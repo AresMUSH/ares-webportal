@@ -1,0 +1,26 @@
+<h1>Web Client</h1>
+
+<p>The web client lets you play the game from a web browser.</p>
+
+<div class="alert alert-warning">If you reload or leave this page, it will close your connection to the game.</div>
+
+<div>
+{{#if showConnect}}
+        <button class="connectButton btn btn-success" {{action "connect"}}>Connect</button>
+{{/if}}
+{{#if showDisconnect}}
+        <button class="disconnectButton btn btn-danger" {{action "disconnect"}}>Disconnect</button>
+{{/if}}
+</div>
+        
+        <div id="console">{{{consoleText}}}</div>
+        
+        {{textarea value=text1 id="sendMsg" cols="80" rows="6" enter="sendMsg1"}}
+        
+        <button class="sendButton btn-primary btn" {{action "sendMsg1"}}>Send Text</button>
+
+        {{textarea value=text2 id="sendMsg2" cols="80" rows="6" enter="sendMsg2"}}
+
+        <button class="sendButton2 btn-primary btn" {{action "sendMsg2"}}>Send Text</button>
+        <div id="debug"></div>
+{{outlet}}

@@ -1,4 +1,10 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
+.DS_Store
+
+# uploads
+
+/public/theme_images
+/public/uploads
 
 # compiled output
 /dist

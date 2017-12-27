@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AresWebclient</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -12,13 +11,26 @@
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/vendor.css">
     <link integrity="" rel="stylesheet" href="{{rootURL}}assets/ares-webclient.css">
 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.10.0/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.10.0/css/themes/default.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.10.0/css/themes/semantic.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/alertifyjs/1.10.0/css/themes/bootstrap.min.css"/>
+
+
     {{content-for "head-footer"}}
   </head>
   <body>
+            
     {{content-for "body"}}
 
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/ares-webclient.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src="https://use.fontawesome.com/ee2438614b.js"></script>
+    <script src="/scripts/config.js"></script>
+    <script src="/scripts/notify.js"></script>
+    <script src="/scripts/ansi_up.js"></script>
+    <script src="/scripts/alertify.min.js"></script>
 
     {{content-for "body-footer"}}
   </body>

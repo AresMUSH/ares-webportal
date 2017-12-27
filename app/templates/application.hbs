@@ -1,5 +1,35 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
+<title>{{model.name}}</title>
 
-{{outlet}}
+<div class="container-fluid">
+
+    <div class="header-wrap">
+
+      <div class="title-wrap">
+        <div class="site-title"><a href="/#">{{model.name}}</a></div>
+        <div class="site-subtitle">{{model.host}} port {{model.port}}</div>
+      </div>
+      
+        {{global-navbar}}
+    </div>
+
+            
+            
+     <div class="body-wrap">
+     
+       <div class="row">
+         <div class="col-md-9">
+           {{outlet}}
+         </div>
+         
+         <div class="col-md-3">
+             global-sidebar
+         </div>
+        </div>
+     </div>
+     
+       <hr>
+
+       <footer>
+         <p>&copy; Linda Naughton 2017.   AresMUSH v.future</p>
+       </footer>
+</div>
