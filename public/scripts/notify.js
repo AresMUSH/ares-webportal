@@ -1,7 +1,7 @@
 (function() {
     $(document).ready(function() {
         var notification_socket = null;
-        notification_socket = new WebSocket(`ws://${config.host}:${config.port}/websocket`);
+        notification_socket = new WebSocket(`ws://${aresconfig.host}:${aresconfig.port}/websocket`);
         
         notification_socket.onopen = function() {          
           var charId = $('#charId').val();

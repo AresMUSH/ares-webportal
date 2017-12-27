@@ -6,6 +6,6 @@ export default Route.extend({
     
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.getScene(params['id']);
+        return aj.queryOne('scene', { id: params['id'] });
     }
 });

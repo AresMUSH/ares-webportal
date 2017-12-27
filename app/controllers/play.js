@@ -33,7 +33,7 @@ export default Controller.extend({
         if (is_json) {
             return;
         }
-        var html = ansi_up.ansi_to_html(data);
+        html = ansi_up.ansi_to_html(data);
         this.set('consoleText', this.get('consoleText') + '<p><pre>' + html + '</pre></p>');
           
         $('#console').stop().animate({
@@ -41,7 +41,7 @@ export default Controller.extend({
         }, 800);           
         
         if (this.get('notification') && this.get('notification.permission') === "granted" && !this.get('windowVisible')) {
-            new Notification(`Activity in ${config.mu_name}!`);
+            new Notification(`Activity in ${aresconfig.mu_name}!`);
         }
     },
     onConnect: function(self) {
@@ -73,7 +73,7 @@ export default Controller.extend({
     actions: {
         connect() {
             var idleKeepaliveMs = 60000;
-            this.set('websocket', new WebSocket(`ws://${config.host}:${config.port}/websocket`));
+            this.set('websocket', new WebSocket(`ws://${aresconfig.host}:${aresconfig.port}/websocket`));
                 var self = this;
                 this.get('websocket').onmessage = function(evt) { 
                     self.onMessage(self, evt);

@@ -6,6 +6,6 @@ export default Route.extend({
     
     model: function() {
         let aj = this.get('ajax');
-        return aj.getScenes();
+        return aj.queryMany('scenes', {});
     }
 });
