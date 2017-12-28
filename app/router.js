@@ -24,6 +24,7 @@ Router.map(function() {
   this.route('help');
   this.route('admin');
   this.route('scene', { path: '/scene/:id' } );
+  this.route('report-error');
 });
 
 export default Router;
