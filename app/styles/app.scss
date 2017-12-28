@@ -1,4 +1,6 @@
 @import 'colors';
+@import 'ember-power-select/themes/bootstrap';
+@import "ember-power-select";
 
 /* -------------------------
 BASIC CONTAINERS
@@ -843,3 +845,5 @@ ul.char-ability-list {
 }
     
     }
+
+@import "ember-power-select";

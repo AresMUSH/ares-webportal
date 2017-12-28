@@ -1,8 +1,19 @@
 <h1>Scenes</h1>
 
-<p>The scenes archive catalogs roleplay scenes from the game.  Only completed scenes show up here.</p>
+<p>The scenes archive catalogs roleplay scenes from the game.  Only completed scenes show up here.  You can filter by type of scene or </p>
 
+<p><b>Select Scenes:</b> {{#power-select selected=filter options=scene_filters onchange=(action "filter_changed") search=(action "search_scenes")as |name|}}
+  {{name}}
+{{/power-select}}</p>
 
-{{scene-list scenes=model}}
+{{scene-list scenes=page_scenes}}
+
+{{#each pages_list as |p|}}
+{{#if (eq p page)}}
+<button class="btn btn-primary" {{action "goto_page" p}}>{{p}}</button>
+{{else}}
+<button class="btn btn-default" {{action "goto_page" p}}>{{p}}</button>
+{{/if}}
+{{/each}}
 
 {{outlet}}

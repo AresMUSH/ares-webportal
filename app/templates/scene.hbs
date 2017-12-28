@@ -13,7 +13,10 @@
 
         <p><b>Related Scenes:</b>
            {{#if model.related_scenes}}
-             {{#each model.related_scenes as |related|}}
+             {{#each model.related_scenes as |related index|}}
+                  {{#if (not-eq index 0)}}
+                  &nbsp;
+                  {{/if}}
                   <a href="/scene/{{related.id}}">{{related.title}}</a>
               {{/each}}
             {{else}}
