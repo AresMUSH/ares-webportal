@@ -18,7 +18,13 @@ Router.map(function() {
     this.route('fs3-skills', { path: '/fs3-skills'});
     this.route('fs3-gear', { path: '/fs3-gear'});
     this.route('who', { path: '/who'});
-    this.route('wiki', { path: '/wiki/:id'});
+    this.route('wiki', function() {
+        this.route('index', { path: '/'});
+        this.route('page', { path: '/:id'});
+        this.route('all', { path: '/all'});
+        this.route('tags', { path: '/tags'});
+        this.route('tag', { path: '/tag/:id'});
+    });
     this.route('events', { path: '/events'});
     this.route('boards', { path: '/boards'});
     this.route('help', { path: '/help'});

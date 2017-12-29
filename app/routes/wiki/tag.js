@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
 
 export default Route.extend({
@@ -6,10 +7,14 @@ export default Route.extend({
     
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('wiki', { id: params['id'] });
+        return RSVP.hash(
+            { 
+                name: params['id'], 
+                content: aj.queryOne('wikiTag', { id: params['id'] })
+            });
     },
     
     titleToken: function(model) {
-        return this.get('model.heading');
+        return this.get('model.name');
     }
 });

@@ -7,7 +7,9 @@
 <hr/>
 
 <b>Tags:</b>  
-TODO TAGS
+    {{#each model.tags as |tag|}}
+    {{#link-to 'wiki.tag' tag}}{{tag}}{{/link-to}}
+    {{/each}}
 
 
 <div class="row">
