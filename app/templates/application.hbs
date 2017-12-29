@@ -1,10 +1,32 @@
 <div class="container-fluid">
+    <div class="header-wrap">
 
+      <div class="title-wrap">
+        <div class="site-title"><a href="/#">{{mush_name}}</a></div>
+        <div class="site-subtitle">{{mush_host}} port {{mush_port}}</div>
+      </div>
+  
+        {{global-navbar}}
+    </div>
+
+        
+        
+     <div class="body-wrap">
+ 
+       <div class="row">
+         <div class="col-md-9">
            {{outlet}}
-
+         </div>
+     
+         <div class="col-md-3">
+             global-sidebar
+         </div>
+        </div>
+     </div>
+ 
        <hr>
 
        <footer>
-         <p>&copy; Linda Naughton 2017.   AresMUSH v.future</p>
+         <p>&copy; Linda Naughton 2017.   AresMUSH v{{mush_version}}</p>
        </footer>
 </div>

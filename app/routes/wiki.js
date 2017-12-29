@@ -10,6 +10,6 @@ export default Route.extend({
     },
     
     titleToken: function(model) {
-        return model.heading;
+        return this.get('model.heading');
     }
 });
