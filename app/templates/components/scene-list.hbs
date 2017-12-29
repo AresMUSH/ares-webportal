@@ -13,7 +13,7 @@
 {{#each scenes as |scene|}}
     <tr>
         <td>
-        <a href="/scene/{{scene.id}}">{{scene.icdate}} - {{scene.title}}</a>
+        {{#link-to "game.scene" scene.id}}{{scene.icdate}} - {{scene.title}}{{/link-to}}
         
         {{scene-tag scene=scene}}
        

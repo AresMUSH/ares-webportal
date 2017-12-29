@@ -17,7 +17,7 @@
                   {{#if (not-eq index 0)}}
                   &nbsp;
                   {{/if}}
-                  <a href="/scene/{{related.id}}">{{related.title}}</a>
+                  {{#link-to "game.scene" related.id}}">{{related.title}}{{/link-to}}
               {{/each}}
             {{else}}
                None
@@ -59,7 +59,7 @@
 
 </div>
 
-<p>{{#link-to "scenes"}}<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to Scenes{{/link-to}}</p>
+<p>{{#link-to "game.scenes"}}<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to Scenes{{/link-to}}</p>
 
 
 <div class="ansi scene-log">
@@ -72,7 +72,7 @@
     TODO SCENE TAGS
    </p>
    
-<p><a href="/scenes"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to Scenes</a></p>
+<p>{{#link-to "game.scenes"}}<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to Scenes{{/link-to}}</p>
 
 
 TODO EDIT BUTTONS
