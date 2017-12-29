@@ -6,17 +6,22 @@ export default Controller.extend({
     filter: 'Recent',
     
     filtered_scenes: function() {
-        switch(this.get('filter')) {
-            case 'Recent':
-                return this.get('model.scenes').slice(0, 20);
-            case 'Event':
-                return this.get('model.scenes').filter(s => s.scene_type == 'event');
-            case 'Social':
-                return this.get('model.scenes').filter(s => s.scene_type == 'social');
-            default:
-                var re = new RegExp(this.get('filter'),"i");
-                return this.get('model.scenes').filter(s => s.title.match(re));
-        }    
+        let types = this.get('model.scene_types').map(t => t.get('name'));
+        let selected_filter = this.get('filter');
+        
+        if (types.includes(selected_filter)) {
+            return this.get('model.scenes').filter(s => s.scene_type == selected_filter.toLowerCase());
+        } 
+        else if (selected_filter === 'All' ){
+            return this.get('model.scenes');
+        } 
+        else if (selected_filter === 'Recent') { 
+            return this.get('model.scenes').slice(0, 20);
+        } 
+        else {
+            var re = new RegExp(this.get('filter'),"i");
+            return this.get('model.scenes').filter(s => s.title.match(re));
+        }        
     }.property('model', 'filter'),
     
     num_scenes: function() {
@@ -52,7 +57,7 @@ export default Controller.extend({
     scene_filters: function() {
         let types = this.get('model.scene_types');
         let scene_types = types.map(s => s.name);
-        return ['Recent'].concat(scene_types);
+        return ['Recent', 'All'].concat(scene_types);
     }.property('model'),
     
     actions: {

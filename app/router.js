@@ -7,7 +7,7 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-    this.route('game', function() {
+    this.route('game', { path: '' }, function() {
         this.route('home', { path: '/'});
         this.route('login', { path: '/login'});
         this.route('logout', { path: '/logout'});
@@ -19,7 +19,7 @@ Router.map(function() {
         this.route('fs3-skills', { path: '/fs3-skills'});
         this.route('fs3-gear', { path: '/fs3-gear'});
         this.route('who', { path: '/who'});
-        this.route('wiki', { path: '/wiki'});
+        this.route('wiki', { path: '/wiki/:id'});
         this.route('events', { path: '/events'});
         this.route('boards', { path: '/boards'});
         this.route('help', { path: '/help'});
