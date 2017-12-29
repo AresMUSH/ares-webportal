@@ -18,25 +18,16 @@ export default Service.extend({
         }
     },
     
-    getApiKey() {
-        return $.getJSON(this.server_url("api-key"),{}).then((response) => {
-               return response['key'];
-               });
-    },
-    
     query(cmd, args) {
-        return this.getApiKey().then((api_key) => {
-            
-         return $.post(this.server_url("request"), 
-            {
-                cmd: cmd,
-                args: args,
-                api_key: api_key
-            }).then((response) => {
-               this.check_for_error(response);
-               return response;
-            });
-        })
+     return $.post(this.server_url("request"), 
+        {
+            cmd: cmd,
+            args: args,
+            api_key: aresconfig.api_key
+        }).then((response) => {
+           this.check_for_error(response);
+           return response;
+        });
     },
     
     queryOne(cmd, args) {

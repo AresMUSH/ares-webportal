@@ -1,1 +1,0 @@
-var aresconfig = {"port":4202,"mu_name":"Local Test","host":"localhost", "api_port": 4203};
