@@ -1,0 +1,54 @@
+<h1>{{model.name}}</h1>
+
+
+<div class="row profile-wrap">
+
+
+    <div class="col-md-4 col-sm-12 col-xs-12">
+                <img src="/uploads/{{model.icon}}" class="profile-image"/>
+    </div>
+
+    <div class="col-md-8 col-sm-12 col-xs-12">        
+
+
+        {{#if model.handle}}
+            <div class="profile-box">
+                                
+                <div class="row">
+                    <div class="col-sm-3">
+                            <b>Player Handle:</b> 
+                    </div>
+                    <div class="col-sm-9">
+                            {{model.handle}}
+                    </div>
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col-sm-3">
+                            <b>Profile:</b> 
+                    </div>
+                    <div class="col-sm-9">
+                          <p>View at <a href="http://arescentral.aresmush.com/handle/{{model.handle}}">AresCentral</a>.</p>  
+                    </div>
+                </div>
+                
+                
+               
+            </div>
+        {{/if}}
+    </div>
+
+
+
+</div>
+
+
+<div class="profile-tab">
+
+    {{char-gallery chars=model.alts title="Characters"}}
+        
+</div>
+
+
+{{outlet}}

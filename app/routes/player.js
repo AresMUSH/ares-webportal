@@ -3,10 +3,13 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend({
     ajax: service(),
-    titleToken: 'Players',
     
-    model: function() {
+    model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryMany('players', {});           
+        return aj.queryOne('player', { id: params['id'] });
+    },
+    
+    titleToken: function(model) {
+        return model.name;
     }
 });
