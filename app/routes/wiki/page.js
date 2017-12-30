@@ -9,7 +9,7 @@ export default Route.extend({
         return aj.queryOne('wikiPage', { id: params['id'] });
     },
     
-    titleToken: function(model) {
+    titleToken: function() {
         return this.get('model.heading');
     }
 });

@@ -9,7 +9,6 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('home', { path: ''});
   this.route('login', { path: '/login'});
-  this.route('logout', { path: '/logout'});
   this.route('scenes', { path: '/scenes'});
   this.route('scene', { path: '/scene/:id' } );
   this.route('characters', { path: '/chars'});
@@ -33,6 +32,9 @@ Router.map(function() {
   this.route('admin', { path: '/admin'});
   this.route('play');
   this.route('report-error');
+  this.route('register');
+  this.route('mail');
+  this.route('profile');
 });
 
 export default Router;

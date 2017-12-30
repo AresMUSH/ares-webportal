@@ -14,7 +14,7 @@ export default Route.extend({
             });
     },
     
-    titleToken: function(model) {
+    titleToken: function() {
         return this.get('model.name');
     }
 });

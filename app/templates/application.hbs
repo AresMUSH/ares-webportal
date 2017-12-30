@@ -1,10 +1,34 @@
 <div class="container-fluid">
     <div class="header-wrap">
 
-      <div class="title-wrap">
-        <div class="site-title"><a href="/#">{{mush_name}}</a></div>
-        <div class="site-subtitle">{{mush_host}} port {{mush_port}}</div>
-      </div>
+
+       <div class="title-wrap">
+       
+           <div class="row">
+               <div class="col-md-6 col-sm-4 col-xs-4">
+                   <div class="site-title">{{#link-to 'home'}}{{mush_name}}{{/link-to}}</div>
+                   <div class="site-subtitle">{{mush_host}} port {{mush_port}}</div>
+               </div>
+               <div class="col-md-6 col-sm-8 col-xs-8">
+                  <div class="text-right user-bar">
+                   {{#if session.isAuthenticated}}
+                       <p>Welcome, {{player_name}}.</p>
+                       <p>{{#link-to 'mail'}}Mail 
+                           <span class="label label-pill label-primary" id="mailBadge">{{unread_mail}}</span>
+                           {{/link-to}}
+                           | {{#link-to 'profile'}}Profile{{/link-to}}
+                           | <a href="/" {{action 'logout'}}>Logout</a> 
+                       </p>
+                    {{else}}
+                        <p>{{#link-to 'login' (query-params redirect=current_route)}}Login{{/link-to}}
+                        | {{#link-to 'register'}}Register{{/link-to}}
+                        </p>
+                    {{/if}}
+                    </div>
+               </div>
+           </div>
+       </div>
+       
   
         {{global-navbar}}
     </div>
@@ -14,7 +38,13 @@
      <div class="body-wrap">
  
        <div class="row">
-         <div class="col-md-9">
+         <div class="col-md-9 body-container">
+           
+           
+           {{#each flashMessages.queue as |flash|}}
+             {{flash-message flash=flash}}
+           {{/each}}
+         
            {{outlet}}
          </div>
      

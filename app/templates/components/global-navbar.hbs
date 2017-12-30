@@ -11,24 +11,7 @@
 
    
      <ul class="nav navbar-nav navbar-right">
-           
-           {{#if true}}
-               <li class="dropdown">
-                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                         
-                         Welcome, Faraday <span class="label label-pill label-primary" id="mailBadge">0</span> <span class="caret"></span></a>
-                         
-                         <ul class="dropdown-menu">
-                           <li><span class="fa fa-bell-o"></span> Notifications <span class="badge">1</span></li>
-                           <li><span class="fa fa-cogs"></span> Account</li>
-                           <li role="separator" class="divider"></li>
-                           <li>{{#link-to "login"}}<span class="fa fa-sign-out"></span> Logout{{/link-to}}</li>
-                         </ul>
-                       </li>
-           {{else}}
-               <li>{{#link-to "login"}}<span class="fa fa-sign-in"></span> Login{{/link-to}}</li>
-            {{/if}}
-                        
+                  
             <li>{{#link-to "play"}}Play{{/link-to}}</li>
             <li>{{#link-to "who"}}Who's Online{{/link-to}}</li>
             
