@@ -14,10 +14,10 @@
         
         <p>{{input type="text" id="name" placeholder="Name" action="login" value=name autofocus=true }}</p>
         <p>{{input type="password" placeholder="Password" action="login" id="password" value=password }}</p>
-        <p>{{input type="confirm_password" placeholder="Confirm Password" action="login" id="confirm_password" value=confirm_password }}</p>
+        <p>{{input type="password" placeholder="Confirm Password" action="login" id="confirm_password" value=confirm_password }}</p>
         
         {{#if model.recaptcha}}
-        <div class="g-recaptcha" data-sitekey="{{model.recaptcha}}"></div>
+        {{g-recaptcha onSuccess=(action "recaptchaResolved") ref=(mut recaptchaControl) sitekey=model.recaptcha}}
         {{/if}}
 
         <button {{action "register"}} class="btn btn-primary">Register</button>

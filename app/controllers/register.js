@@ -5,32 +5,31 @@ export default Controller.extend({
     name: '',
     password: '',
     confirm_password: '',
+    reCaptchaResponse: '',
     session: service(),
     flashMessages: service(),
     ajax: service(),
     
     actions: {
+        recaptchaResolved(reCaptchaResponse) {
+            this.set('reCaptchaResponse', reCaptchaResponse);
+            
+        },
         register() {
             
             let response = this.get('ajax').queryOne('register', 
-               { name: this.get('name'), password: this.get('password'), confirm_password: this.get('confirm_password')})
-            
-            if (response.error) {
-                this.get('flashMessages').danger(response.error);
-                return;
-            }
-            
-            this.get('session').restore('authenticator:ares', response)
-             .then(() => {
-                 
-                 let name = this.get('session.data.authenticated.name');
-                 this.get('flashMessages').success(`Welcome, ${name}!`);
-                 this.set('name', '');
-                 this.set('password', '');
-                 
-                 this.transitionToRoute('home');
-             })
+               { name: this.get('name'), password: this.get('password'), confirm_password: this.get('confirm_password'), recaptcha: this.get('reCaptchaResponse')})
+            .then((response) => {            
+                if (response.error) {
+                    this.get('recaptchaControl').resetReCaptcha();
+                    return;
+                }
+                this.get('flashMessages').success("Your character has been created.  Please log in.");
+                
+                 this.transitionToRoute('login');
+            })
             .catch((response) => {
+                this.get('recaptchaControl').resetReCaptcha();
                 this.get('flashMessages').danger(response.message);
             });
         }
