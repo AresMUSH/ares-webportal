@@ -4,29 +4,31 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     name: '',
     password: '',
+    confirm_password: '',
     session: service(),
     flashMessages: service(),
-    queryParams: [ 'redirect' ],
+    ajax: service(),
     
     actions: {
-        login() {
-            this.get('session').authenticate('authenticator:ares', { name: this.get('name'), password: this.get('password')})
+        register() {
+            
+            let response = this.get('ajax').queryOne('register', 
+               { name: this.get('name'), password: this.get('password'), confirm_password: this.get('confirm_password')})
+            
+            if (response.error) {
+                this.get('flashMessages').danger(response.error);
+                return;
+            }
+            
+            this.get('session').restore('authenticator:ares', response)
              .then(() => {
-                 
-                 if (this.get('model.error')) {
-                     return;
-                 }
                  
                  let name = this.get('session.data.authenticated.name');
                  this.get('flashMessages').success(`Welcome, ${name}!`);
                  this.set('name', '');
                  this.set('password', '');
                  
-                 let redirect = this.get('redirect');
-                 if (!redirect) {
-                     redirect = 'home';
-                 }
-                 window.location.replace(redirect);
+                 this.transitionToRoute('home');
              })
             .catch((response) => {
                 this.get('flashMessages').danger(response.message);

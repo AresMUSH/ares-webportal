@@ -1,13 +1,8 @@
 import Service from '@ember/service';
+import { inject as service } from '@ember/service';
 
 export default Service.extend({
-    
-    check_for_error(response) {
-        if (response.error) {
-            console.log("ERROR: " + response.error);
-            Ember.getOwner(this).lookup('router:main').transitionTo('report-error', { queryParams: { message: response.error } })
-        }
-    },
+    flashMessages: service(),
     
     server_url(route) {
         let base = "http://" + aresconfig.host + ":" + aresconfig.api_port;
@@ -25,7 +20,9 @@ export default Service.extend({
             args: args,
             api_key: aresconfig.api_key
         }).then((response) => {
-           this.check_for_error(response);
+            if (response.error) {
+                return response;
+            }
            return response;
         }).catch(() => {
                     Ember.getOwner(this).lookup('router:main').transitionTo('report-error', { queryParams: { message: "There was a problem connecting to the game." }}) });
@@ -33,12 +30,20 @@ export default Service.extend({
     
     queryOne(cmd, args) {
         return this.query(cmd, args).then((response) => {
+            if (response.error) {
+                this.get('flashMessages').danger(response.error);
+                return response;
+            }
             return Ember.Object.create(response);
         });
     },
 
     queryMany(cmd, args) {    
         return this.query(cmd, args).then((response) => {
+            if (response.error) {
+                this.get('flashMessages').danger(response.error);
+                return [];
+            }
             return response.map(r => Ember.Object.create(r));
         });
     }    

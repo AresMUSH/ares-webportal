@@ -1,1 +1,33 @@
+{{#if model.enable_registration}}
+
+<p>Enter your character information.</p>
+
+        
+        
+        {{#if model.terms_of_service}}
+            <div class="ansi alert alert-info">{{{model.terms_of_service}}}</div>
+        {{/if}}
+        
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        
+        <p>{{input type="text" id="name" placeholder="Name" action="login" value=name autofocus=true }}</p>
+        <p>{{input type="password" placeholder="Password" action="login" id="password" value=password }}</p>
+        <p>{{input type="confirm_password" placeholder="Confirm Password" action="login" id="confirm_password" value=confirm_password }}</p>
+        
+        {{#if model.recaptcha}}
+        <div class="g-recaptcha" data-sitekey="{{model.recaptcha}}"></div>
+        {{/if}}
+
+        <button {{action "register"}} class="btn btn-primary">Register</button>
+        
+    </div>
+</div>
+
+{{else}}
+
+<p>Web registration is disabled.  Please create a character in the game.</p>
+
+{{/if}}
 {{outlet}}

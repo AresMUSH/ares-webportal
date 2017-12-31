@@ -10,12 +10,13 @@
         
     
     
-        <p>Don't have a character yet?  
-            TODO enable web registration
-                <a href="/register">Create one</a>.
-            
-               Create one from inside the game first.
-            
+        <p>Don't have a character yet? 
+        {{#if model.enable_registration}}
+        {{#link-to "register"}}Create one.{{/link-to}}
+        {{else}}
+        Create one from inside the game first.
+        {{/if}}
+        
         </p>
     </div>
 </div>
