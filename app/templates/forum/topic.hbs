@@ -4,11 +4,7 @@
      <p>{{char-icon-inline char=model.author}}</p>
 
 <p><i>{{model.date}}</i></p>
-
-<div class="ansi">
-    {{{model.message}}}
-</div>
-
+{{{ansi-format text=model.message}}}
 <hr/>
 
  <div>
@@ -21,9 +17,7 @@
          <p><i> {{reply.date}} </i></p>
      
      
-         <div class="ansi">
-             {{{reply.message}}}
-         </div>
+         {{{ansi-format text=reply.message}}}
      
          <hr/>
       </div>
