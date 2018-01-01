@@ -1,0 +1,9 @@
+{{#link-to "char" char.name}}
+    {{#if char.icon}}
+    <img class="small-profile-icon" src="/uploads/{{char.icon}}" />
+    {{else}}
+    <img class="small-profile-icon" src="/theme_images/noicon.png" />
+    {{/if}}
+{{/link-to}}
+
+{{#link-to "char" char.name}} {{char.name}} {{/link-to}}

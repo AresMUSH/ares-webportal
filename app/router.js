@@ -35,6 +35,12 @@ Router.map(function() {
   this.route('register');
   this.route('mail');
   this.route('profile');
+  this.route('forum', function() {
+      this.route('index', { path: '/' });
+      this.route('category', { path: '/:category_id'});
+      this.route('topic', { path: '/:category_id/:topic_id'});
+      this.route('new-post', { path: '/:category_id/new-post' })
+  });
 });
 
 export default Router;

@@ -1,0 +1,17 @@
+<h1>Discussion Forums</h1>
+
+<table class="table table-striped">    
+<tbody>
+{{#each model as |forum|}}
+    <tr><td>
+        {{#if model.unread}}
+            <i class="fa fa-flag" aria-hidden="true"></i>
+        {{/if}}
+        
+        {{#link-to 'forum.category' forum.id}}{{forum.name}}{{/link-to}}
+    </td></tr>
+{{/each}}
+</tbody>
+</table>
+
+{{outlet}}

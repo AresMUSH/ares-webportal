@@ -6,9 +6,18 @@ export default Base.extend({
     ajax: service(),
 
     restore(data) {
-        this.set('data', data);
-        return Promise.resolve(data);
+        
+        let aj = this.get('ajax');
+        return aj.queryOne('checkToken', { id: data.id, token: data.token })
+        .then((response) => {
+            if (response.tokenIsValid) {
+                this.set('data', data);
+                return Promise.resolve(data);
+            }
+            return Promise.reject(response);            
+        });    
     },
+    
     authenticate(options) {
         let aj = this.get('ajax');
         return aj.queryOne('login', { name: options.name, password: options.password })
