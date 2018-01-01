@@ -1,0 +1,22 @@
+<h1>All Characters</h1>
+
+{{census-nav types=model.types}}
+
+<table class="table table-striped">
+    <tr>
+        {{#each model.census.titles as |title|}}
+        <th>{{title}}</th>
+        {{/each}}
+    </tr>
+    
+    
+{{#each chars as |char| }}
+<tr>
+    {{#each char as |field|}}
+    <td>{{field}}</td>
+    {{/each}}
+</tr>
+{{/each}}
+
+</table>
+{{outlet}}

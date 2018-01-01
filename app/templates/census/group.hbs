@@ -1,0 +1,26 @@
+<h1>{{model.census.title}}</h1>
+
+{{census-nav types=model.types}}
+
+<table class="table table-striped">
+    <tr>
+        <th>Group</th>
+        <th>Count</th>
+        <th>Characters</th>
+    </tr>
+    
+    
+{{#each model.census.groups as |group| }}
+<tr>
+    <td>{{group.name}}</td>
+    <td>{{group.count}}</td>
+    <td>
+        {{#each group.chars as |char|}}
+        {{char.name}}
+        {{/each}}
+    </td>
+</tr>
+{{/each}}
+
+</table>
+{{outlet}}

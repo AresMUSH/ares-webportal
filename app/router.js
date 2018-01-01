@@ -41,6 +41,11 @@ Router.map(function() {
       this.route('topic', { path: '/:category_id/:topic_id'});
       this.route('new-post', { path: '/:category_id/new-post' })
   });
+  this.route('census', function() {
+      this.route('index', { path: '/' });
+      this.route('group', { path: '/:filter'} )
+  });
+  this.route('actors');
 });
 
 export default Router;

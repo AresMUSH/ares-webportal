@@ -38,19 +38,26 @@
      <div class="body-wrap">
  
        <div class="row">
-         <div class="col-md-9 body-container">
-           
-           
-           {{flash-messages}}
-         
-           {{outlet}}
-         </div>
-     
-         <div class="col-md-3">
-         {{#if (not hideSidebar)}}
-             global-sidebar
+         {{#if hideSidebar}}
+             <div class="col-md-12 body-container">
+               {{flash-messages}}
+               {{outlet}}
+             </div>
+         {{else}}
+             <div class="col-md-9 body-container">
+               {{flash-messages}}
+               {{outlet}}
+             </div>
          {{/if}}
+           
+           
+           
+     
+         {{#if (not hideSidebar)}}
+         <div class="col-md-3">
+             global-sidebar
          </div>
+         {{/if}}
         </div>
      </div>
  
