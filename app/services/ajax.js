@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Service.extend({
     flashMessages: service(),
+    session: service(),
     
     server_url(route) {
         let base = "http://" + aresconfig.host + ":" + aresconfig.api_port;
@@ -18,7 +19,8 @@ export default Service.extend({
         {
             cmd: cmd,
             args: args,
-            api_key: aresconfig.api_key
+            api_key: aresconfig.api_key,
+            auth: this.get('session.data.authenticated')
         }).then((response) => {
             if (response.error) {
                 return response;

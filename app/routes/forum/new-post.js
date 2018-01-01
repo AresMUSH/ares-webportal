@@ -9,7 +9,7 @@ export default Route.extend(RouteTransitionOnError, {
     
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('forumCategory', {category_id: params['category_id'], char_id: this.get('session.data.authenticated.name')});
+        return aj.queryOne('forumCategory', {category_id: params['category_id']});
     },
     
     titleToken: function(model) {

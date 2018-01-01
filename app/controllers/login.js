@@ -18,7 +18,6 @@ export default Controller.extend({
                  }
                  
                  let name = this.get('session.data.authenticated.name');
-                 this.get('flashMessages').success(`Welcome, ${name}!`);
                  this.set('name', '');
                  this.set('password', '');
                  

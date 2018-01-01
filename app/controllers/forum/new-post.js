@@ -13,8 +13,7 @@ export default Controller.extend({
             let aj = this.get('ajax');
             aj.queryOne('addPost', { category_id: this.get('model.id'), 
                subject: this.get('subject'),
-               message: this.get('message'),
-               char_id: this.get('session.data.authenticated.id')})
+               message: this.get('message') })
             .then( (response) => {
                 if (response.error) {
                     return;

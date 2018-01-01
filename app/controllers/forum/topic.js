@@ -11,8 +11,7 @@ export default Controller.extend({
         addReply() {
             let aj = this.get('ajax');
             aj.queryOne('addReply', { topic_id: this.get('model.id'), 
-               reply: this.get('reply'),
-               char_id: this.get('session.data.authenticated.id')})
+               reply: this.get('reply')})
             .then( (response) => {
                 if (response.error) {
                     return;

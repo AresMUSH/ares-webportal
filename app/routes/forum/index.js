@@ -8,6 +8,6 @@ export default Route.extend({
     
     model: function() {
         let aj = this.get('ajax');
-        return aj.queryMany('forumList', {char_id: this.get('session.data.authenticated.name')});
+        return aj.queryMany('forumList', {});
     }
 });

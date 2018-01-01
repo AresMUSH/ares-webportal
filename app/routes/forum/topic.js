@@ -10,8 +10,7 @@ export default Route.extend(RouteTransitionOnError, ReloadableRoute, {
     
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('forumTopic', { topic_id: params['topic_id'], 
-           char_id: this.get('session.data.authenticated.name')});
+        return aj.queryOne('forumTopic', { topic_id: params['topic_id'] });
     },
     titleToken: function(model) {
         return `${model.title} - ${model.category.name}`;
