@@ -1,0 +1,16 @@
+{{search-box}}
+
+{{#if (not model.game.disabled.events)}}
+<div class="sidebar-box">
+  <div class="sidebar-heading">
+      <h2>Upcoming Events <i class="fa fa-calendar" aria-hidden="true"></i></h2>
+  </div>
+  {{#each model.events as |event|}}
+  <p><b>{{#link-to 'events.event' event.id}}{{event.title}}{{/link-to}}</b>
+  <br/>{{event.date}} {{event.start_datetime_local}} ({{event.start_time_standard}})</p>
+  {{/each}}
+   <br/>
+  <p>{{#link-to 'events'}}All Events{{/link-to}}</p>
+  
+</div>
+{{/if}}

@@ -26,7 +26,13 @@ Router.map(function() {
       this.route('tags', { path: '/tags'});
       this.route('tag', { path: '/tag/:id'});
   });
-  this.route('events', { path: '/events'});
+  this.route('events', function() {
+      this.route('index', { path: '/'} );
+      this.route('event', { path: '/:event_id'} );
+      this.route('edit', { path: '/:event_id/edit'} );
+      this.route('create', { path: '/create' } );
+      this.route('ical', { path: '/ical' } );
+  });
   this.route('boards', { path: '/boards'});
   this.route('help', { path: '/help'});
   this.route('admin', { path: '/admin'});

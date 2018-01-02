@@ -33,7 +33,11 @@
                         <li>{{#link-to "characters"}}Characters{{/link-to}}</li>
                         <li>{{#link-to "players"}}Players{{/link-to}}</li>
                         <li>{{#link-to "locations"}}Locations{{/link-to}}</li>
+                        
+                        {{#if (not model.game.disabled.events)}}
                         <li>{{#link-to "events"}}Events{{/link-to}}</li>
+                        {{/if}}
+                        
                         <li>{{#link-to "forum"}}Forums{{/link-to}}</li>
                         <li>{{#link-to "census"}}Census{{/link-to}}</li>
                         <li>{{#link-to "actors"}}Actors{{/link-to}}</li>

@@ -1,0 +1,17 @@
+<h1>New Event</h1>
+
+<p><b>Title:</b></p>
+<p>{{input type="text" id="title" action="create" value=title}}</p>
+
+<p><b>Date:</b></p>
+<p>{{pikaday-input onSelection=(action 'changeDate') format=model.date_entry_format}} </p>
+
+<p><b>Start Time:</b></p>
+<p>{{input type="text" id="time" action="create" value=time }}</p>
+
+<p><b>Description:</b></p>
+
+{{textarea value=description cols="80" rows="6"}}
+
+<button {{action "create"}} class="btn btn-primary">Create</button>
+{{flash-messages}}

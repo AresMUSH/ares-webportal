@@ -11,7 +11,7 @@
                </div>
                <div class="col-md-6 col-sm-8 col-xs-8">
                   <div class="text-right user-bar">
-                   {{#if session.isAuthenticated}}
+                   {{#if isAuthenticated}}
                        <p>Welcome, {{player_name}}.</p>
                        <p>{{#link-to 'mail'}}Mail 
                            <span class="label label-pill label-primary" id="mailBadge">{{unread_mail}}</span>
@@ -30,7 +30,7 @@
        </div>
        
   
-        {{global-navbar}}
+        {{global-navbar model=model}}
     </div>
 
         
@@ -49,13 +49,10 @@
                {{outlet}}
              </div>
          {{/if}}
-           
-           
-           
-     
+                
          {{#if (not hideSidebar)}}
          <div class="col-md-3">
-             global-sidebar
+             {{global-sidebar model=model}}
          </div>
          {{/if}}
         </div>

@@ -1,4 +1,5 @@
 import Route from '@ember/routing/route';
+import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
@@ -19,7 +20,10 @@ export default Route.extend(ApplicationRouteMixin, {
     
     model: function() {
         let aj = this.get('ajax');
-        return aj.queryOne('game', {});
+        return RSVP.hash({
+             game:  aj.query('game', {}),
+             events: aj.queryMany('upcomingEvents', {}),
+           });
     },
 
     title: function(tokens) {

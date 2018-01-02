@@ -1,7 +1,7 @@
         <div class="jumbotron">
             <img src="/theme_images/jumbotron.png" />
-            <div class="jumbotron-tagline">{{ model.website_tagline }}</div>
-            {{{ansi-format text=model.website_welcome}}}
+            <div class="jumbotron-tagline">{{ model.game.website_tagline }}</div>
+            {{{ansi-format text=model.game.website_welcome}}}
             
             <p>This is the <b>Web Portal</b>, which lets you interact with the game from a web browser.  You can create your character online, view and edit character profiles, browse the game's wiki, read scene logs and more!</p>
         </div>
@@ -22,7 +22,7 @@
             <div class="sidebar-heading">
                 <h2>Play with a Client <i class="fa fa-desktop" aria-hidden="true"></i></h2>
             </div>
-            <p>Connect to the game via your favorite MU client at <b>{{model.host}} port {{model.port}}</b>.  AresMUSH works well with <a href="http://www.potatomushclient.com/">Potato</a>.</p>
+            <p>Connect to the game via your favorite MU client at <b>{{model.game.host}} port {{model.game.port}}</b>.  AresMUSH works well with <a href="http://www.potatomushclient.com/">Potato</a>.</p>
 
         </div>
       </div>

@@ -14,7 +14,6 @@ export default Controller.extend({
             });
             chars.push(char);
         });
-        console.log(chars);
         return chars;
     }.property('model')
 });
