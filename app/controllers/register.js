@@ -17,16 +17,15 @@ export default Controller.extend({
         },
         register() {
             
-            let response = this.get('ajax').queryOne('register', 
+           this.get('ajax').queryOne('register', 
                { name: this.get('name'), password: this.get('password'), confirm_password: this.get('confirm_password'), recaptcha: this.get('reCaptchaResponse')})
             .then((response) => {            
                 if (response.error) {
                     this.get('recaptchaControl').resetReCaptcha();
                     return;
-                }
+                }                
+                this.transitionToRoute('login');
                 this.get('flashMessages').success("Your character has been created.  Please log in.");
-                
-                 this.transitionToRoute('login');
             })
             .catch((response) => {
                 this.get('recaptchaControl').resetReCaptcha();

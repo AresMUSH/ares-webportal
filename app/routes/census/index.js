@@ -5,7 +5,6 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend(RouteTransitionOnError, {
     ajax: service(),
-    session: service(),
     titleToken: 'Census',
     
     model: function() {

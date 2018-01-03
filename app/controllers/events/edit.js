@@ -22,9 +22,9 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.get('flashMessages').success('Event updated!');
-                this.transitionToRoute('events.event',                          
+            this.transitionToRoute('events.event',                          
                           this.get('model.id'));
+            this.get('flashMessages').success('Event updated!');
             })
             .catch((response) => {
                 this.get('flashMessages').danger(response.message);

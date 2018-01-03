@@ -1,0 +1,45 @@
+<h1>Plots</h1>
+
+<p>Plots are a way to group related scenes.</p>
+
+{{#if isApproved}}
+
+<div class="row">
+    
+    <div class="col pull-right">
+        {{#link-to 'plots.create' class="btn btn-primary"}}Create Plot{{/link-to}}
+    </div>
+    
+</div>
+
+{{/if}}
+
+<table class="table table-striped">
+
+
+<thead>
+    <tr>
+        <th>Plot</th>
+        <th>Dates</th>
+        <th>Summary</th>
+    </tr>
+</thead>
+
+<tbody>
+
+{{#each model as |plot|}}
+    <tr>
+        <td>
+        {{#link-to 'plots.plot' plot.id}}{{plot.title}}{{/link-to}}
+        </td>
+        <td>
+        {{plot.start_date}} - {{plot.end_date}}
+        </td>        
+        <td class="ansi">
+            {{{plot.summary}}}
+        </td>
+    </tr>
+{{/each}}
+
+</tbody>
+</table>

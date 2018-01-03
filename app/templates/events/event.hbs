@@ -35,10 +35,24 @@
         <div class="pull-right">
   {{#if model.can_manage}}
 
-      <button {{action 'delete'}} class="btn btn-warning">Delete</button>
+      <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
       {{#link-to 'events.edit' model.id class="btn btn-primary"}}Edit{{/link-to}}
   {{/if}}
       
   </div>
   </div>
 </div>
+
+{{#bs-modal-simple
+    title="Confirm Delete"
+    closeTitle="Cancel"
+    submitTitle="Confirm"
+    size=null
+    fade=false
+    open=confirmDelete
+    onSubmit=(action "delete")
+    onHide=(action (mut confirmDelete) null)}}
+    You're about to delete event {{model.title}}. This cannot be undone.  Are you sure?
+  {{/bs-modal-simple}}
+  
+{{outlet}}

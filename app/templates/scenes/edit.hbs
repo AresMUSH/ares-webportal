@@ -1,0 +1,77 @@
+<h1>Edit Scene {{model.scene.title}}</h1>
+        
+
+    <p>
+        <label for="title" class="col-xs-2 col-form-label">Title:</label>
+
+        <p>{{input type="text" id="title" action="save" value=model.scene.title}}</p>
+    </p>
+    
+    <p>
+        <label for="location" class="col-xs-2 col-form-label">Location:</label>
+    
+        <p>{{input type="text" id="location" action="save" value=model.scene.location}}</p>
+    </p>
+    
+    
+    <p>
+        <label for="icdate" class="col-xs-2 col-form-label">IC Date:</label>
+    
+        <p>{{input type="text" id="icdate" action="save" value=model.scene.icdate}}</p>
+    </p>
+
+    <p>
+        <label for="scene_type" class="col-xs-2 col-form-label">Scene Type:</label>
+    
+        {{#power-select selected=model.scene.scene_type options=scene_types onchange=(action "type_changed") as |type|}}
+          {{type}}
+        {{/power-select}}
+        
+    </p>
+    
+    <p>
+        <label for="plot" class="col-xs-2 col-form-label">Plot:</label>
+    
+        {{#power-select selected=model.scene.plot options=model.plots allowClear=true onchange=(action "plot_changed") as |plot|}}
+          {{plot.title}}
+        {{/power-select}}
+    
+    </p>
+    
+    <p>
+        <label for="tags" class="col-xs-2 col-form-label">Tags:</label>
+        <p>{{input type="text" id="tags" action="save" value=model.scene.tags}}</p>
+    </p>        
+    <p>
+        <label for="summary" class="col-xs-2 col-form-label">Summary:</label>
+        {{textarea value=model.scene.summary cols="80" rows="6"}}
+    </p>
+
+    <p>
+        <label for="participants" class="col-xs-2 col-form-label">Participants:</label>
+    
+        {{#power-select-multiple selected=model.scene.participants options=model.characters onchange=(action "participants_changed") as |char|}}
+          {{char.name}}
+        {{/power-select-multiple}}
+    
+    </p>
+    
+    <p>
+        <label for="related" class="col-xs-2 col-form-label">Related Scenes:</label>
+    
+        {{#power-select-multiple selected=model.scene.related_scenes options=model.scenes onchange=(action "related_changed") as |scene|}}
+          {{scene.icdate}} {{scene.title}}
+        {{/power-select-multiple}}
+    
+    </p>
+
+    
+    <p>
+        {{textarea value=model.scene.log cols="80" rows="25"}}
+    </p>
+    
+    <p> {{#link-to 'scenes.scene' model.scene.id class="btn btn-default"}}Cancel{{/link-to}} 
+        <button class="btn btn-primary" {{action 'save'}}>Save</button></p>
+
+{{flash-messages}}
+{{outlet}}

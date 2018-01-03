@@ -2,9 +2,23 @@
 
 <p>The scenes archive catalogs roleplay scenes from the game.  Only completed scenes show up here.  You can filter by type of scene or </p>
 
-<p><b>Select Scenes:</b> {{#power-select selected=filter options=scene_filters onchange=(action "filter_changed") search=(action "search_scenes")as |name|}}
+
+{{#if isApproved}}
+<div class="row">
+    
+    <div class="col pull-right">
+        {{#link-to 'scenes.create' class="btn btn-primary"}}Create Scene{{/link-to}}
+    </div>
+    
+</div>
+{{/if}}
+
+<p><b>Select Scenes:</b> 
+
+{{#power-select selected=filter options=scene_filters onchange=(action "filter_changed") search=(action "search_scenes")as |name|}}
   {{name}}
-{{/power-select}}</p>
+{{/power-select}}
+</p>
 
 {{scene-list scenes=page_scenes}}
 

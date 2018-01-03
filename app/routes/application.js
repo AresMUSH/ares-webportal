@@ -21,8 +21,9 @@ export default Route.extend(ApplicationRouteMixin, {
     model: function() {
         let aj = this.get('ajax');
         return RSVP.hash({
-             game:  aj.query('game', {}),
-             events: aj.queryMany('upcomingEvents', {}),
+            game:  aj.query('game', {}),
+            upcoming_events: aj.queryMany('upcomingEvents', {}),
+            recent_scenes: aj.queryMany('recentScenes', {})
            });
     },
 

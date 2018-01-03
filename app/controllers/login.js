@@ -17,7 +17,6 @@ export default Controller.extend({
                      return;
                  }
                  
-                 let name = this.get('session.data.authenticated.name');
                  this.set('name', '');
                  this.set('password', '');
                  

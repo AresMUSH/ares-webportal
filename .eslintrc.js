@@ -15,6 +15,7 @@ module.exports = {
   "globals": {
       "aresconfig": false,
       "ansi_up": false,
-      "Ember": false
+      "Ember": false,
+      "moment": false
       }
 };

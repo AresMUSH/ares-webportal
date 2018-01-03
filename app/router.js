@@ -9,8 +9,18 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('home', { path: ''});
   this.route('login', { path: '/login'});
-  this.route('scenes', { path: '/scenes'});
-  this.route('scene', { path: '/scene/:id' } );
+  this.route('scenes', function() {
+      this.route('index', { path: '/' });
+      this.route('scene', { path: '/:id' } );    
+      this.route('edit', { path: '/:id/edit' } );    
+      this.route('create');
+  });
+  this.route('plots', function() {
+      this.route('index', { path: '/' });
+      this.route('plot', { path: '/:id' });
+      this.route('edit', { path: '/:id/edit' });
+      this.route('create');
+  });
   this.route('characters', { path: '/chars'});
   this.route('char', { path: '/char/:id' });
   this.route('players', { path: '/players'});

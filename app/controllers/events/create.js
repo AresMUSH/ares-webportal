@@ -10,9 +10,16 @@ export default Controller.extend(AuthenticatedController, {
     time: '',
     description: '',
     
+    resetForm: function() {
+        this.set('title', '');
+        this.set('date', '');
+        this.set('time', '');
+        this.set('description', '');
+    },
+    
     actions: {
         changeDate: function(date) {
-            let formatted_date = moment(date).format(this.get('model.date_entry_format'));
+            let formatted_date = moment(date).format(this.get('model.game.date_entry_format'));
             this.set('date', formatted_date);  
         },
         create: function() {
@@ -25,9 +32,9 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.get('flashMessages').success('Event added!');
                 this.transitionToRoute('events.event',                          
                           response.id);
+                this.get('flashMessages').success('Event added!');
             })
             .catch((response) => {
                 this.get('flashMessages').danger(response.message);

@@ -27,7 +27,6 @@ export default Controller.extend(AuthenticatedController, {
     }.property(),
     
     player_name: function() {
-        let data = this.get('session');
         return this.get('session.data.authenticated.name');
     }.property(),
     

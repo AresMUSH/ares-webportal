@@ -4,16 +4,15 @@ import RouteTransitionOnError from 'ares-webclient/mixins/route-transition-on-er
 
 export default Route.extend(RouteTransitionOnError, {
     ajax: service(),
-    session: service(),
-    routeToGoToOnError: 'events',
-    
+    routeToGoToOnError: 'plots',
+        
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('event', {event_id: params['event_id'], edit_mode: true });
+        
+        return aj.queryOne('plot', { id: params['id'], edit_mode: true  });
     },
     
     titleToken: function(model) {
         return model.title;
     }
-    
 });
