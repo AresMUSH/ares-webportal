@@ -1,0 +1,98 @@
+<h1>FS3 Abilities</h1>
+
+<h2>Attributes</h2>
+
+{{{ansi-format text=model.attrs_blurb }}}
+
+<table class="table table-striped">
+
+<thead>
+    <th>Attribute</th>
+    <th>Description</th>
+</thead>
+
+<tbody>
+{{#each model.attrs as |attr| }}
+<tr>
+    <td>{{attr.name}}</td> 
+    <td>{{attr.description}}</td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+
+<h2>Action Skills</h2>
+
+{{{ansi-format text=model.action_blurb }}}
+
+<table class="table table-striped">
+
+<thead>
+    <th>Skill</th>
+    <th>Linked Attribute</th>
+    <th>Description</th>
+</thead>
+
+<tbody>
+{{#each model.action_skills as |ability| }}
+<tr>
+    <td>{{ability.name}}</td> 
+    <td>{{ability.linked_attr}}</td> 
+    <td>
+        {{ability.description}}
+        {{#if ability.specialties}}
+        <br/> <b>Specialty Required:</b> {{ability.specialties}}
+        {{/if}}
+    
+    </td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+
+
+<h2>Background Skills</h2>
+
+{{{ansi-format text=model.background_blurb}}}
+
+<table class="table table-striped">
+
+<thead>
+    <th>Skill</th>
+    <th>Description</th>
+</thead>
+
+<tbody>
+{{#each model.backgrounds as |ability| }}
+<tr>
+    <td>{{ability.name}}</td> 
+    <td>{{ability.description}}</td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+
+
+<h2>Languages</h2>
+
+{{{ansi-format text=model.language_blurb}}}
+
+<table class="table table-striped">
+
+<thead>
+    <th>Skill</th>
+    <th>Description</th>
+</thead>
+
+<tbody>
+{{#each model.languages as |ability| }}
+<tr>
+    <td>{{ability.name}}</td> 
+    <td>{{ability.description}}</td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+
+
+{{outlet}}

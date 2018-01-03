@@ -3,7 +3,12 @@ import config from './config/environment';
 
 const Router = EmberRouter.extend({
   location: config.locationType,
-  rootURL: config.rootURL
+  rootURL: config.rootURL,
+    
+    didTransition() {
+      this._super(...arguments);
+      window.scrollTo(0, 0);
+    }
 });
 
 Router.map(function() {
@@ -21,13 +26,21 @@ Router.map(function() {
       this.route('edit', { path: '/:id/edit' });
       this.route('create');
   });
+  
+  this.route('fs3combat', function() {
+      this.route('gear');
+      this.route('gear-detail', { path: '/:type/:name' })
+  });
+  
+  this.route('fs3skills', function() {
+      this.route('abilities');
+  });
+  
   this.route('characters', { path: '/chars'});
   this.route('char', { path: '/char/:id' });
   this.route('players', { path: '/players'});
   this.route('player', { path: '/player/:id'});
   this.route('locations', { path: '/locations'});
-  this.route('fs3-skills', { path: '/fs3-skills'});
-  this.route('fs3-gear', { path: '/fs3-gear'});
   this.route('who', { path: '/who'});
   this.route('wiki', function() {
       this.route('index', { path: '/'});

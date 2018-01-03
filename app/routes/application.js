@@ -23,7 +23,8 @@ export default Route.extend(ApplicationRouteMixin, {
         return RSVP.hash({
             game:  aj.query('game', {}),
             upcoming_events: aj.queryMany('upcomingEvents', {}),
-            recent_scenes: aj.queryMany('recentScenes', {})
+            recent_scenes: aj.queryMany('recentScenes', {}),
+            happenings: aj.queryOne('who', {})
            });
     },
 

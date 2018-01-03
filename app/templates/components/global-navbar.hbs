@@ -12,43 +12,77 @@
    
      <ul class="nav navbar-nav navbar-right">
                   
-            <li>{{#link-to "play"}}Play{{/link-to}}</li>
-            <li>{{#link-to "who"}}Who's Online{{/link-to}}</li>
+            <li>{{#link-to 'home'}}Home{{/link-to}}</li>
+                  
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              
+              Play <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+              
+                <li>{{#link-to "who"}}Who's Online{{/link-to}}</li>
+                <li>{{#link-to "play"}}Play on the Web{{/link-to}}</li>
+              
+              </ul>
+            </li>
+                                
             
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              
+              Story <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li>{{#link-to "scenes"}}Scenes{{/link-to}}</li>
+                <li>{{#link-to "plots"}}Plots{{/link-to}}</li>
+              </ul>
+            </li>
+            
+            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              
+              Directory <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li>{{#link-to "characters"}}Characters{{/link-to}}</li>
+                <li>Roster</li>
+                <li>{{#link-to "actors"}}Actors{{/link-to}}</li>                
+                <li>{{#link-to "census"}}Census{{/link-to}}</li>
+                <li>{{#link-to "players"}}Players{{/link-to}}</li>
+                <li><hr></li>
+                <li>{{#link-to "scenes"}}Scenes{{/link-to}}</li>
+                <li>{{#link-to "plots"}}Plots{{/link-to}}</li>
+                <li>{{#link-to "locations"}}Locations{{/link-to}}</li>
+                <li><hr></li>                
+                <li>{{#link-to "forum"}}Forums{{/link-to}}</li>
+                {{#if (not model.game.disabled_plugins.events)}}
+                    <li>{{#link-to "events"}}Events{{/link-to}}</li>
+                {{/if}}
+                
+              </ul>
+            </li>
+                    
+            {{#if (not model.game.disabled_plugins.fs3skills)}}
             <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                       
-                      Story <span class="caret"></span></a>
+                      FS3 <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li>{{#link-to "scenes"}}Scenes{{/link-to}}</li>
-                        <li>{{#link-to "plots"}}Plots{{/link-to}}</li>
-                      </ul>
-                    </li>
-            
-            
-            <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      
-                      Directory <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li>{{#link-to "characters"}}Characters{{/link-to}}</li>
-                        <li>{{#link-to "players"}}Players{{/link-to}}</li>
-                        <li>{{#link-to "locations"}}Locations{{/link-to}}</li>
-                        
-                        {{#if (not model.game.disabled.events)}}
-                        <li>{{#link-to "events"}}Events{{/link-to}}</li>
+                        <li>{{#link-to "fs3skills.abilities"}}Abilities List{{/link-to}}</li>
+                
+                        {{#if (not model.game.disabled_plugins.fs3combat)}}
+                        <li>{{#link-to 'fs3combat.gear'}}Gear List{{/link-to}}</li>
                         {{/if}}
                         
-                        <li>{{#link-to "forum"}}Forums{{/link-to}}</li>
-                        <li>{{#link-to "census"}}Census{{/link-to}}</li>
-                        <li>{{#link-to "actors"}}Actors{{/link-to}}</li>
-                        <li role="separator" class="divider"></li>
-                        <li><b>FS3</b></li>
-                        <li>{{#link-to "fs3-skills"}}Skills{{/link-to}}</li>
-                        <li>{{#link-to "fs3-gear"}}Gear{{/link-to}}</li>
+                        <li><hr></li>
+                        <li><a href="http://aresmush.com/fs3/fs3-3" target="_blank">Player's Guide <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+                        <li><a href="http://aresmush.com/fs3/fs3-3/roll-quickref" target="_blank">Rolls Quick Reference <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+                        {{#if (not model.game.disabled_plugins.fs3combat)}}
+                        <li><a href="http://aresmush.com/fs3/fs3-3/combat-quickref" target="_blank">Combat Quick Reference <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+                        <li><a href="http://aresmush.com/fs3/fs3-3/combat-walkthrough" target="_blank">Interactive Combat Walkthrough <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+                        {{/if}}
                       </ul>
-                    </li>
-                    
+            </li>
+            {{/if}}
                     
             <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">

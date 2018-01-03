@@ -1,6 +1,18 @@
 {{search-box}}
 
-{{#if (not model.game.disabled.events)}}
+<div class="sidebar-box">
+  <div class="sidebar-heading">
+      <h2>Game Status <i class="fa fa-users" aria-hidden="true"></i></h2>
+  </div>
+  
+<p>Today is {{model.game.ictime}}.
+<br/>{{model.game.who_count}} character(s) online.
+<br/>{{model.game.scene_count}} active scene(s).
+</p>
+<p>{{#link-to 'who'}}View Status{{/link-to}}</p>
+</div>
+
+{{#if (not model.game.disabled_plugins.events)}}
 <div class="sidebar-box">
   <div class="sidebar-heading">
       <h2>Upcoming Events <i class="fa fa-calendar" aria-hidden="true"></i></h2>

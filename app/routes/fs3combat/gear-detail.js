@@ -4,11 +4,11 @@ import RouteTransitionOnError from 'ares-webclient/mixins/route-transition-on-er
 
 export default Route.extend(RouteTransitionOnError, {
     ajax: service(),
-    routeToGoToOnError: 'forum',
+    routeToGoToOnError: 'fs3combat.gear',
     
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('forumCategory', {category_id: params['category_id']});
+        return aj.queryOne('gearDetail', {type: params['type'], name: params['name']});
     },
     
     titleToken: function(model) {
