@@ -12,7 +12,8 @@ export default Route.extend(RouteTransitionOnError, {
             { 
                 name: params['id'], 
                 content: aj.queryOne('wikiTag', { id: params['id'] })
-            });
+            })
+            .then((model) => Ember.Object.create(model));
     },
     
     titleToken: function() {

@@ -1,1 +1,43 @@
+<h1>Characters</h1>
+
+<ul class="nav nav-tabs">
+  
+  {{#each model.characters.group_names as |group|}}
+      <li class={{group.active_class}}><a data-toggle="tab" href="#{{group.key}}">{{group.name}}</a></li>
+  {{/each}}
+  {{#if model.game.roster_enabled}}
+      <li><a data-toggle="tab" href="#roster">Roster</a></li>
+  {{/if}}
+</ul>
+
+<div class="tab-content">
+  
+  {{#each model.characters.groups as |group|}}
+
+  <div id="{{group.key}}" class="tab-pane fade in {{group.active_class}}">
+
+    {{#each group.subgroups as |subgroup|}}
+  
+          {{char-group-list name=subgroup.name chars=subgroup.chars}}
+        
+    {{/each}}
+
+    {{#if group.has_npcs}}
+        {{char-group-list name="NPCs" chars=group.npcs}}
+    {{/if}}
+                 
+  </div>
+  {{/each}}
+  
+  {{#if model.game.roster_enabled}}
+  <div id="roster" class="tab-pane fade in">
+      <h2>Roster</h2>
+
+      See {{#link-to 'roster'}}Roster{{/link-to}} for ready-made characters on the roster.
+  </div>
+  {{/if}}
+
+</div>
+
+
 {{outlet}}

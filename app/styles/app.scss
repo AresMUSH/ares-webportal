@@ -773,10 +773,26 @@ ul.char-ability-list {
     max-width: 100%;
 }
 
-.relationship-image {
+.relationship-icon {
+    max-width: 100%;
+    min-height: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;       
+}
+
+.relationship-icon-container {
     width: 100px;
-    margin: auto;
-    display: block;
+    height: 100px;
+    -moz-border-radius: 25px;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;    
+    overflow: hidden;
+    background: $log-icon-color;
+}
+
+.relationship-title-container {
+    text-align: center;
 }
 
 .relationship-row {
@@ -785,7 +801,7 @@ ul.char-ability-list {
     border: 1px solid $border-color;
 }
 
-.idle-message {
+.status-message {
     color: white;
     background-color: $secondary-color;
     text-align: center;

@@ -1,0 +1,37 @@
+
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#relationshipindex">+</a></li>
+    {{#each char.relationships as |cat|}}
+    <li><a data-toggle="tab" href="#{{cat.key}}">{{cat.name}}</a></li>
+    {{/each}}
+</ul>
+
+
+<div class="tab-content">
+
+  <div id="relationshipindex" class="tab-pane fade in active">
+      <div class="tab-cover">Relationships</div>
+  </div>
+  
+  {{#each char.relationships as |cat|}}
+
+  <div id="{{cat.key}}" class="tab-pane fade">
+    
+    {{#each cat.relationships as |ship|}}
+        
+        <div class="row relationship-row">
+            <div class="col col-xs-12 col-sm-3">
+                {{relationship-icon char=ship}}
+            </div>
+            
+            <div class="col col-xs-12 col-sm-8 ansi">
+                <b>{{ship.name}}</b>
+                {{{ansi-format text=ship.text}}}
+            </div>
+        </div>
+        
+     {{/each}}
+             
+  </div>
+  {{/each}}
+</div>

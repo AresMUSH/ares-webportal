@@ -1,2 +1,74 @@
-TODO Char template
+<script type="text/javascript" src="http://www.youtube.com/player_api"></script>
+<script type="text/javascript" src="/scripts/music_player.js"></script>
+
+<h1>{{model.char.name}}</h1>
+
+<div class="row profile-wrap">
+    {{profile-demographics char=model.char}}
+</div>
+
+
+{{#if model.char.status_message}}
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-body status-message">
+                {{model.char.status_message}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+<div class="profile-tab">
+    {{profile-supplemental char=model.char}}
+</div>
+
+
+<div class="profile-tab">
+
+  {{profile-system char=model.char game=model.game}}
+  
+</div>
+
+
+<div class="profile-tab">
+
+ {{profile-relationships char=model.char}}
+ 
+ </div>
+ 
+ <div class="profile-tab">
+ 
+ {{profile-logs char=model.char}}
+
+ </div>  
+    
+    
+<div class="profile-tab">
+
+ {{profile-gallery char=model.char}}
+
+</div>
+
+
+<hr/>
+<b>Tags:</b>  
+{{#each model.char.tags as |tag|}}
+  {{#link-to 'wiki.tag' tag}}{{tag}}{{/link-to}}
+{{/each}}
+    
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+        {{#if model.char.can_manage}}
+          {{#link-to 'home' class="btn btn-primary"}}Edit{{/link-to}}
+        {{/if}}
+      {{#link-to 'home' class="btn btn-default"}}Source/History{{/link-to}}
+  </div>
+  </div>
+</div>
+
+
 {{outlet}}

@@ -11,7 +11,7 @@
 
 <ul>
 {{#each model.content.scenes as |scene| }}
-<li>{{#link-to 'scene' scene.id}}{{scene.title}}{{/link-to}}</li>
+<li>{{#link-to 'scenes.scene' scene.id}}{{scene.title}}{{/link-to}}</li>
 {{/each}}
 </ul>
 
@@ -19,6 +19,6 @@
 
 <ul>
 {{#each model.content.chars as |char| }}
-<li><a href="/char/{{char.name}}">{{char.name}}</a></li>
+<li>{{#link-to 'char' char.name}}{{char.name}}{{/link-to}}</li>
 {{/each}}
 </ul>

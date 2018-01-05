@@ -1,0 +1,27 @@
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#scenesindex">+</a></li>
+    {{#each char.scenes as |cat|}}
+    <li><a data-toggle="tab" href="#{{cat.key}}">{{cat.name}}</a></li>
+    {{/each}}
+</ul>
+
+
+<div class="tab-content">
+
+    <div id="scenesindex" class="tab-pane fade in active">
+        <div class="tab-cover">Scenes</div>
+    </div>
+  
+    {{#each char.scenes as |cat|}}
+  
+    <div id="{{cat.key}}" class="tab-pane fade ">
+  
+        <div class="row">
+            {{scene-list scenes=cat.scenes}}
+        </div>
+      
+    </div>
+  
+    {{/each}}
+  
+</div>

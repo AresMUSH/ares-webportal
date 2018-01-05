@@ -16,7 +16,8 @@ export default Route.extend(RouteTransitionOnError, {
              plots: aj.queryMany('plots', {}),
              characters: aj.queryMany('characters', {}),
              scenes: aj.queryMany('scenes', {})
-           });
+           })
+           .then((model) => Ember.Object.create(model));
     },
     
     titleToken: function() {

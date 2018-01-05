@@ -26,16 +26,16 @@ Router.map(function() {
       this.route('edit', { path: '/:id/edit' });
       this.route('create');
   });
-  
+
   this.route('fs3combat', function() {
       this.route('gear');
       this.route('gear-detail', { path: '/:type/:name' })
   });
-  
+
   this.route('fs3skills', function() {
       this.route('abilities');
   });
-  
+
   this.route('characters', { path: '/chars'});
   this.route('char', { path: '/char/:id' });
   this.route('players', { path: '/players'});
@@ -75,6 +75,7 @@ Router.map(function() {
       this.route('group', { path: '/:filter'} )
   });
   this.route('actors');
+  this.route('roster');
 });
 
 export default Router;

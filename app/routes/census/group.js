@@ -14,6 +14,7 @@ export default Route.extend(RouteTransitionOnError, {
              filter: params['filter'],
              types:  aj.query('censusTypes', {}),
              census: aj.queryOne('censusGroup', {filter: params['filter']}),
-           });
+           })
+           .then((model) => Ember.Object.create(model));
     }
 });

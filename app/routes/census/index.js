@@ -12,6 +12,7 @@ export default Route.extend(RouteTransitionOnError, {
         return RSVP.hash({
              types:  aj.query('censusTypes', {}),
              census: aj.queryOne('censusFull', {}),
-           });
+           })
+           .then((model) => Ember.Object.create(model));
     }
 });

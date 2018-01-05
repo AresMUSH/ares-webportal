@@ -14,8 +14,8 @@ export default Route.extend(ApplicationRouteMixin, {
     
     sessionInvalidated: function() { 
         this.get('flashMessages').info('You have been logged out.');
-        this.refresh();
         this.transitionTo('/');
+        this.refresh();
     },
     
     model: function() {
@@ -25,7 +25,8 @@ export default Route.extend(ApplicationRouteMixin, {
             upcoming_events: aj.queryMany('upcomingEvents', {}),
             recent_scenes: aj.queryMany('recentScenes', {}),
             happenings: aj.queryOne('who', {})
-           });
+           })
+           .then((model) => Ember.Object.create(model));
     },
 
     title: function(tokens) {

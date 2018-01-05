@@ -1,0 +1,35 @@
+<b>Attributes</b>
+<ul class="char-ability-list">
+{{#each char.fs3_attrs as |ability| }}
+<li>
+  {{ability.name}}: {{ability.rating}}
+</li>
+{{/each}}
+</ul>
+
+<b>Action Skills</b>
+<ul class="char-ability-list">
+{{#each char.fs3_action_skills as |ability| }}
+<li>
+  {{ability.name}}: {{ability.rating}}
+</li>
+{{/each}}
+</ul>
+
+<b>Background Skills</b>
+<ul class="char-ability-list">
+{{#each char.fs3_backgrounds as |ability| }}
+<li>
+  {{ability.name}}: {{ability.rating}}
+</li>
+{{/each}}
+</ul>
+
+<b>Language Skills</b>
+<ul class="char-ability-list">
+{{#each char.fs3_languages as |ability| }}
+<li>
+  {{ability.name}}: {{ability.rating}}
+</li>
+{{/each}}
+</ul>

@@ -1,0 +1,26 @@
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#supplementalindex">+</a></li>
+    {{#each char.profile as |profile| }}
+        <li><a data-toggle="tab" href="#{{profile.key}}">{{profile.name}}</a></li>
+    {{/each}}
+</ul>
+
+
+<div class="tab-content">
+
+  <div id="supplementalindex" class="tab-pane fade in active">
+      <div class="tab-cover">Supplemental Information</div>
+  </div>
+  
+  {{#each char.profile as |profile|}}
+  
+  <div id="{{profile.key}}" class="tab-pane fade ansi">
+  
+      {{{ansi-format text=profile.text}}}
+      
+  </div>
+  
+  {{/each}}
+  
+ </div>
+  

@@ -1,0 +1,74 @@
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#systeminfo">+</a></li>
+
+
+  {{#if char.rp_hooks}}
+  <li><a data-toggle="tab" href="#systemhooks">RP Hooks</a></li>
+  {{/if}}
+
+  {{#if char.background}}
+      <li><a data-toggle="tab" href="#systembg">Background</a></li> 
+  {{/if}}
+  
+  {{#if char.description}}
+  <li><a data-toggle="tab" href="#systemdesc">Description</a></li>
+  {{/if}}
+  
+ 
+  {{#if (not game.disabled_plugins.fs3skills)}}
+      <li><a data-toggle="tab" href="#systemsheet">Sheet</a></li>
+  {{/if}}
+  
+  {{#if (not game.disabled_plugins.fs3combat)}}
+      <li><a data-toggle="tab" href="#systemdamage">Damage</a></li>
+  {{/if}}
+</ul>
+
+
+
+
+<div class="tab-content">
+  <div id="systeminfo" class="tab-pane fade in active">
+      <div class="tab-cover">System Information</div>
+  </div>
+        
+  {{#if char.rp_hooks}}
+  <div id="systemhooks" class="tab-pane fade">
+       {{mush_name}}
+      <p>
+          <div class="ansi">
+                <ul>
+                {{#each char.rp_hooks as |h|}}
+                <li><b>{{h.name}}</b> - {{h.description}}</li>
+                {{/each}}
+                </ul>
+          </div>
+     </p>
+  </div>
+  {{/if}}
+  
+  
+  {{#if char.background}}
+  <div id="systembg" class="tab-pane fade">
+      {{{ansi-format text=char.background}}}
+   </div>
+  {{/if}} 
+  
+  {{#if char.description}}
+  <div id="systemdesc" class="tab-pane fade">
+       {{{ansi-format text=char.description}}}
+  </div>
+  {{/if}}
+  
+  {{#if (not game.disabled_plugins.fs3skills)}}
+  <div id="systemsheet" class="tab-pane fade">
+    {{fs3-sheet char=char}}
+  </div>
+  {{/if}}
+  
+  {{#if (not game.disabled_plugins.fs3combat)}}  
+  <div id="systemdamage" class="tab-pane fade">
+    {{fs3-damage char=char}}
+  </div>
+  {{/if}}
+</div>

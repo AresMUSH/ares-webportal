@@ -11,7 +11,8 @@ export default Route.extend({
         return RSVP.hash({
              scenes:  aj.queryMany('scenes', {}),
              scene_types: aj.queryMany('sceneTypes', {}),
-           });
+           })
+           .then((model) => Ember.Object.create(model));
            
     }
 });

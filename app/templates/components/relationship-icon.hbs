@@ -1,0 +1,9 @@
+<div class="relationship-icon-container">
+{{#link-to "char" char.name}}
+    {{#if char.icon}}
+    <img class="relationship-icon" src="/uploads/{{char.icon}}" />
+    {{else}}
+    <img class="relationship-icon" src="/theme_images/noicon.png" />
+    {{/if}}
+{{/link-to}}
+</div>

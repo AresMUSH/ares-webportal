@@ -6,7 +6,7 @@ export default Route.extend(RouteTransitionOnError, {
     ajax: service(),
     session: service(),
     
-    model: function(params) {
+    model: function() {
         let aj = this.get('ajax');
         return aj.queryOne('events');
     },
