@@ -1,0 +1,11 @@
+<h1>Files</h1>
+
+<table class="table table-striped">
+{{#each model as |file|}}
+<tr>
+<td>{{#link-to 'file' file.name}}{{file.name}}{{/link-to}}</td>
+<td>{{file.size}}kb</td>
+<td>&nbsp;</td>
+</tr>
+{{/each}}
+</table>

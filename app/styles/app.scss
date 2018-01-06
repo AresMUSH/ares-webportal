@@ -3,6 +3,7 @@
 @import 'ember-power-select/themes/bootstrap';
 @import "ember-power-select";
 @import "ansi";
+@import "diff";
 
 /* -------------------------
 BASIC CONTAINERS
@@ -67,6 +68,9 @@ form {
     text-align: center;
 }
 
+input {
+    width: 98%;
+}
 
 /* -------------------------
 NAVIGATION
@@ -834,6 +838,9 @@ ul.char-ability-list {
     margin-bottom: 20px;
 }
 
+.file-image {
+    max-width: 500px;
+}
 
 /*.char-scene-list li:before { content: "\2666  "; }*/
 

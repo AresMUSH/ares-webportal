@@ -66,12 +66,18 @@
     </p>
 
     
-    <p>
-        {{textarea value=model.scene.log cols="80" rows="25"}}
-    </p>
+    {{textarea value=model.scene.log cols="80" rows="25"}}
     
-    <p> {{#link-to 'scenes.scene' model.scene.id class="btn btn-default"}}Cancel{{/link-to}} 
-        <button class="btn btn-primary" {{action 'save'}}>Save</button></p>
+        
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+    
+                {{#link-to 'scenes.scene' model.scene.id class="btn btn-default"}}Cancel{{/link-to}} 
+                <button class="btn btn-primary" {{action 'save'}}>Save</button>
+            </div>
+        </div>
+    </div>
 
 {{flash-messages}}
 {{outlet}}

@@ -9,6 +9,7 @@ export default Controller.extend(AuthenticatedController, {
     actions: {
         delete() {
             let aj = this.get('ajax');
+            this.set('confirmDelete', false);
             aj.queryOne('deletePlot', { id: this.get('model.id')})
             .then( (response) => {
                 if (response.error) {

@@ -40,7 +40,6 @@ Router.map(function() {
   this.route('char', { path: '/char/:id' });
   this.route('players', { path: '/players'});
   this.route('player', { path: '/player/:id'});
-  this.route('locations', { path: '/locations'});
   this.route('who', { path: '/who'});
   this.route('wiki', function() {
       this.route('index', { path: '/'});
@@ -48,6 +47,11 @@ Router.map(function() {
       this.route('all', { path: '/all'});
       this.route('tags', { path: '/tags'});
       this.route('tag', { path: '/tag/:id'});
+      this.route('edit', { path: '/:id/edit'});
+      this.route('create', { path: '/create'});
+      this.route('source', { path: '/:page_id/source/:version_id'});
+      this.route('compare', { path: '/:page_id/compare/:version_id'});
+      this.route('revert', { path: '/:page_id/revert/:version_id'});
   });
   this.route('events', function() {
       this.route('index', { path: '/'} );
@@ -56,13 +60,9 @@ Router.map(function() {
       this.route('create', { path: '/create' } );
       this.route('ical', { path: '/ical' } );
   });
-  this.route('boards', { path: '/boards'});
-  this.route('help', { path: '/help'});
-  this.route('admin', { path: '/admin'});
   this.route('play');
   this.route('report-error');
   this.route('register');
-  this.route('mail');
   this.route('profile');
   this.route('forum', function() {
       this.route('index', { path: '/' });
@@ -75,7 +75,15 @@ Router.map(function() {
       this.route('group', { path: '/:filter'} )
   });
   this.route('actors');
+  this.route('files');
+  this.route('file', { path: '/file/:id' });
+  
+  this.route('mail');
+  this.route('admin', { path: '/admin'});
+  this.route('help', { path: '/help'});
   this.route('roster');
+  this.route('locations', { path: '/locations'});
+  
 });
 
 export default Router;
