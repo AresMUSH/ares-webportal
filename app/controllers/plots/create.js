@@ -31,7 +31,7 @@ export default Controller.extend({
                 this.get('flashMessages').success('Plot created!');
             })
             .catch((response) => {
-                this.get('flashMessages').danger(response.message);
+                this.get('flashMessages').danger(response);
             });
         }
     }

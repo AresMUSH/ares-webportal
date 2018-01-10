@@ -62,13 +62,21 @@
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">
+      {{#link-to 'home' class="btn btn-default"}}Source/History{{/link-to}}
         {{#if model.char.can_manage}}
+          <button {{action (mut showUpload) true}} class="btn btn-default">Upload</button>
           {{#link-to 'home' class="btn btn-primary"}}Edit{{/link-to}}
         {{/if}}
-      {{#link-to 'home' class="btn btn-default"}}Source/History{{/link-to}}
   </div>
   </div>
 </div>
+
+{{#if model.char.can_manage}}
+{{#if showUpload}}
+    {{file-uploader folder=model.char.name}}
+{{/if}}
+{{/if}}
+
 
 
 {{outlet}}

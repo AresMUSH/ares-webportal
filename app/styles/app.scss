@@ -68,10 +68,6 @@ form {
     text-align: center;
 }
 
-input {
-    width: 98%;
-}
-
 /* -------------------------
 NAVIGATION
 ------------------------- */
@@ -840,6 +836,15 @@ ul.char-ability-list {
 
 .file-image {
     max-width: 500px;
+}
+
+.upload-preview {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+input[type='file'] {
+  color: transparent;
 }
 
 /*.char-scene-list li:before { content: "\2666  "; }*/

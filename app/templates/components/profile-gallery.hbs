@@ -1,8 +1,10 @@
 <div class="panel panel-info">
 {{#if char.profile_gallery}}
-{{#each char.profile_gallery as |g|}}
-<a href="/uploads/{{g}}"><img src="/uploads/{{g}}" class="profile-gallery"></a>
-{{/each}}
+    {{#each char.profile_gallery as |g|}}
+        {{#link-to 'file' char.profile_image}}
+        <img src="/uploads/{{g}}" class="profile-gallery">
+        {{/link-to}}
+    {{/each}}
 {{/if}}
 <div class="clearfix"></div>
 </div>

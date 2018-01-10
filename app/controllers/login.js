@@ -27,7 +27,7 @@ export default Controller.extend({
                  window.location.replace(redirect);
              })
             .catch((response) => {
-                this.get('flashMessages').danger(response.message);
+                this.get('flashMessages').danger(response);
             });
         }
     }

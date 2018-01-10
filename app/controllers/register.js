@@ -29,7 +29,7 @@ export default Controller.extend({
             })
             .catch((response) => {
                 this.get('recaptchaControl').resetReCaptcha();
-                this.get('flashMessages').danger(response.message);
+                this.get('flashMessages').danger(response);
             });
         }
     }

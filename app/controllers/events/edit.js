@@ -27,7 +27,7 @@ export default Controller.extend(AuthenticatedController, {
             this.get('flashMessages').success('Event updated!');
             })
             .catch((response) => {
-                this.get('flashMessages').danger(response.message);
+                this.get('flashMessages').danger(response);
             });
         }
     }

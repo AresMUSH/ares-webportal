@@ -21,7 +21,7 @@ export default Controller.extend({
                 this.get('flashMessages').success('Plot updated!');
             })
             .catch((response) => {
-                this.get('flashMessages').danger(response.message);
+                this.get('flashMessages').danger(response);
             });
         }
     }

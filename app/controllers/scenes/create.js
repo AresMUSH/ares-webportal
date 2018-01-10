@@ -53,7 +53,7 @@ export default Controller.extend({
                 this.get('flashMessages').success('Scene updated!');
             })
             .catch((response) => {
-                this.get('flashMessages').danger(response.message);
+                this.get('flashMessages').danger(response);
             });
         }
     }

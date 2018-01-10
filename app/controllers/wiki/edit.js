@@ -23,7 +23,7 @@ export default Controller.extend({
                 this.set('preview', response.text);
             })
             .catch((response) => {
-                this.get('flashMessages').danger(response.message);
+                this.get('flashMessages').danger(response);
             });
         },
         
@@ -48,7 +48,7 @@ export default Controller.extend({
                 this.get('flashMessages').success('Page updated!');
             })
             .catch((response) => {
-                this.get('flashMessages').danger(response.message);
+                this.get('flashMessages').danger(response);
             });
         }
     }

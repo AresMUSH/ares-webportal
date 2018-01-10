@@ -4,8 +4,12 @@
 {{#each model as |file|}}
 <tr>
 <td>{{#link-to 'file' file.name}}{{file.name}}{{/link-to}}</td>
-<td>{{file.size}}kb</td>
+<td>{{file.size}}KB</td>
 <td>&nbsp;</td>
 </tr>
 {{/each}}
 </table>
+
+{{#if isApproved}}
+    {{file-uploader}}
+{{/if}}
