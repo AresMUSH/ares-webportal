@@ -4,7 +4,7 @@ import RouteTransitionOnError from 'ares-webclient/mixins/route-transition-on-er
 
 export default Route.extend(RouteTransitionOnError, {
     ajax: service(),
-    routeToGoToOnError: 'fs3combat.gear',
+    errorRoute: 'fs3combat.gear',
     
     model: function(params) {
         let aj = this.get('ajax');

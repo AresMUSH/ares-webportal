@@ -72,7 +72,7 @@ export default Controller.extend({
     
     actions: {
         connect() {
-            var idleKeepaliveMs = 60000;
+            var idle_keepalive_ms = 60000;
             this.set('websocket', new WebSocket(`ws://${aresconfig.host}:${aresconfig.port}/websocket`));
                 var self = this;
                 this.get('websocket').onmessage = function(evt) { 
@@ -97,7 +97,7 @@ export default Controller.extend({
                     this.get('notification').requestPermission();
                 }
                 
-                this.get('keepaliveInterval', window.setInterval(function(){ self.idleKeepalive() }, idleKeepaliveMs));
+                this.get('keepaliveInterval', window.setInterval(function(){ self.idleKeepalive() }, idle_keepalive_ms));
 
             },
             disconnect() {

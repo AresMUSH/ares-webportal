@@ -10,7 +10,7 @@ export default Base.extend({
         let aj = this.get('ajax');
         return aj.queryOne('checkToken', { id: data.id, token: data.token })
         .then((response) => {
-            if (response.tokenIsValid) {
+            if (response.token_valid) {
                 this.set('data', data);
                 return Promise.resolve(data);
             }

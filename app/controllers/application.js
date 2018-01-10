@@ -6,28 +6,28 @@ export default Controller.extend(AuthenticatedController, {
     session: service('session'),
     hideSidebar: false,
 
-    current_route: function() {
+    currentRoute: function() {
         return window.location;
     }.property(),
     
-    mush_name: function() { 
+    mushName: function() { 
         return aresconfig.mu_name;
     }.property(),
     
-    mush_port: function() {
+    mushPort: function() {
         return aresconfig.port;        
     }.property(),
     
-    mush_host: function() {
+    mushHost: function() {
         return aresconfig.host;        
     }.property(),
     
-    mush_version: function() {
+    mushVersion: function() {
         return aresconfig.version;
     }.property(),
     
-    player_name: function() {
-        return this.get('session.data.authenticated.name');
+    currentUser: function() {
+        return this.get('session.data.authenticated');
     }.property(),
     
     actions: {

@@ -6,13 +6,13 @@
        
            <div class="row">
                <div class="col-md-6 col-sm-4 col-xs-4">
-                   <div class="site-title">{{#link-to 'home'}}{{mush_name}}{{/link-to}}</div>
-                   <div class="site-subtitle">{{mush_host}} port {{mush_port}}</div>
+                   <div class="site-title">{{#link-to 'home'}}{{mushName}}{{/link-to}}</div>
+                   <div class="site-subtitle">{{mushHost}} port {{mushPort}}</div>
                </div>
                <div class="col-md-6 col-sm-8 col-xs-8">
                   <div class="text-right user-bar">
                    {{#if isAuthenticated}}
-                       <p>Welcome, {{player_name}}.</p>
+                       <p>Welcome, {{currentUser.name}}.</p>
                        <p>{{#link-to 'mail'}}Mail 
                            <span class="label label-pill label-primary" id="mailBadge">{{unread_mail}}</span>
                            {{/link-to}}
@@ -20,7 +20,7 @@
                            | <a href="/" {{action 'logout'}}>Logout</a> 
                        </p>
                     {{else}}
-                        <p>{{#link-to 'login' (query-params redirect=current_route)}}Login{{/link-to}}
+                        <p>{{#link-to 'login' (query-params redirect=currentRoute)}}Login{{/link-to}}
                         | {{#link-to 'register'}}Register{{/link-to}}
                         </p>
                     {{/if}}
@@ -61,6 +61,6 @@
        <hr>
 
        <footer>
-         <p>&copy; Linda Naughton 2017.   AresMUSH v{{mush_version}}</p>
+         <p>&copy; Linda Naughton 2017.   AresMUSH v{{mushVersion}}</p>
        </footer>
 </div>

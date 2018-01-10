@@ -5,11 +5,11 @@ import RouteTransitionOnError from 'ares-webclient/mixins/route-transition-on-er
 
 export default Route.extend(RouteTransitionOnError, {
     ajax: service(),
-    routeToGoToOnError: 'characters',
+    errorRoute: 'characters',
     
     afterModel: function(model) { 
         if (model && model.error) {
-            this.transitionTo(this.get('routeToGoToOnError'));
+            this.transitionTo(this.get('errorRoute'));
         }
         else if (model.get('char.playerbit')) {
             this.transitionTo('player', model.get('char.id'));

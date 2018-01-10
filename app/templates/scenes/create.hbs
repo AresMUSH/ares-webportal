@@ -21,9 +21,9 @@
     </p>
 
     <p>
-        <label for="scene_type" class="col-xs-2 col-form-label">Scene Type:</label>
+        <label class="col-xs-2 col-form-label">Scene Type:</label>
     
-        {{#power-select selected=model.scene.scene_type options=scene_types onchange=(action "type_changed") as |type|}}
+        {{#power-select selected=model.scene.scene_type options=sceneTypes onchange=(action "typeChanged") as |type|}}
           {{type}}
         {{/power-select}}
         
@@ -32,7 +32,7 @@
     <p>
         <label for="plot" class="col-xs-2 col-form-label">Plot:</label>
     
-        {{#power-select selected=model.scene.plot options=model.plots allowClear=true onchange=(action "plot_changed") as |plot|}}
+        {{#power-select selected=model.scene.plot options=model.plots allowClear=true onchange=(action "plotChanged") as |plot|}}
           {{plot.title}}
         {{/power-select}}
     
@@ -50,7 +50,7 @@
     <p>
         <label for="participants" class="col-xs-2 col-form-label">Participants:</label>
     
-        {{#power-select-multiple selected=model.scene.participants options=model.characters onchange=(action "participants_changed") as |char|}}
+        {{#power-select-multiple selected=model.scene.participants options=model.characters onchange=(action "participantsChanged") as |char|}}
           {{char.name}}
         {{/power-select-multiple}}
     
@@ -58,10 +58,10 @@
     
     <p>
         <label for="related" class="col-xs-2 col-form-label">Related Scenes:</label>
-    
-        {{#power-select-multiple selected=model.scene.related_scenes options=model.scenes onchange=(action "related_changed") as |scene|}}
+        {{#power-select-multiple selected=model.scene.related_scenes options=model.scenes onchange=(action "relatedChanged") as |scene|}}
           {{scene.icdate}} {{scene.title}}
         {{/power-select-multiple}}
+        <div class="hint">It may take a second for the related scenes list to pop up.</div>
     
     </p>
 

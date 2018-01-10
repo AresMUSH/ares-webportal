@@ -14,9 +14,5 @@ export default Mixin.create({
     
     isAdmin: function() {
         return this.get('session.data.authenticated.is_admin');        
-    }.property('model'),
-    
-    current_player: function() {
-        return this.get('session.data.authenticated');
     }.property('model')
 });

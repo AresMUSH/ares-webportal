@@ -7,7 +7,7 @@ import RouteResetFormOnExit from 'ares-webclient/mixins/route-reset-form-on-exit
 export default Route.extend(RouteTransitionOnError, ReloadableRoute, RouteResetFormOnExit, {
     ajax: service(),
     session: service(),
-    routeToGoToOnError: 'forum',
+    errorRoute: 'forum',
     
     model: function(params) {
         let aj = this.get('ajax');

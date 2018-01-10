@@ -23,12 +23,12 @@ export default Route.extend(ApplicationRouteMixin, {
     },
 
     title: function(tokens) {
-        let mush_name = aresconfig.mu_name;
+        let mushName = aresconfig.mu_name;
         if (tokens.length > 0) {
-            return tokens.reverse().join(' - ') + " - " + mush_name;
+            return tokens.reverse().join(' - ') + " - " + mushName;
         }
         else {
-            return mush_name;
+            return mushName;
         }
     }
  });

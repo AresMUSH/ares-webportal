@@ -3,11 +3,11 @@ import AuthenticatedController from 'ares-webclient/mixins/authenticated-control
 
 export default Controller.extend(AuthenticatedController, {
     page: 1,
-    per_page: 30,
+    perPage: 30,
     filter: 'Recent',
     
-    filtered_scenes: function() {
-        let types = this.get('model.scene_types').map(t => t.get('name'));
+    filteredScenes: function() {
+        let types = this.get('model.sceneTypes').map(t => t.get('name'));
         let selected_filter = this.get('filter');
         let all_scenes = this.get('model.scenes');
         
@@ -26,7 +26,7 @@ export default Controller.extend(AuthenticatedController, {
         }
         else if (selected_filter === 'Mine') {
             if (this.get('isAuthenticated')){
-                return all_scenes.filter(s => s.participants.map(p => p.name).includes(this.get('current_player.name')));
+                return all_scenes.filter(s => s.participants.map(p => p.name).includes(this.get('currentUlayer.name')));
             }
             return all_scenes;
         }
@@ -36,38 +36,38 @@ export default Controller.extend(AuthenticatedController, {
         }        
     }.property('model', 'filter'),
     
-    num_scenes: function() {
-        return this.get('filtered_scenes').length;
+    numScenes: function() {
+        return this.get('filteredScenes').length;
     }.property('model', 'filter', 'page'),
     
-    num_pages: function() {
-        let fraction = this.get('num_scenes') / this.get('per_page');
+    numPages: function() {
+        let fraction = this.get('numScenes') / this.get('perPage');
         return Math.ceil(fraction);
-    }.property('num_scenes'),
+    }.property('numScenes'),
     
-    page_scenes: function() {
+    pageScenes: function() {
         let current_page = this.get('page');
-        if (!current_page || current_page < 0 || current_page > this.get('num_pages')) {
+        if (!current_page || current_page < 0 || current_page > this.get('numPages')) {
             current_page = 1;
         }
-        let per_page = this.get('per_page');
+        let per_page = this.get('perPage');
         let start = (current_page - 1) * per_page;
-        let available = this.get('filtered_scenes');
+        let available = this.get('filteredScenes');
         let selected = available.slice(start, start + per_page);
         return selected;
         
     }.property('model', 'filter', 'page'),
     
-    pages_list: function() {
+    pagesList: function() {
         let pages = [];
-        for (var i = 0; i < this.get('num_pages'); i++) {
+        for (var i = 0; i < this.get('numPages'); i++) {
             pages.push(i + 1);
         }
         return pages;
     }.property('model', 'filter', 'page'),
     
-    scene_filters: function() {
-        let types = this.get('model.scene_types');
+    sceneFilters: function() {
+        let types = this.get('model.sceneTypes');
         let scene_types = types.map(s => s.name);
         let base_filters = ['Recent', 'All', 'Popular'];
         if (this.get('isAuthenticated')) {
@@ -77,13 +77,13 @@ export default Controller.extend(AuthenticatedController, {
     }.property('model'),
     
     actions: {
-        filter_changed(new_filter) {
+        filterChanged(new_filter) {
             this.set('filter', new_filter);
         },
-        goto_page(new_page) { 
+        gotoPage(new_page) { 
             this.set('page', new_page);
         },
-        search_scenes(search_term) {
+        searchScenes(search_term) {
             this.set('filter', search_term);
         }
     }

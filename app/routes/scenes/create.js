@@ -5,14 +5,14 @@ import RSVP from 'rsvp';
 
 export default Route.extend(RouteTransitionOnError, {
     ajax: service(),
-    routeToGoToOnError: 'scenes',
+    errorRoute: 'scenes',
         
     model: function() {
         let aj = this.get('ajax');
         
         return RSVP.hash({
              scene: Ember.Object.create(),
-             scene_types: aj.queryMany('sceneTypes', {}),
+             sceneTypes: aj.queryMany('sceneTypes', {}),
              plots: aj.queryMany('plots', {}),
              characters: aj.queryMany('characters', {}),
              scenes: aj.queryMany('scenes', {})

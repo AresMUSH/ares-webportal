@@ -30,7 +30,7 @@ export default Component.extend({
                     name: file.name,
                     data: null,
                     folder: this.get('folder'),
-                    size_kb: Math.round(file.size / 1000),
+                    sizeKb: Math.round(file.size / 1000),
                     url: URL.createObjectURL(file)
                 });
                 
@@ -63,7 +63,7 @@ export default Component.extend({
             
             aj.queryOne('uploadFile', {
                  name: file.name,
-                 size_kb: file.size_kb,
+                 size_kb: file.sizeKb,
                  url: file.url,
                  data: file.data,
                  folder: this.get('folder')

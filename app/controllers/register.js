@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     name: '',
     password: '',
-    confirm_password: '',
+    confirmPassword: '',
     reCaptchaResponse: '',
     session: service(),
     flashMessages: service(),
@@ -18,7 +18,7 @@ export default Controller.extend({
         register() {
             
            this.get('ajax').queryOne('register', 
-               { name: this.get('name'), password: this.get('password'), confirm_password: this.get('confirm_password'), recaptcha: this.get('reCaptchaResponse')})
+               { name: this.get('name'), password: this.get('password'), confirm_password: this.get('confirmPassword'), recaptcha: this.get('reCaptchaResponse')})
             .then((response) => {            
                 if (response.error) {
                     this.get('recaptchaControl').resetReCaptcha();

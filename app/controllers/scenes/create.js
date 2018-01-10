@@ -5,25 +5,21 @@ export default Controller.extend({
     ajax: service(),
     flashMessages: service(),
     
-    plot_names: function() {
-        return this.get('model.plots').map(p => p.get('title'));    
-    }.property('model'),
-    
-    scene_types: function() { 
-        return this.get('model.scene_types').map(p => p.get('name'));
+    sceneTypes: function() { 
+        return this.get('model.sceneTypes').map(p => p.get('name'));
     }.property('model'),
     
     actions: {
-        plot_changed(new_plot) {
+        plotChanged(new_plot) {
             this.set('model.scene.plot', new_plot);
         },
-        type_changed(new_type) {
+        typeChanged(new_type) {
             this.set('model.scene.scene_type', new_type);
         },
-        participants_changed(new_participants) {
+        participantsChanged(new_participants) {
             this.set('model.scene.participants', new_participants);
         },
-        related_changed(new_related) {
+        relatedChanged(new_related) {
             this.set('model.scene.related_scenes', new_related)
         },
         save() {
