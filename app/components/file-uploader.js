@@ -20,7 +20,7 @@ export default Component.extend({
     }.property('fileCount'),
     
     actions: {
-        filesSelected: function(e, args) {
+        filesSelected: function(e) {
             let selectedFiles = e.target.files;
             let info = [];
             for (var i = 0; i < selectedFiles.length; i++) {

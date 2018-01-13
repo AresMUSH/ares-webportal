@@ -4,7 +4,6 @@ import RouteTransitionOnError from 'ares-webclient/mixins/route-transition-on-er
 
 export default Route.extend(RouteTransitionOnError, {
     ajax: service(),
-    session: service(),
     titleToken: 'Actors',
     
     model: function() {

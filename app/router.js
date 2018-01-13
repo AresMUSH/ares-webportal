@@ -96,6 +96,7 @@ Router.map(function() {
   this.route('mail');
   this.route('admin', { path: '/admin'});
   this.route('roster');
+  this.route('chargen');
 });
 
 export default Router;

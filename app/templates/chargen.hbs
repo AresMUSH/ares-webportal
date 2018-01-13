@@ -1,0 +1,198 @@
+<div class="row">
+ <div class="col col-md-12">
+      
+     <h1>Create a Character</h1>
+     
+     
+     <p>Coming Soon: All about creating a character, including a link to a tutorial.</p>
+     
+     <!-- Nav tabs -->
+     <ul class="nav nav-tabs" role="tablist">
+       <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
+       <li role="presentation"><a href="#background" aria-controls="background" role="tab" data-toggle="tab">Background</a></li>
+       <li role="presentation"><a href="#fs3attrs" aria-controls="fs3attrs" role="tab" data-toggle="tab">Attributes</a></li>
+       <li role="presentation"><a href="#fs3action" aria-controls="fs3action" role="tab" data-toggle="tab">Action Skills</a></li>
+       <li role="presentation"><a href="#fs3bg" aria-controls="fs3bg" role="tab" data-toggle="tab">Background Skills</a></li>
+       <li role="presentation"><a href="#fs3lang" aria-controls="fs3lang" role="tab" data-toggle="tab">Language Skills</a></li>
+       <li role="presentation"><a href="#misc" aria-controls="misc" role="tab" data-toggle="tab">Miscellaneous</a></li>
+     </ul>
+     
+     <!-- Tab panes -->
+     <div class="tab-content">
+       <div role="tabpanel" class="tab-pane active" id="demographics">
+           <div class="panel panel-default">
+             <div class="panel-body">
+                 <h3>Demographics</h3>
+     
+                 <form class="form">
+                   <div class="form-group">
+                   <label for="name">Name (first and last):</label>
+                     <input type="text" id="name" class="form-control">
+         
+                     <label for="age">Age:</label>
+                       <input type="text" id="age" class="form-control">
+           
+                     <label for="colony">Home Colony:</label>
+                       <select class="form-control" id="colony">
+                         <option>Aerilon</option>
+                         <option>Aquaria</option>
+                         <option>Canceron</option>
+                         <option>Caprica</option>
+                       </select>
+         
+                   <label for="rank">Rank:</label>
+                     <select class="form-control" id="rank">
+                       <option>Ensign</option>
+                       <option>Lieutenant JG</option>
+                       <option>Lieutenant</option>
+                       <option>Captain</option>
+                     </select>
+         
+                    <label for="colony">Position:</label>
+                      <select class="form-control" id="colony">
+                        <option>Viper Pilot</option>
+                        <option>Raptor Pilot</option>
+                        <option>Raptor ECO</option>
+                        <option>Marine</option>
+                      </select>
+          
+                      <br/>
+                    <span class="btn btn-default" href="#" role="button">Upload Profile Image</span>
+          
+          
+                   </div>       
+                 </form>
+             </div>
+           </div>
+          </div>
+           
+           <div role="tabpanel" class="tab-pane" id="background">
+               <div class="panel panel-default">
+                 <div class="panel-body">
+                   <h3>Background</h3>
+                   <textarea class="form-control" rows="20" id="background"></textarea>
+                 </div>
+               </div>
+             </div>
+             
+         <div role="tabpanel" class="tab-pane" id="fs3attrs">
+             <div class="panel panel-default">
+               <div class="panel-body">
+                 <h3>Attributes</h3>
+     
+                 {{#if showAttrErrors}}
+                 <div class="alert alert-danger">
+                 <ul>
+                 {{#each attrErrors as |error|}}
+                 <li>{{error}}</li>
+                 {{/each}}
+                 </ul>
+                 </div>
+                 {{/if}}
+     
+                 {{#each fs3attrs as |att|}}
+                 {{#fs3-attrbox rating=att.rating ratingName=att.ratingName updated=(action "abilityChanged")}}
+                     <b>{{att.name}}</b> - {{att.desc}}
+                 {{/fs3-attrbox}}
+                 {{/each}}
+               </div>
+             </div>
+           </div>
+
+         <div role="tabpanel" class="tab-pane" id="fs3action">
+             <div class="panel panel-default">
+               <div class="panel-body">
+                 <h3>Action Skills</h3>
+     
+                 {{#if showSkillErrors}}
+                 <div class="alert alert-danger">
+                 <ul>
+                 {{#each skillErrors as |error|}}
+                 <li>{{error}}</li>
+                 {{/each}}
+                 </ul>
+                 </div>
+                 {{/if}}
+
+                 {{#each fs3action as |skill|}}
+                 {{#fs3-actionbox rating=skill.rating ratingName=skill.ratingName updated=(action "abilityChanged")}}
+                     <b>{{skill.name}}</b> - {{skill.desc}}
+                 {{/fs3-actionbox}}
+                 {{/each}}
+                 
+               </div>
+             </div>
+           </div>
+
+         <div role="tabpanel" class="tab-pane" id="fs3lang">
+             <div class="panel panel-default">
+               <div class="panel-body">
+
+
+                 <h3>Language Skills</h3>
+
+                 {{#each langskills as |skill|}}
+                 {{#fs3-langbox rating=skill.rating ratingName=skill.ratingName updated=(action "abilityChanged")}}
+                     <b>{{skill.name}}</b>
+                 {{/fs3-langbox}}
+                 {{/each}}
+               </div>
+             </div>
+           </div>
+
+         <div role="tabpanel" class="tab-pane" id="fs3bg">
+             <div class="panel panel-default">
+               <div class="panel-body">
+                 <h3>Background Skills</h3>
+     
+                 {{#each bgskills as |skill|}}
+                 {{#fs3-bgbox rating=skill.rating ratingName=skill.ratingName updated=(action "abilityChanged")}}
+                     <b>{{input type="text" value=skill.name size=150}}</b>
+                 {{/fs3-bgbox}}
+
+                 {{/each}}
+
+                 <button id="addbg" {{action "addBackgroundSkill"}}>Add Background Skill</button>
+                 
+               </div>
+             </div>
+           </div>
+                                   
+         <div role="tabpanel" class="tab-pane" id="misc">
+             <div class="panel panel-default">
+               <div class="panel-body">
+                 <h3>RP Hooks</h3>
+    
+                  <textarea class="form-control" rows="20" id="hooks"></textarea>
+      
+                 <h3>Notes</h3>
+    
+                  <textarea class="form-control" rows="20" id="notes"></textarea>
+               </div>
+             </div>
+           </div>
+               
+       </div>
+     
+     
+     
+    
+     
+     
+     
+     
+    
+      
+    
+     
+
+     
+    <div class="button-row">
+       <span class="btn btn-default" href="#" role="button">Save For Later</span>
+       <span class="btn btn-success" href="#" role="button">Submit</span>
+    </div>
+     
+  </div>
+</div>
+
+{{outlet}}

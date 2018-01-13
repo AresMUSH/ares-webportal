@@ -26,9 +26,9 @@ export default Route.extend(ApplicationRouteMixin, {
                 }
                 return response;
             })
-            .catch((response) => {
+            .catch(() => {
                 return { game_down: true };
-            });;
+            });
     },
 
     title: function(tokens) {
