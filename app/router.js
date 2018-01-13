@@ -13,6 +13,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('home', { path: ''});
+  this.route('error');
   this.route('login', { path: '/login'});
   this.route('scenes', function() {
       this.route('index', { path: '/' });
@@ -61,7 +62,6 @@ Router.map(function() {
       this.route('ical', { path: '/ical' } );
   });
   this.route('play');
-  this.route('report-error');
   this.route('register');
   this.route('profile');
   this.route('forum', function() {
@@ -75,15 +75,27 @@ Router.map(function() {
       this.route('group', { path: '/:filter'} )
   });
   this.route('actors');
-  this.route('files');
-  this.route('file', { path: '/file/:id' });
-  
+  this.route('files', function() {
+      this.route('index', { path: '/' });
+      this.route('file', { path: '/file', queryParams: [ 'path', 'name' ] });
+      this.route('edit', { path: '/file/edit', queryParams: [ 'path', 'name' ] });
+  });
+
+  this.route('help');
+  this.route('help-topic', { path: '/help/:topic' });
+
+  this.route('locations');
+  this.route('location', { path: '/location/:id'});
+
+  this.route('combat', { path: '/combat/:id' });
+  this.route('combats');
+
+  this.route('map', { path: '/map/:id' });
+  this.route('maps');
+
   this.route('mail');
   this.route('admin', { path: '/admin'});
-  this.route('help', { path: '/help'});
   this.route('roster');
-  this.route('locations', { path: '/locations'});
-  
 });
 
 export default Router;

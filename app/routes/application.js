@@ -17,9 +17,18 @@ export default Route.extend(ApplicationRouteMixin, {
         this.refresh();
     },
     
-    model: function() {
+    model: function() {        
         let aj = this.get('ajax');
-        return aj.queryOne('sidebarInfo', {});
+        return aj.queryOne('sidebarInfo', {})
+            .then( (response) => {
+                if (response.error) {
+                    return { game_down: true };
+                }
+                return response;
+            })
+            .catch((response) => {
+                return { game_down: true };
+            });;
     },
 
     title: function(tokens) {

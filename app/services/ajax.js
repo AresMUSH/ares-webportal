@@ -27,7 +27,7 @@ export default Service.extend({
             }
            return response;
         }).catch(() => {
-                    Ember.getOwner(this).lookup('router:main').transitionTo('report-error', { queryParams: { message: "There was a problem connecting to the game." }}) });
+                    Ember.getOwner(this).lookup('router:main').transitionTo('error', { queryParams: { message: "There was a problem connecting to the game.  It may be down." }}) });
     },
     
     queryOne(cmd, args) {

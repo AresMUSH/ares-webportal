@@ -8,7 +8,7 @@ export default Controller.extend({
     session: service(),
     flashMessages: service(),
     
-    resetForm: function() {
+    resetOnExit: function() {
         this.set('subject', '');
         this.set('message', '');
     },

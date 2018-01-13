@@ -1,1 +1,68 @@
+<h1>Roster</h1>
+
+<p>The roster contains ready-made characters that you can just pick up and play.  Some have been played before, as indicated by a <span class="label label-info">Previously Played</span> tag.  For most characters, you can claim them just by logging onto the game and using the roster command.  Characters marked with <span class="label label-warning">App Required</span> require a little more work so you'll need to talk to the contact person before claiming them.</p>
+    
+
+
+{{#each model as |group|}}
+<h2>{{group.name}}</h2>
+
+<table>
+    <thead>
+        <th>Character</th>
+        <th>Summary</th>
+        <th>Position</th>
+        <th>Age</th>
+        <th>Contact</th>
+        <th>Special Notes</th>
+    </thead>
+    <tbody>
+    
+    {{#each group.chars as |char|}}
+    
+    <tr>
+        <td>
+            {{char-icon char=char}}
+         </td>
+         
+         
+         <td>
+             <b>{{char.fullname}}</b>
+             <br/>
+              {{{ansi-format text=char.roster_notes}}}
+         </td>
+         
+         <td>
+             {{char.groups.position}}
+         </td>
+         
+         <td>
+            {{char.demographics.age}}
+         </td>
+         
+         <td>
+            {{char.contact}}
+        </td>
+        
+         <td>             
+                 {{#if char.previously_played}}
+                 <span class="label label-info">Previously Played</span>
+                 {{/if}}
+             
+                 {{#if char.app_required}}
+                 <span class="label label-warning">App Required</span>
+                 {{/if}}
+         </td>
+
+        
+    
+    </tr>
+        
+    {{/each}}
+    </tbody>
+</table>
+
+{{/each}}
+
+
 {{outlet}}

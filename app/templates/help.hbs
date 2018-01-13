@@ -1,1 +1,14 @@
+<h1>Help Topics</h1>
+
+{{#each model as |toc|}}
+    <h2>{{toc.toc_category}}</h2>
+
+    <ul>
+    {{#each toc.topics as |topic|}}
+    
+    <li>{{#link-to 'help-topic' topic.topic}}{{topic.name}}{{/link-to}} - {{topic.summary}}</li>
+    {{/each}}
+    </ul>
+{{/each}}
+
 {{outlet}}

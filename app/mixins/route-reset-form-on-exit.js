@@ -6,7 +6,7 @@ export default Mixin.create({
       this._super.apply(this, arguments);
 
       if (isExiting) {
-          controller.resetForm();
+          controller.resetOnExit();
       }
     }
 });

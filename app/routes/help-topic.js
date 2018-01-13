@@ -7,10 +7,10 @@ export default Route.extend(RouteTransitionOnError, {
     
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryMany('help');
+        return aj.queryOne('helpTopic', { topic: params['topic']} );
     },
     
     titleToken: function(model) {
-        return "Help";
+        return model.title;
     }
 });

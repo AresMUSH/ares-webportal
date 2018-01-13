@@ -23,17 +23,24 @@
             {{#each files as |f|}}
             <tr>
                 <td><img class="upload-preview" src="{{f.url}}" /></td>
-                <td>{{input type='text' value=f.name}}</td> 
-                <td>{{f.sizeKb}}KB</td> 
                 <td>
+                    <p><label class="col-xs-5">Name:</label> {{input type='text' value=f.name}}</p>
+                    <p><label class="col-xs-5">Folder (optional):</label> {{input type='text' value=f.folder}}</p>
+                    <p><label class="col-xs-5">Overwrite?</label> {{input type='checkbox' checked=f.allowOverwrite}}</p>
+                    
                     {{#if f.upload_message}}
                         {{#if f.upload_success}}
-                        <span class="label label-success">{{f.upload_message}}</span>
+                            <span class="label label-success">{{f.upload_message}}</span>
                         {{else}}
-                        <span class="label label-danger">{{f.upload_message}}</span>
+                            <span class="label label-danger">{{f.upload_message}}</span>
                         {{/if}}
-                    {{else}}
-                        <button class="btn btn-default" {{action 'removeFile' f}}><i class="fa fa-trash" aria-hidden="true"></i></button>
+                    {{/if}}
+                    
+                </td>
+                <td>{{f.sizeKb}}KB</td> 
+                <td>
+                    {{#if (not f.upload_success)}}
+                        <button class="btn btn-default" {{action 'removeFile' f}}><i class="fa fa-ban" aria-hidden="true"></i></button>
                         <button class="btn btn-primary" {{action 'uploadFile' f}}><i class="fa fa-upload" aria-hidden="true"></i></button>
                     {{/if}}
                 </td>

@@ -10,7 +10,7 @@ export default Controller.extend(AuthenticatedController, {
     time: '',
     description: '',
     
-    resetForm: function() {
+    resetOnExit: function() {
         this.set('title', '');
         this.set('date', '');
         this.set('time', '');

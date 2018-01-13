@@ -9,7 +9,7 @@ export default Controller.extend({
     summary: '',
     description: '',
     
-    resetForm: function() {
+    resetOnExit: function() {
         this.set('title', '');
         this.set('summary', '');
         this.set('description', '');

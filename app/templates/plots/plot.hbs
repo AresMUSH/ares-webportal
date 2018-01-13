@@ -1,22 +1,22 @@
-<h1>{{model.title}}</h1>
+<h1>{{model.plot.title}}</h1>
         
 <div class="ansi">
 
-        <p>{{{model.summary}}}</p>
+        <p>{{{model.plot.summary}}}</p>
 </div>
 
 
 
     <h2>Scenes</h2>
     
-    {{scene-list scenes=model.scenes}}
+    {{scene-list scenes=model.plot.scenes sceneTypes=model.sceneTypes}}
     
     
 <div>
 
 <h2>Details</h2>
 
-{{{ansi-format text=model.description}}}
+{{{ansi-format text=model.plot.description}}}
 
 </div>
 
@@ -33,13 +33,14 @@
         {{#if isAdmin}}
         <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
         {{/if}}
-        {{#link-to 'plots.edit' model.id class="btn btn-primary"}}Edit{{/link-to}}
+        {{#link-to 'plots.edit' model.plot.id class="btn btn-primary"}}Edit{{/link-to}}
     </div>
     </div>
 </div>
 
 {{/if}}
 
+{{flash-messages}}
 
 {{#bs-modal-simple
     title="Confirm Delete"
@@ -50,7 +51,7 @@
     open=confirmDelete
     onSubmit=(action "delete")
     onHide=(action (mut confirmDelete) null)}}
-    You're about to delete plot {{model.title}}. This cannot be undone.  Are you sure?
+    You're about to delete plot {{model.plot.title}}. This cannot be undone.  Are you sure?
   {{/bs-modal-simple}}
   
 {{outlet}}

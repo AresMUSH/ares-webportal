@@ -6,7 +6,7 @@ export default Controller.extend({
     flashMessages: service(),
     preview: null,
     
-    resetForm: function() {
+    resetOnExit: function() {
         this.set('preview', null);
     },
     

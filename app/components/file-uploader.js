@@ -29,7 +29,7 @@ export default Component.extend({
                     file: file,
                     name: file.name,
                     data: null,
-                    folder: this.get('folder'),
+                    folder: this.get('folder').toLowerCase(),
                     sizeKb: Math.round(file.size / 1000),
                     url: URL.createObjectURL(file)
                 });
@@ -66,7 +66,8 @@ export default Component.extend({
                  size_kb: file.sizeKb,
                  url: file.url,
                  data: file.data,
-                 folder: this.get('folder')
+                 allow_overwrite: file.allowOverwrite,
+                 folder: file.folder
                })
             .then( (response) => {
                 if (response.error) {

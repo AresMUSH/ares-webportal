@@ -44,7 +44,7 @@
               Directory <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li>{{#link-to "characters"}}Characters{{/link-to}}</li>
-                <li>Roster</li>
+                <li>{{#link-to "roster"}}Roster{{/link-to}}</li>
                 <li>{{#link-to "actors"}}Actors{{/link-to}}</li>                
                 <li>{{#link-to "census"}}Census{{/link-to}}</li>
                 <li>{{#link-to "players"}}Players{{/link-to}}</li>
@@ -52,6 +52,12 @@
                 <li>{{#link-to "scenes"}}Scenes{{/link-to}}</li>
                 <li>{{#link-to "plots"}}Plots{{/link-to}}</li>
                 <li>{{#link-to "locations"}}Locations{{/link-to}}</li>
+                {{#if (not model.game.disabled_plugins.maps)}}
+                <li>{{#link-to "maps"}}Maps{{/link-to}}</li>
+                {{/if}}
+                {{#if (not model.game.disabled_plugins.fs3combat)}}
+                <li>{{#link-to "combats"}}Combats{{/link-to}}</li>
+                {{/if}}
                 <li><hr></li>                
                 <li>{{#link-to "forum"}}Forums{{/link-to}}</li>
                 {{#if (not model.game.disabled_plugins.events)}}
@@ -105,11 +111,14 @@
                       
                       Help <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li>{{#link-to "help"}}Help{{/link-to}}</li>
-                        <li>{{#link-to "admin"}}Admin{{/link-to}}</li>
+                        <li>{{#link-to "help-topic" "web_portal"}}Web Portal Help{{/link-to}}</li>
+                        <li>{{#link-to "help"}}Game Commands{{/link-to}}</li>
+                        <li>{{#link-to "help-topic" "markdown"}}Markdown Reference{{/link-to}}</li>
+                        <li><a href="https://aresmush.com/mush-101/" target="_blank">MUSH 101 Tutorial <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
                       </ul>
                     </li>
             
+                    <li>{{#link-to "admin"}}Admin{{/link-to}}</li>
             
          </ul>
    

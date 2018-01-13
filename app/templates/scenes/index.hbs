@@ -13,21 +13,6 @@
 </div>
 {{/if}}
 
-<p><b>Select Scenes:</b> 
-
-{{#power-select selected=filter options=sceneFilters onchange=(action "filterChanged") search=(action "searchScenes")as |name|}}
-  {{name}}
-{{/power-select}}
-</p>
-
-{{scene-list scenes=pageScenes}}
-
-{{#each pagesList as |p|}}
-{{#if (eq p page)}}
-<button class="btn btn-primary" {{action "gotoPage" p}}>{{p}}</button>
-{{else}}
-<button class="btn btn-default" {{action "gotoPage" p}}>{{p}}</button>
-{{/if}}
-{{/each}}
+{{scene-list scenes=model.scenes sceneTypes=model.sceneTypes}}
 
 {{outlet}}

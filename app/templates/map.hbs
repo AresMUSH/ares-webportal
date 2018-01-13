@@ -1,0 +1,14 @@
+<h1>{{model.name}} Map</h1>
+
+<p>This is the map for the grid areas: {{model.areas}}.</p>
+
+<div class="map">
+    {{{ansi-format text=model.map_text}}}
+</div>
+
+
+<hr/>
+<p>{{#link-to 'maps'}}<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to Maps{{/link-to}}</p>
+
+
+{{outlet}}

@@ -20,7 +20,8 @@ export default Route.extend(RouteTransitionOnError, {
         let aj = this.get('ajax');
         return RSVP.hash({
             char: aj.queryOne('character', { id: params['id'] }),
-            game: this.modelFor('application').game })
+            game: this.modelFor('application').game,
+            sceneTypes: aj.queryMany('sceneTypes', {}) })
             .then((model) => Ember.Object.create(model));
     },
     

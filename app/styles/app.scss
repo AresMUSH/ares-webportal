@@ -847,6 +847,13 @@ input[type='file'] {
   color: transparent;
 }
 
+.map { 
+    font-family: Lucida Console, Andale Mono, monospace;
+    white-space: pre;
+    background-color: black;
+    color: white;
+}
+
 /*.char-scene-list li:before { content: "\2666  "; }*/
 
 @media (max-width:800px)  { 

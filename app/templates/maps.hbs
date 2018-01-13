@@ -1,0 +1,12 @@
+<h1>Maps</h1>
+
+<p>The maps directory helps you find your way around the game grid.</p>
+    
+{{#each model as |m|}}
+
+<ul>
+    <li>{{#link-to 'map' m.id}}{{m.name}}{{/link-to}}</li>
+</ul>
+{{/each}}
+
+{{outlet}}

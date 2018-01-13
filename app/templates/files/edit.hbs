@@ -1,0 +1,27 @@
+<h1>{{model.name}}</h1>
+
+<img src="/uploads/{{model.path}}" class="image-container file-image" />
+
+
+<p><label for="name">Name:</label></p>
+<p>{{input type='text' id='name' value=model.name}}</p>
+
+<p><label for="folder">Folder (optional):</label></p>
+<p>{{input type='text' id='folder' value=model.folder}}</p>
+
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+          {{#link-to 'files.file' (query-params path=model.path name=model.name) class="btn btn-default"}}Cancel{{/link-to}}
+
+          {{#if isApproved}}
+          <button {{action 'save'}} class="btn btn-primary">Save</button>
+          {{/if}}
+          
+         </div>
+  </div>
+</div>
+
+{{flash-messages}}
+{{outlet}}

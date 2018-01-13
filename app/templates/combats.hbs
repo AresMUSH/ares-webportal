@@ -1,0 +1,34 @@
+<h1>Combats</h1>
+
+<p>The combat directory lists active combats and allows you to view combat status in a web page rather than typing 'combat' over and over in your MUSH window.  Organizers can also perform some setup activities via the web.</p>
+
+<table class="table table-striped">
+<thead>
+    <th>Combat ID</th>
+    <th>Organizer</th>
+    <th>Participants</th>
+</thead>
+
+<tbody>
+{{#each model as |combat|}}
+<tr><td>
+    {{#link-to 'combat' combat.id}}{{combat.id}}{{/link-to}}
+</td>
+
+<td>
+    {{combat.organizer}}
+</td>
+
+<td>
+    {{#each combat.participants as |p|}}
+    {{p}}
+    {{/each}}
+</td>
+
+</tr>
+{{/each}}
+</tbody>
+</table>
+
+
+{{outlet}}
