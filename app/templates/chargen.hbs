@@ -3,194 +3,270 @@
       
      <h1>Create a Character</h1>
      
-     
-     <p>Coming Soon: All about creating a character, including a link to a tutorial.</p>
+     <p>The online character creation tool will guide you through creating your character.</p>
+         
+
+     <div class="alert alert-info">
+    
+             <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen, but anything set with the in-game chargen commands will be overwritten by what you set here.</p>
+            
+             <p>
+                 <button name="save" {{action 'save'}} class="btn btn-info">Save</button>
+             </p>
+
+     </div>
+          
+     {{#if showCharErrors}}
+     <div class="alert alert-danger">
+     <p><b>Alerts:</b></p>
+     <ul>
+     {{#each alerts as |error|}}
+     <li>{{error}}</li>
+     {{/each}}
+     </ul>
+     </div>
+     {{/if}}
      
      <!-- Nav tabs -->
      <ul class="nav nav-tabs" role="tablist">
        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
-       <li role="presentation"><a href="#background" aria-controls="background" role="tab" data-toggle="tab">Background</a></li>
-       <li role="presentation"><a href="#fs3attrs" aria-controls="fs3attrs" role="tab" data-toggle="tab">Attributes</a></li>
-       <li role="presentation"><a href="#fs3action" aria-controls="fs3action" role="tab" data-toggle="tab">Action Skills</a></li>
-       <li role="presentation"><a href="#fs3bg" aria-controls="fs3bg" role="tab" data-toggle="tab">Background Skills</a></li>
-       <li role="presentation"><a href="#fs3lang" aria-controls="fs3lang" role="tab" data-toggle="tab">Language Skills</a></li>
+       <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>       
+       <li role="presentation"><a href="#fs3attrs" aria-controls="fs3" role="tab" data-toggle="tab">Abilities</a></li>
        <li role="presentation"><a href="#misc" aria-controls="misc" role="tab" data-toggle="tab">Miscellaneous</a></li>
      </ul>
      
      <!-- Tab panes -->
      <div class="tab-content">
        <div role="tabpanel" class="tab-pane active" id="demographics">
-           <div class="panel panel-default">
-             <div class="panel-body">
-                 <h3>Demographics</h3>
-     
-                 <form class="form">
-                   <div class="form-group">
-                   <label for="name">Name (first and last):</label>
-                     <input type="text" id="name" class="form-control">
-         
-                     <label for="age">Age:</label>
-                       <input type="text" id="age" class="form-control">
-           
-                     <label for="colony">Home Colony:</label>
-                       <select class="form-control" id="colony">
-                         <option>Aerilon</option>
-                         <option>Aquaria</option>
-                         <option>Canceron</option>
-                         <option>Caprica</option>
-                       </select>
-         
-                   <label for="rank">Rank:</label>
-                     <select class="form-control" id="rank">
-                       <option>Ensign</option>
-                       <option>Lieutenant JG</option>
-                       <option>Lieutenant</option>
-                       <option>Captain</option>
-                     </select>
-         
-                    <label for="colony">Position:</label>
-                      <select class="form-control" id="colony">
-                        <option>Viper Pilot</option>
-                        <option>Raptor Pilot</option>
-                        <option>Raptor ECO</option>
-                        <option>Marine</option>
-                      </select>
-          
-                      <br/>
-                    <span class="btn btn-default" href="#" role="button">Upload Profile Image</span>
-          
-          
-                   </div>       
-                 </form>
-             </div>
-           </div>
-          </div>
-           
-           <div role="tabpanel" class="tab-pane" id="background">
-               <div class="panel panel-default">
-                 <div class="panel-body">
-                   <h3>Background</h3>
-                   <textarea class="form-control" rows="20" id="background"></textarea>
+                 
+                 <div class="form-group row">
+                     <div class="col-sm-3">
+                             <b>Full Name:</b> 
+                     </div>
+                     <div class="col-sm-9">
+                             {{input type="text" size=50 value=model.char.fullname}}
+                     </div>
                  </div>
+                      
+                 {{#each-in model.char.demographics as |key demo|}}
+                 <div class="form-group row">
+                     <div class="col-sm-3">
+                             <b>{{demo.name}}:</b> 
+                     </div>
+                     <div class="col-sm-9">
+                         {{#if (eq demo.name 'Gender') }}
+                             
+                             {{#power-select selected=model.char.demographics.gender options=genders onchange=(action "genderChanged") as |gender|}}
+                               {{gender.value}}
+                             {{/power-select}}
+                             
+                         {{else}}
+                             {{input type="text" size=50 value=demo.value}}
+                         {{/if}}
+                     </div>
+                 </div>
+                 {{/each-in}}   
+                 
+               <div class="row">
+                   <div class="col col-xs-12">
+                       <div class="pull-right">
+                           <button name="save" {{action 'save'}} class="btn btn-success">Save</button>
+                       </div>
+                       {{flash-messages}}
+                   </div>
                </div>
-             </div>
+          </div>
+          
+          <div role="tabpanel" class="tab-pane" id="groups">
+                  
+                                    
+                  
+                  {{#each-in model.char.groups as |key group|}}
+                  <div class="form-group row">
+                      <div class="col-sm-3">
+                              <b>{{group.name}}:</b>                               
+                      </div>
+                      <div class="col-sm-9">
+                      {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') onchange=(action "groupChanged" key) as |group|}}
+                        {{group.value}} {{if group.desc '-'}} {{group.desc}}
+                      {{/power-select}}
+                         <p class="cg-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
+                         
+                      </div>
+                      
+                  </div>
+                  
+                  {{/each-in}}
+                  
+               <div class="row">
+                   <div class="col col-xs-12">
+                       <div class="pull-right">
+                           <button name="save" {{action 'save'}} class="btn btn-success">Save</button>
+                       </div>
+                       {{flash-messages}}
+                   </div>
+               </div>
+                  
+            </div>
+            
              
          <div role="tabpanel" class="tab-pane" id="fs3attrs">
-             <div class="panel panel-default">
-               <div class="panel-body">
-                 <h3>Attributes</h3>
-     
-                 {{#if showAttrErrors}}
-                 <div class="alert alert-danger">
-                 <ul>
-                 {{#each attrErrors as |error|}}
-                 <li>{{error}}</li>
-                 {{/each}}
-                 </ul>
-                 </div>
+             
+             {{#if model.char.reset_needed}}
+                 <p>Resetting your abilities will set you up with default attribute and skill values.  Your other character information will be saved.</p>
+                 
+                 {{#if anyGroupMissing}}
+                 <div class="alert alert-info">If you set your groups first, you'll be set up with the appropriate starting skills based on your groups.</div>
                  {{/if}}
+                 
+                 <button name="reset" {{action 'reset'}} class="btn btn-primary">Reset Abilities</button>
+                 
+                 
+             {{else}}
+             <div class="panel panel-default">
+                   <div class="panel-heading">
+                       Attributes
+                   </div>
+               <div class="panel-body">
      
-                 {{#each fs3attrs as |att|}}
-                 {{#fs3-attrbox rating=att.rating ratingName=att.ratingName updated=(action "abilityChanged")}}
+                 <p class="cg-tip">Attributes represent basic abilities that everyone has to some extent. Attributes boost related skills, and come into play when no skill directly applies.  See <a href="http://aresmush.com/fs3/fs3-3/chargen/#attributes">FS3 Attributes</a> for details.</p>
+     
+                 
+                 {{#each model.char.fs3_attributes as |att|}}
+                 {{#fs3-attrbox rating=att.rating ratingName=att.rating_name updated=(action "abilityChanged")}}
                      <b>{{att.name}}</b> - {{att.desc}}
                  {{/fs3-attrbox}}
                  {{/each}}
+                 
                </div>
              </div>
-           </div>
 
-         <div role="tabpanel" class="tab-pane" id="fs3action">
              <div class="panel panel-default">
+                   <div class="panel-heading">
+                       Action Skills
+                   </div>
                <div class="panel-body">
-                 <h3>Action Skills</h3>
-     
-                 {{#if showSkillErrors}}
-                 <div class="alert alert-danger">
-                 <ul>
-                 {{#each skillErrors as |error|}}
-                 <li>{{error}}</li>
-                 {{/each}}
-                 </ul>
-                 </div>
-                 {{/if}}
 
-                 {{#each fs3action as |skill|}}
-                 {{#fs3-actionbox rating=skill.rating ratingName=skill.ratingName updated=(action "abilityChanged")}}
+                 <p class="cg-tip">Action Skills represent your ability in areas deemed important for gameplay. See <a href="http://aresmush.com/fs3/fs3-3/chargen/#action-skills">FS3 Action Skills</a> for details.</p>
+                     
+                 {{#each model.char.fs3_action_skills as |skill|}}
+                 {{#fs3-actionbox rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.max_skill_rating minRating=model.cgInfo.min_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
                      <b>{{skill.name}}</b> - {{skill.desc}}
                  {{/fs3-actionbox}}
                  {{/each}}
                  
                </div>
              </div>
-           </div>
 
-         <div role="tabpanel" class="tab-pane" id="fs3lang">
+        
+
              <div class="panel panel-default">
+                   <div class="panel-heading">
+                       Background Skills
+                   </div>
                <div class="panel-body">
-
-
-                 <h3>Language Skills</h3>
-
-                 {{#each langskills as |skill|}}
-                 {{#fs3-langbox rating=skill.rating ratingName=skill.ratingName updated=(action "abilityChanged")}}
-                     <b>{{skill.name}}</b>
-                 {{/fs3-langbox}}
-                 {{/each}}
-               </div>
-             </div>
-           </div>
-
-         <div role="tabpanel" class="tab-pane" id="fs3bg">
-             <div class="panel panel-default">
-               <div class="panel-body">
-                 <h3>Background Skills</h3>
      
-                 {{#each bgskills as |skill|}}
-                 {{#fs3-bgbox rating=skill.rating ratingName=skill.ratingName updated=(action "abilityChanged")}}
-                     <b>{{input type="text" value=skill.name size=150}}</b>
+                 <p class="cg-tip">Background Skills represent arts, sports, hobbies, professions and any other skills not covered by Action Skills.  Background Skills are free-form, so there is no specific list. You can pick anything from Singing to Underwater Basketweaving. See <a href="http://aresmush.com/fs3/fs3-3/chargen/#background-skills">FS3 Background Skills</a> for details.  To remove a background skill, set its rating to Everyman.</p>
+     
+     
+                 {{#each model.char.fs3_backgrounds as |skill|}}
+                 
+                 {{#fs3-bgbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
+                     <b>{{input type="text" value=skill.name size=50}}</b>
                  {{/fs3-bgbox}}
-
                  {{/each}}
 
-                 <button id="addbg" {{action "addBackgroundSkill"}}>Add Background Skill</button>
+                 <button class="btn btn-default" id="addbg" {{action "addBackgroundSkill"}}>Add Background Skill</button>
                  
                </div>
              </div>
-           </div>
+           
+               <div class="panel panel-default">
+                   <div class="panel-heading">
+                       Language Skills
+                   </div>
+                 <div class="panel-body">
+
+
+                     <p class="cg-tip">Languages represent your ability to speak and read other languages.  Languages have a descriptive rating. See <a href="http://aresmush.com/fs3/fs3-3/chargen/#languages">FS3 Languages</a> for details.  To remove a language, set its rating to Everyman.</p>
+
+                   {{#each model.char.fs3_languages as |skill|}}
+                   {{#fs3-langbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
+                       <b>{{skill.name}}</b> - {{skill.desc}}
+                   {{/fs3-langbox}}
+                   {{/each}}
+                                  
+                 </div>
+               </div>
+               
+               <div class="row">
+                   <div class="col col-xs-12">
+                       <div class="pull-right">
+                           <button name="save" {{action 'save'}} class="btn btn-success">Save</button>
+                       </div>
+                       {{flash-messages}}
+                   </div>
+               </div>
+               
+               {{/if}}
+               
+             </div>
                                    
          <div role="tabpanel" class="tab-pane" id="misc">
              <div class="panel panel-default">
-               <div class="panel-body">
-                 <h3>RP Hooks</h3>
-    
-                  <textarea class="form-control" rows="20" id="hooks"></textarea>
-      
-                 <h3>Notes</h3>
-    
-                  <textarea class="form-control" rows="20" id="notes"></textarea>
+               <div class="panel-heading">
+                 Background
                </div>
-             </div>
+               <div class="panel-body">
+                   <div class="cg-tip">You don't need to write a novel. Just cover the basics: who you are, why are you here, and is there anything noteworthy about you. Be sure to explain any unusual skills.</div>
+                 
+                   {{textarea value=model.char.background cols="80" rows="6"}}
+               </div>
+             </div> 
+
+             <div class="panel panel-default">
+               <div class="panel-heading">
+                 RP Hooks
+               </div>
+               <div class="panel-body">
+                   <div class="cg-tip">RP Hooks are interesting things about your character that others can "hook" into for RP. This could be an odd personality quirk, a reputation your character has, or anything else that might inspire someone to connect with you. Looking around at other character's sheets can be a good way to get inspiration for RP Hooks.</div>
+
+                   {{textarea value=model.char.rp_hooks cols="80" rows="6"}}
+               </div>
+             </div> 
+              
+             <div class="panel panel-default">
+               <div class="panel-heading">
+                 Description
+               </div>
+               <div class="panel-body">
+                 <div class="cg-tip">You can set both your main description, visible when people look at you, and a short description that shows your character at a glance.</div>
+                 <br/>
+                 <p> <i>Main Description:</i> </p>
+                 {{textarea value=model.char.desc cols="80" rows="6"}}
+                 
+                 <p> <i>Short Description:</i> </p>
+                 {{input type="text"  size=100 value=model.char.shortdesc}}
+                 
+               </div>
+             </div> 
+               
+               
+               <div class="row">
+                   <div class="col col-xs-12">
+                       <div class="pull-right">
+                           <button name="save" {{action 'save'}} class="btn btn-success">Save</button>
+                       </div>
+                       {{flash-messages}}
+                   </div>
+               </div>
+               
+               
            </div>
                
        </div>
      
      
-     
-    
-     
-     
-     
-     
-    
-      
-    
-     
-
-     
-    <div class="button-row">
-       <span class="btn btn-default" href="#" role="button">Save For Later</span>
-       <span class="btn btn-success" href="#" role="button">Submit</span>
-    </div>
      
   </div>
 </div>

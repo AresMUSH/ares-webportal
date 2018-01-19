@@ -15,10 +15,10 @@ export default Component.extend({
                 name = "Everyman";
                 break;
             case 2:
-                name =  "Amateur";
+                name =  "Fair";
                 break;
             case 3:
-                name =  "Fair";
+                name =  "Competent";
                 break;
             case 4:
                 name =  "Good";
@@ -27,10 +27,10 @@ export default Component.extend({
                 name = "Great";
                 break;
             case 6:
-                name = "Expert";
+                name = "Exceptional";
                 break;
             case 7:
-                name = "Elite";
+                name = "Amazing";
                 break;
             case 8:
                 name = "Legendary";

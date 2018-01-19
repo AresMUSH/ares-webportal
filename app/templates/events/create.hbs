@@ -1,7 +1,7 @@
 <h1>New Event</h1>
 
 <p><b>Title:</b></p>
-<p>{{input type="text" id="title" action="create" value=title}}</p>
+<p>{{input type="text"  size=50 id="title" action="create" value=title}}</p>
 
 <p><b>Date:</b></p>
 <p>{{pikaday-input onSelection=(action 'changeDate') format=model.game.date_entry_format}} </p>

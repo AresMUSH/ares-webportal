@@ -1,8 +1,8 @@
 <b>Attributes</b>
 <ul class="char-ability-list">
-{{#each char.fs3_attrs as |ability| }}
+{{#each char.fs3_attributes as |ability| }}
 <li>
-  {{ability.name}}: {{ability.rating}}
+  {{ability.name}}: {{ability.rating_name}}
 </li>
 {{/each}}
 </ul>
@@ -11,7 +11,7 @@
 <ul class="char-ability-list">
 {{#each char.fs3_action_skills as |ability| }}
 <li>
-  {{ability.name}}: {{ability.rating}}
+  {{ability.name}}: {{ability.rating_name}}
 </li>
 {{/each}}
 </ul>
@@ -20,7 +20,7 @@
 <ul class="char-ability-list">
 {{#each char.fs3_backgrounds as |ability| }}
 <li>
-  {{ability.name}}: {{ability.rating}}
+  {{ability.name}}: {{ability.rating_name}}
 </li>
 {{/each}}
 </ul>
@@ -29,7 +29,7 @@
 <ul class="char-ability-list">
 {{#each char.fs3_languages as |ability| }}
 <li>
-  {{ability.name}}: {{ability.rating}}
+  {{ability.name}}: {{ability.rating_name}}
 </li>
 {{/each}}
 </ul>

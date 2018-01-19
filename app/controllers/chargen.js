@@ -2,205 +2,178 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
-    session: service(),
     flashMessages: service(),
-
-    fs3attrs: [],
-    fs3action: null,
-    attrErrors: [],
-    skillErrors: [],
-    langskills: [],
-    bgskills: [],
-    powerLevel: 0,
+    ajax: service(),
+    charErrors: [],
+    toggleCharChange: false,
     
-    init: function() {
-        this.resetSkills();
+    alerts: function() {
+        return this.get('charErrors');
+    }.property('toggleCharChange'),
+    
+    genders: function() {
+        return [ { value: 'Male' }, { value: 'Female' }, { value: 'Other' }];
+    }.property(),
+
+    showCharErrors: function() {
+        return this.get('alerts').length > 0;
+    }.property('alerts'),
+
+    attrPoints: function() {
+        let total = this.countPointsInGroup(this.get('model.char.fs3_attributes'), 0, 2, 2);
+        return total;
+    }.property('model.char.fs3_attributes.@each.rating'),
+    
+    countPointsInGroup: function(list, free_points, max_free_rating, cost_per_rating) {
+        let points = 0;
+        list.forEach(function (ability) {
+            let rating = ability.rating;
+            if (rating > max_free_rating) {
+                points = points + ((rating - max_free_rating) * cost_per_rating);
+            }
+        });
+        
+        return (points <= free_points) ? 0 : (points - free_points);
     },
     
-    resetSkills: function() {
-        let bg = [
-            Ember.Object.create( { name: "Enter A Skill Name" , rating: 1, ratingName: 'Interest' })
-        ];
-        this.set('bgskills', bg);
+    anyGroupMissing: function() {
+        let groups = this.get('model.char.groups');
+        let anyMissing = false;
         
-        let lang = [
-            Ember.Object.create( { name: "Standard" , rating: 3, ratingName: 'Fluent' }),
-            Ember.Object.create( { name: "Leonese" , rating: 0, ratingName: 'Unskilled' }),
-            Ember.Object.create( { name: "Sagittaran" , rating: 0, ratingName: 'Unskilled' }),
-            Ember.Object.create( { name: "Scoripian" , rating: 0, ratingName: 'Unskilled' }),
-            Ember.Object.create( { name: "Gemenese" , rating: 0, ratingName: 'Unskilled' }),
-            Ember.Object.create( { name: "Celtan" , rating: 0, ratingName: 'Unskilled' })
-            
-        ];
-        this.set('langskills', lang);
-        
-        let attrs = [
-            Ember.Object.create( { name: "Brawn", desc: "Physical strength and toughness.", rating: 2, ratingName: 'Average' }),
-            Ember.Object.create( { name: "Reflexes", desc: "Reflexes, dexterity, and hand-eye coordination.", rating: 2, ratingName: 'Average' }),
-            Ember.Object.create( { name: "Grit", desc: "Willpower and determination.", rating: 2, ratingName: 'Average' }),
-            Ember.Object.create( { name: "Wits", desc: "Practical intelligence, inventiveness and creativity.", rating: 2, ratingName: 'Average' }),
-            Ember.Object.create( { name: "Perception", desc: "Noticing things and being aware of your surroundings.", rating: 2, ratingName: 'Average' }),
-            Ember.Object.create( { name: "Presence", desc: "Charisma and beauty.", rating: 2, ratingName: 'Average' }),
-        ];
-        this.set('fs3attrs', attrs);
-        
-        let skills = [
-        Ember.Object.create( { name: "Alertness", desc: "Noticing things and being aware of your surroundings. (Perception)" }),
-        Ember.Object.create( { name: "Athletics", desc: "General running, jumping, climbing, etc. (Brawn)" }),
-        Ember.Object.create( { name: "Composure", desc: "Coolness under pressure. (Grit)" }),
-        Ember.Object.create( { name: "Demolitions", desc: "Blowing stuff up. (Wits)" }),
-        Ember.Object.create( { name: "Firearms", desc: "Shooting guns. (Reflexes)" }),
-        Ember.Object.create( { name: "Gunnery", desc: "Vehicle and heavy weapons. (Reflexes)" }),
-        Ember.Object.create( { name: "Medicine", desc: "Tending to the ill and injured. (Wits)" }),
-        Ember.Object.create( { name: "Melee", desc: "Fighting with fists, knives, and hand-to-hand weapons. (Brawn)" }),
-        Ember.Object.create( { name: "Piloting", desc: "Flying spacecraft. (Reflexes)" }),
-        Ember.Object.create( { name: "Stealth", desc: "Being sneaky. (Reflexes)" }),
-        Ember.Object.create( { name: "Technician", desc: "General mechanics/electronics and fixing things. (Wits)" })
-        ];      
-        
-        skills.forEach(function (skill) {
-            skill.set('rating', 1);
-            skill.set('ratingName', 'Everyman');
-        });
-        
-        this.set('fs3action', skills);
-    },     
-    showAttrErrors: function() {
-        if (this.get('attrErrors').length > 0) {
-            return true;
-        }
-        return false;
-    }.property('attrErrors'),
-
-    showSkillErrors: function() {
-        if (this.get('skillErrors').length > 0) {
-            return true;
-        }
-        return false;
-    }.property('skillErrors'),
-        
-    attrPoints: function() {
-        let totalAttrs = 0;
-        let fa = this.get('fs3attrs');
-        
-        Object.keys(fa).forEach(function (key) {
-            let rating = fa[key]['rating'];
-            if (rating > 2) {
-                totalAttrs = totalAttrs + rating - 2;
+        Object.keys(groups).forEach(g => {
+            if (!groups[g].value) {
+                anyMissing = true;
             } 
         });
-        return totalAttrs * 2;
+        return anyMissing;    
+    }.property('toggleCharChange', 'model'),
+    
+    buildQueryDataForChar: function() {
+        let specialties = {};
+        
+        this.get('model.char.fs3_action_skills').forEach(function (ability) {
+            if (ability.specialties) {
+                
+                let selectedSpecs = ability.specialties.filter( s => s.selected ).map(s => s.name);
+                specialties[ability.name] = selectedSpecs;
+            }
+        });
+        
+        return { 
+            id: this.get('model.char.id'),
+            fullname: this.get('model.char.fullname'),
+            demographics: this.get('model.char.demographics'),
+            groups: this.get('model.char.groups'),
+            desc: this.get('model.char.desc'),
+            shortdesc: this.get('model.char.shortdesc'),
+            rp_hooks: this.get('model.char.rp_hooks'),
+            background: this.get('model.char.background'),
+            fs3_attributes: this.createAbilityHash(this.get('model.char.fs3_attributes')),
+            fs3_action_skills: this.createAbilityHash(this.get('model.char.fs3_action_skills')),
+            fs3_backgrounds: this.createAbilityHash(this.get('model.char.fs3_backgrounds')),
+            fs3_languages: this.createAbilityHash(this.get('model.char.fs3_languages')),
+            fs3_specialties: specialties
+        };
+    }, 
+    
+    createAbilityHash: function(ability_list) {
+        return ability_list.reduce(function(map, obj) {
+                map[obj.name] = obj.rating;
+                return map;
+                }, {});
     },
     
     skillPoints: function() {
-        let totalSkills = 0;
-        let fa = this.get('fs3action');
-        
-        Object.keys(fa).forEach(function (key) {
-            let rating = fa[key]['rating'];
-            if (rating > 1) {
-                totalSkills = totalSkills + rating - 1;
-            } 
-        });
-        
-        fa = this.get('bgskills');
-        let bgPoints = 0;
-                Object.keys(fa).forEach(function (key) {
-                    let rating = fa[key]['rating'];
-                    bgPoints = bgPoints + rating;
-                });
-        
-        bgPoints = bgPoints - 6;
-        if (bgPoints < 0) {
-            bgPoints = 0;
+        let total = 0;
+        total = total + this.countPointsInGroup(this.get('model.char.fs3_action_skills'), 0, 1, 1);
+        total = total + this.countPointsInGroup(this.get('model.char.fs3_backgrounds'), 6, 0, 1);
+        total = total + this.countPointsInGroup(this.get('model.char.fs3_languages'), 5, 0, 1);
+        return total;
+    }.property('model.char.fs3_backgrounds.@each.rating', 'model.char.fs3_action_skills.@each.rating', 'model.char.fs3_languages.@each.rating'),
+     
+    checkLimits: function(list, limits, title) {
+        for (var high_rating in limits) {
+            let limit = limits[high_rating];
+            let high = list.filter(l => l.rating >= high_rating);
+            let count = high.length;
+            if (count > limit) {
+                this.charErrors.push(`You can only have ${limit} ${title} at ${high_rating}+.`);
+            }
         }
-        
-        totalSkills = totalSkills + bgPoints;
-         
-        fa = this.get('langskills');
-        let langPoints = 0;
-                Object.keys(fa).forEach(function (key) {
-                    let rating = fa[key]['rating'];
-                    langPoints = langPoints + rating;
-                });
-        
-        let freeLangs = 5;
-        langPoints = langPoints - freeLangs;
-        if (langPoints < 0) {
-            langPoints = 0;
-        }
-                   
-        totalSkills = totalSkills + langPoints;
-        
-        
-        return totalSkills;
-    },    
-    countHigh: function(stats, highLimit) {     
-        let high = 0;
-        Object.keys(stats).forEach(function (key) {
-            let rating = stats[key]['rating'];
-            if (rating >= highLimit) {
-                high = high + 1;
-            }                
-        });
-        return high;
     },
+    
+    toggleCharChanged: function() {
+        this.set('toggleCharChange', !this.get('toggleCharChange'));        
+    },
+    
     validateChar: function() {
-        this.set('attrErrors', []);
-        this.set('skillErrors', []);
-        
-        let highAttrs = this.countHigh(this.get('fs3attrs'), 5);
-        let highAttrs2 = this.countHigh(this.get('fs3attrs'), 4);
-        let highSkills = this.countHigh(this.get('fs3action'), 7);
-        let highSkills2 = this.countHigh(this.get('fs3action'), 5);
-        
-        if (highAttrs > 1)
-        {
-            //this.notifications.error('You can only have one attribute at 5.');
-            this.attrErrors.push('You can only have one attribute at 5.  If you think this limit is bad, please send feedback when you are done.');
-        }
-        
-        if (highAttrs2 > 2)
-        {
-            //this.notifications.error('You can only have one attribute at 5.');
-            this.attrErrors.push('You can only have two attributes at 4+.  If you think this limit is bad, please send feedback when you are done.');
-        }
+        this.set('charErrors', []);
 
-        if (highSkills > 1)
-        {
-            this.skillErrors.push('You can only have 1 skill at 7+.  If you think this limit is bad, please send feedback when you are done.');
-        }
-                
-        if (highSkills2 > 3)
-        {
-            this.skillErrors.push('You can only have 3 skills at 5+.  If you think this limit is bad, please send feedback when you are done.');
-        }
+        this.checkLimits(this.get('model.char.fs3_action_skills'), this.get('model.cgInfo.skill_limits'), 'action skills');
+        this.checkLimits(this.get('model.char.fs3_attributes'), this.get('model.cgInfo.attr_limits'), 'attributes');
         
-        let totalAttrs = this.attrPoints();
-        let totalSkills = this.skillPoints();
-        
-        if (totalAttrs > 16)
-        {
-            //this.notifications.error('You have too many attribute points.');
-            this.attrErrors.push('You have too many points in attributes.  If you think this limit is bad, please send feedback when you are done.');
+        let totalAttrs = this.get('attrPoints');
+        let totalSkills = this.get('skillPoints');
+        let maxAttrs = this.get('model.cgInfo.max_attrs');
+        if (totalAttrs > maxAttrs) {
+            this.charErrors.push(`You can only spend ${maxAttrs} points in attributes.  You have spent ${totalAttrs}.`);
         }
         
-        this.set('powerLevel', totalSkills + totalAttrs);
+        let maxAp = this.get('model.cgInfo.max_ap');
+        let totalAp = totalAttrs + totalSkills;
+        if (totalAp > maxAp) {
+            this.charErrors.push(`You can only spend ${maxAp} ability points.  You have spent ${totalAp}.`);
+        }
+        
+        this.toggleCharChanged();
     },
+    
     
     actions: {
         addBackgroundSkill() {
-            this.get('bgskills').pushObject( Ember.Object.create( { name: "Skill Name" , rating: 1, ratingName: 'Interest' }) );  
+            this.get('model.char.fs3_backgrounds').pushObject( Ember.Object.create( { name: "Enter Skill Name" , rating: 1, rating_name: 'Interest' }) );  
             this.validateChar();
         },
-        addLanguage() {
-            this.get('langskills').pushObject( Ember.Object.create( { name: "Language Name" , rating: 1, ratingName: 'Beginner' }) );  
-            this.validateChar();
-        },
+        
         abilityChanged() {
             this.validateChar();
         },
         
+        genderChanged(val) {
+            this.set('model.char.demographics.gender.value', val.value);
+            this.validateChar();
+        },
+        
+        groupChanged(group, val) {
+            this.set(`model.char.groups.${group}`, val);
+            this.validateChar();
+        },
+        
+        reset() {
+            let aj = this.get('ajax');
+            aj.queryOne('resetChargen', { char: this.buildQueryDataForChar() })
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.send('reloadModel', {});
+            });    
+        },
+        
+        save() {
+            let aj = this.get('ajax');
+            aj.queryOne('saveChargen', { char: this.buildQueryDataForChar() })
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.validateChar();
+                if (response.alerts) {
+                    response.alerts.forEach( r => this.charErrors.push(r) );
+                }
+                //this.send('reloadModel', {});
+            }); 
+        },
         
         submit() {
         }

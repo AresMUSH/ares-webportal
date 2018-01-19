@@ -12,13 +12,13 @@ export default Component.extend({
                 name = "Everyman";
                 break;
             case 1:
-                name = "Interest";
+                name = "Fair";
                 break;
             case 2:
-                name =  "Profession";
+                name =  "Good";
                 break;
             case 3:
-                name =  "Expertise";
+                name =  "Exceptional";
                 break;
         }
         return name;

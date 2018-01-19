@@ -1,9 +1,10 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import RouteTransitionOnError from 'ares-webclient/mixins/route-transition-on-error';
+import AuthenticatedRoute from 'ares-webclient/mixins/authenticated-route';
 import RSVP from 'rsvp';
 
-export default Route.extend(RouteTransitionOnError, {
+export default Route.extend(RouteTransitionOnError, AuthenticatedRoute, {
     ajax: service(),
     errorRoute: 'scenes',
         

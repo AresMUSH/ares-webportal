@@ -14,7 +14,7 @@ export default Controller.extend({
              .then(() => {
                  
                  if (this.get('model.error')) {
-                     return;
+                     return;  // Authenticate does the error printing
                  }
                  
                  this.set('name', '');
@@ -22,12 +22,12 @@ export default Controller.extend({
                  
                  let redirect = this.get('redirect');
                  if (!redirect) {
-                     redirect = 'home';
+                     redirect = '/';
                  }
                  window.location.replace(redirect);
              })
             .catch((response) => {
-                this.get('flashMessages').danger(response);
+                return; // Authenticate does the error printing
             });
         }
     }

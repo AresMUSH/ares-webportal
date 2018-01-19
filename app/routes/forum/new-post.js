@@ -2,8 +2,9 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import RouteTransitionOnError from 'ares-webclient/mixins/route-transition-on-error';
 import RouteResetFormOnExit from 'ares-webclient/mixins/route-reset-form-on-exit';
+import AuthenticatedRoute from 'ares-webclient/mixins/authenticated-route';
 
-export default Route.extend(RouteTransitionOnError, RouteResetFormOnExit, {
+export default Route.extend(RouteTransitionOnError, RouteResetFormOnExit, AuthenticatedRoute, {
     ajax: service(),
     session: service(),
     errorRoute: 'forum',

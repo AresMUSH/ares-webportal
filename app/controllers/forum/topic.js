@@ -21,10 +21,7 @@ export default Controller.extend({
                     return;
                 }
                 this.set('reply', '');
-                this.send('reloadModel', 
-                    this.transitionToRoute('forum.topic', 
-                              this.get('model.category.id'), 
-                              this.get('model.id')));
+                this.send('reloadModel', {});
               this.get('flashMessages').success('Reply added!');
             })
             .catch((response) => {

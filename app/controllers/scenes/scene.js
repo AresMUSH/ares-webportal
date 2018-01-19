@@ -14,9 +14,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.send('reloadModel', 
-                    this.transitionToRoute('scenes.scene', 
-                        this.get('model.id')));
+                this.send('reloadModel', {});
             })
             .catch((response) => {
                 this.get('flashMessages').danger(response);
