@@ -78,10 +78,6 @@ export default Component.extend({
                     file.set('upload_message', 'Upload Succeeded!');                    
                     file.set('upload_success', true);
                 }
-            })
-            .catch((response) => {
-                file.set('upload_message', response.error);
-                file.set('upload_success', false);
             });
         }
     }

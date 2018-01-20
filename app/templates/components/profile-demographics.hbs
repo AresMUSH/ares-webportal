@@ -1,6 +1,6 @@
     <div class="col-md-4 col-sm-12 col-xs-12">
     {{#if char.profile_image}}
-            {{#link-to 'files.file' (query-params path=char.profile_image)}}
+            {{#link-to 'file' (query-params path=char.profile_image)}}
                 <img src="/uploads/{{char.profile_image}}" class="profile-image"/>
             {{/link-to}}
     {{else}}

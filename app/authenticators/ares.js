@@ -20,7 +20,7 @@ export default Base.extend({
     
     authenticate(options) {
         let aj = this.get('ajax');
-        return aj.queryOne('login', { name: options.name, password: options.password })
+        return aj.queryOne('login', { name: options.name, password: options.password }, null)
         .then((response) => {
             if (response.id) {
                 this.set('data', response);

@@ -22,7 +22,7 @@
       <h2>Upcoming Events <i class="fa fa-calendar" aria-hidden="true"></i></h2>
   </div>
   {{#each model.upcoming_events as |event|}}
-  <p><b>{{#link-to 'events.event' event.id}}{{event.title}}{{/link-to}}</b>
+  <p><b>{{#link-to 'event' event.id}}{{event.title}}{{/link-to}}</b>
   <br/>{{event.date}} {{event.start_datetime_local}} ({{event.start_time_standard}})</p>
   {{/each}}
    <br/>
@@ -39,7 +39,7 @@
        
    </div>
    {{#each model.recent_scenes as |scene|}}
-   <p>{{#link-to 'scenes.scene' scene.id}}{{scene.icdate}} - {{scene.title}}{{/link-to}}
+   <p>{{#link-to 'scene' scene.id}}{{scene.icdate}} - {{scene.title}}{{/link-to}}
        {{scene-tag scene=scene}}<br/></p>
    {{/each}}
    <br/>

@@ -1,7 +1,7 @@
 <div class="panel panel-info">
 {{#if char.profile_gallery}}
     {{#each char.profile_gallery as |g|}}
-        {{#link-to 'files.file' (query-params path=g)}}
+        {{#link-to 'file' (query-params path=g)}}
         <img src="/uploads/{{g}}" class="profile-gallery">
         {{/link-to}}
     {{/each}}

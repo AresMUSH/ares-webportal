@@ -1,0 +1,60 @@
+<h1>Files</h1>
+
+
+{{#each model as |folder|}}
+
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+        {{#if folder.name}}
+        <a href="#" data-toggle="tooltip" title="Click to expand or collapse.">
+        
+        <a data-toggle="collapse" href="#collapse-{{folder.name}}">
+            <i class="fa fa-expand" aria-hidden="true"></i>
+            {{folder.name}}
+        </a>
+        
+        </a>
+        {{/if}}
+    </div>
+
+    <div id="collapse-{{folder.name}}" class="{{if folder.name 'panel-collapse collapse' 'panel-default' }}">
+      <div class="panel-body">
+      
+
+      <table class="table table-striped">
+
+      {{#each folder.files as |file|}}
+      <tr>
+      <td>{{#link-to 'file' (query-params path=file.path name=file.name)}}{{file.name}}{{/link-to}}</td>
+      <td>{{file.size}}KB</td>
+      <td>&nbsp;</td>
+      </tr>
+      {{/each}}
+      </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+{{/each}}
+
+
+
+
+{{#if isApproved}}
+
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+          <button {{action (mut showUpload) true}} class="btn btn-primary">Upload</button>
+  </div>
+  </div>
+</div>
+
+
+  {{#if showUpload}}
+    {{file-uploader}}
+  {{/if}}
+{{/if}}

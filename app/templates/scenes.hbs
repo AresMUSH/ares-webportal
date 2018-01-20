@@ -1,0 +1,18 @@
+<h1>Scenes</h1>
+
+<p>The scenes archive catalogs roleplay scenes from the game.  Only completed scenes show up here.  You can filter by type of scene or </p>
+
+
+{{#if isApproved}}
+<div class="row">
+    
+    <div class="col pull-right">
+        {{#link-to 'scene-create' class="btn btn-primary"}}Create Scene{{/link-to}}
+    </div>
+    
+</div>
+{{/if}}
+
+{{scene-list scenes=model.scenes sceneTypes=model.sceneTypes}}
+
+{{outlet}}

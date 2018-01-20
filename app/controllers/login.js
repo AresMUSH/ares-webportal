@@ -25,10 +25,7 @@ export default Controller.extend({
                      redirect = '/';
                  }
                  window.location.replace(redirect);
-             })
-            .catch(() => {
-                return; // Authenticate does the error printing
-            });
+             });
         }
     }
 });

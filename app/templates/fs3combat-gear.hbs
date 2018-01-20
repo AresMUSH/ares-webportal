@@ -1,0 +1,64 @@
+<h1>FS3 Gear</h1>
+
+<div class="ansi">
+    
+<h2>Weapons</h2>
+
+<table class="table table-striped">
+
+<thead>
+    <th>Weapon</th>
+    <th>Description</th>
+</thead>
+
+<tbody>
+{{#each model.weapons as |gear|}}
+<tr>
+    <td>{{#link-to 'fs3combat-gear-detail' 'weapon' gear.key}}{{gear.name}}{{/link-to}}</td> 
+    <td>{{gear.description}}</td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+
+
+<h2>Armor</h2>
+
+<table class="table table-striped">
+
+<thead>
+    <th>Armor</th>
+    <th>Description</th>
+</thead>
+
+<tbody>
+{{#each model.armor as |gear|}}
+<tr>
+    <td>{{#link-to 'fs3combat-gear-detail' 'armor' gear.key}}{{gear.name}}{{/link-to}}</td> 
+    <td>{{gear.description}}</td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+
+
+<h2>Vehicles</h2>
+
+<table class="table table-striped">
+
+<thead>
+    <th>Vehicle</th>
+    <th>Description</th>
+</thead>
+
+<tbody>
+{{#each model.vehicles as |gear|}}
+<tr>
+    <td>{{#link-to 'fs3combat-gear-detail' 'vehicle' gear.key}}{{gear.name}}{{/link-to}}</td> 
+    <td>{{gear.description}}</td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+
+</div>

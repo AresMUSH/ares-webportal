@@ -50,7 +50,7 @@
 <hr/>
 <b>Tags:</b>  
 {{#each model.char.tags as |tag|}}
-  {{#link-to 'wiki.tag' tag}}{{tag}}{{/link-to}}
+  {{#link-to 'wiki-tag' tag}}{{tag}}{{/link-to}}
 {{/each}}
     
 
@@ -77,7 +77,7 @@
         <p>
             
         {{#each model.char.files as |file|}}
-        {{#link-to 'files.file' (query-params path=file.path name=file.name)}}{{file.path}}{{/link-to}}
+        {{#link-to 'file' (query-params path=file.path name=file.name)}}{{file.path}}{{/link-to}}
         {{/each}}
         
         </p>

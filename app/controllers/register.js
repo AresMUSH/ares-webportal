@@ -18,7 +18,7 @@ export default Controller.extend({
         register() {
             
            this.get('ajax').queryOne('register', 
-               { name: this.get('name'), password: this.get('password'), confirm_password: this.get('confirmPassword'), recaptcha: this.get('reCaptchaResponse')})
+               { name: this.get('name'), password: this.get('password'), confirm_password: this.get('confirmPassword'), recaptcha: this.get('reCaptchaResponse')}, null)
             .then((response) => {            
                 if (response.error) {
                     this.get('recaptchaControl').resetReCaptcha();
@@ -26,10 +26,6 @@ export default Controller.extend({
                 }                
                 this.transitionToRoute('login');
                 this.get('flashMessages').success("Your character has been created.  Please log in.");
-            })
-            .catch((response) => {
-                this.get('recaptchaControl').resetReCaptcha();
-                this.get('flashMessages').danger(response);
             });
         }
     }

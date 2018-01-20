@@ -1,0 +1,24 @@
+<h1>Edit Plot {{model.title}}</h1>
+
+    <p>
+        <label for="title" class="col-xs-2 col-form-label">Title:</label>
+
+        <p>{{input type="text" size=50 id="title" action="save" value=model.title}}</p>
+    </p>
+    
+    <p>
+        <label for="summary" class="col-xs-2 col-form-label">Summary:</label>
+        {{textarea value=model.summary cols="80" rows="6"}}
+    </p>
+        
+    <p>
+        <label for="description" class="col-xs-2 col-form-label">Description:</label>
+        {{textarea value=model.description cols="80" rows="25"}}
+    </p>
+
+
+        <p> {{#link-to 'plot' model.id class="btn btn-default"}}Cancel{{/link-to}}  
+        <button {{action 'save'}} class="btn btn-primary">Save</button> </p>
+        
+{{flash-messages}}
+{{outlet}}

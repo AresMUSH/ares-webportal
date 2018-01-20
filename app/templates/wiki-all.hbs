@@ -1,0 +1,7 @@
+<h1>All Pages</h1>
+
+<ul>
+{{#each model as |page| }}
+<li>{{#link-to 'wiki-page' page.id}}{{page.heading}}{{/link-to}}</li>
+{{/each}}
+</ul>
