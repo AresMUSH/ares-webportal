@@ -6,12 +6,26 @@
      <p>The online character creation tool will guide you through creating your character.</p>
          
 
+{{#if model.char.chargen_locked}}
+
+     <div class="alert alert-warning">
+    
+             <p>Your application has been submitted.  Unsubmit your app to make changes.</p>
+            
+             <p>
+                 <button name="unsubmit" {{action 'unsubmit'}} class="btn btn-warning">Unsubmit</button>
+             </p>
+
+     </div>
+     
+{{else}}
+
      <div class="alert alert-info">
     
              <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen, but anything set with the in-game chargen commands will be overwritten by what you set here.</p>
             
              <p>
-                 <button name="save" {{action 'save'}} class="btn btn-info">Save</button>
+                 <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
              </p>
 
      </div>
@@ -67,14 +81,6 @@
                  </div>
                  {{/each-in}}   
                  
-               <div class="row">
-                   <div class="col col-xs-12">
-                       <div class="pull-right">
-                           <button name="save" {{action 'save'}} class="btn btn-success">Save</button>
-                       </div>
-                       {{flash-messages}}
-                   </div>
-               </div>
           </div>
           
           <div role="tabpanel" class="tab-pane" id="groups">
@@ -97,15 +103,6 @@
                   </div>
                   
                   {{/each-in}}
-                  
-               <div class="row">
-                   <div class="col col-xs-12">
-                       <div class="pull-right">
-                           <button name="save" {{action 'save'}} class="btn btn-success">Save</button>
-                       </div>
-                       {{flash-messages}}
-                   </div>
-               </div>
                   
             </div>
             
@@ -198,16 +195,6 @@
                                   
                  </div>
                </div>
-               
-               <div class="row">
-                   <div class="col col-xs-12">
-                       <div class="pull-right">
-                           <button name="save" {{action 'save'}} class="btn btn-success">Save</button>
-                       </div>
-                       {{flash-messages}}
-                   </div>
-               </div>
-               
                {{/if}}
                
              </div>
@@ -251,24 +238,29 @@
                </div>
              </div> 
                
-               
-               <div class="row">
-                   <div class="col col-xs-12">
-                       <div class="pull-right">
-                           <button name="save" {{action 'save'}} class="btn btn-success">Save</button>
-                       </div>
-                       {{flash-messages}}
-                   </div>
-               </div>
-               
-               
            </div>
                
        </div>
      
      
+     <div class="alert alert-success">
+    
+             <p>Remember to save often.  When you're finished, review your character application for errors before submitting it.</p>
+            
+             <p>
+                 <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
+                 <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
+             </p>
+
+     </div>
+{{/if}}
+
+     
+   {{flash-messages}}
      
   </div>
+  
+  
 </div>
 
 {{outlet}}

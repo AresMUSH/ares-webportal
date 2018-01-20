@@ -4,14 +4,10 @@ import AuthenticatedRoute from 'ares-webclient/mixins/authenticated-route';
 
 export default Route.extend(AuthenticatedRoute, {
     ajax: service(),
-        
-    model: function(params) {
+    titleToken: 'Character Review',
+
+    model: function() {
         let aj = this.get('ajax');
-        
-        return aj.queryOne('plot', { id: params['id'], edit_mode: true  });
-    },
-    
-    titleToken: function(model) {
-        return model.title;
+        return aj.queryOne('chargenReview', {}, 'chargen');
     }
 });

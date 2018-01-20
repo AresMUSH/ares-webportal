@@ -1,12 +1,10 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import RouteTransitionOnError from 'ares-webclient/mixins/route-transition-on-error';
 import AuthenticatedRoute from 'ares-webclient/mixins/authenticated-route';
 
-export default Route.extend(RouteTransitionOnError, AuthenticatedRoute, {
+export default Route.extend(AuthenticatedRoute, {
     ajax: service(),
     session: service(),
-    errorRoute: 'events',
     
     model: function(params) {
         let aj = this.get('ajax');

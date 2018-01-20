@@ -1,10 +1,8 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import RouteTransitionOnError from 'ares-webclient/mixins/route-transition-on-error';
 
-export default Route.extend(RouteTransitionOnError, {
+export default Route.extend({
     ajax: service(),
-    errorRoute: 'fs3combat.gear',
     
     model: function(params) {
         let aj = this.get('ajax');

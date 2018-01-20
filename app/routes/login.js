@@ -8,7 +8,7 @@ export default Route.extend(UnauthenticatedRouteMixin, {
     
     model: function() {
         let aj = this.get('ajax');
-        return aj.queryOne('loginInfo', {});
+        return aj.queryOne('loginInfo');
     },
     
     titleToken: function() {

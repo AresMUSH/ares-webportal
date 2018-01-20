@@ -19,7 +19,7 @@ export default Route.extend(ApplicationRouteMixin, {
     
     model: function() {        
         let aj = this.get('ajax');
-        return aj.queryOne('sidebarInfo', {})
+        return aj.queryOne('sidebarInfo')
             .then( (response) => {
                 if (response.error) {
                     return { game_down: true };

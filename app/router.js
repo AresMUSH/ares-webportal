@@ -97,6 +97,7 @@ Router.map(function() {
   this.route('admin', { path: '/admin'});
   this.route('roster');
   this.route('chargen');
+  this.route('chargen-review');
 });
 
 export default Router;

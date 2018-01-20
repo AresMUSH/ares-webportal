@@ -7,6 +7,6 @@ export default Route.extend({
     
     model: function() {
         let aj = this.get('ajax');
-        return aj.queryMany('roster', {});
+        return aj.queryMany('roster');
     }
 });

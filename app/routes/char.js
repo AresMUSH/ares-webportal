@@ -1,17 +1,12 @@
 import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
-import RouteTransitionOnError from 'ares-webclient/mixins/route-transition-on-error';
 
-export default Route.extend(RouteTransitionOnError, {
+export default Route.extend({
     ajax: service(),
-    errorRoute: 'characters',
     
     afterModel: function(model) { 
-        if (model && model.error) {
-            this.transitionTo(this.get('errorRoute'));
-        }
-        else if (model.get('char.playerbit')) {
+        if (model.get('char.playerbit')) {
             this.transitionTo('player', model.get('char.id'));
         }
     },
@@ -21,7 +16,7 @@ export default Route.extend(RouteTransitionOnError, {
         return RSVP.hash({
             char: aj.queryOne('character', { id: params['id'] }),
             game: this.modelFor('application').game,
-            sceneTypes: aj.queryMany('sceneTypes', {}) })
+            sceneTypes: aj.queryMany('sceneTypes') })
             .then((model) => Ember.Object.create(model));
     },
     

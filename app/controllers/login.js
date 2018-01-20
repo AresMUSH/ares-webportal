@@ -26,7 +26,7 @@ export default Controller.extend({
                  }
                  window.location.replace(redirect);
              })
-            .catch((response) => {
+            .catch(() => {
                 return; // Authenticate does the error printing
             });
         }

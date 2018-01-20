@@ -151,18 +151,30 @@ export default Controller.extend({
         
         reset() {
             let aj = this.get('ajax');
-            aj.queryOne('resetChargen', { char: this.buildQueryDataForChar() })
+            aj.queryOne('chargenReset', { char: this.buildQueryDataForChar() })
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
                 this.send('reloadModel', {});
+                this.flashMessages.success('Abilities reset.');
             });    
+        },
+        
+        review() {
+            let aj = this.get('ajax');
+            aj.queryOne('chargenSave', { char: this.buildQueryDataForChar() })
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.transitionToRoute('chargen-review');
+            });   
         },
         
         save() {
             let aj = this.get('ajax');
-            aj.queryOne('saveChargen', { char: this.buildQueryDataForChar() })
+            aj.queryOne('chargenSave', { char: this.buildQueryDataForChar() })
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -171,11 +183,19 @@ export default Controller.extend({
                 if (response.alerts) {
                     response.alerts.forEach( r => this.charErrors.push(r) );
                 }
-                //this.send('reloadModel', {});
+                this.flashMessages.success('Saved!');
             }); 
         },
         
-        submit() {
+        unsubmit() {
+            let aj = this.get('ajax');
+            aj.queryOne('chargenUnsubmit')
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.send('reloadModel', {});
+            }); 
         }
     }
 });

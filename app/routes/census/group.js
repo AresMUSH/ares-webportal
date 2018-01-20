@@ -1,9 +1,8 @@
 import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
-import RouteTransitionOnError from 'ares-webclient/mixins/route-transition-on-error';
 import { inject as service } from '@ember/service';
 
-export default Route.extend(RouteTransitionOnError, {
+export default Route.extend({
     ajax: service(),
     session: service(),
     titleToken: 'Census',
@@ -12,7 +11,7 @@ export default Route.extend(RouteTransitionOnError, {
         let aj = this.get('ajax');
         return RSVP.hash({
              filter: params['filter'],
-             types:  aj.query('censusTypes', {}),
+             types:  aj.query('censusTypes'),
              census: aj.queryOne('censusGroup', {filter: params['filter']}),
            })
            .then((model) => Ember.Object.create(model));

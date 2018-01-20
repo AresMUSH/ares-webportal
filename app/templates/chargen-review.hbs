@@ -1,0 +1,35 @@
+<h1>Review Character</h1>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <pre class="ansi app-status">
+{{#if model.abilities}}
+{{{ansi-format text=model.abilities}}} 
+{{/if}}
+{{{ansi-format text=model.demographics}}}
+{{{ansi-format text=model.background}}}
+{{{ansi-format text=model.desc}}}
+{{{ansi-format text=model.hooks}}}
+{{#if model.ranks}}
+{{{ansi-format text=model.ranks}}}
+{{/if}}
+        </pre>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    
+    <div class="panel-body">
+       <p><span class="ansi-bright-red-fg">Red</span> issues will probably hold up your app.</p>
+       <p><span class="ansi-bright-yellow-fg">Yellow</span> may be OK if it suits your character.</p>
+       <p>If you're happy with your character, submit them for review by the game admin.</p>
+       <hr/>
+      <p>
+          {{#link-to 'chargen' class="btn btn-default"}}Back to Chargen{{/link-to}}
+          <button name="submit" {{action 'submit'}} class="btn btn-success">Submit</button>
+      </p>
+                   
+    </div>
+</div>
+
+{{outlet}}
