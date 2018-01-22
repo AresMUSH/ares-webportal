@@ -20,6 +20,9 @@ Router.map(function() {
   this.route('census-group', { path: '/census/:filter' });
   this.route('characters', { path: '/chars'});
   this.route('char', { path: '/char/:id' });
+  this.route('char-edit', { path: '/char/:id/edit' });
+  this.route('chargen');
+  this.route('chargen-review');
   this.route('combat', { path: '/combat/:id' });
   this.route('combats');
   this.route('error');
@@ -31,7 +34,7 @@ Router.map(function() {
   this.route('files');
   this.route('file', { queryParams: [ 'path', 'name' ] });
   this.route('file-edit', { path: '/file/edit', queryParams: [ 'path', 'name' ] });
-  this.route('forum', { path: '/' });
+  this.route('forum', { path: '/forum' });
   this.route('forum-category', { path: '/forum/:category_id'});
   this.route('forum-topic', { path: '/forum/:category_id/:topic_id'});
   this.route('forum-create-post', { path: '/forum/:category_id/create-post' })
@@ -43,6 +46,8 @@ Router.map(function() {
   this.route('locations');
   this.route('location', { path: '/location/:id'});
   this.route('login', { path: '/login'});
+  this.route('mail');
+  this.route('mail-message', { path: '/mail/:id'});
   this.route('map', { path: '/map/:id' });
   this.route('maps');
   this.route('play');
@@ -53,9 +58,10 @@ Router.map(function() {
   this.route('plot-edit', { path: '/plot/:id/edit' });
   this.route('plot-create', { path: '/plot/create' });
   this.route('register');
+  this.route('roster');
   this.route('scenes');
-  this.route('scene', { path: '/scene/:id' } );    
-  this.route('scene-edit', { path: '/scene/:id/edit' } );    
+  this.route('scene', { path: '/scene/:id' } );
+  this.route('scene-edit', { path: '/scene/:id/edit' } );
   this.route('scene-create', { path: '/scene/create' } );
   this.route('who', { path: '/who'});
   this.route('wiki');
@@ -68,11 +74,8 @@ Router.map(function() {
   this.route('wiki-tags', { path: '/wiki/tags'});
 
 
-  this.route('mail');
   this.route('admin', { path: '/admin'});
-  this.route('roster');
-  this.route('chargen');
-  this.route('chargen-review');
+  this.route('mail-send');
 });
 
 export default Router;

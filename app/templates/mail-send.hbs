@@ -1,0 +1,31 @@
+<h1>Send Mail</h1>
+
+<div class="form-group row">
+    <div class="col-sm-2">
+            <b>To:</b>
+    </div>
+    
+    <div class="col-sm-10">
+          {{input type="text" size=50 id="to_list" value=to_list size=100 }}
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-sm-2">
+            <b>Subject:</b>
+    </div>
+    
+    <div class="col-sm-10">
+          {{input type="text" size=50 id="subject" value=subject size=100 }}
+    </div>
+</div>
+
+<p><b>Message:</b></p>
+{{textarea value=message cols="80" rows="6"}}
+
+{{#link-to 'mail' class='btn btn-default'}}Cancel{{/link-to}}
+<button {{action "sendMail"}} class="btn btn-primary">Send</button>
+
+
+
+{{outlet}}

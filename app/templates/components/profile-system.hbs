@@ -2,9 +2,7 @@
   <li class="active"><a data-toggle="tab" href="#systeminfo">+</a></li>
 
 
-  {{#if char.rp_hooks}}
   <li><a data-toggle="tab" href="#systemhooks">RP Hooks</a></li>
-  {{/if}}
 
   {{#if char.background}}
       <li><a data-toggle="tab" href="#systembg">Background</a></li> 
@@ -32,20 +30,9 @@
       <div class="tab-cover">System Information</div>
   </div>
         
-  {{#if char.rp_hooks}}
   <div id="systemhooks" class="tab-pane fade">
-       {{mushName}}
-      <p>
-          <div class="ansi">
-                <ul>
-                {{#each char.rp_hooks as |h|}}
-                <li><b>{{h.name}}</b> - {{h.description}}</li>
-                {{/each}}
-                </ul>
-          </div>
-     </p>
+      {{{ansi-format text=char.rp_hooks}}}
   </div>
-  {{/if}}
   
   
   {{#if char.background}}

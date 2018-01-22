@@ -7,15 +7,10 @@ export default Route.extend({
     
     model: function(params) {
         let aj = this.get('ajax');
-        return RSVP.hash(
-            { 
-                name: params['id'], 
-                content: aj.queryOne('wikiTag', { id: params['id'] })
-            })
-            .then((model) => Ember.Object.create(model));
+        return aj.queryOne('profileEdit', { id: params['id'] });
     },
     
     titleToken: function(model) {
-        return model.name;
+        return `Edit ${model.name}`;
     }
 });

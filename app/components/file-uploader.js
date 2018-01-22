@@ -61,13 +61,16 @@ export default Component.extend({
                 return;
             }
             
+            let folder = file.folder.toLowerCase();
+            let name = file.name.toLowerCase();
+            
             aj.queryOne('uploadFile', {
-                 name: file.name,
+                 name: name,
                  size_kb: file.sizeKb,
                  url: file.url,
                  data: file.data,
                  allow_overwrite: file.allowOverwrite,
-                 folder: file.folder
+                 folder: folder
                })
             .then( (response) => {
                 if (response.error) {
@@ -77,6 +80,7 @@ export default Component.extend({
                 else {
                     file.set('upload_message', 'Upload Succeeded!');                    
                     file.set('upload_success', true);
+                    this.sendAction('uploaded', folder, name);
                 }
             });
         }

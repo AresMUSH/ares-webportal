@@ -24,9 +24,12 @@
             <tr>
                 <td><img class="upload-preview" src="{{f.url}}" /></td>
                 <td>
+                    {{#if (not f.upload_success)}}
+                    
                     <p><label class="col-xs-5">Name:</label> {{input type='text' value=f.name}}</p>
                     <p><label class="col-xs-5">Folder (optional):</label> {{input type='text' value=f.folder}}</p>
                     <p><label class="col-xs-5">Overwrite?</label> {{input type='checkbox' checked=f.allowOverwrite}}</p>
+                    {{/if}}
                     
                     {{#if f.upload_message}}
                         {{#if f.upload_success}}
