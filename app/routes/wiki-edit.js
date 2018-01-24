@@ -10,7 +10,7 @@ export default Route.extend(AuthenticatedRoute, {
         return aj.queryOne('wikiPage', { id: params['id'], edit_mode: true });
     },
     
-    titleToken: function() {
-        return this.get('model.heading');
+    titleToken: function(model) {
+        return `Edit ${model.heading}`;
     }
 });

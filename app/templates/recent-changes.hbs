@@ -1,0 +1,27 @@
+<h1>Recent Changes</h1>
+
+<p>This list includes wiki pages and profiles.  For scenes, check the {{#link-to 'scenes'}}Scenes{{/link-to}} archive.</p>
+
+<table class="table table-striped">
+    
+   {{#each model as |change|}}
+   <tr>
+       <td>
+           {{change.created}}
+       </td>
+       <td>
+           {{#if (eq change.change_type 'char')}}
+           {{#link-to 'char' change.name}}{{change.title}}{{/link-to}}
+           {{else}}
+           {{#link-to 'wiki-page' change.name}}{{change.title}}{{/link-to}}
+           {{/if}}
+       </td>
+       <td>
+           {{change.author}}
+       </td>
+   </tr>
+   {{/each}}
+
+</table>
+
+{{outlet}}

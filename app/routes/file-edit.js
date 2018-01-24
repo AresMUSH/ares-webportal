@@ -19,6 +19,6 @@ export default Route.extend(AuthenticatedRoute, {
         return Ember.Object.create({ path: params['path'], name: params['name'], folder: folder });
     },
     titleToken: function(model) {
-        return 'Edit ' + model.name;
+        return `Edit ${model.name}`;
     }
 });

@@ -6,7 +6,7 @@ export default Service.extend({
     session: service(),
     routing: service('-routing'),
     
-    server_url(route) {
+    serverUrl(route) {
         let base = "http://" + aresconfig.host + ":" + aresconfig.api_port;
         if (route) {
             return base + "/" + route;
@@ -16,7 +16,7 @@ export default Service.extend({
     },
     
     query(cmd, args) {
-     return $.post(this.server_url("request"), 
+     return $.post(this.serverUrl("request"), 
         {
             cmd: cmd,
             args: args,

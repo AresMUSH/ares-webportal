@@ -12,9 +12,12 @@
                <div class="col-md-6 col-sm-8 col-xs-8">
                   <div class="text-right user-bar">
                    {{#if isAuthenticated}}
+                       <div class="hidden" id="charId">{{currentUser.id}}</div>
                        <p>Welcome, {{currentUser.name}}.</p>
-                       <p>{{#link-to 'mail'}}Mail 
-                           <span class="label label-pill label-primary" id="mailBadge">{{unread_mail}}</span>
+                       <p>{{#link-to 'mail'}}Mail
+                           {{#if model.unread_mail}}
+                           <span class="label label-pill label-primary" id="mailBadge">{{model.unread_mail}}</span>
+                           {{/if}}
                            {{/link-to}}
                            | <a href="/" {{action 'logout'}}>Logout</a> 
                        </p>
@@ -29,7 +32,7 @@
        </div>
        
   
-        {{global-navbar model=model}}
+        {{global-navbar model=model isAdmin=isAdmin}}
     </div>
 
         

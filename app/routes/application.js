@@ -5,7 +5,9 @@ import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mi
 export default Route.extend(ApplicationRouteMixin, {
 
     ajax: service(),
+    session: service(),
     flashMessages: service(),
+    notifications: service(),
    
     sessionAuthenticated: function() {
         //Do nothing.
@@ -17,7 +19,10 @@ export default Route.extend(ApplicationRouteMixin, {
         this.refresh();
     },
     
-    model: function() {        
+    model: function() {       
+        let notifications = this.get('notifications');
+        notifications.checkSession(this.get('session.data.authenticated.id'));
+         
         let aj = this.get('ajax');
         return aj.queryOne('sidebarInfo')
             .then( (response) => {

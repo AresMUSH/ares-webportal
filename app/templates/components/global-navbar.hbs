@@ -98,10 +98,13 @@
                       Wiki <span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         <li>{{#link-to 'wiki-page' "home"}}Home{{/link-to}}</li>
+                        <li>{{#link-to 'wiki-create'}}Create New Page{{/link-to}}</li>
                         <li>{{#link-to 'wiki-all'}}All Pages{{/link-to}}</li>
                         <li>{{#link-to 'wiki-tags'}}Tags{{/link-to}}</li>
-                        <li>{{#link-to 'wiki-create'}}Create New Page{{/link-to}}</li>
+                        <li>{{#link-to "recent-changes"}}Recent Changes{{/link-to}}</li>
+                        <li><hr></li>
                         <li>{{#link-to "files"}}Files{{/link-to}}</li>
+                        <li>{{#link-to "help-topic" "markdown"}}Markdown Reference{{/link-to}}</li>
                       </ul>
                     </li>
 
@@ -119,8 +122,22 @@
                       </ul>
                     </li>
             
-                    <li>{{#link-to "admin"}}Admin{{/link-to}}</li>
+            {{#if isAdmin}}
             
+                   <li class="dropdown">
+                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      
+                             Admin <span class="caret"></span></a>
+                             <ul class="dropdown-menu">
+                               <li>{{#link-to 'jobs'}}Jobs{{/link-to}}</li>
+                               <li>{{#link-to 'logs'}}Logs{{/link-to}}</li>
+                               <li>{{#link-to 'tinker'}}Tinker{{/link-to}}</li>
+                             </ul>
+                           </li>
+                   
+                   
+                   
+            {{/if}}
          </ul>
    
    </div><!--/.navbar-collapse -->

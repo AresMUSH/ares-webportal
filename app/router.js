@@ -21,6 +21,7 @@ Router.map(function() {
   this.route('characters', { path: '/chars'});
   this.route('char', { path: '/char/:id' });
   this.route('char-edit', { path: '/char/:id/edit' });
+  this.route('char-source', { path: '/char/:charId/source/:versionId' });
   this.route('chargen');
   this.route('chargen-review');
   this.route('combat', { path: '/combat/:id' });
@@ -43,11 +44,16 @@ Router.map(function() {
   this.route('fs3skills-abilities', { path: '/fs3skills/abilities' });
   this.route('help');
   this.route('help-topic', { path: '/help/:topic' });
+  this.route('jobs');
+  this.route('job', { path: '/job/:id' });
   this.route('locations');
   this.route('location', { path: '/location/:id'});
+  this.route('logs');
+  this.route('log', { path: '/log/:file' });
   this.route('login', { path: '/login'});
   this.route('mail');
   this.route('mail-message', { path: '/mail/:id'});
+  this.route('mail-send');
   this.route('map', { path: '/map/:id' });
   this.route('maps');
   this.route('play');
@@ -57,6 +63,7 @@ Router.map(function() {
   this.route('plot', { path: '/plot/:id' });
   this.route('plot-edit', { path: '/plot/:id/edit' });
   this.route('plot-create', { path: '/plot/create' });
+  this.route('recent-changes');
   this.route('register');
   this.route('roster');
   this.route('scenes');
@@ -72,10 +79,7 @@ Router.map(function() {
   this.route('wiki-source', { path: '/wiki/:page_id/source/:version_id'});
   this.route('wiki-tag', { path: '/wiki/tag/:id'});
   this.route('wiki-tags', { path: '/wiki/tags'});
-
-
-  this.route('admin', { path: '/admin'});
-  this.route('mail-send');
+  this.route('tinker');
 });
 
 export default Router;

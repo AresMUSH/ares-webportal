@@ -1,0 +1,27 @@
+<h1>Tinker Command</h1>
+    
+    {{ace-editor text=model.text editorChanged=(action 'editorChanged')}}
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+            {{#link-to 'home' class="btn btn-default"}}Cancel{{/link-to}}
+            <button {{action 'save'}} class="btn btn-primary">Save</button>
+        </div>
+        
+        {{flash-messages}}
+    </div>
+</div>
+
+
+<div class="panel panel-warning">
+
+    <div class="panel-body">
+        <p>If you mess up your tinker code and get it in a bad state, you can always restore the original.</p>
+        <p>Be aware: This will erase any of your tinkering changes.  No other code will be affected.</p>
+
+        <button {{action 'reset'}} class="btn btn-warning">Reset</button>
+    </div>
+</div>
+
+{{outlet}}

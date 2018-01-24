@@ -46,3 +46,21 @@
    <p>{{#link-to 'scenes'}}All Scenes{{/link-to}}</p>
 </div>
 
+<div class="sidebar-box">
+   <div class="sidebar-heading">
+       <h2>Recent Changes <i class="fa fa-file-text-o" aria-hidden="true"></i></h2>
+       
+   </div>
+   {{#each model.recent_changes as |change|}}
+   {{#if (eq change.change_type 'char')}}
+   <p>{{#link-to 'char' change.name}}{{change.title}}{{/link-to}}</p>
+   {{else}}
+   <p>{{#link-to 'wiki-page' change.name}}{{change.title}}{{/link-to}}</p>
+   {{/if}}
+   {{/each}}
+   
+   <br/>
+   <p>{{#link-to 'recent-changes'}}More Changes{{/link-to}}</p>
+   
+</div>
+

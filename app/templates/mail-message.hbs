@@ -54,7 +54,7 @@
 
 <h3>Reply</h3>
 <p><b>To:</b> {{input type="text" size=50 id="to_list" value=to_list size=100 }}</p>
-<p><b>Subject:</b> Re: {{input type="text" size=50 id="subject" value=subject size=100 }}</p>
+<p><b>Subject:</b> {{input type="text" size=50 id="subject" value=subject size=100 }}</p>
     {{textarea value=message cols="80" rows="6"}}
     <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>
 </div>

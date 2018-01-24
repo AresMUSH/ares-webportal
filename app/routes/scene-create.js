@@ -5,6 +5,7 @@ import RSVP from 'rsvp';
 
 export default Route.extend(AuthenticatedRoute, {
     ajax: service(),
+    titleToken: 'Create Scene',
         
     model: function() {
         let aj = this.get('ajax');
@@ -17,9 +18,5 @@ export default Route.extend(AuthenticatedRoute, {
              scenes: aj.queryMany('scenes')
            })
            .then((model) => Ember.Object.create(model));
-    },
-    
-    titleToken: function() {
-        return "Create Scene";
     }
 });

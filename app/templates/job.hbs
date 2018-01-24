@@ -1,0 +1,61 @@
+<h1>#{{model.id}} - {{model.title}}</h1>
+<p>{{#link-to 'jobs'}}<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to Jobs{{/link-to}}</p>
+
+     <p>{{char-icon-inline char=model.author}}</p>
+
+<p><label>Submitted: </label> {{model.created}}</p>
+
+<p><label>Status: </label> <span class="label label-info job-status job-status-{{model.status}}">{{model.status}}</span></p>
+
+<hr/>
+
+    {{{ansi-format text=model.description}}}
+
+<hr/>
+
+{{#each model.replies as |r|}}
+ <div>
+     
+     <p>{{char-icon-inline char=r.author}}</p>
+     
+     <p><i> {{r.created}} </i></p>
+     
+     
+         {{#if r.admin_only}}
+         <div class="label label-danger">To Admins Only</div>
+         {{/if}}
+         {{{ansi-format text=r.message}}}
+         
+     
+     <hr/>
+  </div>
+{{/each}}
+
+<div class="inline-response">
+<h3>Add Reply</h3>
+
+        Respond to Admin Only? {{input type='checkbox' checked=replyAdminOnly}} 
+        {{textarea value=reply cols="80" rows="6"}}
+        
+        
+        <p><button class="btn btn-default" {{action 'addReply'}}>Reply</button></p>
+        
+</div>
+
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+ 
+  {{#if model.is_open}}
+        <p><button class="btn btn-primary" {{action 'closeJob'}}>Close Job</button></p>
+  {{/if}}
+   </div>
+  </div>
+</div>
+
+
+
+
+
+{{outlet}}

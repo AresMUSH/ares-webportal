@@ -5,7 +5,9 @@ import { inject as service } from '@ember/service';
 export default Route.extend({
     ajax: service(),
     session: service(),
-    titleToken: 'Census',
+    titleToken: function(model) {
+        return `${model.filter} Census`;
+    },
     
     model: function(params) {
         let aj = this.get('ajax');

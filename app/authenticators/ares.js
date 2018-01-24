@@ -4,6 +4,7 @@ import Promise from 'rsvp';
 
 export default Base.extend({
     ajax: service(),
+    notifications: service(),
 
     restore(data) {
         
@@ -12,8 +13,10 @@ export default Base.extend({
         .then((response) => {
             if (response.token_valid) {
                 this.set('data', data);
+                this.get('notifications').sessionStarted(data.id);
                 return Promise.resolve(data);
             }
+            this.get('notifications').sessionStopped();
             return Promise.reject(response);            
         });    
     },
@@ -24,12 +27,15 @@ export default Base.extend({
         .then((response) => {
             if (response.id) {
                 this.set('data', response);
+                this.get('notifications').sessionStarted(response.id);
                 return Promise.resolve(response);
             }
+            this.get('notifications').sessionStopped();
             return Promise.reject(response);            
         });
     },
     invalidate() {
+        this.get('notifications').sessionStopped();
         return Promise.resolve();
     }
 });

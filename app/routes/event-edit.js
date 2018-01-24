@@ -12,7 +12,7 @@ export default Route.extend(AuthenticatedRoute, {
     },
     
     titleToken: function(model) {
-        return model.title;
+        return `Edit ${model.title}`;
     }
     
 });

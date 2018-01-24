@@ -14,7 +14,7 @@ export default Controller.extend({
     actions: {
         addReply() {
             let aj = this.get('ajax');
-            aj.queryOne('addReply', { topic_id: this.get('model.id'), 
+            aj.queryOne('forumReply', { topic_id: this.get('model.id'), 
                reply: this.get('reply')}, null)
             .then( (response) => {
                 if (response.error) {
