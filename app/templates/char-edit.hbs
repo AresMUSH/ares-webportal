@@ -144,7 +144,7 @@
             {{#each model.files as |file|}}
             
             <div class="thumbnail-gallery">
-            {{#link-to 'file' (query-params path=file.path name=file.name)}}
+            {{#link-to 'file' file.folder file.name}}
             {{file.path}} <img src="/uploads/{{file.path}}" class="thumbnail"/> 
             {{/link-to}}
             </div>
@@ -166,7 +166,7 @@
         <div class="col col-xs-12">
             <div class="pull-right">
     
-                <p> {{#link-to 'char' model.id class="btn btn-default"}}Cancel{{/link-to}}  
+                <p> {{#link-to 'char' model.name class="btn btn-default"}}Cancel{{/link-to}}  
                     <button class="btn btn-primary" {{action 'save'}} >Save</button>
                 </p>
     

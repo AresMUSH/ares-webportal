@@ -9,16 +9,16 @@ export default Controller.extend(AuthenticatedController, {
         save: function() {
             let aj = this.get('ajax');
             aj.queryOne('updateFile', { 
-                path: this.get('model.path'),
-                new_name: this.get('model.name'),
-                new_folder: this.get('model.folder')
+                name: this.get('model.name'),
+                folder: this.get('model.folder'),
+                new_name: this.get('model.new_name'),
+                new_folder: this.get('model.new_folder')
              }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
-            this.transitionToRoute('file',                          
-                          { queryParams: { path: response.path, name: response.name }});
+                this.transitionToRoute('file', response.folder, response.name );
             this.get('flashMessages').success('File saved!');
             });
         }

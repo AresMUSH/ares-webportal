@@ -2,17 +2,12 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
     
-    queryParams: {
-        path: {
-          refreshModel: true
-        },
-        name: {
-            refreshModel: true
-        }
-      },
-      
     model: function(params) {
-        return Ember.Object.create({ path: params['path'], name: params['name'] });
+        let folder = params['folder'];
+        let name = params['name'];
+        let path = `${folder}/${name}`;
+        
+        return Ember.Object.create({ path: path, folder: folder, name: name });
     },
     titleToken: function(model) {
         return model.name;

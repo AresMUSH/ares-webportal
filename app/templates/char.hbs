@@ -57,7 +57,10 @@
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">
-        {{#link-to 'char-source' model.char.id model.char.last_profile_version class="btn btn-default"}}Source/History{{/link-to}}
+            
+        {{#if model.char.last_profile_version}}
+            {{#link-to 'char-source' model.char.id model.char.last_profile_version class="btn btn-default"}}Source/History{{/link-to}}
+        {{/if}}
         {{#if model.char.can_manage}}
           <button {{action (mut showFiles) true}} class="btn btn-default">Files</button>
           {{#link-to 'char-edit' model.char.id class="btn btn-primary"}}Edit{{/link-to}}
@@ -74,13 +77,17 @@
             
         <p><b>Existing Character Files:</b></p>
         
-        <p>
-            
-        {{#each model.char.files as |file|}}
-        {{#link-to 'file' (query-params path=file.path name=file.name)}}{{file.path}}{{/link-to}}
-        {{/each}}
-        
-        </p>
+       <div>
+       {{#each model.char.files as |file|}}
+       
+       <div class="thumbnail-gallery">
+       {{#link-to 'file' file.folder file.name}}
+       {{file.path}} <img src="/uploads/{{file.path}}" class="thumbnail"/> 
+       {{/link-to}}
+       </div>
+       {{/each}}
+       </div>
+       <div class="clearfix"/>
         
         <p>{{#link-to 'files'}}All Files{{/link-to}}</p>
     

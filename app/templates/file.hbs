@@ -14,7 +14,7 @@
 
 
           {{#if isApproved}}
-              {{#link-to 'file-edit' (query-params path=model.path name=model.name) class="btn btn-primary"}}Edit{{/link-to}}
+              {{#link-to 'file-edit' model.folder model.name class="btn btn-primary"}}Edit{{/link-to}}
           {{/if}}
          </div>
   </div>

@@ -71,7 +71,7 @@ export default Component.extend({
                  data: file.data,
                  allow_overwrite: file.allowOverwrite,
                  folder: folder
-               })
+               }, null)
             .then( (response) => {
                 if (response.error) {
                     file.set('upload_message', `Upload Failed! ${response.error}`);
@@ -80,7 +80,11 @@ export default Component.extend({
                 else {
                     file.set('upload_message', 'Upload Succeeded!');                    
                     file.set('upload_success', true);
-                    this.sendAction('uploaded', folder, name);
+                    
+                    let any_left = this.get('files').some(f => !f.upload_success);
+                    if (!any_left) {
+                        this.sendAction('uploaded', folder, name);
+                    }
                 }
             });
         }

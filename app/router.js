@@ -33,8 +33,8 @@ Router.map(function() {
   this.route('event-edit', { path: '/event/:event_id/edit'} );
   this.route('event-create', { path: '/event/create' } );
   this.route('files');
-  this.route('file', { queryParams: [ 'path', 'name' ] });
-  this.route('file-edit', { path: '/file/edit', queryParams: [ 'path', 'name' ] });
+  this.route('file', { path: '/file/:folder/:name' });
+  this.route('file-edit', { path: '/file/edit/:folder/:name' });
   this.route('forum', { path: '/forum' });
   this.route('forum-category', { path: '/forum/:category_id'});
   this.route('forum-topic', { path: '/forum/:category_id/:topic_id'});

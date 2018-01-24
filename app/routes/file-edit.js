@@ -3,20 +3,12 @@ import AuthenticatedRoute from 'ares-webclient/mixins/authenticated-route';
 
 export default Route.extend(AuthenticatedRoute, {
     
-    queryParams: {
-        path: {
-          refreshModel: true
-        },
-        name: {
-            refreshModel: true
-        }
-      },
-      
     model: function(params) {
-        let split = (params['path'] || "").split('/');
-        let folder = split.length > 2 ? split[1] : ''
+        let folder = params['folder'];
+        let name = params['name'];
+        let path = `${folder}/${name}`;
         
-        return Ember.Object.create({ path: params['path'], name: params['name'], folder: folder });
+        return Ember.Object.create({ path: path, folder: folder, name: name, new_folder: folder, new_name: name });
     },
     titleToken: function(model) {
         return `Edit ${model.name}`;

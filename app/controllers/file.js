@@ -11,7 +11,8 @@ export default Controller.extend(AuthenticatedController, {
             let aj = this.get('ajax');
             this.set('confirmDelete', false);
             aj.queryOne('deleteFile', { 
-                path: this.get('model.path')
+                name: this.get('model.name'),
+                folder: this.get('model.folder')
              })
             .then( (response) => {
                 if (response.error) {
