@@ -9,7 +9,6 @@ export default Controller.extend({
         let demographics = {};
         let profile = {};
         let relationships = {};
-        let self = this;
         
         let demo_entry = this.get('model.demographics');
         Object.keys(demo_entry).forEach(function(k) {

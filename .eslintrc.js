@@ -16,6 +16,8 @@ module.exports = {
       "aresconfig": false,
       "ansi_up": false,
       "Ember": false,
-      "moment": false
+      "moment": false,
+      "ace": false,
+      "alertify": false
       }
 };

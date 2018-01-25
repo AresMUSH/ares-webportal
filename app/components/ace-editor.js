@@ -18,7 +18,7 @@ export default Component.extend({
         editor.$blockScrolling = Infinity;
         let self = this;
         
-        editor.getSession().on('change', function(e) {
+        editor.getSession().on('change', function() {
             self.set('text', editor.getValue());
         }); 
       
