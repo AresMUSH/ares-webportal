@@ -2,8 +2,7 @@
     
     {{#each-in model.config as |key config|}}
         <h2>{{config.key}}</h2>
-            <textarea value={{config.new_value}} cols="80" rows={{config.lines}} class="code-editor" onchange={{action 'textChanged' config.warning}}></textarea>
-            {{config.warning}}
+           {{yaml-editor text=config.new_value rows=config.rows}}
            
     {{/each-in}}
 
