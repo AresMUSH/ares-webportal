@@ -32,12 +32,12 @@ export default Controller.extend({
         
         let folder = this.get('model.name');
         let profile_image = this.get('model.profile_image.name');
-        if (profile_image.length > 0) {
+        if (profile_image && profile_image.length > 0) {
             profile_image = `${folder}/${profile_image}`;
         }
         
         let profile_icon = this.get('model.profile_icon.name');
-        if (profile_icon.length > 0) {
+        if (profile_icon && profile_icon.length > 0) {
             profile_icon = `${folder}/${profile_icon}`;
         }
         

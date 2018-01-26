@@ -1,0 +1,17 @@
+<h1>Admin Tasks</h1>
+
+        {{#if model.game.reboot_required}}
+            <div class="alert alert-warning">
+              <strong>Reboot Required!</strong> Your operating system is indicating that your server needs to be rebooted - probably to finish installing automatic updates.  Please reboot at your earliest convenience.
+            </div>
+        {{/if}}
+        
+
+    <div class="alert alert-danger">
+        <p>This button will shut down your game.  You can use it if the in-game <code>shutdown</code> command isn't working.  You will have to log into the server shell to restart the game.</p>
+        
+        <p><button class="btn btn-danger" {{action 'shutdown'}}>Shutdown</button></p>
+    </div>
+
+
+{{outlet}}

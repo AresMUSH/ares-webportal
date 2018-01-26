@@ -51,4 +51,16 @@
 </div>
 
 
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+            
+        {{#if model.can_manage}}
+          {{#link-to 'char-edit' model.id class="btn btn-primary"}}Edit{{/link-to}}
+        {{/if}}
+  </div>
+  </div>
+</div>
+
+
 {{outlet}}

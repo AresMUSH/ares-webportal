@@ -12,9 +12,9 @@
                <div class="col-md-6 col-sm-8 col-xs-8">
                   <div class="text-right user-bar">
                    {{#if isAuthenticated}}
-                       <div class="hidden" id="charId">{{currentUser.id}}</div>
                        <p>Welcome, {{currentUser.name}}.</p>
-                       <p>{{#link-to 'mail'}}Mail
+                       <p>{{#link-to 'char' currentUser.id}}Profile{{/link-to}} |
+                           {{#link-to 'mail'}}Mail
                            {{#if model.unread_mail}}
                            <span class="label label-pill label-primary" id="mailBadge">{{model.unread_mail}}</span>
                            {{/if}}

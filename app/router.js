@@ -26,7 +26,7 @@ Router.map(function() {
   this.route('chargen-review');
   this.route('combat', { path: '/combat/:id' });
   this.route('combats');
-  this.route('config', { path: '/config/:section' });
+  this.route('config', { path: '/config/:file' });
   this.route('error');
   this.route('events');
   this.route('events-ical', { path: '/event/ical' } );
@@ -72,6 +72,7 @@ Router.map(function() {
   this.route('scene-edit', { path: '/scene/:id/edit' } );
   this.route('scene-create', { path: '/scene/create' } );
   this.route('setup');
+  this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
   this.route('who', { path: '/who'});
   this.route('wiki');
@@ -82,6 +83,8 @@ Router.map(function() {
   this.route('wiki-source', { path: '/wiki/:page_id/source/:version_id'});
   this.route('wiki-tag', { path: '/wiki/tag/:id'});
   this.route('wiki-tags', { path: '/wiki/tags'});
+  this.route('manage');
+  this.route('shutdown');
 });
 
 export default Router;

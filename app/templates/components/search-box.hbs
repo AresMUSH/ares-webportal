@@ -1,4 +1,8 @@
 <div class="sidebar-box" style="margin-bottom:0px">
-    Please set up your <a href="http://aresmush.com/tutorials/config/website">Site Search</a>.
+    {{#if model.game.searchbox_text}}
+        {{{model.game.searchbox_text}}}
+    {{else}}
+        Please set up your <a href="http://aresmush.com/tutorials/config/website">Site Search</a>.
+    {{/if}}
 </div>
     
