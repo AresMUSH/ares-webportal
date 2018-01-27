@@ -10,8 +10,6 @@ export default Route.extend({
         return aj.queryOne('events');
     },
     
-    titleToken: function(model) {
-        return model.title;
-    }
+    titleToken: 'Events'
     
 });

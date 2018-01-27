@@ -10,7 +10,7 @@ export default Component.extend({
         textChanged: function(evt) {
             this.set('warning', '');
             try {
-                let yaml = JsYaml.safeLoad(evt.target.value);
+                JsYaml.safeLoad(evt.target.value);
             }
             catch(error) {
                 this.set('warning', `There may be a problem with your configuration YAML text: ${error.reason}.`);

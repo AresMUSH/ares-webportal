@@ -7,7 +7,7 @@ export default Route.extend(AdminRoute, ReloadableRoute, {
     ajax: service(),
     titleToken: "Tinker",
         
-    model: function(params) {
+    model: function() {
         let aj = this.get('ajax');
         return aj.queryOne('getTinker');
     },
