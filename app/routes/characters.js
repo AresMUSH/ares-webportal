@@ -10,7 +10,7 @@ export default Route.extend(DefaultRoute, {
     model: function() {
         let aj = this.get('ajax');
         return RSVP.hash({
-            characters: aj.queryOne('characterGroups'),
+            characters: aj.requestOne('characterGroups'),
             game: this.modelFor('application').game})
             .then((model) => Ember.Object.create(model));
     }

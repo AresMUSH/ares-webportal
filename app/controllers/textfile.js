@@ -10,7 +10,7 @@ export default Controller.extend({
             let aj = this.get('ajax');
 
 
-            aj.queryOne('saveTextFile', { file: this.get('model.file'), file_type: this.get('model.file_type'), text: this.get('model.text') }, null)
+            aj.requestOne('saveTextFile', { file: this.get('model.file'), file_type: this.get('model.file_type'), text: this.get('model.text') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;

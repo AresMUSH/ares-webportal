@@ -8,7 +8,7 @@ export default Route.extend(DefaultRoute, {
     
     model: function() {
         let aj = this.get('ajax');
-        return aj.queryOne('events');
+        return aj.requestOne('events');
     },
     
     titleToken: 'Events'

@@ -15,7 +15,7 @@ export default Service.extend({
         }
     },
     
-    query(cmd, args) {
+    request(cmd, args) {
      return $.post(this.serverUrl("request"), 
         {
             cmd: cmd,
@@ -31,8 +31,8 @@ export default Service.extend({
                     Ember.getOwner(this).lookup('router:main').transitionTo('error', { queryParams: { message: "There was a problem connecting to the game.  It may be down." }}) });
     },
     
-    queryOne(cmd, args = {}, transitionToOnError = 'home') {
-        return this.query(cmd, args).then((response) => {
+    requestOne(cmd, args = {}, transitionToOnError = 'home') {
+        return this.request(cmd, args).then((response) => {
             if (response.error) {
                 this.get('flashMessages').danger(response.error);
                 if (transitionToOnError) {
@@ -44,8 +44,8 @@ export default Service.extend({
         });
     },
 
-    queryMany(cmd, args = {}, transitionToOnError = 'home') {    
-        return this.query(cmd, args).then((response) => {
+    requestMany(cmd, args = {}, transitionToOnError = 'home') {    
+        return this.request(cmd, args).then((response) => {
             if (response.error) {
                 this.get('flashMessages').danger(response.error);
                 if (transitionToOnError) {

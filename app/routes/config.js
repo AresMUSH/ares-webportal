@@ -12,7 +12,7 @@ export default Route.extend(ReloadableRoute, AdminRoute, {
         
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('getConfig', { file: params['file']})
+        return aj.requestOne('getConfig', { file: params['file']})
         .then(model => {
             Object.keys(model.config).forEach(function(k) {
                 model.config[k].new_value = JsYaml.dump(model.config[k].value);

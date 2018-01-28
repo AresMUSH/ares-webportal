@@ -8,6 +8,6 @@ export default Route.extend(DefaultRoute, {
     
     model: function() {
         let aj = this.get('ajax');
-        return aj.queryMany('maps');
+        return aj.requestMany('maps');
     }
 });

@@ -8,6 +8,6 @@ export default Route.extend(AuthenticatedRoute, {
         
     model: function() {
         let aj = this.get('ajax');
-        return aj.queryOne('mailIndex');
+        return aj.requestOne('mailIndex');
     }
 });

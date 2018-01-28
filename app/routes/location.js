@@ -10,6 +10,6 @@ export default Route.extend(DefaultRoute, {
     
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('location', { id: params['id'] });
+        return aj.requestOne('location', { id: params['id'] });
     }
 });

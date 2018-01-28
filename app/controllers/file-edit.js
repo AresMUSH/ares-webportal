@@ -8,7 +8,7 @@ export default Controller.extend(AuthenticatedController, {
     actions: {        
         save: function() {
             let aj = this.get('ajax');
-            aj.queryOne('updateFile', { 
+            aj.requestOne('updateFile', { 
                 name: this.get('model.name'),
                 folder: this.get('model.folder'),
                 new_name: this.get('model.new_name'),

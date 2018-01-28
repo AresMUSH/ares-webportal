@@ -12,8 +12,8 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, {
         let aj = this.get('ajax');
         
         return RSVP.hash({
-            char: aj.queryOne('chargenChar'),
-            cgInfo: aj.queryOne('chargenInfo')})
+            char: aj.requestOne('chargenChar'),
+            cgInfo: aj.requestOne('chargenInfo')})
             .then((model) => Ember.Object.create(model));
     }
 });

@@ -13,7 +13,7 @@ export default Controller.extend(AuthenticatedController, {
         },
         edit: function() {
             let aj = this.get('ajax');
-            aj.queryOne('editEvent', { event_id: this.get('model.id'),
+            aj.requestOne('editEvent', { event_id: this.get('model.id'),
                title: this.get('model.title'), 
                date: this.get('model.date'),
                time: this.get('model.time'),

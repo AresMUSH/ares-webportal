@@ -8,7 +8,7 @@ export default Route.extend(AuthenticatedRoute, {
     model: function(params) {
         let aj = this.get('ajax');
         
-        return aj.queryOne('plot', { id: params['id'], edit_mode: true  });
+        return aj.requestOne('plot', { id: params['id'], edit_mode: true  });
     },
     
     titleToken: function(model) {

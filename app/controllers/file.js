@@ -10,7 +10,7 @@ export default Controller.extend(AuthenticatedController, {
         delete: function() {
             let aj = this.get('ajax');
             this.set('confirmDelete', false);
-            aj.queryOne('deleteFile', { 
+            aj.requestOne('deleteFile', { 
                 name: this.get('model.name'),
                 folder: this.get('model.folder')
              })

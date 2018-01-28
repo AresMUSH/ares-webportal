@@ -6,7 +6,7 @@ export default Route.extend({
     
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('player', { id: params['id'] });
+        return aj.requestOne('player', { id: params['id'] });
     },
     
     titleToken: function(model) {

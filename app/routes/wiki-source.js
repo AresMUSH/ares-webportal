@@ -7,7 +7,7 @@ export default Route.extend(DefaultRoute, {
         
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('wikiPageSource', { page_id: params['page_id'], version_id: params['version_id'] });
+        return aj.requestOne('wikiPageSource', { page_id: params['page_id'], version_id: params['version_id'] });
     },
     
     titleToken: function(model) {

@@ -16,7 +16,7 @@ export default Controller.extend({
     actions: {
         addPost() {
             let aj = this.get('ajax');
-            aj.queryOne('forumPost', { category_id: this.get('model.id'), 
+            aj.requestOne('forumPost', { category_id: this.get('model.id'), 
                subject: this.get('subject'),
                message: this.get('message') }, null)
             .then( (response) => {

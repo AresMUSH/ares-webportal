@@ -12,10 +12,10 @@ export default Route.extend(AuthenticatedRoute, {
         
         return RSVP.hash({
              scene: Ember.Object.create(),
-             sceneTypes: aj.queryMany('sceneTypes'),
-             plots: aj.queryMany('plots'),
-             characters: aj.queryMany('characters'),
-             scenes: aj.queryMany('scenes')
+             sceneTypes: aj.requestMany('sceneTypes'),
+             plots: aj.requestMany('plots'),
+             characters: aj.requestMany('characters'),
+             scenes: aj.requestMany('scenes')
            })
            .then((model) => Ember.Object.create(model));
     }

@@ -10,6 +10,6 @@ export default Route.extend(AuthenticatedRoute, {
         
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('mailMessage', { id: params['id']});
+        return aj.requestOne('mailMessage', { id: params['id']});
     }
 });

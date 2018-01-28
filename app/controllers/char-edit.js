@@ -99,7 +99,7 @@ export default Controller.extend({
             }
             
             let aj = this.get('ajax');
-            aj.queryOne('profileSave', this.buildQueryDataForChar(), null)
+            aj.requestOne('profileSave', this.buildQueryDataForChar(), null)
             .then( (response) => {
                 if (response.error) {
                     return;

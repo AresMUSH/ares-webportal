@@ -7,7 +7,7 @@ export default Route.extend(AuthenticatedRoute, {
     
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('profileEdit', { id: params['id'] });
+        return aj.requestOne('profileEdit', { id: params['id'] });
     },
     
     titleToken: function(model) {

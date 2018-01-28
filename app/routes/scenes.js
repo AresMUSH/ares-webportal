@@ -10,8 +10,8 @@ export default Route.extend(DefaultRoute, {
     model: function() {
         let aj = this.get('ajax');
         return RSVP.hash({
-             scenes:  aj.queryMany('scenes'),
-             sceneTypes: aj.queryMany('sceneTypes'),
+             scenes:  aj.requestMany('scenes'),
+             sceneTypes: aj.requestMany('sceneTypes'),
            })
            .then((model) => Ember.Object.create(model));
            

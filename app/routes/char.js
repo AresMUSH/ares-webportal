@@ -15,9 +15,9 @@ export default Route.extend(DefaultRoute, {
     model: function(params) {
         let aj = this.get('ajax');
         return RSVP.hash({
-            char: aj.queryOne('character', { id: params['id'] }),
+            char: aj.requestOne('character', { id: params['id'] }),
             game: this.modelFor('application').game,
-            sceneTypes: aj.queryMany('sceneTypes') })
+            sceneTypes: aj.requestMany('sceneTypes') })
             .then((model) => Ember.Object.create(model));
     },
     

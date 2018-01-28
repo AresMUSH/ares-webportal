@@ -8,7 +8,7 @@ export default Route.extend(ReloadableRoute, DefaultRoute, {
         
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('scene', { id: params['id'] });
+        return aj.requestOne('scene', { id: params['id'] });
     },
     
     titleToken: function(model) {

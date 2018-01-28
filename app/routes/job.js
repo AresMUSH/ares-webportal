@@ -9,7 +9,7 @@ export default Route.extend(AdminRoute, ReloadableRoute, {
     
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('job', {id: params['id'] });
+        return aj.requestOne('job', {id: params['id'] });
     },
     
     titleToken: function(model) {

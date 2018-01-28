@@ -24,7 +24,7 @@ export default Controller.extend(AuthenticatedController, {
         },
         create: function() {
             let aj = this.get('ajax');
-            aj.queryOne('createEvent', { title: this.get('title'), 
+            aj.requestOne('createEvent', { title: this.get('title'), 
                date: this.get('date'),
                time: this.get('time'),
                description: this.get('description') }, null)

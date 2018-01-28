@@ -7,7 +7,7 @@ export default Controller.extend({
     actions: {
         submit() {
             let aj = this.get('ajax');
-            aj.queryOne('chargenSubmit')
+            aj.requestOne('chargenSubmit')
             .then( (response) => {
                 if (response.error) {
                     return;

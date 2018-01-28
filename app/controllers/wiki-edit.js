@@ -15,7 +15,7 @@ export default Controller.extend({
         preview() {
             let aj = this.get('ajax');
             
-            aj.queryOne('wikiPreview', { text: this.get('model.text') })
+            aj.requestOne('wikiPreview', { text: this.get('model.text') })
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -31,7 +31,7 @@ export default Controller.extend({
                 tags = tags.split(/[\s,]/);
             }
             
-            aj.queryOne('editWiki', { id: this.get('model.id'),
+            aj.requestOne('editWiki', { id: this.get('model.id'),
                title: this.get('model.title'), 
                name: this.get('model.name'),
                text: this.get('model.text'),

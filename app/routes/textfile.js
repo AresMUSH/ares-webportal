@@ -11,6 +11,6 @@ export default Route.extend(ReloadableRoute, AdminRoute, {
         
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('getTextFile', { file_type: params['file_type'], file: params['file']});
+        return aj.requestOne('getTextFile', { file_type: params['file_type'], file: params['file']});
     }
 });

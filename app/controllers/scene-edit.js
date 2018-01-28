@@ -29,7 +29,7 @@ export default Controller.extend({
                 tags = tags.split(/[\s,]/);
             }
             
-            aj.queryOne('editScene', { id: this.get('model.scene.id'),
+            aj.requestOne('editScene', { id: this.get('model.scene.id'),
                title: this.get('model.scene.title'), 
                icdate: this.get('model.scene.icdate'),
                scene_type: this.get('model.scene.scene_type'),

@@ -10,7 +10,7 @@ export default Controller.extend({
             let aj = this.get('ajax');
 
 
-            aj.queryOne('shutdown')
+            aj.requestOne('shutdown')
             .then( (response) => {
                 if (response.error) {
                     return;

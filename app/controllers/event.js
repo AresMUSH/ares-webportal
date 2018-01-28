@@ -11,7 +11,7 @@ export default Controller.extend(AuthenticatedController, {
         delete: function() {
             let aj = this.get('ajax');
             this.set('confirmDelete', false);
-            aj.queryOne('deleteEvent', { event_id: this.get('model.id') })
+            aj.requestOne('deleteEvent', { event_id: this.get('model.id') })
             .then( (response) => {
                 if (response.error) {
                     return;

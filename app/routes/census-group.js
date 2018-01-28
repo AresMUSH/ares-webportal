@@ -14,8 +14,8 @@ export default Route.extend(DefaultRoute, {
         let aj = this.get('ajax');
         return RSVP.hash({
              filter: params['filter'],
-             types:  aj.query('censusTypes'),
-             census: aj.queryOne('censusGroup', {filter: params['filter']}),
+             types:  aj.request('censusTypes'),
+             census: aj.requestOne('censusGroup', {filter: params['filter']}),
            })
            .then((model) => Ember.Object.create(model));
     }

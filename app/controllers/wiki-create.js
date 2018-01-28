@@ -14,7 +14,7 @@ export default Controller.extend({
                 tags = tags.split(/[\s,]/);
             }
             
-            aj.queryOne('createWiki', {
+            aj.requestOne('createWiki', {
                title: this.get('model.title'), 
                text: this.get('model.text'),
                tags: tags}, null)

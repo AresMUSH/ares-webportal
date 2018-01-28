@@ -24,7 +24,7 @@ export default Route.extend(ApplicationRouteMixin, {
         notifications.checkSession(this.get('session.data.authenticated.id'));
          
         let aj = this.get('ajax');
-        return aj.queryOne('sidebarInfo')
+        return aj.requestOne('sidebarInfo')
             .then( (response) => {
                 if (response.error) {
                     return { game_down: true };

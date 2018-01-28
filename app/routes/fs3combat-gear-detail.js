@@ -7,7 +7,7 @@ export default Route.extend(DefaultRoute, {
     
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('gearDetail', {type: params['type'], name: params['name']});
+        return aj.requestOne('gearDetail', {type: params['type'], name: params['name']});
     },
     
     titleToken: function(model) {

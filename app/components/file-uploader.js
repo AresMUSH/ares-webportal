@@ -64,7 +64,7 @@ export default Component.extend({
             let folder = file.folder.toLowerCase();
             let name = file.name.toLowerCase();
             
-            aj.queryOne('uploadFile', {
+            aj.requestOne('uploadFile', {
                  name: name,
                  size_kb: file.sizeKb,
                  url: file.url,

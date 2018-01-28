@@ -9,7 +9,7 @@ export default Controller.extend(AuthenticatedController, {
     actions: {
         like(like) {
             let aj = this.get('ajax');
-            aj.queryOne('likeScene', { id: this.get('model.id'), like: like})
+            aj.requestOne('likeScene', { id: this.get('model.id'), like: like})
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -21,7 +21,7 @@ export default Controller.extend(AuthenticatedController, {
         delete() {
             let aj = this.get('ajax');
             this.set('confirmDelete', false);
-            aj.queryOne('deleteScene', { id: this.get('model.id')})
+            aj.requestOne('deleteScene', { id: this.get('model.id')})
             .then( (response) => {
                 if (response.error) {
                     return;

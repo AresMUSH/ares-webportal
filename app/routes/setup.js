@@ -9,6 +9,6 @@ export default Route.extend(ReloadableRoute, AdminRoute, {
         
     model: function() {
         let aj = this.get('ajax');
-        return aj.queryOne('getSetupIndex');
+        return aj.requestOne('getSetupIndex');
     }
 });

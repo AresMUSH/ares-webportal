@@ -16,7 +16,7 @@ export default Controller.extend({
                 config[k] = modelConfig[k].new_value;
             });
 
-            aj.queryOne('saveConfig', { file: this.get('model.file'), config: config }, null)
+            aj.requestOne('saveConfig', { file: this.get('model.file'), config: config }, null)
             .then( (response) => {
                 if (response.error) {
                     return;

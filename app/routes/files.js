@@ -9,6 +9,6 @@ export default Route.extend(ReloadableRoute, DefaultRoute, {
     
     model: function() {
         let aj = this.get('ajax');
-        return aj.queryMany('files');
+        return aj.requestMany('files');
     }
 });

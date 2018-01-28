@@ -8,6 +8,6 @@ export default Route.extend(AuthenticatedRoute, {
 
     model: function() {
         let aj = this.get('ajax');
-        return aj.queryOne('chargenReview', {}, 'chargen');
+        return aj.requestOne('chargenReview', {}, 'chargen');
     }
 });

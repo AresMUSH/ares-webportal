@@ -5,7 +5,7 @@ export default Controller.extend({
     ajax: service(),
     handleSave: function() {
         let aj = this.get('ajax');
-        aj.queryOne('saveTinker', { text: this.get('model.text') }, null)
+        aj.requestOne('saveTinker', { text: this.get('model.text') }, null)
         .then( (response) => {
             if (response.error) {
                 return;

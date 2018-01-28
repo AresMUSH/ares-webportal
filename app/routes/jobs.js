@@ -9,7 +9,7 @@ export default Route.extend(AdminRoute, {
     
     model: function() {
         let aj = this.get('ajax');
-        return aj.queryMany('jobs');
+        return aj.requestMany('jobs');
     },
     
     

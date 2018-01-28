@@ -7,7 +7,7 @@ export default Route.extend(AuthenticatedRoute, {
         
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('wikiPage', { id: params['id'], edit_mode: true });
+        return aj.requestOne('wikiPage', { id: params['id'], edit_mode: true });
     },
     
     titleToken: function(model) {

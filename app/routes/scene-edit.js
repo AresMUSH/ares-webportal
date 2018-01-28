@@ -10,11 +10,11 @@ export default Route.extend(AuthenticatedRoute, {
         let aj = this.get('ajax');
         
         return RSVP.hash({
-             scene:  aj.queryOne('scene', { id: params['id'], edit_mode: true  }),
-             sceneTypes: aj.queryMany('sceneTypes'),
-             plots: aj.queryMany('plots'),
-             characters: aj.queryMany('characters'),
-             scenes: aj.queryMany('scenes')
+             scene:  aj.requestOne('scene', { id: params['id'], edit_mode: true  }),
+             sceneTypes: aj.requestMany('sceneTypes'),
+             plots: aj.requestMany('plots'),
+             characters: aj.requestMany('characters'),
+             scenes: aj.requestMany('scenes')
            })
            .then((model) => Ember.Object.create(model));
     },

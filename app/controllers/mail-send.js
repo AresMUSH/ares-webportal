@@ -17,7 +17,7 @@ export default Controller.extend({
     actions: {
         sendMail: function() {
             let aj = this.get('ajax');
-            aj.queryOne('sendMail', { subject: this.get('subject'), 
+            aj.requestOne('sendMail', { subject: this.get('subject'), 
                message: this.get('message'),
                to_list: this.get('to_list')}, null)
             .then( (response) => {

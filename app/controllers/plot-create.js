@@ -18,7 +18,7 @@ export default Controller.extend({
     actions: {
         save: function() {
             let aj = this.get('ajax');
-            aj.queryOne('createPlot', { 
+            aj.requestOne('createPlot', { 
                title: this.get('title'), 
                summary: this.get('summary'),
                description: this.get('description')}, null)

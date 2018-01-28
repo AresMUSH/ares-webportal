@@ -10,8 +10,8 @@ export default Route.extend(DefaultRoute, {
     model: function() {
         let aj = this.get('ajax');
         return RSVP.hash({
-             types:  aj.query('censusTypes'),
-             census: aj.queryOne('censusFull'),
+             types:  aj.request('censusTypes'),
+             census: aj.requestOne('censusFull'),
            })
            .then((model) => Ember.Object.create(model));
     }

@@ -17,7 +17,7 @@ export default Controller.extend({
         },
         register() {
             
-           this.get('ajax').queryOne('register', 
+           this.get('ajax').requestOne('register', 
                { name: this.get('name'), password: this.get('password'), confirm_password: this.get('confirmPassword'), recaptcha: this.get('reCaptchaResponse')}, null)
             .then((response) => {            
                 if (response.error) {

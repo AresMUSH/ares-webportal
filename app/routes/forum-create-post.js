@@ -10,6 +10,6 @@ export default Route.extend(RouteResetFormOnExit, AuthenticatedRoute, {
 
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.queryOne('forumCategory', {category_id: params['category_id']});
+        return aj.requestOne('forumCategory', {category_id: params['category_id']});
     }
 });

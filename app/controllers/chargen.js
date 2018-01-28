@@ -151,7 +151,7 @@ export default Controller.extend({
         
         reset() {
             let aj = this.get('ajax');
-            aj.queryOne('chargenReset', { char: this.buildQueryDataForChar() })
+            aj.requestOne('chargenReset', { char: this.buildQueryDataForChar() })
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -163,7 +163,7 @@ export default Controller.extend({
         
         review() {
             let aj = this.get('ajax');
-            aj.queryOne('chargenSave', { char: this.buildQueryDataForChar() })
+            aj.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -174,7 +174,7 @@ export default Controller.extend({
         
         save() {
             let aj = this.get('ajax');
-            aj.queryOne('chargenSave', { char: this.buildQueryDataForChar() })
+            aj.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -189,7 +189,7 @@ export default Controller.extend({
         
         unsubmit() {
             let aj = this.get('ajax');
-            aj.queryOne('chargenUnsubmit')
+            aj.requestOne('chargenUnsubmit')
             .then( (response) => {
                 if (response.error) {
                     return;

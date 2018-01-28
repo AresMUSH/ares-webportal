@@ -11,7 +11,7 @@ export default Route.extend(DefaultRoute, {
         return RSVP.hash(
             { 
                 name: params['id'], 
-                content: aj.queryOne('wikiTag', { id: params['id'] })
+                content: aj.requestOne('wikiTag', { id: params['id'] })
             })
             .then((model) => Ember.Object.create(model));
     },
