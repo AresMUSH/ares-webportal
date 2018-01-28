@@ -1,9 +1,10 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import ReloadableRoute from 'ares-webclient/mixins/reloadable-route';
+import AdminRoute from 'ares-webclient/mixins/admin-route';
 import JsYaml from "npm:js-yaml";
 
-export default Route.extend(ReloadableRoute, {
+export default Route.extend(ReloadableRoute, AdminRoute, {
     ajax: service(),
     titleToken: function(model) {
         return model.file;  

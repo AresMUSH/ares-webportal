@@ -1,7 +1,8 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
+import AuthenticatedRoute from 'ares-webclient/mixins/authenticated-route';
 
-export default Route.extend({
+export default Route.extend(AuthenticatedRoute, {
     ajax: service(),
     
     model: function(params) {
