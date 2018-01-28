@@ -4,6 +4,11 @@ import JsYaml from "npm:js-yaml";
 export default Component.extend({
     text: '',
     warning: '',
+    editorId: '',
+    
+    didInsertElement: function() {
+        
+    },
     
     actions: {
         

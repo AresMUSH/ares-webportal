@@ -1,4 +1,5 @@
-<textarea value={{text}} cols="80" rows={{lines}} class="code-editor" onchange={{action 'textChanged'}}></textarea>
+{{ace-editor text=text editorId=editorId rows=lines mode='yaml' editorChanged=(action 'textChanged')}}
+
 
 {{#if warning}}
 <div class="alert alert-warning">{{warning}}</div>
