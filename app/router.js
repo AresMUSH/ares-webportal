@@ -85,6 +85,7 @@ Router.map(function() {
   this.route('wiki-tags', { path: '/wiki/tags'});
   this.route('manage');
   this.route('shutdown');
+  this.route('chat');
 });
 
 export default Router;

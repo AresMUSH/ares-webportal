@@ -6,7 +6,7 @@ export default Controller.extend(AuthenticatedController, {
     
     actions: {        
         uploaded: function() {
-            this.send('reloadModel', {});
+            this.send('reloadModel');
         }
     }
 });

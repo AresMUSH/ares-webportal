@@ -156,7 +156,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.send('reloadModel', {});
+                this.send('reloadModel');
                 this.flashMessages.success('Abilities reset.');
             });    
         },
@@ -194,7 +194,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.send('reloadModel', {});
+                this.send('reloadModel');
             }); 
         }
     }

@@ -27,7 +27,7 @@ export default Controller.extend({
                 }
                 this.set('reply', '');
                 this.set('replyAdminOnly', true);
-                this.send('reloadModel', {});
+                this.send('reloadModel');
               this.get('flashMessages').success('Reply added!');
             });
         },

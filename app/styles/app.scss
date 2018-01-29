@@ -870,6 +870,11 @@ input[type='file'] {
     color: white;
 }
 
+#chat-window {
+    max-height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 .job-status-DONE {
     background-color: gray;
     color: white;

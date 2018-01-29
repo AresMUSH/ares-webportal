@@ -1,0 +1,41 @@
+<h1>Chat</h1>
+
+
+{{#each-in model.channels as |key channel|}}
+
+{{#if channel.allowed}}
+    <button {{action 'changeChannel' channel.name}} class="btn btn-default" disabled={{not channel.enabled}}>{{channel.name}}
+
+    {{#if (not channel.enabled)}}
+        (not on)
+    {{/if}}
+    <span class="label label-pill label-primary">{{channel.new_messages}}</span>
+    </button>
+
+{{/if}}
+
+{{/each-in}}
+
+<h2>{{selectedChannel}}</h2>
+
+<div id="chat-window">
+{{#each-in model.channels as |key channel|}}
+
+{{#if (eq channel.name selectedChannel)}}
+        {{#each channel.messages as |message|}}
+        {{{ansi-format text=message}}}
+        {{/each}}
+{{/if}}
+
+{{/each-in}}
+</div>
+
+{{#if selectedChannel}}
+
+    {{textarea value=chatMessage cols="80" rows="3" enter="send"}}
+
+    <button class="btn-primary btn" {{action "send"}}>Send to {{selectedChannel}}</button>
+{{/if}}
+
+{{flash-messages}}
+{{outlet}}

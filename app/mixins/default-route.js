@@ -7,7 +7,6 @@ export default Mixin.create({
     
     beforeModel: function() {
         let appModel = this.modelFor('application');
-        console.log(appModel);
         let regRequired = appModel.get('registration_required');
         
         if (regRequired && !this.get('session.isAuthenticated')) {

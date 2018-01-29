@@ -14,7 +14,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.send('reloadModel', {});
+                this.send('reloadModel');
             });
         },
         

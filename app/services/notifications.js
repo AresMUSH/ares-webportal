@@ -8,6 +8,7 @@ export default Service.extend({
     
     socket: null,
     charId: null,
+    chatCallback: null,
     
     socketUrl() {
         return `ws://${aresconfig.host}:${aresconfig.port}/websocket`;
@@ -18,6 +19,10 @@ export default Service.extend({
         if (!socket || this.get('charId') != charId) {
             this.sessionStarted(charId);
         }
+    },
+    
+    notify(msg, type = 'success') {
+        alertify.notify(msg, type, 10);
     },
     
     sessionStarted(charId) {
@@ -78,13 +83,23 @@ export default Service.extend({
 
         if (!recipient || recipient === self.get('charId')) {
             var formatted_msg = ansi_up.ansi_to_html(data.args.message, { use_classes: true });
-            alertify.notify(formatted_msg, 'success', 10);
-            
+            var notify = true;
             if (data.args.notification_type == "new_mail") {
                 var mail_badge = $('#mailBadge');
                 var mail_count = mail_badge.text();
                 mail_count = parseInt( mail_count );
                 mail_badge.text(mail_count + 1);
+                
+            }
+            else if (data.args.notification_type == "new_chat") {
+                if (this.get('chatCallback')) {
+                    this.get('chatCallback')(data.args.message);
+                }
+                notify = false;
+            }
+            
+            if (notify) {
+                alertify.notify(formatted_msg, 'success', 10);
             }
         }
         

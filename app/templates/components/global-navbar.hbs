@@ -21,6 +21,9 @@
               <ul class="dropdown-menu">
               
                 <li>{{#link-to "chargen"}}Create a Character{{/link-to}}</li>
+                {{#if model.game.roster_enabled}}             
+                <li>{{#link-to "roster"}}Pre-Made Characters{{/link-to}}</li>
+                {{/if}}
                 <li>{{#link-to "who"}}Who's Online{{/link-to}}</li>
                 <li>{{#link-to "play"}}Play on the Web{{/link-to}}</li>
               
@@ -33,25 +36,38 @@
               
               Story <span class="caret"></span></a>
               <ul class="dropdown-menu">
+                <li>{{#link-to "characters"}}Characters{{/link-to}}</li>
                 <li>{{#link-to "scenes"}}Scenes{{/link-to}}</li>
                 <li>{{#link-to "plots"}}Plots{{/link-to}}</li>
               </ul>
             </li>
             
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              
+              Community <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                           
+                <li>{{#link-to "chat"}}Chat{{/link-to}}</li>
+                <li>{{#link-to "forum"}}Forums{{/link-to}}</li>
+                {{#if (not model.game.disabled_plugins.events)}}
+                    <li>{{#link-to "events"}}Events{{/link-to}}</li>
+                {{/if}}
+                <li>{{#link-to "players"}}Players{{/link-to}}</li>
+              </ul>
+            </li>
             
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               
               Directory <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li>{{#link-to "characters"}}Characters{{/link-to}}</li>
-                <li>{{#link-to "roster"}}Roster{{/link-to}}</li>
-                <li>{{#link-to "actors"}}Actors{{/link-to}}</li>                
                 <li>{{#link-to "census"}}Census{{/link-to}}</li>
-                <li>{{#link-to "players"}}Players{{/link-to}}</li>
+                <li>{{#link-to "actors"}}Actors{{/link-to}}</li>   
+                {{#if model.game.roster_enabled}}             
+                <li>{{#link-to "roster"}}Roster{{/link-to}}</li>
+                {{/if}}
                 <li><hr></li>
-                <li>{{#link-to "scenes"}}Scenes{{/link-to}}</li>
-                <li>{{#link-to "plots"}}Plots{{/link-to}}</li>
                 <li>{{#link-to "locations"}}Locations{{/link-to}}</li>
                 {{#if (not model.game.disabled_plugins.maps)}}
                 <li>{{#link-to "maps"}}Maps{{/link-to}}</li>
@@ -60,10 +76,6 @@
                 <li>{{#link-to "combats"}}Combats{{/link-to}}</li>
                 {{/if}}
                 <li><hr></li>                
-                <li>{{#link-to "forum"}}Forums{{/link-to}}</li>
-                {{#if (not model.game.disabled_plugins.events)}}
-                    <li>{{#link-to "events"}}Events{{/link-to}}</li>
-                {{/if}}
                 <li>{{#link-to "files"}}Files{{/link-to}}</li>
                 
               </ul>

@@ -21,7 +21,7 @@ export default Controller.extend({
                     return;
                 }
                 this.set('reply', '');
-                this.send('reloadModel', {});
+                this.send('reloadModel');
               this.get('flashMessages').success('Reply added!');
             });
         }
