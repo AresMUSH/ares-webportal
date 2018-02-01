@@ -23,7 +23,7 @@
 <tr>
     <td>
         {{#if m.unread}}
-            <i class="fa fa-flag" aria-hidden="true"></i>
+        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
         {{/if}}
         
         {{#link-to 'mail-message' m.id}}{{m.subject}}{{/link-to}}

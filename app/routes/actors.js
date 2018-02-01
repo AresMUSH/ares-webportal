@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import DefaultRoute from 'ares-webclient/mixins/default-route';
+import DefaultRoute from 'ares-webportal/mixins/default-route';
 import { inject as service } from '@ember/service';
 
 export default Route.extend(DefaultRoute, {

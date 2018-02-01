@@ -41,6 +41,7 @@
 </tbody>
 </table>
 
+{{#if model.allow_vehicles}}
 
 <h2>Vehicles</h2>
 
@@ -60,5 +61,28 @@
 {{/each}}
 </tbody>
 </table>
+{{/if}}
+
+{{#if model.allow_mounts}}
+<h2>Mounts</h2>
+
+<table class="table table-striped">
+
+<thead>
+    <th>Mounts</th>
+    <th>Description</th>
+</thead>
+
+<tbody>
+{{#each model.mounts as |gear|}}
+<tr>
+    <td>{{#link-to 'fs3combat-gear-detail' 'mount' gear.key}}{{gear.name}}{{/link-to}}</td> 
+    <td>{{gear.description}}</td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+{{/if}}
+
 
 </div>

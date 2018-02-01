@@ -1,13 +1,13 @@
 <h1>New Event</h1>
 
 <p><b>Title:</b></p>
-<p>{{input type="text"  size=50 id="title" action="create" value=title}}</p>
+<p>{{input type="text"  size=50 id="title" enter="create" value=title}}</p>
 
 <p><b>Date:</b></p>
 <p>{{pikaday-input onSelection=(action 'changeDate') format=model.game.date_entry_format}} </p>
 
 <p><b>Start Time:</b></p>
-<p>{{input type="text" id="time" size="122" action="create" value=time }}</p>
+<p>{{input type="text" id="time" size="122" enter="create" value=time }}</p>
 
 <p><b>Description:</b></p>
 

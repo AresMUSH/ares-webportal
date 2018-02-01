@@ -4,8 +4,8 @@
 <tbody>
 {{#each model as |forum|}}
     <tr><td>
-        {{#if model.unread}}
-            <i class="fa fa-flag" aria-hidden="true"></i>
+        {{#if forum.unread}}
+        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
         {{/if}}
         
         {{#link-to 'forum-category' forum.id}}{{forum.name}}{{/link-to}}
@@ -13,5 +13,16 @@
 {{/each}}
 </tbody>
 </table>
+
+{{#if isAuthenticated}}
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+          <button {{action 'nextUnread'}} class="btn btn-default">Next Unread</button>
+         </div>
+  </div>
+</div>
+{{/if}}
 
 {{outlet}}

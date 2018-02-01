@@ -9,9 +9,10 @@ export default Service.extend({
     socket: null,
     charId: null,
     chatCallback: null,
+    sceneCallback: null,
     
     socketUrl() {
-        return `ws://${aresconfig.host}:${aresconfig.port}/websocket`;
+        return `ws://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
     },
     
     checkSession(charId) {
@@ -94,6 +95,12 @@ export default Service.extend({
             else if (data.args.notification_type == "new_chat") {
                 if (this.get('chatCallback')) {
                     this.get('chatCallback')(data.args.message);
+                }
+                notify = false;
+            }
+            else if (data.args.notification_type == "new_scene_activity") {
+                if (this.get('sceneCallback')) {
+                    this.get('sceneCallback')(data.args.message);
                 }
                 notify = false;
             }

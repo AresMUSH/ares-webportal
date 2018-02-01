@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import Paginator from 'ares-webclient/mixins/paginator';
+import Paginator from 'ares-webportal/mixins/paginator';
 
 export default Component.extend(Paginator, {
     filter: 'Recent',

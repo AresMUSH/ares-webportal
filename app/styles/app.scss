@@ -258,7 +258,10 @@ BOOTSTRAP OVERRIDES
   border-radius: 20rem;
 }
 
-
+.label-primary {
+    background-color: $primary-color;
+    color: $primary-words-color;
+}
 .nav-tabs>li>a {
     border: 1px solid $border-color;
 }
@@ -612,12 +615,13 @@ SCENES SCREEN
 
 .scene-pose {
     padding: 10px;
-    border: 1px dashed $border-color;
     margin: 15px;
 }
 
 .scene-pose-header {
     font-size: .8em;
+    border-top: 1px dashed $border-color;
+    padding-top: 10px;
     color: $faded-text-color;
     margin-bottom: 20px;
 }
@@ -631,6 +635,14 @@ SCENES SCREEN
 .scene-set-pose {
     margin-left: 25px;
     border-left: 1px solid $secondary-color;
+    font-style: italic;
+    padding: 0px 10px 10px 10px;
+}
+
+.scene-ooc-pose {
+    margin-left: 25px;
+    background-color: $log-icon-color;
+    color: $log-icon-text-color;
     font-style: italic;
     padding: 0px 10px 10px 10px;
 }

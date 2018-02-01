@@ -3,7 +3,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'ares-webclient',
+    modulePrefix: 'ares-webportal',
     environment,
     rootURL: '/',
     locationType: 'auto',

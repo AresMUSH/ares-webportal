@@ -1,6 +1,19 @@
 <h1>Create Scene</h1>
-        
+    <div class="alert alert-info">
+        Scene Completed? {{input type='checkbox' checked=model.scene.completed}} 
+        <div class="hint">All fields need to be filled out for completed scenes, but not for incomplete ones.  Completed scenes are always public and shared.</div>
+    </div>
 
+    {{#if (not model.scene.completed)}}
+     <p>
+         <label class="col-xs-2 col-form-label">Scene Privacy:</label>
+
+        {{#power-select selected=model.scene.privacy options=scenePrivacyValues onchange=(action "privacyChanged") as |type|}}
+          {{type}}
+        {{/power-select}}
+    </p>
+    {{/if}}
+    
     <p>
         <label for="title" class="col-xs-2 col-form-label">Title:</label>
 
@@ -66,11 +79,13 @@
     </p>
 
     
+    {{#if model.scene.completed }}
     <p>
         {{textarea value=model.scene.log cols="80" rows="25"}}
     </p>
+    {{/if}}
     
-    <p> {{#link-to 'scene' model.scene.id class="btn btn-default"}}Cancel{{/link-to}} 
+    <p> {{#link-to 'scenes' class="btn btn-default"}}Cancel{{/link-to}} 
         <button class="btn btn-primary" {{action 'save'}}>Save</button></p>
         
 {{flash-messages}}

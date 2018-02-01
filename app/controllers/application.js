@@ -1,9 +1,10 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import AuthenticatedController from 'ares-webclient/mixins/authenticated-controller';
+import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
 export default Controller.extend(AuthenticatedController, {
     session: service('session'),
+    notifications: service(),
     hideSidebar: false,
 
     currentRoute: function() {
@@ -15,7 +16,7 @@ export default Controller.extend(AuthenticatedController, {
     }.property(),
     
     mushPort: function() {
-        return aresconfig.port;        
+        return aresconfig.mush_port;        
     }.property(),
     
     mushHost: function() {
@@ -30,9 +31,14 @@ export default Controller.extend(AuthenticatedController, {
         return this.get('session.data.authenticated');
     }.property(),
     
+    
     actions: {
         logout() {
           this.get('session').invalidate();
+        },
+        
+        refresh() {
+            this.send('reloadModel');
         }
       }
 });

@@ -1,6 +1,4 @@
-<h1>Game Status</h1>
-
-<h2>Who's Online</h2>
+<h1>Who's Online</h1>
 
 <p>{{model.who_count}} character(s) online.</p>
 
@@ -12,17 +10,5 @@
     {{/each}}
 </table>
 
-
-<h2>Scenes</h2>
-
-<p>{{model.scenes_count}} active scene(s).</p>
-
-<table class="table table-striped">
-    {{#each model.scenes as |scene|}}
-    <tr>
-        <td> <b>{{scene.location}}</b> - {{scene.people}}</td>        
-    </tr>
-    {{/each}}
-</table>
 
 {{outlet}}

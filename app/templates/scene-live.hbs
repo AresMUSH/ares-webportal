@@ -1,0 +1,139 @@
+<h1>Scene {{model.id}}
+    {{#if model.title}}
+     - {{model.title}}
+     {{/if}}
+     
+     (In Progress)
+ </h1>
+
+{{#if newActivity}}
+<div class="alert alert-warning">
+    <p>There is new activity in this scene.  Refresh the page to see it.</p>
+    <button {{action 'refresh'}} class="btn btn-default">Refresh</button>
+</div>
+{{/if}}
+
+<div class="row log-wrap">
+       
+    <div class="log-box">
+       
+        <p>{{model.summary}}</p>
+
+        <p><b>Date:</b> {{model.icdate}}</p>
+
+        <p><b>Location:</b> {{model.location}}</p>
+
+        <div>
+          
+            
+        {{scene-tag scene=model}}
+         
+         </div>
+         
+    </div>
+    
+    <div class="log-participants-box">
+        
+    {{#each model.participants as |p|}}
+        <div class="profile-gallery">    
+            {{char-icon char=p}}
+        </div>
+    {{/each}}
+    
+    </div>
+    
+    <div class="clearfix"> </div>
+
+
+</div>
+
+<p>{{#link-to "scenes"}}<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to Scenes{{/link-to}}</p>
+
+
+<div class="ansi scene-log">
+    
+{{#each model.poses as |pose|}}    
+        
+        
+         
+        {{#if pose.is_system_pose}}
+            <div class="scene-system-pose">
+            {{{ansi-format text=pose.pose}}}
+            </div>
+        {{else}}
+            <div class="scene-pose-header">		
+                {{char-icon-inline char=pose.char}}	
+            </div>
+             {{#if pose.is_setpose}}
+                <div class="scene-set-pose">
+                {{{ansi-format text=pose.pose}}}
+                </div>
+            {{else if pose.is_ooc}}
+                <div class="scene-ooc-pose">
+                <span class="label label-pill label-primary"> OOC</span>	
+                {{{ansi-format text=pose.pose}}}
+                </div>
+            {{else}}        
+                <div class="scene-pose">	
+                    {{{ansi-format text=pose.pose}}}
+                </div>
+            {{/if}}
+        {{/if}}
+{{/each}}
+    
+</div>
+
+
+{{#if newActivity}}
+<div class="alert alert-warning">
+    <p>There is new activity in this scene.  Refresh the page to see it.</p>
+    <button {{action 'refresh'}} class="btn btn-default">Refresh</button>
+</div>
+{{/if}}
+
+
+{{#if isApproved}}
+
+
+    {{#if (not model.is_private)}}
+    <div class="alert alert-success">
+        This scene is open to the public.  Anyone can pose in to join.
+    </div>
+    {{/if}}
+
+    {{textarea value=scenePose cols="80" rows="6" enter="addPose"}}
+    
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+        
+        {{#if (not model.completed)}}
+        <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
+        <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
+        <button {{action 'addPose' 'emit'}} class="btn btn-primary">Add Emit</button>
+        {{/if}}
+        
+        <hr/>
+        
+        {{#if model.can_edit}}
+
+        {{#link-to 'scene-edit' model.id class="btn btn-default"}}Edit Scene{{/link-to}}
+            {{#if (not model.completed)}}
+            <button {{action 'changeSceneStatus' 'stop'}} class="btn btn-default">Stop Scene</button>
+            {{else}}
+            <button {{action 'changeSceneStatus' 'restart'}} class="btn btn-default">Restart Scene</button>
+            <button {{action 'changeSceneStatus' 'share'}} class="btn btn-default">Share Scene</button>
+            {{/if}}
+        {{/if}}
+        
+    </div>
+    </div>
+</div>
+
+{{/if}}
+
+{{flash-messages}}
+
+
+{{outlet}}

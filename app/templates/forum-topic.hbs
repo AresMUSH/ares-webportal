@@ -28,14 +28,36 @@
   </div>
 
 {{#if model.can_reply}}
-<div class="inline-response">
-<h3>Add Reply</h3>
 
-    {{textarea value=reply cols="80" rows="6"}}
+<div class="panel panel-default">
+    <div class="panel panel-heading">
+        <a data-toggle="collapse" href="#reply">Reply</a>
         
-    <button {{action "addReply"}} class="btn btn-primary">Reply</button>
+    </div>
+    <div id="reply" class="panel-collapse collapse">
+
+
+            {{textarea value=reply cols="80" rows="6"}}
+        
+            <button {{action "addReply"}} class="btn btn-primary">Add Reply</button>
     
-    {{flash-messages}}
+    </div>
+</div>
+
+{{/if}}
+
+{{flash-messages}}
+
+
+{{#if isAuthenticated}}
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+          <button {{action 'nextUnread'}} class="btn btn-default">Next Unread</button>
+         </div>
+  </div>
 </div>
 {{/if}}
+
 {{outlet}}

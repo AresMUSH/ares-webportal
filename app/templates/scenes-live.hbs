@@ -1,0 +1,54 @@
+<h1>Active Scenes</h1>
+
+<p>This list shows scenes that are currently in progress.  Private scenes require an invitation, but public scenes are open to anyone.   You can play in-game or via the web portal.</p>
+
+<p>The unread flags <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span> show new activity in scenes you're participating in.</p>
+
+{{#if newActivity}}
+<div class="alert alert-warning">
+    <p>There has been new scene activity.  Refresh the page to see it.</p>
+    <button {{action 'refresh'}} class="btn btn-default">Refresh</button>
+</div>
+{{/if}}
+
+
+<table class="table table-striped">
+    
+{{#each model as |scene| }}
+<tr>
+    <td>
+        {{#if scene.is_unread}}
+        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+        {{/if}}
+    </td>
+    <td>{{#link-to 'scene-live' scene.id}}Scene {{scene.id}}
+        {{#if scene.title}}
+         - {{scene.title}}
+        {{/if}}
+        {{/link-to}}
+        <br/>
+        {{scene.icdate}}
+        
+        {{#if scene.is_private}}
+        <span class="label label-danger">Private</span>
+        {{else}}
+        <span class="label label-success">Public</span>
+        {{/if}}
+    </td>
+    <td>
+        {{scene.location}}
+    </td>
+    <td>
+        {{#each scene.participants as |char|}}
+        {{char-icon-inline char=char}}
+        {{/each}}
+    </td>
+    <td>
+        {{scene.updated}}
+    </td>
+</tr>
+{{/each}}
+
+</table>
+
+{{outlet}}

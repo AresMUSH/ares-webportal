@@ -24,7 +24,9 @@ Router.map(function() {
   this.route('char-source', { path: '/char/:charId/source/:versionId' });
   this.route('chargen');
   this.route('chargen-review');
+  this.route('chat');
   this.route('combat', { path: '/combat/:id' });
+  this.route('combatant-edit', { path: '/combatant/:id' });
   this.route('combats');
   this.route('config', { path: '/config/:file' });
   this.route('error');
@@ -55,6 +57,7 @@ Router.map(function() {
   this.route('mail');
   this.route('mail-message', { path: '/mail/:id'});
   this.route('mail-send');
+  this.route('manage');
   this.route('map', { path: '/map/:id' });
   this.route('maps');
   this.route('play');
@@ -68,10 +71,13 @@ Router.map(function() {
   this.route('register');
   this.route('roster');
   this.route('scenes');
+  this.route('scenes-live');
   this.route('scene', { path: '/scene/:id' } );
+  this.route('scene-live', { path: '/scene-live/:id' });
   this.route('scene-edit', { path: '/scene/:id/edit' } );
   this.route('scene-create', { path: '/scene/create' } );
   this.route('setup');
+  this.route('shutdown');
   this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
   this.route('who', { path: '/who'});
@@ -83,9 +89,13 @@ Router.map(function() {
   this.route('wiki-source', { path: '/wiki/:page_id/source/:version_id'});
   this.route('wiki-tag', { path: '/wiki/tag/:id'});
   this.route('wiki-tags', { path: '/wiki/tags'});
-  this.route('manage');
-  this.route('shutdown');
-  this.route('chat');
+  
+  // !!!!!!!!!!!!!!!!!!!!!!!!
+  // This must be at the end
+  // !!!!!!!!!!!!!!!!!!!!!!!!
+  
+  this.route('not-found', { path: '*:' });
+  
 });
 
 export default Router;

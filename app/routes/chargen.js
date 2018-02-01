@@ -1,8 +1,8 @@
 import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
-import ReloadableRoute from 'ares-webclient/mixins/reloadable-route';
-import AuthenticatedRoute from 'ares-webclient/mixins/authenticated-route';
+import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
+import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
 
 export default Route.extend(AuthenticatedRoute, ReloadableRoute, {
     ajax: service(),

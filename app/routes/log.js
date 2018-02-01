@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import AdminRoute from 'ares-webclient/mixins/admin-route';
+import AdminRoute from 'ares-webportal/mixins/admin-route';
 
 export default Route.extend(AdminRoute, {
     ajax: service(),

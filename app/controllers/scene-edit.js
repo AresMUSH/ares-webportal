@@ -44,8 +44,8 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('scene',                          
-                          this.get('model.scene.id'));
+                
+                this.transitionToRoute('scene', this.get('model.scene.id'));
                 this.get('flashMessages').success('Scene updated!');
             });
         }

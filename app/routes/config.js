@@ -1,7 +1,7 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import ReloadableRoute from 'ares-webclient/mixins/reloadable-route';
-import AdminRoute from 'ares-webclient/mixins/admin-route';
+import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
+import AdminRoute from 'ares-webportal/mixins/admin-route';
 import JsYaml from "npm:js-yaml";
 
 export default Route.extend(ReloadableRoute, AdminRoute, {

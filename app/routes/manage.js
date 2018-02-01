@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import AdminRoute from 'ares-webclient/mixins/admin-route';
+import AdminRoute from 'ares-webportal/mixins/admin-route';
 
 export default Route.extend(AdminRoute, {
     titleToken: "Game Management",

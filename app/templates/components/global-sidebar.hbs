@@ -2,20 +2,29 @@
 
 <div class="sidebar-box">
   <div class="sidebar-heading">
-      <h2>Game Status <i class="fa fa-users" aria-hidden="true"></i></h2>
+      <h2>Game Status <i class="fa fa-video-camera" aria-hidden="true"></i></h2>
   </div>
   
 {{#if model.game_down}}
-<p>The website can't contact the game.  It may be down.</p>
+    <p>The website can't contact the game.  It may be down.</p>
 {{else}}
-<p>Today is {{model.game.ictime}}.
-<br/>{{model.game.who_count}} character(s) online.
-<br/>{{model.game.scene_count}} active scene(s).
-</p>
-<p>{{#link-to 'who'}}View Status{{/link-to}}</p>
+    <p>Today is {{model.game.ictime}}.
+    <br/>{{model.game.who_count}} character(s) online.
+    <br/>{{model.game.scene_count}} scene(s) are in progress.
+  
+  {{#if model.game.unread_scenes_count}}
+  <br/><span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span> New activity in your scenes!
+  {{/if}}
+  </p>
+  
+  <p>{{#link-to 'scenes-live'}}View Active Scenes{{/link-to}}</p>
+  
 {{/if}}
+
 </div>
 
+    
+    
 {{#if (not model.game.disabled_plugins.events)}}
 <div class="sidebar-box">
   <div class="sidebar-heading">

@@ -7,6 +7,9 @@ export default Mixin.create({
     
     beforeModel: function() {
         let appModel = this.modelFor('application');
+        if (appModel.game_down) {
+            return;
+        }
         let regRequired = appModel.get('registration_required');
         
         if (regRequired && !this.get('session.isAuthenticated')) {

@@ -9,18 +9,25 @@ export default Controller.extend({
         return this.get('model.sceneTypes').map(p => p.get('name'));
     }.property('model'),
     
+    scenePrivacyValues: function() { 
+        return [ 'Public', 'Private' ];
+    }.property(),
+    
     actions: {
-        plotChanged(new_plot) {
-            this.set('model.scene.plot', new_plot);
+        plotChanged(newPlot) {
+            this.set('model.scene.plot', newPlot);
         },
-        typeChanged(new_type) {
-            this.set('model.scene.scene_type', new_type);
+        typeChanged(newType) {
+            this.set('model.scene.scene_type', newType);
         },
-        participantsChanged(new_participants) {
-            this.set('model.scene.participants', new_participants);
+        participantsChanged(newParticipants) {
+            this.set('model.scene.participants', newParticipants);
         },
-        relatedChanged(new_related) {
-            this.set('model.scene.related_scenes', new_related)
+        relatedChanged(newRelated) {
+            this.set('model.scene.related_scenes', newRelated)
+        },
+        privacyChanged(newPrivacy) {
+            this.set('model.scene.privacy', newPrivacy)
         },
         save() {
             let aj = this.get('ajax');
@@ -36,6 +43,8 @@ export default Controller.extend({
                location: this.get('model.scene.location'),
                summary: this.get('model.scene.summary'),
                plot_id: this.get('model.scene.plot.id'),
+               completed: this.get('model.scene.completed'),
+               privacy: this.get('model.scene.privacy'),
                participants: (this.get('model.scene.participants') || []).map(p => p.name),
                related_scenes: (this.get('model.scene.related_scenes') || []).map(s => s.id),
                tags: tags,
