@@ -1,3 +1,0 @@
-bundle install
-nohup bundle exec ruby start.rb > /dev/null 2>errors.txt&
-echo kill -9 $! > bin/killportal

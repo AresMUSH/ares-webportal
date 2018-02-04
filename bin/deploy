@@ -1,0 +1,2 @@
+ember build --environment production
+cp -R dist/* /Users/lynn/testdeploy

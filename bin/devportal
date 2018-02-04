@@ -1,2 +1,1 @@
-bundle install
-bundle exec ruby start.rb
+ember serve
