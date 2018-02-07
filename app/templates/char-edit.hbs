@@ -15,7 +15,7 @@
             {{#each-in model.demographics as |key demo|}}
             <div class="form-group row">
                 <div class="col-sm-3">
-                        <b>{{demo.name}}:</b> 
+                        <b>{{demo.name}}</b> 
                 </div>
                 <div class="col-sm-9">
                     {{#if (eq demo.name 'Gender') }}
@@ -116,7 +116,7 @@
             <p>
             
             Category: {{input type="text" size=50 value=relationship.category placeholder="Enter category."}}
-            Order: {{input type="text" size=50 value=relationship.order placeholder="Optional order within a category."}}
+            Order: {{input type="text" size=25 value=relationship.order placeholder="Order (Optional)."}}
             
             </p>
             {{textarea value=relationship.text cols="80" rows="6"}}
@@ -145,7 +145,7 @@
             
             <div class="thumbnail-gallery">
             {{#link-to 'file' file.folder file.name}}
-            {{file.path}} <img src="/uploads/{{file.path}}" class="thumbnail"/> 
+            {{file.path}} <img src="/game/uploads/{{file.path}}" class="thumbnail"/> 
             {{/link-to}}
             </div>
             {{/each}}

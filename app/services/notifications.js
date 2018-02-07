@@ -22,6 +22,14 @@ export default Service.extend({
         }
     },
     
+    changeFavicon(active) {
+        var src = '/game/uploads/theme_images/favicon.ico';
+        if (active) { 
+            src = '/game/uploads/theme_images/faviconactive.ico';
+        }
+        $('link[rel="shortcut icon"]').attr('href', src);
+    },
+     
     notify(msg, type = 'success') {
         alertify.notify(msg, type, 10);
     },

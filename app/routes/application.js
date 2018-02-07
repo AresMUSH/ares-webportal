@@ -37,14 +37,17 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
             return { game_down: true };
         });
     },
+    
+    titleToken: function(model) { 
+        return model.game.name;
+    },
 
     title: function(tokens) {
-        let mushName = aresconfig.mu_name;
         if (tokens.length > 0) {
-            return tokens.reverse().join(' - ') + " - " + mushName;
+            return tokens.reverse().join(' - ');
         }
         else {
-            return mushName;
+            return '';
         }
     },
     

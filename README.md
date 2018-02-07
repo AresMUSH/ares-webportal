@@ -1,46 +1,15 @@
-# ares-webportal
+AresMUSH Web Portal
+========
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+AresMUSH is a brand new MUSH server in development.  
 
-## Prerequisites
+For more information see:  [http://www.aresmush.com](http://www.aresmush.com)
 
-You will need the following things properly installed on your computer.
+License
+=======
 
-* [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with npm)
-* [Ember CLI](https://ember-cli.com/)
-* [Google Chrome](https://google.com/chrome/)
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br/><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">AresMUSH</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.aresmush.com" property="cc:attributionName" rel="cc:attributionURL">Linda Naughton</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
-## Installation
-
-* `git clone <repository-url>` this repository
-* `cd ares-webportal`
-* `npm install`
-
-## Running / Development
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
-
-### Building
-
-* `ember build` (development)
-* `ember build --environment production` (production)
-
-### Deploying
-
-Specify what it takes to deploy your app.
 
 ## Further Reading / Useful Links
 

@@ -73,10 +73,10 @@
                  {{#each-in model.char.demographics as |key demo|}}
                  <div class="form-group row">
                      <div class="col-sm-3">
-                             <b>{{demo.name}}:</b> 
+                             <b>{{demo.name}}</b> 
                      </div>
                      <div class="col-sm-9">
-                         {{#if (eq demo.name 'Gender') }}
+                         {{#if (eq demo.key 'Gender') }}
                              
                              {{#power-select selected=model.char.demographics.gender options=genders onchange=(action "genderChanged") as |gender|}}
                                {{gender.value}}

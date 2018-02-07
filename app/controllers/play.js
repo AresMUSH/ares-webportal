@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     connected: false,
@@ -6,6 +7,7 @@ export default Controller.extend({
     text1: '',
     text2: '',
     windowVisible: true,
+    notifications: service(),
     
     idleKeepalive: function() {
         if (this.get('connected')) {
@@ -40,8 +42,11 @@ export default Controller.extend({
             scrollTop: $('#console')[0].scrollHeight
         }, 800);           
         
-        if (this.get('notification') && this.get('notification.permission') === "granted" && !this.get('windowVisible')) {
-            new Notification(`Activity in ${aresconfig.mu_name}!`);
+        if (!this.get('windowVisible')) {
+            this.get('notifications').changeFavicon(true);
+            if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
+                new Notification(`Activity in ${aresconfig.mu_name}!`);
+            }            
         }
     },
     onConnect: function(self) {
@@ -85,16 +90,18 @@ export default Controller.extend({
                     self.onConnect(self);
                 };
                 
+                // Blur is the event that gets triggered when the window becomes active.
                 $(window).blur(function(){
                     self.set('windowVisible', false);
                 });
                 $(window).focus(function(){
                     self.set('windowVisible', true);
+                    self.get('notifications').changeFavicon(false);                    
                 });
-                this.set('notification', window.Notification || window.mozNotification || window.webkitNotification);
+                this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
             
-                if (this.get('notification')) {
-                    this.get('notification').requestPermission();
+                if (this.get('browserNotification')) {
+                    this.get('browserNotification').requestPermission();
                 }
                 
                 this.get('keepaliveInterval', window.setInterval(function(){ self.idleKeepalive() }, idle_keepalive_ms));

@@ -1,2 +1,3 @@
+yarn install
 ember build --environment production
-cp -R dist/* /Users/lynn/testdeploy
+cp -R /Users/lynn/Code/ares-webportal/dist/* /Users/lynn/testdeploy

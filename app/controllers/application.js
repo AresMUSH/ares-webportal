@@ -12,7 +12,7 @@ export default Controller.extend(AuthenticatedController, {
     }.property(),
     
     mushName: function() { 
-        return aresconfig.mu_name;
+        return this.get('model.game.name');
     }.property(),
     
     mushPort: function() {
