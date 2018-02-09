@@ -14,9 +14,19 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
         this.controllerFor('scene-live').setupCallback();
     },
 
+    deactivate: function() {
+        let aj = this.get('ajax');
+        aj.requestOne('watchScene', { id: this.modelFor('scene-live').get('id'), watch: false  });
+    },
+
     model: function(params) {
         let aj = this.get('ajax');
-        return aj.requestOne('liveScene', { id: params['id'] });
+        return aj.requestOne('liveScene', { id: params['id'] })
+        .then( response => {
+            aj.requestOne('watchScene', { id: params['id'], watch: true });
+            return response;
+           }
+        )
            
     }
 });

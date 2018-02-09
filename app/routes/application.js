@@ -37,17 +37,15 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
             return { game_down: true };
         });
     },
-    
-    titleToken: function(model) { 
-        return model.game.name;
-    },
 
     title: function(tokens) {
+        var gameName = aresconfig.game_name;
         if (tokens.length > 0) {
-            return tokens.reverse().join(' - ');
+            let tokenString = tokens.reverse().join(' - ');
+            return `${tokenString} - ${gameName}`
         }
         else {
-            return '';
+            return gameName;
         }
     },
     
