@@ -8,6 +8,7 @@ export default Controller.extend({
     text2: '',
     windowVisible: true,
     notifications: service(),
+    messages: [],
     
     idleKeepalive: function() {
         if (this.get('connected')) {
@@ -18,25 +19,24 @@ export default Controller.extend({
         }
     },
     
-    onMessage: function(self, evt) {
-        var html, is_json;
-        var data = evt.data;
+    onMessage: function(evt) {
+        var data;
+        
         try
         {
-            data = JSON.parse(evt.data);
-            is_json = true;
+           data = JSON.parse(evt.data);
         }
         catch(e)
         {
-            data = evt.data;
-            is_json = false;
+            data = null;
         }
-
-        if (is_json) {
+        
+        if (!data) {
             return;
         }
-        html = ansi_up.ansi_to_html(data);
-        this.set('consoleText', this.get('consoleText') + '<p><pre>' + html + '</pre></p>');
+        
+        let html = ansi_up.ansi_to_html(data.args.message);
+        this.get('messages').pushObject(html);
           
         $('#console').stop().animate({
             scrollTop: $('#console')[0].scrollHeight
@@ -51,12 +51,12 @@ export default Controller.extend({
     },
     onConnect: function(self) {
         document.getElementById("sendMsg").focus();
-        self.set('connected', true);        
+        self.set('connected', true);   
+	self.set('messages', []);     
     },
     onDisconnect: function(self) {
         self.set('connected', false);
     },
-
     showDisconnect: function() {
         return this.get('connected');
     }.property('connected'),
@@ -75,13 +75,14 @@ export default Controller.extend({
         this.get('websocket').send(json);
     },
     
+    
     actions: {
         connect() {
             var idle_keepalive_ms = 60000;
             this.set('websocket', new WebSocket(`ws://${aresconfig.host}:${aresconfig.websocket_port}/websocket`));
                 var self = this;
                 this.get('websocket').onmessage = function(evt) { 
-                    self.onMessage(self, evt);
+                    self.onMessage(evt);
                 };
                 this.get('websocket').onclose = function() {
                     self.onDisconnect(self);
@@ -106,6 +107,7 @@ export default Controller.extend({
                 
                 this.get('keepaliveInterval', window.setInterval(function(){ self.idleKeepalive() }, idle_keepalive_ms));
 
+                
             },
             disconnect() {
                 this.sendInput('quit');

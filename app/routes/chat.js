@@ -14,13 +14,5 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, {
     model: function() {
         let aj = this.get('ajax');
         return aj.request('chat');
-    },
-    
-    chatCallback: function(self, channelName) {
-        let channels = self.get('channels');
-        let channel = channels[channelName];
-        let messages = channel.new_messages || 0;
-        channel.new_messages =  messages + 1;
-        //this.send('reloadModel');
     }
 });
