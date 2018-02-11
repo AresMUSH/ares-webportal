@@ -16,14 +16,19 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
 
     deactivate: function() {
         let aj = this.get('ajax');
-        aj.requestOne('watchScene', { id: this.modelFor('scene-live').get('id'), watch: false  });
+        let model = this.modelFor('scene-live');
+        if (model.notify_watch) {            
+            aj.requestOne('watchScene', { id: model.id, watch: false  });
+        }
     },
 
     model: function(params) {
         let aj = this.get('ajax');
         return aj.requestOne('liveScene', { id: params['id'] })
         .then( response => {
-            aj.requestOne('watchScene', { id: params['id'], watch: true });
+            if (response.watchScene) {
+                aj.requestOne('watchScene', { id: params['id'], watch: true });
+            }
             return response;
            }
         )
