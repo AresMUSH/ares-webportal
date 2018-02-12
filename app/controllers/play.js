@@ -42,8 +42,9 @@ export default Controller.extend({
             scrollTop: $('#console')[0].scrollHeight
         }, 800);           
         
+        this.get('notifications').changeFavicon(true);
+
         if (!this.get('windowVisible')) {
-            this.get('notifications').changeFavicon(true);
             if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
                 new Notification(`Activity in ${aresconfig.mu_name}!`);
             }            

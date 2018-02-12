@@ -5,6 +5,7 @@ export default Controller.extend({
     ajax: service(),
     notifications: service(),
     newActivity: false,
+    
     onSceneActivity: function() {
         this.set('newActivity', true);
     },

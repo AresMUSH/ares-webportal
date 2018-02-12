@@ -21,19 +21,21 @@
         <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
         {{/if}}
     </td>
-    <td>{{#link-to 'scene-live' scene.id}}Scene {{scene.id}}
+    <td>
+        
+        {{#link-to 'scene-live' scene.id}}Scene {{scene.id}}
         {{#if scene.title}}
          - {{scene.title}}
         {{/if}}
         {{/link-to}}
-        <br/>
-        {{scene.icdate}}
         
         {{#if scene.is_private}}
         <span class="label label-danger">Private</span>
         {{else}}
         <span class="label label-success">Public</span>
         {{/if}}
+
+        <p>{{scene.icdate}}</p>
     </td>
     <td>
         {{scene.location}}
@@ -50,5 +52,6 @@
 {{/each}}
 
 </table>
-
+  
+  
 {{outlet}}

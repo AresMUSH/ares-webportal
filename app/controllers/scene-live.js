@@ -10,6 +10,7 @@ export default Controller.extend(AuthenticatedController, {
     scenePose: '',
     onSceneActivity: function(sceneId) {
         if (sceneId === this.get('model.id')) {
+            this.get('notifications').changeFavicon(true);                    
             this.set('newActivity', true);
             this.get('notifications').notify("New scene activity!");
         }
@@ -18,6 +19,7 @@ export default Controller.extend(AuthenticatedController, {
     resetOnExit: function() {
         this.set('scenePose', '');
         this.set('newActivity', false);
+        this.get('notifications').changeFavicon(false);                    
     },
     
     setupCallback: function() {

@@ -19,6 +19,13 @@ export default Controller.extend({
         let message = splitMsg[1];
         
         this.appendChatMessage(channelKey, message);
+        this.get('notifications').changeFavicon(true);                    
+        
+        let self = this;
+        
+        $(window).focus(function(){
+            self.get('notifications').changeFavicon(false);                    
+        });
         
         if (channelKey === this.get('selectedChannel').toLowerCase()) {
             this.scrollChatWindow();

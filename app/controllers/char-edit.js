@@ -106,6 +106,8 @@ export default Controller.extend({
                 }
             
                 this.get('flashMessages').success('Saved!');
+                this.transitionToRoute('char', this.get('model.name'));
+                
             });
         }
     }

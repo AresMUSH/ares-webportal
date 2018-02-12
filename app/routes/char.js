@@ -22,6 +22,6 @@ export default Route.extend(DefaultRoute, {
     },
     
     titleToken: function(model) {
-        return model.name;
+        return model.char.name;
     }
 });
