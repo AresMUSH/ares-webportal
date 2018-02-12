@@ -45,6 +45,7 @@ Router.map(function() {
   this.route('fs3combat-gear', { path: '/fs3combat/gear/' });
   this.route('fs3combat-gear-detail', { path: '/fs3combat/gear/:type/:name' })
   this.route('fs3skills-abilities', { path: '/fs3skills/abilities' });
+  this.route('game-edit');
   this.route('help');
   this.route('help-topic', { path: '/help/:topic' });
   this.route('jobs');
@@ -89,13 +90,13 @@ Router.map(function() {
   this.route('wiki-source', { path: '/wiki/:page_id/source/:version_id'});
   this.route('wiki-tag', { path: '/wiki/tag/:id'});
   this.route('wiki-tags', { path: '/wiki/tags'});
-  
+
   // !!!!!!!!!!!!!!!!!!!!!!!!
   // This must be at the end
   // !!!!!!!!!!!!!!!!!!!!!!!!
-  
+
   this.route('not-found', { path: '*:' });
-  
+
 });
 
 export default Router;

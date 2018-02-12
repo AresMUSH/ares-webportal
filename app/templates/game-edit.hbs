@@ -1,0 +1,50 @@
+<h1>Edit Game Information</h1>
+
+<p>This information will be used on your web portal and in the <a href="http://arescentral.aresmush.com">AresCentral Game Directory</a> to advertise your game.</p>
+
+<p><label for="name">Name:</label></p>
+<p>{{input type='text' size=50 id='name' value=model.config.name}}</p>
+
+<p><label for="name">Website:</label></p>
+<p>{{input type='text' size=50 id='website' value=model.config.website}}</p>
+
+<p><label for="name">Category:</label>
+
+{{#power-select selected=model.config.category options=model.category_options onchange=(action "categoryChanged") as |category|}}
+  {{category}}
+{{/power-select}}
+
+</p>
+
+<p><label for="name">Status:</label>
+
+{{#power-select selected=model.config.status options=model.status_options onchange=(action "statusChanged") as |status|}}
+  {{status}}
+{{/power-select}}
+                        
+</p>
+
+<p>
+    <b>Public Game:</b>
+
+    {{input type='checkbox' checked=model.config.public_game}}
+</p>
+
+
+<p><b>Description:</b></p>
+{{textarea value=model.config.description cols="80" rows="6"}}
+
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+          {{#link-to 'setup' class="btn btn-default"}}Cancel{{/link-to}}
+
+          <button {{action 'save'}} class="btn btn-primary">Save</button>
+          
+         </div>
+  </div>
+</div>
+
+{{flash-messages}}
+{{outlet}}
