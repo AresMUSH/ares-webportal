@@ -97,6 +97,7 @@ Router.map(function() {
 
   this.route('not-found', { path: '*:' });
 
+  this.route('kills');
 });
 
 export default Router;

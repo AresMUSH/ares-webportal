@@ -16,10 +16,14 @@
   {{#if (not game.disabled_plugins.fs3skills)}}
       <li><a data-toggle="tab" href="#systemsheet">Sheet</a></li>
   {{/if}}
-  
+
+      <li><a data-toggle="tab" href="#systemawards">Awards</a></li>
+
   {{#if (not game.disabled_plugins.fs3combat)}}
       <li><a data-toggle="tab" href="#systemdamage">Damage</a></li>
   {{/if}}
+
+      <li><a data-toggle="tab" href="#systemkills">Kills</a></li>
 </ul>
 
 
@@ -46,7 +50,44 @@
        {{{ansi-format text=char.description}}}
   </div>
   {{/if}}
-  
+
+   <div id="systemawards" class="tab-pane fade">
+   <div class="medal-area">
+   <div class="medal-row">
+    {{#each char.awards.badge_images as |i|}}
+    <img class="medal" src="/game/uploads/misc/{{i}}" alt="{{i}}" title="{{i}}" />
+    {{/each}}
+   </div>
+
+   <div class="medal-row">
+    {{#each char.awards.medal_images as |i|}}
+    <img class="medal" src="/game/uploads/misc/{{i}}" alt="{{i}}" title="{{i}}" />
+    {{/each}}
+   </div>
+
+   <div class="medal-row">
+    {{#each char.awards.campaign_images as |i|}}
+    <img class="medal" src="/game/uploads/misc/{{i}}" alt="{{i}}" title="{{i}}" />
+    {{/each}}
+   </div>
+
+   </div>
+	<br/><br/>
+
+	<ul>
+	{{#each char.awards.citations as |c|}}
+	<li><b>{{c.name}}</b></li>
+	<ul>
+	{{#each c.citations as |citation|}}
+	<li>{{citation}}</li>
+	{{/each}}
+	</ul>
+	{{/each}}
+	</ul>
+
+ </div>
+
+
   {{#if (not game.disabled_plugins.fs3skills)}}
   <div id="systemsheet" class="tab-pane fade">
     {{fs3-sheet char=char}}
@@ -57,5 +98,28 @@
   <div id="systemdamage" class="tab-pane fade">
     {{fs3-damage char=char}}
   </div>
-  {{/if}}
+
+   <div id="systemkills" class="tab-pane fade">
+  <table class="table table-striped">
+
+   <thead>
+         <tr>
+	          <th>#</th>
+		           <th>Date</th>
+			            <th>Victory</th>
+				             <th>Scene</th>
+					           </tr>
+						      </thead>
+
+  {{#each char.kills as |k|}}
+  <tr>
+  <td>{{k.index}}</td>
+  <td>{{k.date}}</td>
+  <td>{{k.name}}</td>
+  <td>{{#link-to 'scene' k.scene.id}}{{k.scene.title}}{{/link-to}}</td>
+  </tr>
+  {{/each}}
+   </table>
+  </div>
+{{/if}}
 </div>
