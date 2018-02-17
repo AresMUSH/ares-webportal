@@ -40,21 +40,18 @@
      <div class="body-wrap">
  
        <div class="row">
-         {{#if hideSidebar}}
-             <div class="col-md-12 body-container">
-               {{flash-messages}}
-               {{outlet}}
-             </div>
-         {{else}}
-             <div class="col-md-9 body-container">
-               {{flash-messages}}
-               {{outlet}}
-             </div>
-         {{/if}}
+         <div class="col-md-9 body-container">
+           {{flash-messages}}
+           {{outlet}}
+         </div>
                 
-         {{#if (not hideSidebar)}}
+         {{#if hideSidebar}}
          <div class="col-md-3">
-             {{global-sidebar model=model}}
+         &nbsp;
+         </div>
+         {{else}}
+         <div class="col-md-3">
+             {{global-sidebar model=sidebar}}
          </div>
          {{/if}}
         </div>

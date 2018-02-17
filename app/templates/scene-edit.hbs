@@ -44,7 +44,7 @@
     </p>        
     <p>
         <label for="summary" class="col-xs-2 col-form-label">Summary:</label>
-        {{textarea value=model.scene.summary cols="80" rows="6"}}
+        {{markdown-editor text=model.scene.summary}}
     </p>
 
     <p>
@@ -68,7 +68,7 @@
 
     {{#if model.scene.shared}}
     
-    {{textarea value=model.scene.log cols="80" rows="25"}}
+    {{markdown-editor text=model.scene.log rows=20}}
     
     {{/if}}
     

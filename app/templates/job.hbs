@@ -1,5 +1,5 @@
 <h1>#{{model.id}} - {{model.title}}</h1>
-<p>{{#link-to 'jobs'}}<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to Jobs{{/link-to}}</p>
+<p>{{#link-to 'jobs'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Jobs{{/link-to}}</p>
 
      <p>{{char-icon-inline char=model.author}}</p>
 
@@ -35,7 +35,7 @@
 <h3>Add Reply</h3>
 
         Respond to Admin Only? {{input type='checkbox' checked=replyAdminOnly}} 
-        {{textarea value=reply cols="80" rows="6"}}
+        {{markdown-editor text=reply}}
         
         
         <p><button class="btn btn-default" {{action 'addReply'}}>Reply</button></p>

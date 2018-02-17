@@ -23,10 +23,6 @@ export default Controller.extend({
         
         let self = this;
         
-        $(window).focus(function(){
-            self.get('notifications').changeFavicon(false);                    
-        });
-        
         if (channelKey === this.get('selectedChannel').toLowerCase()) {
             this.scrollChatWindow();
         }

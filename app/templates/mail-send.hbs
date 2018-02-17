@@ -21,7 +21,7 @@
 </div>
 
 <p><b>Message:</b></p>
-{{textarea value=message cols="80" rows="6"}}
+{{markdown-editor text=message}}
 
 {{#link-to 'mail' class='btn btn-default'}}Cancel{{/link-to}}
 <button {{action "sendMail"}} class="btn btn-primary">Send</button>

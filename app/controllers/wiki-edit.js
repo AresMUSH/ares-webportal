@@ -15,7 +15,7 @@ export default Controller.extend({
         preview() {
             let aj = this.get('ajax');
             
-            aj.requestOne('wikiPreview', { text: this.get('model.text') })
+            aj.requestOne('markdownPreview', { text: this.get('model.text') })
             .then( (response) => {
                 if (response.error) {
                     return;

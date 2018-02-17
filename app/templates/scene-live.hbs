@@ -22,6 +22,10 @@
         <p><b>Date:</b> {{model.icdate}}</p>
 
         <p><b>Location:</b> {{model.location}}</p>
+        
+        {{#if model.description}}
+        <p>{{{ansi-format text=model.description}}}</p>
+        {{/if}}
 
         <div>
           
@@ -47,7 +51,7 @@
 
 </div>
 
-<p>{{#link-to "scenes-live"}}<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to Scenes{{/link-to}}</p>
+<p>{{#link-to "scenes-live"}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Scenes{{/link-to}}</p>
 
 
 <div class="ansi scene-log">
@@ -94,7 +98,7 @@
 
 {{#if isApproved}}
 
-    {{textarea value=scenePose cols="80" rows="6" enter="addPose"}}
+    {{markdown-editor text=scenePose onEnter=(action "addPose")}}
     
 
 <div class="row">
@@ -104,7 +108,7 @@
         {{#if (not model.completed)}}
         <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
         <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
-        <button {{action 'addPose' 'emit'}} class="btn btn-primary">Add Emit</button>
+        <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
         {{/if}}
         
         <hr/>

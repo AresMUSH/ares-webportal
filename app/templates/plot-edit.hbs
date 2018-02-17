@@ -8,12 +8,12 @@
     
     <p>
         <label for="summary" class="col-xs-2 col-form-label">Summary:</label>
-        {{textarea value=model.summary cols="80" rows="6"}}
+        {{markdown-editor text=model.summary}}
     </p>
         
     <p>
         <label for="description" class="col-xs-2 col-form-label">Description:</label>
-        {{textarea value=model.description cols="80" rows="25"}}
+        {{markdown-editor text=model.description}}
     </p>
 
 

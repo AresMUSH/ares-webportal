@@ -1,0 +1,27 @@
+<h1>Select Plugins</h1>
+
+<p>Some plugins are optional, and can be easily disabled and enabled.  Please read the <a href="https://aresmush.com/tutorials/config/plugins/">Enabling and Disabling Plugins</a> tutorial to learn more.</p>
+
+{{#each model as |plugin|}}
+
+<p><span class="text">{{plugin.name}}:</span>
+  {{input type='checkbox' checked=plugin.selected}} 
+</p>
+  
+
+{{/each}}
+
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+          {{#link-to 'setup' class="btn btn-default"}}Cancel{{/link-to}}
+
+          <button {{action 'save'}} class="btn btn-primary">Save</button>
+          
+         </div>
+  </div>
+</div>
+
+
+{{outlet}}

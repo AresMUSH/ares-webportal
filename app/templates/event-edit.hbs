@@ -11,7 +11,8 @@
 
 <p><b>Description:</b></p>
 
-{{textarea value=model.description cols="80" rows="6"}}
+{{markdown-editor text=model.description}}
+
 
 {{#link-to 'event' model.id class="btn btn-default"}}Cancel{{/link-to}}
 <button {{action "edit"}} class="btn btn-primary">Save</button>

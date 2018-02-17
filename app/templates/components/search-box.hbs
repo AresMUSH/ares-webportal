@@ -1,6 +1,11 @@
 <div class="sidebar-box" style="margin-bottom:0px">
-    {{#if model.game.searchbox_text}}
-        {{{model.game.searchbox_text}}}
+
+    {{#if model.game.gcse_search_id}}
+
+    <gcse:searchbox-only newWindow=true></gcse:searchbox-only>
+
+    <script src="https://cse.google.com/cse.js?cx={{model.game.gcse_search_id}}" async defer type="text/javascript"></script>    
+
     {{else}}
         Please set up your <a href="http://aresmush.com/tutorials/config/website">Site Search</a>.
     {{/if}}

@@ -68,6 +68,7 @@ Router.map(function() {
   this.route('plot', { path: '/plot/:id' });
   this.route('plot-edit', { path: '/plot/:id/edit' });
   this.route('plot-create', { path: '/plot/create' });
+  this.route('plugins-edit');
   this.route('recent-changes');
   this.route('register');
   this.route('roster');
@@ -96,7 +97,6 @@ Router.map(function() {
   // !!!!!!!!!!!!!!!!!!!!!!!!
 
   this.route('not-found', { path: '*:' });
-
 });
 
 export default Router;

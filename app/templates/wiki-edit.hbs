@@ -18,15 +18,13 @@
     </p>
     
    
-    {{textarea value=model.text rows="25"}}
-     
+    {{markdown-editor text=model.text rows=20}}
   
     <div class="row">
         <div class="col col-xs-12">
             <div class="pull-right">
                 
               {{#link-to 'wiki-page' model.id class="btn btn-default"}}Cancel{{/link-to}} 
-                <button class="btn btn-default" {{action 'preview'}}>Preview</button>
                 <button class="btn btn-primary" {{action 'save'}}>Save</button>
         </div>
       </div>

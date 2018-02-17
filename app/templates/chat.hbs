@@ -32,8 +32,8 @@
 
 {{#if selectedChannel}}
 
-    {{textarea value=chatMessage cols="80" rows="3" enter="send"}}
-
+    {{markdown-editor text=chatMessage rows=3 onEnter=(action "send")}}
+    
     <button class="btn-primary btn" {{action "send"}}>Send to {{selectedChannel}}</button>
 {{/if}}
 

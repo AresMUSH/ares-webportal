@@ -4,7 +4,7 @@
             
     <p><b>Subject:</b> {{input type="text" size=50 id="subject" enter="post" value=subject size=100 }}</p>
     <p><b>Message:</b></p>
-    {{textarea value=message cols="80" rows="6"}}
+    {{markdown-editor text=message}}
 
     {{#link-to 'forum-category' model.id class='btn btn-default'}}Cancel{{/link-to}}
     <button {{action "addPost"}} class="btn btn-primary">Post</button>

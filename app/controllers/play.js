@@ -111,7 +111,9 @@ export default Controller.extend({
                 
             },
             disconnect() {
-                this.sendInput('quit');
+                if (this.get('connected')){
+                    this.sendInput('quit');                    
+                }
             },
             sendMsg1() {
                 this.sendInput(this.get('text1'));
