@@ -50,10 +50,6 @@ export default Controller.extend(AuthenticatedController, {
     actions: {
         logout() {
           this.get('session').invalidate();
-        },
-        
-        refresh() {
-            this.send('reloadModel');
         }
       }
 });

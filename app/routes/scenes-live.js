@@ -6,10 +6,15 @@ import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
 
 export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
     ajax: service(),
+    notifications: service(),
     titleToken: "Active Scenes",
     
     activate: function() {
         this.controllerFor('scenes-live').setupCallback();
+    },
+    
+    deactivate: function() {
+        this.set('notifications.sceneCallback', null);
     },
     
     model: function() {

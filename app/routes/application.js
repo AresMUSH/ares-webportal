@@ -16,10 +16,9 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
     
     doReload: function() {
         this.loadModel().then( newModel => {
-            this.set('model', newModel);
             this.controllerFor('application').set('sidebar', newModel);
             this.controllerFor('application').set('refreshSidebar', newModel.timestamp);
-        });
+        });        
     },
     
     loadModel: function() {
@@ -39,10 +38,11 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
     model: function() {       
         let notifications = this.get('notifications');
         notifications.checkSession(this.get('session.data.authenticated.id'));
+      
         $(window).focus( () => {
             this.get('notifications').changeFavicon(false);                    
         });
-
+        
         return this.loadModel();
     },
 
@@ -69,11 +69,11 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
 
     actions: {
         willTransition() {
-            this.doReload();
+           this.doReload();
         },
         
         reloadSidebar() {
-            this.doReload();
+           this.doReload();
         }
     }
 });

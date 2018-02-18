@@ -76,7 +76,7 @@
                              <b>{{demo.name}}</b> 
                      </div>
                      <div class="col-sm-9">
-                         {{#if (eq demo.key 'Gender') }}
+                         {{#if (eq key 'gender') }}
                              
                              {{#power-select selected=model.char.demographics.gender options=genders onchange=(action "genderChanged") as |gender|}}
                                {{gender.value}}
@@ -119,7 +119,7 @@
             <p>Resetting your abilities will set you up with default attribute and skill values.  Your other character information will be saved.</p>
             
             {{#if anyGroupMissing}}
-            <div class="alert alert-warning">If you set your groups first, you'll be set up with the appropriate starting skills based on your groups.</div>
+            <div class="alert alert-warning">If you set your groups first, you'll be given the appropriate starting skills based on your groups.</div>
             {{/if}}
             
             <button name="reset" {{action 'reset'}} class="btn btn-primary">Reset Abilities</button>

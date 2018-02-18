@@ -5,10 +5,15 @@ import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 
 export default Route.extend(AuthenticatedRoute, ReloadableRoute, {
     ajax: service(),
+    notifications: service(),
     titleToken: 'Chat',
     
     activate: function() {
         this.controllerFor('chat').setupCallback();
+    },
+    
+    deactivate: function() {
+        this.set('notifications.chatCallback', null);
     },
     
     model: function() {
