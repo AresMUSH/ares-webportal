@@ -3,7 +3,7 @@
             <div class="jumbotron-tagline">{{ model.game.website_tagline }}</div>
             {{{ansi-format text=model.game.website_welcome}}}
             
-            <p>This is the <b>Web Portal</b>, which lets you interact with the game from a web browser.  You can create your character online, view and edit character profiles, browse the game's wiki, read scene logs and more!</p>
+            <p>This is the <b>Web Portal</b>, which lets you interact with the game from a web browser.  You can {{#link-to 'chargen'}}create your character{{/link-to}} online, view and edit {{#link-to 'characters'}}character profiles{{/link-to}}, browse the game's {{#link-to 'wiki'}}wiki{{/link-to}}, read {{#link-to 'scenes'}}scene logs{{/link-to}} and more!</p>
         </div>
         
         

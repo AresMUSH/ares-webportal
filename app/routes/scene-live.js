@@ -5,6 +5,7 @@ import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
 
 export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     ajax: service(),
+    notifications: service(),
 
     titleToken: function(model) {
         return `Scene ${model.id}`;  
@@ -15,9 +16,10 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     },
 
     deactivate: function() {
+        this.get('notifications').set('sceneCallback', null);
         let aj = this.get('ajax');
         let model = this.modelFor('scene-live');
-        if (model.notify_watch) {            
+        if (model && model.notify_watch) {            
             aj.requestOne('watchScene', { id: model.id, watch: false  });
         }
     },

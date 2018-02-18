@@ -41,11 +41,8 @@
     <p>
         <label for="tags" class="col-xs-2 col-form-label">Tags:</label>
         <p>{{input type="text" size=50 id="tags" enter="save" value=model.scene.tags}}</p>
-    </p>        
-    <p>
-        <label for="summary" class="col-xs-2 col-form-label">Summary:</label>
-        {{markdown-editor text=model.scene.summary}}
-    </p>
+    </p> 
+    
 
     <p>
         <label for="participants" class="col-xs-2 col-form-label">Participants:</label>
@@ -65,6 +62,12 @@
     <div class="hint">It may take a second for the related scenes list to pop up.</div>
     
     </p>
+           
+    <p>
+        <label for="summary" class="col-xs-2 col-form-label">Summary:</label>
+        {{markdown-editor text=model.scene.summary}}
+    </p>
+
 
     {{#if model.scene.shared}}
     
