@@ -50,6 +50,7 @@ Router.map(function() {
   this.route('help-topic', { path: '/help/:topic' });
   this.route('jobs');
   this.route('job', { path: '/job/:id' });
+  this.route('kills');
   this.route('locations');
   this.route('location', { path: '/location/:id'});
   this.route('logs');
@@ -68,6 +69,7 @@ Router.map(function() {
   this.route('plot', { path: '/plot/:id' });
   this.route('plot-edit', { path: '/plot/:id/edit' });
   this.route('plot-create', { path: '/plot/create' });
+  this.route('plugins-edit');
   this.route('recent-changes');
   this.route('register');
   this.route('roster');
@@ -96,8 +98,6 @@ Router.map(function() {
   // !!!!!!!!!!!!!!!!!!!!!!!!
 
   this.route('not-found', { path: '*:' });
-
-  this.route('kills');
 });
 
 export default Router;

@@ -6,6 +6,13 @@
             </div>
         {{/if}}
         
+        <div class="alert alert-info">
+            <p>This button will redeploy the website.  You need to redeploy after any website code changes.</p>
+        
+            <p><button class="btn btn-info" {{action 'deploy'}}>Redeploy Website</button></p>
+        </div>
+        
+        
 
     <div class="alert alert-danger">
         <p>This button will shut down your game.  You can use it if the in-game <code>shutdown</code> command isn't working.  You will have to log into the server shell to restart the game.</p>

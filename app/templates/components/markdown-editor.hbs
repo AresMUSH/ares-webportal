@@ -1,0 +1,26 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        
+    <button {{action 'preview'}} class="btn btn-default btn-xs">
+        
+        {{#if preview}}
+        <a href="#" data-toggle="tooltip" title="Hide Preview"><i class="fa fa-eye-slash"   aria-hidden="true"></i></a>
+        {{else}}
+        <a href="#" data-toggle="tooltip" title="Show Preview"><i class="fa fa-eye "  aria-hidden="true"></i></a>
+        {{/if}}
+    </button>
+        {{#link-to 'help-topic' 'markdown' class="btn btn-default btn-xs" target="_"}}<a href="#"  data-toggle="tooltip" title="Markdown Help"><i class="fa fa-question-circle" aria-hidden="true"></i></a>{{/link-to}}
+        
+{{textarea value=text cols="80" rows=rows enter=onEnter}}
+{{#if preview}}
+
+<div class="panel panel-info">
+    <div class="panel-body">
+        {{{ansi-format text=preview}}}
+        
+    </div>
+</div>
+{{/if}}
+
+</div>
+</div>

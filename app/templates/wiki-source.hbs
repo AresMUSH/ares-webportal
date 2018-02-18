@@ -9,9 +9,9 @@
     {{#each model.versions as |v|}}
     <li>
      {{#if (eq v.id model.version_id)}}
-     <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>
+     <i class="far fa-dot-circle fa-fw" aria-hidden="true"></i>
      {{else}}
-     <i class="fa fa-fw"></i>
+     <i class="far fa-circle fa-fw"></i>
      {{/if}}
      {{#link-to 'wiki-source' model.page_id v.id}}{{v.created}} ({{v.author}}){{/link-to}}
      </li>
@@ -64,4 +64,4 @@
   </div>
 </div>
 
-{{#link-to 'wiki-page' model.name}}<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to Page{{/link-to}}
+{{#link-to 'wiki-page' model.name}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Page{{/link-to}}

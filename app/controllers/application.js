@@ -6,6 +6,8 @@ export default Controller.extend(AuthenticatedController, {
     session: service('session'),
     notifications: service(),
     hideSidebar: false,
+    refreshSidebar: false,
+    sidebarModel: {},
 
     currentRoute: function() {
         return window.location;
@@ -31,6 +33,19 @@ export default Controller.extend(AuthenticatedController, {
         return this.get('session.data.authenticated');
     }.property(),
     
+    onSidebarUpdate: function() {
+        this.send('reloadSidebar');
+    },
+    
+    sidebar: function() {
+        return this.get('model');
+    }.property('refreshSidebar'),
+    
+    setupCallback: function() {
+        let self = this;
+        this.get('notifications').set('sidebarCallback', function() {
+            self.onSidebarUpdate() } );
+    },
     
     actions: {
         logout() {

@@ -22,9 +22,9 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-            this.transitionToRoute('event',                          
+                this.transitionToRoute('event',                          
                           this.get('model.id'));
-            this.get('flashMessages').success('Event updated!');
+                this.get('flashMessages').success('Event updated!');
             });
         }
     }

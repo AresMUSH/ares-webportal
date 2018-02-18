@@ -10,21 +10,19 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
     flashMessages: service(),
     notifications: service(),
     
-    sessionAuthenticated: function() {
-        //Do nothing.
+    activate: function() {
+        this.controllerFor('application').setupCallback();
     },
     
-    sessionInvalidated: function() { 
-        this.get('flashMessages').info('You have been logged out.');
-        this.transitionTo('/');
-        this.refresh();
+    doReload: function() {
+        this.loadModel().then( newModel => {
+            this.set('model', newModel);
+            this.controllerFor('application').set('sidebar', newModel);
+            this.controllerFor('application').set('refreshSidebar', newModel.timestamp);
+        });
     },
     
-    model: function() {       
-        let notifications = this.get('notifications');
-        notifications.checkSession(this.get('session.data.authenticated.id'));
-        
-         
+    loadModel: function() {
         let aj = this.get('ajax');
         return aj.requestOne('sidebarInfo')
         .then( (response) => {
@@ -35,9 +33,29 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
         })
         .catch(() => {
             return { game_down: true };
+        });  
+    },
+    
+    model: function() {       
+        let notifications = this.get('notifications');
+        notifications.checkSession(this.get('session.data.authenticated.id'));
+        $(window).focus( () => {
+            this.get('notifications').changeFavicon(false);                    
         });
+
+        return this.loadModel();
     },
 
+    sessionAuthenticated: function() {
+        //Do nothing.
+    },
+    
+    sessionInvalidated: function() { 
+        this.get('flashMessages').info('You have been logged out.');
+        this.transitionTo('/');
+        this.refresh();
+    },
+    
     title: function(tokens) {
         var gameName = aresconfig.game_name;
         if (tokens.length > 0) {
@@ -48,10 +66,14 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
             return gameName;
         }
     },
-    
+
     actions: {
         willTransition() {
-            this.refresh();
+            this.doReload();
+        },
+        
+        reloadSidebar() {
+            this.doReload();
         }
     }
 });

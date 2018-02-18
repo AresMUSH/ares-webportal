@@ -1,6 +1,6 @@
 <h1>{{model.subject}}</h1>
 
-<p>{{#link-to 'mail'}}<i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to Mail{{/link-to}}</p>
+<p>{{#link-to 'mail'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Mail{{/link-to}}</p>
 
 <table>
     <tr>
@@ -55,7 +55,7 @@
 <h3>Reply</h3>
 <p><b>To:</b> {{input type="text" size=50 id="to_list" value=to_list size=100 }}</p>
 <p><b>Subject:</b> {{input type="text" size=50 id="subject" value=subject size=100 }}</p>
-    {{textarea value=message cols="80" rows="6"}}
+    {{markdown-editor text=message}}
     <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>
 </div>
 {{/if}}

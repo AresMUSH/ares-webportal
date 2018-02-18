@@ -1,0 +1,3 @@
+cd ~/ares-webportal/
+yarn install
+ember build --environment production

@@ -98,7 +98,7 @@
            {{input type="text" size=50 value=profile.name placeholder="Enter section name."}}
            <button class="btn btn-default" {{action 'removeProfile' profile.key}}><i class="fa fa-trash" aria-hidden="true"></i></button>
            </p>
-           {{textarea value=profile.text cols="80" rows="6"}}
+           {{markdown-editor text=profile.text}}
             <hr/>
            {{/each}}
            
@@ -119,7 +119,8 @@
             Order: {{input type="text" size=25 value=relationship.order placeholder="Order (Optional)."}}
             
             </p>
-            {{textarea value=relationship.text cols="80" rows="6"}}
+            
+            {{markdown-editor text=relationship.text}}
             
             <hr/>
             {{/each}}
@@ -130,10 +131,7 @@
         </div>
       
         <div id="hooks" class="tab-pane fade in">
-            
-            {{textarea value=model.rp_hooks cols="80" rows="6"}}
-            
-          
+          {{markdown-editor text=model.rp_hooks}}
         </div>
       
         <div id="files" class="tab-pane fade in">

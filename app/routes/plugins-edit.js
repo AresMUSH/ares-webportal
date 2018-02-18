@@ -8,9 +8,9 @@ export default Route.extend(AdminRoute, {
     
     model: function() {
         let aj = this.get('ajax');
-        return aj.requestOne('editGame');
+        return aj.requestMany('editPlugins');
     },
     
-    titleToken: 'Edit Game'
+    titleToken: 'Edit Plugins'
     
 });

@@ -9,7 +9,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     titleToken: function(model) {
         return `Scene ${model.id}`;  
     },
-    
+
     activate: function() {
         this.controllerFor('scene-live').setupCallback();
     },

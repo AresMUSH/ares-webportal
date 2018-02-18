@@ -2,14 +2,15 @@ import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 
 export default Service.extend({
-    flashMessages: service(),
     session: service(),
     routing: service('-routing'),
+    flashMessages: service(),
     
     socket: null,
     charId: null,
     chatCallback: null,
     sceneCallback: null,
+    sidebarCallback: null,
     
     socketUrl() {
         return `ws://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
@@ -25,7 +26,7 @@ export default Service.extend({
     changeFavicon(active) {
         var src = '/game/uploads/theme_images/favicon.ico';
         if (active) { 
-            src = '/game/uploads/theme_images/faviconactive.ico';
+            src = '/game/uploads/theme_images/favicon-active.ico';
         }
         $('link[rel="shortcut icon"]').attr('href', src);
     },
@@ -112,6 +113,10 @@ export default Service.extend({
                 notify = false;
             }
             else if (notification_type == "new_scene_activity") {
+                this.changeFavicon(true);    
+                if (this.get('sidebarCallback')) {
+                    this.get('sidebarCallback')();
+                }                
                 if (this.get('sceneCallback')) {
                     this.get('sceneCallback')(data.args.message);
                 }
@@ -119,7 +124,7 @@ export default Service.extend({
             }
             
             if (notify) {
-                alertify.notify(formatted_msg, 'success', 10);
+                this.notify(formatted_msg);
             }
         }
         

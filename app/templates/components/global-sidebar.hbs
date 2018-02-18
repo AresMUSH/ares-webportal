@@ -1,10 +1,9 @@
 {{search-box model=model}}
-
+    
 <div class="sidebar-box">
   <div class="sidebar-heading">
-      <h2>Game Status <i class="fa fa-video-camera" aria-hidden="true"></i></h2>
+      <h2>Game Status <i class="fa fa-video" aria-hidden="true"></i></h2>
   </div>
-  
 {{#if model.game_down}}
     <p>The website can't contact the game.  It may be down.</p>
 {{else}}
@@ -57,7 +56,7 @@
 
 <div class="sidebar-box">
    <div class="sidebar-heading">
-       <h2>Recent Changes <i class="fa fa-file-text-o" aria-hidden="true"></i></h2>
+       <h2>Recent Changes <i class="fa fa-file-alt" aria-hidden="true"></i></h2>
        
    </div>
    {{#each model.recent_changes as |change|}}
