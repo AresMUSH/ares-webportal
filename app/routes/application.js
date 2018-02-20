@@ -8,7 +8,8 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
     ajax: service(),
     session: service(),
     flashMessages: service(),
-    notifications: service(),
+    gameSocket: service(),
+    favicon: service(),
     
     activate: function() {
         this.controllerFor('application').setupCallback();
@@ -36,11 +37,11 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
     },
     
     model: function() {       
-        let notifications = this.get('notifications');
-        notifications.checkSession(this.get('session.data.authenticated.id'));
+        let gameSocket = this.get('gameSocket');
+        gameSocket.checkSession(this.get('session.data.authenticated.id'));
       
         $(window).focus( () => {
-            this.get('notifications').changeFavicon(false);                    
+            this.get('favicon').changeFavicon(false);                    
         });
         
         return this.loadModel();

@@ -7,7 +7,8 @@ export default Controller.extend({
     text1: '',
     text2: '',
     windowVisible: true,
-    notifications: service(),
+    gameSocket: service(),
+    favicon: service(),
     messages: [],
     
     idleKeepalive: function() {
@@ -42,9 +43,9 @@ export default Controller.extend({
             scrollTop: $('#console')[0].scrollHeight
         }, 800);           
         
-        this.get('notifications').changeFavicon(true);
 
         if (!this.get('windowVisible')) {
+            this.get('favicon').changeFavicon(true);
             if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
                 new Notification(`Activity in ${aresconfig.mu_name}!`);
             }            
@@ -98,7 +99,7 @@ export default Controller.extend({
                 });
                 $(window).focus(function(){
                     self.set('windowVisible', true);
-                    self.get('notifications').changeFavicon(false);                    
+                    self.get('favicon').changeFavicon(false);                    
                 });
                 this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
             

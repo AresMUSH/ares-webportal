@@ -2,7 +2,8 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
-    notifications: service(),
+    gameSocket: service(),
+    favicon: service(),
     ajax: service(),
     selectedChannel: '',
     chatMessage: '',
@@ -19,7 +20,7 @@ export default Controller.extend({
         let message = splitMsg[1];
         
         this.appendChatMessage(channelKey, message);
-        this.get('notifications').changeFavicon(true);                    
+        this.get('favicon').changeFavicon(true);                    
         
         let self = this;
         
@@ -30,7 +31,7 @@ export default Controller.extend({
             let messageCount = this.get(`model.channels.${channelKey}.new_messages`) || 0;
             this.set(`model.channels.${channelKey}.new_messages`, messageCount + 1);
         }
-        this.get('notifications').notify('New chat activity!');
+        this.get('gameSocket').notify('New chat activity!');
     },
     
     scrollChatWindow: function() {
@@ -41,7 +42,7 @@ export default Controller.extend({
     
     setupCallback: function() {
         let self = this;
-        this.get('notifications').set('chatCallback', function(channel) {
+        this.get('gameSocket').set('chatCallback', function(channel) {
             self.onChatMessage(channel) } );
     },
     

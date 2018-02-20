@@ -4,7 +4,7 @@ import Promise from 'rsvp';
 
 export default Base.extend({
     ajax: service(),
-    notifications: service(),
+    gameSocket: service(),
 
     restore(data) {
         
@@ -13,10 +13,10 @@ export default Base.extend({
         .then((response) => {
             if (response.token) {
                 this.set('data', response);
-                this.get('notifications').sessionStarted(data.id);
+                this.get('gameSocket').sessionStarted(data.id);
                 return Promise.resolve(data);
             }
-            this.get('notifications').sessionStopped();
+            this.get('gameSocket').sessionStopped();
             return Promise.reject(response);            
         });    
     },
@@ -27,15 +27,15 @@ export default Base.extend({
         .then((response) => {
             if (response.id) {
                 this.set('data', response);
-                this.get('notifications').sessionStarted(response.id);
+                this.get('gameSocket').sessionStarted(response.id);
                 return Promise.resolve(response);
             }
-            this.get('notifications').sessionStopped();
+            this.get('gameSocket').sessionStopped();
             return Promise.reject(response);            
         });
     },
     invalidate() {
-        this.get('notifications').sessionStopped();
+        this.get('gameSocket').sessionStopped();
         return Promise.resolve();
     }
 });

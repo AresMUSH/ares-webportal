@@ -6,7 +6,7 @@ import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
 
 export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
     ajax: service(),
-    notifications: service(),
+    gameSocket: service(),
     titleToken: "Active Scenes",
     
     activate: function() {
@@ -14,7 +14,7 @@ export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
     },
     
     deactivate: function() {
-        this.set('notifications.sceneCallback', null);
+        this.set('gameSocket.sceneCallback', null);
     },
     
     model: function() {

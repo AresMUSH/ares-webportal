@@ -1,6 +1,15 @@
 <h1>Edit Scene {{model.scene.title}}</h1>
         
+    {{#if (not model.scene.completed)}}
+     <p>
+         <label class="col-xs-2 col-form-label">Scene Privacy:</label>
 
+        {{#power-select selected=model.scene.privacy options=scenePrivacyValues onchange=(action "privacyChanged") as |type|}}
+          {{type}}
+        {{/power-select}}
+    </p>
+    {{/if}}
+    
     <p>
         <label for="title" class="col-xs-2 col-form-label">Title:</label>
 

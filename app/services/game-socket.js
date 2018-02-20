@@ -5,6 +5,7 @@ export default Service.extend({
     session: service(),
     routing: service('-routing'),
     flashMessages: service(),
+    favicon: service(),
     
     socket: null,
     charId: null,
@@ -23,14 +24,6 @@ export default Service.extend({
         }
     },
     
-    changeFavicon(active) {
-        var src = '/game/uploads/theme_images/favicon.ico';
-        if (active) { 
-            src = '/game/uploads/theme_images/favicon-active.ico';
-        }
-        $('link[rel="shortcut icon"]').attr('href', src);
-    },
-     
     notify(msg, type = 'success') {
         alertify.notify(msg, type, 10);
     },
@@ -113,11 +106,11 @@ export default Service.extend({
                 notify = false;
             }
             else if (notification_type == "new_scene_activity") {
-                this.changeFavicon(true);    
                 if (this.get('sidebarCallback')) {
                     this.get('sidebarCallback')();
                 }                
                 if (this.get('sceneCallback')) {
+                    this.get('favicon').changeFavicon(true);    
                     this.get('sceneCallback')(data.args.message);
                 }
                 notify = false;
