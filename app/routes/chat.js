@@ -5,7 +5,7 @@ import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 
 export default Route.extend(AuthenticatedRoute, ReloadableRoute, {
     ajax: service(),
-    notifications: service(),
+    gameSocket: service(),
     titleToken: 'Chat',
     
     activate: function() {
@@ -13,7 +13,7 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, {
     },
     
     deactivate: function() {
-        this.set('notifications.chatCallback', null);
+        this.set('gameSocket.chatCallback', null);
     },
     
     model: function() {

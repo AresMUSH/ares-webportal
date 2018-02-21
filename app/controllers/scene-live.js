@@ -5,13 +5,13 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 export default Controller.extend(AuthenticatedController, {
     ajax: service(),
     flashMessages: service(),
-    notifications: service(),
+    gameSocket: service(),
     newActivity: false,
     scenePose: '',
     onSceneActivity: function(sceneId) {
         if (sceneId === this.get('model.id')) {
             this.set('newActivity', true);
-            this.get('notifications').notify("New scene activity!");
+            this.get('gameSocket').notify("New scene activity!");
         }
     },
     
@@ -22,7 +22,7 @@ export default Controller.extend(AuthenticatedController, {
     
     setupCallback: function() {
         let self = this;
-        this.get('notifications').set('sceneCallback', function(scene) {
+        this.get('gameSocket').set('sceneCallback', function(scene) {
             self.onSceneActivity(scene) } );
     },
     

@@ -5,7 +5,7 @@ import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
 
 export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     ajax: service(),
-    notifications: service(),
+    gameSocket: service(),
 
     titleToken: function(model) {
         return `Scene ${model.id}`;  
@@ -16,10 +16,10 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     },
 
     deactivate: function() {
-        this.get('notifications').set('sceneCallback', null);
+        this.get('gameSocket').set('sceneCallback', null);
         let aj = this.get('ajax');
         let model = this.modelFor('scene-live');
-        if (model && model.notify_watch) {            
+        if (model) {            
             aj.requestOne('watchScene', { id: model.id, watch: false  });
         }
     },
@@ -28,9 +28,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
         let aj = this.get('ajax');
         return aj.requestOne('liveScene', { id: params['id'] })
         .then( response => {
-            if (response.watchScene) {
-                aj.requestOne('watchScene', { id: params['id'], watch: true });
-            }
+            aj.requestOne('watchScene', { id: params['id'], watch: true });
             return response;
            }
         )

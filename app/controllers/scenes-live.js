@@ -1,9 +1,10 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
-export default Controller.extend({
+export default Controller.extend(AuthenticatedController, {
     ajax: service(),
-    notifications: service(),
+    gameSocket: service(),
     newActivity: false,
     
     onSceneActivity: function() {
@@ -16,7 +17,7 @@ export default Controller.extend({
     
     setupCallback: function() {
         let self = this;
-        this.get('notifications').set('sceneCallback', function(scene) {
+        this.get('gameSocket').set('sceneCallback', function(scene) {
             self.onSceneActivity(scene) } );
     },
     

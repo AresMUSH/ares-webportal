@@ -4,7 +4,7 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 
 export default Controller.extend(AuthenticatedController, {
     session: service('session'),
-    notifications: service(),
+    gameSocket: service(),
     hideSidebar: false,
     refreshSidebar: false,
     sidebarModel: {},
@@ -43,7 +43,7 @@ export default Controller.extend(AuthenticatedController, {
     
     setupCallback: function() {
         let self = this;
-        this.get('notifications').set('sidebarCallback', function() {
+        this.get('gameSocket').set('sidebarCallback', function() {
             self.onSidebarUpdate() } );
     },
     

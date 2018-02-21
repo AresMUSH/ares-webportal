@@ -9,6 +9,10 @@ export default Controller.extend({
         return this.get('model.sceneTypes').map(p => p.get('name'));
     }.property('model'),
     
+    scenePrivacyValues: function() { 
+        return [ 'Public', 'Private' ];
+    }.property(),
+    
     actions: {
         plotChanged(new_plot) {
             this.set('model.scene.plot', new_plot);
@@ -18,6 +22,9 @@ export default Controller.extend({
         },
         participantsChanged(new_participants) {
             this.set('model.scene.participants', new_participants);
+        },
+        privacyChanged(newPrivacy) {
+            this.set('model.scene.privacy', newPrivacy)
         },
         relatedChanged(new_related) {
             this.set('model.scene.related_scenes', new_related)
@@ -35,6 +42,7 @@ export default Controller.extend({
                scene_type: this.get('model.scene.scene_type'),
                location: this.get('model.scene.location'),
                summary: this.get('model.scene.summary'),
+               privacy: this.get('model.scene.privacy'),
                plot_id: this.get('model.scene.plot.id'),
                participants: (this.get('model.scene.participants') || []).map(p => p.name),
                related_scenes: (this.get('model.scene.related_scenes') || []).map(s => s.id),
