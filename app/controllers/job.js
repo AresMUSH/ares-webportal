@@ -5,7 +5,7 @@ export default Controller.extend({
     reply: '',
     replyAdminOnly: true,
     
-    ajax: service(),
+    gameApi: service(),
     session: service(),
     flashMessages: service(),
     
@@ -17,8 +17,8 @@ export default Controller.extend({
 
     actions: {
         addReply() {
-            let aj = this.get('ajax');
-            aj.requestOne('jobReply', { id: this.get('model.id'), 
+            let api = this.get('gameApi');
+            api.requestOne('jobReply', { id: this.get('model.id'), 
                reply: this.get('reply'),
                admin_only: this.get('replyAdminOnly')}, null)
             .then( (response) => {
@@ -32,8 +32,8 @@ export default Controller.extend({
             });
         },
         closeJob() {
-            let aj = this.get('ajax');
-            aj.requestOne('jobClose', { id: this.get('model.id')})
+            let api = this.get('gameApi');
+            api.requestOne('jobClose', { id: this.get('model.id')})
             .then( (response) => {
                 if (response.error) {
                     return;

@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     flashMessages: service(),
-    ajax: service(),
+    gameApi: service(),
     
     title: '',
     summary: '',
@@ -17,8 +17,8 @@ export default Controller.extend({
     
     actions: {
         save: function() {
-            let aj = this.get('ajax');
-            aj.requestOne('createPlot', { 
+            let api = this.get('gameApi');
+            api.requestOne('createPlot', { 
                title: this.get('title'), 
                summary: this.get('summary'),
                description: this.get('description')}, null)

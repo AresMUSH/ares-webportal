@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameSocket: service(),
     favicon: service(),
-    ajax: service(),
+    gameApi: service(),
     selectedChannel: '',
     chatMessage: '',
     
@@ -21,9 +21,7 @@ export default Controller.extend({
         
         this.appendChatMessage(channelKey, message);
         this.get('favicon').changeFavicon(true);                    
-        
-        let self = this;
-        
+                
         if (channelKey === this.get('selectedChannel').toLowerCase()) {
             this.scrollChatWindow();
         }
@@ -55,8 +53,8 @@ export default Controller.extend({
         },
         
         send: function() {
-            let aj = this.get('ajax');
-            aj.requestOne('chatTalk', { channel: this.get('selectedChannel'), message: this.get('chatMessage')}, null)
+            let api = this.get('gameApi');
+            api.requestOne('chatTalk', { channel: this.get('selectedChannel'), message: this.get('chatMessage')}, null)
             .then( (response) => {
                 if (response.error) {
                     return;

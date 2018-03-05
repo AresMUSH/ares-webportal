@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
     reply: '',
-    ajax: service(),
+    gameApi: service(),
     session: service(),
     flashMessages: service(),
     
@@ -14,8 +14,8 @@ export default Controller.extend(AuthenticatedController, {
     
     actions: {
         addReply() {
-            let aj = this.get('ajax');
-            aj.requestOne('forumReply', { topic_id: this.get('model.id'), 
+            let api = this.get('gameApi');
+            api.requestOne('forumReply', { topic_id: this.get('model.id'), 
                reply: this.get('reply')}, null)
             .then( (response) => {
                 if (response.error) {
@@ -27,8 +27,8 @@ export default Controller.extend(AuthenticatedController, {
             });
         },
         nextUnread: function() {
-            let aj = this.get('ajax');
-            aj.requestOne('forumUnread')
+            let api = this.get('gameApi');
+            api.requestOne('forumUnread')
             .then( (response) => {
                 if (response.error) {
                     return;

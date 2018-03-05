@@ -5,13 +5,13 @@ import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(ReloadableRoute, DefaultRoute, {
-    ajax: service(),
+    gameApi: service(),
         
     model: function(params) {
-        let aj = this.get('ajax');
+        let api = this.get('gameApi');
         return RSVP.hash({
-            plot: aj.requestOne('plot', { id: params['id'] }),
-            sceneTypes: aj.requestMany('sceneTypes') })
+            plot: api.requestOne('plot', { id: params['id'] }),
+            sceneTypes: api.requestMany('sceneTypes') })
             .then((model) => Ember.Object.create(model));
     },
     

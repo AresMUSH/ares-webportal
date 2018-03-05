@@ -3,7 +3,7 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
-    ajax: service(),
+    gameApi: service(),
     flashMessages: service(),
     
     actions: {
@@ -12,8 +12,8 @@ export default Controller.extend(AuthenticatedController, {
             this.set('model.date', formatted_date);  
         },
         edit: function() {
-            let aj = this.get('ajax');
-            aj.requestOne('editEvent', { event_id: this.get('model.id'),
+            let api = this.get('gameApi');
+            api.requestOne('editEvent', { event_id: this.get('model.id'),
                title: this.get('model.title'), 
                date: this.get('model.date'),
                time: this.get('model.time'),

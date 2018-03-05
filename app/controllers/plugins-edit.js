@@ -2,15 +2,15 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
-    ajax: service(),
+    gameApi: service(),
     flashMessages: service(),
     
     actions: {
         
         save() {
-            let aj = this.get('ajax');
+            let api = this.get('gameApi');
             let disabled = this.get('model').filter(p => !p.selected).map(p => p.name);
-            aj.requestOne('savePlugins', { disabled_plugins: disabled }, null)
+            api.requestOne('savePlugins', { disabled_plugins: disabled }, null)
             .then( (response) => {
                 if (response.error) {
                     return;

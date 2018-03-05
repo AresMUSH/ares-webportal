@@ -8,7 +8,7 @@ export default Controller.extend({
     reCaptchaResponse: '',
     session: service(),
     flashMessages: service(),
-    ajax: service(),
+    gameApi: service(),
     
     actions: {
         recaptchaResolved(reCaptchaResponse) {
@@ -17,7 +17,7 @@ export default Controller.extend({
         },
         register() {
             
-           this.get('ajax').requestOne('register', 
+           this.get('gameApi').requestOne('register', 
                { name: this.get('name'), password: this.get('password'), confirm_password: this.get('confirmPassword'), recaptcha: this.get('reCaptchaResponse')}, null)
             .then((response) => {            
                 if (response.error) {

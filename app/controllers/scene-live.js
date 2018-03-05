@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
 export default Controller.extend(AuthenticatedController, {
-    ajax: service(),
+    gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
     newActivity: false,
@@ -34,8 +34,8 @@ export default Controller.extend(AuthenticatedController, {
                 this.get('flashMessages').danger("You haven't entered a pose.");
                 return;
             }
-            let aj = this.get('ajax');
-            aj.requestOne('addScenePose', { id: this.get('model.id'),
+            let api = this.get('gameApi');
+            api.requestOne('addScenePose', { id: this.get('model.id'),
                 pose: pose, pose_type: poseType })
             .then( (response) => {
                 if (response.error) {
@@ -47,8 +47,8 @@ export default Controller.extend(AuthenticatedController, {
         },
         
         changeSceneStatus(status) {
-            let aj = this.get('ajax');
-            aj.requestOne('changeSceneStatus', { id: this.get('model.id'),
+            let api = this.get('gameApi');
+            api.requestOne('changeSceneStatus', { id: this.get('model.id'),
                 status: status }, null)
             .then( (response) => {
                 if (response.error) {

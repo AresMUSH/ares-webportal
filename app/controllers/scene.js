@@ -3,13 +3,13 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
-    ajax: service(),
+    gameApi: service(),
     confirmDelete: false,
     
     actions: {
         like(like) {
-            let aj = this.get('ajax');
-            aj.requestOne('likeScene', { id: this.get('model.id'), like: like})
+            let api = this.get('gameApi');
+            api.requestOne('likeScene', { id: this.get('model.id'), like: like})
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -19,9 +19,9 @@ export default Controller.extend(AuthenticatedController, {
         },
         
         delete() {
-            let aj = this.get('ajax');
+            let api = this.get('gameApi');
             this.set('confirmDelete', false);
-            aj.requestOne('deleteScene', { id: this.get('model.id')})
+            api.requestOne('deleteScene', { id: this.get('model.id')})
             .then( (response) => {
                 if (response.error) {
                     return;

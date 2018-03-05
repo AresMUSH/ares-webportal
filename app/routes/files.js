@@ -4,11 +4,11 @@ import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(ReloadableRoute, DefaultRoute, {
-    ajax: service(),
+    gameApi: service(),
     titleToken: 'Files',
     
     model: function() {
-        let aj = this.get('ajax');
-        return aj.requestMany('files');
+        let api = this.get('gameApi');
+        return api.requestMany('files');
     }
 });

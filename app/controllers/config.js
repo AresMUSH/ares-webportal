@@ -2,13 +2,13 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
-    ajax: service(),
+    gameApi: service(),
     flashMessages: service(),
     
     actions: {
         
         save() {
-            let aj = this.get('ajax');
+            let api = this.get('gameApi');
             let modelConfig = this.get('model.config');
             let config = {};
             
@@ -16,7 +16,7 @@ export default Controller.extend({
                 config[k] = modelConfig[k].new_value;
             });
 
-            aj.requestOne('saveConfig', { file: this.get('model.file'), config: config }, null)
+            api.requestOne('saveConfig', { file: this.get('model.file'), config: config }, null)
             .then( (response) => {
                 if (response.error) {
                     return;

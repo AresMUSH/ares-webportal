@@ -5,7 +5,7 @@ import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
 
 export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
-    ajax: service(),
+    gameApi: service(),
     gameSocket: service(),
     titleToken: "Active Scenes",
     
@@ -18,7 +18,7 @@ export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
     },
     
     model: function() {
-        let aj = this.get('ajax');
-        return aj.requestMany('liveScenes');
+        let api = this.get('gameApi');
+        return api.requestMany('liveScenes');
     }
 });

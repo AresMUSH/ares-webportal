@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
-    ajax: service(),
+    gameApi: service(),
     flashMessages: service(),
     
     sceneTypes: function() { 
@@ -30,13 +30,13 @@ export default Controller.extend({
             this.set('model.scene.privacy', newPrivacy)
         },
         save() {
-            let aj = this.get('ajax');
+            let api = this.get('gameApi');
             let tags = this.get('model.scene.tags') || [];
             if (!Array.isArray(tags)) {
                 tags = tags.split(/[\s,]/);
             }
             
-            aj.requestOne('createScene', { 
+            api.requestOne('createScene', { 
                title: this.get('model.scene.title'), 
                icdate: this.get('model.scene.icdate'),
                scene_type: this.get('model.scene.scene_type'),

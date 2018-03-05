@@ -2,15 +2,15 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
-    ajax: service(),
+    gameApi: service(),
     flashMessages: service(),
     
     actions: {
         deploy() {
-            let aj = this.get('ajax');
+            let api = this.get('gameApi');
 
 
-            aj.requestOne('deployWebsite')
+            api.requestOne('deployWebsite')
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -21,10 +21,10 @@ export default Controller.extend({
         },
         
         shutdown() {
-            let aj = this.get('ajax');
+            let api = this.get('gameApi');
 
 
-            aj.requestOne('shutdown')
+            api.requestOne('shutdown')
             .then( (response) => {
                 if (response.error) {
                     return;

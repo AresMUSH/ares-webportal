@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
-    ajax: service(),
+    gameApi: service(),
     flashMessages: service(),
     appNotes: '',
     
@@ -12,8 +12,8 @@ export default Controller.extend({
     
     actions: {
         submit() {
-            let aj = this.get('ajax');
-            aj.requestOne('chargenSubmit', { app_notes: this.get('appNotes') })
+            let api = this.get('gameApi');
+            api.requestOne('chargenSubmit', { app_notes: this.get('appNotes') })
             .then( (response) => {
                 if (response.error) {
                     return;

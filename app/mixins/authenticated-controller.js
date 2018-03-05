@@ -14,5 +14,10 @@ export default Mixin.create({
     
     isAdmin: function() {
         return this.get('session.data.authenticated.is_admin');        
+    }.property('model'),
+    
+    isCoder: function() {
+        return this.get('session.data.authenticated.is_coder');        
     }.property('model')
+    
 });

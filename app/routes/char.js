@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(DefaultRoute, {
-    ajax: service(),
+    gameApi: service(),
     
     afterModel: function(model) { 
         if (model.get('char.playerbit')) {
@@ -13,11 +13,11 @@ export default Route.extend(DefaultRoute, {
     },
     
     model: function(params) {
-        let aj = this.get('ajax');
+        let api = this.get('gameApi');
         return RSVP.hash({
-            char: aj.requestOne('character', { id: params['id'] }),
+            char: api.requestOne('character', { id: params['id'] }),
             game: this.modelFor('application').game,
-            sceneTypes: aj.requestMany('sceneTypes') })
+            sceneTypes: api.requestMany('sceneTypes') })
             .then((model) => Ember.Object.create(model));
     },
     

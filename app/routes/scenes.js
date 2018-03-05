@@ -4,14 +4,14 @@ import { inject as service } from '@ember/service';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(DefaultRoute, {
-    ajax: service(),
+    gameApi: service(),
     titleToken: 'Scenes',
     
     model: function() {
-        let aj = this.get('ajax');
+        let api = this.get('gameApi');
         return RSVP.hash({
-             scenes:  aj.requestMany('scenes'),
-             sceneTypes: aj.requestMany('sceneTypes'),
+             scenes:  api.requestMany('scenes'),
+             sceneTypes: api.requestMany('sceneTypes'),
            })
            .then((model) => Ember.Object.create(model));
            

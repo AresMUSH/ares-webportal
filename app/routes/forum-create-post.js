@@ -4,12 +4,12 @@ import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
 import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
 
 export default Route.extend(RouteResetOnExit, AuthenticatedRoute, {
-    ajax: service(),
+    gameApi: service(),
     session: service(),
     titleToken: "New Post",
 
     model: function(params) {
-        let aj = this.get('ajax');
-        return aj.requestOne('forumCategory', {category_id: params['category_id']});
+        let api = this.get('gameApi');
+        return api.requestOne('forumCategory', {category_id: params['category_id']});
     }
 });
