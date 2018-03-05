@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
-    ajax: service(),
+    gameApi: service(),
     flashMessages: service(),
 
     teams: function() {
@@ -11,8 +11,8 @@ export default Controller.extend({
     
     actions: {
         save: function() {
-            let aj = this.get('ajax');
-            aj.requestOne('updateCombatant', { id: this.get('model.id'), 
+            let api = this.get('gameApi');
+            api.requestOne('updateCombatant', { id: this.get('model.id'), 
                 team: this.get('model.team'),
                 stance: this.get('model.stance'),
                 weapon: this.get('model.weapon'),

@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
 export default Controller.extend(AuthenticatedController, {
-    ajax: service(),
+    gameApi: service(),
     gameSocket: service(),
     newActivity: false,
     

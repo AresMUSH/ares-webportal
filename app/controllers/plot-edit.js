@@ -3,12 +3,12 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     flashMessages: service(),
-    ajax: service(),
+    gameApi: service(),
     
     actions: {
         save: function() {
-            let aj = this.get('ajax');
-            aj.requestOne('editPlot', { id: this.get('model.id'),
+            let api = this.get('gameApi');
+            api.requestOne('editPlot', { id: this.get('model.id'),
                title: this.get('model.title'), 
                summary: this.get('model.summary'),
                description: this.get('model.description')}, null)

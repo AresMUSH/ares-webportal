@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
-    ajax: service(),
+    gameApi: service(),
     flashMessages: service(),
     subject: '',
     message: '',
@@ -16,8 +16,8 @@ export default Controller.extend({
     
     actions: {
         sendReply: function() {
-            let aj = this.get('ajax');
-            aj.requestOne('sendMail', { subject: this.get('subject'), 
+            let api = this.get('gameApi');
+            api.requestOne('sendMail', { subject: this.get('subject'), 
                message: this.get('message'),
                to_list: this.get('to_list')}, null)
             .then( (response) => {

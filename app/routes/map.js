@@ -3,13 +3,13 @@ import { inject as service } from '@ember/service';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(DefaultRoute, {
-    ajax: service(),
+    gameApi: service(),
     titleToken: function(model) {
         return model.name;
     },
     
     model: function(params) {
-        let aj = this.get('ajax');
-        return aj.requestOne('map', { id: params['id'] });
+        let api = this.get('gameApi');
+        return api.requestOne('map', { id: params['id'] });
     }
 });

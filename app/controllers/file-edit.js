@@ -3,12 +3,12 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
-    ajax: service(),
+    gameApi: service(),
     
     actions: {        
         save: function() {
-            let aj = this.get('ajax');
-            aj.requestOne('updateFile', { 
+            let api = this.get('gameApi');
+            api.requestOne('updateFile', { 
                 name: this.get('model.name'),
                 folder: this.get('model.folder'),
                 new_name: this.get('model.new_name'),

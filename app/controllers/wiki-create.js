@@ -2,19 +2,19 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
-    ajax: service(),
+    gameApi: service(),
     flashMessages: service(),
     
     actions: {
         
         save() {
-            let aj = this.get('ajax');
+            let api = this.get('gameApi');
             let tags = this.get('model.tags') || [];
             if (!Array.isArray(tags)) {
                 tags = tags.split(/[\s,]/);
             }
             
-            aj.requestOne('createWiki', {
+            api.requestOne('createWiki', {
                title: this.get('model.title'), 
                text: this.get('model.text'),
                tags: tags}, null)

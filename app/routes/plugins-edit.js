@@ -3,12 +3,12 @@ import { inject as service } from '@ember/service';
 import AdminRoute from 'ares-webportal/mixins/admin-route';
 
 export default Route.extend(AdminRoute, {
-    ajax: service(),
+    gameApi: service(),
     session: service(),
     
     model: function() {
-        let aj = this.get('ajax');
-        return aj.requestMany('editPlugins');
+        let api = this.get('gameApi');
+        return api.requestMany('editPlugins');
     },
     
     titleToken: 'Edit Plugins'

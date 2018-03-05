@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     subject: '',
     message: '',
-    ajax: service(),
+    gameApi: service(),
     session: service(),
     flashMessages: service(),
     
@@ -15,8 +15,8 @@ export default Controller.extend({
     
     actions: {
         addPost() {
-            let aj = this.get('ajax');
-            aj.requestOne('forumPost', { category_id: this.get('model.id'), 
+            let api = this.get('gameApi');
+            api.requestOne('forumPost', { category_id: this.get('model.id'), 
                subject: this.get('subject'),
                message: this.get('message') }, null)
             .then( (response) => {

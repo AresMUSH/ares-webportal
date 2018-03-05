@@ -9,7 +9,6 @@
    </div>
    <div id="navbar" class="navbar-collapse collapse">
 
-   
      <ul class="nav navbar-nav navbar-right">
                   
             <li>{{#link-to 'home'}}Home{{/link-to}}</li>
@@ -141,19 +140,23 @@
                         <li><a href="https://aresmush.com/mush-101/" target="_blank">MUSH 101 Tutorial <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></li>
                       </ul>
                     </li>
-            
-            {{#if isAdmin}}
+            {{#if (or isAdmin isCoder)}}
             
                    <li class="dropdown">
                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                       
                              Admin <span class="caret"></span></a>
                              <ul class="dropdown-menu">
+                               {{#if isAdmin}}
                                <li>{{#link-to 'jobs'}}Jobs{{/link-to}}</li>
                                <li>{{#link-to 'setup'}}Setup{{/link-to}}</li>
                                <li>{{#link-to 'manage'}}Manage{{/link-to}}</li>
                                <li>{{#link-to 'logs'}}Logs{{/link-to}}</li>
+                               {{/if}}
+                               
+                               {{#if isCoder}}
                                <li>{{#link-to 'tinker'}}Tinker{{/link-to}}</li>
+                               {{/if}}
                              </ul>
                            </li>
                    

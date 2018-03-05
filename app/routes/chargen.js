@@ -5,15 +5,15 @@ import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
 
 export default Route.extend(AuthenticatedRoute, ReloadableRoute, {
-    ajax: service(),
+    gameApi: service(),
     titleToken: 'Character Creation',
 
     model: function() {
-        let aj = this.get('ajax');
+        let api = this.get('gameApi');
         
         return RSVP.hash({
-            char: aj.requestOne('chargenChar'),
-            cgInfo: aj.requestOne('chargenInfo')})
+            char: api.requestOne('chargenChar'),
+            cgInfo: api.requestOne('chargenInfo')})
             .then((model) => Ember.Object.create(model));
     }
 });

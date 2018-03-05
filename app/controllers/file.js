@@ -3,14 +3,14 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
-    ajax: service(),
+    gameApi: service(),
     confirmDelete: false,
     
     actions: {        
         delete: function() {
-            let aj = this.get('ajax');
+            let api = this.get('gameApi');
             this.set('confirmDelete', false);
-            aj.requestOne('deleteFile', { 
+            api.requestOne('deleteFile', { 
                 name: this.get('model.name'),
                 folder: this.get('model.folder')
              })

@@ -4,11 +4,11 @@ import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
 import RSVP from 'rsvp';
 
 export default Route.extend(AuthenticatedRoute, {
-    ajax: service(),
+    gameApi: service(),
     titleToken: 'Create Scene',
         
     model: function() {
-        let aj = this.get('ajax');
+        let api = this.get('gameApi');
         let appModel = this.modelFor('application');
         
         return RSVP.hash({
@@ -16,10 +16,10 @@ export default Route.extend(AuthenticatedRoute, {
                  scene_type: 'Social',
                  privacy: 'Private',
                  icdate: appModel.game.scene_start_date }),
-             sceneTypes: aj.requestMany('sceneTypes'),
-             plots: aj.requestMany('plots'),
-             characters: aj.requestMany('characters'),
-             scenes: aj.requestMany('scenes')
+             sceneTypes: api.requestMany('sceneTypes'),
+             plots: api.requestMany('plots'),
+             characters: api.requestMany('characters'),
+             scenes: api.requestMany('scenes')
            })
            .then((model) => Ember.Object.create(model));
     }

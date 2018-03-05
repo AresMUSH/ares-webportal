@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
-    ajax: service(),
+    gameApi: service(),
     
     actions: {
         categoryChanged(val) {
@@ -12,8 +12,8 @@ export default Controller.extend({
             this.set('model.config.status', val);
         },
         save() {
-            let aj = this.get('ajax');
-            aj.requestOne('saveGame', { config: this.get('model.config') }, null)
+            let api = this.get('gameApi');
+            api.requestOne('saveGame', { config: this.get('model.config') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;

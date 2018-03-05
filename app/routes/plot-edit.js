@@ -3,12 +3,12 @@ import { inject as service } from '@ember/service';
 import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
 
 export default Route.extend(AuthenticatedRoute, {
-    ajax: service(),
+    gameApi: service(),
         
     model: function(params) {
-        let aj = this.get('ajax');
+        let api = this.get('gameApi');
         
-        return aj.requestOne('plot', { id: params['id'], edit_mode: true  });
+        return api.requestOne('plot', { id: params['id'], edit_mode: true  });
     },
     
     titleToken: function(model) {

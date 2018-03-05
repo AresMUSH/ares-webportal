@@ -5,12 +5,12 @@ import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
-    ajax: service(),
+    gameApi: service(),
     session: service(),
     
     model: function(params) {
-        let aj = this.get('ajax');
-        return aj.requestOne('forumTopic', { topic_id: params['topic_id'] });
+        let api = this.get('gameApi');
+        return api.requestOne('forumTopic', { topic_id: params['topic_id'] });
     },
     titleToken: function(model) {
         return `${model.title} - ${model.category.name}`;

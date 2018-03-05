@@ -3,13 +3,13 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
-    ajax: service(),
+    gameApi: service(),
     flashMessages: service(),
     
     actions: {
         nextUnread: function() {
-            let aj = this.get('ajax');
-            aj.requestOne('forumUnread')
+            let api = this.get('gameApi');
+            api.requestOne('forumUnread')
             .then( (response) => {
                 if (response.error) {
                     return;

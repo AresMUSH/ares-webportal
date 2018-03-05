@@ -4,12 +4,12 @@ import AdminRoute from 'ares-webportal/mixins/admin-route';
 import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 
 export default Route.extend(AdminRoute, ReloadableRoute, {
-    ajax: service(),
+    gameApi: service(),
     session: service(),
     
     model: function(params) {
-        let aj = this.get('ajax');
-        return aj.requestOne('job', {id: params['id'] });
+        let api = this.get('gameApi');
+        return api.requestOne('job', {id: params['id'] });
     },
     
     titleToken: function(model) {

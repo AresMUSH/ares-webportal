@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
-    ajax: service(),
+    gameApi: service(),
     flashMessages: service(),
     
     buildQueryDataForChar: function() {
@@ -103,8 +103,8 @@ export default Controller.extend({
                 return;
             }
             
-            let aj = this.get('ajax');
-            aj.requestOne('profileSave', this.buildQueryDataForChar(), null)
+            let api = this.get('gameApi');
+            api.requestOne('profileSave', this.buildQueryDataForChar(), null)
             .then( (response) => {
                 if (response.error) {
                     return;

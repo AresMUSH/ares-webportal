@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
     flashMessages: service(),
-    ajax: service(),
+    gameApi: service(),
     charErrors: [],
     toggleCharChange: false,
     
@@ -150,8 +150,8 @@ export default Controller.extend({
         },
         
         reset() {
-            let aj = this.get('ajax');
-            aj.requestOne('chargenReset', { char: this.buildQueryDataForChar() })
+            let api = this.get('gameApi');
+            api.requestOne('chargenReset', { char: this.buildQueryDataForChar() })
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -162,8 +162,8 @@ export default Controller.extend({
         },
         
         review() {
-            let aj = this.get('ajax');
-            aj.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
+            let api = this.get('gameApi');
+            api.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -173,8 +173,8 @@ export default Controller.extend({
         },
         
         save() {
-            let aj = this.get('ajax');
-            aj.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
+            let api = this.get('gameApi');
+            api.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -188,8 +188,8 @@ export default Controller.extend({
         },
         
         unsubmit() {
-            let aj = this.get('ajax');
-            aj.requestOne('chargenUnsubmit')
+            let api = this.get('gameApi');
+            api.requestOne('chargenUnsubmit')
             .then( (response) => {
                 if (response.error) {
                     return;

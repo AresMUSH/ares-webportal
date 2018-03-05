@@ -5,7 +5,7 @@ import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 
 export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
 
-    ajax: service(),
+    gameApi: service(),
     session: service(),
     flashMessages: service(),
     gameSocket: service(),
@@ -23,8 +23,8 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
     },
     
     loadModel: function() {
-        let aj = this.get('ajax');
-        return aj.requestOne('sidebarInfo')
+        let api = this.get('gameApi');
+        return api.requestOne('sidebarInfo')
         .then( (response) => {
             if (response.error) {
                 return { game_down: true };

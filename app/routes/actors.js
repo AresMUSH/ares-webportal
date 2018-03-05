@@ -3,11 +3,11 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 import { inject as service } from '@ember/service';
 
 export default Route.extend(DefaultRoute, {
-    ajax: service(),
+    gameApi: service(),
     titleToken: 'Actors',
     
     model: function() {
-        let aj = this.get('ajax');
-        return aj.requestMany('actors');
+        let api = this.get('gameApi');
+        return api.requestMany('actors');
     }
 });

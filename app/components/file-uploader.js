@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
     files: [],
     folder: '',
-    ajax: service(),
+    gameApi: service(),
     flashMessages: service(),
     
     didInsertElement: function() {
@@ -54,7 +54,7 @@ export default Component.extend({
         },
         
         uploadFile: function(file) {
-            let aj = this.get('ajax');
+            let api = this.get('gameApi');
             
             if (!file.data) {
                 this.get('flashMessages').danger('That file is not ready for upload yet.  Give it a few more seconds.');
@@ -64,7 +64,7 @@ export default Component.extend({
             let folder = file.folder.toLowerCase();
             let name = file.name.toLowerCase();
             
-            aj.requestOne('uploadFile', {
+            api.requestOne('uploadFile', {
                  name: name,
                  size_kb: file.sizeKb,
                  url: file.url,

@@ -5,7 +5,7 @@ export default Component.extend({
     text: '',
     preview: null,
     rows: 6,
-    ajax: service(),
+    gameApi: service(),
     
     actions: { 
         onEnter() {
@@ -16,9 +16,9 @@ export default Component.extend({
                 this.set('preview', null);
                 return;
             }
-            let aj = this.get('ajax');
+            let api = this.get('gameApi');
             
-            aj.requestOne('markdownPreview', { text: this.get('text') })
+            api.requestOne('markdownPreview', { text: this.get('text') })
             .then( (response) => {
                 if (response.error) {
                     return;
