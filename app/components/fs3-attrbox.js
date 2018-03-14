@@ -2,7 +2,7 @@ import Component from '@ember/component';
 
 export default Component.extend({
     minRating: 1,
-    maxRating: 5,
+    maxRating: 4,
     
     getRatingName: function() {
         let name = "";
@@ -18,9 +18,6 @@ export default Component.extend({
                 name =  "Good";
                 break;
             case 4:
-                name =  "Great";
-                break;
-            case 5:
                 name =  "Exceptional";
                 break;
         }

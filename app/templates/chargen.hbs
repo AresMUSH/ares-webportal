@@ -139,7 +139,7 @@
      
                  
                  {{#each model.char.fs3_attributes as |att|}}
-                 {{#fs3-attrbox rating=att.rating ratingName=att.rating_name updated=(action "abilityChanged")}}
+                 {{#fs3-attrbox rating=att.rating ratingName=att.rating_name maxRating=model.cgInfo.max_attr_rating  updated=(action "abilityChanged")}}
                      <b>{{att.name}}</b> - {{att.desc}}
                  {{/fs3-attrbox}}
                  {{/each}}
