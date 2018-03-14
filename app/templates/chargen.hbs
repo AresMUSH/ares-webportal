@@ -101,9 +101,14 @@
                               <b>{{group.name}}:</b>                               
                       </div>
                       <div class="col-sm-9">
-                      {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') onchange=(action "groupChanged" key) as |group|}}
+                          
+                      {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
+                        {{input type="text" size=50 value=group.value}}
+                      {{else}}
+                        {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') onchange=(action "groupChanged" key) as |group|}}
                         {{group.value}} {{if group.desc '-'}} {{group.desc}}
                       {{/power-select}}
+                      {{/if}}
                          <p class="cg-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
                          
                       </div>
