@@ -78,7 +78,7 @@
                      <div class="col-sm-9">
                          {{#if (eq key 'gender') }}
                              
-                             {{#power-select selected=model.char.demographics.gender options=genders onchange=(action "genderChanged") as |gender|}}
+                             {{#power-select selected=model.char.demographics.gender searchField="value" options=genders onchange=(action "genderChanged") as |gender|}}
                                {{gender.value}}
                              {{/power-select}}
                              
@@ -105,7 +105,7 @@
                       {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
                         {{input type="text" size=50 value=group.value}}
                       {{else}}
-                        {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') onchange=(action "groupChanged" key) as |group|}}
+                        {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" onchange=(action "groupChanged" key) as |group|}}
                         {{group.value}} {{if group.desc '-'}} {{group.desc}}
                       {{/power-select}}
                       {{/if}}
