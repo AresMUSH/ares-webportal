@@ -144,7 +144,7 @@
      
                  
                  {{#each model.char.fs3_attributes as |att|}}
-                 {{#fs3-attrbox rating=att.rating ratingName=att.rating_name maxRating=model.cgInfo.max_attr_rating  updated=(action "abilityChanged")}}
+                 {{#fs3-attrbox rating=att.rating ratingName=att.rating_name maxRating=model.cgInfo.fs3.max_attr_rating  updated=(action "abilityChanged")}}
                      <b>{{att.name}}</b> - {{att.desc}}
                  {{/fs3-attrbox}}
                  {{/each}}
@@ -164,7 +164,7 @@
                  <p class="cg-tip">Action Skills represent your ability in areas deemed important for gameplay. See <a href="http://aresmush.com/fs3/fs3-3/chargen/#action-skills">FS3 Action Skills</a> for details.</p>
                      
                  {{#each model.char.fs3_action_skills as |skill|}}
-                 {{#fs3-actionbox rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.max_skill_rating minRating=model.cgInfo.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
+                 {{#fs3-actionbox rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.fs3.max_skill_rating minRating=model.cgInfo.fs3.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
                      <b>{{skill.name}}</b> - {{skill.desc}}
                  {{/fs3-actionbox}}
                  {{/each}}

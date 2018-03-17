@@ -90,6 +90,12 @@ export default Controller.extend({
         total = total + this.countPointsInGroup(this.get('model.char.fs3_languages'), 5, 0, 1);
         return total;
     }.property('model.char.fs3_backgrounds.@each.rating', 'model.char.fs3_action_skills.@each.rating', 'model.char.fs3_languages.@each.rating'),
+    
+    actionPoints: function() {
+        let total = 0;
+        total = total + this.countPointsInGroup(this.get('model.char.fs3_action_skills'), 0, 1, 1);
+        return total;
+    }.property('model.char.fs3_action_skills.@each.rating'),
      
     checkLimits: function(list, limits, title) {
         for (var high_rating in limits) {
@@ -109,17 +115,23 @@ export default Controller.extend({
     validateChar: function() {
         this.set('charErrors', []);
 
-        this.checkLimits(this.get('model.char.fs3_action_skills'), this.get('model.cgInfo.skill_limits'), 'action skills');
-        this.checkLimits(this.get('model.char.fs3_attributes'), this.get('model.cgInfo.attr_limits'), 'attributes');
+        this.checkLimits(this.get('model.char.fs3_action_skills'), this.get('model.cgInfo.fs3.skill_limits'), 'action skills');
+        this.checkLimits(this.get('model.char.fs3_attributes'), this.get('model.cgInfo.fs3.attr_limits'), 'attributes');
         
         let totalAttrs = this.get('attrPoints');
         let totalSkills = this.get('skillPoints');
-        let maxAttrs = this.get('model.cgInfo.max_attrs');
+        let totalAction = this.get('actionPoints');
+        let maxAttrs = this.get('model.cgInfo.fs3.max_attrs');
         if (totalAttrs > maxAttrs) {
             this.charErrors.push(`You can only spend ${maxAttrs} points in attributes.  You have spent ${totalAttrs}.`);
         }
+
+        let maxAction = this.get('model.cgInfo.fs3.max_action');
+        if (totalAction > maxAction) {
+            this.charErrors.push(`You can only spend ${maxAction} points in action skills.  You have spent ${totalAction}.`);
+        }
         
-        let maxAp = this.get('model.cgInfo.max_ap');
+        let maxAp = this.get('model.cgInfo.fs3.max_ap');
         let totalAp = totalAttrs + totalSkills;
         if (totalAp > maxAp) {
             this.charErrors.push(`You can only spend ${maxAp} ability points.  You have spent ${totalAp}.`);
