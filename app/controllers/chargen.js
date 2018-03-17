@@ -20,9 +20,9 @@ export default Controller.extend({
     }.property('alerts'),
 
     attrPoints: function() {
-        let total = this.countPointsInGroup(this.get('model.char.fs3_attributes'), 0, 2, 2);
+        let total = this.countPointsInGroup(this.get('model.char.fs3.fs3_attributes'), 0, 2, 2);
         return total;
-    }.property('model.char.fs3_attributes.@each.rating'),
+    }.property('model.char.fs3.fs3_attributes.@each.rating'),
     
     countPointsInGroup: function(list, free_points, max_free_rating, cost_per_rating) {
         let points = 0;
@@ -51,7 +51,7 @@ export default Controller.extend({
     buildQueryDataForChar: function() {
         let specialties = {};
         
-        this.get('model.char.fs3_action_skills').forEach(function (ability) {
+        this.get('model.char.fs3.fs3_action_skills').forEach(function (ability) {
             if (ability.specialties) {
                 
                 let selectedSpecs = ability.specialties.filter( s => s.selected ).map(s => s.name);
@@ -68,10 +68,10 @@ export default Controller.extend({
             shortdesc: this.get('model.char.shortdesc'),
             rp_hooks: this.get('model.char.rp_hooks'),
             background: this.get('model.char.background'),
-            fs3_attributes: this.createAbilityHash(this.get('model.char.fs3_attributes')),
-            fs3_action_skills: this.createAbilityHash(this.get('model.char.fs3_action_skills')),
-            fs3_backgrounds: this.createAbilityHash(this.get('model.char.fs3_backgrounds')),
-            fs3_languages: this.createAbilityHash(this.get('model.char.fs3_languages')),
+            fs3_attributes: this.createAbilityHash(this.get('model.char.fs3.fs3_attributes')),
+            fs3_action_skills: this.createAbilityHash(this.get('model.char.fs3.fs3_action_skills')),
+            fs3_backgrounds: this.createAbilityHash(this.get('model.char.fs3.fs3_backgrounds')),
+            fs3_languages: this.createAbilityHash(this.get('model.char.fs3.fs3_languages')),
             fs3_specialties: specialties
         };
     }, 
@@ -85,17 +85,17 @@ export default Controller.extend({
     
     skillPoints: function() {
         let total = 0;
-        total = total + this.countPointsInGroup(this.get('model.char.fs3_action_skills'), 0, 1, 1);
-        total = total + this.countPointsInGroup(this.get('model.char.fs3_backgrounds'), 6, 0, 1);
-        total = total + this.countPointsInGroup(this.get('model.char.fs3_languages'), 5, 0, 1);
+        total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_action_skills'), 0, 1, 1);
+        total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_backgrounds'), 6, 0, 1);
+        total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_languages'), 5, 0, 1);
         return total;
-    }.property('model.char.fs3_backgrounds.@each.rating', 'model.char.fs3_action_skills.@each.rating', 'model.char.fs3_languages.@each.rating'),
+    }.property('model.char.fs3.fs3_backgrounds.@each.rating', 'model.char.fs3.fs3_action_skills.@each.rating', 'model.char.fs3.fs3_languages.@each.rating'),
     
     actionPoints: function() {
         let total = 0;
-        total = total + this.countPointsInGroup(this.get('model.char.fs3_action_skills'), 0, 1, 1);
+        total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_action_skills'), 0, 1, 1);
         return total;
-    }.property('model.char.fs3_action_skills.@each.rating'),
+    }.property('model.char.fs3.fs3_action_skills.@each.rating'),
      
     checkLimits: function(list, limits, title) {
         for (var high_rating in limits) {
@@ -115,8 +115,8 @@ export default Controller.extend({
     validateChar: function() {
         this.set('charErrors', []);
 
-        this.checkLimits(this.get('model.char.fs3_action_skills'), this.get('model.cgInfo.fs3.skill_limits'), 'action skills');
-        this.checkLimits(this.get('model.char.fs3_attributes'), this.get('model.cgInfo.fs3.attr_limits'), 'attributes');
+        this.checkLimits(this.get('model.char.fs3.fs3_action_skills'), this.get('model.cgInfo.fs3.skill_limits'), 'action skills');
+        this.checkLimits(this.get('model.char.fs3.fs3_attributes'), this.get('model.cgInfo.fs3.attr_limits'), 'attributes');
         
         let totalAttrs = this.get('attrPoints');
         let totalSkills = this.get('skillPoints');
@@ -143,7 +143,7 @@ export default Controller.extend({
     
     actions: {
         addBackgroundSkill() {
-            this.get('model.char.fs3_backgrounds').pushObject( Ember.Object.create( { name: "Enter Skill Name" , rating: 1, rating_name: 'Interest' }) );  
+            this.get('model.char.fs3.fs3_backgrounds').pushObject( Ember.Object.create( { name: "Enter Skill Name" , rating: 1, rating_name: 'Interest' }) );  
             this.validateChar();
         },
         
