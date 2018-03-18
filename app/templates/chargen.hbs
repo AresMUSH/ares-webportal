@@ -78,7 +78,7 @@
                      <div class="col-sm-9">
                          {{#if (eq key 'gender') }}
                              
-                             {{#power-select selected=model.char.demographics.gender options=genders onchange=(action "genderChanged") as |gender|}}
+                             {{#power-select selected=model.char.demographics.gender searchField="value" options=genders onchange=(action "genderChanged") as |gender|}}
                                {{gender.value}}
                              {{/power-select}}
                              
@@ -101,9 +101,14 @@
                               <b>{{group.name}}:</b>                               
                       </div>
                       <div class="col-sm-9">
-                      {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') onchange=(action "groupChanged" key) as |group|}}
+                          
+                      {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
+                        {{input type="text" size=50 value=group.value}}
+                      {{else}}
+                        {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" onchange=(action "groupChanged" key) as |group|}}
                         {{group.value}} {{if group.desc '-'}} {{group.desc}}
                       {{/power-select}}
+                      {{/if}}
                          <p class="cg-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
                          
                       </div>
@@ -138,8 +143,8 @@
                  <p class="cg-tip">Attributes represent basic abilities that everyone has to some extent. Attributes boost related skills, and come into play when no skill directly applies.  See <a href="http://aresmush.com/fs3/fs3-3/chargen/#attributes">FS3 Attributes</a> for details.</p>
      
                  
-                 {{#each model.char.fs3_attributes as |att|}}
-                 {{#fs3-attrbox rating=att.rating ratingName=att.rating_name updated=(action "abilityChanged")}}
+                 {{#each model.char.fs3.fs3_attributes as |att|}}
+                 {{#fs3-attrbox rating=att.rating ratingName=att.rating_name maxRating=model.cgInfo.fs3.max_attr_rating  updated=(action "abilityChanged")}}
                      <b>{{att.name}}</b> - {{att.desc}}
                  {{/fs3-attrbox}}
                  {{/each}}
@@ -158,8 +163,8 @@
 
                  <p class="cg-tip">Action Skills represent your ability in areas deemed important for gameplay. See <a href="http://aresmush.com/fs3/fs3-3/chargen/#action-skills">FS3 Action Skills</a> for details.</p>
                      
-                 {{#each model.char.fs3_action_skills as |skill|}}
-                 {{#fs3-actionbox rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.max_skill_rating minRating=model.cgInfo.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
+                 {{#each model.char.fs3.fs3_action_skills as |skill|}}
+                 {{#fs3-actionbox rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.fs3.max_skill_rating minRating=model.cgInfo.fs3.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
                      <b>{{skill.name}}</b> - {{skill.desc}}
                  {{/fs3-actionbox}}
                  {{/each}}
@@ -181,7 +186,7 @@
                  <p class="cg-tip">Background Skills represent arts, sports, hobbies, professions and any other skills not covered by Action Skills.  Background Skills are free-form, so there is no specific list. You can pick anything from Singing to Underwater Basketweaving. See <a href="http://aresmush.com/fs3/fs3-3/chargen/#background-skills">FS3 Background Skills</a> for details.  To remove a background skill, set its rating to Everyman.</p>
      
      
-                 {{#each model.char.fs3_backgrounds as |skill|}}
+                 {{#each model.char.fs3.fs3_backgrounds as |skill|}}
                  
                  {{#fs3-bgbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
                      <b>{{input type="text" value=skill.name size=50}}</b>
@@ -204,7 +209,7 @@
 
                      <p class="cg-tip">Languages represent your ability to speak and read other languages.  Languages have a descriptive rating. See <a href="http://aresmush.com/fs3/fs3-3/chargen/#languages">FS3 Languages</a> for details.  To remove a language, set its rating to Everyman.</p>
 
-                   {{#each model.char.fs3_languages as |skill|}}
+                   {{#each model.char.fs3.fs3_languages as |skill|}}
                    {{#fs3-langbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
                        <b>{{skill.name}}</b> - {{skill.desc}}
                    {{/fs3-langbox}}
