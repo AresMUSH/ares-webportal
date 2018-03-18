@@ -20,7 +20,7 @@
                 <div class="col-sm-9">
                     {{#if (eq demo.name 'Gender') }}
                         
-                        {{#power-select selected=model.char.demographics.gender options=genders onchange=(action "genderChanged") as |gender|}}
+                        {{#power-select selected=model.char.demographics.gender searchField="value" options=genders onchange=(action "genderChanged") as |gender|}}
                           {{gender.value}}
                         {{/power-select}}
                         
@@ -37,7 +37,7 @@
                 </div>
                 
                 <div class="col-sm-9">
-                    {{#power-select-multiple selected=model.gallery options=model.files onchange=(action "galleryChanged") as |file|}}
+                    {{#power-select-multiple selected=model.gallery searchField="name" options=model.files onchange=(action "galleryChanged") as |file|}}
                     {{file.name}}
                     {{/power-select-multiple}}
                 </div>
@@ -49,7 +49,7 @@
                 </div>
                 
                 <div class="col-sm-9">
-                    {{#power-select selected=model.profile_image options=model.files onchange=(action "profileImageChanged") as |file|}}
+                    {{#power-select selected=model.profile_image searchField="name" options=model.files onchange=(action "profileImageChanged") as |file|}}
                     {{file.name}}
                     {{/power-select}}
                 </div>
@@ -61,7 +61,7 @@
                 </div>
                 
                 <div class="col-sm-9">
-                    {{#power-select selected=model.profile_icon options=model.files onchange=(action "profileIconChanged") as |file|}}
+                    {{#power-select selected=model.profile_icon searchField="name" options=model.files onchange=(action "profileIconChanged") as |file|}}
                     {{file.name}}
                     {{/power-select}}
                 </div>

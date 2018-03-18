@@ -29,7 +29,20 @@
     {{{ansi-format text=model.description}}}
 </div>
 
+<hr/>
 
+{{#each model.signups as |s|}}
+ <div>
+ 
+     <p>{{char-icon-inline char=s.char}}</p>
+  
+ 
+     {{{ansi-format text=s.comment}}}
+ 
+     <hr/>
+  </div>
+{{/each}}
+    
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">
