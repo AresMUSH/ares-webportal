@@ -26,5 +26,8 @@ export default Component.extend({
                 this.set('preview', response.text);
             });
         },
+        showHelp() {
+            window.open("/help/markdown");
+        }
     }
 });

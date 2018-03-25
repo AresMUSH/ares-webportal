@@ -18,6 +18,6 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, {
     
     model: function() {
         let api = this.get('gameApi');
-        return api.request('chat');
+        return api.requestOne('chat');
     }
 });

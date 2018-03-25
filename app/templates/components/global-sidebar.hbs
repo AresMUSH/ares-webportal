@@ -57,6 +57,25 @@
 
 <div class="sidebar-box">
    <div class="sidebar-heading">
+       <h2>Recent Forum Posts <i class="fa fa-comments" aria-hidden="true"></i></h2>
+       
+   </div>
+   {{#each model.recent_forum as |post|}}
+   <p>{{post.author.name}} 
+          {{#if post.is_reply}}    
+            replied to 
+          {{else}}
+            posted 
+          {{/if}}
+          {{#link-to 'forum-topic' post.category_id post.id}}{{post.subject}}.{{/link-to}}
+   </p>
+   {{/each}}
+   <br/>
+   <p>{{#link-to 'forum'}}View Forum{{/link-to}}</p>
+</div>
+
+<div class="sidebar-box">
+   <div class="sidebar-heading">
        <h2>Recent Changes <i class="fa fa-file-alt" aria-hidden="true"></i></h2>
        
    </div>

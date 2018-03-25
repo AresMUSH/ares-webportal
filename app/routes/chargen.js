@@ -13,7 +13,9 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, {
         
         return RSVP.hash({
             char: api.requestOne('chargenChar'),
-            cgInfo: api.requestOne('chargenInfo')})
+            cgInfo: api.requestOne('chargenInfo'),
+            app: this.modelFor('application') 
+            })
             .then((model) => Ember.Object.create(model));
     }
 });

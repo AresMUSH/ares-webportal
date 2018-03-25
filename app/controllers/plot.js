@@ -10,7 +10,7 @@ export default Controller.extend(AuthenticatedController, {
         delete() {
             let api = this.get('gameApi');
             this.set('confirmDelete', false);
-            api.requestOne('deletePlot', { id: this.get('model.id')})
+            api.requestOne('deletePlot', { id: this.get('model.plot.id')})
             .then( (response) => {
                 if (response.error) {
                     return;

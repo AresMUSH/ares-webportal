@@ -8,28 +8,25 @@ export default Controller.extend({
     selectedChannel: '',
     chatMessage: '',
     
-    appendChatMessage: function(channel, message) {
-        let channelKey = channel.toLowerCase();
-        let messages = this.get(`model.channels.${channelKey}.messages`);
-        messages.pushObject(message);  
-    },
-    
     onChatMessage: function(msg) {
         let splitMsg = msg.split('|');
         let channelKey = splitMsg[0];
         let message = splitMsg[1];
         
-        this.appendChatMessage(channelKey, message);
-        this.get('favicon').changeFavicon(true);                    
-                
-        if (channelKey === this.get('selectedChannel').toLowerCase()) {
-            this.scrollChatWindow();
-        }
-        else {
-            let messageCount = this.get(`model.channels.${channelKey}.new_messages`) || 0;
-            this.set(`model.channels.${channelKey}.new_messages`, messageCount + 1);
-        }
-        this.get('gameSocket').notify('New chat activity!');
+        this.get('gameApi').requestOne('chat').then( response => {
+            this.get('favicon').changeFavicon(true);                    
+            this.set(`model.channels.${channelKey}.messages`, response.get(`channels.${channelKey}.messages`))
+            this.set(`model.channels.${channelKey}.who`, response.get(`channels.${channelKey}.who`))
+            if (channelKey === this.get('selectedChannel').toLowerCase()) {
+                this.scrollChatWindow();
+            }
+            else {
+                let messageCount = this.get(`model.channels.${channelKey}.new_messages`) || 0;
+                this.set(`model.channels.${channelKey}.new_messages`, messageCount + 1);
+            }
+            this.get('gameSocket').notify('New chat activity!');
+            
+        });                
     },
     
     scrollChatWindow: function() {
