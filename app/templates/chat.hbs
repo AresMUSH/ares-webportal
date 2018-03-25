@@ -23,7 +23,8 @@
 
 {{#if (eq channel.name selectedChannel)}}
         {{#each channel.messages as |message|}}
-        {{{ansi-format text=message}}}
+            <div class="cg-tip"><i class="fa fa-clock"></i> {{message.timestamp}}</div>
+            {{{ansi-format text=message.message}}}
         {{/each}}
 {{/if}}
 
@@ -31,6 +32,36 @@
 </div>
 
 {{#if selectedChannel}}
+
+<div class="panel panel-default">
+    <h4>Who's On {{selectedChannel}}</h4>
+    
+    {{#each-in model.channels as |key channel|}}
+
+    {{#if (eq channel.name selectedChannel)}}
+            {{#each channel.who as |who|}}
+             <div style="float:left;padding:15px;">
+                 {{#link-to "char" who.name}}
+                     {{#if who.icon}}
+                     <img class="small-profile-icon" src="/game/uploads/{{who.icon}}" />
+                     {{else}}
+                     <img class="small-profile-icon" src="/game/uploads/theme_images/noicon.png" />
+                     {{/if}}
+                 {{/link-to}}
+
+                 {{#link-to "char" who.name}} 
+                     {{who.name}} 
+                     {{#if who.muted}}<i class="fa fa-microphone-slash"></i>{{/if}}
+                 
+                 {{/link-to}}
+            </div>
+                 
+            {{/each}}
+    {{/if}}
+
+    {{/each-in}}
+    <div class="clearfix"></div>
+</div>
 
     {{markdown-editor text=chatMessage rows=3 onEnter=(action "send")}}
     
