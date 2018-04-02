@@ -1,6 +1,10 @@
-{{search-box model=model}}
+{{#if hide}}
+&nbsp;
+{{else}}
+
+{{search-box model=model boxStyle=boxStyle}}
     
-<div class="sidebar-box">
+<div class="sidebar-box {{boxStyle}}">
   <div class="sidebar-heading">
       <h2>Game Status <i class="fa fa-video" aria-hidden="true"></i></h2>
   </div>
@@ -26,7 +30,7 @@
     
     
 {{#if (not model.game.disabled_plugins.events)}}
-<div class="sidebar-box">
+<div class="sidebar-box {{boxStyle}}">
   <div class="sidebar-heading">
       <h2>Upcoming Events <i class="fa fa-calendar" aria-hidden="true"></i></h2>
   </div>
@@ -42,7 +46,7 @@
 
 
 
-<div class="sidebar-box">
+<div class="sidebar-box {{boxStyle}}">
    <div class="sidebar-heading">
        <h2>Recent Scenes <i class="fa fa-book" aria-hidden="true"></i></h2>
        
@@ -55,7 +59,7 @@
    <p>{{#link-to 'scenes'}}All Scenes{{/link-to}}</p>
 </div>
 
-<div class="sidebar-box">
+<div class="sidebar-box {{boxStyle}}">
    <div class="sidebar-heading">
        <h2>Recent Forum Posts <i class="fa fa-comments" aria-hidden="true"></i></h2>
        
@@ -74,7 +78,7 @@
    <p>{{#link-to 'forum'}}View Forum{{/link-to}}</p>
 </div>
 
-<div class="sidebar-box">
+<div class="sidebar-box {{boxStyle}}">
    <div class="sidebar-heading">
        <h2>Recent Changes <i class="fa fa-file-alt" aria-hidden="true"></i></h2>
        
@@ -92,3 +96,4 @@
    
 </div>
 
+{{/if}}
