@@ -112,10 +112,9 @@
                       
                       Wiki <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li>{{#link-to 'wiki-page' "home"}}Home{{/link-to}}</li>
-                        <li>{{#link-to 'wiki-page' "getting-started"}}Getting Started{{/link-to}}</li>
-                        <li>{{#link-to 'wiki-page' "policies"}}Policies{{/link-to}}</li>
-                        <li>{{#link-to 'wiki-page' "theme"}}Theme{{/link-to}}</li>
+                        {{#each model.wiki_nav as |page|}}
+                            <li>{{#link-to 'wiki-page' page.url}}{{page.heading}}{{/link-to}}</li>
+                        {{/each}}
                         <li><hr></li>
                         <li>{{#link-to 'wiki-create'}}Create New Page{{/link-to}}</li>
                         <li>{{#link-to 'wiki-all'}}All Pages{{/link-to}}</li>

@@ -40,19 +40,32 @@
      <div class="body-wrap">
  
        <div class="row">
-         <div class="col-md-9 body-container">
-           {{flash-messages}}
-           {{outlet}}
-         </div>
-                
+         {{#if (not hideSidebar)}}
+             {{#if model.left_sidebar}}
+             <div class="col-md-3">
+               {{global-sidebar model=sidebar boxStyle="sidebar-box-left"}}
+             </div>
+             {{/if}}
+        {{/if}}
+         
          {{#if hideSidebar}}
-         <div class="col-md-3">
-         &nbsp;
-         </div>
+             <div class="col-md-12 body-container">
+               {{flash-messages}}
+               {{outlet}}
+             </div>
          {{else}}
-         <div class="col-md-3">
-             {{global-sidebar model=sidebar}}
-         </div>
+             <div class="col-md-9 body-container">
+               {{flash-messages}}
+               {{outlet}}
+             </div>
+         {{/if}}
+                
+         {{#if (not hideSidebar)}}
+             {{#if (not model.left_sidebar)}}
+             <div class="col-md-3">
+                 {{global-sidebar model=sidebar boxStyle="sidebar-box-right"}}
+             </div>
+             {{/if}}
          {{/if}}
         </div>
      </div>
