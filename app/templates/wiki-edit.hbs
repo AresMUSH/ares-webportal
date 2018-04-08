@@ -1,6 +1,6 @@
 <h1>{{model.heading}}</h1>
 
-{{#if page.can_change_name}}
+{{#if model.can_change_name}}
     <p>
         <label for="name" class="col-xs-2 col-form-label">Page Name:</label>
         <p>{{input type="text" size=50 id="name" enter="save" value=model.name}}</p>
