@@ -4,8 +4,36 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({    
     gameApi: service(),
     flashMessages: service(),
+    newConfigKey: '',
+    configChanged: false,
+    
+    config: function() {
+        return this.get('model.config');
+    }.property('model.config', 'configChanged'),
+    
+    resetOnExit: function() {
+        this.set('newConfigKey', '');
+    },
     
     actions: {
+        
+        addNew() {
+            let key = this.get('newConfigKey');
+            let modelConfig = this.get('model.config');
+            if (modelConfig[key]) {
+                return;
+            }
+            modelConfig[key] = { key: key, lines: 3, value: '', new_value: '' };
+            this.set('model.config', modelConfig);
+            this.set('configChanged', !this.get('configChanged'));
+        },
+        
+        removeKey(key) {
+            let modelConfig = this.get('model.config');
+            delete modelConfig[key];
+            this.set('model.config', modelConfig);
+            this.set('configChanged', !this.get('configChanged'));
+        },
         
         save() {
             let api = this.get('gameApi');
