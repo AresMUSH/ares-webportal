@@ -66,7 +66,7 @@
                  
                  <div class="form-group row">
                      <div class="col-sm-3">
-                             <b>Full Name:</b> 
+                             <b>Full Name</b> 
                      </div>
                      <div class="col-sm-9">
                              {{input type="text" size=50 value=model.char.fullname}}
@@ -101,15 +101,15 @@
                   {{#each-in model.char.groups as |key group|}}
                   <div class="form-group row">
                       <div class="col-sm-3">
-                              <b>{{group.name}}:</b>                               
+                              <b>{{group.name}}</b>                               
                       </div>
                       <div class="col-sm-9">
                           
                       {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
                         {{input type="text" size=50 value=group.value}}
                       {{else}}
-                        {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" onchange=(action "groupChanged" key) as |group|}}
-                        {{group.value}} {{if group.desc '-'}} {{group.desc}}
+                        {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" onchange=(action "groupChanged" key) as |g|}}
+                        {{g.value}} {{if g.desc '-'}} {{g.desc}}
                       {{/power-select}}
                       {{/if}}
                          <p class="cg-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
