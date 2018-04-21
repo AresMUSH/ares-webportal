@@ -44,10 +44,12 @@
      <!-- Nav tabs -->
      <ul class="nav nav-tabs" role="tablist">
        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
-       <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>     
+       <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>   
+       
+         {{model.char.reset_needed}}
        
         {{#if (not model.app.game.disabled_plugins.fs3skills)}}          
-            {{#if model.char.reset_needed}}
+            {{#if model.char.fs3.reset_needed}}
            <li role="presentation"><a href="#fs3reset" aria-controls="fs3reset" role="tab" data-toggle="tab">Abilities</a></li>
            {{else}}
            <li role="presentation"><a href="#fs3attrs" aria-controls="fs3attrs" role="tab" data-toggle="tab">Attributes</a></li>
@@ -123,7 +125,7 @@
             </div>
 
         {{#if (not model.app.game.disabled_plugins.fs3skills)}}
-            {{#if model.char.reset_needed}}
+            {{#if model.char.fs3.reset_needed}}
              <div role="tabpanel" class="tab-pane" id="fs3reset">
                 <p>Resetting your abilities will set you up with default attribute and skill values.  Your other character information will be saved.</p>
             
