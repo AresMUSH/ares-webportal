@@ -44,10 +44,12 @@
      <!-- Nav tabs -->
      <ul class="nav nav-tabs" role="tablist">
        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
-       <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>     
+       <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>   
+       
+         {{model.char.reset_needed}}
        
         {{#if (not model.app.game.disabled_plugins.fs3skills)}}          
-            {{#if model.char.reset_needed}}
+            {{#if model.char.fs3.reset_needed}}
            <li role="presentation"><a href="#fs3reset" aria-controls="fs3reset" role="tab" data-toggle="tab">Abilities</a></li>
            {{else}}
            <li role="presentation"><a href="#fs3attrs" aria-controls="fs3attrs" role="tab" data-toggle="tab">Attributes</a></li>
@@ -66,7 +68,7 @@
                  
                  <div class="form-group row">
                      <div class="col-sm-3">
-                             <b>Full Name:</b> 
+                             <b>Full Name</b> 
                      </div>
                      <div class="col-sm-9">
                              {{input type="text" size=50 value=model.char.fullname}}
@@ -101,15 +103,15 @@
                   {{#each-in model.char.groups as |key group|}}
                   <div class="form-group row">
                       <div class="col-sm-3">
-                              <b>{{group.name}}:</b>                               
+                              <b>{{group.name}}</b>                               
                       </div>
                       <div class="col-sm-9">
                           
                       {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
                         {{input type="text" size=50 value=group.value}}
                       {{else}}
-                        {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" onchange=(action "groupChanged" key) as |group|}}
-                        {{group.value}} {{if group.desc '-'}} {{group.desc}}
+                        {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" onchange=(action "groupChanged" key) as |g|}}
+                        {{g.value}} {{if g.desc '-'}} {{g.desc}}
                       {{/power-select}}
                       {{/if}}
                          <p class="cg-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
@@ -123,7 +125,7 @@
             </div>
 
         {{#if (not model.app.game.disabled_plugins.fs3skills)}}
-            {{#if model.char.reset_needed}}
+            {{#if model.char.fs3.reset_needed}}
              <div role="tabpanel" class="tab-pane" id="fs3reset">
                 <p>Resetting your abilities will set you up with default attribute and skill values.  Your other character information will be saved.</p>
             

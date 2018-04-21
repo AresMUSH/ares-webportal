@@ -11,7 +11,6 @@ export default Controller.extend({
     onChatMessage: function(msg) {
         let splitMsg = msg.split('|');
         let channelKey = splitMsg[0];
-        let message = splitMsg[1];
         
         this.get('gameApi').requestOne('chat').then( response => {
             this.get('favicon').changeFavicon(true);                    
