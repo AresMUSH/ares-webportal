@@ -20,9 +20,16 @@
       
    {{#if model.can_edit}}
         {{#link-to 'wiki-edit' model.name class="btn btn-primary"}}Edit{{/link-to}} 
+   {{else}}
+      <button class="btn btn-primary" disabled=true>Edit</button>
    {{/if}} 
    
-   </div>
+       </div>
+       
+       {{#if model.lock_info}}
+       <div class="alert alert-warning">This page is locked by {{model.lock_info.locked_by}}.  Their lock will expire on {{model.lock_info.time}} or when they're done editing.</div>
+       {{/if}}
+       
   </div>
 </div>
 
