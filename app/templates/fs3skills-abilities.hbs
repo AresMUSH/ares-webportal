@@ -94,5 +94,27 @@
 </tbody>
 </table>
 
+{{#if model.use_advantages}}
+<h2>Advantages</h2>
+
+{{{ansi-format text=model.advantages_blurb}}}
+
+<table class="table table-striped">
+
+<thead>
+    <th>Advantage</th>
+    <th>Description</th>
+</thead>
+
+<tbody>
+{{#each model.advantages as |ability| }}
+<tr>
+    <td>{{ability.name}}</td> 
+    <td>{{ability.description}}</td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+{{/if}}
 
 {{outlet}}

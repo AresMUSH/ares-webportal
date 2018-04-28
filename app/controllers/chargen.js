@@ -72,6 +72,7 @@ export default Controller.extend({
             fs3_action_skills: this.createAbilityHash(this.get('model.char.fs3.fs3_action_skills')),
             fs3_backgrounds: this.createAbilityHash(this.get('model.char.fs3.fs3_backgrounds')),
             fs3_languages: this.createAbilityHash(this.get('model.char.fs3.fs3_languages')),
+            fs3_advantages: this.createAbilityHash(this.get('model.char.fs3.fs3_advantages')),
             fs3_specialties: specialties
         };
     }, 
@@ -86,10 +87,11 @@ export default Controller.extend({
     skillPoints: function() {
         let total = 0;
         total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_action_skills'), 0, 1, 1);
-        total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_backgrounds'), 6, 0, 1);
-        total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_languages'), 5, 0, 1);
+        total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_backgrounds'), this.get('model.cgInfo.fs3.free_backgrounds'), 0, 1);
+        total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_languages'), this.get('model.cgInfo.fs3.free_languages'), 0, 1);
+        total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_advantages'), 0, 0, this.get('model.cgInfo.fs3.advantages_cost'));
         return total;
-    }.property('model.char.fs3.fs3_backgrounds.@each.rating', 'model.char.fs3.fs3_action_skills.@each.rating', 'model.char.fs3.fs3_languages.@each.rating'),
+    }.property('model.char.fs3.fs3_backgrounds.@each.rating', 'model.char.fs3.fs3_action_skills.@each.rating', 'model.char.fs3.fs3_languages.@each.rating', 'model.char.fs3.fs3_advantages.@each.rating'),
     
     actionPoints: function() {
         let total = 0;
