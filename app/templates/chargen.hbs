@@ -56,6 +56,9 @@
            <li role="presentation"><a href="#fs3action" aria-controls="fs3action" role="tab" data-toggle="tab">Action Skills</a></li>
            <li role="presentation"><a href="#fs3bg" aria-controls="fs3bg" role="tab" data-toggle="tab">Background Skills</a></li>
            <li role="presentation"><a href="#fs3lang" aria-controls="fs3lang" role="tab" data-toggle="tab">Languages</a></li>
+           {{#if model.char.fs3.use_advantages}}
+       <li role="presentation"><a href="#fs3adv" aria-controls="fs3adv" role="tab" data-toggle="tab">Advantages</a></li>
+            {{/if}}
        
            {{/if}}
          {{/if}}
@@ -146,7 +149,7 @@
                        </div>
                    <div class="panel-body">
      
-                     <p class="cg-tip">Attributes represent basic abilities that everyone has to some extent. Attributes boost related skills, and come into play when no skill directly applies.  See <a href="http://aresmush.com/fs3/fs3-3/chargen/#attributes">FS3 Attributes</a> for details.</p>
+                     <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.attrs_blurb}}}</p>
      
                  
                      {{#each model.char.fs3.fs3_attributes as |att|}}
@@ -167,7 +170,7 @@
                        </div>
                    <div class="panel-body">
 
-                     <p class="cg-tip">Action Skills represent your ability in areas deemed important for gameplay. See <a href="http://aresmush.com/fs3/fs3-3/chargen/#action-skills">FS3 Action Skills</a> for details.</p>
+                     <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.action_blurb}}}</p>
                      
                      {{#each model.char.fs3.fs3_action_skills as |skill|}}
                      {{#fs3-actionbox rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.fs3.max_skill_rating minRating=model.cgInfo.fs3.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
@@ -189,7 +192,7 @@
                        </div>
                    <div class="panel-body">
      
-                     <p class="cg-tip">Background Skills represent arts, sports, hobbies, professions and any other skills not covered by Action Skills.  Background Skills are free-form, so there is no specific list. You can pick anything from Singing to Underwater Basketweaving. See <a href="http://aresmush.com/fs3/fs3-3/chargen/#background-skills">FS3 Background Skills</a> for details.  To remove a background skill, set its rating to Everyman.</p>
+                     <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.background_blurb}}} To remove a background skill, set its rating to Everyman.</p>
      
      
                      {{#each model.char.fs3.fs3_backgrounds as |skill|}}
@@ -213,7 +216,7 @@
                      <div class="panel-body">
 
 
-                         <p class="cg-tip">Languages represent your ability to speak and read other languages.  Languages have a descriptive rating. See <a href="http://aresmush.com/fs3/fs3-3/chargen/#languages">FS3 Languages</a> for details.  To remove a language, set its rating to Everyman.</p>
+                         <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.language_blurb}}} To remove a language, set its rating to Everyman.</p>
 
                        {{#each model.char.fs3.fs3_languages as |skill|}}
                        {{#fs3-langbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
@@ -224,6 +227,28 @@
                      </div>
                    </div>
                  </div>
+                 
+                 <div role="tabpanel" class="tab-pane" id="fs3adv">
+           
+                     <div class="panel panel-default">
+                         <div class="panel-heading">
+                             Advantages
+                         </div>
+                       <div class="panel-body">
+
+
+                           <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.advantages_blurb}}} To remove an advantage, set its rating to Everyman.</p>
+
+                         {{#each model.char.fs3.fs3_advantages as |skill|}}
+                         {{#fs3-advantagebox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
+                             <b>{{skill.name}}</b> - {{skill.desc}}
+                         {{/fs3-advantagebox}}
+                         {{/each}}
+                                  
+                       </div>
+                     </div>
+                   </div>
+                   
                    {{/if}}
                 {{/if}}
                                    

@@ -1,6 +1,6 @@
 <b>Attributes</b>
 <ul class="char-ability-list">
-{{#each char.fs3_attributes as |ability| }}
+{{#each char.fs3.attributes as |ability| }}
 <li>
   {{ability.name}}: {{ability.rating_name}}
 </li>
@@ -9,7 +9,7 @@
 
 <b>Action Skills</b>
 <ul class="char-ability-list">
-{{#each char.fs3_action_skills as |ability| }}
+{{#each char.fs3.action_skills as |ability| }}
 <li>
   {{ability.name}}: {{ability.rating_name}}
 </li>
@@ -18,7 +18,7 @@
 
 <b>Background Skills</b>
 <ul class="char-ability-list">
-{{#each char.fs3_backgrounds as |ability| }}
+{{#each char.fs3.backgrounds as |ability| }}
 <li>
   {{ability.name}}: {{ability.rating_name}}
 </li>
@@ -27,9 +27,19 @@
 
 <b>Language Skills</b>
 <ul class="char-ability-list">
-{{#each char.fs3_languages as |ability| }}
+{{#each char.fs3.languages as |ability| }}
 <li>
   {{ability.name}}: {{ability.rating_name}}
 </li>
 {{/each}}
 </ul>
+{{#if char.fs3.use_advantages}}
+<b>Advantages</b>
+<ul class="char-ability-list">
+{{#each char.fs3.advantages as |ability| }}
+<li>
+  {{ability.name}}: {{ability.rating_name}}
+</li>
+{{/each}}
+</ul>
+{{/if}}
