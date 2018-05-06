@@ -12,6 +12,19 @@ export default Controller.extend({
     
     actions: {
         
+        cancel() {
+            let api = this.get('gameApi');
+            
+            api.requestOne('editWikiCancel', { id: this.get('model.id') })
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.transitionToRoute('wiki-page',                          
+                          this.get('model.name'));
+            });
+        },
+        
         preview() {
             let api = this.get('gameApi');
             
