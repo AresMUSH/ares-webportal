@@ -2,7 +2,7 @@
             <img src="/game/uploads/theme_images/jumbotron.png" />
             {{{ansi-format text=model.game.website_welcome}}}
             
-            <p>This is the <b>Web Portal</b>, which lets you interact with the game from a web browser.  You can {{#link-to 'chargen'}}create your character{{/link-to}} online, view and edit {{#link-to 'characters'}}character profiles{{/link-to}}, browse the game's {{#link-to 'wiki'}}wiki{{/link-to}}, read {{#link-to 'scenes'}}scene logs{{/link-to}} and more!</p>
+            <p>{{model.game.name}} is a MUSH - a multi-player text-based storytelling game.  New to MUSHing?  Check out the <a href="http://aresmush.com/mush-101" target="_blank">MUSH 101 Tutorial</a>.  This is the <b>Web Portal</b>, which lets you interact with the game from a web browser.  You can {{#link-to 'chargen'}}create your character{{/link-to}} online, view and edit {{#link-to 'characters'}}character profiles{{/link-to}}, browse the game's {{#link-to 'wiki'}}wiki{{/link-to}}, read {{#link-to 'scenes'}}scene logs{{/link-to}} and more!</p>
         </div>
         
         
@@ -21,7 +21,7 @@
             <div class="sidebar-heading">
                 <h2>Play with a Client <i class="fa fa-desktop" aria-hidden="true"></i></h2>
             </div>
-            <p>Connect to the game via your favorite MU client at <b>{{model.game.host}} port {{model.game.port}}</b>.  AresMUSH works well with <a href="http://www.potatomushclient.com/">Potato</a>.</p>
+            <p>Connect to the game via your favorite <a href="https://aresmush.com/clients/" target="_blank">MU client</a> at <b>{{model.game.host}} port {{model.game.port}}</b>.</p>
 
         </div>
       </div>
