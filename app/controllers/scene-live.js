@@ -22,6 +22,7 @@ export default Controller.extend(AuthenticatedController, {
     
     setupCallback: function() {
         let self = this;
+        
         this.get('gameSocket').set('sceneCallback', function(scene) {
             self.onSceneActivity(scene) } );
     },

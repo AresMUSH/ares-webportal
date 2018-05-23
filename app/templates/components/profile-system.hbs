@@ -14,7 +14,9 @@
   
  
   {{#if (not game.disabled_plugins.fs3skills)}}
+     {{#if char.fs3.show_sheet}}
       <li><a data-toggle="tab" href="#systemsheet">Sheet</a></li>
+      {{/if}}
   {{/if}}
 
       <li><a data-toggle="tab" href="#systemawards">Awards</a></li>

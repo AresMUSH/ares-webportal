@@ -24,7 +24,7 @@
         <div class="col col-xs-12">
             <div class="pull-right">
                 
-              {{#link-to 'wiki-page' model.name class="btn btn-default"}}Cancel{{/link-to}} 
+                <button class="btn btn-default" {{action 'cancel'}}>Cancel</button>
                 <button class="btn btn-primary" {{action 'save'}}>Save</button>
         </div>
       </div>

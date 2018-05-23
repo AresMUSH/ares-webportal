@@ -7,7 +7,13 @@ export default Service.extend({
     routing: service('-routing'),
     
     serverUrl(route) {
-        let base = "http://" + aresconfig.host + ":" + aresconfig.api_port;
+        var base;
+        if (aresconfig.use_api_proxy) {
+            base = "http://" + aresconfig.host + ":" + aresconfig.web_portal_port + "/api";
+        } 
+        else {
+            base = "http://" + aresconfig.host + ":" + aresconfig.api_port;
+        }
         if (route) {
             return base + "/" + route;
         } else {

@@ -10,7 +10,7 @@ export default Controller.extend({
     }.property('model'),
     
     scenePrivacyValues: function() { 
-        return [ 'Public', 'Private' ];
+        return [ 'Open', 'Private' ];
     }.property(),
     
     actions: {

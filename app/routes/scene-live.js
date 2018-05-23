@@ -13,6 +13,9 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
 
     activate: function() {
         this.controllerFor('scene-live').setupCallback();
+        $(window).on('beforeunload', () => {
+            this.deactivate();
+        });
     },
 
     deactivate: function() {
