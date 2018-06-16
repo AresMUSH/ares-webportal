@@ -36,15 +36,22 @@ export default Service.extend({
             socket.close();
         }
         
-        socket = new WebSocket(this.socketUrl());
-        this.set('socket', socket);
-        let self = this;
-        socket.onopen = function() {
-            self.handleConnect(self);
-        };
-        socket.onmessage = function(evt) {
-            self.handleMessage(self, evt);
-        };
+        try
+        {
+            socket = new WebSocket(this.socketUrl());
+            this.set('socket', socket);
+            let self = this;
+            socket.onopen = function() {
+                self.handleConnect(self);
+            };
+            socket.onmessage = function(evt) {
+                self.handleMessage(self, evt);
+            };
+        }
+        catch(error)
+        {
+            console.log(`Error loading websocket: ${error}`);
+        }
     },
     
     sessionStopped() {
