@@ -9,8 +9,5 @@ export default Route.extend(DefaultRoute, {
         let path = `${folder}/${name}`;
         
         return Ember.Object.create({ path: path, folder: folder, name: name });
-    },
-    titleToken: function(model) {
-        return model.name;
     }
 });

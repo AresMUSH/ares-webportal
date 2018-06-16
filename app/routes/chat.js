@@ -6,7 +6,6 @@ import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 export default Route.extend(AuthenticatedRoute, ReloadableRoute, {
     gameApi: service(),
     gameSocket: service(),
-    titleToken: 'Chat',
     
     activate: function() {
         this.controllerFor('chat').setupCallback();

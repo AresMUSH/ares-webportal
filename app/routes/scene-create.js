@@ -5,7 +5,6 @@ import RSVP from 'rsvp';
 
 export default Route.extend(AuthenticatedRoute, {
     gameApi: service(),
-    titleToken: 'Create Scene',
         
     model: function() {
         let api = this.get('gameApi');

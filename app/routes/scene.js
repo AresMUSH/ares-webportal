@@ -15,9 +15,5 @@ export default Route.extend(ReloadableRoute, DefaultRoute, {
                 } 
                 return response;
             });
-    },
-    
-    titleToken: function(model) {
-        return model.title;
     }
 });

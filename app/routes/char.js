@@ -19,9 +19,5 @@ export default Route.extend(DefaultRoute, {
             game: this.modelFor('application').game,
             sceneTypes: api.requestMany('sceneTypes') })
             .then((model) => Ember.Object.create(model));
-    },
-    
-    titleToken: function(model) {
-        return model.char.name;
     }
 });

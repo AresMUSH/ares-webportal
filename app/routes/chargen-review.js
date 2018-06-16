@@ -5,7 +5,6 @@ import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
 
 export default Route.extend(AuthenticatedRoute, RouteResetOnExit, {
     gameApi: service(),
-    titleToken: 'Character Review',
 
     model: function() {
         let api = this.get('gameApi');

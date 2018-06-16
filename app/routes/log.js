@@ -1,13 +1,10 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import AdminRoute from 'ares-webportal/mixins/admin-route';
+import DefaultRoute from 'ares-webportal/mixins/default-route';
 
-export default Route.extend(AdminRoute, {
+export default Route.extend(DefaultRoute, {
     gameApi: service(),
     session: service(),
-    titleToken: function(model) {
-        return model.name;
-    },
     
     model: function(params) {
         let api = this.get('gameApi');

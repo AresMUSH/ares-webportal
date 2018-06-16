@@ -5,7 +5,6 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(ReloadableRoute, DefaultRoute, {
     gameApi: service(),
-    titleToken: 'Files',
     
     model: function() {
         let api = this.get('gameApi');

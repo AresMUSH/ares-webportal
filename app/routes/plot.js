@@ -13,9 +13,5 @@ export default Route.extend(ReloadableRoute, DefaultRoute, {
             plot: api.requestOne('plot', { id: params['id'] }),
             sceneTypes: api.requestMany('sceneTypes') })
             .then((model) => Ember.Object.create(model));
-    },
-    
-    titleToken: function(model) {
-        return model.title;
     }
 });

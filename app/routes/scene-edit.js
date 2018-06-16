@@ -17,9 +17,5 @@ export default Route.extend(AuthenticatedRoute, {
              scenes: api.requestMany('scenes')
            })
            .then((model) => Ember.Object.create(model));
-    },
-    
-    titleToken: function(model) {
-        return model.title;
     }
 });

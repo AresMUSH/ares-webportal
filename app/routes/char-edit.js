@@ -8,9 +8,5 @@ export default Route.extend(AuthenticatedRoute, {
     model: function(params) {
         let api = this.get('gameApi');
         return api.requestOne('profileEdit', { id: params['id'] });
-    },
-    
-    titleToken: function(model) {
-        return `Edit ${model.name}`;
     }
 });

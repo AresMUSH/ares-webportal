@@ -5,7 +5,6 @@ import { inject as service } from '@ember/service';
 export default Route.extend(UnauthenticatedRouteMixin, {
     gameApi: service(),
     routeIfAlreadyAuthenticated: 'home',
-    titleToken: "Login",
 
     activate: function() {
         this.controllerFor('application').set('hideSidebar', true);

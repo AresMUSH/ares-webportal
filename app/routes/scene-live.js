@@ -7,10 +7,6 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     gameApi: service(),
     gameSocket: service(),
 
-    titleToken: function(model) {
-        return `Scene ${model.id}`;  
-    },
-
     activate: function() {
         this.controllerFor('scene-live').setupCallback();
         $(window).on('beforeunload', () => {
