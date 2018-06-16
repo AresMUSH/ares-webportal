@@ -3,6 +3,9 @@
 
 module.exports = function(environment) {
   let ENV = {
+      pageTitle: {
+            replace: true
+          },
     modulePrefix: 'ares-webportal',
     environment,
     rootURL: '/',

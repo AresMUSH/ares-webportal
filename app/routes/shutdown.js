@@ -1,5 +1,5 @@
 import Route from '@ember/routing/route';
-import AdminRoute from 'ares-webportal/mixins/admin-route';
+import RestrictedRoute from 'ares-webportal/mixins/restricted-route';
 
-export default Route.extend(AdminRoute, {
+export default Route.extend(RestrictedRoute, {
 });

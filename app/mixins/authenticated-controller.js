@@ -18,6 +18,5 @@ export default Mixin.create({
     
     isCoder: function() {
         return this.get('session.data.authenticated.is_coder');        
-    }.property('model')
-    
+    }.property('model')    
 });

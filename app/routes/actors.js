@@ -4,7 +4,6 @@ import { inject as service } from '@ember/service';
 
 export default Route.extend(DefaultRoute, {
     gameApi: service(),
-    titleToken: 'Actors',
     
     model: function() {
         let api = this.get('gameApi');

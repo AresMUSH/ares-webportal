@@ -11,9 +11,5 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
     model: function(params) {
         let api = this.get('gameApi');
         return api.requestOne('forumTopic', { topic_id: params['topic_id'] });
-    },
-    titleToken: function(model) {
-        return `${model.title} - ${model.category.name}`;
     }
-    
 });

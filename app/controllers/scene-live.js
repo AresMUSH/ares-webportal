@@ -15,6 +15,10 @@ export default Controller.extend(AuthenticatedController, {
         }
     },
     
+    pageTitle: function() {
+        return 'Scene ' + this.get('model.scene.id');
+    }.property(),
+    
     resetOnExit: function() {
         this.set('scenePose', '');
         this.set('newActivity', false);

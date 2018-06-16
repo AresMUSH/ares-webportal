@@ -9,8 +9,5 @@ export default Route.extend(DefaultRoute, {
     model: function() {
         let api = this.get('gameApi');
         return api.requestOne('events');
-    },
-    
-    titleToken: 'Events'
-    
+    }
 });
