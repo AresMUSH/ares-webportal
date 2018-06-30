@@ -16,6 +16,7 @@ Router.map(function() {
 
 
   this.route('actors');
+  this.route('area-edit', { path: '/area/:id/edit'});
   this.route('census');
   this.route('census-group', { path: '/census/:filter' });
   this.route('characters', { path: '/chars'});

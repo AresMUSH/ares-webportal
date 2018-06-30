@@ -3,24 +3,61 @@
 
 <p>The locations directory allows you to browse locations (aka 'rooms') on the game, organized by 'area'.</p>
     
-{{#each model as |a|}}
-  <hr />
+<ul class="nav nav-tabs">
+  {{#each model.areas as |a|}}
+      <li class={{a.active_class}}><a data-toggle="tab" href="#{{a.name}}">{{a.name}}</a></li>
+  {{/each}}
+  <li><a data-toggle="tab" href="#orphan-rooms">Other Rooms</a></li>
+</ul>
 
-<h2>{{a.area}}</h2>
+<div class="tab-content">
 
-<div>
-    {{#if a.map}}    
-<p>    [ {{#link-to 'map' a.map}}Map{{/link-to}} ]</p>
+{{#each model.areas as |a|}}
+  
+    <div id="{{a.name}}" class="tab-pane fade in {{a.active_class}}">
+
+    <div>
+        {{{ansi-format text=a.description}}}
     
-    {{/if}}
-     <ul> 
-        {{#each a.locations as |loc|}}
-          <li>{{#link-to 'location' loc.id}}{{loc.name}}{{/link-to}}</li>
-        {{/each}}
-    </ul>
+        {{#if (and a.map a.show_map)}}
+        <h3>Map</h3> 
+        <div class="map">
+            {{{ansi-format text=a.map.text}}}
+        </div>
+        {{/if}}
+    
+        <h3>Locations in {{a.name}}</h3>
+         <ul> 
+            {{#each a.locations as |loc|}}
+              <li>{{#link-to 'location' loc.id}}{{loc.name}}{{/link-to}}</li>
+            {{/each}}
+        </ul>
+    </div>
 
-</div>
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+            
+            
+            {{#if a.can_manage}}
+              {{#link-to 'area-edit' a.id class="btn btn-primary"}}Edit{{/link-to}}
+            {{/if}}
+          </div>
+      </div>
+    </div>
+    
+     </div>
 
 {{/each}}
+
+    <div id="orphan-rooms" class="tab-pane fade in">
+         <ul> 
+        {{#each model.orphan_rooms as |r|}}
+          <li>{{#link-to 'location' r.id}}{{r.name}}{{/link-to}}</li>
+        {{/each}}
+        </ul>
+    </div>
+
+</div>
 
 {{outlet}}
