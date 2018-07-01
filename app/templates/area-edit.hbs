@@ -10,18 +10,6 @@
 
 
 {{#link-to 'locations' class="btn btn-default"}}Cancel{{/link-to}}
-<button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
 <button {{action "edit"}} class="btn btn-primary">Save</button>
 {{flash-messages}}
 
-{{#bs-modal-simple
-    title="Confirm Delete"
-    closeTitle="Cancel"
-    submitTitle="Confirm"
-    size=null
-    fade=false
-    open=confirmDelete
-    onSubmit=(action "delete")
-    onHide=(action (mut confirmDelete) null)}}
-    You're about to delete area {{model.name}}. This cannot be undone.  Are you sure?
-  {{/bs-modal-simple}}

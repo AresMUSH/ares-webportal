@@ -2,62 +2,66 @@
 <h1>Locations</h1>
 
 <p>The locations directory allows you to browse locations (aka 'rooms') on the game, organized by 'area'.</p>
-    
-<ul class="nav nav-tabs">
-  {{#each model.areas as |a|}}
-      <li class={{a.active_class}}><a data-toggle="tab" href="#{{a.name}}">{{a.name}}</a></li>
+  <ul>
+  {{#each model.directory as |a| }}
+      {{area-directory area=a onSelected=(action "selectArea")}}
   {{/each}}
-  <li><a data-toggle="tab" href="#orphan-rooms">Other Rooms</a></li>
-</ul>
+  </ul>
 
-<div class="tab-content">
+{{#if currentArea}}
 
-{{#each model.areas as |a|}}
-  
-    <div id="{{a.name}}" class="tab-pane fade in {{a.active_class}}">
+<div class="panel panel-default">
+    <div class="panel panel-body">
 
-    <div>
-        {{{ansi-format text=a.description}}}
-    
-        {{#if (and a.map a.show_map)}}
-        <h3>Map</h3> 
-        <div class="map">
-            {{{ansi-format text=a.map.text}}}
+        <h2>{{currentArea.name}}</h2>
+        <div>
+            {{{ansi-format text=currentArea.description}}}
         </div>
-        {{/if}}
     
-        <h3>Locations in {{a.name}}</h3>
-         <ul> 
-            {{#each a.locations as |loc|}}
-              <li>{{#link-to 'location' loc.id}}{{loc.name}}{{/link-to}}</li>
-            {{/each}}
-        </ul>
-    </div>
+            <h3>Locations in {{currentArea.name}}</h3>
+             <ul> 
+                {{#each currentArea.locations as |loc|}}
+                  <li>{{#link-to 'location' loc.id}}{{loc.name}}{{/link-to}}</li>
+                {{/each}}
+            </ul>
 
-    <div class="row">
-        <div class="col col-xs-12">
-            <div class="pull-right">
+        <div class="row">
+            <div class="col col-xs-12">
+                <div class="pull-right">
             
             
-            {{#if a.can_manage}}
-              {{#link-to 'area-edit' a.id class="btn btn-primary"}}Edit{{/link-to}}
-            {{/if}}
+                {{#if model.can_manage}}
+                  <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
+                  {{#link-to 'area-edit' currentArea.id class="btn btn-primary"}}Edit{{/link-to}}
+                {{/if}}
+              </div>
           </div>
-      </div>
+        </div>        
     </div>
-    
-     </div>
-
-{{/each}}
-
-    <div id="orphan-rooms" class="tab-pane fade in">
-         <ul> 
-        {{#each model.orphan_rooms as |r|}}
-          <li>{{#link-to 'location' r.id}}{{r.name}}{{/link-to}}</li>
-        {{/each}}
-        </ul>
-    </div>
-
 </div>
 
+
+{{/if}}
+
+
+<h2>Other Rooms</h2>
+
+<ul> 
+{{#each model.orphan_rooms as |r|}}
+  <li>{{#link-to 'location' r.id}}{{r.name}}{{/link-to}}</li>
+{{/each}}
+</ul>
+
+{{#bs-modal-simple
+    title="Confirm Delete"
+    closeTitle="Cancel"
+    submitTitle="Confirm"
+    size=null
+    fade=false
+    open=confirmDelete
+    onSubmit=(action "delete")
+    onHide=(action (mut confirmDelete) null)}}
+    You're about to delete area {{currentArea.name}}. This cannot be undone.  Are you sure?
+  {{/bs-modal-simple}}
+  
 {{outlet}}
