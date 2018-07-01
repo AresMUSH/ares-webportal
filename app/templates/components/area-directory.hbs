@@ -1,4 +1,4 @@
-<li><a {{action (action 'selectArea' area)}}>{{area.name}}</a>
+<li><a href="#" {{action (action 'selectArea' area)}}>{{area.name}}</a>
 <ul>
   {{#each area.children as |c| }}
   {{area-directory area=c  onSelected=onSelected}}

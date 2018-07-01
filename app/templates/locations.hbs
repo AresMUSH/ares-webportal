@@ -2,6 +2,11 @@
 <h1>Locations</h1>
 
 <p>The locations directory allows you to browse locations (aka 'rooms') on the game, organized by 'area'.</p>
+
+<h2>Areas</h2>
+
+<p class="hint">Select an area to view its details.</p>
+
   <ul>
   {{#each model.directory as |a| }}
       {{area-directory area=a onSelected=(action "selectArea")}}

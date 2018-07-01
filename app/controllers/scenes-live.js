@@ -7,8 +7,8 @@ export default Controller.extend(AuthenticatedController, {
     gameSocket: service(),
     newActivity: false,
     
-    onSceneActivity: function() {
-        this.set('newActivity', true);
+    onSceneActivity: function(msg) {
+        this.send('reloadModel');
     },
     
     resetOnExit: function() {
@@ -17,8 +17,8 @@ export default Controller.extend(AuthenticatedController, {
     
     setupCallback: function() {
         let self = this;
-        this.get('gameSocket').set('sceneCallback', function(scene) {
-            self.onSceneActivity(scene) } );
+        this.get('gameSocket').set('sceneCallback', function(data) {
+            self.onSceneActivity(data) } );
     },
     
     actions: {
