@@ -60,8 +60,6 @@ Router.map(function() {
   this.route('mail-message', { path: '/mail/:id'});
   this.route('mail-send');
   this.route('manage');
-  this.route('map', { path: '/map/:id' });
-  this.route('maps');
   this.route('play');
   this.route('players', { path: '/players'});
   this.route('player', { path: '/player/:id'});

@@ -4,15 +4,6 @@
 <p><b>Name:</b></p>
 <p>{{input type="text" size=50 id="name" enter="create" value=model.name}}</p>
 
-{{#if model.maps}}
-<p><b>Map:</b></p>
-<p>
-{{#power-select selected=model.map allowClear="true" searchField="name" options=model.maps onchange=(action "mapChanged") as |map|}}
-  {{map.name}}
-{{/power-select}}
-</p>
-{{/if}}
-
 <p><b>Description:</b></p>
 
 {{markdown-editor text=model.description}}

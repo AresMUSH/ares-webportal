@@ -8,15 +8,12 @@ export default Controller.extend(AuthenticatedController, {
     confirmDelete: false,
     
     actions: {
-        mapChanged: function(map) {
-            this.set('model.map', map);  
-        },
+
         edit: function() {
             let api = this.get('gameApi');
             api.requestOne('editArea', { id: this.get('model.id'),
                name: this.get('model.name'), 
-               description: this.get('model.description'),
-               map: this.get('model.map.id') }, null)
+               description: this.get('model.description') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
