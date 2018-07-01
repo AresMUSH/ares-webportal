@@ -1,25 +1,72 @@
+{{title 'Locations'}}
 <h1>Locations</h1>
 
 <p>The locations directory allows you to browse locations (aka 'rooms') on the game, organized by 'area'.</p>
+
+<h2>Areas</h2>
+
+<p class="hint">Select an area to view its details.</p>
+
+  <ul>
+  {{#each model.directory as |a| }}
+      {{area-directory area=a onSelected=(action "selectArea")}}
+  {{/each}}
+  </ul>
+
+{{#if currentArea}}
+
+<div class="panel panel-default">
+    <div class="panel panel-body">
+
+        <h2>{{currentArea.name}}</h2>
+        <div>
+            {{{ansi-format text=currentArea.description}}}
+        </div>
     
-{{#each model as |a|}}
-  <hr />
+            <h3>Locations in {{currentArea.name}}</h3>
+             <ul> 
+                {{#each currentArea.locations as |loc|}}
+                  <li>{{#link-to 'location' loc.id}}{{loc.name}}{{/link-to}}</li>
+                {{/each}}
+            </ul>
 
-<h2>{{a.area}}</h2>
-
-<div>
-    {{#if a.map}}    
-<p>    [ {{#link-to 'map' a.map}}Map{{/link-to}} ]</p>
-    
-    {{/if}}
-     <ul> 
-        {{#each a.locations as |loc|}}
-          <li>{{#link-to 'location' loc.id}}{{loc.name}}{{/link-to}}</li>
-        {{/each}}
-    </ul>
-
+        <div class="row">
+            <div class="col col-xs-12">
+                <div class="pull-right">
+            
+            
+                {{#if model.can_manage}}
+                  <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
+                  {{#link-to 'area-edit' currentArea.id class="btn btn-primary"}}Edit{{/link-to}}
+                {{/if}}
+              </div>
+          </div>
+        </div>        
+    </div>
 </div>
 
-{{/each}}
 
+{{/if}}
+
+
+<h2>Other Rooms</h2>
+
+<ul> 
+{{#each model.orphan_rooms as |r|}}
+  <li>{{#link-to 'location' r.id}}{{r.name}}{{/link-to}}</li>
+{{/each}}
+</ul>
+
+{{#bs-modal-simple
+    title="Confirm Delete"
+    closeTitle="Cancel"
+    submitTitle="Confirm"
+    size=null
+    fade=false
+    open=confirmDelete
+    onSubmit=(action "delete")
+    onHide=(action (mut confirmDelete) null)}}
+    You're about to delete area {{currentArea.name}}. This cannot be undone.  Are you sure?
+  {{/bs-modal-simple}}
+  
 {{outlet}}

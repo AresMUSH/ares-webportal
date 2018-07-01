@@ -1,13 +1,28 @@
+{{title model.name}}
 <h1>{{model.area}}{{if model.area ' - ' ''}}{{model.name}}</h1>
 
 {{{ansi-format text=model.description}}}
 
-<blockquote>
-    To start a scene here, use <code>scene/start {{if model.area model.area ''}}{{if model.area '/' ''}}{{model.name}}</code> in the game.
-</blockquote>
 
 <hr/>
-<p>{{#link-to 'locations'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations{{/link-to}}</p>
+
+<p>
+    To start a scene here in-game, use <code>scene/start {{if model.area model.area ''}}{{if model.area '/' ''}}{{model.name}}</code>.
+</p>
+
+
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+            
+              {{#link-to 'scene-create' class="btn btn-primary"}}Start Scene{{/link-to}}
+          </div>
+          
+          <p>{{#link-to 'locations'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations{{/link-to}}</p>
+          
+      </div>
+    </div>
+    
 
 
 {{outlet}}

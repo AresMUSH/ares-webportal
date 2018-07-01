@@ -6,9 +6,6 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 export default Route.extend(DefaultRoute, {
     gameApi: service(),
     session: service(),
-    titleToken: function(model) {
-        return `${model.filter} Census`;
-    },
     
     model: function(params) {
         let api = this.get('gameApi');

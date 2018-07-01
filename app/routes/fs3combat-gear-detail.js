@@ -8,10 +8,5 @@ export default Route.extend(DefaultRoute, {
     model: function(params) {
         let api = this.get('gameApi');
         return api.requestOne('gearDetail', {type: params['type'], name: params['name']});
-    },
-    
-    titleToken: function(model) {
-        return model.name;
     }
-    
 });

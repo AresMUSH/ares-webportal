@@ -14,9 +14,5 @@ export default Route.extend(DefaultRoute, {
                 content: api.requestOne('wikiTag', { id: params['id'] })
             })
             .then((model) => Ember.Object.create(model));
-    },
-    
-    titleToken: function(model) {
-        return model.name;
     }
 });

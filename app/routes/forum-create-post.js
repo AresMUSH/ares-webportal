@@ -6,7 +6,6 @@ import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
 export default Route.extend(RouteResetOnExit, AuthenticatedRoute, {
     gameApi: service(),
     session: service(),
-    titleToken: "New Post",
 
     model: function(params) {
         let api = this.get('gameApi');

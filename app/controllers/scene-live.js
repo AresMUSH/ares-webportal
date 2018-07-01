@@ -6,14 +6,34 @@ export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
-    newActivity: false,
     scenePose: '',
-    onSceneActivity: function(sceneId) {
+    onSceneActivity: function(msg) {
+        let splitMsg = msg.split('|');
+        let sceneId = splitMsg[0];
+
+
         if (sceneId === this.get('model.id')) {
-            this.set('newActivity', true);
+            var data;
+            try
+            {
+               data = JSON.parse(splitMsg[1]);
+            }
+            catch(e)
+            {
+                data = null;
+            }
+            
+            if (data) {
+                this.get('model.poses').pushObject(data);
+            }
+        
             this.get('gameSocket').notify("New scene activity!");
         }
     },
+    
+    pageTitle: function() {
+        return 'Scene ' + this.get('model.id');
+    }.property(),
     
     resetOnExit: function() {
         this.set('scenePose', '');
@@ -23,8 +43,8 @@ export default Controller.extend(AuthenticatedController, {
     setupCallback: function() {
         let self = this;
         
-        this.get('gameSocket').set('sceneCallback', function(scene) {
-            self.onSceneActivity(scene) } );
+        this.get('gameSocket').set('sceneCallback', function(data) {
+            self.onSceneActivity(data) } );
     },
     
     actions: {
@@ -32,7 +52,7 @@ export default Controller.extend(AuthenticatedController, {
         addPose(poseType) {
             let pose = this.get('scenePose');
             if (pose.length === 0) {
-                this.get('flashMessages').danger("You haven't entered a pose.");
+                this.get('flashMessages').danger("You haven't entered antyhing.");
                 return;
             }
             let api = this.get('gameApi');

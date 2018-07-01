@@ -9,9 +9,5 @@ export default Route.extend(AuthenticatedRoute, {
         let api = this.get('gameApi');
         
         return api.requestOne('plot', { id: params['id'], edit_mode: true  });
-    },
-    
-    titleToken: function(model) {
-        return model.title;
     }
 });
