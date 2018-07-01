@@ -8,6 +8,10 @@ export default Controller.extend(AuthenticatedController, {
     confirmDelete: false,
     currentArea: null,
     
+    resetOnExit: function() { 
+        this.set('currentArea', null);
+    },
+    
     actions: {
 
         delete() {

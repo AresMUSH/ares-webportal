@@ -6,7 +6,6 @@ export default Controller.extend({
     consoleText: '',
     text1: '',
     text2: '',
-    windowVisible: true,
     gameSocket: service(),
     favicon: service(),
     messages: [],
@@ -44,7 +43,7 @@ export default Controller.extend({
         }, 800);           
         
 
-        if (!this.get('windowVisible')) {
+        if (!this.get('gameSocket.windowVisible')) {
             this.get('favicon').changeFavicon(true);
             if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
                 new Notification(`Activity in ${aresconfig.mu_name}!`);
@@ -93,14 +92,6 @@ export default Controller.extend({
                     self.onConnect(self);
                 };
                 
-                // Blur is the event that gets triggered when the window becomes active.
-                $(window).blur(function(){
-                    self.set('windowVisible', false);
-                });
-                $(window).focus(function(){
-                    self.set('windowVisible', true);
-                    self.get('favicon').changeFavicon(false);                    
-                });
                 this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
             
                 if (this.get('browserNotification')) {
