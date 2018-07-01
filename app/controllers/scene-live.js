@@ -8,6 +8,7 @@ export default Controller.extend(AuthenticatedController, {
     gameSocket: service(),
     favicon: service(),
     
+    showLocationSelect: false,
     scenePose: '',
     onSceneActivity: function(msg) {
         let splitMsg = msg.split('|');
@@ -84,6 +85,10 @@ export default Controller.extend(AuthenticatedController, {
         refresh() {
             this.resetOnExit();
             this.send('reloadModel');
+        },
+        
+        changeLocation() {
+            alert("Location.");
         }
     }
 });

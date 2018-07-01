@@ -23,7 +23,6 @@
 
         <div>
           
-            
         {{scene-tag scene=model}}
          
          </div>
@@ -51,8 +50,6 @@
 <div class="ansi scene-log">
     
 {{#each model.poses as |pose|}}    
-        
-        
          
         {{#if pose.is_system_pose}}
             <div class="scene-system-pose">
@@ -89,7 +86,36 @@
 
 <div class="row">
     <div class="col col-xs-12">
+        {{#if model.can_edit}}
+
+            <ul class="nav navbar-nav">    
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                  <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
+                  <ul class="dropdown-menu">
+
+                  <li><a href="#" {{action (mut showLocationSelect) true}}>Change Location</a></li>
+                  <li>{{#link-to 'scene-edit' model.id}}Edit Scene{{/link-to}}</li>
+
+                  <li role="separator" class="divider"></li>
+
+                  {{#if (not model.completed)}}
+                  <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li> 
+                  {{else}}
+                  <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li> 
+                  <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
+                  {{/if}}
+ 	
+                  </ul>
+                </li>
+            </ul>
+            
+        {{/if}}
+        
         <div class="pull-right">
+        
+        
         
         {{#if (not model.completed)}}
         <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
@@ -98,17 +124,7 @@
         {{/if}}
         
         <hr/>
-        
-        {{#if model.can_edit}}
-
-        {{#link-to 'scene-edit' model.id class="btn btn-default"}}Edit Scene{{/link-to}}
-            {{#if (not model.completed)}}
-            <button {{action 'changeSceneStatus' 'stop'}} class="btn btn-default">Stop Scene</button>
-            {{else}}
-            <button {{action 'changeSceneStatus' 'restart'}} class="btn btn-default">Restart Scene</button>
-            <button {{action 'changeSceneStatus' 'share'}} class="btn btn-default">Share Scene</button>
-            {{/if}}
-        {{/if}}
+                
         
     </div>
     </div>
@@ -119,10 +135,10 @@
 {{flash-messages}}
 
 <div class="panel panel-default">
-    <div class="panel panel-heading">
+    <div class="panel-heading">
         {{model.location.name}}
     </div>
-    <div class="panel panel-body">
+    <div class="panel-body">
         {{#if model.location.description}}
         {{{ansi-format text=model.location.description}}}
         {{/if}}
@@ -135,5 +151,17 @@
     </div>
 </div>
 
+
+{{#bs-modal-simple
+    title="Select a Location"
+    closeTitle="Cancel"
+    submitTitle="Select"
+    size=null
+    fade=false
+    open=showLocationSelect
+    onSubmit=(action "changeLocation")
+    onHide=(action (mut showLocationSelect) null)}}
+    ABC
+  {{/bs-modal-simple}}
 
 {{outlet}}

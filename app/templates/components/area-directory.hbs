@@ -1,7 +1,7 @@
-<li><a href="#" {{action (action 'selectArea' area)}}>{{area.name}}</a>
+<li>{{#link-to 'location' area.id}}{{area.name}}{{/link-to}}
 <ul>
   {{#each area.children as |c| }}
-  {{area-directory area=c  onSelected=onSelected}}
+  {{area-directory area=c}}
   {{/each}}
 </ul>
 </li>
