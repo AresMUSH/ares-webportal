@@ -6,28 +6,18 @@ export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
+    favicon: service(),
+    
     scenePose: '',
     onSceneActivity: function(msg) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];
 
-
         if (sceneId === this.get('model.id')) {
-            var data;
-            try
-            {
-               data = JSON.parse(splitMsg[1]);
-            }
-            catch(e)
-            {
-                data = null;
-            }
-            
-            if (data) {
-                this.get('model.poses').pushObject(data);
-            }
-        
-            this.get('gameSocket').notify("New scene activity!");
+            this.get('gameApi').requestOne('liveScene', { id: this.get('model.id') }).then( response => {
+                this.set(`model`, response)
+                this.get('gameSocket').notify('New scene activity!');
+            });
         }
     },
     
@@ -63,7 +53,6 @@ export default Controller.extend(AuthenticatedController, {
                     return;
                 }
                 this.resetOnExit();
-                this.send('reloadModel');
             });
         },
         

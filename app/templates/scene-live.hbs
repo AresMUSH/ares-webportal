@@ -15,7 +15,7 @@
 
         <p><b>Date:</b> {{model.icdate}}</p>
 
-        <p><b>Location:</b> {{model.location}}</p>
+        <p><b>Location:</b> {{model.location.name}}</p>
         
         {{#if model.description}}
         <p>{{{ansi-format text=model.description}}}</p>
@@ -117,6 +117,23 @@
 {{/if}}
 
 {{flash-messages}}
+
+<div class="panel panel-default">
+    <div class="panel panel-heading">
+        {{model.location.name}}
+    </div>
+    <div class="panel panel-body">
+        {{#if model.location.description}}
+        {{{ansi-format text=model.location.description}}}
+        {{/if}}
+        
+        {{#if model.location.scene_set}}
+        <div class="scene-set-pose">
+          {{{ansi-format text=model.location.scene_set}}}
+        </div>
+        {{/if}}
+    </div>
+</div>
 
 
 {{outlet}}

@@ -13,7 +13,9 @@ export default Controller.extend({
         let channelKey = splitMsg[0];
         
         this.get('gameApi').requestOne('chat').then( response => {
-            this.get('favicon').changeFavicon(true);                    
+            if (!this.get('gameSocket.windowVisible')) {
+                this.get('favicon').changeFavicon(true);
+            }
             this.set(`model.channels.${channelKey}.messages`, response.get(`channels.${channelKey}.messages`))
             this.set(`model.channels.${channelKey}.who`, response.get(`channels.${channelKey}.who`))
             if (channelKey === this.get('selectedChannel').toLowerCase()) {
