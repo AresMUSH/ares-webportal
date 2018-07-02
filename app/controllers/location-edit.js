@@ -17,7 +17,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('locations');
+                this.transitionToRoute('location', this.get('model.id'));
                 this.get('flashMessages').success('Area updated!');
             });
         }

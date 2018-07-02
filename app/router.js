@@ -16,7 +16,6 @@ Router.map(function() {
 
 
   this.route('actors');
-  this.route('area-edit', { path: '/area/:id/edit'});
   this.route('census');
   this.route('census-group', { path: '/census/:filter' });
   this.route('characters', { path: '/chars'});
@@ -54,6 +53,7 @@ Router.map(function() {
   this.route('kills');
   this.route('locations');
   this.route('location', { path: '/location/:id'});
+  this.route('location-edit', { path: '/location/:id/edit'});
   this.route('logs');
   this.route('log', { path: '/log/:file' });
   this.route('login', { path: '/login'});

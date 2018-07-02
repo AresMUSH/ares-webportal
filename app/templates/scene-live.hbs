@@ -23,7 +23,6 @@
 
         <div>
           
-            
         {{scene-tag scene=model}}
          
          </div>
@@ -48,11 +47,9 @@
 <p>{{#link-to "scenes-live"}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Scenes{{/link-to}}</p>
 
 
-<div class="ansi scene-log">
+<div class="ansi scene-log" id="live-scene-log">
     
 {{#each model.poses as |pose|}}    
-        
-        
          
         {{#if pose.is_system_pose}}
             <div class="scene-system-pose">
@@ -84,31 +81,47 @@
 
 {{#if isApproved}}
 
-    {{markdown-editor text=scenePose onEnter=(action "addPose")}}
+    {{markdown-editor text=scenePose}}
     
 
 <div class="row">
     <div class="col col-xs-12">
-        <div class="pull-right">
+        {{#if model.can_edit}}
+
+            <ul class="nav navbar-nav">    
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                  <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
+                  <ul class="dropdown-menu">
+
+                  <li>{{#link-to 'scene-edit' model.id}}Edit Scene{{/link-to}}</li>
+
+                  <li role="separator" class="divider"></li>
+
+                  {{#if (not model.completed)}}
+                  <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li> 
+                  {{else}}
+                  <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li> 
+                  <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
+                  {{/if}}
+ 	
+                  </ul>
+                </li>
+            </ul>
+            
+        {{/if}}
         
+        <div class="pull-right">
+                
         {{#if (not model.completed)}}
         <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
         <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
-        <button {{action 'addPose' 'emit'}} class="btn btn-primary">Add Emit</button>
+        <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
         {{/if}}
         
         <hr/>
-        
-        {{#if model.can_edit}}
-
-        {{#link-to 'scene-edit' model.id class="btn btn-default"}}Edit Scene{{/link-to}}
-            {{#if (not model.completed)}}
-            <button {{action 'changeSceneStatus' 'stop'}} class="btn btn-default">Stop Scene</button>
-            {{else}}
-            <button {{action 'changeSceneStatus' 'restart'}} class="btn btn-default">Restart Scene</button>
-            <button {{action 'changeSceneStatus' 'share'}} class="btn btn-default">Share Scene</button>
-            {{/if}}
-        {{/if}}
+                
         
     </div>
     </div>
@@ -119,10 +132,10 @@
 {{flash-messages}}
 
 <div class="panel panel-default">
-    <div class="panel panel-heading">
+    <div class="panel-heading">
         {{model.location.name}}
     </div>
-    <div class="panel panel-body">
+    <div class="panel-body">
         {{#if model.location.description}}
         {{{ansi-format text=model.location.description}}}
         {{/if}}
