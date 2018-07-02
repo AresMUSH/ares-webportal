@@ -18,6 +18,7 @@ export default Controller.extend(AuthenticatedController, {
             this.get('gameApi').requestOne('liveScene', { id: this.get('model.id') }).then( response => {
                 this.set(`model`, response)
                 this.get('gameSocket').notify('New scene activity!');
+                 this.scrollSceneWindow();
             });
         }
     },
@@ -38,6 +39,12 @@ export default Controller.extend(AuthenticatedController, {
             self.onSceneActivity(data) } );
     },
     
+    scrollSceneWindow: function() {
+        $('#live-scene-log').stop().animate({
+            scrollTop: $('#live-scene-log')[0].scrollHeight
+        }, 800);    
+    },
+    
     actions: {
         
         addPose(poseType) {
@@ -53,8 +60,9 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.resetOnExit();
+                this.scrollSceneWindow();
             });
+            this.resetOnExit();
         },
         
         changeSceneStatus(status) {
@@ -85,10 +93,6 @@ export default Controller.extend(AuthenticatedController, {
         refresh() {
             this.resetOnExit();
             this.send('reloadModel');
-        },
-        
-        changeLocation() {
-            alert("Location.");
         }
     }
 });
