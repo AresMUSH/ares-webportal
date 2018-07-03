@@ -6,7 +6,6 @@ import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
 
 export default Route.extend(AuthenticatedRoute, ReloadableRoute, {
     gameApi: service(),
-    titleToken: 'Character Creation',
 
     model: function() {
         let api = this.get('gameApi');

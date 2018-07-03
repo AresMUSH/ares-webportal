@@ -7,9 +7,5 @@ export default Route.extend({
     model: function(params) {
         let api = this.get('gameApi');
         return api.requestOne('player', { id: params['id'] });
-    },
-    
-    titleToken: function(model) {
-        return model.name;
     }
 });

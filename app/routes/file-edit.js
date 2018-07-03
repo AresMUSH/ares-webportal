@@ -9,8 +9,5 @@ export default Route.extend(AuthenticatedRoute, {
         let path = `${folder}/${name}`;
         
         return Ember.Object.create({ path: path, folder: folder, name: name, new_folder: folder, new_name: name });
-    },
-    titleToken: function(model) {
-        return `Edit ${model.name}`;
     }
 });

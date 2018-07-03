@@ -7,6 +7,7 @@ export default Service.extend({
     flashMessages: service(),
     favicon: service(),
     
+    windowVisible: true,
     socket: null,
     charId: null,
     chatCallback: null,
@@ -69,6 +70,16 @@ export default Service.extend({
           'data': { 'id': self.get('charId') }
         };
         let json = JSON.stringify(cmd);
+        
+        // Blur is the event that gets triggered when the window becomes active.
+        $(window).blur(function(){
+            self.set('windowVisible', false);
+        });
+        $(window).focus(function(){
+            self.set('windowVisible', true);
+            self.get('favicon').changeFavicon(false);                    
+        });
+
         return self.get('socket').send(json);
     },
     
@@ -117,7 +128,9 @@ export default Service.extend({
                     this.get('sidebarCallback')();
                 }                
                 if (this.get('sceneCallback')) {
-                    this.get('favicon').changeFavicon(true);    
+                    if (!this.get('windowVisible')) {
+                      this.get('favicon').changeFavicon(true);    
+                    }
                     this.get('sceneCallback')(data.args.message);
                 }
                 notify = false;

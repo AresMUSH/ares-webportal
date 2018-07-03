@@ -1,13 +1,67 @@
-<h1>{{model.area}}{{if model.area ' - ' ''}}{{model.name}}</h1>
+{{title model.area.name}}
+<h1>{{model.area.name}}</h1>
 
-{{{ansi-format text=model.description}}}
+<h2>Area Directory</h2>
 
-<blockquote>
-    To start a scene here, use <code>scene/start {{if model.area model.area ''}}{{if model.area '/' ''}}{{model.name}}</code> in the game.
-</blockquote>
+<a data-toggle="collapse" href="#directory"><button class="btn btn-default btn-collapse">Show/Hide Directory</button></a>
+<div id="directory" class="panel-collapse collapse">
+    <ul>
+    {{#each model.directory as |a| }}
+      {{area-directory area=a}}
+    {{/each}}
+    </ul>
+</div>
 
-<hr/>
-<p>{{#link-to 'locations'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations{{/link-to}}</p>
+<br/><br/>
 
+{{#if model.area.parent}}
+<p><b>Parent Area:</b> {{#link-to 'location' model.area.parent.id}}{{model.area.parent.name}}{{/link-to}}</p>
+{{/if}}
+
+<p>
+    {{{ansi-format text=model.area.description}}}
+</p>
+
+<h3>Areas in {{model.area.name}}</h3>
+
+<ul> 
+{{#each model.area.children as |c|}}
+  <li>{{#link-to 'location' c.id}}{{c.name}}{{/link-to}}</li>
+{{/each}}
+</ul>
+
+<h3>Locations in {{model.area.name}}</h3>
+ 
+{{#each model.area.locations as |loc|}}
+<div class="panel panel-default">
+   <div class="panel-heading">{{loc.name}}</div>
+   <div class="panel-body">{{{ansi-format text=loc.description}}}</div>
+</div>
+{{/each}}
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+    
+        {{#if model.can_manage}}
+          <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
+          {{#link-to 'location-edit' model.area.id class="btn btn-primary"}}Edit{{/link-to}}
+        {{/if}}
+      </div>
+  </div>
+</div>        
+
+{{#bs-modal-simple
+    title="Confirm Delete"
+    closeTitle="Cancel"
+    submitTitle="Confirm"
+    size=null
+    fade=false
+    open=confirmDelete
+    onSubmit=(action "delete")
+    onHide=(action (mut confirmDelete) null)}}
+    You're about to delete area {{model.area.name}}. This cannot be undone.  Are you sure?
+  {{/bs-modal-simple}}
+  
 
 {{outlet}}

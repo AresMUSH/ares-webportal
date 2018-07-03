@@ -52,6 +52,7 @@ Router.map(function() {
   this.route('job', { path: '/job/:id' });
   this.route('locations');
   this.route('location', { path: '/location/:id'});
+  this.route('location-edit', { path: '/location/:id/edit'});
   this.route('logs');
   this.route('log', { path: '/log/:file' });
   this.route('login', { path: '/login'});
@@ -59,8 +60,6 @@ Router.map(function() {
   this.route('mail-message', { path: '/mail/:id'});
   this.route('mail-send');
   this.route('manage');
-  this.route('map', { path: '/map/:id' });
-  this.route('maps');
   this.route('play');
   this.route('players', { path: '/players'});
   this.route('player', { path: '/player/:id'});

@@ -1,3 +1,4 @@
+{{title 'Chat'}}
 <h1>Chat</h1>
 
 
@@ -23,7 +24,7 @@
 
 {{#if (eq channel.name selectedChannel)}}
         {{#each channel.messages as |message|}}
-            <div class="cg-tip"><i class="fa fa-clock"></i> {{message.timestamp}}</div>
+            <div class="cg-tip">{{message.timestamp}}</div>
             {{{ansi-format text=message.message}}}
         {{/each}}
 {{/if}}

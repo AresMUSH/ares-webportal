@@ -1,3 +1,4 @@
+{{title model.heading}}
 <h1>{{model.heading}} Source</h1>
 
 <div class="panel panel-default">
@@ -21,10 +22,10 @@
 </div>
 
 <div class="panel panel-default">
-    <div class="panel panel-heading">
+    <div class="panel-heading">
         Selected Version
     </div>
-    <div class="panel panel-body">
+    <div class="panel-body">
         <pre>
         {{model.text}}
         </pre>
@@ -35,14 +36,14 @@
 {{#if model.diff}}
 
 <div class="panel panel-default">
-    <div class="panel panel-heading">
+    <div class="panel-heading">
         Compared to Previous Version
         &nbsp;
         <a data-toggle="collapse" href="#compare"><button class="btn btn-default btn-collapse">Show/Hide</button></a>
         
     </div>
     <div id="compare" class="panel-collapse collapse">
-        <div class="panel panel-body">
+        <div class="panel-body">
             {{{model.diff}}}
         </div>
     </div>

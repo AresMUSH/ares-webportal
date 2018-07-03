@@ -8,10 +8,5 @@ export default Route.extend(DefaultRoute, {
     model: function(params) {
         let api = this.get('gameApi');
         return api.requestOne('forumCategory', {category_id: params['category_id']});
-    },
-    
-    titleToken: function(model) {
-        return model.name;
     }
-    
 });

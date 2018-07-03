@@ -7,6 +7,10 @@ export default Controller.extend({
     newCombatantName: '',
     newCombatantType: 'Soldier',
     
+    pageTitle: function() {
+        return `Combat ${this.get('model.id')}`;
+    }.property(),
+    
     resetOnExit: function() {
         this.set('newCombatantName', '');
         this.set('newCombatantType', '');

@@ -16,9 +16,5 @@ export default Route.extend(DefaultRoute, {
             this.get('flashMessages').warning('That page was not found, but you can create it.');
             this.transitionTo('wiki-create', { queryParams: { title: model.title || "" }});
         }  
-    },
-    
-    titleToken: function(model) {
-        return model.heading;
-    }
+    }    
 });

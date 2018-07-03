@@ -6,14 +6,26 @@ export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
-    newActivity: false,
+    favicon: service(),
+    
+    showLocationSelect: false,
     scenePose: '',
-    onSceneActivity: function(sceneId) {
+    onSceneActivity: function(msg) {
+        let splitMsg = msg.split('|');
+        let sceneId = splitMsg[0];
+
         if (sceneId === this.get('model.id')) {
-            this.set('newActivity', true);
-            this.get('gameSocket').notify("New scene activity!");
+            this.get('gameApi').requestOne('liveScene', { id: this.get('model.id') }).then( response => {
+                this.set(`model`, response)
+                this.get('gameSocket').notify('New scene activity!');
+                 this.scrollSceneWindow();
+            });
         }
     },
+    
+    pageTitle: function() {
+        return 'Scene ' + this.get('model.id');
+    }.property(),
     
     resetOnExit: function() {
         this.set('scenePose', '');
@@ -23,8 +35,14 @@ export default Controller.extend(AuthenticatedController, {
     setupCallback: function() {
         let self = this;
         
-        this.get('gameSocket').set('sceneCallback', function(scene) {
-            self.onSceneActivity(scene) } );
+        this.get('gameSocket').set('sceneCallback', function(data) {
+            self.onSceneActivity(data) } );
+    },
+    
+    scrollSceneWindow: function() {
+        $('#live-scene-log').stop().animate({
+            scrollTop: $('#live-scene-log')[0].scrollHeight
+        }, 800);    
     },
     
     actions: {
@@ -32,7 +50,7 @@ export default Controller.extend(AuthenticatedController, {
         addPose(poseType) {
             let pose = this.get('scenePose');
             if (pose.length === 0) {
-                this.get('flashMessages').danger("You haven't entered a pose.");
+                this.get('flashMessages').danger("You haven't entered antyhing.");
                 return;
             }
             let api = this.get('gameApi');
@@ -42,9 +60,9 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.resetOnExit();
-                this.send('reloadModel');
+                this.scrollSceneWindow();
             });
+            this.resetOnExit();
         },
         
         changeSceneStatus(status) {

@@ -8,9 +8,5 @@ export default Route.extend(AuthenticatedRoute, {
     model: function(params) {
         let api = this.get('gameApi');
         return api.requestOne('wikiPage', { id: params['id'], edit_mode: true });
-    },
-    
-    titleToken: function(model) {
-        return `Edit ${model.heading}`;
     }
 });

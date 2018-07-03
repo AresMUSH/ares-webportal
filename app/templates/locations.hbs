@@ -1,25 +1,23 @@
+{{title 'Locations'}}
 <h1>Locations</h1>
 
 <p>The locations directory allows you to browse locations (aka 'rooms') on the game, organized by 'area'.</p>
-    
-{{#each model as |a|}}
-  <hr />
 
-<h2>{{a.area}}</h2>
+<h2>Area Directory</h2>
 
-<div>
-    {{#if a.map}}    
-<p>    [ {{#link-to 'map' a.map}}Map{{/link-to}} ]</p>
-    
-    {{/if}}
-     <ul> 
-        {{#each a.locations as |loc|}}
-          <li>{{#link-to 'location' loc.id}}{{loc.name}}{{/link-to}}</li>
-        {{/each}}
-    </ul>
+  <ul>
+  {{#each model.directory as |a| }}
+      {{area-directory area=a}}
+  {{/each}}
+  </ul>
 
+<h2>Other Rooms</h2>
+
+{{#each model.orphan_rooms as |r|}}
+<div class="panel panel-default">
+   <div class="panel-heading">{{r.name}}</div>
+   <div class="panel-body">{{{ansi-format text=r.description}}}</div>
 </div>
-
 {{/each}}
 
 {{outlet}}

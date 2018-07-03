@@ -1,0 +1,7 @@
+<li>{{#link-to 'location' area.id}}{{area.name}}{{/link-to}}
+<ul>
+  {{#each area.children as |c| }}
+  {{area-directory area=c}}
+  {{/each}}
+</ul>
+</li>

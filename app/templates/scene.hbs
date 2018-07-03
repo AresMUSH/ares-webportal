@@ -1,3 +1,4 @@
+{{title pageTitle}}
 <h1>{{model.icdate}} - {{model.title}}</h1>
         
 <div class="row log-wrap">
@@ -55,9 +56,11 @@
     <div class="log-participants-box">
         
     {{#each model.participants as |p|}}
+      {{#if (not p.is_ooc)}}
         <div class="profile-gallery">    
             {{char-icon char=p}}
         </div>
+      {{/if}}
     {{/each}}
     
     </div>

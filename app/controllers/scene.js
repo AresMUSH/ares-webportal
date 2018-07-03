@@ -6,6 +6,10 @@ export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     confirmDelete: false,
     
+    pageTitle: function() {
+        return `${this.get('model.icdate')} - ${this.get('model.title')}`
+    }.property(),
+    
     actions: {
         like(like) {
             let api = this.get('gameApi');

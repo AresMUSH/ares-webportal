@@ -9,10 +9,5 @@ export default Route.extend(AuthenticatedRoute, {
     model: function(params) {
         let api = this.get('gameApi');
         return api.requestOne('event', {event_id: params['event_id'], edit_mode: true });
-    },
-    
-    titleToken: function(model) {
-        return `Edit ${model.title}`;
     }
-    
 });

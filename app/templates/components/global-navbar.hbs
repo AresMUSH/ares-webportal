@@ -51,7 +51,7 @@
               <ul class="dropdown-menu">
                            
                 <li>{{#link-to "chat"}}Chat{{/link-to}}</li>
-                <li>{{#link-to "forum"}}Forums{{/link-to}}</li>
+                <li>{{#link-to "forum"}}Forum{{/link-to}}</li>
                 {{#if (not model.game.disabled_plugins.events)}}
                     <li>{{#link-to "events"}}Events{{/link-to}}</li>
                 {{/if}}
@@ -64,16 +64,16 @@
               
               Directory <span class="caret"></span></a>
               <ul class="dropdown-menu">
+                <li>{{#link-to "characters"}}Characters{{/link-to}}</li>
                 <li>{{#link-to "census"}}Census{{/link-to}}</li>
                 <li>{{#link-to "actors"}}Actors{{/link-to}}</li>   
                 {{#if model.game.roster_enabled}}             
                 <li>{{#link-to "roster"}}Roster{{/link-to}}</li>
                 {{/if}}
                 <li><hr></li>
+                <li>{{#link-to "scenes"}}Scenes{{/link-to}}</li>
+                <li>{{#link-to "plots"}}Plots{{/link-to}}</li>
                 <li>{{#link-to "locations"}}Locations{{/link-to}}</li>
-                {{#if (not model.game.disabled_plugins.maps)}}
-                <li>{{#link-to "maps"}}Maps{{/link-to}}</li>
-                {{/if}}
                 {{#if (not model.game.disabled_plugins.fs3combat)}}
                 <li>{{#link-to "combats"}}Combats{{/link-to}}</li>
                 {{/if}}
@@ -144,13 +144,11 @@
                       
                              Admin <span class="caret"></span></a>
                              <ul class="dropdown-menu">
-                               {{#if isAdmin}}
                                <li>{{#link-to 'jobs'}}Jobs{{/link-to}}</li>
                                <li>{{#link-to 'setup'}}Setup{{/link-to}}</li>
                                <li>{{#link-to 'manage'}}Manage{{/link-to}}</li>
                                <li>{{#link-to 'logs'}}Logs{{/link-to}}</li>
-                               {{/if}}
-                               
+
                                {{#if isCoder}}
                                <li>{{#link-to 'tinker'}}Tinker{{/link-to}}</li>
                                {{/if}}

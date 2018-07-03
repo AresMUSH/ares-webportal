@@ -8,9 +8,5 @@ export default Route.extend(DefaultRoute, {
     model: function(params) {
         let api = this.get('gameApi');
         return api.requestOne('wikiPageSource', { page_id: params['page_id'], version_id: params['version_id'] });
-    },
-    
-    titleToken: function(model) {
-        return `Source ${model.heading}`;
-    }
+    }    
 });
