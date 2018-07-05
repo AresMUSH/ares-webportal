@@ -10,7 +10,7 @@
                    <div class="site-title">{{#link-to 'home'}}{{mushName}}{{/link-to}}</div>
                    <div class="site-subtitle">{{mushHost}} port {{mushPort}}</div>
                </div>
-               <div class="col-md-6 col-sm-12 col-xs-12">
+               <div class="col-md-6 hidden-sm hidden-xs">
                   <div class="text-right user-bar">
                    {{#if isAuthenticated}}
                        <p>Welcome, {{currentUser.name}}.</p>
@@ -20,7 +20,7 @@
                            <span class="label label-pill label-primary" id="mailBadge">{{model.unread_mail}}</span>
                            {{/if}}
                            {{/link-to}}
-                           | <a href="/" {{action 'logout'}}>Logout</a> 
+                           | {{#link-to 'logout'}}Logout{{/link-to}}
                        </p>
                     {{else}}
                         <p>{{#link-to 'login' (query-params redirect=currentRoute)}}Login{{/link-to}}
@@ -33,7 +33,7 @@
        </div>
        
   
-        {{global-navbar model=model isAdmin=isAdmin isCoder=isCoder}}
+        {{global-navbar model=model isAdmin=isAdmin isCoder=isCoder isAuthenticated=isAuthenticated currentUser=currentUser currentRoute=currentRoute}}
     </div>
 
         

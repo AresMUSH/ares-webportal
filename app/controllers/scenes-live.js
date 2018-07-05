@@ -7,7 +7,7 @@ export default Controller.extend(AuthenticatedController, {
     gameSocket: service(),
     newActivity: false,
     
-    onSceneActivity: function(msg) {
+    onSceneActivity: function() {
         this.send('reloadModel');
     },
     

@@ -45,11 +45,5 @@ export default Controller.extend(AuthenticatedController, {
         let self = this;
         this.get('gameSocket').set('sidebarCallback', function() {
             self.onSidebarUpdate() } );
-    },
-    
-    actions: {
-        logout() {
-          this.get('session').invalidate();
-        }
-      }
+    }
 });
