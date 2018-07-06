@@ -38,17 +38,16 @@ export default Controller.extend({
         let html = ansi_up.ansi_to_html(data.args.message);
         this.get('messages').pushObject(html);
           
-        $('#console').stop().animate({
-            scrollTop: $('#console')[0].scrollHeight
-        }, 800);           
-        
-
-        if (!this.get('gameSocket.windowVisible')) {
-            this.get('favicon').changeFavicon(true);
-            if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
-                new Notification(`Activity in ${aresconfig.mu_name}!`);
-            }            
+        try {
+            $('#console').stop().animate({
+                scrollTop: $('#console')[0].scrollHeight
+            }, 800);           
         }
+        catch(error) {
+            // This happens sometimes when transitioning away from play screen.
+        }
+
+        this.get('gameSocket').notify(null);
     },
     onConnect: function(self) {
         document.getElementById("sendMsg").focus();
@@ -91,12 +90,6 @@ export default Controller.extend({
                 this.get('websocket').onopen = function() {
                     self.onConnect(self);
                 };
-                
-                this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
-            
-                if (this.get('browserNotification')) {
-                    this.get('browserNotification').requestPermission();
-                }
                 
                 this.get('keepaliveInterval', window.setInterval(function(){ self.idleKeepalive() }, idle_keepalive_ms));
 

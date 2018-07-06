@@ -25,8 +25,25 @@ export default Service.extend({
         }
     },
     
+    // Regular alert notification
     notify(msg, type = 'success') {
-        alertify.notify(msg, type, 10);
+        
+        if (this.get('windowVisible')) {
+            if (msg) {
+               alertify.notify(msg, type, 10);
+            }
+        }
+        else {
+            if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
+                this.get('favicon').changeFavicon(true);
+                try {
+                    new Notification(`Activity in ${aresconfig.game_name}!`);
+                }
+                catch(error) {
+                    // Do nothing.  Just safeguard against missing browser notification.
+                }
+            }            
+        }
     },
     
     sessionStarted(charId) {
@@ -48,6 +65,12 @@ export default Service.extend({
             socket.onmessage = function(evt) {
                 self.handleMessage(self, evt);
             };
+            
+            this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
+        
+            if (this.get('browserNotification')) {
+                this.get('browserNotification').requestPermission();
+            }
         }
         catch(error)
         {

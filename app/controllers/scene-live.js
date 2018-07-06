@@ -60,14 +60,16 @@ export default Controller.extend(AuthenticatedController, {
             let api = this.get('gameApi');
             let poseId = this.get('confirmDeleteScenePose.id');
             this.set('confirmDeleteScenePose', false);
+
+            let scenePose = this.get('model.poses').find(p => p.id === poseId);
+            this.get('model.poses').removeObject(scenePose);
+
             api.requestOne('deleteScenePose', { scene_id: this.get('model.id'),
                 pose_id: poseId })
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
-                let scenePose = this.get('model.poses').find(p => p.id === poseId);
-                this.get('model.poses').removeObject(scenePose);
             });
             this.resetOnExit();  
         },
@@ -77,6 +79,9 @@ export default Controller.extend(AuthenticatedController, {
                 this.get('flashMessages').danger("You haven't entered antyhing.");
                 return;
             }
+            scenePose.set('editActive', false);
+            scenePose.set('pose', pose);
+
             let api = this.get('gameApi');
             api.requestOne('editScenePose', { scene_id: this.get('model.id'),
                 pose_id: scenePose.id, pose: pose })
@@ -85,7 +90,6 @@ export default Controller.extend(AuthenticatedController, {
                     return;
                 }
                 scenePose.set('pose', response.pose);
-                scenePose.set('editActive', false);
             });
             this.resetOnExit();  
         },
