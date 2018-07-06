@@ -1,56 +1,28 @@
 {{title pageTitle}}
-<h1>Scene {{model.id}}
+<h1>Scene {{model.id}} - {{model.icdate}}
     {{#if model.title}}
      - {{model.title}}
      {{/if}}
-     
-     (In Progress)
  </h1>
 
-<div class="row log-wrap">
-       
-    <div class="log-box">
-       
-        <p>{{model.summary}}</p>
-
-        <p><b>Date:</b> {{model.icdate}}</p>
-
-        <p><b>Location:</b> {{model.location.name}}</p>
-        
-        {{#if model.description}}
-        <p>{{{ansi-format text=model.description}}}</p>
-        {{/if}}
-
-        <div>
-          
-        {{scene-tag scene=model}}
-         
-         </div>
-         
-    </div>
-    
-    <div class="log-participants-box">
-        
-    {{#each model.participants as |p|}}
-        <div class="profile-gallery">    
-            {{char-icon char=p}}
-        </div>
-    {{/each}}
-    
-    </div>
-    
-    <div class="clearfix"> </div>
-
-
-</div>
-
-<p>{{#link-to "scenes-live"}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Scenes{{/link-to}}</p>
-
+{{live-scene-context scene=model}}
 
 <div class="ansi scene-log" id="live-scene-log">
     
-{{#each model.poses as |pose|}}    
-         
+{{#each scenePoses as |pose|}}    
+        {{#if (and isApproved pose.can_edit)}}
+        <div class="hint pull-right">
+            {{#if pose.editActive}}
+            <a href="#" {{action 'saveScenePose' pose}}><i class="fa fa-save" aria-hidden="true"></i></a>
+            <a href="#" {{action 'cancelScenePoseEdit' pose}}><i class="fa fa-ban" aria-hidden="true"></i></a>
+            
+            {{else}}
+            <a href="#" {{action 'editScenePose' pose}}><i class="fa fa-edit" aria-hidden="true"></i></a>
+            <a href="#" {{action (mut confirmDeleteScenePose) pose}}><i class="fa fa-trash" aria-hidden="true"></i></a>
+            {{/if}}
+        </div>
+        {{/if}}
+        
         {{#if pose.is_system_pose}}
             <div class="scene-system-pose">
             {{{ansi-format text=pose.pose}}}
@@ -59,20 +31,24 @@
             <div class="scene-pose-header">		
                 {{char-icon-inline char=pose.char}}	
             </div>
-             {{#if pose.is_setpose}}
-                <div class="scene-set-pose">
-                {{{ansi-format text=pose.pose}}}
-                </div>
-            {{else if pose.is_ooc}}
-                <div class="scene-ooc-pose">
-                <span class="label label-pill label-primary"> OOC</span>	
-                {{{ansi-format text=pose.pose}}}
-                </div>
-            {{else}}        
-                <div class="scene-pose">	
+             {{#if pose.editActive}}
+                {{markdown-editor text=pose.raw_pose}}
+             {{else}}
+                 {{#if pose.is_setpose}}
+                    <div class="scene-set-pose">
                     {{{ansi-format text=pose.pose}}}
-                </div>
-            {{/if}}
+                    </div>
+                {{else if pose.is_ooc}}
+                    <div class="scene-ooc-pose">
+                    <span class="label label-pill label-primary"> OOC</span>	
+                    {{{ansi-format text=pose.pose}}}
+                    </div>
+                {{else}}        
+                    <div class="scene-pose">	
+                        {{{ansi-format text=pose.pose}}}
+                    </div>
+                {{/if}}
+             {{/if}}
         {{/if}}
 {{/each}}
     
@@ -131,22 +107,18 @@
 
 {{flash-messages}}
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        {{model.location.name}}
-    </div>
-    <div class="panel-body">
-        {{#if model.location.description}}
-        {{{ansi-format text=model.location.description}}}
-        {{/if}}
-        
-        {{#if model.location.scene_set}}
-        <div class="scene-set-pose">
-          {{{ansi-format text=model.location.scene_set}}}
-        </div>
-        {{/if}}
-    </div>
-</div>
+{{live-scene-context scene=model}}
 
+{{#bs-modal-simple
+    title="Confirm Delete"
+    closeTitle="Cancel"
+    submitTitle="Confirm"
+    size=null
+    fade=false
+    open=confirmDeleteScenePose
+    onSubmit=(action "deleteScenePose")
+    onHide=(action (mut confirmDeleteScenePose) null)}}
+    You're about to delete this scene pose. This cannot be undone.  Are you sure?
+  {{/bs-modal-simple}}
 
 {{outlet}}

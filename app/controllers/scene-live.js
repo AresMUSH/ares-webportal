@@ -8,8 +8,8 @@ export default Controller.extend(AuthenticatedController, {
     gameSocket: service(),
     favicon: service(),
     
-    showLocationSelect: false,
     scenePose: '',
+    confirmDeleteScenePose: false,
     onSceneActivity: function(msg) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];
@@ -29,7 +29,6 @@ export default Controller.extend(AuthenticatedController, {
     
     resetOnExit: function() {
         this.set('scenePose', '');
-        this.set('newActivity', false);
     },
     
     setupCallback: function() {
@@ -45,7 +44,51 @@ export default Controller.extend(AuthenticatedController, {
         }, 800);    
     },
     
+    scenePoses: function() {
+        return this.get('model.poses').map(p => Ember.Object.create(p));  
+    }.property('model.poses.@each.id'),
+    
     actions: {
+        
+        editScenePose(scenePose) { 
+            scenePose.set('editActive', true);
+        },
+        cancelScenePoseEdit(scenePose) {
+            scenePose.set('editActive', false);
+        },
+        deleteScenePose() {
+            let api = this.get('gameApi');
+            let poseId = this.get('confirmDeleteScenePose.id');
+            this.set('confirmDeleteScenePose', false);
+            api.requestOne('deleteScenePose', { scene_id: this.get('model.id'),
+                pose_id: poseId })
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                let scenePose = this.get('model.poses').find(p => p.id === poseId);
+                this.get('model.poses').removeObject(scenePose);
+            });
+            this.resetOnExit();  
+        },
+        saveScenePose(scenePose) {
+            let pose = scenePose.get('raw_pose');
+            if (pose.length === 0) {
+                this.get('flashMessages').danger("You haven't entered antyhing.");
+                return;
+            }
+            let api = this.get('gameApi');
+            api.requestOne('editScenePose', { scene_id: this.get('model.id'),
+                pose_id: scenePose.id, pose: pose })
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                scenePose.set('pose', response.pose);
+                scenePose.set('editActive', false);
+            });
+            this.resetOnExit();  
+        },
         
         addPose(poseType) {
             let pose = this.get('scenePose');
