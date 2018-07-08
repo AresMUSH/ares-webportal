@@ -2,10 +2,12 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
+import RSVP from 'rsvp';
 
 export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     gameApi: service(),
     gameSocket: service(),
+    session: service(),
 
     activate: function() {
         this.controllerFor('scene-live').setupCallback();
@@ -20,19 +22,16 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
         this.controllerFor('application').set('hideSidebar', false);
         let api = this.get('gameApi');
         let model = this.modelFor('scene-live');
-        if (model) {            
-            api.requestOne('watchScene', { id: model.id, watch: false  });
-        }
     },
 
     model: function(params) {
         let api = this.get('gameApi');
-        return api.requestOne('liveScene', { id: params['id'] })
-        .then( response => {
-            api.requestOne('watchScene', { id: params['id'], watch: true });
-            return response;
-           }
-        )
-           
+        return RSVP.hash({
+             scene: api.requestOne('liveScene', { id: params['id'] }),
+             abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }),
+             locations: api.request('sceneLocations', { id: params['id'] }),
+             my_scenes: api.requestMany('myScenes')
+           })
+           .then((model) => Ember.Object.create(model));
     }
 });
