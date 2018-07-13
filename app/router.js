@@ -56,7 +56,8 @@ Router.map(function() {
   this.route('location-edit', { path: '/location/:id/edit'});
   this.route('logs');
   this.route('log', { path: '/log/:file' });
-  this.route('login', { path: '/login'});
+  this.route('login', { path: '/login', query_params: ['redirect'] });
+  this.route('logout');
   this.route('mail');
   this.route('mail-message', { path: '/mail/:id'});
   this.route('mail-send');
@@ -77,7 +78,7 @@ Router.map(function() {
   this.route('scene', { path: '/scene/:id' } );
   this.route('scene-live', { path: '/scene-live/:id' });
   this.route('scene-edit', { path: '/scene/:id/edit' } );
-  this.route('scene-create', { path: '/scene/create' } );
+  this.route('scene-create', { path: '/scene/create', query_params: ['location'] } );
   this.route('setup');
   this.route('shutdown');
   this.route('textfile', { path: '/textfile/:file_type/:file' });

@@ -1,12 +1,5 @@
 {{title 'Admin Tasks'}}
 <h1>Admin Tasks</h1>
-
-        {{#if model.game.reboot_required}}
-            <div class="alert alert-warning">
-              <strong>Reboot Required!</strong> Your operating system is indicating that your server needs to be rebooted - probably to finish installing automatic updates.  Please reboot at your earliest convenience.
-            </div>
-        {{/if}}
-        
         <div class="alert alert-info">
             <p>This button will redeploy the website.  You need to redeploy after any website code changes.</p>
         

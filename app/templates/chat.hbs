@@ -41,7 +41,7 @@
 
     {{#if (eq channel.name selectedChannel)}}
             {{#each channel.who as |who|}}
-             <div class="chat-who-icon">
+             <div class="small-who-icon">
                  {{#link-to "char" who.name}}
                      {{#if who.icon}}
                      <img class="small-profile-icon" src="/game/uploads/{{who.icon}}" />

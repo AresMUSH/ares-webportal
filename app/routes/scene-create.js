@@ -6,7 +6,7 @@ import RSVP from 'rsvp';
 export default Route.extend(AuthenticatedRoute, {
     gameApi: service(),
         
-    model: function() {
+    model: function(params) {
         let api = this.get('gameApi');
         let appModel = this.modelFor('application');
         
@@ -14,6 +14,7 @@ export default Route.extend(AuthenticatedRoute, {
              scene: Ember.Object.create({ 
                  scene_type: 'Social',
                  privacy: 'Private',
+                 location: params['location'],
                  icdate: appModel.game.scene_start_date }),
              sceneTypes: api.requestMany('sceneTypes'),
              plots: api.requestMany('plots'),

@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import RestrictedRoute from 'ares-webportal/mixins/restricted-route';
+import RSVP from 'rsvp';
 
 export default Route.extend(RestrictedRoute, {
     gameApi: service(),
@@ -8,8 +9,6 @@ export default Route.extend(RestrictedRoute, {
 
     model: function() {
         let api = this.get('gameApi');
-        return api.requestMany('jobs');
+        return api.requestOne('jobs');
     },
-    
-    
 });

@@ -16,7 +16,10 @@
 {{#each model.orphan_rooms as |r|}}
 <div class="panel panel-default">
    <div class="panel-heading">{{r.name}}</div>
-   <div class="panel-body">{{{ansi-format text=r.description}}}</div>
+   <div class="panel-body">
+       {{{ansi-format text=r.description}}}
+       {{#link-to 'scene-create' (query-params location=loc.name_and_area) class="btn btn-default pull-right"}}Start Scene Here{{/link-to}}
+   </div>
 </div>
 {{/each}}
 

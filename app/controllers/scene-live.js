@@ -8,28 +8,43 @@ export default Controller.extend(AuthenticatedController, {
     gameSocket: service(),
     favicon: service(),
     
-    showLocationSelect: false,
     scenePose: '',
+    rollString: null,
+    confirmDeleteScenePose: false,
+    selectSkillRoll: false,
+    selectLocation: false,
+    newLocation: null,
+    
     onSceneActivity: function(msg) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];
-
-        if (sceneId === this.get('model.id')) {
-            this.get('gameApi').requestOne('liveScene', { id: this.get('model.id') }).then( response => {
-                this.set(`model`, response)
-                this.get('gameSocket').notify('New scene activity!');
-                 this.scrollSceneWindow();
-            });
+        let data = splitMsg[1];
+        
+        if (sceneId === this.get('model.scene.id')) {
+           this.get('gameApi').requestOne('liveScene', { id: this.get('model.scene.id') }).then( response => {
+             this.set(`model.scene`, response)
+             this.get('gameSocket').notify('New scene activity!');
+             this.scrollSceneWindow();
+          });
         }
+        
+        this.get('model.my_scenes').forEach(s => {
+            if (s.id === sceneId) {
+                s.set('is_unread', true);
+                this.get('gameSocket').notify('New activity in one of your other scenes!');
+            }
+        });
     },
     
     pageTitle: function() {
-        return 'Scene ' + this.get('model.id');
+        return 'Scene ' + this.get('model.scene.id');
     }.property(),
     
     resetOnExit: function() {
         this.set('scenePose', '');
-        this.set('newActivity', false);
+        this.set('rollString', null);
+        this.set('confirmDeleteScenePose', false);
+        this.set('selectSkillRoll', false)
     },
     
     setupCallback: function() {
@@ -45,7 +60,76 @@ export default Controller.extend(AuthenticatedController, {
         }, 800);    
     },
     
+    scenePoses: function() {
+        return this.get('model.scene.poses').map(p => Ember.Object.create(p));  
+    }.property('model.scene.poses.@each.id'),
+    
     actions: {
+        locationSelected(loc) {
+            this.set('newLocation', loc);  
+        },
+        changeLocation() {
+            let api = this.get('gameApi');
+            
+            let newLoc = this.get('newLocation');
+            if (!newLoc) {
+                this.get('flashMessages').danger("You haven't selected a location.");
+                return;
+            }
+            this.set('selectLocation', false);
+            this.set('newLocation', null);
+
+            api.requestOne('changeSceneLocation', { scene_id: this.get('model.scene.id'),
+                location: newLoc })
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+            });
+        },
+        
+        editScenePose(scenePose) { 
+            scenePose.set('editActive', true);
+        },
+        cancelScenePoseEdit(scenePose) {
+            scenePose.set('editActive', false);
+        },
+        deleteScenePose() {
+            let api = this.get('gameApi');
+            let poseId = this.get('confirmDeleteScenePose.id');
+            this.set('confirmDeleteScenePose', false);
+
+            let scenePose = this.get('model.scene.poses').find(p => p.id === poseId);
+            this.get('model.scene.poses').removeObject(scenePose);
+
+            api.requestOne('deleteScenePose', { scene_id: this.get('model.scene.id'),
+                pose_id: poseId })
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+            });
+        },
+        saveScenePose(scenePose) {
+            let pose = scenePose.get('raw_pose');
+            if (pose.length === 0) {
+                this.get('flashMessages').danger("You haven't entered antyhing.");
+                return;
+            }
+            scenePose.set('editActive', false);
+            scenePose.set('pose', pose);
+
+            let api = this.get('gameApi');
+            api.requestOne('editScenePose', { scene_id: this.get('model.scene.id'),
+                pose_id: scenePose.id, pose: pose })
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                scenePose.set('pose', response.pose);
+            });
+            this.set('scenePose', '');
+        },
         
         addPose(poseType) {
             let pose = this.get('scenePose');
@@ -54,7 +138,8 @@ export default Controller.extend(AuthenticatedController, {
                 return;
             }
             let api = this.get('gameApi');
-            api.requestOne('addScenePose', { id: this.get('model.id'),
+            this.set('scenePose', '');
+            api.requestOne('addScenePose', { id: this.get('model.scene.id'),
                 pose: pose, pose_type: poseType })
             .then( (response) => {
                 if (response.error) {
@@ -62,12 +147,34 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 this.scrollSceneWindow();
             });
-            this.resetOnExit();
+        },
+        
+        addSceneRoll() {
+            let api = this.get('gameApi');
+            
+            // Needed because the onChange event doesn't get triggered when the list is 
+            // first loaded, so the roll string is empty.
+            let rollString = this.get('rollString') || this.get('model.abilities')[0];
+            
+            if (!rollString) {
+                this.get('flashMessages').danger("You haven't selected an ability to roll.");
+                return;
+            }
+            this.set('selectSkillRoll', false);
+            this.set('rollString', null);
+
+            api.requestOne('addSceneRoll', { scene_id: this.get('model.scene.id'),
+                roll_string: rollString })
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+            });
         },
         
         changeSceneStatus(status) {
             let api = this.get('gameApi');
-            api.requestOne('changeSceneStatus', { id: this.get('model.id'),
+            api.requestOne('changeSceneStatus', { id: this.get('model.scene.id'),
                 status: status }, null)
             .then( (response) => {
                 if (response.error) {
@@ -75,16 +182,14 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 if (status === 'share') {
                     this.get('flashMessages').success('The scene has been shared.');
-                    this.transitionToRoute('scene', this.get('model.id'));
+                    this.transitionToRoute('scene', this.get('model.scene.id'));
                 }
                 else if (status === 'stop') {
                     this.get('flashMessages').success('The scene has been stopped.');
-                    this.resetOnExit();
                     this.send('reloadModel');
                 }
                 else if (status === 'restart') {
                     this.get('flashMessages').success('The scene has been restarted.');
-                    this.resetOnExit();
                     this.send('reloadModel'); 
                 }
             });

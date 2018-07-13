@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
+    queryParams: [ 'location' ],
     
     sceneTypes: function() { 
         return this.get('model.sceneTypes').map(p => p.get('name'));

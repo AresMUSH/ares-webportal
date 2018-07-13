@@ -1,6 +1,13 @@
 {{title 'Jobs'}}
 <h1>Jobs</h1>
 
+{{#if model.reboot_required_notice}}
+    <div class="alert alert-warning">
+      <strong>Reboot Required!</strong> {{model.reboot_required_notice}}
+    </div>
+{{/if}}
+        
+        
 <table class="table table-striped">    
 <tbody>
     <tr>
@@ -10,7 +17,7 @@
         <th>Submitter</th>
         <th>Handled By</th>
     </tr>
-{{#each model as |job|}}
+{{#each model.jobs as |job|}}
     <tr><td>
         {{#if job.unread}}
         <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
