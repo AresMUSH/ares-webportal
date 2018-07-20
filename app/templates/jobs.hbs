@@ -1,3 +1,5 @@
+{{#if model.job_admin}}
+
 {{title 'Jobs'}}
 <h1>Jobs</h1>
 
@@ -7,6 +9,13 @@
     </div>
 {{/if}}
         
+{{else}}
+
+{{title 'Requests'}}
+<h1>Requests</h1>
+
+{{/if}}
+
         
 <table class="table table-striped">    
 <tbody>

@@ -79,6 +79,7 @@ Router.map(function() {
   this.route('scene-edit', { path: '/scene/:id/edit' } );
   this.route('scene-create', { path: '/scene/create', query_params: ['location'] } );
   this.route('setup');
+  this.route('setup-colors');
   this.route('shutdown');
   this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
