@@ -25,6 +25,9 @@ export default Controller.extend({
     }.property('model.char.fs3.fs3_attributes.@each.rating'),
     
     countPointsInGroup: function(list, free_points, max_free_rating, cost_per_rating) {
+        if (!list) {
+            return;
+        }
         let points = 0;
         list.forEach(function (ability) {
             let rating = ability.rating;
@@ -50,14 +53,16 @@ export default Controller.extend({
     
     buildQueryDataForChar: function() {
         let specialties = {};
+        let actionSkills = this.get('model.char.fs3.fs3_action_skills')
         
-        this.get('model.char.fs3.fs3_action_skills').forEach(function (ability) {
+        if (actionSkills) {         
+        actionSkills.forEach(function (ability) {
             if (ability.specialties) {
-                
                 let selectedSpecs = ability.specialties.filter( s => s.selected ).map(s => s.name);
                 specialties[ability.name] = selectedSpecs;
-            }
-        });
+                }
+            });
+        }
         
         return { 
             id: this.get('model.char.id'),
@@ -78,6 +83,9 @@ export default Controller.extend({
     }, 
     
     createAbilityHash: function(ability_list) {
+        if (!ability_list) {
+            return {};
+        }
         return ability_list.reduce(function(map, obj) {
                 map[obj.name] = obj.rating;
                 return map;
@@ -100,6 +108,10 @@ export default Controller.extend({
     }.property('model.char.fs3.fs3_action_skills.@each.rating'),
      
     checkLimits: function(list, limits, title) {
+        if (!list) {
+            return;
+        }
+
         for (var high_rating in limits) {
             let limit = limits[high_rating];
             let high = list.filter(l => l.rating >= high_rating);
