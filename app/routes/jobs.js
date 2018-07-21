@@ -1,9 +1,9 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import RestrictedRoute from 'ares-webportal/mixins/restricted-route';
+import DefaultRoute from 'ares-webportal/mixins/default-route';
 import RSVP from 'rsvp';
 
-export default Route.extend(RestrictedRoute, {
+export default Route.extend(DefaultRoute, {
     gameApi: service(),
     session: service(),
 

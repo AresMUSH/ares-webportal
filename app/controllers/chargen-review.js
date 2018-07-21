@@ -18,7 +18,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.get('flashMessages').success('You have submitted your application.  Check for responses to your app in-game.');
+                this.get('flashMessages').success('You have submitted your application.  Check for responses to your app under Help->Requests.');
                 this.transitionToRoute('chargen');
             });   
         }

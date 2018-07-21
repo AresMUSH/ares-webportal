@@ -27,13 +27,14 @@ export default Controller.extend(AuthenticatedController, {
              this.scrollSceneWindow();
           });
         }
-        
-        this.get('model.my_scenes').forEach(s => {
-            if (s.id === sceneId) {
-                s.set('is_unread', true);
-                this.get('gameSocket').notify('New activity in one of your other scenes!');
-            }
-        });
+        else {
+            this.get('model.my_scenes').forEach(s => {
+                if (s.id === sceneId) {
+                    s.set('is_unread', true);
+                    this.get('gameSocket').notify('New activity in one of your other scenes!');
+                }
+            });            
+        }
     },
     
     pageTitle: function() {

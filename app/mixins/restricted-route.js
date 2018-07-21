@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 export default Mixin.create({
     session: service(),
     flashMessages: service(),
-    allowedErorrMessage: 'You must be logged in as an admin or coder.',
+    allowedErrorMessage: 'You must be logged in as an admin or coder.',
 
     isAllowed: function() {
         return this.get('session.data.authenticated.is_admin') || 
@@ -13,7 +13,7 @@ export default Mixin.create({
     
     beforeModel: function() {
         if (!this.isAllowed()) {
-            this.get('flashMessages').danger(this.allowedErrorMessage);
+            this.get('flashMessages').danger(this.get('allowedErrorMessage'));
             this.transitionTo('login');
         }
     }

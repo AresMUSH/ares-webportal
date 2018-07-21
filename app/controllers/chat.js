@@ -30,10 +30,18 @@ export default Controller.extend({
         });                
     },
     
+    chatMessage: function() {
+        
+    }.property('model.channels.@each.chatMessage'),
+    
     scrollChatWindow: function() {
-        $('#chat-window').stop().animate({
-            scrollTop: $('#chat-window')[0].scrollHeight
-        }, 800);    
+        let chatWindow = $('#chat-window')[0];
+        if (chatWindow) {
+            $('#chat-window').stop().animate({
+                scrollTop: chatWindow.scrollHeight
+            }, 800);    
+        }
+        
     },
     
     setupCallback: function() {
@@ -42,22 +50,75 @@ export default Controller.extend({
             self.onChatMessage(channel) } );
     },
     
+    getCurrentChannelKey: function() {
+        let channelName = this.get('selectedChannel');
+        if (channelName) {
+            return channelName.toLowerCase();
+        }
+        return null;
+    },
+    
     actions: {
+        scrollDown: function() {
+            this.scrollChatWindow();
+        },
+        
         changeChannel: function(channel) {
             this.set('selectedChannel', channel);
-            this.scrollChatWindow();
             let channelKey = channel.toLowerCase();
             this.set(`model.channels.${channelKey}.new_messages`, null);
         },
         
-        send: function() {
+        joinChannel: function() {
             let api = this.get('gameApi');
-            api.requestOne('chatTalk', { channel: this.get('selectedChannel'), message: this.get('chatMessage')}, null)
+            let channelName = this.get('selectedChannel');
+                        
+            api.requestOne('joinChannel', { channel: channelName }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
-                this.set('chatMessage', '');
+                this.send('reloadModel');
+            });
+        },
+        
+        leaveChannel: function() {
+            let api = this.get('gameApi');
+            let channelName = this.get('selectedChannel');
+                        
+            api.requestOne('leaveChannel', { channel: channelName }, null)
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.send('reloadModel');
+            });
+        },
+        
+        muteChannel: function(mute) {
+            let api = this.get('gameApi');
+            let channelName = this.get('selectedChannel');
+                        
+            api.requestOne('muteChannel', { channel: channelName, mute: mute }, null)
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.send('reloadModel');
+            });
+        },
+        
+        send: function() {
+            let api = this.get('gameApi');
+            let channelName = this.get('selectedChannel');
+            let message = this.get('chatMessage');
+            this.set(`chatMessage`, '');
+                        
+            api.requestOne('chatTalk', { channel: channelName, message: message }, null)
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
             });
         }
     }

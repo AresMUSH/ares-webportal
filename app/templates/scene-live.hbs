@@ -1,17 +1,5 @@
 {{title pageTitle}}
 
-<div class="row">
-    <div class="col col-xs-12">
-          {{#each model.my_scenes as |scene|}}
-            {{#link-to 'scene-live' scene.id class='btn btn-default'}}#{{scene.id}} {{scene.title}}
-            {{#if scene.is_unread}}
-             <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
-            {{/if}}
-            {{/link-to}}
-          {{/each}}
-
-   </div>
- </div>
  
  <div class="row">
    <div class="col col-xs-12">
@@ -23,6 +11,21 @@
      </h1>
 
     {{live-scene-context scene=model.scene}}
+    
+</div>
+</div>
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="alert alert-info">
+          {{#each model.my_scenes as |scene|}}
+            {{#link-to 'scene-live' scene.id class='btn btn-default'}}#{{scene.id}} {{scene.title}}
+            {{#if scene.is_unread}}
+             <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+            {{/if}}
+            {{/link-to}}
+          {{/each}}
+      </div>
 
     <div class="ansi scene-log" id="live-scene-log">
     
@@ -73,10 +76,8 @@
 
     {{#if isApproved}}
 
-        {{markdown-editor text=scenePose}}
+        {{markdown-editor text=scenePose rows=4}}
     
-    <hr/>
-
     <div class="row">
         <div class="col col-xs-12">
             {{#if model.scene.can_edit}}

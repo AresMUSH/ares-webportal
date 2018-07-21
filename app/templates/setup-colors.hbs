@@ -1,0 +1,23 @@
+{{title "Setup Theme Colors"}}
+<h1>Setup Theme Colors</h1>
+
+<table>
+    
+{{#each model as |color|}}
+<tr>
+    <td><b>{{color.name}}</b></td>
+    <td>{{input type="color" value=color.value }}</td>
+</tr>
+{{/each}}
+
+</table>
+
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+                
+            <button {{action 'saveColors'}} class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+{{outlet}}
