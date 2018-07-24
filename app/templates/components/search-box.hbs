@@ -1,13 +1,7 @@
 <div class="sidebar-box {{boxStyle}}">
 
-    {{#if model.game.gcse_search_id}}
-
-    <gcse:search></gcse:search>
-
-    <script src="https://cse.google.com/cse.js?cx={{model.game.gcse_search_id}}" async defer type="text/javascript"></script>    
-
-    {{else}}
-        Please set up your <a href="http://aresmush.com/tutorials/config/website">Site Search</a>.
-    {{/if}}
+    <p>{{input type="text" size=25 id="search" enter="search" value=searchTerm}}</p>
+    <button class="btn btn-default" {{action "search"}}>Search</button>
+    
 </div>
     
