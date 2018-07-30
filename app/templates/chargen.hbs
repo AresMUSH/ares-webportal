@@ -46,10 +46,11 @@
      <ul class="nav nav-tabs" role="tablist">
        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
        <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>   
-       
-         {{model.char.reset_needed}}
-       
-        {{#if (not model.app.game.disabled_plugins.fs3skills)}}          
+              
+        {{#if model.app.game.disabled_plugins.fs3skills}}  
+            <li role="presentation"><a href="#abilities" aria-controls="abilities" role="tab" data-toggle="tab">Abilities</a></li>
+        {{else}}
+        
             {{#if model.char.fs3.reset_needed}}
            <li role="presentation"><a href="#fs3reset" aria-controls="fs3reset" role="tab" data-toggle="tab">Abilities</a></li>
            {{else}}
@@ -90,7 +91,10 @@
                              {{#power-select selected=model.char.demographics.gender searchField="value" options=genders onchange=(action "genderChanged") as |gender|}}
                                {{gender.value}}
                              {{/power-select}}
-                             
+                         
+                         {{else if (eq key 'age')}}
+                             {{input type="text" size=50 value=demo.value}}
+                             <div class="cg-tip">Enter an age or a birthdate in {{model.cgInfo.date_format}} format.</div>
                          {{else}}
                              {{input type="text" size=50 value=demo.value}}
                          {{/if}}
@@ -128,7 +132,11 @@
                   
             </div>
 
-        {{#if (not model.app.game.disabled_plugins.fs3skills)}}
+        {{#if model.app.game.disabled_plugins.fs3skills}}
+            <div role="tabpanel" class="tab-pane" id="abilities">
+                <p>Your game does not support setting abilities/skills through the web chargen.  You'll need to complete chargen using in-game commands.</p>
+            </div>
+        {{else}}
             {{#if model.char.fs3.reset_needed}}
              <div role="tabpanel" class="tab-pane" id="fs3reset">
                 <p>Resetting your abilities will set you up with default attribute and skill values.  Your other character information will be saved.</p>
@@ -304,7 +312,7 @@
             
              <p>
                  <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
-                 <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
+                 <button name="review" {{action 'review'}} class="btn btn-success">Review/Submit</button>
              </p>
 
      </div>

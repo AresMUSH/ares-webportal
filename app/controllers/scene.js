@@ -33,6 +33,19 @@ export default Controller.extend(AuthenticatedController, {
                 this.transitionToRoute('scenes');
                 this.get('flashMessages').success('Scene deleted!');
             });
-        }
+        },
+        
+        unshareScene() {
+            let api = this.get('gameApi');
+            api.requestOne('changeSceneStatus', { id: this.get('model.id'),
+                status: 'unshare' }, null)
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.get('flashMessages').success('The scene is no longer shared.');
+                this.transitionToRoute('scene-live', this.get('model.id'));
+            });
+        },
     }
 });

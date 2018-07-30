@@ -96,6 +96,7 @@
         {{#if model.can_delete }}
         <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete Scene</button>
         {{/if}}
+        <button {{action 'unshareScene'}} class="btn btn-default">Unshare Scene</button>
         {{#link-to 'scene-edit' model.id class="btn btn-primary"}}Edit Scene{{/link-to}}
         </div>
     </div>
