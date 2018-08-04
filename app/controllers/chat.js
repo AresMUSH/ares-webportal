@@ -30,10 +30,6 @@ export default Controller.extend({
         });                
     },
     
-    chatMessage: function() {
-        
-    }.property('model.channels.@each.chatMessage'),
-    
     scrollChatWindow: function() {
         let chatWindow = $('#chat-window')[0];
         if (chatWindow) {

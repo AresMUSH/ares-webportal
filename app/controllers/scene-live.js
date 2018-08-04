@@ -18,7 +18,7 @@ export default Controller.extend(AuthenticatedController, {
     onSceneActivity: function(msg) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];
-        let data = splitMsg[1];
+        //let data = splitMsg[1];
         
         if (sceneId === this.get('model.scene.id')) {
            this.get('gameApi').requestOne('liveScene', { id: this.get('model.scene.id') }).then( response => {
@@ -111,7 +111,7 @@ export default Controller.extend(AuthenticatedController, {
                 }
             });
         },
-        saveScenePose(scenePose) {
+        saveScenePose(scenePose, notify) {
             let pose = scenePose.get('raw_pose');
             if (pose.length === 0) {
                 this.get('flashMessages').danger("You haven't entered antyhing.");
@@ -122,7 +122,7 @@ export default Controller.extend(AuthenticatedController, {
 
             let api = this.get('gameApi');
             api.requestOne('editScenePose', { scene_id: this.get('model.scene.id'),
-                pose_id: scenePose.id, pose: pose })
+                pose_id: scenePose.id, pose: pose, notify: notify })
             .then( (response) => {
                 if (response.error) {
                     return;

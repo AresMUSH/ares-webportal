@@ -57,11 +57,11 @@ export default Controller.extend({
     actions: {
         addProfile() {
             let count = this.get('model.profile.length');
-            this.get('model.profile').pushObject({ name: null, text: '', key: count + 1 });
+            this.get('model.profile').pushObject({ name: '', text: '', key: count + 1 });
         },
         addRelationship() {
             let count = this.get('model.relationships.length');
-            this.get('model.relationships').pushObject({ name: null, text: '', key: count + 1 });
+            this.get('model.relationships').pushObject({ name: '', text: '', key: count + 1 });
         },
         fileUploaded(folder, name) {
             folder = folder.toLowerCase();

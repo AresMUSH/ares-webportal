@@ -4,10 +4,10 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(DefaultRoute, {
     gameApi: service(),
-    session: service(),
-
-    model: function() {
+    queryParams: {term: { refreshModel:true } },
+    
+    model: function(params) {
         let api = this.get('gameApi');
-        return api.requestOne('jobs');
-    },
+        return api.requestOne('searchSite', { search: params['term'] });
+    }
 });

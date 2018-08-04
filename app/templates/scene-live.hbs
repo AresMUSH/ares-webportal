@@ -32,10 +32,7 @@
     {{#each scenePoses as |pose|}}    
             {{#if (and isApproved pose.can_edit)}}
             <div class="hint pull-right">
-                {{#if pose.editActive}}
-                 <a href="#" {{action 'saveScenePose' pose}}><i class="fa fa-save" aria-hidden="true"></i></a>
-                 <a href="#" {{action 'cancelScenePoseEdit' pose}}><i class="fa fa-ban" aria-hidden="true"></i></a>
-                 {{else}}
+                {{#if (not pose.editActive)}}
                 <a href="#" {{action 'editScenePose' pose}}><i class="fa fa-edit" aria-hidden="true"></i></a>
                 <a href="#" {{action (mut confirmDeleteScenePose) pose}}><i class="fa fa-trash" aria-hidden="true"></i></a>
                 {{/if}}
@@ -52,6 +49,14 @@
                 </div>
                  {{#if pose.editActive}}
                     {{markdown-editor text=pose.raw_pose}}
+                    
+                    <div class="pull-right">
+                    <button class="btn-default" {{action 'cancelScenePoseEdit' pose}}>Cancel</button>
+                    <button class="btn-warning" {{action 'saveScenePose' pose false}}>Typo</button>
+                    <button class="btn-primary" {{action 'saveScenePose' pose true}}>Save</button>
+                    </div>
+                    <div class="clearfix"></div>
+                    
                  {{else}}
                      {{#if pose.is_setpose}}
                         <div class="scene-set-pose">

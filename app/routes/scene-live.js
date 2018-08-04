@@ -20,8 +20,6 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     deactivate: function() {
         this.get('gameSocket').set('sceneCallback', null);
         this.controllerFor('application').set('hideSidebar', false);
-        let api = this.get('gameApi');
-        let model = this.modelFor('scene-live');
     },
 
     model: function(params) {
