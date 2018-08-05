@@ -50,35 +50,13 @@
     {{char-gallery chars=model.alts title="Characters"}}
         
 </div>
-
+{{#if model.achievements}}
 <div>
     <h3>Achievements</h3>
     
-    {{#each model.achievements as |achieve| }}
-    <p>
-    {{#if (eq achieve.type 'community')}}
-    <i class="fa fa-users fa-2x" aria-hidden="true"></i>
-    {{/if}}
-
-    {{#if (eq achieve.type 'portal')}}
-    <i class="fa fa-globe fa-2x" aria-hidden="true"></i>
-    {{/if}}
-    
-    {{#if (eq achieve.type 'fs3')}}
-    <i class="fa fa-cubes fa-2x" aria-hidden="true"></i>
-    {{/if}}
-
-    {{#if (eq achieve.type 'story')}}
-    <i class="fa fa-book fa-2x" aria-hidden="true"></i>
-    {{/if}}
-    
-    &nbsp;
-    
-    {{achieve.message}} 
-    </p>
-    {{/each}}
+    {{char-achievements achievements=model.achievements}}
 </div>
-
+{{/if}}
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">
