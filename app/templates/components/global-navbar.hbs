@@ -10,49 +10,71 @@
    <div id="navbar" class="navbar-collapse collapse">
 
      <ul class="nav navbar-nav navbar-right">
-                  
-            <li>{{#link-to 'home'}}Home{{/link-to}}</li>
+
+
 
             {{#if isAuthenticated}}
 
             <li class="dropdown  hidden-xl  hidden-lg  hidden-md">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      
+
                       Welcome {{currentUser.name}} <span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         <li>{{#link-to 'char' currentUser.id}}Profile{{/link-to}}</li>
                         <li>{{#link-to 'mail'}}Mail{{/link-to}}</li>
                         <li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
-                        
+
                       </ul>
                     </li>
                   {{else}}
                   <li class="hidden-xl  hidden-lg  hidden-md">{{#link-to 'login' (query-params redirect=currentRoute)}}Login{{/link-to}}</li>
                   {{/if}}
-                           
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              
-              Play <span class="caret"></span></a>
+
+              About Us <span class="caret"></span></a>
               <ul class="dropdown-menu">
-              
+
+                <li><a href="/wiki/about_us">About Us</a></li>
+                <li><a href="/wiki/policies">Policies</a></li>
+                <li><a href="/wiki/admin">Admin</a></li>
+                <li><a href="/wiki/theme_intro">Theme Intro</a></li>
+
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+              Game <span class="caret"></span></a>
+              <ul class="dropdown-menu">
                 <li>{{#link-to "chargen"}}Create a Character{{/link-to}}</li>
-                {{#if model.game.roster_enabled}}             
+                {{#if model.game.roster_enabled}}
                 <li>{{#link-to "roster"}}Pre-Made Characters{{/link-to}}</li>
                 {{/if}}
-                <li>{{#link-to "who"}}Who's Online{{/link-to}}</li>
                 <li><hr></li>
+                <li>{{#link-to "play"}}Play via Web Client{{/link-to}}</li>
                 <li>{{#link-to "scenes-live"}}Active Scenes{{/link-to}}</li>
                 <li>{{#link-to "scene-create"}}Start New Scene{{/link-to}}</li>
                 <li><hr></li>
-                <li>{{#link-to "play"}}Play via Web Client{{/link-to}}</li>
+                <li>{{#link-to "who"}}Who's Online{{/link-to}}</li>
+                {{#if (not model.game.disabled_plugins.fs3combat)}}
+                <li>{{#link-to "combats"}}Combats{{/link-to}}</li>
+                {{/if}}
+                <li><hr></li>
+                <li>{{#link-to "chat"}}Chat{{/link-to}}</li>
+                <li>{{#link-to "forum"}}Forum{{/link-to}}</li>
+                {{#if (not model.game.disabled_plugins.events)}}
+                    <li>{{#link-to "events"}}Events{{/link-to}}</li>
+                {{/if}}
+                <li><hr></li>
+                <li>{{#link-to "help"}}Help{{/link-to}}</li>
               </ul>
             </li>
-                                
-            
+
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              
+
               Story <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li>{{#link-to "characters"}}Characters{{/link-to}}</li>
@@ -60,58 +82,37 @@
                 <li>{{#link-to "plots"}}Plots{{/link-to}}</li>
               </ul>
             </li>
-            
+
+
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              
-              Community <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                           
-                <li>{{#link-to "chat"}}Chat{{/link-to}}</li>
-                <li>{{#link-to "forum"}}Forum{{/link-to}}</li>
-                {{#if (not model.game.disabled_plugins.events)}}
-                    <li>{{#link-to "events"}}Events{{/link-to}}</li>
-                {{/if}}
-                <li>{{#link-to "players"}}Players{{/link-to}}</li>
-              </ul>
-            </li>
-            
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              
+
               Directory <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li>{{#link-to "characters"}}Characters{{/link-to}}</li>
+                <li>{{#link-to "players"}}Players{{/link-to}}</li>
                 <li>{{#link-to "census"}}Census{{/link-to}}</li>
-                <li>{{#link-to "actors"}}Actors{{/link-to}}</li>   
-                {{#if model.game.roster_enabled}}             
-                <li>{{#link-to "roster"}}Roster{{/link-to}}</li>
-                {{/if}}
-                <li><hr></li>
-                <li>{{#link-to "scenes"}}Scenes{{/link-to}}</li>
-                <li>{{#link-to "plots"}}Plots{{/link-to}}</li>
+                <li>{{#link-to "actors"}}Actors{{/link-to}}</li>
                 <li>{{#link-to "locations"}}Locations{{/link-to}}</li>
-                {{#if (not model.game.disabled_plugins.fs3combat)}}
-                <li>{{#link-to "combats"}}Combats{{/link-to}}</li>
-                {{/if}}
-                <li><hr></li>                
                 <li>{{#link-to "files"}}Files{{/link-to}}</li>
-                
               </ul>
             </li>
-                    
+
             {{#if (not model.game.disabled_plugins.fs3skills)}}
             <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      
-                      FS3 <span class="caret"></span></a>
+
+                      System <span class="caret"></span></a>
                       <ul class="dropdown-menu">
+                        <li><a href="/wiki/combat_system">Combat System></a></li>
+                        <li><a href="/wiki/magic_system">Magic System</a></li>
+                        <li><a href="https://fusiontables.google.com/data?docid=1K6_WIYp0Lwxuz72CkSulilrAXE1eHWsXxlNVnDz6#card:id=2">Spell Database</a></li>
+                        <li><a href="/wiki/luck_points">Luck Points</a></li>
+                        <li><a href="/wiki/xp">XP</a></li>
                         <li>{{#link-to 'fs3skills-abilities'}}Abilities List{{/link-to}}</li>
-                
                         {{#if (not model.game.disabled_plugins.fs3combat)}}
                         <li>{{#link-to 'fs3combat-gear'}}Gear List{{/link-to}}</li>
                         {{/if}}
-                        
                         <li><hr></li>
                         <li><a href="http://aresmush.com/fs3/fs3-3" target="_blank">Player's Guide <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></li>
                         <li><a href="http://aresmush.com/fs3/fs3-3/roll-quickref" target="_blank">Rolls Quick Reference <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></li>
@@ -122,10 +123,27 @@
                       </ul>
             </li>
             {{/if}}
-                    
+
+          <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                    World <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="/wiki/grand_lake">Grand Lake</a></li>
+                      <li><a href="/wiki/magic">Magic</a></li>
+                      <li><a href="/wiki/portals">Portals</a></li>
+                      <li><a href="/wiki/schools">Schools</a></li>
+                      <li><a href="/wiki/magical_items">Magical Items</a></li>
+                      <li><a href="/wiki/magical_orders">Magical Orders</a></li>
+                      <li><a href="/wiki/creatures">Creatures</a></li>
+
+                    </ul>
+                  </li>
+
+
             <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      
+
                       Wiki <span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         {{#each model.wiki_nav as |page|}}
@@ -142,11 +160,11 @@
                       </ul>
                     </li>
 
-            
-            
+
+
             <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      
+
                       Help <span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         <li>{{#link-to "help"}}Game Help{{/link-to}}</li>
@@ -156,10 +174,10 @@
                       </ul>
                     </li>
             {{#if (or isAdmin isCoder)}}
-            
+
                    <li class="dropdown">
                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      
+
                              Admin <span class="caret"></span></a>
                              <ul class="dropdown-menu">
                                <li>{{#link-to 'jobs'}}Jobs{{/link-to}}</li>
@@ -172,16 +190,16 @@
                                {{/if}}
                              </ul>
                            </li>
-                   
-                   
-                   
+
+
+
             {{/if}}
-            
+
            </ul>
-            
-   
+
+
    </div><!--/.navbar-collapse -->
-   
-   
-   
+
+
+
 </nav>
