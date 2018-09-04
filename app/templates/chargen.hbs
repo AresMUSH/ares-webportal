@@ -1,36 +1,36 @@
 {{title 'Create a Character'}}
 <div class="row">
  <div class="col col-md-12">
-      
+
      <h1>Create a Character</h1>
-     
+
      <p>The online character creation tool will guide you through creating your character.</p>
-         
+
 
 {{#if model.char.chargen_locked}}
 
      <div class="alert alert-warning">
-    
+
              <p>Your application has been submitted.  Unsubmit your app to make changes.</p>
-            
+
              <p>
                  <button name="unsubmit" {{action 'unsubmit'}} class="btn btn-warning">Unsubmit</button>
              </p>
 
      </div>
-     
+
 {{else}}
 
      <div class="alert alert-info">
-    
+
              <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen, but anything set with the in-game chargen commands will be overwritten by what you set here.</p>
-            
+
              <p>
                  <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
              </p>
 
      </div>
-          
+
      {{#if showCharErrors}}
      <div class="alert alert-danger">
      <p><b>Alerts:</b></p>
@@ -41,16 +41,16 @@
      </ul>
      </div>
      {{/if}}
-     
+
      <!-- Nav tabs -->
      <ul class="nav nav-tabs" role="tablist">
        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
-       <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>   
-              
-        {{#if model.app.game.disabled_plugins.fs3skills}}  
+       <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>
+
+        {{#if model.app.game.disabled_plugins.fs3skills}}
             <li role="presentation"><a href="#abilities" aria-controls="abilities" role="tab" data-toggle="tab">Abilities</a></li>
         {{else}}
-        
+
             {{#if model.char.fs3.reset_needed}}
            <li role="presentation"><a href="#fs3reset" aria-controls="fs3reset" role="tab" data-toggle="tab">Abilities</a></li>
            {{else}}
@@ -61,37 +61,37 @@
            {{#if model.char.fs3.use_advantages}}
        <li role="presentation"><a href="#fs3adv" aria-controls="fs3adv" role="tab" data-toggle="tab">Advantages</a></li>
             {{/if}}
-       
+
            {{/if}}
          {{/if}}
        <li role="presentation"><a href="#misc" aria-controls="misc" role="tab" data-toggle="tab">Miscellaneous</a></li>
      </ul>
-     
+
      <!-- Tab panes -->
      <div class="tab-content">
        <div role="tabpanel" class="tab-pane active" id="demographics">
-                 
+
                  <div class="form-group row">
                      <div class="col-sm-3">
-                             <b>Full Name</b> 
+                             <b>Full Name</b>
                      </div>
                      <div class="col-sm-9">
                              {{input type="text" size=50 value=model.char.fullname}}
                      </div>
                  </div>
-                      
+
                  {{#each-in model.char.demographics as |key demo|}}
                  <div class="form-group row">
                      <div class="col-sm-3">
-                             <b>{{demo.name}}</b> 
+                             <b>{{demo.name}}</b>
                      </div>
                      <div class="col-sm-9">
                          {{#if (eq key 'gender') }}
-                             
+
                              {{#power-select selected=model.char.demographics.gender searchField="value" options=genders onchange=(action "genderChanged") as |gender|}}
                                {{gender.value}}
                              {{/power-select}}
-                         
+
                          {{else if (eq key 'age')}}
                              {{input type="text" size=50 value=demo.value}}
                              <div class="cg-tip">Enter an age or a birthdate in {{model.cgInfo.date_format}} format.</div>
@@ -100,21 +100,21 @@
                          {{/if}}
                      </div>
                  </div>
-                 {{/each-in}}   
-                 
+                 {{/each-in}}
+
           </div>
-          
+
           <div role="tabpanel" class="tab-pane" id="groups">
-                  
-                                    
-                  
+
+
+
                   {{#each-in model.char.groups as |key group|}}
                   <div class="form-group row">
                       <div class="col-sm-3">
-                              <b>{{group.name}}</b>                               
+                              <b>{{group.name}}</b>
                       </div>
                       <div class="col-sm-9">
-                          
+
                       {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
                         {{input type="text" size=50 value=group.value}}
                       {{else}}
@@ -123,13 +123,13 @@
                       {{/power-select}}
                       {{/if}}
                          <p class="cg-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
-                         
+
                       </div>
-                      
+
                   </div>
-                  
+
                   {{/each-in}}
-                  
+
             </div>
 
         {{#if model.app.game.disabled_plugins.fs3skills}}
@@ -139,40 +139,40 @@
         {{else}}
             {{#if model.char.fs3.reset_needed}}
              <div role="tabpanel" class="tab-pane" id="fs3reset">
-                <p>Resetting your abilities will set you up with default attribute and skill values.  Your other character information will be saved.</p>
-            
+                <p>Setting your abilities will set you up with default attribute and skill values.  Your other character information will be saved.</p>
+
                 {{#if anyGroupMissing}}
                 <div class="alert alert-warning">If you set your groups first, you'll be given the appropriate starting skills based on your groups.</div>
                 {{/if}}
-            
-                <button name="reset" {{action 'reset'}} class="btn btn-primary">Reset Abilities</button>
+
+                <button name="reset" {{action 'reset'}} class="btn btn-primary">Set Abilities</button>
             </div>
-            
+
             {{else}}
-             
+
              <div role="tabpanel" class="tab-pane" id="fs3attrs">
-             
+
                  <div class="panel panel-default">
                        <div class="panel-heading">
                            Attributes
                        </div>
                    <div class="panel-body">
-     
+
                      <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.attrs_blurb}}}</p>
-     
-                 
+
+
                      {{#each model.char.fs3.fs3_attributes as |att|}}
                      {{#fs3-attrbox rating=att.rating ratingName=att.rating_name maxRating=model.cgInfo.fs3.max_attr_rating  updated=(action "abilityChanged")}}
                          <b>{{att.name}}</b> - {{att.desc}}
                      {{/fs3-attrbox}}
                      {{/each}}
-                 
+
                    </div>
                  </div>
             </div>
-        
+
             <div role="tabpanel" class="tab-pane" id="fs3action">
-        
+
                  <div class="panel panel-default">
                        <div class="panel-heading">
                            Action Skills
@@ -180,44 +180,44 @@
                    <div class="panel-body">
 
                      <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.action_blurb}}}</p>
-                     
+
                      {{#each model.char.fs3.fs3_action_skills as |skill|}}
                      {{#fs3-actionbox rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.fs3.max_skill_rating minRating=model.cgInfo.fs3.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
                          <b>{{skill.name}}</b> - {{skill.desc}}
                      {{/fs3-actionbox}}
                      {{/each}}
-                 
+
                    </div>
                  </div>
 
             </div>
-        
+
             <div role="tabpanel" class="tab-pane" id="fs3bg">
-        
+
 
                  <div class="panel panel-default">
                        <div class="panel-heading">
                            Background Skills
                        </div>
                    <div class="panel-body">
-     
+
                      <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.background_blurb}}} To remove a background skill, set its rating to Everyman.</p>
-     
-     
+
+
                      {{#each model.char.fs3.fs3_backgrounds as |skill|}}
-                 
+
                      {{#fs3-bgbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
                          <b>{{input type="text" value=skill.name size=50}}</b>
                      {{/fs3-bgbox}}
                      {{/each}}
 
                      <button class="btn btn-default" id="addbg" {{action "addBackgroundSkill"}}>Add Background Skill</button>
-                 
+
                    </div>
                  </div>
                </div>
                <div role="tabpanel" class="tab-pane" id="fs3lang">
-           
+
                    <div class="panel panel-default">
                        <div class="panel-heading">
                            Language Skills
@@ -232,13 +232,13 @@
                            <b>{{skill.name}}</b> - {{skill.desc}}
                        {{/fs3-langbox}}
                        {{/each}}
-                                  
+
                      </div>
                    </div>
                  </div>
-                 
+
                  <div role="tabpanel" class="tab-pane" id="fs3adv">
-           
+
                      <div class="panel panel-default">
                          <div class="panel-heading">
                              Advantages
@@ -253,14 +253,14 @@
                              <b>{{skill.name}}</b> - {{skill.desc}}
                          {{/fs3-advantagebox}}
                          {{/each}}
-                                  
+
                        </div>
                      </div>
                    </div>
-                   
+
                    {{/if}}
                 {{/if}}
-                                   
+
          <div role="tabpanel" class="tab-pane" id="misc">
              <div class="panel panel-default">
                <div class="panel-heading">
@@ -268,11 +268,11 @@
                </div>
                <div class="panel-body">
                    <div class="cg-tip">You don't need to write a novel. Just cover the basics: who you are, why are you here, and is there anything noteworthy about you. Be sure to explain any unusual skills.</div>
-                 
+
                    {{markdown-editor text=model.char.background}}
-                   
+
                </div>
-             </div> 
+             </div>
 
              <div class="panel panel-default">
                <div class="panel-heading">
@@ -283,8 +283,8 @@
 
                    {{markdown-editor text=model.char.rp_hooks}}
                </div>
-             </div> 
-              
+             </div>
+
              <div class="panel panel-default">
                <div class="panel-heading">
                  Description
@@ -294,22 +294,22 @@
                  <br/>
                  <p> <i>Main Description:</i> </p>
                  {{markdown-editor text=model.char.desc}}
-                 
+
                  <p> <i>Short Description:</i> </p>
                  {{input type="text"  size=100 value=model.char.shortdesc}}
-                 
+
                </div>
-             </div> 
-               
+             </div>
+
            </div>
-               
+
        </div>
-     
-     
+
+
      <div class="alert alert-success">
-    
+
              <p>Remember to save often.  When you're finished, review your character application for errors before submitting it.</p>
-            
+
              <p>
                  <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
                  <button name="review" {{action 'review'}} class="btn btn-success">Review/Submit</button>
@@ -318,12 +318,12 @@
      </div>
 {{/if}}
 
-     
+
    {{flash-messages}}
-     
+
   </div>
-  
-  
+
+
 </div>
 
 {{outlet}}
