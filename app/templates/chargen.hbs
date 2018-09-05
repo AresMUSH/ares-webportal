@@ -1,4 +1,4 @@
-{{title 'Create a Character'}}
+grou{{title 'Create a Character'}}
 <div class="row">
  <div class="col col-md-12">
 
@@ -44,6 +44,7 @@
 
      <!-- Nav tabs -->
      <ul class="nav nav-tabs" role="tablist">
+       <li role="presentation" class="active"><a href="#instructions" aria-controls="instructions" role="tab" data-toggle="tab">Instructions</a></li>
        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
        <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>
 
@@ -69,6 +70,31 @@
 
      <!-- Tab panes -->
      <div class="tab-content">
+       <div role="tabpanel" class="tab-pane active" id="instructions">
+         <p>Instructions</p>
+         <p>As you create your character, you can move back and forth between tabs to complete the application in any order that you choose. Be sure to hit 'save' frequently so that you don't lose any work.</p>
+          <p>Spirit Lake uses a modification of Faraday's FS3.3 system for character generation and conflict resolution. You have <b>60 points</b> to spend on attributes, action skills, background skills, and languages. Each rating spends 1 point.</p>
+          <p>Definitions</p>
+          <ul>
+            <li><b>Attributes</b>represent basic aspects of a character. Though they can change in play, they don't shift as dramatically as skills.</li>
+            <li><b>Action SKills</b> are those skills that will come into frequent play in the 'action' of the game.</li>
+            <li><b>Background Skills</b> are freeform skills that allow you to flesh out your character however you like. They are less likely to come into regular play, but be important from time to time.</li>
+            <li><b>Languages</b> can represent everything from a few classes in high school to completely fluency in another language. Everyone gets English for free.</li>
+            </ul>
+            <p>Limitations</p>
+            <ul>
+              <li>You can't spend more than 13 points on attributes.</li>
+              <li>You can have up to four attributes at level 3 or above and 2 attributes at level 4.</li>
+              <li>No one may have a Magic attribute higher than level 1.</li>
+              <li>You can't spent more than 36 points on action skills.</li>
+              <li>You can have up to six action skills at level 5 or above, three at level 6 and above, and one at level 7. You may not start with an action skill at level 8.</li>
+              <li>Schools of magic are represented by action skills. If you have a Major and Minor School, they will be set to level 2 and level 1, respectively. If you have only a Major School, it may be set to level 3.</li>
+            </ul>
+            <p>To see how many points you have spent and what you have left to complete, click 'review/submit'. You will be able to return to character generation after you review your application.</b>
+
+
+
+       </div>
        <div role="tabpanel" class="tab-pane active" id="demographics">
 
                  <div class="form-group row">
@@ -105,7 +131,10 @@
           </div>
 
           <div role="tabpanel" class="tab-pane" id="groups">
-
+            <p class="cg-tip">Schools reflect the type of spells a magic user is able to do. A magic user may have an affinity for a single School, or they may possess an affinity for two, one lesser and one greater. </p>
+            <p class="cg-tip">Read more about the <a href="http://spiritlakemu.com/wiki/schools">IC aspect of the Schools of Magic.</a></p>
+            <p class="cg-tip">Setting your School here will automatically set your Major School to '2' and your Minor School to '1'. If your character has only a Major School, you may raise it to '3' on the next tab.</p>
+            <p class="cg-tip">Read more about how Schools function in the <a href="http://spiritlakemu.com/wiki/magic_system">Magic System.</a></p>
 
 
                   {{#each-in model.char.groups as |key group|}}
@@ -201,7 +230,9 @@
                        </div>
                    <div class="panel-body">
 
-                     <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.background_blurb}}} To remove a background skill, set its rating to Everyman.</p>
+                     <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.background_blurb}}}</p>
+                      <p class="cg-tip">You must have at least 3 background skills. See [Background Skills](http://spiritlakemu.com/fs3skills/abilities) for some suggestions.</p>
+                      <p class="cg-tip">To remove a background skill, set its rating to Everyman.</p>
 
 
                      {{#each model.char.fs3.fs3_backgrounds as |skill|}}
@@ -225,7 +256,7 @@
                      <div class="panel-body">
 
 
-                         <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.language_blurb}}} To remove a language, set its rating to Everyman.</p>
+                         <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.language_blurb}}} You recieve English for free. To remove a language, set its rating to Unskilled.</p>
 
                        {{#each model.char.fs3.fs3_languages as |skill|}}
                        {{#fs3-langbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
@@ -267,7 +298,14 @@
                  Background
                </div>
                <div class="panel-body">
-                   <div class="cg-tip">You don't need to write a novel. Just cover the basics: who you are, why are you here, and is there anything noteworthy about you. Be sure to explain any unusual skills.</div>
+                  <div class="cg-tip">The most important part of a character is their background. It doesn't need to be long, but it should give a solid idea of who your character is.</p>
+                  <div class="cg-tip">Some questions you might want to ask as you write your background:
+                    <ul>
+                      <li>What are the major events in your character's life?</li>
+                      <li>Does your character have any noteworthy skills or accomplishments? How did they come about?</li>
+                      <li>Is your character a magic-user? How have they reacted to the suddent appearance of magic in their life?</li>
+                    </ul>
+
 
                    {{markdown-editor text=model.char.background}}
 
@@ -279,7 +317,7 @@
                  RP Hooks
                </div>
                <div class="panel-body">
-                   <div class="cg-tip">RP Hooks are interesting things about your character that others can "hook" into for RP. This could be an odd personality quirk, a reputation your character has, or anything else that might inspire someone to connect with you. Looking around at other character's sheets can be a good way to get inspiration for RP Hooks.</div>
+                   <div class="cg-tip">RP Hooks are interesting things about your character that others can "hook" into for RP. This could be a reputation your character has, a hobby, a job, a family connection, or anything else that might inspire someone to connect with you. Looking around at other character's sheets can be a good way to get inspiration for RP Hooks.</div>
 
                    {{markdown-editor text=model.char.rp_hooks}}
                </div>
@@ -290,7 +328,7 @@
                  Description
                </div>
                <div class="panel-body">
-                 <div class="cg-tip">You can set both your main description, visible when people look at you, and a short description that shows your character at a glance.</div>
+                 <div class="cg-tip"> Set both your main description, visible when people look at you, and a short description that shows the basics of your character at a glance.</div>
                  <br/>
                  <p> <i>Main Description:</i> </p>
                  {{markdown-editor text=model.char.desc}}
