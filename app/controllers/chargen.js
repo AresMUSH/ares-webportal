@@ -66,7 +66,7 @@ export default Controller.extend(FS3Chargen, {
             this.validateChar();
         },
   
-        secretPrefChanged(val) { console.log(val.value, val.desc, this.get('model.char'));
+        secretPrefChanged(val) { 
             this.set('model.char.secretpref', val);
             this.validateChar();
         },
