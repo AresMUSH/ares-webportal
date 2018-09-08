@@ -1,0 +1,41 @@
+{{title 'Review Character'}}
+<h1>Review {{model.name}}</h1>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <pre class="ansi app-status">
+{{#if model.abilities}}
+{{{ansi-format text=model.abilities}}} 
+{{/if}}
+{{{ansi-format text=model.demographics}}}
+{{{ansi-format text=model.background}}}
+{{{ansi-format text=model.desc}}}
+{{{ansi-format text=model.hooks}}}
+{{#if model.ranks}}
+{{{ansi-format text=model.ranks}}}
+{{/if}}
+        </pre>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    
+    <div class="panel-body">
+       <p><span class="ansi-bright-red-fg">Red</span> issues should probably hold up the app.</p>
+       <p><span class="ansi-bright-yellow-fg">Yellow</span> may be OK if it suits the character.</p>
+       <hr/>
+
+       <p>Add notes for the job below.</p>
+       
+       {{textarea value=appNotes cols="80" rows=5}}
+       
+       
+      <p>
+          <button name="reject" {{action 'rejectChar'}} class="btn btn-warning">Reject</button>
+          <button name="approve" {{action 'approveChar'}} class="btn btn-success">Approve</button>
+      </p>
+                   
+    </div>
+</div>
+
+{{outlet}}
