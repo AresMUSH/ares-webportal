@@ -26,6 +26,11 @@
   {{/if}}
 
       <li><a data-toggle="tab" href="#systemkills">Kills</a></li>
+  
+  {{#if char.achievements}}
+      <li><a data-toggle="tab" href="#achievements">Achievements</a></li>
+  {{/if}}
+
 </ul>
 
 
@@ -101,6 +106,7 @@
     {{fs3-damage char=char}}
   </div>
 
+
    <div id="systemkills" class="tab-pane fade">
   <table class="table table-striped">
 
@@ -124,4 +130,12 @@
    </table>
   </div>
 {{/if}}
+
+  
+  {{#if char.achievements}}
+  <div id="achievements" class="tab-pane fade">
+      {{char-achievements achievements=char.achievements}}
+  </div>
+  {{/if}}
+
 </div>

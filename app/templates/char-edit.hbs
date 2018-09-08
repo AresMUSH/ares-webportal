@@ -51,7 +51,7 @@
                 </div>
                 
                 <div class="col-sm-9">
-                    {{#power-select selected=model.profile_image searchField="name" options=model.files onchange=(action "profileImageChanged") as |file|}}
+                    {{#power-select selected=model.profile_image allowClear=true searchField="name" options=model.files onchange=(action "profileImageChanged") as |file|}}
                     {{file.name}}
                     {{/power-select}}
                 </div>
@@ -63,7 +63,7 @@
                 </div>
                 
                 <div class="col-sm-9">
-                    {{#power-select selected=model.profile_icon searchField="name" options=model.files onchange=(action "profileIconChanged") as |file|}}
+                    {{#power-select selected=model.profile_icon allowClear=true searchField="name" options=model.files onchange=(action "profileIconChanged") as |file|}}
                     {{file.name}}
                     {{/power-select}}
                 </div>
