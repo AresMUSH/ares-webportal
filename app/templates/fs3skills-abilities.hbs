@@ -51,6 +51,28 @@
 </tbody>
 </table>
 
+<table class="table table-striped">
+
+<thead>
+    <th>School</th>
+    <th>Description</th>
+</thead>
+
+<tbody>
+{{#each model.magic_skills as |ability| }}
+<tr>
+    <td>{{ability.name}}</td>
+    <td>{{ability.description}}
+        {{#if ability.specialties}}
+        <br/> <b>Specialty Required:</b> {{ability.specialties}}
+        {{/if}}
+
+    </td>
+</tr>
+{{/each}}
+</tbody>
+</table>
+
 
 <h2>Background Skills</h2>
 
