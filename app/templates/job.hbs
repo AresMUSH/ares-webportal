@@ -60,6 +60,9 @@
               <span class="btn btn-default" href="#" role="button">Job Menu <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
               <li><a href="#" {{action 'closeJob'}}>Close Job</a></li>
+              {{#if model.is_approval_job}}
+              <li>{{#link-to 'app-review' model.author.id}}Review {{model.author.name}}{{/link-to}}</li>
+              {{/if}}
               </ul>
             </li>
         </ul>
