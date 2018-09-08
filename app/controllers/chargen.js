@@ -44,6 +44,7 @@ export default Controller.extend(FS3Chargen, {
             shortdesc: this.get('model.char.shortdesc'),
             rp_hooks: this.get('model.char.rp_hooks'),
             background: this.get('model.char.background'),
+            secretpref: this.get('model.char.secretpref'),
             fs3: this.buildFs3QueryData()
         };
     }, 
@@ -64,7 +65,12 @@ export default Controller.extend(FS3Chargen, {
             this.set(`model.char.groups.${group}`, val);
             this.validateChar();
         },
-        
+  
+        secretPrefChanged(val) { console.log(val.value, val.desc, this.get('model.char'));
+            this.set('model.char.secretpref', val);
+            this.validateChar();
+        },
+
         reset() {
             let api = this.get('gameApi');
             api.requestOne('chargenReset', { char: this.buildQueryDataForChar() })
