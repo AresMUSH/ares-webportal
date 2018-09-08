@@ -29,12 +29,10 @@
                  <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
              </p>
          
-        {{#unless model.app.game.disabled_plugins.fs3skills}}
-	  {{#unless model.char.fs3.reset_needed }}
+        {{#unless (or model.app.game.disabled_plugins.fs3skills model.char.fs3.reset_needed) }}
             <p>
               <button name="reset" {{action 'reset'}} class="btn btn-primary">Reset Attributes and Skills</button>
             </p>
-          {{/unless}}
         {{/unless}}
 
      </div>
