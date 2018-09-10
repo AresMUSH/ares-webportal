@@ -120,7 +120,7 @@ export default Mixin.create({
     
     actions: {
         addBackgroundSkill() {
-            this.get('model.char.fs3.fs3_backgrounds').pushObject( Ember.Object.create( { name: "Enter Skill Name" , rating: 1, rating_name: 'Interest' }) );  
+            this.get('model.char.fs3.fs3_backgrounds').pushObject( Ember.Object.create( { name: "Enter Skill Name" , rating: 1, rating_name: 'Fair' }) );  
             this.validateChar();
         },
         
