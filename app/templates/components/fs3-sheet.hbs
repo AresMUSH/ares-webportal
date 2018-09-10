@@ -1,38 +1,57 @@
-<b>Attributes</b>
-<ul class="char-ability-list">
-{{#each char.fs3.attributes as |ability| }}
-<li>
-  {{ability.name}}: {{ability.rating_name}}
-</li>
-{{/each}}
-</ul>
+<div class="sheet_table">
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <p class="sheet_header">Attributes</p>
+      <ul class="char-ability-list">
+      {{#each char.fs3.attributes as |ability| }}
+      <li>
+        <b>{{ability.name}}</b>: {{ability.rating_name}}
+      </li>
+      {{/each}}
+      </ul>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <p class="sheet_header">Action Skills</p>
+      <ul class="char-ability-list">
+      {{#each char.fs3.action_skills as |ability| }}
+        {{#if ability.rating}}
+        <li>
+          <b>{{ability.name}}</b>: {{ability.rating_name}}
+        </li>
+        {{/if}}
+      {{/each}}
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <p class="sheet_header">Background Skills</p>
+      <ul class="char-ability-list">
+      {{#each char.fs3.backgrounds as |ability| }}
+      <li>
+        <b>{{ability.name}}</b>: {{ability.rating_name}}
+      </li>
+      {{/each}}
+      </ul>
+    </div>
+    <div class="col-sm-12 col-md-6">
+      <p class="sheet_header">Languages</p>
+      <ul class="char-ability-list">
+      {{#each char.fs3.languages as |ability| }}
+      <li>
+        <b>{{ability.name}}</b>: {{ability.rating_name}}
+      </li>
+      {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
 
-<b>Action Skills</b>
-<ul class="char-ability-list">
-{{#each char.fs3.action_skills as |ability| }}
-<li>
-  {{ability.name}}: {{ability.rating_name}}
-</li>
-{{/each}}
-</ul>
 
-<b>Background Skills</b>
-<ul class="char-ability-list">
-{{#each char.fs3.backgrounds as |ability| }}
-<li>
-  {{ability.name}}: {{ability.rating_name}}
-</li>
-{{/each}}
-</ul>
 
-<b>Language Skills</b>
-<ul class="char-ability-list">
-{{#each char.fs3.languages as |ability| }}
-<li>
-  {{ability.name}}: {{ability.rating_name}}
-</li>
-{{/each}}
-</ul>
+
+
+
 {{#if char.fs3.use_advantages}}
 <b>Advantages</b>
 <ul class="char-ability-list">
