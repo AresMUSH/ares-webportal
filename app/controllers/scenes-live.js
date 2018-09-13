@@ -7,8 +7,15 @@ export default Controller.extend(AuthenticatedController, {
     gameSocket: service(),
     newActivity: false,
     
-    onSceneActivity: function() {
-        this.send('reloadModel');
+    onSceneActivity: function(msg) {
+        let splitMsg = msg.split('|');
+        let sceneId = splitMsg[0];
+
+        this.get('model').forEach(s => {
+          if (s.id === sceneId) {
+            s.set('is_unread', true);
+          }
+        });   
     },
     
     resetOnExit: function() {

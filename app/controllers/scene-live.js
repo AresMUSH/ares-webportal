@@ -55,6 +55,10 @@ export default Controller.extend(AuthenticatedController, {
             self.onSceneActivity(data) } );
     },
     
+    showSceneSelection: function() {
+      return this.get('model.my_scenes').length > 0;
+    }.property('model.my_scenes.@each.id'),
+    
     scrollSceneWindow: function() {
         $('#live-scene-log').stop().animate({
             scrollTop: $('#live-scene-log')[0].scrollHeight

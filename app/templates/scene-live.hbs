@@ -17,6 +17,8 @@
 
 <div class="row">
     <div class="col col-xs-12">
+      
+      {{#if showSceneSelection}}
         <div class="alert alert-info">
           {{#each model.my_scenes as |scene|}}
             {{#link-to 'scene-live' scene.id class='btn btn-default'}}#{{scene.id}} {{scene.title}}
@@ -25,7 +27,8 @@
             {{/if}}
             {{/link-to}}
           {{/each}}
-      </div>
+        </div>
+        {{/if}}
 
     <div class="ansi scene-log" id="live-scene-log">
     
@@ -95,8 +98,10 @@
                       <ul class="dropdown-menu">
 
                       <li>{{#link-to 'scene-edit' model.scene.id}}Edit Scene{{/link-to}}</li>
-                      <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
-                      <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
+                      {{#if (not model.scene.completed)}}
+                        <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
+                        <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
+                      {{/if}}
 
                       <li role="separator" class="divider"></li>
 
