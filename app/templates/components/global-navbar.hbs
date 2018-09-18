@@ -36,10 +36,11 @@
               About Us <span class="caret"></span></a>
               <ul class="dropdown-menu">
 
-                <li><a href="/wiki/about_us">About Us</a></li>
+                <li><a href="/wiki/about_us">About Spirit Lake</a></li>
+                <li><a href="/wiki/world_intro">World Intro</a></li>
                 <li><a href="/wiki/policies">Policies</a></li>
-                <li><a href="/wiki/admin">Admin</a></li>
-                <li><a href="/wiki/theme_intro">Theme Intro</a></li>
+                <li><a href="/wiki/staff">Staff Team</a></li>
+
               </ul>
             </li>
 
@@ -57,11 +58,10 @@
                 <li>{{#link-to "play"}}Play via Web Client{{/link-to}}</li>
                 <li>{{#link-to "scenes-live"}}Active Scenes{{/link-to}}</li>
                 <li>{{#link-to "scene-create"}}Start New Scene{{/link-to}}</li>
-                <li><hr></li>
-                <li>{{#link-to "who"}}Who's Online{{/link-to}}</li>
                 {{#if (not model.game.disabled_plugins.fs3combat)}}
                 <li>{{#link-to "combats"}}Combats{{/link-to}}</li>
                 {{/if}}
+                <li>{{#link-to "who"}}Who's Online{{/link-to}}</li>
                 <li><hr></li>
                 <li>{{#link-to "chat"}}Chat{{/link-to}}</li>
                 <li>{{#link-to "forum"}}Forum{{/link-to}}</li>
@@ -81,12 +81,12 @@
                       <ul class="dropdown-menu">
                         <li><a href="/wiki/grand_lake">Grand Lake</a></li>
                         <li><a href="/wiki/magic">Magic</a></li>
-                        <li><a href="/wiki/portals">Portals</a></li>
                         <li><a href="/wiki/schools">Schools</a></li>
                         <li><a href="/wiki/magical_items">Magical Items</a></li>
                         <li><a href="/wiki/magical_orders">Magical Orders</a></li>
+                        <li><a href="/wiki/portals">Portals</a></li>
                         <li><a href="/wiki/creatures">Creatures</a></li>
-
+                        <li><a href="/wiki/familiars">Familiars</a></li>
                       </ul>
               </li>
 
@@ -96,7 +96,7 @@
               Story <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li>{{#link-to "characters"}}Characters{{/link-to}}</li>
-                <li>{{#link-to "scenes"}}Scenes{{/link-to}}</li>
+                <li>{{#link-to "scenes"}}Scenes & Journals{{/link-to}}</li>
                 <li>{{#link-to "plots"}}Plots{{/link-to}}</li>
               </ul>
             </li>
@@ -112,6 +112,7 @@
                 <li>{{#link-to "census"}}Census{{/link-to}}</li>
                 <li>{{#link-to "actors"}}Actors{{/link-to}}</li>
                 <li>{{#link-to "locations"}}Locations{{/link-to}}</li>
+                <li><hr></li>
                 <li>{{#link-to "files"}}Files{{/link-to}}</li>
               </ul>
             </li>
