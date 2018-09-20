@@ -30,17 +30,9 @@ export default Controller.extend({
         
         let gallery = this.get('model.gallery').map(g => g.path);
         
-        let folder = this.get('model.name');
         let profile_image = this.get('model.profile_image.name');
-        if (profile_image && profile_image.length > 0) {
-            profile_image = `${folder}/${profile_image}`;
-        }
-        
         let profile_icon = this.get('model.profile_icon.name');
-        if (profile_icon && profile_icon.length > 0) {
-            profile_icon = `${folder}/${profile_icon}`;
-        }
-        
+
         return { 
             id: this.get('model.id'),
             demographics: demographics,
