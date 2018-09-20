@@ -24,7 +24,6 @@
      <div class="alert alert-info">
 
              <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen.</p>
-
              <p>
                  <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
              </p>
@@ -50,6 +49,7 @@
 
      <!-- Nav tabs -->
      <ul class="nav nav-tabs" role="tablist">
+       <li role="presentation" class="active"><a href="#instructions" aria-controls="instructions" role="tab" data-toggle="tab">Instructions</a></li>
        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
        <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Schools</a></li>
 
@@ -75,6 +75,31 @@
 
      <!-- Tab panes -->
      <div class="tab-content">
+       <div role="tabpanel" class="tab-pane active" id="instructions">
+         <p>Instructions</p>
+         <p>As you create your character, you can move back and forth between tabs to complete the application in any order that you choose. Be sure to hit 'save' frequently so that you don't lose any work.</p>
+          <p>Spirit Lake uses a modification of Faraday's FS3.3 system for character generation and conflict resolution. You have <b>60 points</b> to spend on attributes, action skills, background skills, and languages. Each rating spends 1 point.</p>
+          <p>Definitions</p>
+          <ul>
+            <li><b>Attributes</b>represent basic aspects of a character. Though they can change in play, they don't shift as dramatically as skills.</li>
+            <li><b>Action SKills</b> are those skills that will come into frequent play in the 'action' of the game.</li>
+            <li><b>Background Skills</b> are freeform skills that allow you to flesh out your character however you like. They are less likely to come into regular play, but be important from time to time.</li>
+            <li><b>Languages</b> can represent everything from a few classes in high school to completely fluency in another language. Everyone gets English for free.</li>
+            </ul>
+            <p>Limitations</p>
+            <ul>
+              <li>You can't spend more than 13 points on attributes.</li>
+              <li>You can have up to four attributes at level 3 or above and 2 attributes at level 4.</li>
+              <li>No one may have a Magic attribute higher than level 1.</li>
+              <li>You can't spent more than 36 points on action skills.</li>
+              <li>You can have up to six action skills at level 5 or above, three at level 6 and above, and one at level 7. You may not start with an action skill at level 8.</li>
+              <li>Schools of magic are represented by action skills. If you have a Major and Minor School, they will be set to level 2 and level 1, respectively. If you have only a Major School, it may be set to level 3.</li>
+            </ul>
+            <p>To see how many points you have spent and what you have left to complete, click 'review/submit'. You will be able to return to character generation after you review your application.</b>
+
+
+
+       </div>
        <div role="tabpanel" class="tab-pane active" id="demographics">
 
                  <div class="form-group row">
@@ -119,12 +144,10 @@
                    </div>
 
                  </div>
-
           </div>
 
           <div role="tabpanel" class="tab-pane" id="groups">
             <p class="cg-tip"><a href="http://spiritlakemu.com/wiki/schools" target="_blank">Schools</a> reflect the type of spells a magic user is able to do. A magic user may have an affinity for a single School, or they may possess an affinity for two, one lesser and one greater. <br><br>Setting your School(s) here will set your Major School to level 2 and your Minor School to level 1. If you choose only a Major School, you can raise it to level 3 on the Action Skills tab.<br><br></p>
-
                   {{#each-in model.char.groups as |key group|}}
                   <div class="form-group row">
                       <div class="col-sm-3">
@@ -140,6 +163,7 @@
                       {{/power-select}}
                       {{/if}}
                          <p class="cg-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
+
                       </div>
                   </div>
                   {{/each-in}}
@@ -180,12 +204,13 @@
                      <li>You can have up to four attributes at level 3 or above and two at level 4.</li>
                      <li>No one may have a Magic attribute above 1.</li>
                      </ul></p>
-
+                     
                      {{#each model.char.fs3.fs3_attributes as |att|}}
                      {{#fs3-attrbox rating=att.rating ratingName=att.rating_name maxRating=model.cgInfo.fs3.max_attr_rating  updated=(action "abilityChanged")}}
                          <b>{{att.name}}</b> - {{att.desc}}
                      {{/fs3-attrbox}}
                      {{/each}}
+
                      <p><br></p>
                      <p><b>What level should I choose?</b></p>
                      <table>
@@ -239,14 +264,13 @@
                      <li>No one may start with a level 8 action skill.</li>
                      <li>Your Major School should be level 2 and your Minor School should be level 1. If you have only a Major School, it may be level 3.</li>
                      </ul><br><br></p>
-
                      {{#each model.char.fs3.fs3_action_skills as |skill|}}
                      {{#if (or skill.rating (not skill.is_school))}}
                      {{#fs3-actionbox rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.fs3.max_skill_rating minRating=model.cgInfo.fs3.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
                          <b>{{skill.name}} </b> - {{skill.desc}}
                      {{/fs3-actionbox}}
                      {{/if}}
-		     {{/each}}
+		                 {{/each}}
                   <p><br></p>
                   <p><b>What level should I choose?</b></p>
                     <table>
@@ -327,7 +351,6 @@
 
                      <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.background_blurb}}} You must have at least 3 background skills. To remove a background skill, set its rating to Everyman.</p>
 
-
                      {{#each model.char.fs3.fs3_backgrounds as |skill|}}
 
                      {{#fs3-bgbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
@@ -382,8 +405,8 @@
                      <div class="panel-body">
 
 
-                         <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.language_blurb}}} To remove a language, set its rating to Unskilled.</p>
 
+                         <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.language_blurb}}} To remove a language, set its rating to Unskilled.</p>
                        {{#each model.char.fs3.fs3_languages as |skill|}}
                        {{#fs3-langbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
                            <b>{{skill.name}}</b> {{skill.desc}}
@@ -431,8 +454,6 @@
                    <li>Have they just arrived in Grand Lake, or are they a native? What do they think about it?</li>
                    </ul></p>
 
-
-
                    {{markdown-editor text=model.char.background}}
 
                </div>
@@ -444,7 +465,6 @@
                </div>
                <div class="panel-body">
                    <div class="cg-tip">{{{ansi-format text=model.cgInfo.hooks_blurb}}}</div>
-
                    {{markdown-editor text=model.char.rp_hooks}}
                </div>
              </div>
