@@ -57,7 +57,7 @@ export default Controller.extend(FS3Chargen, {
     actions: {
         
         genderChanged(val) {
-            this.set('model.char.demographics.gender.value', val.value); 
+            this.set('model.char.demographics.gender.value', val.value)
             this.validateChar();
         },
         
