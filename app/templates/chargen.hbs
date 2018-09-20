@@ -1,36 +1,41 @@
 {{title 'Create a Character'}}
 <div class="row">
  <div class="col col-md-12">
-      
+
      <h1>Create a Character</h1>
-     
+
      <p>The online character creation tool will guide you through creating your character.</p>
-         
+
 
 {{#if model.char.chargen_locked}}
 
      <div class="alert alert-warning">
-    
+
              <p>Your application has been submitted.  Unsubmit your app to make changes.</p>
-            
+
              <p>
                  <button name="unsubmit" {{action 'unsubmit'}} class="btn btn-warning">Unsubmit</button>
              </p>
 
      </div>
-     
+
 {{else}}
 
      <div class="alert alert-info">
-    
-             <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen, but anything set with the in-game chargen commands will be overwritten by what you set here.</p>
-            
+
+             <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen.</p>
              <p>
                  <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
              </p>
 
+        {{#unless (or model.app.game.disabled_plugins.fs3skills model.char.fs3.reset_needed) }}
+            <p>
+              <button name="reset" {{action 'reset'}} class="btn btn-primary">Reset Attributes and Skills</button>
+            </p>
+        {{/unless}}
+
      </div>
-          
+
      {{#if showCharErrors}}
      <div class="alert alert-danger">
      <p><b>Alerts:</b></p>
@@ -41,16 +46,17 @@
      </ul>
      </div>
      {{/if}}
-     
+
      <!-- Nav tabs -->
      <ul class="nav nav-tabs" role="tablist">
+       <li role="presentation" class="active"><a href="#instructions" aria-controls="instructions" role="tab" data-toggle="tab">Instructions</a></li>
        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
-       <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>   
-              
-        {{#if model.app.game.disabled_plugins.fs3skills}}  
+       <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Schools</a></li>
+
+        {{#if model.app.game.disabled_plugins.fs3skills}}
             <li role="presentation"><a href="#abilities" aria-controls="abilities" role="tab" data-toggle="tab">Abilities</a></li>
         {{else}}
-        
+
             {{#if model.char.fs3.reset_needed}}
            <li role="presentation"><a href="#fs3reset" aria-controls="fs3reset" role="tab" data-toggle="tab">Abilities</a></li>
            {{else}}
@@ -61,37 +67,62 @@
            {{#if model.char.fs3.use_advantages}}
        <li role="presentation"><a href="#fs3adv" aria-controls="fs3adv" role="tab" data-toggle="tab">Advantages</a></li>
             {{/if}}
-       
+
            {{/if}}
          {{/if}}
        <li role="presentation"><a href="#misc" aria-controls="misc" role="tab" data-toggle="tab">Miscellaneous</a></li>
      </ul>
-     
+
      <!-- Tab panes -->
      <div class="tab-content">
+       <div role="tabpanel" class="tab-pane active" id="instructions">
+         <p>Instructions</p>
+         <p>As you create your character, you can move back and forth between tabs to complete the application in any order that you choose. Be sure to hit 'save' frequently so that you don't lose any work.</p>
+          <p>Spirit Lake uses a modification of Faraday's FS3.3 system for character generation and conflict resolution. You have <b>60 points</b> to spend on attributes, action skills, background skills, and languages. Each rating spends 1 point.</p>
+          <p>Definitions</p>
+          <ul>
+            <li><b>Attributes</b>represent basic aspects of a character. Though they can change in play, they don't shift as dramatically as skills.</li>
+            <li><b>Action SKills</b> are those skills that will come into frequent play in the 'action' of the game.</li>
+            <li><b>Background Skills</b> are freeform skills that allow you to flesh out your character however you like. They are less likely to come into regular play, but be important from time to time.</li>
+            <li><b>Languages</b> can represent everything from a few classes in high school to completely fluency in another language. Everyone gets English for free.</li>
+            </ul>
+            <p>Limitations</p>
+            <ul>
+              <li>You can't spend more than 13 points on attributes.</li>
+              <li>You can have up to four attributes at level 3 or above and 2 attributes at level 4.</li>
+              <li>No one may have a Magic attribute higher than level 1.</li>
+              <li>You can't spent more than 36 points on action skills.</li>
+              <li>You can have up to six action skills at level 5 or above, three at level 6 and above, and one at level 7. You may not start with an action skill at level 8.</li>
+              <li>Schools of magic are represented by action skills. If you have a Major and Minor School, they will be set to level 2 and level 1, respectively. If you have only a Major School, it may be set to level 3.</li>
+            </ul>
+            <p>To see how many points you have spent and what you have left to complete, click 'review/submit'. You will be able to return to character generation after you review your application.</b>
+
+
+
+       </div>
        <div role="tabpanel" class="tab-pane active" id="demographics">
-                 
+
                  <div class="form-group row">
                      <div class="col-sm-3">
-                             <b>Full Name</b> 
+                             <b>Full Name</b>
                      </div>
                      <div class="col-sm-9">
                              {{input type="text" size=50 value=model.char.fullname}}
                      </div>
                  </div>
-                      
+
                  {{#each-in model.char.demographics as |key demo|}}
                  <div class="form-group row">
                      <div class="col-sm-3">
-                             <b>{{demo.name}}</b> 
+                             <b>{{demo.name}}</b>
                      </div>
                      <div class="col-sm-9">
                          {{#if (eq key 'gender') }}
-                             
+
                              {{#power-select selected=model.char.demographics.gender searchField="value" options=genders onchange=(action "genderChanged") as |gender|}}
                                {{gender.value}}
                              {{/power-select}}
-                         
+
                          {{else if (eq key 'age')}}
                              {{input type="text" size=50 value=demo.value}}
                              <div class="cg-tip">Enter an age or a birthdate in {{model.cgInfo.date_format}} format.</div>
@@ -100,21 +131,30 @@
                          {{/if}}
                      </div>
                  </div>
-                 {{/each-in}}   
-                 
+                 {{/each-in}}
+		 <div class="form-group row">
+                   <div class="col-sm-3">
+                     <b>Secret Preference</b>
+                   </div>
+                   <div class="col-sm-9">
+                    {{#power-select selected=model.char.secretpref searchField="value" options=model.cgInfo.secret_prefs onchange=(action "secretPrefChanged") as |pref|}}
+                     {{pref.value}} - {{pref.desc}}
+                    {{/power-select}}
+                    <p class="cg-tip">Secrets are admin-created pieces of information about your character, which your character may or may not be aware of. They are hooks for plots and story development over time.</p>
+                   </div>
+
+                 </div>
           </div>
-          
+
           <div role="tabpanel" class="tab-pane" id="groups">
-                  
-                                    
-                  
+            <p class="cg-tip"><a href="http://spiritlakemu.com/wiki/schools" target="_blank">Schools</a> reflect the type of spells a magic user is able to do. A magic user may have an affinity for a single School, or they may possess an affinity for two, one lesser and one greater. <br><br>Setting your School(s) here will set your Major School to level 2 and your Minor School to level 1. If you choose only a Major School, you can raise it to level 3 on the Action Skills tab.<br><br></p>
                   {{#each-in model.char.groups as |key group|}}
                   <div class="form-group row">
                       <div class="col-sm-3">
-                              <b>{{group.name}}</b>                               
+                              <b>{{group.name}}</b>
                       </div>
                       <div class="col-sm-9">
-                          
+
                       {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
                         {{input type="text" size=50 value=group.value}}
                       {{else}}
@@ -123,13 +163,11 @@
                       {{/power-select}}
                       {{/if}}
                          <p class="cg-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
-                         
+
                       </div>
-                      
                   </div>
-                  
                   {{/each-in}}
-                  
+
             </div>
 
         {{#if model.app.game.disabled_plugins.fs3skills}}
@@ -139,40 +177,79 @@
         {{else}}
             {{#if model.char.fs3.reset_needed}}
              <div role="tabpanel" class="tab-pane" id="fs3reset">
-                <p>Starting your abilities will set you up with default attribute and skill values.  Your other character information will be saved.</p>
-            
+                <p>Setting your abilities will set you up with default attribute and skill values.  Your other character information will be saved.</p>
+
                 {{#if anyGroupMissing}}
-                <div class="alert alert-warning">If you set your groups first, you'll be given the appropriate starting skills based on your groups.</div>
+                <div class="alert alert-warning">If you set your schools first, you'll be given the appropriate starting skills.</div>
                 {{/if}}
-            
-                <button name="reset" {{action 'reset'}} class="btn btn-primary">Start Abilities</button>
+
+                <button name="reset" {{action 'reset'}} class="btn btn-primary">Set Abilities</button>
             </div>
-            
+
             {{else}}
-             
+
              <div role="tabpanel" class="tab-pane" id="fs3attrs">
-             
+
                  <div class="panel panel-default">
                        <div class="panel-heading">
                            Attributes
                        </div>
                    <div class="panel-body">
-     
+
                      <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.attrs_blurb}}}</p>
-     
-                 
+
+                     <p class="cg-tip"><ul>
+                     <li>You get a rating of up to 'Average' for free.</li>
+                     <li>You can spend up to 13 additional points on attributes.</li>
+                     <li>You can have up to four attributes at level 3 or above and two at level 4.</li>
+                     <li>No one may have a Magic attribute above 1.</li>
+                     </ul></p>
+                     
                      {{#each model.char.fs3.fs3_attributes as |att|}}
                      {{#fs3-attrbox rating=att.rating ratingName=att.rating_name maxRating=model.cgInfo.fs3.max_attr_rating  updated=(action "abilityChanged")}}
                          <b>{{att.name}}</b> - {{att.desc}}
                      {{/fs3-attrbox}}
                      {{/each}}
-                 
+
+                     <p><br></p>
+                     <p><b>What level should I choose?</b></p>
+                     <table>
+                     <thead>
+                       <tr>
+                         <th>Rating</th>
+                         <th>Summary</th>
+                         <th>Description</th>
+                       </tr>
+                     </thead>
+                     <tbody>
+                       <tr>
+                         <td>1</td>
+                         <td>Poor</td>
+                         <td>You are below average.  (less than 40th percentile)</td>
+                       </tr>
+                       <tr>
+                         <td>2</td>
+                         <td>Average</td>
+                         <td>You are about average.  (40-60th percentile)</td>
+                       </tr>
+                       <tr>
+                         <td>3</td>
+                         <td>Good</td>
+                         <td>You’re better than average.   (60-80th percentile)</td>
+                       </tr>
+                       <tr>
+                         <td>4</td>
+                         <td>Exceptional</td>
+                         <td>You’re considerably above average. (more than 80th percentile)</td>
+                       </tr>
+                     </tbody>
+                   </table>
                    </div>
                  </div>
             </div>
-        
+
             <div role="tabpanel" class="tab-pane" id="fs3action">
-        
+
                  <div class="panel panel-default">
                        <div class="panel-heading">
                            Action Skills
@@ -180,44 +257,147 @@
                    <div class="panel-body">
 
                      <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.action_blurb}}}</p>
-                     
+
+                     <p class="cg-tip"><ul>
+                     <li>You can spend up to 28 points on action skills.</li>
+                     <li> You can have up to six action skills at level 5 or above, three at level six or above, and one at level 7. </li>
+                     <li>No one may start with a level 8 action skill.</li>
+                     <li>Your Major School should be level 2 and your Minor School should be level 1. If you have only a Major School, it may be level 3.</li>
+                     </ul><br><br></p>
                      {{#each model.char.fs3.fs3_action_skills as |skill|}}
+                     {{#if (or skill.rating (not skill.is_school))}}
                      {{#fs3-actionbox rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.fs3.max_skill_rating minRating=model.cgInfo.fs3.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
-                         <b>{{skill.name}}</b> - {{skill.desc}}
+                         <b>{{skill.name}} </b> - {{skill.desc}}
                      {{/fs3-actionbox}}
-                     {{/each}}
-                 
+                     {{/if}}
+		                 {{/each}}
+                  <p><br></p>
+                  <p><b>What level should I choose?</b></p>
+                    <table>
+                    <tr>
+                    <th class="tg-0pky">Level</th>
+                    <th class="tg-0pky">Label</th>
+                    <th class="tg-0pky">Description</th>
+                    <th class="tg-0pky">Examples</th>
+                    </tr>
+                    <tr>
+                    <td class="tg-0lax">0</td>
+                    <td class="tg-0lax">Unskilled</td>
+                    <td class="tg-0lax">Worse than most people, specifically bad or lacking even the most basic knowledge.</td>
+                    <td class="tg-0lax">You grew up in a cave or something and know absolutely nothing about this.</td>
+                    </tr>
+                    <tr>
+                    <td class="tg-0pky">1</td>
+                    <td class="tg-0pky">Everyman</td>
+                    <td class="tg-0pky">You know what the average inhabitant of the game world would know.</td>
+                    <td class="tg-0pky">Everyone is capable at this level except through special circumstances.</td>
+                    </tr>
+                    <tr>
+                    <td class="tg-0pky">2</td>
+                    <td class="tg-0pky">Fair</td>
+                    <td class="tg-0pky">You’ve still got a lot to learn, but you can handle easy stuff.</td>
+                    <td class="tg-0pky"> A high school graduate, a year or less in a job, self-trained.</td>
+                    </tr>
+                    <tr>
+                    <td class="tg-0pky">3</td>
+                    <td class="tg-0pky">Competent</td>
+                    <td class="tg-0pky">You have competence at a junior-professional level, but lack finesse or experience.</td>
+                    <td class="tg-0pky">An undergraduate student, two to five years in a job, a year or two of casual training from someone experienced.</td>
+                    </tr>
+                    <tr>
+                    <td class="tg-0pky">4</td>
+                    <td class="tg-0pky">Good</td>
+                    <td class="tg-0pky">You are thoroughly competent at a general professional level.</td>
+                    <td class="tg-0pky">A bachelor's degree, five to seven years in a job, several years of casual training from someone experienced.</td>
+                    </tr>
+                    <tr>
+                    <td class="tg-0pky">5</td>
+                    <td class="tg-0pky">Great</td>
+                    <td class="tg-0pky">You understand nuances and shortcuts, and can handle even challenging situations with ease.</td>
+                    <td class="tg-0pky">Seven to fifteen years in a job, more than 5 years of casual training from someone experienced.</td>
+                    </tr>
+                    <tr>
+                    <td class="tg-0pky">6</td>
+                    <td class="tg-0pky">Exceptional</td>
+                    <td class="tg-0pky">You are an expert, and can pull through even in dire circumstances.</td>
+                    <td class="tg-0pky">A PhD or MD, more than fifteen years in a job.</td>
+                    </tr>
+                    <tr>
+                    <td class="tg-0pky">7</td>
+                    <td class="tg-0pky">Amazing</td>
+                    <td class="tg-0pky">You have mastered your field and few can compare.</td>
+                    <td class="tg-0pky">A leading expert in a field. A star athlete, known physician, well-published author, etc.</td>
+                    </tr>
+                    <tr>
+                    <td class="tg-0pky">8</td>
+                    <td class="tg-0pky">Legendary</td>
+                    <td class="tg-0pky">You are one of the best that’s ever lived. </td>
+                    <td class="tg-0pky">Einstein, Stephen Hawking, Shakespeare, or Beethoven.</td>
+                    </tr>
+                    </table>
                    </div>
                  </div>
 
             </div>
-        
+
             <div role="tabpanel" class="tab-pane" id="fs3bg">
-        
+
 
                  <div class="panel panel-default">
                        <div class="panel-heading">
                            Background Skills
                        </div>
                    <div class="panel-body">
-     
-                     <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.background_blurb}}} To remove a background skill, set its rating to Everyman.</p>
-     
-     
+
+                     <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.background_blurb}}} You must have at least 3 background skills. To remove a background skill, set its rating to Everyman.</p>
+
                      {{#each model.char.fs3.fs3_backgrounds as |skill|}}
-                 
+
                      {{#fs3-bgbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
                          <b>{{input type="text" value=skill.name size=50}}</b>
                      {{/fs3-bgbox}}
                      {{/each}}
 
                      <button class="btn btn-default" id="addbg" {{action "addBackgroundSkill"}}>Add Background Skill</button>
-                 
+                     <p><br><br><br></p>
+                     <p><b>What level should I choose?</b></p>
+                     <table>
+                     <tr>
+                       <th>Label</th>
+                       <th>Description</th>
+                       <th>Examples</th>
+                     </tr>
+                     <tr>
+                       <td>Unskilled</td>
+                       <td>Worse than most people, specifically bad or lacking even the most basic knowledge. <br><br>There is no need to add a background skill for this level.</td>
+                       <td>You grew up in a cave or something and know absolutely nothing about this.</td>
+                     </tr>
+                     <tr>
+                       <td>Everyman</td>
+                       <td>You know what the average inhabitant of the game world would know. <br><br>There is no need to add a background skill for this level. It is assumed everyone generally has everyman capabilities.</td>
+                       <td>Everyone is capable at this level except through special circumstances.</td>
+                     </tr>
+                     <tr>
+                       <td>Fair</td>
+                       <td>Interests and casual studies.</td>
+                       <td>Playing in a bar league, a hobby, some college or equivalent study that never went anywhere</td>
+                     </tr>
+                     <tr>
+                       <td>Good</td>
+                       <td>Professional or semi-professional competence.</td>
+                       <td>A minor league or college athlete, a serious hobbyist, a college degree with some professional experience.</td>
+                     </tr>
+                     <tr>
+                       <td>Exceptional</td>
+                       <td>Notable expertise in your field</td>
+                       <td>A major league athlete, an advanced degree, a renowned expert.</td>
+                     </tr>
+                   </table>
                    </div>
                  </div>
                </div>
                <div role="tabpanel" class="tab-pane" id="fs3lang">
-           
+
                    <div class="panel panel-default">
                        <div class="panel-heading">
                            Language Skills
@@ -225,20 +405,20 @@
                      <div class="panel-body">
 
 
-                         <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.language_blurb}}} To remove a language, set its rating to Everyman.</p>
 
+                         <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.language_blurb}}} To remove a language, set its rating to Unskilled.</p>
                        {{#each model.char.fs3.fs3_languages as |skill|}}
                        {{#fs3-langbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
-                           <b>{{skill.name}}</b> - {{skill.desc}}
+                           <b>{{skill.name}}</b> {{skill.desc}}
                        {{/fs3-langbox}}
                        {{/each}}
-                                  
+
                      </div>
                    </div>
                  </div>
-                 
+
                  <div role="tabpanel" class="tab-pane" id="fs3adv">
-           
+
                      <div class="panel panel-default">
                          <div class="panel-heading">
                              Advantages
@@ -253,14 +433,14 @@
                              <b>{{skill.name}}</b> - {{skill.desc}}
                          {{/fs3-advantagebox}}
                          {{/each}}
-                                  
+
                        </div>
                      </div>
                    </div>
-                   
+
                    {{/if}}
                 {{/if}}
-                                   
+
          <div role="tabpanel" class="tab-pane" id="misc">
              <div class="panel panel-default">
                <div class="panel-heading">
@@ -268,11 +448,16 @@
                </div>
                <div class="panel-body">
                    <div class="cg-tip">{{{ansi-format text=model.cgInfo.bg_blurb}}}</div>
-                 
+                   <p class="cg-tip"><ul>
+                   <li>What are the major events in your character's life?</li>
+                   <li>Is your character a magic user? If so, how have they reacted to its presence?</li>
+                   <li>Have they just arrived in Grand Lake, or are they a native? What do they think about it?</li>
+                   </ul></p>
+
                    {{markdown-editor text=model.char.background}}
-                   
+
                </div>
-             </div> 
+             </div>
 
              <div class="panel panel-default">
                <div class="panel-heading">
@@ -280,11 +465,10 @@
                </div>
                <div class="panel-body">
                    <div class="cg-tip">{{{ansi-format text=model.cgInfo.hooks_blurb}}}</div>
-
                    {{markdown-editor text=model.char.rp_hooks}}
                </div>
-             </div> 
-              
+             </div>
+
              <div class="panel panel-default">
                <div class="panel-heading">
                  Description
@@ -294,22 +478,22 @@
                  <br/>
                  <p> <i>Main Description:</i> </p>
                  {{markdown-editor text=model.char.desc}}
-                 
+
                  <p> <i>Short Description:</i> </p>
                  {{input type="text"  size=100 value=model.char.shortdesc}}
-                 
+
                </div>
-             </div> 
-               
+             </div>
+
            </div>
-               
+
        </div>
-     
-     
+
+
      <div class="alert alert-success">
-    
+
              <p>Remember to save often.  When you're finished, review your character application for errors before submitting it.</p>
-            
+
              <p>
                  <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
                  <button name="review" {{action 'review'}} class="btn btn-success">Review/Submit</button>
@@ -318,12 +502,12 @@
      </div>
 {{/if}}
 
-     
+
    {{flash-messages}}
-     
+
   </div>
-  
-  
+
+
 </div>
 
 {{outlet}}
