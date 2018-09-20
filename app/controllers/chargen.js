@@ -57,13 +57,20 @@ export default Controller.extend(FS3Chargen, {
     actions: {
         
         genderChanged(val) {
-            this.set('model.char.demographics.gender.value', val.value);
+            this.set('model.char.demographics.gender.value', val.value)
             this.validateChar();
         },
         
         groupChanged(group, val) {
+	    var opp = group === 'major school' ? 'minor school' : 'major school';
+	    if (val.value === this.get(`model.char.groups.${opp}.value`)) {
+		var none = this.get(`model.cgInfo.group_options.${opp}.values`).find(function (school) {
+                  return 'None' === school.value;
+		});
+		this.set(`model.char.groups.${opp}`, none);
+            } 
             this.set(`model.char.groups.${group}`, val);
-            this.validateChar();
+	    this.validateChar();
         },
   
         secretPrefChanged(val) { 
