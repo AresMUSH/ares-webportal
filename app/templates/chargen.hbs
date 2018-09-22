@@ -49,7 +49,7 @@
 
      <!-- Nav tabs -->
      <ul class="nav nav-tabs" role="tablist">
-       <li role="presentation" class="active"><a href="#instructions" aria-controls="instructions" role="tab" data-toggle="tab">Instructions</a></li>
+       <!-- <li role="presentation" class="active"><a href="#instructions" aria-controls="instructions" role="tab" data-toggle="tab">Instructions</a></li> -->
        <li role="presentation"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
        <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Schools</a></li>
 
@@ -75,18 +75,18 @@
 
      <!-- Tab panes -->
      <div class="tab-content">
-       <div role="tabpanel" class="tab-pane active" id="instructions">
-         <p>Instructions</p>
+       <!-- <div role="tabpanel" class="tab-pane active" id="instructions">
          <p>As you create your character, you can move back and forth between tabs to complete the application in any order that you choose. Be sure to hit 'save' frequently so that you don't lose any work.</p>
-          <p>Spirit Lake uses a modification of Faraday's FS3.3 system for character generation and conflict resolution. You have <b>60 points</b> to spend on attributes, action skills, background skills, and languages. Each rating spends 1 point.</p>
-          <p>Definitions</p>
+          <p>Spirit Lake uses a modification of <a href="https://www.aresmush.com/fs3/fs3-3/chargen/">Faraday's FS3.3</a> system for character generation and conflict resolution. </p>
+
           <ul>
-            <li><b>Attributes</b> represent basic aspects of a character. Though they can change in play, they don't shift as dramatically as skills.</li>
-            <li><b>Action Skills</b> are those skills that will come into frequent play in the 'action' of the game.</li>
-            <li><b>Background Skills</b> are freeform skills that allow you to flesh out your character however you like. They are less likely to come into regular play, but be important from time to time.</li>
-            <li><b>Languages</b> can represent everything from a few classes in high school to completely fluency in another language. Everyone gets English for free.</li>
-            </ul>
-            <p>Limitations</p>
+            <li><b>Schools</b> reflect the type of magic your character can do, and also set you up with default values in magic-related skills.</li>
+            <li><b>Attributes</b> represent basic aspects of a character. Though they can change in play, they don't shift as dramatically as skills.<br></li>
+            <li><b>Action Skills</b> are those skills that will come into frequent play in the 'action' of the game.<br></li>
+            <li><b>Background Skills</b> are freeform skills that allow you to flesh out your character however you like. They are less likely to come into regular play, but be important from time to time.<br></li>
+            <li><b>Languages</b> can represent everything from a few classes in high school to completely fluency in another language. Everyone gets English for free.<br></li>
+            </ul> -->
+            <!-- <p>Limitations</p>
             <ul>
               <li>You can't spend more than 13 points on attributes.</li>
               <li>You can have up to four attributes at level 3 or above and 2 attributes at level 4.</li>
@@ -94,11 +94,11 @@
               <li>You can't spent more than 36 points on action skills.</li>
               <li>You can have up to six action skills at level 5 or above, three at level 6 and above, and one at level 7. You may not start with an action skill at level 8.</li>
               <li>Schools of magic are represented by action skills. If you have a Major and Minor School, they will be set to level 2 and level 1, respectively. If you have only a Major School, it may be set to level 3.</li>
-            </ul>
-            <p>To see how many points you have spent and what you have left to complete, click 'review/submit'. You will be able to return to character generation after you review your application.</p>
+            </ul> -->
+            <!-- <p>To see how many points you have spent and what you have left to complete, click '<b>review/submit</b>'. You will be able to return to character generation after you review your application.</p>
 
 
-       </div>
+       </div> -->
        <div role="tabpanel" class="tab-pane" id="demographics">
 
                  <div class="form-group row">
@@ -203,7 +203,7 @@
                      <li>You can have up to four attributes at level 3 or above and two at level 4.</li>
                      <li>No one may have a Magic attribute above 1.</li>
                      </ul></p>
-                     
+
                      {{#each model.char.fs3.fs3_attributes as |att|}}
                      {{#fs3-attrbox rating=att.rating ratingName=att.rating_name maxRating=model.cgInfo.fs3.max_attr_rating  updated=(action "abilityChanged")}}
                          <b>{{att.name}}</b> - {{att.desc}}
