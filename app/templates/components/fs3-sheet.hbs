@@ -1,12 +1,17 @@
 <div class="sheet_table">
   <div class="row">
+    <div class="col-sm-12">
+      <div class="pull-right alpha-numeric-switch"><i class="fas fa-info-circle"></i></div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-sm-12 col-md-6">
       <h1>Attributes</h1>
       <ul class="char-ability-list">
       {{#each char.fs3.attributes as |ability| }}
       <li>
         <div class="rating-block">
-          <b>{{ability.name}}</b>: {{fs3-rating class="rating" rating=(attr-rating rating=ability.rating max=4)}}
+          <b>{{ability.name}}</b>: <div class="rating-wrapper">{{fs3-rating class="rating-numeric" rating=(attr-rating rating=ability.rating max=4)}}<div class="rating-alpha">{{ability.rating_name}}</div></div>
         </div>
       </li>
       {{/each}}
@@ -19,7 +24,7 @@
         {{#if ability.rating}}
         <li>
           <div class="rating-block">
-            <b>{{ability.name}}</b>: {{fs3-rating class="rating" rating=(attr-rating rating=ability.rating max=8)}}
+            <b>{{ability.name}}</b>: <div class="rating-wrapper">{{fs3-rating class="rating-numeric" rating=(attr-rating rating=ability.rating max=8)}}<div class="rating-alpha">{{ability.rating_name}}</div></div>
           </div>
         </li>
         {{/if}}
@@ -34,7 +39,7 @@
       {{#each char.fs3.backgrounds as |ability| }}
       <li>
         <div class="rating-block">
-          <b>{{ability.name}}</b>: {{fs3-rating class="rating" rating=(attr-rating rating=ability.rating max=4)}}
+          <b>{{ability.name}}</b>: <div class="rating-wrapper">{{fs3-rating class="rating-numeric" rating=(attr-rating rating=ability.rating max=4)}}<div class="rating-alpha">{{ability.rating_name}}</div></div>
         </div>
       </li>
       {{/each}}
@@ -52,7 +57,13 @@
     </div>
   </div>
 </div>
-
+  <script type="text/javascript">
+    $('.alpha-numeric-switch').click(function (e) {
+      console.log('click heard', e)
+      $('.rating-numeric').toggle();
+      $('.rating-alpha').toggle();
+    });
+  </script>
 
 
 
