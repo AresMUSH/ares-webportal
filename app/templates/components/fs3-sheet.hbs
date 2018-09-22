@@ -33,7 +33,9 @@
       <ul class="char-ability-list">
       {{#each char.fs3.backgrounds as |ability| }}
       <li>
-        <b>{{ability.name}}</b>: {{ability.rating_name}}
+        <div class="rating-block">
+          <b>{{ability.name}}</b>: {{fs3-rating class="rating" rating=(attr-rating rating=ability.rating max=4)}}
+        </div>
       </li>
       {{/each}}
       </ul>
