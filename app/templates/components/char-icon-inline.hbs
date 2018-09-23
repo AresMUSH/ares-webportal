@@ -1,8 +1,8 @@
 {{#link-to "char" char.name}}
     {{#if char.icon}}
-    <img class="small-profile-icon" src="/game/uploads/{{char.icon}}" />
+    <img class="small-profile-icon {{cls}}" src="/game/uploads/{{char.icon}}" />
     {{else}}
-    <img class="small-profile-icon" src="/game/uploads/theme_images/noicon.png" />
+    <img class="small-profile-icon {{cls}}" src="/game/uploads/theme_images/noicon.png" />
     {{/if}}
 {{/link-to}}
 
