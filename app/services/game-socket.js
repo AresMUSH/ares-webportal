@@ -15,7 +15,7 @@ export default Service.extend({
     sidebarCallback: null,
     
     socketUrl() {
-        return `ws://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
+        return `wss://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
     },
     
     checkSession(charId) {
@@ -27,7 +27,6 @@ export default Service.extend({
     
     // Regular alert notification
     notify(msg, type = 'success') {
-        
         if (this.get('windowVisible')) {
             if (msg) {
                alertify.notify(msg, type, 10);
@@ -37,13 +36,23 @@ export default Service.extend({
             if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
                 this.get('favicon').changeFavicon(true);
                 try {
-                    new Notification(`Activity in ${aresconfig.game_name}!`);
+                    new Notification(msg);
                 }
                 catch(error) {
                     // Do nothing.  Just safeguard against missing browser notification.
                 }
-            }            
-        }
+            } else if (Notification.permission !== "denied") {
+    		Notification.requestPermission(function (permission) {
+      		    if (permission === "granted") {
+			try {    
+       			  new Notification(msg);
+		        } catch (error) {
+			
+			}
+      		    }
+    		});            
+            }
+	}
     },
     
     sessionStarted(charId) {
