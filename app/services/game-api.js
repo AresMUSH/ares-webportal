@@ -9,10 +9,10 @@ export default Service.extend({
     serverUrl(route) {
         var base;
         if (aresconfig.use_api_proxy) {
-            base = "http://" + aresconfig.host + ":" + aresconfig.web_portal_port + "/api";
+            base = "https://" + aresconfig.host + ":" + aresconfig.web_portal_port + "/api";
         } 
         else {
-            base = "http://" + aresconfig.host + ":" + aresconfig.api_port;
+            base = "https//" + aresconfig.host + ":" + aresconfig.api_port;
         }
         if (route) {
             return base + "/" + route;
