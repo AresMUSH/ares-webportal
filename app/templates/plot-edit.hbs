@@ -6,20 +6,20 @@
 
         <p>{{input type="text" size=50 id="title" enter="save" value=model.title}}</p>
     </p>
-    
+
     <p>
         <label for="summary" class="col-xs-2 col-form-label">Summary:</label>
         {{markdown-editor text=model.summary}}
     </p>
-        
+
     <p>
-        <label for="description" class="col-xs-2 col-form-label">Description:</label>
+        <label for="description" class="col-xs-2 col-form-label">Events:</label>
         {{markdown-editor text=model.description}}
     </p>
 
 
-        <p> {{#link-to 'plot' model.id class="btn btn-default"}}Cancel{{/link-to}}  
+        <p> {{#link-to 'plot' model.id class="btn btn-default"}}Cancel{{/link-to}}
         <button {{action 'save'}} class="btn btn-primary">Save</button> </p>
-        
+
 {{flash-messages}}
 {{outlet}}
