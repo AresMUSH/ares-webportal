@@ -13,8 +13,14 @@ export default Route.extend(DefaultRoute, {
     
     afterModel: function(model) {
         if (model.not_found) {
+          if (this.get('session.isAuthenticated')) {
             this.get('flashMessages').warning('That page was not found, but you can create it.');
             this.transitionTo('wiki-create', { queryParams: { title: model.title || "" }});
+          }
+          else {
+            this.get('flashMessages').warning('Page not found.');
+            this.transitionTo('wiki');
+          }
         }  
     }    
 });

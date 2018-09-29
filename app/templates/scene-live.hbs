@@ -88,7 +88,6 @@
     
     <div class="row">
         <div class="col col-xs-12">
-            {{#if model.scene.can_edit}}
 
                 <ul class="nav navbar-nav">    
                     <li class="dropdown">
@@ -97,28 +96,30 @@
                       <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
                       <ul class="dropdown-menu">
 
-                      <li>{{#link-to 'scene-edit' model.scene.id}}Edit Scene{{/link-to}}</li>
-                      {{#if (not model.scene.completed)}}
+                      {{#if model.scene.can_edit}}
+
+                        <li>{{#link-to 'scene-edit' model.scene.id}}Edit Scene{{/link-to}}</li>
+                        
+                        {{#if (not model.scene.completed)}}
                         <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
                         <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
-                      {{/if}}
+                         
+                         <li role="separator" class="divider"></li>
 
-                      <li role="separator" class="divider"></li>
-
-                      {{#if (not model.scene.completed)}}
-                      <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li> 
-                      {{else}}
-                      <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li> 
-                      <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
-                      {{/if}}
+                         <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li> 
+                         {{else}}
+                         <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li> 
+                         <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
+                         {{/if}}
+                       {{/if}}
+                       
+                      <li>{{#link-to 'scene-download' model.scene.id}}Download Scene{{/link-to}}</li> 
  	
                       </ul>
                     </li>
                 </ul>
             
-           
-            
-            {{/if}}
+          
         
             <div class="pull-right">
                 

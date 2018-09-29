@@ -39,7 +39,7 @@ export default Controller.extend(AuthenticatedController, {
     
     pageTitle: function() {
         return 'Scene ' + this.get('model.scene.id');
-    }.property(),
+    }.property('model.scene.id'),
     
     resetOnExit: function() {
         this.set('scenePose', '');
