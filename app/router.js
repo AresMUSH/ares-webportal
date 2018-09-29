@@ -78,6 +78,7 @@ Router.map(function() {
   this.route('scene', { path: '/scene/:id' } );
   this.route('scene-live', { path: '/scene-live/:id' });
   this.route('scene-edit', { path: '/scene/:id/edit' } );
+  this.route('scene-download', { path: '/scene/:id/download' } );
   this.route('scene-create', { path: '/scene/create', query_params: ['location'] } );
   this.route('search', { path: '/search', query_params: ['term'] });
   this.route('setup');
