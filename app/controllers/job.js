@@ -43,6 +43,27 @@ export default Controller.extend({
                 this.transitionToRoute('jobs');
               this.get('flashMessages').success('Reply added!');
             });
+        },
+        assignJob(staff) {
+          let api = this.get('gameApi');
+          api.requestOne('jobAssign', { id: this.get('model.id'), staff_id: staff.id })
+            .then((res) => {
+              if (res.error) {
+                return;
+              }
+              this.send('reloadModel');
+              this.get('flashMessages').success('Assigned to ' + staff.name  + '!');
+            });
+	},
+        changeStatus(status) {
+          this.get('gameApi').requestOne('jobChangeStatus', { id: this.get('model.id'), status: status })
+            .then((res) => {
+              if (res.error) {
+                return;
+              }
+              this.send('reloadModel');
+              this.get('flashMessages').success('Status changed to ' + status + '.');
+            });
         }
     }
 });
