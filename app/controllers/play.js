@@ -79,7 +79,9 @@ export default Controller.extend({
     actions: {
         connect() {
             var idle_keepalive_ms = 60000;
-            this.set('websocket', new WebSocket(`wss://${aresconfig.host}:${aresconfig.websocket_port}/websocket`));
+	    var protocol = aresconfig.ssl ? 'wss' : 'ws';
+
+            this.set('websocket', new WebSocket(`${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`));
                 var self = this;
                 this.get('websocket').onmessage = function(evt) { 
                     self.onMessage(evt);

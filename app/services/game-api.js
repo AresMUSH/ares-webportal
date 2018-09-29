@@ -12,7 +12,7 @@ export default Service.extend({
             base = "https://" + aresconfig.host + ":" + aresconfig.web_portal_port + "/api";
         } 
         else {
-            base = "https//" + aresconfig.host + ":" + aresconfig.api_port;
+            base = "http://" + aresconfig.host + ":" + aresconfig.api_port;
         }
         if (route) {
             return base + "/" + route;
