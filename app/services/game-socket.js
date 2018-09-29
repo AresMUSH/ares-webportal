@@ -156,6 +156,10 @@ export default Service.extend({
                 }
                 notify = false;
             }
+            else if (notification_type == "job_update") {
+                var badge = $('#jobBadge');
+                badge.text(parseInt(badge.text()) + 1);
+            }
             else if (notification_type == "new_scene_activity") {
                 if (this.get('sidebarCallback')) {
                     this.get('sidebarCallback')();
