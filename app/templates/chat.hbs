@@ -67,28 +67,19 @@
     <div class="clearfix"></div>
     
         <div class="panel panel-default">
+          <div class="panel-body">
             <h4>Who's On {{selectedChannel}}</h4>
 
+            <div class="icon-row">
             {{#each channel.who as |who|}}
-             <div class="small-who-icon">
-                 {{#link-to "char" who.name}}
-                     {{#if who.icon}}
-                     <img class="small-profile-icon" src="/game/uploads/{{who.icon}}" />
-                     {{else}}
-                     <img class="small-profile-icon" src="/game/uploads/theme_images/noicon.png" />
-                     {{/if}}
-                 {{/link-to}}
+              {{char-icon-inline char=who }}
+              {{#if who.muted}}<i class="fa fa-microphone-slash"></i>{{/if}}
 
-                 {{#link-to "char" who.name}} 
-                     {{who.name}} 
-                     {{#if who.muted}}<i class="fa fa-microphone-slash"></i>{{/if}}
-         
-                 {{/link-to}}
-            </div>
-         
             {{/each}}
+            </div>
 
             <div class="clearfix"></div>
+          </div>
         </div>
     {{else}}
     
