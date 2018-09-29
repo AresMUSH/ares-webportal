@@ -16,10 +16,15 @@
                        <p>Welcome, {{currentUser.name}}.</p>
                        <p>{{#link-to 'char' currentUser.id}}Profile{{/link-to}} |
                            {{#link-to 'mail'}}Mail
-                           {{#if model.unread_mail}}
-                           <span class="label label-pill label-primary" id="mailBadge">{{model.unread_mail}}</span>
-                           {{/if}}
-                           {{/link-to}}
+                             {{#if model.unread_mail}}
+                             <span class="label label-pill label-primary" id="mailBadge">{{model.unread_mail}}</span>
+                             {{/if}}
+                           {{/link-to}} |
+                           {{#link-to 'jobs'}}{{#if currentUser.is_admin}}Jobs{{else}}Requests{{/if}}
+                             {{#if model.job_activity}}
+                             <span class="label label-pill label-primary" id="jobBadge">{{model.job_activity}}</span>
+                             {{/if}}
+                           {{/link-to}} 
                            | {{#link-to 'logout'}}Logout{{/link-to}}
                        </p>
                     {{else}}
