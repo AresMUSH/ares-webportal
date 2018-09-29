@@ -1,13 +1,47 @@
 {{title model.title}}
 <h1>#{{model.id}} - {{model.title}}</h1>
 
-<p>{{#link-to 'jobs'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> 
-     {{#if model.job_admin}}
-     Back to Jobs
-     {{else}}
-     Back to Requests
-     {{/if}}
-{{/link-to}}</p>
+{{#if model.job_admin}}
+  <div class="row">
+    <div class="col-md-4">
+      <p>
+        {{#link-to 'jobs'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
+          {{#if model.job_admin}}
+            Back to Jobs
+          {{else}}
+            Back to Requests
+          {{/if}}
+        {{/link-to}}
+      </p>
+    </div>
+    <div class="col-md-8">
+          <ul class="nav navbar-nav pull-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+              <span class="btn btn-default" href="#" role="button">Assign <span class="caret"></span></span> </a>
+              <ul class="dropdown-menu">
+              {{#each model.job_staff as |staff| }}
+                <li><a href="#" {{action 'assignJob' staff}}>{{staff.name}}</a></li>
+              {{/each}}
+              </ul>
+            </li>
+        </ul>
+          <ul class="nav navbar-nav pull-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+              <span class="btn btn-default" href="#" role="button">Status <span class="caret"></span></span> </a>
+              <ul class="dropdown-menu">
+              {{#each model.statuses as |status| }}
+                <li><a href="#" {{action 'changeStatus' status}}>{{status}}</a></li>
+              {{/each}}
+              </ul>
+            </li>
+        </ul>
+    </div>
+  </div>
+{{/if}}
 
      <p>{{char-icon-inline char=model.author}}</p>
 
