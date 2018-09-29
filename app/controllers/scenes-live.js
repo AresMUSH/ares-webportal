@@ -33,6 +33,18 @@ export default Controller.extend(AuthenticatedController, {
         refresh() {
             this.set('newActivity', false);
             this.send('reloadModel');
+        },
+        
+        stopWatching(id) {
+          let api = this.get('gameApi');
+          api.requestOne('unwatchScene', { id: id }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              this.get('flashMessages').success('You are no longer watching that scene.');
+              this.send('reloadModel'); 
+          });
         }
     }
 });

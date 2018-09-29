@@ -1,0 +1,22 @@
+import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
+import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
+import DefaultRoute from 'ares-webportal/mixins/default-route';
+
+export default Route.extend(ReloadableRoute, DefaultRoute, {
+    gameApi: service(),
+    textFile: null,
+  
+    model: function(params) {
+        let api = this.get('gameApi');
+        return api.requestOne('downloadScene', { id: params['id'] });
+      },
+      
+      activate: function() {
+          this.controllerFor('application').set('hideSidebar', true);
+      },
+      deactivate: function() {
+          this.controllerFor('application').set('hideSidebar', false);
+          this.controllerFor('play').send('disconnect');
+      }
+});

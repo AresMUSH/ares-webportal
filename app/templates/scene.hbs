@@ -89,19 +89,41 @@
 
 
 
-{{#if model.can_edit }}
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
-        {{#if model.can_delete }}
-        <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete Scene</button>
-        {{/if}}
-        <button {{action 'unshareScene'}} class="btn btn-default">Unshare Scene</button>
-        {{#link-to 'scene-edit' model.id class="btn btn-primary"}}Edit Scene{{/link-to}}
+    {{#if isApproved}}
+    
+    <div class="row">
+        <div class="col col-xs-12">
+
+                <ul class="nav navbar-nav">    
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                      <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
+                      <ul class="dropdown-menu">
+
+                      {{#if model.can_edit}}
+
+                        <li>{{#link-to 'scene-edit' model.id}}Edit Scene{{/link-to}}</li>
+                        <li><a href="#" {{action 'unshareScene'}}>Unshare Scene</a></li>
+                        <li><a href="#" {{action (mut confirmDelete) true}}>Delete Scene</a></li>
+                         
+                         <li role="separator" class="divider"></li>
+                       {{/if}}
+                       
+                      <li>{{#link-to 'scene-download' model.id}}Download Scene{{/link-to}}</li> 
+ 	
+                      </ul>
+                    </li>
+                </ul>
+        
         </div>
     </div>
-</div>
-{{/if}}
+
+    {{/if}}
+
+
+
+
 
 {{flash-messages}}
 

@@ -12,11 +12,11 @@
 {{/if}}
 
 {{#if (eq item.category 'aresmush::character')}}
-{{#link-to 'char' item.name}}{{item.name}}{{/link-to}} <i>(character)</i>
+{{#link-to 'char' item.id}}{{item.name}}{{/link-to}} <i>(character)</i>
 {{/if}}
 
 {{#if (eq item.category 'aresmush::wikipage')}}
-{{#link-to 'wiki-page' item.name}}{{item.name}}{{/link-to}} <i>(wiki)</i>
+{{#link-to 'wiki-page' item.id}}{{item.name}}{{/link-to}} <i>(wiki)</i>
 {{/if}}
 <br/>
 {{item.summary}}
