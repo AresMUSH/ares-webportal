@@ -45,7 +45,7 @@
     </td>
     <td>
         {{#each scene.participants as |char|}}
-        {{char-icon-inline char=char cls=(if char.online '' 'faded')}}
+        {{char-icon-inline char=char icon-class=(if char.online '' 'faded')}}
         {{/each}}
     </td>
     <td>

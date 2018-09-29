@@ -12,21 +12,11 @@
           {{{ansi-format text=scene.location.scene_set}}}
         </div>
         {{/if}}
-        
-        {{#each scene.participants as |who|}}
-         <div class="small-who-icon">
-             {{#link-to "char" who.name}}
-                 {{#if who.icon}}
-                 <img class="small-profile-icon" src="/game/uploads/{{who.icon}}" />
-                 {{else}}
-                 <img class="small-profile-icon" src="/game/uploads/theme_images/noicon.png" />
-                 {{/if}}
-             {{/link-to}}
 
-             {{#link-to "char" who.name}} 
-                 {{who.name}} 
-             {{/link-to}}
-        </div>
+        <div class="icon-row">
+        {{#each scene.participants as |who|}}
+          {{char-icon-inline char=who icon-class=(if who.online '' 'faded')}}
         {{/each}}
+        </div>
     </div>
 </div>
