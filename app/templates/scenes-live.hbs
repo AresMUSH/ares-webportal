@@ -17,6 +17,14 @@
 
 <table class="table table-striped">
     
+<tr>
+  <th></th>
+  <th>Title<br/>---<br/>Status</th>
+  <th>Location</th>
+  <th>Participants</th>
+  <th>IC Date<br/>---<br/>Last Activity</th>
+</tr>
+
 {{#each model as |scene| }}
 <tr>
     <td>
@@ -37,8 +45,6 @@
         {{else}}
         <span class="label label-success">Open</span>
         {{/if}}
-
-        <p>{{scene.icdate}}</p>
     </td>
     <td>
         {{scene.location}}
@@ -49,7 +55,8 @@
         {{/each}}
     </td>
     <td>
-        {{scene.updated}}
+      <p>{{scene.icdate}}</p>
+      <p>{{scene.updated}}</p>
     </td>
     <td>
       {{#if scene.watching}}
