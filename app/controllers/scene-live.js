@@ -118,7 +118,7 @@ export default Controller.extend(AuthenticatedController, {
         saveScenePose(scenePose, notify) {
             let pose = scenePose.get('raw_pose');
             if (pose.length === 0) {
-                this.get('flashMessages').danger("You haven't entered antyhing.");
+                this.get('flashMessages').danger("You haven't entered anything.");
                 return;
             }
             scenePose.set('editActive', false);
@@ -139,7 +139,7 @@ export default Controller.extend(AuthenticatedController, {
         addPose(poseType) {
             let pose = this.get('scenePose');
             if (pose.length === 0) {
-                this.get('flashMessages').danger("You haven't entered antyhing.");
+                this.get('flashMessages').danger("You haven't entered anything.");
                 return;
             }
             let api = this.get('gameApi');
