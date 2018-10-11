@@ -85,6 +85,10 @@
     {{#if isApproved}}
 
         {{markdown-editor text=scenePose rows=4}}
+        
+    {{/if}}
+    
+    
     
     <div class="row">
         <div class="col col-xs-12">
@@ -118,8 +122,9 @@
                       </ul>
                     </li>
                 </ul>
-            
-          
+        
+        
+    {{#if isApproved}}
         
             <div class="pull-right">
                 
@@ -135,11 +140,15 @@
             </div>
         
         
-        
-        </div>
-    </div>
+       
 
     {{/if}}
+    
+
+         </div>
+     </div>
+     
+                
 
 
     {{flash-messages}}
