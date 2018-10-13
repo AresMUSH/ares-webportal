@@ -12,10 +12,17 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, RestrictedRoute, 
         let api = this.get('gameApi');
         return api.requestOne('getConfig', { file: params['file']})
         .then(model => {
+          
+          if (model.get('valid')) {
             Object.keys(model.config).forEach(function(k) {
                 model.config[k].new_value = JsYaml.dump(model.config[k].value);
             });
             return model;
+          }
+          else {
+            this.get('flashMessages').danger('There is a problem with this config file.  Check your formatting.');
+            this.transitionTo('textfile', 'config', model.get('file'));
+          }
         })
        
     }
