@@ -5,10 +5,20 @@
 
 <div class="alert alert-warning">This section contains advanced configuration options. Please read the <a href="http://aresmush.com/tutorials/config">AresMUSH.com tutorials</a> before attempting to configure your game here.</div>
    
-<h2>Game Directory</h2>
+<h2>Game Information</h2>
 <ul>
-    <li>{{#link-to 'game-edit'}}Edit Basic Game Information{{/link-to}}</li>
-    <li>{{#link-to 'setup-colors'}}Edit Theme Colors{{/link-to}}</li>
+    <li>{{#link-to 'game-edit'}}Game Directory Information{{/link-to}}</li>
+    <li>{{#link-to 'textfile' 'text' 'connect.txt'}}Connect Screen{{/link-to}}</li>
+    <li>{{#link-to 'textfile' 'text' 'tos.txt'}}Terms of Service{{/link-to}}</li>
+</ul>
+
+<h2>Website</h2>
+
+<ul>
+<li>{{#link-to 'setup-colors'}}Edit Theme Colors{{/link-to}}</li>
+<li>{{#link-to 'textfile' 'text' 'website.txt'}}Home Page Text{{/link-to}}</li>
+<li>{{#link-to 'files'}}Upload Files{{/link-to}} <span class="hint">(Theme images live in the theme_files folder.)</span></li>
+<li>{{#link-to 'textfile' 'style' 'custom_style.scss'}}Custom CSS Style{{/link-to}}</li>
 </ul>
 
 <h2>Plugins</h2>
