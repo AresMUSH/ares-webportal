@@ -19,10 +19,10 @@
     
 <tr>
   <th></th>
-  <th>Title<br/>---<br/>Status</th>
+  <th>Title / Status</th>
   <th>Location</th>
   <th>Participants</th>
-  <th>IC Date<br/>---<br/>Last Activity</th>
+  <th>IC Date</th>
 </tr>
 
 {{#each model as |scene| }}
@@ -56,7 +56,6 @@
     </td>
     <td>
       <p>{{scene.icdate}}</p>
-      <p>{{scene.updated}}</p>
     </td>
     <td>
       {{#if scene.watching}}

@@ -52,7 +52,7 @@ export default Controller.extend({
     onConnect: function(self) {
         document.getElementById("sendMsg").focus();
         self.set('connected', true);   
-	self.set('messages', []);     
+	      self.set('messages', []);     
     },
     onDisconnect: function(self) {
         self.set('connected', false);

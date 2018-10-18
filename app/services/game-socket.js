@@ -65,7 +65,19 @@ export default Service.extend({
             socket.onmessage = function(evt) {
                 self.handleMessage(self, evt);
             };
-            
+            socket.onclose = function(evt) {
+              self.get('flashMessages').add({
+                message: 'Your connection to the game has been lost!  You will no longer see updates.  Try reloading the page.  If the problem persists, the game may be down.',
+                type: 'danger',
+                priority: 200,
+                sticky: true,
+                destroyOnClick: true,
+                onDestroy() {
+                  // behavior triggered when flash is destroyed
+                }
+              });
+              self.notify("Connection lost.");
+            };            
             this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
         
             if (this.get('browserNotification')) {

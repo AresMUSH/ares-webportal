@@ -1,7 +1,7 @@
-{{title model.tag}}
-<h1>Mail - {{model.tag}}</h1>
+{{title tag}}
+<h1>Mail - {{tag}}</h1>
 
-[ <a href="/mail">Inbox</a> ]
+[  <a href="#" {{action 'changeTag' 'Inbox'}}>Inbox</a> ]
 {{#each model.tags as |tag|}}
 [ <a href="#" {{action 'changeTag' tag}}>{{tag}}</a> ]
 {{/each}}
