@@ -5,14 +5,14 @@ export default Service.extend({
     flashMessages: service(),
     session: service(),
     routing: service('-routing'),
-    
+
     serverUrl(route) {
         var base;
         if (aresconfig.use_api_proxy) {
-            base = "http://" + aresconfig.host + ":" + aresconfig.web_portal_port + "/api";
-        } 
+            base = "http://" + window.location.host + ":" + aresconfig.web_portal_port + "/api";
+        }
         else {
-            base = "http://" + aresconfig.host + ":" + aresconfig.api_port;
+            base = "http://" + window.location.host + ":" + aresconfig.api_port;
         }
         if (route) {
             return base + "/" + route;
@@ -20,9 +20,9 @@ export default Service.extend({
             return base;
         }
     },
-    
+
     request(cmd, args) {
-     return $.post(this.serverUrl("request"), 
+     return $.post(this.serverUrl("request"),
         {
             cmd: cmd,
             args: args,
@@ -36,7 +36,7 @@ export default Service.extend({
         }).catch(() => {
                     Ember.getOwner(this).lookup('router:main').transitionTo('error', { queryParams: { message: "There was a problem connecting to the game.  It may be down." }}) });
     },
-    
+
     requestOne(cmd, args = {}, transitionToOnError = 'home') {
         return this.request(cmd, args).then((response) => {
             if (response.error) {
@@ -50,7 +50,7 @@ export default Service.extend({
         });
     },
 
-    requestMany(cmd, args = {}, transitionToOnError = 'home') {    
+    requestMany(cmd, args = {}, transitionToOnError = 'home') {
         return this.request(cmd, args).then((response) => {
             if (response.error) {
                 this.get('flashMessages').danger(response.error);
@@ -61,6 +61,6 @@ export default Service.extend({
             }
             return response.map(r => Ember.Object.create(r));
         });
-    }    
-    
+    }
+
 });

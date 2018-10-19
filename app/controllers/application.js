@@ -12,39 +12,39 @@ export default Controller.extend(AuthenticatedController, {
     currentRoute: function() {
         return window.location;
     }.property(),
-    
-    mushName: function() { 
+
+    mushName: function() {
         return this.get('model.game.name');
     }.property(),
-    
+
     mushPort: function() {
-        return aresconfig.mush_port;        
+        return aresconfig.mush_port;
     }.property(),
-    
+
     mushHost: function() {
-        return aresconfig.host;        
+        return window.location.host;
     }.property(),
-    
+
     mushVersion: function() {
         return aresconfig.version;
     }.property(),
-    
+
     portalVersion: function() {
       return aresweb_version;
     }.property(),
-    
+
     currentUser: function() {
         return this.get('session.data.authenticated');
     }.property(),
-    
+
     onSidebarUpdate: function() {
         this.send('reloadSidebar');
     },
-    
+
     sidebar: function() {
         return this.get('model');
     }.property('refreshSidebar'),
-    
+
     setupCallback: function() {
         let self = this;
         this.get('gameSocket').set('sidebarCallback', function() {
