@@ -15,7 +15,7 @@ export default Service.extend({
     sidebarCallback: null,
     
     socketUrl() {
-        return `ws://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
+        return `ws://${window.location.host}:${aresconfig.websocket_port}/websocket`;
     },
     
     checkSession(charId) {
