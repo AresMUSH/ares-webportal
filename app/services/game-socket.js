@@ -15,7 +15,8 @@ export default Service.extend({
     sidebarCallback: null,
     
     socketUrl() {
-        return `ws://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
+      var protocol = aresconfig.use_https ? 'wss' : 'ws';
+      return `${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
     },
     
     checkSession(charId) {
@@ -28,12 +29,11 @@ export default Service.extend({
     // Regular alert notification
     notify(msg, type = 'success') {
         
-        if (this.get('windowVisible')) {
-            if (msg) {
-               alertify.notify(msg, type, 10);
-            }
+        if (msg) {
+          alertify.notify(msg, type, 60);
         }
-        else {
+      
+        if (!this.get('windowVisible')) {
             if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
                 this.get('favicon').changeFavicon(true);
                 try {
@@ -51,7 +51,8 @@ export default Service.extend({
         this.set('charId', charId);
         
         if (socket) {
-            socket.close();
+          this.handleConnect();
+          return;
         }
         
         try
@@ -60,12 +61,24 @@ export default Service.extend({
             this.set('socket', socket);
             let self = this;
             socket.onopen = function() {
-                self.handleConnect(self);
+                self.handleConnect();
             };
             socket.onmessage = function(evt) {
                 self.handleMessage(self, evt);
             };
-            
+            socket.onclose = function() {
+              self.get('flashMessages').add({
+                message: 'Your connection to the game has been lost!  You will no longer see updates.  Try reloading the page.  If the problem persists, the game may be down.',
+                type: 'danger',
+                priority: 200,
+                sticky: true,
+                destroyOnClick: true,
+                onDestroy() {
+                  // behavior triggered when flash is destroyed
+                }
+              });
+              self.notify("Connection lost.");
+            };            
             this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
         
             if (this.get('browserNotification')) {
@@ -79,21 +92,28 @@ export default Service.extend({
     },
     
     sessionStopped() {
-        let socket = this.get('socket');
         this.set('charId', null);
-        if (socket) {
+        this.sendCharId();
+        /*
+        
+        let socket = this.get('socket');
+            if (socket) {
             socket.close();
             this.set('socket', null);
-        }
+        }*/
     },
     
-    handleConnect(self) {
-        let cmd = {
-          'type': 'identify',
-          'data': { 'id': self.get('charId') }
-        };
-        let json = JSON.stringify(cmd);
-        
+    sendCharId() {
+      let cmd = {
+        'type': 'identify',
+        'data': { 'id': this.get('charId') }
+      };
+      let json = JSON.stringify(cmd);
+      return this.get('socket').send(json);
+    },
+    
+    handleConnect() {
+      let self = this;
         // Blur is the event that gets triggered when the window becomes active.
         $(window).blur(function(){
             self.set('windowVisible', false);
@@ -102,8 +122,8 @@ export default Service.extend({
             self.set('windowVisible', true);
             self.get('favicon').changeFavicon(false);                    
         });
-
-        return self.get('socket').send(json);
+        
+        this.sendCharId();
     },
     
     handleMessage(self, evt) {

@@ -35,6 +35,12 @@ export default Controller.extend({
             return;
         }
         
+        var notification_type = data.args.notification_type;
+        
+        if (notification_type != "webclient_output") {
+            return;
+        }
+        
         let html = ansi_up.ansi_to_html(data.args.message);
         this.get('messages').pushObject(html);
           
@@ -52,8 +58,16 @@ export default Controller.extend({
     onConnect: function(self) {
         document.getElementById("sendMsg").focus();
         self.set('connected', true);   
-	self.set('messages', []);     
+        self.set('messages', []); 
+        
+        let cmd = {
+          'type': 'identify',
+          'data': { 'id': this.get('charId'), 'webclient': true }
+        };
+        let json = JSON.stringify(cmd);
+        this.get('websocket').send(json);
     },
+    
     onDisconnect: function(self) {
         self.set('connected', false);
     },
@@ -79,7 +93,8 @@ export default Controller.extend({
     actions: {
         connect() {
             var idle_keepalive_ms = 60000;
-            this.set('websocket', new WebSocket(`ws://${aresconfig.host}:${aresconfig.websocket_port}/websocket`));
+            var protocol = aresconfig.use_https ? 'wss' : 'ws';
+            this.set('websocket', new WebSocket(`${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`));
                 var self = this;
                 this.get('websocket').onmessage = function(evt) { 
                     self.onMessage(evt);

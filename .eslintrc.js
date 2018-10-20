@@ -11,9 +11,11 @@ module.exports = {
 
   },
   rules: {
+      'no-console': 'off'
   },
   "globals": {
       "aresconfig": false,
+      "aresweb_version": false,
       "ansi_up": false,
       "Ember": false,
       "moment": false,
