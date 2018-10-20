@@ -29,6 +29,10 @@ export default Controller.extend(AuthenticatedController, {
         return aresconfig.version;
     }.property(),
     
+    portalVersion: function() {
+      return aresweb_version;
+    }.property(),
+    
     currentUser: function() {
         return this.get('session.data.authenticated');
     }.property(),
