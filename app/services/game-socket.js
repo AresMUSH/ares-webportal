@@ -6,26 +6,26 @@ export default Service.extend({
     routing: service('-routing'),
     flashMessages: service(),
     favicon: service(),
-    
+
     windowVisible: true,
     socket: null,
     charId: null,
     chatCallback: null,
     sceneCallback: null,
     sidebarCallback: null,
-    
+
     socketUrl() {
 	var protocol = aresconfig.ssl ? 'wss' : 'ws';
         return `${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
     },
-    
+
     checkSession(charId) {
         let socket = this.get('socket');
         if (!socket || this.get('charId') != charId) {
             this.sessionStarted(charId);
         }
     },
-    
+
     // Regular alert notification
     notify(msg, type = 'success') {
         if (this.get('windowVisible')) {
@@ -33,7 +33,8 @@ export default Service.extend({
                alertify.notify(msg, type, 10);
             }
         }
-        else {
+
+        if (!this.get('windowVisible')) {
             if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
                 this.get('favicon').changeFavicon(true);
                 try {
@@ -45,39 +46,52 @@ export default Service.extend({
             } else if (Notification.permission !== "denied") {
     		Notification.requestPermission(function (permission) {
       		    if (permission === "granted") {
-			try {    
+			try {
        			  new Notification(msg);
 		        } catch (error) {
-			
+
 			}
       		    }
-    		});            
+    		});
             }
 	}
     },
-    
+
     sessionStarted(charId) {
         let socket = this.get('socket');
         this.set('charId', charId);
-        
+
         if (socket) {
-            socket.close();
+          this.handleConnect();
+          return;
         }
-        
+
         try
         {
             socket = new WebSocket(this.socketUrl());
             this.set('socket', socket);
             let self = this;
             socket.onopen = function() {
-                self.handleConnect(self);
+                self.handleConnect();
             };
             socket.onmessage = function(evt) {
                 self.handleMessage(self, evt);
             };
-            
+            socket.onclose = function() {
+              self.get('flashMessages').add({
+                message: 'Your connection to the game has been lost!  You will no longer see updates.  Try reloading the page.  If the problem persists, the game may be down.',
+                type: 'danger',
+                priority: 200,
+                sticky: true,
+                destroyOnClick: true,
+                onDestroy() {
+                  // behavior triggered when flash is destroyed
+                }
+              });
+              self.notify("Connection lost.");
+            };
             this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
-        
+
             if (this.get('browserNotification')) {
                 this.get('browserNotification').requestPermission();
             }
@@ -87,39 +101,46 @@ export default Service.extend({
             console.log(`Error loading websocket: ${error}`);
         }
     },
-    
+
     sessionStopped() {
-        let socket = this.get('socket');
         this.set('charId', null);
-        if (socket) {
+        this.sendCharId();
+        /*
+
+        let socket = this.get('socket');
+            if (socket) {
             socket.close();
             this.set('socket', null);
-        }
+        }*/
     },
-    
-    handleConnect(self) {
-        let cmd = {
-          'type': 'identify',
-          'data': { 'id': self.get('charId') }
-        };
-        let json = JSON.stringify(cmd);
-        
+
+    sendCharId() {
+      let cmd = {
+        'type': 'identify',
+        'data': { 'id': this.get('charId') }
+      };
+      let json = JSON.stringify(cmd);
+      return this.get('socket').send(json);
+    },
+
+    handleConnect() {
+      let self = this;
         // Blur is the event that gets triggered when the window becomes active.
         $(window).blur(function(){
             self.set('windowVisible', false);
         });
         $(window).focus(function(){
             self.set('windowVisible', true);
-            self.get('favicon').changeFavicon(false);                    
+            self.get('favicon').changeFavicon(false);
         });
 
-        return self.get('socket').send(json);
+        this.sendCharId();
     },
-    
+
     handleMessage(self, evt) {
-        
+
         var data;
-        
+
         try
         {
            data = JSON.parse(evt.data);
@@ -128,18 +149,18 @@ export default Service.extend({
         {
             data = null;
         }
-        
+
         if (!data) {
             return;
         }
-        
+
         var recipient = data.args.character;
         var notification_type = data.args.notification_type;
-        
+
         if (notification_type == "webclient_output") {
             return;
         }
-        
+
         if (!recipient || recipient === self.get('charId')) {
             var formatted_msg = ansi_up.ansi_to_html(data.args.message, { use_classes: true });
             var notify = true;
@@ -148,7 +169,7 @@ export default Service.extend({
                 var mail_count = mail_badge.text();
                 mail_count = parseInt( mail_count );
                 mail_badge.text(mail_count + 1);
-                
+
             }
             else if (notification_type == "new_chat") {
                 if (this.get('chatCallback')) {
@@ -163,22 +184,22 @@ export default Service.extend({
             else if (notification_type == "new_scene_activity") {
                 if (this.get('sidebarCallback')) {
                     this.get('sidebarCallback')();
-                }                
+                }
                 if (this.get('sceneCallback')) {
                     if (!this.get('windowVisible')) {
-                      this.get('favicon').changeFavicon(true);    
+                      this.get('favicon').changeFavicon(true);
                     }
                     this.get('sceneCallback')(data.args.message);
                 }
                 notify = false;
             }
-            
+
             if (notify) {
                 this.notify(formatted_msg);
             }
         }
-        
+
     }
-    
-    
+
+
 });

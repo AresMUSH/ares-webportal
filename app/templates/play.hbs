@@ -14,10 +14,9 @@
 {{/if}}
 </div>
         <div id="console">
-            {{#each messages as |msg|}}
-            <p><pre>{{{msg}}}</pre></p>
-            {{/each}}
-        
+              {{#each messages as |msg|}}
+{{{msg}}}
+              {{/each}}
         </div>
         
         {{textarea value=text1 id="sendMsg" cols="80" rows="6" enter="sendMsg1"}}

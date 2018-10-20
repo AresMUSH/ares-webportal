@@ -9,7 +9,7 @@ export default Controller.extend({
     gameSocket: service(),
     favicon: service(),
     messages: [],
-    
+
     idleKeepalive: function() {
         if (this.get('connected')) {
             this.sendInput("keepalive");
@@ -18,10 +18,10 @@ export default Controller.extend({
             clearInterval(this.get('keepaliveInterval'));
         }
     },
-    
+
     onMessage: function(evt) {
         var data;
-        
+
         try
         {
            data = JSON.parse(evt.data);
@@ -30,18 +30,24 @@ export default Controller.extend({
         {
             data = null;
         }
-        
+
         if (!data) {
             return;
         }
-        
+
+        var notification_type = data.args.notification_type;
+
+        if (notification_type != "webclient_output") {
+            return;
+        }
+
         let html = ansi_up.ansi_to_html(data.args.message);
         this.get('messages').pushObject(html);
-          
+
         try {
             $('#console').stop().animate({
                 scrollTop: $('#console')[0].scrollHeight
-            }, 800);           
+            }, 800);
         }
         catch(error) {
             // This happens sometimes when transitioning away from play screen.
@@ -51,20 +57,28 @@ export default Controller.extend({
     },
     onConnect: function(self) {
         document.getElementById("sendMsg").focus();
-        self.set('connected', true);   
-	self.set('messages', []);     
+        self.set('connected', true);
+        self.set('messages', []);
+
+        let cmd = {
+          'type': 'identify',
+          'data': { 'id': this.get('charId'), 'webclient': true }
+        };
+        let json = JSON.stringify(cmd);
+        this.get('websocket').send(json);
     },
+
     onDisconnect: function(self) {
         self.set('connected', false);
     },
     showDisconnect: function() {
         return this.get('connected');
     }.property('connected'),
-    
-    showConnect: function() {  
+
+    showConnect: function() {
         return !this.get('connected');
     }.property('connected'),
-    
+
     sendInput: function(msg) {
         var cmd, json;
         cmd = {
@@ -74,8 +88,8 @@ export default Controller.extend({
         json = JSON.stringify(cmd);
         this.get('websocket').send(json);
     },
-    
-    
+
+
     actions: {
         connect() {
             var idle_keepalive_ms = 60000;
@@ -83,7 +97,7 @@ export default Controller.extend({
 
             this.set('websocket', new WebSocket(`${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`));
                 var self = this;
-                this.get('websocket').onmessage = function(evt) { 
+                this.get('websocket').onmessage = function(evt) {
                     self.onMessage(evt);
                 };
                 this.get('websocket').onclose = function() {
@@ -92,14 +106,14 @@ export default Controller.extend({
                 this.get('websocket').onopen = function() {
                     self.onConnect(self);
                 };
-                
+
                 this.get('keepaliveInterval', window.setInterval(function(){ self.idleKeepalive() }, idle_keepalive_ms));
 
-                
+
             },
             disconnect() {
                 if (this.get('connected')){
-                    this.sendInput('quit');                    
+                    this.sendInput('quit');
                 }
             },
             sendMsg1() {
