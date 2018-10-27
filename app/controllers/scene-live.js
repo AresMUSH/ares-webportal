@@ -36,6 +36,10 @@ export default Controller.extend(AuthenticatedController, {
             });            
         }
     },
+
+    rollEnabled: function() {
+      return this.get('model.abilities').length > 0;
+    }.property('model.abilities'),
     
     pageTitle: function() {
         return 'Scene ' + this.get('model.scene.id');

@@ -14,6 +14,7 @@ export default Controller.extend(AuthenticatedController, {
         this.get('model').forEach(s => {
           if (s.id === sceneId) {
             s.set('is_unread', true);
+            s.set('updated', moment().format('dd MMM DD, YYYY h:mm a'))
           }
         });   
     },

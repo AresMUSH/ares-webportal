@@ -105,7 +105,11 @@
                         <li>{{#link-to 'scene-edit' model.scene.id}}Edit Scene{{/link-to}}</li>
                         
                         {{#if (not model.scene.completed)}}
+                        
+                        {{#if rollEnabled}}
                         <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
+                        {{/if}}
+                        
                         <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
                          
                          <li role="separator" class="divider"></li>
