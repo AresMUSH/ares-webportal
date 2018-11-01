@@ -93,8 +93,10 @@ export default Controller.extend({
     actions: {
         connect() {
             var idle_keepalive_ms = 60000;
-            var protocol = aresconfig.use_https ? 'wss' : 'ws';
-            this.set('websocket', new WebSocket(`${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`));
+            var url = new URL('/websocket',window.location.href);
+            url.protocol = window.location.protocol === "https:" ? "wss" : "ws";
+            url.port = window.location.port === "" ? ( window.location.protocol === "https:" ? 443 : 80 ) : window.location.port
+            this.set('websocket', new WebSocket(url.href));
                 var self = this;
                 this.get('websocket').onmessage = function(evt) { 
                     self.onMessage(evt);

@@ -8,13 +8,17 @@ export default Service.extend({
     
     serverUrl(route) {
         var base;
+        var url;
         var protocol = aresconfig.use_https ? 'https' : 'http';
         if (aresconfig.use_api_proxy) {
-          base = `${protocol}://${aresconfig.host}:${aresconfig.web_portal_port}/api`;
+          url = new URL('/api',window.location.href);
+          url.port = window.location.port === "" ? ( window.location.protocol === "https:" ? 443 : 80 ) : window.location.port
         } 
         else {
-          base = `${protocol}://${aresconfig.host}:${aresconfig.api_port}`;
+          url = new URL(window.location.href);
+          url.port = aresconfig.api_port;
         }
+        base = url.href;
         if (route) {
             return base + "/" + route;
         } else {

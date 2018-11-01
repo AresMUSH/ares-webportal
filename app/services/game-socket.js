@@ -15,8 +15,10 @@ export default Service.extend({
     sidebarCallback: null,
     
     socketUrl() {
-      var protocol = aresconfig.use_https ? 'wss' : 'ws';
-      return `${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
+        var url = new URL('/websocket',window.location.href);
+        url.protocol = window.location.protocol === "https:" ? "wss" : "ws";
+        url.port = window.location.port === "" ? ( window.location.protocol === "https:" ? 443 : 80 ) : window.location.port
+        return url.href;
     },
     
     checkSession(charId) {
@@ -66,6 +68,9 @@ export default Service.extend({
             socket.onmessage = function(evt) {
                 self.handleMessage(self, evt);
             };
+            socket.onerror = function(err) {
+              console.log('WebSocket Error: ' + err);
+            }
             socket.onclose = function() {
               self.get('flashMessages').add({
                 message: 'Your connection to the game has been lost!  You will no longer see updates.  Try reloading the page.  If the problem persists, the game may be down.',
