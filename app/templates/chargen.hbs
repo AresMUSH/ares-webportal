@@ -23,12 +23,12 @@
 
      <div class="alert alert-info">
 
-             <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen.</p>
+             <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen. You can also review your application at any time to see errors.</p>
              <p>
                  <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
                  <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
              </p>
-
+             <p>If you want to start over, you can reset your Attributes and Skills to the defaults set by your Schools.</p>
         {{#unless (or model.app.game.disabled_plugins.fs3skills model.char.fs3.reset_needed) }}
             <p>
               <button name="reset" {{action 'reset'}} class="btn btn-primary">Reset Attributes and Skills</button>
@@ -191,7 +191,7 @@
                      {{/each}}
 
                      <p><br></p>
-                     <div class="cg-tip">
+                     <div class="cg-tip-table">
                      <p><b>What level should I choose?</b></p>
                      <table>
                      <thead>
@@ -245,7 +245,8 @@
                      <li> You can have up to six action skills at level 5 or above, three at level six or above, and one at level 7. </li>
                      <li>No one may start with a level 8 action skill.</li>
                      <li>Your Major School should be level 2 and your Minor School should be level 1. If you have only a Major School, it may be level 3.</li>
-                   </ul><br><br></div>
+                   </ul></div>
+                   <br><br>
                      {{#each model.char.fs3.fs3_action_skills as |skill|}}
                      {{#if (or skill.rating (not skill.is_school))}}
                      {{#fs3-actionbox rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.fs3.max_skill_rating minRating=model.cgInfo.fs3.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
@@ -254,7 +255,7 @@
                      {{/if}}
 		                 {{/each}}
                   <p><br></p>
-                  <div class="cg-tip">
+                  <div class="cg-tip-table">
                   <p><b>What level should I choose?</b></p>
                     <table>
                     <tr>
@@ -352,7 +353,7 @@
 
                      <button class="btn btn-default" id="addbg" {{action "addBackgroundSkill"}}>Add Background Skill</button>
                      <p><br><br><br></p>
-                     <div class="cg-tip">
+                     <div class="cg-tip-table">
                      <p><b>What level should I choose?</b></p>
                      <table>
                      <tr>
