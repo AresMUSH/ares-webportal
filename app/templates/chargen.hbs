@@ -177,7 +177,7 @@
                        <p>{{{ansi-format text=model.cgInfo.fs3.abilities.attrs_blurb}}}</p>
 
                        <ul>
-                       <li>You get a rating of up to 'Average' for free.</li>
+                       <li>You get a rating of up to 'Average' for free. Each additional rating costs 2 points. </li>
                        <li>You can spend up to 13 additional points on attributes.</li>
                        <li>You can have up to four attributes at level 3 or above and two at level 4.</li>
                        <li>No one may have a Magic attribute above 1.</li>
@@ -240,6 +240,7 @@
                      <p>{{{ansi-format text=model.cgInfo.fs3.abilities.action_blurb}}}</p>
 
                      <ul>
+                     <li>You automatically get the Everyman (1) rating in each Action Skill for free. Each additional rating costs 1 point.</li>
                      <li>You can spend up to 28 points on action skills.</li>
                      <li> You can have up to six action skills at level 5 or above, three at level six or above, and one at level 7. </li>
                      <li>No one may start with a level 8 action skill.</li>
@@ -331,8 +332,14 @@
                            Background Skills
                        </div>
                    <div class="panel-body">
-
-                     <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.background_blurb}}} You must have at least 3 background skills. To remove a background skill, set its rating to Everyman.</p>
+                     <div class="cg-tip"
+                     <p class>{{{ansi-format text=model.cgInfo.fs3.abilities.background_blurb}}}  </p>
+                     <ul>
+                       <li>You can have up to 6 rating points of Background Skills for free. Additional Background Skills cost 1 AP each.</li>
+                       <li>You must have at least 3 background skills.</li>
+                       <li>To remove a background skill, set its rating to Everyman.</li>
+                     </ul>
+                   </div>
                      <p></p>
 
                      {{#each model.char.fs3.fs3_backgrounds as |skill|}}
@@ -438,7 +445,14 @@
                    <li>What are the major events in your character's life? Where are they from, what do they do for a living?</li>
                    <li>Is your character a magic user? If so, how have they reacted to its presence?</li>
                    <li>Have they just arrived in Grand Lake, or are they a native? What do they think about it?</li>
-                 </ul></div>
+                 </ul>
+                 <p><b>Magic and Coming to Grand Lake</b></p>
+                 <p>Magic has been slowly trickling back into the world since early 2019. Those who are inclined toward its use experience this in a variety of small ways. Take a look at the level one spells in your <a href="/wiki/schools">Schools</a> to get an idea of the sorts of things they may have been doing unintentionally.</p>
+
+                 <p>Although <a href="/wiki/grand_lake">Grand Lake</a> seems to have an abnormally high population of magic users, not all character will be natives. Those who are not are drawn to Grand Lake via dreams. Vague at first, the dreams grow increasingly explicit.  They feature images of the Rocky Mountains and Grand Lake, along with an unmistakable sense that answers lie there. Later dreams may include an outright calling, a whisper that tells you to come join the others in Grand Lake. The dreams are largely hopeful, but some may sense an ominous undercurrent (<i>before it's too late</i>) in their dreams.</p>
+
+               </div>
+
 
                    {{markdown-editor text=model.char.background}}
 
