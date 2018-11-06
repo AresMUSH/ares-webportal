@@ -26,6 +26,7 @@
              <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen.</p>
              <p>
                  <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
+                 <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
              </p>
 
         {{#unless (or model.app.game.disabled_plugins.fs3skills model.char.fs3.reset_needed) }}
@@ -101,7 +102,7 @@
 
                          {{else if (eq key 'age')}}
                              {{input type="text" size=50 value=demo.value}}
-                             <div class="cg-tip">Enter an age or a birthdate in {{model.cgInfo.date_format}} format.</div>
+                             <div class="cg-subtle-tip">Enter an age or a birthdate in {{model.cgInfo.date_format}} format.</div>
                          {{else}}
                              {{input type="text" size=50 value=demo.value}}
                          {{/if}}
@@ -116,14 +117,14 @@
                     {{#power-select selected=model.char.secretpref searchField="value" options=model.cgInfo.secret_prefs onchange=(action "secretPrefChanged") as |pref|}}
                      {{pref.value}} - {{pref.desc}}
                     {{/power-select}}
-                    <p class="cg-tip">Secrets are admin-created pieces of information about your character, which your character may or may not be aware of. They are hooks for plots and story development over time.</p>
+                    <p class="cg-subtle-tip">Secrets are admin-created pieces of information about your character, which your character may or may not be aware of. They are hooks for plots and story development over time.</p>
                    </div>
 
                  </div>
           </div>
 
           <div role="tabpanel" class="tab-pane" id="groups">
-            <p class="cg-tip"><a href="http://spiritlakemu.com/wiki/schools" target="_blank">Schools</a> reflect the type of spells a magic user is able to do. A magic user may have an affinity for a single School, or they may possess an affinity for two, one lesser and one greater. <br><br>Setting your School(s) here will set your Major School to level 2 and your Minor School to level 1. If you choose only a Major School, you can raise it to level 3 on the Action Skills tab.<br><br></p>
+            <p class="cg-tip"><a href="http://spiritlakemu.com/wiki/schools" target="_blank">Schools</a> reflect the type of spells a magic user is able to do. A magic user may have an affinity for a single School, or they may possess an affinity for two, one lesser and one greater. <br><br>Setting your School(s) here will set your Major School to level 2 and your Minor School to level 1. If you choose only a Major School, you can raise it to level 3 on the Action Skills tab.</p><br><br>
                   {{#each-in model.char.groups as |key group|}}
                   <div class="form-group row">
                       <div class="col-sm-3">
@@ -138,7 +139,7 @@
                         {{g.value}} {{if g.desc '-'}} {{g.desc}}
                       {{/power-select}}
                       {{/if}}
-                         <p class="cg-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
+                         <p class="cg-subtle-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
 
                       </div>
                   </div>
@@ -171,15 +172,16 @@
                            Attributes
                        </div>
                    <div class="panel-body">
+                     <div class="cg-tip">
+                       <p>{{{ansi-format text=model.cgInfo.fs3.abilities.attrs_blurb}}}</p>
 
-                     <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.attrs_blurb}}}</p>
-
-                     <p class="cg-tip"><ul>
-                     <li>You get a rating of up to 'Average' for free.</li>
-                     <li>You can spend up to 13 additional points on attributes.</li>
-                     <li>You can have up to four attributes at level 3 or above and two at level 4.</li>
-                     <li>No one may have a Magic attribute above 1.</li>
-                     </ul></p>
+                       <ul>
+                       <li>You get a rating of up to 'Average' for free.</li>
+                       <li>You can spend up to 13 additional points on attributes.</li>
+                       <li>You can have up to four attributes at level 3 or above and two at level 4.</li>
+                       <li>No one may have a Magic attribute above 1.</li>
+                       </ul>
+                    </div>
 
                      {{#each model.char.fs3.fs3_attributes as |att|}}
                      {{#fs3-attrbox rating=att.rating ratingName=att.rating_name maxRating=model.cgInfo.fs3.max_attr_rating  updated=(action "abilityChanged")}}
@@ -188,6 +190,7 @@
                      {{/each}}
 
                      <p><br></p>
+                     <div class="cg-tip">
                      <p><b>What level should I choose?</b></p>
                      <table>
                      <thead>
@@ -221,6 +224,7 @@
                      </tbody>
                    </table>
                    </div>
+                   </div>
                  </div>
             </div>
 
@@ -231,15 +235,15 @@
                            Action Skills
                        </div>
                    <div class="panel-body">
+                     <div class="cg-tip">
+                     <p>{{{ansi-format text=model.cgInfo.fs3.abilities.action_blurb}}}</p>
 
-                     <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.action_blurb}}}</p>
-
-                     <p class="cg-tip"><ul>
+                     <ul>
                      <li>You can spend up to 28 points on action skills.</li>
                      <li> You can have up to six action skills at level 5 or above, three at level six or above, and one at level 7. </li>
                      <li>No one may start with a level 8 action skill.</li>
                      <li>Your Major School should be level 2 and your Minor School should be level 1. If you have only a Major School, it may be level 3.</li>
-                     </ul><br><br></p>
+                   </ul><br><br></div>
                      {{#each model.char.fs3.fs3_action_skills as |skill|}}
                      {{#if (or skill.rating (not skill.is_school))}}
                      {{#fs3-actionbox rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.fs3.max_skill_rating minRating=model.cgInfo.fs3.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
@@ -248,6 +252,7 @@
                      {{/if}}
 		                 {{/each}}
                   <p><br></p>
+                  <div class="cg-tip">
                   <p><b>What level should I choose?</b></p>
                     <table>
                     <tr>
@@ -311,6 +316,7 @@
                     <td class="tg-0pky">Einstein, Stephen Hawking, Shakespeare, or Beethoven.</td>
                     </tr>
                     </table>
+                  </div>
                    </div>
                  </div>
 
@@ -326,6 +332,7 @@
                    <div class="panel-body">
 
                      <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.background_blurb}}} You must have at least 3 background skills. To remove a background skill, set its rating to Everyman.</p>
+                     <p></p>
 
                      {{#each model.char.fs3.fs3_backgrounds as |skill|}}
 
@@ -336,6 +343,7 @@
 
                      <button class="btn btn-default" id="addbg" {{action "addBackgroundSkill"}}>Add Background Skill</button>
                      <p><br><br><br></p>
+                     <div class="cg-tip">
                      <p><b>What level should I choose?</b></p>
                      <table>
                      <tr>
@@ -370,6 +378,7 @@
                      </tr>
                    </table>
                    </div>
+                 </div>
                  </div>
                </div>
                <div role="tabpanel" class="tab-pane" id="fs3lang">
@@ -423,12 +432,12 @@
                  Background
                </div>
                <div class="panel-body">
-                   <div class="cg-tip">{{{ansi-format text=model.cgInfo.bg_blurb}}}</div>
-                   <p class="cg-tip"><ul>
+                   <div class="cg-tip">{{{ansi-format text=model.cgInfo.bg_blurb}}}
+                   <ul>
                    <li>What are the major events in your character's life?</li>
                    <li>Is your character a magic user? If so, how have they reacted to its presence?</li>
                    <li>Have they just arrived in Grand Lake, or are they a native? What do they think about it?</li>
-                   </ul></p>
+                 </ul></div>
 
                    {{markdown-editor text=model.char.background}}
 
@@ -472,7 +481,8 @@
 
              <p>
                  <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
-                 <button name="review" {{action 'review'}} class="btn btn-success">Review/Submit</button>
+                 <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
+                 <button name="review" {{action 'review'}} class="btn btn-success">Submit</button>
              </p>
 
      </div>
