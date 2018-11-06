@@ -23,7 +23,7 @@
 
      <div class="alert alert-info">
 
-             <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen. You can also review your application at any time to see errors.</p>
+             <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen. You can also review your application at any time to see the number of points you have left, as well as any errors.</p>
              <p>
                  <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
                  <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
@@ -182,7 +182,7 @@
                        <li>You can have up to four attributes at level 3 or above and two at level 4.</li>
                        <li>No one may have a Magic attribute above 1.</li>
                        </ul>
-                    </div>
+                    </div><br><br>
 
                      {{#each model.char.fs3.fs3_attributes as |att|}}
                      {{#fs3-attrbox rating=att.rating ratingName=att.rating_name maxRating=model.cgInfo.fs3.max_attr_rating  updated=(action "abilityChanged")}}
@@ -342,7 +342,7 @@
                      </ul>
                    </div>
 
-                     <p></p>
+                     <br><br>
 
                      {{#each model.char.fs3.fs3_backgrounds as |skill|}}
 
@@ -401,7 +401,7 @@
 
 
 
-                         <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.language_blurb}}} To remove a language, set its rating to Unskilled.</p>
+                         <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.language_blurb}}} To remove a language, set its rating to Unskilled.</p><br><br>
                        {{#each model.char.fs3.fs3_languages as |skill|}}
                        {{#fs3-langbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
                            <b>{{skill.name}}</b> {{skill.desc}}
@@ -449,7 +449,7 @@
                    <li>Have they just arrived in Grand Lake, or are they a native? What do they think about it?</li>
                  </ul>
                  <p><b>Magic and Coming to Grand Lake</b></p>
-                 <p>Magic has been slowly trickling back into the world since early 2019. Those who are inclined toward its use experience this in a variety of small ways. Take a look at the level one spells in your <a href="/wiki/schools">Schools</a> to get an idea of the sorts of things they may have been doing unintentionally.</p>
+                 <p><a href="/wiki/magic">Magic</a> has been slowly trickling back into the world since early 2019. Those who are inclined toward its use experience this in a variety of small ways. Take a look at the level one spells in your <a href="/wiki/schools">Schools</a> to get an idea of the sorts of things they may have been doing unintentionally.</p>
 
                  <p>Although <a href="/wiki/grand_lake">Grand Lake</a> seems to have an abnormally high population of magic users, not all character will be natives. Those who are not are drawn to Grand Lake via dreams. Vague at first, the dreams grow increasingly explicit.  They feature images of the Rocky Mountains and Grand Lake, along with an unmistakable sense that answers lie there. Later dreams may include an outright calling, a whisper that tells you to come join the others in Grand Lake. The dreams are largely hopeful, but some may sense an ominous undercurrent (<i>before it's too late</i>) in their dreams.</p>
 
