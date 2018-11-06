@@ -52,6 +52,7 @@
      <ul class="nav nav-tabs" role="tablist">
 
        <li role="presentation"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
+       <li role="presentation"><a href="#misc" aria-controls="misc" role="tab" data-toggle="tab">Background & More</a></li>
        <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Schools</a></li>
 
         {{#if model.app.game.disabled_plugins.fs3skills}}
@@ -71,7 +72,7 @@
 
            {{/if}}
          {{/if}}
-       <li role="presentation"><a href="#misc" aria-controls="misc" role="tab" data-toggle="tab">Miscellaneous</a></li>
+
      </ul>
 
      <!-- Tab panes -->
@@ -434,7 +435,7 @@
                <div class="panel-body">
                    <div class="cg-tip">{{{ansi-format text=model.cgInfo.bg_blurb}}}
                    <ul>
-                   <li>What are the major events in your character's life?</li>
+                   <li>What are the major events in your character's life? Where are they from, what do they do for a living?</li>
                    <li>Is your character a magic user? If so, how have they reacted to its presence?</li>
                    <li>Have they just arrived in Grand Lake, or are they a native? What do they think about it?</li>
                  </ul></div>
