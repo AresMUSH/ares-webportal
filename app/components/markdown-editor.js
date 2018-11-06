@@ -4,12 +4,12 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
     text: '',
     preview: null,
-    rows: 6,
+    rows: 12,
     gameApi: service(),
-    
-    actions: { 
+
+    actions: {
         onEnter() {
-            this.send('onEnter');  
+            this.send('onEnter');
         },
         preview() {
             if (this.get('preview.length') > 0) {
@@ -17,7 +17,7 @@ export default Component.extend({
                 return;
             }
             let api = this.get('gameApi');
-            
+
             api.requestOne('markdownPreview', { text: this.get('text') })
             .then( (response) => {
                 if (response.error) {
