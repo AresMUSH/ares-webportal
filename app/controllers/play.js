@@ -9,6 +9,7 @@ export default Controller.extend({
     gameSocket: service(),
     favicon: service(),
     messages: [],
+    scrollPaused: false,
     
     idleKeepalive: function() {
         if (this.get('connected')) {
@@ -43,22 +44,14 @@ export default Controller.extend({
         
         let html = ansi_up.ansi_to_html(data.args.message);
         this.get('messages').pushObject(html);
-          
-        try {
-            $('#console').stop().animate({
-                scrollTop: $('#console')[0].scrollHeight
-            }, 800);           
-        }
-        catch(error) {
-            // This happens sometimes when transitioning away from play screen.
-        }
-
+        this.scrollToBottom();  
         this.get('gameSocket').notify(null);
     },
     onConnect: function(self) {
         document.getElementById("sendMsg").focus();
         self.set('connected', true);   
         self.set('messages', []); 
+        self.set('scrollPaused', false);
         
         let cmd = {
           'type': 'identify',
@@ -71,6 +64,23 @@ export default Controller.extend({
     onDisconnect: function(self) {
         self.set('connected', false);
     },
+    
+    scrollToBottom: function() {
+      // Unless scrolling paused 
+      if (this.get('scrollPaused')) {
+        return;
+      }
+      
+      try {
+        $('#console').stop().animate({
+          scrollTop: $('#console')[0].scrollHeight
+        }, 800);           
+      }
+      catch(error) {
+        // This happens sometimes when transitioning away from play screen.
+      }      
+    },
+    
     showDisconnect: function() {
         return this.get('connected');
     }.property('connected'),
@@ -122,6 +132,13 @@ export default Controller.extend({
             sendMsg2() {
                 this.sendInput(this.get('text2'));
                 this.set('text2', '');
+            },
+            pauseScroll() {
+              this.set('scrollPaused', true);
+            },
+            unpauseScroll() {
+              this.set('scrollPaused', false);
+              this.scrollToBottom();
             }
         }
     });
