@@ -204,6 +204,10 @@ export default Controller.extend(AuthenticatedController, {
             });
         },
         
+        scrollDown() {
+          this.scrollSceneWindow();
+        },
+        
         refresh() {
             this.resetOnExit();
             this.send('reloadModel');
