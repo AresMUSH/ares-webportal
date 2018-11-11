@@ -18,19 +18,22 @@
 <div class="row">
     <div class="col col-xs-12">
       
-      {{#if showSceneSelection}}
-        <div class="alert alert-info">
-          {{#each model.my_scenes as |scene|}}
-            {{#link-to 'scene-live' scene.id class='btn btn-default'}}#{{scene.id}} {{scene.title}}
-            {{#if scene.is_unread}}
-             <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
-            {{/if}}
-            {{/link-to}}
-          {{/each}}
-        </div>
-        {{/if}}
+    {{#if showSceneSelection}}
+      <div class="alert alert-info">
+        {{#each model.my_scenes as |scene|}}
+          {{#link-to 'scene-live' scene.id class='btn btn-default'}}#{{scene.id}} {{scene.title}}
+          {{#if scene.is_unread}}
+           <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+          {{/if}}
+          {{/link-to}}
+        {{/each}}
+       </div>
+      {{/if}}
+
+        <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
 
     <div class="ansi scene-log" id="live-scene-log">
+    
     
     {{#each scenePoses as |pose|}}    
             {{#if (and isApproved pose.can_edit)}}
