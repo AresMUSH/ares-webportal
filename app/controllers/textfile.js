@@ -8,15 +8,20 @@ export default Controller.extend({
         
         save() {
             let api = this.get('gameApi');
+            let file_type = this.get('model.file_type');
 
-
-            api.requestOne('saveTextFile', { file: this.get('model.file'), file_type: this.get('model.file_type'), text: this.get('model.text') }, null)
+            api.requestOne('saveTextFile', { file: this.get('model.file'), file_type: file_type, text: this.get('model.text') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
         
-            this.get('flashMessages').success('Config saved!');
+            if (file_type == 'style') {
+              this.get('flashMessages').success('Config saved!  You will need to refresh the page for the new styles to take effect.');
+            }
+            else {
+              this.get('flashMessages').success('Config saved!');
+            }
             this.transitionToRoute('setup');
             });  
         }

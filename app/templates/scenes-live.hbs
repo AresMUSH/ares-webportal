@@ -23,6 +23,7 @@
   <th>Location</th>
   <th>Participants</th>
   <th>IC Date</th>
+  <th>Last Activity</th>
 </tr>
 
 {{#each model as |scene| }}
@@ -58,6 +59,7 @@
       <p>{{scene.icdate}}</p>
     </td>
     <td>
+      {{scene.updated}}
       {{#if scene.watching}}
         {{#if (not scene.participating) }}
           <button class="btn btn-default" {{action 'stopWatching' scene.id}}>
