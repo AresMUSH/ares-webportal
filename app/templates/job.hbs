@@ -7,13 +7,107 @@
      {{else}}
      Back to Requests
      {{/if}}
-{{/link-to}}</p>
+{{/link-to}}
 
-     <p>{{char-icon-inline char=model.author}}</p>
+<div class="clearfix"></div>
 
-<p><label>Submitted: </label> {{model.created}}</p>
+</p>
 
-<p><label>Status: </label> <span class="label label-info job-status job-status-{{model.status}}">{{model.status}}</span></p>
+<table>
+  <tr>
+    <td>
+      <label>Author:</label>
+    </td>
+    <td>
+      {{char-icon-inline char=model.author}}
+    </td>
+    <td>
+      &nbsp;
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+     <label>Assigned To:</label> 
+    </td>
+    <td>
+     {{char-icon-inline char=model.assigned_to}} 
+    </td>
+    <td>
+      {{#if model.job_admin}}
+        <ul class="nav">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+            <span class="btn btn-default" href="#" role="button">Assign <span class="caret"></span></span> </a>
+            <ul class="dropdown-menu">
+            {{#each model.job_admin as |staff| }}
+              <li><a href="#" {{action 'assignJob' staff}}>{{staff.name}}</a></li>
+            {{/each}}
+            </ul>
+          </li>
+      </ul>
+      {{else}}
+      &nbsp;
+      {{/if}}
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+       <label>Status: </label>
+    </td>
+    <td>
+      <span class="label label-info job-status job-status-{{model.status}}">{{model.status}}</span>
+    </td>
+    <td>
+      {{#if model.job_admin}}
+          <ul class="nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+              <span class="btn btn-default" href="#" role="button">Change Status <span class="caret"></span></span> </a>
+              <ul class="dropdown-menu">
+              {{#each model.status_values as |status| }}
+                <li><a href="#" {{action 'changeStatus' status}}>{{status}}</a></li>
+              {{/each}}
+              </ul>
+            </li>
+        </ul>
+      {{else}}
+      &nbsp;
+      {{/if}}
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+      <label>Category:</label>
+    </td>
+    <td>
+      {{model.category}}
+    </td>
+    <td>
+      &nbsp;
+    </td>
+  </tr>
+  
+  
+  <tr>
+    <td>
+      <label>Submitted:</label>
+    </td>
+    <td>
+      {{model.created}}
+    </td>
+    <td>
+      &nbsp;
+    </td>
+  </tr>
+  
+  
+</table>
+
 
 <hr/>
 

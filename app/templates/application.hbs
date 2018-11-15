@@ -20,6 +20,14 @@
                            <span class="label label-pill label-primary" id="mailBadge">{{model.unread_mail}}</span>
                            {{/if}}
                            {{/link-to}}
+                           |
+                           {{#link-to 'jobs'}}
+                                {{#if model.jobs_admin}}Jobs{{else}}Requests{{/if}}
+                                {{#if model.job_activity}}
+                                    <span class="label label-pill label-primary" id="jobBadge">{{model.job_activity}}</span>
+                                {{/if}}
+                           {{/link-to}}
+                           
                            | {{#link-to 'logout'}}Logout{{/link-to}}
                        </p>
                     {{else}}
