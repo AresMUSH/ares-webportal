@@ -32,7 +32,7 @@
 </div>
 
 <div class="alert alert-warning">Select a channel.</div>
-        
+
 {{/if}}
 
 
@@ -47,13 +47,13 @@
 
         <div id="chat-window">
         {{#each channel.messages as |message|}}
-            <div class="cg-tip">{{message.timestamp}}</div>
+            <div class="chat-datetime">{{message.timestamp}}</div>
             {{{ansi-format text=message.message}}}
         {{/each}}
         </div>
-        
+
         {{markdown-editor text=chatMessage rows=3 onEnter=(action "send")}}
-    
+
         <div class="pull-right">
             <button class="btn-warning btn" {{action "leaveChannel"}}>Leave Channel</button>
             {{#if channel.muted}}
@@ -63,9 +63,9 @@
             {{/if}}
             <button class="btn-primary btn" {{action "send"}}>Send to {{channel.name}}</button>
         </div>
-    
+
     <div class="clearfix"></div>
-    
+
         <div class="panel panel-default">
           <div class="panel-body">
             <h4>Who's On {{selectedChannel}}</h4>
@@ -82,7 +82,7 @@
           </div>
         </div>
     {{else}}
-    
+
         <div id="chat-window">
         </div>
 
@@ -91,7 +91,7 @@
             <br/>
             <button class="btn btn-default" {{action "joinChannel"}}>Join Channel</button>
         </div>
-        
+
     {{/if}}
 {{/if}}
 
