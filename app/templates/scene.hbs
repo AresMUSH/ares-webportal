@@ -1,10 +1,10 @@
 {{title pageTitle}}
 <h1>{{model.icdate}} - {{model.title}}</h1>
-        
+
 <div class="row log-wrap">
-       
+
     <div class="log-box">
-       
+
         <p>{{model.summary}}</p>
 
         <p><b>Date:</b> {{model.icdate}}</p>
@@ -24,7 +24,7 @@
                None
             {{/if}}
         </p>
-            
+
         <p>
             <b>Plot: </b>
             {{#if model.plot}}
@@ -33,12 +33,12 @@
                 None
             {{/if}}
         </p>
-        
+
         <div>
-          
-            
+
+
         {{scene-tag scene=model}}
-         
+
         {{#if isApproved}}
             {{#if model.has_liked}}
             <button {{action 'like' false}} class="badge badge-likes"><i class="fa fa-heart" area-hidden="true"></i> {{model.likes}}</button>
@@ -48,23 +48,23 @@
         {{else}}
             <button class="badge badge-likes"><i class="far fa-heart" area-hidden="true"></i> {{model.likes}}</button>
         {{/if}}
-        
+
          </div>
-         
+
     </div>
-    
+
     <div class="log-participants-box">
-        
+
     {{#each model.participants as |p|}}
       {{#if (not p.is_ooc)}}
-        <div class="profile-gallery">    
+        <div class="profile-gallery">
             {{char-icon char=p}}
         </div>
       {{/if}}
     {{/each}}
-    
+
     </div>
-    
+
     <div class="clearfix"> </div>
 
 
@@ -73,27 +73,56 @@
 <p>{{#link-to "scenes"}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Scenes{{/link-to}}</p>
 
 
+<div class="row">
+    <div class="col col-xs-12">
+
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                  <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
+                  <ul class="dropdown-menu">
+
+                  {{#if model.can_edit}}
+
+                    <li>{{#link-to 'scene-edit' model.id}}Edit Scene{{/link-to}}</li>
+                    <li><a href="#" {{action 'unshareScene'}}>Unshare Scene</a></li>
+                    <li><a href="#" {{action (mut confirmDelete) true}}>Delete Scene</a></li>
+
+                     <li role="separator" class="divider"></li>
+                   {{/if}}
+
+                  <li>{{#link-to 'scene-download' model.id}}Download Scene{{/link-to}}</li>
+
+                  </ul>
+                </li>
+            </ul>
+
+    </div>
+</div>
+
+
 <div class="scene-log">
     {{{ansi-format text=model.log}}}
 </div>
-    
+
 <br/>
 <p>
-    <b>Tags:</b>  
+    <b>Tags:</b>
     {{#each model.tags as |tag|}}
     {{#link-to 'wiki-tag' tag}}{{tag}}{{/link-to}}
     {{/each}}
    </p>
-   
+
 <p>{{#link-to "scenes"}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Scenes{{/link-to}}</p>
 
 
 
-    
+
     <div class="row">
         <div class="col col-xs-12">
 
-                <ul class="nav navbar-nav">    
+                <ul class="nav navbar-nav">
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
@@ -105,16 +134,16 @@
                         <li>{{#link-to 'scene-edit' model.id}}Edit Scene{{/link-to}}</li>
                         <li><a href="#" {{action 'unshareScene'}}>Unshare Scene</a></li>
                         <li><a href="#" {{action (mut confirmDelete) true}}>Delete Scene</a></li>
-                         
+
                          <li role="separator" class="divider"></li>
                        {{/if}}
-                       
-                      <li>{{#link-to 'scene-download' model.id}}Download Scene{{/link-to}}</li> 
- 	
+
+                      <li>{{#link-to 'scene-download' model.id}}Download Scene{{/link-to}}</li>
+
                       </ul>
                     </li>
                 </ul>
-        
+
         </div>
     </div>
 
