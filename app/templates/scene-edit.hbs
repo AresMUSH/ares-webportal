@@ -1,6 +1,6 @@
 {{title model.scene.title}}
 <h1>Edit Scene {{model.scene.title}}</h1>
-        
+
     {{#if (not model.scene.completed)}}
      <p>
          <label class="col-xs-2 col-form-label">Scene Privacy:</label>
@@ -10,69 +10,79 @@
         {{/power-select}}
     </p>
     {{/if}}
-    
+
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+
+                {{#link-to 'scene' model.scene.id class="btn btn-default"}}Cancel{{/link-to}}
+                <button class="btn btn-primary" {{action 'save'}}>Save</button>
+            </div>
+        </div>
+    </div>
+
     <p>
         <label for="title" class="col-xs-2 col-form-label">Title:</label>
 
         <p>{{input type="text" size=50 id="title" enter="save" value=model.scene.title}}</p>
     </p>
-    
+
     <p>
         <label for="location" class="col-xs-2 col-form-label">Location:</label>
-    
+
         <p>{{input type="text" size=50 id="location" enter="save" value=model.scene.location}}</p>
     </p>
-    
-    
+
+
     <p>
         <label for="icdate" class="col-xs-2 col-form-label">IC Date:</label>
-    
+
         <p>{{input type="text" size=50 id="icdate" enter="save" value=model.scene.icdate}}</p>
     </p>
 
     <p>
         <label class="col-xs-2 col-form-label">Scene Type:</label>
-    
+
         {{#power-select selected=model.scene.scene_type options=sceneTypes onchange=(action "typeChanged") as |type|}}
           {{type}}
         {{/power-select}}
-        
+
     </p>
-    
+
     <p>
         <label class="col-xs-2 col-form-label">Plot:</label>
-    
+
         {{#power-select selected=model.scene.plot options=model.plots allowClear=true searchField="title" onchange=(action "plotChanged") as |plot|}}
           {{plot.title}}
         {{/power-select}}
-    
+
     </p>
-    
+
     <p>
         <label for="tags" class="col-xs-2 col-form-label">Tags:</label>
         <p>{{input type="text" size=50 id="tags" enter="save" value=model.scene.tags}}</p>
-    </p> 
-    
+    </p>
+
 
     <p>
         <label for="participants" class="col-xs-2 col-form-label">Participants:</label>
-    
+
         {{#power-select-multiple selected=model.scene.participants options=model.characters searchField="name" onchange=(action "participantsChanged") as |char|}}
           {{char.name}}
         {{/power-select-multiple}}
-    
+
     </p>
-    
+
     <p>
         <label for="related" class="col-xs-2 col-form-label">Related Scenes:</label>
-    
+
         {{#power-select-multiple selected=model.scene.related_scenes options=model.scenes searchField="title" onchange=(action "relatedChanged") as |scene|}}
           {{scene.icdate}} {{scene.title}}
         {{/power-select-multiple}}
     <div class="hint">It may take a second for the related scenes list to pop up.</div>
-    
+
     </p>
-           
+
     <p>
         <label for="summary" class="col-xs-2 col-form-label">Summary:</label>
         {{markdown-editor text=model.scene.summary}}
@@ -80,16 +90,16 @@
 
 
     {{#if model.scene.shared}}
-    
+
     {{markdown-editor text=model.scene.log rows=20}}
-    
+
     {{/if}}
-    
+
     <div class="row">
         <div class="col col-xs-12">
             <div class="pull-right">
-    
-                {{#link-to 'scene' model.scene.id class="btn btn-default"}}Cancel{{/link-to}} 
+
+                {{#link-to 'scene' model.scene.id class="btn btn-default"}}Cancel{{/link-to}}
                 <button class="btn btn-primary" {{action 'save'}}>Save</button>
             </div>
         </div>
