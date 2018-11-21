@@ -49,7 +49,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-              Game <span class="caret"></span></a>
+              Play <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li>{{#link-to "chargen"}}Create a Character{{/link-to}}</li>
                 {{#if model.game.roster_enabled}}
@@ -62,7 +62,15 @@
                 {{#if (not model.game.disabled_plugins.fs3combat)}}
                 <li>{{#link-to "combats"}}Combats{{/link-to}}</li>
                 {{/if}}
-                <li>{{#link-to "who"}}Who's Online{{/link-to}}</li>
+              </ul>
+            </li>
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                Game
+                <li><a href="/wiki/getting_started">Getting Started</a></li>
+                <li><a href="/wiki/tag/guide">Guides</a></li>
+                <li>{{#link-to "help"}}Help{{/link-to}}</li>
                 <li><hr></li>
                 <li>{{#link-to "chat"}}Chat{{/link-to}}</li>
                 <li>{{#link-to "forum"}}Forum{{/link-to}}</li>
@@ -70,9 +78,7 @@
                     <li>{{#link-to "events"}}Events{{/link-to}}</li>
                 {{/if}}
                 <li>{{#link-to 'jobs'}}Requests{{/link-to}}</li>
-                <li><hr></li>
-                <li><a href="/wiki/getting_started">Getting Started</a></li>
-                <li>{{#link-to "help"}}Help{{/link-to}}</li>
+                <li>{{#link-to "who"}}Who's Online{{/link-to}}</li>
               </ul>
             </li>
 
@@ -100,6 +106,8 @@
                 <li>{{#link-to "characters"}}Characters{{/link-to}}</li>
                 <li>{{#link-to "scenes"}}Scenes & Journals{{/link-to}}</li>
                 <li>{{#link-to "plots"}}Plots{{/link-to}}</li>
+                <li><a href="/forum/5">Story Forum</a></li>
+                <li><a href="/forum/7">Story Actions Forum</a></li>
               </ul>
             </li>
 
