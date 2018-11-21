@@ -48,22 +48,22 @@
         
      <div class="body-wrap">
  
-       <div class="row">
+       <div class="row body-row">
          {{#if (not hideSidebar)}}
              {{#if model.left_sidebar}}
-             <div class="col-md-3">
+             <div class="col-md-3 left-sidebar">
                {{global-sidebar model=sidebar boxStyle="sidebar-box-left"}}
              </div>
              {{/if}}
         {{/if}}
          
          {{#if hideSidebar}}
-             <div class="col-md-12 body-container">
+             <div class="col-md-12 body-container {{if model.left_sidebar 'right-body' 'left-body'}}">
                {{flash-messages}}
                {{outlet}}
              </div>
          {{else}}
-             <div class="col-md-9 body-container">
+             <div class="col-md-9 body-container {{if model.left_sidebar 'right-body' 'left-body'}}">
                {{flash-messages}}
                {{outlet}}
              </div>
@@ -71,7 +71,7 @@
                 
          {{#if (not hideSidebar)}}
              {{#if (not model.left_sidebar)}}
-             <div class="col-md-3">
+             <div class="col-md-3 right-sidebar">
                  {{global-sidebar model=sidebar boxStyle="sidebar-box-right"}}
              </div>
              {{/if}}
