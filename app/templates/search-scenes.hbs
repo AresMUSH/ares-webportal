@@ -1,0 +1,97 @@
+{{title "Search Scenes"}}
+
+<h1>Search Scenes</h1>
+
+<p>Here you can search for scenes.  The search will only match scenes that contain ALL the specified search criteria.</p>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+    <label>Title:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="title"  value=searchTitle enter="search"}}</p>
+        <p class="hint">Matches whole words in the scene title.</p>
+  </div>
+  
+</div>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>Participant Name:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="participant"  value=searchParticipant enter="search"}}</p>
+        <p class="hint">Enter an entire participant name.</p>
+  </div>
+  
+</div>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>IC Date:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="icdate"  value=searchDate enter="search"}}</p>
+        <p class="hint">Matches the beginning of a scene's IC date, e.g. 2018-04 will find all scenes from April.</p>
+  </div>
+  
+</div>
+
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>Log:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="log"  value=searchLog enter="search"}}</p>
+        <p class="hint">Matches whole words in the scene's summary or log.</p>
+  </div>
+  
+</div>
+
+
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>Tag:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="tag"  value=searchTag enter="search"}}</p>
+        <p class="hint">Matches an entire scene tag.</p>
+  </div>
+  
+</div>
+
+
+    
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+    
+                <button class="btn btn-default" {{action 'reset'}}>Reset</button>
+                <button class="btn btn-primary" {{action 'search'}}>Search</button>
+            </div>
+        </div>
+    </div>
+
+<hr/>
+
+{{#if searchResults}}
+
+{{scene-list scenes=searchResults sceneTypes=model.sceneTypes}}
+
+{{else}}
+<p>No search results.</p>
+{{/if}}
+
+{{outlet}}
