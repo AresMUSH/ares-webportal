@@ -101,6 +101,10 @@ Router.map(function() {
   // !!!!!!!!!!!!!!!!!!!!!!!!
 
   this.route('not-found', { path: '*:' });
+  this.route('search-jobs');
+  this.route('search-wiki');
+  this.route('search-chars');
+  this.route('search-forum');
 });
 
 export default Router;

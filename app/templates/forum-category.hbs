@@ -22,27 +22,7 @@
 </div>
 
 
-<table class="table table-striped">
-<tbody>
-      <tr>
-      <th>Title</th>
-      <th>Posted By</th>
-    </tr>
-    
-{{#each model.posts as |p|}}
-    <tr>
-    <td>
-        {{#if p.unread}}
-        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
-        {{/if}}
-         {{#link-to 'forum-topic' model.id p.id}}{{p.title}}{{/link-to}}
-     </td>
-     <td>{{p.author}} @ {{p.date}}
-     </td>
-     </tr>
-{{/each}}
-</tbody>
-</table>
+{{forum-post-list posts=model.posts}}
 
 
 

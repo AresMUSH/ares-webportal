@@ -4,19 +4,15 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   gameApi: service(),
   flashMessages: service(),
-  searchLog: '',
-  searchParticipant: '',
+  searchText: '',
   searchTitle: '',
-  searchTag: '',
-  searchDate: '',
+  searchSubmitter: '',
   searchResults: null,
     
   resetOnExit: function() {
-    this.set('searchLog', '');
-    this.set('searchParticipant', '');
+    this.set('searchText', '');
     this.set('searchTitle', '');
-    this.set('searchTag', '');
-    this.set('searchDate', '');
+    this.set('searchSubmitter', '');
     this.set('searchResults', null);
   },
     
@@ -27,12 +23,10 @@ export default Controller.extend({
     search() {
       let api = this.get('gameApi');
             
-      api.requestMany('searchScenes', { 
-        searchLog: this.get('searchLog'),
-        searchParticipant: this.get('searchParticipant'),
+      api.requestMany('searchJobs', { 
+        searchSubmitter: this.get('searchSubmitter'),
         searchTitle: this.get('searchTitle'),
-        searchTag: this.get('searchTag'),
-        searchDate: this.get('searchDate')
+        searchText: this.get('searchText')
       }, null)
       .then( (response) => {
         if (response.error) {

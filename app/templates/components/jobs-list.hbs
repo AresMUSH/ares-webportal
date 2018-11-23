@@ -1,0 +1,36 @@
+<table class="table table-striped">    
+<tbody>
+    <tr>
+        <th>Title</th> 
+        <th>Category</th>  
+        <th>Status</th>
+        <th>Submitter</th>
+        <th>Handled By</th>
+    </tr>
+{{#each jobs as |job|}}
+    <tr><td>
+        {{#if job.unread}}
+        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+        {{/if}}
+        
+        {{#link-to 'job' job.id}}#{{job.id}} - {{job.title}}{{/link-to}}
+    </td>
+    <td>
+        {{job.category}}
+    </td>
+    <td>
+        <p><span class="label label-info job-status job-status-{{job.status}}">{{job.status}}</span></p>
+        
+    </td>
+    <td>
+        {{job.author}}
+    </td>
+    <td>
+        {{job.assigned_to}}
+    </td>
+
+
+     </tr>
+{{/each}}
+</tbody>
+</table>

@@ -2,7 +2,11 @@
 
 <h1>Search Scenes</h1>
 
-<p>Here you can search for scenes.  The search will only match scenes that contain ALL the specified search criteria.</p>
+{{search-bar}}
+
+<p>The search will only match scenes that contain ALL the specified search criteria.  Capitalization doesn't matter.</p>
+
+<hr/>
 
 <div class="row">
   
@@ -12,7 +16,6 @@
   
   <div class="col col-xs-9">
         <p>{{input type="text" size=50 id="title"  value=searchTitle enter="search"}}</p>
-        <p class="hint">Matches whole words in the scene title.</p>
   </div>
   
 </div>
@@ -20,12 +23,12 @@
 <div class="row">
   
   <div class="col col-xs-3">
-        <label>Participant Name:</label>
+        <label>Participant Names:</label>
   </div>
   
   <div class="col col-xs-9">
         <p>{{input type="text" size=50 id="participant"  value=searchParticipant enter="search"}}</p>
-        <p class="hint">Enter an entire participant name.</p>
+        <p class="hint">Enter one or more participant names (space-separated).</p>
   </div>
   
 </div>
@@ -47,12 +50,11 @@
 <div class="row">
   
   <div class="col col-xs-3">
-        <label>Log:</label>
+        <label>Summary and Log:</label>
   </div>
   
   <div class="col col-xs-9">
         <p>{{input type="text" size=50 id="log"  value=searchLog enter="search"}}</p>
-        <p class="hint">Matches whole words in the scene's summary or log.</p>
   </div>
   
 </div>
@@ -67,7 +69,6 @@
   
   <div class="col col-xs-9">
         <p>{{input type="text" size=50 id="tag"  value=searchTag enter="search"}}</p>
-        <p class="hint">Matches an entire scene tag.</p>
   </div>
   
 </div>
@@ -85,6 +86,8 @@
     </div>
 
 <hr/>
+
+{{flash-messages}}
 
 {{#if searchResults}}
 
