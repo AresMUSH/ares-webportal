@@ -1,0 +1,100 @@
+{{title "Search Scenes"}}
+
+<h1>Search Scenes</h1>
+
+{{search-bar}}
+
+<p>The search will only match scenes that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
+
+<hr/>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+    <label>Title:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="title"  value=searchTitle enter="search"}}</p>
+  </div>
+  
+</div>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>Participant Names:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="participant"  value=searchParticipant enter="search"}}</p>
+        <p class="hint">Enter one or more participant names (space-separated).</p>
+  </div>
+  
+</div>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>IC Date:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="icdate"  value=searchDate enter="search"}}</p>
+        <p class="hint">Matches the beginning of a scene's IC date, e.g. 2018-04 will find all scenes from April.</p>
+  </div>
+  
+</div>
+
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>Summary and Log:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="log"  value=searchLog enter="search"}}</p>
+  </div>
+  
+</div>
+
+
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>Tag:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="tag"  value=searchTag enter="search"}}</p>
+  </div>
+  
+</div>
+
+
+    
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+    
+                <button class="btn btn-default" {{action 'reset'}}>Reset</button>
+                <button class="btn btn-primary" {{action 'search'}}>Search</button>
+            </div>
+        </div>
+    </div>
+
+<hr/>
+
+{{flash-messages}}
+
+{{#if searchResults}}
+
+{{scene-list scenes=searchResults sceneTypes=model.sceneTypes}}
+
+{{else}}
+<p>No search results.</p>
+{{/if}}
+
+{{outlet}}

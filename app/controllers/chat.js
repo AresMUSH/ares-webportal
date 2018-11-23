@@ -31,13 +31,17 @@ export default Controller.extend({
     },
     
     scrollChatWindow: function() {
+      try {
         let chatWindow = $('#chat-window')[0];
         if (chatWindow) {
             $('#chat-window').stop().animate({
                 scrollTop: chatWindow.scrollHeight
             }, 800);    
-        }
-        
+        }        
+      }
+      catch(error) {
+        // This happens sometimes when transitioning away from screen.
+      }   
     },
     
     setupCallback: function() {

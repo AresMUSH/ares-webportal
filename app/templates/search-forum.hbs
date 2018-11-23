@@ -1,0 +1,72 @@
+{{title "Search Forum"}}
+
+<h1>Search Forum</h1>
+
+{{search-bar}}
+
+<p>The search will only match forum posts that contain ALL the specified search criteria.  Capitalization doesn't matter and the searches match entire words only.</p>
+
+<hr/>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+    <label>Title:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="title"  value=searchTitle enter="search"}}</p>
+  </div>
+  
+</div>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+    <label>Author:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="author"  value=searchAuthor enter="search"}}</p>
+        <p class="hint">Enter an author's name.  Remember that automated posts come from "System".</p>
+  </div>
+  
+</div>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+    <label>Post and Replies:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="text"  value=searchText enter="search"}}</p>
+  </div>
+  
+</div>
+
+    
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+    
+                <button class="btn btn-default" {{action 'reset'}}>Reset</button>
+                <button class="btn btn-primary" {{action 'search'}}>Search</button>
+            </div>
+        </div>
+    </div>
+
+<hr/>
+
+{{flash-messages}}
+
+{{#if searchResults}}
+
+{{forum-post-list posts=searchResults}}
+
+
+{{else}}
+<p>No search results.</p>
+{{/if}}
+
+{{outlet}}

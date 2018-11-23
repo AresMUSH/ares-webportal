@@ -1,0 +1,85 @@
+{{#if model.jobs_admin}}
+{{title "Search Jobs"}}
+
+<h1>Search Jobs</h1>
+{{else}}
+{{title "Search Requests"}}
+
+<h1>Search Requests</h1>
+
+{{/if}}
+
+{{search-bar}}
+  
+<p>The search will only match requests/jobs that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
+
+<hr/>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+    <label>Title:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="title"  value=searchTitle enter="search"}}</p>
+  </div>
+  
+</div>
+
+{{#if model.jobs_admin}}
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>Submitter Name:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="submitter"  value=searchSubmitter enter="search"}}</p>
+        <p class="hint">Enter a submitter's name.  Remember that automated jobs come from "System".</p>
+  </div>
+  
+</div>
+
+{{/if}}
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>Description and Comments:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="text"  value=searchText enter="search"}}</p>
+  </div>
+  
+</div>
+
+
+
+
+    
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+    
+                <button class="btn btn-default" {{action 'reset'}}>Reset</button>
+                <button class="btn btn-primary" {{action 'search'}}>Search</button>
+            </div>
+        </div>
+    </div>
+
+<hr/>
+
+{{flash-messages}}
+
+{{#if searchResults}}
+
+{{jobs-list jobs=searchResults}}
+
+{{else}}
+<p>No search results.</p>
+{{/if}}
+
+{{outlet}}
