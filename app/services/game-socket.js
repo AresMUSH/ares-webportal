@@ -177,9 +177,6 @@ export default Service.extend({
                     this.get('sidebarCallback')();
                 }                
                 if (this.get('sceneCallback')) {
-                    if (!this.get('windowVisible')) {
-                      this.get('favicon').changeFavicon(true);    
-                    }
                     this.get('sceneCallback')(data.args.message);
                 }
                 notify = false;
