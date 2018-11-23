@@ -29,133 +29,32 @@
                   {{else}}
                   <li class="hidden-xl  hidden-lg  hidden-md">{{#link-to 'login' (query-params redirect=currentRoute)}}Login{{/link-to}}</li>
                   {{/if}}
-                           
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              
-              Play <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-              
-                <li>{{#link-to "chargen"}}Create a Character{{/link-to}}</li>
-                {{#if model.game.roster_enabled}}             
-                <li>{{#link-to "roster"}}Pre-Made Characters{{/link-to}}</li>
-                {{/if}}
-                <li>{{#link-to "who"}}Who's Online{{/link-to}}</li>
-                <li><hr></li>
-                <li>{{#link-to "scenes-live"}}Active Scenes{{/link-to}}</li>
-                <li>{{#link-to "scene-create"}}Start New Scene{{/link-to}}</li>
-                <li><hr></li>
-                <li>{{#link-to "play"}}Play via Web Client{{/link-to}}</li>
-              </ul>
-            </li>
-                                
-            
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              
-              Story <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li>{{#link-to "characters"}}Characters{{/link-to}}</li>
-                <li>{{#link-to "scenes"}}Scenes{{/link-to}}</li>
-                <li>{{#link-to "plots"}}Plots{{/link-to}}</li>
-              </ul>
-            </li>
-            
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              
-              Community <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                           
-                <li>{{#link-to "chat"}}Chat{{/link-to}}</li>
-                <li>{{#link-to "forum"}}Forum{{/link-to}}</li>
-                {{#if (not model.game.disabled_plugins.events)}}
-                    <li>{{#link-to "events"}}Events{{/link-to}}</li>
-                {{/if}}
-                <li>{{#link-to "players"}}Players{{/link-to}}</li>
-              </ul>
-            </li>
-            
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              
-              Directory <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li>{{#link-to "characters"}}Characters{{/link-to}}</li>
-                <li>{{#link-to "census"}}Census{{/link-to}}</li>
-                <li>{{#link-to "actors"}}Actors{{/link-to}}</li>   
-                {{#if model.game.roster_enabled}}             
-                <li>{{#link-to "roster"}}Roster{{/link-to}}</li>
-                {{/if}}
-                <li><hr></li>
-                <li>{{#link-to "scenes"}}Scenes{{/link-to}}</li>
-                <li>{{#link-to "plots"}}Plots{{/link-to}}</li>
-                <li>{{#link-to "locations"}}Locations{{/link-to}}</li>
-                {{#if (not model.game.disabled_plugins.fs3combat)}}
-                <li>{{#link-to "combats"}}Combats{{/link-to}}</li>
-                {{/if}}
-                <li>{{#link-to "kills"}}Kills{{/link-to}}</li>
-                <li><hr></li>                
-                <li>{{#link-to "files"}}Files{{/link-to}}</li>
-                
-              </ul>
-            </li>
-                    
-            {{#if (not model.game.disabled_plugins.fs3skills)}}
-            <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      
-                      FS3 <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li>{{#link-to 'fs3skills-abilities'}}Abilities List{{/link-to}}</li>
-                
-                        {{#if (not model.game.disabled_plugins.fs3combat)}}
-                        <li>{{#link-to 'fs3combat-gear'}}Gear List{{/link-to}}</li>
-                        {{/if}}
-                        
-                        <li><hr></li>
-                        <li><a href="http://aresmush.com/fs3/fs3-3" target="_blank">Player's Guide <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></li>
-                        <li><a href="http://aresmush.com/fs3/fs3-3/roll-quickref" target="_blank">Rolls Quick Reference <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></li>
-                        {{#if (not model.game.disabled_plugins.fs3combat)}}
-                        <li><a href="http://aresmush.com/fs3/fs3-3/combat-quickref" target="_blank">Combat Quick Reference <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></li>
-                        <li><a href="http://aresmush.com/fs3/fs3-3/combat-walkthrough" target="_blank">Interactive Combat Walkthrough <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></li>
-                        {{/if}}
-                      </ul>
-            </li>
-            {{/if}}
-                    
-            <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      
-                      Wiki <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        {{#each model.wiki_nav as |page|}}
-                            <li>{{#link-to 'wiki-page' page.url}}{{page.heading}}{{/link-to}}</li>
-                        {{/each}}
-                        <li><hr></li>
-                        <li>{{#link-to 'wiki-create'}}Create New Page{{/link-to}}</li>
-                        <li>{{#link-to 'wiki-all'}}All Pages{{/link-to}}</li>
-                        <li>{{#link-to 'wiki-tags'}}Tags{{/link-to}}</li>
-                        <li>{{#link-to "recent-changes"}}Recent Changes{{/link-to}}</li>
-                        <li><hr></li>
-                        <li>{{#link-to "files"}}Files{{/link-to}}</li>
-                        <li>{{#link-to "help-topic" "markdown"}}Markdown Reference{{/link-to}}</li>
-                      </ul>
-                    </li>
 
+            {{#each model.top_navbar as |section|}}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             
-            
-            <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      
-                      Help <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li>{{#link-to "help"}}Game Help{{/link-to}}</li>
-                        <li>{{#link-to "help-topic" "markdown"}}Markdown Reference{{/link-to}}</li>
-                        <li><a href="https://aresmush.com/mush-101/" target="_blank">MUSH 101 Tutorial <i class="fa fa-external-link-alt" aria-hidden="true"></i></a></li>
-                        <li>{{#link-to 'jobs'}}Requests{{/link-to}}</li>
-                      </ul>
-                    </li>
+                {{section.title}} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  {{#each section.menu as |nav|}}
+                    {{#if nav.url}}
+                        <li><a href="{{nav.url}}" target="{{nav.target}}">{{{nav.title}}}</a></li>
+                    {{else if nav.divider}}
+                        <li><hr/></li>
+                    {{else}}
+                      <li>
+                      {{#if nav.id}}
+                        {{#link-to nav.page nav.id}}{{{nav.title}}}{{/link-to}}
+                      {{else}}
+                        {{#link-to nav.page}}{{{nav.title}}}{{/link-to}}
+                      {{/if}}
+                      </li>
+                    {{/if}}
+                  {{/each}}
+                </ul>
+              </li>            
+            {{/each}}
+                    
             {{#if (or isAdmin isCoder)}}
             
                    <li class="dropdown">
@@ -174,8 +73,6 @@
                                {{/if}}
                              </ul>
                            </li>
-                   
-                   
                    
             {{/if}}
             

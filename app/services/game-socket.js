@@ -160,6 +160,12 @@ export default Service.extend({
                 mail_badge.text(mail_count + 1);
                 
             }
+            else if (notification_type == "job_update") {
+                var job_badge = $('#jobBadge');
+                var job_count = job_badge.text();
+                job_count = parseInt( job_count );
+                job_badge.text(job_count + 1);
+            }
             else if (notification_type == "new_chat") {
                 if (this.get('chatCallback')) {
                     this.get('chatCallback')(data.args.message);
@@ -171,9 +177,6 @@ export default Service.extend({
                     this.get('sidebarCallback')();
                 }                
                 if (this.get('sceneCallback')) {
-                    if (!this.get('windowVisible')) {
-                      this.get('favicon').changeFavicon(true);    
-                    }
                     this.get('sceneCallback')(data.args.message);
                 }
                 notify = false;

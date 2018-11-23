@@ -1,10 +1,25 @@
 {{title tag}}
 <h1>Mail - {{tag}}</h1>
 
+<div class="row">
+    <div class="col col-xs-12">
+
 [  <a href="#" {{action 'changeTag' 'Inbox'}}>Inbox</a> ]
 {{#each model.tags as |tag|}}
 [ <a href="#" {{action 'changeTag' tag}}>{{tag}}</a> ]
 {{/each}}
+
+        <div class="pull-right">
+ 
+     {{#if isApproved}}
+
+          {{#link-to 'mail-send' class="btn btn-primary"}}Send Mail{{/link-to}}
+
+      {{/if}}
+  </div>
+  </div>
+</div>
+
 
 <table class="table table-striped">
 
@@ -45,21 +60,6 @@
 {{/each}}
 
 </table>
-
-
-
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
- 
-     {{#if isApproved}}
-
-          {{#link-to 'mail-send' class="btn btn-primary"}}Send Mail{{/link-to}}
-
-      {{/if}}
-  </div>
-  </div>
-</div>
 
 
 {{outlet}}

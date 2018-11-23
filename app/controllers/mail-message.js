@@ -27,6 +27,28 @@ export default Controller.extend({
                 this.transitionToRoute('mail');
                 this.get('flashMessages').success('Sent!');
             });
+        },
+        deleteMsg: function() {
+          let api = this.get('gameApi');
+          api.requestOne('deleteMail', { id: this.get('model.id') }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              this.transitionToRoute('mail');
+              this.get('flashMessages').success('Message deleted!');
+          });
+        },
+        archiveMsg: function() {
+          let api = this.get('gameApi');
+          api.requestOne('archiveMail', { id: this.get('model.id') }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              this.transitionToRoute('mail');
+              this.get('flashMessages').success('Message archived!');
+          });
         }
     }
 });

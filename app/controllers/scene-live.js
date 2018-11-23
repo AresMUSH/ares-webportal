@@ -64,9 +64,15 @@ export default Controller.extend(AuthenticatedController, {
     }.property('model.my_scenes.@each.id'),
     
     scrollSceneWindow: function() {
-        $('#live-scene-log').stop().animate({
-            scrollTop: $('#live-scene-log')[0].scrollHeight
-        }, 800);    
+        try {
+          $('#live-scene-log').stop().animate({
+              scrollTop: $('#live-scene-log')[0].scrollHeight
+          }, 800); 
+        }
+        catch(error) {
+          // This happens sometimes when transitioning away from screen.
+        }   
+  
     },
     
     scenePoses: function() {
