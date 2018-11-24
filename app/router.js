@@ -32,7 +32,6 @@ Router.map(function() {
   this.route('config', { path: '/config/:file' });
   this.route('error');
   this.route('events');
-  this.route('events-ical', { path: '/events/ical' } );
   this.route('event', { path: '/event/:event_id'} );
   this.route('event-edit', { path: '/event/:event_id/edit'} );
   this.route('event-create', { path: '/event/create' } );
