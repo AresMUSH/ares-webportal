@@ -1,6 +1,19 @@
 {{title model.title}}
 <h1>{{model.title}}</h1>
+
+
+<div class="row">
+    <div class="col col-xs-12">
+
 <p>{{#link-to 'forum-category' model.category.id}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to {{model.category.name}}{{/link-to}}</p>
+
+        <div class="pull-right">
+          {{#if isAuthenticated}}
+          <button {{action 'nextUnread'}} class="btn btn-default">Next Unread</button>
+          {{/if}}
+         </div>
+  </div>
+</div>
 
      <p>{{char-icon-inline char=model.author}}</p>
 
@@ -48,17 +61,5 @@
 {{/if}}
 
 {{flash-messages}}
-
-
-{{#if isAuthenticated}}
-
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
-          <button {{action 'nextUnread'}} class="btn btn-default">Next Unread</button>
-         </div>
-  </div>
-</div>
-{{/if}}
 
 {{outlet}}

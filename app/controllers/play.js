@@ -9,6 +9,10 @@ export default Controller.extend({
     gameSocket: service(),
     favicon: service(),
     messages: [],
+    history1: [],
+    history2: [],
+    showHistory1: false,
+    showHistory2: false,
     scrollPaused: false,
 
     idleKeepalive: function() {
@@ -96,7 +100,10 @@ export default Controller.extend({
             'message': msg.trim()
         };
         json = JSON.stringify(cmd);
-        this.get('websocket').send(json);
+        let socket = this.get('websocket');
+        if (socket) {
+          socket.send(json);
+        }
     },
 
 
@@ -127,12 +134,30 @@ export default Controller.extend({
                 }
             },
             sendMsg1() {
-                this.sendInput(this.get('text1'));
+                let cmd = this.get('text1');
+                this.sendInput(cmd);
                 this.set('text1', '');
+                this.get('history1').addObject(cmd); 
+                if (this.get('history1').length > 10) {
+                  this.get('history1').removeAt(0);
+                }
             },
             sendMsg2() {
-                this.sendInput(this.get('text2'));
+                let cmd = this.get('text2');
+                this.sendInput(cmd);
                 this.set('text2', '');
+                this.get('history2').addObject(cmd); 
+                if (this.get('history2').length > 10) {
+                  this.get('history2').removeAt(0);
+                }
+            },
+            loadHistory1(text) {
+              this.set('text1', text);
+              this.set('showHistory1', null);
+            },
+            loadHistory2(text) {
+              this.set('text2', text);
+              this.set('showHistory2', null);
             },
             pauseScroll() {
               this.set('scrollPaused', true);
