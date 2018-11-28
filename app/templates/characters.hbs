@@ -1,6 +1,10 @@
 {{title 'Characters'}}
 <h1>Characters</h1>
 
+<div class="pull-right">
+  {{#link-to 'search-chars'}}<i class="fa fa-search" aria-hidden="true"></i> Search Characters{{/link-to}}  
+</div>
+
 <ul class="nav nav-tabs">
   
   {{#each model.characters.group_names as |group|}}

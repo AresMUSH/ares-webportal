@@ -50,15 +50,45 @@
             {{{ansi-format text=model.body}}}
 </div>
 
-{{#if model.can_reply}}
-<div class="inline-response">
+<hr/>
+        <div class="pull-right">
+        <button class="btn btn-warning" {{action (mut confirmDelete) true}}>Delete</button>
+        <button class="btn btn-default" {{action 'archiveMsg'}}>Archive</button>
+        </div>
+        
+<div class="clearfix"></div>
 
-<h3>Reply</h3>
-<p><b>To:</b> {{input type="text" size=50 id="to_list" value=to_list size=100 }}</p>
-<p><b>Subject:</b> {{input type="text" size=50 id="subject" value=subject size=100 }}</p>
-    {{markdown-editor text=message}}
-    <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>
+ 
+{{#if model.can_reply}}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a data-toggle="collapse" href="#reply">Click to Reply</a>
+        
+    </div>
+    <div id="reply" class="panel-collapse collapse">
+      <div class="panel-body">
+      <h3>Reply</h3>
+      <p><b>To:</b> {{input type="text" size=50 id="to_list" value=to_list size=100 }}</p>
+      <p><b>Subject:</b> {{input type="text" size=50 id="subject" value=subject size=100 }}</p>
+          {{markdown-editor text=message}}
+          <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>    
+        </div>
+    </div>
 </div>
+
 {{/if}}
 
+{{#bs-modal-simple
+    title="Confirm Delete"
+    closeTitle="Cancel"
+    submitTitle="Confirm"
+    size=null
+    fade=false
+    open=confirmDelete
+    onSubmit=(action "deleteMsg")
+    onHide=(action (mut confirmDelete) null)}}
+    You're about to delete this mail message. This cannot be undone.  Are you sure?
+  {{/bs-modal-simple}}
+  
 {{outlet}}

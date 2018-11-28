@@ -1,0 +1,80 @@
+{{title "Search Characters"}}
+
+<h1>Search Characters</h1>
+
+{{search-bar}}
+
+<p>The search will only match characters that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
+
+<hr/>
+
+<h3>Groups</h3>
+
+{{#each-in model.cgInfo.group_options as |key group| }}
+<div class="row">
+  
+  <div class="col col-xs-3">
+    <label>{{group.name}}:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50  value=(mut (get searchGroups key)) enter="search"}}</p>
+  </div>
+  
+</div>
+{{/each-in}}
+
+<h3>Demographics</h3>
+
+{{#each model.cgInfo.demographics as |demo| }}
+<div class="row">
+  
+  <div class="col col-xs-3">
+    <label>{{demo}}:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50  value=(mut (get searchDemographics demo)) enter="search"}}</p>
+  </div>
+  
+</div>
+{{/each}}
+
+<h3>Other</h3>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>Tag:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="tag"  value=searchTag enter="search"}}</p>
+  </div>
+  
+</div>
+    
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+    
+                <button class="btn btn-default" {{action 'reset'}}>Reset</button>
+                <button class="btn btn-primary" {{action 'search'}}>Search</button>
+            </div>
+        </div>
+    </div>
+
+<hr/>
+
+{{flash-messages}}
+
+{{#if searchResults}}
+
+{{char-group-list name="Results" chars=searchResults}}
+
+
+{{else}}
+<p>No search results.</p>
+{{/if}}
+
+{{outlet}}

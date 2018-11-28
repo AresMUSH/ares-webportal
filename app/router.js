@@ -80,7 +80,7 @@ Router.map(function() {
   this.route('scene-edit', { path: '/scene/:id/edit' } );
   this.route('scene-download', { path: '/scene/:id/download' } );
   this.route('scene-create', { path: '/scene/create', query_params: ['location'] } );
-  this.route('search', { path: '/search', query_params: ['term'] });
+  this.route('search-scenes');
   this.route('setup');
   this.route('setup-colors');
   this.route('shutdown');
@@ -101,6 +101,10 @@ Router.map(function() {
   // !!!!!!!!!!!!!!!!!!!!!!!!
 
   this.route('not-found', { path: '*:' });
+  this.route('search-jobs');
+  this.route('search-wiki');
+  this.route('search-chars');
+  this.route('search-forum');
 });
 
 export default Router;
