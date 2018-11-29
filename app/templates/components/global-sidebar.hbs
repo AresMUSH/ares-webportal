@@ -1,5 +1,6 @@
 <div class="sidebar-box {{boxStyle}}">
-  {{#link-to 'search-wiki'}}<i class="fa fa-search" aria-hidden="true"></i> Search{{/link-to}}
+  <p class="fa fa-search">{{input type="text" size=50 id="text"  value=searchText enter="search"}}</p>
+  {{#link-to 'search-wiki'}}<i class="fa fa-search" aria-hidden="true"></i> Other Searches{{/link-to}}
 </div>
 
 
@@ -13,21 +14,21 @@
     <p>Today is {{model.game.ictime}}.
     <br/>{{model.game.who_count}} character(s) online.
     <br/>{{model.game.scene_count}} scene(s) are in progress.
-  
+
   {{#if model.game.unread_scenes_count}}
   <br/><span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span> New activity in your scenes!
   {{/if}}
   </p>
-  
-  <p>{{#link-to 'scenes-live'}}Active Scenes{{/link-to}} | 
+
+  <p>{{#link-to 'scenes-live'}}Active Scenes{{/link-to}} |
       {{#link-to 'who'}}Who's Online{{/link-to}}</p>
-  
+
 {{/if}}
 
 </div>
 
-    
-    
+
+
 {{#if (not model.game.disabled_plugins.events)}}
 <div class="sidebar-box {{boxStyle}}">
   <div class="sidebar-heading">
@@ -39,7 +40,7 @@
   {{/each}}
    <br/>
   <p>{{#link-to 'events'}}All Events{{/link-to}}</p>
-  
+
 </div>
 {{/if}}
 
@@ -48,7 +49,7 @@
 <div class="sidebar-box {{boxStyle}}">
    <div class="sidebar-heading">
        <h2>Recent Scenes <i class="fa fa-book" aria-hidden="true"></i></h2>
-       
+
    </div>
    {{#each model.recent_scenes as |scene|}}
    <p>{{#link-to 'scene' scene.id}}{{scene.icdate}} - {{scene.title}}{{/link-to}}
@@ -61,14 +62,14 @@
 <div class="sidebar-box {{boxStyle}}">
    <div class="sidebar-heading">
        <h2>Recent Forum Posts <i class="fa fa-comments" aria-hidden="true"></i></h2>
-       
+
    </div>
    {{#each model.recent_forum as |post|}}
-   <p>{{post.author.name}} 
-          {{#if post.is_reply}}    
-            replied to 
+   <p>{{post.author.name}}
+          {{#if post.is_reply}}
+            replied to
           {{else}}
-            posted 
+            posted
           {{/if}}
           {{#link-to 'forum-topic' post.category_id post.id}}{{post.subject}}.{{/link-to}}
    </p>
@@ -80,7 +81,7 @@
 <div class="sidebar-box {{boxStyle}}">
    <div class="sidebar-heading">
        <h2>Recent Changes <i class="fa fa-file-alt" aria-hidden="true"></i></h2>
-       
+
    </div>
    {{#each model.recent_changes as |change|}}
    {{#if (eq change.change_type 'char')}}
@@ -89,8 +90,8 @@
    <p>{{#link-to 'wiki-page' change.name}}{{change.title}}{{/link-to}}</p>
    {{/if}}
    {{/each}}
-   
+
    <br/>
    <p>{{#link-to 'recent-changes'}}More Changes{{/link-to}}</p>
-   
+
 </div>
