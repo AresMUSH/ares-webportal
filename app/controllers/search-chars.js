@@ -6,12 +6,14 @@ export default Controller.extend({
   flashMessages: service(),
   searchGroups: {},
   searchDemographics: {},
+  searchName: '',
   searchTag: '',
   searchResults: null,
     
   resetOnExit: function() {
     this.set('searchGroups', {});
     this.set('searchDemographics', {});
+    this.set('searchName', '');
     this.set('searchTag', '');
     this.set('searchResults', null);
   },
@@ -26,7 +28,8 @@ export default Controller.extend({
       api.requestMany('searchChars', { 
         searchGroups: this.get('searchGroups'),
         searchDemographics: this.get('searchDemographics'),
-        searchTag: this.get('searchTag')
+        searchTag: this.get('searchTag'),
+        searchName: this.get('searchName')
       }, null)
       .then( (response) => {
         if (response.error) {
