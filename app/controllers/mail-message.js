@@ -7,7 +7,12 @@ export default Controller.extend({
     subject: '',
     message: '',
     to_list: '',
+    confirmDelete: false,
 
+  resetOnExit: function() {
+    this.set('confirmDelete', false);
+  },
+  
     setup: function() {
         this.set('subject', `Re: ${this.get('model.subject')}`);
         this.set('to_list', this.get('model.from'));
