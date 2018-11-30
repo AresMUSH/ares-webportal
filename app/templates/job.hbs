@@ -69,7 +69,7 @@
               <span class="btn btn-default" href="#" role="button">Change Status <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
               {{#each model.status_values as |status| }}
-                <li><a href="#" {{action 'changeData' 'status' status}}>{{status}}</a></li>
+                <li><a href="#" {{action 'changeData' 'status' status}}><span class="label job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
               {{/each}}
               </ul>
             </li>
@@ -96,7 +96,7 @@
               <span class="btn btn-default" href="#" role="button">Change Category <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
               {{#each model.category_values as |category| }}
-                <li><a href="#" {{action 'changeData' 'category' category}}>{{category}}</a></li>
+                <li><a href="#" {{action 'changeData' 'category' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
               {{/each}}
               </ul>
             </li>
