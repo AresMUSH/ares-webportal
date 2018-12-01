@@ -1,102 +1,140 @@
 {{title 'Chat'}}
 <h1>Chat</h1>
 
-<div class="alert alert-info">
-{{#each-in model.channels as |key channel|}}
+<div class="row">
+  
+<div class="col col-xs-3">
+  
+  {{#each-in model.channels as |key channel|}}
 
-{{#if channel.allowed}}
-    <button {{action 'changeChannel' channel.name}} class="btn btn-default">{{channel.name}}
+  {{#if channel.allowed}}
+      {{#if channel.enabled}}
+      
 
-    {{#if (not channel.enabled)}}
-        <i class="fa fa-ban"></i>
-    {{/if}}
-    {{#if channel.muted}}
-        <i class="fa fa-microphone-slash"></i>
-    {{/if}}
-    <span class="label label-pill label-primary">{{channel.new_messages}}</span>
-    </button>
-
-{{/if}}
-
-{{/each-in}}
-</div>
-
-
-{{#if selectedChannel}}
-
-<b>{{selectedChannel}}</b> <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i></a>
-
-{{else}}
-
-<div id="chat-window">
-</div>
-
-<div class="alert alert-warning">Select a channel.</div>
-        
-{{/if}}
-
-
-{{#each-in model.channels as |key channel|}}
-
-{{#if (eq channel.name selectedChannel)}}
-
-    {{#if channel.enabled}}
+        <button {{action 'changeChannel' channel.name}} 
+           class="btn btn-default chat-button {{if (eq channel.name selectedChannel) 'chat-button-active' ''}}">{{channel.name}}        
         {{#if channel.muted}}
-        <div class="alert alert-warning">This channel is muted.  You will not see new messages.</div>
+            <i class="fa fa-microphone-slash"></i>
         {{/if}}
+        <span class="label label-pill label-primary">{{channel.new_messages}}</span>
+        </button>
+      <br/>
+      {{/if}}
 
-        <div id="chat-window">
-        {{#each channel.messages as |message|}}
-            <div class="cg-tip">{{message.timestamp}}</div>
-            {{{ansi-format text=message.message}}}
-        {{/each}}
-        </div>
-        
-        {{markdown-editor text=chatMessage rows=3 onEnter=(action "send")}}
-    
-        <div class="pull-right">
-            <button class="btn-warning btn" {{action "leaveChannel"}}>Leave Channel</button>
-            {{#if channel.muted}}
-            <button class="btn-default btn" {{action "muteChannel" false}}>Unmute Channel</button>
-            {{else}}
-            <button class="btn-default btn" {{action "muteChannel" true}}>Mute Channel</button>
+  {{/if}}
+
+  {{/each-in}}
+
+    <ul class="nav chat-nav">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+        <span class="btn btn-default chat-button" href="#" role="button">Add Channel <span class="caret"></span></span> </a>
+        <ul class="dropdown-menu">
+          {{#each-in model.channels as |key channel|}}
+            {{#if (not channel.enabled)}}
+              <li><a href="#" {{action 'joinChannel' channel.name}}>{{channel.name}}</a></li>
             {{/if}}
-            <button class="btn-primary btn" {{action "send"}}>Send to {{channel.name}}</button>
-        </div>
-    
-    <div class="clearfix"></div>
-    
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <h4>Who's On {{selectedChannel}}</h4>
-
-            <div class="icon-row">
-            {{#each channel.who as |who|}}
-              {{char-icon-inline char=who }}
-              {{#if who.muted}}<i class="fa fa-microphone-slash"></i>{{/if}}
-
-            {{/each}}
-            </div>
-
-            <div class="clearfix"></div>
-          </div>
-        </div>
-    {{else}}
-    
-        <div id="chat-window">
-        </div>
-
-        <div class="alert alert-warning">
-            <p>You are not on this channel.</p>
-            <br/>
-            <button class="btn btn-default" {{action "joinChannel"}}>Join Channel</button>
-        </div>
+        {{/each-in}}
+        </ul>
+      </li>
+  </ul>
         
-    {{/if}}
-{{/if}}
+</div>
 
-{{/each-in}}
+<div class="col col-xs-9">
 
+  {{#if selectedChannel}}
+
+  <b>{{selectedChannel}}</b> <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i></a>
+
+  {{else}}
+
+  <div id="chat-window">
+  </div>
+
+  <div class="alert alert-warning">Select a channel.</div>
+        
+  {{/if}}
+
+
+  {{#each-in model.channels as |key channel|}}
+
+  {{#if (eq channel.name selectedChannel)}}
+
+      {{#if channel.enabled}}
+          {{#if channel.muted}}
+          <div class="alert alert-warning">This channel is muted.  You will not see new messages.</div>
+          {{/if}}
+
+          <div id="chat-window">
+          {{#each channel.messages as |message|}}
+              <div class="cg-tip">{{message.timestamp}}</div>
+              {{{ansi-format text=message.message}}}
+          {{/each}}
+          </div>
+
+          {{markdown-editor text=chatMessage rows=3 onEnter=(action "send")}}
+
+      {{else}}
+    
+          <div id="chat-window">
+          </div>
+
+          <div class="alert alert-warning">
+              <p>You are not on this channel.</p>
+              <br/>
+              <button class="btn btn-default" {{action "joinChannel" channel.name}}>Join Channel</button>
+          </div>
+        
+      {{/if}}
+  {{/if}}
+
+  {{/each-in}}
+
+</div>
+</div>
+
+<div class="row">
+
+  {{#each-in model.channels as |key channel|}}
+
+  {{#if (eq channel.name selectedChannel)}}
+
+      {{#if channel.enabled}}
+            
+          <div class="pull-right">
+              <button class="btn-warning btn" {{action "leaveChannel"}}>Leave Channel</button>
+              {{#if channel.muted}}
+              <button class="btn-default btn" {{action "muteChannel" false}}>Unmute Channel</button>
+              {{else}}
+              <button class="btn-default btn" {{action "muteChannel" true}}>Mute Channel</button>
+              {{/if}}
+              <button class="btn-primary btn" {{action "send"}}>Send to {{channel.name}}</button>
+          </div>
+    
+      <div class="clearfix"></div>
+    
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h4>Who's On {{selectedChannel}}</h4>
+
+              <div class="icon-row">
+              {{#each channel.who as |who|}}
+                {{char-icon-inline char=who }}
+                {{#if who.muted}}<i class="fa fa-microphone-slash"></i>{{/if}}
+
+              {{/each}}
+              </div>
+
+              <div class="clearfix"></div>
+            </div>
+          </div>      
+      {{/if}}
+  {{/if}}
+
+  {{/each-in}}
+</div>
 
 {{flash-messages}}
 {{outlet}}

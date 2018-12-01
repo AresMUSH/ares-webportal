@@ -69,9 +69,8 @@ export default Controller.extend({
             this.set(`model.channels.${channelKey}.new_messages`, null);
         },
         
-        joinChannel: function() {
+        joinChannel: function(channelName) {
             let api = this.get('gameApi');
-            let channelName = this.get('selectedChannel');
                         
             api.requestOne('joinChannel', { channel: channelName }, null)
             .then( (response) => {
