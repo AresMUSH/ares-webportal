@@ -26,12 +26,6 @@ export default Component.extend(Paginator, {
             let popular = all_scenes.filter(s => s.likes > 0);
             return popular.sort((a, b) => a.likes < b.likes ).slice(0, 20);
         }
-        else if (selected_filter === 'Mine') {
-            if (this.get('isAuthenticated')){
-                return all_scenes.filter(s => s.participants.map(p => p.name).includes(this.get('currentUlayer.name')));
-            }
-            return all_scenes;
-        }
         else {
             let filter = this.get('filter');
             let re = new RegExp(filter,"i");
@@ -43,9 +37,6 @@ export default Component.extend(Paginator, {
         let types = this.get('sceneTypes');
         let scene_types = types.map(s => s.name);
         let base_filters = ['Recent', 'All', 'Popular'];
-        if (this.get('isAuthenticated')) {
-            base_filters.push('Mine');
-        }
         return base_filters.concat(scene_types);
     }.property('scenes'),
     

@@ -1,10 +1,10 @@
-{{title "Search Wiki"}}
+{{title "Search Help"}}
 
-<h1>Search Wiki</h1>
+<h1>Search Help</h1>
 
 {{search-bar}}
 
-<p>The search will only match wiki pages that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
+<p>The search will only match help topics that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
 
 <hr/>
 
@@ -19,20 +19,6 @@
   </div>
   
 </div>
-
-<div class="row">
-  
-  <div class="col col-xs-3">
-        <label>Tag:</label>
-  </div>
-  
-  <div class="col col-xs-9">
-        <p>{{input type="text" size=50 id="tag"  value=searchTag enter="search"}}</p>
-  </div>
-  
-</div>
-
-
     
     <div class="row">
         <div class="col col-xs-12">
@@ -50,11 +36,27 @@
 
 {{#if searchResults}}
 
+<h2>Best Matches</h2>
 <ul>
-{{#each searchResults as |page|}}
-<li>{{#link-to 'wiki-page' page.id}}{{page.heading}}{{/link-to}}</li>
+{{#each searchResults.probable_matches as |topic|}}
+<li>{{#link-to 'help-topic' topic.id}}{{topic.name}}{{/link-to}} - {{topic.summary}}</li>
 {{/each}}
 </ul>
+
+
+<h2>Other Possible Matches</h2>
+
+{{#if searchResults.possible_matches}}
+
+<ul>
+{{#each searchResults.possible_matches as |topic|}}
+<li>{{#link-to 'help-topic' topic.id}}{{topic.name}}{{/link-to}} - {{topic.summary}}</li>
+{{/each}}
+</ul>
+
+{{else}}
+None
+{{/if}}
 
 {{else}}
 <p>No search results.</p>
