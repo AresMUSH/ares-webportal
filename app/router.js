@@ -83,6 +83,7 @@ Router.map(function() {
   this.route('search-jobs');
   this.route('search-wiki');
   this.route('search-chars');
+  this.route('search-help');
   this.route('search-forum');
   this.route('setup');
   this.route('setup-colors');

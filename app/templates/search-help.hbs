@@ -1,0 +1,65 @@
+{{title "Search Help"}}
+
+<h1>Search Help</h1>
+
+{{search-bar}}
+
+<p>The search will only match help topics that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
+
+<hr/>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+    <label>Text:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=50 id="text" value=searchText enter="search"}}</p>
+  </div>
+  
+</div>
+    
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+    
+                <button class="btn btn-default" {{action 'reset'}}>Reset</button>
+                <button class="btn btn-primary" {{action 'search'}}>Search</button>
+            </div>
+        </div>
+    </div>
+
+<hr/>
+
+{{flash-messages}}
+
+{{#if searchResults}}
+
+<h2>Best Matches</h2>
+<ul>
+{{#each searchResults.probable_matches as |topic|}}
+<li>{{#link-to 'help-topic' topic.id}}{{topic.name}}{{/link-to}} - {{topic.summary}}</li>
+{{/each}}
+</ul>
+
+
+<h2>Other Possible Matches</h2>
+
+{{#if searchResults.possible_matches}}
+
+<ul>
+{{#each searchResults.possible_matches as |topic|}}
+<li>{{#link-to 'help-topic' topic.id}}{{topic.name}}{{/link-to}} - {{topic.summary}}</li>
+{{/each}}
+</ul>
+
+{{else}}
+None
+{{/if}}
+
+{{else}}
+<p>No search results.</p>
+{{/if}}
+
+{{outlet}}
