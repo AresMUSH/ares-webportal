@@ -3,6 +3,8 @@
 
 {{census-nav types=model.types}}
 
+<div class="table-responsive">
+
 <table class="table table-striped">
     <tr>
         {{#each model.census.titles as |title|}}
@@ -20,4 +22,7 @@
 {{/each}}
 
 </table>
+
+</div>
+
 {{outlet}}

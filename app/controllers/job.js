@@ -55,14 +55,14 @@ export default Controller.extend({
         this.get('flashMessages').success('Assigned to ' + assignee.name  + '!');
       });
     },
-    changeStatus(status) {
-      this.get('gameApi').requestOne('jobChangeStatus', { id: this.get('model.id'), status: status })
+    changeData(type, data) {
+      this.get('gameApi').requestOne('jobChangeData', { id: this.get('model.id'), type: type, data: data })
       .then((response) => {
         if (response.error) {
           return;
         }
         this.send('reloadModel');
-        this.get('flashMessages').success('Status changed to ' + status + '.');
+        this.get('flashMessages').success('Job changed to ' + data + '.');
       });
     }
   }
