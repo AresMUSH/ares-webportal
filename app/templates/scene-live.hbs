@@ -51,7 +51,15 @@
                 </div>
             {{else}}
                 <div class="scene-pose-header">		
-                    {{char-icon-inline char=pose.char}}	
+                  {{#link-to "char" pose.char.name}}
+                      {{#if pose.char.icon}}
+                      <img class="small-profile-icon {{icon-class}}" src="/game/uploads/{{pose.char.icon}}" />
+                      {{else}}
+                      <img class="small-profile-icon {{icon-class}}" src="/game/uploads/theme_images/noicon.png" />
+                      {{/if}}
+                  {{/link-to}}
+
+                  {{#link-to "char" pose.char.name}} {{pose.char.name}} {{/link-to}}
                 </div>
                  {{#if pose.editActive}}
                     {{markdown-editor text=pose.raw_pose}}

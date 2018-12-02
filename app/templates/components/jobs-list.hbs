@@ -1,3 +1,4 @@
+<div class="table-responsive">
 <table class="table table-striped">    
 <tbody>
     <tr>
@@ -16,7 +17,7 @@
         {{#link-to 'job' job.id}}#{{job.id}} - {{job.title}}{{/link-to}}
     </td>
     <td>
-        {{job.category}}
+        <span class="label label-info job-category job-category-{{job.category}}">{{job.category}}</span>
     </td>
     <td>
         <p><span class="label label-info job-status job-status-{{job.status}}">{{job.status}}</span></p>
@@ -34,3 +35,4 @@
 {{/each}}
 </tbody>
 </table>
+</div>

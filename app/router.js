@@ -32,7 +32,6 @@ Router.map(function() {
   this.route('config', { path: '/config/:file' });
   this.route('error');
   this.route('events');
-  this.route('events-ical', { path: '/events/ical' } );
   this.route('event', { path: '/event/:event_id'} );
   this.route('event-edit', { path: '/event/:event_id/edit'} );
   this.route('event-create', { path: '/event/create' } );
@@ -81,6 +80,11 @@ Router.map(function() {
   this.route('scene-download', { path: '/scene/:id/download' } );
   this.route('scene-create', { path: '/scene/create', query_params: ['location'] } );
   this.route('search-scenes');
+  this.route('search-jobs');
+  this.route('search-wiki');
+  this.route('search-chars');
+  this.route('search-help');
+  this.route('search-forum');
   this.route('setup');
   this.route('setup-colors');
   this.route('shutdown');
@@ -101,10 +105,6 @@ Router.map(function() {
   // !!!!!!!!!!!!!!!!!!!!!!!!
 
   this.route('not-found', { path: '*:' });
-  this.route('search-jobs');
-  this.route('search-wiki');
-  this.route('search-chars');
-  this.route('search-forum');
 });
 
 export default Router;
