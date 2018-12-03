@@ -37,17 +37,7 @@ export default Controller.extend(AuthenticatedController, {
         return this.get('session.data.authenticated');
     }.property(),
     
-    onSidebarUpdate: function() {
-        this.send('reloadSidebar');
-    },
-    
     sidebar: function() {
         return this.get('model');
-    }.property('refreshSidebar'),
-    
-    setupCallback: function() {
-        let self = this;
-        this.get('gameSocket').set('sidebarCallback', function() {
-            self.onSidebarUpdate() } );
-    }
+    }.property('refreshSidebar')
 });
