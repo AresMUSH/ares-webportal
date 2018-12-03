@@ -12,7 +12,6 @@ export default Service.extend({
     charId: null,
     chatCallback: null,
     sceneCallback: null,
-    sidebarCallback: null,
 
     socketUrl() {
 	var protocol = aresconfig.ssl ? 'wss' : 'ws';
@@ -188,9 +187,6 @@ export default Service.extend({
                 badge.text(parseInt(badge.text()) + 1);
             }
             else if (notification_type == "new_scene_activity") {
-                if (this.get('sidebarCallback')) {
-                    this.get('sidebarCallback')();
-                }
                 if (this.get('sceneCallback')) {
                     this.get('sceneCallback')(data.args.message);
                 }

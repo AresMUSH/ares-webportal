@@ -11,10 +11,6 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
     gameSocket: service(),
     favicon: service(),
     
-    activate: function() {
-        this.controllerFor('application').setupCallback();
-    },
-    
     doReload: function() {
         this.loadModel().then( newModel => {
             this.controllerFor('application').set('sidebar', newModel);
@@ -70,10 +66,6 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
 
     actions: {
         willTransition() {
-           this.doReload();
-        },
-        
-        reloadSidebar() {
            this.doReload();
         }
     }
