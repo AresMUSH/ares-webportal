@@ -25,8 +25,8 @@
 {{/each}}
 </div>
 
-{{textarea value=text1 id="sendMsg" cols="80" rows="6" enter="sendMsg1"}}
-
+{{cmd-box value=text1 id="sendMsg" cols="80" rows="6" sendText=(action "sendMsg1")}}
+    
 <button class="sendButton btn-primary btn" {{action "sendMsg1"}}>Send Text</button>
 <button class="btn btn-default" {{action (mut showHistory1) true}}><i class="fa fa-history" aria-hidden="true"></i></button>
 
@@ -34,7 +34,7 @@
    <span class="label label-warning">Scrolling is paused!</span>
 {{/if}}
 
-{{textarea value=text2 id="sendMsg2" cols="80" rows="6" enter="sendMsg2"}}
+{{cmd-box value=text2 id="sendMsg2" cols="80" rows="6" sendText=(action "sendMsg2")}}
 
 <button class="sendButton2 btn-primary btn" {{action "sendMsg2"}}>Send Text</button>
 <button class="btn btn-default" {{action (mut showHistory2) true}}><i class="fa fa-history" aria-hidden="true"></i></button>
