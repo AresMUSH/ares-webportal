@@ -26,10 +26,10 @@ export default Service.extend({
     },
     
     // Regular alert notification
-    notify(msg, type = 'success') {
+    notify(msg, timeOutSecs = 5, type = 'success') {
         
         if (msg) {
-          alertify.notify(msg, type, 60);
+          alertify.notify(msg, type, timeOutSecs);
         }
       
         if (!this.get('windowVisible')) {

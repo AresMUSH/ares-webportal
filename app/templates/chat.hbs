@@ -69,7 +69,7 @@
 
           <div id="chat-window">
           {{#each channel.messages as |message|}}
-              <div class="cg-tip">{{message.timestamp}}</div>
+              <div class="timestamp-tip">{{message.timestamp}}</div>
               {{{ansi-format text=message.message}}}
           {{/each}}
           </div>
