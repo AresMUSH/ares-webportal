@@ -5,24 +5,26 @@
   <li><a data-toggle="tab" href="#systemhooks">RP Hooks</a></li>
 
   {{#if char.background}}
-      <li><a data-toggle="tab" href="#systembg">Background</a></li> 
+      <li><a data-toggle="tab" href="#systembg">Background</a></li>
   {{/if}}
-  
+
   {{#if char.description}}
   <li><a data-toggle="tab" href="#systemdesc">Description</a></li>
   {{/if}}
-  
- 
+
+
   {{#if (not game.disabled_plugins.fs3skills)}}
      {{#if char.fs3.show_sheet}}
       <li><a data-toggle="tab" href="#systemsheet">Sheet</a></li>
       {{/if}}
   {{/if}}
-  
+
+  <li><a data-toggle="tab" href="#spells">Spells</a></li>
+
   {{#if (not game.disabled_plugins.fs3combat)}}
       <li><a data-toggle="tab" href="#systemdamage">Damage</a></li>
   {{/if}}
-  
+
   {{#if char.achievements}}
       <li><a data-toggle="tab" href="#achievements">Achievements</a></li>
   {{/if}}
@@ -35,36 +37,40 @@
   <div id="systeminfo" class="tab-pane fade in active">
       <div class="tab-cover">System Information</div>
   </div>
-        
+
   <div id="systemhooks" class="tab-pane fade">
       {{{ansi-format text=char.rp_hooks}}}
   </div>
-  
-  
+
+
   {{#if char.background}}
   <div id="systembg" class="tab-pane fade">
       {{{ansi-format text=char.background}}}
    </div>
-  {{/if}} 
-  
+  {{/if}}
+
   {{#if char.description}}
   <div id="systemdesc" class="tab-pane fade">
        {{{ansi-format text=char.description}}}
   </div>
   {{/if}}
-  
+
   {{#if (not game.disabled_plugins.fs3skills)}}
   <div id="systemsheet" class="tab-pane fade">
     {{fs3-sheet char=char}}
   </div>
   {{/if}}
-  
-  {{#if (not game.disabled_plugins.fs3combat)}}  
+
+  <div id="spells" class="tab-pane fade">
+    {{spells char=char}}
+  </div>
+
+  {{#if (not game.disabled_plugins.fs3combat)}}
   <div id="systemdamage" class="tab-pane fade">
     {{fs3-damage char=char}}
   </div>
   {{/if}}
-  
+
   {{#if char.achievements}}
   <div id="achievements" class="tab-pane fade">
       {{char-achievements achievements=char.achievements}}
