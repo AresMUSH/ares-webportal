@@ -4,11 +4,8 @@
       <h1>Spells</h1>
       {{#each char.spells as |spell|}}
       <div class="row">
-          <div class="col-sm-25">
-                  <b>{{spell.name}}</b>
-          </div>
-          <div class="col-sm-9">
-                  {{spell.level}}
+          <div  class="col-sm-25 col-md-6">
+                  <b>{{spell.name}}</b>   {{spell.level}}
           </div>
       </div>
       {{/each}}
