@@ -33,8 +33,8 @@ export default Service.extend({
         }
       
         if (!this.get('windowVisible')) {
+            this.get('favicon').changeFavicon(true);
             if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
-                this.get('favicon').changeFavicon(true);
                 try {
                     new Notification(`Activity in ${aresconfig.game_name}!`);
                 }
