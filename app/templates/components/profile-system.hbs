@@ -19,8 +19,6 @@
       {{/if}}
   {{/if}}
 
-  <li><a data-toggle="tab" href="#spells">Spells</a></li>
-
   {{#if (not game.disabled_plugins.fs3combat)}}
       <li><a data-toggle="tab" href="#systemdamage">Damage</a></li>
   {{/if}}
@@ -60,10 +58,6 @@
     {{fs3-sheet char=char}}
   </div>
   {{/if}}
-
-  <div id="spells" class="tab-pane fade">
-    {{spells char=char}}
-  </div>
 
   {{#if (not game.disabled_plugins.fs3combat)}}
   <div id="systemdamage" class="tab-pane fade">
