@@ -1,23 +1,17 @@
-<div class="sheet_table">
-  <div class="row">
-    <div class="col-sm-12 col-md-6">
-      <h1>Spells</h1>
+<h1>Spells</h1>
 
-      <div class="row">
-        {{#each char.spells as |spell|}}
-        <div class="spell-block">
-          <div  class="col-sm-25">            
-            <b>{{spell.name}}</b>
-          </div>
-          <div  class="col-sm-5">
-            <i>Level {{spell.level}} </i>
-          </div>
-          <div  class="col-sm-10">
-            <a href="/wiki/{{spell.school}}">{{spell.school}}</a>
-          </div>
-        </div>
-      </div>
-      {{/each}}
+<div class="row">
+  {{#each char.spells as |spell|}}
+  <div class="spell-block">
+    <div  class="col-sm-25">            
+      <b>{{spell.name}}</b>
+    </div>
+    <div  class="col-sm-5">
+      <i>Level {{spell.level}} </i>
+    </div>
+    <div  class="col-sm-10">
+      <a href="/wiki/{{spell.school}}">{{spell.school}}</a>
     </div>
   </div>
 </div>
+  {{/each}}
