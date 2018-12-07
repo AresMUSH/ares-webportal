@@ -23,6 +23,8 @@
       <li><a data-toggle="tab" href="#systemdamage">Damage</a></li>
   {{/if}}
 
+  <li><a data-toggle="tab" href="#systemspells">Spells</a></li>
+
   {{#if char.achievements}}
       <li><a data-toggle="tab" href="#achievements">Achievements</a></li>
   {{/if}}
@@ -56,6 +58,12 @@
   {{#if (not game.disabled_plugins.fs3skills)}}
   <div id="systemsheet" class="tab-pane fade">
     {{fs3-sheet char=char}}
+  </div>
+  {{/if}}
+
+  {{#if char.spells}}
+  <div id="systemspells" class="tab-pane fade">
+    {{spells char=char}}
   </div>
   {{/if}}
 
