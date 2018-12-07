@@ -29,18 +29,18 @@
 <div class="profile-tab">
 
   {{profile-system char=model.char game=model.game}}
-  
+
 </div>
 
 
 <div class="profile-tab">
 
  {{profile-relationships char=model.char}}
- 
+
  </div>
- 
+
 {{profile-logs char=model.char sceneTypes=model.sceneTypes}}
-   
+
 <div class="profile-tab">
 
  {{profile-gallery char=model.char}}
@@ -49,16 +49,16 @@
 
 
 <hr/>
-<b>Tags:</b>  
+<b>Tags:</b>
 {{#each model.char.tags as |tag|}}
   {{#link-to 'wiki-tag' tag}}{{tag}}{{/link-to}}
 {{/each}}
-    
+
 
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">
-            
+
         {{#if model.char.last_profile_version}}
             {{#link-to 'char-source' model.char.id model.char.last_profile_version class="btn btn-default"}}Source/History{{/link-to}}
         {{/if}}
@@ -73,25 +73,25 @@
 {{#if model.char.can_manage}}
 {{#if showFiles}}
     <div class="panel panel-default">
-        
+
         <div class="panel-body">
-            
+
         <p><b>Existing Character Files:</b></p>
-        
+
        <div>
        {{#each model.char.files as |file|}}
-       
+
        <div class="thumbnail-gallery">
        {{#link-to 'file' file.folder file.name}}
-       {{file.path}} <img src="/game/uploads/{{file.path}}" class="thumbnail"/> 
+       {{file.path}} <img src="/game/uploads/{{file.path}}" class="thumbnail"/>
        {{/link-to}}
        </div>
        {{/each}}
        </div>
        <div class="clearfix"/>
-        
+
         <p>{{#link-to 'files'}}All Files{{/link-to}}</p>
-    
+
         {{file-uploader folder=model.char.name}}
         </div>
     </div>
