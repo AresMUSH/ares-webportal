@@ -107,6 +107,7 @@ Router.map(function() {
   // !!!!!!!!!!!!!!!!!!!!!!!!
 
   this.route('not-found', { path: '*:' });
+  this.route('job-create');
 });
 
 export default Router;
