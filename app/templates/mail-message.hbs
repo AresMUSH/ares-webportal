@@ -32,9 +32,14 @@
             <b>Tags:</b>
         </td>
         <td>
-             {{#each model.tags as |tag|}}
-             {{tag}}
-             {{/each}}
+            
+             {{#power-select-multiple selected=model.tags options=model.all_tags onchange=(action "tagsChanged") as |tag|}}
+               {{tag}}
+             {{/power-select-multiple}}
+             
+             {{input type="text" size=10 id="newTag" value=newTag }} 
+             <a href="#" {{action 'addNewTag'}}><i class="fa fa-plus" aria-hidden="true"></i></a>     
+
         </td>
     </tr>
     
@@ -77,7 +82,7 @@
     <div id="reply" class="panel-collapse collapse">
       <div class="panel-body">
       <h3>Reply</h3>
-      <p><b>To:</b> {{input type="text" size=50 id="to_list" value=to_list size=100 }}</p>
+      <p><b>To:</b> {{input type="text" size=50 id="to_list" value=toList size=100 }}</p>
       <p><b>Subject:</b> {{input type="text" size=50 id="subject" value=subject size=100 }}</p>
           {{markdown-editor text=message}}
           <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>    
@@ -96,7 +101,7 @@
     <div id="forward" class="panel-collapse collapse">
       <div class="panel-body">
       <h3>Forward</h3>
-      <p><b>To:</b> {{input type="text" size=50 id="fwd_to_list" value=fwd_to_list size=100 }}</p>
+      <p><b>To:</b> {{input type="text" size=50 id="fwd_to_list" value=fwdToList size=100 }}</p>
       <b>Original Message:</b>
       {{{ansi-format text=model.body}}}
           {{markdown-editor text=message}}
@@ -105,4 +110,5 @@
     </div>
 </div>
 
+{{flash-messages}}
 {{outlet}}
