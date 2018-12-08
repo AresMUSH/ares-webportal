@@ -27,7 +27,7 @@
                         {{/power-select}}
                         
                     {{else}}
-                        {{input type="text" size=50 value=demo.value}}
+                        {{input type="text" size=25 value=demo.value}}
                     {{/if}}
                 </div>
             </div>
@@ -75,7 +75,7 @@
                 </div>
                 
                 <div class="col-sm-9">
-                    {{input type="text" size=50 value=model.tags}}
+                    {{input type="text" size=25 value=model.tags}}
                     
                 </div>
             </div>
@@ -97,7 +97,7 @@
            
            {{#each model.profile as |profile|}}
            <p>
-           {{input type="text" size=50 value=profile.name placeholder="Enter section name."}}
+           {{input type="text" size=25 value=profile.name placeholder="Enter section name."}}
            <button class="btn btn-default" {{action 'removeProfile' profile.key}}><i class="fa fa-trash" aria-hidden="true"></i></button>
            </p>
            {{markdown-editor text=profile.text}}
@@ -111,13 +111,13 @@
           
             {{#each model.relationships as |relationship|}}
             <p>
-            {{input type="text" size=50 value=relationship.name placeholder="Enter name."}}
+            {{input type="text" size=25 value=relationship.name placeholder="Enter name."}}
             <button class="btn btn-default" {{action 'removeRelationship' relationship.key}}><i class="fa fa-trash" aria-hidden="true"></i></button>
             </p>
             
             <p>
             
-            Category: {{input type="text" size=50 value=relationship.category placeholder="Enter category."}}
+            Category: {{input type="text" size=25 value=relationship.category placeholder="Enter category."}}
             Order: {{input type="text" size=25 value=relationship.order placeholder="Order (Optional)."}}
             
             </p>

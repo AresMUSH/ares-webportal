@@ -82,8 +82,8 @@
     <div id="reply" class="panel-collapse collapse">
       <div class="panel-body">
       <h3>Reply</h3>
-      <p><b>To:</b> {{input type="text" size=50 id="to_list" value=toList size=100 }}</p>
-      <p><b>Subject:</b> {{input type="text" size=50 id="subject" value=subject size=100 }}</p>
+      <p><b>To:</b> {{input type="text" size=25 id="to_list" value=toList  }}</p>
+      <p><b>Subject:</b> {{input type="text" size=25 id="subject" value=subject }}</p>
           {{markdown-editor text=message}}
           <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>    
         </div>
@@ -101,7 +101,7 @@
     <div id="forward" class="panel-collapse collapse">
       <div class="panel-body">
       <h3>Forward</h3>
-      <p><b>To:</b> {{input type="text" size=50 id="fwd_to_list" value=fwdToList size=100 }}</p>
+      <p><b>To:</b> {{input type="text" size=25 id="fwd_to_list" value=fwdToList }}</p>
       <b>Original Message:</b>
       {{{ansi-format text=model.body}}}
           {{markdown-editor text=message}}
