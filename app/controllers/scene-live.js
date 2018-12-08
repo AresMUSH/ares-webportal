@@ -15,7 +15,7 @@ export default Controller.extend(AuthenticatedController, {
     selectLocation: false,
     newLocation: null,
     
-    onSceneActivity: function(msg, timestamp) {
+    onSceneActivity: function(msg /* , timestamp */) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];
         //let data = splitMsg[1];
