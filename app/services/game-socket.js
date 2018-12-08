@@ -125,6 +125,16 @@ export default Service.extend({
         this.sendCharId();
     },
     
+    updateMailBadge(count) {
+      var mail_badge = $('#mailBadge');
+      mail_badge.text(count);
+    },
+    
+    updateJobsBadge(count) {
+      var job_badge = $('#jobBadge');
+      job_badge.text(count);
+    },
+    
     handleMessage(self, evt) {
         
         var data;
@@ -153,11 +163,10 @@ export default Service.extend({
             var formatted_msg = ansi_up.ansi_to_html(data.args.message, { use_classes: true });
             var notify = true;
             if (notification_type == "new_mail") {
-                var mail_badge = $('#mailBadge');
-                var mail_count = mail_badge.text();
-                mail_count = parseInt( mail_count );
-                mail_badge.text(mail_count + 1);
-                
+              var mail_badge = $('#mailBadge');
+              var mail_count = mail_badge.text();
+              mail_count = parseInt( mail_count );
+              mail_badge.text(mail_count + 1);                
             }
             else if (notification_type == "job_update") {
                 var job_badge = $('#jobBadge');
@@ -184,6 +193,4 @@ export default Service.extend({
         }
         
     }
-    
-    
 });
