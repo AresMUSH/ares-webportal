@@ -27,6 +27,8 @@ Router.map(function() {
   this.route('chargen-review');
   this.route('chat');
   this.route('combat', { path: '/combat/:id' });
+  this.route('combat-log', { path: '/combat/:id/log' });
+  this.route('combat-setup', { path: '/combat/:id/setup' });
   this.route('combatant-edit', { path: '/combatant/:id' });
   this.route('combats');
   this.route('config', { path: '/config/:file' });

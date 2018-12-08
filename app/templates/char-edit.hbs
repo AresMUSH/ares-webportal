@@ -22,7 +22,7 @@
                 <div class="col-sm-9">
                     {{#if (eq demo.name 'Gender') }}
                         
-                        {{#power-select selected=model.char.demographics.gender searchField="value" options=genders onchange=(action "genderChanged") as |gender|}}
+                        {{#power-select selected=model.demographics.gender searchField="value" options=genders onchange=(action "genderChanged") as |gender|}}
                           {{gender.value}}
                         {{/power-select}}
                         
