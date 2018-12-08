@@ -173,7 +173,7 @@ export default Service.extend({
             }
             else if (notification_type == "new_scene_activity") {
                 if (this.get('sceneCallback')) {
-                    this.get('sceneCallback')(data.args.message);
+                    this.get('sceneCallback')(data.args.message, data.args.timestamp);
                 }
                 notify = false;
             }

@@ -7,14 +7,16 @@ export default Controller.extend(AuthenticatedController, {
     gameSocket: service(),
     newActivity: false,
     
-    onSceneActivity: function(msg) {
+    onSceneActivity: function(msg, timestamp) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];
+        let lastPosed = splitMsg[1];
 
         this.get('model').forEach(s => {
           if (s.id === sceneId) {
             s.set('is_unread', true);
-            s.set('updated', moment().format('dd MMM DD, YYYY h:mm a'))
+            s.set('updated', timestamp);
+            s.set('last_posed', lastPosed);
           }
         });   
     },
@@ -25,8 +27,8 @@ export default Controller.extend(AuthenticatedController, {
     
     setupCallback: function() {
         let self = this;
-        this.get('gameSocket').set('sceneCallback', function(data) {
-            self.onSceneActivity(data) } );
+        this.get('gameSocket').set('sceneCallback', function(msg, timestamp) {
+            self.onSceneActivity(msg, timestamp) } );
     },
     
     actions: {
