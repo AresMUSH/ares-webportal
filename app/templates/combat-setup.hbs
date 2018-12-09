@@ -1,0 +1,107 @@
+{{title 'Combat Setup'}}
+<h1>Setup Combat {{model.id}}</h1>
+
+<p>Here you can quickly set up combat stats for all the NPCs at once.  PCs cannot be set here to avoid accidentally overwriting their settings.  You can still edit PCs individually on the main combat screen.</p>
+
+<p>{{#link-to 'combat' model.id}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Combat{{/link-to}}</p>
+
+<hr/>
+
+{{#each-in model.combatants as |id comb| }}
+
+<p>
+  {{comb.name}}
+</p>
+
+<div class="row">
+  <div class="col col-xs-6">
+
+    <p>
+      <label>Team:</label>
+  
+      {{#power-select selected=comb.team options=teams onchange=(action "teamChanged" id) as |npc|}}
+        {{npc}}
+      {{/power-select}}
+    </p>
+
+  </div>
+    
+  <div class="col col-xs-6">
+      
+    <p>
+      <label>NPC Level:</label>
+      {{#power-select selected=comb.npc_skill options=model.options.npc_skills onchange=(action "npcChanged" id) as |npc|}}
+        {{npc}}
+      {{/power-select}}
+    </p>
+  
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col col-xs-6">
+
+    <p>
+      <label>Stance</label>
+    {{#power-select selected=comb.stance options=model.options.stances onchange=(action "stanceChanged" id) as |npc|}}
+      {{npc}}
+    {{/power-select}}
+    </p>
+  </div>
+  
+  <div class="col col-xs-6">
+    <p>
+      <label>Armor</label>
+    {{#power-select selected=comb.armor options=model.options.armor onchange=(action "armorChanged" id) as |npc|}}
+      {{npc}}
+    {{/power-select}}
+
+    {{#each comb.armor_specials as |spec|}}
+        <span class="text">&nbsp; {{spec.name}}:</span>
+        {{input type='checkbox' checked=spec.selected}} 
+    {{/each}}
+    </p>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col col-xs-6">
+
+    <p>
+      <label>Weapon</label>
+    {{#power-select selected=comb.weapon options=model.options.weapons onchange=(action "weaponChanged" id) as |npc|}}
+      {{npc}}
+    {{/power-select}}
+
+    {{#each comb.weapon_specials as |spec|}}
+        <span class="text">&nbsp; {{spec.name}}:</span>
+        {{input type='checkbox' checked=spec.selected}} 
+    {{/each}}
+
+    </p>
+
+  </div>
+</div>
+
+<hr/>
+
+{{/each-in}}
+
+
+    
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+    
+                <p> {{#link-to 'combat' model.combat class="btn btn-default"}}Cancel{{/link-to}}  
+                    <button class="btn btn-primary" {{action 'save'}} >Save</button>
+                </p>
+    
+            </div>
+        {{flash-messages}}
+        </div>
+    </div>
+    
+{{outlet}}

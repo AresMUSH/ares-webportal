@@ -1,12 +1,14 @@
 {{title model.plot.title}}
 <h1>{{model.plot.title}}</h1>
-        
+      
+  
 <div class="ansi">
 
-        <p>{{{model.plot.summary}}}</p>
+        <p>{{{ansi-format text=model.plot.summary}}}</p>
 </div>
 
 
+<p><label>Storyteller:</label> {{char-icon-inline char=model.plot.storyteller}}</p>
 
     <h2>Scenes</h2>
     

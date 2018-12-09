@@ -1,0 +1,59 @@
+{{#if model.is_job_admin}}
+  {{title 'Create Job'}}
+  <h1>Create a Job</h1>
+{{else}}
+  {{title 'Create Request'}}
+  <h1>Create a Request</h1>
+{{/if}}
+
+<table>
+ 
+ 
+ <tr>
+   <td>
+     <label>Title:</label>
+   </td>
+   <td>
+     <p>{{input type='text' size=25 id='title' value=title}}</p>
+   </td>
+   <td>
+     &nbsp;
+   </td>
+ </tr>
+ 
+  <tr>
+    <td>
+      <label>Category:</label>
+    </td>
+    <td>
+        <span class="label label-info job-category job-category-{{model.category}}">{{category}}</span>
+    </td>
+    <td>
+          <ul class="nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+              <span class="btn btn-default" href="#" role="button">Change Category <span class="caret"></span></span> </a>
+              <ul class="dropdown-menu">
+              {{#each model.category_values as |category| }}
+                <li><a href="#" {{action 'changeCategory' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+              {{/each}}
+              </ul>
+            </li>
+        </ul>
+      
+    </td>
+  </tr>
+</table>
+
+     
+ {{markdown-editor text=description}}
+   
+<div class="pull-right">
+<button class="btn btn-primary" {{action 'createJob'}}>Create</button>
+</div>
+
+{{flash-messages}}
+{{outlet}}
+
+
