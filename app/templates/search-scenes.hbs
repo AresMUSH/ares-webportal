@@ -8,6 +8,12 @@
 
 <hr/>
 
+{{#if searchResults}}
+<a data-toggle="collapse" href="#searchFields"><button class="btn btn-default btn-collapse">Show/Hide Search</button></a>
+{{/if}}
+
+<div id="searchFields" class="panel-collapse collapse {{if searchResults '' 'in'}}">
+
 <div class="row">
   
   <div class="col col-xs-3">
@@ -15,7 +21,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=50 id="title"  value=searchTitle enter="search"}}</p>
+        <p>{{input type="text" size=25 id="title"  value=searchTitle enter="search"}}</p>
   </div>
   
 </div>
@@ -27,7 +33,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=50 id="participant"  value=searchParticipant enter="search"}}</p>
+        <p>{{input type="text" size=25 id="participant"  value=searchParticipant enter="search"}}</p>
         <p class="hint">Enter one or more participant names (space-separated).</p>
   </div>
   
@@ -40,7 +46,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=50 id="icdate"  value=searchDate enter="search"}}</p>
+        <p>{{input type="text" size=25 id="icdate"  value=searchDate enter="search"}}</p>
         <p class="hint">Matches the beginning of a scene's IC date, e.g. 2018-04 will find all scenes from April.</p>
   </div>
   
@@ -54,7 +60,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=50 id="log"  value=searchLog enter="search"}}</p>
+        <p>{{input type="text" size=25 id="log"  value=searchLog enter="search"}}</p>
   </div>
   
 </div>
@@ -68,7 +74,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=50 id="tag"  value=searchTag enter="search"}}</p>
+        <p>{{input type="text" size=25 id="tag"  value=searchTag enter="search"}}</p>
   </div>
   
 </div>
@@ -84,6 +90,8 @@
             </div>
         </div>
     </div>
+
+</div>
 
 <hr/>
 

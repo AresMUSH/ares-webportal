@@ -4,7 +4,10 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({    
     gameApi: service(),
     flashMessages: service(),
-    
+    genders: function() {
+      return [ { value: 'Male' }, { value: 'Female' }, { value: 'Other' }];
+    }.property(),
+  
     buildQueryDataForChar: function() {
         let demographics = {};
         let profile = {};
@@ -67,6 +70,9 @@ export default Controller.extend({
         },
         galleryChanged(files) {
             this.set('model.gallery', files);
+        },
+        genderChanged(val) {
+            this.set('model.demographics.gender.value', val.value);
         },
         profileImageChanged(image) {
             this.set('model.profile_image', image);

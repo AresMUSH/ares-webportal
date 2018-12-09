@@ -1,10 +1,32 @@
 {{title pageTitle}}
 <h1>Combat {{model.id}}</h1>
 
-<p><i>Organized by {{model.organizer}}</i></p>
 
-{{#if model.can_manage}}
-{{/if}}
+    <div class="row">
+        <div class="col col-xs-12">
+          
+          <p><i>Organized by {{model.organizer}}</i> 
+
+            <div class="pull-right">
+    
+                <p> {{#link-to 'combat-log' model.id class="btn btn-default"}}View Log{{/link-to}}  
+                    {{#if model.can_manage}}
+                      {{#link-to 'combat-setup' model.id class="btn btn-default"}}Setup{{/link-to}}  
+                    {{/if}}
+                    
+                    
+                </p>
+    
+            </div>
+            
+            </p>
+        {{flash-messages}}
+        </div>
+    </div>
+    
+    
+
+
 
 <div class="table-responsive">
 
@@ -14,6 +36,7 @@
     <th>Name</th>
     <th>Damage</th>
     <th>Weapon</th>
+    <th>Armor</th>
     <th>Vehicle</th>
     <th>Stance</th>
     <th>Action</th>
@@ -55,6 +78,9 @@
         <td>
             {{c.weapon}} {{c.ammo}}
         </td>
+        <td>
+            {{c.armor}}
+        </td>
         
         <td>
             {{c.vehicle}}
@@ -93,7 +119,7 @@
     <div class="panel-body">
         
         <p><b>Name:</b> </p>
-            <p>{{input type="text"  size=100 value=newCombatantName}}</p>
+            <p>{{input type="text"  size=25 value=newCombatantName}}</p>
         <p><b>Type:</b> {{#power-select selected=newCombatantType options=model.combatant_types onchange=(action "combatantTypeChanged") as |type|}}
           {{type}}
         {{/power-select}}</p>

@@ -14,7 +14,7 @@
                   <div class="text-right user-bar">
                    {{#if isAuthenticated}}
                        <p>Welcome, {{currentUser.name}}.</p>
-                       <p>{{#link-to 'char' currentUser.id}}Profile{{/link-to}} |
+                       <p>{{#link-to 'char' currentUser.name}}Profile{{/link-to}} |
                            {{#link-to 'mail'}}Mail
                            {{#if model.unread_mail}}
                            <span class="label label-pill label-primary" id="mailBadge">{{model.unread_mail}}</span>

@@ -1,8 +1,8 @@
-{{title model.title}}
-<h1>#{{model.id}} - {{model.title}}</h1>
+{{title model.job.title}}
+<h1>#{{model.job.id}} - {{model.job.title}}</h1>
 
 <p>{{#link-to 'jobs'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i>
-     {{#if model.is_job_admin}}
+     {{#if model.job.is_job_admin}}
      Back to Jobs
      {{else}}
      Back to Requests
@@ -19,7 +19,7 @@
       <label>Author:</label>
     </td>
     <td>
-      {{char-icon-inline char=model.author}}
+      {{char-icon-inline char=model.job.author}}
     </td>
     <td>
       &nbsp;
@@ -31,17 +31,19 @@
      <label>Assigned To:</label>
     </td>
     <td>
-     {{char-icon-inline char=model.assigned_to}}
+      {{#if model.job.assigned_to}}
+       {{char-icon-inline char=model.job.assigned_to}}
+       {{/if}}
     </td>
     <td>
-      {{#if model.is_job_admin}}
+      {{#if model.job.is_job_admin}}
         <ul class="nav">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
             <span class="btn btn-default" href="#" role="button">Assign <span class="caret"></span></span> </a>
             <ul class="dropdown-menu">
-            {{#each model.job_admin as |staff| }}
+            {{#each model.job.job_admins as |staff| }}
               <li><a href="#" {{action 'assignJob' staff}}>{{staff.name}}</a></li>
             {{/each}}
             </ul>
@@ -58,17 +60,17 @@
        <label>Status: </label>
     </td>
     <td>
-      <span class="label label-info job-status job-status-{{model.status}}">{{model.status}}</span>
+      <span class="label label-info job-status job-status-{{model.job.status}}">{{model.job.status}}</span>
     </td>
     <td>
-      {{#if model.is_job_admin}}
+      {{#if model.job.is_job_admin}}
           <ul class="nav">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
               <span class="btn btn-default" href="#" role="button">Change Status <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
-              {{#each model.status_values as |status| }}
+              {{#each model.options.status_values as |status| }}
                 <li><a href="#" {{action 'changeData' 'status' status}}><span class="label job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
               {{/each}}
               </ul>
@@ -85,17 +87,17 @@
       <label>Category:</label>
     </td>
     <td>
-        <span class="label label-info job-category job-category-{{model.category}}">{{model.category}}</span>
+        <span class="label label-info job-category job-category-{{model.job.category}}">{{model.job.category}}</span>
     </td>
     <td>
-      {{#if model.is_job_admin}}
+      {{#if model.job.is_job_admin}}
           <ul class="nav">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
               <span class="btn btn-default" href="#" role="button">Change Category <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
-              {{#each model.category_values as |category| }}
+              {{#each model.options.category_values as |category| }}
                 <li><a href="#" {{action 'changeData' 'category' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
               {{/each}}
               </ul>
@@ -113,7 +115,7 @@
       <label>Submitted:</label>
     </td>
     <td>
-      {{model.created}}
+      {{model.job.created}}
     </td>
     <td>
       &nbsp;
@@ -126,21 +128,25 @@
 
 <hr/>
 
-    {{{ansi-format text=model.description}}}
+    {{{ansi-format text=model.job.description}}}
 
 <hr/>
 
-{{#each model.replies as |r|}}
+{{#each model.job.replies as |r|}}
  <div>
 
      <p>{{char-icon-inline char=r.author}}</p>
-
-     <p><i> {{r.created}} </i></p>
+     <p><i> {{r.created}} </i>
+      {{#if model.job.is_job_admin}}
+        <a href="#" {{action 'deleteReply' r.id}}><i class="fa fa-trash" aria-hidden="true"></i></a>
+      {{/if}}
+      </p>
 
 
          {{#if r.admin_only}}
          <div class="label label-danger">To Admins Only</div>
          {{/if}}
+
          {{{ansi-format text=r.message}}}
 
 
@@ -151,7 +157,7 @@
 <div class="inline-response">
 <h3>Add Reply</h3>
 
-    {{#if model.is_job_admin}}
+    {{#if model.job.is_job_admin}}
         Respond to Admin Only? {{input type='checkbox' checked=replyAdminOnly}}
     {{/if}}
         {{markdown-editor text=reply}}
@@ -161,7 +167,7 @@
 
 <div class="row">
     <div class="col col-xs-12">
-     {{#if model.is_open }}
+     {{#if model.job.is_open }}
         <ul class="nav navbar-nav">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -169,8 +175,8 @@
               <span class="btn btn-default" href="#" role="button">Job Menu <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
               <li><a href="#" {{action 'closeJob'}}>Close Job</a></li>
-              {{#if model.is_approval_job}}
-              <li>{{#link-to 'app-review' model.author.id}}Review {{model.author.name}}{{/link-to}}</li>
+              {{#if model.job.is_approval_job}}
+              <li>{{#link-to 'app-review' model.job.author.id}}Review {{model.job.author.name}}{{/link-to}}</li>
               {{/if}}
               </ul>
             </li>
@@ -183,8 +189,5 @@
   </div>
 </div>
 
-
-
-
-
+{{flash-messages}}
 {{outlet}}

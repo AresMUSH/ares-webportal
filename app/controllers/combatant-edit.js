@@ -17,6 +17,7 @@ export default Controller.extend({
                 stance: this.get('model.stance'),
                 weapon: this.get('model.weapon'),
                 armor: this.get('model.armor'),
+                npc_skill: this.get('model.npc_skill'),
                 weapon_specials: this.get('model.weapon_specials') || [],
                 armor_specials: this.get('model.armor_specials') || []
              }, null )
