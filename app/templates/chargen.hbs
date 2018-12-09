@@ -341,13 +341,13 @@
                        <li>To remove a background skill, set its rating to Everyman.</li>
                      </ul>
                    </div>
-
+ 
                      <br><br>
 
                      {{#each model.char.fs3.fs3_backgrounds as |skill|}}
 
                      {{#fs3-bgbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
-                         <b>{{input type="text" {{input type="text" size=25 </b>
+                         <b>{{input type="text" value=skill.name size=25}}</b>
                      {{/fs3-bgbox}}
                      {{/each}}
 
