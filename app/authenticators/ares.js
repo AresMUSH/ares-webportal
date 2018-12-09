@@ -4,6 +4,7 @@ import Promise from 'rsvp';
 
 export default Base.extend({
     gameApi: service(),
+    session: service(),
     gameSocket: service(),
 
     restore(data) {
@@ -16,7 +17,7 @@ export default Base.extend({
                 this.get('gameSocket').sessionStarted(data.id);
                 return Promise.resolve(data);
             }
-            this.get('gameSocket').sessionStopped();
+            this.get('session').invalidate();
             return Promise.reject(response);            
         });    
     },
@@ -30,7 +31,7 @@ export default Base.extend({
                 this.get('gameSocket').sessionStarted(response.id);
                 return Promise.resolve(response);
             }
-            this.get('gameSocket').sessionStopped();
+            this.get('session').invalidate();
             return Promise.reject(response);            
         });
     },

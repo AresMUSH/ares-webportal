@@ -13,53 +13,63 @@
         <label>Name:</label>
   </div>
 
-  <div class="col col-xs-9">
-        <p>{{input type="text" size=50 id="name"  value=searchName enter="search"}}</p>
-  </div>
+{{#if searchResults}}
+<a data-toggle="collapse" href="#searchFields"><button class="btn btn-default btn-collapse">Show/Hide Search</button></a>
+{{/if}}
 
-</div>
+<div id="searchFields" class="panel-collapse collapse {{if searchResults '' 'in'}}">
 
-{{#each-in model.cgInfo.group_options as |key group| }}
+<h3>Groups</h3>
 
 <div class="row">
+{{#each-in model.cgInfo.group_options as |key group| }}
 
-  <div class="col col-xs-3">
+  <div class="col col-xs-3 col-md-2">
     <label>{{group.name}}:</label>
   </div>
 
-  <div class="col col-xs-9">
-        <p>{{input type="text" size=50  value=(mut (get searchGroups key)) enter="search"}}</p>
+  <div class="col col-xs-9 col-md-4">
+        <p>{{input type="text" size=25  value=(mut (get searchGroups key)) enter="search"}}</p>
   </div>
 
-</div>
 {{/each-in}}
+</div>
 
 <h3>Demographics</h3>
 
-{{#each model.cgInfo.demographics as |demo| }}
 <div class="row">
+{{#each model.cgInfo.demographics as |demo| }}
 
-  <div class="col col-xs-3">
+  <div class="col col-xs-3 col-md-2">
     <label>{{demo}}:</label>
   </div>
 
-  <div class="col col-xs-9">
-        <p>{{input type="text" size=50  value=(mut (get searchDemographics demo)) enter="search"}}</p>
+  <div class="col col-xs-9 col-md-4">
+        <p>{{input type="text" size=25  value=(mut (get searchDemographics demo)) enter="search"}}</p>
   </div>
 
-</div>
 {{/each}}
+</div>
 
 <h3>Other</h3>
 
 <div class="row">
 
-  <div class="col col-xs-3">
+  <div class="col col-xs-3 col-md-2">
+        <label>Name:</label>
+  </div>
+
+  <div class="col col-xs-9 col-md-4">
+        <p>{{input type="text" size=25 id="name"  value=searchName enter="search"}}</p>
+  </div>
+
+
+  <div class="col col-xs-3 col-md-2">
         <label>Tag:</label>
   </div>
 
-  <div class="col col-xs-9">
-        <p>{{input type="text" size=50 id="tag"  value=searchTag enter="search"}}</p>
+  <div class="col col-xs-9 col-md-4">
+        <p>{{input type="text" size=25 id="tag"  value=searchTag enter="search"}}</p>
   </div>
 
 </div>
@@ -75,6 +85,8 @@
     </div>
 
 <hr/>
+
+</div>
 
 {{flash-messages}}
 

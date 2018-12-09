@@ -32,8 +32,10 @@
         <span class="btn btn-default chat-button" href="#" role="button">Add Channel <span class="caret"></span></span> </a>
         <ul class="dropdown-menu">
           {{#each-in model.channels as |key channel|}}
-            {{#if (not channel.enabled)}}
-              <li><a href="#" {{action 'joinChannel' channel.name}}>{{channel.name}}</a></li>
+            {{#if channel.allowed}}
+              {{#if (not channel.enabled)}}
+                <li><a href="#" {{action 'joinChannel' channel.name}}>{{channel.name}}</a></li>
+              {{/if}}
             {{/if}}
         {{/each-in}}
         </ul>
@@ -69,7 +71,7 @@
 
           <div id="chat-window">
           {{#each channel.messages as |message|}}
-              <div class="chat-timestamp">{{message.timestamp}}</div>
+              <div class="timestamp-tip">{{message.timestamp}}</div>
               {{{ansi-format text=message.message}}}
           {{/each}}
           </div>

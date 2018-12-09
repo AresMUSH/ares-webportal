@@ -85,7 +85,7 @@
                              <b>Full Name</b>
                      </div>
                      <div class="col-sm-9">
-                             {{input type="text" size=50 value=model.char.fullname}}
+                             {{input type="text" size=25 value=model.char.fullname}}
                      </div>
                  </div>
 
@@ -102,10 +102,10 @@
                              {{/power-select}}
 
                          {{else if (eq key 'age')}}
-                             {{input type="text" size=50 value=demo.value}}
+                             {{input type="text" size=25 value=demo.value}}
                              <div class="cg-subtle-tip">Enter an age or a birthdate in {{model.cgInfo.date_format}} format.</div>
                          {{else}}
-                             {{input type="text" size=50 value=demo.value}}
+                             {{input type="text" size=25 value=demo.value}}
                          {{/if}}
                      </div>
                  </div>
@@ -134,7 +134,7 @@
                       <div class="col-sm-9">
 
                       {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
-                        {{input type="text" size=50 value=group.value}}
+                        {{input type="text" size=25 value=group.value}}
                       {{else}}
                         {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" onchange=(action "groupChanged" key) as |g|}}
                         {{g.value}} {{if g.desc '-'}} {{g.desc}}
@@ -347,7 +347,7 @@
                      {{#each model.char.fs3.fs3_backgrounds as |skill|}}
 
                      {{#fs3-bgbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
-                         <b>{{input type="text" value=skill.name size=50}}</b>
+                         <b>{{input type="text" {{input type="text" size=25 </b>
                      {{/fs3-bgbox}}
                      {{/each}}
 
@@ -482,7 +482,7 @@
                  {{markdown-editor text=model.char.desc}}
 
                  <p> <i>Short Description:</i> </p>
-                 {{input type="text"  size=100 value=model.char.shortdesc}}
+                 {{input type="text"  size=25 value=model.char.shortdesc}}
 
                </div>
              </div>

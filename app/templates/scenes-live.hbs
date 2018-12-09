@@ -60,7 +60,14 @@
       <p>{{scene.icdate}}</p>
     </td>
     <td>
-      {{scene.updated}}
+      {{#if scene.last_posed}}
+      {{scene.last_posed}} @ 
+      {{/if}}
+      
+      {{scene.updated}} 
+      
+      <br/>
+      
       {{#if scene.watching}}
         {{#if (not scene.participating) }}
           <button class="btn btn-default" {{action 'stopWatching' scene.id}}>
