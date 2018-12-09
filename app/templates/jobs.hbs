@@ -1,24 +1,32 @@
 {{#if model.job_admin}}
 
-{{title 'Jobs'}}
-<h1>Jobs</h1>
+  {{title 'Jobs'}}
+  <h1>Jobs</h1>
 
-{{#if model.reboot_required_notice}}
-    <div class="alert alert-warning">
-      <strong>Reboot Required!</strong> {{model.reboot_required_notice}}
-    </div>
-{{/if}}
+  {{#if model.reboot_required_notice}}
+      <div class="alert alert-warning">
+        <strong>Reboot Required!</strong> {{model.reboot_required_notice}}
+      </div>
+  {{/if}}
+  
+  <div class="pull-right">
+    {{#link-to 'search-jobs'}}<i class="fa fa-search" aria-hidden="true"></i> Search Jobs{{/link-to}}  &nbsp;&nbsp;
+    {{#link-to 'job-create' class="btn btn-primary"}}Create Job{{/link-to}}
+  </div>
         
 {{else}}
 
-{{title 'Requests'}}
-<h1>Requests</h1>
+  {{title 'Requests'}}
+  <h1>Requests</h1>
+  
+  <div class="pull-right">
+    {{#link-to 'search-jobs'}}<i class="fa fa-search" aria-hidden="true"></i> Search Requests{{/link-to}}  &nbsp;&nbsp;
+    {{#link-to 'job-create' class="btn btn-primary"}}Create Request{{/link-to}}
+  </div>
 
 {{/if}}
 
-<div class="pull-right">
-  {{#link-to 'search-jobs'}}<i class="fa fa-search" aria-hidden="true"></i> Search Jobs/Requests{{/link-to}}  
-</div>
+
 <div class="clearfix"></div>
         
 {{jobs-list jobs=model.jobs}}
