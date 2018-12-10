@@ -4,27 +4,27 @@
 
     <div class="row">
         <div class="col col-xs-12">
-          
-          <p><i>Organized by {{model.organizer}}</i> 
+
+          <p><i>Organized by {{model.organizer}}</i>
 
             <div class="pull-right">
-    
-                <p> {{#link-to 'combat-log' model.id class="btn btn-default"}}View Log{{/link-to}}  
+
+                <p> {{#link-to 'combat-log' model.id class="btn btn-default"}}View Log{{/link-to}}
                     {{#if model.can_manage}}
-                      {{#link-to 'combat-setup' model.id class="btn btn-default"}}Setup{{/link-to}}  
+                      {{#link-to 'combat-setup' model.id class="btn btn-default"}}Setup{{/link-to}}
                     {{/if}}
-                    
-                    
+
+
                 </p>
-    
+
             </div>
-            
+
             </p>
         {{flash-messages}}
         </div>
     </div>
-    
-    
+
+
 
 
 
@@ -37,7 +37,6 @@
     <th>Damage</th>
     <th>Weapon</th>
     <th>Armor</th>
-    <th>Vehicle</th>
     <th>Stance</th>
     <th>Action</th>
     <th></th>
@@ -46,78 +45,75 @@
 
 
 
-{{#each model.teams as |t| }}    
+{{#each model.teams as |t| }}
 
 <tr><td colspan="6"><h3>Team {{t.team}}</h3></td></tr>
 
     {{#each t.combatants as |c| }}
-    
+
     <tr>
         <td>
             {{c.name}}
         </td>
-        
+
         <td>
             {{#if c.is_ko}}
             <span style="color:red" >
                 <i class="fa fa-crosshairs" aria-hidden="true"></i>
-                K O 
+                K O
                 <i class="fa fa-crosshairs" aria-hidden="true"></i>
             </span>
             {{else}}
             <span style="color:red" >
-                
+
                 {{#each c.damage_boxes as |d|}}
                     <i class="fa fa-heartbeat" style="color:red" aria-hidden="true"></i>
                 {{/each}}
-                
+
             </span>
             {{/if}}
         </td>
-        
+
         <td>
             {{c.weapon}} {{c.ammo}}
         </td>
         <td>
             {{c.armor}}
         </td>
-        
-        <td>
-            {{c.vehicle}}
-        </td>
+
         
         <td>
             {{c.stance}}
         </td>
-        
+
         <td>
             {{c.action}}
         </td>
-        
+
         <td>
             {{#if c.can_edit}}
                 {{#link-to 'combatant-edit' c.id}}<i class="fa fa-edit" aria-hidden="true"></i>{{/link-to}}
             {{/if}}
         </td>
     </tr>
-    
+
     {{/each}}
-  
+
 
 {{/each}}
 
-    
+
 </tbody>
 </table>
 </div>
-   
+
 
 <div class="panel panel-default">
     <div class="panel-heading">
         Add a Combatant
     </div>
     <div class="panel-body">
-        
+
         <p><b>Name:</b> </p>
             <p>{{input type="text"  size=25 value=newCombatantName}}</p>
         <p><b>Type:</b> {{#power-select selected=newCombatantType options=model.combatant_types onchange=(action "combatantTypeChanged") as |type|}}
