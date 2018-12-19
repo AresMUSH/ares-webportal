@@ -23,7 +23,9 @@
       <li><a data-toggle="tab" href="#systemdamage">Damage</a></li>
   {{/if}}
 
-  <li><a data-toggle="tab" href="#systemspells">Spells</a></li>
+  {{#if char.spells}}
+    <li><a data-toggle="tab" href="#systemspells">Spells</a></li>
+  {{/if}}
 
   {{#if char.achievements}}
       <li><a data-toggle="tab" href="#achievements">Achievements</a></li>
