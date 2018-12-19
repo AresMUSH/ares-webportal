@@ -12,12 +12,9 @@
     <br>
   </div>
   {{/each}}
-  <hr style="width:75%; border: 5px; border-radius: 5px;">
 </div>
 
 <h2><a href="/wiki/{{char.minor_school}}">{{char.minor_school}}</a></h2>
-
-
 <div class="row">
   {{#each char.minor_spells as |spell|}}
   <div class="spell-block">
@@ -31,3 +28,20 @@
   </div>
   {{/each}}
 </div>
+
+{{#if other_spells}}
+  <h2>Other Spells</a></h2>
+  <div class="row">
+    {{#each char.other_spells as |spell|}}
+    <div class="spell-block">
+      <div  class="col-sm-7 col-md-6">
+        <b>{{spell.name}}</b>
+      </div>
+      <div  class="col-sm-2 col-md-2">
+        <i>Level {{spell.level}} </i>
+      </div>
+      <br>
+    </div>
+    {{/each}}
+  </div>
+{{/if}}
