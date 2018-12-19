@@ -2,99 +2,101 @@
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#general">General</a></li>
-        <li><a data-toggle="tab" href="#profile">Profile</a></li>
+        <li><a data-toggle="tab" href="#profile">Character Information</a></li>
         <li><a data-toggle="tab" href="#relationships">Relationships</a></li>
         <li><a data-toggle="tab" href="#hooks">RP Hooks</a></li>
         <li><a data-toggle="tab" href="#files">Files</a></li>
     </ul>
-    
-    
+
+
 
     <div class="tab-content">
 
         <div id="general" class="tab-pane fade in active">
-            
+
             {{#each-in model.demographics as |key demo|}}
             <div class="form-group row">
                 <div class="col-sm-3">
-                        <b>{{demo.name}}</b> 
+                        <b>{{demo.name}}</b>
                 </div>
                 <div class="col-sm-9">
                     {{#if (eq demo.name 'Gender') }}
-                        
+
                         {{#power-select selected=model.demographics.gender searchField="value" options=genders onchange=(action "genderChanged") as |gender|}}
                           {{gender.value}}
                         {{/power-select}}
-                        
+
                     {{else}}
                         {{input type="text" size=25 value=demo.value}}
                     {{/if}}
                 </div>
             </div>
             {{/each-in}}
-            
+
             <div class="form-group row">
                 <div class="col-sm-3">
                         <b>Gallery</b>
                 </div>
-                
+
                 <div class="col-sm-9">
                     {{#power-select-multiple selected=model.gallery searchField="name" options=model.files onchange=(action "galleryChanged") as |file|}}
                     {{file.name}}
                     {{/power-select-multiple}}
                 </div>
             </div>
-            
+
             <div class="form-group row">
                 <div class="col-sm-3">
                         <b>Profile Image</b>
                 </div>
-                
+
                 <div class="col-sm-9">
                     {{#power-select selected=model.profile_image allowClear=true searchField="name" options=model.files onchange=(action "profileImageChanged") as |file|}}
                     {{file.name}}
                     {{/power-select}}
                 </div>
             </div>
-            
+
             <div class="form-group row">
                 <div class="col-sm-3">
                         <b>Profile Icon</b>
                 </div>
-                
+
                 <div class="col-sm-9">
                     {{#power-select selected=model.profile_icon allowClear=true searchField="name" options=model.files onchange=(action "profileIconChanged") as |file|}}
                     {{file.name}}
                     {{/power-select}}
                 </div>
             </div>
-            
+
             <div class="form-group row">
                 <div class="col-sm-3">
                         <b>Page Tags</b>
                 </div>
-                
+
                 <div class="col-sm-9">
                     {{input type="text" size=25 value=model.tags}}
-                    
+
                 </div>
             </div>
-            
-            <div class="form-group row">
-                <div class="col-sm-3">
-                        <b>Share Background</b>
-                </div>
-                
-                <div class="col-sm-9">
-                      {{input type='checkbox' checked=model.bg_shared}}
-                </div>
-            </div>
-            
-            
+
+
+
+
         </div>
-      
+
         <div id="profile" class="tab-pane fade in">
-           
+
+          <div class="form-group row">
+              <div class="col-sm-3">
+                      <b>Share Background</b>
+              </div>
+
+              <div class="col-sm-9">
+                    {{input type='checkbox' checked=model.bg_shared}}
+              </div>
+          </div>
+
            {{#each model.profile as |profile|}}
            <p>
            {{input type="text" size=25 value=profile.name placeholder="Enter section name."}}
@@ -103,73 +105,73 @@
            {{markdown-editor text=profile.text}}
             <hr/>
            {{/each}}
-           
+
            <button class="btn btn-default" {{action 'addProfile'}}>Add Profile Section <i class="fa fa-plus" aria-hidden="true"></i></button>
         </div>
-    
+
         <div id="relationships" class="tab-pane fade in">
-          
+
             {{#each model.relationships as |relationship|}}
             <p>
             {{input type="text" size=25 value=relationship.name placeholder="Enter name."}}
             <button class="btn btn-default" {{action 'removeRelationship' relationship.key}}><i class="fa fa-trash" aria-hidden="true"></i></button>
             </p>
-            
+
             <p>
-            
+
             Category: {{input type="text" size=25 value=relationship.category placeholder="Enter category."}}
             Order: {{input type="text" size=25 value=relationship.order placeholder="Order (Optional)."}}
-            
+
             </p>
-            
+
             {{markdown-editor text=relationship.text}}
-            
+
             <hr/>
             {{/each}}
-           
+
             <button class="btn btn-default" {{action 'addRelationship'}}>Add Relationship <i class="fa fa-plus" aria-hidden="true"></i></button>
-            
-          
+
+
         </div>
-      
+
         <div id="hooks" class="tab-pane fade in">
           {{markdown-editor text=model.rp_hooks}}
         </div>
-      
+
         <div id="files" class="tab-pane fade in">
             <div class="cg-tip">Files for your character page need to be in a folder matching your character's name.  They will show up below and be accessible in the gallery and profile image selection lists.</div>
             <hr/>
-        
+
             <div>
             {{#each model.files as |file|}}
-            
+
             <div class="thumbnail-gallery">
             {{#link-to 'file' file.folder file.name}}
-            {{file.path}} <img src="/game/uploads/{{file.path}}" class="thumbnail"/> 
+            {{file.path}} <img src="/game/uploads/{{file.path}}" class="thumbnail"/>
             {{/link-to}}
             </div>
             {{/each}}
             </div>
             <div class="clearfix"/>
-        
+
             <p>{{#link-to 'files'}}All Files{{/link-to}}</p>
-    
+
             {{file-uploader folder=model.name uploaded=(action "fileUploaded")}}
         </div>
-      
-          
+
+
     </div>
-    
-   
-    
+
+
+
     <div class="row">
         <div class="col col-xs-12">
             <div class="pull-right">
-    
-                <p> {{#link-to 'char' model.name class="btn btn-default"}}Cancel{{/link-to}}  
+
+                <p> {{#link-to 'char' model.name class="btn btn-default"}}Cancel{{/link-to}}
                     <button class="btn btn-primary" {{action 'save'}} >Save</button>
                 </p>
-    
+
             </div>
         {{flash-messages}}
         </div>
