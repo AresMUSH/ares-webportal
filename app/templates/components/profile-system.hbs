@@ -2,15 +2,7 @@
   <li class="active"><a data-toggle="tab" href="#systeminfo">+</a></li>
 
 
-  <li><a data-toggle="tab" href="#systemhooks">RP Hooks</a></li>
 
-  {{#if char.background}}
-      <li><a data-toggle="tab" href="#systembg">Background</a></li>
-  {{/if}}
-
-  {{#if char.description}}
-  <li><a data-toggle="tab" href="#systemdesc">Description</a></li>
-  {{/if}}
 
 
   {{#if (not game.disabled_plugins.fs3skills)}}
@@ -40,22 +32,7 @@
       <div class="tab-cover">System Information</div>
   </div>
 
-  <div id="systemhooks" class="tab-pane fade">
-      {{{ansi-format text=char.rp_hooks}}}
-  </div>
 
-
-  {{#if char.background}}
-  <div id="systembg" class="tab-pane fade">
-      {{{ansi-format text=char.background}}}
-   </div>
-  {{/if}}
-
-  {{#if char.description}}
-  <div id="systemdesc" class="tab-pane fade">
-       {{{ansi-format text=char.description}}}
-  </div>
-  {{/if}}
 
   {{#if (not game.disabled_plugins.fs3skills)}}
   <div id="systemsheet" class="tab-pane fade">
