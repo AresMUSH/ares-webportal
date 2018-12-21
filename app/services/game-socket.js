@@ -14,8 +14,8 @@ export default Service.extend({
     sceneCallback: null,
 
     socketUrl() {
-      var protocol = aresconfig.ssl ? 'wss' : 'ws';	       var protocol = aresconfig.use_https ? 'wss' : 'ws';
-         return `${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
+	var protocol = aresconfig.ssl ? 'wss' : 'ws';
+        return `${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
     },
 
     checkSession(charId) {
@@ -36,13 +36,23 @@ export default Service.extend({
             this.get('favicon').changeFavicon(true);
             if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
                 try {
-                    new Notification(`Activity in ${aresconfig.game_name}!`);
+                    new Notification(msg);
                 }
                 catch(error) {
                     // Do nothing.  Just safeguard against missing browser notification.
                 }
+            } else if (Notification.permission !== "denied") {
+    		Notification.requestPermission(function (permission) {
+      		    if (permission === "granted") {
+			try {
+       			  new Notification(msg);
+		        } catch (error) {
+
+			}
+      		    }
+    		});
             }
-        }
+	}
     },
 
     sessionStarted(charId) {
@@ -94,7 +104,6 @@ export default Service.extend({
         this.set('charId', null);
         this.sendCharId();
         /*
-
         let socket = this.get('socket');
             if (socket) {
             socket.close();
@@ -179,6 +188,10 @@ export default Service.extend({
                     this.get('chatCallback')(data.args.message);
                 }
                 notify = false;
+            }
+            else if (notification_type == "job_update") {
+                var badge = $('#jobBadge');
+                badge.text(parseInt(badge.text()) + 1);
             }
             else if (notification_type == "new_scene_activity") {
                 if (this.get('sceneCallback')) {
