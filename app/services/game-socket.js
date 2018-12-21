@@ -14,7 +14,7 @@ export default Service.extend({
     sceneCallback: null,
 
     socketUrl() {
-      var protocol = aresconfig.use_https ? 'wss' : 'ws';
+      var protocol = aresconfig.ssl ? 'wss' : 'ws';
       return `${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
     },
 
