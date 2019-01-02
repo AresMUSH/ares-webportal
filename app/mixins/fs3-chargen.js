@@ -102,12 +102,13 @@ export default Mixin.create({
             this.charErrors.push(`Magic cannot be higher than 1.`);
         }
 
+        let attrsHash = this.get('model.char.fs3.fs3_attributes.magic');
         let totalAttrs = this.get('attrPoints');
         let totalSkills = this.get('skillPoints');
         let totalAction = this.get('actionPoints');
         let maxAttrs = this.get('model.cgInfo.fs3.max_attrs');
         if (totalAttrs > maxAttrs) {
-            this.charErrors.push(`You can only spend ${maxAttrs} points in attributes.  You have spent ${totalAttrs}.`);
+            this.charErrors.push(`You can only spend ${maxAttrs} points in attributes.  You have spent ${totalAttrs}. ${attrsHash}`);
         }
 
         let maxAction = this.get('model.cgInfo.fs3.max_action');
