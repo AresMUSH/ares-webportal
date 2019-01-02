@@ -101,7 +101,7 @@ export default Mixin.create({
         let magicRating = magicAttr ? magicAttr.rating : 0;
 
         if (magicRating > 1) {
-            this.charErrors.push(`Magic cannot be higher than 1.`);
+            this.charErrors.push('Magic cannot be higher than 1.');
         }
 
         let totalAttrs = this.get('attrPoints');
