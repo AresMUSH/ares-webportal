@@ -97,7 +97,7 @@ export default Mixin.create({
         this.checkLimits(this.get('model.char.fs3.fs3_attributes'), this.get('model.cgInfo.fs3.attr_limits'), 'attributes');
 
         // Magic
-        let magicAttr = this.get('model.char.fs3_attributes').filter(a => a.name === 'Magic');
+        let magicAttr = this.get('model.char.fs3.fs3_attributes').filter(a => a.name === 'Magic');
         let magicRating = magicAttr ? magicAttr.rating : 0;
 
         if (magicRating > 1) {
