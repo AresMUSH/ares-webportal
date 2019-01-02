@@ -96,6 +96,14 @@ export default Mixin.create({
         this.checkLimits(this.get('model.char.fs3.fs3_action_skills'), this.get('model.cgInfo.fs3.skill_limits'), 'action skills');
         this.checkLimits(this.get('model.char.fs3.fs3_attributes'), this.get('model.cgInfo.fs3.attr_limits'), 'attributes');
 
+        // Magic
+        let magicAttr = this.get('model.char.fs3_attributes').filter(a => a.name === 'Magic');
+        let magicRating = magicAttr ? magicAttr.rating : 0;
+
+        if (magicRating > 1) {
+            this.charErrors.push(`Magic cannot be higher than 1.`);
+        }
+
         let totalAttrs = this.get('attrPoints');
         let totalSkills = this.get('skillPoints');
         let totalAction = this.get('actionPoints');
