@@ -98,7 +98,7 @@ export default Mixin.create({
         this.checkLimits(this.get('model.char.fs3.fs3_attributes'), this.get('model.cgInfo.fs3.attr_limits'), 'attributes');
         // Magic
         let magic = this.get('model.char.fs3.fs3_attributes.magic');
-        if (magic > 1) {
+        if (this.get('model.char.fs3.fs3_attributes.magic') > 1) {
             this.charErrors.push(`Magic cannot be higher than 1.`);
         }
 
