@@ -102,7 +102,7 @@ export default Mixin.create({
             this.charErrors.push(`Magic cannot be higher than 1.`);
         }
 
-        let attrsHash = this.get('model.char.fs3.fs3_attributes.magic');
+        let attrsHash = this.get('model.char.fs3.fs3_attributes');
         let totalAttrs = this.get('attrPoints');
         let totalSkills = this.get('skillPoints');
         let totalAction = this.get('actionPoints');
