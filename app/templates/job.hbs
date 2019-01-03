@@ -120,13 +120,9 @@
     <td>
       {{#if model.job.is_open }}
         {{#if model.job.is_approval_job}}
-                <span class="btn btn-default" href="#" role="button">{{#link-to 'app-review' model.job.author.id}}Review {{model.job.author.name}}{{/link-to}} </span>
+                <span class="btn btn-default" href="#" role="button" style="color:black;">{{#link-to 'app-review' model.job.author.id}}Review {{model.job.author.name}}{{/link-to}} </span>
         {{/if}}
       {{/if}}
-
-          <div class="pull-right">
-          <button class="btn btn-primary" {{action 'addReply'}}>Reply</button>
-          </div>
 
     </td>
   </tr>
