@@ -11,7 +11,7 @@ export default Route.extend(AuthenticatedRoute, {
                 
         return RSVP.hash({
              plot:  api.requestOne('plot', { id: params['id'], edit_mode: true  }),
-             characters: api.requestMany('characters')
+             characters: api.requestMany('characters', { select: 'include_staff' })
            })
            .then((model) => Ember.Object.create(model));
     }

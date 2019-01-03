@@ -8,6 +8,15 @@
     </p>
     
     <p>
+        <label for="storyteller" class="col-xs-2 col-form-label">Storyteller:</label>
+    
+        {{#power-select options=model selected=storyteller searchField="name" onchange=(action "storytellerChanged") as |char|}}
+          {{char.name}}
+        {{/power-select}}
+    
+    </p>
+    
+    <p>
         <label for="summary" class="col-xs-2 col-form-label">Summary:</label>
         {{markdown-editor text=summary}}
     </p>
