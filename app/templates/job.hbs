@@ -22,7 +22,11 @@
       {{char-icon-inline char=model.job.author}}
     </td>
     <td>
-      &nbsp;
+      {{#if model.job.is_open }}
+        {{#if model.job.is_approval_job}}
+                <span class="btn btn-default" href="#" role="button">{{#link-to 'app-review' model.job.author.id}}Review {{model.job.author.name}}{{/link-to}} </span>
+        {{/if}}
+      {{/if}}
     </td>
   </tr>
 
@@ -118,11 +122,7 @@
       {{model.job.created}}
     </td>
     <td>
-      {{#if model.job.is_open }}
-        {{#if model.job.is_approval_job}}
-                <span class="btn btn-default" href="#" role="button" style="color:black;">{{#link-to 'app-review' model.job.author.id}}Review {{model.job.author.name}}{{/link-to}} </span>
-        {{/if}}
-      {{/if}}
+      &nbsp;
 
     </td>
   </tr>
