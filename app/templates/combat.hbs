@@ -93,6 +93,7 @@
         <td>
             {{#if c.can_edit}}
                 {{#link-to 'combatant-edit' c.id}}<i class="fa fa-edit" aria-hidden="true"></i>{{/link-to}}
+                <a href="#" {{action (mut confirmRemoveCombatant) c.id }} ><i class="fa fa-ban" aria-hidden="true"></i></a>
             {{/if}}
         </td>
     </tr>
@@ -125,6 +126,19 @@
 </div>
 
         {{flash-messages}}
+
+
+{{#bs-modal-simple
+    title="Confirm Remove"
+    closeTitle="Cancel"
+    submitTitle="Confirm"
+    size=null
+    fade=false
+    open=confirmRemoveCombatant
+    onSubmit=(action "removeCombatant" confirmRemoveCombatant)
+    onHide=(action (mut confirmRemoveCombatant) null)}}
+    This will remove them from combat.  Are you sure?
+  {{/bs-modal-simple}}
 
 
 <hr/>

@@ -45,12 +45,19 @@
 {{#if searchResults}}
 
 <h2>Best Matches</h2>
+
+{{#if searchResults.probable_matches}}
+
 <ul>
 {{#each searchResults.probable_matches as |topic|}}
 <li>{{#link-to 'help-topic' topic.id}}{{topic.name}}{{/link-to}} - {{topic.summary}}</li>
 {{/each}}
 </ul>
 
+
+{{else}}
+None
+{{/if}}
 
 <h2>Other Possible Matches</h2>
 

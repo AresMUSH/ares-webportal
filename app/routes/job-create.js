@@ -7,7 +7,7 @@ export default Route.extend(DefaultRoute, RouteResetOnExit, {
     gameApi: service(),
     gameSocket: service(),
     
-    model: function(params) {
+    model: function() {
         let api = this.get('gameApi');
         return api.requestOne('jobOptions');
     },
