@@ -6,6 +6,7 @@ export default Controller.extend({
     flashMessages: service(),
     newCombatantName: '',
     newCombatantType: 'Soldier',
+    confirmRemoveCombatant: false,
     
     pageTitle: function() {
         return `Combat ${this.get('model.id')}`;
@@ -14,6 +15,7 @@ export default Controller.extend({
     resetOnExit: function() {
         this.set('newCombatantName', '');
         this.set('newCombatantType', '');
+        this.set('confirmRemoveCombatant', false);
     },
     
     actions: {
@@ -34,6 +36,18 @@ export default Controller.extend({
                     this.get('flashMessages').success('Combatant added!');
                 });
             }
+            
+        },
+        removeCombatant: function(id) {
+            let api = this.get('gameApi');
+            api.requestOne('removeCombatant', { id: id }, null)
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.send('reloadModel');
+                this.get('flashMessages').success('Combatant removed!');
+            });
             
         },
         combatantTypeChanged: function(type) {
