@@ -10,6 +10,10 @@ export default Controller.extend(AuthenticatedController, {
         return `${this.get('model.icdate')} - ${this.get('model.title')}`
     }.property(),
     
+    resetOnExit: function() {
+      this.set('confirmDelete', false);
+    },
+    
     actions: {
         like(like) {
             let api = this.get('gameApi');

@@ -6,6 +6,10 @@ export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
     confirmDelete: false,
+  
+    resetOnExit: function() {
+      this.set('confirmDelete', false);
+    },
     
     actions: {
         delete: function() {
