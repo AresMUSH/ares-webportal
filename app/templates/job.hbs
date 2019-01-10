@@ -24,7 +24,8 @@
     <td>
       {{#if model.job.is_open }}
         {{#if model.job.is_approval_job}}
-                <span class="btn btn-default btn-app" href="#" role="button">{{#link-to 'app-review' model.job.author.id}}Review {{model.job.author.name}}'s Application{{/link-to}} </span>
+                <span class="btn btn-default btn-app" href="#" role="button">{{#link-to 'app-review' model.job.author.id}}Review {{model.job.author.name}}'s Application{{/link-to}} </span> <br>
+                {{#link-to 'char' model.id class="btn btn-primary" target="_blank"}}View Character{{/link-to}}
         {{/if}}
       {{/if}}
     </td>
