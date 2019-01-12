@@ -14,6 +14,7 @@ export default Controller.extend(AuthenticatedController, {
     selectSkillRoll: false,
     selectLocation: false,
     newLocation: null,
+    scrollPaused: false,
     
     onSceneActivity: function(msg /* , timestamp */) {
         let splitMsg = msg.split('|');
@@ -64,6 +65,11 @@ export default Controller.extend(AuthenticatedController, {
     }.property('model.my_scenes.@each.id'),
     
     scrollSceneWindow: function() {
+      // Unless scrolling paused 
+      if (this.get('scrollPaused')) {
+        return;
+      }
+      
         try {
           $('#live-scene-log').stop().animate({
               scrollTop: $('#live-scene-log')[0].scrollHeight
@@ -217,6 +223,14 @@ export default Controller.extend(AuthenticatedController, {
         refresh() {
             this.resetOnExit();
             this.send('reloadModel');
+        },
+        
+        pauseScroll() {
+          this.set('scrollPaused', true);
+        },
+        unpauseScroll() {
+          this.set('scrollPaused', false);
+          this.scrollSceneWindow();
         }
     }
 });
