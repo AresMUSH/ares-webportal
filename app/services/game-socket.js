@@ -12,6 +12,7 @@ export default Service.extend({
     charId: null,
     chatCallback: null,
     sceneCallback: null,
+    connected: false,
     
     socketUrl() {
       var protocol = aresconfig.use_https ? 'wss' : 'ws';
@@ -66,17 +67,9 @@ export default Service.extend({
                 self.handleMessage(self, evt);
             };
             socket.onclose = function() {
-              self.get('flashMessages').add({
-                message: 'Your connection to the game has been lost!  You will no longer see updates.  Try reloading the page.  If the problem persists, the game may be down.',
-                type: 'danger',
-                priority: 200,
-                sticky: true,
-                destroyOnClick: true,
-                onDestroy() {
-                  // behavior triggered when flash is destroyed
-                }
-              });
-              self.notify("Connection lost.");
+              let message = 'Your connection to the game has been lost!  You will no longer see updates.  Try reloading the page.  If the problem persists, the game may be down.';
+              self.notify(message, 5, 'error');
+              self.set('connected', false);
             };            
             this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
         
@@ -121,7 +114,7 @@ export default Service.extend({
             self.set('windowVisible', true);
             self.get('favicon').changeFavicon(false);                    
         });
-        
+        this.set('connected', true);
         this.sendCharId();
     },
     
