@@ -4,7 +4,15 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
-  let app = new EmberApp(defaults, {
+    let app = new EmberApp(defaults, {
+
+	    minifyJS: {
+		enabled: false,
+    },
+    minifyCSS: {
+      enabled: false
+    },
+	
     'ember-bootstrap': {
       'bootstrapVersion': 3,
       'importBootstrapFont': true,
@@ -12,7 +20,9 @@ module.exports = function(defaults) {
     }
   });
 
-  /*  app.import(app.bowerDirectory + '/bootstrap/dist/css/bootstrap.css');
+    app.options.minifyJS.enabled = false;
+    
+    /*  app.import(app.bowerDirectory + '/bootstrap/dist/css/bootstrap.css');
     app.import(app.bowerDirectory + '/bootstrap/dist/js/bootstrap.js');
     app.import(app.bowerDirectory + '/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', {
       destDir: 'fonts'
