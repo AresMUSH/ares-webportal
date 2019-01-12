@@ -9,23 +9,7 @@ module.exports = function(defaults) {
       'bootstrapVersion': 3,
       'importBootstrapFont': true,
       'importBootstrapCSS': false
-    },
-
-      'ember-cli-uglify': {
-          enabled: true,
-
-          exclude: ['assets/vendor.js', 'assets/alertify.min.js'],
-
-          uglify: {
-              compress: {
-                  sequences: 100,
-                  unused: false
-              },
-              output: {
-                  semicolons: true,
-              },
-          },
-      }
+    }
   });
 
   /*  app.import(app.bowerDirectory + '/bootstrap/dist/css/bootstrap.css');
