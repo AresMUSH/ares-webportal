@@ -32,12 +32,22 @@ export default Service.extend({
         if (msg) {
           alertify.notify(msg, type, timeOutSecs);
         }
-      
-        if (!this.get('windowVisible')) {
+             
+       if (!this.get('windowVisible')) {
             this.get('favicon').changeFavicon(true);
             if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
                 try {
-                    new Notification(`Activity in ${aresconfig.game_name}!`);
+                  var doc = new DOMParser().parseFromString(msg, 'text/html');
+                  var cleanMsg =  doc.body.textContent || "";
+                     
+                  new Notification(`Activity in ${aresconfig.game_name}`, 
+                    {
+                      icon: '/game/uploads/theme_images/favicon.ico',
+                      body: cleanMsg,
+                      tag: aresconfig.game_name,
+                      renotify: true
+                    }
+                   ); 
                 }
                 catch(error) {
                     // Do nothing.  Just safeguard against missing browser notification.
