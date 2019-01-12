@@ -328,6 +328,17 @@
 
      
    {{flash-messages}}
+   
+   {{#if showCharErrors}}
+   <div class="alert alert-danger">
+   <p><b>Alerts:</b></p>
+   <ul>
+   {{#each alerts as |error|}}
+   <li>{{error}}</li>
+   {{/each}}
+   </ul>
+   </div>
+   {{/if}}
      
   </div>
   
