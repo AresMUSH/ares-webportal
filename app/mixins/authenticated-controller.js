@@ -6,7 +6,7 @@ export default Mixin.create({
     
     isAuthenticated: function() {
         return this.get('session.isAuthenticated');
-    }.property('model'),
+    }.property('session.isAuthenticated'),
     
     isApproved: function() {
         return this.get('session.data.authenticated.is_approved');
