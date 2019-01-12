@@ -55,9 +55,14 @@ export default Mixin.create({
             return {};
         }
         return ability_list.reduce(function(map, obj) {
-                map[obj.name] = obj.rating;
+                if (obj.name && obj.name.length > 0) {
+                  map[obj.name] = obj.rating;
+                }
                 return map;
-                }, {});
+                }, 
+                {}
+              
+              );
     },
     
     skillPoints: function() {
@@ -95,6 +100,11 @@ export default Mixin.create({
 
         this.checkLimits(this.get('model.char.fs3.fs3_action_skills'), this.get('model.cgInfo.fs3.skill_limits'), 'action skills');
         this.checkLimits(this.get('model.char.fs3.fs3_attributes'), this.get('model.cgInfo.fs3.attr_limits'), 'attributes');
+        
+        let emptyBgSkills = this.get('model.char.fs3.fs3_backgrounds').filter(s => !(s.name && s.name.length > 0));
+        if (emptyBgSkills.length > 0) {
+          this.charErrors.push('Background skill names cannot be blank.  Set the skill to Everyman to remove it.');
+        }
         
         let totalAttrs = this.get('attrPoints');
         let totalSkills = this.get('skillPoints');

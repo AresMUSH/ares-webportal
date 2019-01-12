@@ -7,6 +7,7 @@ export default Controller.extend({
     gameApi: service(),
     selectedChannel: '',
     chatMessage: '',
+    scrollPaused: false,
     
     onChatMessage: function(msg) {
         let splitMsg = msg.split('|');
@@ -28,13 +29,18 @@ export default Controller.extend({
     },
     
     scrollChatWindow: function() {
+      // Unless scrolling paused 
+      if (this.get('scrollPaused')) {
+        return;
+      }
+      let chatWindow = $('#chat-window')[0];
+      if (chatWindow) {
+          $('#chat-window').stop().animate({
+              scrollTop: chatWindow.scrollHeight
+          }, 800);    
+      }        
       try {
-        let chatWindow = $('#chat-window')[0];
-        if (chatWindow) {
-            $('#chat-window').stop().animate({
-                scrollTop: chatWindow.scrollHeight
-            }, 800);    
-        }        
+        
       }
       catch(error) {
         // This happens sometimes when transitioning away from screen.
@@ -116,6 +122,14 @@ export default Controller.extend({
                     return;
                 }
             });
+        },
+
+        pauseScroll() {
+          this.set('scrollPaused', true);
+        },
+        unpauseScroll() {
+          this.set('scrollPaused', false);
+          this.scrollChatWindow();
         }
     }
     
