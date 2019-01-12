@@ -37,6 +37,10 @@ export default Controller.extend(AuthenticatedController, {
         return this.get('session.data.authenticated');
     }.property(),
     
+    socketConnected: function() {
+      return this.get('gameSocket.connected');
+    }.property('gameSocket.connected'),
+    
     sidebar: function() {
         return this.get('model');
     }.property('refreshSidebar')

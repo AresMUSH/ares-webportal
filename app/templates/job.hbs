@@ -22,11 +22,21 @@
       {{char-icon-inline char=model.job.author}}
     </td>
     <td>
-      {{#if model.job.is_open }}
-        {{#if model.job.is_approval_job}}
-                <span class="btn btn-primary btn-app" href="#" role="button">{{#link-to 'app-review' model.job.author.id}}Review {{model.job.author.name}}'s Application{{/link-to}} </span> <br><br>
-                {{#link-to 'char' model.job.author.id class="btn btn-primary" target="_blank"}}View Character{{/link-to}}
-        {{/if}}
+       {{#if model.job.is_open }}
+          <ul class="nav navbar-nav">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                <span class="btn btn-default" href="#" role="button">Job Menu <span class="caret"></span></span> </a>
+                <ul class="dropdown-menu">
+                <li><a href="#" {{action 'closeJob'}}>Close Job</a></li>
+                {{#if model.job.is_approval_job}}
+                <li>{{#link-to 'app-review' model.job.author.id}}App Review for {{model.job.author.name}}{{/link-to}}</li>
+                <li>{{#link-to 'char' model.job.author.name}}Profile for {{model.job.author.name}}{{/link-to}}</li>
+                {{/if}}
+                </ul>
+              </li>
+          </ul>
       {{/if}}
     </td>
   </tr>
@@ -182,7 +192,8 @@
               <ul class="dropdown-menu">
               <li><a href="#" {{action 'closeJob'}}>Close Job</a></li>
               {{#if model.job.is_approval_job}}
-              <li>{{#link-to 'app-review' model.job.author.id}}Review {{model.job.author.name}}{{/link-to}}</li>
+                <li>{{#link-to 'app-review' model.job.author.id}}App Review for {{model.job.author.name}}{{/link-to}}</li>
+                <li>{{#link-to 'char' model.job.author.name}}Profile for {{model.job.author.name}}{{/link-to}}</li>
               {{/if}}
               </ul>
             </li>
