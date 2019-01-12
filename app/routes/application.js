@@ -25,6 +25,7 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
             if (response.error) {
                 return { game_down: true };
             }
+            response['socketConnected'] = this.get('gameSocket.connected');
             return response;
         })
         .catch(() => {

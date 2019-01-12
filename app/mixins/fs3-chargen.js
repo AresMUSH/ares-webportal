@@ -55,9 +55,14 @@ export default Mixin.create({
             return {};
         }
         return ability_list.reduce(function(map, obj) {
-                map[obj.name] = obj.rating;
+                if (obj.name && obj.name.length > 0) {
+                  map[obj.name] = obj.rating;
+                }
                 return map;
-                }, {});
+                },
+                {}
+
+              );
     },
 
     skillPoints: function() {

@@ -48,9 +48,20 @@
 
   {{#if selectedChannel}}
 
-  <b>{{selectedChannel}}</b> <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i></a>
+  <b>{{selectedChannel}}</b> <a href="#" {{action "scrollDown"}} data-toggle="tooltip" title="Scroll to bottom."><i class="fas fa-chevron-circle-down"></i></a>
+
+
+  {{#if scrollPaused}}
+          <a href="#" {{action "unpauseScroll"}} data-toggle="tooltip" title="Resume scrolling."><i class="fas fa-play"></i></a>
+  {{else}}
+          <a href="#" {{action "pauseScroll"}} data-toggle="tooltip" title="Pause scrolling."><i class="fas fa-pause"></i></a>
+  {{/if}}
+
+
 
   {{else}}
+
+
 
   <div id="chat-window">
   </div>
@@ -69,12 +80,22 @@
           <div class="alert alert-warning">This channel is muted.  You will not see new messages.</div>
           {{/if}}
 
+
+    {{#if scrollPaused}}
+       <span class="label label-warning">Scrolling is paused!</span>
+    {{/if}}
+
           <div id="chat-window">
           {{#each channel.messages as |message|}}
               <div class="timestamp-tip">{{message.timestamp}}</div>
               {{{ansi-format text=message.message}}}
           {{/each}}
           </div>
+
+
+    {{#if scrollPaused}}
+       <span class="label label-warning">Scrolling is paused!</span>
+    {{/if}}
 
           {{markdown-editor text=chatMessage rows=3 onEnter=(action "send")}}
 

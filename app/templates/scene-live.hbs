@@ -31,10 +31,21 @@
       {{/if}}
 
         <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
+ &nbsp; 
+  {{#if scrollPaused}}
+          <a href="#" {{action "unpauseScroll"}} data-toggle="tooltip" title="Resume scrolling."><i class="fas fa-play"></i> Resume Scrolling.</a><br/>
+  {{else}}
+          <a href="#" {{action "pauseScroll"}} data-toggle="tooltip" title="Pause scrolling."><i class="fas fa-pause"></i> Pause Scrolling.</a>
+  {{/if}}
 
+
+    {{#if scrollPaused}}
+       <span class="label label-warning">Scrolling is paused!</span>
+    {{/if}}
+    
     <div class="ansi scene-log" id="live-scene-log">
     
-    
+
     {{#each scenePoses as |pose|}}    
             {{#if (and isApproved pose.can_edit)}}
             <div class="hint pull-right">
@@ -89,14 +100,20 @@
                  {{/if}}
             {{/if}}
     {{/each}}
-    
+
     </div>
+
+  {{#if scrollPaused}}
+     <span class="label label-warning">Scrolling is paused!</span>
+  {{/if}}
+  
 
 
     {{#if isApproved}}
 
         {{markdown-editor text=scenePose rows=4}}
-        
+    {{else}}
+         <p>You must be approved to join a scene.</p>
     {{/if}}
     
     
