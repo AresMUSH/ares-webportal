@@ -29,6 +29,9 @@ export default Service.extend({
     
     reportError(error) {
       try {
+        if (error.message === 'TransitionAborted') {
+          return;
+        }
         console.log(error);
         $.post(this.serverUrl("request"), 
                 {
