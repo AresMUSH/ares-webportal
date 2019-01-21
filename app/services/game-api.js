@@ -10,7 +10,12 @@ export default Service.extend({
         var base;
         var protocol = aresconfig.use_https ? 'https' : 'http';
         if (aresconfig.use_api_proxy) {
-          base = `${protocol}://${aresconfig.host}:${aresconfig.web_portal_port}/api`;
+          if (`${aresconfig.web_portal_port}` === '80') {
+            base = `${protocol}://${aresconfig.host}/api`;
+          }
+          else {
+            base = `${protocol}://${aresconfig.host}:${aresconfig.web_portal_port}/api`;
+          }
         } 
         else {
           base = `${protocol}://${aresconfig.host}:${aresconfig.api_port}`;
