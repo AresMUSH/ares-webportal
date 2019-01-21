@@ -27,6 +27,21 @@ export default Service.extend({
         }
     },
     
+    reportError(error) {
+      try {
+        console.log(error);
+        $.post(this.serverUrl("request"), 
+                {
+                    cmd: 'webError',
+                    args: { error: `${error} : ${error.stack}` },
+                    api_key: aresconfig.api_key
+                });
+        Ember.getOwner(this).lookup('router:main').transitionTo('error', { queryParams: { message: "Client error." }});
+      } catch(ex) { 
+        // Failsafe.  Do nothing.
+      }
+    },
+    
     request(cmd, args) {
      return $.post(this.serverUrl("request"), 
         {
@@ -39,8 +54,8 @@ export default Service.extend({
                 return response;
             }
            return response;
-        }).catch(() => {
-                    Ember.getOwner(this).lookup('router:main').transitionTo('error', { queryParams: { message: "There was a problem connecting to the game.  It may be down." }}) });
+        }).catch(ex => {
+              Ember.getOwner(this).lookup('router:main').transitionTo('error', { queryParams: { message: "There was a problem connecting to the game.  It may be down." }}) });
     },
     
     requestOne(cmd, args = {}, transitionToOnError = 'home') {
