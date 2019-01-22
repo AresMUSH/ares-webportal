@@ -118,7 +118,7 @@
                     {{#power-select selected=model.char.secretpref searchField="value" options=model.cgInfo.secret_prefs onchange=(action "secretPrefChanged") as |pref|}}
                      {{pref.value}} - {{pref.desc}}
                     {{/power-select}}
-                    <p class="cg-subtle-tip">Secrets are admin-created pieces of information about your character, which your character may or may not be aware of. They are hooks for plots and story development over time. Secrets may be positive or negative, and sometimes may affect more than one character.</p>
+                    <p class="cg-subtle-tip">Secrets are admin-created pieces of information that are hooks for plots and story development over time. They may refer to a piece of your character's past, or be a plot seed that will be planted in the future. Secrets may be positive or negative, and sometimes may be shared by more than one character. You may choose to have a hand in developing your character's secret or leave it entirely up to admin, but once created, the implementation of secrets is in the hands of the game's Storytellers.</p>
                    </div>
 
                  </div>
@@ -179,7 +179,7 @@
                        <ul>
                        <li>You get a rating of up to 'Average' for free. Each additional rating costs 2 points. </li>
                        <li>You can spend up to 13 additional points on attributes.</li>
-                       <li>You can have up to four attributes at level 3 or above and two at level 4.</li>
+                       <li>You can have up to four attributes at level 3 or higher, of which only two can be level 4.</li>
                        <li>No one may have a Magic attribute above 1.</li>
                        </ul>
                     </div><br><br>
@@ -242,7 +242,7 @@
                      <ul>
                      <li>You automatically get the Everyman (1) rating in each Action Skill for free. Each additional rating costs 1 point.</li>
                      <li>You can spend up to 28 points on action skills.</li>
-                     <li> You can have up to six action skills at level 5 or above, three at level six or above, and one at level 7. </li>
+                     <li> You can have up to six action skills at level 5 or above, of which only three can be level six or above, and only one can be level 7. </li>
                      <li>No one may start with a level 8 action skill.</li>
                      <li>Your Major School should be level 2 and your Minor School should be level 1. If you have only a Major School, it may be level 3.</li>
                      <li>Note that for Alertness and Composure, natural ability can get you up to 3. Anything higher should reflect training or experience in those skills.</li>
@@ -508,7 +508,7 @@
 
 
    {{flash-messages}}
-   
+
    {{#if showCharErrors}}
    <div class="alert alert-danger">
    <p><b>Alerts:</b></p>
