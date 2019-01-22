@@ -164,7 +164,6 @@
             <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
             <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
             <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
-            {{rollString}}
             {{/if}}
         
                 
@@ -228,7 +227,8 @@
               <option value={{ability}}>{{ability}}</option>
             {{/each}}
           </select>
-      
+          {{input type="text" size=25 id="rollString" enter="addSceneRoll" value=rollString}}
+          
         {{/bs-modal-simple}}
     
    </div>
