@@ -53,7 +53,10 @@ export default Service.extend({
             api_key: aresconfig.api_key,
             auth: this.get('session.data.authenticated')
         }).then((response) => {
-            if (response.error) {
+            if (!response) {
+              Ember.getOwner(this).lookup('router:main').transitionTo('error', { queryParams: { message: "Empty response from game." }});
+            }
+            else if (response.error) {
                 return response;
             }
            return response;
