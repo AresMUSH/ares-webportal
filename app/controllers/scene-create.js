@@ -25,10 +25,13 @@ export default Controller.extend({
             this.set('model.scene.participants', newParticipants);
         },
         relatedChanged(newRelated) {
-            this.set('model.scene.related_scenes', newRelated)
+          this.set('model.scene.related_scenes', newRelated);
         },
         privacyChanged(newPrivacy) {
-            this.set('model.scene.privacy', newPrivacy)
+          this.set('model.scene.privacy', newPrivacy);
+        },
+        locationSelected(newLocation) {
+          this.set('model.scene.location', newLocation);
         },
         save() {
             let api = this.get('gameApi');
