@@ -82,7 +82,7 @@
     <div id="reply" class="panel-collapse collapse">
       <div class="panel-body">
       <h3>Reply</h3>
-      <p><b>To:</b> {{input type="text" size=25 id="to_list" value=toList  }} <span class="hint">Specify one or more names, separated by spaces.</span></p>
+      <p><b>To:</b> {{input type="text" size=25 id="to_list" value=toList  }} <a href="#" {{action 'replyAll'}}>Reply All</a> <span class="hint">Specify one or more names, separated by spaces.</span></p>
       <p><b>Subject:</b> {{input type="text" size=25 id="subject" value=subject }}</p>
           {{markdown-editor text=message}}
           <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>    

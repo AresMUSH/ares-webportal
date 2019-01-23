@@ -110,6 +110,9 @@ export default Controller.extend({
     tagsChanged: function(tags) {
       this.set('model.tags', tags);
       this.saveTags();
+    },
+    replyAll: function() {
+      this.set('toList', this.get('model.reply_all'));
     }
   }
 });
