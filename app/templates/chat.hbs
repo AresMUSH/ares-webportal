@@ -48,7 +48,10 @@
 
   {{#if selectedChannel}}
 
-  <b>{{selectedChannel}}</b> <a href="#" {{action "scrollDown"}} data-toggle="tooltip" title="Scroll to bottom."><i class="fas fa-chevron-circle-down"></i></a>
+  <b>{{selectedChannel}}</b> <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down">
+    {{#bs-tooltip placement="left"}}Scroll to bottom.{{/bs-tooltip}}
+    
+  </i></a>
 
   
   {{#if scrollPaused}}
@@ -97,7 +100,7 @@
        <span class="label label-warning">Scrolling is paused!</span>
     {{/if}}
     
-          {{markdown-editor text=chatMessage rows=3 onEnter=(action "send")}}
+          {{cmd-box value=chatMessage class="chat-box" cols="80" rows="6" sendText=(action "send")}}
 
       {{else}}
     
