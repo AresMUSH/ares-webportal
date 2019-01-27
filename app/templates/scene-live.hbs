@@ -47,14 +47,21 @@
     
 
     {{#each scenePoses as |pose|}}    
-            {{#if (and isApproved pose.can_edit)}}
             <div class="hint pull-right">
-                {{#if (not pose.editActive)}}
-                <a href="#" {{action 'editScenePose' pose}}><i class="fa fa-edit" aria-hidden="true"></i></a>
-                <a href="#" {{action (mut confirmDeleteScenePose) pose}}><i class="fa fa-trash" aria-hidden="true"></i></a>
+                
+                
+                <i class="fas fa-clock" >
+                  {{#bs-tooltip placement="left"}}{{pose.timestamp}}{{/bs-tooltip}}
+                </i>
+               
+                
+                {{#if (and isApproved pose.can_edit)}}
+                  {{#if (not pose.editActive)}}
+                  <a href="#" {{action 'editScenePose' pose}}><i class="fa fa-edit" aria-hidden="true"></i></a>
+                  <a href="#" {{action (mut confirmDeleteScenePose) pose}}><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  {{/if}}
                 {{/if}}
             </div>
-            {{/if}}
         
             {{#if pose.is_system_pose}}
                 <div class="scene-system-pose">
