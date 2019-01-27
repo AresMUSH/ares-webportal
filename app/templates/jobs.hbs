@@ -17,18 +17,28 @@
           <ul class="dropdown-menu">
             <li><a href="#" {{action 'filterJobs' 'active'}}><span class="label job-category job-category-ACTIVE">&nbsp;</span> ACTIVE</a></li>
             <li><a href="#" {{action 'filterJobs' 'mine'}}><span class="label job-category job-category-MINE">&nbsp;</span> MINE</a></li>
-          {{#each model.options.category_values as |category| }}
-            <li><a href="#" {{action 'filterJobs' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
-          {{/each}}
-          </ul>
+            <li><a href="#" {{action 'filterJobs' 'all'}}><span class="label job-category job-category-MINE">&nbsp;</span> ALL</a></li>          </ul>
         </li>
     </ul>
-  
+    
   <div class="pull-right">
     
     {{#link-to 'search-jobs'}}<i class="fa fa-search" aria-hidden="true"></i> Search Jobs{{/link-to}}  &nbsp;&nbsp;
     {{#link-to 'job-create' class="btn btn-primary"}}Create Job{{/link-to}}
   </div>
+  
+
+  
+  {{#each model.status_filter as |status|}}
+      <<span class="label job-filter job-status job-status-{{status.name}}">&nbsp;</span> {{status.name}}
+      {{input type='checkbox' checked=status.selected}} 
+  {{/each}}
+  <br/>
+  
+  {{#each model.category_filter as |cat|}}
+      <span class="label job-filter job-category job-category-{{cat.name}}">&nbsp;</span> {{cat.name}}
+      {{input type='checkbox' checked=cat.selected}} 
+  {{/each}}
         
 {{else}}
 
@@ -46,6 +56,6 @@
 <div class="clearfix"></div>
 
 
-{{jobs-list jobs=model.jobs}}
+{{jobs-list jobs=filteredJobs}}
 
 {{outlet}}
