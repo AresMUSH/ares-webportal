@@ -11,7 +11,11 @@ export default Route.extend(DefaultRoute, ReloadableRoute, {
     afterModel: function(model) {
       var statusFilter = [];
       model.get('options.status_values').forEach(function(s) {
-        let hash = { name: s, selected: true };
+        let hash = { name: s, selected: true, disabled: false };
+        if (s === 'DONE' && model.get('options.jobs_filter') != 'ALL') {
+          hash['disabled'] = true;
+          hash['selected'] = false;
+        }
         statusFilter.pushObject(hash);
       });
     
