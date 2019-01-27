@@ -33,9 +33,10 @@
         <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
  &nbsp; 
   {{#if scrollPaused}}
-          <a href="#" {{action "unpauseScroll"}} data-toggle="tooltip" title="Resume scrolling."><i class="fas fa-play"></i> Resume Scrolling.</a><br/>
+          <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
+          </i> Resume Scrolling</a><br/>
   {{else}}
-          <a href="#" {{action "pauseScroll"}} data-toggle="tooltip" title="Pause scrolling."><i class="fas fa-pause"></i> Pause Scrolling.</a>
+          <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause"></i> Pause Scrolling</a>
   {{/if}}
 
 
@@ -57,8 +58,12 @@
                 
                 {{#if (and isApproved pose.can_edit)}}
                   {{#if (not pose.editActive)}}
-                  <a href="#" {{action 'editScenePose' pose}}><i class="fa fa-edit" aria-hidden="true"></i></a>
-                  <a href="#" {{action (mut confirmDeleteScenePose) pose}}><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  <a href="#" {{action 'editScenePose' pose}}><i class="fa fa-edit" aria-hidden="true">
+                    {{#bs-tooltip placement="left"}}Edit pose.{{/bs-tooltip}}
+                  </i></a>
+                  <a href="#" {{action (mut confirmDeleteScenePose) pose}}><i class="fa fa-trash" aria-hidden="true">
+                    {{#bs-tooltip placement="left"}}Delete pose.{{/bs-tooltip}}
+                  </i></a>
                   {{/if}}
                 {{/if}}
             </div>

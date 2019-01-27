@@ -55,9 +55,13 @@
 
   
   {{#if scrollPaused}}
-          <a href="#" {{action "unpauseScroll"}} data-toggle="tooltip" title="Resume scrolling."><i class="fas fa-play"></i></a>
+          <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
+            {{#bs-tooltip placement="left"}}Resume scrolling.{{/bs-tooltip}}
+          </i></a>
   {{else}}
-          <a href="#" {{action "pauseScroll"}} data-toggle="tooltip" title="Pause scrolling."><i class="fas fa-pause"></i></a>
+          <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause">
+            {{#bs-tooltip placement="left"}}Pause scrolling.{{/bs-tooltip}}
+          </i></a>
   {{/if}}
   
         
