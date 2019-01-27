@@ -4,10 +4,12 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   gameApi: service(),
   flashMessages: service(),
-  subject: '',
-  message: '',
-  toList: '',
-  fwdToList: '',
+  replySubject: '',
+  fwdSubject: '',
+  replyMessage: '',
+  fwdMessage: '',
+  replyToList: [],
+  fwdToList: [],
   newTag: '',
   confirmDelete: false,
 
@@ -16,16 +18,18 @@ export default Controller.extend({
   },
   
   setup: function() {
-    this.set('subject', `Re: ${this.get('model.subject')}`);
-    this.set('toList', this.get('model.from'));
-    this.set('fwdToList', '');
-    this.set('message', '');
+    this.set('replySubject', `Re: ${this.get('model.message.subject')}`);
+    this.set('fwdSubject', `Fwd: ${this.get('model.message.subject')}`);
+    this.set('replyToList', this.get('model.characters').filter(c => c.name === this.get('model.message.from')));
+    this.set('fwdToList', []);
+    this.set('replyMessage', '');
+    this.set('fwdMessage', '');
     this.set('newTag', '');
-  }.observes('model'),
+  }.observes('model.message'),
   
   saveTags: function() {
     let api = this.get('gameApi');
-    api.requestOne('tagMail', { id: this.get('model.id'), tags: this.get('model.tags') }, null)
+    api.requestOne('tagMail', { id: this.get('model.message.id'), tags: this.get('model.message.tags') }, null)
     .then( (response) => {
       if (response.error) {
         return;
@@ -36,11 +40,53 @@ export default Controller.extend({
   },
     
   actions: {
+
+    addNewTag: function() {
+      let tags = this.get('model.message.tags');
+      let newTag = this.get('newTag');
+      
+      if (newTag === '') {
+        return;
+      }
+      
+      tags.push(newTag);
+      this.set('model.message.tags', tags);
+      this.saveTags();
+    },
+    archiveMsg: function() {
+      let api = this.get('gameApi');
+      api.requestOne('archiveMail', { id: this.get('model.message.id') }, null)
+      .then( (response) => {
+        if (response.error) {
+          return;
+        }
+        this.transitionToRoute('mail');
+        this.get('flashMessages').success('Message archived!');
+      });
+    },
+    deleteMsg: function() {
+      let api = this.get('gameApi');
+      api.requestOne('deleteMail', { id: this.get('model.message.id') }, null)
+      .then( (response) => {
+        if (response.error) {
+          return;
+        }
+        this.transitionToRoute('mail');
+        this.get('flashMessages').success('Message moved to trash.');
+      });
+    },
+    fwdToListChanged: function(list) {
+      this.set('fwdToList', list);
+    },
+    replyAll: function() {      
+      this.set('replyToList', this.get('model.characters').filter(c =>this.get('model.message.reply_all').includes(c.name)));
+    },
+    
     sendReply: function() {
       let api = this.get('gameApi');
-      api.requestOne('sendMail', { subject: this.get('subject'), 
-      message: this.get('message'),
-      to_list: this.get('toList')}, null)
+      api.requestOne('sendMail', { subject: this.get('replySubject'), 
+      message: this.get('replyMessage'),
+      to_list: (this.get('replyToList') || []).map (p => p.name )}, null)
       .then( (response) => {
         if (response.error) {
           return;
@@ -51,9 +97,9 @@ export default Controller.extend({
     },
     sendForward: function() {
       let api = this.get('gameApi');
-      api.requestOne('sendMail', { subject: `Fwd: ${this.get('model.subject')}`, 
-      message: `${this.get('message')}\n\n----\n\nOriginal Message:\n${this.get('model.raw_body')}`,
-      to_list: this.get('fwdToList')}, null)
+      api.requestOne('sendMail', { subject: this.get('fwdSubject'), 
+      message: `${this.get('fwdMessage')}\n\n----\n\nOriginal Message:\n${this.get('model.message.raw_body')}`,
+      to_list: (this.get('fwdToList') || []).map (p => p.name )}, null)
       .then( (response) => {
         if (response.error) {
           return;
@@ -62,20 +108,16 @@ export default Controller.extend({
         this.get('flashMessages').success('Sent!');
       });
     },
-    deleteMsg: function() {
-      let api = this.get('gameApi');
-      api.requestOne('deleteMail', { id: this.get('model.id') }, null)
-      .then( (response) => {
-        if (response.error) {
-          return;
-        }
-        this.transitionToRoute('mail');
-        this.get('flashMessages').success('Message moved to trash.');
-      });
+    tagsChanged: function(tags) {
+      this.set('model.message.tags', tags);
+      this.saveTags();
+    },
+    replyToListChanged: function(list) {
+      this.set('replyToList', list);
     },
     uneleteMsg: function() {
       let api = this.get('gameApi');
-      api.requestOne('undeleteMail', { id: this.get('model.id') }, null)
+      api.requestOne('undeleteMail', { id: this.get('model.message.id') }, null)
       .then( (response) => {
         if (response.error) {
           return;
@@ -83,36 +125,6 @@ export default Controller.extend({
         this.transitionToRoute('mail');
         this.get('flashMessages').success('Message undeleted.');
       });
-    },
-    addNewTag: function() {
-      let tags = this.get('model.tags');
-      let newTag = this.get('newTag');
-      
-      if (newTag === '') {
-        return;
-      }
-      
-      tags.push(newTag);
-      this.set('model.tags', tags);
-      this.saveTags();
-    },
-    archiveMsg: function() {
-      let api = this.get('gameApi');
-      api.requestOne('archiveMail', { id: this.get('model.id') }, null)
-      .then( (response) => {
-        if (response.error) {
-          return;
-        }
-        this.transitionToRoute('mail');
-        this.get('flashMessages').success('Message archived!');
-      });
-    },
-    tagsChanged: function(tags) {
-      this.set('model.tags', tags);
-      this.saveTags();
-    },
-    replyAll: function() {
-      this.set('toList', this.get('model.reply_all'));
     }
   }
 });
