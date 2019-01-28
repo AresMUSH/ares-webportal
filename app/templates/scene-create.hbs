@@ -25,8 +25,18 @@
     <p>
         <label for="location" class="col-xs-2 col-form-label">Location:</label>
     
-        <p>{{input type="text" size=25 id="location" enter="save" value=model.scene.location}}</p>
-    </p>
+       {{input type="text" size=25 class="col-xs-4" id="location" enter="save" value=model.scene.location}}
+    
+        
+            {{#power-select selected=newLocation class="col-xs-4" options=model.locations onchange=(action "locationSelected") as |location|}}
+          {{location}}
+        {{/power-select}}
+        
+        </p>
+     
+    
+    
+   
     
     
     <p>

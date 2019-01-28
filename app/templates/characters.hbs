@@ -13,6 +13,7 @@
   {{#if model.game.roster_enabled}}
       <li><a data-toggle="tab" href="#roster">Roster</a></li>
   {{/if}}
+      <li><a data-toggle="tab" href="#idle">Gone</a></li>
 </ul>
 
 <div class="tab-content">
@@ -42,6 +43,9 @@
   </div>
   {{/if}}
 
+   <div id="idle" class="tab-pane fade in">
+      {{char-group-list name="" chars=model.characters.idle}}
+  </div>
 </div>
 
 

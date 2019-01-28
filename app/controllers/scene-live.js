@@ -195,6 +195,9 @@ export default Controller.extend(AuthenticatedController, {
         
         changeSceneStatus(status) {
             let api = this.get('gameApi');
+            if (status === 'share') {
+                this.get('gameSocket').set('sceneCallback', null);
+            }
             api.requestOne('changeSceneStatus', { id: this.get('model.scene.id'),
                 status: status }, null)
             .then( (response) => {
