@@ -52,6 +52,7 @@ Router.map(function() {
   this.route('help-topic', { path: '/help/:topic' });
   this.route('jobs');
   this.route('job', { path: '/job/:id' });
+  this.route('job-create');
   this.route('locations');
   this.route('location', { path: '/location/:id'});
   this.route('location-edit', { path: '/location/:id/edit'});
@@ -107,7 +108,6 @@ Router.map(function() {
   // !!!!!!!!!!!!!!!!!!!!!!!!
 
   this.route('not-found', { path: '*:' });
-  this.route('job-create');
 });
 
 export default Router;

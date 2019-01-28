@@ -60,6 +60,11 @@
          {{#if hideSidebar}}
              <div class="col-md-12 body-container {{if model.left_sidebar 'right-body' 'left-body'}}">
                {{flash-messages}}
+               
+               {{#if (not socketConnected)}}
+                 <div class="alert alert-warning">The website is not receiving live updates from the game.  Try reloading the page.</div>
+               {{/if}}
+               
                {{outlet}}
              </div>
          {{else}}

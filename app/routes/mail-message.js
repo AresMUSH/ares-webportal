@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
 import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
 import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
+import RSVP from 'rsvp';
 
 export default Route.extend(AuthenticatedRoute, ReloadableRoute, RouteResetOnExit, {
     gameApi: service(),
@@ -10,10 +11,14 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, RouteResetOnExi
         
     model: function(params) {
         let api = this.get('gameApi');
-        return api.requestOne('mailMessage', { id: params['id']}).
-        then((model) => {
-          this.get('gameSocket').updateMailBadge(model.unread_mail_count);
-          return model;
+        
+        return RSVP.hash({
+             message:  api.requestOne('mailMessage', { id: params['id']  }),
+             characters: api.requestMany('characters', { select: 'all' })
+           })
+           .then((model) => {
+          this.get('gameSocket').updateMailBadge(model.message.unread_mail_count);
+          return Ember.Object.create(model);
           }
         );
     }
