@@ -9,12 +9,15 @@
 <ol>
     {{#each model.versions as |v|}}
     <li>
+     
+     {{#link-to 'wiki-source' model.page_id v.id}}
      {{#if (eq v.id model.version_id)}}
      <i class="far fa-dot-circle fa-fw" aria-hidden="true"></i>
      {{else}}
      <i class="far fa-circle fa-fw"></i>
      {{/if}}
-     {{#link-to 'wiki-source' model.page_id v.id}}{{v.created}} ({{v.author}}){{/link-to}}
+     
+     {{v.created}} ({{v.author}}){{/link-to}}
      </li>
     {{/each}}
 </ol>
