@@ -16,7 +16,7 @@ export default Route.extend(DefaultRoute, ReloadableRoute, {
              options: api.requestOne('jobOptions')
            })
            .then((model) => {
-             this.get('gameSocket').updateJobsBadge(model.unread_jobs_count);
+             this.get('gameSocket').updateJobsBadge(model.job.unread_jobs_count);
              return Ember.Object.create(model);
            });
            

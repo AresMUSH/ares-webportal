@@ -2,7 +2,8 @@
     <div class="panel-body markdown-editor">
         
         <div class="pull-right markdown-controls">
-    <a href="#" {{action 'preview'}} data-toggle="tooltip" title="Toggle Preview">
+    <a href="#" {{action 'preview'}}>
+        {{#bs-tooltip placement="left"}}Toggle preview.{{/bs-tooltip}}
         
         {{#if preview}}
         <i class="fa fa-eye-slash"   aria-hidden="true"></i>
@@ -11,8 +12,11 @@
         {{/if}}
     </a>
     
-    <a href="#" {{action 'showHelp'}} data-toggle="tooltip" title="Markdown Help">
-        <i class="fa fa-question-circle" aria-hidden="true"></i>
+    <a href="#" {{action 'showHelp'}}>
+        <i class="fa fa-question-circle" aria-hidden="true">
+          {{#bs-tooltip placement="left"}}Markdown help.{{/bs-tooltip}}
+          
+        </i>
     </a>
     </div>
     

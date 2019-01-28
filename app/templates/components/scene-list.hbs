@@ -2,7 +2,7 @@
 
 <div class="hint">Select a scene filter, or type in part of a scene name or a character name.</div>
 
-{{#power-select selected=filter options=sceneFilters onchange=(action "filterChanged") search=(action "searchScenes")as |name|}}
+{{#power-select selected=filter options=sceneFilters onchange=(action "filterChanged") search=(action "searchScenes") as |name|}}
   {{name}}
 {{/power-select}}
 

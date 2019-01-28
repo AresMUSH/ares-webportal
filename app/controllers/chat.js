@@ -33,14 +33,14 @@ export default Controller.extend({
       if (this.get('scrollPaused')) {
         return;
       }
-      let chatWindow = $('#chat-window')[0];
-      if (chatWindow) {
-          $('#chat-window').stop().animate({
-              scrollTop: chatWindow.scrollHeight
-          }, 800);    
-      }        
+      
       try {
-        
+        let chatWindow = $('#chat-window')[0];
+        if (chatWindow) {
+            $('#chat-window').stop().animate({
+                scrollTop: chatWindow.scrollHeight
+            }, 800);    
+        }  
       }
       catch(error) {
         // This happens sometimes when transitioning away from screen.

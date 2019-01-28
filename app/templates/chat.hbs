@@ -48,13 +48,20 @@
 
   {{#if selectedChannel}}
 
-  <b>{{selectedChannel}}</b> <a href="#" {{action "scrollDown"}} data-toggle="tooltip" title="Scroll to bottom."><i class="fas fa-chevron-circle-down"></i></a>
+  <b>{{selectedChannel}}</b> <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down">
+    {{#bs-tooltip placement="left"}}Scroll to bottom.{{/bs-tooltip}}
+
+  </i></a>
 
 
   {{#if scrollPaused}}
-          <a href="#" {{action "unpauseScroll"}} data-toggle="tooltip" title="Resume scrolling."><i class="fas fa-play"></i></a>
+          <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
+            {{#bs-tooltip placement="left"}}Resume scrolling.{{/bs-tooltip}}
+          </i></a>
   {{else}}
-          <a href="#" {{action "pauseScroll"}} data-toggle="tooltip" title="Pause scrolling."><i class="fas fa-pause"></i></a>
+          <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause">
+            {{#bs-tooltip placement="left"}}Pause scrolling.{{/bs-tooltip}}
+          </i></a>
   {{/if}}
 
 
@@ -97,7 +104,7 @@
        <span class="label label-warning">Scrolling is paused!</span>
     {{/if}}
 
-          {{markdown-editor text=chatMessage rows=3 onEnter=(action "send")}}
+          {{cmd-box value=chatMessage class="chat-box" cols="80" rows="6" sendText=(action "send")}}
 
       {{else}}
 
