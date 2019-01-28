@@ -7,7 +7,11 @@
     </div>
     
     <div class="col-sm-10">
-          {{input type="text" size=25 id="to_list" value=to_list }}
+      
+      {{#power-select-multiple selected=toList options=model searchField="name" onchange=(action "toListChanged") as |char|}}
+        {{char.name}}
+      {{/power-select-multiple}}
+      
     </div>
 </div>
 
@@ -27,6 +31,7 @@
 {{#link-to 'mail' class='btn btn-default'}}Cancel{{/link-to}}
 <button {{action "sendMail"}} class="btn btn-primary">Send</button>
 
+{{flash-messages}}
 
 
 {{outlet}}

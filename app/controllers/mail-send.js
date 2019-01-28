@@ -6,12 +6,12 @@ export default Controller.extend({
     flashMessages: service(),
     subject: '',
     message: '',
-    to_list: '',
+    toList: [],
     
     resetOnExit: function() {
         this.set('subject', '');
         this.set('message', '');
-        this.set('to_list', '');
+        this.set('toList', []);
     },
     
     actions: {
@@ -19,7 +19,7 @@ export default Controller.extend({
             let api = this.get('gameApi');
             api.requestOne('sendMail', { subject: this.get('subject'), 
                message: this.get('message'),
-               to_list: this.get('to_list')}, null)
+               to_list: (this.get('toList') || []).map(p => p.name) }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -27,6 +27,9 @@ export default Controller.extend({
                 this.transitionToRoute('mail');
                 this.get('flashMessages').success('Sent!');
             });
-        }
+        },
+        toListChanged(newList) {
+            this.set('toList', newList);
+        },
     }
 });

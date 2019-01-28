@@ -7,14 +7,13 @@
 <div class="panel-group">
   <div class="panel panel-default">
     <div class="panel-heading">
-        <a href="#" data-toggle="tooltip" title="Click to expand or collapse.">
         
         <a data-toggle="collapse" href="#collapse-{{folder.name}}">
             <i class="far fa-folder-open" aria-hidden="true"></i>
             {{folder.name}}
+            {{#bs-tooltip placement="right"}}Click to expand or collapse.{{/bs-tooltip}}
         </a>
         
-        </a>
     </div>
 
     <div id="collapse-{{folder.name}}" class="{{if folder.name 'panel-collapse collapse' 'panel-default' }}">
