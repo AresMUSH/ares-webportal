@@ -51,10 +51,11 @@
             <div class="hint pull-right">
                 
                 
+                {{#if (not pose.is_system_pose)}}
                 <i class="fas fa-clock" >
                   {{#bs-tooltip placement="left"}}{{pose.timestamp}}{{/bs-tooltip}}
                 </i>
-               
+                {{/if}}
                 
                 {{#if (and isApproved pose.can_edit)}}
                   {{#if (not pose.editActive)}}
