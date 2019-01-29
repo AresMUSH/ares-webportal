@@ -1,13 +1,13 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(DefaultRoute, {
+    gameApi: service(),
     
     model: function(params) {
-        let folder = params['folder'];
-        let name = params['name'];
-        let path = `${folder}/${name}`;
-        
-        return Ember.Object.create({ path: path, folder: folder, name: name });
+        let api = this.get('gameApi');
+        return api.requestOne('file', {folder: params['folder'],
+           name: params['name']});
     }
 });
