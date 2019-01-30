@@ -27,7 +27,7 @@
   <th>Last Activity</th>
 </tr>
 
-{{#each model as |scene| }}
+{{#each model.active as |scene| }}
 <tr>
     <td>
         {{#if scene.is_unread}}
@@ -80,6 +80,20 @@
 {{/each}}
 
 </table>
+
+
+{{#if model.unshared}}
+<br/>
+<hr/>
+
+<h4>Unshared Scenes</h4>
+<p>You have the following stopped, unshared scenes. Unshared scenes may be deleted after {{model.unshared_warning_days}} days, so you should download or share them before that happens.</p>
+<ul>
+{{#each model.unshared as |scene|}}
+<li>{{#link-to 'scene-live' scene.id}}{{scene.title}}{{/link-to}} - {{scene.people}}</li>
+{{/each}}
+</ul>
+{{/if}}
 </div>
   
 {{outlet}}
