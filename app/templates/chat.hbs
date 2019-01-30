@@ -104,7 +104,8 @@
        <span class="label label-warning">Scrolling is paused!</span>
     {{/if}}
     
-          {{cmd-box value=chatMessage class="chat-box" cols="80" rows="6" sendText=(action "send")}}
+          {{cmd-box value=chatMessage class="chat-box" cols="80" rows="6" onEnter=(action "send") }}
+
 
       {{else}}
     

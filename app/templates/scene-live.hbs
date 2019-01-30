@@ -87,7 +87,7 @@
                 </div>
                  {{#if pose.editActive}}
                     {{markdown-editor text=pose.raw_pose}}
-                    
+                                        
                     <div class="pull-right">
                     <button class="btn-default" {{action 'cancelScenePoseEdit' pose}}>Cancel</button>
                     <button class="btn-warning" {{action 'saveScenePose' pose false}}>Typo</button>
@@ -124,7 +124,8 @@
 
     {{#if isApproved}}
 
-        {{markdown-editor text=scenePose rows=4}}
+        {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
+        
     {{else}}
          <p>You must be approved to join a scene.</p>
     {{/if}}
