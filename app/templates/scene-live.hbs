@@ -34,14 +34,28 @@
  &nbsp; 
   {{#if scrollPaused}}
           <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
-          </i> Resume Scrolling</a><br/>
+          </i> Resume Scrolling</a>
   {{else}}
           <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause"></i> Pause Scrolling</a>
   {{/if}}
+  
+   &nbsp; 
+  {{#if model.scene.is_muted}}
+  <a href="#" {{action 'muteScene' false}}><i class="fas fa-play"></i> Unmute Scene</a>
+  {{else}}
+  <<a href="#" {{action 'muteScene' true}}><i class="fas fa-microphone-slash"></i> Mute Scene</a>
+  {{/if}}
 
-
+ &nbsp; 
     {{#if scrollPaused}}
+    <br/>
        <span class="label label-warning">Scrolling is paused!</span>
+    {{/if}}
+    
+    {{#if model.scene.is_muted}}
+    <br/>
+       <span class="label label-warning">Scene is muted!</span>
+
     {{/if}}
     
     <div class="ansi scene-log" id="live-scene-log">
@@ -120,6 +134,12 @@
      <span class="label label-warning">Scrolling is paused!</span>
   {{/if}}
   
+
+    {{#if model.scene.is_muted}}
+    <span class="label label-warning">
+      Scene is muted!
+    </span>
+    {{/if}}
 
 
     {{#if isApproved}}
