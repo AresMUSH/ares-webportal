@@ -2,10 +2,18 @@ import TextArea from '@ember/component/text-area';
 
 export default TextArea.extend({
     
-    keyPress: function(event) {
+    allowMultiLine: false,
+  
+    keyDown: function(event) {
       if (event.keyCode == 13) {
-        this.sendAction('sendText');
-        event.preventDefault();
+        if (event.ctrlKey || event.metaKey) {
+          this.sendAction('onEnter');
+          event.preventDefault();
+        }
+        else if (!this.get('allowMultiLine')) {
+          this.sendAction('onEnter');
+          event.preventDefault();
+        }
       }
     }
 });
