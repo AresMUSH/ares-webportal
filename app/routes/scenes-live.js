@@ -18,6 +18,6 @@ export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
     
     model: function() {
         let api = this.get('gameApi');
-        return api.requestMany('liveScenes');
+        return api.requestOne('liveScenes');
     }
 });

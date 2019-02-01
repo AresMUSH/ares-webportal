@@ -2,6 +2,10 @@
 <h1>Discussion Forum</h1>
 
 <p>The forum enables MU-wide discussion topics, available in-game and on the web portal.</p>
+
+{{#if model.is_muted}}
+<div class="alert alert-warning">The forum is muted.  You will not see notifications for new posts or replies.</div>
+{{/if}}
   
 {{#if isAuthenticated}}
 
@@ -9,6 +13,13 @@
     <div class="col col-xs-12">
         <div class="pull-right">
           {{#link-to 'search-forum' class="btn btn-default"}}<i class="fa fa-search" aria-hidden="true"></i> Search Forum{{/link-to}}  
+
+          {{#if model.is_muted}}
+            <button {{action 'muteForum' false}} class="btn btn-default"><i class="fa fa-play" aria-hidden="true"></i> Unmute</button>
+          {{else}}
+            <button {{action 'muteForum' true}} class="btn btn-default"><i class="fa fa-pause" aria-hidden="true"></i> Mute</button>
+            {{/if}}
+          
           <button {{action 'nextUnread'}} class="btn btn-default">Next Unread</button>
          </div>
   </div>
@@ -17,7 +28,7 @@
 
 <table class="table table-striped">    
 <tbody>
-{{#each model as |forum|}}
+{{#each model.categories as |forum|}}
     <tr><td>
         {{#if forum.unread}}
         <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
@@ -36,8 +47,24 @@
               <br/>{{forum.last_post.date}}
             {{/if}}
         </td>
+        <td>
+          <a href="#" {{action 'hideCategory' forum true}}><i class="fa fa-eye-slash" aria-hidden="true"></i>
+          {{#bs-tooltip placement="left"}}Hide Forum{{/bs-tooltip}}
+          </a>
+          
+        </td>
     </tr>
 {{/each}}
+
+{{#if anyHidden}}
+<h4>Hidden</h4>
+{{#each model.hidden as |forum|}}
+{{#link-to 'forum-category' forum.id}}{{forum.name}}{{/link-to}}          
+    <a href="#" {{action 'hideCategory' forum true}} >[<i class="fa fa-eye" aria-hidden="true"></i>]
+          &nbsp; {{#bs-tooltip placement="left"}}Show Forum{{/bs-tooltip}}
+          </a> &nbsp; &nbsp;
+{{/each}}
+{{/if}}
 </tbody>
 </table>
 

@@ -219,6 +219,20 @@ export default Controller.extend(AuthenticatedController, {
             });
         },
         
+        muteScene(option) {
+            let api = this.get('gameApi');
+            api.requestOne('muteScene', { id: this.get('model.scene.id'),
+                muted: option }, null)
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                let status = option ? 'muted' : 'unmuted';
+                this.get('flashMessages').success(`The scene has been ${status}.`);
+                this.send('reloadModel'); 
+            });
+        },
+        
         scrollDown() {
           this.scrollSceneWindow();
         },
