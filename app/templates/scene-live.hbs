@@ -1,9 +1,9 @@
 {{title pageTitle}}
 
- 
+
  <div class="row">
    <div class="col col-xs-12">
-       
+
     <h1>Scene {{model.scene.id}} - {{model.scene.icdate}}
         {{#if model.scene.title}}
          - {{model.scene.title}}
@@ -11,13 +11,13 @@
      </h1>
 
     {{live-scene-context scene=model.scene}}
-    
+
 </div>
 </div>
 
 <div class="row">
     <div class="col col-xs-12">
-      
+
     {{#if showSceneSelection}}
       <div class="alert alert-info">
         {{#each model.my_scenes as |scene|}}
@@ -31,7 +31,7 @@
       {{/if}}
 
         <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
- &nbsp; 
+ &nbsp;
   {{#if scrollPaused}}
           <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
           </i> Resume Scrolling</a><br/>
@@ -43,19 +43,19 @@
     {{#if scrollPaused}}
        <span class="label label-warning">Scrolling is paused!</span>
     {{/if}}
-    
-    <div class="ansi scene-log" id="live-scene-log">
-    
 
-    {{#each scenePoses as |pose|}}    
+    <div class="ansi scene-log" id="live-scene-log">
+
+
+    {{#each scenePoses as |pose|}}
             <div class="hint pull-right">
-                
-                
+
+
                 <i class="fas fa-clock" >
                   {{#bs-tooltip placement="left"}}{{pose.timestamp}}{{/bs-tooltip}}
                 </i>
-               
-                
+
+
                 {{#if (and isApproved pose.can_edit)}}
                   {{#if (not pose.editActive)}}
                   <a href="#" {{action 'editScenePose' pose}}><i class="fa fa-edit" aria-hidden="true">
@@ -67,13 +67,13 @@
                   {{/if}}
                 {{/if}}
             </div>
-        
+
             {{#if pose.is_system_pose}}
                 <div class="scene-system-pose">
                 {{{ansi-format text=pose.pose}}}
                 </div>
             {{else}}
-                <div class="scene-pose-header">		
+                <div class="scene-pose-header">
                   {{#link-to "char" pose.char.name}}
                       {{#if pose.char.icon}}
                       <img class="small-profile-icon {{icon-class}}" src="/game/uploads/{{pose.char.icon}}" />
@@ -86,14 +86,14 @@
                 </div>
                  {{#if pose.editActive}}
                     {{markdown-editor text=pose.raw_pose}}
-                    
+
                     <div class="pull-right">
                     <button class="btn-default" {{action 'cancelScenePoseEdit' pose}}>Cancel</button>
                     <button class="btn-warning" {{action 'saveScenePose' pose false}}>Typo</button>
                     <button class="btn-primary" {{action 'saveScenePose' pose true}}>Save</button>
                     </div>
                     <div class="clearfix"></div>
-                    
+
                  {{else}}
                      {{#if pose.is_setpose}}
                         <div class="scene-set-pose">
@@ -101,11 +101,11 @@
                         </div>
                     {{else if pose.is_ooc}}
                         <div class="scene-ooc-pose">
-                        <span class="label label-pill label-primary"> OOC</span>	
+                        <span class="label label-pill label-primary"> OOC</span>
                         {{{ansi-format text=pose.pose}}}
                         </div>
-                    {{else}}        
-                        <div class="scene-pose">	
+                    {{else}}
+                        <div class="scene-pose">
                             {{{ansi-format text=pose.pose}}}
                         </div>
                     {{/if}}
@@ -118,22 +118,23 @@
   {{#if scrollPaused}}
      <span class="label label-warning">Scrolling is paused!</span>
   {{/if}}
-  
+
 
 
     {{#if isApproved}}
-
+      {{#if model.scene.can_edit}}
         {{markdown-editor text=scenePose rows=4}}
+      {{/if}}
     {{else}}
          <p>You must be approved to join a scene.</p>
     {{/if}}
-    
-    
-    
+
+
+
     <div class="row">
         <div class="col col-xs-12">
 
-                <ul class="nav navbar-nav">    
+                <ul class="nav navbar-nav">
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
@@ -143,58 +144,58 @@
                       {{#if model.scene.can_edit}}
 
                         <li>{{#link-to 'scene-edit' model.scene.id}}Edit Scene{{/link-to}}</li>
-                        
+
                         {{#if (not model.scene.completed)}}
-                        
+
                         {{#if rollEnabled}}
                         <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
                         {{/if}}
-                        
+
                         <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
-                         
+
                          <li role="separator" class="divider"></li>
 
-                         <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li> 
+                         <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li>
                          {{else}}
-                         <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li> 
-                         <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
+                         <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li>
+                         <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li>
                          {{/if}}
                        {{/if}}
-                       
-                      <li>{{#link-to 'scene-download' model.scene.id}}Download Scene{{/link-to}}</li> 
- 	
+
+                      <li>{{#link-to 'scene-download' model.scene.id}}Download Scene{{/link-to}}</li>
+
                       </ul>
                     </li>
                 </ul>
-        
-        
+
+
     {{#if isApproved}}
-        
+
             <div class="pull-right">
-                
-            {{#if (not model.scene.completed)}}
-            <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
-            <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
-            <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
-            <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
+            {{#if model.scene.can_edit}}
+              {{#if (not model.scene.completed)}}
+              <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
+              <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
+              <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
+              <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
 
 
+              {{/if}}
             {{/if}}
-        
-                
-        
+
+
             </div>
-        
-        
-       
+
+
+
 
     {{/if}}
-    
+
 
          </div>
      </div>
-     
-                
+
+
 
 
     {{flash-messages}}
@@ -206,7 +207,7 @@
                 {{#power-select selected=newLocation options=model.locations onchange=(action "locationSelected") as |location|}}
               {{location}}
             {{/power-select}}
-        
+
             <div class="btn btn-default" {{action 'changeLocation'}}>Select Location</div>
         </p>
         </div>
@@ -227,7 +228,7 @@
         onHide=(action (mut confirmDeleteScenePose) null)}}
         You're about to delete this scene pose. This cannot be undone.  Are you sure?
       {{/bs-modal-simple}}
-  
+
       {{#bs-modal-simple
           title="Select a Skill to Roll"
           closeTitle="Cancel"
@@ -243,9 +244,9 @@
             {{/each}}
           </select>
           {{input type="text" size=25 id="rollString" enter="addSceneRoll" value=rollString}}
-          
+
         {{/bs-modal-simple}}
-    
+
    </div>
 </div>
 {{outlet}}
