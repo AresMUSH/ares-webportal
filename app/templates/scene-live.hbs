@@ -143,7 +143,7 @@
 
 
     {{#if isApproved}}
-      {{#if pose.can_edit}}
+      {{#if model.scene.can_edit}}
         {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
       {{/if}}
     {{else}}
@@ -162,7 +162,7 @@
                       <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
                       <ul class="dropdown-menu">
 
-                      {{#if pose.can_edit}}
+                      {{#if model.scene.can_edit}}
 
                         <li>{{#link-to 'scene-edit' model.scene.id}}Edit Scene{{/link-to}}</li>
 
@@ -193,7 +193,7 @@
     {{#if isApproved}}
 
             <div class="pull-right">
-            {{#if pose.can_edit}}
+            {{#if model.scene.can_edit}}
               {{#if (not model.scene.completed)}}
               <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
               <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
