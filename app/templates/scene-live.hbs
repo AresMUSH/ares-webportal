@@ -142,10 +142,12 @@
 
 
 
-    {{#if (and isApproved pose.can_edit)}}
-        {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}      
+    {{#if isApproved}}
+      {{#if pose.can_edit}}
+        {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
+      {{/if}}
     {{else}}
-         <p>You must be approved and have an invitation to join a scene.</p>
+         <p>You must be approved to join a scene.</p>
     {{/if}}
 
 
@@ -160,7 +162,7 @@
                       <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
                       <ul class="dropdown-menu">
 
-                      {{#if model.scene.can_edit}}
+                      {{#if pose.can_edit}}
 
                         <li>{{#link-to 'scene-edit' model.scene.id}}Edit Scene{{/link-to}}</li>
 
@@ -191,7 +193,7 @@
     {{#if isApproved}}
 
             <div class="pull-right">
-            {{#if model.scene.can_edit}}
+            {{#if pose.can_edit}}
               {{#if (not model.scene.completed)}}
               <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
               <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
