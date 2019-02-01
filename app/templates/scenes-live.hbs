@@ -3,7 +3,7 @@
 
 <div class="alert alert-info">This list shows scenes that are currently in progress.  For completed scenes, see the {{#link-to 'scenes'}}Scenes{{/link-to}} list.</div>
 
-<p> Private scenes require an invitation, but open scenes are open to anyone.  You can play in-game or via the web portal. The unread flags <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span> show new activity in public scenes or scenes you're watching/participating in.</p>
+<p> Private or Watchable scenes require an invitation, but open scenes are open to anyone.  You can play in-game or via the web portal. The unread flags <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span> show new activity in public scenes or scenes you're watching/participating in.</p>
 
 {{#if isApproved}}
 <div class="row">
@@ -45,7 +45,12 @@
         {{#if scene.is_private}}
         <span class="label label-danger">Private</span>
         {{else}}
-        <span class="label label-success">Open</span>
+          {{#if scene.is_watchable}}
+            <span class="label label-info">Watchable </span>
+          {{else}}
+            <span class="label label-success">Open</span>
+          {{/if}}
+
         {{/if}}
     </td>
     <td>
