@@ -4,15 +4,15 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
-    
-    sceneTypes: function() { 
+
+    sceneTypes: function() {
         return this.get('model.sceneTypes').map(p => p.get('name'));
     }.property('model'),
-    
-    scenePrivacyValues: function() { 
-        return [ 'Open', 'Private' ];
+
+    scenePrivacyValues: function() {
+        return [ 'Open', 'Private', 'Watchable' ];
     }.property(),
-    
+
     actions: {
         plotChanged(new_plot) {
             this.set('model.scene.plot', new_plot);
@@ -35,9 +35,9 @@ export default Controller.extend({
             if (!Array.isArray(tags)) {
                 tags = tags.split(/[\s,]/);
             }
-            
+
             api.requestOne('editScene', { id: this.get('model.scene.id'),
-               title: this.get('model.scene.title'), 
+               title: this.get('model.scene.title'),
                icdate: this.get('model.scene.icdate'),
                scene_type: this.get('model.scene.scene_type'),
                location: this.get('model.scene.location'),
@@ -52,7 +52,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                
+
                 this.transitionToRoute('scene', this.get('model.scene.id'));
                 this.get('flashMessages').success('Scene updated!');
             });

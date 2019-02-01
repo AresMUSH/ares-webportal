@@ -5,15 +5,15 @@ export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
     queryParams: [ 'location' ],
-    
-    sceneTypes: function() { 
+
+    sceneTypes: function() {
         return this.get('model.sceneTypes').map(p => p.get('name'));
     }.property('model'),
-    
+
     scenePrivacyValues: function() { 
-        return [ 'Open', 'Private' ];
+        return [ 'Open', 'Private', 'Watchable' ];
     }.property(),
-    
+
     actions: {
         plotChanged(newPlot) {
             this.set('model.scene.plot', newPlot);
@@ -39,9 +39,9 @@ export default Controller.extend({
             if (!Array.isArray(tags)) {
                 tags = tags.split(/[\s,]/);
             }
-            
-            api.requestOne('createScene', { 
-               title: this.get('model.scene.title'), 
+
+            api.requestOne('createScene', {
+               title: this.get('model.scene.title'),
                icdate: this.get('model.scene.icdate'),
                scene_type: this.get('model.scene.scene_type'),
                location: this.get('model.scene.location'),
@@ -57,7 +57,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('scene',                          
+                this.transitionToRoute('scene',
                           response.id);
                 this.get('flashMessages').success('Scene updated!');
             });
