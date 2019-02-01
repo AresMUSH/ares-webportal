@@ -134,12 +134,12 @@
      <span class="label label-warning">Scrolling is paused!</span>
   {{/if}}
 
+
     {{#if model.scene.is_muted}}
     <span class="label label-warning">
       Scene is muted!
     </span>
     {{/if}}
-
 
 
     {{#if isApproved}}
@@ -193,16 +193,16 @@
     {{#if isApproved}}
 
             <div class="pull-right">
-            {{#if model.scene.can_edit}}
-              {{#if (not model.scene.completed)}}
-              <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
-              <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
-              <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
-              <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
+
+            {{#if (not model.scene.completed)}}
+            <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
+            <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
+            <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
+            <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
 
 
-              {{/if}}
             {{/if}}
+
 
 
             </div>
