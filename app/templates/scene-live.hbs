@@ -34,14 +34,28 @@
  &nbsp; 
   {{#if scrollPaused}}
           <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
-          </i> Resume Scrolling</a><br/>
+          </i> Resume Scrolling</a>
   {{else}}
           <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause"></i> Pause Scrolling</a>
   {{/if}}
+  
+   &nbsp; 
+  {{#if model.scene.is_muted}}
+  <a href="#" {{action 'muteScene' false}}><i class="fas fa-play"></i> Unmute Scene</a>
+  {{else}}
+  <<a href="#" {{action 'muteScene' true}}><i class="fas fa-microphone-slash"></i> Mute Scene</a>
+  {{/if}}
 
-
+ &nbsp; 
     {{#if scrollPaused}}
+    <br/>
        <span class="label label-warning">Scrolling is paused!</span>
+    {{/if}}
+    
+    {{#if model.scene.is_muted}}
+    <br/>
+       <span class="label label-warning">Scene is muted!</span>
+
     {{/if}}
     
     <div class="ansi scene-log" id="live-scene-log">
@@ -51,10 +65,11 @@
             <div class="hint pull-right">
                 
                 
+                {{#if (not pose.is_system_pose)}}
                 <i class="fas fa-clock" >
                   {{#bs-tooltip placement="left"}}{{pose.timestamp}}{{/bs-tooltip}}
                 </i>
-               
+                {{/if}}
                 
                 {{#if (and isApproved pose.can_edit)}}
                   {{#if (not pose.editActive)}}
@@ -86,7 +101,7 @@
                 </div>
                  {{#if pose.editActive}}
                     {{markdown-editor text=pose.raw_pose}}
-                    
+                                        
                     <div class="pull-right">
                     <button class="btn-default" {{action 'cancelScenePoseEdit' pose}}>Cancel</button>
                     <button class="btn-warning" {{action 'saveScenePose' pose false}}>Typo</button>
@@ -120,10 +135,17 @@
   {{/if}}
   
 
+    {{#if model.scene.is_muted}}
+    <span class="label label-warning">
+      Scene is muted!
+    </span>
+    {{/if}}
+
 
     {{#if isApproved}}
 
-        {{markdown-editor text=scenePose rows=4}}
+        {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
+        
     {{else}}
          <p>You must be approved to join a scene.</p>
     {{/if}}
