@@ -143,7 +143,7 @@
 
 
     {{#if isApproved}}
-      {{#if model.scene.can_edit}}
+      {{#if model.scene.can_join}}
         {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
       {{/if}}
     {{else}}
@@ -193,14 +193,15 @@
     {{#if isApproved}}
 
             <div class="pull-right">
+            {{#if model.scene.can_join}}
+              {{#if (not model.scene.completed)}}
+              <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
+              <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
+              <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
+              <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
 
-            {{#if (not model.scene.completed)}}
-            <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
-            <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
-            <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
-            <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
 
-
+              {{/if}}
             {{/if}}
 
 
