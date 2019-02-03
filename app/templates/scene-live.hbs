@@ -162,7 +162,7 @@
                       <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
                       <ul class="dropdown-menu">
 
-                      {{#if model.scene.can_edit}}
+                      {{#if (and model.scene.can_edit model.scene.can_join)}}
 
                         <li>{{#link-to 'scene-edit' model.scene.id}}Edit Scene{{/link-to}}</li>
 
