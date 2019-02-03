@@ -49,7 +49,7 @@ export default Controller.extend({
     let html = ansi_up.ansi_to_html(data.args.message);
     this.get('messages').pushObject(html);
     this.scrollToBottom();  
-    this.get('gameSocket').notify(null);
+    this.get('gameSocket').notify("");
   },
   onConnect: function(self) {
     document.getElementById("sendMsg").focus();
