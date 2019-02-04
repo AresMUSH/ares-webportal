@@ -6,16 +6,16 @@
 
 <div class="alert alert-info">For scenes that are still in progress, see the {{#link-to 'scenes-live'}}Active Scenes{{/link-to}} list.</div>
 
-{{#if isApproved}}
 <div class="row">
     
     <div class="col pull-right">
        {{#link-to 'search-scenes' class="btn btn-default"}}<i class="fa fa-search" aria-hidden="true"></i> Search Scenes{{/link-to}}  
+       {{#if isApproved}}
         {{#link-to 'scene-create' class="btn btn-primary"}}Create Scene{{/link-to}}
+        {{/if}}
     </div>
     
 </div>
-{{/if}}
 
 {{scene-list scenes=model.scenes sceneTypes=model.sceneTypes}}
 
