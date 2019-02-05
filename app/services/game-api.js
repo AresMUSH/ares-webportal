@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 export default Service.extend({
     flashMessages: service(),
     session: service(),
-    routing: service('-routing'),
+    router: service(),
     
     serverUrl(route) {
         var base;
@@ -33,15 +33,21 @@ export default Service.extend({
           return;
         }
         console.log(error);
+        let err = new Error();
         $.post(this.serverUrl("request"), 
                 {
                     cmd: 'webError',
-                    args: { error: `${error} : ${error.stack}` },
+                    args: { error: `${error.message} : ${err.stack}` },
                     api_key: aresconfig.api_key
                 });
-        Ember.getOwner(this).lookup('router:main').transitionTo('error', { queryParams: { message: "Client error." }});
+                this.get('router').transitionTo('error');
       } catch(ex) { 
-        // Failsafe.  Do nothing.
+        try {
+          this.get('router').transitionTo('error');
+        }
+        catch(ex) {
+          // Failsafe.  Do nothing.
+        }
       }
     },
     
@@ -54,22 +60,26 @@ export default Service.extend({
             auth: this.get('session.data.authenticated')
         }).then((response) => {
             if (!response) {
-              Ember.getOwner(this).lookup('router:main').transitionTo('error', { queryParams: { message: "Empty response from game." }});
+              this.reportError({ message: `No response from game for ${cmd}.` });
             }
             else if (response.error) {
                 return response;
             }
            return response;
         }).catch(ex => {
-              Ember.getOwner(this).lookup('router:main').transitionTo('error', { queryParams: { message: "There was a problem connecting to the game.  It may be down." }}) });
+          this.reportError(ex);
+        });
     },
     
     requestOne(cmd, args = {}, transitionToOnError = 'home') {
         return this.request(cmd, args).then((response) => {
-            if (response.error) {
+          if (!response) {
+            this.reportError({ message: `No response from game for ${cmd}.` });
+          }
+          else if (response.error) {
                 this.get('flashMessages').danger(response.error);
                 if (transitionToOnError) {
-                    this.get("routing").transitionTo(transitionToOnError);
+                    this.get("router").transitionTo(transitionToOnError);
                 }
                 return response;
             }
@@ -79,10 +89,13 @@ export default Service.extend({
 
     requestMany(cmd, args = {}, transitionToOnError = 'home') {    
         return this.request(cmd, args).then((response) => {
-            if (response.error) {
+          if (!response) {
+            this.reportError({ message: `No response from game for ${cmd}.` });
+          }
+          else if (response.error) {
                 this.get('flashMessages').danger(response.error);
                 if (transitionToOnError) {
-                    this.get("routing").transitionTo(transitionToOnError);
+                    this.get("router").transitionTo(transitionToOnError);
                 }
                 return [];
             }
