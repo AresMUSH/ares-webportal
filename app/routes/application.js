@@ -69,7 +69,7 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
         willTransition() {
            this.doReload();
         },
-        error(error, transition) {
+        error(error) {
             this.get('gameApi').reportError({ message: error });
         }
     }
