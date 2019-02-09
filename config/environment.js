@@ -11,7 +11,7 @@ module.exports = function(environment) {
     rootURL: '/',
     locationType: 'auto',
     flashMessageDefaults: {
-      timeout: 5000
+      timeout: 10000
     },
       
     EmberENV: {

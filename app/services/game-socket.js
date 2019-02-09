@@ -27,7 +27,7 @@ export default Service.extend({
     },
     
     // Regular alert notification
-    notify(msg, timeOutSecs = 5, type = 'success') {
+    notify(msg, timeOutSecs = 10, type = 'success') {
         
         if (msg) {
           alertify.notify(msg, type, timeOutSecs);

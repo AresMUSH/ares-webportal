@@ -26,6 +26,10 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
                 return { game_down: true };
             }
             response['socketConnected'] = this.get('gameSocket.connected');
+            
+            if (response.token_expiry_warning) {
+              this.get('flashMessages').warning(`Your login expires today (in ${response.token_expiry_warning}). You should log out and back in before that happens so you don't lose any work.'`, { timeout: 15000 });
+            }
             return response;
         })
         .catch(() => {
