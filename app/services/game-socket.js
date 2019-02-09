@@ -3,7 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Service.extend({
     session: service(),
-    routing: service('-routing'),
+    router: service(),
     flashMessages: service(),
     favicon: service(),
 

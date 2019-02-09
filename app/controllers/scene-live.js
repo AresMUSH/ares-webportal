@@ -109,6 +109,17 @@ export default Controller.extend(AuthenticatedController, {
             });
         },
         
+        cookies() {
+            let api = this.get('gameApi');
+            api.requestOne('sceneCookies', { id: this.get('model.scene.id') }, null)
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.get('flashMessages').success('You give cookies to the scene participants.');
+            });
+        },
+        
         editScenePose(scenePose) { 
             scenePose.set('editActive', true);
         },
