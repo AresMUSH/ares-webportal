@@ -179,7 +179,7 @@ export default Service.extend({
             }
             else if (notification_type == "new_chat") {
                 if (this.get('chatCallback')) {
-                    this.get('chatCallback')(data.args.message);
+                    this.get('chatCallback')(data.args.message, data.args.timestamp);
                 }
                 notify = false;
             }
