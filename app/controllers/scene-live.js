@@ -19,14 +19,23 @@ export default Controller.extend(AuthenticatedController, {
     onSceneActivity: function(msg /* , timestamp */) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];
-        //let data = splitMsg[1];
-        
+        let char = splitMsg[1];
+        let poseData = splitMsg[2];
+        // For poses we can just add it to the display.  Other events require a reload.
         if (sceneId === this.get('model.scene.id')) {
-           this.get('gameApi').requestOne('liveScene', { id: this.get('model.scene.id') }).then( response => {
-             this.set(`model.scene`, response)
-             this.get('gameSocket').notify('New scene activity!');
-             this.scrollSceneWindow();
-          });
+          if (poseData) {
+            poseData = JSON.parse(poseData);
+            let poses = this.get('model.scene.poses');
+            poses.pushObject(poseData);
+            this.get('gameSocket').notify('New scene activity!');
+            this.scrollSceneWindow();
+          } else {
+            this.get('gameApi').requestOne('liveScene', { id: this.get('model.scene.id') }).then( response => {
+              this.set(`model.scene`, response)
+              this.get('gameSocket').notify('New scene activity!');
+              this.scrollSceneWindow();
+           });
+          }
         }
         else {
             this.get('model.my_scenes').forEach(s => {

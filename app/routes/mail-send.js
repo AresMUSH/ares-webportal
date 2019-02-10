@@ -6,7 +6,7 @@ import { inject as service } from '@ember/service';
 export default Route.extend(RouteResetOnExit, AuthenticatedRoute, {
   gameApi: service(),
       
-  model: function(params) {
+  model: function() {
       let api = this.get('gameApi');
       return api.requestMany('characters', { select: 'all' });
   }

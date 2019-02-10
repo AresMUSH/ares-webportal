@@ -9,23 +9,21 @@ export default Controller.extend({
     chatMessage: '',
     scrollPaused: false,
     
-    onChatMessage: function(msg) {
+    onChatMessage: function(msg, timestamp) {
         let splitMsg = msg.split('|');
         let channelKey = splitMsg[0];
-        
-        this.get('gameApi').requestOne('chat').then( response => {
-            this.set(`model.channels.${channelKey}.messages`, response.get(`channels.${channelKey}.messages`))
-            this.set(`model.channels.${channelKey}.who`, response.get(`channels.${channelKey}.who`))
-            if (channelKey === this.get('selectedChannel').toLowerCase()) {
-                this.scrollChatWindow();
-            }
-            else {
-                let messageCount = this.get(`model.channels.${channelKey}.new_messages`) || 0;
-                this.set(`model.channels.${channelKey}.new_messages`, messageCount + 1);
-            }
-            this.get('gameSocket').notify('New chat activity!');
-            
-        });                
+        let newMessage = splitMsg[1];
+
+        let messages = this.get(`model.channels.${channelKey}.messages`);
+        messages.pushObject({message: newMessage, timestamp: timestamp });
+        if (channelKey === this.get('selectedChannel').toLowerCase()) {
+            this.scrollChatWindow();
+        }
+        else {
+            let messageCount = this.get(`model.channels.${channelKey}.new_messages`) || 0;
+            this.set(`model.channels.${channelKey}.new_messages`, messageCount + 1);
+        }
+        this.get('gameSocket').notify('New chat activity!');    
     },
     
     scrollChatWindow: function() {
@@ -49,8 +47,8 @@ export default Controller.extend({
     
     setupCallback: function() {
         let self = this;
-        this.get('gameSocket').set('chatCallback', function(channel) {
-            self.onChatMessage(channel) } );
+        this.get('gameSocket').set('chatCallback', function(msg, timestamp) {
+            self.onChatMessage(msg, timestamp) } );
     },
     
     getCurrentChannelKey: function() {
