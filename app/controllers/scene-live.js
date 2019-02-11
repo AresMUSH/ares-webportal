@@ -7,7 +7,7 @@ export default Controller.extend(AuthenticatedController, {
     flashMessages: service(),
     gameSocket: service(),
     favicon: service(),
-    
+
     scenePose: '',
     rollString: null,
     confirmDeleteScenePose: false,
@@ -15,7 +15,7 @@ export default Controller.extend(AuthenticatedController, {
     selectLocation: false,
     newLocation: null,
     scrollPaused: false,
-    
+
     onSceneActivity: function(msg /* , timestamp */) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];
@@ -43,64 +43,64 @@ export default Controller.extend(AuthenticatedController, {
                     s.set('is_unread', true);
                     this.get('gameSocket').notify('New activity in one of your other scenes!');
                 }
-            });            
+            });
         }
     },
 
     rollEnabled: function() {
       return this.get('model.abilities').length > 0;
     }.property('model.abilities'),
-    
+
     pageTitle: function() {
         return 'Scene ' + this.get('model.scene.id');
     }.property('model.scene.id'),
-    
+
     resetOnExit: function() {
         this.set('scenePose', '');
         this.set('rollString', null);
         this.set('confirmDeleteScenePose', false);
         this.set('selectSkillRoll', false)
     },
-    
+
     setupCallback: function() {
         let self = this;
-        
+
         this.get('gameSocket').set('sceneCallback', function(data) {
             self.onSceneActivity(data) } );
     },
-    
+
     showSceneSelection: function() {
       return this.get('model.my_scenes').length > 0;
     }.property('model.my_scenes.@each.id'),
-    
+
     scrollSceneWindow: function() {
-      // Unless scrolling paused 
+      // Unless scrolling paused
       if (this.get('scrollPaused')) {
         return;
       }
-      
+
         try {
           $('#live-scene-log').stop().animate({
               scrollTop: $('#live-scene-log')[0].scrollHeight
-          }, 800); 
+          }, 800);
         }
         catch(error) {
           // This happens sometimes when transitioning away from screen.
-        }   
-  
+        }
+
     },
-    
+
     scenePoses: function() {
-        return this.get('model.scene.poses').map(p => Ember.Object.create(p));  
+        return this.get('model.scene.poses').map(p => Ember.Object.create(p));
     }.property('model.scene.poses.@each.id'),
-    
+
     actions: {
         locationSelected(loc) {
-            this.set('newLocation', loc);  
+            this.set('newLocation', loc);
         },
         changeLocation() {
             let api = this.get('gameApi');
-            
+
             let newLoc = this.get('newLocation');
             if (!newLoc) {
                 this.get('flashMessages').danger("You haven't selected a location.");
@@ -117,7 +117,7 @@ export default Controller.extend(AuthenticatedController, {
                 }
             });
         },
-        
+
         cookies() {
             let api = this.get('gameApi');
             api.requestOne('sceneCookies', { id: this.get('model.scene.id') }, null)
@@ -128,8 +128,8 @@ export default Controller.extend(AuthenticatedController, {
                 this.get('flashMessages').success('You give cookies to the scene participants.');
             });
         },
-        
-        editScenePose(scenePose) { 
+
+        editScenePose(scenePose) {
             scenePose.set('editActive', true);
         },
         cancelScenePoseEdit(scenePose) {
@@ -171,7 +171,7 @@ export default Controller.extend(AuthenticatedController, {
             });
             this.set('scenePose', '');
         },
-        
+
         addPose(poseType) {
             let pose = this.get('scenePose');
             if (pose.length === 0) {
@@ -189,14 +189,14 @@ export default Controller.extend(AuthenticatedController, {
                 this.scrollSceneWindow();
             });
         },
-        
+
         addSceneRoll() {
             let api = this.get('gameApi');
-            
-            // Needed because the onChange event doesn't get triggered when the list is 
+
+            // Needed because the onChange event doesn't get triggered when the list is
             // first loaded, so the roll string is empty.
             let rollString = this.get('rollString') || this.get('model.abilities')[0];
-            
+
             if (!rollString) {
                 this.get('flashMessages').danger("You haven't selected an ability to roll.");
                 return;
@@ -212,7 +212,32 @@ export default Controller.extend(AuthenticatedController, {
                 }
             });
         },
-        
+
+        addSceneSpell() {
+            let api = this.get('gameApi');
+
+            // Needed because the onChange event doesn't get triggered when the list is
+            // first loaded, so the roll string is empty.
+            let spellString = this.get('spellString') || this.get('model.spells')[0];
+
+            if (!spellString) {
+                this.get('flashMessages').danger("You haven't selected a spell to cast.");
+                return;
+            }
+            this.set('selectCastSpell', false);
+            this.set('spellString', null);
+
+            api.requestOne('addSceneSpell', { scene_id: this.get('model.scene.id'),
+                spell_string: spellString }, null)
+            .then( (response) => {
+                if (response.error) {
+                  this.get('flashMessages').danger(response.error);
+                    return;
+                }
+            });
+        },
+
+
         changeSceneStatus(status) {
             let api = this.get('gameApi');
             if (status === 'share') {
@@ -234,11 +259,11 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 else if (status === 'restart') {
                     this.get('flashMessages').success('The scene has been restarted.');
-                    this.send('reloadModel'); 
+                    this.send('reloadModel');
                 }
             });
         },
-        
+
         muteScene(option) {
             let api = this.get('gameApi');
             api.requestOne('muteScene', { id: this.get('model.scene.id'),
@@ -249,19 +274,19 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 let status = option ? 'muted' : 'unmuted';
                 this.get('flashMessages').success(`The scene has been ${status}.`);
-                this.send('reloadModel'); 
+                this.send('reloadModel');
             });
         },
-        
+
         scrollDown() {
           this.scrollSceneWindow();
         },
-        
+
         refresh() {
             this.resetOnExit();
             this.send('reloadModel');
         },
-        
+
         pauseScroll() {
           this.set('scrollPaused', true);
         },
