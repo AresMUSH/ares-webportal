@@ -1,4 +1,4 @@
-{{#if model.is_job_admin}}
+{{#if model.options.is_job_admin}}
   {{title 'Create Job'}}
   <h1>Create a Job</h1>
 {{else}}
@@ -21,12 +21,34 @@
    </td>
  </tr>
  
+ <tr>
+    <td>
+       <label>Submitter:</label>
+     </td>
+    
+     <td>
+      
+       {{#power-select selected=submitter options=model.characters searchField="name" onchange=(action "submitterChanged") as |char|}}
+         {{char.name}}
+       {{/power-select}}
+      
+     </td>
+ </tr>
+ 
   <tr>
     <td>
       <label>Category:</label>
     </td>
     <td>
-        <span class="label label-info job-category job-category-{{model.category}}">{{category}}</span>
+          {{#if category}}
+            <span class="label label-info job-category job-category-{{category}}">
+            {{category}}
+            </span>
+          {{else}}
+            <span class="label label-info job-category job-category-{{model.options.request_category}}">
+            {{model.options.request_category}}
+            </span>
+          {{/if}}
     </td>
     <td>
           <ul class="nav">
@@ -35,7 +57,7 @@
 
               <span class="btn btn-default" href="#" role="button">Change Category <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
-              {{#each model.category_values as |category| }}
+              {{#each model.options.category_values as |category| }}
                 <li><a href="#" {{action 'changeCategory' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
               {{/each}}
               </ul>

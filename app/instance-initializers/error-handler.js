@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-const { RSVP, set } = Ember;
+const { RSVP } = Ember;
 
 export function initialize(appInstance) {
   let service = appInstance.lookup('service:gameApi');
