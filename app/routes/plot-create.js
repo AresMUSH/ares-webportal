@@ -9,5 +9,10 @@ export default Route.extend(AuthenticatedRoute, RouteResetOnExit, {
     model: function() {
         let api = this.get('gameApi');
         return api.requestMany('characters', { select: 'include_staff' });
+    },
+    
+    setupController: function(controller, model) {
+      this._super(controller, model);
+      controller.set('storyteller', model.find(c => c.id == this.get('session.data.authenticated.id')));
     }
 });

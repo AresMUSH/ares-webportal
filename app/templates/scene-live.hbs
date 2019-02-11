@@ -71,14 +71,21 @@
                 </i>
                 {{/if}}
                 
+                {{#if pose.live_update}}
+                  <i class="fas fa-lock" >
+                    {{#bs-tooltip placement="left"}}Please reload the page if you need to edit or delete this pose.{{/bs-tooltip}}
+                  </i>
+                {{/if}}
                 {{#if (and isApproved pose.can_edit)}}
                   {{#if (not pose.editActive)}}
                   <a href="#" {{action 'editScenePose' pose}}><i class="fa fa-edit" aria-hidden="true">
                     {{#bs-tooltip placement="left"}}Edit pose.{{/bs-tooltip}}
                   </i></a>
+                  {{#if pose.can_delete}}
                   <a href="#" {{action (mut confirmDeleteScenePose) pose}}><i class="fa fa-trash" aria-hidden="true">
                     {{#bs-tooltip placement="left"}}Delete pose.{{/bs-tooltip}}
                   </i></a>
+                  {{/if}}
                   {{/if}}
                 {{/if}}
             </div>
@@ -89,15 +96,20 @@
                 </div>
             {{else}}
                 <div class="scene-pose-header">		
-                  {{#link-to "char" pose.char.name}}
-                      {{#if pose.char.icon}}
-                      <img class="small-profile-icon {{icon-class}}" src="/game/uploads/{{pose.char.icon}}" />
-                      {{else}}
+                  {{#if pose.restarted_scene_pose}}
                       <img class="small-profile-icon {{icon-class}}" src="/game/uploads/theme_images/noicon.png" />
-                      {{/if}}
-                  {{/link-to}}
+                      Scene Restarted
+                  {{else}}
+                      {{#link-to "char" pose.char.name}}
+                          {{#if pose.char.icon}}
+                          <img class="small-profile-icon {{icon-class}}" src="/game/uploads/{{pose.char.icon}}" />
+                          {{else}}
+                          <img class="small-profile-icon {{icon-class}}" src="/game/uploads/theme_images/noicon.png" />
+                          {{/if}}
+                      {{/link-to}}
 
-                  {{#link-to "char" pose.char.name}} {{pose.char.name}} {{/link-to}}
+                      {{#link-to "char" pose.char.name}} {{pose.char.name}} {{/link-to}}
+                    {{/if}}
                 </div>
                  {{#if pose.editActive}}
                     {{markdown-editor text=pose.raw_pose}}
@@ -268,7 +280,6 @@
           {{input type="text" size=25 id="rollString" enter="addSceneRoll" value=rollString}}
           
         {{/bs-modal-simple}}
-    
    </div>
 </div>
 {{outlet}}
