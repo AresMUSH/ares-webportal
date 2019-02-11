@@ -11,10 +11,6 @@ export default Controller.extend({
     description: '',
     storyteller: null,
     
-    defaultStoryteller: function() {
-      return this.get('model').find(c => c.id == this.get('session.data.authenticated.id'));
-    }.property(),
-    
     resetOnExit: function() {
         this.set('title', '');
         this.set('summary', '');
