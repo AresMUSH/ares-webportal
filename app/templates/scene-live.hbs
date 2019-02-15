@@ -210,6 +210,7 @@
             <div class="pull-right">
             {{#if model.scene.can_join}}
               {{#if (not model.scene.completed)}}
+              <button {{action 'addTxt' }} class="btn btn-default">Send Txt</button>
               <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
               <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
               <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>

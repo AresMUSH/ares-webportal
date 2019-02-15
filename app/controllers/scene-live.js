@@ -190,6 +190,25 @@ export default Controller.extend(AuthenticatedController, {
             });
         },
 
+        addTxt() {
+            let pose = this.get('scenePose');
+            if (pose.length === 0) {
+                this.get('flashMessages').danger("You haven't entered anything.");
+                return;
+            }
+            let api = this.get('gameApi');
+            api.requestOne('addTxt', { scene_id: this.get('model.scene.id'),
+                pose: pose }, null)
+            .then( (response) => {
+                if (response.error) {
+                    this.get('flashMessages').error(response.error);
+                    return;
+                }
+                this.set('scenePose', '');
+                this.scrollSceneWindow();
+            });
+        },        
+
         addSceneRoll() {
             let api = this.get('gameApi');
 
