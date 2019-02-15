@@ -26,6 +26,12 @@ export default Service.extend({
         }
     },
     
+    highlightFavicon() {
+      if (!this.get('windowVisible')) {
+        this.get('favicon').changeFavicon(true);
+      }
+    },
+    
     // Regular alert notification
     notify(msg, timeOutSecs = 10, type = 'success') {
         

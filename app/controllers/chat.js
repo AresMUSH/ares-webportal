@@ -23,7 +23,8 @@ export default Controller.extend({
             let messageCount = this.get(`model.channels.${channelKey}.new_messages`) || 0;
             this.set(`model.channels.${channelKey}.new_messages`, messageCount + 1);
         }
-        this.get('gameSocket').notify('New chat activity!');    
+        // No browser notifications because it's too spammy.
+        this.get('gameSocket').highlightFavicon();
     },
     
     scrollChatWindow: function() {
