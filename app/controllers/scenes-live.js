@@ -12,11 +12,12 @@ export default Controller.extend(AuthenticatedController, {
         let sceneId = splitMsg[0];
         let lastPosed = splitMsg[1];
 
-        this.get('model').forEach(s => {
+        let model = this.get('model.active');
+        model.forEach((s, i) => {
           if (s.id === sceneId) {
-            s.set('is_unread', true);
-            s.set('updated', timestamp);
-            s.set('last_posed', lastPosed);
+            this.set(`model.active.${i}.is_unread`, true);
+            this.set(`model.active.${i}.updated`, timestamp);
+            this.set(`model.active.${i}.last_posed`, lastPosed);
           }
         });   
     },
