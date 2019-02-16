@@ -117,7 +117,16 @@ export default Service.extend({
         'data': { 'id': this.get('charId') }
       };
       let json = JSON.stringify(cmd);
-      return this.get('socket').send(json);
+      try {
+        let socket = this.get('socket');
+        if (socket) {
+          socket.send(json); 
+        }
+      }
+      catch {
+        // Socket closed already.
+      }
+       
     },
     
     handleConnect() {
