@@ -43,7 +43,7 @@
   {{#if model.scene.is_muted}}
   <a href="#" {{action 'muteScene' false}}><i class="fas fa-play"></i> Unmute Scene</a>
   {{else}}
-  <<a href="#" {{action 'muteScene' true}}><i class="fas fa-microphone-slash"></i> Mute Scene</a>
+  <a href="#" {{action 'muteScene' true}}><i class="fas fa-microphone-slash"></i> Mute Scene</a>
   {{/if}}
 
  &nbsp; 
@@ -71,11 +71,7 @@
                 </i>
                 {{/if}}
                 
-                {{#if pose.live_update}}
-                  <i class="fas fa-lock" >
-                    {{#bs-tooltip placement="left"}}Please reload the page if you need to edit or delete this pose.{{/bs-tooltip}}
-                  </i>
-                {{/if}}
+                
                 {{#if (and isApproved pose.can_edit)}}
                   {{#if (not pose.editActive)}}
                   <a href="#" {{action 'editScenePose' pose}}><i class="fa fa-edit" aria-hidden="true">
@@ -174,27 +170,29 @@
                       <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
                       <ul class="dropdown-menu">
 
-                      {{#if model.scene.can_edit}}
-
+                        {{#if model.scene.can_edit}}
                         <li>{{#link-to 'scene-edit' model.scene.id}}Edit Scene{{/link-to}}</li>
-                        
-                        {{#if (not model.scene.completed)}}
-                        
-                        {{#if rollEnabled}}
-                        <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
                         {{/if}}
                         
-                        <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
-                        <li><a href="#" {{action 'cookies'}}>Give Cookies</a></li>
+                        {{#if isApproved}}
+                          {{#if (not model.scene.completed)}}
+                        
+                          {{#if rollEnabled}}
+                          <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
+                          {{/if}}
+                        
+                          <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
+                          <li><a href="#" {{action 'cookies'}}>Give Cookies</a></li>
                          
-                         <li role="separator" class="divider"></li>
+                           <li role="separator" class="divider"></li>
 
-                         <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li> 
-                         {{else}}
-                         <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li> 
-                         <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
+                           <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li> 
+                           {{else}}
+                           <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li> 
+                           <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
+                           {{/if}}
                          {{/if}}
-                       {{/if}}
+                       
                        
                       <li>{{#link-to 'scene-download' model.scene.id}}Download Scene{{/link-to}}</li> 
  	
