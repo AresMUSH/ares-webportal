@@ -26,6 +26,12 @@ export default Service.extend({
         }
     },
 
+    highlightFavicon() {
+      if (!this.get('windowVisible')) {
+        this.get('favicon').changeFavicon(true);
+      }
+    },
+
     // Regular alert notification
     notify(msg, timeOutSecs = 10, type = 'success') {
 
@@ -120,7 +126,16 @@ export default Service.extend({
         'data': { 'id': this.get('charId') }
       };
       let json = JSON.stringify(cmd);
-      return this.get('socket').send(json);
+      try {
+        let socket = this.get('socket');
+        if (socket) {
+          socket.send(json);
+        }
+      }
+      catch(err) {
+        // Socket closed already.
+      }
+
     },
 
     handleConnect() {

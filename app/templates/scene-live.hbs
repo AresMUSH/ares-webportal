@@ -43,7 +43,7 @@
   {{#if model.scene.is_muted}}
   <a href="#" {{action 'muteScene' false}}><i class="fas fa-play"></i> Unmute Scene</a>
   {{else}}
-  <<a href="#" {{action 'muteScene' true}}><i class="fas fa-microphone-slash"></i> Mute Scene</a>
+  <a href="#" {{action 'muteScene' true}}><i class="fas fa-microphone-slash"></i> Mute Scene</a>
   {{/if}}
 
  &nbsp;
@@ -71,11 +71,7 @@
                 </i>
                 {{/if}}
 
-                {{#if pose.live_update}}
-                  <i class="fas fa-lock" >
-                    {{#bs-tooltip placement="left"}}Please reload the page if you need to edit or delete this pose.{{/bs-tooltip}}
-                  </i>
-                {{/if}}
+
                 {{#if (and isApproved pose.can_edit)}}
                   {{#if (not pose.editActive)}}
                   <a href="#" {{action 'editScenePose' pose}}><i class="fa fa-edit" aria-hidden="true">
