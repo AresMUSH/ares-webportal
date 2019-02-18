@@ -6,6 +6,7 @@ export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
+    session: service(),
     favicon: service(),
 
     scenePose: '',
@@ -26,6 +27,10 @@ export default Controller.extend(AuthenticatedController, {
           if (poseData) {
             poseData = JSON.parse(poseData);
             let poses = this.get('model.scene.poses');
+            if (!poseData.can_edit && (poseData.char.id == this.get('session.data.authenticated.id'))) {
+              poseData.can_edit = true
+              poseData.can_delete = true
+            }
             poses.pushObject(poseData);
             this.get('gameSocket').notify('New scene activity!');
             this.scrollSceneWindow();
