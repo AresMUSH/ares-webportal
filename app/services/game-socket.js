@@ -123,7 +123,7 @@ export default Service.extend({
           socket.send(json); 
         }
       }
-      catch {
+      catch(err) {
         // Socket closed already.
       }
        
