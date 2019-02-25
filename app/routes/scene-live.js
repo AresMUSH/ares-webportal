@@ -32,5 +32,10 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
              my_scenes: api.requestMany('myScenes')
            })
            .then((model) => Ember.Object.create(model));
+    },
+    
+    setupController: function(controller, model) {
+      this._super(controller, model);
+      this.set('model.is_unread', false);
     }
 });
