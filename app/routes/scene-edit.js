@@ -13,7 +13,7 @@ export default Route.extend(AuthenticatedRoute, {
              scene:  api.requestOne('scene', { id: params['id'], edit_mode: true  }),
              sceneTypes: api.requestMany('sceneTypes'),
              plots: api.requestMany('plots'),
-             characters: api.requestMany('characters'),
+             characters: api.requestMany('characters', { select: 'include_staff' }),
              scenes: api.requestMany('scenes')
            })
            .then((model) => Ember.Object.create(model));
