@@ -8,7 +8,7 @@
 <p>{{pikaday-input onSelection=(action 'changeDate') value=model.date format=model.date_entry_format}} </p>
 
 <p><b>Start Time:</b></p>
-<div class="hint">Use <b>server time</b> in standard format (e.g. either 1:30pm or 1330 depending on nationality.)</div>
+<div class="hint">Use <b>server time</b> in standard format (e.g. either 1:30pm or 1330 depending on nationality.) The current server time is {{model.server_time}}.</div>
 <p>{{input type="text" id="time" enter="create" value=model.time }}</p>
 
 <p><b>Description:</b></p>
