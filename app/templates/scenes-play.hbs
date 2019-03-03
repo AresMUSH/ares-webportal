@@ -1,23 +1,37 @@
-{{title pageTitle}}
-
+{{title 'My Scenes'}}
  
  <div class="row">
    <div class="col col-xs-12">
-       
-    <h1>Scene {{model.scene.id}} - {{model.scene.icdate}}
-        {{#if model.scene.title}}
-         - {{model.scene.title}}
-         {{/if}}
-     </h1>
+       <h1>My Scenes</h1>
+    
+      <h3>Scene {{currentScene.id}} - {{currentScene.icdate}}
+          {{#if currentScene.title}}
+           - {{currentScene.title}}
+           {{/if}}
+       </h3>
 
-    {{live-scene-context scene=model.scene}}
+      {{live-scene-context scene=currentScene}}
     
 </div>
 </div>
 
 <div class="row">
     <div class="col col-xs-12">
-     
+      
+      <div class="alert alert-info">
+        {{#each model.scenes as |scene|}}
+          <a href="#" {{action "switchScene" scene.id}} class={{if (eq scene.id currentScene.id) 'btn btn-primary' 'btn btn-default' }}>#{{scene.id}} {{scene.title}}
+          {{#if scene.is_unread}}
+           <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+          {{/if}}
+          </a>
+        {{/each}}
+        
+        <i class="fas fa-info-circle">
+          {{#bs-tooltip placement="left"}}Only scenes you have joined or watched will show up here.{{/bs-tooltip}}
+        </i>
+       </div>
+
         <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
  &nbsp; 
   {{#if scrollPaused}}
@@ -28,7 +42,7 @@
   {{/if}}
   
    &nbsp; 
-  {{#if model.scene.is_watching}}
+  {{#if currentScene.is_watching}}
   <a href="#" {{action 'watchScene' false}}><i class="fas fa-eye-slash"></i> Unwatch Scene</a>
   {{else}}
   <a href="#" {{action 'watchScene' true}}><i class="fas fa-eye"></i> Watch Scene</a>
@@ -40,7 +54,7 @@
        <span class="label label-warning">Scrolling is paused!</span>
     {{/if}}
     
-    {{#if (not model.scene.is_watching)}}
+    {{#if (not currentScene.is_watching)}}
     <br/>
        <span class="label label-warning">You are not watching this scene and will not be notified of new scene activity.</span>
 
@@ -48,7 +62,6 @@
     
     <div class="ansi scene-log" id="live-scene-log">
     
-
     {{#each scenePoses as |pose|}}    
             <div class="hint pull-right">
                 
@@ -131,94 +144,89 @@
   {{/if}}
   
 
-    {{#if (not model.scene.is_watching)}}
+    {{#if (not currentScene.is_watching)}}
+    <br/>
        <span class="label label-warning">You are not watching this scene and will not be notified of new scene activity.</span>
+
     {{/if}}
 
 
-    {{#if isApproved}}
+    {{#if currentScene.reloadRequired}}
+    <div class="alert alert-warning">
+      This scene has changed status since you opened it.  Please reload the page.
+    </div>
 
-        {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
-        
     {{else}}
-         <p>You must be approved to join a scene.</p>
-    {{/if}}
+
+      {{#if isApproved}}
+          {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
+      {{else}}
+           <p>You must be approved to join a scene.</p>
+      {{/if}}
     
-    
-    
-    <div class="row">
-        <div class="col col-xs-12">
+      <div class="row">
+          <div class="col col-xs-12">
 
-                <ul class="nav navbar-nav">    
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <ul class="nav navbar-nav">    
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-                      <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
-                      <ul class="dropdown-menu">
+                  <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
+                  <ul class="dropdown-menu">
 
-                        {{#if model.scene.can_edit}}
-                        <li>{{#link-to 'scene-edit' model.scene.id}}Edit Scene{{/link-to}}</li>
-                        {{/if}}
-                        
-                        {{#if isApproved}}
-                          {{#if (not model.scene.completed)}}
-                        
-                          {{#if rollEnabled}}
-                          <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
-                          {{/if}}
-                        
-                          <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
-                          <li><a href="#" {{action 'cookies'}}>Give Cookies</a></li>
-                         
-                           <li role="separator" class="divider"></li>
-
-                           <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li> 
-                           {{else}}
-                           <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li> 
-                           <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
-                           {{/if}}
-                         {{/if}}
-                       
-                       
-                      <li>{{#link-to 'scene-download' model.scene.id}}Download Scene{{/link-to}}</li> 
- 	
-                      </ul>
-                    </li>
-                </ul>
-        
-        
-    {{#if isApproved}}
-        
-            <div class="pull-right">
+                    {{#if currentScene.can_edit}}
+                    <li>{{#link-to 'scene-edit' currentScene.id}}Edit Scene{{/link-to}}</li>
+                    {{/if}}
                 
-            {{#if (not model.scene.completed)}}
-            <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
-            <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
-            <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
-            <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
+                    {{#if isApproved}}
+                      {{#if (not currentScene.completed)}}
+                
+                      {{#if rollEnabled}}
+                      <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
+                      {{/if}}
+                
+                      <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
+                      <li><a href="#" {{action 'cookies'}}>Give Cookies</a></li>
+                 
+                       <li role="separator" class="divider"></li>
 
+                       <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li> 
+                       {{else}}
+                       <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li> 
+                       <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
+                       {{/if}}
+                     {{/if}}
+               
+               
+                  <li>{{#link-to 'scene-download' currentScene.id}}Download Scene{{/link-to}}</li> 
+
+                  </ul>
+                </li>
+            </ul>
+        
+        
+            {{#if isApproved}}
+        
+              <div class="pull-right">
+          
+              {{#if (not currentScene.completed)}}
+              <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
+              <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
+              <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
+              <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
+              {{/if}}
+  
+              </div>
 
             {{/if}}
-        
-                
-        
-            </div>
-        
-        
-       
 
-    {{/if}}
-    
-
-         </div>
-     </div>
-     
-                
-
+           </div>
+       </div>
+     {{/if}}
 
     {{flash-messages}}
 
-    {{#if (and model.scene.can_edit selectLocation)}}
+    {{#if (and currentScene.can_edit selectLocation)}}
     <div class="row">
         <div class="col col-xs-4">
            <p>

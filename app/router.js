@@ -77,6 +77,7 @@ Router.map(function() {
   this.route('roster');
   this.route('scenes');
   this.route('scenes-live');
+  this.route('scenes-play');
   this.route('scene', { path: '/scene/:id' } );
   this.route('scene-live', { path: '/scene-live/:id' });
   this.route('scene-edit', { path: '/scene/:id/edit' } );

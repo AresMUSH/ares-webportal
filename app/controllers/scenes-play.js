@@ -16,6 +16,7 @@ export default Controller.extend(AuthenticatedController, {
     selectLocation: false,
     newLocation: null,
     scrollPaused: false,
+    currentScene: null,
     
     onSceneActivity: function(msg /* , timestamp */) {
         let splitMsg = msg.split('|');
@@ -23,24 +24,21 @@ export default Controller.extend(AuthenticatedController, {
         let char = splitMsg[1];
         let poseData = splitMsg[2];
         // For poses we can just add it to the display.  Other events require a reload.
-        if (sceneId === this.get('model.scene.id')) {
-          if (poseData) {
-            poseData = JSON.parse(poseData);
-            let poses = this.get('model.scene.poses');
-            if (!poseData.can_edit && (poseData.char.id == this.get('session.data.authenticated.id'))) {
-              poseData.can_edit = true
-              poseData.can_delete = true
-            }
-            poses.pushObject(poseData);
-            this.get('gameSocket').notify('New scene activity!');
-            this.scrollSceneWindow();
-          } else {
-            this.get('gameApi').requestOne('liveScene', { id: this.get('model.scene.id') }).then( response => {
-              this.set(`model.scene`, response)
-              this.get('gameSocket').notify('New scene activity!');
-              this.scrollSceneWindow();
-           });
-          }
+        if (sceneId === this.get('currentScene.id')) {
+          let scene = this.get('currentScene');
+          this.updateSceneData(scene, poseData);
+          scene.set('is_unread', false);
+          this.get('gameSocket').notify('New scene activity!');
+          this.scrollSceneWindow();
+        }
+        else {
+            this.get('model.scenes').forEach(s => {
+                if (s.id === sceneId) {
+                    this.updateSceneData(s, poseData);
+                    s.set('is_unread', true);
+                    this.get('gameSocket').notify('New activity in one of your other scenes!');
+                }
+            });            
         }
     },
 
@@ -48,9 +46,9 @@ export default Controller.extend(AuthenticatedController, {
       return this.get('model.abilities').length > 0;
     }.property('model.abilities'),
     
-    pageTitle: function() {
-        return 'Scene ' + this.get('model.scene.id');
-    }.property('model.scene.id'),
+    sceneTitle: function() {
+        return 'Scene ' + this.get('currentScene.id');
+    }.property('currentScene.id'),
     
     resetOnExit: function() {
         this.set('scenePose', '');
@@ -67,8 +65,8 @@ export default Controller.extend(AuthenticatedController, {
     },
     
     showSceneSelection: function() {
-      return this.get('model.my_scenes').length > 0;
-    }.property('model.my_scenes.@each.id'),
+      return this.get('model.scenes').length > 0;
+    }.property('model.scenes.@each.id'),
     
     scrollSceneWindow: function() {
       // Unless scrolling paused 
@@ -88,8 +86,22 @@ export default Controller.extend(AuthenticatedController, {
     },
     
     scenePoses: function() {
-        return this.get('model.scene.poses').map(p => Ember.Object.create(p));  
-    }.property('model.scene.poses.@each.id'),
+        return this.get('currentScene.poses').map(p => Ember.Object.create(p));  
+    }.property('currentScene.poses.@each.id'),
+    
+    updateSceneData(scene, poseData) {
+      if (poseData) {
+        poseData = JSON.parse(poseData);
+        let poses = scene.get('poses');
+        if (!poseData.can_edit && (poseData.char.id == this.get('session.data.authenticated.id'))) {
+          poseData.can_edit = true
+          poseData.can_delete = true
+        }
+        poses.pushObject(poseData);
+      } else {
+        scene.set('reloadRequired', true);
+      }
+    },
     
     actions: {
         locationSelected(loc) {
@@ -106,7 +118,7 @@ export default Controller.extend(AuthenticatedController, {
             this.set('selectLocation', false);
             this.set('newLocation', null);
 
-            api.requestOne('changeSceneLocation', { scene_id: this.get('model.scene.id'),
+            api.requestOne('changeSceneLocation', { scene_id: this.get('currentScene.id'),
                 location: newLoc })
             .then( (response) => {
                 if (response.error) {
@@ -117,7 +129,7 @@ export default Controller.extend(AuthenticatedController, {
         
         cookies() {
             let api = this.get('gameApi');
-            api.requestOne('sceneCookies', { id: this.get('model.scene.id') }, null)
+            api.requestOne('sceneCookies', { id: this.get('currentScene.id') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -137,10 +149,10 @@ export default Controller.extend(AuthenticatedController, {
             let poseId = this.get('confirmDeleteScenePose.id');
             this.set('confirmDeleteScenePose', false);
 
-            let scenePose = this.get('model.scene.poses').find(p => p.id === poseId);
-            this.get('model.scene.poses').removeObject(scenePose);
+            let scenePose = this.get('currentScene.poses').find(p => p.id === poseId);
+            this.get('currentScene.poses').removeObject(scenePose);
 
-            api.requestOne('deleteScenePose', { scene_id: this.get('model.scene.id'),
+            api.requestOne('deleteScenePose', { scene_id: this.get('currentScene.id'),
                 pose_id: poseId })
             .then( (response) => {
                 if (response.error) {
@@ -158,7 +170,7 @@ export default Controller.extend(AuthenticatedController, {
             scenePose.set('pose', pose);
 
             let api = this.get('gameApi');
-            api.requestOne('editScenePose', { scene_id: this.get('model.scene.id'),
+            api.requestOne('editScenePose', { scene_id: this.get('currentScene.id'),
                 pose_id: scenePose.id, pose: pose, notify: notify })
             .then( (response) => {
                 if (response.error) {
@@ -177,7 +189,7 @@ export default Controller.extend(AuthenticatedController, {
             }
             let api = this.get('gameApi');
             this.set('scenePose', '');
-            api.requestOne('addScenePose', { id: this.get('model.scene.id'),
+            api.requestOne('addScenePose', { id: this.get('currentScene.id'),
                 pose: pose, pose_type: poseType })
             .then( (response) => {
                 if (response.error) {
@@ -201,7 +213,7 @@ export default Controller.extend(AuthenticatedController, {
             this.set('selectSkillRoll', false);
             this.set('rollString', null);
 
-            api.requestOne('addSceneRoll', { scene_id: this.get('model.scene.id'),
+            api.requestOne('addSceneRoll', { scene_id: this.get('currentScene.id'),
                 roll_string: rollString })
             .then( (response) => {
                 if (response.error) {
@@ -215,7 +227,7 @@ export default Controller.extend(AuthenticatedController, {
             if (status === 'share') {
                 this.get('gameSocket').set('sceneCallback', null);
             }
-            api.requestOne('changeSceneStatus', { id: this.get('model.scene.id'),
+            api.requestOne('changeSceneStatus', { id: this.get('currentScene.id'),
                 status: status }, null)
             .then( (response) => {
                 if (response.error) {
@@ -223,7 +235,7 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 if (status === 'share') {
                     this.get('flashMessages').success('The scene has been shared.');
-                    this.transitionToRoute('scene', this.get('model.scene.id'));
+                    this.transitionToRoute('scene', this.get('currentScene.id'));
                 }
                 else if (status === 'stop') {
                     this.get('flashMessages').success('The scene has been stopped.');
@@ -239,14 +251,14 @@ export default Controller.extend(AuthenticatedController, {
         watchScene(option) {
             let api = this.get('gameApi');
             let command = option ? 'watchScene' : 'unwatchScene';
-            api.requestOne(command, { id: this.get('model.scene.id') }, null)
+            api.requestOne(command, { id: this.get('currentScene.id') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
                 let message = option ? 'now watching' : 'no longer watching';
+                this.get('currentScene').set('is_watching', option);
                 this.get('flashMessages').success(`You are ${message} the scene.`);
-                this.get('model.scene').set('is_watching', option);
             });
         },
         
@@ -262,6 +274,16 @@ export default Controller.extend(AuthenticatedController, {
         pauseScroll() {
           this.set('scrollPaused', true);
         },
+        
+        switchScene(id) {
+          this.get('model.scenes').forEach(s => {
+              if (s.id === id) {
+                  s.set('is_unread', false);
+                  this.set('currentScene', s);
+              }
+          });   
+        },
+        
         unpauseScroll() {
           this.set('scrollPaused', false);
           this.scrollSceneWindow();
