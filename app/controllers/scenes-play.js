@@ -9,12 +9,6 @@ export default Controller.extend(AuthenticatedController, {
     session: service(),
     favicon: service(),
     
-    scenePose: '',
-    rollString: null,
-    confirmDeleteScenePose: false,
-    selectSkillRoll: false,
-    selectLocation: false,
-    newLocation: null,
     scrollPaused: false,
     currentScene: null,
     
@@ -42,19 +36,8 @@ export default Controller.extend(AuthenticatedController, {
         }
     },
 
-    rollEnabled: function() {
-      return this.get('model.abilities').length > 0;
-    }.property('model.abilities'),
-    
-    sceneTitle: function() {
-        return 'Scene ' + this.get('currentScene.id');
-    }.property('currentScene.id'),
-    
     resetOnExit: function() {
-        this.set('scenePose', '');
-        this.set('rollString', null);
-        this.set('confirmDeleteScenePose', false);
-        this.set('selectSkillRoll', false)
+        this.set('scrollPaused', false);
     },
     
     setupCallback: function() {
@@ -63,10 +46,6 @@ export default Controller.extend(AuthenticatedController, {
         this.get('gameSocket').set('sceneCallback', function(data) {
             self.onSceneActivity(data) } );
     },
-    
-    showSceneSelection: function() {
-      return this.get('model.scenes').length > 0;
-    }.property('model.scenes.@each.id'),
     
     scrollSceneWindow: function() {
       // Unless scrolling paused 
@@ -85,10 +64,6 @@ export default Controller.extend(AuthenticatedController, {
   
     },
     
-    scenePoses: function() {
-        return this.get('currentScene.poses').map(p => Ember.Object.create(p));  
-    }.property('currentScene.poses.@each.id'),
-    
     updateSceneData(scene, poseData) {
       if (poseData) {
         poseData = JSON.parse(poseData);
@@ -99,170 +74,14 @@ export default Controller.extend(AuthenticatedController, {
         }
         poses.pushObject(poseData);
       } else {
-        scene.set('reloadRequired', true);
+        scene.set('reload_required', true);
       }
     },
     
     actions: {
-        locationSelected(loc) {
-            this.set('newLocation', loc);  
-        },
-        changeLocation() {
-            let api = this.get('gameApi');
-            
-            let newLoc = this.get('newLocation');
-            if (!newLoc) {
-                this.get('flashMessages').danger("You haven't selected a location.");
-                return;
-            }
-            this.set('selectLocation', false);
-            this.set('newLocation', null);
-
-            api.requestOne('changeSceneLocation', { scene_id: this.get('currentScene.id'),
-                location: newLoc })
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-            });
-        },
         
-        cookies() {
-            let api = this.get('gameApi');
-            api.requestOne('sceneCookies', { id: this.get('currentScene.id') }, null)
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                this.get('flashMessages').success('You give cookies to the scene participants.');
-            });
-        },
         
-        editScenePose(scenePose) { 
-            scenePose.set('editActive', true);
-        },
-        cancelScenePoseEdit(scenePose) {
-            scenePose.set('editActive', false);
-        },
-        deleteScenePose() {
-            let api = this.get('gameApi');
-            let poseId = this.get('confirmDeleteScenePose.id');
-            this.set('confirmDeleteScenePose', false);
-
-            let scenePose = this.get('currentScene.poses').find(p => p.id === poseId);
-            this.get('currentScene.poses').removeObject(scenePose);
-
-            api.requestOne('deleteScenePose', { scene_id: this.get('currentScene.id'),
-                pose_id: poseId })
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-            });
-        },
-        saveScenePose(scenePose, notify) {
-            let pose = scenePose.get('raw_pose');
-            if (pose.length === 0) {
-                this.get('flashMessages').danger("You haven't entered anything.");
-                return;
-            }
-            scenePose.set('editActive', false);
-            scenePose.set('pose', pose);
-
-            let api = this.get('gameApi');
-            api.requestOne('editScenePose', { scene_id: this.get('currentScene.id'),
-                pose_id: scenePose.id, pose: pose, notify: notify })
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                scenePose.set('pose', response.pose);
-            });
-            this.set('scenePose', '');
-        },
-        
-        addPose(poseType) {
-            let pose = this.get('scenePose');
-            if (pose.length === 0) {
-                this.get('flashMessages').danger("You haven't entered anything.");
-                return;
-            }
-            let api = this.get('gameApi');
-            this.set('scenePose', '');
-            api.requestOne('addScenePose', { id: this.get('currentScene.id'),
-                pose: pose, pose_type: poseType })
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                this.scrollSceneWindow();
-            });
-        },
-        
-        addSceneRoll() {
-            let api = this.get('gameApi');
-            
-            // Needed because the onChange event doesn't get triggered when the list is 
-            // first loaded, so the roll string is empty.
-            let rollString = this.get('rollString') || this.get('model.abilities')[0];
-            
-            if (!rollString) {
-                this.get('flashMessages').danger("You haven't selected an ability to roll.");
-                return;
-            }
-            this.set('selectSkillRoll', false);
-            this.set('rollString', null);
-
-            api.requestOne('addSceneRoll', { scene_id: this.get('currentScene.id'),
-                roll_string: rollString })
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-            });
-        },
-        
-        changeSceneStatus(status) {
-            let api = this.get('gameApi');
-            if (status === 'share') {
-                this.get('gameSocket').set('sceneCallback', null);
-            }
-            api.requestOne('changeSceneStatus', { id: this.get('currentScene.id'),
-                status: status }, null)
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                if (status === 'share') {
-                    this.get('flashMessages').success('The scene has been shared.');
-                    this.transitionToRoute('scene', this.get('currentScene.id'));
-                }
-                else if (status === 'stop') {
-                    this.get('flashMessages').success('The scene has been stopped.');
-                    this.send('reloadModel');
-                }
-                else if (status === 'restart') {
-                    this.get('flashMessages').success('The scene has been restarted.');
-                    this.send('reloadModel'); 
-                }
-            });
-        },
-        
-        watchScene(option) {
-            let api = this.get('gameApi');
-            let command = option ? 'watchScene' : 'unwatchScene';
-            api.requestOne(command, { id: this.get('currentScene.id') }, null)
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                let message = option ? 'now watching' : 'no longer watching';
-                this.get('currentScene').set('is_watching', option);
-                this.get('flashMessages').success(`You are ${message} the scene.`);
-            });
-        },
-        
-        scrollDown() {
+        scrollScene() {
           this.scrollSceneWindow();
         },
         
@@ -271,8 +90,11 @@ export default Controller.extend(AuthenticatedController, {
             this.send('reloadModel');
         },
         
-        pauseScroll() {
-          this.set('scrollPaused', true);
+        setScroll(option) {
+          this.set('scrollPaused', !option);
+          if (option) {
+            this.scrollSceneWindow();
+          }
         },
         
         switchScene(id) {
@@ -282,11 +104,6 @@ export default Controller.extend(AuthenticatedController, {
                   this.set('currentScene', s);
               }
           });   
-        },
-        
-        unpauseScroll() {
-          this.set('scrollPaused', false);
-          this.scrollSceneWindow();
         }
     }
 });
