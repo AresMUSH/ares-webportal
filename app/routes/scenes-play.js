@@ -8,9 +8,10 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     gameApi: service(),
     gameSocket: service(),
     session: service(),
+    flashMessages: service(),
 
     activate: function() {
-        this.controllerFor('scene-live').setupCallback();
+        this.controllerFor('scenes-play').setupCallback();
         this.controllerFor('application').set('hideSidebar', true);
         $(window).on('beforeunload', () => {
             this.deactivate();
@@ -25,7 +26,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     model: function(params) {
         let api = this.get('gameApi');
         return RSVP.hash({
-             scene: api.requestOne('liveScene', { id: params['id'] }),
+             scenes: api.requestMany('myScenes'),
              abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }),
              locations: api.request('sceneLocations', { id: params['id'] })
            })
@@ -34,6 +35,14 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     
     setupController: function(controller, model) {
       this._super(controller, model);
-      this.set('model.is_unread', false);
+      if (model.scenes.length > 0) {
+        controller.set('currentScene', model.scenes[0]);
+        controller.set('currentScene.is_unread', false);        
+      }
+      else {
+        this.controllerFor('application').set('hideSidebar', false);
+        this.get('flashMessages').danger('You must watch or join a scene first.');
+        this.transitionTo('scenes-live');
+      }
     }
 });

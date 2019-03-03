@@ -1,0 +1,40 @@
+{{title 'My Scenes'}}
+ 
+ <div class="row">
+   <div class="col col-xs-12">
+       <h1>My Scenes</h1>
+    
+      <h3>Scene {{currentScene.id}} - {{currentScene.icdate}}
+          {{#if currentScene.title}}
+           - {{currentScene.title}}
+           {{/if}}
+       </h3>
+
+      {{live-scene-context scene=currentScene}}
+    
+</div>
+</div>
+
+<div class="row">
+    <div class="col col-xs-12">
+      
+      <div class="alert alert-info">
+        {{#each model.scenes as |scene|}}
+          <a href="#" {{action "switchScene" scene.id}} class={{if (eq scene.id currentScene.id) 'btn btn-primary' 'btn btn-default' }}>#{{scene.id}} {{scene.title}}
+          {{#if scene.is_unread}}
+           <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+          {{/if}}
+          </a>
+        {{/each}}
+        
+        <i class="fas fa-info-circle">
+          {{#bs-tooltip placement="left"}}Only scenes you have joined or watched will show up here.{{/bs-tooltip}}
+        </i>
+       </div>
+       
+   {{live-scene-control scene=currentScene locations=model.locations abilities=model.abilities scrollPaused=scrollPaused refresh=(action "refresh") scrollScene=(action "scrollScene") setScroll=(action "setScroll")}}
+       
+
+   </div>
+</div>
+{{outlet}}
