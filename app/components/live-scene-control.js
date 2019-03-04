@@ -126,7 +126,7 @@ export default Component.extend(AuthenticatedController, {
               return;
           }
           let api = this.get('gameApi');
-          api.requestOne('addTxt', { scene_id: this.get('model.scene.id'),
+          api.requestOne('addTxt', { scene_id: this.get('scene.id'),
               pose: pose }, null)
           .then( (response) => {
               if (response.error) {
@@ -175,7 +175,7 @@ export default Component.extend(AuthenticatedController, {
           this.set('selectCastSpell', false);
           this.set('spellString', null);
 
-          api.requestOne('addSceneSpell', { scene_id: this.get('model.scene.id'),
+          api.requestOne('addSceneSpell', { scene_id: this.get('scene.id'),
               spell_string: spellString }, null)
           .then( (response) => {
               if (response.error) {
