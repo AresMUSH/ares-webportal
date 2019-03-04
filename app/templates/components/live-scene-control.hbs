@@ -155,6 +155,8 @@
                         <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
                         {{/if}}
 
+                        <li><a href="#" {{action (mut selectCastSpell) true}}>Cast Spell</a></li>
+
                         <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
                         <li><a href="#" {{action 'cookies'}}>Give Cookies</a></li>
 
@@ -249,3 +251,21 @@
           {{input type="text" size=25 id="rollString" enter="addSceneRoll" value=rollString}}
 
         {{/bs-modal-simple}}
+
+        {{#bs-modal-simple
+            title="Select a Spell to Cast"
+            closeTitle="Cancel"
+            submitTitle="Cast"
+            size=null
+            fade=false
+            open=selectCastSpell
+            onSubmit=(action "addSceneSpell")
+            onHide=(action (mut selectCastSpell) null)}}
+            <select onchange={{action (mut spellString) value="target.value"}}>
+              {{#each model.spells as |spell|}}
+                <option value={{spell}}>{{spell}}</option>
+              {{/each}}
+            </select>
+            {{input type="text" size=25 id="spellString" enter="addSceneSpell" value=spellString}}
+
+          {{/bs-modal-simple}}
