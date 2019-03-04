@@ -39,6 +39,18 @@ export default Controller.extend(AuthenticatedController, {
             this.send('reloadModel');
         },
         
+        joinScene(id) {
+          let api = this.get('gameApi');
+          api.requestOne('joinScene', { id: id }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              this.get('flashMessages').success('You join the scene.');
+              this.send('reloadModel'); 
+          });
+        },
+        
         stopWatching(id) {
           let api = this.get('gameApi');
           api.requestOne('unwatchScene', { id: id }, null)
@@ -47,6 +59,18 @@ export default Controller.extend(AuthenticatedController, {
                   return;
               }
               this.get('flashMessages').success('You are no longer watching that scene.');
+              this.send('reloadModel'); 
+          });
+        },
+        
+        watchScene(id) {
+          let api = this.get('gameApi');
+          api.requestOne('watchScene', { id: id }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              this.get('flashMessages').success('You start watching that scene.');
               this.send('reloadModel'); 
           });
         }

@@ -9,7 +9,8 @@
 <div class="row">
 
     <div class="col pull-right">
-        {{#link-to 'scene-create' class="btn btn-primary"}}Create Scene{{/link-to}}
+        {{#link-to 'scene-create' class="btn btn-default"}}Create Scene{{/link-to}}
+        {{#link-to 'scenes-play' class="btn btn-primary"}}Play{{/link-to}}
     </div>
 
 </div>
@@ -32,6 +33,28 @@
     <td>
         {{#if scene.is_unread}}
         <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+        {{/if}}
+
+        {{#if scene.watching}}
+          <button class="btn btn-default" {{action 'stopWatching' scene.id}}>
+          <i class="fa fa-eye-slash" aria-hidden="true"></i>
+            {{#bs-tooltip placement="left"}}Stop watching.{{/bs-tooltip}}
+          </button>
+        {{else}}
+          {{#if scene.can_view}}
+            <button class="btn btn-default" {{action 'watchScene' scene.id}}>
+            <i class="fa fa-eye" aria-hidden="true"></i>
+              {{#bs-tooltip placement="left"}}Watch scene.{{/bs-tooltip}}
+            </button>
+
+            {{#if (not scene.participating) }}
+              <button class="btn btn-default" {{action 'joinScene' scene.id}}>
+              <i class="fa fa-sign-in-alt" aria-hidden="true"></i>
+                {{#bs-tooltip placement="left"}}Join scene.{{/bs-tooltip}}
+              </button>
+            {{/if}}
+          {{/if}}
+
         {{/if}}
     </td>
     <td>
@@ -71,15 +94,6 @@
 
       {{scene.updated}}
 
-      <br/>
-
-      {{#if scene.watching}}
-        {{#if (not scene.participating) }}
-          <button class="btn btn-default" {{action 'stopWatching' scene.id}}>
-          <i class="fa fa-eye-slash" aria-hidden="true"></i>
-          </button>
-         {{/if}}
-      {{/if}}
     </td>
 </tr>
 {{/each}}
