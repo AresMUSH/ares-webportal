@@ -1,4 +1,4 @@
-  <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
+<a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
  &nbsp;
   {{#if scrollPaused}}
           <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
@@ -125,10 +125,8 @@
     {{else}}
 
       {{#if isApproved}}
-        <!-- {{#if scene.can_join}} -->
 
           {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
-        <!-- {{/if}} -->
 
       {{else}}
            <p>You must be approved to join a scene.</p>
@@ -146,9 +144,9 @@
                     <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
                     <ul class="dropdown-menu">
 
-                      <!-- {{#if (and scene.can_edit scene.can_join)}} -->
+                      {{#if scene.can_edit}}
                       <li>{{#link-to 'scene-edit' scene.id}}Edit Scene{{/link-to}}</li>
-                      <!-- {{/if}} -->
+                      {{/if}}
 
                       {{#if isApproved}}
                         {{#if (not scene.completed)}}
@@ -180,7 +178,7 @@
 
                 <div class="pull-right">
 
-                  <!-- {{#if scene.can_join}} -->
+                  {{#if (not scene.completed)}}
                   <button {{action 'addTxt' }} class="btn btn-default">Send Txt</button>
                   <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
                   <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
@@ -188,7 +186,7 @@
                   <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
 
 
-                  <!-- {{/if}} -->
+                  {{/if}}
 
 
 
@@ -249,23 +247,5 @@
             {{/each}}
           </select>
           {{input type="text" size=25 id="rollString" enter="addSceneRoll" value=rollString}}
-
-          {{#bs-modal-simple
-              title="Select a Spell to Cast"
-              closeTitle="Cancel"
-              submitTitle="Cast"
-              size=null
-              fade=false
-              open=selectCastSpell
-              onSubmit=(action "addSceneSpell")
-              onHide=(action (mut selectCastSpell) null)}}
-              <select onchange={{action (mut spellString) value="target.value"}}>
-                {{#each model.spells as |spell|}}
-                  <option value={{spell}}>{{spell}}</option>
-                {{/each}}
-              </select>
-              {{input type="text" size=25 id="spellString" enter="addSceneSpell" value=spellString}}
-
-            {{/bs-modal-simple}}
 
         {{/bs-modal-simple}}
