@@ -3,14 +3,30 @@
 
 <p>Some plugins are optional, and can be easily disabled and enabled.  Please read the <a href="https://aresmush.com/tutorials/config/plugins/">Enabling and Disabling Plugins</a> tutorial to learn more.</p>
 
+<div class="alert alert-warning"><b>Note!</b> Only plugins marked 'optional' below can safely be disabled without making custom code changes.  Any plugin can be removed; but you have to take care with required ones.  See the tutorial above for more information.</div>
+  
+<table>
 {{#each model as |plugin|}}
 
-<p><span class="text">{{plugin.name}}:</span>
+<tr>
+  <td><span class="text">{{plugin.name}}</span></td>
+  <td>
   {{input type='checkbox' checked=plugin.selected}} 
-</p>
+  </td>
+
+  <td>
+  {{#if plugin.optional}}
+  <span class="label label-success">optional</span>
+  {{else}}
+  <span class="label label-warning">required</span>
+  {{/if}}
+  </td>
+</tr>
   
 
 {{/each}}
+
+</table>
 
 
 <div class="row">

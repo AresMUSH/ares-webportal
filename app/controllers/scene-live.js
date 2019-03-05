@@ -27,7 +27,7 @@ export default Controller.extend(AuthenticatedController, {
             this.get('gameSocket').notify('New scene activity!');
             this.scrollSceneWindow();
           } else {
-            scene.set('reload_required', true);            
+            this.set('model.scene.reload_required', true);            
             this.get('gameSocket').notify('New scene activity!');
             this.scrollSceneWindow();
           }
