@@ -190,6 +190,8 @@ export default Component.extend(AuthenticatedController, {
           if (status === 'share') {
               this.get('gameSocket').set('sceneCallback', null);
           }
+          this.set('scene.reload_required', true);
+          
           api.requestOne('changeSceneStatus', { id: this.get('scene.id'),
               status: status }, null)
           .then( (response) => {
@@ -198,7 +200,6 @@ export default Component.extend(AuthenticatedController, {
               }
               if (status === 'share') {
                   this.get('flashMessages').success('The scene has been shared.');
-                  this.transitionToRoute('scene', this.get('scene.id'));
               }
               else if (status === 'stop') {
                   this.get('flashMessages').success('The scene has been stopped.');

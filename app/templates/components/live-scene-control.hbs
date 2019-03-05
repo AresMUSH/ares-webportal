@@ -126,7 +126,9 @@
 
       {{#if isApproved}}
 
-          {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
+          {{#if (not scene.completed)}}
+            {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
+          {{/if}}
 
       {{else}}
            <p>You must be approved to join a scene.</p>
