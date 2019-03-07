@@ -4,7 +4,7 @@ import config from './config/environment';
 const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL,
-    
+
     didTransition() {
       this._super(...arguments);
       window.scrollTo(0, 0);
@@ -77,6 +77,7 @@ Router.map(function() {
   this.route('roster');
   this.route('scenes');
   this.route('scenes-live');
+  this.route('scenes-play');
   this.route('scene', { path: '/scene/:id' } );
   this.route('scene-live', { path: '/scene-live/:id' });
   this.route('scene-edit', { path: '/scene/:id/edit' } );
@@ -92,6 +93,7 @@ Router.map(function() {
   this.route('setup');
   this.route('setup-colors');
   this.route('shutdown');
+  this.route('spells-air', { path: '/schools/:school'});
   this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
   this.route('who', { path: '/who'});

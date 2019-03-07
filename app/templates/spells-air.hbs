@@ -1,0 +1,56 @@
+{{title 'Air'}}
+<h1>Air</h1>
+
+<div class="ansi">
+
+<h2>Spells</h2>
+
+<ul class="nav nav-tabs">
+  {{#each-in model.spells as |group spells|}}
+    <li ><a data-toggle="tab" href="#{{group}}">Level {{group}}</a></li>
+  {{/each-in}}
+</ul>
+
+<div class="tab-content">
+  {{#each-in model.spells as |group spells|}}
+  <div id="{{group}}" class="tab-pane fade in {{group}}">
+
+    {{#each spells as |spell|}}
+
+      {{#if spell.available}}
+        <div class="spell_card">
+          {{#if spell.potion}}
+            <span style="float:right;"><img src="http://spiritlakemu.com/game/uploads/theme_images/potionicon.png" width="35px" title="Can be made into a potion"></span>
+          {{/if}}
+          <h3>{{spell.name}}</h3>
+          <b>Level {{spell.level}} {{spell.school}} spell </b><br><br>
+
+          {{spell.desc}}<br><br>
+          {{#if spell.targets}}
+            <b>Targets:</b> {{spell.targets}}<br>
+          {{/if}}
+          {{#if spell.duration}}
+            <b>Duration:</b> {{spell.duration}}<br>
+          {{/if}}
+          <b>Casting Time:</b> {{spell.casting_time}}<br>
+          <b>Range:</b> {{spell.range}}
+          {{#if spell.los}}
+            requires line of sight<br>
+          {{/if}}
+          {{#if spell.area}}
+            <b>Area:</b> {{spell.area}}<br>
+          {{/if}}
+          {{#if spell.heal}}
+            <b>Heal:</b> {{spell.heal}}<br>
+          {{/if}}
+          <br>
+        </div>
+      {{/if}}
+    {{/each}}
+  </div>
+  {{/each-in}}
+</div>
+
+
+
+</div>
