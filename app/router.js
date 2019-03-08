@@ -93,7 +93,7 @@ Router.map(function() {
   this.route('setup');
   this.route('setup-colors');
   this.route('shutdown');
-  this.route('spells-air', { path: '/schools/:school'});
+  this.route('spells', { path: '/schools/:school'});
   this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
   this.route('who', { path: '/who'});
