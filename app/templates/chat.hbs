@@ -12,7 +12,7 @@
 
 
         <button {{action 'changeChannel' channel.name}}
-           class="btn btn-default chat-button {{if (eq channel.name selectedChannel) 'chat-button-active' ''}}">{{channel.name}}
+           class="btn btn-default chat-button {{if (eq channel.name selectedChannel) 'chat-button-active' ''}}">#{{channel.name}}
         {{#if channel.muted}}
             <i class="fa fa-microphone-slash"></i>
         {{/if}}
@@ -95,7 +95,7 @@
           <div id="chat-window">
           {{#each channel.messages as |message|}}
               <div class="timestamp-tip">{{message.timestamp}}</div>
-              {{{ansi-format text=message.message}}}
+              <div class="chat-text">{{{ansi-format text=message.message}}}</div>
           {{/each}}
           </div>
 
