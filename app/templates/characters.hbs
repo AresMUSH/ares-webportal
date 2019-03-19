@@ -2,7 +2,7 @@
 <h1>Characters</h1>
 
 <div class="pull-right">
-  {{#link-to "census"}}Census{{/link-to}} &middot; {{#link-to 'search-chars'}}<i class="fa fa-search" aria-hidden="true"></i> Search Characters{{/link-to}}  
+  {{#link-to "census"}}Census{{/link-to}} &middot; {{#link-to 'search-chars'}}<i class="fa fa-search" aria-hidden="true"></i> Search Characters{{/link-to}}
 </div>
 <p>Here you can browse the profiles for all approved characters.</p>
 <div class="clearfix"/>
@@ -14,7 +14,8 @@
   {{#if model.game.roster_enabled}}
       <li><a data-toggle="tab" href="#roster">Roster</a></li>
   {{/if}}
-      <li><a data-toggle="tab" href="#idle">Gone</a></li>
+      <li><a data-toggle="tab" href="#gone">Gone</a></li>
+      <li><a data-toggle="tab" href="#dead">Dead</a></li>
 </ul>
 
 <div class="tab-content">
@@ -44,9 +45,13 @@
   </div>
   {{/if}}
 
-   <div id="idle" class="tab-pane fade in">
-      {{char-group-list name="" chars=model.characters.idle}}
+   <div id="gone" class="tab-pane fade in">
+      {{char-group-list name="" chars=model.characters.gone}}
   </div>
+
+  <div id="dead" class="tab-pane fade in">
+     {{char-group-list name="" chars=model.characters.dead}}
+ </div>
 </div>
 
 
