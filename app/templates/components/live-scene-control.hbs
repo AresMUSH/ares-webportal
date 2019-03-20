@@ -124,14 +124,13 @@
 
     {{else}}
 
-      {{#if isApproved}}
+      {{#if (and scene.can_join isApproved)}}
 
           {{#if (not scene.completed)}}
             {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
           {{/if}}
 
-      {{else}}
-           <p>You must be approved to join a scene.</p>
+      
       {{/if}}
 
 
@@ -150,16 +149,16 @@
                       <li>{{#link-to 'scene-edit' scene.id}}Edit Scene{{/link-to}}</li>
                       {{/if}}
 
-                      {{#if isApproved}}
+                      {{#if (and scene.can_join isApproved)}}
                         {{#if (not scene.completed)}}
 
                         {{#if rollEnabled}}
                         <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
                         {{/if}}
 
-                        <li><a href="#" {{action (mut selectCastSpell) true}}>Cast Spell</a></li>
+                          <li><a href="#" {{action (mut selectCastSpell) true}}>Cast Spell</a></li>
+                          <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
 
-                        <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
                         <li><a href="#" {{action 'cookies'}}>Give Cookies</a></li>
 
                          <li role="separator" class="divider"></li>
@@ -178,7 +177,7 @@
                   </li>
               </ul>
 
-              {{#if isApproved}}
+              {{#if (and scene.can_join isApproved)}}
 
                 <div class="pull-right">
 
