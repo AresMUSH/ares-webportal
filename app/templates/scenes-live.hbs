@@ -48,10 +48,12 @@
             </button>
 
             {{#if (not scene.participating) }}
+              {{#if scene.can_join}}
               <button class="btn btn-default" {{action 'joinScene' scene.id}}>
               <i class="fa fa-sign-in-alt" aria-hidden="true"></i>
                 {{#bs-tooltip placement="left"}}Join scene.{{/bs-tooltip}}
               </button>
+              {{/if}}
             {{/if}}
           {{/if}}
 
