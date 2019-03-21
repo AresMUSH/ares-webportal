@@ -11,6 +11,7 @@ export default Service.extend({
     socket: null,
     charId: null,
     chatCallback: null,
+    jobsCallback: null,
     sceneCallback: null,
     connected: false,
     
@@ -182,15 +183,20 @@ export default Service.extend({
             var notify = true;
             if (notification_type == "new_mail") {
               var mail_badge = $('#mailBadge');
-              var mail_count = mail_badge.text();
+              var mail_count = mail_badge.text() || '0';
               mail_count = parseInt( mail_count );
               mail_badge.text(mail_count + 1);                
             }
             else if (notification_type == "job_update") {
                 var job_badge = $('#jobBadge');
-                var job_count = job_badge.text();
+                var job_count = job_badge.text() || '0';
                 job_count = parseInt( job_count );
                 job_badge.text(job_count + 1);
+                
+                if (this.get('jobsCallback')) {
+                    this.get('jobsCallback')(data.args.message);
+                }
+                notify = false;
             }
             else if (notification_type == "new_chat") {
                 if (this.get('chatCallback')) {
