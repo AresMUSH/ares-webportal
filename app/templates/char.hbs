@@ -13,6 +13,9 @@
         <div class="panel panel-default">
             <div class="panel-body status-message">
                 {{{model.char.status_message}}}
+                {{#if model.char.idle_notes}}
+                {{{ansi-format text=model.char.idle_notes}}}
+                {{/if}}
             </div>
         </div>
     </div>
