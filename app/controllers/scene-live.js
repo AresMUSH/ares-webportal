@@ -26,6 +26,7 @@ export default Controller.extend(AuthenticatedController, {
               poseData.can_delete = true;
             }
             poses.pushObject(poseData);
+            this.set('model.scene.pose_order', poseData.pose_order);
           } else if (activityType == 'pose_updated') {
             let poseData = JSON.parse(activityData);
             let poses = this.get('model.scene.poses');
