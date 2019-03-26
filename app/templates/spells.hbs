@@ -70,6 +70,21 @@
           {{#if spell.heal}}
             <b>Heal:</b> {{spell.heal}}<br>
           {{/if}}
+          {{#if spell.mod}}
+            <b>Modifiers:</b>
+            {{#if spell.attack_mod}}
+              {{spell.attack_mod}} attack
+            {{/if}}
+            {{#if spell.lethal_mod}}
+              {{spell.lethal_mod}} lethality
+            {{/if}}
+            {{#if spell.defense_mod}}
+             {{spell.defense_mod}} defense
+            {{/if}}
+            {{#if spell.spell_mod}}
+               {{spell.spell_mod}} spell
+            {{/if}}
+          {{/if}}
           {{#if spell.weapon}}
             <hr width="95%">
             <h4>Spell Attack Stats</h4>
