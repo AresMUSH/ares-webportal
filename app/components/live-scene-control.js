@@ -166,7 +166,7 @@ export default Component.extend(AuthenticatedController, {
 
           // Needed because the onChange event doesn't get triggered when the list is
           // first loaded, so the roll string is empty.
-          let spellString = this.get('spellString') || this.get('model.spells')[0];
+          let spellString = this.get('spellString') || this.get('spells')[0];
 
           if (!spellString) {
               this.get('flashMessages').danger("You haven't selected a spell to cast.");
@@ -191,7 +191,7 @@ export default Component.extend(AuthenticatedController, {
               this.get('gameSocket').set('sceneCallback', null);
           }
           this.set('scene.reload_required', true);
-          
+
           api.requestOne('changeSceneStatus', { id: this.get('scene.id'),
               status: status }, null)
           .then( (response) => {
