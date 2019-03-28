@@ -130,7 +130,7 @@
             {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
           {{/if}}
 
-      
+
       {{/if}}
 
 
@@ -263,7 +263,7 @@
             onSubmit=(action "addSceneSpell")
             onHide=(action (mut selectCastSpell) null)}}
             <select onchange={{action (mut spellString) value="target.value"}}>
-              {{#each model.spells as |spell|}}
+              {{#each spells as |spell|}}
                 <option value={{spell}}>{{spell}}</option>
               {{/each}}
             </select>
