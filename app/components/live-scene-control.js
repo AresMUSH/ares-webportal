@@ -166,7 +166,7 @@ export default Component.extend(AuthenticatedController, {
 
           // Needed because the onChange event doesn't get triggered when the list is
           // first loaded, so the roll string is empty.
-          let spellString = this.get('spellString') || this.get('spells')[0];
+        let spellString = this.get('spellString') || this.get('spells')[0];
 
           if (!spellString) {
               this.get('flashMessages').danger("You haven't selected a spell to cast.");
