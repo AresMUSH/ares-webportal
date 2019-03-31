@@ -6,8 +6,17 @@ import RSVP from 'rsvp';
 
 export default Route.extend(DefaultRoute, ReloadableRoute, {
     gameApi: service(),
+    gameSocket: service(),
     session: service(),
   
+    activate: function() {
+        this.controllerFor('jobs').setupCallback();
+    },
+  
+    deactivate: function() {
+        this.set('gameSocket.jobsCallback', null);
+    },
+    
     afterModel: function(model) {
       var statusFilter = [];
       model.get('options.status_values').forEach(function(s) {

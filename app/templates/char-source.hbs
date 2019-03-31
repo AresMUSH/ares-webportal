@@ -8,8 +8,19 @@
     </div>
 
 <ol>
-    {{#each model.versions as |version|}}
-    <li>{{#link-to 'char-source' model.char_id version.id}}{{version.created}} - {{version.author}}{{/link-to}}</li>
+    {{#each model.versions as |v|}}
+    
+    <li>
+    {{#link-to 'char-source' model.char_id v.id}}
+    {{#if (eq v.id model.current_version)}}
+    <i class="far fa-dot-circle fa-fw" aria-hidden="true"></i>
+    {{else}}
+    <i class="far fa-circle fa-fw"></i>
+    {{/if}}
+    
+    {{v.created}} - {{v.author}}
+    {{/link-to}}
+    </li>
     {{/each}}
 </ol>
 

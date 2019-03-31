@@ -7,17 +7,24 @@
 
 <table class="table table-striped">
     <tr>
+        <th>&nbsp;</th>
         {{#each model.census.titles as |title|}}
         <th>{{title}}</th>
         {{/each}}
     </tr>
     
     
-{{#each chars as |char| }}
+{{#each model.census.chars as |char| }}
 <tr>
-    {{#each char as |field|}}
-    <td>{{field}}</td>
-    {{/each}}
+  {{#each-in char as |field value| }}
+    <td>
+      {{#if (eq field 'char')}}
+        {{char-icon-inline char=value}}
+      {{else}}
+        {{value}}
+      {{/if}}
+    </td>
+    {{/each-in}}
 </tr>
 {{/each}}
 
