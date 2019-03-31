@@ -68,7 +68,12 @@
 
 <div class="clearfix"></div>
 
-
+  {{#if newJobs}}
+      <div class="alert alert-warning">
+        New jobs are available.  Reload the page to see them.
+      </div>
+  {{/if}}
+  
 {{jobs-list jobs=filteredJobs}}
 
 {{outlet}}
