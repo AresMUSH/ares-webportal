@@ -1,8 +1,9 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
+import SceneUpdate from 'ares-webportal/mixins/scene-update';
 
-export default Controller.extend(AuthenticatedController, {
+export default Controller.extend(AuthenticatedController, SceneUpdate, {
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
@@ -11,23 +12,12 @@ export default Controller.extend(AuthenticatedController, {
     
     onSceneActivity: function(msg /* , timestamp */) {
         let splitMsg = msg.split('|');
-        let sceneId = splitMsg[0];
-        let char = splitMsg[1];
-        let poseData = splitMsg[2];
-        // For poses we can just add it to the display.  Other events require a reload.
+        let sceneId = splitMsg[0];       
+        
         if (sceneId === this.get('model.scene.id')) {
-          if (poseData) {
-            poseData = JSON.parse(poseData);
-            let poses = this.get('model.scene.poses');
-            if (!poseData.can_edit && (poseData.char.id == this.get('session.data.authenticated.id'))) {
-              poseData.can_edit = true
-              poseData.can_delete = true
-            }
-            poses.pushObject(poseData);
-            this.get('gameSocket').notify('New scene activity!');
-            this.scrollSceneWindow();
-          } else {
-            this.set('model.scene.reload_required', true);            
+          let notify = this.updateSceneData(this.get('model.scene'), msg);
+          
+          if (notify) {
             this.get('gameSocket').notify('New scene activity!');
             this.scrollSceneWindow();
           }
