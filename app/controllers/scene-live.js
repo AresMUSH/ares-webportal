@@ -1,8 +1,9 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
+import SceneUpdate from 'ares-webportal/mixins/scene-update';
 
-export default Controller.extend(AuthenticatedController, {
+export default Controller.extend(AuthenticatedController, SceneUpdate, {
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
@@ -54,6 +55,11 @@ export default Controller.extend(AuthenticatedController, {
           } else {
             this.set('model.scene.reload_required', true);
           }
+
+        let sceneId = splitMsg[0];
+
+        if (sceneId === this.get('model.scene.id')) {
+          let notify = this.updateSceneData(this.get('model.scene'), msg);
 
           if (notify) {
             this.get('gameSocket').notify('New scene activity!');
