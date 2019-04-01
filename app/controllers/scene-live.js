@@ -12,54 +12,12 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
 
     onSceneActivity: function(msg /* , timestamp */) {
         let splitMsg = msg.split('|');
-        let sceneId = splitMsg[0];
-        let char = splitMsg[1];
-        let activityType = splitMsg[2];
-        let activityData = splitMsg[3];
-        let notify = true;
-
-        if (sceneId === this.get('model.scene.id')) {
-          if (activityType == 'new_pose') {
-            let poseData = JSON.parse(activityData);
-            let poses = this.get('model.scene.poses');
-            if (!poseData.can_edit && (poseData.char.id == this.get('session.data.authenticated.id'))) {
-              poseData.can_edit = true;
-              poseData.can_delete = true;
-            }
-            poses.pushObject(poseData);
-            this.set('model.scene.pose_order', poseData.pose_order);
-          } else if (activityType == 'pose_updated') {
-            let poseData = JSON.parse(activityData);
-            let poses = this.get('model.scene.poses');
-            poses.forEach((p, i) => {
-              if (p.id === poseData.id) {
-                Ember.set(p, 'pose', poseData.pose);
-                Ember.set(p, 'raw_pose', poseData.raw_pose);
-              }
-            });
-            notify = false;
-          }
-          else if (activityType == 'pose_deleted') {
-            let poseData = JSON.parse(activityData);
-            let poses = this.get('model.scene.poses');
-            poses.forEach(p => {
-              if (p.id === poseData.id) {
-                poses.removeObject(p);
-              }
-            });
-            notify = false;
-          } else if (activityType == 'location_updated') {
-            let locationData = JSON.parse(activityData);
-            this.set('model.scene.location', locationData);
-            notify = false;
-          } else {
-            this.set('model.scene.reload_required', true);
-          }
 
         let sceneId = splitMsg[0];
 
         if (sceneId === this.get('model.scene.id')) {
           let notify = this.updateSceneData(this.get('model.scene'), msg);
+
 
           if (notify) {
             this.get('gameSocket').notify('New scene activity!');
