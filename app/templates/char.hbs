@@ -1,7 +1,3 @@
-
-<script type="text/javascript" src="/scripts/music_player.js"></script>
-<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
-
 {{title model.char.name}}
 
 <h1>{{model.char.name_and_nickname}}</h1>
@@ -17,6 +13,9 @@
         <div class="panel panel-default">
             <div class="panel-body status-message">
                 {{{model.char.status_message}}}
+                {{#if model.char.idle_notes}}
+                {{{ansi-format text=model.char.idle_notes}}}
+                {{/if}}
             </div>
         </div>
     </div>
@@ -103,3 +102,5 @@
 
 
 {{outlet}}
+
+<script async defer src="//assets.pinterest.com/js/pinit.js"></script>

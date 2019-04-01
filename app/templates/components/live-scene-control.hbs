@@ -127,7 +127,19 @@
       {{#if (and scene.can_join isApproved)}}
 
           {{#if (not scene.completed)}}
+          
             {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
+            
+           <div class="scene-pose-order">
+            <label>Pose Order:</label> {{#each scene.pose_order as |p|}}
+            {{#if (eq p.name playerName)}}
+              <span class="your-pose-order">{{p.name}}</span>
+            {{else}}
+              {{p.name}}
+            {{/if}}
+            <span class="hint">({{p.time}})</span>
+            {{/each}}
+           </div> 
           {{/if}}
 
 
