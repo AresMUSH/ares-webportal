@@ -34,6 +34,19 @@
 
    {{live-scene-control scene=currentScene locations=model.locations abilities=model.abilities spells=model.spells scrollPaused=scrollPaused playerName=currentUser.name refresh=(action "refresh") scrollScene=(action "scrollScene") setScroll=(action "setScroll")}}
 
+     <div class="alert alert-info">
+       {{#each model.scenes as |scene|}}
+         <a href="#" {{action "switchScene" scene.id}} class={{if (eq scene.id currentScene.id) 'btn btn-primary' 'btn btn-default' }}>#{{scene.id}} {{scene.title}}
+         {{#if scene.is_unread}}
+          <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+         {{/if}}
+         </a>
+       {{/each}}
+
+       <i class="fas fa-info-circle">
+         {{#bs-tooltip placement="left"}}Only scenes you have joined or watched will show up here.{{/bs-tooltip}}
+       </i>
+      </div>
 
    </div>
 </div>
