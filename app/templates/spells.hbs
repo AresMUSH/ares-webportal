@@ -9,7 +9,7 @@
 
 <p></p>
 <div class="blurb">
-  {{{model.blurb}}}
+  {{{ansi-format text=model.blurb}}}
 </div>
 
 <div class="clear"></div>
@@ -52,7 +52,7 @@
           {{/if}}
           <br>
 
-          {{{spell.desc}}}<br><br>
+          {{{ansi-format text=spell.desc}}}<br><br>
           {{#if spell.targets}}
             <b>Targets:</b> {{spell.targets}}<br>
           {{/if}}
