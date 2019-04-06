@@ -1,8 +1,9 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
+import SceneUpdate from 'ares-webportal/mixins/scene-update';
 
-export default Controller.extend(AuthenticatedController, {
+export default Controller.extend(AuthenticatedController, SceneUpdate, {
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
@@ -13,24 +14,29 @@ export default Controller.extend(AuthenticatedController, {
     currentScene: null,
     
     onSceneActivity: function(msg /* , timestamp */) {
-        let splitMsg = msg.split('|');
-        let sceneId = splitMsg[0];
-        let char = splitMsg[1];
-        let poseData = splitMsg[2];
+      let splitMsg = msg.split('|');
+      let sceneId = splitMsg[0];
+      let notify = true;
+      
         // For poses we can just add it to the display.  Other events require a reload.
         if (sceneId === this.get('currentScene.id')) {
           let scene = this.get('currentScene');
-          this.updateSceneData(scene, poseData);
           scene.set('is_unread', false);
-          this.get('gameSocket').notify('New scene activity!');
-          this.scrollSceneWindow();
+          
+          notify = this.updateSceneData(scene, msg);
+          
+          if (notify) {
+            this.get('gameSocket').notify('New scene activity!');
+            this.scrollSceneWindow();
+          }
+          
         }
         else {
             this.get('model.scenes').forEach(s => {
                 if (s.id === sceneId) {
-                    this.updateSceneData(s, poseData);
-                    s.set('is_unread', true);
-                    this.get('gameSocket').notify('New activity in one of your other scenes!');
+                  notify = this.updateSceneData(s, msg);
+                  s.set('is_unread', true);
+                  this.get('gameSocket').notify('New activity in one of your other scenes!');
                 }
             });            
         }
@@ -62,20 +68,6 @@ export default Controller.extend(AuthenticatedController, {
           // This happens sometimes when transitioning away from screen.
         }   
   
-    },
-    
-    updateSceneData(scene, poseData) {
-      if (poseData) {
-        poseData = JSON.parse(poseData);
-        let poses = scene.get('poses');
-        if (!poseData.can_edit && (poseData.char.id == this.get('session.data.authenticated.id'))) {
-          poseData.can_edit = true
-          poseData.can_delete = true
-        }
-        poses.pushObject(poseData);
-      } else {
-        scene.set('reload_required', true);
-      }
     },
     
     actions: {
