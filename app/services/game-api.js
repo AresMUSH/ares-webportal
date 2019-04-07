@@ -6,6 +6,18 @@ export default Service.extend({
     session: service(),
     router: service(),
     
+    portalUrl() {
+      var base;
+      var protocol = aresconfig.use_https ? 'https' : 'http';
+      if (`${aresconfig.web_portal_port}` === '80') {
+        base = `${protocol}://${aresconfig.host}`;
+      }
+      else {
+        base = `${protocol}://${aresconfig.host}:${aresconfig.web_portal_port}`;
+      }
+      return base;
+    },
+    
     serverUrl(route) {
         var base;
         var protocol = aresconfig.use_https ? 'https' : 'http';
