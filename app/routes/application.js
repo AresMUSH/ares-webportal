@@ -10,7 +10,14 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
     flashMessages: service(),
     gameSocket: service(),
     favicon: service(),
-    
+    headData: service(),
+  
+    afterModel(model) {
+        this.set('headData.mushName', model.get('game.name'));
+        this.set('headData.portalUrl', this.get('gameApi').portalUrl());
+        this.set('headData.mushDesc', model.get('game.description'));
+      },
+      
     doReload: function() {
         this.loadModel().then( newModel => {
             this.controllerFor('application').set('sidebar', newModel);
