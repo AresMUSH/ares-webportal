@@ -3,7 +3,7 @@
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#general">General</a></li>
         <li><a data-toggle="tab" href="#profile">Character Information</a></li>
-        <li><a data-toggle="tab" href="#hooks">RP Hooks</a></li>
+        <li><a data-toggle="tab" href="#hooks">Hooks & Preferences</a></li>
         <li><a data-toggle="tab" href="#relationships">Relationships</a></li>
         <li><a data-toggle="tab" href="#files">Files</a></li>
     </ul>
@@ -137,7 +137,10 @@
         </div>
 
         <div id="hooks" class="tab-pane fade in">
+          <b>RP Hooks</b>
           {{markdown-editor text=model.rp_hooks}}
+          <b>Plot Preferences</b>
+          {{markdown-editor text=model.plot_prefs}}
         </div>
 
         <div id="files" class="tab-pane fade in">

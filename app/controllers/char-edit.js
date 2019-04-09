@@ -1,18 +1,18 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
-export default Controller.extend({    
+export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
     genders: function() {
       return [ { value: 'Male' }, { value: 'Female' }, { value: 'Other' }];
     }.property(),
-  
+
     buildQueryDataForChar: function() {
         let demographics = {};
         let profile = {};
         let relationships = {};
-        
+
         let demo_entry = this.get('model.demographics');
         Object.keys(demo_entry).forEach(function(k) {
             demographics[k] = demo_entry[k].value;
@@ -21,25 +21,26 @@ export default Controller.extend({
         this.get('model.profile').forEach(function(p) {
             profile[p.name] = p.text;
         });
-        
+
         this.get('model.relationships').forEach(function(r) {
             relationships[r.name] = { text: r.text, order: r.order, category: r.category };
         });
-        
+
         let tags = this.get('model.tags') || [];
         if (!Array.isArray(tags)) {
             tags = tags.split(/[\s,]/);
         }
-        
+
         let gallery = this.get('model.gallery').map(g => g.path);
-        
+
         let profile_image = this.get('model.profile_image.name');
         let profile_icon = this.get('model.profile_icon.name');
 
-        return { 
+        return {
             id: this.get('model.id'),
             demographics: demographics,
             rp_hooks: this.get('model.rp_hooks'),
+            plot_prefs: this.get('model.plot_prefs'),
             relationships: relationships,
             gallery: gallery,
             profile: profile,
@@ -48,7 +49,7 @@ export default Controller.extend({
             profile_icon: profile_icon,
             tags: tags
         };
-    }, 
+    },
     actions: {
         addProfile() {
             let count = this.get('model.profile.length');
@@ -95,22 +96,22 @@ export default Controller.extend({
                 this.get('flashMessages').danger('Profile names cannot be blank.');
                 return;
             }
-            
+
             if (this.get('model.relationships').filter(r => r.name.length == 0).length > 0) {
                 this.get('flashMessages').danger('Relationship names cannot be blank.');
                 return;
             }
-            
+
             let api = this.get('gameApi');
             api.requestOne('profileSave', this.buildQueryDataForChar(), null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
-            
+
                 this.get('flashMessages').success('Saved!');
                 this.transitionToRoute('char', this.get('model.name'));
-                
+
             });
         }
     }
