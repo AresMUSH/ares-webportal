@@ -1,19 +1,26 @@
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#scenesindex">+</a></li>
     <li><a data-toggle="tab" href="#scenelist">Scenes</a></li>
+    <li><a data-toggle="tab" href="#plotprefs">Plot Preferences</a></li>
 </ul>
 
 
 <div class="tab-content">
 
     <div id="scenesindex" class="tab-pane fade in active">
-        <div class="tab-cover">Scenes</div>
+        <div class="tab-cover">Story</div>
     </div>
-    
+
     <div id="scenelist" class="tab-pane fade ">
-  
+
         {{scene-list scenes=char.scenes sceneTypes=sceneTypes}}
-      
+
     </div>
-    
+
+    <div id="plotprefs" class="tab-pane fade ">
+
+        {{{ansi-format text=char.plot_prefs}}}
+
+    </div>
+
 </div>
