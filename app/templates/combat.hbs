@@ -71,6 +71,13 @@
                     <i class="fa fa-heartbeat" style="color:red" aria-hidden="true"></i>
                 {{/each}}
                 
+                {{#bs-tooltip placement="left"}}
+                  {{#each c.damage as |damage|}}
+                  {{damage}}<br/>
+                  {{/each}}
+                {{/bs-tooltip}}
+                
+                
             </span>
             {{/if}}
         </td>
