@@ -7,8 +7,8 @@ export default Mixin.create({
     
   updateSceneData: function(scene, msg) {
     let splitMsg = msg.split('|');
-    let sceneId = splitMsg[0];
-    let char = splitMsg[1];
+    //let sceneId = splitMsg[0];
+    //let char = splitMsg[1];
     let activityType = splitMsg[2];
     let activityData = splitMsg[3];
     let notify = true;
@@ -27,7 +27,7 @@ export default Mixin.create({
     } else if (activityType == 'pose_updated') {
       let poseData = JSON.parse(activityData);
       let poses = scene.get('poses');
-      poses.forEach((p, i) => {
+      poses.forEach((p) => {
         if (p.id === poseData.id) {
           Ember.set(p, 'pose', poseData.pose);
           Ember.set(p, 'raw_pose', poseData.raw_pose);
