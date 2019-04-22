@@ -47,7 +47,7 @@ export default Mixin.create({
     } else if (activityType == 'location_updated') {
       let locationData = JSON.parse(activityData);
       scene.set('location', locationData);
-      notify = false;
+      notify = true;
     } else {
       scene.set('reload_required', true);            
     }
