@@ -19,7 +19,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
           let notify = this.updateSceneData(this.get('model.scene'), msg);
           
           if (notify) {
-            this.get('gameSocket').notify(`New activity from ${char} in scene ${sceneId}`);
+            this.get('gameSocket').notify(`New activity from ${char} in scene ${sceneId}.`);
             this.scrollSceneWindow();
           }
         }

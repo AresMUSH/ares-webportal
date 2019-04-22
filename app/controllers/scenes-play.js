@@ -37,7 +37,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
                 if (s.id === sceneId) {
                   notify = this.updateSceneData(s, msg);
                   s.set('is_unread', true);
-                  this.get('gameSocket').notify(`New activity from ${char} in one of your other scenes (${sceneId})!`);
+                  this.get('gameSocket').notify(`New activity from ${char} in one of your other scenes (${sceneId}).`);
                 }
             });            
         }
