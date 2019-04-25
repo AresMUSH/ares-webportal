@@ -6,6 +6,7 @@ export default Controller.extend({
     flashMessages: service(),
     newConfigKey: '',
     configChanged: false,
+    confirmRestore: null,
     
     config: function() {
         return this.get('model.config');
@@ -13,6 +14,7 @@ export default Controller.extend({
     
     resetOnExit: function() {
         this.set('newConfigKey', '');
+        this.set('confirmRestore', null);
     },
     
     actions: {
@@ -33,6 +35,19 @@ export default Controller.extend({
             delete modelConfig[key];
             this.set('model.config', modelConfig);
             this.set('configChanged', !this.get('configChanged'));
+        },
+        
+        restoreDefaults() {
+          let api = this.get('gameApi');
+          api.requestOne('restoreConfig', { file: this.get('model.file') }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+      
+          this.get('flashMessages').success('Config restored!');
+          this.send('reloadModel');
+          });  
         },
         
         save() {

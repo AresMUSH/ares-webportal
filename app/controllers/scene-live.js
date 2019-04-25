@@ -13,12 +13,13 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     onSceneActivity: function(msg /* , timestamp */) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];       
+        let char = splitMsg[1];
         
         if (sceneId === this.get('model.scene.id')) {
           let notify = this.updateSceneData(this.get('model.scene'), msg);
           
           if (notify) {
-            this.get('gameSocket').notify('New scene activity!');
+            this.get('gameSocket').notify(`New activity from ${char} in scene ${sceneId}.`);
             this.scrollSceneWindow();
           }
         }
