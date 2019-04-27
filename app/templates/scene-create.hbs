@@ -7,92 +7,119 @@
     </div>
 
     {{#if (not model.scene.completed)}}
-     <p>
-         <label class="col-xs-2 col-form-label">Scene Privacy:</label>
-
+    
+     <div class="form-group row">
+      <div class="col-sm-3">
+         <label class="col-form-label">Scene Privacy:</label>
+      </div>
+      <div class="col-sm-9">
         {{#power-select selected=model.scene.privacy options=scenePrivacyValues onchange=(action "privacyChanged") as |type|}}
           {{type}}
         {{/power-select}}
-    </p>
+      </div> 
+    </div>
+    
     {{/if}}
     
-    <p>
-        <label for="title" class="col-xs-2 col-form-label">Title:</label>
-
-        <p>{{input type="text" size=25 id="title" enter="save" value=model.scene.title}}</p>
-    </p>
+     <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="title" class="col-form-label">Title:</label>
+      </div>
+      <div class="col-sm-9">
+        {{input type="text" size=25 id="title" enter="save" value=model.scene.title}}
+      </div> 
+    </div>
     
-    <p>
-        <label for="location" class="col-xs-2 col-form-label">Location:</label>
+    <div class="form-group row">
+     <div class="col-sm-3">
+        <label for="location" class="col-form-label">Location:</label>
+     </div>
+     <div class="col-sm-9">
+       <p>{{input type="text" size=25 class="col-xs-4" id="location" enter="save" value=model.scene.location}}</p>
     
-       {{input type="text" size=25 class="col-xs-4" id="location" enter="save" value=model.scene.location}}
-    
-        
+        <p>
             {{#power-select selected=newLocation class="col-xs-4" options=model.locations onchange=(action "locationSelected") as |location|}}
           {{location}}
         {{/power-select}}
-        
         </p>
-     
+     </div> 
+   </div>
+    
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="icdate" class="col-form-label">IC Date:</label>
+    </div>
+    <div class="col-sm-9">
+       {{input type="text" size=25 id="icdate" enter="save" value=model.scene.icdate}}
+    </div> 
+  </div>
     
     
-   
-    
-    
-    <p>
-        <label for="icdate" class="col-xs-2 col-form-label">IC Date:</label>
-    
-        <p>{{input type="text" size=25 id="icdate" enter="save" value=model.scene.icdate}}</p>
-    </p>
-
-    <p>
-        <label class="col-xs-2 col-form-label">Scene Type:</label>
-    
+    <div class="form-group row">
+     <div class="col-sm-3">
+        <label class="col-form-label">Scene Type:</label>
+     </div>
+     <div class="col-sm-9">
         {{#power-select selected=model.scene.scene_type options=sceneTypes onchange=(action "typeChanged") as |type|}}
           {{type}}
         {{/power-select}}
-        
-    </p>
-    
-    <p>
-        <label for="plot" class="col-xs-2 col-form-label">Plot:</label>
-    
-        {{#power-select selected=model.scene.plot options=model.plots allowClear=true searchField="title" onchange=(action "plotChanged") as |plot|}}
-          {{plot.title}}
-        {{/power-select}}
-    
-    </p>
-    
-    <p>
-        <label for="tags" class="col-xs-2 col-form-label">Tags:</label>
-        <p>{{input type="text" size=25 id="tags" enter="save" value=model.scene.tags}}</p>
-    </p> 
-    
+     </div> 
+   </div>
 
-    <p>
-        <label for="participants" class="col-xs-2 col-form-label">Participants:</label>
-    
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="plot" class="col-form-label">Plot:</label>
+    </div>
+    <div class="col-sm-9">
+ 
+     {{#power-select selected=model.scene.plot options=model.plots allowClear=true searchField="title" onchange=(action "plotChanged") as |plot|}}
+       {{plot.title}}
+     {{/power-select}}
+    </div> 
+  </div>
+  
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="tags" class="col-form-label">Tags:</label>
+    </div>
+    <div class="col-sm-9">
+     {{input type="text" size=25 id="tags" enter="save" value=model.scene.tags}}
+    </div> 
+  </div>
+  
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="participants" class="col-form-label">Participants:</label>
+    </div>
+    <div class="col-sm-9">
         {{#power-select-multiple selected=model.scene.participants options=model.characters searchField="name" onchange=(action "participantsChanged") as |char|}}
           {{char.name}}
         {{/power-select-multiple}}
-    
-    </p>
-    
-    <p>
-        <label for="related" class="col-xs-2 col-form-label">Related Scenes:</label>
+    </div> 
+  </div>
+  
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="related" class="col-form-label">Related Scenes:</label>
+    </div>
+    <div class="col-sm-9">
         {{#power-select-multiple selected=model.scene.related_scenes options=model.scenes searchField="title" onchange=(action "relatedChanged") as |scene|}}
           {{scene.icdate}} {{scene.title}}
         {{/power-select-multiple}}
         <div class="hint">It may take a second for the related scenes list to pop up.</div>
-    
-    </p>
-           
-    <p>
-        <label for="summary" class="col-xs-2 col-form-label">Summary:</label>
+    </div> 
+  </div>
+  
+  
+    <div class="form-group row">
+     <div class="col-sm-3">
+        <label for="summary" class="col-form-label">Summary:</label>
+     </div>
+     <div class="col-sm-9">
         {{markdown-editor text=model.scene.summary}}
-    </p>
-
-
+     </div> 
+   </div>
+ 
     
     {{#if model.scene.completed }}
     <p>

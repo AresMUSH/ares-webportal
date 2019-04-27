@@ -29,7 +29,8 @@ export default Controller.extend({
         searchGroups: this.get('searchGroups'),
         searchDemographics: this.get('searchDemographics'),
         searchTag: this.get('searchTag'),
-        searchName: this.get('searchName')
+        searchName: this.get('searchName'),
+        searchRelation: this.get('searchRelation')
       }, null)
       .then( (response) => {
         if (response.error) {
