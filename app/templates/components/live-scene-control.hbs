@@ -160,6 +160,7 @@
 
                       {{#if scene.can_edit}}
                       <li>{{#link-to 'scene-edit' scene.id}}Edit Scene{{/link-to}}</li>
+                      <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
                       {{/if}}
                     
                       {{#if isApproved}}
@@ -169,7 +170,6 @@
                         <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
                         {{/if}}
                     
-                        <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
                         <li><a href="#" {{action 'cookies'}}>Give Cookies</a></li>
                      
                          <li role="separator" class="divider"></li>
