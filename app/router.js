@@ -91,10 +91,12 @@ Router.map(function() {
   this.route('search-chars');
   this.route('search-help');
   this.route('search-forum');
+  this.route('search-spells');
   this.route('setup');
   this.route('setup-colors');
   this.route('shutdown');
   this.route('schools', { path: '/schools/:school'});
+  this.route('spells', { path: '/spells'});
   this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
   this.route('who', { path: '/who'});
