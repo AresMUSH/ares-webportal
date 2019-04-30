@@ -1,0 +1,126 @@
+{{title "Search Spells"}}
+
+<h1>Search Spells</h1>
+
+{{search-bar}}
+
+<p>The search will only match spells that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
+
+<hr/>
+
+{{#if searchResults}}
+<a data-toggle="collapse" href="#searchFields"><button class="btn btn-default btn-collapse">Show/Hide Search</button></a>
+{{/if}}
+
+<div id="searchFields" class="panel-collapse collapse {{if searchResults '' 'in'}}">
+
+<div class="row">
+
+  <div class="col col-xs-3">
+    <label>Name:</label>
+  </div>
+
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=25 id="title"  value=searchName enter="search"}}</p>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <label>Level:</label>
+  </div>
+
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=25 id="participant"  value=searchLevel enter="search"}}</p>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <label>School:</label>
+  </div>
+
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=25 id="icdate"  value=searchSchool enter="search"}}</p>
+
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <label>Effect:</label>
+  </div>
+
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=25 id="tag"  value=searchEffect enter="search"}}</p>
+  </div>
+
+</div>
+
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <label>Description:</label>
+  </div>
+
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=25 id="desc"  value=searchDesc enter="search"}}</p>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <p><label>Available?</label>
+
+        {{input type="checkbox"  id="available"  checked=searchAvailable}}</p>
+
+  </div>
+
+  <div class="col col-xs-3">
+      <p>  <label>Potion?</label>
+  
+        {{input type="checkbox"  id="potion"  checked=searchPotion}}</p>
+  </div>
+
+
+
+</div>
+
+
+
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+
+                <button class="btn btn-default" {{action 'reset'}}>Reset</button>
+                <button class="btn btn-primary" {{action 'search'}}>Search</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr/>
+
+{{flash-messages}}
+
+{{#if searchResults}}
+{{#each searchResults as |spell|}}
+  {{spell-card spell=spell}}
+{{/each}}
+
+
+{{else}}
+<p>No search results.</p>
+{{/if}}
+
+{{outlet}}

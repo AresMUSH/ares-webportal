@@ -3,18 +3,16 @@
 
 <div class="ansi">
 
-<p><center>[ {{#link-to 'spells' 'air'}}Air{{/link-to}} | {{#link-to 'spells' 'corpus'}}Corpus{{/link-to}} | {{#link-to 'spells' 'earth'}}Earth{{/link-to}} | {{#link-to 'spells' 'fire'}}Fire{{/link-to}} | {{#link-to 'spells' 'nature'}}Nature{{/link-to}} | {{#link-to 'spells' 'spirit'}}Spirit{{/link-to}} | {{#link-to 'spells' 'water'}}Water{{/link-to}} | {{#link-to 'spells' 'will'}}Will{{/link-to}} ]</center></p>
+<p><center>[ {{#link-to 'schools' 'air'}}Air{{/link-to}} | {{#link-to 'schools' 'corpus'}}Corpus{{/link-to}} | {{#link-to 'schools' 'earth'}}Earth{{/link-to}} | {{#link-to 'schools' 'fire'}}Fire{{/link-to}} | {{#link-to 'schools' 'nature'}}Nature{{/link-to}} | {{#link-to 'schools' 'spirit'}}Spirit{{/link-to}} | {{#link-to 'schools' 'water'}}Water{{/link-to}} | {{#link-to 'schools' 'will'}}Will{{/link-to}} ]</center></p>
 
-<div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="https://www.pinterest.com/spiritlakeworld/{{model.pinterest}}/"></a></div>
+
 
 <p></p>
-<div class="blurb">
-  {{{ansi-format text=model.blurb}}}
-</div>
+
 
 <div class="clear"></div>
 
-<h2 style="padding-top:0px; margin-top:0px;">Spells</h2>
+<h2 style="padding-top:0px; margin-top:0px;">All Spells</h2>
 
 <ul class="nav nav-tabs">
   {{#each-in model.spells as |group spells|}}
@@ -28,116 +26,8 @@
 
     {{#each spells as |spell|}}
 
-      {{#if spell.available}}
-        <div class="spell_card">
-          <span style="float:right;">
-            {{#if spell.potion}}
-            <img src="http://spiritlakemu.com/game/uploads/theme_images/potionicon.png" width="35px" title="Can be made into a potion">
-          {{/if}}
-          {{#if spell.single_target}}
-            <img src="http://spiritlakemu.com/game/uploads/theme_images/singletargeticon.png" width="35px" title="Single target">
-          {{/if}}
-          {{#if spell.multi_target}}
-            <img src="http://spiritlakemu.com/game/uploads/theme_images/multitargeticon.png" width="35px" title="Multiple targets">
-          {{/if}}</span>
+      {{spell-card spell=spell}}
 
-          <span style="float:right; clear: both;"><b>Cost:</b> {{spell.xp}} XP</span>
-
-          <h3 style="margin:0px;">{{spell.name}}</h3>
-          <b><i>{{spell.school}}</i></b><br>
-          <b>Level {{spell.level}}</b><br>
-
-          {{#if spell.level_8}}
-            <i>Casting a level 8 spell results in Spell Casting Fatigue that lasts 8 - 24 hours, varying with your ability to rest and refuel.</i><br>
-          {{/if}}
-          <br>
-
-          {{{ansi-format text=spell.desc}}}<br><br>
-          {{#if spell.targets}}
-            <b>Targets:</b> {{spell.targets}}<br>
-          {{/if}}
-          {{#if spell.duration}}
-            <b>Duration:</b> {{spell.duration}}<br>
-          {{/if}}
-          <b>Casting Time:</b> {{spell.casting_time}}<br>
-          <b>Range:</b> {{spell.range}}<br>
-          {{#if spell.los}}
-            <i>Requires line of sight</i><br>
-          {{/if}}
-          {{#if spell.area}}
-            <b>Area:</b> {{spell.area}}<br>
-          {{/if}}
-          {{#if spell.heal}}
-            <b>Heal:</b> {{spell.heal}}<br>
-          {{/if}}
-          {{#if spell.mod}}
-            <b>Modifiers:</b>
-            {{#if spell.attack_mod}}
-              {{spell.attack_mod}} attack
-            {{/if}}
-            {{#if spell.lethal_mod}}
-              {{spell.lethal_mod}} lethality
-            {{/if}}
-            {{#if spell.defense_mod}}
-             {{spell.defense_mod}} defense
-            {{/if}}
-            {{#if spell.spell_mod}}
-               {{spell.spell_mod}} spell
-            {{/if}}
-          {{/if}}
-          {{#if spell.weapon}}
-            <hr width="95%">
-            <h4>Spell Attack Stats</h4>
-            {{#if spell.weapon_specials}}
-            <p><i>Applies {{spell.name}} stats atop the stats of the weapon you are already wielding.</i></p>
-            {{/if}}
-            <p><i>
-              {{spell.weapon_type}}{{#if spell.weapon_shrapnel}} (Shrapnel){{/if}} &nbsp;&#183; {{spell.weapon_damage_type}} Damage<br>
-            </i></p>
-            {{#if spell.weapon_lethality}}
-              <b>Lethality:</b> {{spell.weapon_lethality}}<br>
-            {{/if}}
-            {{#if spell.weapon_special_lethality}}
-              <b>Lethality:</b> {{spell.weapon_special_lethality}}<br>
-            {{/if}}
-            {{#if spell.weapon_penetration}}
-              <b>Penetration:</b> {{spell.weapon_penetration}}<br>
-            {{/if}}
-            {{#if spell.weapon_special_penetration}}
-              <b>Penetration:</b> {{spell.weapon_special_penetration}}<br>
-            {{/if}}
-            {{#if spell.weapon_accuracy}}
-              <b>Accuracy:</b> {{spell.weapon_accuracy}}<br>
-            {{/if}}
-            {{#if spell.weapon_special_accuracy}}
-              <b>Accuracy:</b> {{spell.weapon_special_accuracy}}<br>
-            {{/if}}
-            {{#if spell.weapon_init}}
-              <b>Initiative Bonus:</b> {{spell.weapon_init}}<br>
-            {{/if}}
-            {{#if spell.weapon_special_init}}
-              <b>Initiative Bonus:</b> {{spell.weapon_special_init}}<br>
-            {{/if}}
-
-
-
-          {{/if}}
-
-
-
-          {{#if spell.armor}}
-            <hr width="95%">
-            <h4>Armor Stats</h4>
-            {{#if spell.armor_protection}}
-              <b>Defense:</b> {{spell.armor_protection}}<br>
-            {{/if}}
-            {{#if spell.armor_defense}}
-              <b>Defense:</b> {{spell.armor_defense}}<br>
-            {{/if}}
-          {{/if}}
-          <br>
-        </div>
-      {{/if}}
     {{/each}}
   </div>
   {{/each-in}}

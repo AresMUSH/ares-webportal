@@ -7,7 +7,7 @@ export default Route.extend(DefaultRoute, {
 
     model: function(params) {
         let api = this.get('gameApi');
-        return api.requestOne('spells');
+        return api.requestOne('schools', { school: params['school']  });
     }
 
 });
