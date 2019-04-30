@@ -78,14 +78,14 @@
 
 <div class="row">
 
-  <div class="col col-xs-3">
+  <!-- <div class="col col-xs-3">
         <label>Available?</label>
   </div>
 
   <div class="col col-xs-3">
         <p>{{input type="checkbox"  id="available"  checked=searchAvailable}}</p>
-  </div>
-  
+  </div> -->
+
 
 </div>
 
@@ -109,7 +109,7 @@
 
 {{#if searchResults}}
 {{#each searchResults as |spell|}}
-{{spell-card spell=spell}}
+  {{spell-card spell=spell}}
 {{/each}}
 
 
