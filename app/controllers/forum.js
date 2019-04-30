@@ -11,6 +11,17 @@ export default Controller.extend(AuthenticatedController, {
     }.property('model.hidden'),
     
     actions: {
+      catchup: function() {
+        let api = this.get('gameApi');
+        api.requestOne('forumCatchup')
+        .then( (response) => {
+            if (response.error) {
+                return;
+            }
+            this.send('reloadModel');
+            this.get('flashMessages').success('All topics marked as read!');
+        });
+      },
       hideCategory: function(category, option) { 
         let api = this.get('gameApi');
         api.requestOne('forumHide', { hide: option, category_id: category.id })

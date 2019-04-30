@@ -1,30 +1,43 @@
 {{title model.plot.title}}
 <h1>Edit Plot - {{model.plot.title}}</h1>
 
-    <p>
-        <label for="title" class="col-xs-2 col-form-label">Title:</label>
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="title" class="col-form-label">Title:</label>
+    </div>
+    <div class="col-sm-9">
+        {{input type="text" size=25 id="title" enter="save" value=model.plot.title}}
+    </div>
+  </div>
 
-        <p>{{input type="text" size=25 id="title" enter="save" value=model.plot.title}}</p>
-    </p>
-
-    <p>
-        <label for="storyteller" class="col-xs-2 col-form-label">Storyteller:</label>
-
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="storyteller" class="col-form-label">Storyteller:</label>
+    </div>
+    <div class="col-sm-9">
         {{#power-select selected=model.plot.storyteller options=model.characters searchField="name" onchange=(action "storytellerChanged") as |char|}}
           {{char.name}}
         {{/power-select}}
+    </div>
+  </div>
 
-    </p>
-
-    <p>
-        <label for="summary" class="col-xs-2 col-form-label">Summary:</label>
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="summary" class="col-form-label">Summary:</label>
+    </div>
+    <div class="col-sm-9">
         {{markdown-editor text=model.plot.summary}}
-    </p>
+    </div>
+  </div>
 
-    <p>
-        <label for="description" class="col-xs-2 col-form-label">Events:</label>
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="description" class="col-form-label">Events:</label>
+    </div>
+    <div class="col-sm-9">
         {{markdown-editor text=model.plot.description}}
-    </p>
+    </div>
+  </div>
 
 
         <p> {{#link-to 'plot' model.plot.id class="btn btn-default"}}Cancel{{/link-to}}

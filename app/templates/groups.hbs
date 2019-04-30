@@ -1,0 +1,27 @@
+{{title 'Groups'}}
+<h1>Groups</h1>
+
+{{#each-in model.group_options as |key group| }}
+
+<h2>{{group.name}}</h2>
+
+<p>{{{ansi-format text=group.desc}}}</p>
+
+{{#if group.freeform}}
+<i>Freeform group.  No specific values.</i>
+{{else}}
+<ul>
+  {{#each group.values as |v| }}
+  <li>{{v.value}} 
+    {{#if v.desc}}
+    - {{v.desc}}
+    {{/if}}
+    </li>
+  {{/each}}
+</ul>
+{{/if}}
+
+{{/each-in}}
+
+
+{{outlet}}

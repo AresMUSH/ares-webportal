@@ -69,6 +69,8 @@ export default Controller.extend({
             this.set('selectedChannel', channel);
             let channelKey = channel.toLowerCase();
             this.set(`model.channels.${channelKey}.new_messages`, null);
+            let self = this;
+            setTimeout(() => self.scrollChatWindow(), 150, self);
         },
         
         joinChannel: function(channelName) {
