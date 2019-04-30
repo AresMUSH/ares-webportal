@@ -1,0 +1,39 @@
+{{title model.title}}
+<h1>{{model.title}}</h1>
+
+<div class="ansi">
+
+<p><center>[ {{#link-to 'schools' 'air'}}Air{{/link-to}} | {{#link-to 'schools' 'corpus'}}Corpus{{/link-to}} | {{#link-to 'schools' 'earth'}}Earth{{/link-to}} | {{#link-to 'schools' 'fire'}}Fire{{/link-to}} | {{#link-to 'schools' 'nature'}}Nature{{/link-to}} | {{#link-to 'schools' 'spirit'}}Spirit{{/link-to}} | {{#link-to 'schools' 'water'}}Water{{/link-to}} | {{#link-to 'schools' 'will'}}Will{{/link-to}} ]</center></p>
+
+
+
+<p></p>
+
+
+<div class="clear"></div>
+
+<h2 style="padding-top:0px; margin-top:0px;">All Spells</h2>
+
+<ul class="nav nav-tabs">
+  {{#each-in model.spells as |group spells|}}
+    <li ><a data-toggle="tab" href="#{{group}}">Level {{group}}</a></li>
+  {{/each-in}}
+</ul>
+
+<div class="tab-content">
+  {{#each-in model.spells as |group spells|}}
+  <div id="{{group}}" class="tab-pane fade in {{group}}">
+
+    {{#each spells as |spell|}}
+
+      {{spell-card spell=spell}}
+
+    {{/each}}
+  </div>
+  {{/each-in}}
+</div>
+
+
+
+</div>
+<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
