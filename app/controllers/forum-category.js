@@ -23,6 +23,18 @@ export default Controller.extend(AuthenticatedController, {
                     this.get('flashMessages').warning('No more unread messages.');                    
                 }
             });
+        },
+
+        catchup: function() {
+          let api = this.get('gameApi');
+          api.requestOne('forumCatchup', { category_id: this.get('model.id') })
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              this.send('reloadModel');
+              this.get('flashMessages').success('All topics marked as read!');
+          });
         }
     }
 });

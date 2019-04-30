@@ -29,7 +29,7 @@ export default Controller.extend({
     let jobMessage = splitMsg[1];
     let found = false;
     
-    this.get('model.jobs').forEach((j, i) => {
+    this.get('model.jobs').forEach((j) => {
       if (j.id === jobId) {
         j.set(`unread`, true);
         found = true;

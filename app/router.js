@@ -48,6 +48,7 @@ Router.map(function() {
   this.route('fs3combat-gear-detail', { path: '/fs3combat/gear/:type/:name' })
   this.route('fs3skills-abilities', { path: '/fs3skills/abilities' });
   this.route('game-edit');
+  this.route('groups');
   this.route('help');
   this.route('help-topic', { path: '/help/:topic' });
   this.route('jobs');
