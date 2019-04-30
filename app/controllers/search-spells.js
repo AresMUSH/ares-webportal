@@ -9,8 +9,8 @@ export default Controller.extend({
   searchSchool: '',
   searchEffect: '',
   searchDesc: '',
-  searchAvailable: '',
-  searchPotion: '',
+  searchAvailable: true,
+  searchPotion: false,
   searchResults: null,
 
   resetOnExit: function() {
@@ -19,8 +19,8 @@ export default Controller.extend({
     this.set('searchSchool', '');
     this.set('searchEffect', '');
     this.set('searchDesc', '');
-    this.set('searchAvailable', '');
-    this.set('searchPotion', '');
+    this.set('searchAvailable', false);
+    this.set('searchPotion', false);
     this.set('searchResults', null);
   },
 
@@ -45,6 +45,7 @@ export default Controller.extend({
           this.get('flashMessages').error("Oops!  Something went wrong when the website talked to the game.  Please try again and alert staff is the problem persists.");
           return;
         }
+
         this.set('searchResults', response);
       });
     }
