@@ -10,7 +10,11 @@
     <img src="http://spiritlakemu.com/game/uploads/theme_images/multitargeticon.png" width="35px" title="Multiple targets">
   {{/if}}</span>
 
-  <span style="float:right; clear: both;"><b>Cost:</b> {{spell.xp}} XP</span>
+  <span style="float:right; clear: both;"><b>Cost:</b> {{spell.xp}} XP<br>
+    {{#if spell.effect}}
+      <i>{{spell.effect}}</i>
+    {{/if}}
+  </span>
 
   <h3 style="margin:0px;">{{spell.name}}</h3>
   <b><i>{{spell.school}}</i></b><br>
