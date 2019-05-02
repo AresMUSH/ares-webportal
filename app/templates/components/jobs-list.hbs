@@ -3,6 +3,7 @@
 <tbody>
     <tr>
         <th>Title</th>
+        <th>Date</th>
         <th>Category</th>
         <th>Status</th>
         <th>Submitter</th>
@@ -15,6 +16,9 @@
         {{/if}}
 
         {{#link-to 'job' job.id}}#{{job.id}} - {{job.title}}{{/link-to}}
+    </td>
+    <td>
+      {{job.short_created}}
     </td>
     <td>
         <span class="label label-info job-category job-category-{{job.category}}">{{job.category}}</span>
