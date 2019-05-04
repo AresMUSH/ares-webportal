@@ -2,10 +2,49 @@
 <h1>Chat</h1>
 
 <div class="row">
+  <div class="col col-xs-3">
+    {{#each model.pages as |group| }}
+      <button {{action 'selectPageGroup' group}} 
+         class="btn btn-default chat-button {{if (eq group.title selectedPageGroup.title) 'chat-button-active' ''}}">{{group.title}}
+      <span class="label label-pill label-primary">{{group.new_messages}}</span>
+      </button>
+    <br/>
+    {{/each}}
+  </div>
+    
+  <div class="col col-xs-9">
+    {{#if selectedPageGroup}}
+   
+      <b>{{selectedPageGroup.title}}</b> <a href="#" {{action "scrollDownPages"}}><i class="fas fa-chevron-circle-down">
+      {{#bs-tooltip placement="left"}}Scroll to bottom.{{/bs-tooltip}}
+    
+      </i></a>
+    
+    
+      <div id="page-window">
+      {{#each selectedPageGroup.pages as |p|}}
+          <div class="timestamp-tip">{{p.timestamp}}</div>
+          {{{ansi-format text=p.message}}}
+      {{/each}}
+      </div>
+      
+    {{else}}
+    
+      <div id="page-window">
+        <div class="alert alert-warning">Select a conversation.</div>
+      </div>
+    
+    {{/if}}
+  </div>
+</div>
+
+<hr/>
+
+<div class="row">
   
 <div class="col col-xs-3">
-  
-  {{#each-in model.channels as |key channel|}}
+    
+  {{#each-in model.chat.channels as |key channel|}}
 
   {{#if channel.allowed}}
       {{#if channel.enabled}}
@@ -31,7 +70,7 @@
 
         <span class="btn btn-default chat-button" href="#" role="button">Add Channel <span class="caret"></span></span> </a>
         <ul class="dropdown-menu">
-          {{#each-in model.channels as |key channel|}}
+          {{#each-in model.chat.channels as |key channel|}}
             {{#if channel.allowed}}
               {{#if (not channel.enabled)}}
                 <li><a href="#" {{action 'joinChannel' channel.name}}>{{channel.name}}</a></li>
@@ -78,7 +117,7 @@
   {{/if}}
 
 
-  {{#each-in model.channels as |key channel|}}
+  {{#each-in model.chat.channels as |key channel|}}
 
   {{#if (eq channel.name selectedChannel)}}
 
@@ -88,9 +127,9 @@
           {{/if}}
 
 
-    {{#if scrollPaused}}
-       <span class="label label-warning">Scrolling is paused!</span>
-    {{/if}}
+          {{#if scrollPaused}}
+          <span class="label label-warning">Scrolling is paused!</span>
+          {{/if}}
     
           <div id="chat-window">
           {{#each channel.messages as |message|}}
@@ -100,9 +139,9 @@
           </div>
 
 
-    {{#if scrollPaused}}
-       <span class="label label-warning">Scrolling is paused!</span>
-    {{/if}}
+          {{#if scrollPaused}}
+          <span class="label label-warning">Scrolling is paused!</span>
+          {{/if}}
     
           {{cmd-box value=chatMessage class="chat-box" cols="80" rows="6" onEnter=(action "send") }}
 
@@ -128,7 +167,7 @@
 
 <div class="row">
 
-  {{#each-in model.channels as |key channel|}}
+  {{#each-in model.chat.channels as |key channel|}}
 
   {{#if (eq channel.name selectedChannel)}}
 

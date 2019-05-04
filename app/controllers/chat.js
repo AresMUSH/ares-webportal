@@ -14,14 +14,14 @@ export default Controller.extend({
         let channelKey = splitMsg[0];
         let newMessage = splitMsg[1];
 
-        let messages = this.get(`model.channels.${channelKey}.messages`);
+        let messages = this.get(`model.chat.channels.${channelKey}.messages`);
         messages.pushObject({message: newMessage, timestamp: timestamp });
         if (channelKey === this.get('selectedChannel').toLowerCase()) {
             this.scrollChatWindow();
         }
         else {
-            let messageCount = this.get(`model.channels.${channelKey}.new_messages`) || 0;
-            this.set(`model.channels.${channelKey}.new_messages`, messageCount + 1);
+            let messageCount = this.get(`model.chat.channels.${channelKey}.new_messages`) || 0;
+            this.set(`model.chat.channels.${channelKey}.new_messages`, messageCount + 1);
         }
         // No browser notifications because it's too spammy.
         this.get('gameSocket').highlightFavicon();
@@ -38,7 +38,21 @@ export default Controller.extend({
         if (chatWindow) {
             $('#chat-window').stop().animate({
                 scrollTop: chatWindow.scrollHeight
-            }, 800);    
+            }, 400);    
+        }  
+      }
+      catch(error) {
+        // This happens sometimes when transitioning away from screen.
+      }   
+    },
+    
+    scrollPageWindow: function() {      
+      try {
+        let pageWindow = $('#page-window')[0];
+        if (pageWindow) {
+            $('#page-window').stop().animate({
+                scrollTop: pageWindow.scrollHeight
+            }, 400);    
         }  
       }
       catch(error) {
@@ -65,10 +79,14 @@ export default Controller.extend({
             this.scrollChatWindow();
         },
         
+        scrollDownPages: function() {
+            this.scrollPageWindow();
+        },
+        
         changeChannel: function(channel) {
             this.set('selectedChannel', channel);
             let channelKey = channel.toLowerCase();
-            this.set(`model.channels.${channelKey}.new_messages`, null);
+            this.set(`model.chat.channels.${channelKey}.new_messages`, null);
             let self = this;
             setTimeout(() => self.scrollChatWindow(), 150, self);
         },
@@ -123,6 +141,11 @@ export default Controller.extend({
                     return;
                 }
             });
+        },
+        
+        selectPageGroup: function(group) {
+          this.set('selectedPageGroup', group);
+          this.scrollPageWindow();
         },
 
         pauseScroll() {
