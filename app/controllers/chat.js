@@ -45,8 +45,11 @@ export default Controller.extend({
             let messageCount = channel.new_messages || 0;
             Ember.set(channel, 'new_messages', messageCount + 1);
         }
-        // No browser notifications because it's too spammy.
+        // No browser notifications for channels because it's too spammy.
         this.get('gameSocket').highlightFavicon();
+        if (channel.is_page) {
+          this.get('gameSocket').notify(`New conversation activity in ${channelTitle}.`);
+        }
     },
     
     addPageChannel: function(key, title) {
@@ -150,6 +153,11 @@ export default Controller.extend({
             });
         },
         
+        newConversation: function() {
+          this.set('selectedChannel', null);
+          this.set('newConversation', true);
+        },
+        
         send: function() {
             let api = this.get('gameApi');
             let channelName = this.get('selectedChannel.key');
@@ -191,8 +199,8 @@ export default Controller.extend({
               if (response.error) {
                   return;
               }
-              let channel = this.addPageChannel(response.thread, `${names}`);              
-              this.changeChannel(channel);
+              let channel = this.getChannel(response.thread);              
+              this.send('changeChannel', channel);
           });
         },
 

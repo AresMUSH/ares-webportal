@@ -7,22 +7,22 @@
 <div class="col col-xs-3">
     
   {{#each channelsByActivity as |channel|}}
-{{#if channel.allowed}}
+    {{#if channel.allowed}}
       {{#if channel.enabled}}
-
-
         <button {{action 'changeChannel' channel}} 
-           class="btn btn-default chat-button {{if (eq channel.key selectedChannel.key) 'chat-button-active' ''}}">{{channel.title}}
-        {{#if channel.muted}}
-            <i class="fa fa-microphone-slash"></i>
-        {{/if}}
-        <span class="label label-pill label-primary">{{channel.new_messages}}</span>
-        </button>
+           class="btn btn-default chat-button {{if (eq channel.key selectedChannel.key) 'chat-button-active' ''}}">
+           {{#if channel.is_page}}
+           &lt;PM&gt;
+           {{/if}}
+           {{channel.title}}
+          {{#if channel.muted}}
+              <i class="fa fa-microphone-slash"></i>
+          {{/if}}
+          <span class="label label-pill label-primary">{{channel.new_messages}}</span>
+          </button>
       <br/>
       {{/if}}
-
-  {{/if}}
-
+    {{/if}}
   {{/each}}
 
     <ul class="nav chat-nav">
@@ -41,7 +41,7 @@
         </ul>
       </li>
       <li>
-        <span class="btn btn-default chat-button" role="button" {{action (mut newConversation) true}}>New Conversation</span>
+        <span class="btn btn-default chat-button" role="button" {{action 'newConversation'}}>New Conversation</span>
       </li>
   </ul>
   
@@ -51,32 +51,46 @@
 
   {{#if selectedChannel}}
 
-  <b>{{selectedChannel.title}}</b> <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down">
-    {{#bs-tooltip placement="left"}}Scroll to bottom.{{/bs-tooltip}}
+    <b>{{selectedChannel.title}}</b> <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down">
+      {{#bs-tooltip placement="left"}}Scroll to bottom.{{/bs-tooltip}}
     
-  </i></a>
+    </i></a>
 
   
-  {{#if scrollPaused}}
-          <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
-            {{#bs-tooltip placement="left"}}Resume scrolling.{{/bs-tooltip}}
-          </i></a>
-  {{else}}
-          <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause">
-            {{#bs-tooltip placement="left"}}Pause scrolling.{{/bs-tooltip}}
-          </i></a>
-  {{/if}}
-  
+    {{#if scrollPaused}}
+            <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
+              {{#bs-tooltip placement="left"}}Resume scrolling.{{/bs-tooltip}}
+            </i></a>
+    {{else}}
+            <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause">
+              {{#bs-tooltip placement="left"}}Pause scrolling.{{/bs-tooltip}}
+            </i></a>
+    {{/if}}
         
         
+  {{else if newConversation}}
+
+    <div id="chat-window">
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <b>To:</b>{{#power-select-multiple selected=newConversationList options=model.characters searchField="name" onchange=(action "conversationListChanged") as |char|}}
+            {{char.name}}
+          {{/power-select-multiple}}
+      
+          {{cmd-box value=chatMessage class="chat-box" cols="80" rows="6" onEnter=(action "startConversation") }}
+      
+          <button class="btn-primary btn" {{action "startConversation"}}>Send Message</button>
+      </div>
+    </div>
   {{else}}
 
 
+    <div id="chat-window">
+    </div>
 
-  <div id="chat-window">
-  </div>
-
-  <div class="alert alert-warning">Select a channel.</div>
+    <div class="alert alert-warning">Select a channel.</div>
         
   {{/if}}
 
@@ -122,6 +136,8 @@
           </div>
         
       {{/if}}
+      
+      
   {{/if}}
 
   {{/each}}
@@ -172,14 +188,6 @@
   {{/each}}
 </div>
 
-{{#if newConversation}}
-    <b>To:</b>{{#power-select-multiple selected=newConversationList options=model.characters searchField="name" onchange=(action "conversationListChanged") as |char|}}
-        {{char.name}}
-      {{/power-select-multiple}}
-      
-      {{cmd-box value=chatMessage class="chat-box" cols="80" rows="6" onEnter=(action "startConversation") }}
-      
-{{/if}}
 
 {{flash-messages}}
 {{outlet}}
