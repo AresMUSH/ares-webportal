@@ -1,29 +1,29 @@
 {{title 'Chat'}}
 <h1>Chat</h1>
 
+
 <div class="row">
   
 <div class="col col-xs-3">
-  
-  {{#each-in model.channels as |key channel|}}
-
-  {{#if channel.allowed}}
+    
+  {{#each channelsByActivity as |channel|}}
+    {{#if channel.allowed}}
       {{#if channel.enabled}}
-      
-
-        <button {{action 'changeChannel' channel.name}} 
-           class="btn btn-default chat-button {{if (eq channel.name selectedChannel) 'chat-button-active' ''}}">{{channel.name}}        
-        {{#if channel.muted}}
-            <i class="fa fa-microphone-slash"></i>
-        {{/if}}
-        <span class="label label-pill label-primary">{{channel.new_messages}}</span>
-        </button>
+        <button {{action 'changeChannel' channel}} 
+           class="btn btn-default chat-button {{if (eq channel.key selectedChannel.key) 'chat-button-active' ''}}">
+           {{#if channel.is_page}}
+           &lt;PM&gt;
+           {{/if}}
+           {{channel.title}}
+          {{#if channel.muted}}
+              <i class="fa fa-microphone-slash"></i>
+          {{/if}}
+          <span class="label label-pill label-primary">{{channel.new_messages}}</span>
+          </button>
       <br/>
       {{/if}}
-
-  {{/if}}
-
-  {{/each-in}}
+    {{/if}}
+  {{/each}}
 
     <ul class="nav chat-nav">
       <li class="dropdown">
@@ -31,14 +31,17 @@
 
         <span class="btn btn-default chat-button" href="#" role="button">Add Channel <span class="caret"></span></span> </a>
         <ul class="dropdown-menu">
-          {{#each-in model.channels as |key channel|}}
+          {{#each model.chat as |channel|}}
             {{#if channel.allowed}}
               {{#if (not channel.enabled)}}
-                <li><a href="#" {{action 'joinChannel' channel.name}}>{{channel.name}}</a></li>
+                <li><a href="#" {{action 'joinChannel' channel.title}}>{{channel.title}}</a></li>
               {{/if}}
             {{/if}}
-        {{/each-in}}
+        {{/each}}
         </ul>
+      </li>
+      <li>
+        <span class="btn btn-default chat-button" role="button" {{action 'newConversation'}}>New Conversation</span>
       </li>
   </ul>
   
@@ -48,39 +51,53 @@
 
   {{#if selectedChannel}}
 
-  <b>{{selectedChannel}}</b> <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down">
-    {{#bs-tooltip placement="left"}}Scroll to bottom.{{/bs-tooltip}}
+    <b>{{selectedChannel.title}}</b> <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down">
+      {{#bs-tooltip placement="left"}}Scroll to bottom.{{/bs-tooltip}}
     
-  </i></a>
+    </i></a>
 
   
-  {{#if scrollPaused}}
-          <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
-            {{#bs-tooltip placement="left"}}Resume scrolling.{{/bs-tooltip}}
-          </i></a>
+    {{#if scrollPaused}}
+            <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
+              {{#bs-tooltip placement="left"}}Resume scrolling.{{/bs-tooltip}}
+            </i></a>
+    {{else}}
+            <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause">
+              {{#bs-tooltip placement="left"}}Pause scrolling.{{/bs-tooltip}}
+            </i></a>
+    {{/if}}
+        
+        
+  {{else if newConversation}}
+
+    <div id="chat-window">
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <b>To:</b>{{#power-select-multiple selected=newConversationList options=model.characters searchField="name" onchange=(action "conversationListChanged") as |char|}}
+            {{char.name}}
+          {{/power-select-multiple}}
+      
+          {{cmd-box value=chatMessage class="chat-box" cols="80" rows="6" onEnter=(action "startConversation") }}
+      
+          <button class="btn-primary btn" {{action "startConversation"}}>Send Message</button>
+      </div>
+    </div>
   {{else}}
-          <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause">
-            {{#bs-tooltip placement="left"}}Pause scrolling.{{/bs-tooltip}}
-          </i></a>
-  {{/if}}
-  
-        
-        
-  {{else}}
 
 
+    <div id="chat-window">
+    </div>
 
-  <div id="chat-window">
-  </div>
-
-  <div class="alert alert-warning">Select a channel.</div>
+    <div class="alert alert-warning">Select a channel.</div>
         
   {{/if}}
 
 
-  {{#each-in model.channels as |key channel|}}
+  {{#each model.chat as |channel|}}
 
-  {{#if (eq channel.name selectedChannel)}}
+  {{#if (eq channel.key selectedChannel.key)}}
 
       {{#if channel.enabled}}
           {{#if channel.muted}}
@@ -88,9 +105,9 @@
           {{/if}}
 
 
-    {{#if scrollPaused}}
-       <span class="label label-warning">Scrolling is paused!</span>
-    {{/if}}
+          {{#if scrollPaused}}
+          <span class="label label-warning">Scrolling is paused!</span>
+          {{/if}}
     
           <div id="chat-window">
           {{#each channel.messages as |message|}}
@@ -100,9 +117,9 @@
           </div>
 
 
-    {{#if scrollPaused}}
-       <span class="label label-warning">Scrolling is paused!</span>
-    {{/if}}
+          {{#if scrollPaused}}
+          <span class="label label-warning">Scrolling is paused!</span>
+          {{/if}}
     
           {{cmd-box value=chatMessage class="chat-box" cols="80" rows="6" onEnter=(action "send") }}
 
@@ -115,40 +132,44 @@
           <div class="alert alert-warning">
               <p>You are not on this channel.</p>
               <br/>
-              <button class="btn btn-default" {{action "joinChannel" channel.name}}>Join Channel</button>
+              <button class="btn btn-default" {{action "joinChannel" channel.key}}>Join Channel</button>
           </div>
         
       {{/if}}
+      
+      
   {{/if}}
 
-  {{/each-in}}
+  {{/each}}
 
 </div>
 </div>
 
 <div class="row">
 
-  {{#each-in model.channels as |key channel|}}
+  {{#each model.chat as |channel|}}
 
-  {{#if (eq channel.name selectedChannel)}}
+  {{#if (eq channel.key selectedChannel.key)}}
 
       {{#if channel.enabled}}
             
           <div class="pull-right">
+            {{#if (not channel.is_page)}}
               <button class="btn-warning btn" {{action "leaveChannel"}}>Leave Channel</button>
               {{#if channel.muted}}
               <button class="btn-default btn" {{action "muteChannel" false}}>Unmute Channel</button>
               {{else}}
               <button class="btn-default btn" {{action "muteChannel" true}}>Mute Channel</button>
               {{/if}}
-              <button class="btn-primary btn" {{action "send"}}>Send to {{channel.name}}</button>
+            {{/if}}
+              <button class="btn-primary btn" {{action "send"}}>Send Message</button>
           </div>
     
       <div class="clearfix"></div>
     
           <div class="panel panel-default">
             <div class="panel-body">
-              <h4>Who's On {{selectedChannel}}</h4>
+              <h4>Who's On {{channel.title}}</h4>
 
               <div class="icon-row">
               {{#each channel.who as |who|}}
@@ -164,8 +185,9 @@
       {{/if}}
   {{/if}}
 
-  {{/each-in}}
+  {{/each}}
 </div>
+
 
 {{flash-messages}}
 {{outlet}}

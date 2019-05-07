@@ -58,7 +58,7 @@
     "bootstrap": "^4.0.0",
     "ember-browserify": "^1.2.1",
     "express": "^4.16.2",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "jquery-ui": "^1.12.1",
     "js-yaml": "^3.10.0"
   }
