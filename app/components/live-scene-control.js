@@ -21,8 +21,7 @@ export default Component.extend(AuthenticatedController, {
   scenePoses: function() {
       return this.get('scene.poses').map(p => Ember.Object.create(p));  
   }.property('scene.poses.@each.pose'),
-  
-    
+      
     actions: { 
       locationSelected(loc) {
           this.set('newLocation', loc);  

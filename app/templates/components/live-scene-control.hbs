@@ -1,4 +1,4 @@
-  <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
+<a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
  &nbsp; 
   {{#if scrollPaused}}
           <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
@@ -137,10 +137,12 @@
             {{else}}
               {{p.name}}
             {{/if}}
-            <span class="hint">({{p.time}})</span>
+            <span class="hint">({{time-diff time=p.time}})</span>
             {{/each}}
            </div> 
           {{/if}}
+          
+          
         
       {{else}}
            <p>You must be approved to join a scene.</p>

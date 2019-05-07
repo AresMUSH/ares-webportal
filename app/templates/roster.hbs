@@ -5,7 +5,7 @@
     
 
 
-{{#each model as |group|}}
+{{#each model.roster as |group|}}
 <h2>{{group.name}}</h2>
 
 <div class="table-responsive">
@@ -13,8 +13,9 @@
     <thead>
         <th>Character</th>
         <th>Summary</th>
-        <th>Position</th>
-        <th>Age</th>
+        {{#each model.titles as |title|}}
+        <th>{{title}}</th>
+        {{/each}}
         <th>Contact</th>
         <th>Special Notes</th>
     </thead>
@@ -34,13 +35,10 @@
               {{{ansi-format text=char.roster_notes}}}
          </td>
          
-         <td>
-             {{char.groups.position}}
-         </td>
+         {{#each-in char.fields as |field value| }}
+         <td>{{value}}</td>
+         {{/each-in}}
          
-         <td>
-            {{char.demographics.age}}
-         </td>
          
          <td>
             {{char.contact}}
