@@ -40,6 +40,9 @@ export default Controller.extend({
         Ember.set(channel, 'last_activity', Date.now());
         if (channelKey === this.get('selectedChannel.key')) {
             this.scrollChatWindow();
+            if (channel.is_page) {
+              this.markPageThreadRead(channel.key);
+            }
         }
         else {
             let messageCount = channel.new_messages || 0;
@@ -95,6 +98,16 @@ export default Controller.extend({
       return this.get('model.chat').find(c => c.key === channelKey);
     },
     
+    markPageThreadRead: function(threadId) {
+      let api = this.get('gameApi');
+      api.requestOne('markPageThreadRead', { thread_id: threadId }, null)
+      .then( (response) => {
+          if (response.error) {
+              return;
+          }
+      }); 
+    },
+    
     actions: {
         scrollDown: function() {
             this.scrollChatWindow();
@@ -107,8 +120,13 @@ export default Controller.extend({
         changeChannel: function(channel) {
             this.set('selectedChannel', channel);
             Ember.set(channel, 'new_messages', null);
+            Ember.set(channel, 'is_unread', false);
+            if (this.get('selectedChannel.is_page'))  {
+              this.markPageThreadRead(channel.key);
+            } 
             let self = this;
             setTimeout(() => self.scrollChatWindow(), 150, self);
+            
         },
         
         conversationListChanged(newList) {
