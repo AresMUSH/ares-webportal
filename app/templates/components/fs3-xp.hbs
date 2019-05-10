@@ -1,0 +1,20 @@
+<p><b>Experience Points Available:</b> {{char.fs3.xp.xp_points}}</p>
+
+{{fs3-xplist category="Attributes" abilities=char.fs3.xp.attributes xp=char.fs3.xp.xp_points learnAbility=(action "learnAbility")}}
+
+<hr/>
+
+{{fs3-xplist category="Action Skills" abilities=char.fs3.xp.action_skills xp=char.fs3.xp.xp_points learnAbility=(action "learnAbility")}}
+
+<hr/>
+
+{{fs3-xplist category="Background Skills" abilities=char.fs3.xp.backgrounds xp=char.fs3.xp.xp_points learnAbility=(action "learnAbility")}}
+
+<hr/>
+
+{{fs3-xplist category="Language Skills" abilities=char.fs3.xp.languages xp=char.fs3.xp.xp_points learnAbility=(action "learnAbility")}}
+
+{{#if char.fs3.use_advantages}}
+<hr/>
+{{fs3-xplist category="Advantages" abilities=char.fs3.xp.advantages xp=char.fs3.xp.xp_points learnAbility=(action "learnAbility")}}
+{{/if}}
