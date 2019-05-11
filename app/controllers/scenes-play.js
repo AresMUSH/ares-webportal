@@ -63,7 +63,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         try {
           $('#live-scene-log').stop().animate({
               scrollTop: $('#live-scene-log')[0].scrollHeight
-          }, 800); 
+          }, 400); 
         }
         catch(error) {
           // This happens sometimes when transitioning away from screen.
@@ -95,6 +95,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
               if (s.id === id) {
                   s.set('is_unread', false);
                   this.set('currentScene', s);
+                  let self = this;
+                  setTimeout(() => self.scrollSceneWindow(), 150, self);
               }
           });   
         }

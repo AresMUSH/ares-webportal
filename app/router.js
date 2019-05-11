@@ -76,6 +76,7 @@ Router.map(function() {
   this.route('recent-changes');
   this.route('register');
   this.route('roster');
+  this.route('routes');
   this.route('scenes');
   this.route('scenes-live');
   this.route('scenes-play');

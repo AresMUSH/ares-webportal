@@ -1,8 +1,9 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
+import AvailableRoutes from 'ares-webportal/mixins/available-routes';
 
-export default Controller.extend(AuthenticatedController, {
+export default Controller.extend(AuthenticatedController, AvailableRoutes, {
     session: service('session'),
     gameSocket: service(),
     hideSidebar: false,
@@ -43,5 +44,33 @@ export default Controller.extend(AuthenticatedController, {
     
     sidebar: function() {
         return this.get('model');
-    }.property('refreshSidebar')
+    }.property('refreshSidebar'),
+
+    topNavbar: function() {
+      let config = this.get('model.top_navbar');
+      let nav = [];
+      let availableRoutes = this.availableRoutes();
+      
+      config.forEach(n => {
+        let menuOK = true;
+        let error = "";
+        n.menu.forEach(m => {
+          let page = m.page;
+          if (page && !availableRoutes.includes(page)) {
+            error = page;
+            console.log(`Bad route in menu: ${page}`);
+            menuOK = false;
+          }
+        })
+        if (menuOK) {
+          nav.push(n); 
+        } else {
+          nav.push({ title: `ERROR: ${error}` });
+        }
+      });
+      
+      return nav;
+      
+    }.property('model')
+    
 });

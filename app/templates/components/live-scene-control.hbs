@@ -1,4 +1,4 @@
-  <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
+<a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
  &nbsp; 
   {{#if scrollPaused}}
           <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
@@ -130,17 +130,10 @@
           
             {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
             
-           <div class="scene-pose-order">
-            <label>Pose Order:</label> {{#each scene.pose_order as |p|}}
-            {{#if (eq p.name playerName)}}
-              <span class="your-pose-order">{{p.name}}</span>
-            {{else}}
-              {{p.name}}
-            {{/if}}
-            <span class="hint">({{p.time}})</span>
-            {{/each}}
-           </div> 
+            {{pose-order poseOrder=scene.pose_order playerName=playerName}}
           {{/if}}
+          
+          
         
       {{else}}
            <p>You must be approved to join a scene.</p>
@@ -160,6 +153,7 @@
 
                       {{#if scene.can_edit}}
                       <li>{{#link-to 'scene-edit' scene.id}}Edit Scene{{/link-to}}</li>
+                      <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
                       {{/if}}
                     
                       {{#if isApproved}}
@@ -169,7 +163,6 @@
                         <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
                         {{/if}}
                     
-                        <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
                         <li><a href="#" {{action 'cookies'}}>Give Cookies</a></li>
                      
                          <li role="separator" class="divider"></li>

@@ -71,6 +71,8 @@
      <div class="tab-content">
        <div role="tabpanel" class="tab-pane active" id="demographics">
                  
+           <p class="cg-tip">{{{ansi-format text=model.cgInfo.demographics_blurb}}}</p>
+
                  <div class="form-group row">
                      <div class="col-sm-3">
                              <b>Full Name</b> 
@@ -106,6 +108,7 @@
           
           <div role="tabpanel" class="tab-pane" id="groups">
                   
+              <p class="cg-tip">{{{ansi-format text=model.cgInfo.groups_blurb}}}</p>
                                     
                   
                   {{#each-in model.char.groups as |key group|}}

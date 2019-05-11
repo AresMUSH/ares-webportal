@@ -25,7 +25,7 @@
             </div>
             
             <div class="col col-xs-12 col-sm-8 ansi">
-                <b>{{ship.name}}</b>
+                <b>{{#link-to 'char' ship.name}}{{ship.name}}{{/link-to}}</b>
                 {{{ansi-format text=ship.text}}}
             </div>
         </div>
