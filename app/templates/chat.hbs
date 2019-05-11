@@ -18,7 +18,11 @@
           {{#if channel.muted}}
               <i class="fa fa-microphone-slash"></i>
           {{/if}}
-          <span class="label label-pill label-primary">{{channel.new_messages}}</span>
+          {{#if (and channel.is_page channel.is_unread)}}
+            <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+          {{else}}
+            <span class="label label-pill label-primary">{{channel.new_messages}}</span>
+          {{/if}}
           </button>
       <br/>
       {{/if}}

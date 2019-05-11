@@ -20,6 +20,9 @@
      {{#if char.fs3.show_sheet}}
       <li><a data-toggle="tab" href="#systemsheet">Sheet</a></li>
       {{/if}}
+      {{#if char.fs3.xp}}
+      <li><a data-toggle="tab" href="#systemxp">XP</a></li>
+      {{/if}}
   {{/if}}
   
   {{#if (not game.disabled_plugins.fs3combat)}}
@@ -73,9 +76,16 @@
   {{/if}}
   
   {{#if (not game.disabled_plugins.fs3skills)}}
-  <div id="systemsheet" class="tab-pane fade">
-    {{fs3-sheet char=char}}
-  </div>
+    {{#if char.fs3.show_sheet}}
+      <div id="systemsheet" class="tab-pane fade">
+        {{fs3-sheet char=char}}
+      </div>
+     {{/if}}
+     {{#if char.fs3.xp}}
+      <div id="systemxp" class="tab-pane fade">
+        {{fs3-xp char=char abilityLearned=(action 'abilityLearned')}}
+      </div>
+     {{/if}}
   {{/if}}
   
   {{#if (not game.disabled_plugins.fs3combat)}}  

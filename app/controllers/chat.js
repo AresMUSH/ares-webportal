@@ -40,6 +40,9 @@ export default Controller.extend({
         Ember.set(channel, 'last_activity', Date.now());
         if (channelKey === this.get('selectedChannel.key')) {
             this.scrollChatWindow();
+            if (channel.is_page) {
+              this.markPageThreadRead(channel.key);
+            }
         }
         else {
             let messageCount = channel.new_messages || 0;
@@ -95,6 +98,16 @@ export default Controller.extend({
       return this.get('model.chat').find(c => c.key === channelKey);
     },
     
+    markPageThreadRead: function(threadId) {
+      let api = this.get('gameApi');
+      api.requestOne('markPageThreadRead', { thread_id: threadId }, null)
+      .then( (response) => {
+          if (response.error) {
+              return;
+          }
+      }); 
+    },
+    
     actions: {
         scrollDown: function() {
             this.scrollChatWindow();
@@ -107,8 +120,13 @@ export default Controller.extend({
         changeChannel: function(channel) {
             this.set('selectedChannel', channel);
             Ember.set(channel, 'new_messages', null);
+            Ember.set(channel, 'is_unread', false);
+            if (this.get('selectedChannel.is_page'))  {
+              this.markPageThreadRead(channel.key);
+            } 
             let self = this;
             setTimeout(() => self.scrollChatWindow(), 150, self);
+            
         },
         
         conversationListChanged(newList) {
@@ -129,9 +147,9 @@ export default Controller.extend({
         
         leaveChannel: function() {
             let api = this.get('gameApi');
-            let channelName = this.get('selectedChannel.key');
+            let channelKey = this.get('selectedChannel.key');
                         
-            api.requestOne('leaveChannel', { channel: channelName }, null)
+            api.requestOne('leaveChannel', { channel: channelKey }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -142,9 +160,9 @@ export default Controller.extend({
         
         muteChannel: function(mute) {
             let api = this.get('gameApi');
-            let channelName = this.get('selectedChannel.key');
+            let channelKey = this.get('selectedChannel.key');
                         
-            api.requestOne('muteChannel', { channel: channelName, mute: mute }, null)
+            api.requestOne('muteChannel', { channel: channelKey, mute: mute }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -160,19 +178,19 @@ export default Controller.extend({
         
         send: function() {
             let api = this.get('gameApi');
-            let channelName = this.get('selectedChannel.key');
+            let channelKey = this.get('selectedChannel.key');
             let message = this.get('chatMessage');
             this.set(`chatMessage`, '');
                       
             if (this.get('selectedChannel.is_page'))  {
-              api.requestOne('sendPage', { thread: channelName, message: message }, null)
+              api.requestOne('sendPage', { thread_id: channelKey, message: message }, null)
               .then( (response) => {
                   if (response.error) {
                       return;
                   }
               }); 
             } else {
-              api.requestOne('chatTalk', { channel: channelName, message: message }, null)
+              api.requestOne('chatTalk', { channel: channelKey, message: message }, null)
               .then( (response) => {
                   if (response.error) {
                       return;
