@@ -1,0 +1,47 @@
+<p><b>{{category}}</b></p>
+<table>
+  <tr>
+    <th>Ability</th>
+    <th>Progress</th>
+    <th>Points</th>
+    <th>Learn Again</th>
+    <th></th>
+  </tr>
+
+{{#each abilities as |ability| }}
+  <tr>
+    <td>
+    {{ability.name}}
+    </td>
+    {{#if ability.can_raise}}
+    <td>
+    <div class="progress xp-progress">
+      {{progress-bar currentValue=ability.xp maxValue=ability.xp_needed bgColor="bg-success"}}
+    </div>
+    </td>
+    <td class="text-center">
+      {{ability.xp}} / {{ability.xp_needed}}
+    </td>
+    <td>
+      {{#if (eq ability.days_to_learn 0)}}
+        {{#if (gt xp 0)}}
+        <a href="#" class="btn btn-default" {{action 'learnAbility' ability}} >Learn</a>
+        {{else}}
+        Out of XP
+        {{/if}}
+      {{else}}
+      in {{ability.days_to_learn}} days
+      {{/if}}
+    </td>
+    {{else}}
+    <td>
+    At Max
+    </td>
+    <td>&nbsp;</td>
+    {{/if}}
+    
+    
+  </tr>
+{{/each}}
+</table>
+

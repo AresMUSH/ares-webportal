@@ -25,7 +25,10 @@
     <br/>{{model.game.scene_count}} scene(s) are in progress.
 
   {{#if model.game.unread_scenes_count}}
-  <br/><span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span> New activity in your scenes!
+  <br/><span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span> New activity in your {{#link-to 'scenes-live'}}scenes{{/link-to}}!
+  {{/if}}
+  {{#if model.unread_pages}}
+  <br/><span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span> New {{#link-to 'chat'}}private messages{{/link-to}}!
   {{/if}}
   </p>
 
