@@ -13,7 +13,7 @@
 <div class="clear"></div>
 
 <h2 style="padding-top:0px; margin-top:0px;">All Spells</h2>
-
+{{#link-to 'search-spells' class="btn btn-default"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}
 <ul class="nav nav-tabs">
   {{#each-in model.spells as |group spells|}}
     <li ><a data-toggle="tab" href="#{{group}}">Level {{group}}</a></li>
