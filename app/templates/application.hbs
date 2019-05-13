@@ -40,9 +40,7 @@
                </div>
            </div>
        </div>
-
-
-        {{global-navbar model=model isAdmin=isAdmin isCoder=isCoder isAuthenticated=isAuthenticated currentUser=currentUser currentRoute=currentRoute}}
+        {{global-navbar topNavbar=topNavbar model=model isAdmin=isAdmin isCoder=isCoder isAuthenticated=isAuthenticated currentUser=currentUser currentRoute=currentRoute}}
     </div>
 
 
@@ -61,11 +59,11 @@
          {{#if hideSidebar}}
              <div class="col-md-12 body-container {{if model.left_sidebar 'right-body' 'left-body'}}">
                {{flash-messages}}
-               
+
                {{#if (not socketConnected)}}
                  <div class="alert alert-warning">The website is not receiving live updates from the game.  Try reloading the page.</div>
                {{/if}}
-               
+
                {{outlet}}
              </div>
          {{else}}

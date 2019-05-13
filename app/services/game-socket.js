@@ -201,7 +201,7 @@ export default Service.extend({
                 var job_count = job_badge.text() || '0';
                 job_count = parseInt( job_count );
                 job_badge.text(job_count + 1);
-                
+
                 if (this.get('jobsCallback')) {
                     this.get('jobsCallback')(data.args.message);
                 }
@@ -213,9 +213,11 @@ export default Service.extend({
                 }
                 notify = false;
             }
-            else if (notification_type == "job_update") {
-                var badge = $('#jobBadge');
-                badge.text(parseInt(badge.text()) + 1);
+            else if (notification_type == "new_page") {
+                if (this.get('chatCallback')) {
+                    this.get('chatCallback')(data.args.message, data.args.timestamp);
+                }
+                notify = false;
             }
             else if (notification_type == "new_scene_activity") {
                 if (this.get('sceneCallback')) {

@@ -173,7 +173,7 @@
 <div class="inline-response">
 <h3>Add Reply</h3>
 
-    {{#if model.job.is_job_admin}}
+    {{#if model.job.is_category_admin}}
         Respond to Admin Only? {{input type='checkbox' checked=replyAdminOnly}}
     {{/if}}
         {{markdown-editor text=reply}}
