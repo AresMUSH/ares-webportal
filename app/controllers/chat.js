@@ -47,12 +47,14 @@ export default Controller.extend({
         else {
             let messageCount = channel.new_messages || 0;
             Ember.set(channel, 'new_messages', messageCount + 1);
+
+            if (channel.is_page) {
+              this.get('gameSocket').notify(`New conversation activity in ${channelTitle}.`);
+            }
+
         }
         // No browser notifications for channels because it's too spammy.
         this.get('gameSocket').highlightFavicon();
-        if (channel.is_page) {
-          this.get('gameSocket').notify(`New conversation activity in ${channelTitle}.`);
-        }
     },
     
     addPageChannel: function(key, title) {
