@@ -1,5 +1,5 @@
-{{title model.name}}
-<h1>Edit {{model.name}} Portal</h1>
+{{title model.portal.name}}
+<h1>Edit {{model.portal.name}} Portal</h1>
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#general">General</a></li>
@@ -19,14 +19,16 @@
           </div>
 
           <div class="col-sm-9">
-            {{input type="text" size=25 value=model.name}}
+            {{input type="text" size=25 value=model.portal.name}}
           </div>
           <div class="col-sm-3">
             <b>GMs</b>
           </div>
 
           <div class="col-sm-9">
-            {{input type="text" size=25 value=model.gms}}
+            {{#power-select-multiple selected=model.portal.gms options=model.characters searchField="name" onchange=(action "gmsChanged") as |char|}}
+              {{char.name}}
+            {{/power-select-multiple}}
           </div>
 
           <div class="col-sm-3">
@@ -34,7 +36,7 @@
           </div>
 
           <div class="col-sm-9">
-            {{input type="text" size=25 value=model.location}}
+            {{input type="text" size=25 value=model.portal.location}}
           </div>
 
           <div class="col-sm-3">
@@ -42,7 +44,7 @@
           </div>
 
           <div class="col-sm-9">
-            {{input type="text" size=25 value=model.primary_school}}
+            {{input type="text" size=25 value=model.portal.primary_school}}
           </div>
 
           <div class="col-sm-3">
@@ -50,21 +52,21 @@
           </div>
 
           <div class="col-sm-9">
-            {{input type="text" size=25 value=model.all_schools}}
+            {{input type="text" size=25 value=model.portal.all_schools}}
           </div>
         </div>
       </div>
 
       <div id="desc" class="tab-pane fade in">
         <b>Description</b>
-        {{markdown-editor text=model.description}}
+        {{markdown-editor text=model.portal.description}}
       </div>
 
       <div id="creatures" class="tab-pane fade in">
         <b>Creatures</b>
-        {{markdown-editor text=model.creatures}}
+        {{markdown-editor text=model.portal.creatures}}
         <b>Important Figures</b>
-        {{markdown-editor text=model.npcs}}
+        {{markdown-editor text=model.portal.npcs}}
       </div>
 
 
@@ -72,10 +74,10 @@
 
       <div id="events" class="tab-pane fade in">
         <b>Trivia</b>
-        {{markdown-editor text=model.trivia}}
+        {{markdown-editor text=model.portal.trivia}}
 
         <b>Events</b>
-        {{markdown-editor text=model.events}}
+        {{markdown-editor text=model.portal.events}}
       </div>
 
     </div>
@@ -87,7 +89,7 @@
         <div class="col col-xs-12">
             <div class="pull-right">
 
-                <p> {{#link-to 'portal' model.name class="btn btn-default"}}Cancel{{/link-to}}
+                <p> {{#link-to 'portal' model.portal.name class="btn btn-default"}}Cancel{{/link-to}}
                     <button class="btn btn-primary" {{action 'save'}} >Save</button>
                 </p>
 
