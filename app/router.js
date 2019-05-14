@@ -72,6 +72,7 @@ Router.map(function() {
   this.route('plot', { path: '/plot/:id' });
   this.route('plot-edit', { path: '/plot/:id/edit' });
   this.route('plot-create', { path: '/plot/create' });
+  this.route('portal', { path: '/portals/:portal' });
   this.route('plugins-edit');
   this.route('recent-changes');
   this.route('register');

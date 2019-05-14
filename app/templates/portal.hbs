@@ -1,0 +1,35 @@
+{{title model.name}}
+<h1>{{model.name}} Portal</h1>
+
+<p><b>GMs:</b>  {{#each model.gms as |gm|}}
+{{#link-to 'char' gm}}{{gm}}{{/link-to}}
+{{/each}} </p>
+<p><b>Location:</b> {{model.location}}</p>
+<p><b>Primary School:</b> {{model.primary_school}}</p>
+<p><b>All Schools:</b>
+{{#each model.all_schools as |school|}}
+{{#link-to 'schools' school}}{{school}}{{/link-to}}
+{{/each}}
+  </p>
+
+<p><h2>Desc:</h2> {{model.description}}</p>
+
+<p><h2>Important Figures:</h2>
+  <ul>
+  {{#each model.npcs as |npc|}}
+    <li>{{#link-to 'char' npc}}{{npc}}{{/link-to}}</li>
+  {{/each}}
+  </ul></p>
+
+
+<h2>Creatures:</h2>
+<p>
+  <ul>
+  {{#each model.creatures as |creature|}}
+    <li>{{creature}}</li>
+  {{/each}}
+  </ul></p>
+
+
+<p><h2>Trivia:</h2> {{model.trivia}}</p>
+<p><h2>Events:</h2> {{model.events}}</p>
