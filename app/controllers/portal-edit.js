@@ -6,9 +6,10 @@ export default Controller.extend({
     gameApi: service(),
 
     actions: {
-        save: function() {
+        save() {
             let api = this.get('gameApi');
-            api.requestOne('portalEdit', { id: this.get('model.portal.id'),
+            api.requestOne('portalEdit', {
+               id: this.get('model.portal.id'),
                name: this.get('model.portal.name'),
                gms: this.get('model.portal.gms'),
                location: this.get('model.portal.portal'),
@@ -24,7 +25,7 @@ export default Controller.extend({
                     return;
                 }
                 this.transitionToRoute('portal',
-                          this.get('model.portal.id'));
+                this.get('model.portal.id'));
                 this.get('flashMessages').success('Portal updated!');
             });
         }
