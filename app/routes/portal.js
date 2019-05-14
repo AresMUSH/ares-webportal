@@ -7,6 +7,6 @@ export default Route.extend(DefaultRoute, {
 
     model: function(params) {
         let api = this.get('gameApi');
-        return api.requestOne('portal', { portal: params['portal']  });
+        return api.requestOne('portal', { id: params['id']  });
     }
 });
