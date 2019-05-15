@@ -9,6 +9,12 @@ export default Controller.extend({
         gmsChanged(new_gms) {
           this.set('model.portal.gms', new_gms);
         },
+        allschoolsChanged(new_schools) {
+          this.set('model.portal.all_schools', new_schools);
+        },
+        primaryschoolChanged(new_school) {
+          this.set('model.portal.primary_school', new_school);
+        },
         save() {
             let api = this.get('gameApi');
             api.requestOne('portalEdit', {
@@ -16,13 +22,13 @@ export default Controller.extend({
                name: this.get('model.portal.name'),
                gms: (this.get('model.portal.gms') || []).map(gm => gm.name),
                location: this.get('model.portal.location'),
-               primary_school: this.get('model.portal.primary_school'),
-               all_schools: this.get('model.portal.all_schools'),
-               description: this.get('model.portal.description'),
-               creatures: this.get('model.portal.creatures'),
-               npcs: this.get('model.portal.npcs'),
-               trivia: this.get('model.portal.trivia'),
-               events: this.get('model.portal.events')}, null)
+               primary_school: this.get('model.portal.primary_school').name,
+               all_schools: (this.get('model.portal.all_schools') || []).map(s => s.name),
+               description: this.get('model.portal.edit_desc'),
+               creatures: this.get('model.portal.edit_creatures'),
+               npcs: this.get('model.portal.edit_npcs'),
+               trivia: this.get('model.portal.edit_trivia'),
+               events: this.get('model.portal.edit_events')}, null)
             .then( (response) => {
                 if (response.error) {
                     return;

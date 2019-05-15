@@ -44,7 +44,9 @@
           </div>
 
           <div class="col-sm-9">
-            {{input type="text" size=25 value=model.portal.primary_school}}
+            {{#power-select selected=model.portal.primary_school options=model.schools   onchange=(action "primaryschoolChanged") as |school|}}
+              {{school.name}}
+            {{/power-select}}
           </div>
 
           <div class="col-sm-3">
@@ -52,21 +54,27 @@
           </div>
 
           <div class="col-sm-9">
-            {{input type="text" size=25 value=model.portal.all_schools}}
+
+
+            {{#power-select-multiple selected=model.portal.all_schools options=model.schools   searchField="name" onchange=(action "allschoolsChanged") as |school|}}
+              {{school.name}}
+            {{/power-select-multiple}}
+
+
           </div>
         </div>
       </div>
 
       <div id="desc" class="tab-pane fade in">
         <b>Description</b>
-        {{markdown-editor text=model.portal.description}}
+        {{markdown-editor text=model.portal.edit_desc}}
       </div>
 
       <div id="creatures" class="tab-pane fade in">
         <b>Creatures</b>
-        {{markdown-editor text=model.portal.creatures}}
+        {{markdown-editor text=model.portal.edit_creatures}}
         <b>Important Figures</b>
-        {{markdown-editor text=model.portal.npcs}}
+        {{markdown-editor text=model.portal.edit_npcs}}
       </div>
 
 
@@ -74,10 +82,10 @@
 
       <div id="events" class="tab-pane fade in">
         <b>Trivia</b>
-        {{markdown-editor text=model.portal.trivia}}
+        {{markdown-editor text=model.portal.edit_trivia}}
 
         <b>Events</b>
-        {{markdown-editor text=model.portal.events}}
+        {{markdown-editor text=model.portal.edit_events}}
       </div>
 
     </div>
@@ -89,7 +97,7 @@
         <div class="col col-xs-12">
             <div class="pull-right">
 
-                <p> {{#link-to 'portal' model.portal.name class="btn btn-default"}}Cancel{{/link-to}}
+                <p> {{#link-to 'portal' model.portal.id class="btn btn-default"}}Cancel{{/link-to}}
                     <button class="btn btn-primary" {{action 'save'}} >Save</button>
                 </p>
 
