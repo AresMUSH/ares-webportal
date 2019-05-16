@@ -1,0 +1,55 @@
+{{title model.name}}
+<h1>{{model.name}}</h1>
+
+<div class="ansi">
+  <div class="portal-card">
+    <div class="portal-card-heading">
+      {{model.name}}
+    </div>
+    <div class="portal-card-body">
+      <b>GMs:</b>  {{#each model.gms as |gm|}}
+      {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
+      {{/each}} <br>
+      <!-- {{#if model.portals}}<b>Found:</b> {{#each model.portals as |portal|}}
+      <b>{{model.sapient}}</b>
+      {{#link-to 'portal' portal.id}}{{portal.name}} {{/link-to}} -->
+      <!-- {{/each}}<br>  {{/if}} -->
+      {{#if model.major_school}}<b>Major School:</b> {{#link-to 'schools' model.major_school.name}}{{model.major_school.name}}{{/link-to}}<br>{{/if}}
+      {{model.sapient}}
+      {{#if model.minor_school}}<b>Minor School:</b>
+      {{#link-to 'schools' model.minor_school.name}}{{model.minor_school.name}}{{/link-to}}{{/if}}
+      {{#if model.found}}<b>Found:</b>
+      {{model.found}}{{/if}}
+      {{#if model.language}}<b>Language:</b>
+      {{model.language}}{{/if}}
+
+    </div>
+  </div>
+
+  {{#if model.pinterest}}
+
+    <div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="{{model.pinterest}}"></a></div>
+  {{/if}}
+
+  {{#if model.traits}}
+    <h2>Traits & Description</h2>
+    {{{ansi-format text=model.traits}}}
+  {{/if}}
+
+  {{#if model.society}}
+    <h2>Society</h2>
+    {{{ansi-format text=model.society}}}
+  {{/if}}
+
+  {{#if model.magical_abilities}}
+    <h2>Magical Abilities & Spells</h2>
+    {{{ansi-format text=model.magical_abilities}}}
+  {{/if}}
+
+  {{#if model.events}}
+    <p><h2>Events</h2>
+    {{{ansi-format text=model.events}}}</p>
+  {{/if}}
+  </div>
+  <div class="pull-right">{{#link-to 'creature-edit' model.id class="btn btn-default"}}Edit{{/link-to}}</div>
+  <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
