@@ -18,6 +18,7 @@
     </div>
   </div>
   {{#if model.pinterest}}
+  
     <div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="{{model.pinterest}}"></a></div>
   {{/if}}
 
@@ -47,3 +48,4 @@
   {{/if}}
 </div>
 <div class="pull-right">{{#link-to 'portal-edit' model.id class="btn btn-default"}}Edit{{/link-to}}</div>
+<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
