@@ -41,12 +41,10 @@ export default Controller.extend({
         save() {
             let api = this.get('gameApi');
             api.requestOne('creatureCreate', {
-               id: this.get('model.creature.id'),
-               name: this.get('name'),
+              name: this.get('name'),
                gms: (this.get('model.creature.gms') || []).map(gm => gm.name),
-               // portals: this.get('model.creature.portals'),
-               major_school: this.get('model.creature.major_school').name,
-               minor_school: this.get('model.creature.minor_school').name,
+               major_school: this.get('model.creature.major_school.name'),
+               minor_school: this.get('model.creature.minor_school.name'),
                sapient: this.get('isSapient'),
                pinterest: this.get('model.creature.pinterest'),
                found: this.get('model.creature.found'),
@@ -59,7 +57,7 @@ export default Controller.extend({
                     return;
                 }
                 this.transitionToRoute('creature',
-                this.get('model.creature.id'));
+                response.id);
                 this.get('flashMessages').success('Creature created!');
             });
         }
