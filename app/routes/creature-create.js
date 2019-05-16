@@ -13,8 +13,6 @@ export default Route.extend(AuthenticatedRoute, {
            characters: api.requestMany('characters', { select: 'include_staff' }),
            schools: api.requestMany('getSchools'),
            creature:  Ember.Object.create({
-               gms: model.characters.find(c => c.id == this.get('session.data.authenticated.id')),
-               privacy: 'Private',
                sapient: false})
          })
          .then((model) => Ember.Object.create(model));
