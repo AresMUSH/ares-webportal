@@ -54,7 +54,7 @@
           </div>
 
           <div class="col-sm-9">
-            {{#power-select-multiple selected=model.portal.all_schools options=model.schools   searchField="name" onchange=(action "allschoolsChanged") as |school|}}
+            {{#power-select-multiple selected=model.portal.all_schools options=model.schools placeholder="A portal can have to 5 schools of magic total"  searchField="name" onchange=(action "allschoolsChanged") as |school|}}
               {{school.name}}
             {{/power-select-multiple}}
           </div>
