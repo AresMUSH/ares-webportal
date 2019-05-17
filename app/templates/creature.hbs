@@ -22,9 +22,9 @@
     </div>
 
     <div class="infobox-body">
-      <b>GMs:</b>  {{#each model.gms as |gm|}}
+      {{#if model.gms}}<b>GMs:</b>  {{#each model.gms as |gm|}}
       {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
-      {{/each}} <br>
+      {{/each}} <br>{{/if}}
       <!-- {{#if model.portals}}<b>Found:</b> {{#each model.portals as |portal|}}
       <b>{{model.sapient}}</b>
       {{#link-to 'portal' portal.id}}{{portal.name}} {{/link-to}} -->
