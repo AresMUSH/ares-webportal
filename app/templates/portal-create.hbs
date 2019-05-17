@@ -1,7 +1,7 @@
 {{title model.portal.name}}
 
-TESTING
-<h1>Edit {{model.portal.name}} Portal</h1>
+
+<h1>Create {{model.portal.name}} Portal</h1>
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#general">General</a></li>
@@ -56,7 +56,7 @@ TESTING
           </div>
 
           <div class="col-sm-9">
-            {{#power-select-multiple selected=model.portal.all_schools options=model.schools   searchField="name" onchange=(action "allschoolsChanged") as |school|}}
+            {{#power-select-multiple selected=model.portal.all_schools placeholder="A portal can have to 5 schools of magic total" options=model.schools   searchField="name" onchange=(action "allschoolsChanged") as |school|}}
               {{school.name}}
             {{/power-select-multiple}}
           </div>
@@ -103,7 +103,7 @@ TESTING
         <div class="col col-xs-12">
             <div class="pull-right">
 
-                <p> {{#link-to 'portal' model.portal.id class="btn btn-default"}}Cancel{{/link-to}}
+                <p> {{#link-to 'portals' class="btn btn-default"}}Cancel{{/link-to}}
                     <button class="btn btn-primary" {{action 'save'}} >Save</button>
                 </p>
 

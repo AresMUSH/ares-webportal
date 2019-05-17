@@ -33,6 +33,7 @@ Router.map(function() {
   this.route('combats');
   this.route('config', { path: '/config/:file' });
   this.route('creature', { path: '/creature/:id' });
+  this.route('creatures', { path: '/creatures' });
   this.route('creature-create', { path: '/creature/create' });
   this.route('creature-edit', { path: '/creature/:id/edit' })
   this.route('error');
@@ -76,6 +77,7 @@ Router.map(function() {
   this.route('plot-edit', { path: '/plot/:id/edit' });
   this.route('plot-create', { path: '/plot/create' });
   this.route('portal', { path: '/portal/:id' });
+  this.route('portals', { path: '/portals' });
   this.route('portal-create', { path: '/portal/create' });
   this.route('portal-edit', { path: '/portal/:id/edit' });
   this.route('plugins-edit');
