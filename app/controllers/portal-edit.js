@@ -22,15 +22,14 @@ export default Controller.extend({
                name: this.get('model.portal.name'),
                gms: (this.get('model.portal.gms') || []).map(gm => gm.name),
                location: this.get('model.portal.location'),
-               primary_school: this.get('model.portal.primary_school').name,
+               primary_school: this.get('model.portal.primary_school.name'),
                all_schools: (this.get('model.portal.all_schools') || []).map(s => s.name),
                pinterest: this.get('model.portal.pinterest'),
                description: this.get('model.portal.edit_desc'),
                creatures: this.get('model.portal.edit_creatures'),
                npcs: this.get('model.portal.edit_npcs'),
                trivia: this.get('model.portal.edit_trivia'),
-               events: this.get('model.portal.edit_events'),
-               society: this.get('model.portal.edit_society')}, null)
+               events: this.get('model.portal.edit_events')}, null)
             .then( (response) => {
                 if (response.error) {
                     return;
