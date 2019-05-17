@@ -10,7 +10,6 @@ export default Controller.extend({
     gms: '',
     major_school: '',
     minor_school: '',
-    major_school: '',
     sapient: '',
     pinterest: '',
     found: '',
