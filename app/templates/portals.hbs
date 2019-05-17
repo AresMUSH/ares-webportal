@@ -1,0 +1,18 @@
+{{title 'Portals'}}
+<h1>Portals</h1>
+
+<div class="pull-right">
+  {{#link-to 'portal-create' class="btn btn-primary"}}Create Portal{{/link-to}}
+</div>
+
+<div class="clearfix"/>
+
+  <ul>
+    {{#each model as |portal|}}
+        <li>{{#link-to 'portal' portal.id}}{{portal.name}}{{/link-to}}</li>
+    {{/each}}
+  </ul>
+
+
+
+{{outlet}}
