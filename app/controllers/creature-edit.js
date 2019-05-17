@@ -34,6 +34,7 @@ export default Controller.extend({
                sapient: this.get('isSapient'),
                pinterest: this.get('model.creature.pinterest'),
                found: this.get('model.creature.found'),
+               language: this.get('model.creature.language'),
                traits: this.get('model.creature.edit_traits'),
                society: this.get('model.creature.edit_society'),
                magical_abilities: this.get('model.creature.edit_magical_abilities'),

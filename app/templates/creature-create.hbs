@@ -62,12 +62,13 @@
           </div>
 
           <div class="col-sm-3">
-            <b>Pinterest URL</b>
+            <b>Language:</b>
           </div>
 
           <div class="col-sm-9">
-            {{input type="text" size=25 value=model.creature.pinterest}}
+            {{input type="text" size=25 value=model.creature.language}}
           </div>
+
 
           <div class="col-sm-3">
             <b>Found:</b>
@@ -79,9 +80,15 @@
 
           <div class="col col-xs-3">
                 <p><label>Sapient?</label>
-
                 {{input type="checkbox"  id="sapient"  checked=isSapient}}</p>
+          </div>
 
+          <div class="col-sm-3">
+            <b>Pinterest URL</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{input type="text" size=25 value=model.creature.pinterest}}
           </div>
 
         </div>
