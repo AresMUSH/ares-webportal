@@ -5,7 +5,7 @@
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#general">General</a></li>
-        <li><a data-toggle="tab" href="#desc">Description</a></li>
+        <li><a data-toggle="tab" href="#desc">Description & Society</a></li>
         <li><a data-toggle="tab" href="#creatures">Creatures & NPCs</a></li>
         <li><a data-toggle="tab" href="#events">Trivia & Events</a></li>
     </ul>
@@ -17,7 +17,7 @@
       <div id="general" class="tab-pane fade in active">
         <div class="form-group row">
           <div class="col-sm-3">
-            <b>Name</b>
+            <b>Name*</b>
           </div>
 
           <div class="col-sm-9">
@@ -42,7 +42,7 @@
           </div>
 
           <div class="col-sm-3">
-            <b>Primary School</b>
+            <b>Primary School*</b>
           </div>
 
           <div class="col-sm-9">
@@ -74,6 +74,9 @@
       <div id="desc" class="tab-pane fade in">
         <b>Description</b>
         {{markdown-editor text=model.portal.edit_desc}}
+
+        <b>Society</b>
+        {{markdown-editor text=model.portal.edit_society}}
       </div>
 
       <div id="creatures" class="tab-pane fade in">

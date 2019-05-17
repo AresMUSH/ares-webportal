@@ -14,8 +14,8 @@
       {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
       {{/each}} <br> {{/if}}
       {{#if model.location}}<b>Location:</b> {{model.location}}<br>  {{/if}}
-      {{#if model.primary_school}}<b>Dominant School:</b>
-      {{#link-to 'schools' model.primary_school.name}}
+      {{#if model.primary_school}}
+        <b>Dominant School:</b> {{#link-to 'schools' model.primary_school.name}}
       {{model.primary_school.name}}
       {{/link-to}}
       <br>{{/if}}

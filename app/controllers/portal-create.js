@@ -18,6 +18,7 @@ export default Controller.extend({
     npcs: '',
     trivia: '',
     events: '',
+    society: '',
 
 
     actions: {
@@ -44,7 +45,8 @@ export default Controller.extend({
                creatures: this.get('model.portal.edit_creatures'),
                npcs: this.get('model.portal.edit_npcs'),
                trivia: this.get('model.portal.edit_trivia'),
-               events: this.get('model.portal.edit_events')}, null)
+               events: this.get('model.portal.edit_events'),
+               society: this.get('model.portal.edit_society')}, null)
             .then( (response) => {
                 if (response.error) {
                     return;
