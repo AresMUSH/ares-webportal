@@ -19,14 +19,15 @@
           </div>
 
           <div class="col-sm-9">
-            {{input type="text" size=25 text=model.creature.name}}
+            {{input type="text" size=25 enter="save"  value=model.creature.name}}
           </div>
+
           <div class="col-sm-3">
             <b>GMs</b>
           </div>
 
           <div class="col-sm-9">
-            {{#power-select-multiple  options=model.characters searchField="name" onchange=(action "gmsChanged") as |char|}}
+            {{#power-select-multiple  selected=model.creature.gms options=model.characters searchField="name" onchange=(action "gmsChanged") as |char|}}
               {{char.name}}
             {{/power-select-multiple}}
           </div>
@@ -36,15 +37,16 @@
           </div>
 
           <div class="col-sm-9">
-            {{input type="text" size=25 text=model.portal.location}}
+            {{input type="text" size=25 value=model.portal.location}}
           </div> -->
+
 
           <div class="col-sm-3">
             <b>Major School</b>
           </div>
 
           <div class="col-sm-9">
-            {{#power-select  options=model.schools   onchange=(action "majorschoolChanged") as |school|}}
+            {{#power-select  selected=model.creature.major_school options=model.schools   onchange=(action "majorschoolChanged") as |school|}}
               {{school.name}}
             {{/power-select}}
           </div>
@@ -54,7 +56,7 @@
           </div>
 
           <div class="col-sm-9">
-            {{#power-select  options=model.schools   onchange=(action "minorschoolChanged") as |school|}}
+            {{#power-select  selected=model.creature.minor_school options=model.schools   onchange=(action "minorschoolChanged") as |school|}}
               {{school.name}}
             {{/power-select}}
           </div>
@@ -64,7 +66,7 @@
           </div>
 
           <div class="col-sm-9">
-            {{input type="text" size=25 text=model.creature.pinterest}}
+            {{input type="text" size=25 value=model.creature.pinterest}}
           </div>
 
           <div class="col-sm-3">
@@ -72,7 +74,7 @@
           </div>
 
           <div class="col-sm-9">
-            {{input type="text" size=25 text=model.creature.found}}
+            {{input type="text" size=25 value=model.creature.found}}
           </div>
 
           <div class="col col-xs-3">

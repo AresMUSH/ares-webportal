@@ -41,14 +41,14 @@ export default Controller.extend({
         save() {
             let api = this.get('gameApi');
             api.requestOne('creatureCreate', {
-              name: this.get('name'),
+              name: this.get('model.creature.name'),
                gms: (this.get('model.creature.gms') || []).map(gm => gm.name),
                major_school: this.get('model.creature.major_school.name'),
                minor_school: this.get('model.creature.minor_school.name'),
                sapient: this.get('isSapient'),
                pinterest: this.get('model.creature.pinterest'),
                found: this.get('model.creature.found'),
-               traits: this.get('model.creature.edit_traits'),
+
                society: this.get('model.creature.edit_society'),
                magical_abilities: this.get('model.creature.edit_magical_abilities'),
                events: this.get('model.creature.edit_events')}, null)

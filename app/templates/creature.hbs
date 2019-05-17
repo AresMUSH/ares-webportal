@@ -2,11 +2,26 @@
 <h1>{{model.name}}</h1>
 
 <div class="ansi">
-  <div class="portal-card">
-    <div class="portal-card-heading">
-      {{model.name}}
+  <div class="infobox">
+    <div class="infobox-heading">
+      <div class="infobox-title-text">
+        {{model.name}}
+        <div class="infobox-majorschool">
+          {{#if model.major_school}}{{#link-to 'schools' model.major_school.name}}{{model.major_school.name}}{{/link-to}}{{/if}}
+        </div>
+
+        <div class="infobox-subtitle">
+          {{model.sapient}}
+          <div class="infobox-minorschool">
+            {{#if model.minor_school}}
+            {{#link-to 'schools' model.minor_school.name}}{{model.minor_school.name}}{{/link-to}}{{/if}}
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div class="portal-card-body">
+
+    <div class="infobox-body">
       <b>GMs:</b>  {{#each model.gms as |gm|}}
       {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
       {{/each}} <br>
@@ -14,10 +29,9 @@
       <b>{{model.sapient}}</b>
       {{#link-to 'portal' portal.id}}{{portal.name}} {{/link-to}} -->
       <!-- {{/each}}<br>  {{/if}} -->
-      {{#if model.major_school}}<b>Major School:</b> {{#link-to 'schools' model.major_school.name}}{{model.major_school.name}}{{/link-to}}<br>{{/if}}
-      {{model.sapient}}
-      {{#if model.minor_school}}<b>Minor School:</b>
-      {{#link-to 'schools' model.minor_school.name}}{{model.minor_school.name}}{{/link-to}}{{/if}}
+
+
+
       {{#if model.found}}<b>Found:</b>
       {{model.found}}{{/if}}
       {{#if model.language}}<b>Language:</b>
