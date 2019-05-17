@@ -2,25 +2,31 @@
 <h1>{{model.name}} Portal</h1>
 
 <div class="ansi">
+  {{#if model.pinterest}}
+
+    <div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="{{model.pinterest}}"></a></div>
+  {{/if}}
 
   <div class="portal-card">
     <div class="portal-card-heading">{{model.name}} </div>
     <div class="portal-card-body">
-      <b>GMs:</b>  {{#each model.gms as |gm|}}
+      {{#if model.gms}}<b>GMs:</b>  {{#each model.gms as |gm|}}
       {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
-      {{/each}} <br>
+      {{/each}} <br> {{/if}}
       {{#if model.location}}<b>Location:</b> {{model.location}}<br>  {{/if}}
-      <b>Dominant School:</b> {{#link-to 'schools' model.primary_school.name}}{{model.primary_school.name}}{{/link-to}}<br>
-      <b>All Schools:</b>
-      {{#each model.all_schools as |school|}}
-      {{#link-to 'schools' school.name}}{{school.name}}{{/link-to}}
-      {{/each}}
+      {{#if model.primary_school}}<b>Dominant School:</b>
+      {{#link-to 'schools' model.primary_school.name}}
+      {{model.primary_school.name}}
+      {{/link-to}}
+      <br>{{/if}}
+      {{#if model.all_schools}}<b>All Schools:</b>
+        {{#each model.all_schools as |school|}}
+          {{#link-to 'schools' school.name}}{{school.name}}{{/link-to}}
+        {{/each}}
+      {{/if}}
     </div>
   </div>
-  {{#if model.pinterest}}
-  
-    <div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="{{model.pinterest}}"></a></div>
-  {{/if}}
+
 
   {{#if model.description}}
     <h2>Description</h2>
@@ -47,5 +53,9 @@
     {{{ansi-format text=model.events}}}</p>
   {{/if}}
 </div>
-<div class="pull-right">{{#link-to 'portal-edit' model.id class="btn btn-default"}}Edit{{/link-to}}</div>
+
+<div class="pull-right">
+  {{#link-to 'portals' class="btn btn-default"}}All Portals{{/link-to}}
+  {{#link-to 'portal-edit' model.id class="btn btn-default"}}Edit{{/link-to}}
+</div>
 <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
