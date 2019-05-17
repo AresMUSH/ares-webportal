@@ -1,0 +1,114 @@
+{{title model.portal.name}}
+<h1>Edit {{model.portal.name}} Portal</h1>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#general">General</a></li>
+        <li><a data-toggle="tab" href="#desc">Description</a></li>
+        <li><a data-toggle="tab" href="#creatures">Creatures & NPCs</a></li>
+        <li><a data-toggle="tab" href="#events">Trivia & Events</a></li>
+    </ul>
+
+
+
+    <div class="tab-content">
+
+      <div id="general" class="tab-pane fade in active">
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <b>Name</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{input type="text" size=25 value=model.portal.name}}
+          </div>
+          <div class="col-sm-3">
+            <b>GMs</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{#power-select-multiple selected=model.portal.gms options=model.characters searchField="name" onchange=(action "gmsChanged") as |char|}}
+              {{char.name}}
+            {{/power-select-multiple}}
+          </div>
+
+          <div class="col-sm-3">
+            <b>Location</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{input type="text" size=25 value=model.portal.location}}
+          </div>
+
+          <div class="col-sm-3">
+            <b>Primary School</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{#power-select selected=model.portal.primary_school options=model.schools   onchange=(action "primaryschoolChanged") as |school|}}
+              {{school.name}}
+            {{/power-select}}
+          </div>
+
+          <div class="col-sm-3">
+            <b>All Schools</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{#power-select-multiple selected=model.portal.all_schools options=model.schools placeholder="A portal can have to 5 schools of magic total"  searchField="name" onchange=(action "allschoolsChanged") as |school|}}
+              {{school.name}}
+            {{/power-select-multiple}}
+          </div>
+
+          <div class="col-sm-3">
+            <b>Pinterest URL</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{input type="text" size=25 value=model.portal.pinterest}}
+          </div>
+        </div>
+      </div>
+
+      <div id="desc" class="tab-pane fade in">
+        <b>Description</b>
+        {{markdown-editor text=model.portal.edit_desc}}
+      </div>
+
+      <div id="creatures" class="tab-pane fade in">
+        <b>Creatures</b>
+        {{markdown-editor text=model.portal.edit_creatures}}
+        <b>Important Figures</b>
+        {{markdown-editor text=model.portal.edit_npcs}}
+      </div>
+
+
+
+
+      <div id="events" class="tab-pane fade in">
+        <b>Trivia</b>
+        {{markdown-editor text=model.portal.edit_trivia}}
+
+        <b>Events</b>
+        {{markdown-editor text=model.portal.edit_events}}
+      </div>
+
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+
+                <p> {{#link-to 'portal' model.portal.id class="btn btn-default"}}Cancel{{/link-to}}
+                    <button class="btn btn-primary" {{action 'save'}} >Save</button>
+                </p>
+
+            </div>
+        {{flash-messages}}
+        </div>
+    </div>
+
+
+{{outlet}}

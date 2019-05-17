@@ -1,0 +1,128 @@
+{{title 'Create Creature'}}
+<h1>Create Creature</h1>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#general">General</a></li>
+        <li><a data-toggle="tab" href="#traits">Traits</a></li>
+        <li><a data-toggle="tab" href="#society">Society</a></li>
+        <li><a data-toggle="tab" href="#events">Events</a></li>
+    </ul>
+
+
+
+    <div class="tab-content">
+
+      <div id="general" class="tab-pane fade in active">
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <b>Name</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{input type="text" size=25 enter="save"  value=model.creature.name}}
+          </div>
+
+          <div class="col-sm-3">
+            <b>GMs</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{#power-select-multiple  selected=model.creature.gms options=model.characters searchField="name" onchange=(action "gmsChanged") as |char|}}
+              {{char.name}}
+            {{/power-select-multiple}}
+          </div>
+
+          <!-- <div class="col-sm-3">
+            <b>Location</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{input type="text" size=25 value=model.portal.location}}
+          </div> -->
+
+
+          <div class="col-sm-3">
+            <b>Major School</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{#power-select  selected=model.creature.major_school options=model.schools   onchange=(action "majorschoolChanged") as |school|}}
+              {{school.name}}
+            {{/power-select}}
+          </div>
+
+          <div class="col-sm-3">
+            <b>Minor School</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{#power-select  selected=model.creature.minor_school options=model.schools   onchange=(action "minorschoolChanged") as |school|}}
+              {{school.name}}
+            {{/power-select}}
+          </div>
+
+          <div class="col-sm-3">
+            <b>Pinterest URL</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{input type="text" size=25 value=model.creature.pinterest}}
+          </div>
+
+          <div class="col-sm-3">
+            <b>Found:</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{input type="text" size=25 value=model.creature.found}}
+          </div>
+
+          <div class="col col-xs-3">
+                <p><label>Sapient?</label>
+
+                {{input type="checkbox"  id="sapient"  checked=isSapient}}</p>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div id="traits" class="tab-pane fade in">
+        <b>Traits & Description</b>
+        {{markdown-editor text=model.creature.edit_traits}}
+
+        <b>Magical Abilities & Spells<</b>
+        {{markdown-editor text=model.creature.edit_magical_abilities}}
+      </div>
+
+
+      <div id="society" class="tab-pane fade in">
+        <b>Society</b>
+        {{markdown-editor text=model.creature.edit_society}}
+      </div>
+
+      <div id="events" class="tab-pane fade in">
+        <b>Events</b>
+        {{markdown-editor text=model.creature.edit_events}}
+      </div>
+
+    </div>
+
+
+
+
+    <div class="row">
+      <div class="col col-xs-12">
+          <div class="pull-right">
+
+              <p> {{#link-to 'creatures' class="btn btn-default"}}Cancel{{/link-to}}
+                  <button class="btn btn-primary" {{action 'save'}} >Save</button>
+              </p>
+
+          </div>
+        {{flash-messages}}
+        </div>
+    </div>
+
+
+{{outlet}}

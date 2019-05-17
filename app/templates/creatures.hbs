@@ -1,0 +1,42 @@
+{{title 'Creatures'}}
+<h1>Creatures</h1>
+
+<div class="pull-right">
+  {{#link-to 'creature-create' class="btn btn-primary"}}Create Creature{{/link-to}}
+</div>
+
+<div class="clearfix"/>
+  <ul class="nav nav-tabs">
+      <li><a data-toggle="tab" href="#sapient">Sapient</a></li>
+      <li><a data-toggle="tab" href="#nonsapient">Non Sapient</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+
+  <div id="sapient" class="tab-pane active in 'Sapient'">
+    <ul>
+      {{#each model as |creature|}}
+        {{#if creature.sapient}}
+          <li>{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}}</li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+
+  <div id="nonsapient" class="tab-pane fade in 'Non Sapient'">
+    <ul>
+      {{#each model as |creature|}}
+        {{#unless creature.sapient}}
+          <li>{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}}</li>
+        {{/unless}}
+      {{/each}}
+    </ul>
+  </div>
+
+
+
+</div>
+
+
+{{outlet}}
