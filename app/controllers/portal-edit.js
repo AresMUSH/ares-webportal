@@ -9,6 +9,9 @@ export default Controller.extend({
         gmsChanged(new_gms) {
           this.set('model.portal.gms', new_gms);
         },
+        creaturesChanged(new_creatures) {
+          this.set('model.portal.creatures', new_creatures);
+        },
         allschoolsChanged(new_schools) {
           this.set('model.portal.all_schools', new_schools);
         },
@@ -21,12 +24,13 @@ export default Controller.extend({
                id: this.get('model.portal.id'),
                name: this.get('model.portal.name'),
                gms: (this.get('model.portal.gms') || []).map(gm => gm.name),
+               creatures: (this.get('model.portal.creatures') || []).map(creature => creature.id),
                location: this.get('model.portal.location'),
                primary_school: this.get('model.portal.primary_school.name'),
                all_schools: (this.get('model.portal.all_schools') || []).map(s => s.name),
                pinterest: this.get('model.portal.pinterest'),
                description: this.get('model.portal.edit_desc'),
-               creatures: this.get('model.portal.edit_creatures'),
+               other_creatures: this.get('model.portal.edit_other_creatures'),
                npcs: this.get('model.portal.edit_npcs'),
                trivia: this.get('model.portal.edit_trivia'),
                events: this.get('model.portal.edit_events')}, null)
