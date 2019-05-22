@@ -25,14 +25,16 @@
       {{#if model.gms}}<b>GMs:</b>  {{#each model.gms as |gm|}}
       {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
       {{/each}} <br>{{/if}}
-      <!-- {{#if model.portals}}<b>Found:</b> {{#each model.portals as |portal|}}
-      <b>{{model.sapient}}</b>
-      {{#link-to 'portal' portal.id}}{{portal.name}} {{/link-to}} -->
-      <!-- {{/each}}<br>  {{/if}} -->
+
+
+      {{#if model.portals}}<b>Portals:</b>
+      {{#each model.portals as |portal|}}
+        {{#link-to 'portal' portal.id}}{{portal.name}} {{/link-to}}
+      {{/each}}<br>  {{/if}}
 
 
 
-      {{#if model.found}}<b>Found:</b>
+      {{#if model.found}}<b>Also found:</b>
       {{model.found}}{{/if}}
       {{#if model.language}}<b>Language:</b>
       {{model.language}}{{/if}}

@@ -31,14 +31,6 @@
             {{/power-select-multiple}}
           </div>
 
-          <!-- <div class="col-sm-3">
-            <b>Location</b>
-          </div>
-
-          <div class="col-sm-9">
-            {{input type="text" size=25 value=model.portal.location}}
-          </div> -->
-
           <div class="col-sm-3">
             <b>Major School</b>
           </div>
@@ -68,7 +60,17 @@
           </div>
 
           <div class="col-sm-3">
-            <b>Found:</b>
+            <b>Portals</b>
+          </div>
+
+          <div class="col-sm-9">
+            {{#power-select-multiple selected=model.creature.portals options=model.portals searchField="name" onchange=(action "portalsChanged") as |portal|}}
+              {{portal.name}}
+            {{/power-select-multiple}}
+          </div>
+
+          <div class="col-sm-3">
+            <b>Also Found:</b>
           </div>
 
           <div class="col-sm-9">
