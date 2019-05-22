@@ -34,6 +34,28 @@
             {{/if}}
         </p>
 
+          <p>
+            {{#if model.portals}}
+            <b>Portals: </b>
+              {{#each model.portals as |portal|}}
+                <a href="/portal/{{portal.id}}">{{portal.name}}</a>
+              {{/each}}
+            {{else}}
+                None
+            {{/if}}
+        </p>
+
+          <p>
+            {{#if model.creatures}}
+            <b>Creatures: </b>
+              {{#each model.creatures as |creature|}}
+                <a href="/creature/{{creature.id}}">{{creature.name}}</a>
+              {{/each}}
+            {{else}}
+                None
+            {{/if}}
+        </p>
+
         <p><b>Scene Number:</b> {{model.id}}</p>
 
 
