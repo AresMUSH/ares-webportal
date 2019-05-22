@@ -81,7 +81,14 @@
 
       <div id="creatures" class="tab-pane fade in">
         <b>Creatures</b>
-        {{markdown-editor text=model.portal.edit_creatures}}
+        {{#power-select-multiple selected=model.portal.creatures options=model.creatures searchField="name" onchange=(action "creaturesChanged") as |creature|}}
+          {{creature.name}}
+        {{/power-select-multiple}}
+        <br><br>
+        <b>Other Creatures</b>
+        {{markdown-editor text=model.portal.edit_other_creatures}}
+
+
         <b>Important Figures</b>
         {{markdown-editor text=model.portal.edit_npcs}}
       </div>
