@@ -18,6 +18,12 @@ export default Controller.extend({
         plotChanged(newPlot) {
             this.set('model.scene.plot', newPlot);
         },
+        creaturesChanged(new_creatures) {
+          this.set('model.scene.creatures', new_creatures);
+        },
+        portalsChanged(new_portals) {
+          this.set('model.scene.portals', new_portals);
+        },
         typeChanged(newType) {
             this.set('model.scene.scene_type', newType);
         },
@@ -47,6 +53,8 @@ export default Controller.extend({
                location: this.get('model.scene.location'),
                summary: this.get('model.scene.summary'),
                plot_id: this.get('model.scene.plot.id'),
+               portals: (this.get('model.scene.portals') || []).map(portal => portal.id),
+               creatures: (this.get('model.scene.creatures') || []).map(creature => creature.id),
                completed: this.get('model.scene.completed'),
                privacy: this.get('model.scene.privacy'),
                participants: (this.get('model.scene.participants') || []).map(p => p.name),

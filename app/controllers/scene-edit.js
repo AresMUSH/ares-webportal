@@ -23,6 +23,12 @@ export default Controller.extend({
         participantsChanged(new_participants) {
             this.set('model.scene.participants', new_participants);
         },
+        creaturesChanged(new_creatures) {
+          this.set('model.scene.creatures', new_creatures);
+        },
+        portalsChanged(new_portals) {
+          this.set('model.scene.portals', new_portals);
+        },
         privacyChanged(newPrivacy) {
             this.set('model.scene.privacy', newPrivacy)
         },
@@ -41,6 +47,8 @@ export default Controller.extend({
                icdate: this.get('model.scene.icdate'),
                scene_type: this.get('model.scene.scene_type'),
                location: this.get('model.scene.location'),
+               portals: (this.get('model.scene.portals') || []).map(portal => portal.id),
+               creatures: (this.get('model.scene.creatures') || []).map(creature => creature.id),
                summary: this.get('model.scene.summary'),
                privacy: this.get('model.scene.privacy'),
                plot_id: this.get('model.scene.plot.id'),
