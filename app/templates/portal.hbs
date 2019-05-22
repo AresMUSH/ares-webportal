@@ -40,7 +40,15 @@
 
   {{#if model.creatures}}
     <h2>Creatures</h2>
-    {{{ansi-format text=model.creatures}}}
+    <ul>
+    {{#each model.creatures as |creature|}}
+      <li>{{#link-to 'creature' creature.id}}{{creature.name}} {{/link-to}}</li>
+    {{/each}}
+    </ul>
+  {{/if}}
+
+  {{#if model.other_creatures}}
+    {{{ansi-format text=model.other_creatures }}}
   {{/if}}
 
   {{#if model.trivia}}
