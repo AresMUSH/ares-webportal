@@ -11,7 +11,8 @@ export default Route.extend(AuthenticatedRoute, {
         return RSVP.hash({
            portal:  api.requestOne('portal', { id: params['id'], edit_mode: true  }),
            characters: api.requestMany('characters', { select: 'include_staff' }),
-           schools: api.requestMany('getSchools')
+           schools: api.requestMany('getSchools'),
+           creatures: api.requestMany('creatures')
          })
          .then((model) => Ember.Object.create(model));
     }

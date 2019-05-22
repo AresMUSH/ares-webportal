@@ -16,6 +16,9 @@ export default Controller.extend({
         gmsChanged(new_gms) {
           this.set('model.creature.gms', new_gms);
         },
+        portalsChanged(new_portals) {
+          this.set('model.creature.portals', new_portals);
+        },
         majorschoolChanged(new_schools) {
           this.set('model.creature.major_school', new_schools);
         },
@@ -28,9 +31,9 @@ export default Controller.extend({
                id: this.get('model.creature.id'),
                name: this.get('model.creature.name'),
                gms: (this.get('model.creature.gms') || []).map(gm => gm.name),
-               // portals: this.get('model.creature.portals'),
-               major_school: this.get('model.creature.major_school').name,
-               minor_school: this.get('model.creature.minor_school').name,
+               portals: (this.get('model.creature.portals') || []).map(portal => portal.id),
+               major_school: this.get('model.creature.major_school.name'),
+               minor_school: this.get('model.creature.minor_school.name'),
                sapient: this.get('isSapient'),
                pinterest: this.get('model.creature.pinterest'),
                found: this.get('model.creature.found'),
