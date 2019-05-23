@@ -1,25 +1,25 @@
-{{title model.name}}
-<h1>{{model.name}}</h1>
+{{title model.creature.name}}
+<h1>{{model.creature.name}}</h1>
 
 <div class="ansi">
   <div class="creature-box">
     <div class="infobox-heading">
       <div class="infobox-title-text">
-        {{model.name}}
+        {{model.creature.name}}
         <div class="infobox-majorschool">
-          {{#if model.major_school}}
-          {{#link-to 'schools' model.major_school.name}}
-          {{model.major_school.name}}
+          {{#if model.creature.major_school}}
+          {{#link-to 'schools' model.creature.major_school.name}}
+          {{model.creature.major_school.name}}
           {{/link-to}}
           {{/if}}
         </div>
 
         <div class="infobox-subtitle">
-          {{model.sapient}}
+          {{model.creature.sapient}}
           <div class="infobox-minorschool">
-            {{#if model.minor_school}}
-            {{#link-to 'schools' model.minor_school.name}}
-            {{model.minor_school.name}}
+            {{#if model.creature.minor_school}}
+            {{#link-to 'schools' model.creature.minor_school.name}}
+            {{model.creature.minor_school.name}}
             {{/link-to}}
             {{/if}}
           </div>
@@ -29,52 +29,57 @@
     </div>
 
     <div class="infobox-body">
-      {{#if model.gms}}<b>GMs:</b>  {{#each model.gms as |gm|}}
+      {{#if model.creature.gms}}<b>GMs:</b>  {{#each model.creature.gms as |gm|}}
       {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
       {{/each}} <br>{{/if}}
 
 
-      {{#if model.portals}}<b>Portals:</b>
-      {{#each model.portals as |portal|}}
+      {{#if model.creature.portals}}<b>Portals:</b>
+      {{#each model.creature.portals as |portal|}}
         {{#link-to 'portal' portal.id}}{{portal.name}} {{/link-to}}
       {{/each}}<br>  {{/if}}
 
 
 
-      {{#if model.found}}<b>Also found:</b>
-      {{model.found}}{{/if}}
-      {{#if model.language}}<b>Language:</b>
-      {{model.language}}{{/if}}
+      {{#if model.creature.found}}<b>Also found:</b>
+      {{model.creature.found}}{{/if}}
+      {{#if model.creature.language}}<b>Language:</b>
+      {{model.creature.language}}{{/if}}
 
     </div>
   </div>
 
-  {{#if model.pinterest}}
+  {{#if model.creature.pinterest}}
 
-    <div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="{{model.pinterest}}"></a></div>
+    <div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="{{model.creature.pinterest}}"></a></div>
   {{/if}}
 
-  {{#if model.traits}}
+  {{#if model.creature.traits}}
     <h2>Traits & Description</h2>
-    {{{ansi-format text=model.traits}}}
+    {{{ansi-format text=model.creature.traits}}}
   {{/if}}
 
-  {{#if model.society}}
+  {{#if model.creature.society}}
     <h2>Society</h2>
-    {{{ansi-format text=model.society}}}
+    {{{ansi-format text=model.creature.society}}}
   {{/if}}
 
-  {{#if model.magical_abilities}}
+  {{#if model.creature.magical_abilities}}
     <h2>Magical Abilities & Spells</h2>
-    {{{ansi-format text=model.magical_abilities}}}
+    {{{ansi-format text=model.creature.magical_abilities}}}
   {{/if}}
 
-  {{#if model.events}}
+  {{#if model.creature.events}}
     <p><h2>Events</h2>
-    {{{ansi-format text=model.events}}}</p>
+    {{{ansi-format text=model.creature.events}}}</p>
   {{/if}}
+
+
+<h2>Scenes</h2>
+  {{scene-list scenes=model.creature.scenes sceneTypes=model.sceneTypes}}
+
   </div>
   <div class="pull-right">
     {{#link-to 'creatures' class="btn btn-default"}}All Creatures{{/link-to}}
-    {{#link-to 'creature-edit' model.id class="btn btn-default"}}Edit{{/link-to}}</div>
+    {{#link-to 'creature-edit' model.creature.id class="btn btn-default"}}Edit{{/link-to}}</div>
   <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
