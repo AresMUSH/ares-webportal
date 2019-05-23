@@ -1,3 +1,8 @@
 # http://www.robotstxt.org
 User-agent: *
 Disallow:
+
+Sitemap: stargate.aresmush.com/game/sitemap.xml
+Sitemap: stargate.aresmush.com/game/sitemap.xml
+Sitemap: stargate.aresmush.com/game/sitemap.xml
+Sitemap: stargate.aresmush.com/game/sitemap.xml
