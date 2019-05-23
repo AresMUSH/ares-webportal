@@ -66,11 +66,8 @@
     {{{ansi-format text=model.portal.events}}}</p>
   {{/if}}
 
-  {{#each model.portal.scenes as |scene|}}
- {{#link-to 'scene' scene.id}}{{scene.title}} {{/link-to}}
- {{/each}}
-
-  {{!-- {{scene-list scenes=model.portal.scenes sceneTypes=sceneTypes}} --}}
+<h2>Scenes</h2>
+  {{scene-list scenes=model.portal.scenes sceneTypes=model.sceneTypes}}
 </div>
 
 <div class="pull-right">

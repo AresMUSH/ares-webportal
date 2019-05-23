@@ -74,12 +74,9 @@
     {{{ansi-format text=model.creature.events}}}</p>
   {{/if}}
 
-  {{#each model.creature.scenes as |scene|}}
- {{#link-to 'scene' scene.id}}{{scene.title}} {{/link-to}}
- {{/each}}
 
-
-  {{!-- {{scene-list scenes=model.creature.scenes sceneTypes=sceneTypes}} --}}
+<h2>Scenes</h2>
+  {{scene-list scenes=model.creature.scenes sceneTypes=model.sceneTypes}}
 
   </div>
   <div class="pull-right">
