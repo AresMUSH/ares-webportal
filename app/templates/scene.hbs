@@ -26,11 +26,10 @@
         </p>
 
         <p>
-            <b>Plot: </b>
+
             {{#if model.plot}}
+            <b>Plot: </b>
                 <a href="/plot/{{model.plot.id}}">{{model.plot.title}}</a>
-            {{else}}
-                None
             {{/if}}
         </p>
 
@@ -40,8 +39,6 @@
               {{#each model.portals as |portal|}}
                 <a href="/portal/{{portal.id}}">{{portal.name}}</a>
               {{/each}}
-            {{else}}
-                None
             {{/if}}
         </p>
 
@@ -51,8 +48,6 @@
               {{#each model.creatures as |creature|}}
                 <a href="/creature/{{creature.id}}">{{creature.name}}</a>
               {{/each}}
-            {{else}}
-                None
             {{/if}}
         </p>
 
