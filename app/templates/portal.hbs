@@ -1,74 +1,80 @@
-{{title model.name}}
-<h1>{{model.name}} Portal</h1>
+{{title model.portal.name}}
+<h1>{{model.portal.name}} Portal</h1>
 
 <div class="ansi">
 
-  {{#if model.latitude}}<span style="float:right;"><iframe width="300" height="250" frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?q={{model.latitude}}%20{{model.longitude}}&key=AIzaSyDtQxW3ou9wLCgpLzTHiYQCKLv4YBM3t1c" allowfullscreen></iframe></span>{{/if}}
+  {{#if model.portal.latitude}}<span style="float:right;"><iframe width="300" height="250" frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?q={{model.portal.latitude}}%20{{model.portal.longitude}}&key=AIzaSyDtQxW3ou9wLCgpLzTHiYQCKLv4YBM3t1c" allowfullscreen></iframe></span>{{/if}}
 
 
 
   <div class="portal-card">
-    <div class="portal-card-heading">{{model.name}} </div>
+    <div class="portal-card-heading">{{model.portal.name}} </div>
     <div class="portal-card-body">
-      {{#if model.gms}}<b>GMs:</b>  {{#each model.gms as |gm|}}
+      {{#if model.portal.gms}}<b>GMs:</b>  {{#each model.portal.gms as |gm|}}
       {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
       {{/each}} <br> {{/if}}
-      {{#if model.location}}<b>Location:</b> {{model.location}}<br>  {{/if}}
-      {{#if model.primary_school}}
-        <b>Dominant School:</b> {{#link-to 'schools' model.primary_school.name}}
-      {{model.primary_school.name}}
+      {{#if model.portal.location}}<b>Location:</b> {{model.portal.location}}<br>  {{/if}}
+      {{#if model.portal.primary_school}}
+        <b>Dominant School:</b> {{#link-to 'schools' model.portal.primary_school.name}}
+      {{model.portal.primary_school.name}}
       {{/link-to}}
       <br>{{/if}}
-      {{#if model.all_schools}}<b>All Schools:</b>
-        {{#each model.all_schools as |school|}}
+      {{#if model.portal.all_schools}}<b>All Schools:</b>
+        {{#each model.portal.all_schools as |school|}}
           {{#link-to 'schools' school.name}}{{school.name}}{{/link-to}}
         {{/each}}
       {{/if}}
     </div>
   </div>
  <div class="clear"></div>
-  {{#if model.pinterest}}
+  {{#if model.portal.pinterest}}
 
-    <div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="{{model.pinterest}}"></a></div>
+    <div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="{{model.portal.pinterest}}"></a></div>
   {{/if}}
 
-  {{#if model.description}}
+  {{#if model.portal.description}}
     <h2>Description</h2>
-    {{{ansi-format text=model.description}}}
+    {{{ansi-format text=model.portal.description}}}
   {{/if}}
 
-  {{#if model.npcs}}
+  {{#if model.portal.npcs}}
     <h2>Important Figures:</h2>
-    {{{ansi-format text=model.npcs}}}
+    {{{ansi-format text=model.portal.npcs}}}
   {{/if}}
 
-  {{#if model.creatures}}
+  {{#if model.portal.creatures}}
     <h2>Creatures</h2>
     <ul>
-    {{#each model.creatures as |creature|}}
+    {{#each model.portal.creatures as |creature|}}
       <li>{{#link-to 'creature' creature.id}}{{creature.name}} {{/link-to}}</li>
     {{/each}}
     </ul>
   {{/if}}
 
-  {{#if model.other_creatures}}
-    {{{ansi-format text=model.other_creatures }}}
+  {{#if model.portal.other_creatures}}
+    {{{ansi-format text=model.portal.other_creatures }}}
   {{/if}}
 
-  {{#if model.trivia}}
+  {{#if model.portal.trivia}}
     <p><h2>Trivia</h2>
-    {{{ansi-format text=model.trivia}}}</p>
+    {{{ansi-format text=model.portal.trivia}}}</p>
   {{/if}}
 
-  {{#if model.events}}
+  {{#if model.portal.events}}
     <p><h2>Events</h2>
-    {{{ansi-format text=model.events}}}</p>
+    {{{ansi-format text=model.portal.events}}}</p>
   {{/if}}
+
+  {{#each model.portal.scenes as |scene|}}
+ {{#link-to 'scene' scene.id}}{{scene.title}} {{/link-to}}
+ {{/each}}
+
+  {{!-- {{scene-list scenes=model.portal.scenes sceneTypes=sceneTypes}} --}}
 </div>
 
 <div class="pull-right">
   {{#link-to 'portals' class="btn btn-default"}}All Portals{{/link-to}}
-  {{#link-to 'portal-edit' model.id class="btn btn-default"}}Edit{{/link-to}}
+  {{#link-to 'portal-edit' model.portal.id class="btn btn-default"}}Edit{{/link-to}}
 </div>
 <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
