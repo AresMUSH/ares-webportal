@@ -173,6 +173,10 @@
                          <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
                          {{/if}}
                        {{/if}}
+                       
+                       {{#if scene.can_delete}}
+                       <li><a href="#" {{action (mut confirmDeleteScene) true}}>Delete Scene</a></li> 
+                       {{/if}}
                    
                    
                     <li>{{#link-to 'scene-download' scene.id}}Download Scene{{/link-to}}</li> 
@@ -237,6 +241,18 @@
         onHide=(action (mut confirmDeleteScenePose) null)}}
         You're about to delete this scene pose. This cannot be undone.  Are you sure?
       {{/bs-modal-simple}}
+      
+      {{#bs-modal-simple
+          title="Confirm Delete"
+          closeTitle="Cancel"
+          submitTitle="Confirm"
+          size=null
+          fade=false
+          open=confirmDeleteScene
+          onSubmit=(action "deleteScene")
+          onHide=(action (mut confirmDeleteScene) null)}}
+          You're about to delete this scene. This cannot be undone.  Are you sure?
+        {{/bs-modal-simple}}
   
       {{#bs-modal-simple
           title="Select a Skill to Roll"
