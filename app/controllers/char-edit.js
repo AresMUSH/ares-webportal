@@ -44,6 +44,7 @@ export default Controller.extend({
             gallery: gallery,
             profile: profile,
             bg_shared: this.get('model.bg_shared'),
+            lastwill: this.get('model.lastwill'),
             profile_image: profile_image,
             profile_icon: profile_icon,
             tags: tags

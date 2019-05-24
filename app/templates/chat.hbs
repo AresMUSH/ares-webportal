@@ -145,51 +145,53 @@
   {{/if}}
 
   {{/each}}
+  
 
-</div>
-</div>
+  <div class="row">
 
-<div class="row">
+    {{#each model.chat as |channel|}}
 
-  {{#each model.chat as |channel|}}
+    {{#if (eq channel.key selectedChannel.key)}}
 
-  {{#if (eq channel.key selectedChannel.key)}}
-
-      {{#if channel.enabled}}
+        {{#if channel.enabled}}
             
-          <div class="pull-right">
-            {{#if (not channel.is_page)}}
-              <button class="btn-warning btn" {{action "leaveChannel"}}>Leave Channel</button>
-              {{#if channel.muted}}
-              <button class="btn-default btn" {{action "muteChannel" false}}>Unmute Channel</button>
-              {{else}}
-              <button class="btn-default btn" {{action "muteChannel" true}}>Mute Channel</button>
+            <div class="pull-right">
+              {{#if (not channel.is_page)}}
+                <button class="btn-warning btn" {{action "leaveChannel"}}>Leave Channel</button>
+                {{#if channel.muted}}
+                <button class="btn-default btn" {{action "muteChannel" false}}>Unmute Channel</button>
+                {{else}}
+                <button class="btn-default btn" {{action "muteChannel" true}}>Mute Channel</button>
+                {{/if}}
               {{/if}}
-            {{/if}}
-              <button class="btn-primary btn" {{action "send"}}>Send Message</button>
-          </div>
-    
-      <div class="clearfix"></div>
-    
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <h4>Who's On {{channel.title}}</h4>
-
-              <div class="icon-row">
-              {{#each channel.who as |who|}}
-                {{char-icon-inline char=who }}
-                {{#if who.muted}}<i class="fa fa-microphone-slash"></i>{{/if}}
-
-              {{/each}}
-              </div>
-
-              <div class="clearfix"></div>
+                <button class="btn-primary btn" {{action "send"}}>Send Message</button>
             </div>
-          </div>      
-      {{/if}}
-  {{/if}}
+    
+        <div class="clearfix"></div>
+    
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <h4>Who's On {{channel.title}}</h4>
 
-  {{/each}}
+                <div class="icon-row">
+                {{#each channel.who as |who|}}
+                  {{char-icon-inline char=who }}
+                  {{#if who.muted}}<i class="fa fa-microphone-slash"></i>{{/if}}
+
+                {{/each}}
+                </div>
+
+                <div class="clearfix"></div>
+              </div>
+            </div>      
+        {{/if}}
+    {{/if}}
+
+    {{/each}}
+  </div>
+  
+
+</div>
 </div>
 
 

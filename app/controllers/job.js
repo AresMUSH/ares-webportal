@@ -11,7 +11,7 @@ export default Controller.extend({
     
   setup: function() {
     this.set('reply', '');
-    this.set('replyAdminOnly', this.get('model.job.is_job_admin') ? true : false );
+    this.set('replyAdminOnly', this.get('model.job.is_category_admin') ? true : false );
   }.observes('model'),
     
 

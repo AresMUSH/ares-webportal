@@ -97,6 +97,14 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
                   this.set('currentScene', s);
                   let self = this;
                   setTimeout(() => self.scrollSceneWindow(), 150, self);
+                  
+                  let api = this.get('gameApi');
+                  api.requestOne('markSceneRead', { id: id }, null)
+                  .then( (response) => {
+                      if (response.error) {
+                          return;
+                      }
+                  }); 
               }
           });   
         }
