@@ -6,6 +6,7 @@ export default Component.extend(AuthenticatedController, {
     scenePose: '',
     rollString: null,
     confirmDeleteScenePose: false,
+    confirmDeleteScene: false,
     selectSkillRoll: false,
     selectLocation: false,
     newLocation: null,
@@ -78,6 +79,19 @@ export default Component.extend(AuthenticatedController, {
                   return;
               }
           });
+      },
+      deleteScene() {
+        let api = this.get('gameApi');
+        this.set('confirmDeleteScene', false);
+
+        api.requestOne('deleteScene', { id: this.get('scene.id') })
+        .then( (response) => {
+            if (response.error) {
+                return;
+            }
+            this.get('flashMessages').success('The scene has been deleted.');
+            this.sendAction('refresh'); 
+        });
       },
       saveScenePose(scenePose, notify) {
           let pose = scenePose.get('raw_pose');
