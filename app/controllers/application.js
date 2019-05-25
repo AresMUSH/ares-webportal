@@ -50,6 +50,10 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
       let config = this.get('model.top_navbar');
       let nav = [];
       let availableRoutes = this.availableRoutes();
+
+      if (!config) {
+        return [];
+      }
       
       config.forEach(n => {
         let menuOK = true;

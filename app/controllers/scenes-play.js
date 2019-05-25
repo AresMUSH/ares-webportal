@@ -13,6 +13,10 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     scrollPaused: false,
     currentScene: null,
     
+    anyNewActivity: function() {
+      return this.get('model.scenes').any(s => s.is_unread );
+    }.property('model.scenes.@each.is_unread'),
+  
     onSceneActivity: function(msg /* , timestamp */) {
       let splitMsg = msg.split('|');
       let sceneId = splitMsg[0];
@@ -97,6 +101,14 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
                   this.set('currentScene', s);
                   let self = this;
                   setTimeout(() => self.scrollSceneWindow(), 150, self);
+                  
+                  let api = this.get('gameApi');
+                  api.requestOne('markSceneRead', { id: id }, null)
+                  .then( (response) => {
+                      if (response.error) {
+                          return;
+                      }
+                  }); 
               }
           });   
         }

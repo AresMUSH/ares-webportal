@@ -17,6 +17,9 @@ export default Controller.extend({
        });
     }.property('model.chat.@each.last_activity'),
     
+    anyNewActivity: function() {
+      return this.get('model.chat').any(c => c.is_unread || c.new_messages > 0);
+    }.property('model.chat.@each.is_unread', 'model.chat.@each.new_messages'),
     
     resetOnExit: function() {
         this.set('selectedChannel', null);
@@ -31,7 +34,6 @@ export default Controller.extend({
         let channelKey = splitMsg[0];
         let channelTitle = splitMsg[1];
         let newMessage = splitMsg[2];
-      
         let channel = this.getChannel(channelKey);
         if (!channel) {
           channel = this.addPageChannel(channelKey, channelTitle);
