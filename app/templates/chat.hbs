@@ -4,30 +4,40 @@
 
 <div class="row">
   
-<div class="col col-xs-3">
+<div class="col col-xs-12 col-md-3">
     
-  {{#each channelsByActivity as |channel|}}
-    {{#if channel.allowed}}
-      {{#if channel.enabled}}
-        <button {{action 'changeChannel' channel}} 
-           class="btn btn-default chat-button {{if (eq channel.key selectedChannel.key) 'chat-button-active' ''}}">
-           {{#if channel.is_page}}
-           &lt;PM&gt;
-           {{/if}}
-           {{channel.title}}
-          {{#if channel.muted}}
-              <i class="fa fa-microphone-slash"></i>
-          {{/if}}
-          {{#if (and channel.is_page channel.is_unread)}}
-            <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
-          {{else}}
-            <span class="label label-pill label-primary">{{channel.new_messages}}</span>
-          {{/if}}
-          </button>
-      <br/>
+  <button class="btn btn-default visible-sm visible-xs hidden-md" type="button" data-toggle="collapse" data-target="#channelMenuCollapse" aria-expanded="false" aria-controls="channelMenuCollapse">
+      <i class="fas fa-bars"></i>
+      {{#if anyNewActivity}}
+      <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
       {{/if}}
-    {{/if}}
-  {{/each}}
+    </button>
+
+    <div class="collapse in" id="channelMenuCollapse">
+    
+    {{#each channelsByActivity as |channel|}}
+      {{#if channel.allowed}}
+        {{#if channel.enabled}}
+          <button {{action 'changeChannel' channel}} 
+             class="btn btn-default chat-button {{if (eq channel.key selectedChannel.key) 'chat-button-active' ''}}">
+             {{#if channel.is_page}}
+             &lt;PM&gt;
+             {{/if}}
+             {{channel.title}}
+            {{#if channel.muted}}
+                <i class="fa fa-microphone-slash"></i>
+            {{/if}}
+            {{#if (and channel.is_page channel.is_unread)}}
+              <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+            {{else}}
+              <span class="label label-pill label-primary">{{channel.new_messages}}</span>
+            {{/if}}
+            </button>
+        <br/>
+        {{/if}}
+      {{/if}}
+    {{/each}}
+   
 
     <ul class="nav chat-nav">
       <li class="dropdown">
@@ -47,11 +57,12 @@
       <li>
         <span class="btn btn-default chat-button" role="button" {{action 'newConversation'}}>New Conversation</span>
       </li>
-  </ul>
+    </ul>
+  </div>
   
 </div>
 
-<div class="col col-xs-9">
+<div class="col col-xs-12 col-md-9">
 
   {{#if selectedChannel}}
 
