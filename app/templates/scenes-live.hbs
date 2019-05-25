@@ -73,7 +73,7 @@
     <td>
       
         {{#each scene.participants as |char|}}
-        {{char-icon-inline char=char icon-class=(if char.online '' 'faded')}}
+        {{char-icon-inline char=char}}
         {{/each}}
         
         {{#if (or scene.can_view (not scene.is_private))}}
