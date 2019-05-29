@@ -26,7 +26,12 @@
 
     <div id="secret" class="tab-pane fade ">
 
-    <h3>{{#link-to 'plot' char.secret_plot}}{{char.secret_name}}{{/link-to}}</h3>
+    <h3>
+      {{#if char.secret_plot}}
+        {{#link-to 'plot' char.secret_plot}}{{char.secret_name}} {{/link-to}}
+      {{else}}
+        {{char.secret_name}}
+      {{/if}}</h3>
       {{char.secret_summary}}
 
     </div>
