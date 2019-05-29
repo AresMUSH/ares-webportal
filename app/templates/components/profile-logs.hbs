@@ -2,7 +2,7 @@
     <li class="active"><a data-toggle="tab" href="#scenesindex">+</a></li>
     <li><a data-toggle="tab" href="#scenelist">Scenes</a></li>
     <li><a data-toggle="tab" href="#plotprefs">Plot Preferences</a></li>
-    <li><a data-toggle="tab" href="#secret">Secret</a></li>
+    {{#if char.secret_name}}<li><a data-toggle="tab" href="#secret">Secret</a></li>{{/if}}
 </ul>
 
 
@@ -23,7 +23,7 @@
         {{{ansi-format text=char.plot_prefs}}}
 
     </div>
-
+{{#if char.secret_name}}
     <div id="secret" class="tab-pane fade ">
 
     <h4>
@@ -36,5 +36,6 @@
       {{char.secret_summary}}
 
     </div>
+{{/if}}
 
 </div>
