@@ -43,6 +43,29 @@
 
   <tr>
     <td>
+      <label>Other Participants:</label>
+    </td>
+    <td>
+      {{#each model.job.participants as |participant|}}
+        {{char-icon-inline char=participant}}
+      {{/each}}
+    </td>
+    <td>
+        {{#if editParticipants}}
+         {{#power-select-multiple selected=newParticipants options=model.characters searchField="name" onchange=(action "participantsChanged") as |char|}}
+          {{char.name}}
+        {{/power-select-multiple}}
+        <div class="btn btn-default" {{action (mut editParticipants) false}}>Cancel</div>
+        <div class="btn btn-primary" {{action 'saveParticipants'}}>Save</div>
+      {{else}}
+        <div class="btn btn-default" {{action (mut editParticipants) true}}>Edit</div>
+      {{/if}}
+      
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
      <label>Assigned To:</label> 
     </td>
     <td>
