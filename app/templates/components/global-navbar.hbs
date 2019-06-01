@@ -46,9 +46,9 @@
                     {{else}}
                       <li>
                       {{#if nav.id}}
-                        {{#link-to nav.page nav.id}}{{{nav.title}}}{{/link-to}}
+                        {{#link-to nav.route nav.id}}{{{nav.title}}}{{/link-to}}
                       {{else}}
-                        {{#link-to nav.page}}{{{nav.title}}}{{/link-to}}
+                        {{#link-to nav.route}}{{{nav.title}}}{{/link-to}}
                       {{/if}}
                       </li>
                     {{/if}}

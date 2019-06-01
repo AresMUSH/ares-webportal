@@ -15,6 +15,17 @@ export default Controller.extend(AuthenticatedController, {
     },
     
     actions: {
+        cookies() {
+            let api = this.get('gameApi');
+            api.requestOne('sceneCookies', { id: this.get('model.id') }, null)
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.get('flashMessages').success('You give cookies to the scene participants.');
+            });
+        },
+
         like(like) {
             let api = this.get('gameApi');
             api.requestOne('likeScene', { id: this.get('model.id'), like: like})
