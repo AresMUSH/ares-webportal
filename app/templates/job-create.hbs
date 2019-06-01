@@ -35,6 +35,20 @@
      </td>
  </tr>
  
+ <tr>
+    <td>
+       <label>Other Participants:</label>
+     </td>
+    
+     <td>
+      
+        {{#power-select-multiple selected=participants options=model.characters searchField="name" onchange=(action "participantsChanged") as |char|}}
+         {{char.name}}
+       {{/power-select-multiple}}
+      
+     </td>
+ </tr>
+ 
   <tr>
     <td>
       <label>Category:</label>

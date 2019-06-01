@@ -9,12 +9,14 @@ export default Controller.extend({
   category: '',
   description: '',
   submitter: null,
+  participants: [],
     
   resetOnExit: function() {
     this.set('title', '');
     this.set('category', this.get('model.options.request_category'));
     this.set('description', '');
     this.set('submitter', null);
+    this.set('participants', []);
   },
     
   actions: {
@@ -28,6 +30,7 @@ export default Controller.extend({
         title: this.get('title'), 
         category: this.get('category') || this.get('model.options.request_category'),
         description: this.get('description'),
+        participants: (this.get('participants') || []).map(p => p.id),
         submitter: this.get('submitter.name') }, null)
         .then( (response) => {
           if (response.error) {
@@ -38,6 +41,10 @@ export default Controller.extend({
         });
       },
       
+      participantsChanged: function(newParticipants) {
+          this.set('participants', newParticipants);
+      },
+
       submitterChanged(submitter) {
           this.set('submitter', submitter);
       },

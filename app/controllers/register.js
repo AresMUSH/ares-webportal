@@ -24,8 +24,8 @@ export default Controller.extend({
                     this.get('recaptchaControl').resetReCaptcha();
                     return;
                 }                
-                this.transitionToRoute('login');
                 this.get('flashMessages').success("Your character has been created.  Please log in.");
+                this.transitionToRoute('login');
             });
         }
     }

@@ -4,14 +4,19 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   reply: '',
   replyAdminOnly: true,
+  editParticipants: false,
+  newParticipants: [],
     
   gameApi: service(),
   session: service(),
   flashMessages: service(),
+  
     
   setup: function() {
     this.set('reply', '');
     this.set('replyAdminOnly', this.get('model.job.is_category_admin') ? true : false );
+    this.set('editParticipants', false);
+    this.set('newParticipants', this.get('model.job.participants'));
   }.observes('model'),
     
 
@@ -74,6 +79,22 @@ export default Controller.extend({
         }
         this.send('reloadModel');
         this.get('flashMessages').success('Job changed to ' + data + '.');
+      });
+    },
+    participantsChanged: function(newParticipants) {
+        this.set('newParticipants', newParticipants);
+    },
+    saveParticipants: function() {
+      let participants = this.get('newParticipants');
+      this.set('editParticipants', false);
+      this.set('newParticipants', []);
+      this.get('gameApi').requestOne('jobChangeParticipants', { id: this.get('model.job.id'), participants: participants.map(p => p.id) })
+      .then((response) => {
+        if (response.error) {
+          return;
+        }
+        this.send('reloadModel');
+        this.get('flashMessages').success('Participants saved.');
       });
     }
   }
