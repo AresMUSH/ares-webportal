@@ -1,6 +1,5 @@
-{title 'Chat'}}
+{{title 'Chat'}}
 <h1>Chat</h1>
-
 
 <div class="row">
 
@@ -21,7 +20,7 @@
           <button {{action 'changeChannel' channel}}
              class="btn btn-default chat-button {{if (eq channel.key selectedChannel.key) 'chat-button-active' ''}}">
              {{#if channel.is_page}}
-             &lt;PM&gt;
+             <b>PM:</b> 
              {{/if}}
              {{channel.title}}
             {{#if channel.muted}}
