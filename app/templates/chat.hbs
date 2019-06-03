@@ -1,4 +1,4 @@
-{{title 'Chat'}}
+{title 'Chat'}}
 <h1>Chat</h1>
 
 
@@ -127,7 +127,7 @@
           <div id="chat-window">
           {{#each channel.messages as |message|}}
               <div class="timestamp-tip">{{message.timestamp}}</div>
-              <div class="chat-text">{{{ansi-format text=message.message}}}</div>
+              {{{ansi-format text=message.message}}}
           {{/each}}
           </div>
 
