@@ -2,16 +2,16 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import FS3Chargen from 'ares-webportal/mixins/fs3-chargen';
 
-export default Controller.extend(FS3Chargen, {    
+export default Controller.extend(FS3Chargen, {
     flashMessages: service(),
     gameApi: service(),
     charErrors: [],
     toggleCharChange: false,
-    
+
     alerts: function() {
         return this.get('charErrors');
     }.property('toggleCharChange'),
-    
+
     genders: function() {
         return [ { value: 'Male' }, { value: 'Female' }, { value: 'Other' }];
     }.property(),
@@ -20,22 +20,22 @@ export default Controller.extend(FS3Chargen, {
         return this.get('alerts').length > 0;
     }.property('alerts'),
 
-    
+
     anyGroupMissing: function() {
         let groups = this.get('model.char.groups');
         let anyMissing = false;
-        
+
         Object.keys(groups).forEach(g => {
             if (!groups[g].value) {
                 anyMissing = true;
-            } 
+            }
         });
-        return anyMissing;    
+        return anyMissing;
     }.property('toggleCharChange', 'model'),
-    
+
     buildQueryDataForChar: function() {
-        
-        return { 
+
+        return {
             id: this.get('model.char.id'),
             fullname: this.get('model.char.fullname'),
             demographics: this.get('model.char.demographics'),
@@ -45,22 +45,23 @@ export default Controller.extend(FS3Chargen, {
             rp_hooks: this.get('model.char.rp_hooks'),
             background: this.get('model.char.background'),
             secretpref: this.get('model.char.secretpref'),
+            lastwill: this.get('model.char.lastwill'),
             fs3: this.buildFs3QueryData()
         };
-    }, 
-    
-    
-    toggleCharChanged: function() {
-        this.set('toggleCharChange', !this.get('toggleCharChange'));        
     },
-    
+
+
+    toggleCharChanged: function() {
+        this.set('toggleCharChange', !this.get('toggleCharChange'));
+    },
+
     actions: {
-        
+
         genderChanged(val) {
             this.set('model.char.demographics.gender.value', val.value)
             this.validateChar();
         },
-        
+
         groupChanged(group, val) {
 	    var opp = group === 'major school' ? 'minor school' : 'major school';
 	    if (val.value === this.get(`model.char.groups.${opp}.value`)) {
@@ -68,12 +69,12 @@ export default Controller.extend(FS3Chargen, {
                   return 'None' === school.value;
 		});
 		this.set(`model.char.groups.${opp}`, none);
-            } 
+            }
             this.set(`model.char.groups.${group}`, val);
 	    this.validateChar();
         },
-  
-        secretPrefChanged(val) { 
+
+        secretPrefChanged(val) {
             this.set('model.char.secretpref', val);
             this.validateChar();
         },
@@ -87,9 +88,9 @@ export default Controller.extend(FS3Chargen, {
                 }
                 this.send('reloadModel');
                 this.flashMessages.success('Abilities reset.');
-            });    
+            });
         },
-        
+
         review() {
             let api = this.get('gameApi');
             api.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
@@ -98,9 +99,9 @@ export default Controller.extend(FS3Chargen, {
                     return;
                 }
                 this.transitionToRoute('chargen-review');
-            });   
+            });
         },
-        
+
         save() {
             let api = this.get('gameApi');
             api.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
@@ -113,9 +114,9 @@ export default Controller.extend(FS3Chargen, {
                     response.alerts.forEach( r => this.charErrors.push(r) );
                 }
                 this.flashMessages.success('Saved!');
-            }); 
+            });
         },
-        
+
         unsubmit() {
             let api = this.get('gameApi');
             api.requestOne('chargenUnsubmit')
@@ -124,7 +125,7 @@ export default Controller.extend(FS3Chargen, {
                     return;
                 }
                 this.send('reloadModel');
-            }); 
+            });
         }
     }
 });

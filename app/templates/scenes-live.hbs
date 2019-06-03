@@ -22,8 +22,7 @@
 <tr>
   <th></th>
   <th>Title / Status</th>
-  <th>Location</th>
-  <th>Participants</th>
+  <th>Participants / Location / Summary</th>
   <th>IC Date</th>
   <th>Last Activity</th>
 </tr>
@@ -79,12 +78,19 @@
         {{/if}}
     </td>
     <td>
-        {{scene.location}}
-    </td>
-    <td>
+      
         {{#each scene.participants as |char|}}
-        {{char-icon-inline char=char icon-class=(if char.online '' 'faded')}}
+        {{char-icon-inline char=char}}
         {{/each}}
+        
+        {{#if (or scene.can_view (not scene.is_private))}}
+          <p>{{scene.location}}</p>
+        
+          {{#if scene.summary}}
+          <p>{{scene.summary}}</p>
+          {{/if}}
+        {{/if}}
+        
     </td>
     <td>
       <p>{{scene.icdate}}</p>
@@ -108,7 +114,7 @@
 <hr/>
 
 <h4>Unshared Scenes</h4>
-<p>You have the following stopped, unshared scenes. Unshared scenes may be deleted after {{model.unshared_warning_days}} days, so you should download or share them before that happens.</p>
+<p>You have the following stopped, unshared scenes. Unshared scenes may be deleted after {{model.unshared_deletion_days}} days, so you should download or share them before that happens.</p>
 <ul>
 {{#each model.unshared as |scene|}}
 <li>{{#link-to 'scene-live' scene.id}}{{scene.title}}{{/link-to}} - {{scene.people}}</li>

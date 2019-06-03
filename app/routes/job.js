@@ -13,7 +13,8 @@ export default Route.extend(DefaultRoute, ReloadableRoute, {
 
         return RSVP.hash({
              job:  api.requestOne('job', { id: params['id']  }),
-             options: api.requestOne('jobOptions')
+             options: api.requestOne('jobOptions'),
+             characters: api.requestMany('characters', { select: 'all' })
            })
            .then((model) => {
              this.get('gameSocket').updateJobsBadge(model.job.unread_jobs_count);
