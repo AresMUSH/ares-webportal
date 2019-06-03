@@ -13,9 +13,14 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
     headData: service(),
   
     afterModel(model) {
+      try {
         this.set('headData.mushName', model.get('game.name'));
         this.set('headData.portalUrl', this.get('gameApi').portalUrl());
-        this.set('headData.mushDesc', model.get('game.description'));
+        this.set('headData.mushDesc', model.get('game.description'));  
+        }
+        catch(error) {
+          // Don't do anything here.
+        }
       },
       
     doReload: function() {

@@ -1,9 +1,9 @@
 <span style="display: inline-block">
 {{#link-to "char" char.name}}
     {{#if char.icon}}
-    <img class="small-profile-icon {{icon-class}}" src="/game/uploads/{{char.icon}}" />
+    <img class="small-profile-icon {{icon-class}} icon-status-{{char.status}} {{if (eq char.status 'offline') 'faded'}}" src="/game/uploads/{{char.icon}}" />
     {{else}}
-    <img class="small-profile-icon {{icon-class}}" src="/game/uploads/theme_images/noicon.png" />
+    <img class="small-profile-icon {{icon-class}} icon-status-{{char.status}}" src="/game/uploads/theme_images/noicon.png" />
     {{/if}}
 {{/link-to}}
 

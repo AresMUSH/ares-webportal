@@ -50,22 +50,32 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
       let config = this.get('model.top_navbar');
       let nav = [];
       let availableRoutes = this.availableRoutes();
+
+      if (!config) {
+        return [];
+      }
       
       config.forEach(n => {
         let menuOK = true;
         let error = "";
-        n.menu.forEach(m => {
-          let page = m.page;
-          if (page && !availableRoutes.includes(page)) {
-            error = page;
-            console.log(`Bad route in menu: ${page}`);
-            menuOK = false;
+        try {
+          n.menu.forEach(m => {
+            let route = m.route;
+            if (route && !availableRoutes.includes(route)) {
+              error = route;
+              console.log(`Bad route in menu: ${route}`);
+              menuOK = false;
+            }
+          })
+          if (menuOK) {
+            nav.push(n); 
+          } else {
+            nav.push({ title: `MENU ERROR` });
           }
-        })
-        if (menuOK) {
-          nav.push(n); 
-        } else {
-          nav.push({ title: `ERROR: ${error}` });
+        }
+        catch(error) {
+          console.log(`Bad menu config under ${n.title}.`);
+          nav.push({ title: `MENU ERROR` });
         }
       });
       

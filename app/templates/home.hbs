@@ -1,34 +1,19 @@
-        <div class="jumbotron">
+<div class="jumbotron">
+  <img src="/game/uploads/theme_images/jumbotron.png" />
 
-            <img src="/game/uploads/theme_images/jumbotron.png" />
+  {{{ansi-format text=model.game.website_welcome}}}
 
-            {{{ansi-format text=model.game.website_welcome}}}
+<hr/>
 
-            <p style="font-style:italic; font-size:95%;"><br>{{model.game.name}} is a MUSH - a multi-player text-based storytelling game.  New to MUSHing?  Check out the <a href="http://aresmush.com/mush-101" target="_blank">MUSH 101 Tutorial</a>.  On the web portal, you can {{#link-to 'chargen'}}create your character{{/link-to}}, view and edit {{#link-to 'characters'}}character profiles{{/link-to}}, read {{#link-to 'scenes'}}scene logs{{/link-to}} and more.</p>
-        </div>
+  <div class="splash">
 
+            <p>{{model.game.name}} is a MUSH - a multi-player text-based storytelling game. New to MUSHing?  Check out the <a href="http://aresmush.com/mush-101" target="_blank">MUSH 101 Tutorial</a>.</p>
 
-        <div class="row">
-        <div class="splash-box col col-xs-6">
-            <div class="sidebar-heading">
-                <h2>Play on the Web <i class="fa fa-globe" aria-hidden="true"></i></h2>
+              <p>On the web portal, you can {{#link-to 'chargen'}}create your character{{/link-to}}, {{#link-to 'scenes-live'}}join scenes{{/link-to}}, {{#link-to 'chat'}}chat{{/link-to}}, view and edit {{#link-to 'characters'}}character profiles{{/link-to}}, browse the game's {{#link-to 'wiki'}}wiki{{/link-to}}, read {{#link-to 'scenes'}}scene logs{{/link-to}} and more!</p>
 
-            </div>
+            <p>Use the {{#link-to 'scenes-live'}}scenes page{{/link-to}} to play from your browser,  connect to the game with the {{#link-to "play"}}web client{{/link-to}}.</p>, or point a <a href="https://aresmush.com/clients/" target="_blank">MU client</a> to <b>{{model.game.host}} port {{model.game.port}}</b>.</p>
+    </div>
 
-            <p>Use the {{#link-to 'scenes-live'}}scenes page{{/link-to}} to play from your browser, or connect to the game with the {{#link-to "play"}}web client{{/link-to}}.</p>
-        </div>
-
-
-        <div class="splash-box col col-xs-6">
-            <div class="sidebar-heading">
-                <h2>Play with a Client <i class="fa fa-desktop" aria-hidden="true"></i></h2>
-            </div>
-            <p>Connect to the game via your favorite <a href="https://aresmush.com/clients/" target="_blank">MU client</a> at <b>{{model.game.host}} port {{model.game.port}}</b>.</p>
-
-        </div>
-      </div>
-
-
-
+</div>
 
 {{outlet}}

@@ -18,6 +18,7 @@
         {{/each}}
         <th>Contact</th>
         <th>Special Notes</th>
+        <th></th>
     </thead>
     <tbody>
     
@@ -52,6 +53,21 @@
                  {{#if char.app_required}}
                  <span class="label label-warning">App Required</span>
                  {{/if}}
+                 
+                 
+         </td>
+         
+         <td>
+           {{#if char.password}}
+           <div class="alert alert-success">
+             <p>Roster character claimed!  You can now log into that character with the password: {{char.password}}</p>
+             <p>Please write this password down before you leave this page, or you will have to contact staff to reset it.</p>
+           </div>
+           {{else}}
+             {{#if (not char.app_required)}}
+             <p><button {{action (mut confirmClaim) char}} class="btn btn-default">Claim</button> </p>
+             {{/if}}           
+           {{/if}}
          </td>
 
         
@@ -66,4 +82,17 @@
 {{/each}}
 
 
+
+{{#bs-modal-simple
+    title="Confirm Claim"
+    closeTitle="Cancel"
+    submitTitle="Confirm"
+    size=null
+    fade=false
+    open=confirmClaim
+    onSubmit=(action "claimRoster")
+    onHide=(action (mut confirmClaim) null)}}
+    You're about to claim the character {{confirmClaim.name}} from the roster. Are you sure?
+  {{/bs-modal-simple}}
+  
 {{outlet}}

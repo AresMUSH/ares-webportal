@@ -1,8 +1,13 @@
+{{#if scene.summary}}
+<p> {{{ansi-format text=scene.summary}}} </p>
+{{/if}}
+
 <div class="panel panel-default">
     <div class="panel-heading">
         {{scene.location.name}}
     </div>
     <div class="panel-body">
+    
         {{#if scene.location.description}}
         {{{ansi-format text=scene.location.description}}}
         {{/if}}
@@ -12,10 +17,10 @@
           {{{ansi-format text=scene.location.scene_set}}}
         </div>
         {{/if}}
-
+        
         <div class="icon-row">
         {{#each scene.participants as |who|}}
-          {{char-icon-inline char=who icon-class=(if who.online '' 'faded')}}
+          {{char-icon-inline char=who}}
         {{/each}}
         </div>
     </div>
