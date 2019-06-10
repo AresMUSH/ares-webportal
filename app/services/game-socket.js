@@ -204,6 +204,12 @@ export default Service.extend({
                 }
                 notify = false;
             }
+            else if (notification_type == "new_page") {
+                if (this.get('chatCallback')) {
+                    this.get('chatCallback')(data.args.message, data.args.timestamp);
+                }
+                notify = false;
+            }
             else if (notification_type == "new_scene_activity") {
                 if (this.get('sceneCallback')) {
                     this.get('sceneCallback')(data.args.message, data.args.timestamp);

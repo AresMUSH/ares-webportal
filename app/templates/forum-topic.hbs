@@ -18,24 +18,86 @@
   </div>
 </div>
 
-     <p>{{char-icon-inline char=model.author}}</p>
 
-<p><i>{{model.date}}</i></p>
-{{{ansi-format text=model.message}}}
+       <div class="hint pull-right">
+           
+           <i class="fas fa-clock" >
+             {{#bs-tooltip placement="left"}}{{model.date}}{{/bs-tooltip}}
+           </i>
+           
+           {{#if model.can_edit}}
+             {{#if (not model.editActive)}}
+             <a href="#" {{action (mut model.editActive) true}}><i class="fa fa-edit" aria-hidden="true">
+               {{#bs-tooltip placement="left"}}Edit topic.{{/bs-tooltip}}
+             </i></a>
+             <a href="#" {{action (mut confirmDeleteTopic) true}}><i class="fa fa-trash" aria-hidden="true">
+               {{#bs-tooltip placement="left"}}Delete topic.{{/bs-tooltip}}
+             </i></a>
+             {{/if}}
+           {{/if}}
+       </div>
+       
+       <p>{{char-icon-inline char=model.author}}</p>
+       
+       {{#if model.editActive}}
+          <p><b>Title:</b> {{input type="text" size=25 value=model.title}}</p>
+       
+          <p><b>Text:</b></p>
+          {{markdown-editor text=model.raw_message}}
+                              
+          <div class="pull-right">
+          <button class="btn-default" {{action (mut model.editActive) false}}>Cancel</button>
+          <button class="btn-primary" {{action 'editPost'}}>Save</button>
+          </div>
+          <div class="clearfix"></div>
+        {{else}}
+         {{{ansi-format text=model.message}}}
+       {{/if}}
+       
+       
+
 <hr/>
 
  <div>
      
     {{#each model.replies as |reply|}}
      <div>
-     
-         <p>{{char-icon-inline char=reply.author}}</p>
-     
-         <p><i> {{reply.date}} </i></p>
-     
-     
+       
+       
+       <div class="hint pull-right">
+           
+           <i class="fas fa-clock" >
+             {{#bs-tooltip placement="left"}}{{reply.date}}{{/bs-tooltip}}
+           </i>
+           
+           {{#if reply.can_edit}}
+             {{#if (not reply.editActive)}}
+             <a href="#" {{action (mut reply.editActive) true}}><i class="fa fa-edit" aria-hidden="true">
+               {{#bs-tooltip placement="left"}}Edit reply.{{/bs-tooltip}}
+             </i></a>
+             <a href="#" {{action (mut confirmDeleteReply) reply}}><i class="fa fa-trash" aria-hidden="true">
+               {{#bs-tooltip placement="left"}}Delete reply.{{/bs-tooltip}}
+             </i></a>
+             {{/if}}
+           {{/if}}
+           
+           
+       </div>
+       
+       
+       <p>{{char-icon-inline char=reply.author}}</p>
+          
+       {{#if reply.editActive}}
+          {{markdown-editor text=reply.raw_message}}
+                              
+          <div class="pull-right">
+          <button class="btn-default" {{action (mut reply.editActive) false}}>Cancel</button>
+          <button class="btn-primary" {{action 'editReply' reply}}>Save</button>
+          </div>
+          <div class="clearfix"></div>
+        {{else}}
          {{{ansi-format text=reply.message}}}
-     
+       {{/if}}
          <hr/>
       </div>
     {{/each}}
@@ -67,5 +129,30 @@
 
 
 {{flash-messages}}
+
+{{#bs-modal-simple
+    title="Confirm Delete"
+    closeTitle="Cancel"
+    submitTitle="Confirm"
+    size=null
+    fade=false
+    open=confirmDeleteReply
+    onSubmit=(action "deleteReply" confirmDeleteReply)
+    onHide=(action (mut confirmDeleteReply) null)}}
+    You're about to delete this reply. This cannot be undone.  Are you sure?
+  {{/bs-modal-simple}}
+
+{{#bs-modal-simple
+  title="Confirm Delete"
+  closeTitle="Cancel"
+  submitTitle="Confirm"
+  size=null
+  fade=false
+  open=confirmDeleteTopic
+  onSubmit=(action "deleteTopic")
+  onHide=(action (mut confirmDeleteTopic) null)}}
+  You're about to delete this topic. This cannot be undone.  Are you sure?
+{{/bs-modal-simple}}
+
 
 {{outlet}}

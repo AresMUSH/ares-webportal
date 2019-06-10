@@ -44,6 +44,7 @@ export default Controller.extend(FS3Chargen, {
             shortdesc: this.get('model.char.shortdesc'),
             rp_hooks: this.get('model.char.rp_hooks'),
             background: this.get('model.char.background'),
+            lastwill: this.get('model.char.lastwill'),
             fs3: this.buildFs3QueryData()
         };
     }, 

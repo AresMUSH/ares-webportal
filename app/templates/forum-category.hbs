@@ -10,6 +10,7 @@
 
         <div class="pull-right">
  
+          <button {{action 'catchup'}} class="btn btn-default">Mark All Read</button>
           <button {{action 'nextUnread'}} class="btn btn-default">Next Unread</button>
  
           {{#if model.can_post}}

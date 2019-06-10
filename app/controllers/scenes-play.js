@@ -13,9 +13,14 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     scrollPaused: false,
     currentScene: null,
     
+    anyNewActivity: function() {
+      return this.get('model.scenes').any(s => s.is_unread );
+    }.property('model.scenes.@each.is_unread'),
+  
     onSceneActivity: function(msg /* , timestamp */) {
       let splitMsg = msg.split('|');
       let sceneId = splitMsg[0];
+      let char = splitMsg[1];
       let notify = true;
       
         // For poses we can just add it to the display.  Other events require a reload.
@@ -26,7 +31,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
           notify = this.updateSceneData(scene, msg);
           
           if (notify) {
-            this.get('gameSocket').notify('New scene activity!');
+            this.get('gameSocket').notify(`New activity from ${char} in scene ${sceneId}.`);
             this.scrollSceneWindow();
           }
           
@@ -36,7 +41,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
                 if (s.id === sceneId) {
                   notify = this.updateSceneData(s, msg);
                   s.set('is_unread', true);
-                  this.get('gameSocket').notify('New activity in one of your other scenes!');
+                  this.get('gameSocket').notify(`New activity from ${char} in one of your other scenes (${sceneId}).`);
                 }
             });            
         }
@@ -62,7 +67,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         try {
           $('#live-scene-log').stop().animate({
               scrollTop: $('#live-scene-log')[0].scrollHeight
-          }, 800); 
+          }, 400); 
         }
         catch(error) {
           // This happens sometimes when transitioning away from screen.
@@ -94,6 +99,16 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
               if (s.id === id) {
                   s.set('is_unread', false);
                   this.set('currentScene', s);
+                  let self = this;
+                  setTimeout(() => self.scrollSceneWindow(), 150, self);
+                  
+                  let api = this.get('gameApi');
+                  api.requestOne('markSceneRead', { id: id }, null)
+                  .then( (response) => {
+                      if (response.error) {
+                          return;
+                      }
+                  }); 
               }
           });   
         }
