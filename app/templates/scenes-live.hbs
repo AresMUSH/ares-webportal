@@ -78,19 +78,18 @@
         {{/if}}
     </td>
     <td>
-      
+
         {{#each scene.participants as |char|}}
         {{char-icon-inline char=char}}
         {{/each}}
-        
+        <p>{{scene.location}}</p>        
         {{#if (or scene.can_view (not scene.is_private))}}
-          <p>{{scene.location}}</p>
-        
+
           {{#if scene.summary}}
           <p>{{scene.summary}}</p>
           {{/if}}
         {{/if}}
-        
+
     </td>
     <td>
       <p>{{scene.icdate}}</p>
