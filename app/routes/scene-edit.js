@@ -14,7 +14,7 @@ export default Route.extend(AuthenticatedRoute, {
              sceneTypes: api.requestMany('sceneTypes'),
              plots: api.requestMany('plots'),
              characters: api.requestMany('characters', { select: 'include_staff' }),
-             scenes: api.requestMany('scenes')
+             scenes: api.requestOne('scenes')
            })
            .then((model) => Ember.Object.create(model));
     }

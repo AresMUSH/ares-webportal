@@ -103,7 +103,7 @@
         <label for="related" class="col-form-label">Related Scenes:</label>
     </div>
     <div class="col-sm-9">
-        {{#power-select-multiple selected=model.scene.related_scenes options=model.scenes searchField="title" onchange=(action "relatedChanged") as |scene|}}
+        {{#power-select-multiple selected=model.scene.related_scenes options=model.scenes.scenes searchField="title" onchange=(action "relatedChanged") as |scene|}}
           {{scene.icdate}} {{scene.title}}
         {{/power-select-multiple}}
         <div class="hint">It may take a second for the related scenes list to pop up.</div>

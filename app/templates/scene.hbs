@@ -110,7 +110,10 @@
 
                         <li>{{#link-to 'scene-edit' model.id}}Edit Scene{{/link-to}}</li>
                         <li><a href="#" {{action 'unshareScene'}}>Unshare Scene</a></li>
+                        
+                        {{#if model.can_delete}}
                         <li><a href="#" {{action (mut confirmDelete) true}}>Delete Scene</a></li>
+                        {{/if}}
                          
                          <li role="separator" class="divider"></li>
                        {{/if}}
