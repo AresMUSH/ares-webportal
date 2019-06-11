@@ -14,14 +14,16 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];       
         let char = splitMsg[1];
+        let currentUsername = this.get('currentUser.name');
         
         if (sceneId === this.get('model.scene.id')) {
           let notify = this.updateSceneData(this.get('model.scene'), msg);
           
-          if (notify) {
+          if (notify && (char != currentUsername)) {
             this.get('gameSocket').notify(`New activity from ${char} in scene ${sceneId}.`);
-            this.scrollSceneWindow();
           }
+          
+          this.scrollSceneWindow();
         }
     },
     
