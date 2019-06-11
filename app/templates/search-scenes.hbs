@@ -55,6 +55,34 @@
 <div class="row">
   
   <div class="col col-xs-3">
+        <label>Scene Type:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+
+    {{#power-select selected=searchType options=sceneTypes onchange=(action "sceneTypeChanged") as |name|}}
+      {{name}}
+    {{/power-select}}
+    <br/>
+  </div>
+  
+</div>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>Location:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=25 id="location"  value=searchLocation enter="search"}}</p>
+  </div>
+  
+</div>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
         <label>Tag:</label>
   </div>
   
@@ -73,6 +101,8 @@
   
   <div class="col col-xs-9">
         <p>{{input type="text" size=25 id="log"  value=searchLog enter="search"}}</p>
+
+        <p class="hint">Matches a whole word or phrase from a log's summary or full log text.</p>
   </div>
   
 </div>
@@ -95,9 +125,9 @@
 
 {{flash-messages}}
 
-{{#if searchResults}}
+{{#if searchResults.pages}}
 
-{{scene-list scenes=searchResults sceneTypes=model.sceneTypes}}
+{{scene-list scenes=searchResults sceneTypes=model.sceneTypes filter=searchType page=page hideSearch=true goToPage=(action "goToPage")}}
 
 {{else}}
 <p>No search results.</p>
