@@ -15,7 +15,6 @@ Router.map(function() {
   this.route('home', { path: ''});
 
 
-  this.route('actors');
   this.route('app-review', { path: '/app/:id' });
   this.route('census');
   this.route('census-group', { path: '/census/:filter' });
