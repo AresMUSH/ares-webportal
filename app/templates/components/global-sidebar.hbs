@@ -25,6 +25,10 @@
   {{/if}}
   </p>
   
+  {{#if model.motd}}
+  <p>{{{ansi-format text=model.motd}}}</p>
+  {{/if}}
+  
   <p>{{#link-to 'scenes-live'}}Active Scenes{{/link-to}} | 
       {{#link-to 'who'}}Who's Online{{/link-to}}</p>
   
