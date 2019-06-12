@@ -22,7 +22,7 @@
 
 <tbody>
 
-{{#each scenes.scenes as |scene|}}
+{{#each scenes as |scene|}}
     <tr>
         <td>
         {{#link-to 'scene' scene.id}}{{scene.icdate}} - {{scene.title}}{{/link-to}}
@@ -42,7 +42,7 @@
 </tbody>
 </table>
 
-{{#each scenes.pages as |p|}}
+{{#each pages as |p|}}
 {{#if (eq p page)}}
 <button class="btn btn-primary" {{action "goToPage" p}}>{{p}}</button>
 {{else}}
