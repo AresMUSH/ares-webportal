@@ -14,7 +14,7 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('home', { path: ''});
 
-
+  this.route('account');
   this.route('app-review', { path: '/app/:id' });
   this.route('census');
   this.route('census-group', { path: '/census/:filter' });
