@@ -57,8 +57,8 @@ export default Controller.extend(AuthenticatedController, {
                 return;
               }
               Ember.set(reply, 'editActive', false);
-              Ember.set(reply, 'message', response.message);
-            this.get('flashMessages').success('Reply edited!');
+             this.get('flashMessages').success('Reply edited!');
+             this.send('reloadModel');
           });
         },
         
@@ -73,8 +73,8 @@ export default Controller.extend(AuthenticatedController, {
                 return;
               }
               this.set('model.editActive', false);
-              this.set('model.message', response.message);
-            this.get('flashMessages').success('Post edited!');
+              this.get('flashMessages').success('Post edited!');
+              this.send('reloadModel');
           });
         },
         

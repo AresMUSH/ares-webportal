@@ -150,13 +150,14 @@
                       <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
                       <ul class="dropdown-menu">
 
-                        <li><a href="#" {{action 'cookies'}}>Give Cookies</a></li>
-
                         {{#if model.can_edit}}
 
                         <li>{{#link-to 'scene-edit' model.id}}Edit Scene{{/link-to}}</li>
                         <li><a href="#" {{action 'unshareScene'}}>Unshare Scene</a></li>
+
+                        {{#if model.can_delete}}
                         <li><a href="#" {{action (mut confirmDelete) true}}>Delete Scene</a></li>
+                        {{/if}}
 
                          <li role="separator" class="divider"></li>
                        {{/if}}
