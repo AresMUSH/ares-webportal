@@ -1,8 +1,7 @@
-import Controller from '@ember/controller';
+import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
-export default Controller.extend(AuthenticatedController, {
+export default Component.extend({
   gameApi: service(),
   filter: 'Recent',
   page: 1,
@@ -16,12 +15,13 @@ export default Controller.extend(AuthenticatedController, {
     let api = this.get('gameApi');
     api.requestOne('scenes', {
        filter: this.get('filter'), 
-       page: this.get('page') })
+       page: this.get('page'),
+       char_id: this.get('char.id') })
     .then( (response) => {
         if (response.error) {
           return;
         }
-        this.set('model.scenes', response);
+        this.set('scenes', response);
     });
   },
   

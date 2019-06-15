@@ -1,12 +1,13 @@
-{{#if scene.summary}}
-<p> {{{ansi-format text=scene.summary}}} </p>
-{{/if}}
-
 <div class="panel panel-default">
     <div class="panel-heading">
         {{scene.location.name}}
     </div>
     <div class="panel-body">
+    
+        {{#if scene.summary}}
+        <p> {{{ansi-format text=scene.summary}}} </p>
+        <hr/>
+        {{/if}}        
     
         {{#if scene.location.description}}
         {{{ansi-format text=scene.location.description}}}
@@ -23,5 +24,6 @@
           {{char-icon-inline char=who}}
         {{/each}}
         </div>
+        
     </div>
 </div>

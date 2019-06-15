@@ -22,13 +22,20 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       let sceneId = splitMsg[0];
       let char = splitMsg[1];
       let notify = true;
+      let currentUsername = this.get('currentUser.name');
       
         // For poses we can just add it to the display.  Other events require a reload.
         if (sceneId === this.get('currentScene.id')) {
           let scene = this.get('currentScene');
-          scene.set('is_unread', false);
           
           notify = this.updateSceneData(scene, msg);
+
+          if (currentUsername != char) {
+            scene.set('is_unread', false);
+          }
+          else {
+            notify = false;
+          }
           
           if (notify) {
             this.get('gameSocket').notify(`New activity from ${char} in scene ${sceneId}.`);
@@ -40,8 +47,10 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
             this.get('model.scenes').forEach(s => {
                 if (s.id === sceneId) {
                   notify = this.updateSceneData(s, msg);
-                  s.set('is_unread', true);
-                  this.get('gameSocket').notify(`New activity from ${char} in one of your other scenes (${sceneId}).`);
+                  if (currentUsername != char) {
+                    s.set('is_unread', true);
+                    this.get('gameSocket').notify(`New activity from ${char} in one of your other scenes (${sceneId}).`);
+                  }
                 }
             });            
         }
