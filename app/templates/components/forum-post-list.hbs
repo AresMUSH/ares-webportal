@@ -5,15 +5,15 @@
       <th>Posted By</th>
     </tr>
     
-{{#each posts as |p|}}
+{{#each posts as |post|}}
     <tr>
     <td>
-        {{#if p.unread}}
+        {{#if post.unread}}
         <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
         {{/if}}
-         {{#link-to 'forum-topic' p.category_id p.id}}{{p.title}}{{/link-to}}
+         {{#link-to 'forum-topic' post.category_id post.id}}{{post.title}}{{/link-to}}
      </td>
-     <td>{{p.author}} @ {{p.date}}
+     <td>{{post.author}} @ {{post.date}}
      </td>      
      </tr>
 {{/each}}

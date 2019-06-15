@@ -58,10 +58,10 @@
     
     <div class="log-participants-box">
         
-    {{#each model.participants as |p|}}
-      {{#if (not p.is_ooc)}}
+    {{#each model.participants as |participant|}}
+      {{#if (not participant.is_ooc)}}
         <div class="profile-gallery">    
-            {{char-icon char=p}}
+            {{char-icon char=participant}}
         </div>
       {{/if}}
     {{/each}}

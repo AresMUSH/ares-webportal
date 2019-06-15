@@ -37,10 +37,10 @@
 </table>
 </div>
 
-{{#each pages as |p|}}
-{{#if (eq p page)}}
-<button class="btn btn-primary" {{action "goToPage" p}}>{{p}}</button>
+{{#each pages as |pg|}}
+{{#if (eq pg page)}}
+<button class="btn btn-primary" {{action "goToPage" pg}}>{{pg}}</button>
 {{else}}
-<button class="btn btn-default" {{action "goToPage" p}}>{{p}}</button>
+<button class="btn btn-default" {{action "goToPage" pg}}>{{pg}}</button>
 {{/if}}
 {{/each}}

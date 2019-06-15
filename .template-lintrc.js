@@ -9,6 +9,6 @@ module.exports = {
     'table-groups': false,
     'no-unnecessary-concat': false,
     'no-html-comments': false,
-    'no-nested-interactive': false
+    'no-inline-styles': false
   },
 };
