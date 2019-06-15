@@ -37,7 +37,6 @@ export default Controller.extend(FS3Chargen, {
         
         return { 
             id: this.get('model.char.id'),
-            fullname: this.get('model.char.fullname'),
             demographics: this.get('model.char.demographics'),
             groups: this.get('model.char.groups'),
             desc: this.get('model.char.desc'),
