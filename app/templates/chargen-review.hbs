@@ -26,7 +26,7 @@
 
        {{#if model.allow_web_submit}}
          <p>If you're happy with your character, submit them for review by the game admin.</p>
-         <hr/>
+         <hr>
          <p>If you want to make any special notes about your application, you can enter them below.</p>
        
          {{textarea value=appNotes cols="80" rows=5}}
@@ -38,7 +38,7 @@
         </p>
       {{else}}
           <p>You'll need to log onto the game to complete character creation and submit your application.</p>
-          <hr/>
+          <hr>
           <p>
             {{#link-to 'chargen' class="btn btn-default"}}Back to Chargen{{/link-to}}
           </p>

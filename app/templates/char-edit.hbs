@@ -114,7 +114,7 @@
            <button class="btn btn-default" {{action 'removeProfile' profile.key}}><i class="fa fa-trash" aria-hidden="true"></i></button>
            </p>
            {{markdown-editor text=profile.text}}
-            <hr/>
+            <hr>
            {{/each}}
            
            <button class="btn btn-default" {{action 'addProfile'}}>Add Profile Section <i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -137,7 +137,7 @@
             
             {{markdown-editor text=relationship.text}}
             
-            <hr/>
+            <hr>
             {{/each}}
            
             <button class="btn btn-default" {{action 'addRelationship'}}>Add Relationship <i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -151,14 +151,14 @@
       
         <div id="files" class="tab-pane fade in">
             <div class="cg-tip">Files for your character page need to be in a folder matching your character's name.  They will show up below and be accessible in the gallery and profile image selection lists.</div>
-            <hr/>
+            <hr>
         
             <div>
             {{#each model.files as |file|}}
             
             <div class="thumbnail-gallery">
             {{#link-to 'file' file.folder file.name}}
-            {{file.path}} <img src="/game/uploads/{{file.path}}" class="thumbnail"/> 
+            {{file.path}} <img src="/game/uploads/{{file.path}}" alt="{{file.name}}" class="thumbnail">
             {{/link-to}}
             </div>
             {{/each}}

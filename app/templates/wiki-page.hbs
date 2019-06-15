@@ -3,7 +3,7 @@
 
 {{{ansi-format text=model.text}}}
 
-<hr/>
+<hr>
 
 <b>Tags:</b>  
     {{#each model.tags as |tag|}}
@@ -22,7 +22,7 @@
    {{#if model.can_edit}}
         {{#link-to 'wiki-edit' model.name class="btn btn-primary"}}Edit{{/link-to}} 
    {{else}}
-      <button class="btn btn-primary" disabled=true>Edit</button>
+      <button class="btn btn-primary" disabled="true">Edit</button>
    {{/if}} 
    
        </div>

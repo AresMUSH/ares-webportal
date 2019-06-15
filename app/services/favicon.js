@@ -6,7 +6,6 @@ export default Service.extend({
         var src = '/game/uploads/theme_images/favicon.ico';
         if (active) { 
             src = '/game/uploads/theme_images/favicon-active.ico';
-        } else {
         }
         $('link[rel="shortcut icon"]').attr('href', src);
         

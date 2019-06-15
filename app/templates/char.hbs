@@ -49,7 +49,7 @@
 </div>
 
 
-<hr/>
+<hr>
 <b>Tags:</b>  
 {{#each model.char.tags as |tag|}}
   {{#link-to 'wiki-tag' tag}}{{tag}}{{/link-to}}
@@ -84,7 +84,7 @@
        
        <div class="thumbnail-gallery">
        {{#link-to 'file' file.folder file.name}}
-       {{file.path}} <img src="/game/uploads/{{file.path}}" class="thumbnail"/> 
+       {{file.path}} <img src="/game/uploads/{{file.path}}" alt="{{file.name}}" class="thumbnail">
        {{/link-to}}
        </div>
        {{/each}}

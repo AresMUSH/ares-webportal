@@ -13,9 +13,9 @@
     <div class="panel-body">
 
         
-        <p>{{input type="text" id="name" placeholder="Name" enter="register" value=name autofocus=true }}</p>
-        <p>{{input type="password" placeholder="Password" enter="register" id="password" value=password }}</p>
-        <p>{{input type="password" placeholder="Confirm Password" enter="register" id="confirmPassword" value=confirmPassword }}</p>
+        <p>{{input type="text" id="name" placeholder="Name" enter=(action "register")  value=name autofocus=true }}</p>
+        <p>{{input type="password" placeholder="Password" enter=(action "register")  id="password" value=password }}</p>
+        <p>{{input type="password" placeholder="Confirm Password" enter=(action "register")  id="confirmPassword" value=confirmPassword }}</p>
         
         {{#if model.recaptcha}}
         {{g-recaptcha onSuccess=(action "recaptchaResolved") ref=(mut recaptchaControl) sitekey=model.recaptcha}}
