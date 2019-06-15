@@ -73,15 +73,7 @@
                  
            <p class="cg-tip">{{{ansi-format text=model.cgInfo.demographics_blurb}}}</p>
 
-                 <div class="form-group row">
-                     <div class="col-sm-3">
-                             <b>Full Name</b> 
-                     </div>
-                     <div class="col-sm-9">
-                             {{input type="text" size=25 value=model.char.fullname}}
-                     </div>
-                 </div>
-                      
+                
                  {{#each-in model.char.demographics as |key demo|}}
                  <div class="form-group row">
                      <div class="col-sm-3">

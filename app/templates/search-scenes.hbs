@@ -127,7 +127,7 @@
 
 {{#if searchResults.pages}}
 
-{{scene-list scenes=searchResults sceneTypes=model.sceneTypes filter=searchType page=page hideSearch=true goToPage=(action "goToPage")}}
+{{scene-list scenes=searchResults.scenes pages=searchResults.pages sceneTypes=model.sceneTypes filter=searchType page=page hideSearch=true goToPage=(action "goToPage")}}
 
 {{else}}
 <p>No search results.</p>

@@ -1,0 +1,58 @@
+{{title 'Account Settings'}}
+
+<h1>Account Settings</h1>
+
+<h2>Player Handle</h2>
+
+{{#if model.handle}}
+<p>Your character is linked to the handle <b>{{model.handle}}</b>.  Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your handle preferences.</p>
+{{else}}
+
+<p>AresMUSH player handles provide--at your discretion--a consistent player identity across Ares games. They also enable cross-game features like a friends list and synchronized account preferences.</p>
+
+<p>Learn more about player handles on <a href="https://aresmush.com/handles" target="_blank" rel="nofollow noopener">aresmush.com</a></p>
+
+<p>To set up a player handle:</p>
+
+<ol>
+  <li>Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a>  and register your handle account.</li>
+  <li>Go to 'My Account -> Manage Characters'.</li>
+  <li>Click 'Get A New Link Code' and copy the code it gives you.</li>
+  <li>Enter the handle name and the code below and click 'Link to Handle'.</li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        {{flash-messages}}
+        
+        <p>{{input type="text" id="handleName" placeholder="Handle Name" enter="linkHandle" value=handleName autofocus=true }}</p>
+        <p>{{input type="text" placeholder="Link Code" enter="linkHandle" id="linkCode" value=linkCode }}</p>
+        
+        <button {{action "linkHandle"}} class="btn btn-primary">Link to Handle</button>
+        
+    </div>
+</div>
+  
+{{/if}}
+
+
+<h2>Change Password</h2>
+
+<p>Enter your current password and desired new password and click 'Change Password'.</p>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        {{flash-messages}}
+        
+        <p>{{input type="password" id="password" placeholder="Current Password" enter="changePassword" value=currentPassword autofocus=true }}</p>
+        <p>{{input type="password" placeholder="Password" enter="changePassword" id="newPassword" value=newPassword }}</p>
+        <p>{{input type="password" placeholder="Confirm Password" enter="changePassword" id="confirmPassword" value=confirmPassword }}</p>
+        
+        <button {{action "changePassword"}} class="btn btn-primary">Change Password</button>
+                
+    </div>
+</div>
+
+{{outlet}}

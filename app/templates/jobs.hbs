@@ -34,7 +34,7 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-        <span href="#" role="button" class="btn btn-default">{{model.options.jobs_filter}} <span class="caret"></span></span> </a>
+        <span href="#" role="button" class="btn btn-default">{{model.jobs.jobs_filter}} <span class="caret"></span></span> </a>
         <ul class="dropdown-menu">
           <li><a href="#" {{action 'filterJobs' 'active'}}>ACTIVE</a></li>
 {{#if model.options.is_job_admin}}
@@ -42,6 +42,7 @@
           <li><a href="#" {{action 'filterJobs' 'unfinished'}}>UNFINISHED</a></li>
 {{/if}}
           <li><a href="#" {{action 'filterJobs' 'all'}}>ALL</a></li>
+          <li><a href="#" {{action 'filterJobs' 'unread'}}>UNREAD</a></li>
         </ul>
       </li>
   </ul>
@@ -79,6 +80,6 @@
       </div>
   {{/if}}
   
-{{jobs-list jobs=filteredJobs}}
+{{jobs-list jobs=filteredJobs pages=model.jobs.pages page=page goToPage=(action "goToPage")}}
 
 {{outlet}}
