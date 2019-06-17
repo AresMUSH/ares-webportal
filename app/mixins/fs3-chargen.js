@@ -105,8 +105,8 @@ export default Mixin.create({
         let magicAttr = this.get('model.char.fs3.fs3_attributes').find(a => a.name === 'Magic');
         let magicRating = magicAttr ? magicAttr.rating : 0;
 
-        if (magicRating > 1) {
-            this.charErrors.push('Magic cannot be higher than 1.');
+        if (magicRating > 2) {
+            this.charErrors.push('Magic cannot be higher than 2.');
         }
 
         let totalAttrs = this.get('attrPoints');
