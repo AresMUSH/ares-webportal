@@ -47,6 +47,12 @@
 
    <div id="gone" class="tab-pane fade in">
       {{char-group-list name="" chars=model.characters.idle}}
+
+      <a data-toggle="collapse" href="#unplayed"><button class="btn btn-default btn-collapse">Unplayed Characters</button></a>
+      <div id="unplayed" class="panel-collapse collapse">
+        {{char-group-list name="" chars=model.characters.unplayed}}
+      </div>
+
   </div>
 
    <div id="dead" class="tab-pane fade in">
