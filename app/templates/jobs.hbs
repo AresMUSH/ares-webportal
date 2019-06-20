@@ -36,40 +36,20 @@
 
         <span href="#" role="button" class="btn btn-default">{{model.jobs.jobs_filter}} <span class="caret"></span></span> </a>
         <ul class="dropdown-menu">
-          <li><a href="#" {{action 'filterJobs' 'active'}}>ACTIVE</a></li>
+          <li><a href="#" {{action 'filterJobs' 'active'}}><span class="label job-category job-category-general">&nbsp;</span> ACTIVE</a></li>
 {{#if model.options.is_job_admin}}
-          <li><a href="#" {{action 'filterJobs' 'mine'}}>MINE</a></li>
-          <li><a href="#" {{action 'filterJobs' 'unfinished'}}>UNFINISHED</a></li>
+          <li><a href="#" {{action 'filterJobs' 'mine'}}><span class="label job-category job-category-general">&nbsp;</span> MINE</a></li>
+          <li><a href="#" {{action 'filterJobs' 'unfinished'}}><span class="label job-category job-category-general">&nbsp;</span> UNFINISHED</a></li>
 {{/if}}
-          <li><a href="#" {{action 'filterJobs' 'all'}}>ALL</a></li>
-          <li><a href="#" {{action 'filterJobs' 'unread'}}>UNREAD</a></li>
+          <li><a href="#" {{action 'filterJobs' 'all'}}><span class="label job-category job-category-general">&nbsp;</span> ALL</a></li>
+          <li><a href="#" {{action 'filterJobs' 'unread'}}><span class="label job-category job-category-general">&nbsp;</span> UNREAD</a></li>
+          {{#each model.options.category_values as |category| }}
+            <li><a href="#" {{action 'filterJobs' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+          {{/each}}
+
         </ul>
       </li>
   </ul>
-
-
-
-    <ul class="nav" style="display: inline-block;">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-        <span href="#" role="button" class="btn btn-default"><span class="label job-category job-category-{{categoryFilter}}">&nbsp;</span> {{if categoryFilter categoryFilter 'ALL'}} <span class="caret"></span></span> </a>
-        <ul class="dropdown-menu">
-          <li><a href="#" {{action 'clearCategoryFilter'}}><span class="label job-category job-category-none">&nbsp;</span> ALL</a></li>
-         {{#each model.options.category_values as |category| }}
-           <li><a href="#" {{action 'categoryFilterChanged' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
-         {{/each}}
-       </ul>
-      </li>
-  </ul>
-
-    {{#each model.status_filter as |status|}}
-        <span class="label job-filter job-status job-status-{{status.name}}">&nbsp;</span> {{status.name}}
-        {{input type='checkbox' checked=status.selected disabled=status.disabled }}
-    {{/each}}
-    <br/>
-
-
 
 
 <div class="clearfix"></div>
@@ -80,6 +60,6 @@
       </div>
   {{/if}}
 
-{{jobs-list jobs=filteredJobs pages=model.jobs.pages page=page goToPage=(action "goToPage")}}
+{{jobs-list jobs=model.jobs.jobs pages=model.jobs.pages page=page goToPage=(action "goToPage")}}
 
 {{outlet}}

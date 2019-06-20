@@ -18,26 +18,6 @@ export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
         this.set('gameSocket.jobsCallback', null);
     },
     
-    afterModel: function(model) {
-      var statusFilter = [];
-      model.get('options.status_values').forEach(function(s) {
-        let hash = { name: s, selected: true, disabled: false };
-        if (s === 'DONE' && model.get('jobs.jobs_filter') != 'ALL') {
-          hash['disabled'] = true;
-          hash['selected'] = false;
-        }
-        statusFilter.pushObject(hash);
-      });
-    
-      model.set('status_filter', statusFilter);
-
-      var categoryFilter = [];
-      model.get('options.category_values').forEach(function(s) {
-        let hash = { name: s, selected: true };
-        categoryFilter.pushObject(hash);
-      });
-      model.set('category_filter', categoryFilter);
-    },
     
     model: function() {
       let api = this.get('gameApi');
