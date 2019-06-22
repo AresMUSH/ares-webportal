@@ -5,13 +5,12 @@ const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL,
     
-/*  init() {
+ init() {
       this._super(...arguments);
       this.on('routeDidChange', transition => {
         window.scrollTo(0, 0);
       });
     }
-  */
 });
 
 Router.map(function() {

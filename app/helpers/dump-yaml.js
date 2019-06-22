@@ -1,5 +1,5 @@
 import { helper } from '@ember/component/helper';
-import JsYaml from "npm:js-yaml";
+import JsYaml from "js-yaml";
 
 export function dumpYaml(params, hash) {
    
