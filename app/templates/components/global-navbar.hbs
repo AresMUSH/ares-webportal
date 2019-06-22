@@ -33,23 +33,23 @@
                   <li class="hidden-xl  hidden-lg  hidden-md">{{#link-to 'login' (query-params redirect=currentRoute)}}Login{{/link-to}}</li>
                   {{/if}}
 
-            {{#each topNavbar as |section|}}
+            {{#each topNavbar as |sec|}}
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             
-                {{section.title}} <span class="caret"></span></a>
+                {{sec.title}} <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  {{#each section.menu as |nav|}}
-                    {{#if nav.url}}
-                        <li><a href="{{nav.url}}" target="{{nav.target}}">{{{nav.title}}}</a></li>
-                    {{else if nav.divider}}
-                        <li><hr/></li>
+                  {{#each sec.menu as |navItem|}}
+                    {{#if navItem.url}}
+                        <li><a href="{{navItem.url}}" target="{{navItem.target}}">{{{navItem.title}}}</a></li>
+                    {{else if navItem.divider}}
+                        <li><hr></li>
                     {{else}}
                       <li>
-                      {{#if nav.id}}
-                        {{#link-to nav.route nav.id}}{{{nav.title}}}{{/link-to}}
+                      {{#if navItem.id}}
+                        {{#link-to navItem.route navItem.id}}{{{navItem.title}}}{{/link-to}}
                       {{else}}
-                        {{#link-to nav.route}}{{{nav.title}}}{{/link-to}}
+                        {{#link-to navItem.route}}{{{navItem.title}}}{{/link-to}}
                       {{/if}}
                       </li>
                     {{/if}}

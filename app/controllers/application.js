@@ -57,12 +57,10 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
       
       config.forEach(n => {
         let menuOK = true;
-        let error = "";
         try {
           n.menu.forEach(m => {
             let route = m.route;
             if (route && !availableRoutes.includes(route)) {
-              error = route;
               console.log(`Bad route in menu: ${route}`);
               menuOK = false;
             }

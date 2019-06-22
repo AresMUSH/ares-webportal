@@ -30,7 +30,7 @@
 
   {{/if}}
   
-    <ul class="nav" style="display: inline-block;">
+    <ul class="nav inline-block">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
@@ -41,7 +41,7 @@
           <li><a href="#" {{action 'filterJobs' 'mine'}}><span class="label job-category job-category-general">&nbsp;</span> MINE</a></li>
           <li><a href="#" {{action 'filterJobs' 'unfinished'}}><span class="label job-category job-category-general">&nbsp;</span> UNFINISHED</a></li>
 {{/if}}
-          <li><a href="#" {{action 'filterJobs' 'all'}}><span class="label job-category job-category-general">&nbsp;</span> ALL</a></li>
+              <li><a href="#" {{action 'filterJobs' 'all'}}><span class="label job-category job-category-general">&nbsp;</span> ALL</a></li>
           <li><a href="#" {{action 'filterJobs' 'unread'}}><span class="label job-category job-category-general">&nbsp;</span> UNREAD</a></li>
           {{#each model.options.category_values as |category| }}
             <li><a href="#" {{action 'filterJobs' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
@@ -51,6 +51,7 @@
       </li>
   </ul>
   
+
 
 <div class="clearfix"></div>
 

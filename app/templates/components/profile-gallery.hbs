@@ -2,7 +2,7 @@
 {{#if char.profile_gallery}}
     {{#each char.profile_gallery as |g|}}
         {{#link-to 'file' g.folder g.name}}
-        <img src="/game/uploads/{{g.path}}" class="profile-gallery">
+        <img src="/game/uploads/{{g.path}}" class="profile-gallery" alt="{{g.name}}" >
         {{/link-to}}
     {{/each}}
 {{/if}}
