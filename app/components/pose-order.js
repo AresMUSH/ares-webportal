@@ -18,7 +18,7 @@ export default Component.extend({
   
   didInsertElement: function() {
     this.updateTime();
-    let timer = window.setInterval(this.updateTime.bind(this), 1000*60);
+    let timer = window.setInterval(this.updateTime.bind(this), 1000*60*5); // Update each five mins
     this.set('timerId', timer);
   },
   
