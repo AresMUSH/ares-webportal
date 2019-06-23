@@ -51,6 +51,9 @@
       {{/each}}
     </td>
     <td>
+       <ul class="nav">
+         <li>
+           <a href="#">
         {{#if editParticipants}}
          {{#power-select-multiple selected=newParticipants options=model.characters searchField="name" onchange=(action "participantsChanged") as |char|}}
           {{char.name}}
@@ -60,6 +63,9 @@
       {{else}}
         <div class="btn btn-default" {{action (mut editParticipants) true}}>Edit</div>
       {{/if}}
+         </a>
+         </li>
+      </ul>
       
     </td>
   </tr>

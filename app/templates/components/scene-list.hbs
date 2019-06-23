@@ -1,13 +1,14 @@
+{{#if (not hideSearch)}}
 <p><b>Select Scenes:</b> 
 
-<div class="hint">Select a scene filter, or type in part of a scene name or a character name.</div>
-
-{{#power-select selected=filter options=sceneFilters onchange=(action "filterChanged") search=(action "searchScenes") as |name|}}
+{{#power-select selected=filter options=sceneFilters onchange=(action "filterChanged") as |name|}}
   {{name}}
 {{/power-select}}
 
-</p>
+{{#link-to 'search-scenes' class="btn btn-default"}}<i class="fa fa-search" aria-hidden="true"></i> Search Scenes{{/link-to}}  
 
+</p>
+{{/if}}
 
 <table class="table table-striped">
 
@@ -21,7 +22,7 @@
 
 <tbody>
 
-{{#each currentPageItems as |scene|}}
+{{#each scenes as |scene|}}
     <tr>
         <td>
         {{#link-to 'scene' scene.id}}{{scene.icdate}} - {{scene.title}}{{/link-to}}
@@ -41,11 +42,11 @@
 </tbody>
 </table>
 
-{{#each pagesList as |p|}}
+{{#each pages as |p|}}
 {{#if (eq p page)}}
-<button class="btn btn-primary" {{action "gotoPage" p}}>{{p}}</button>
+<button class="btn btn-primary" {{action "goToPage" p}}>{{p}}</button>
 {{else}}
-<button class="btn btn-default" {{action "gotoPage" p}}>{{p}}</button>
+<button class="btn btn-default" {{action "goToPage" p}}>{{p}}</button>
 {{/if}}
 {{/each}}
 

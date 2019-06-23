@@ -14,8 +14,7 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('home', { path: ''});
 
-
-  this.route('actors');
+  this.route('account');
   this.route('app-review', { path: '/app/:id' });
   this.route('census');
   this.route('census-group', { path: '/census/:filter' });
@@ -97,6 +96,7 @@ Router.map(function() {
   this.route('shutdown');
   this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
+  this.route('tos');
   this.route('who', { path: '/who'});
   this.route('wiki');
   this.route('wiki-page', { path: '/wiki/:id'});

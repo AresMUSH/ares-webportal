@@ -20,7 +20,7 @@ export default Route.extend(AuthenticatedRoute, {
              plots: api.requestMany('plots'),
              characters: api.requestMany('characters'),
              locations: api.request('sceneLocations'),
-             scenes: api.requestMany('scenes')
+             scenes: api.requestOne('scenes')
            })
            .then((model) => Ember.Object.create(model));
     }
