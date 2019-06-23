@@ -87,6 +87,7 @@
                     <div class="clearfix"></div>
                     
                  {{else}}
+                   
                      {{#if pose.is_setpose}}
                         <div class="scene-set-pose">
                         {{{ansi-format text=pose.pose}}}
@@ -98,6 +99,10 @@
                         </div>
                     {{else}}        
                         <div class="scene-pose">	
+                          {{#if pose.place_name}}
+                            <b>In {{pose.place_name}}</b>
+                          {{/if}}
+                          
                             {{{ansi-format text=pose.pose}}}
                         </div>
                     {{/if}}
@@ -131,6 +136,17 @@
             {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
             
             {{pose-order poseOrder=scene.pose_order playerName=playerName}}
+            
+            <div class="scene-pose-order">
+              <b>Places:</b>
+              {{#each places as |place|}}
+                ||
+                {{place.name}}: 
+                   {{#each place.chars as |char|}}
+                   {{char}}
+                   {{/each}}
+                 {{/each}}              
+            </div>
           {{/if}}
           
           
@@ -154,13 +170,14 @@
                       {{#if scene.can_edit}}
                       <li>{{#link-to 'scene-edit' scene.id}}Edit Scene{{/link-to}}</li>
                       <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
+                      <li><a href="#" {{action (mut selectPlace) true}}>Join a Place</a></li>
                       {{/if}}
                     
                       {{#if isApproved}}
                         {{#if (not scene.completed)}}
                     
                         {{#if rollEnabled}}
-                        <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
+                        <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Ability Roll</a></li>
                         <li><a href="#" {{action (mut selectSpendLuck) true}}>Spend Luck</a></li>
                         {{/if}}
                                          
@@ -212,20 +229,6 @@
 
     {{flash-messages}}
 
-    {{#if (and scene.can_edit selectLocation)}}
-    <div class="row">
-        <div class="col col-xs-4">
-           <p>
-                {{#power-select selected=newLocation options=locations onchange=(action "locationSelected") as |location|}}
-              {{location}}
-            {{/power-select}}
-        
-            <div class="btn btn-default" role="button" {{action 'changeLocation'}}>Select Location</div>
-        </p>
-        </div>
-    </div>
-    {{/if}}
-
         <hr>
 
 
@@ -254,7 +257,7 @@
         {{/bs-modal-simple}}
   
       {{#bs-modal-simple
-          title="Select a Skill to Roll"
+          title="Add Ability Roll"
           closeTitle="Cancel"
           submitTitle="Roll"
           size=null
@@ -262,6 +265,7 @@
           open=selectSkillRoll
           onSubmit=(action "addSceneRoll")
           onHide=(action (mut selectSkillRoll) null)}}
+          <p>Select an ability, or type one (plus modifiers, if applicable) in the box.</p>
           <select onchange={{action (mut rollString) value="target.value"}}>
             {{#each abilities as |ability|}}
               <option value={{ability}}>{{ability}}</option>
@@ -283,4 +287,43 @@
             
             <b>Reason:</b> {{input type="text" size=25 id="luckReason" enter=(action "spendLuck")  value=luckReason}}
           
+          {{/bs-modal-simple}}
+          
+  
+          {{#bs-modal-simple
+              title="Join a Place"
+              closeTitle="Cancel"
+              submitTitle="Select"
+              size=null
+              fade=false
+              open=selectPlace
+              onSubmit=(action "changePlace")
+              onHide=(action (mut selectPlace) null)}}
+              <p>Select an existing place or a name for a new one.</p>
+              <select onchange={{action (mut newPlace) value="target.value"}}>
+                {{#each places as |place|}}
+                  <option value={{place.name}}>{{place.name}}</option>
+                {{/each}}
+              </select>
+              {{input type="text" size=25 id="newPlace" enter=(action "changePlace")  value=newPlace}}
+          
+          {{/bs-modal-simple}}
+          
+
+          {{#bs-modal-simple
+              title="Change the Scene Location"
+              closeTitle="Cancel"
+              submitTitle="Select"
+              size=null
+              fade=false
+              open=selectLocation
+              onSubmit=(action "changeLocation")
+              onHide=(action (mut selectLocation) null)}}
+              <p>Select a location from the list or type one into the bottom box.</p>
+              <p>
+                {{#power-select selected=newLocation options=locations onchange=(action "locationSelected") as |location|}}
+              {{location}}
+            {{/power-select}}
+             <b>Custom Location:</b> {{input type="text" size=25 id="newLocation" enter=(action "changeLocation")  value=newLocation}}
+               </p>
           {{/bs-modal-simple}}

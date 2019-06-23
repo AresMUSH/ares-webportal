@@ -10,8 +10,10 @@ export default Component.extend(AuthenticatedController, {
     selectSkillRoll: false,
     selectSpendLuck: false,
     selectLocation: false,
+    selectPlace: false,
     newLocation: null,
     luckReason: null,
+    newPlace: null,
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
@@ -205,6 +207,27 @@ export default Component.extend(AuthenticatedController, {
 
           api.requestOne('spendLuck', { scene_id: this.get('scene.id'),
               reason: luckReason }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+          });
+      },
+      
+      changePlace() {
+          let api = this.get('gameApi');
+          let newPlace = this.get('newPlace');
+    
+          this.set('selectPlace', false);
+          this.set('newPlace', null);
+          
+          if (!newPlace) {
+              this.get('flashMessages').danger("You haven't selected a place.");
+              return;
+          }
+
+          api.requestOne('changePlace', { scene_id: this.get('scene.id'),
+              place_name: newPlace }, null)
           .then( (response) => {
               if (response.error) {
                   return;
