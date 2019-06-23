@@ -10,6 +10,7 @@ export default Component.extend(AuthenticatedController, {
     selectSkillRoll: false,
     selectSpendLuck: false,
     selectLocation: false,
+    showPlaces: false,
     selectPlace: false,
     newLocation: null,
     luckReason: null,
@@ -216,7 +217,11 @@ export default Component.extend(AuthenticatedController, {
       
       changePlace() {
           let api = this.get('gameApi');
-          let newPlace = this.get('newPlace');
+
+          // Needed because the onChange event doesn't get triggered when the list is 
+          // first loaded, so the place string is empty.
+          let defaultPlace = this.get('places')[0] ? this.get('places')[0].name : null;
+          let newPlace = this.get('newPlace') || defaultPlace;
     
           this.set('selectPlace', false);
           this.set('newPlace', null);
@@ -232,6 +237,19 @@ export default Component.extend(AuthenticatedController, {
               if (response.error) {
                   return;
               }
+          });
+      },
+      
+      viewPlaces() {
+          let api = this.get('gameApi');
+
+          api.requestOne('viewPlaces', { scene_id: this.get('scene.id') })
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              this.set('places', response.places);
+              this.set('showPlaces', true);
           });
       },
       
