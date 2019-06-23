@@ -159,16 +159,14 @@
                       {{#if scene.can_edit}}
                       <li>{{#link-to 'scene-edit' scene.id}}Edit Scene{{/link-to}}</li>
                       <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
-                      <li><a href="#" {{action 'viewPlaces'}}>View Places</a></li>
-                      <li><a href="#" {{action (mut selectPlace) true}}>Join a Place</a></li>
+                      {{live-scene-places scene=scene}}
                       {{/if}}
                     
                       {{#if isApproved}}
                         {{#if (not scene.completed)}}
                     
                         {{#if rollEnabled}}
-                        <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Ability Roll</a></li>
-                        <li><a href="#" {{action (mut selectSpendLuck) true}}>Spend Luck</a></li>
+                        {{live-scene-fs3 abilities=abilities scene=scene}}
                         {{/if}}
                                          
                          <li role="separator" class="divider"></li>
@@ -222,117 +220,44 @@
 
 
     {{#bs-modal-simple
+      title="Confirm Delete"
+      closeTitle="Cancel"
+      submitTitle="Confirm"
+      size=null
+      fade=false
+      open=confirmDeleteScenePose
+      onSubmit=(action "deleteScenePose")
+      onHide=(action (mut confirmDeleteScenePose) null)}}
+      You're about to delete this scene pose. This cannot be undone.  Are you sure?
+    {{/bs-modal-simple}}
+    
+    {{#bs-modal-simple
         title="Confirm Delete"
         closeTitle="Cancel"
         submitTitle="Confirm"
         size=null
         fade=false
-        open=confirmDeleteScenePose
-        onSubmit=(action "deleteScenePose")
-        onHide=(action (mut confirmDeleteScenePose) null)}}
-        You're about to delete this scene pose. This cannot be undone.  Are you sure?
-      {{/bs-modal-simple}}
-      
-      {{#bs-modal-simple
-          title="Confirm Delete"
-          closeTitle="Cancel"
-          submitTitle="Confirm"
-          size=null
-          fade=false
-          open=confirmDeleteScene
-          onSubmit=(action "deleteScene")
-          onHide=(action (mut confirmDeleteScene) null)}}
-          You're about to delete this scene. This cannot be undone.  Are you sure?
-        {{/bs-modal-simple}}
-  
-      {{#bs-modal-simple
-          title="Add Ability Roll"
-          closeTitle="Cancel"
-          submitTitle="Roll"
-          size=null
-          fade=false
-          open=selectSkillRoll
-          onSubmit=(action "addSceneRoll")
-          onHide=(action (mut selectSkillRoll) null)}}
-          <p>Select an ability, or type one (plus modifiers, if applicable) in the box.</p>
-          <select onchange={{action (mut rollString) value="target.value"}}>
-            {{#each abilities as |ability|}}
-              <option value={{ability}}>{{ability}}</option>
-            {{/each}}
-          </select>
-          {{input type="text" size=25 id="rollString" enter=(action "addSceneRoll")  value=rollString}}
-          
-        {{/bs-modal-simple}}
-        
-        {{#bs-modal-simple
-            title="Spend a Luck Point"
-            closeTitle="Cancel"
-            submitTitle="Spend"
-            size=null
-            fade=false
-            open=selectSpendLuck
-            onSubmit=(action "spendLuck")
-            onHide=(action (mut selectSpendLuck) null)}}
-            
-            <b>Reason:</b> {{input type="text" size=25 id="luckReason" enter=(action "spendLuck")  value=luckReason}}
-          
-          {{/bs-modal-simple}}
-          
-  
-          {{#bs-modal-simple
-              title="Join a Place"
-              closeTitle="Cancel"
-              submitTitle="Select"
-              size=null
-              fade=false
-              open=selectPlace
-              onSubmit=(action "changePlace")
-              onHide=(action (mut selectPlace) null)}}
-              <p>Select an existing place or a name for a new one.</p>
-              <select onchange={{action (mut newPlace) value="target.value"}}>
-                {{#each places as |place|}}
-                  <option value={{place.name}}>{{place.name}} -- 
-                  {{#each place.chars as |char|}}
-                  {{char.name}}
-                  {{/each}}
-                  </option>
-                {{/each}}
-              </select>
-              {{input type="text" size=25 id="newPlace" enter=(action "changePlace")  value=newPlace}}
-          
-          {{/bs-modal-simple}}
-          
+        open=confirmDeleteScene
+        onSubmit=(action "deleteScene")
+        onHide=(action (mut confirmDeleteScene) null)}}
+        You're about to delete this scene. This cannot be undone.  Are you sure?
+    {{/bs-modal-simple}}
 
-          {{#bs-modal-simple
-              title="Change the Scene Location"
-              closeTitle="Cancel"
-              submitTitle="Select"
-              size=null
-              fade=false
-              open=selectLocation
-              onSubmit=(action "changeLocation")
-              onHide=(action (mut selectLocation) null)}}
-              <p>Select a location from the list or type one into the bottom box.</p>
-              <p>
-                {{#power-select selected=newLocation options=locations onchange=(action "locationSelected") as |location|}}
-              {{location}}
-            {{/power-select}}
-             <b>Custom Location:</b> {{input type="text" size=25 id="newLocation" enter=(action "changeLocation")  value=newLocation}}
-               </p>
-          {{/bs-modal-simple}}
+    {{#bs-modal-simple
+        title="Change the Scene Location"
+        closeTitle="Cancel"
+        submitTitle="Select"
+        size=null
+        fade=false
+        open=selectLocation
+        onSubmit=(action "changeLocation")
+        onHide=(action (mut selectLocation) null)}}
+        <p>Select a location from the list or type one into the bottom box.</p>
+        <p>
+          {{#power-select selected=newLocation options=locations onchange=(action "locationSelected") as |location|}}
+        {{location}}
+      {{/power-select}}
+       <b>Custom Location:</b> {{input type="text" size=25 id="newLocation" enter=(action "changeLocation")  value=newLocation}}
+         </p>
+    {{/bs-modal-simple}}
           
-          {{#bs-modal-simple
-              title="View Places"
-              closeTitle="Done"
-              size=null
-              fade=false
-              open=showPlaces
-              onHide=(action (mut showPlaces) null)}}
-              {{#each places as |place|}}
-                <p><b>{{place.name}}</b></p>
-                {{#each place.chars as |char|}}
-                {{char-icon-inline char=char}}
-                {{/each}}
-                <hr>
-              {{/each}}
-          {{/bs-modal-simple}}

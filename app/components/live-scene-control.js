@@ -1,10 +1,8 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
-import LiveScenePlaces from 'ares-webportal/mixins/live-scene-places';
-import LiveSceneFS3 from 'ares-webportal/mixins/live-scene-fs3';
 
-export default Component.extend(AuthenticatedController, LiveScenePlaces, LiveSceneFS3, {
+export default Component.extend(AuthenticatedController, {
     scenePose: '',
     rollString: null,
     confirmDeleteScenePose: false,

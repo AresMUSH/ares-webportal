@@ -1,0 +1,36 @@
+<li><a href="#" {{action (mut selectSkillRoll) true}}>Add Ability Roll</a></li>
+<li><a href="#" {{action (mut selectSpendLuck) true}}>Spend Luck</a></li>
+
+{{#bs-modal-simple
+  title="Spend a Luck Point"
+  closeTitle="Cancel"
+  submitTitle="Spend"
+  size=null
+  fade=false
+  open=selectSpendLuck
+  onSubmit=(action "spendLuck")
+  onHide=(action (mut selectSpendLuck) null)}}
+  
+  <b>Reason:</b> {{input type="text" size=25 id="luckReason" enter=(action "spendLuck")  value=luckReason}}
+
+{{/bs-modal-simple}}
+
+
+{{#bs-modal-simple
+    title="Add Ability Roll"
+    closeTitle="Cancel"
+    submitTitle="Roll"
+    size=null
+    fade=false
+    open=selectSkillRoll
+    onSubmit=(action "addSceneRoll")
+    onHide=(action (mut selectSkillRoll) null)}}
+    <p>Select an ability, or type one (plus modifiers, if applicable) in the box.</p>
+    <select onchange={{action (mut rollString) value="target.value"}}>
+      {{#each abilities as |ability|}}
+        <option value={{ability}}>{{ability}}</option>
+      {{/each}}
+    </select>
+    {{input type="text" size=25 id="rollString" enter=(action "addSceneRoll")  value=rollString}}
+
+  {{/bs-modal-simple}}

@@ -1,9 +1,14 @@
-import Mixin from '@ember/object/mixin';
+import Component from '@ember/component';
+import { inject as service } from '@ember/service';
 
-export default Mixin.create({
-    showPlaces: false,
-    selectPlace: false,
-    newPlace: null,
+export default Component.extend({
+  tagName: '',
+  gameApi: service(),
+  flashMessages: service(),
+
+  showPlaces: false,
+  selectPlace: false,
+  newPlace: null,
 
   actions: {
 
@@ -12,7 +17,7 @@ export default Mixin.create({
 
           // Needed because the onChange event doesn't get triggered when the list is 
           // first loaded, so the place string is empty.
-          let defaultPlace = this.get('places')[0] ? this.get('places')[0].name : null;
+          let defaultPlace = this.get('scene.places')[0] ? this.get('scene.places')[0].name : null;
           let newPlace = this.get('newPlace') || defaultPlace;
     
           this.set('selectPlace', false);
@@ -40,7 +45,7 @@ export default Mixin.create({
               if (response.error) {
                   return;
               }
-              this.set('places', response.places);
+              this.set('scene.places', response.places);
               this.set('showPlaces', true);
           });
       }
