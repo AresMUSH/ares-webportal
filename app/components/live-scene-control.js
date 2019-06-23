@@ -8,8 +8,10 @@ export default Component.extend(AuthenticatedController, {
     confirmDeleteScenePose: false,
     confirmDeleteScene: false,
     selectSkillRoll: false,
+    selectSpendLuck: false,
     selectLocation: false,
     newLocation: null,
+    luckReason: null,
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
@@ -189,10 +191,30 @@ export default Component.extend(AuthenticatedController, {
           });
       },
       
+      spendLuck() {
+          let api = this.get('gameApi');
+          let luckReason = this.get('luckReason');
+    
+          this.set('selectSpendLuck', false);
+          this.set('luckReason', null);
+          
+          if (!luckReason) {
+              this.get('flashMessages').danger("You haven't given a reason for your luck spend.");
+              return;
+          }
+
+          api.requestOne('spendLuck', { scene_id: this.get('scene.id'),
+              reason: luckReason }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+          });
+      },
+      
       scrollDown() {
         this.sendAction('scrollScene');
       },
-      
       
       pauseScroll() {
         this.sendAction('setScroll', false);

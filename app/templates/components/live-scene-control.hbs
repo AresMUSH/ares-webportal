@@ -161,6 +161,7 @@
                     
                         {{#if rollEnabled}}
                         <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
+                        <li><a href="#" {{action (mut selectSpendLuck) true}}>Spend Luck</a></li>
                         {{/if}}
                                          
                          <li role="separator" class="divider"></li>
@@ -269,3 +270,17 @@
           {{input type="text" size=25 id="rollString" enter=(action "addSceneRoll")  value=rollString}}
           
         {{/bs-modal-simple}}
+        
+        {{#bs-modal-simple
+            title="Spend a Luck Point"
+            closeTitle="Cancel"
+            submitTitle="Spend"
+            size=null
+            fade=false
+            open=selectSpendLuck
+            onSubmit=(action "spendLuck")
+            onHide=(action (mut selectSpendLuck) null)}}
+            
+            <b>Reason:</b> {{input type="text" size=25 id="luckReason" enter=(action "spendLuck")  value=luckReason}}
+          
+          {{/bs-modal-simple}}
