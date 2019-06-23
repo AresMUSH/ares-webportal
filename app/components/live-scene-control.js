@@ -1,20 +1,16 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
+import LiveScenePlaces from 'ares-webportal/mixins/live-scene-places';
+import LiveSceneFS3 from 'ares-webportal/mixins/live-scene-fs3';
 
-export default Component.extend(AuthenticatedController, {
+export default Component.extend(AuthenticatedController, LiveScenePlaces, LiveSceneFS3, {
     scenePose: '',
     rollString: null,
     confirmDeleteScenePose: false,
     confirmDeleteScene: false,
-    selectSkillRoll: false,
-    selectSpendLuck: false,
     selectLocation: false,
-    showPlaces: false,
-    selectPlace: false,
     newLocation: null,
-    luckReason: null,
-    newPlace: null,
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
@@ -126,29 +122,6 @@ export default Component.extend(AuthenticatedController, {
           });
       },
       
-      addSceneRoll() {
-          let api = this.get('gameApi');
-          
-          // Needed because the onChange event doesn't get triggered when the list is 
-          // first loaded, so the roll string is empty.
-          let rollString = this.get('rollString') || this.get('abilities')[0];
-          
-          if (!rollString) {
-              this.get('flashMessages').danger("You haven't selected an ability to roll.");
-              return;
-          }
-          this.set('selectSkillRoll', false);
-          this.set('rollString', null);
-
-          api.requestOne('addSceneRoll', { scene_id: this.get('scene.id'),
-              roll_string: rollString })
-          .then( (response) => {
-              if (response.error) {
-                  return;
-              }
-          });
-      },
-      
       changeSceneStatus(status) {
           let api = this.get('gameApi');
           if (status === 'share') {
@@ -191,65 +164,6 @@ export default Component.extend(AuthenticatedController, {
               if (option) {
                 this.sendAction('refresh'); 
               }
-          });
-      },
-      
-      spendLuck() {
-          let api = this.get('gameApi');
-          let luckReason = this.get('luckReason');
-    
-          this.set('selectSpendLuck', false);
-          this.set('luckReason', null);
-          
-          if (!luckReason) {
-              this.get('flashMessages').danger("You haven't given a reason for your luck spend.");
-              return;
-          }
-
-          api.requestOne('spendLuck', { scene_id: this.get('scene.id'),
-              reason: luckReason }, null)
-          .then( (response) => {
-              if (response.error) {
-                  return;
-              }
-          });
-      },
-      
-      changePlace() {
-          let api = this.get('gameApi');
-
-          // Needed because the onChange event doesn't get triggered when the list is 
-          // first loaded, so the place string is empty.
-          let defaultPlace = this.get('places')[0] ? this.get('places')[0].name : null;
-          let newPlace = this.get('newPlace') || defaultPlace;
-    
-          this.set('selectPlace', false);
-          this.set('newPlace', null);
-          
-          if (!newPlace) {
-              this.get('flashMessages').danger("You haven't selected a place.");
-              return;
-          }
-
-          api.requestOne('changePlace', { scene_id: this.get('scene.id'),
-              place_name: newPlace }, null)
-          .then( (response) => {
-              if (response.error) {
-                  return;
-              }
-          });
-      },
-      
-      viewPlaces() {
-          let api = this.get('gameApi');
-
-          api.requestOne('viewPlaces', { scene_id: this.get('scene.id') })
-          .then( (response) => {
-              if (response.error) {
-                  return;
-              }
-              this.set('places', response.places);
-              this.set('showPlaces', true);
           });
       },
       

@@ -135,8 +135,8 @@
           
             {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
             
-            {{pose-order poseOrder=scene.pose_order playerName=playerName}}
-
+              {{pose-order poseOrder=scene.pose_order playerName=playerName}}
+            
           {{/if}}
           
           
@@ -144,7 +144,6 @@
       {{else}}
            <p>You must be approved to join a scene.</p>
       {{/if}}
-    
     
     
       <div class="row">

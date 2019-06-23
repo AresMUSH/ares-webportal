@@ -6,6 +6,10 @@ export default Component.extend({
   tagName: 'span',
   timerId: null,
   
+  watchOrder: Ember.observer('poseOrder.@each.time', function(){
+    this.updateTime();
+  }),
+  
   updateTime: function() {
     this.get('poseOrder').forEach(po => {
       Ember.set(po, 'timeString', timeDiff({}, { time: po.time }));
@@ -14,7 +18,7 @@ export default Component.extend({
   
   didInsertElement: function() {
     this.updateTime();
-    let timer = window.setInterval(this.updateTime.bind(this), 1000*60*5); // Five minute timer.
+    let timer = window.setInterval(this.updateTime.bind(this), 1000*60);
     this.set('timerId', timer);
   },
   
