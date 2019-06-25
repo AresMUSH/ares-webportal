@@ -108,6 +108,7 @@ Router.map(function() {
   this.route('spells', { path: '/spells'});
   this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
+  this.route('tos');
   this.route('who', { path: '/who'});
   this.route('wiki');
   this.route('wiki-page', { path: '/wiki/:id'});
