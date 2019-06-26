@@ -1,6 +1,7 @@
-<li><a href="#" {{action 'viewPlaces'}}>View Places</a></li>
-<li><a href="#" {{action (mut selectPlace) true}}>Join a Place</a></li>
-
+{{#if scene.places}}
+  <li><a href="#" {{action 'viewPlaces'}}>View Places</a></li>
+  <li><a href="#" {{action (mut selectPlace) true}}>Join a Place</a></li>
+{{/if}}
           
 {{#bs-modal-simple
   title="View Places"

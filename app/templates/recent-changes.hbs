@@ -20,6 +20,13 @@
        <td>
            {{change.author}}
        </td>
+       <td>
+         {{#if (eq change.change_type 'char')}}
+         {{#link-to 'char-source' change.name change.id}}(history){{/link-to}}
+         {{else}}
+         {{#link-to 'wiki-source' change.name change.id}}(history){{/link-to}}
+         {{/if}}
+       </td>
    </tr>
    {{/each}}
 

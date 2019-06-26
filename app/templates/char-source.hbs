@@ -4,37 +4,46 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        Other Versions
+        Other Versions &nbsp;
+        <a data-toggle="collapse" href="#history" class="btn btn-default btn-collapse">Show/Hide</a>
+        
     </div>
-
-<ol>
-    {{#each model.versions as |v|}}
+    <div id="history" class="panel-collapse collapse">
+      <div class="panel-body">
+   
+          <ol>
+              {{#each model.versions as |v|}}
     
-    <li>
-    {{#link-to 'char-source' model.char_id v.id}}
-    {{#if (eq v.id model.current_version)}}
-    <i class="far fa-dot-circle fa-fw" aria-hidden="true"></i>
-    {{else}}
-    <i class="far fa-circle fa-fw"></i>
-    {{/if}}
+              <li>
+              {{#link-to 'char-source' model.char_id v.id}}
+              {{#if (eq v.id model.current_version)}}
+              <i class="far fa-dot-circle fa-fw" aria-hidden="true"></i>
+              {{else}}
+              <i class="far fa-circle fa-fw"></i>
+              {{/if}}
     
-    {{v.created}} - {{v.author}}
-    {{/link-to}}
-    </li>
-    {{/each}}
-</ol>
-
+              {{v.created}} - {{v.author}}
+              {{/link-to}}
+              </li>
+              {{/each}}
+          </ol>
+        </div>
+    </div>
 </div>
 
             
 <div class="panel panel-default">
     <div class="panel-heading">
-        Selected Version
+        Selected Version &nbsp;
+        <a data-toggle="collapse" href="#source" class="btn btn-default btn-collapse">Show/Hide</a>
+        
     </div>
-    <div class="panel-body">
-        <pre>
-        {{{model.text}}}
-        </pre>
+    <div id="source" class="panel-collapse collapse">
+      <div class="panel-body">
+          <pre>
+          {{{model.text}}}
+          </pre>
+      </div>
     </div>
 </div>
 
