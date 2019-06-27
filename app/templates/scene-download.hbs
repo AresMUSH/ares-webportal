@@ -1,8 +1,19 @@
 <h1>{{model.title}}</h1>
 
+{{#if model.shared}}
+<p>Scene is already shared, so you can only download the finished, clean log.</p> 
+{{else}}
+<p>
+  {{input type='checkbox' checked=showOoc click=(action 'toggleOoc')}} Show OOC <br/>
+  {{input type='checkbox' checked=showSystem click=(action 'toggleSystem')}} Show System Messages (rolls, combat, etc.)
+  
+</p>
+
+{{/if}}
+
 <p><a href="#" {{action 'download'}} class="btn btn-primary">Download</a></p>
 
-<br><hr><br>
+<hr>
 
 <pre>
 {{{ansi-format text=model.log}}}
