@@ -115,7 +115,7 @@
               {{#if model.app.game.disabled_plugins.fs3skills}}
                 <p>Your game does not support setting abilities/skills through the web chargen.  You'll need to complete chargen using in-game commands.</p>
               {{else}}
-                  {{chargen-fs3 model=model anyGroupMissing=anyGroupMissing charErrors=charErrors fs3Data=fs3Data}}
+                  {{fs3-chargen model=model anyGroupMissing=anyGroupMissing charErrors=charErrors fs3Data=fs3Data}}
               {{/if}}
               
             </div>
