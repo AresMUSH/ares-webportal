@@ -25,6 +25,11 @@
     open=selectSkillRoll
     onSubmit=(action "addSceneRoll")
     onHide=(action (mut selectSkillRoll) null)}}
+
+    <p class="hint">For both types of rolls, you can use a rating number to roll for a NPC. An average attribute is automatically factored in, so rolling a skill of "3" will roll 5 dice total for the NPC.</p>
+    
+
+    <p><b>Regular Roll</b></p>
     <p>Select an ability, or type one (plus modifiers, if applicable) in the box.</p>
     <select onchange={{action (mut rollString) value="target.value"}}>
       {{#each abilities as |ability|}}
@@ -33,4 +38,16 @@
     </select>
     {{input type="text" size=25 id="rollString" enter=(action "addSceneRoll")  value=rollString}}
 
+   <hr>
+    
+    <p><b>Opposed Roll</b></p>
+    <p>Enter two character and ability names.</p>
+    <p>
+      Character: {{input type="text" size=15 id="vsName1" enter=(action "addSceneRoll") value=vsName1}} 
+      Ability: {{input type="text" size=15 id="vsRoll1" enter=(action "addSceneRoll") value=vsRoll1}}<br/>
+     vs<br/>
+      Character: {{input type="text" size=15 id="vsName2" enter=(action "addSceneRoll") value=vsName2}} 
+      Ability: {{input type="text" size=15 id="vsRoll2" enter=(action "addSceneRoll") value=vsRoll2}}<br/>
+    </p>
+    
   {{/bs-modal-simple}}
