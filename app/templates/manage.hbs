@@ -1,18 +1,51 @@
 {{title 'Admin Tasks'}}
 <h1>Admin Tasks</h1>
-        <div class="alert alert-info">
-            <p>This button will redeploy the website.  You need to redeploy after any website code changes.</p>
+
+<h2>Upgrade the Game</h2>        
+
+<p>This button will take upgrade your game to the latest Ares version.</p>
+
+<div class="alert alert-warning">
+  This is intended for use when:
+  
+  <ul>
+    <li>You <b>do not</b> have any custom code changes. -or-</li>
+    <li>You have already updated your GitHub fork and resolved any code conflicts.</li>
+  </ul>
+</div>
+
+    <p><button class="btn btn-primary" {{action 'upgrade'}}>Upgrade</button></p>
+
+{{#if upgradeMessage}}
+<div class="alert alert-success">
+<p>{{upgradeMessage}}</p>
+</div>
+{{/if}}
+
+<p><hr></p>
+
+<h2>Deploy the Website</h2>
+    
+    
+    <p>This button will redeploy the website.  You need to redeploy after any website code changes.</p>
         
-            <p><button class="btn btn-info" {{action 'deploy'}}>Redeploy Website</button></p>
-        </div>
+    <p><button class="btn btn-primary" {{action 'deploy'}}>Redeploy Website</button></p>
+
+{{#if deployMessage}}
+<div class="alert alert-success">
+<p>{{deployMessage}}</p>
+</div>
+{{/if}}
+
+<p><hr></p>
         
-        
+<h2>Shut Down the Game</h2>
 
     <div class="alert alert-danger">
         <p>This button will shut down your game.  You can use it if the in-game <code>shutdown</code> command isn't working.  You will have to log into the server shell to restart the game.</p>
+    </div>
         
         <p><button class="btn btn-danger" {{action 'shutdown'}}>Shutdown</button></p>
-    </div>
 
 
 {{outlet}}

@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import JsYaml from "npm:js-yaml";
+import JsYaml from "js-yaml";
 
 export default Component.extend({
     text: '',

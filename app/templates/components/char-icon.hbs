@@ -3,9 +3,9 @@
 <div class="log-icon-container">
     {{#link-to "char" char.name}}
        {{#if char.icon}}
-        <img class="log-icon" src="/game/uploads/{{char.icon}}" />
+        <img alt="{{char.name}}'s icon" class="log-icon" src="/game/uploads/{{char.icon}}" >
        {{else}}
-       <img class="log-icon" src="/game/uploads/theme_images/noicon.png" />
+       <img alt="{{char.name}}'s icon" class="log-icon" src="/game/uploads/theme_images/noicon.png" >
        {{/if}}
     {{/link-to}}
 </div>

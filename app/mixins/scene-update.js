@@ -23,7 +23,7 @@ export default Mixin.create({
         poseData.can_delete = true;
       }
       poses.pushObject(poseData);
-      scene.set('pose_order', poseData.pose_order);
+      scene.get('pose_order').setObjects(poseData.pose_order);
     } else if (activityType == 'pose_updated') {
       let poseData = JSON.parse(activityData);
       let poses = scene.get('poses');

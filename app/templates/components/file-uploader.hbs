@@ -11,8 +11,7 @@
         <input type="file" 
            multiple="true" 
            accept="image/*" 
-           onchange={{action "filesSelected"}}
-        />
+           onchange={{action "filesSelected"}}>
         
         {{else}}
 
@@ -22,7 +21,7 @@
         
             {{#each files as |f|}}
             <tr>
-                <td><img class="upload-preview" src="{{f.url}}" /></td>
+                <td><img class="upload-preview" alt="preview image" src="{{f.url}}" ></td>
                 <td>
                     {{#if (not f.upload_success)}}
                     

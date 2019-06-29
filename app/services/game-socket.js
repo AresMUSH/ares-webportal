@@ -182,17 +182,9 @@ export default Service.extend({
             var formatted_msg = ansi_up.ansi_to_html(data.args.message, { use_classes: true });
             var notify = true;
             if (notification_type == "new_mail") {
-              var mail_badge = $('#mailBadge');
-              var mail_count = mail_badge.text() || '0';
-              mail_count = parseInt( mail_count );
-              mail_badge.text(mail_count + 1);                
+              // Deprecated            
             }
             else if (notification_type == "job_update") {
-                var job_badge = $('#jobBadge');
-                var job_count = job_badge.text() || '0';
-                job_count = parseInt( job_count );
-                job_badge.text(job_count + 1);
-                
                 if (this.get('jobsCallback')) {
                     this.get('jobsCallback')(data.args.message);
                 }
@@ -215,6 +207,11 @@ export default Service.extend({
                     this.get('sceneCallback')(data.args.message, data.args.timestamp);
                 }
                 notify = false;
+            }
+            else if (notification_type == "notification_update") {
+              var notification_badge = $('#notificationBadge');
+              notification_badge.text(data.args.message);
+              notify = false;
             }
             
             if (notify) {

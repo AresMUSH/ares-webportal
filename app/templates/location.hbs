@@ -3,16 +3,16 @@
 
 <h2>Area Directory</h2>
 
-<a data-toggle="collapse" href="#directory"><button class="btn btn-default btn-collapse">Show/Hide Directory</button></a>
+<a data-toggle="collapse" href="#directory" class="btn btn-default btn-collapse">Show/Hide Directory</a>
 <div id="directory" class="panel-collapse collapse">
     <ul>
-    {{#each model.directory as |a| }}
-      {{area-directory area=a}}
+    {{#each model.directory as |area| }}
+      {{area-directory area=area}}
     {{/each}}
     </ul>
 </div>
 
-<br/><br/>
+<br><br>
 
 {{#if model.area.parent}}
 <p><b>Parent Area:</b> {{#link-to 'location' model.area.parent.id}}{{model.area.parent.name}}{{/link-to}}</p>
