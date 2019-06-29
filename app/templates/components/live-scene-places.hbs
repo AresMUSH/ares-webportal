@@ -1,0 +1,44 @@
+{{#if scene.places}}
+  <li><a href="#" {{action 'viewPlaces'}}>View Places</a></li>
+  <li><a href="#" {{action (mut selectPlace) true}}>Join a Place</a></li>
+{{/if}}
+          
+{{#bs-modal-simple
+  title="View Places"
+  closeTitle="Done"
+  size=null
+  fade=false
+  open=showPlaces
+  onHide=(action (mut showPlaces) null)}}
+  {{#each scene.places as |place|}}
+    <p><b>{{place.name}}</b></p>
+    {{#each place.chars as |char|}}
+    {{char-icon-inline char=char}}
+    {{/each}}
+    <hr>
+  {{/each}}
+{{/bs-modal-simple}}
+
+
+{{#bs-modal-simple
+  title="Join a Place"
+  closeTitle="Cancel"
+  submitTitle="Select"
+  size=null
+  fade=false
+  open=selectPlace
+  onSubmit=(action "changePlace")
+  onHide=(action (mut selectPlace) null)}}
+  <p>Select an existing place or a name for a new one.</p>
+  <select onchange={{action (mut newPlace) value="target.value"}}>
+    {{#each scene.places as |place|}}
+      <option value={{place.name}}>{{place.name}} -- 
+      {{#each place.chars as |char|}}
+      {{char.name}}
+      {{/each}}
+      </option>
+    {{/each}}
+  </select>
+  {{input type="text" size=25 id="newPlace" enter=(action "changePlace")  value=newPlace}}
+
+{{/bs-modal-simple}}

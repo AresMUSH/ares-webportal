@@ -1,8 +1,8 @@
 {{head-layout}}
-{{head-layout}}
 {{title model.game.name}}
 <div class="container-fluid">
     <div class="header-wrap">
+
 
        <div class="title-wrap">
        
@@ -15,22 +15,32 @@
                   <div class="text-right user-bar">
                    {{#if isAuthenticated}}
                        <p>Welcome, {{currentUser.name}}.</p>
-                       <p>{{#link-to 'char' currentUser.name}}Profile{{/link-to}} |
-                           {{#link-to 'mail'}}Mail
-                           {{#if model.unread_mail}}
-                           <span class="label label-pill label-primary" id="mailBadge">{{model.unread_mail}}</span>
+                       <p>
+                           {{#link-to 'notifications'}}
+                           {{#if model.notification_count}}
+                               <span class="label label-pill label-primary"><i class="fa fa-bell" aria-hidden="true"></i>
+                               <span id="notificationBadge">{{model.notification_count}}</span>
+                               </span>
+                           {{else}}
+                              <i class="fa fa-bell" aria-hidden="true"></i>
                            {{/if}}
-                           {{/link-to}}
-                           |
+                           {{/link-to}} 
+                            |
+                           {{#link-to 'char' currentUser.name}}
+                             <i class="fa fa-user" aria-hidden="true"></i>
+                           {{/link-to}} |
+                           {{#link-to 'mail'}}
+                             <i class="fa fa-envelope" aria-hidden="true"></i>
+                           {{/link-to}} |
                            {{#link-to 'jobs'}}
-                                {{#if model.jobs_admin}}Jobs{{else}}Requests{{/if}}
-                                {{#if model.job_activity}}
-                                    <span class="label label-pill label-primary" id="jobBadge">{{model.job_activity}}</span>
-                                {{/if}}
+                                <i class="fa fa-list" aria-hidden="true"></i>
                            {{/link-to}}
-                           
-                           | {{#link-to 'account'}}Account{{/link-to}}
-                           | {{#link-to 'logout'}}Logout{{/link-to}}
+                           | {{#link-to 'account'}}
+                             <i class="fa fa-cogs" aria-hidden="true"></i>
+                           {{/link-to}}
+                           | {{#link-to 'logout'}}
+                             <i class="fa fa-sign-out-alt" aria-hidden="true"></i> 
+                           {{/link-to}}
                        </p>
                     {{else}}
                         <p>{{#link-to 'login' (query-params redirect=currentRoute)}}Login{{/link-to}}

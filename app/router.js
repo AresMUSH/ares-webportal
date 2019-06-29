@@ -5,9 +5,11 @@ const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL,
     
-    didTransition() {
+ init() {
       this._super(...arguments);
-      window.scrollTo(0, 0);
+      this.on('routeDidChange', transition => {
+        window.scrollTo(0, 0);
+      });
     }
 });
 
@@ -43,6 +45,8 @@ Router.map(function() {
   this.route('forum-category', { path: '/forum/:category_id'});
   this.route('forum-topic', { path: '/forum/:category_id/:topic_id'});
   this.route('forum-create-post', { path: '/forum/:category_id/create-post' })
+  this.route('fs3-limits');
+  this.route('fs3-xp-costs');
   this.route('fs3combat-gear', { path: '/fs3combat/gear/' });
   this.route('fs3combat-gear-detail', { path: '/fs3combat/gear/:type/:name' })
   this.route('fs3skills-abilities', { path: '/fs3skills/abilities' });
@@ -64,6 +68,7 @@ Router.map(function() {
   this.route('mail-message', { path: '/mail/:id'});
   this.route('mail-send');
   this.route('manage');
+  this.route('notifications');
   this.route('play');
   this.route('players', { path: '/players'});
   this.route('player', { path: '/player/:id'});
@@ -96,6 +101,7 @@ Router.map(function() {
   this.route('shutdown');
   this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
+  this.route('tos');
   this.route('who', { path: '/who'});
   this.route('wiki');
   this.route('wiki-page', { path: '/wiki/:id'});

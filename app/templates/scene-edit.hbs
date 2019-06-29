@@ -21,7 +21,7 @@
           <label for="title" class="col-form-label">Title:</label>
       </div>
       <div class="col-sm-9">
-          {{input type="text" size=25 id="title" enter="save" value=model.scene.title}}
+          {{input type="text" size=25 id="title" enter=(action "save")  value=model.scene.title}}
       </div>
     </div>
     
@@ -30,7 +30,7 @@
           <label for="location" class="col-form-label">Location:</label>
       </div>
       <div class="col-sm-9">
-          {{input type="text" size=25 id="location" enter="save" value=model.scene.location}}
+          {{input type="text" size=25 id="location" enter=(action "save")  value=model.scene.location}}
       </div>
     </div>
     
@@ -40,7 +40,7 @@
           <label for="icdate" class="col-form-label">IC Date:</label>
       </div>
        <div class="col-sm-9">
-          {{input type="text" size=25 id="icdate" enter="save" value=model.scene.icdate}}
+          {{input type="text" size=25 id="icdate" enter=(action "save")  value=model.scene.icdate}}
       </div>
     </div>
 
@@ -72,7 +72,7 @@
         <label for="tags" class="col-form-label">Tags:</label>
     </div>
     <div class="col-sm-9">
-        {{input type="text" size=25 id="tags" enter="save" value=model.scene.tags}}
+        {{input type="text" size=25 id="tags" enter=(action "save")  value=model.scene.tags}}
     </div> 
   </div>
 
@@ -96,7 +96,6 @@
             {{#power-select-multiple selected=model.scene.related_scenes options=model.scenes.scenes searchField="title" onchange=(action "relatedChanged") as |scene|}}
               {{scene.icdate}} {{scene.title}}
             {{/power-select-multiple}}
-        <div class="hint">It may take a second for the related scenes list to pop up.</div>
     </div> 
   </div>
     
