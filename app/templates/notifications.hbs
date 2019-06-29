@@ -24,6 +24,8 @@
       {{#link-to 'chat'}}View{{/link-to}}
     {{else if (eq notification.type 'scene')}}
       {{#link-to 'scenes-play'}}View{{/link-to}}
+    {{else if (eq notification.type 'event')}}
+      {{#link-to 'event' (get notification.data 0)}}View{{/link-to}}
     {{/if}}
   </td>
 </tr>
