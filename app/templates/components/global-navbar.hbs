@@ -19,8 +19,13 @@
             <li class="dropdown  hidden-xl  hidden-lg  hidden-md">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                       
-                      Welcome {{currentUser.name}} <span class="caret"></span></a>
+                      Welcome {{currentUser.name}}  
+                      {{#if model.notification_count}}
+                          <span class="label label-pill label-primary" id="notificationBadge"><i class="fa fa-bell" aria-hidden="true"></i> {{model.notification_count}}</span>
+                      {{/if}}
+                      <span class="caret"></span></a>
                       <ul class="dropdown-menu">
+                        <li>{{#link-to 'notifications'}}Notifications{{/link-to}}</li>
                         <li>{{#link-to 'char' currentUser.id}}Profile{{/link-to}}</li>
                         <li>{{#link-to 'mail'}}Mail{{/link-to}}</li>
                         <li>{{#link-to 'jobs'}}{{#if model.jobs_admin}}Jobs{{else}}Requests{{/if}}{{/link-to}}</li>
