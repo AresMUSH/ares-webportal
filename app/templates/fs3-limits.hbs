@@ -22,14 +22,14 @@
 <tr><td>Max Attribute Rating</td><td>{{model.fs3.max_attr_rating}}</td></tr>
 <tr><td>Min Background Skills</td><td>{{model.fs3.min_backgrounds}}</td></tr>
 <tr><td>Min Action Skill Rating</td><td>{{model.fs3.min_action_skill_rating}}</td></tr>
-<tr><td>Attribute Limits <i class="fa fa-star" aria-hidden="true"></i> </td>
+<tr><td>Attribute Limits</td>
   <td><ul>
     {{#each-in model.fs3.attr_limits as |lvl numAbilities|}}
     <li>{{numAbilities}} at or above {{lvl}}</li>
     {{/each-in}}
     </ul>
   </td></tr>
-<tr><td>Action Skill Limits <i class="fa fa-star" aria-hidden="true"></i></td>
+<tr><td>Action Skill Limits</td>
   <td>
     <ul>
       {{#each-in model.fs3.skill_limits as |lvl numAbilities|}}

@@ -65,6 +65,18 @@ export default Controller.extend({
             });   
         },
         
+        reset() {
+          let api = this.get('gameApi');
+          api.requestOne('chargenReset', { char: this.buildQueryDataForChar() })
+          .then( (response) => {
+            if (response.error) {
+              return;
+            }
+            this.send('reloadModel');
+            this.flashMessages.success('Abilities reset.');
+          });    
+        },
+        
         save() {
             let api = this.get('gameApi');
             api.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
