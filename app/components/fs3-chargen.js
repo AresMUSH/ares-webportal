@@ -6,6 +6,7 @@ export default Component.extend({
   newBgSkill: null,
   selectBackgroundSkill: false,
   flashMessages: service(),
+  gameApi: service(),
   
   didInsertElement: function() {
     this.set('fs3Data', this.buildFs3QueryData());
@@ -153,15 +154,8 @@ export default Component.extend({
       this.validateChar();
     },
     reset() {
-      let api = this.get('gameApi');
-      api.requestOne('chargenReset', { char: this.buildQueryDataForChar() })
-      .then( (response) => {
-        if (response.error) {
-          return;
-        }
-        this.send('reloadModel');
-        this.flashMessages.success('Abilities reset.');
-      });    
+      this.set('fs3Data', this.buildFs3QueryData());
+      this.sendAction('reset');
     }
   }
     
