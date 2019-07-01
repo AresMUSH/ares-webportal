@@ -10,6 +10,7 @@ export default Component.extend({
   
   didInsertElement: function() {
     this.set('fs3Data', this.buildFs3QueryData());
+    this.validateChar();
   },
   
   attrPoints: function() {
@@ -106,7 +107,7 @@ export default Component.extend({
   },
     
   validateChar: function() {
-    this.get('charErrors').replace();
+    this.set('charErrors', Ember.A());
     this.checkLimits(this.get('model.char.fs3.fs3_action_skills'), this.get('model.cgInfo.fs3.skill_limits'), 'action skills');
     this.checkLimits(this.get('model.char.fs3.fs3_attributes'), this.get('model.cgInfo.fs3.attr_limits'), 'attributes');
         
