@@ -22,7 +22,7 @@ export default Route.extend(AuthenticatedRoute, {
              locations: api.request('sceneLocations'),
              creatures: api.requestMany('creatures'),
              portals: api.requestMany('portals'),
-             scenes: api.requestOne('scenes')
+             scenes: api.requestOne('scenes', { filter: 'Related' })
            })
            .then((model) => Ember.Object.create(model));
     }

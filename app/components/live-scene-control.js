@@ -7,7 +7,6 @@ export default Component.extend(AuthenticatedController, {
     rollString: null,
     confirmDeleteScenePose: false,
     confirmDeleteScene: false,
-    selectSkillRoll: false,
     selectLocation: false,
     newLocation: null,
     gameApi: service(),
@@ -120,73 +119,7 @@ export default Component.extend(AuthenticatedController, {
               this.sendAction('scrollScene');
           });
       },
-
-      addTxt() {
-          let pose = this.get('scenePose');
-          if (pose.length === 0) {
-              this.get('flashMessages').danger("You haven't entered anything.");
-              return;
-          }
-          let api = this.get('gameApi');
-          api.requestOne('addTxt', { scene_id: this.get('scene.id'),
-              pose: pose }, null)
-          .then( (response) => {
-              if (response.error) {
-                  this.get('flashMessages').error(response.error);
-                  return;
-              }
-              this.set('scenePose', '');
-              this.scrollSceneWindow();
-          });
-      },
-
-      addSceneRoll() {
-          let api = this.get('gameApi');
-
-          // Needed because the onChange event doesn't get triggered when the list is
-          // first loaded, so the roll string is empty.
-          let rollString = this.get('rollString') || this.get('abilities')[0];
-
-          if (!rollString) {
-              this.get('flashMessages').danger("You haven't selected an ability to roll.");
-              return;
-          }
-          this.set('selectSkillRoll', false);
-          this.set('rollString', null);
-
-          api.requestOne('addSceneRoll', { scene_id: this.get('scene.id'),
-              roll_string: rollString })
-          .then( (response) => {
-              if (response.error) {
-                  return;
-              }
-          });
-      },
-
-      addSceneSpell() {
-          let api = this.get('gameApi');
-
-          // Needed because the onChange event doesn't get triggered when the list is
-          // first loaded, so the roll string is empty.
-        let spellString = this.get('spellString') || this.get('spells')[0];
-
-          if (!spellString) {
-              this.get('flashMessages').danger("You haven't selected a spell to cast.");
-              return;
-          }
-          this.set('selectCastSpell', false);
-          this.set('spellString', null);
-
-          api.requestOne('addSceneSpell', { scene_id: this.get('scene.id'),
-              spell_string: spellString }, null)
-          .then( (response) => {
-              if (response.error) {
-                this.get('flashMessages').danger(response.error);
-                  return;
-              }
-          });
-      },
-
+      
       changeSceneStatus(status) {
           let api = this.get('gameApi');
           if (status === 'share') {
@@ -235,7 +168,6 @@ export default Component.extend(AuthenticatedController, {
       scrollDown() {
         this.sendAction('scrollScene');
       },
-
 
       pauseScroll() {
         this.sendAction('setScroll', false);

@@ -16,12 +16,12 @@
 
  &nbsp;
     {{#if scrollPaused}}
-    <br/>
+    <br>
        <span class="label label-warning">Scrolling is paused!</span>
     {{/if}}
 
     {{#if (not scene.is_watching)}}
-    <br/>
+    <br>
        <span class="label label-warning">You are not watching this scene and will not be notified of new scene activity.</span>
 
     {{/if}}
@@ -62,14 +62,14 @@
             {{else}}
                 <div class="scene-pose-header">
                   {{#if pose.restarted_scene_pose}}
-                      <img class="small-profile-icon {{icon-class}}" src="/game/uploads/theme_images/noicon.png" />
+                      <img alt="System Profile Icon"  class="small-profile-icon {{icon-class}}" src="/game/uploads/theme_images/noicon.png" >
                       Scene Restarted
                   {{else}}
                       {{#link-to "char" pose.char.name}}
                           {{#if pose.char.icon}}
-                          <img class="small-profile-icon {{icon-class}}" src="/game/uploads/{{pose.char.icon}}" />
+                          <img alt="{{pose.char.name}}'s icon" class="small-profile-icon {{icon-class}}" src="/game/uploads/{{pose.char.icon}}" >
                           {{else}}
-                          <img class="small-profile-icon {{icon-class}}" src="/game/uploads/theme_images/noicon.png" />
+                          <img alt="{{pose.char.name}}'s icon" class="small-profile-icon {{icon-class}}" src="/game/uploads/theme_images/noicon.png" >
                           {{/if}}
                       {{/link-to}}
 
@@ -87,6 +87,7 @@
                     <div class="clearfix"></div>
 
                  {{else}}
+
                      {{#if pose.is_setpose}}
                         <div class="scene-set-pose">
                         {{{ansi-format text=pose.pose}}}
@@ -98,6 +99,10 @@
                         </div>
                     {{else}}
                         <div class="scene-pose">
+                          {{#if pose.place_name}}
+                            <b>At {{pose.place_name}}</b>
+                          {{/if}}
+
                             {{{ansi-format text=pose.pose}}}
                         </div>
                     {{/if}}
@@ -130,7 +135,8 @@
 
             {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
 
-            {{pose-order poseOrder=scene.pose_order playerName=playerName}}
+              {{pose-order poseOrder=scene.pose_order playerName=playerName}}
+
           {{/if}}
 
 
@@ -140,7 +146,6 @@
       {{/if}}
 
 
-
       <div class="row">
           <div class="col col-xs-12">
 
@@ -148,19 +153,20 @@
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-                    <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
+                    <span class="btn btn-default" href="#">Scene Menu <span class="caret"></span></span> </a>
                     <ul class="dropdown-menu">
 
                       {{#if scene.can_edit}}
                       <li>{{#link-to 'scene-edit' scene.id}}Edit Scene{{/link-to}}</li>
                       <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
+                      {{live-scene-places scene=scene}}
                       {{/if}}
 
                       {{#if (and scene.can_join isApproved)}}
                         {{#if (not scene.completed)}}
 
                         {{#if rollEnabled}}
-                        <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Roll</a></li>
+                        {{live-scene-fs3 abilities=abilities scene=scene}}
                         {{/if}}
 
                           <li><a href="#" {{action (mut selectCastSpell) true}}>Cast Spell</a></li>
@@ -211,25 +217,22 @@
 
     {{/if}}
 
-
     {{flash-messages}}
 
-    {{#if (and scene.can_edit selectLocation)}}
-    <div class="row">
-        <div class="col col-xs-4">
-           <p>
-                {{#power-select selected=newLocation options=locations onchange=(action "locationSelected") as |location|}}
-              {{location}}
-            {{/power-select}}
+        <hr>
 
-            <div class="btn btn-default" {{action 'changeLocation'}}>Select Location</div>
-        </p>
-        </div>
-    </div>
-    {{/if}}
 
-        <hr/>
-
+    {{#bs-modal-simple
+      title="Confirm Delete"
+      closeTitle="Cancel"
+      submitTitle="Confirm"
+      size=null
+      fade=false
+      open=confirmDeleteScenePose
+      onSubmit=(action "deleteScenePose")
+      onHide=(action (mut confirmDeleteScenePose) null)}}
+      You're about to delete this scene pose. This cannot be undone.  Are you sure?
+    {{/bs-modal-simple}}
 
     {{#bs-modal-simple
         title="Confirm Delete"
@@ -237,56 +240,44 @@
         submitTitle="Confirm"
         size=null
         fade=false
-        open=confirmDeleteScenePose
-        onSubmit=(action "deleteScenePose")
-        onHide=(action (mut confirmDeleteScenePose) null)}}
-        You're about to delete this scene pose. This cannot be undone.  Are you sure?
+        open=confirmDeleteScene
+        onSubmit=(action "deleteScene")
+        onHide=(action (mut confirmDeleteScene) null)}}
+        You're about to delete this scene. This cannot be undone.  Are you sure?
+    {{/bs-modal-simple}}
+
+    {{#bs-modal-simple
+        title="Select a Spell to Cast"
+        closeTitle="Cancel"
+        submitTitle="Cast"
+        size=null
+        fade=false
+        open=selectCastSpell
+        onSubmit=(action "addSceneSpell")
+        onHide=(action (mut selectCastSpell) null)}}
+        <select onchange={{action (mut spellString) value="target.value"}}>
+          {{#each spells as |spell|}}
+            <option value={{spell}}>{{spell}}</option>
+          {{/each}}
+        </select>
+        {{input type="text" size=25 id="spellString" enter="addSceneSpell" value=spellString}}
+
       {{/bs-modal-simple}}
 
-      {{#bs-modal-simple
-          title="Confirm Delete"
-          closeTitle="Cancel"
-          submitTitle="Confirm"
-          size=null
-          fade=false
-          open=confirmDeleteScene
-          onSubmit=(action "deleteScene")
-          onHide=(action (mut confirmDeleteScene) null)}}
-          You're about to delete this scene. This cannot be undone.  Are you sure?
-        {{/bs-modal-simple}}
-
-      {{#bs-modal-simple
-          title="Select a Skill to Roll"
-          closeTitle="Cancel"
-          submitTitle="Roll"
-          size=null
-          fade=false
-          open=selectSkillRoll
-          onSubmit=(action "addSceneRoll")
-          onHide=(action (mut selectSkillRoll) null)}}
-          <select onchange={{action (mut rollString) value="target.value"}}>
-            {{#each abilities as |ability|}}
-              <option value={{ability}}>{{ability}}</option>
-            {{/each}}
-          </select>
-          {{input type="text" size=25 id="rollString" enter="addSceneRoll" value=rollString}}
-
-        {{/bs-modal-simple}}
-
-        {{#bs-modal-simple
-            title="Select a Spell to Cast"
-            closeTitle="Cancel"
-            submitTitle="Cast"
-            size=null
-            fade=false
-            open=selectCastSpell
-            onSubmit=(action "addSceneSpell")
-            onHide=(action (mut selectCastSpell) null)}}
-            <select onchange={{action (mut spellString) value="target.value"}}>
-              {{#each spells as |spell|}}
-                <option value={{spell}}>{{spell}}</option>
-              {{/each}}
-            </select>
-            {{input type="text" size=25 id="spellString" enter="addSceneSpell" value=spellString}}
-
-          {{/bs-modal-simple}}
+    {{#bs-modal-simple
+        title="Change the Scene Location"
+        closeTitle="Cancel"
+        submitTitle="Select"
+        size=null
+        fade=false
+        open=selectLocation
+        onSubmit=(action "changeLocation")
+        onHide=(action (mut selectLocation) null)}}
+        <p>Select a location from the list or type one into the bottom box.</p>
+        <p>
+          {{#power-select selected=newLocation options=locations onchange=(action "locationSelected") as |location|}}
+        {{location}}
+      {{/power-select}}
+       <b>Custom Location:</b> {{input type="text" size=25 id="newLocation" enter=(action "changeLocation")  value=newLocation}}
+         </p>
+    {{/bs-modal-simple}}

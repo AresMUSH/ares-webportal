@@ -16,7 +16,7 @@ export default Route.extend(AuthenticatedRoute, {
              characters: api.requestMany('characters', { select: 'include_staff' }),
              creatures: api.requestMany('creatures'),
              portals: api.requestMany('portals'),
-             scenes: api.requestOne('scenes')
+             scenes: api.requestOne('scenes', { filter: 'Related' })
            })
            .then((model) => Ember.Object.create(model));
     }

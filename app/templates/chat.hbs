@@ -32,7 +32,7 @@
               <span class="label label-pill label-primary">{{channel.new_messages}}</span>
             {{/if}}
             </button>
-        <br/>
+        <br>
         {{/if}}
       {{/if}}
     {{/each}}
@@ -42,7 +42,7 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-        <span class="btn btn-default chat-button" href="#" role="button">Add Channel <span class="caret"></span></span> </a>
+        <span class="btn btn-default chat-button" href="#">Add Channel <span class="caret"></span></span> </a>
         <ul class="dropdown-menu">
           {{#each model.chat as |channel|}}
             {{#if channel.allowed}}
@@ -145,7 +145,7 @@
 
           <div class="alert alert-warning">
               <p>You are not on this channel.</p>
-              <br/>
+              <br>
               <button class="btn btn-default" {{action "joinChannel" channel.key}}>Join Channel</button>
           </div>
 

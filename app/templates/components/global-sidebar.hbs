@@ -21,15 +21,8 @@
     <div class="alert alert-danger">The website can't contact the game.  It may be down.</div>
 {{else}}
     <p>Today is {{model.game.ictime}}.
-    <br/>{{model.game.who_count}} character(s) online.
-    <br/>{{model.game.scene_count}} scene(s) are in progress.
-
-  {{#if model.game.unread_scenes_count}}
-  <br/><span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span> New activity in {{#link-to 'scenes-play'}}your scenes{{/link-to}}!
-  {{/if}}
-  {{#if model.unread_pages}}
-  <br/><span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span> New {{#link-to 'chat'}}private messages{{/link-to}}!
-  {{/if}}
+    <br>{{model.game.who_count}} character(s) online.
+    <br>{{model.game.scene_count}} scene(s) are in progress.
   </p>
 
   {{#if model.motd}}
@@ -52,9 +45,9 @@
   </div>
   {{#each model.upcoming_events as |event|}}
   <p><b>{{#link-to 'event' event.id}}{{event.title}}{{/link-to}}</b>
-  <br/>{{event.date}} {{event.start_datetime_local}} ({{event.start_time_standard}})</p>
+  <br>{{event.date}} {{event.start_datetime_local}} ({{event.start_time_standard}})</p>
   {{/each}}
-   <br/>
+   <br>
   <p>{{#link-to 'events'}}All Events{{/link-to}}</p>
 
 </div>
@@ -69,9 +62,9 @@
    </div>
    {{#each model.recent_scenes as |scene|}}
    <p>{{#link-to 'scene' scene.id}}{{scene.icdate}} - {{scene.title}}{{/link-to}}
-       {{scene-tag scene=scene}}<br/></p>
+       {{scene-tag scene=scene}}<br></p>
    {{/each}}
-   <br/>
+   <br>
    <p>{{#link-to 'scenes'}}All Scenes{{/link-to}}</p>
 </div>
 
@@ -90,7 +83,7 @@
           {{#link-to 'forum-topic' post.category_id post.id}}{{post.subject}}.{{/link-to}}
    </p>
    {{/each}}
-   <br/>
+   <br>
    <p>{{#link-to 'forum'}}View Forum{{/link-to}}</p>
 </div>
 
@@ -107,7 +100,7 @@
    {{/if}}
    {{/each}}
 
-   <br/>
+   <br>
    <p>{{#link-to 'recent-changes'}}More Changes{{/link-to}}</p>
 
 </div>

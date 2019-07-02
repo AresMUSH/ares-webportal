@@ -6,7 +6,7 @@
         <label for="title" class="col-xs-2 col-form-label">Title:</label>
      </div>
      <div class="col-sm-9">
-       {{input type="text" size=25 id="title" enter="save" value=model.title}}
+       {{input type="text" size=25 id="title" enter=(action "save")  value=model.title}}
      </div> 
    </div>
    
@@ -15,7 +15,7 @@
         <label for="tags" class="col-xs-2 col-form-label">Tags:</label>
      </div>
      <div class="col-sm-9">
-        {{input type="text" size=25 id="tags" enter="save" value=model.tags}}
+        {{input type="text" size=25 id="tags" enter=(action "save")  value=model.tags}}
      </div> 
    </div>  
     
@@ -35,4 +35,4 @@
     {{flash-messages}}
     
 
-<hr/>
+<hr>

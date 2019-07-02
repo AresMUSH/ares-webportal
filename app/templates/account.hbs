@@ -26,8 +26,8 @@
 
         {{flash-messages}}
         
-        <p>{{input type="text" id="handleName" placeholder="Handle Name" enter="linkHandle" value=handleName autofocus=true }}</p>
-        <p>{{input type="text" placeholder="Link Code" enter="linkHandle" id="linkCode" value=linkCode }}</p>
+        <p>{{input type="text" id="handleName" placeholder="Handle Name" enter=(action "linkHandle")  value=handleName autofocus=true }}</p>
+        <p>{{input type="text" placeholder="Link Code" enter=(action "linkHandle") id="linkCode" value=linkCode }}</p>
         
         <button {{action "linkHandle"}} class="btn btn-primary">Link to Handle</button>
         
@@ -46,9 +46,9 @@
 
         {{flash-messages}}
         
-        <p>{{input type="password" id="password" placeholder="Current Password" enter="changePassword" value=currentPassword autofocus=true }}</p>
-        <p>{{input type="password" placeholder="Password" enter="changePassword" id="newPassword" value=newPassword }}</p>
-        <p>{{input type="password" placeholder="Confirm Password" enter="changePassword" id="confirmPassword" value=confirmPassword }}</p>
+        <p>{{input type="password" id="password" placeholder="Current Password" enter=(action "changePassword") value=currentPassword autofocus=true }}</p>
+        <p>{{input type="password" placeholder="Password" enter=(action "changePassword")  id="newPassword" value=newPassword }}</p>
+        <p>{{input type="password" placeholder="Confirm Password" enter=(action "changePassword")  id="confirmPassword" value=confirmPassword }}</p>
         
         <button {{action "changePassword"}} class="btn btn-primary">Change Password</button>
                 
