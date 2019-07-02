@@ -24,9 +24,21 @@
         </div>
     </div>
     
+<div class="panel panel-default">    
+  <div class="panel-heading">
+    Combat Activity
+  </div>
+  <div class="panel-body">
     
-
-
+    <div id="combat-log">
+      {{{ansi-format text=combatLog}}}
+    </div>
+  
+    {{#if newCombatActivity}}
+    <div class="alert alert-warning">This combat has been updated since you last loaded the page. You may wish to refresh it.</div>
+    {{/if}}
+  </div>
+</div>
 
 <div class="table-responsive">
 
@@ -43,7 +55,6 @@
     <th></th>
 
 </tr>
-
 
 
 {{#each model.teams as |t| }}    

@@ -13,6 +13,7 @@ export default Service.extend({
     chatCallback: null,
     jobsCallback: null,
     sceneCallback: null,
+    combatCallback: null,
     connected: false,
     
     socketUrl() {
@@ -205,6 +206,12 @@ export default Service.extend({
             else if (notification_type == "new_scene_activity") {
                 if (this.get('sceneCallback')) {
                     this.get('sceneCallback')(data.args.message, data.args.timestamp);
+                }
+                notify = false;
+            }
+            else if (notification_type == "combat_activity") {
+                if (this.get('combatCallback')) {
+                    this.get('combatCallback')(data.args.message, data.args.timestamp);
                 }
                 notify = false;
             }

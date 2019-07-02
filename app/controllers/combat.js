@@ -4,19 +4,51 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
+    gameSocket: service(),
     flashMessages: service(),
     newCombatantName: '',
     newCombatantType: 'Soldier',
+    newCombatActivity: false,
     confirmRemoveCombatant: false,
+    combatLog: '',
     
     pageTitle: function() {
         return `Combat ${this.get('model.id')}`;
     }.property(),
     
+    onCombatActivity: function(msg) {
+      this.set('newCombatActivity', true);
+      
+      let splitMsg = msg.split('|');
+      let combatId = splitMsg[0];       
+      let message = splitMsg[1];
+      
+      if (combatId === this.get('model.id')) {
+        this.set('combatLog', this.get('combatLog') + "\n" + message);
+        try {
+          $('#combat-log').stop().animate({
+              scrollTop: $('#combat-log')[0].scrollHeight
+          }, 800); 
+        }
+        catch(error) {
+          // This happens sometimes when transitioning away from screen.
+        }   
+      }
+    },
+    
     resetOnExit: function() {
         this.set('newCombatantName', '');
         this.set('newCombatantType', '');
         this.set('confirmRemoveCombatant', false);
+        this.set('newCombatActivity', false);
+        this.set('combatLog', '');
+    },
+    
+    setupCallback: function() {
+        let self = this;
+        
+        this.get('gameSocket').set('combatCallback', function(data, timestamp) {
+            self.onCombatActivity(data) } );
     },
     
     addToCombat(name, type) {
@@ -37,17 +69,6 @@ export default Controller.extend(AuthenticatedController, {
               if (response.error) {
                   return;
               }
-              let combatant = response;
-              let found = false;
-              this.get('model.teams').forEach(t => {
-                if (t.team == combatant.team) {
-                  found = true;
-                  Ember.get(t, 'combatants').pushObject(combatant);
-                }            
-              })
-              if (!found) { 
-                this.get('model.teams').pushObject({ team: combatant.team, combatants: [ combatant ]});
-              }
               this.get('flashMessages').success('Combatant added!');
           });
     },
@@ -59,12 +80,6 @@ export default Controller.extend(AuthenticatedController, {
           if (response.error) {
               return;
           }
-          this.get('model.teams').forEach(t => {
-            let combatant = t.combatants.find(c => c.name === name);
-            if (combatant) {
-              Ember.get(t, 'combatants').removeObject(combatant);
-            }            
-          })
           this.get('flashMessages').success('Combatant removed!');
       });
     },
