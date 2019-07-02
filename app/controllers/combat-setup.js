@@ -9,6 +9,10 @@ export default Controller.extend({
         return [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
     }.property(),
     
+    passengerTypes: function() {
+      return [ 'pilot', 'passenger', 'none' ];
+    }.property(),
+    
     actions: {
         save: function() {
             let api = this.get('gameApi');
@@ -37,6 +41,9 @@ export default Controller.extend({
         },
         npcChanged: function(id, skill) {
           this.set(`model.combatants.${id}.npc_skill`, skill);
+        },
+        passengerTypeChanged: function(id, type) {
+          this.set(`model.combatants.${id}.passenger_type`, type);
         },
         actionChanged: function(id, action) {
           this.set(`model.combatants.${id}.action`, action);

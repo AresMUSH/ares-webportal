@@ -100,6 +100,18 @@
     </p>
 
   </div>
+  
+  <div class="col-sm-6">
+          <b>Vehicle:</b> 
+      
+          {{#power-select selected=comb.passenger_type options=passengerTypes onchange=(action "passengerTypeChanged" id) as |passengerType|}}
+            {{passengerType}}
+          {{/power-select}}
+          <br>
+          {{input type="text" size=25 value=comb.vehicle}}
+          
+          
+  </div>
 </div>
 
 <hr>
