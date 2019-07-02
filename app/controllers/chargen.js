@@ -64,7 +64,6 @@ export default Controller.extend({
         secretPrefChanged(val) {
             this.set('model.char.secretpref', val);
         },
-        },
 
         review() {
             let api = this.get('gameApi');
