@@ -13,14 +13,31 @@
   {{comb.name}}
 </p>
 
+<div class="form-group row">
+    <div class="col-xs-6">
+            <b>Action:</b>  {{#power-select selected=comb.action options=model.options.actions onchange=(action "actionChanged" id) as |act|}}
+              {{act}}
+            {{/power-select}}
+    </div>
+    <div class="col-xs-6">
+        
+            <b>Action Args:</b><br>
+            {{input type="text" size=25 id=id value=comb.action_args}}
+            
+            
+    </div>
+ 
+</div>
+
+
 <div class="row">
   <div class="col col-xs-6">
 
     <p>
       <label>Team:</label>
   
-      {{#power-select selected=comb.team options=teams onchange=(action "teamChanged" id) as |npc|}}
-        {{npc}}
+      {{#power-select selected=comb.team options=teams onchange=(action "teamChanged" id) as |team|}}
+        {{team}}
       {{/power-select}}
     </p>
 
@@ -30,8 +47,8 @@
       
     <p>
       <label>NPC Level:</label>
-      {{#power-select selected=comb.npc_skill options=model.options.npc_skills onchange=(action "npcChanged" id) as |npc|}}
-        {{npc}}
+      {{#power-select selected=comb.npc_skill options=model.options.npc_skills onchange=(action "npcChanged" id) as |level|}}
+        {{level}}
       {{/power-select}}
     </p>
   
@@ -44,8 +61,8 @@
 
     <p>
       <label>Stance</label>
-    {{#power-select selected=comb.stance options=model.options.stances onchange=(action "stanceChanged" id) as |npc|}}
-      {{npc}}
+    {{#power-select selected=comb.stance options=model.options.stances onchange=(action "stanceChanged" id) as |stance|}}
+      {{stance}}
     {{/power-select}}
     </p>
   </div>
@@ -53,8 +70,8 @@
   <div class="col col-xs-6">
     <p>
       <label>Armor</label>
-    {{#power-select selected=comb.armor options=model.options.armor onchange=(action "armorChanged" id) as |npc|}}
-      {{npc}}
+    {{#power-select selected=comb.armor options=model.options.armor onchange=(action "armorChanged" id) as |armor|}}
+      {{armor}}
     {{/power-select}}
 
     {{#each comb.armor_specials as |spec|}}
@@ -71,8 +88,8 @@
 
     <p>
       <label>Weapon</label>
-    {{#power-select selected=comb.weapon options=model.options.weapons onchange=(action "weaponChanged" id) as |npc|}}
-      {{npc}}
+    {{#power-select selected=comb.weapon options=model.options.weapons onchange=(action "weaponChanged" id) as |weapon|}}
+      {{weapon}}
     {{/power-select}}
 
     {{#each comb.weapon_specials as |spec|}}

@@ -38,5 +38,9 @@ export default Controller.extend({
         npcChanged: function(id, skill) {
           this.set(`model.combatants.${id}.npc_skill`, skill);
         },
+        actionChanged: function(id, action) {
+          this.set(`model.combatants.${id}.action`, action);
+          this.set(`model.combatants.${id}.action_args`, '');
+        },
     }
 });

@@ -17,6 +17,8 @@ export default Controller.extend({
                 stance: this.get('model.stance'),
                 weapon: this.get('model.weapon'),
                 armor: this.get('model.armor'),
+                action: this.get('model.action'),
+                action_args: this.get('model.action_args'),
                 npc_skill: this.get('model.npc_skill'),
                 weapon_specials: this.get('model.weapon_specials') || [],
                 armor_specials: this.get('model.armor_specials') || []
@@ -43,6 +45,10 @@ export default Controller.extend({
         },
         npcChanged: function(npc) {
             this.set('model.npc_skill', npc);
+        },
+        actionChanged: function(action) {
+            this.set('model.action', action);
+            this.set('model.action_args', '');
         },
     }
 });

@@ -12,6 +12,7 @@
                 <p> {{#link-to 'combat-log' model.id class="btn btn-default"}}View Log{{/link-to}}  
                     {{#if model.can_manage}}
                       {{#link-to 'combat-setup' model.id class="btn btn-default"}}Setup{{/link-to}}  
+                      <a href="#" class="btn btn-primary" {{action 'newTurn'}}>New Turn</a>
                     {{/if}}
                     
                     
@@ -20,7 +21,6 @@
             </div>
             
             </p>
-        {{flash-messages}}
         </div>
     </div>
     
@@ -108,7 +108,7 @@
         <td>
             {{#if c.can_edit}}
                 {{#link-to 'combatant-edit' c.id}}<i class="fa fa-edit" aria-hidden="true"></i>{{/link-to}}
-                <a href="#" {{action (mut confirmRemoveCombatant) c.id }} ><i class="fa fa-ban" aria-hidden="true"></i></a>
+                <a href="#" {{action (mut confirmRemoveCombatant) c.name }} ><i class="fa fa-ban" aria-hidden="true"></i></a>
             {{/if}}
         </td>
     </tr>
@@ -123,7 +123,7 @@
 </table>
 </div>
    
-
+{{#if model.can_manage}}
 <div class="panel panel-default">
     <div class="panel-heading">
         Add a Combatant
@@ -139,6 +139,14 @@
         <button class="btn btn-primary" {{action 'addCombatant'}} >Add</button>
     </div>
 </div>
+{{else if model.in_combat}}
+        <button class="btn btn-warning" {{action 'leaveCombat'}} >Leave</button>
+{{else if currentUser.name}}
+        <p><b>Join combat as:</b> {{#power-select selected=newCombatantType options=model.combatant_types onchange=(action "combatantTypeChanged") as |type|}}
+          {{type}}
+        {{/power-select}}</p>
+        <button class="btn btn-primary" {{action 'joinCombat'}} >Join</button>
+{{/if}}
 
         {{flash-messages}}
 

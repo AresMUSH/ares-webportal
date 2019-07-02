@@ -1,7 +1,8 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
-export default Controller.extend({
+export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
     newCombatantName: '',
@@ -18,37 +19,68 @@ export default Controller.extend({
         this.set('confirmRemoveCombatant', false);
     },
     
+    addToCombat(name, type) {
+      if (name.length === 0) {
+          this.get('flashMessages').danger('Name is required.');
+          return;
+      } 
+      if (!type) {
+        this.get('flashMessages').danger('You must select a type.');
+        return
+      }
+      
+      let api = this.get('gameApi');
+          api.requestOne('addCombatant', { id: this.get('model.id'), 
+             name: name,
+             combatant_type: type }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              this.get('flashMessages').success('Combatant added!');
+          });
+    },
+    
+    removeFromCombat(name) {
+      let api = this.get('gameApi');
+      api.requestOne('removeCombatant', { name: name, id: this.get('model.id') }, null)
+      .then( (response) => {
+          if (response.error) {
+              return;
+          }
+          this.get('flashMessages').success('Combatant removed!');
+      });
+    },
+    
     actions: {
         addCombatant: function() {
-            let name = this.get('newCombatantName');
-            if (name.length === 0) {
-                this.get('flashMessages').danger('Name is required.');
-            } else {
-                let api = this.get('gameApi');
-                api.requestOne('addCombatant', { id: this.get('model.id'), 
-                   name: this.get('newCombatantName'),
-                   combatant_type: this.get('newCombatantType') }, null)
-                .then( (response) => {
-                    if (response.error) {
-                        return;
-                    }
-                    this.send('reloadModel');
-                    this.get('flashMessages').success('Combatant added!');
-                });
-            }
-            
+          let name = this.get('newCombatantName');
+          let type = this.get('newCombatantType');
+          this.addToCombat(name, type);            
         },
-        removeCombatant: function(id) {
+        joinCombat: function() {
+          let name = this.get('currentUser.name')
+          let type = this.get('newCombatantType');
+          this.addToCombat(name, type);            
+        },
+        newTurn: function() {
             let api = this.get('gameApi');
-            api.requestOne('removeCombatant', { id: id }, null)
+            api.requestOne('newCombatTurn', { id: this.get('model.id') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
-                this.send('reloadModel');
-                this.get('flashMessages').success('Combatant removed!');
+                this.get('flashMessages').success('Combat turn started!');
             });
             
+        },
+        leaveCombat: function() {
+          let name = this.get('currentUser.name')
+          this.removeFromCombat(name);
+        },
+        removeCombatant: function(name) {
+          this.set('confirmRemoveCombatant', false);
+          this.removeFromCombat(name);
         },
         combatantTypeChanged: function(type) {
             this.set('newCombatantType', type);
