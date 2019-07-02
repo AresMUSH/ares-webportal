@@ -10,14 +10,14 @@
            {{#if model.char.fs3.use_advantages}}
        <li role="presentation"><a href="#fs3adv" aria-controls="fs3adv" role="tab" data-toggle="tab">Advantages</a></li>
             {{/if}}
-       
+
            {{/if}}
-           
+
          </ul>
 
      <div class="tab-content">
 
-           
+
 {{#if model.char.fs3.reset_needed}}
   <div role="tabpanel" class="tab-pane active" id="fs3reset">
   <p>Starting your abilities will set you up with default attribute and skill values.  Your other character information will be saved.</p>
@@ -61,15 +61,15 @@
    <div class="panel-body">
 
      <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.action_blurb}}}</p>
-     
+
      <br/>
-   
+
      {{#each model.char.fs3.fs3_action_skills as |skill|}}
      {{#fs3-actionbox name=skill.name rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.fs3.max_skill_rating minRating=model.cgInfo.fs3.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
          <b>{{skill.name}}</b> - {{skill.desc}}
      {{/fs3-actionbox}}
      {{/each}}
-     
+
 
    </div>
   </div>
@@ -116,7 +116,7 @@
            <b>{{skill.name}}</b> - {{skill.desc}}
        {{/fs3-langbox}}
        {{/each}}
-                
+
      </div>
    </div>
   </div>
@@ -137,11 +137,11 @@
              <b>{{skill.name}}</b> - {{skill.desc}}
          {{/fs3-advantagebox}}
          {{/each}}
-                
+
        </div>
      </div>
    </div>
- 
+
 {{/if}}
 
 </div>
