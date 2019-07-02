@@ -37,6 +37,17 @@ export default Controller.extend(AuthenticatedController, {
               if (response.error) {
                   return;
               }
+              let combatant = response;
+              let found = false;
+              this.get('model.teams').forEach(t => {
+                if (t.team == combatant.team) {
+                  found = true;
+                  Ember.get(t, 'combatants').pushObject(combatant);
+                }            
+              })
+              if (!found) { 
+                this.get('model.teams').pushObject({ team: combatant.team, combatants: [ combatant ]});
+              }
               this.get('flashMessages').success('Combatant added!');
           });
     },
@@ -48,6 +59,12 @@ export default Controller.extend(AuthenticatedController, {
           if (response.error) {
               return;
           }
+          this.get('model.teams').forEach(t => {
+            let combatant = t.combatants.find(c => c.name === name);
+            if (combatant) {
+              Ember.get(t, 'combatants').removeObject(combatant);
+            }            
+          })
           this.get('flashMessages').success('Combatant removed!');
       });
     },
