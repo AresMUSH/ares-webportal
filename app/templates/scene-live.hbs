@@ -18,7 +18,7 @@
 <div class="row">
     <div class="col col-xs-12">
 
-      {{live-scene-control scene=model.scene locations=model.locations abilities=model.abilities spells=model.spells playerName=currentUser.name scrollPaused=scrollPaused refresh=(action "refresh") scrollScene=(action "scrollScene") setScroll=(action "setScroll")}}
+      {{live-scene-control scene=model.scene locations=model.locations abilities=model.abilities spells=model.spells places=model.scene.places playerName=currentUser.name scrollPaused=scrollPaused refresh=(action "refresh") scrollScene=(action "scrollScene") setScroll=(action "setScroll")}}
    </div>
 </div>
 {{outlet}}

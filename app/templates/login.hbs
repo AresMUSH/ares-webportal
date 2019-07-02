@@ -10,8 +10,8 @@
 <div class="panel panel-default">
     <div class="panel-body">
 
-        <p>{{input type="text" id="name" placeholder="Name" enter="login" value=name autofocus=true }}</p>
-        <p>{{input type="password" placeholder="Password" enter="login" id="password" value=password }}</p>
+        <p>{{input type="text" id="name" placeholder="Name" enter=(action "login")  value=name autofocus=true }}</p>
+        <p>{{input type="password" placeholder="Password" enter=(action "login")  id="password" value=password }}</p>
         
         <button {{action "login"}} class="btn btn-primary">Login</button>
             

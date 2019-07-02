@@ -1,25 +1,16 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import FS3Chargen from 'ares-webportal/mixins/fs3-chargen';
 
-export default Controller.extend(FS3Chargen, {
+export default Controller.extend({
     flashMessages: service(),
     gameApi: service(),
     charErrors: [],
     toggleCharChange: false,
-
-    alerts: function() {
-        return this.get('charErrors');
-    }.property('toggleCharChange'),
+    fs3Data: {},
 
     genders: function() {
         return [ { value: 'Male' }, { value: 'Female' }, { value: 'Other' }];
     }.property(),
-
-    showCharErrors: function() {
-        return this.get('alerts').length > 0;
-    }.property('alerts'),
-
 
     anyGroupMissing: function() {
         let groups = this.get('model.char.groups');
@@ -45,7 +36,7 @@ export default Controller.extend(FS3Chargen, {
             background: this.get('model.char.background'),
             secretpref: this.get('model.char.secretpref'),
             lastwill: this.get('model.char.lastwill'),
-            fs3: this.buildFs3QueryData()
+            fs3: this.get('fs3Data')
         };
     },
 
@@ -57,8 +48,7 @@ export default Controller.extend(FS3Chargen, {
     actions: {
 
         genderChanged(val) {
-            this.set('model.char.demographics.gender.value', val.value)
-            this.validateChar();
+            this.set('model.char.demographics.gender.value', val.value);
         },
 
         groupChanged(group, val) {
@@ -70,24 +60,10 @@ export default Controller.extend(FS3Chargen, {
 		this.set(`model.char.groups.${opp}`, none);
             }
             this.set(`model.char.groups.${group}`, val);
-	    this.validateChar();
-        },
 
         secretPrefChanged(val) {
             this.set('model.char.secretpref', val);
-            this.validateChar();
         },
-
-        reset() {
-            let api = this.get('gameApi');
-            api.requestOne('chargenReset', { char: this.buildQueryDataForChar() })
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                this.send('reloadModel');
-                this.flashMessages.success('Abilities reset.');
-            });
         },
 
         review() {
@@ -101,6 +77,18 @@ export default Controller.extend(FS3Chargen, {
             });
         },
 
+        reset() {
+          let api = this.get('gameApi');
+          api.requestOne('chargenReset', { char: this.buildQueryDataForChar() })
+          .then( (response) => {
+            if (response.error) {
+              return;
+            }
+            this.send('reloadModel');
+            this.flashMessages.success('Abilities reset.');
+          });
+        },
+
         save() {
             let api = this.get('gameApi');
             api.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
@@ -108,9 +96,9 @@ export default Controller.extend(FS3Chargen, {
                 if (response.error) {
                     return;
                 }
-                this.validateChar();
                 if (response.alerts) {
-                    response.alerts.forEach( r => this.charErrors.push(r) );
+                  this.charErrors.replace();
+                  response.alerts.forEach( r => this.charErrors.pushObject(r) );
                 }
                 this.flashMessages.success('Saved!');
             });

@@ -6,7 +6,7 @@
         <label for="title" class="col-form-label">Title:</label>
     </div>
     <div class="col-sm-9">
-        {{input type="text" size=25 id="title" enter="save" value=model.plot.title}}
+        {{input type="text" size=25 id="title" enter=(action "save")  value=model.plot.title}}
     </div>
   </div>
 

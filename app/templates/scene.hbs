@@ -75,10 +75,10 @@
 
     <div class="log-participants-box">
 
-    {{#each model.participants as |p|}}
-      {{#if (not p.is_ooc)}}
+    {{#each model.participants as |participant|}}
+      {{#if (not participant.is_ooc)}}
         <div class="profile-gallery">
-            {{char-icon char=p}}
+            {{char-icon char=participant}}
         </div>
       {{/if}}
     {{/each}}
@@ -128,7 +128,7 @@
 
 <a name="bottom"></a>
 
-<br/>
+<br>
 <p>
     <b>Tags:</b>
     {{#each model.tags as |tag|}}
@@ -147,7 +147,7 @@
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-                      <span class="btn btn-default" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
+                      <span class="btn btn-default" href="#">Scene Menu <span class="caret"></span></span> </a>
                       <ul class="dropdown-menu">
 
                         {{#if model.can_edit}}

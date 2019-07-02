@@ -27,7 +27,7 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-                <span class="btn btn-default" href="#" role="button">Job Menu <span class="caret"></span></span> </a>
+                <span class="btn btn-default" href="#">Job Menu <span class="caret"></span></span> </a>
                 <ul class="dropdown-menu">
                 <li><a href="#" {{action 'closeJob'}}>Close Job</a></li>
                 {{#if model.job.is_approval_job}}
@@ -58,10 +58,10 @@
          {{#power-select-multiple selected=newParticipants options=model.characters searchField="name" onchange=(action "participantsChanged") as |char|}}
           {{char.name}}
         {{/power-select-multiple}}
-        <div class="btn btn-default" {{action (mut editParticipants) false}}>Cancel</div>
-        <div class="btn btn-primary" {{action 'saveParticipants'}}>Save</div>
+        <button class="btn btn-default" {{action (mut editParticipants) false}}>Cancel</button>
+        <button class="btn btn-primary" {{action 'saveParticipants'}}>Save</button>
       {{else}}
-        <div class="btn btn-default" {{action (mut editParticipants) true}}>Edit</div>
+        <button class="btn btn-default" {{action (mut editParticipants) true}}>Edit</button>
       {{/if}}
          </a>
          </li>
@@ -171,11 +171,11 @@
 </table>
 
 
-<hr/>
+<hr>
 
     {{{ansi-format text=model.job.description}}}
 
-<hr/>
+<hr>
 
 {{#each model.job.replies as |r|}}
  <div>
@@ -195,7 +195,7 @@
          {{{ansi-format text=r.message}}}
 
 
-     <hr/>
+     <hr>
   </div>
 {{/each}}
 

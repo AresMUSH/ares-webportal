@@ -2,14 +2,14 @@
 <h1>New Event</h1>
 
 <p><b>Title:</b></p>
-<p>{{input type="text"  size=25 id="title" enter="create" value=title}}</p>
+<p>{{input type="text"  size=25 id="title" enter=(action "create")  value=title}}</p>
 
 <p><b>Date:</b></p>
 <p>{{pikaday-input onSelection=(action 'changeDate') format=model.game.date_entry_format}} </p>
 
 <p><b>Start Time:</b></p>
 <div class="hint">Use <b>server time</b> (US Mountain) in standard format (1:30pm, 1330, 10:00am, 1000).  The current server time is {{model.server_time}}.</div>
-<p>{{input type="text" id="time" size="25" enter="create" value=time }}</p>
+<p>{{input type="text" id="time" size="25" enter=(action "create")  value=time }}</p>
 
 <p><b>Description:</b></p>
 

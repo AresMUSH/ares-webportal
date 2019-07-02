@@ -1,0 +1,47 @@
+{{title 'FS3 Ability Limits'}}
+
+<h1>FS3 Ability Limits</h1>
+
+<p class="alert alert-info">Limits marked with a star (<i class="fa fa-star" aria-hidden="true"></i>) are absolute limits, including what you can get with XP.  The rest apply only to Character Creation.</p>
+
+<table class="table table-striped">
+
+<thead>
+    <th>Name</th>
+    <th>Limit</th>
+</thead>
+
+<tbody>
+
+<tr><td>Free Background Skill Points</td><td>{{model.fs3.free_backgrounds}}</td></tr>
+<tr><td>Free Language Points</td><td>{{model.fs3.free_languages}}</td></tr>
+<tr><td>Max Ability Points</td><td>{{model.fs3.max_ap}}</td></tr>
+<tr><td>Max Ability Points on Action Skills</td><td>{{model.fs3.max_action}}</td></tr>
+<tr><td>Max Ability Points on Attributes</td><td>{{model.fs3.max_attrs}}</td></tr>
+<tr><td>Max Skill Rating</td><td>{{model.fs3.max_skill_rating}}</td></tr>
+<tr><td>Max Attribute Rating</td><td>{{model.fs3.max_attr_rating}}</td></tr>
+<tr><td>Min Background Skills</td><td>{{model.fs3.min_backgrounds}}</td></tr>
+<tr><td>Min Action Skill Rating</td><td>{{model.fs3.min_action_skill_rating}}</td></tr>
+<tr><td>Attribute Limits</td>
+  <td><ul>
+    {{#each-in model.fs3.attr_limits as |lvl numAbilities|}}
+    <li>{{numAbilities}} at or above {{lvl}}</li>
+    {{/each-in}}
+    </ul>
+  </td></tr>
+<tr><td>Action Skill Limits</td>
+  <td>
+    <ul>
+      {{#each-in model.fs3.skill_limits as |lvl numAbilities|}}
+      <li>{{numAbilities}} at or above {{lvl}}</li>
+      {{/each-in}}
+    </ul>
+  </td></tr>
+
+<tr><td>Max Dots In Action Skills Above "Everyman" w/ XP <i class="fa fa-star" aria-hidden="true"></i> </td><td>{{model.fs3.max_dots_action}}</td></tr>
+<tr><td>Max Dots In Attributes Above "Average" w/ XP <i class="fa fa-star" aria-hidden="true"></i> </td><td>{{model.fs3.max_dots_attrs}}</td></tr>
+
+</tbody>
+</table>
+
+{{outlet}}

@@ -49,7 +49,7 @@
 </div>
 
 
-<hr/>
+<hr>
 <b>Tags:</b>
 {{#each model.char.tags as |tag|}}
   {{#link-to 'wiki-tag' tag}}{{tag}}{{/link-to}}
@@ -80,11 +80,11 @@
         <p><b>Existing Character Files:</b></p>
 
        <div>
-       {{#each model.char.files as |file|}}
+       {{#each model.char.files as |charFile|}}
 
        <div class="thumbnail-gallery">
-       {{#link-to 'file' file.folder file.name}}
-       {{file.path}} <img src="/game/uploads/{{file.path}}" class="thumbnail"/>
+       {{#link-to 'file' charFile.folder charFile.name}}
+       {{file.path}} <img src="/game/uploads/{{charFile.path}}" alt="{{charFile.name}}" class="thumbnail">
        {{/link-to}}
        </div>
        {{/each}}
@@ -103,4 +103,4 @@
 
 {{outlet}}
 
-<script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+    <script async defer src="//assets.pinterest.com/js/pinit.js"></script>

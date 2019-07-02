@@ -62,21 +62,21 @@
 
         <td>
             {{#if c.is_ko}}
-            <span style="color:red" >
+            <span class="combat-damage" >
                 <i class="fa fa-crosshairs" aria-hidden="true"></i>
                 K O
                 <i class="fa fa-crosshairs" aria-hidden="true"></i>
             </span>
             {{else}}
-            <span style="color:red" >
+            <span class="combat-damage" >
 
-                {{#each c.damage_boxes as |d|}}
-                    <i class="fa fa-heartbeat" style="color:red" aria-hidden="true"></i>
+                {{#each c.damage_boxes}}
+                    <i class="fa fa-heartbeat combat-damage" aria-hidden="true"></i>
                 {{/each}}
 
                 {{#bs-tooltip placement="left"}}
                   {{#each c.damage as |damage|}}
-                  {{damage}}<br/>
+                  {{damage}}<br>
                   {{/each}}
                 {{/bs-tooltip}}
 
@@ -152,7 +152,7 @@
   {{/bs-modal-simple}}
 
 
-<hr/>
+<hr>
 <p>{{#link-to 'combats'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Combat List{{/link-to}}</p>
 
 

@@ -24,13 +24,13 @@
     
 </table>
 
-<br/>
+<br>
     
 <div class="ansi">
     {{{ansi-format text=model.description}}}
 </div>
 
-<hr/>
+<hr>
 
 <h2>Signups</h2>
 
@@ -43,23 +43,23 @@
      {{{ansi-format text=s.comment}}}
      {{/if}}     
  
-     <hr/>
+     <hr>
   </div>
 {{/each}}
 
 {{#if model.signed_up}}
 <p>You are signed up for the event.</p>
 
-<p><label>Signup Comment:</label> {{input type="text" size=25 id="signup" enter="signup" value=model.signup_comment }}  </p>
+<p><label>Signup Comment:</label> {{input type="text" size=25 id="signup" enter=(action "signup")  value=model.signup_comment }}  </p>
 <p>  <button {{action 'cancelSignup'}} class="btn btn-warning">Cancel Signup</button>
   <button {{action 'signup'}} class="btn btn-default">Edit Signup</button> </p>
 {{else}}
-<p><label>Signup Comment:</label>  {{input type="text" size=25 id="signup" enter="signup" value=model.signup_comment }}  
+<p><label>Signup Comment:</label>  {{input type="text" size=25 id="signup" enter=(action "signup")  value=model.signup_comment }}  
   <button {{action 'signup'}} class="btn btn-default">Sign Up</button> </p>
 
 {{/if}}
 
-<hr/>
+<hr>
 
 <div class="row">
     <div class="col col-xs-12">
