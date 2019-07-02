@@ -34,7 +34,6 @@ export default Controller.extend({
             shortdesc: this.get('model.char.shortdesc'),
             rp_hooks: this.get('model.char.rp_hooks'),
             background: this.get('model.char.background'),
-            secretpref: this.get('model.char.secretpref'),
             lastwill: this.get('model.char.lastwill'),
             fs3: this.get('fs3Data')
         };
@@ -47,22 +46,16 @@ export default Controller.extend({
 
     actions: {
 
+        secretPrefChanged(val) {
+            this.set('model.char.secretpref', val);
+        },
+
         genderChanged(val) {
             this.set('model.char.demographics.gender.value', val.value);
         },
 
         groupChanged(group, val) {
-	    var opp = group === 'major school' ? 'minor school' : 'major school';
-	    if (val.value === this.get(`model.char.groups.${opp}.value`)) {
-		var none = this.get(`model.cgInfo.group_options.${opp}.values`).find(function (school) {
-                  return 'None' === school.value;
-		});
-		this.set(`model.char.groups.${opp}`, none);
-            }
             this.set(`model.char.groups.${group}`, val);
-
-        secretPrefChanged(val) {
-            this.set('model.char.secretpref', val);
         },
 
         review() {
