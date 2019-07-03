@@ -1,0 +1,24 @@
+<a href="#" {{action (mut selectCastSpell) true}}>Cast a Spell</a>
+
+{{#bs-modal-simple
+    title="Select a Spell to Cast"
+    closeTitle="Cancel"
+    submitTitle="Cast"
+    size=null
+    fade=false
+    open=selectCastSpell
+    onSubmit=(action "addSceneSpell")
+    onHide=(action (mut selectCastSpell) null)}}
+    <p><b>Select Spell</b></p>
+    <select onchange={{action (mut spellString) value="target.value"}}>
+      {{#each spells as |spell|}}
+        <option value={{spell}}>{{spell}}</option>
+      {{/each}}
+    </select>
+    {{input type="text" size=25 id="spellString" enter="addSceneSpell" value=spellString}}
+    <p><b>Other Options</b></p>
+    <p>
+      Target: {{input type="text" size=15 id="targetName" enter=(action "addSceneSpell") value=targetName}}
+      Mod: {{input type="text" size=15 id="mod" enter=(action "addSceneSpell") value=mod}}
+    </p>
+{{/bs-modal-simple}}
