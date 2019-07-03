@@ -119,7 +119,26 @@ export default Component.extend(AuthenticatedController, {
               this.sendAction('scrollScene');
           });
       },
-      
+
+      addTxt() {
+          let pose = this.get('scenePose');
+          if (pose.length === 0) {
+              this.get('flashMessages').danger("You haven't entered anything.");
+              return;
+          }
+          let api = this.get('gameApi');
+          api.requestOne('addTxt', { scene_id: this.get('scene.id'),
+              pose: pose }, null)
+          .then( (response) => {
+              if (response.error) {
+                  this.get('flashMessages').error(response.error);
+                  return;
+              }
+              this.set('scenePose', '');
+              this.scrollSceneWindow();
+          });
+      },
+
       changeSceneStatus(status) {
           let api = this.get('gameApi');
           if (status === 'share') {
