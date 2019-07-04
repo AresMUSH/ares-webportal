@@ -211,7 +211,13 @@ export default Service.extend({
             }
             else if (notification_type == "combat_activity") {
                 if (this.get('combatCallback')) {
-                    this.get('combatCallback')(data.args.message, data.args.timestamp);
+                    this.get('combatCallback')(data.args.message, notification_type);
+                }
+                notify = false;
+            }
+            else if (notification_type == "new_combat_turn") {
+                if (this.get('combatCallback')) {
+                    this.get('combatCallback')(data.args.message, notification_type);
                 }
                 notify = false;
             }
