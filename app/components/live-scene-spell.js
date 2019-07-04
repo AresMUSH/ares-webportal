@@ -7,6 +7,7 @@ export default Component.extend({
   target_name: null,
   gameApi: service(),
   flashMessages: service(),
+  tagName: '',
 
 
   actions: {
