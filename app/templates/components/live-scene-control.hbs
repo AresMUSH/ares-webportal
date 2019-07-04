@@ -165,11 +165,13 @@
                       {{#if (and scene.can_join isApproved)}}
                         {{#if (not scene.completed)}}
 
+                        {{live-scene-spell spells=spells scene=scene}}
+
                         {{#if rollEnabled}}
                         {{live-scene-fs3 abilities=abilities scene=scene}}
                         {{/if}}
 
-                          <li><a href="#" {{action (mut selectCastSpell) true}}>Cast Spell</a></li>
+
 
                          <li role="separator" class="divider"></li>
 
