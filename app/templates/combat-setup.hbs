@@ -21,7 +21,8 @@
     </div>
     <div class="col-xs-6">
         
-            <b>Action Args:</b><br>
+            <b>Action Args:</b> <i class="fas fa-question-circle">
+      {{#bs-tooltip placement="left"}}Enter targets or other options for your action, like Dummy/burst,called:head.{{/bs-tooltip}}</i><br>
             {{input type="text" size=25 id=id value=comb.action_args}}
             
             
@@ -102,13 +103,16 @@
   </div>
   
   <div class="col-sm-6">
-          <b>Vehicle:</b> 
-      
+          <b>Vehicle:</b> <i class="fas fa-question-circle">
+      {{#bs-tooltip placement="left"}}Enter a vehicle type to get in your own vehicle, or a character name to get into theirs.{{/bs-tooltip}}</i>
+          <br>
+          {{input type="text" size=25 value=comb.vehicle}}
+          <br>
+          <b>Passenger Type:</b>
           {{#power-select selected=comb.passenger_type options=passengerTypes onchange=(action "passengerTypeChanged" id) as |passengerType|}}
             {{passengerType}}
           {{/power-select}}
-          <br>
-          {{input type="text" size=25 value=comb.vehicle}}
+          
           
           
   </div>

@@ -85,6 +85,7 @@ export default Controller.extend(AuthenticatedController, {
         }
         let combatant = response;
         let found = false;
+        this.set('newCombatantName', '');
         this.get('model.teams').forEach(t => {
           if (t.team == combatant.team) {
             found = true;

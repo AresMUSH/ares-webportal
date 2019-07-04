@@ -11,7 +11,8 @@
               {{act}}
             {{/power-select}}
             <br>
-            {{input type="text" size=25 id="actionArgs" value=model.action_args}}
+            <b>Action Args:</b> <i class="fas fa-question-circle">
+      {{#bs-tooltip placement="left"}}Enter targets or other options for your action, like Dummy/burst,called:head.{{/bs-tooltip}}</i> {{input type="text" size=25 id="actionArgs" value=model.action_args}}
             
             
     </div>
@@ -115,15 +116,16 @@
 
 <div class="form-group row">
     <div class="col-sm-3">
-            <b>Vehicle:</b> 
+            <b>Vehicle:</b> <i class="fas fa-question-circle">
+      {{#bs-tooltip placement="left"}}Enter a vehicle type to get in your own vehicle, or a character name to get into theirs.{{/bs-tooltip}}</i>
     </div>
     <div class="col-sm-9">
         
-            {{#power-select selected=model.passenger_type options=passengerTypes onchange=(action "passengerTypeChanged") as |passengerType|}}
+            {{input type="text" size=25 id="vehicleName" value=model.vehicle}}
+            <br>
+            <b>Passenger Type:</b> {{#power-select selected=model.passenger_type options=passengerTypes onchange=(action "passengerTypeChanged") as |passengerType|}}
               {{passengerType}}
             {{/power-select}}
-            <br>
-            {{input type="text" size=25 id="vehicleName" value=model.vehicle}}
             
             
     </div>

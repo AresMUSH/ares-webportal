@@ -138,7 +138,7 @@
         </td>
         
         <td>
-            {{#if c.can_edit}}
+            {{#if currentUser}}
                 {{#link-to 'combatant-edit' c.id}}<i class="fa fa-edit" aria-hidden="true"></i>{{/link-to}}
                 <a href="#" {{action (mut confirmRemoveCombatant) c.name }} ><i class="fa fa-ban" aria-hidden="true"></i></a>
             {{/if}}
