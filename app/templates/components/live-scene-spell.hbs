@@ -15,7 +15,7 @@
         <option value={{spell}}>{{spell}}</option>
       {{/each}}
     </select>
-    {{input type="text" size=25 id="spellString" enter="addSceneSpell" value=spellString}}
+    {{input type="text" size=15 id="spellString" enter=(action "addSceneSpell") value=spellString}}
     <p><b>Other Options</b></p>
     <p>
       Target: {{input type="text" size=15 id="targetName" enter=(action "addSceneSpell") value=targetName}}
