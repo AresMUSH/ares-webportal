@@ -115,7 +115,7 @@
               {{#if model.app.game.disabled_plugins.fs3skills}}
                 <p>Your game does not support setting abilities/skills through the web chargen.  You'll need to complete chargen using in-game commands.</p>
               {{else}}
-                  {{fs3-chargen model=model anyGroupMissing=anyGroupMissing charErrors=charErrors fs3Data=fs3Data}}
+                  {{fs3-chargen model=model anyGroupMissing=anyGroupMissing charErrors=charErrors fs3Data=fs3Data reset=(action 'reset')}}
               {{/if}}
               
             </div>
@@ -159,6 +159,7 @@
                  
                </div>
              </div> 
+             
                
                
                <div class="panel panel-default">

@@ -6,9 +6,22 @@ import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 
 export default Route.extend(DefaultRoute, RouteResetOnExit, ReloadableRoute, {
     gameApi: service(),
-    
+    gameSocket: service(),
+  
     model: function(params) {
         let api = this.get('gameApi');
         return api.requestOne('combat', { id: params['id'] });
-    }
+    },
+
+    activate: function() {
+        this.controllerFor('combat').setupCallback();
+        $(window).on('beforeunload', () => {
+            this.deactivate();
+        });
+    },
+
+    deactivate: function() {
+        this.get('gameSocket').set('combatCallback', null);
+    },
+    
 });
