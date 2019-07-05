@@ -14,10 +14,6 @@ export default Component.extend(AuthenticatedController, {
     gameSocket: service(),
     session: service(),
   
-    rollEnabled: function() {
-      return this.get('abilities').length > 0;
-    }.property('abilities'),
-  
     scenePoses: function() {
         return this.get('scene.poses').map(p => Ember.Object.create(p));  
     }.property('scene.poses.@each.pose'),

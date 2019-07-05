@@ -77,6 +77,17 @@ export default Component.extend({
           return;
         }
       });
+    },
+    
+    startCombat() {
+      let api = this.get('gameApi');
+      api.requestOne('startCombat', { scene_id: this.get('scene.id') }, null)
+      .then( (response) => {
+        if (response.error) {
+          return;
+        }
+        this.set('scene.combat', response.id);
+      });
     }
   }
 });

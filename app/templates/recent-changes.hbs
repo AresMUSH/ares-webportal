@@ -12,7 +12,7 @@
        </td>
        <td>
            {{#if (eq change.change_type 'deleted')}}
-             {{change.title}} deleted
+             {{change.title}}
            {{else if (eq change.change_type 'char')}}
              {{#link-to 'char' change.name}}{{change.title}}{{/link-to}}
            {{else if (eq change.change_type 'event')}}

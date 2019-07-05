@@ -85,7 +85,6 @@ export default Controller.extend({
                     return;
                 }
                 if (response.alerts) {
-                  this.charErrors.replace();
                   response.alerts.forEach( r => this.charErrors.pushObject(r) );
                 }
                 this.flashMessages.success('Saved!');
