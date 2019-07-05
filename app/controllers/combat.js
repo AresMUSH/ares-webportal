@@ -83,18 +83,7 @@ export default Controller.extend(AuthenticatedController, {
         if (response.error) {
           return;
         }
-        let combatant = response;
-        let found = false;
-        this.set('newCombatantName', '');
-        this.get('model.teams').forEach(t => {
-          if (t.team == combatant.team) {
-            found = true;
-            Ember.get(t, 'combatants').pushObject(combatant);
-          }
-        });
-        if (!found) { 
-          this.get('model.teams').pushObject({ team: combatant.team, combatants: [ combatant ]});
-        }
+        this.set('model', response);
         if (isCurrentUser) {
           this.set('model.in_combat', true);
         }

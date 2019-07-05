@@ -13,6 +13,7 @@
                  <li> <a href="#" {{action (mut showAddCombatant) true}}>Add Combatant</a></li>
                 {{#if model.can_manage}}
                  <li> {{#link-to 'combat-setup' model.id}}Setup NPCs{{/link-to}}</li>
+                 <li> {{#link-to 'combat-teams' model.id}}Setup Teams{{/link-to}}</li>
                  <li> <a href="#" {{action (mut confirmStopCombat) true}}>Stop Combat</a></li>
                 {{/if}}
                 <li>{{#link-to 'combat-log' model.id}}View Log{{/link-to}}</li> 
@@ -192,11 +193,12 @@
     open=showAddCombatant
     onSubmit=(action "addCombatant")
     onHide=(action (mut showAddCombatant) null)}}
-        <p><b>Name:</b> </p>
+        <p><b>Name(s):</b> </p>
             <p>{{input type="text"  size=25 value=newCombatantName}}</p>
         <p><b>Type:</b> {{#power-select selected=newCombatantType options=model.combatant_types onchange=(action "combatantTypeChanged") as |type|}}
           {{type}}
         {{/power-select}}</p>
+        <div class="hint">You can add multiple combatants at once, as long as they're the same combatant type. List their names separated by spaces.</div>
   {{/bs-modal-simple}}
 
 
