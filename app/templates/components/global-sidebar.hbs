@@ -89,7 +89,7 @@
    {{#if (eq change.change_type 'char')}}
    <p>{{#link-to 'char' change.name}}{{change.title}}{{/link-to}}</p>
    {{else if (eq change.change_type 'event')}}
-   <p>{{#link-to 'event' change.name}}{{change.title}}{{/link-to}}</p>
+   <p>{{#link-to 'event' change.id}}{{change.title}}{{/link-to}}</p>
    {{else if (eq change.change_type 'wiki')}}
    <p>{{#link-to 'wiki-page' change.name}}{{change.title}}{{/link-to}}</p>
    {{else}}
