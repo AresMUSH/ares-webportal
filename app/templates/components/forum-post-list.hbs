@@ -1,21 +1,28 @@
 <table class="table table-striped">
 <tbody>
-      <tr>
+    <tr>
+      <th></th>
       <th>Title</th>
       <th>Posted By</th>
+      <th>Last Activity</th>
     </tr>
     
 {{#each posts as |post|}}
-    <tr>
+  <tr>
     <td>
-        {{#if post.unread}}
-        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
-        {{/if}}
+      {{#if post.unread}}
+      <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+      {{/if}}
+    </td>
+    <td>
          {{#link-to 'forum-topic' post.category_id post.id}}{{post.title}}{{/link-to}}
      </td>
      <td>{{post.author}} @ {{post.date}}
-     </td>      
-     </tr>
+     </td>
+     <td>
+       {{post.last_activity}}
+     </td>
+   </tr>
 {{/each}}
 </tbody>
 </table>
