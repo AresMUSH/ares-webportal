@@ -166,17 +166,28 @@
 
         {{#if channel.enabled}}
             
+            <ul class="nav navbar-nav">    
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                  <span class="btn btn-default" href="#">Chat Menu <span class="caret"></span></span> </a>
+                  <ul class="dropdown-menu">
+                  {{#if (not channel.is_page)}}
+                    <li><a href="#" {{action "leaveChannel"}}>Leave Channel</a></li>
+                    {{#if channel.muted}}
+                    <li><a href="#" {{action "muteChannel" false}}>Unmute Channel</a></li>
+                    {{else}}
+                    <li><a href="#" {{action "muteChannel" true}}>Mute Channel</a></li>
+                    {{/if}}
+                  {{/if}}
+                  <li><a href="#" {{action (mut showReport) true}}>Report Chat</a></li>
+                </ul>
+                </li>
+            </ul>
+            
+            
             <div class="pull-right">
-              <button class="btn-danger btn" {{action (mut showReport) true}}>Report Chat</button>
-              {{#if (not channel.is_page)}}
-                <button class="btn-warning btn" {{action "leaveChannel"}}>Leave Channel</button>
-                {{#if channel.muted}}
-                <button class="btn-default btn" {{action "muteChannel" false}}>Unmute Channel</button>
-                {{else}}
-                <button class="btn-default btn" {{action "muteChannel" true}}>Mute Channel</button>
-                {{/if}}
-              {{/if}}
-                <button class="btn-primary btn" {{action "send"}}>Send Message</button>
+              <button class="btn-primary btn" {{action "send"}}>Send Message</button>
             </div>
     
         <div class="clearfix"></div>
