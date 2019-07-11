@@ -28,14 +28,28 @@
 </div>
 {{/if}}
 
-<table class="table table-striped">    
+<div class="table-responsive">
+<table class="table table-striped">   
+<thead>
+  <tr>
+    <th></th>
+    <th>Category</th>
+    <th>Description</th>
+    <th>Last Post</th>
+    <th></th>
+  </tr>
+</thead>
+     
 <tbody>
 {{#each model.categories as |forum|}}
-    <tr><td>
-        {{#if forum.unread}}
-        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
-        {{/if}}
+    <tr>
+        <td>
+          {{#if forum.unread}}
+          <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+          {{/if}}
+        </td>
         
+         <td>
         {{#link-to 'forum-category' forum.id}}{{forum.name}}{{/link-to}} 
         </td>
         
@@ -43,10 +57,11 @@
         {{forum.description}}
         </td>
         <td>
-            {{#if forum.last_post}}
-              {{forum.last_post.author}} posted 
-              {{#link-to 'forum-topic' forum.id forum.last_post.id}}{{forum.last_post.subject}}{{/link-to}}
-              <br>{{forum.last_post.date}}
+            {{#if forum.last_activity}}
+              {{forum.last_activity.author}} 
+              {{if (eq forum.last_activity.type 'reply') 'replied to' 'posted'}}
+              {{#link-to 'forum-topic' forum.id forum.last_activity.id}}{{forum.last_activity.subject}}{{/link-to}}
+              <br>{{forum.last_activity.date}}
             {{/if}}
         </td>
         <td>
@@ -58,6 +73,10 @@
     </tr>
 {{/each}}
 
+</tbody>
+</table>
+</div>
+
 {{#if anyHidden}}
 <h4>Hidden</h4>
 {{#each model.hidden as |forum|}}
@@ -67,8 +86,5 @@
           </a> &nbsp; &nbsp;
 {{/each}}
 {{/if}}
-</tbody>
-</table>
-
 
 {{outlet}}
