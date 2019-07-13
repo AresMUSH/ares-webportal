@@ -86,15 +86,18 @@
        
    </div>
    {{#each model.recent_changes as |change|}}
-   {{#if (eq change.change_type 'char')}}
-   <p>{{#link-to 'char' change.name}}{{change.title}}{{/link-to}}</p>
-   {{else if (eq change.change_type 'event')}}
-   <p>{{#link-to 'event' change.id}}{{change.title}}{{/link-to}}</p>
-   {{else if (eq change.change_type 'wiki')}}
-   <p>{{#link-to 'wiki-page' change.name}}{{change.title}}{{/link-to}}</p>
-   {{else}}
-   <p>{{change.title}}</p>
-   {{/if}}
+   <p>
+     {{#if (eq change.type 'char')}}
+       {{#link-to 'char' change.data.char_name}}{{change.message}}{{/link-to}}
+     {{else if (eq change.type 'wiki')}}
+       {{#link-to 'wiki-page' change.data.page_name}}{{change.message}}{{/link-to}}
+     {{else if (eq change.type 'file')}}
+       {{#link-to 'file' change.data.folder change.data.name}}{{change.message}}{{/link-to}}
+     {{else}}
+       {{change.message}}
+     {{/if}}
+     
+   </p>
    {{/each}}
    
    <br>
