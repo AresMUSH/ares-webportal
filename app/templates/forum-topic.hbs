@@ -21,18 +21,16 @@
 
        <div class="hint pull-right">
            
-           <i class="fas fa-clock" >
-             {{#bs-tooltip placement="left"}}{{model.date}}{{/bs-tooltip}}
-           </i>
+         {{tooltip-icon position='left' message=model.date icon='fas fa-clock'}}
            
            {{#if model.can_edit}}
              {{#if (not model.editActive)}}
-             <a href="#" {{action (mut model.editActive) true}}><i class="fa fa-edit" aria-hidden="true">
-               {{#bs-tooltip placement="left"}}Edit topic.{{/bs-tooltip}}
-             </i></a>
-             <a href="#" {{action (mut confirmDeleteTopic) true}}><i class="fa fa-trash" aria-hidden="true">
-               {{#bs-tooltip placement="left"}}Delete topic.{{/bs-tooltip}}
-             </i></a>
+             <a href="#" {{action (mut model.editActive) true}}>
+               {{tooltip-icon position='left' message='Edit topic.' icon='fa fa-edit'}}
+             </a>
+             <a href="#" {{action (mut confirmDeleteTopic) true}}>
+               {{tooltip-icon position='left' message='Delete topic.' icon='fa fa-trash'}}
+             </a>
              {{/if}}
            {{/if}}
        </div>
@@ -66,18 +64,16 @@
        
        <div class="hint pull-right">
            
-           <i class="fas fa-clock" >
-             {{#bs-tooltip placement="left"}}{{reply.date}}{{/bs-tooltip}}
-           </i>
+           {{tooltip-icon position='left' message=reply.date icon='fas fa-clock'}}
            
            {{#if reply.can_edit}}
              {{#if (not reply.editActive)}}
-             <a href="#" {{action (mut reply.editActive) true}}><i class="fa fa-edit" aria-hidden="true">
-               {{#bs-tooltip placement="left"}}Edit reply.{{/bs-tooltip}}
-             </i></a>
-             <a href="#" {{action (mut confirmDeleteReply) reply}}><i class="fa fa-trash" aria-hidden="true">
-               {{#bs-tooltip placement="left"}}Delete reply.{{/bs-tooltip}}
-             </i></a>
+             <a href="#" {{action (mut reply.editActive) true}}>
+               {{tooltip-icon position='left' message='Edit reply.' icon='fa fa-edit'}}
+             </a>
+             <a href="#" {{action (mut confirmDeleteReply) reply}}>
+               {{tooltip-icon position='left' message='Delete reply.' icon='fa fa-trash'}}
+             </a>
              {{/if}}
            {{/if}}
            

@@ -4,6 +4,8 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
     files: [],
     folder: '',
+    allowMulti: true,
+    lockProperties: false,
     gameApi: service(),
     flashMessages: service(),
     
@@ -22,8 +24,13 @@ export default Component.extend({
     actions: {
         filesSelected: function(e) {
             let selectedFiles = e.target.files;
+            let fileCount = selectedFiles.length;
+            if (fileCount > 1 && !this.get('allowMulti')) {
+              this.get('flashMessages').danger('You can only upload a single file.');
+              fileCount = 1;
+            }
             let info = [];
-            for (var i = 0; i < selectedFiles.length; i++) {
+            for (var i = 0; i < fileCount; i++) {
                 let file = selectedFiles.item(i);
                 let fileInfo = Ember.Object.create( {
                     file: file,
@@ -83,7 +90,7 @@ export default Component.extend({
                     
                     let any_left = this.get('files').some(f => !f.upload_success);
                     if (!any_left) {
-                        this.sendAction('uploaded', folder, name);
+                        this.sendAction('uploaded', response.folder, response.name);
                     }
                 }
             });
