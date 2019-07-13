@@ -65,8 +65,8 @@
             {{/if}}
         </td>
         <td>
-          <a href="#" {{action 'hideCategory' forum true}}><i class="fa fa-eye-slash" aria-hidden="true"></i>
-          {{#bs-tooltip placement="left"}}Hide Forum{{/bs-tooltip}}
+          <a href="#" {{action 'hideCategory' forum true}}>
+            {{tooltip-icon position='left' message='Hide category.' icon='fa fa-eye-slash'}}
           </a>
           
         </td>
@@ -81,9 +81,9 @@
 <h4>Hidden</h4>
 {{#each model.hidden as |forum|}}
 {{#link-to 'forum-category' forum.id}}{{forum.name}}{{/link-to}}          
-    <a href="#" {{action 'hideCategory' forum true}} >[<i class="fa fa-eye" aria-hidden="true"></i>]
-          &nbsp; {{#bs-tooltip placement="left"}}Show Forum{{/bs-tooltip}}
-          </a> &nbsp; &nbsp;
+    <a href="#" {{action 'hideCategory' forum true}} >
+      [{{tooltip-icon position='top' message='Show category.' icon='fa fa-eye'}}]
+    </a> &nbsp; &nbsp;
 {{/each}}
 {{/if}}
 

@@ -66,20 +66,19 @@
 
   {{#if selectedChannel}}
 
-    <b>{{selectedChannel.title}}</b> <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down">
-      {{#bs-tooltip placement="left"}}Scroll to bottom.{{/bs-tooltip}}
-    
-    </i></a>
+    <b>{{selectedChannel.title}}</b> <a href="#" {{action "scrollDown"}}>
+      {{tooltip-icon position='left' message='Scroll to bottom.' icon='fas fa-chevron-circle-down'}}
+      </a>
 
   
     {{#if scrollPaused}}
-            <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
-              {{#bs-tooltip placement="left"}}Resume scrolling.{{/bs-tooltip}}
-            </i></a>
+            <a href="#" {{action "unpauseScroll"}}>
+              {{tooltip-icon position='left' message='Resume scrolling.' icon='fas fa-play'}}
+            </a>
     {{else}}
-            <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause">
-              {{#bs-tooltip placement="left"}}Pause scrolling.{{/bs-tooltip}}
-            </i></a>
+            <a href="#" {{action "pauseScroll"}}>
+              {{tooltip-icon position='left' message='Pause scrolling.' icon='fas fa-pause'}}
+            </a>
     {{/if}}
         
         

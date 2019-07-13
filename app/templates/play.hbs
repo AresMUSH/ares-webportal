@@ -29,8 +29,8 @@
     
 <button class="sendButton btn-primary btn" {{action "sendMsg1"}}>Send Text</button>
 <button class="btn btn-default" {{action (mut showHistory1) true}}>
-  {{#bs-tooltip placement="right"}}Command history.{{/bs-tooltip}}
-  <i class="fa fa-history" aria-hidden="true"></i></button>
+  {{tooltip-icon position='right' message='Command history.' icon='fa fa-history'}}
+</button>
 
 {{#if scrollPaused}}
    <span class="label label-warning">Scrolling is paused!</span>
@@ -40,8 +40,8 @@
 
 <button class="sendButton2 btn-primary btn" {{action "sendMsg2"}}>Send Text</button>
 <button class="btn btn-default" {{action (mut showHistory2) true}}>
-  {{#bs-tooltip placement="right"}}Command history.{{/bs-tooltip}}
-  <i class="fa fa-history" aria-hidden="true"></i></button>
+  {{tooltip-icon position='right' message='Command history.' icon='fa fa-history'}}
+</button>
 
 <br><br>
 

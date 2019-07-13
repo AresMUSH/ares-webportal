@@ -22,8 +22,10 @@
     </div>
     <div class="col-xs-6">
         
-            <b>Action Args:</b> <i class="fas fa-question-circle">
-      {{#bs-tooltip placement="left"}}Enter targets or other options for your action, like Dummy/burst,called:head.{{/bs-tooltip}}</i><br>
+            <b>Action Args:</b> 
+            
+            {{tooltip-icon position='top' message='Enter targets or other options for your action, like Dummy/burst,called:head.' icon='fa fa-question-circle'}}
+            <br>
             {{input type="text" size=25 id=id value=comb.action_args}}
             
             
@@ -104,8 +106,9 @@
   </div>
   
   <div class="col-sm-6">
-          <b>Vehicle:</b> <i class="fas fa-question-circle">
-      {{#bs-tooltip placement="left"}}Enter a vehicle type to get in your own vehicle, or a character name to get into theirs.{{/bs-tooltip}}</i>
+          <b>Vehicle:</b>
+          
+          {{tooltip-icon position='top' message='Enter a vehicle type to get in your own vehicle, or a character name to get into theirs.' icon='fa fa-question-circle'}}
           <br>
           {{input type="text" size=25 value=comb.vehicle}}
           <br>
