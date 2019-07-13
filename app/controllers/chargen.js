@@ -33,6 +33,7 @@ export default Controller.extend({
             desc: this.get('model.char.desc'),
             shortdesc: this.get('model.char.shortdesc'),
             rp_hooks: this.get('model.char.rp_hooks'),
+            profile_image: this.get('model.char.profile_image'),
             background: this.get('model.char.background'),
             lastwill: this.get('model.char.lastwill'),
             fs3: this.get('fs3Data')
@@ -47,11 +48,17 @@ export default Controller.extend({
     actions: {
         
         genderChanged(val) {
-            this.set('model.char.demographics.gender.value', val.value);
+           this.set('model.char.demographics.gender.value', val.value);
         },
         
         groupChanged(group, val) {
             this.set(`model.char.groups.${group}`, val);
+        },
+        
+        fileUploaded(folder, name) {
+          folder = folder.toLowerCase();
+          name = name.toLowerCase();
+          this.set('model.char.profile_image', `${folder}/${name}`);
         },
         
         review() {
