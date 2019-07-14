@@ -96,26 +96,17 @@
         
         <td>
             {{#if c.is_ko}}
-            <span class="combat-damage" >
+            <span class="combat-damage hint--left" aria-label="{{c.wound_display}}">
                 <i class="fa fa-crosshairs" aria-hidden="true"></i>
                 K O 
                 <i class="fa fa-crosshairs" aria-hidden="true"></i>
             </span>
             {{else}}
-            <span class="combat-damage" >
-                
+              <span class="combat-damage hint--left" aria-label="{{c.wound_display}}">                
                 {{#each c.damage_boxes}}
                     <i class="fa fa-heartbeat combat-damage" aria-hidden="true"></i>
                 {{/each}}
-                
-                {{#bs-tooltip placement="left"}}
-                  {{#each c.damage as |damage|}}
-                  {{damage}}<br>
-                  {{/each}}
-                {{/bs-tooltip}}
-                
-                
-            </span>
+              </span>
             {{/if}}
         </td>
         
@@ -140,8 +131,12 @@
         
         <td>
             {{#if currentUser}}
-                {{#link-to 'combatant-edit' c.id}}<i class="fa fa-edit" aria-hidden="true"></i>{{/link-to}}
-                <a href="#" {{action (mut confirmRemoveCombatant) c.name }} ><i class="fa fa-ban" aria-hidden="true"></i></a>
+                {{#link-to 'combatant-edit' c.id}}
+                {{tooltip-icon position='left' message='Edit combatant.' icon='fa fa-edit'}}
+                {{/link-to}}
+                <a href="#" {{action (mut confirmRemoveCombatant) c.name }} >
+                  {{tooltip-icon position='left' message='Remove combatant.' icon='fas fa-ban'}}
+                </a>
             {{/if}}
         </td>
     </tr>

@@ -11,8 +11,9 @@
               {{act}}
             {{/power-select}}
             <br>
-            <b>Action Args:</b> <i class="fas fa-question-circle">
-      {{#bs-tooltip placement="left"}}Enter targets or other options for your action, like Dummy/burst,called:head.{{/bs-tooltip}}</i> {{input type="text" size=25 id="actionArgs" value=model.action_args}}
+            <b>Action Args:</b> 
+            {{tooltip-icon position='right' message='Enter targets or other options for your action, like Dummy/burst,called:head.' icon='fa fa-question-circle'}}
+            {{input type="text" size=25 id="actionArgs" value=model.action_args}}
             
             
     </div>
@@ -116,8 +117,9 @@
 
 <div class="form-group row">
     <div class="col-sm-3">
-            <b>Vehicle:</b> <i class="fas fa-question-circle">
-      {{#bs-tooltip placement="left"}}Enter a vehicle type to get in your own vehicle, or a character name to get into theirs.{{/bs-tooltip}}</i>
+            <b>Vehicle:</b>           
+            {{tooltip-icon position='right' message='Enter a vehicle type to get in your own vehicle, or a character name to get into theirs.' icon='fa fa-question-circle'}}
+
     </div>
     <div class="col-sm-9">
         

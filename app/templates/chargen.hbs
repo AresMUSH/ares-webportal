@@ -47,7 +47,11 @@
        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
        <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>   
             <li role="presentation"><a href="#abilities" aria-controls="abilities" role="tab" data-toggle="tab">Abilities</a></li>
-       <li role="presentation"><a href="#misc" aria-controls="misc" role="tab" data-toggle="tab">Miscellaneous</a></li>
+       <li role="presentation"><a href="#bg" aria-controls="misc" role="tab" data-toggle="tab">Background</a></li>
+       <li role="presentation"><a href="#hooks" aria-controls="misc" role="tab" data-toggle="tab">RP Hooks</a></li>
+       <li role="presentation"><a href="#icon" aria-controls="misc" role="tab" data-toggle="tab">Profile Icon</a></li>
+       <li role="presentation"><a href="#descs" aria-controls="misc" role="tab" data-toggle="tab">Descriptions</a></li>
+       <li role="presentation"><a href="#lastwill" aria-controls="misc" role="tab" data-toggle="tab">Last Will</a></li>
      </ul>
      
      <!-- Tab panes -->
@@ -120,59 +124,43 @@
               
             </div>
                                    
-         <div role="tabpanel" class="tab-pane" id="misc">
-             <div class="panel panel-default">
-               <div class="panel-heading">
-                 Background
-               </div>
-               <div class="panel-body">
-                   <div class="cg-tip">{{{ansi-format text=model.cgInfo.bg_blurb}}}</div>
-                 
-                   {{markdown-editor text=model.char.background}}
+         <div role="tabpanel" class="tab-pane" id="bg">
+             <div class="cg-tip">{{{ansi-format text=model.cgInfo.bg_blurb}}}</div>
+           
+             {{markdown-editor text=model.char.background}}
+          </div>
+          
+          <div role="tabpanel" class="tab-pane" id="hooks">
+          
+               <div class="cg-tip">{{{ansi-format text=model.cgInfo.hooks_blurb}}}</div>
+
+               {{markdown-editor text=model.char.rp_hooks}}
+          </div>
+          
+          <div role="tabpanel" class="tab-pane" id="icon">
+
+               <div class="cg-tip">{{{ansi-format text=model.cgInfo.icon_blurb}}}</div>
+
+               {{file-uploader folder=model.char.name lockProperties=true allowMulti=false uploaded=(action "fileUploaded")}}
                    
-               </div>
-             </div> 
+          </div>
 
-             <div class="panel panel-default">
-               <div class="panel-heading">
-                 RP Hooks
-               </div>
-               <div class="panel-body">
-                   <div class="cg-tip">{{{ansi-format text=model.cgInfo.hooks_blurb}}}</div>
-
-                   {{markdown-editor text=model.char.rp_hooks}}
-               </div>
-             </div> 
-              
-             <div class="panel panel-default">
-               <div class="panel-heading">
-                 Description
-               </div>
-               <div class="panel-body">
-                 <div class="cg-tip">{{{ansi-format text=model.cgInfo.desc_blurb}}}</div>
-                 <br>
-                 <p> <i>Main Description:</i> </p>
-                 {{markdown-editor text=model.char.desc}}
-                 
-                 <p> <i>Short Description:</i> </p>
-                 {{input type="text"  size=25 value=model.char.shortdesc}}
-                 
-               </div>
-             </div> 
+         <div role="tabpanel" class="tab-pane" id="descs">
+             <div class="cg-tip">{{{ansi-format text=model.cgInfo.desc_blurb}}}</div>
+             <br>
+             <p> <i>Main Description:</i> </p>
+             {{markdown-editor text=model.char.desc}}
              
-               
-               
-               <div class="panel panel-default">
-                 <div class="panel-heading">
-                   Last Will
-                 </div>
-                 <div class="panel-body">
-                   <div class="cg-tip">{{{ansi-format text=model.cgInfo.lastwill_blurb}}}</div>
-                   <br>
-                   {{markdown-editor text=model.char.lastwill}}
-                 </div>
-               </div>
-               
+             <p> <i>Short Description:</i> </p>
+             {{input type="text"  size=25 value=model.char.shortdesc}}
+             
+          </div>
+          
+          <div role="tabpanel" class="tab-pane" id="lastwill">
+                         
+               <div class="cg-tip">{{{ansi-format text=model.cgInfo.lastwill_blurb}}}</div>
+               <br>
+               {{markdown-editor text=model.char.lastwill}}
            </div>
                
        </div>

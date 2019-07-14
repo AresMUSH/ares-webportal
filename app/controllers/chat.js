@@ -5,10 +5,13 @@ export default Controller.extend({
     gameSocket: service(),
     favicon: service(),
     gameApi: service(),
+    flashMessages: service(),
     selectedChannel: null,
     chatMessage: '',
     scrollPaused: false,
     newConversation: false,
+    showReport: false,
+    reportReason: '',
     newConversationList: [],
     
     channelsByActivity: function() {
@@ -26,6 +29,8 @@ export default Controller.extend({
         this.set('chatMessage', '');
         this.set('scrollPaused', false);
         this.set('newConversation', false);
+        this.set('reportReason', '');
+        this.set('showReport', false);
         this.set('newConversationList', []);
     },
     
@@ -178,6 +183,36 @@ export default Controller.extend({
         newConversation: function() {
           this.set('selectedChannel', null);
           this.set('newConversation', true);
+        },
+        
+        reportChat: function() {
+          let api = this.get('gameApi');
+          let channelKey = this.get('selectedChannel.key');
+          let reason = this.get('reportReason');
+          this.set('reportReason', '');
+          this.set('showReport', false);
+          
+          let reportedMessages = this.get('selectedChannel.messages').filter(m => m.checked);
+          if (reportedMessages.length == 0) {
+            this.get('flashMessages').danger('You must select some messages to report.');
+            return;
+          }
+          if (reason.length == 0) {
+            this.get('flashMessages').danger('You must enter a reason for the report.');
+            return;
+          }
+          
+          let messages = reportedMessages.map(m => m.id);
+          let command = this.get('selectedChannel.is_page') ? 'reportPage' : 'reportChat';
+          
+          api.requestOne(command, { key: channelKey, messages: messages, reason: reason }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              this.get('flashMessages').success('The messages have been reported to the game admin.');
+          });
+          
         },
         
         send: function() {

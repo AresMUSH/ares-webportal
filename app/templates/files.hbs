@@ -1,20 +1,19 @@
 {{title 'Files'}}
 <h1>Files</h1>
 
+<p>Click on a folder to show or hide that folder's files.</p>
+
+<p><a href="#upload"><i class="fas fa-chevron-circle-down"></i> Jump to Upload</a></p>
 
 {{#each model as |folder|}}
 
-<div class="panel-group">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-        
         <a data-toggle="collapse" href="#collapse-{{folder.name}}">
             <i class="far fa-folder-open" aria-hidden="true"></i>
-            {{folder.name}}
-            {{#bs-tooltip placement="right"}}Click to expand or collapse.{{/bs-tooltip}}
+            {{folder.name}} &nbsp; &nbsp;
         </a>
-        
-    </div>
+{{/each}}
+
+{{#each model as |folder|}}
 
     <div id="collapse-{{folder.name}}" class="{{if folder.name 'panel-collapse collapse' 'panel-default' }}">
       <div class="panel-body">
@@ -33,12 +32,11 @@
 
       </div>
     </div>
-  </div>
-</div>
 {{/each}}
 
 
 
+<a name="upload"></a>
 
 {{#if isApproved}}
 
