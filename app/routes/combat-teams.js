@@ -4,9 +4,9 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(DefaultRoute, {
     gameApi: service(),
-
-    model: function() {
+    
+    model: function(params) {
         let api = this.get('gameApi');
-        return api.requestOne('chargenInfo');
+        return api.requestOne('combatSetup', { id: params['id'] });
     }
 });

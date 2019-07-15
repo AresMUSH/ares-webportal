@@ -25,6 +25,7 @@
   <th>Participants / Location / Summary</th>
   <th>IC Date</th>
   <th>Last Activity</th>
+  <th></th>
 </tr>
 
 {{#each model.active as |scene| }}
@@ -82,7 +83,7 @@
         {{#each scene.participants as |char|}}
         {{char-icon-inline char=char}}
         {{/each}}
-        <p>{{scene.location}}</p>        
+        <p>{{scene.location}}</p>
         {{#if (or scene.can_view (not scene.is_private))}}
 
           {{#if scene.summary}}
@@ -101,6 +102,26 @@
 
       {{scene.updated}}
 
+    </td>
+    <td>
+      {{#if scene.watching}}
+        <a href="#" {{action 'stopWatching' scene.id}}>
+          {{tooltip-icon position='left' message='Stop watching scene.' icon='fa fa-eye-slash'}}
+        </a>
+      {{else}}
+        {{#if scene.can_view}}
+          <a href="#" {{action 'watchScene' scene.id}}>
+            {{tooltip-icon position='left' message='Watch scene.' icon='fa fa-eye'}}
+          </a>
+
+          {{#if (not scene.participating) }}
+            <a href="#" {{action 'joinScene' scene.id}}>
+              {{tooltip-icon position='left' message='Join scene.' icon='fa fa-sign-in-alt'}}
+            </a>
+          {{/if}}
+        {{/if}}
+
+      {{/if}}
     </td>
 </tr>
 {{/each}}

@@ -8,27 +8,19 @@
    {{#each model as |change|}}
    <tr>
        <td>
-           {{change.created}}
+           {{change.timestamp}}
        </td>
        <td>
-           {{#if (eq change.change_type 'deleted')}}
-             {{change.title}} deleted
-           {{else if (eq change.change_type 'char')}}
-             {{#link-to 'char' change.name}}{{change.title}}{{/link-to}}
-           {{else if (eq change.change_type 'event')}}
-            {{#link-to 'event' change.id}}{{change.title}}{{/link-to}}
-           {{else if (eq change.change_type 'wiki')}}
-             {{#link-to 'wiki-page' change.name}}{{change.title}}{{/link-to}}
-           {{/if}}
+           {{recent-change-link change=change}}
        </td>
        <td>
            {{change.author}}
        </td>
        <td>
-         {{#if (eq change.change_type 'char')}}
-         {{#link-to 'char-source' change.name change.id}}(history){{/link-to}}
-         {{else if (eq change.change_type 'wiki')}}
-         {{#link-to 'wiki-source' change.name change.id}}(history){{/link-to}}
+         {{#if (eq change.type 'char')}}
+           {{#link-to 'char-source' change.data.char_name change.data.version_id}}(history){{/link-to}}
+         {{else if (eq change.type 'wiki')}}
+           {{#link-to 'wiki-source' change.data.page_name change.data.version_id}}(history){{/link-to}}
          {{/if}}
        </td>
    </tr>
