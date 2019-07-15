@@ -34,21 +34,18 @@
 
 
                 {{#if (not pose.is_system_pose)}}
-                <i class="fas fa-clock" >
-                  {{#bs-tooltip placement="left"}}{{pose.timestamp}}{{/bs-tooltip}}
-                </i>
+                  {{tooltip-icon position='left' message=pose.timestamp icon='fas fa-clock'}}
                 {{/if}}
-
                 {{#if (not scene.reload_required)}}
                   {{#if (and isApproved pose.can_edit)}}
                     {{#if (not pose.editActive)}}
-                    <a href="#" {{action 'editScenePose' pose}}><i class="fa fa-edit" aria-hidden="true">
-                      {{#bs-tooltip placement="left"}}Edit pose.{{/bs-tooltip}}
-                    </i></a>
+                    <a href="#" {{action 'editScenePose' pose}}>
+                      {{tooltip-icon position='left' message='Edit Pose' icon='fa fa-edit'}}
+                    </a>
                     {{#if pose.can_delete}}
-                    <a href="#" {{action (mut confirmDeleteScenePose) pose}}><i class="fa fa-trash" aria-hidden="true">
-                      {{#bs-tooltip placement="left"}}Delete pose.{{/bs-tooltip}}
-                    </i></a>
+                    <a href="#" {{action (mut confirmDeleteScenePose) pose}}>
+                      {{tooltip-icon position='left' message='Delete Pose' icon='fa fa-trash'}}
+                    </a>
                     {{/if}}
                     {{/if}}
                   {{/if}}
@@ -164,10 +161,8 @@
 
                       {{#if (and scene.can_join isApproved)}}
                         {{#if (not scene.completed)}}
-
                         {{live-scene-spell spells=spells scene=scene}}
-
-                        {{#if rollEnabled}}
+                        {{#if scene.fs3_enabled}}
                         {{live-scene-fs3 abilities=abilities scene=scene}}
                         {{/if}}
 

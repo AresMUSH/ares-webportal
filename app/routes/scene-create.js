@@ -18,7 +18,7 @@ export default Route.extend(AuthenticatedRoute, {
                  icdate: appModel.game.scene_start_date }),
              sceneTypes: api.requestMany('sceneTypes'),
              plots: api.requestMany('plots'),
-             characters: api.requestMany('characters'),
+             characters: api.requestMany('characters', { select: 'include_staff' }),
              locations: api.request('sceneLocations'),
              creatures: api.requestMany('creatures'),
              portals: api.requestMany('portals'),

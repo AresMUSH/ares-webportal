@@ -1,5 +1,12 @@
 <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Ability Roll</a></li>
 <li><a href="#" {{action (mut selectSpendLuck) true}}>Spend Luck</a></li>
+{{#if scene.fs3combat_enabled}}
+  {{#if scene.combat}}
+  <li>{{#link-to 'combat' scene.combat target="_blank"}}View Combat{{/link-to}}</li>
+  {{else}}
+  <li><a href="#" {{action 'startCombat'}}>Start Combat</a></li>
+  {{/if}}
+{{/if}}
 
 {{#bs-modal-simple
   title="Spend a Luck Point"
@@ -44,10 +51,10 @@
     <p>Enter two character and ability names.</p>
     <p>
       Character: {{input type="text" size=15 id="vsName1" enter=(action "addSceneRoll") value=vsName1}} 
-      Ability: {{input type="text" size=15 id="vsRoll1" enter=(action "addSceneRoll") value=vsRoll1}}<br/>
-     vs<br/>
+      Ability: {{input type="text" size=15 id="vsRoll1" enter=(action "addSceneRoll") value=vsRoll1}}<br>
+     vs<br>
       Character: {{input type="text" size=15 id="vsName2" enter=(action "addSceneRoll") value=vsName2}} 
-      Ability: {{input type="text" size=15 id="vsRoll2" enter=(action "addSceneRoll") value=vsRoll2}}<br/>
+      Ability: {{input type="text" size=15 id="vsRoll2" enter=(action "addSceneRoll") value=vsRoll2}}<br>
     </p>
     
   {{/bs-modal-simple}}

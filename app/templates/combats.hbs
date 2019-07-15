@@ -1,12 +1,15 @@
 {{title 'Combats'}}
 <h1>Combats</h1>
 
-<p>The combat directory lists active combats and allows you to view combat status in a web page rather than typing 'combat' over and over in your MUSH window.  Organizers can also perform some setup activities via the web.</p>
+<p>The combat directory lists active combats and allows you to view combat status in a web page rather than typing 'combat' over and over in your MUSH window.</p>
+
+<p class="alert alert-info">Usually you'll want to start a combat from the scene menu of an {{#link-to 'scenes-live'}}active scene{{/link-to}}, so the scene and combat are linked. This ensures that combat results are added to the scene. If you want an orphaned combat, <a href="#" {{action 'startCombat'}}>click here</a> to start one.</p>
 
 <table class="table table-striped">
 <thead>
     <th>Combat ID</th>
     <th>Organizer</th>
+    <th>Scene</th>
     <th>Participants</th>
 </thead>
 
@@ -18,6 +21,12 @@
 
 <td>
     {{combat.organizer}}
+</td>
+
+<td>
+  {{#if combat.scene}}
+    {{#link-to 'scene-live' combat.scene}}{{combat.scene}}{{/link-to}}
+  {{/if}}
 </td>
 
 <td>

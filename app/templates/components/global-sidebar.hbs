@@ -93,11 +93,9 @@
 
    </div>
    {{#each model.recent_changes as |change|}}
-   {{#if (eq change.change_type 'char')}}
-   <p>{{#link-to 'char' change.name}}{{change.title}}{{/link-to}}</p>
-   {{else}}
-   <p>{{#link-to 'wiki-page' change.name}}{{change.title}}{{/link-to}}</p>
-   {{/if}}
+   <p>
+     {{recent-change-link change=change}}
+   </p>
    {{/each}}
 
    <br>

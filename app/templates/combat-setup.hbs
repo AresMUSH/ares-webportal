@@ -9,9 +9,30 @@
 
 {{#each-in model.combatants as |id comb| }}
 
+{{#if (not comb.is_npc)}}
 <p>
   {{comb.name}}
 </p>
+
+<div class="form-group row">
+    <div class="col-xs-6">
+            <b>Action:</b>  {{#power-select selected=comb.action options=model.options.actions onchange=(action "actionChanged" id) as |act|}}
+              {{act}}
+            {{/power-select}}
+    </div>
+    <div class="col-xs-6">
+        
+            <b>Action Args:</b> 
+            
+            {{tooltip-icon position='top' message='Enter targets or other options for your action, like Dummy/burst,called:head.' icon='fa fa-question-circle'}}
+            <br>
+            {{input type="text" size=25 id=id value=comb.action_args}}
+            
+            
+    </div>
+ 
+</div>
+
 
 <div class="row">
   <div class="col col-xs-6">
@@ -19,8 +40,8 @@
     <p>
       <label>Team:</label>
   
-      {{#power-select selected=comb.team options=teams onchange=(action "teamChanged" id) as |npc|}}
-        {{npc}}
+      {{#power-select selected=comb.team options=teams onchange=(action "teamChanged" id) as |team|}}
+        {{team}}
       {{/power-select}}
     </p>
 
@@ -30,8 +51,8 @@
       
     <p>
       <label>NPC Level:</label>
-      {{#power-select selected=comb.npc_skill options=model.options.npc_skills onchange=(action "npcChanged" id) as |npc|}}
-        {{npc}}
+      {{#power-select selected=comb.npc_skill options=model.options.npc_skills onchange=(action "npcChanged" id) as |level|}}
+        {{level}}
       {{/power-select}}
     </p>
   
@@ -44,8 +65,8 @@
 
     <p>
       <label>Stance</label>
-    {{#power-select selected=comb.stance options=model.options.stances onchange=(action "stanceChanged" id) as |npc|}}
-      {{npc}}
+    {{#power-select selected=comb.stance options=model.options.stances onchange=(action "stanceChanged" id) as |stance|}}
+      {{stance}}
     {{/power-select}}
     </p>
   </div>
@@ -53,8 +74,8 @@
   <div class="col col-xs-6">
     <p>
       <label>Armor</label>
-    {{#power-select selected=comb.armor options=model.options.armor onchange=(action "armorChanged" id) as |npc|}}
-      {{npc}}
+    {{#power-select selected=comb.armor options=model.options.armor onchange=(action "armorChanged" id) as |armor|}}
+      {{armor}}
     {{/power-select}}
 
     {{#each comb.armor_specials as |spec|}}
@@ -71,8 +92,8 @@
 
     <p>
       <label>Weapon</label>
-    {{#power-select selected=comb.weapon options=model.options.weapons onchange=(action "weaponChanged" id) as |npc|}}
-      {{npc}}
+    {{#power-select selected=comb.weapon options=model.options.weapons onchange=(action "weaponChanged" id) as |weapon|}}
+      {{weapon}}
     {{/power-select}}
 
     {{#each comb.weapon_specials as |spec|}}
@@ -83,9 +104,27 @@
     </p>
 
   </div>
+  
+  <div class="col-sm-6">
+          <b>Vehicle:</b>
+          
+          {{tooltip-icon position='top' message='Enter a vehicle type to get in your own vehicle, or a character name to get into theirs.' icon='fa fa-question-circle'}}
+          <br>
+          {{input type="text" size=25 value=comb.vehicle}}
+          <br>
+          <b>Passenger Type:</b>
+          {{#power-select selected=comb.passenger_type options=passengerTypes onchange=(action "passengerTypeChanged" id) as |passengerType|}}
+            {{passengerType}}
+          {{/power-select}}
+          
+          
+          
+  </div>
 </div>
 
 <hr>
+
+{{/if}}
 
 {{/each-in}}
 
@@ -95,7 +134,7 @@
         <div class="col col-xs-12">
             <div class="pull-right">
     
-                <p> {{#link-to 'combat' model.combat class="btn btn-default"}}Cancel{{/link-to}}  
+                <p> {{#link-to 'combat' model.id class="btn btn-default"}}Cancel{{/link-to}}  
                     <button class="btn btn-primary" {{action 'save'}} >Save</button>
                 </p>
     
