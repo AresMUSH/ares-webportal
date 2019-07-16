@@ -9,11 +9,6 @@
   src="https://www.google.com/maps/embed/v1/place?q={{model.portal.latitude}}%20{{model.portal.longitude}}&key=AIzaSyDtQxW3ou9wLCgpLzTHiYQCKLv4YBM3t1c&maptype=satellite" allowfullscreen></iframe>
   </span>
   {{/if}}
-  {{#if model.portal.location_known}}<span class="ansi-green-fg" style="float:right;"><i><b>This portal's location is ICly available on WeirdNet</b></i></span>
-  {{else}}<span class="ansi-red-fg" style="float:right;"><i><b>This portal's location is NOT ICly available on WeirdNet</b></i></span>
-  {{/if}}
-
-
 
   <div class="portal-card">
     <div class="portal-card-heading">{{model.portal.name}} </div>
@@ -30,7 +25,10 @@
       {{#if model.portal.all_schools}}<b>All Schools:</b>
         {{#each model.portal.all_schools as |school|}}
           {{#link-to 'schools' school.name}}{{school.name}}{{/link-to}}
-        {{/each}}
+        {{/each}}<br>
+      {{/if}}
+      {{#if model.portal.location_known}}<span class="ansi-green-fg"><i><b>This portal's location is ICly available on WeirdNet</b></i></span>
+      {{else}}<span class="ansi-red-fg"><i><b>This portal's location is NOT ICly available on WeirdNet</b></i></span>
       {{/if}}
     </div>
   </div>
