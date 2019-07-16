@@ -12,6 +12,7 @@ export default Controller.extend({
     primary_school: '',
     all_schools: '',
     location: '',
+    location_known: '',
     latitude: '',
     longitude: '',
     sapient: '',
@@ -22,7 +23,11 @@ export default Controller.extend({
     trivia: '',
     events: '',
     society: '',
+    rp_suggestions: '',
 
+    resetOnExit: function() {
+      this.set('isKnown', false);
+    },
 
     actions: {
         gmsChanged(new_gms) {
@@ -45,6 +50,7 @@ export default Controller.extend({
                gms: (this.get('model.portal.gms') || []).map(gm => gm.name),
                creatures: (this.get('model.portal.creatures') || []).map(creature => creature.id),
                location: this.get('model.portal.location'),
+               location_known: this.get('isKnown'),
                latitude: this.get('model.portal.latitude'),
                longitude: this.get('model.portal.longitude'),
                primary_school: this.get('model.portal.primary_school.name'),
@@ -55,6 +61,7 @@ export default Controller.extend({
                npcs: this.get('model.portal.edit_npcs'),
                trivia: this.get('model.portal.edit_trivia'),
                events: this.get('model.portal.edit_events'),
+               rp_suggestions: this.get('model.portal.edit_rp_suggestions'),
                society: this.get('model.portal.edit_society')}, null)
             .then( (response) => {
                 if (response.error) {

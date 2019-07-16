@@ -3,17 +3,24 @@
 
 <div class="ansi">
 
-  {{#if model.portal.latitude}}<span style="float:right;"><iframe width="300" height="250" frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?q={{model.portal.latitude}}%20{{model.portal.longitude}}&key=AIzaSyDtQxW3ou9wLCgpLzTHiYQCKLv4YBM3t1c&maptype=satellite" allowfullscreen></iframe></span>{{/if}}
+  {{#if model.portal.latitude}}
+  <span style="float:right;">
+    <iframe width="300" height="250" frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?q={{model.portal.latitude}}%20{{model.portal.longitude}}&key=AIzaSyDtQxW3ou9wLCgpLzTHiYQCKLv4YBM3t1c&maptype=satellite" allowfullscreen></iframe>
+  </span>
+  {{/if}}
+  {{#if model.portal.location_known}}<span class="ansi-green-fg" style="float:right;"><i><b>This portal's location is ICly available on WeirdNet</b></i></span>
+  {{else}}<span class="ansi-red-fg" style="float:right;"><i><b>This portal's location is NOT ICly available on WeirdNet</b></i></span>
+  {{/if}}
 
 
 
   <div class="portal-card">
     <div class="portal-card-heading">{{model.portal.name}} </div>
     <div class="portal-card-body">
-      {{#if model.portal.gms}}<b>GMs:</b>  {{#each model.portal.gms as |gm|}}
+      {{#if model.portal.gms}}<i>For more information, see {{#each model.portal.gms as |gm|}}
       {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
-      {{/each}} <br> {{/if}}
+      {{/each}} </i><br> {{/if}}
       {{#if model.portal.location}}<b>Location:</b> {{model.portal.location}}<br>  {{/if}}
       {{#if model.portal.primary_school}}
         <b>Dominant School:</b> {{#link-to 'schools' model.portal.primary_school.name}}
@@ -59,6 +66,11 @@
   {{#if model.portal.trivia}}
     <p><h2>Trivia</h2>
     {{{ansi-format text=model.portal.trivia}}}</p>
+  {{/if}}
+
+  {{#if model.portal.rp_suggestions}}
+    <p><h2>Trivia</h2>
+    {{{ansi-format text=model.portal.rp_suggestions}}}</p>
   {{/if}}
 
   {{#if model.portal.events}}
