@@ -69,6 +69,7 @@ Router.map(function() {
   this.route('log', { path: '/log/:file' });
   this.route('login', { path: '/login', query_params: ['redirect'] });
   this.route('logout');
+  this.route('lore-hooks');
   this.route('mail');
   this.route('mail-message', { path: '/mail/:id'});
   this.route('mail-send');
