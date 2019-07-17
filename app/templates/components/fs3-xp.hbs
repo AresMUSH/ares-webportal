@@ -16,5 +16,25 @@
 
 {{#if char.fs3.use_advantages}}
 <hr>
-{{fs3-xplist category="Advantages" abilities=char.fs3.xp.advantages xp=char.fs3.xp.xp_points learnAbility=(action "learnAbility")}}
+  {{#if char.fs3.xp.allow_advantages_xp}}
+
+    {{fs3-xplist category="Advantages" abilities=char.fs3.xp.advantages xp=char.fs3.xp.xp_points learnAbility=(action "learnAbility")}}
+  {{else}}
+  <p><b>Advantages</b></p>
+    You can't raise advantages directly with XP.  Submit a request to staff.
+  {{/if}}
 {{/if}}
+  
+<hr>
+
+<p><b>New Ability</b> 
+  
+    {{#if (gt char.fs3.xp.xp_points 0)}}
+  
+    {{input type="text" size=25 value=newAbility}}
+    <a href="#" class="btn btn-default" {{action 'learnNewAbility'}} >Learn</a>
+    
+    {{else}}
+    Out of XP
+    {{/if}}
+</p>
