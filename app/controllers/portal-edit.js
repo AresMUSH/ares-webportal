@@ -5,10 +5,6 @@ export default Controller.extend({
     flashMessages: service(),
     gameApi: service(),
 
-    resetOnExit: function() {
-      this.set('isKnown', false);
-    },
-
     actions: {
         gmsChanged(new_gms) {
           this.set('model.portal.gms', new_gms);
@@ -37,6 +33,7 @@ export default Controller.extend({
                all_schools: (this.get('model.portal.all_schools') || []).map(s => s.name),
                pinterest: this.get('model.portal.pinterest'),
                description: this.get('model.portal.edit_desc'),
+               society: this.get('model.portal.edit_society'),
                other_creatures: this.get('model.portal.edit_other_creatures'),
                npcs: this.get('model.portal.edit_npcs'),
                trivia: this.get('model.portal.edit_trivia'),
