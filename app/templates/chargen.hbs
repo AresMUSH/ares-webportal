@@ -1,174 +1,186 @@
 {{title 'Create a Character'}}
 <div class="row">
- <div class="col col-md-12">
+  <div class="col col-md-12">
 
-     <h1>Create a Character</h1>
+    <h1>Create a Character</h1>
 
-     <p>The online character creation tool will guide you through creating your character. We recommend reading our <a href="/wiki/join_us">guidelines & help</a> before getting started. You should also read the <a href="/wiki/world_intro">World Intro</a> for a fast and dirty introduction to theme.</p>
+    <p>The online character creation tool will guide you through creating your character. We recommend reading our <a href="/wiki/join_us">guidelines & help</a> before getting started. You should also read the <a href="/wiki/world_intro">World Intro</a> for a fast and dirty introduction to theme.</p>
 
 
-{{#if model.char.chargen_locked}}
+    {{#if model.char.chargen_locked}}
 
-     <div class="alert alert-warning">
+      <div class="alert alert-warning">
 
-             <p>Your application has been submitted.  Unsubmit your app to make changes.</p>
+        <p>Your application has been submitted.  Unsubmit your app to make changes.</p>
 
-             <p>
-                 <button name="unsubmit" {{action 'unsubmit'}} class="btn btn-warning">Unsubmit</button>
-             </p>
-
-     </div>
-
-{{else}}
-
-     <div class="alert alert-info">
-
-      <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen. You can also review your application at any time to see the number of points you have left, as well as any errors.</p>
-
-      <p>
-        <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
-        <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
-      </p>
-
-      <p>If you want to start over, you can reset your Attributes and Skills to the defaults set by your Schools.</p>
-      {{#unless (or model.app.game.disabled_plugins.fs3skills model.char.fs3.reset_needed) }}
         <p>
-          <button name="reset" {{action 'reset'}} class="btn btn-primary">Reset Attributes and Skills</button>
+          <button name="unsubmit" {{action 'unsubmit'}} class="btn btn-warning">Unsubmit</button>
         </p>
-      {{/unless}}
-     </div>
 
-     {{#if charErrors.length}}
-     <div class="alert alert-danger">
-     <p><b>Alerts:</b></p>
-     <ul>
-     {{#each charErrors as |error|}}
-     <li>{{error}}</li>
-     {{/each}}
-     </ul>
-     </div>
-     {{/if}}
+      </div>
 
-     <!-- Nav tabs -->
-     <ul class="nav nav-tabs" role="tablist">
-       <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
-       <li role="presentation"><a href="#bg" aria-controls="misc" role="tab" data-toggle="tab">Background & More</a></li>
-       <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Schools</a></li>
-      <li role="presentation"><a href="#abilities" aria-controls="abilities" role="tab" data-toggle="tab">Abilities</a></li>
-     </ul>
+    {{else}}
 
-     <!-- Tab panes -->
-     <div class="tab-content">
-       <div role="tabpanel" class="tab-pane active" id="demographics">
+      <div class="alert alert-info">
 
-           <p class="cg-tip">{{{ansi-format text=model.cgInfo.demographics_blurb}}}</p>
+        <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen. You can also review your application at any time to see the number of points you have left, as well as any errors.</p>
 
+        <p>
+          <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
+          <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
+        </p>
 
-                 {{#each-in model.char.demographics as |key demo|}}
-                 <div class="form-group row">
-                     <div class="col-sm-3">
-                             <b>{{demo.name}}</b>
-                     </div>
-                     <div class="col-sm-9">
-                         {{#if (eq key 'gender') }}
+        <p>If you want to start over, you can reset your Attributes and Skills to the defaults set by your Schools.</p>
+        {{#unless (or model.app.game.disabled_plugins.fs3skills model.char.fs3.reset_needed) }}
+          <p>
+            <button name="reset" {{action 'reset'}} class="btn btn-primary">Reset Attributes and Skills</button>
+          </p>
+        {{/unless}}
+      </div>
 
-                             {{#power-select selected=model.char.demographics.gender searchField="value" options=genders onchange=(action "genderChanged") as |gender|}}
-                               {{gender.value}}
-                             {{/power-select}}
+      {{#if charErrors.length}}
+        <div class="alert alert-danger">
+          <p><b>Alerts:</b></p>
+          <ul>
+            {{#each charErrors as |error|}}
+              <li>{{error}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/if}}
 
-                         {{else if (eq key 'age')}}
-                             {{input type="text" size=25 value=demo.value}}
-                             <div class="cg-tip">Enter an age or a birthdate in {{model.cgInfo.date_format}} format.</div>
-                         {{else}}
-                             {{input type="text" size=25 value=demo.value}}
-                         {{/if}}
-                     </div>
-                 </div>
-                 {{/each-in}}
+       <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
+        <li role="presentation"><a href="#bg" aria-controls="misc" role="tab" data-toggle="tab">Background & More</a></li>
+        <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Schools</a></li>
+        <li role="presentation"><a href="#abilities" aria-controls="abilities" role="tab" data-toggle="tab">Abilities</a></li>
+      </ul>
 
-                 <div class="cg-tip">{{{ansi-format text=model.cgInfo.icon_blurb}}}</div>
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="demographics">
 
-                 {{file-uploader folder=model.char.name lockProperties=true allowMulti=false uploaded=(action "fileUploaded")}}
+          <p class="cg-tip">{{{ansi-format text=model.cgInfo.demographics_blurb}}}</p>
 
+          {{#each-in model.char.demographics as |key demo|}}
+            <div class="form-group row">
+              <div class="col-sm-3">
+                <b>{{demo.name}}</b>
+              </div>
+              <div class="col-sm-9">
+                {{#if (eq key 'gender') }}
+                  {{#power-select selected=model.char.demographics.gender searchField="value" width="100" options=genders onchange=(action "genderChanged") as |gender|}}
+                    {{gender.value}}
+                  {{/power-select}}
 
+                {{else if (eq key 'age')}}
+                    <p>{{input type="text" size=25 value=demo.value}}</p>
+                    <div class="cg-tip">Enter an age or a birthdate in {{model.cgInfo.date_format}} format.</div>
+                {{else}}
+                    <p>{{input type="text" size=25 value=demo.value}}</p>
+                {{/if}}
+              </div>
+            </div>
+          {{/each-in}}
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Profile Icon
+            </div>
+            <div class="panel-body">
+              <div class="cg-tip">{{{ansi-format text=model.cgInfo.icon_blurb}}}</div><br>
+              <p>{{file-uploader folder=model.char.name lockProperties=true allowMulti=false uploaded=(action "fileUploaded")}}</p>
+            </div>
           </div>
 
-          <div role="tabpanel" class="tab-pane" id="groups">
+        </div>
 
-              <p class="cg-tip">{{{ansi-format text=model.cgInfo.groups_blurb}}}</p>
+        <div role="tabpanel" class="tab-pane" id="groups">
 
+          <p class="cg-tip">{{{ansi-format text=model.cgInfo.groups_blurb}}}</p>
 
-                  {{#each-in model.char.groups as |key group|}}
-                  <div class="form-group row">
-                      <div class="col-sm-3">
-                              <b>{{group.name}}</b>
-                      </div>
-                      <div class="col-sm-9">
-
-                      {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
-                        {{input type="text" size=25 value=group.value}}
-                      {{else}}
-                        {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" onchange=(action "groupChanged" key) as |g|}}
-                        {{g.value}} {{if g.desc '-'}} {{g.desc}}
-                      {{/power-select}}
-                      {{/if}}
-                         <p class="cg-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
-
-                      </div>
-
-                  </div>
-
-                  {{/each-in}}
-
+          {{#each-in model.char.groups as |key group|}}
+            <div class="form-group row">
+              <div class="col-sm-3">
+                <b>{{group.name}}</b>
+              </div>
+              <div class="col-sm-9">
+                {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
+                  {{input type="text" size=25 value=group.value}}
+                {{else}}
+                  <p>{{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" onchange=(action "groupChanged" key) as |g|}}
+                  {{g.value}} {{if g.desc '-'}} {{g.desc}}
+                  {{/power-select}}</p>
+                {{/if}}
+                <p class="cg-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
+              </div>
             </div>
+          {{/each-in}}
+        </div>
 
-            <div role="tabpanel" class="tab-pane" id="abilities">
 
-              {{#if model.app.game.disabled_plugins.fs3skills}}
-                <p>Your game does not support setting abilities/skills through the web chargen.  You'll need to complete chargen using in-game commands.</p>
-              {{else}}
-                  {{fs3-chargen model=model anyGroupMissing=anyGroupMissing charErrors=charErrors fs3Data=fs3Data reset=(action 'reset')}}
-              {{/if}}
+        <div role="tabpanel" class="tab-pane" id="abilities">
 
+          {{#if model.app.game.disabled_plugins.fs3skills}}
+            <p>Your game does not support setting abilities/skills through the web chargen.  You'll need to complete chargen using in-game commands.</p>
+          {{else}}
+              {{fs3-chargen model=model anyGroupMissing=anyGroupMissing charErrors=charErrors fs3Data=fs3Data reset=(action 'reset')}}
+          {{/if}}
+
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="bg">
+
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Background
             </div>
-
-         <div role="tabpanel" class="tab-pane" id="bg">
-             <div class="panel panel-default">
-               <div class="panel-heading">
-                 Background
-               </div>
-               <div class="panel-body">
-                   <div class="cg-tip">{{{ansi-format text=model.cgInfo.bg_blurb}}}</div>
-
-                   {{markdown-editor text=model.char.background}}
-
-               </div>
-             </div>
-
-               {{markdown-editor text=model.char.rp_hooks}}
+            <div class="panel-body">
+              <div class="cg-tip">{{{ansi-format text=model.cgInfo.bg_blurb}}}</div>
+              {{markdown-editor text=model.char.background}}
+            </div>
           </div>
 
-          <div role="tabpanel" class="tab-pane" id="icon">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              RP Hooks
+            </div>
+            <div class="panel-body">
+              <div class="cg-tip">{{{ansi-format text=model.cgInfo.hooks_blurb}}}</div>
+              {{markdown-editor text=model.char.rp_hooks}}
+            </div>
+          </div>
 
-                   {{markdown-editor text=model.char.rp_hooks}}
-               </div>
-             </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Description
+            </div>
+            <div class="panel-body">
+              <div class="cg-tip">{{{ansi-format text=model.cgInfo.desc_blurb}}}</div>
+              <br>
+              <p> <i>Main Description:</i> </p>
+              {{markdown-editor text=model.char.desc}}
 
-             <div class="panel panel-default">
-               <div class="panel-heading">
-                 Description
-               </div>
-               <div class="panel-body">
-                 <div class="cg-tip">{{{ansi-format text=model.cgInfo.desc_blurb}}}</div>
-                 <br>
-                 <p> <i>Main Description:</i> </p>
-                 {{markdown-editor text=model.char.desc}}
+              <p> <i>Short Description:</i> </p>
+              {{input type="text"  size=75 value=model.char.shortdesc}}
+            </div>
+          </div>
 
-                 <p> <i>Short Description:</i> </p>
-                 {{input type="text"  size=25 value=model.char.shortdesc}}
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              Last Will
+            </div>
+            <div class="panel-body">
+              <div class="cg-tip">{{{ansi-format text=model.cgInfo.lastwill_blurb}}}</div>
+              <br>
+              {{markdown-editor text=model.char.lastwill}}
+            </div>
+          </div>
 
-               </div>
-             </div>
+        </div>
+      </div>
+
 
              <!-- <div class="form-group row">
                <div class="col-sm-3">
@@ -185,57 +197,37 @@
              </div>
            </div> -->
 
+    <div class="alert alert-success">
 
-               <div class="panel panel-default">
-                 <div class="panel-heading">
-                   Last Will
-                 </div>
-                 <div class="panel-body">
-                   <div class="cg-tip">{{{ansi-format text=model.cgInfo.lastwill_blurb}}}</div>
-                   <br>
-                   {{markdown-editor text=model.char.lastwill}}
-                 </div>
-               </div>
+      {{#if model.cgInfo.allow_web_submit}}
+        <p>Remember to save often.  When you're finished, you can review your character for errors or missing information and then submit your application.</p>
 
+        <p>
+          <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
+          <button name="review" {{action 'review'}} class="btn btn-success">Review or Submit</button>
+        </p>
+      {{else}}
+        <p>Remember to save often.  You can also review your character for errors or missing information.  When you're done here, you will need to log onto the game to finish character creation and submit your application.</p>
 
-           <!-- </div> -->
-
-       <!-- </div> -->
-
-
-     <div class="alert alert-success">
-
-     {{#if model.cgInfo.allow_web_submit}}
-             <p>Remember to save often.  When you're finished, you can review your character for errors or missing information and then submit your application.</p>
-
-             <p>
-                 <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
-                 <button name="review" {{action 'review'}} class="btn btn-success">Review or Submit</button>
-             </p>
-     {{else}}
-             <p>Remember to save often.  You can also review your character for errors or missing information.  When you're done here, you will need to log onto the game to finish character creation and submit your application.</p>
-
-             <p>
-                 <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
-                 <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
-             </p>
-     {{/if}}
-     </div>
+        <p>
+          <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
+          <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
+        </p>
+      {{/if}}
+    </div>
 {{/if}}
+    {{flash-messages}}
 
-
-   {{flash-messages}}
-
-     {{#if charErrors.length}}
-     <div class="alert alert-danger">
-     <p><b>Alerts:</b></p>
-     <ul>
-     {{#each charErrors as |error|}}
-     <li>{{error}}</li>
-     {{/each}}
-     </ul>
+    {{#if charErrors.length}}
+      <div class="alert alert-danger">
+        <p><b>Alerts:</b></p>
+        <ul>
+          {{#each charErrors as |error|}}
+          <li>{{error}}</li>
+          {{/each}}
+        </ul>
      </div>
-     {{/if}}
+    {{/if}}
   </div>
 
 
