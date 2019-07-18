@@ -29,9 +29,9 @@
     </div>
 
     <div class="infobox-body">
-      {{#if model.creature.gms}}<b>GMs:</b>  {{#each model.creature.gms as |gm|}}
+      {{#if model.creature.gms}}<i>For more information see {{#each model.creature.gms as |gm|}}
       {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
-      {{/each}} <br>{{/if}}
+      {{/each}} </i><br>{{/if}}
 
 
       {{#if model.creature.portals}}<b>Portals:</b>
