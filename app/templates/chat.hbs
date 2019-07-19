@@ -16,7 +16,7 @@
     <div class="collapse in" id="channelMenuCollapse">
     
     {{#each channelsByActivity as |channel|}}
-      {{#if channel.allowed}}
+      {{#if channel.can_join}}
         {{#if channel.enabled}}
           <button {{action 'changeChannel' channel}} 
              class="btn btn-default chat-button {{if (eq channel.key selectedChannel.key) 'chat-button-active' ''}}">
@@ -46,7 +46,7 @@
         <span class="btn btn-default chat-button" href="#">Add Channel <span class="caret"></span></span> </a>
         <ul class="dropdown-menu">
           {{#each model.chat as |channel|}}
-            {{#if channel.allowed}}
+            {{#if channel.can_join}}
               {{#if (not channel.enabled)}}
                 <li><a href="#" {{action 'joinChannel' channel.title}}>{{channel.title}}</a></li>
               {{/if}}
@@ -135,7 +135,9 @@
           <span class="label label-warning">Scrolling is paused!</span>
           {{/if}}
     
-          {{cmd-box value=chatMessage class="chat-box" cols="80" rows="6" onEnter=(action "send") }}
+          {{#if channel.can_talk}}
+            {{cmd-box value=chatMessage class="chat-box" cols="80" rows="6" onEnter=(action "send") }}
+          {{/if}}
 
 
       {{else}}
@@ -185,9 +187,11 @@
             </ul>
             
             
-            <div class="pull-right">
-              <button class="btn-primary btn" {{action "send"}}>Send Message</button>
-            </div>
+            {{#if channel.can_talk}}
+              <div class="pull-right">
+                <button class="btn-primary btn" {{action "send"}}>Send Message</button>
+              </div>
+            {{/if}}
     
         <div class="clearfix"></div>
     
