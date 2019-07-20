@@ -1,6 +1,24 @@
 {{title 'Admin Tasks'}}
 <h1>Admin Tasks</h1>
 
+
+
+{{#if status}}
+<p>The upgrade/deploy task may take a couple minutes.  The status will update below.  Be sure to pay attention to any errors displayed.</p>
+
+<hr/>
+
+<pre id="manageLog" class="console">
+  {{{ansi-format text=status}}}
+</pre>
+
+<hr/>
+
+<p>When the status says the task is done, you can <a href="#" {{action 'returnToManage'}}>return to the manage screen.</a></p>
+
+
+{{else}}
+
 <h2>Upgrade the Game</h2>        
 
 <p>This button will take upgrade your game to the latest Ares version.</p>
@@ -10,32 +28,22 @@
   
   <ul>
     <li>You <b>do not</b> have any custom code changes. -or-</li>
-    <li>You have already updated your GitHub fork and resolved any code conflicts.</li>
+    <li>You have already updated your GitHub fork and resolved any code conflicts, and your game is pointing to your fork.</li>
   </ul>
 </div>
 
     <p><button class="btn btn-primary" {{action 'upgrade'}}>Upgrade</button></p>
 
-{{#if upgradeMessage}}
-<div class="alert alert-success">
-<p>{{upgradeMessage}}</p>
-</div>
-{{/if}}
 
 <p><hr></p>
 
 <h2>Deploy the Website</h2>
     
     
-    <p>This button will redeploy the website.  You need to redeploy after any website code changes.</p>
+    <p>This button will redeploy the website.  You need to redeploy if you make custom web portal code changes.  Doing an upgrade will redeploy automatically.</p>
         
     <p><button class="btn btn-primary" {{action 'deploy'}}>Redeploy Website</button></p>
 
-{{#if deployMessage}}
-<div class="alert alert-success">
-<p>{{deployMessage}}</p>
-</div>
-{{/if}}
 
 <p><hr></p>
         
@@ -46,6 +54,8 @@
     </div>
         
         <p><button class="btn btn-danger" {{action 'shutdown'}}>Shutdown</button></p>
+{{/if}}
+
 
 
 {{outlet}}

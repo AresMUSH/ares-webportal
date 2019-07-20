@@ -121,7 +121,10 @@
         </div>
     
         <div id="relationships" class="tab-pane fade in">
-          
+            <p><b>Category Order:</b> {{input type="text" size=50 value=model.relationships_category_order placeholder="Order (Optional)."}}</p>
+            <p class="hint">List categories, separated by commas, in the order you want them to appear on your relationship display.</p>
+            <hr/>
+
             {{#each model.relationships as |relationship|}}
             <p>
             {{input type="text" size=25 value=relationship.name placeholder="Enter name."}}
