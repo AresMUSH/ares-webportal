@@ -37,6 +37,17 @@ export default Component.extend({
           });
       },
       
+      leavePlace() {
+          let api = this.get('gameApi');
+
+          api.requestOne('leavePlace', { scene_id: this.get('scene.id') })
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+          });
+      },
+      
       viewPlaces() {
           let api = this.get('gameApi');
 
