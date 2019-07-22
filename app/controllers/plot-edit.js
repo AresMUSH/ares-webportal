@@ -16,6 +16,7 @@ export default Controller.extend({
                title: this.get('model.plot.title'), 
                summary: this.get('model.plot.summary'),
                storyteller_id: this.get('model.plot.storyteller.id'),
+               completed: this.get('model.plot.completed'),
                description: this.get('model.plot.description')}, null)
             .then( (response) => {
                 if (response.error) {
