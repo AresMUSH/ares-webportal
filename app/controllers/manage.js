@@ -3,32 +3,55 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
     gameApi: service(),
+    gameSocket: service(),
     flashMessages: service(),
-    deployMessage: null,
-    upgradeMessage: null,
+    status: '',
 
     resetOnExit: function() {
-      this.set('deployMessage', null);
-      this.set('upgradeMessage', null);
+      this.set('status', '');
     },
-  
+
+    setupCallback: function() {
+      let self = this;
+      this.set('status', '');
+      this.get('gameSocket').set('manageCallback', function(data, notification_type) {
+        self.addToStatus(data) } );
+    },
+    
+    addToStatus: function(message) {
+      let old_status = this.get('status');
+      this.set('status', `${old_status}\n${message}`);
+      
+      try {
+        $('#manageLog').stop().animate({
+            scrollTop: $('#manageLog')[0].scrollHeight
+        }, 800); 
+      }
+      catch(error) {
+        // This happens sometimes when transitioning away from screen.
+      }   
+    },
+      
     actions: {
         deploy() {
-            let api = this.get('gameApi');
+          let api = this.get('gameApi');
+          this.set('status', '');
+          this.addToStatus('Website redeploying.  Please wait.');
 
-            api.requestOne('deployWebsite')
+          api.requestOne('deployWebsite', null)
             .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-            this.set('deployMessage', 'Website redeploying.  Please wait a minute and then refresh your browser window to see the changes.  Check the game log file for any error messages.');
+              this.addToStatus(response.message);
           });  
+        },
+        
+        returnToManage() {
+          this.set('status', '');
         },
         
         shutdown() {
             let api = this.get('gameApi');
 
-
+            this.set('status', '');
             api.requestOne('shutdown')
             .then( (response) => {
                 if (response.error) {
@@ -40,22 +63,13 @@ export default Controller.extend({
         },
         
         upgrade() {
-            let api = this.get('gameApi');
-
-
-            api.requestOne('upgrade')
+          let api = this.get('gameApi');
+          this.set('status', '');
+          this.addToStatus('Starting upgrade.  Please wait.');
+          api.requestOne('upgrade', null)
             .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                if (response.restart_required) {
-                  this.set('upgradeMessage', "This upgrade requires a game restart. Shutdown and restart the game to complete the upgrade. See the 'restarting the game' tutorial on aresmush.com for help.")
-                } else {
-                  this.set('upgradeMessage', 'Upgrade complete.  Please wait a minute and then refresh your browser window to see the changes.  Check the game log file for any error messages.')
-                }
-            
-            
-            });  
+              this.addToStatus(response.message);
+          });
         }
         
     }
