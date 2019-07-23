@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
     gameApi: service(),
     flashMessages: service(),
+    newAbility: '',
 
     actions: { 
       learnAbility(ability) {
@@ -14,10 +15,28 @@ export default Component.extend({
                     return;
                 }
             
-                this.get('flashMessages').success('Saved!');
+                this.get('flashMessages').success('Learned!');
                 this.sendAction('abilityLearned');
             });
-        }
+        },
+        learnNewAbility() {
+              let api = this.get('gameApi');
+              let name = this.get('newAbility');
+              
+              if (name.length == 0) {
+                return;
+              }
+              
+              api.requestOne('learnAbility', { ability: name }, null)
+              .then( (response) => {
+                  if (response.error) {
+                      return;
+                  }
+            
+                  this.get('flashMessages').success('Learned!');
+                  this.sendAction('abilityLearned');
+              });
+          }
         
     }
 });

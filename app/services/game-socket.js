@@ -14,6 +14,7 @@ export default Service.extend({
     jobsCallback: null,
     sceneCallback: null,
     combatCallback: null,
+    manageCallback: null,
     connected: false,
 
     socketUrl() {
@@ -233,6 +234,12 @@ export default Service.extend({
             else if (notification_type == "notification_update") {
               var notification_badge = $('#notificationBadge');
               notification_badge.text(data.args.message);
+              notify = false;
+            }
+            else if (notification_type == "manage_activity") {
+              if (this.get('manageCallback')) {
+                  this.get('manageCallback')(data.args.message, notification_type);
+              }
               notify = false;
             }
 

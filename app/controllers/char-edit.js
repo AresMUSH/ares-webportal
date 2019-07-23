@@ -42,6 +42,7 @@ export default Controller.extend({
             rp_hooks: this.get('model.rp_hooks'),
             plot_prefs: this.get('model.plot_prefs'),
             relationships: relationships,
+            relationships_category_order: this.get('model.relationships_category_order'),
             gallery: gallery,
             profile: profile,
             bg_shared: this.get('model.bg_shared'),
