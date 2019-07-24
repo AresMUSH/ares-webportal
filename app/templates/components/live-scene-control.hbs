@@ -193,7 +193,7 @@
                 <div class="pull-right">
 
                   {{#if (not scene.completed)}}
-                  <button {{action 'addTxt' }} class="btn btn-default">Send Txt</button>
+                  {{live-scene-txt scenePose=scenePose scene=scene}}
                   <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
                   <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
                   <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
@@ -242,24 +242,6 @@
         onHide=(action (mut confirmDeleteScene) null)}}
         You're about to delete this scene. This cannot be undone.  Are you sure?
     {{/bs-modal-simple}}
-
-    <!-- {{#bs-modal-simple
-        title="Select a Spell to Cast"
-        closeTitle="Cancel"
-        submitTitle="Cast"
-        size=null
-        fade=false
-        open=selectCastSpell
-        onSubmit=(action "addSceneSpell")
-        onHide=(action (mut selectCastSpell) null)}}
-        <select onchange={{action (mut spellString) value="target.value"}}>
-          {{#each spells as |spell|}}
-            <option value={{spell}}>{{spell}}</option>
-          {{/each}}
-        </select>
-        {{input type="text" size=25 id="spellString" enter="addSceneSpell" value=spellString}}
-
-      {{/bs-modal-simple}} -->
 
     {{#bs-modal-simple
         title="Change the Scene Location"

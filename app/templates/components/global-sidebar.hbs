@@ -1,12 +1,15 @@
+<div class="sidebar-box {{boxStyle}}" style="margin-top:10px;">
+  <div class="sidebar-heading">
+    <h2>Search <i class="fa fa-search" aria-hidden="true"></i></h2>
+  </div>
+  <p><center>{{#link-to 'search-scenes'}}Scenes{{/link-to}} &middot; {{#link-to 'search-spells'}}Spells{{/link-to}} &middot; {{#link-to 'search-help'}}Help{{/link-to}}  &middot; {{#link-to 'search-wiki'}}Wiki {{/link-to}} &middot; {{#link-to 'search-wiki'}}More{{/link-to}}</center></p>
+</div>
+
 <div class="sidebar-box {{boxStyle}}">
-
-
-
-    <p style="margin-top:10px;">
-
-  {{#link-to 'search-wiki'}}<i class="fa fa-search" aria-hidden="true"></i> Search{{/link-to}}</p>
-  <hr>
-  <p><center><a href="/wiki/create">New</a> &middot; <a href="/wiki/all">All</a> &middot; <a href="/wiki/tags">Tags</a> &middot; <a href="/wiki/recent-changes">Recent</a> &middot; <a href="/files">Files </a> &middot; <a href="/help/markdown">Help</a></center></p>
+  <div class="sidebar-heading">
+    <h2>Wiki <i class="fas fa-user-edit"></i></h2>
+  </div>
+  <p><center>{{#link-to 'wiki-create'}}New{{/link-to}} &middot; {{#link-to 'wiki-all'}}All{{/link-to}} &middot; {{#link-to wiki-tags}}Tags{{/link-to}}  &middot; {{#link-to 'files'}}Files {{/link-to}} &middot; {{#link-to 'help-topic' 'markdown'}}Format Help{{/link-to}}</center></p>
 </div>
 
 
