@@ -51,7 +51,7 @@
 
        <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
+        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Basic Info</a></li>
         <li role="presentation"><a href="#bg" aria-controls="misc" role="tab" data-toggle="tab">Background & More</a></li>
         <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Schools</a></li>
         <li role="presentation"><a href="#abilities" aria-controls="abilities" role="tab" data-toggle="tab">Abilities</a></li>
@@ -75,14 +75,32 @@
                   {{/power-select}}
 
                 {{else if (eq key 'age')}}
-                    <p>{{input type="text" size=25 value=demo.value}}</p>
-                    <div class="cg-tip">Enter an age or a birthdate in {{model.cgInfo.date_format}} format.</div>
+
+                  <p>{{input type="text" size=25 value=demo.value}}</p>
+                  <div class="cg-tip">Enter an age or a birthdate in {{model.cgInfo.date_format}} format.</div>
+
                 {{else}}
                     <p>{{input type="text" size=25 value=demo.value}}</p>
                 {{/if}}
               </div>
             </div>
           {{/each-in}}
+
+          <div class="form-group row">
+            <div class="col-sm-3">
+              <b>Lore Hook Preference</b>
+            </div>
+            <div class="col-sm-9">
+              <p>{{#power-select selected=model.char.lore_hook_pref searchField="value" options=model.cgInfo.lore_hook_prefs onchange=(action "lorehookPrefChanged") as |pref|}}
+                {{pref.value}} - {{pref.desc}}
+              {{/power-select}}</p>
+              <div class="cg-tip">
+                <p>Lore Hooks are bits of fun lore that are unique to you. See the <a href="https://tinyurl.com/y6zgez98">Guide to Lore Hooks</a> for more info on each type of hook.</p>
+                <p>Storytellers begin working on Lore Hooks once a character has been played for at least a month.</p>
+                <p>If you have preferences for the sort of Lore Hook you recieve, feel free to leave them in the comments before submitting your application. You can also set or change your preference any time after CG.</p>
+              </div>
+            </div>
+          </div>
 
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -181,21 +199,6 @@
         </div>
       </div>
 
-
-             <!-- <div class="form-group row">
-               <div class="col-sm-3">
-                 <b>Secret Preference</b>
-               </div>
-               <div class="col-sm-9">
-                {{#power-select selected=model.char.secretpref searchField="value" options=model.cgInfo.secret_prefs onchange=(action "secretPrefChanged") as |pref|}}
-                 {{pref.value}} - {{pref.desc}}
-                {{/power-select}}
-                <p class="cg-subtle-tip">Secrets are admin-created pieces of information that are hooks for plots and story development over time. They may refer to a piece of your character's past, or be a plot seed that will be planted in the future. Secrets may be positive or negative, and sometimes may be shared by more than one character. You may choose to have a hand in developing your character's secret or leave it entirely up to admin, but once created, the implementation of secrets is in the hands of the game's Storytellers.</p>
-                <p>Storytellers begin working on a secret once a character is at least a month old.</p>
-                <p>If you have preferences for the sort of secret you recieve (IE: tragic, heroic, dark, happy), feel free to leave them in the comments before submitting your application. </p>
-               </div>
-             </div>
-           </div> -->
 
     <div class="alert alert-success">
 

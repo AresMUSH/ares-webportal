@@ -32,6 +32,7 @@ export default Controller.extend({
             groups: this.get('model.char.groups'),
             desc: this.get('model.char.desc'),
             shortdesc: this.get('model.char.shortdesc'),
+            lore_hook_pref: this.get('model.char.lore_hook_pref'),
             rp_hooks: this.get('model.char.rp_hooks'),
             profile_image: this.get('model.char.profile_image'),
             background: this.get('model.char.background'),
@@ -49,6 +50,10 @@ export default Controller.extend({
 
         secretPrefChanged(val) {
             this.set('model.char.secretpref', val);
+        },
+
+        lorehookPrefChanged(val) {
+            this.set('model.char.lore_hook_pref', val);
         },
 
         genderChanged(val) {
