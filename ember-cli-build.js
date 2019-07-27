@@ -10,9 +10,9 @@ module.exports = function(defaults) {
       'importBootstrapFont': true,
       'importBootstrapCSS': false
     },
-    'babel': {
-        'includePolyfill': true
-      }
+    'ember-cli-babel': {
+      includePolyfill: true
+    }
   });
 
   /*  app.import(app.bowerDirectory + '/bootstrap/dist/css/bootstrap.css');
