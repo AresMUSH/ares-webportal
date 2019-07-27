@@ -4,10 +4,12 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 import AvailableRoutes from 'ares-webportal/mixins/available-routes';
 
 export default Controller.extend(AuthenticatedController, AvailableRoutes, {
-    session: service('session'),
+    session: service(),
     gameSocket: service(),
+    gameApi: service(),
     hideSidebar: false,
     refreshSidebar: false,
+    showAltSelection: false,
     sidebarModel: {},
 
     currentRoute: function() {
@@ -36,7 +38,7 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
     
     currentUser: function() {
         return this.get('session.data.authenticated');
-    }.property(),
+    }.property('session.data.authenticated'),
     
     socketConnected: function() {
       return this.get('gameSocket.connected');
@@ -79,6 +81,16 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
       
       return nav;
       
-    }.property('model')
+    }.property('model'),
+    
+    actions: {
+      switchAlt: function(alt) {
+        this.set('showAltSelection', false);
+        this.get('session').authenticate('authenticator:ares', { name: alt, password: 'ALT' })
+         .then(() => {
+           window.location.replace('/');
+         });
+      }
+    }
     
 });

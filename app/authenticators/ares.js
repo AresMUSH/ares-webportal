@@ -35,6 +35,7 @@ export default Base.extend({
             return Promise.reject(response);            
         });
     },
+    
     invalidate() {
         this.get('gameSocket').sessionStopped();
         return Promise.resolve();

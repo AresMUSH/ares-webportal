@@ -142,7 +142,13 @@ export default Component.extend({
     addBackgroundSkill() {
       let skill = this.get('newBgSkill');
       if (!skill) {
-        this.get('flashMessages').danger("You haven't given a reason for your luck spend.");
+        this.get('flashMessages').danger("You didn't specify a skill name.");
+        this.set('selectBackgroundSkill', false);
+        return;
+      }
+      if (!skill.match(/^[\w\s]+$/)) {
+        this.get('flashMessages').danger("Skills can't have special characters in their names.");
+        this.set('selectBackgroundSkill', false);
         return;
       }
       this.set('newBgSkill', null);

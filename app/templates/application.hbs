@@ -14,7 +14,15 @@
                <div class="col-md-6 hidden-sm hidden-xs">
                   <div class="text-right user-bar">
                    {{#if isAuthenticated}}
-                       <p>Welcome, {{currentUser.name}}.</p>
+                       <p>Welcome, {{currentUser.name}}. 
+                         <a href="#" {{action (mut showAltSelection) true}}><i class="fa fa-caret-down" aria-hidden="true"></i></a> </p>
+                       {{#if showAltSelection}}
+                         {{#each model.alts as |alt|}}
+                           {{#if (not (eq alt.name currentUser.name)) }}
+                             <p><i><a href="#" {{action 'switchAlt' alt.name}}>Switch to {{alt.name}}.</a></i></p>
+                           {{/if}}
+                         {{/each}}
+                       {{/if}}
                        <p>
                            {{#link-to 'notifications'}}
                            {{#if model.notification_count}}
