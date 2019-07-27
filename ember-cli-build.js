@@ -9,7 +9,10 @@ module.exports = function(defaults) {
       'bootstrapVersion': 3,
       'importBootstrapFont': true,
       'importBootstrapCSS': false
-    }
+    },
+    'babel': {
+        'includePolyfill': true
+      }
   });
 
   /*  app.import(app.bowerDirectory + '/bootstrap/dist/css/bootstrap.css');
