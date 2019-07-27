@@ -34,7 +34,7 @@ export default Controller.extend({
         this.set('newConversationList', []);
     },
     
-    onChatMessage: function(msg, timestamp) {
+    onChatMessage: function(type, msg, timestamp) {
         let splitMsg = msg.split('|');
         let channelKey = splitMsg[0];
         let channelTitle = splitMsg[1];
@@ -100,8 +100,10 @@ export default Controller.extend({
     
     setupCallback: function() {
         let self = this;
-        this.get('gameSocket').set('chatCallback', function(msg, timestamp) {
-            self.onChatMessage(msg, timestamp) } );
+        this.get('gameSocket').setupCallback('new_chat', function(type, msg, timestamp) {
+            self.onChatMessage(type, msg, timestamp) } );
+        this.get('gameSocket').setupCallback('new_page', function(type, msg, timestamp) {
+            self.onChatMessage(type, msg, timestamp) } );
     },
     
     getChannel: function(channelKey) {

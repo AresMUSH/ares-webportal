@@ -18,7 +18,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     },
 
     deactivate: function() {
-        this.get('gameSocket').set('sceneCallback', null);
+        this.get('gameSocket').removeCallback('new_scene_activity');
         this.controllerFor('application').set('hideSidebar', false);
     },
 

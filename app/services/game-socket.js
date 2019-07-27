@@ -10,11 +10,7 @@ export default Service.extend({
     windowVisible: true,
     socket: null,
     charId: null,
-    chatCallback: null,
-    jobsCallback: null,
-    sceneCallback: null,
-    combatCallback: null,
-    manageCallback: null,
+    callbacks: {},
     connected: false,
     
     socketUrl() {
@@ -132,6 +128,14 @@ export default Service.extend({
        
     },
     
+    removeCallback( notification ) {
+      delete this.callbacks[notification];
+    },
+    
+    setupCallback( notification, method ) {
+      this.callbacks[notification] = method;
+    },
+    
     handleConnect() {
       let self = this;
         // Blur is the event that gets triggered when the window becomes active.
@@ -183,54 +187,24 @@ export default Service.extend({
         if (!recipient || recipient === self.get('charId')) {
             var formatted_msg = ansi_up.ansi_to_html(data.args.message, { use_classes: true });
             var notify = true;
-            if (notification_type == "new_mail") {
-              // Deprecated            
+            
+            if (this.callbacks[notification_type]) {
+              this.callbacks[notification_type](notification_type, data.args.message, data.args.timestamp);
+              notify = false;
             }
-            else if (notification_type == "job_update") {
-                if (this.get('jobsCallback')) {
-                    this.get('jobsCallback')(data.args.message);
-                }
-                notify = false;
-            }
-            else if (notification_type == "new_chat") {
-                if (this.get('chatCallback')) {
-                    this.get('chatCallback')(data.args.message, data.args.timestamp);
-                }
-                notify = false;
-            }
-            else if (notification_type == "new_page") {
-                if (this.get('chatCallback')) {
-                    this.get('chatCallback')(data.args.message, data.args.timestamp);
-                }
-                notify = false;
-            }
-            else if (notification_type == "new_scene_activity") {
-                if (this.get('sceneCallback')) {
-                    this.get('sceneCallback')(data.args.message, data.args.timestamp);
-                }
-                notify = false;
-            }
-            else if (notification_type == "combat_activity") {
-                if (this.get('combatCallback')) {
-                    this.get('combatCallback')(data.args.message, notification_type);
-                }
-                notify = false;
-            }
-            else if (notification_type == "new_combat_turn") {
-                if (this.get('combatCallback')) {
-                    this.get('combatCallback')(data.args.message, notification_type);
-                }
+            
+            if (notification_type == "job_update" ||
+                notification_type == "new_chat" || 
+                notification_type == "new_page" ||
+                notification_type == "new_scene_activity" ||
+                notification_type == "combat_activity" ||
+                notification_type == "new_combat_turn" || 
+                notification_type == "manage_activity") {
                 notify = false;
             }
             else if (notification_type == "notification_update") {
               var notification_badge = $('#notificationBadge');
               notification_badge.text(data.args.message);
-              notify = false;
-            }
-            else if (notification_type == "manage_activity") { 
-              if (this.get('manageCallback')) {
-                  this.get('manageCallback')(data.args.message, notification_type);
-              }
               notify = false;
             }
             

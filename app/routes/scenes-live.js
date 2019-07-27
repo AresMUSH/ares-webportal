@@ -13,7 +13,7 @@ export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
     },
     
     deactivate: function() {
-        this.set('gameSocket.sceneCallback', null);
+      this.get('gameSocket').removeCallback('new_scene_activity');
     },
     
     model: function() {

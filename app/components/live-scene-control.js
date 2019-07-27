@@ -119,7 +119,7 @@ export default Component.extend(AuthenticatedController, {
       changeSceneStatus(status) {
           let api = this.get('gameApi');
           if (status === 'share') {
-              this.get('gameSocket').set('sceneCallback', null);
+            this.get('gameSocket').removeCallback('new_scene_activity');
           }
           this.set('scene.reload_required', true);
           

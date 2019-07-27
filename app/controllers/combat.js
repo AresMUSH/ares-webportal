@@ -19,7 +19,7 @@ export default Controller.extend(AuthenticatedController, {
     return `Combat ${this.get('model.id')}`;
   }.property(),
     
-  onCombatActivity: function(msg, notification_type) {
+  onCombatActivity: function(type, msg, timestamp) {
       
     let splitMsg = msg.split('|');
     let combatId = splitMsg[0];       
@@ -27,7 +27,8 @@ export default Controller.extend(AuthenticatedController, {
       
     if (combatId === this.get('model.id')) {
 
-      if (notification_type == 'new_combat_turn') {
+      if (type == 'new_combat_turn') {
+        this.set('newCombatActivity', false);
         let teams = JSON.parse(message);
         this.set('model.teams', teams);
       }
@@ -60,9 +61,10 @@ export default Controller.extend(AuthenticatedController, {
     
   setupCallback: function() {
     let self = this;
-        
-    this.get('gameSocket').set('combatCallback', function(data, notification_type) {
-      self.onCombatActivity(data, notification_type) } );
+    this.get('gameSocket').setupCallback('combat_activity', function(type, msg, timestamp) {
+        self.onCombatActivity(type, msg, timestamp) } );
+    this.get('gameSocket').setupCallback('new_combat_turn', function(type, msg, timestamp) {
+        self.onCombatActivity(type, msg, timestamp) } );
     },
     
     addToCombat(name, type, isCurrentUser) {

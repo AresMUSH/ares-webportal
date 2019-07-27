@@ -11,8 +11,8 @@ export default Controller.extend({
   
   setupCallback: function() {
       let self = this;
-      this.get('gameSocket').set('jobsCallback', function(msg) {
-          self.onJobsMessage(msg) } );
+      this.get('gameSocket').setupCallback('job_update', function(type, msg, timestamp) {
+          self.onJobsMessage(type, msg, timestamp) } );
   },
   
   resetOnExit: function() {
@@ -20,8 +20,8 @@ export default Controller.extend({
       this.set('newJobs', null);
   },
   
-  onJobsMessage: function(message) {
-    let splitMsg = message.split('|');
+  onJobsMessage: function(type, msg, timestamp) {
+    let splitMsg = msg.split('|');
     let jobId = splitMsg[0];
     let jobMessage = splitMsg[1];
     let found = false;
@@ -35,10 +35,7 @@ export default Controller.extend({
     
     if (!found) {
       this.set('newJobs', true);
-    }
-    
-    this.get('gameSocket').notify(jobMessage);
-    
+    }    
   },
   
   

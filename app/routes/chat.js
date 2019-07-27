@@ -14,7 +14,8 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, RouteResetOnExi
     },
     
     deactivate: function() {
-        this.set('gameSocket.chatCallback', null);
+        this.get('gameSocket').removeCallback('new_chat');
+        this.get('gameSocket').removeCallback('new_page');
     },
     
     model: function() {

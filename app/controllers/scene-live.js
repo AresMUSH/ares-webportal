@@ -10,7 +10,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     session: service(),
     favicon: service(),
     
-    onSceneActivity: function(msg /* , timestamp */) {
+    onSceneActivity: function(type, msg, timestamp) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];       
         let char = splitMsg[1];
@@ -55,9 +55,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     
     setupCallback: function() {
         let self = this;
-        
-        this.get('gameSocket').set('sceneCallback', function(data) {
-            self.onSceneActivity(data) } );
+        this.get('gameSocket').setupCallback('new_scene_activity', function(type, msg, timestamp) {
+            self.onSceneActivity(type, msg, timestamp) } );
     },
     
     actions: {

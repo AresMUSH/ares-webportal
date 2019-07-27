@@ -15,9 +15,8 @@ export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
     },
   
     deactivate: function() {
-        this.set('gameSocket.jobsCallback', null);
+      this.get('gameSocket').removeCallback('job_update');
     },
-    
     
     model: function() {
       let api = this.get('gameApi');

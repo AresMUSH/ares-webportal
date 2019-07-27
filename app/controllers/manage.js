@@ -14,8 +14,8 @@ export default Controller.extend({
     setupCallback: function() {
       let self = this;
       this.set('status', '');
-      this.get('gameSocket').set('manageCallback', function(data, notification_type) {
-        self.addToStatus(data) } );
+      this.get('gameSocket').setupCallback('manage_activity', function(type, msg, timestamp) {
+          self.addToStatus(msg) } );
     },
     
     addToStatus: function(message) {

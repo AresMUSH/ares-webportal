@@ -7,7 +7,7 @@ export default Controller.extend(AuthenticatedController, {
     gameSocket: service(),
     newActivity: false,
     
-    onSceneActivity: function(msg, timestamp) {
+    onSceneActivity: function(type, msg, timestamp) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];
         let lastPosed = splitMsg[1];
@@ -28,8 +28,8 @@ export default Controller.extend(AuthenticatedController, {
     
     setupCallback: function() {
         let self = this;
-        this.get('gameSocket').set('sceneCallback', function(msg, timestamp) {
-            self.onSceneActivity(msg, timestamp) } );
+        this.get('gameSocket').setupCallback('new_scene_activity', function(type, msg, timestamp) {
+            self.onSceneActivity(type, msg, timestamp) } );
     },
     
     actions: {
