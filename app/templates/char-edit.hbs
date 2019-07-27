@@ -111,13 +111,13 @@
            {{#each model.profile as |profile|}}
            <p>
            {{input type="text" size=25 value=profile.name placeholder="Enter section name."}}
-           <button class="btn btn-default" {{action 'removeProfile' profile.key}}><i class="fa fa-trash" aria-hidden="true"></i></button>
+           <button class="btn btn-default" {{action 'removeProfile' profile.key}}><i class="fa fa-trash" aria-label="Remove Section"></i></button>
            </p>
            {{markdown-editor text=profile.text}}
             <hr>
            {{/each}}
            
-           <button class="btn btn-default" {{action 'addProfile'}}>Add Profile Section <i class="fa fa-plus" aria-hidden="true"></i></button>
+           <button class="btn btn-default" {{action 'addProfile'}}>Add Profile Section <i class="fa fa-plus" aria-label="Add Section"></i></button>
         </div>
     
         <div id="relationships" class="tab-pane fade in">
@@ -128,7 +128,7 @@
             {{#each model.relationships as |relationship|}}
             <p>
             {{input type="text" size=25 value=relationship.name placeholder="Enter name."}}
-            <button class="btn btn-default" {{action 'removeRelationship' relationship.key}}><i class="fa fa-trash" aria-hidden="true"></i></button>
+            <button class="btn btn-default" {{action 'removeRelationship' relationship.key}}><i class="fa fa-trash" aria-label="Remove Relationship"></i></button>
             </p>
             
             <p>

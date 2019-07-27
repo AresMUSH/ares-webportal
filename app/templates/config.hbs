@@ -4,7 +4,7 @@
 <div class="alert alert-info">See the <a href="{{model.help}}">Configuration Help</a> for an explanation for all of these options.</div>
     
     {{#each-in config as |key config|}}
-        <h2>{{config.key}} <button class="btn btn-default btn-sm" {{action 'removeKey' config.key}}><i class="fa fa-trash" aria-hidden="true"></i></button></h2>
+        <h2>{{config.key}} <button class="btn btn-default btn-sm" {{action 'removeKey' config.key}}><i class="fa fa-trash" aria-label="Delete Key"></i></button></h2>
            {{yaml-editor editorId=config.key text=config.new_value rows=config.rows}}
            
     {{/each-in}}

@@ -51,8 +51,8 @@
                 <td>{{f.sizeKb}}KB</td> 
                 <td>
                     {{#if (not f.upload_success)}}
-                        <button class="btn btn-default" {{action 'removeFile' f}}><i class="fa fa-ban" aria-hidden="true"></i></button>
-                        <button class="btn btn-primary" {{action 'uploadFile' f}}><i class="fa fa-upload" aria-hidden="true"></i></button>
+                        <button class="btn btn-default" {{action 'removeFile' f}}><i class="fa fa-ban" aria-label="Remove File"></i></button>
+                        <button class="btn btn-primary" {{action 'uploadFile' f}}><i class="fa fa-upload" aria-label="Upload File"></i></button>
                     {{/if}}
                 </td>
             </tr>
