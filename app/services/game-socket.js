@@ -19,15 +19,15 @@ export default Service.extend({
     },
     
     checkSession(charId) {
-        let socket = this.get('socket');
-        if (!socket || this.get('charId') != charId) {
+        let socket = this.socket;
+        if (!socket || this.charId != charId) {
             this.sessionStarted(charId);
         }
     },
     
     highlightFavicon() {
-      if (!this.get('windowVisible')) {
-        this.get('favicon').changeFavicon(true);
+      if (!this.windowVisible) {
+        this.favicon.changeFavicon(true);
       }
     },
     
@@ -38,9 +38,9 @@ export default Service.extend({
           alertify.notify(msg, type, timeOutSecs);
         }
              
-       if (!this.get('windowVisible')) {
-            this.get('favicon').changeFavicon(true);
-            if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
+       if (!this.windowVisible) {
+            this.favicon.changeFavicon(true);
+            if (this.browserNotification && this.get('browserNotification.permission') === "granted") {
                 try {
                   var doc = new DOMParser().parseFromString(msg, 'text/html');
                   var cleanMsg =  doc.body.textContent || "";
@@ -62,7 +62,7 @@ export default Service.extend({
     },
     
     sessionStarted(charId) {
-        let socket = this.get('socket');
+        let socket = this.socket;
         this.set('charId', charId);
         
         if (socket) {
@@ -88,8 +88,8 @@ export default Service.extend({
             };            
             this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
         
-            if (this.get('browserNotification')) {
-                this.get('browserNotification').requestPermission();
+            if (this.browserNotification) {
+                this.browserNotification.requestPermission();
             }
         }
         catch(error)
@@ -113,11 +113,11 @@ export default Service.extend({
     sendCharId() {
       let cmd = {
         'type': 'identify',
-        'data': { 'id': this.get('charId') }
+        'data': { 'id': this.charId }
       };
       let json = JSON.stringify(cmd);
       try {
-        let socket = this.get('socket');
+        let socket = this.socket;
         if (socket) {
           socket.send(json); 
         }

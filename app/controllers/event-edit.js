@@ -12,7 +12,7 @@ export default Controller.extend(AuthenticatedController, {
             this.set('model.date', formatted_date);  
         },
         edit: function() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('editEvent', { event_id: this.get('model.id'),
                title: this.get('model.title'), 
                date: this.get('model.date'),
@@ -25,7 +25,7 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 this.transitionToRoute('event',                          
                           this.get('model.id'));
-                this.get('flashMessages').success('Event updated!');
+                this.flashMessages.success('Event updated!');
             });
         }
     }

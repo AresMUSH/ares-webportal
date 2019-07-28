@@ -12,13 +12,13 @@ export default Controller.extend({
     
     actions: {
         submit() {
-            let api = this.get('gameApi');
-            api.requestOne('chargenSubmit', { app_notes: this.get('appNotes') })
+            let api = this.gameApi;
+            api.requestOne('chargenSubmit', { app_notes: this.appNotes })
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
-                this.get('flashMessages').success('You have submitted your application.  Check for responses to your app under Help->Requests.');
+                this.flashMessages.success('You have submitted your application.  Check for responses to your app under Help->Requests.');
                 this.transitionToRoute('chargen');
             });   
         }

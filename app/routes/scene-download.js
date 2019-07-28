@@ -8,7 +8,7 @@ export default Route.extend(ReloadableRoute, DefaultRoute, {
     textFile: null,
   
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('downloadScene', { id: params['id'] });
       },
       

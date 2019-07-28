@@ -7,18 +7,18 @@ export default Route.extend(DefaultRoute, {
     flashMessages: service(),
     
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('wikiPage', { id: params['id'] });
     },
     
     afterModel: function(model) {
         if (model.not_found) {
           if (this.get('session.isAuthenticated')) {
-            this.get('flashMessages').warning('That page was not found, but you can create it.');
+            this.flashMessages.warning('That page was not found, but you can create it.');
             this.transitionTo('wiki-create', { queryParams: { title: model.title || "" }});
           }
           else {
-            this.get('flashMessages').warning('Page not found.');
+            this.flashMessages.warning('Page not found.');
             this.transitionTo('wiki');
           }
         }  

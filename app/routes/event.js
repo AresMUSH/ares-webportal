@@ -8,7 +8,7 @@ export default Route.extend(DefaultRoute, RouteResetOnExit, {
     session: service(),
     
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('event', {event_id: params['event_id']});
     }
 });

@@ -9,19 +9,19 @@ export default Controller.extend({
     actions: {
 
         edit: function() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('editArea', { id: this.get('model.area.id') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
                 this.transitionToRoute('locations');
-                this.get('flashMessages').success('Area updated!');
+                this.flashMessages.success('Area updated!');
             });
         },
         
         delete() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             this.set('confirmDelete', false);
             api.requestOne('deleteArea', { id: this.get('model.area.id')})
             .then( (response) => {
@@ -29,7 +29,7 @@ export default Controller.extend({
                     return;
                 }
                 this.transitionToRoute('locations');
-                this.get('flashMessages').success('Area deleted!');
+                this.flashMessages.success('Area deleted!');
             });
         }
         

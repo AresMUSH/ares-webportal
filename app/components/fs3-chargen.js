@@ -1,3 +1,5 @@
+import EmberObject from '@ember/object';
+import { A } from '@ember/array';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
@@ -107,7 +109,7 @@ export default Component.extend({
   },
     
   validateChar: function() {
-    this.set('charErrors', Ember.A());
+    this.set('charErrors', A());
     this.checkLimits(this.get('model.char.fs3.fs3_action_skills'), this.get('model.cgInfo.fs3.skill_limits'), 'action skills');
     this.checkLimits(this.get('model.char.fs3.fs3_attributes'), this.get('model.cgInfo.fs3.attr_limits'), 'attributes');
         
@@ -116,9 +118,9 @@ export default Component.extend({
       this.charErrors.pushObject('Background skill names cannot be blank.  Set the skill to Everyman to remove it.');
     }
         
-    let totalAttrs = this.get('attrPoints');
-    let totalSkills = this.get('skillPoints');
-    let totalAction = this.get('actionPoints');
+    let totalAttrs = this.attrPoints;
+    let totalSkills = this.skillPoints;
+    let totalAction = this.actionPoints;
     let maxAttrs = this.get('model.cgInfo.fs3.max_attrs');
     if (totalAttrs > maxAttrs) {
       this.charErrors.pushObject(`You can only spend ${maxAttrs} points in attributes.  You have spent ${totalAttrs}.`);
@@ -140,20 +142,20 @@ export default Component.extend({
     
   actions: {
     addBackgroundSkill() {
-      let skill = this.get('newBgSkill');
+      let skill = this.newBgSkill;
       if (!skill) {
-        this.get('flashMessages').danger("You didn't specify a skill name.");
+        this.flashMessages.danger("You didn't specify a skill name.");
         this.set('selectBackgroundSkill', false);
         return;
       }
       if (!skill.match(/^[\w\s]+$/)) {
-        this.get('flashMessages').danger("Skills can't have special characters in their names.");
+        this.flashMessages.danger("Skills can't have special characters in their names.");
         this.set('selectBackgroundSkill', false);
         return;
       }
       this.set('newBgSkill', null);
       this.set('selectBackgroundSkill', false);
-      this.get('model.char.fs3.fs3_backgrounds').pushObject( Ember.Object.create( { name: skill, rating: 1, rating_name: 'Fair' }) );  
+      this.get('model.char.fs3.fs3_backgrounds').pushObject( EmberObject.create( { name: skill, rating: 1, rating_name: 'Fair' }) );  
       this.validateChar();
     },
         

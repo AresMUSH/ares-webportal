@@ -1,3 +1,4 @@
+import { observer, set } from '@ember/object';
 import Component from '@ember/component';
 import { timeDiff } from 'ares-webportal/helpers/time-diff';
 
@@ -6,13 +7,13 @@ export default Component.extend({
   tagName: 'span',
   timerId: null,
   
-  watchOrder: Ember.observer('poseOrder.@each.time', function(){
+  watchOrder: observer('poseOrder.@each.time', function(){
     this.updateTime();
   }),
   
   updateTime: function() {
-    this.get('poseOrder').forEach(po => {
-      Ember.set(po, 'timeString', timeDiff({}, { time: po.time }));
+    this.poseOrder.forEach(po => {
+      set(po, 'timeString', timeDiff({}, { time: po.time }));
     });
   },
   
@@ -23,7 +24,7 @@ export default Component.extend({
   },
   
   willDestroyElement: function() {
-    window.clearInterval(this.get('timerId'));
+    window.clearInterval(this.timerId);
     this.set('timerId', null);
   }
 });

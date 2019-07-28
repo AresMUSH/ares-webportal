@@ -45,7 +45,7 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
     }.property('gameSocket.connected'),
     
     sidebar: function() {
-        return this.get('model');
+        return this.model;
     }.property('refreshSidebar'),
 
     topNavbar: function() {
@@ -86,7 +86,7 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
     actions: {
       switchAlt: function(alt) {
         this.set('showAltSelection', false);
-        this.get('session').authenticate('authenticator:ares', { name: alt, password: 'ALT' })
+        this.session.authenticate('authenticator:ares', { name: alt, password: 'ALT' })
          .then(() => {
            window.location.replace('/');
          });

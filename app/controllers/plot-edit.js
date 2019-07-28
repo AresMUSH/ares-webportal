@@ -11,7 +11,7 @@ export default Controller.extend({
         },
         
         save: function() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('editPlot', { id: this.get('model.plot.id'),
                title: this.get('model.plot.title'), 
                summary: this.get('model.plot.summary'),
@@ -25,7 +25,7 @@ export default Controller.extend({
                 }
                 this.transitionToRoute('plot',                          
                           this.get('model.plot.id'));
-                this.get('flashMessages').success('Plot updated!');
+                this.flashMessages.success('Plot updated!');
             });
         }
     }

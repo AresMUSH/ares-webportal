@@ -6,7 +6,7 @@ export default Route.extend(AuthenticatedRoute, {
     gameApi: service(),
         
     model: function() {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestMany('loginNotices');
     },
     afterModel: function() {

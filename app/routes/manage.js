@@ -18,6 +18,6 @@ export default Route.extend(RestrictedRoute, RouteResetOnExit, {
     },
 
     deactivate: function() {
-      this.get('gameSocket').removeCallback('manage_activity');
+      this.gameSocket.removeCallback('manage_activity');
     },
 });

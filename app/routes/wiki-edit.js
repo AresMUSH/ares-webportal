@@ -7,7 +7,7 @@ export default Route.extend(AuthenticatedRoute, RouteResetOnExit, {
     gameApi: service(),
         
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('wikiPage', { id: params['id'], edit_mode: true });
     }
 });

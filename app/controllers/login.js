@@ -10,7 +10,7 @@ export default Controller.extend({
     
     actions: {
         login() {
-            this.get('session').authenticate('authenticator:ares', { name: this.get('name'), password: this.get('password')})
+            this.session.authenticate('authenticator:ares', { name: this.name, password: this.password})
              .then(() => {
                  
                  if (this.get('model.error')) {
@@ -20,7 +20,7 @@ export default Controller.extend({
                  this.set('name', '');
                  this.set('password', '');
                  
-                 let redirect = this.get('redirect');
+                 let redirect = this.redirect;
                  if (!redirect) {
                      redirect = '/';
                  }

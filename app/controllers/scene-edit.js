@@ -30,7 +30,7 @@ export default Controller.extend({
             this.set('model.scene.related_scenes', new_related)
         },
         save() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             let tags = this.get('model.scene.tags') || [];
             if (!Array.isArray(tags)) {
                 tags = tags.split(/[\s,]/);
@@ -55,7 +55,7 @@ export default Controller.extend({
                 }
                 
                 this.transitionToRoute('scene', this.get('model.scene.id'));
-                this.get('flashMessages').success('Scene updated!');
+                this.flashMessages.success('Scene updated!');
             });
         }
     }

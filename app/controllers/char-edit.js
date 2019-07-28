@@ -98,23 +98,23 @@ export default Controller.extend({
         },
         save() {
             if (this.get('model.profile').filter(p => p.name.length == 0).length > 0) {
-                this.get('flashMessages').danger('Profile names cannot be blank.');
+                this.flashMessages.danger('Profile names cannot be blank.');
                 return;
             }
             
             if (this.get('model.relationships').filter(r => r.name.length == 0).length > 0) {
-                this.get('flashMessages').danger('Relationship names cannot be blank.');
+                this.flashMessages.danger('Relationship names cannot be blank.');
                 return;
             }
             
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('profileSave', this.buildQueryDataForChar(), null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
             
-                this.get('flashMessages').success('Saved!');
+                this.flashMessages.success('Saved!');
                 this.transitionToRoute('char', this.get('model.name'));
                 
             });

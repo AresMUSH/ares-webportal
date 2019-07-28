@@ -13,11 +13,11 @@ export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
     },
     
     deactivate: function() {
-      this.get('gameSocket').removeCallback('new_scene_activity');
+      this.gameSocket.removeCallback('new_scene_activity');
     },
     
     model: function() {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('liveScenes');
     }
 });

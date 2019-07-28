@@ -6,7 +6,7 @@ export default Route.extend(AuthenticatedRoute, {
     gameApi: service(),
     
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('profileEdit', { id: params['id'] });
     }
 });

@@ -7,7 +7,7 @@ export default Controller.extend(AuthenticatedController, {
     
     actions: {        
         save: function() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('updateFile', { 
                 name: this.get('model.name'),
                 folder: this.get('model.folder'),
@@ -19,7 +19,7 @@ export default Controller.extend(AuthenticatedController, {
                     return;
                 }
                 this.transitionToRoute('file', response.folder, response.name );
-            this.get('flashMessages').success('File saved!');
+            this.flashMessages.success('File saved!');
             });
         }
     }

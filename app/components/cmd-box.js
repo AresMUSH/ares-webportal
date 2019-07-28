@@ -10,7 +10,7 @@ export default TextArea.extend({
           this.sendAction('onEnter');
           event.preventDefault();
         }
-        else if (!this.get('allowMultiLine')) {
+        else if (!this.allowMultiLine) {
           this.sendAction('onEnter');
           event.preventDefault();
         }

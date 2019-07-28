@@ -34,7 +34,7 @@ export default Controller.extend({
           this.set('model.scene.location', newLocation);
         },
         save() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             let tags = this.get('model.scene.tags') || [];
             if (!Array.isArray(tags)) {
                 tags = tags.split(/[\s,]/);
@@ -60,7 +60,7 @@ export default Controller.extend({
                 }
                 this.transitionToRoute('scene',                          
                           response.id);
-                this.get('flashMessages').success('Scene updated!');
+                this.flashMessages.success('Scene updated!');
             });
         }
     }

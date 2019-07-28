@@ -7,7 +7,7 @@ export default Mixin.create({
     
     beforeModel: function() {
         if (!this.get('session.isAuthenticated')) {
-            this.get('flashMessages').danger('You must log in first.');
+            this.flashMessages.danger('You must log in first.');
             this.transitionTo('login');
         }
     }

@@ -19,15 +19,15 @@ export default Controller.extend({
       this.resetOnExit();
     },
     search() {
-      let api = this.get('gameApi');
+      let api = this.gameApi;
             
       api.requestMany('searchLocations', { 
-        searchDesc: this.get('searchDesc'),
-        searchName: this.get('searchName')
+        searchDesc: this.searchDesc,
+        searchName: this.searchName
       }, null)
       .then( (response) => {
         if (response.error) {
-          this.get('flashMessages').error("Oops!  Something went wrong when the website talked to the game.  Please try again and alert staff is the problem persists.");          
+          this.flashMessages.error("Oops!  Something went wrong when the website talked to the game.  Please try again and alert staff is the problem persists.");          
           return;
         }
         this.set('searchResults', response);

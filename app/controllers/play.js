@@ -16,11 +16,11 @@ export default Controller.extend({
   scrollPaused: false,
     
   idleKeepalive: function() {
-    if (this.get('connected')) {
+    if (this.connected) {
       this.sendInput("keepalive");
     }
     else {
-      clearInterval(this.get('keepaliveInterval'));
+      clearInterval(this.keepaliveInterval);
     }
   },
     
@@ -47,9 +47,9 @@ export default Controller.extend({
     }
         
     let html = ansi_up.ansi_to_html(data.args.message);
-    this.get('messages').pushObject(html);
+    this.messages.pushObject(html);
     this.scrollToBottom();  
-    this.get('gameSocket').notify("");
+    this.gameSocket.notify("");
   },
   onConnect: function(self) {
     document.getElementById("sendMsg").focus();
@@ -59,10 +59,10 @@ export default Controller.extend({
         
     let cmd = {
       'type': 'identify',
-      'data': { 'id': this.get('charId'), 'webclient': true }
+      'data': { 'id': this.charId, 'webclient': true }
     };
     let json = JSON.stringify(cmd);
-    this.get('websocket').send(json);
+    this.websocket.send(json);
   },
     
   onDisconnect: function(self) {
@@ -71,7 +71,7 @@ export default Controller.extend({
     
   scrollToBottom: function() {
     // Unless scrolling paused 
-    if (this.get('scrollPaused')) {
+    if (this.scrollPaused) {
       return;
     }
       
@@ -86,11 +86,11 @@ export default Controller.extend({
   },
     
   showDisconnect: function() {
-    return this.get('connected');
+    return this.connected;
   }.property('connected'),
     
   showConnect: function() {  
-    return !this.get('connected');
+    return !this.connected;
   }.property('connected'),
     
   sendInput: function(msg) {
@@ -100,7 +100,7 @@ export default Controller.extend({
       'message': msg.trim()
     };
     json = JSON.stringify(cmd);
-    let socket = this.get('websocket');
+    let socket = this.websocket;
     if (socket) {
       socket.send(json);
     }
@@ -113,41 +113,41 @@ export default Controller.extend({
       var protocol = aresconfig.use_https ? 'wss' : 'ws';
       this.set('websocket', new WebSocket(`${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`));
         var self = this;
-        this.get('websocket').onmessage = function(evt) { 
+        this.websocket.onmessage = function(evt) { 
           self.onMessage(evt);
         };
-        this.get('websocket').onclose = function() {
+        this.websocket.onclose = function() {
           self.onDisconnect(self);
         };
-        this.get('websocket').onopen = function() {
+        this.websocket.onopen = function() {
           self.onConnect(self);
         };
                 
-        this.get('keepaliveInterval', window.setInterval(function(){ self.idleKeepalive() }, idle_keepalive_ms));
+        this.keepaliveInterval;
 
                 
       },
       disconnect() {
-        if (this.get('connected')){
+        if (this.connected){
           this.sendInput('quit');                    
         }
       },
       sendMsg1() {
-        let cmd = this.get('text1');
+        let cmd = this.text1;
         this.sendInput(cmd);
         this.set('text1', '');
-        this.get('history1').addObject(cmd); 
-        if (this.get('history1').length > 10) {
-          this.get('history1').removeAt(0);
+        this.history1.addObject(cmd); 
+        if (this.history1.length > 10) {
+          this.history1.removeAt(0);
         }
       },
       sendMsg2() {
-        let cmd = this.get('text2');
+        let cmd = this.text2;
         this.sendInput(cmd);
         this.set('text2', '');
-        this.get('history2').addObject(cmd); 
-        if (this.get('history2').length > 10) {
-          this.get('history2').removeAt(0);
+        this.history2.addObject(cmd); 
+        if (this.history2.length > 10) {
+          this.history2.removeAt(0);
         }
       },
       loadHistory1(text) {

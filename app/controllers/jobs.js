@@ -1,3 +1,4 @@
+import { set } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
@@ -11,7 +12,7 @@ export default Controller.extend({
   
   setupCallback: function() {
       let self = this;
-      this.get('gameSocket').setupCallback('job_update', function(type, msg, timestamp) {
+      this.gameSocket.setupCallback('job_update', function(type, msg, timestamp) {
           self.onJobsMessage(type, msg, timestamp) } );
   },
   
@@ -28,7 +29,7 @@ export default Controller.extend({
     
     this.get('model.jobs.jobs').forEach((j) => {
       if (j.id === jobId) {
-        Ember.set(j, `unread`, true);
+        set(j, `unread`, true);
         found = true;
       }
     });  
@@ -44,7 +45,7 @@ export default Controller.extend({
     
     goToPage(newPage) {
       this.set('page', newPage);
-      let api = this.get('gameApi');
+      let api = this.gameApi;
       api.requestOne('jobs', { page: newPage }, null)
       .then( (response) => {
         if (response.error) {
@@ -56,14 +57,14 @@ export default Controller.extend({
     
     filterJobs(filter) {
       this.set('page', 1);
-      let api = this.get('gameApi');
+      let api = this.gameApi;
       api.requestOne('jobsFilter', { filter: filter, page: 1 }, null)
       .then( (response) => {
         if (response.error) {
           return;
         }
         this.send('reloadModel');
-        this.get('flashMessages').success('Jobs filtered!');
+        this.flashMessages.success('Jobs filtered!');
       });
     }
   }
