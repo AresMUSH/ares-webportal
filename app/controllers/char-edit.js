@@ -23,7 +23,11 @@ export default Controller.extend({
         });
         
         this.get('model.relationships').forEach(function(r) {
-            relationships[r.name] = { text: r.text, order: r.order, category: r.category };
+            relationships[r.name] = { text: r.text, 
+              order: r.order, 
+              category: r.category,
+              is_npc: r.is_npc,
+              npc_image: r.is_npc ? r.npc_image : null };
         });
         
         let tags = this.get('model.tags') || [];
