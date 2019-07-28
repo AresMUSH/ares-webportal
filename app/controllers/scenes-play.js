@@ -17,7 +17,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       return this.get('model.scenes').any(s => s.is_unread );
     }.property('model.scenes.@each.is_unread'),
   
-    onSceneActivity: function(type, msg, timestamp) {
+    onSceneActivity: function(type, msg /* , timestamp */ ) {
       let splitMsg = msg.split('|');
       let sceneId = splitMsg[0];
       let char = splitMsg[1];

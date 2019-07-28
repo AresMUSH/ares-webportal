@@ -11,11 +11,15 @@ export default Controller.extend({
       this.set('status', '');
     },
 
+    onManageActivity: function(type, msg /* , timestamp */ ) {
+      this.addToStatus(msg);
+    },
+    
     setupCallback: function() {
       let self = this;
       this.set('status', '');
       this.gameSocket.setupCallback('manage_activity', function(type, msg, timestamp) {
-          self.addToStatus(msg) } );
+          self.onManageActivity(type, msg, timestamp) } );
     },
     
     addToStatus: function(message) {

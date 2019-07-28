@@ -20,7 +20,7 @@ export default Controller.extend(AuthenticatedController, {
     return `Combat ${this.get('model.id')}`;
   }.property(),
     
-  onCombatActivity: function(type, msg, timestamp) {
+  onCombatActivity: function(type, msg /* , timestamp */ ) {
       
     let splitMsg = msg.split('|');
     let combatId = splitMsg[0];       

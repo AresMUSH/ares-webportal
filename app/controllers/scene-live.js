@@ -10,7 +10,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     session: service(),
     favicon: service(),
     
-    onSceneActivity: function(type, msg, timestamp) {
+    onSceneActivity: function(type, msg /* , timestamp */ ) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];       
         let char = splitMsg[1];

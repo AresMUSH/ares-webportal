@@ -123,8 +123,7 @@ export default Controller.extend({
           self.onConnect(self);
         };
                 
-        this.keepaliveInterval;
-
+        this.set('keepaliveInterval', window.setInterval(function(){ self.idleKeepalive() }, idle_keepalive_ms));
                 
       },
       disconnect() {

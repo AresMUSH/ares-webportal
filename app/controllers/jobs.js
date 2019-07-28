@@ -21,10 +21,9 @@ export default Controller.extend({
       this.set('newJobs', null);
   },
   
-  onJobsMessage: function(type, msg, timestamp) {
+  onJobsMessage: function(type, msg /* , timestamp */ ) {
     let splitMsg = msg.split('|');
     let jobId = splitMsg[0];
-    let jobMessage = splitMsg[1];
     let found = false;
     
     this.get('model.jobs.jobs').forEach((j) => {
