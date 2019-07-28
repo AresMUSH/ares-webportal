@@ -47,6 +47,7 @@ export default Controller.extend({
                participants: (this.get('model.scene.participants') || []).map(p => p.name),
                related_scenes: (this.get('model.scene.related_scenes') || []).map(s => s.id),
                tags: tags,
+               content_warning: this.get('model.scene.content_warning'),
                log: this.get('model.scene.log')}, null)
             .then( (response) => {
                 if (response.error) {

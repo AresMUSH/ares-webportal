@@ -57,10 +57,15 @@
         {{/each}}
         
         {{#if (or scene.can_view (not scene.is_private))}}
-          <p>{{scene.location}}</p>
+          <p>{{#if scene.content_warning}}
+          {{content-warning-tag warning=scene.content_warning}}
+          {{/if}}
+ 
+            {{scene.location}}</p>
         
           {{#if scene.summary}}
-          <p>{{scene.summary}}</p>
+          <p>{{scene.summary}}
+          </p>
           {{/if}}
         {{/if}}
         

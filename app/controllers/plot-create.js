@@ -28,6 +28,7 @@ export default Controller.extend({
             api.requestOne('createPlot', { 
                title: this.get('title'), 
                summary: this.get('summary'),
+               content_warning: this.get('model.plot.content_warning'),
                storyteller_id: this.get('storyteller.id'),
                description: this.get('description')}, null)
             .then( (response) => {

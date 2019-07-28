@@ -17,6 +17,7 @@ export default Controller.extend(AuthenticatedController, {
                title: this.get('model.title'), 
                date: this.get('model.date'),
                time: this.get('model.time'),
+               content_warning: this.get('model.content_warning'),
                description: this.get('model.description') }, null)
             .then( (response) => {
                 if (response.error) {

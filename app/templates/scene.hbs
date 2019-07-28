@@ -7,6 +7,10 @@
        
         <p>{{model.summary}}</p>
 
+        {{#if model.content_warning}}
+        <div class="alert alert-danger"><b>Content Warning:</b> {{model.content_warning}}</div>
+        {{/if}}
+
         <p><b>Date:</b> {{model.icdate}}</p>
 
         <p><b>Location:</b> {{model.location}}</p>

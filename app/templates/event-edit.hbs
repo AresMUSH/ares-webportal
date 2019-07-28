@@ -11,6 +11,10 @@
 <div class="hint">Use <b>server time</b> in standard format (e.g. either 1:30pm or 1330 depending on nationality.) The current server time is {{model.server_time}}.</div>
 <p>{{input type="text" id="time" enter=(action "edit")  value=model.time }}</p>
 
+<p><b>Content Warning:</b></p>
+<p> {{input type="text" size=25 id="content_warning" value=model.content_warning}} </p>   
+
+
 <p><b>Description:</b></p>
 
 {{markdown-editor text=model.description}}

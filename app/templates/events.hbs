@@ -29,6 +29,9 @@
 <tr>
     <td>
         {{#link-to 'event' event.id}}{{event.title}}{{/link-to}}
+        {{#if event.content_warning}}
+        {{content-warning-tag warning=event.content_warning}}
+        {{/if}}
     </td>
     
     <td>
@@ -36,7 +39,7 @@
     </td>
     <td>
         {{event.start_datetime_local}} ({{event.start_time_standard}})
-    </td>
+    </td>      
 </tr>
 
 {{/each}}

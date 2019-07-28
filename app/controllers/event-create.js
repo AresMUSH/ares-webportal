@@ -9,12 +9,14 @@ export default Controller.extend(AuthenticatedController, {
     date: '',
     time: '',
     description: '',
+    content_warning: '',
     
     resetOnExit: function() {
         this.set('title', '');
         this.set('date', '');
         this.set('time', '');
         this.set('description', '');
+        this.set('content_warning', '');
     },
     
     actions: {
@@ -27,6 +29,7 @@ export default Controller.extend(AuthenticatedController, {
             api.requestOne('createEvent', { title: this.get('title'), 
                date: this.get('date'),
                time: this.get('time'),
+               content_warning: this.get('content_warning'),
                description: this.get('description') }, null)
             .then( (response) => {
                 if (response.error) {
