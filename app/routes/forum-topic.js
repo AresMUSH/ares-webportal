@@ -9,7 +9,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
     session: service(),
     
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('forumTopic', { topic_id: params['topic_id'] });
     }
 });

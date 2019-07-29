@@ -6,7 +6,7 @@ export default Route.extend(DefaultRoute, {
     gameApi: service(),
     
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('file', {folder: params['folder'],
            name: params['name']});
     }

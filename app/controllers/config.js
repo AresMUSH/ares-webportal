@@ -20,38 +20,38 @@ export default Controller.extend({
     actions: {
         
         addNew() {
-            let key = this.get('newConfigKey');
+            let key = this.newConfigKey;
             let modelConfig = this.get('model.config');
             if (modelConfig[key]) {
                 return;
             }
             modelConfig[key] = { key: key, lines: 3, value: '', new_value: '' };
             this.set('model.config', modelConfig);
-            this.set('configChanged', !this.get('configChanged'));
+            this.set('configChanged', !this.configChanged);
         },
         
         removeKey(key) {
             let modelConfig = this.get('model.config');
             delete modelConfig[key];
             this.set('model.config', modelConfig);
-            this.set('configChanged', !this.get('configChanged'));
+            this.set('configChanged', !this.configChanged);
         },
         
         restoreDefaults() {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
           api.requestOne('restoreConfig', { file: this.get('model.file') }, null)
           .then( (response) => {
               if (response.error) {
                   return;
               }
       
-          this.get('flashMessages').success('Config restored!');
+          this.flashMessages.success('Config restored!');
           this.send('reloadModel');
           });  
         },
         
         save() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             let modelConfig = this.get('model.config');
             let config = {};
             
@@ -65,7 +65,7 @@ export default Controller.extend({
                     return;
                 }
         
-            this.get('flashMessages').success('Config saved!');
+            this.flashMessages.success('Config saved!');
             this.transitionToRoute('setup');
             });  
         }

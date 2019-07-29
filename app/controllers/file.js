@@ -8,7 +8,7 @@ export default Controller.extend(AuthenticatedController, {
     
     actions: {        
         delete: function() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             this.set('confirmDelete', false);
             api.requestOne('deleteFile', { 
                 name: this.get('model.name'),
@@ -19,7 +19,7 @@ export default Controller.extend(AuthenticatedController, {
                     return;
                 }
             this.transitionToRoute('files');
-            this.get('flashMessages').success('File deleted!');
+            this.flashMessages.success('File deleted!');
             });
         }
     }

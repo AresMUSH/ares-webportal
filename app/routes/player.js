@@ -5,7 +5,7 @@ export default Route.extend({
     gameApi: service(),
     
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('player', { id: params['id'] });
     }
 });

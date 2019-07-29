@@ -1,12 +1,27 @@
 {{title 'Recent Changes'}}
 <h1>Recent Changes</h1>
 
-<p>This list includes wiki pages, events and profiles.  For scenes, check the {{#link-to 'scenes'}}Scenes{{/link-to}} archive.</p>
+<p>This list includes wiki pages and profiles.  For scenes, check the {{#link-to 'scenes'}}Scenes{{/link-to}} archive.</p>
 
 <table class="table table-striped">
     
    {{#each model as |change|}}
    <tr>
+       <td>
+         {{#if (eq change.type 'char')}}
+         Character
+         {{else if (eq change.type 'wiki')}}
+         Wiki Page
+         {{else if (eq change.type 'event')}}
+         Event
+         {{else if (eq change.type 'scene')}}
+         Scene
+         {{else if (eq change.type 'file')}}
+         File
+         {{else}}
+         {{change.type}}
+         {{/if}}
+       </td>
        <td>
            {{change.timestamp}}
        </td>

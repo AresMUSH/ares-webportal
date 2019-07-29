@@ -9,7 +9,7 @@ export default Controller.extend(AuthenticatedController, {
     actions: {
 
         edit: function() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('editArea', { id: this.get('model.id'),
                name: this.get('model.name'), 
                description: this.get('model.description') }, null)
@@ -18,7 +18,7 @@ export default Controller.extend(AuthenticatedController, {
                     return;
                 }
                 this.transitionToRoute('location', this.get('model.id'));
-                this.get('flashMessages').success('Area updated!');
+                this.flashMessages.success('Area updated!');
             });
         }
     }

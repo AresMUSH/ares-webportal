@@ -6,16 +6,16 @@ export default Controller.extend(AuthenticatedController, {
     
     messages: function() {
         let allMail = this.get('model.mail');
-        if (this.get('tag') === 'Trash') {
+        if (this.tag === 'Trash') {
           return allMail.filter(m => m.is_in_trash);
         }
         else {
-          return allMail.filter(m => !m.is_in_trash && m.tags.includes(this.get('tag')));
+          return allMail.filter(m => !m.is_in_trash && m.tags.includes(this.tag));
         }
     }.property('tag', 'model.mail.@each.subject'),
     
     sentMail: function() {
-        return this.get('tag') === 'Sent';
+        return this.tag === 'Sent';
     }.property('tag'),
     
     actions: {

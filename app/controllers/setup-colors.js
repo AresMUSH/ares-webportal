@@ -10,16 +10,16 @@ export default Controller.extend(AuthenticatedController, {
     actions: {
         
         saveColors() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             let colors = {};
-            this.get('model').forEach(c => { colors[c.name] = c.value } );
+            this.model.forEach(c => { colors[c.name] = c.value } );
             api.requestOne('saveColors', { colors: colors })
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
                 
-                this.get('flashMessages').success('Colors saved.  You will need to refresh the page for the new colors to take effect.');
+                this.flashMessages.success('Colors saved.  You will need to refresh the page for the new colors to take effect.');
                 this.transitionToRoute('setup');
                 
             });

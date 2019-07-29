@@ -7,7 +7,7 @@ export default Route.extend(ReloadableRoute, RestrictedRoute, {
     gameApi: service(),
         
     model: function() {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('getSetupIndex');
     }
 });

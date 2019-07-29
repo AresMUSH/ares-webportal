@@ -7,7 +7,7 @@ export default Route.extend(RouteResetOnExit, AuthenticatedRoute, {
   gameApi: service(),
       
   model: function() {
-      let api = this.get('gameApi');
+      let api = this.gameApi;
       return api.requestMany('characters', { select: 'all' });
   }
   

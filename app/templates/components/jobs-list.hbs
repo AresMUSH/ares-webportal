@@ -11,7 +11,7 @@
 {{#each jobs as |job|}}
     <tr><td>
         {{#if job.unread}}
-        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
         {{/if}}
         
         {{#link-to 'job' job.id}}#{{job.id}} - {{job.title}}{{/link-to}}

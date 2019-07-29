@@ -9,12 +9,14 @@ export default Controller.extend(AuthenticatedController, {
     date: '',
     time: '',
     description: '',
+    content_warning: '',
     
     resetOnExit: function() {
         this.set('title', '');
         this.set('date', '');
         this.set('time', '');
         this.set('description', '');
+        this.set('content_warning', '');
     },
     
     actions: {
@@ -23,18 +25,19 @@ export default Controller.extend(AuthenticatedController, {
             this.set('date', formatted_date);  
         },
         create: function() {
-            let api = this.get('gameApi');
-            api.requestOne('createEvent', { title: this.get('title'), 
-               date: this.get('date'),
-               time: this.get('time'),
-               description: this.get('description') }, null)
+            let api = this.gameApi;
+            api.requestOne('createEvent', { title: this.title, 
+               date: this.date,
+               time: this.time,
+               content_warning: this.content_warning,
+               description: this.description }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
                 this.transitionToRoute('event',                          
                           response.id);
-                this.get('flashMessages').success('Event added!');
+                this.flashMessages.success('Event added!');
             });
         }
     }

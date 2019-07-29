@@ -8,6 +8,10 @@
         <p> {{{ansi-format text=scene.summary}}} </p>
         <hr>
         {{/if}}        
+
+        {{#if scene.content_warning}}
+        <div class="alert alert-danger"><b>Content Warning:</b> {{scene.content_warning}}</div>
+        {{/if}}
     
         {{#if scene.location.description}}
         {{{ansi-format text=scene.location.description}}}

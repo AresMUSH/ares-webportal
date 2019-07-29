@@ -21,16 +21,16 @@ export default Controller.extend({
       this.resetOnExit();
     },
     search() {
-      let api = this.get('gameApi');
+      let api = this.gameApi;
             
       api.requestMany('searchForum', { 
-        searchText: this.get('searchText'),
-        searchAuthor: this.get('searchAuthor'),
-        searchTitle: this.get('searchTitle')
+        searchText: this.searchText,
+        searchAuthor: this.searchAuthor,
+        searchTitle: this.searchTitle
       }, null)
       .then( (response) => {
         if (response.error) {
-          this.get('flashMessages').error("Oops!  Something went wrong when the website talked to the game.  Please try again and alert staff is the problem persists.");          
+          this.flashMessages.error("Oops!  Something went wrong when the website talked to the game.  Please try again and alert staff is the problem persists.");          
           return;
         }
         this.set('searchResults', response);

@@ -7,7 +7,7 @@ export default Controller.extend(AuthenticatedController, {
     gameSocket: service(),
     newActivity: false,
     
-    onSceneActivity: function(msg, timestamp) {
+    onSceneActivity: function(type, msg, timestamp) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];
         let lastPosed = splitMsg[1];
@@ -28,8 +28,8 @@ export default Controller.extend(AuthenticatedController, {
     
     setupCallback: function() {
         let self = this;
-        this.get('gameSocket').set('sceneCallback', function(msg, timestamp) {
-            self.onSceneActivity(msg, timestamp) } );
+        this.gameSocket.setupCallback('new_scene_activity', function(type, msg, timestamp) {
+            self.onSceneActivity(type, msg, timestamp) } );
     },
     
     actions: {
@@ -40,37 +40,37 @@ export default Controller.extend(AuthenticatedController, {
         },
         
         joinScene(id) {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
           api.requestOne('joinScene', { id: id }, null)
           .then( (response) => {
               if (response.error) {
                   return;
               }
-              this.get('flashMessages').success('You join the scene.');
+              this.flashMessages.success('You join the scene.');
               this.send('reloadModel'); 
           });
         },
         
         stopWatching(id) {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
           api.requestOne('unwatchScene', { id: id }, null)
           .then( (response) => {
               if (response.error) {
                   return;
               }
-              this.get('flashMessages').success('You are no longer watching that scene.');
+              this.flashMessages.success('You are no longer watching that scene.');
               this.send('reloadModel'); 
           });
         },
         
         watchScene(id) {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
           api.requestOne('watchScene', { id: id }, null)
           .then( (response) => {
               if (response.error) {
                   return;
               }
-              this.get('flashMessages').success('You start watching that scene.');
+              this.flashMessages.success('You start watching that scene.');
               this.send('reloadModel'); 
           });
         }

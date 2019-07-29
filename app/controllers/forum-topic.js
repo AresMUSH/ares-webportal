@@ -1,3 +1,4 @@
+import { set } from '@ember/object';
 import Controller from '@ember/controller';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import { inject as service } from '@ember/service';
@@ -18,21 +19,21 @@ export default Controller.extend(AuthenticatedController, {
     
     actions: {
         addReply() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('forumReply', { topic_id: this.get('model.id'), 
-               reply: this.get('reply')}, null)
+               reply: this.reply}, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
                 this.set('reply', '');
                 this.send('reloadModel');
-              this.get('flashMessages').success('Reply added!');
+              this.flashMessages.success('Reply added!');
             });
         },
         
         nextUnread: function() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('forumUnread')
             .then( (response) => {
                 if (response.error) {
@@ -43,43 +44,43 @@ export default Controller.extend(AuthenticatedController, {
                     this.transitionToRoute('forum-topic', response.category_id, response.post_id);
                 }
                 else {
-                    this.get('flashMessages').warning('No more unread messages.');                    
+                    this.flashMessages.warning('No more unread messages.');                    
                 }
             });
         },
         editReply: function(reply) {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
           api.requestOne('forumEditReply', { reply_id: reply.id, 
              message: reply.raw_message }, null)
           .then( (response) => {
               if (response.error) {
-                this.get('flashMessages').error(response.error);
+                this.flashMessages.error(response.error);
                 return;
               }
-              Ember.set(reply, 'editActive', false);
-             this.get('flashMessages').success('Reply edited!');
+              set(reply, 'editActive', false);
+             this.flashMessages.success('Reply edited!');
              this.send('reloadModel');
           });
         },
         
         editPost: function() {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
           api.requestOne('forumEditTopic', { topic_id: this.get('model.id'), 
              subject: this.get('model.title'),
              message: this.get('model.raw_message') }, null)
           .then( (response) => {
               if (response.error) {
-                this.get('flashMessages').error(response.error);
+                this.flashMessages.error(response.error);
                 return;
               }
               this.set('model.editActive', false);
-              this.get('flashMessages').success('Post edited!');
+              this.flashMessages.success('Post edited!');
               this.send('reloadModel');
           });
         },
         
         deleteReply: function(reply) {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
           this.get('model.replies').removeObject(reply);
           this.set('confirmDeleteReply', null);
           api.requestOne('forumDeleteReply', { reply_id: reply.id })
@@ -87,11 +88,11 @@ export default Controller.extend(AuthenticatedController, {
               if (response.error) {
                 return;
               }
-            this.get('flashMessages').success('Reply deleted!');
+            this.flashMessages.success('Reply deleted!');
           });
         },
         deleteTopic: function() {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
           this.set('confirmDeleteTopic', null);
           api.requestOne('forumDeleteTopic', { topic_id: this.get('model.id') })
           .then( (response) => {
@@ -99,7 +100,7 @@ export default Controller.extend(AuthenticatedController, {
                 return;
               }
             this.transitionToRoute('forum-category', this.get('model.category.id'));
-            this.get('flashMessages').success('Post deleted!');
+            this.flashMessages.success('Post deleted!');
           });
         }
     }

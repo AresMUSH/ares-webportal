@@ -11,15 +11,19 @@ export default Controller.extend({
       this.set('status', '');
     },
 
+    onManageActivity: function(type, msg /* , timestamp */ ) {
+      this.addToStatus(msg);
+    },
+    
     setupCallback: function() {
       let self = this;
       this.set('status', '');
-      this.get('gameSocket').set('manageCallback', function(data, notification_type) {
-        self.addToStatus(data) } );
+      this.gameSocket.setupCallback('manage_activity', function(type, msg, timestamp) {
+          self.onManageActivity(type, msg, timestamp) } );
     },
     
     addToStatus: function(message) {
-      let old_status = this.get('status');
+      let old_status = this.status;
       this.set('status', `${old_status}\n${message}`);
       
       try {
@@ -34,7 +38,7 @@ export default Controller.extend({
       
     actions: {
         deploy() {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
           this.set('status', '');
           this.addToStatus('Website redeploying.  Please wait.');
 
@@ -49,7 +53,7 @@ export default Controller.extend({
         },
         
         shutdown() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
 
             this.set('status', '');
             api.requestOne('shutdown')
@@ -63,7 +67,7 @@ export default Controller.extend({
         },
         
         upgrade() {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
           this.set('status', '');
           this.addToStatus('Starting upgrade.  Please wait.');
           api.requestOne('upgrade', null)

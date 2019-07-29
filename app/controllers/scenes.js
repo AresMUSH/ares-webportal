@@ -13,10 +13,10 @@ export default Controller.extend(AuthenticatedController, {
   },
   
   updateScenesList: function() {
-    let api = this.get('gameApi');
+    let api = this.gameApi;
     api.requestOne('scenes', {
-       filter: this.get('filter'), 
-       page: this.get('page') })
+       filter: this.filter, 
+       page: this.page })
     .then( (response) => {
         if (response.error) {
           return;

@@ -27,21 +27,21 @@ export default Controller.extend({
   },
   
   updateScenesList: function() {
-    let api = this.get('gameApi');
+    let api = this.gameApi;
           
     api.requestOne('searchScenes', { 
-      searchLog: this.get('searchLog'),
-      searchParticipant: this.get('searchParticipant'),
-      searchTitle: this.get('searchTitle'),
-      searchTag: this.get('searchTag'),
-      searchDate: this.get('searchDate'),
-      searchType: this.get('searchType'),
-      searchLocation: this.get('searchLocation'),
-      page: this.get('page')
+      searchLog: this.searchLog,
+      searchParticipant: this.searchParticipant,
+      searchTitle: this.searchTitle,
+      searchTag: this.searchTag,
+      searchDate: this.searchDate,
+      searchType: this.searchType,
+      searchLocation: this.searchLocation,
+      page: this.page
     }, null)
     .then( (response) => {
       if (response.error) {
-        this.get('flashMessages').error("Oops!  Something went wrong when the website talked to the game.  Please try again and alert staff is the problem persists.");          
+        this.flashMessages.error("Oops!  Something went wrong when the website talked to the game.  Please try again and alert staff is the problem persists.");          
         return;
       }
       this.set('searchResults', response);

@@ -1,17 +1,15 @@
-<div class="ansi">
-    <table class="table">
-        <thead>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Severity</th>
-        </thead>
-        
-          {{#each char.fs3.damage as |damage|}}
-          <tr>
-              <td>{{damage.date}}</td>
-              <td>{{damage.description}}</td>
-              <td>{{{ansi-format text=damage.severity}}}</td>
-           </tr>
-          {{/each}}
-  </table>
-</div>
+<table class="table">
+    <thead>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Severity</th>
+    </thead>
+    
+      {{#each char.fs3.damage as |damage|}}
+      <tr>
+          <td>{{damage.date}}</td>
+          <td>{{damage.description}}</td>
+          <td>{{{ansi-format text=damage.severity}}}</td>
+       </tr>
+      {{/each}}
+</table>

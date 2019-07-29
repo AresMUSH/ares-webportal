@@ -17,14 +17,14 @@ export default Controller.extend({
         },
         register() {
             
-           this.get('gameApi').requestOne('register', 
-               { name: this.get('name'), password: this.get('password'), confirm_password: this.get('confirmPassword'), recaptcha: this.get('reCaptchaResponse')}, null)
+           this.gameApi.requestOne('register', 
+               { name: this.name, password: this.password, confirm_password: this.confirmPassword, recaptcha: this.reCaptchaResponse}, null)
             .then((response) => {            
                 if (response.error) {
-                    this.get('recaptchaControl').resetReCaptcha();
+                    this.recaptchaControl.resetReCaptcha();
                     return;
                 }                
-                this.get('flashMessages').success("Your character has been created.  Please log in.");
+                this.flashMessages.success("Your character has been created.  Please log in.");
                 this.transitionToRoute('login');
             });
         }

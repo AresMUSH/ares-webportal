@@ -51,9 +51,9 @@
       {{/each}}
     </td>
     <td>
-       <ul class="nav">
-         <li>
-           <a href="#">
+      
+      <div class="job-participant-edit-box">
+       
         {{#if editParticipants}}
          {{#power-select-multiple selected=newParticipants options=model.characters searchField="name" onchange=(action "participantsChanged") as |char|}}
           {{char.name}}
@@ -63,9 +63,8 @@
       {{else}}
         <button class="btn btn-default" {{action (mut editParticipants) true}}>Edit</button>
       {{/if}}
-         </a>
-         </li>
-      </ul>
+        
+        </div>
       
     </td>
   </tr>
@@ -182,7 +181,7 @@
      <p>{{char-icon-inline char=r.author}}</p>
      <p><i> {{r.created}} </i> 
       {{#if model.job.is_job_admin}}
-        <a href="#" {{action 'deleteReply' r.id}}><i class="fa fa-trash" aria-hidden="true"></i></a>     
+        <a href="#" {{action 'deleteReply' r.id}}><i class="fa fa-trash" aria-label="Delete Reply"></i></a>     
       {{/if}}
       </p>
      

@@ -13,7 +13,7 @@ export default Controller.extend(AuthenticatedController, {
     
     actions: {
         delete: function() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             this.set('confirmDelete', false);
             api.requestOne('deleteEvent', { event_id: this.get('model.id') })
             .then( (response) => {
@@ -21,29 +21,29 @@ export default Controller.extend(AuthenticatedController, {
                     return;
                 }
                 this.transitionToRoute('events');
-                this.get('flashMessages').success('Event deleted!');
+                this.flashMessages.success('Event deleted!');
             });
         },
         signup: function() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('eventSignup', { event_id: this.get('model.id'), comment: this.get('model.signup_comment') })
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
                 this.transitionToRoute('events');
-                this.get('flashMessages').success('Signed up!');
+                this.flashMessages.success('Signed up!');
             });
         },
         cancelSignup: function() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('eventCancelSignup', { event_id: this.get('model.id') })
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
                 this.transitionToRoute('events');
-                this.get('flashMessages').success('Signup canceled.');
+                this.flashMessages.success('Signup canceled.');
             });
         }
     }

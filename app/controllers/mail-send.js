@@ -16,16 +16,16 @@ export default Controller.extend({
     
     actions: {
         sendMail: function() {
-            let api = this.get('gameApi');
-            api.requestOne('sendMail', { subject: this.get('subject'), 
-               message: this.get('message'),
-               to_list: (this.get('toList') || []).map(p => p.name) }, null)
+            let api = this.gameApi;
+            api.requestOne('sendMail', { subject: this.subject, 
+               message: this.message,
+               to_list: (this.toList || []).map(p => p.name) }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
                 this.transitionToRoute('mail');
-                this.get('flashMessages').success('Sent!');
+                this.flashMessages.success('Sent!');
             });
         },
         toListChanged(newList) {

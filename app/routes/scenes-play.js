@@ -1,3 +1,4 @@
+import EmberObject from '@ember/object';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
@@ -19,18 +20,18 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     },
 
     deactivate: function() {
-        this.get('gameSocket').set('sceneCallback', null);
+        this.gameSocket.removeCallback('new_scene_activity');
         this.controllerFor('application').set('hideSidebar', false);
     },
 
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return RSVP.hash({
              scenes: api.requestMany('myScenes'),
              abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }),
              locations: api.request('sceneLocations', { id: params['id'] })
            })
-           .then((model) => Ember.Object.create(model));
+           .then((model) => EmberObject.create(model));
     },
     
     setupController: function(controller, model) {
@@ -41,7 +42,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
       }
       else {
         this.controllerFor('application').set('hideSidebar', false);
-        this.get('flashMessages').danger('You must watch or join a scene first.');
+        this.flashMessages.danger('You must watch or join a scene first.');
         this.transitionTo('scenes-live');
       }
     }

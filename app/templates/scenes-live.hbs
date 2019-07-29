@@ -3,7 +3,7 @@
 
 <p>This list shows scenes that are currently in progress.  Private scenes require an invitation, but open scenes are open to anyone.   You can play in-game or via the web portal.</p>
 
-<p>The unread flags <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span> show new activity in public scenes or scenes you're watching/participating in.</p>
+<p>The unread flags <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity Flag"></i></span> show new activity in public scenes or scenes you're watching/participating in.</p>
 
 {{#if isApproved}}
 <div class="row">
@@ -32,7 +32,7 @@
 <tr>
     <td>
         {{#if scene.is_unread}}
-        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
         {{/if}}
         
     </td>
@@ -57,10 +57,15 @@
         {{/each}}
         
         {{#if (or scene.can_view (not scene.is_private))}}
-          <p>{{scene.location}}</p>
+          <p>{{#if scene.content_warning}}
+          {{content-warning-tag warning=scene.content_warning}}
+          {{/if}}
+ 
+            {{scene.location}}</p>
         
           {{#if scene.summary}}
-          <p>{{scene.summary}}</p>
+          <p>{{scene.summary}}
+          </p>
           {{/if}}
         {{/if}}
         

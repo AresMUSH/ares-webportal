@@ -22,10 +22,10 @@ export default Controller.extend({
 
   actions: {
     addReply() {
-      let api = this.get('gameApi');
+      let api = this.gameApi;
       api.requestOne('jobReply', { id: this.get('model.job.id'), 
-      reply: this.get('reply'),
-      admin_only: this.get('replyAdminOnly')}, null)
+      reply: this.reply,
+      admin_only: this.replyAdminOnly}, null)
       .then( (response) => {
         if (response.error) {
           return;
@@ -33,11 +33,11 @@ export default Controller.extend({
         this.set('reply', '');
         this.set('replyAdminOnly', true);
         this.send('reloadModel');
-        this.get('flashMessages').success('Reply added!');
+        this.flashMessages.success('Reply added!');
       });
     },
     closeJob() {
-      let api = this.get('gameApi');
+      let api = this.gameApi;
       api.requestOne('jobClose', { id: this.get('model.job.id')})
       .then( (response) => {
         if (response.error) {
@@ -46,55 +46,55 @@ export default Controller.extend({
         this.set('reply', '');
         this.set('replyAdminOnly', true);
         this.transitionToRoute('jobs');
-        this.get('flashMessages').success('Reply added!');
+        this.flashMessages.success('Reply added!');
       });
     },
     assignJob(assignee) {
-      let api = this.get('gameApi');
+      let api = this.gameApi;
       api.requestOne('jobAssign', { id: this.get('model.job.id'), assignee_id: assignee.id })
       .then((response) => {
         if (response.error) {
           return;
         }
         this.send('reloadModel');
-        this.get('flashMessages').success('Assigned to ' + assignee.name  + '!');
+        this.flashMessages.success('Assigned to ' + assignee.name  + '!');
       });
     },
     deleteReply(id) {
-      let api = this.get('gameApi');
+      let api = this.gameApi;
       api.requestOne('jobDeleteReply', { id: this.get('model.job.id'), reply_id: id })
       .then((response) => {
         if (response.error) {
           return;
         }
         this.send('reloadModel');
-        this.get('flashMessages').success('Reply deleted!');
+        this.flashMessages.success('Reply deleted!');
       });
     },
     changeData(type, data) {
-      this.get('gameApi').requestOne('jobChangeData', { id: this.get('model.job.id'), type: type, data: data })
+      this.gameApi.requestOne('jobChangeData', { id: this.get('model.job.id'), type: type, data: data })
       .then((response) => {
         if (response.error) {
           return;
         }
         this.send('reloadModel');
-        this.get('flashMessages').success('Job changed to ' + data + '.');
+        this.flashMessages.success('Job changed to ' + data + '.');
       });
     },
     participantsChanged: function(newParticipants) {
         this.set('newParticipants', newParticipants);
     },
     saveParticipants: function() {
-      let participants = this.get('newParticipants');
+      let participants = this.newParticipants;
       this.set('editParticipants', false);
       this.set('newParticipants', []);
-      this.get('gameApi').requestOne('jobChangeParticipants', { id: this.get('model.job.id'), participants: participants.map(p => p.id) })
+      this.gameApi.requestOne('jobChangeParticipants', { id: this.get('model.job.id'), participants: participants.map(p => p.id) })
       .then((response) => {
         if (response.error) {
           return;
         }
         this.send('reloadModel');
-        this.get('flashMessages').success('Participants saved.');
+        this.flashMessages.success('Participants saved.');
       });
     }
   }

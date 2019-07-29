@@ -1,3 +1,4 @@
+import { get } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
@@ -19,7 +20,7 @@ export default Controller.extend(AuthenticatedController, {
     return `Combat ${this.get('model.id')}`;
   }.property(),
     
-  onCombatActivity: function(msg, notification_type) {
+  onCombatActivity: function(type, msg /* , timestamp */ ) {
       
     let splitMsg = msg.split('|');
     let combatId = splitMsg[0];       
@@ -27,13 +28,14 @@ export default Controller.extend(AuthenticatedController, {
       
     if (combatId === this.get('model.id')) {
 
-      if (notification_type == 'new_combat_turn') {
+      if (type == 'new_combat_turn') {
+        this.set('newCombatActivity', false);
         let teams = JSON.parse(message);
         this.set('model.teams', teams);
       }
       else {
         this.set('newCombatActivity', true);
-        this.set('combatLog', this.get('combatLog') + "\n" + message);
+        this.set('combatLog', this.combatLog + "\n" + message);
         try {
           $('#combat-log').stop().animate({
             scrollTop: $('#combat-log')[0].scrollHeight
@@ -60,22 +62,23 @@ export default Controller.extend(AuthenticatedController, {
     
   setupCallback: function() {
     let self = this;
-        
-    this.get('gameSocket').set('combatCallback', function(data, notification_type) {
-      self.onCombatActivity(data, notification_type) } );
+    this.gameSocket.setupCallback('combat_activity', function(type, msg, timestamp) {
+        self.onCombatActivity(type, msg, timestamp) } );
+    this.gameSocket.setupCallback('new_combat_turn', function(type, msg, timestamp) {
+        self.onCombatActivity(type, msg, timestamp) } );
     },
     
     addToCombat(name, type, isCurrentUser) {
       if (name.length === 0) {
-        this.get('flashMessages').danger('Name is required.');
+        this.flashMessages.danger('Name is required.');
         return;
       } 
       if (!type) {
-        this.get('flashMessages').danger('You must select a type.');
+        this.flashMessages.danger('You must select a type.');
         return
       }
       
-      let api = this.get('gameApi');
+      let api = this.gameApi;
       api.requestOne('addCombatant', { id: this.get('model.id'), 
       name: name,
       combatant_type: type }, null)
@@ -87,12 +90,12 @@ export default Controller.extend(AuthenticatedController, {
         if (isCurrentUser) {
           this.set('model.in_combat', true);
         }
-        this.get('flashMessages').success('Combatant added!');
+        this.flashMessages.success('Combatant added!');
       });
     },
     
     removeFromCombat(name, isCurrentUser) {
-      let api = this.get('gameApi');
+      let api = this.gameApi;
       api.requestOne('removeCombatant', { name: name, id: this.get('model.id') }, null)
       .then( (response) => {
         if (response.error) {
@@ -101,37 +104,37 @@ export default Controller.extend(AuthenticatedController, {
         this.get('model.teams').forEach(t => {
           let combatant = t.combatants.find(c => c.name === name);
           if (combatant) {
-            Ember.get(t, 'combatants').removeObject(combatant);
+            get(t, 'combatants').removeObject(combatant);
           }
         });
         if (isCurrentUser) {
           this.set('model.in_combat', false);
         }
-        this.get('flashMessages').success('Combatant removed!');
+        this.flashMessages.success('Combatant removed!');
       });
     },
     
     actions: {
       addCombatant: function() {
-        let name = this.get('newCombatantName');
-        let type = this.get('newCombatantType');
+        let name = this.newCombatantName;
+        let type = this.newCombatantType;
         this.set('showAddCombatant', false);
         this.addToCombat(name, type, false);            
       },
       joinCombat: function() {
         let name = this.get('currentUser.name')
-        let type = this.get('newCombatantType');
+        let type = this.newCombatantType;
         this.set('showJoinCombat', false);
         this.addToCombat(name, type, true);            
       },
       newTurn: function() {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         api.requestOne('newCombatTurn', { id: this.get('model.id') }, null)
         .then( (response) => {
           if (response.error) {
             return;
           }
-          this.get('flashMessages').success('Combat turn started!');
+          this.flashMessages.success('Combat turn started!');
         });
             
       },
@@ -148,13 +151,13 @@ export default Controller.extend(AuthenticatedController, {
       },
       stopCombat: function() {
         this.set('confirmStopCombat', false);
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         api.requestOne('stopCombat', { id: this.get('model.id') }, null)
         .then( (response) => {
           if (response.error) {
             return;
           }
-          this.get('flashMessages').success('Combat stopped!');
+          this.flashMessages.success('Combat stopped!');
           this.transitionToRoute('combats');
         });
       }

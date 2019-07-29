@@ -5,13 +5,13 @@ export default Mixin.create({
     perPage: 30,
     
     currentPageItems: function() {
-        let current_page = this.get('page');
-        if (!current_page || current_page < 0 || current_page > this.get('numPages')) {
+        let current_page = this.page;
+        if (!current_page || current_page < 0 || current_page > this.numPages) {
             current_page = 1;
         }
-        let per_page = this.get('perPage');
+        let per_page = this.perPage;
         let start = (current_page - 1) * per_page;
-        let selected = this.get('allItems').slice(start, start + per_page);
+        let selected = this.allItems.slice(start, start + per_page);
         return selected;
     }.property('allItems', 'page'),
     
@@ -24,7 +24,7 @@ export default Mixin.create({
     }.property('allItems', 'page'),
     
     numPages: function() {
-        let fraction = this.get('allItems').length / this.get('perPage');
+        let fraction = this.allItems.length / this.perPage;
         return Math.ceil(fraction);
     }
 });
