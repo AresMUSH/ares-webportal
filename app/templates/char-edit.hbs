@@ -111,30 +111,38 @@
            {{#each model.profile as |profile|}}
            <p>
            {{input type="text" size=25 value=profile.name placeholder="Enter section name."}}
-           <button class="btn btn-default" {{action 'removeProfile' profile.key}}><i class="fa fa-trash" aria-hidden="true"></i></button>
+           <button class="btn btn-default" {{action 'removeProfile' profile.key}}><i class="fa fa-trash" aria-label="Remove Section"></i></button>
            </p>
            {{markdown-editor text=profile.text}}
             <hr>
            {{/each}}
            
-           <button class="btn btn-default" {{action 'addProfile'}}>Add Profile Section <i class="fa fa-plus" aria-hidden="true"></i></button>
+           <button class="btn btn-default" {{action 'addProfile'}}>Add Profile Section <i class="fa fa-plus" aria-label="Add Section"></i></button>
         </div>
     
         <div id="relationships" class="tab-pane fade in">
             <p><b>Category Order:</b> {{input type="text" size=50 value=model.relationships_category_order placeholder="Order (Optional)."}}</p>
             <p class="hint">List categories, separated by commas, in the order you want them to appear on your relationship display.</p>
-            <hr/>
+            <hr>
 
             {{#each model.relationships as |relationship|}}
             <p>
             {{input type="text" size=25 value=relationship.name placeholder="Enter name."}}
-            <button class="btn btn-default" {{action 'removeRelationship' relationship.key}}><i class="fa fa-trash" aria-hidden="true"></i></button>
+            
+            Category: {{input type="text" size=25 value=relationship.category placeholder="Enter category."}}
+                        
+            <button class="btn btn-default" {{action 'removeRelationship' relationship.key}}><i class="fa fa-trash" aria-label="Remove Relationship"></i></button>
             </p>
             
             <p>
             
-            Category: {{input type="text" size=25 value=relationship.category placeholder="Enter category."}}
             Order: {{input type="text" size=25 value=relationship.order placeholder="Order (Optional)."}}
+                        
+            Off-Game NPC: {{input type='checkbox' checked=relationship.is_npc}} 
+            
+            {{#if relationship.is_npc}}
+            NPC Image: {{input type="text" size=25 value=relationship.npc_image placeholder="folder/filename.ext (Optional)."}}
+            {{/if}}
             
             </p>
             

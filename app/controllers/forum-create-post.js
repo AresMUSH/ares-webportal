@@ -15,10 +15,10 @@ export default Controller.extend({
     
     actions: {
         addPost() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('forumPost', { category_id: this.get('model.id'), 
-               subject: this.get('subject'),
-               message: this.get('message') }, null)
+               subject: this.subject,
+               message: this.message }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -26,7 +26,7 @@ export default Controller.extend({
                 this.transitionToRoute('forum-topic', 
                           this.get('model.id'), 
                           response.id);
-                this.get('flashMessages').success('Topic added!');
+                this.flashMessages.success('Topic added!');
             });
         }
     }

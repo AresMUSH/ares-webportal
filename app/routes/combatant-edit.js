@@ -7,7 +7,7 @@ export default Route.extend(DefaultRoute, ReloadableRoute, {
     gameApi: service(),
     
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('combatant', { id: params['id'] });
     }
 });

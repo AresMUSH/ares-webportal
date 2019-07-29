@@ -1,3 +1,4 @@
+import EmberObject from '@ember/object';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
@@ -10,15 +11,15 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, RouteResetOnExi
     gameSocket: service(),
         
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         
         return RSVP.hash({
              message:  api.requestOne('mailMessage', { id: params['id']  }),
              characters: api.requestMany('characters', { select: 'all' })
            })
            .then((model) => {
-          this.get('gameSocket').updateMailBadge(model.message.unread_mail_count);
-          return Ember.Object.create(model);
+          this.gameSocket.updateMailBadge(model.message.unread_mail_count);
+          return EmberObject.create(model);
           }
         );
     }

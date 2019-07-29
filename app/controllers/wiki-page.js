@@ -8,7 +8,7 @@ export default Controller.extend(AuthenticatedController, {
     
     actions: {
         delete() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             this.set('confirmDelete', false);
             api.requestOne('deleteWiki', { id: this.get('model.id')})
             .then( (response) => {
@@ -16,7 +16,7 @@ export default Controller.extend(AuthenticatedController, {
                     return;
                 }
                 this.transitionToRoute('wiki');
-                this.get('flashMessages').success('Page deleted!');
+                this.flashMessages.success('Page deleted!');
             });
         }
     }

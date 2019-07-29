@@ -7,13 +7,13 @@ export default Controller.extend({
     
     actions: {
         startCombat: function() {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
           api.requestOne('startCombat')
           .then( (response) => {
               if (response.error) {
                   return;
               }
-              this.get('flashMessages').success('Combat started!');
+              this.flashMessages.success('Combat started!');
               this.transitionToRoute('combat', response.id);
           });
         }

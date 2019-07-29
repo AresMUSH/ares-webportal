@@ -9,6 +9,9 @@ module.exports = function(defaults) {
       'bootstrapVersion': 3,
       'importBootstrapFont': true,
       'importBootstrapCSS': false
+    },
+    'ember-cli-babel': {
+      includePolyfill: true
     }
   });
 

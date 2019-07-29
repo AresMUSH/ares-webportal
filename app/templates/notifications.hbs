@@ -8,7 +8,7 @@
 {{#each model as |notification|}}
 <tr>
   <td>{{#if notification.is_unread}}
-        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="Unread Notification"></i></span>
         {{/if}}
       </td>
   <td>{{notification.timestamp}}</td>

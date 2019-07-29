@@ -2,10 +2,11 @@
 <h1>{{model.plot.title}}</h1>
       
   
-<div class="ansi">
+<p>{{{ansi-format text=model.plot.summary}}}</p>
 
-        <p>{{{ansi-format text=model.plot.summary}}}</p>
-</div>
+{{#if model.plot.content_warning}}
+<div class="alert alert-danger"><b>Content Warning:</b> {{model.plot.content_warning}}</div>
+{{/if}}
 
 
 <p><label>Storyteller:</label> {{char-icon-inline char=model.plot.storyteller}}</p>

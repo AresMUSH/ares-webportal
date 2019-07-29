@@ -25,7 +25,11 @@
             </div>
             
             <div class="col col-xs-12 col-sm-8 ansi">
+                {{#if ship.is_npc}}
+                <b>{{ship.name}}</b> (NPC)
+                {{else}}
                 <b>{{#link-to 'char' ship.name}}{{ship.name}}{{/link-to}}</b>
+                {{/if}}
                 {{{ansi-format text=ship.text}}}
             </div>
         </div>

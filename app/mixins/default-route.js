@@ -13,7 +13,7 @@ export default Mixin.create({
         let regRequired = appModel.get('registration_required');
         
         if (regRequired && !this.get('session.isAuthenticated')) {
-            this.get('flashMessages').danger('You must log in first.');
+            this.flashMessages.danger('You must log in first.');
             this.transitionTo('login');
         }
     }

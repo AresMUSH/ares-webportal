@@ -7,7 +7,7 @@ export default Route.extend(ReloadableRoute, RestrictedRoute, {
     gameApi: service(),
 
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('getTextFile', { file_type: params['file_type'], file: params['file']});
     }
 });

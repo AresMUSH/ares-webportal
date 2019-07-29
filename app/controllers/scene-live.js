@@ -10,7 +10,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     session: service(),
     favicon: service(),
     
-    onSceneActivity: function(msg /* , timestamp */) {
+    onSceneActivity: function(type, msg /* , timestamp */ ) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];       
         let char = splitMsg[1];
@@ -20,7 +20,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
           let notify = this.updateSceneData(this.get('model.scene'), msg);
           
           if (notify && (char != currentUsername)) {
-            this.get('gameSocket').notify(`New activity from ${char} in scene ${sceneId}.`);
+            this.gameSocket.notify(`New activity from ${char} in scene ${sceneId}.`);
           }
           
           this.scrollSceneWindow();
@@ -38,7 +38,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     
     scrollSceneWindow: function() {
       // Unless scrolling paused 
-      if (this.get('scrollPaused')) {
+      if (this.scrollPaused) {
         return;
       }
     
@@ -55,9 +55,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     
     setupCallback: function() {
         let self = this;
-        
-        this.get('gameSocket').set('sceneCallback', function(data) {
-            self.onSceneActivity(data) } );
+        this.gameSocket.setupCallback('new_scene_activity', function(type, msg, timestamp) {
+            self.onSceneActivity(type, msg, timestamp) } );
     },
     
     actions: {

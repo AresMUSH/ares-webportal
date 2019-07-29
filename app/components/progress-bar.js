@@ -1,3 +1,4 @@
+import { htmlSafe } from '@ember/template';
 import Component from '@ember/component';
 
 export default Component.extend({
@@ -6,13 +7,13 @@ export default Component.extend({
   tagName: '',
   
   progress: function() {
-    if (this.get('maxValue') === 0) {
+    if (this.maxValue === 0) {
       return 0;
     }
-    return 100.0 * this.get('currentValue') / this.get('maxValue');
+    return 100.0 * this.currentValue / this.maxValue;
   }.property('currentValue'),
   
   widthStyle: function() {
-    return Ember.String.htmlSafe(`width: ${this.get('progress')}%;`);
+    return htmlSafe(`width: ${this.progress}%;`);
   }.property('progress')
 });

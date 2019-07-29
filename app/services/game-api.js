@@ -1,3 +1,4 @@
+import EmberObject from '@ember/object';
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 
@@ -52,10 +53,10 @@ export default Service.extend({
                     args: { error: `${error.message} : ${err.stack}` },
                     api_key: aresconfig.api_key
                 });
-                this.get('router').transitionTo('error');
+                this.router.transitionTo('error');
       } catch(ex) { 
         try {
-          this.get('router').transitionTo('error');
+          this.router.transitionTo('error');
         }
         catch(ex) {
           // Failsafe.  Do nothing.
@@ -89,13 +90,13 @@ export default Service.extend({
             this.reportError({ message: `No response from game for ${cmd}.` });
           }
           else if (response.error) {
-                this.get('flashMessages').danger(response.error);
+                this.flashMessages.danger(response.error);
                 if (transitionToOnError) {
-                    this.get("router").transitionTo(transitionToOnError);
+                    this.router.transitionTo(transitionToOnError);
                 }
                 return response;
             }
-            return Ember.Object.create(response);
+            return EmberObject.create(response);
         });
     },
 
@@ -105,13 +106,13 @@ export default Service.extend({
             this.reportError({ message: `No response from game for ${cmd}.` });
           }
           else if (response.error) {
-                this.get('flashMessages').danger(response.error);
+                this.flashMessages.danger(response.error);
                 if (transitionToOnError) {
-                    this.get("router").transitionTo(transitionToOnError);
+                    this.router.transitionTo(transitionToOnError);
                 }
                 return [];
             }
-            return response.map(r => Ember.Object.create(r));
+            return response.map(r => EmberObject.create(r));
         });
     }    
     

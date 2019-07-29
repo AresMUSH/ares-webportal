@@ -15,7 +15,7 @@ export default Route.extend(RestrictedRoute, ReloadableRoute, {
     },
     
     model: function() {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('getTinker');
     },
     

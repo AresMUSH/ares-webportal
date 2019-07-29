@@ -38,7 +38,7 @@
              {{/power-select-multiple}}
              
              {{input type="text" size=10 id="newTag" value=newTag }} 
-             <a href="#" {{action 'addNewTag'}}><i class="fa fa-plus" aria-hidden="true"></i></a>     
+             <a href="#" {{action 'addNewTag'}}><i class="fa fa-plus" aria-label="Add Tag"></i></a>     
 
         </td>
     </tr>
@@ -55,9 +55,7 @@
 </table>
 <hr>
     
-<div class="ansi">
-            {{{ansi-format text=model.message.body}}}
-</div>
+{{{ansi-format text=model.message.body}}}
 
 <hr>
         <div class="pull-right">

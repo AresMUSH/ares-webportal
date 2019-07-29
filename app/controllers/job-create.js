@@ -25,19 +25,19 @@ export default Controller.extend({
     },
       
     createJob: function() {
-      let api = this.get('gameApi');
+      let api = this.gameApi;
       api.requestOne('jobCreate', { 
-        title: this.get('title'), 
-        category: this.get('category') || this.get('model.options.request_category'),
-        description: this.get('description'),
-        participants: (this.get('participants') || []).map(p => p.id),
+        title: this.title, 
+        category: this.category || this.get('model.options.request_category'),
+        description: this.description,
+        participants: (this.participants || []).map(p => p.id),
         submitter: this.get('submitter.name') }, null)
         .then( (response) => {
           if (response.error) {
             return;
           }
           this.transitionToRoute('job', response.id);
-          this.get('flashMessages').success('Job created!');
+          this.flashMessages.success('Job created!');
         });
       },
       

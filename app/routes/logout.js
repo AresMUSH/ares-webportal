@@ -6,7 +6,7 @@ export default Route.extend({
     flashMessages: service(),
     
     beforeModel: function() {
-        this.get('session').invalidate();
+        this.session.invalidate();
         this.transitionToRoute('home');
     }
 });

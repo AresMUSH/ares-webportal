@@ -13,7 +13,7 @@ export default Controller.extend({
     actions: {
         
         cancel() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             
             api.requestOne('editWikiCancel', { id: this.get('model.id') })
             .then( (response) => {
@@ -26,7 +26,7 @@ export default Controller.extend({
         },
         
         preview() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             
             api.requestOne('markdownPreview', { text: this.get('model.text') })
             .then( (response) => {
@@ -38,7 +38,7 @@ export default Controller.extend({
         },
         
         save() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             let tags = this.get('model.tags') || [];
             if (!Array.isArray(tags)) {
                 tags = tags.split(/[\s,]/);
@@ -55,7 +55,7 @@ export default Controller.extend({
                 }
                 this.transitionToRoute('wiki-page',                          
                           this.get('model.name'));
-                this.get('flashMessages').success('Page updated!');
+                this.flashMessages.success('Page updated!');
             });
         }
     }

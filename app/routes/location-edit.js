@@ -7,7 +7,7 @@ export default Route.extend(AuthenticatedRoute, {
     session: service(),
     
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('area', {id: params['id'], edit_mode: true });
     }
 });

@@ -30,6 +30,7 @@
 <tbody>
 
 {{#each model as |plot|}}
+  {{#if (not plot.completed) }}
     <tr>
         <td>
         {{#link-to 'plot' plot.id}}{{plot.title}}{{/link-to}}
@@ -40,11 +41,30 @@
         <td>
         {{plot.start_date}} - {{plot.end_date}}
         </td>        
-        <td class="ansi">
+        <td>
             {{{ansi-format text=plot.summary}}}
+            {{#if plot.content_warning}}
+            {{content-warning-tag warning=plot.content_warning}}
+            {{/if}}
+            
         </td>
     </tr>
+  {{/if}}
 {{/each}}
 
 </tbody>
 </table>
+
+<h2>Completed Plots</h2>
+
+<ul>
+{{#each model as |plot|}}
+  {{#if plot.completed }}
+    <li>
+        {{#link-to 'plot' plot.id}}{{plot.title}}{{/link-to}}
+        
+            {{{ansi-format text=plot.summary}}}
+    </li>
+  {{/if}}
+{{/each}}
+</ul>

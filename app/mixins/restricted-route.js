@@ -13,7 +13,7 @@ export default Mixin.create({
     
     beforeModel: function() {
         if (!this.isAllowed()) {
-            this.get('flashMessages').danger(this.get('allowedErrorMessage'));
+            this.flashMessages.danger(this.allowedErrorMessage);
             this.transitionTo('login');
         }
     }

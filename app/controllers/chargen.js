@@ -36,13 +36,13 @@ export default Controller.extend({
             profile_image: this.get('model.char.profile_image'),
             background: this.get('model.char.background'),
             lastwill: this.get('model.char.lastwill'),
-            fs3: this.get('fs3Data')
+            fs3: this.fs3Data
         };
     }, 
     
     
     toggleCharChanged: function() {
-        this.set('toggleCharChange', !this.get('toggleCharChange'));        
+        this.set('toggleCharChange', !this.toggleCharChange);        
     },
     
     actions: {
@@ -62,7 +62,7 @@ export default Controller.extend({
         },
         
         review() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
             .then( (response) => {
                 if (response.error) {
@@ -73,7 +73,7 @@ export default Controller.extend({
         },
         
         reset() {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
           api.requestOne('chargenReset', { char: this.buildQueryDataForChar() })
           .then( (response) => {
             if (response.error) {
@@ -85,7 +85,7 @@ export default Controller.extend({
         },
         
         save() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
             .then( (response) => {
                 if (response.error) {
@@ -99,7 +99,7 @@ export default Controller.extend({
         },
         
         unsubmit() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('chargenUnsubmit')
             .then( (response) => {
                 if (response.error) {

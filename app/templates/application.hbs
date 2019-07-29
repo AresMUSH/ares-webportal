@@ -14,32 +14,36 @@
                <div class="col-md-6 hidden-sm hidden-xs">
                   <div class="text-right user-bar">
                    {{#if isAuthenticated}}
-                       <p>Welcome, {{currentUser.name}}.</p>
+                       <p>Welcome, {{currentUser.name}}. 
+                         <a href="#" {{action (mut showAltSelection) true}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a> </p>
+                       {{#if showAltSelection}}
+                         {{#each model.alts as |alt|}}
+                           {{#if (not (eq alt.name currentUser.name)) }}
+                             <p><i><a href="#" {{action 'switchAlt' alt.name}}>Switch to {{alt.name}}.</a></i></p>
+                           {{/if}}
+                         {{/each}}
+                       {{/if}}
                        <p>
                            {{#link-to 'notifications'}}
-                           {{#if model.notification_count}}
-                               <span class="label label-pill label-primary"><i class="fa fa-bell" aria-hidden="true"></i>
+                               <span class="label label-pill label-primary"><i class="fa fa-bell" aria-label='Unread Notifications'></i>
                                <span id="notificationBadge">{{model.notification_count}}</span>
                                </span>
-                           {{else}}
-                              <i class="fa fa-bell" aria-hidden="true"></i>
-                           {{/if}}
                            {{/link-to}} 
                             |
                            {{#link-to 'char' currentUser.name}}
-                             <i class="fa fa-user" aria-hidden="true"></i>
+                             <i class="fa fa-user" aria-label="Profile"></i>
                            {{/link-to}} |
                            {{#link-to 'mail'}}
-                             <i class="fa fa-envelope" aria-hidden="true"></i>
+                             <i class="fa fa-envelope" aria-label="Mail"></i>
                            {{/link-to}} |
                            {{#link-to 'jobs'}}
-                                <i class="fa fa-list" aria-hidden="true"></i>
+                                <i class="fa fa-list" aria-label="Jobs"></i>
                            {{/link-to}}
                            | {{#link-to 'account'}}
-                             <i class="fa fa-cogs" aria-hidden="true"></i>
+                             <i class="fa fa-cogs" aria-label="Account"></i>
                            {{/link-to}}
                            | {{#link-to 'logout'}}
-                             <i class="fa fa-sign-out-alt" aria-hidden="true"></i> 
+                             <i class="fa fa-sign-out-alt" aria-label="Logout"></i> 
                            {{/link-to}}
                        </p>
                     {{else}}

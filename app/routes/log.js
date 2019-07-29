@@ -7,7 +7,7 @@ export default Route.extend(DefaultRoute, {
     session: service(),
     
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('log', { file: params['file']});
     },
     

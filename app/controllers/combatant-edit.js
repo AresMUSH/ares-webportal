@@ -15,7 +15,7 @@ export default Controller.extend({
     
     actions: {
         save: function() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('updateCombatant', { id: this.get('model.id'), 
                 team: this.get('model.team'),
                 stance: this.get('model.stance'),
@@ -34,7 +34,7 @@ export default Controller.extend({
                     return;
                 }
                 this.transitionToRoute('combat', this.get('model.combat'));
-                this.get('flashMessages').success('Combatant saved!');
+                this.flashMessages.success('Combatant saved!');
             });
         },
         teamChanged: function(team) {
