@@ -15,7 +15,10 @@
                   <div class="text-right user-bar">
                    {{#if isAuthenticated}}
                        <p>Welcome, {{currentUser.name}}. 
-                         <a href="#" {{action (mut showAltSelection) true}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a> </p>
+                        {{#if model.alts}}
+                         <a href="#" {{action (mut showAltSelection) true}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a> 
+                         {{/if}}
+                       </p>
                        {{#if showAltSelection}}
                          {{#each model.alts as |alt|}}
                            {{#if (not (eq alt.name currentUser.name)) }}
