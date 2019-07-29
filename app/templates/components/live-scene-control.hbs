@@ -176,7 +176,7 @@
                          {{/if}}
                        {{/if}}
                        
-                       {{#if scene.can_delete}}
+                       {{#if (and scene.can_delete scene.completed)}}
                        <li><a href="#" {{action (mut confirmDeleteScene) true}}>Delete Scene</a></li> 
                        {{/if}}
                    
