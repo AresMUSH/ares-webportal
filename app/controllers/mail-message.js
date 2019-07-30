@@ -28,14 +28,14 @@ export default Controller.extend({
   }.observes('model.message'),
   
   saveTags: function() {
-    let api = this.get('gameApi');
+    let api = this.gameApi;
     api.requestOne('tagMail', { id: this.get('model.message.id'), tags: this.get('model.message.tags') }, null)
     .then( (response) => {
       if (response.error) {
         return;
       }
       this.send('reloadModel');
-      this.get('flashMessages').success('Tags updated!');
+      this.flashMessages.success('Tags updated!');
     });
   },
     
@@ -43,7 +43,7 @@ export default Controller.extend({
 
     addNewTag: function() {
       let tags = this.get('model.message.tags');
-      let newTag = this.get('newTag');
+      let newTag = this.newTag;
       
       if (newTag === '') {
         return;
@@ -54,25 +54,25 @@ export default Controller.extend({
       this.saveTags();
     },
     archiveMsg: function() {
-      let api = this.get('gameApi');
+      let api = this.gameApi;
       api.requestOne('archiveMail', { id: this.get('model.message.id') }, null)
       .then( (response) => {
         if (response.error) {
           return;
         }
         this.transitionToRoute('mail');
-        this.get('flashMessages').success('Message archived!');
+        this.flashMessages.success('Message archived!');
       });
     },
     deleteMsg: function() {
-      let api = this.get('gameApi');
+      let api = this.gameApi;
       api.requestOne('deleteMail', { id: this.get('model.message.id') }, null)
       .then( (response) => {
         if (response.error) {
           return;
         }
         this.transitionToRoute('mail');
-        this.get('flashMessages').success('Message moved to trash.');
+        this.flashMessages.success('Message moved to trash.');
       });
     },
     fwdToListChanged: function(list) {
@@ -83,29 +83,29 @@ export default Controller.extend({
     },
     
     sendReply: function() {
-      let api = this.get('gameApi');
-      api.requestOne('sendMail', { subject: this.get('replySubject'), 
-      message: this.get('replyMessage'),
-      to_list: (this.get('replyToList') || []).map (p => p.name )}, null)
+      let api = this.gameApi;
+      api.requestOne('sendMail', { subject: this.replySubject, 
+      message: this.replyMessage,
+      to_list: (this.replyToList || []).map (p => p.name )}, null)
       .then( (response) => {
         if (response.error) {
           return;
         }
         this.transitionToRoute('mail');
-        this.get('flashMessages').success('Sent!');
+        this.flashMessages.success('Sent!');
       });
     },
     sendForward: function() {
-      let api = this.get('gameApi');
-      api.requestOne('sendMail', { subject: this.get('fwdSubject'), 
-      message: `${this.get('fwdMessage')}\n\n----\n\nOriginal Message:\n${this.get('model.message.raw_body')}`,
-      to_list: (this.get('fwdToList') || []).map (p => p.name )}, null)
+      let api = this.gameApi;
+      api.requestOne('sendMail', { subject: this.fwdSubject, 
+      message: `${this.fwdMessage}\n\n----\n\nOriginal Message:\n${this.get('model.message.raw_body')}`,
+      to_list: (this.fwdToList || []).map (p => p.name )}, null)
       .then( (response) => {
         if (response.error) {
           return;
         }
         this.transitionToRoute('mail');
-        this.get('flashMessages').success('Sent!');
+        this.flashMessages.success('Sent!');
       });
     },
     tagsChanged: function(tags) {
@@ -116,14 +116,14 @@ export default Controller.extend({
       this.set('replyToList', list);
     },
     uneleteMsg: function() {
-      let api = this.get('gameApi');
+      let api = this.gameApi;
       api.requestOne('undeleteMail', { id: this.get('model.message.id') }, null)
       .then( (response) => {
         if (response.error) {
           return;
         }
         this.transitionToRoute('mail');
-        this.get('flashMessages').success('Message undeleted.');
+        this.flashMessages.success('Message undeleted.');
       });
     }
   }

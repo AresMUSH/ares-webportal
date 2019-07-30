@@ -12,7 +12,7 @@ export default Controller.extend(AuthenticatedController, {
     
     actions: {
         delete() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             this.set('confirmDelete', false);
             api.requestOne('deletePlot', { id: this.get('model.plot.id')})
             .then( (response) => {
@@ -20,7 +20,7 @@ export default Controller.extend(AuthenticatedController, {
                     return;
                 }
                 this.transitionToRoute('plots');
-                this.get('flashMessages').success('Plot deleted!');
+                this.flashMessages.success('Plot deleted!');
             });
         }
     }

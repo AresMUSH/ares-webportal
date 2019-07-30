@@ -12,18 +12,18 @@ export default Controller.extend(AuthenticatedController, {
     
     actions: {
       catchup: function() {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         api.requestOne('forumCatchup')
         .then( (response) => {
             if (response.error) {
                 return;
             }
             this.send('reloadModel');
-            this.get('flashMessages').success('All topics marked as read!');
+            this.flashMessages.success('All topics marked as read!');
         });
       },
       hideCategory: function(category, option) { 
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         api.requestOne('forumHide', { hide: option, category_id: category.id })
         .then( (response) => {
             if (response.error) {
@@ -33,7 +33,7 @@ export default Controller.extend(AuthenticatedController, {
         });
       },
       muteForum: function(option) { 
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         api.requestOne('forumMute', { muted: option })
         .then( (response) => {
             if (response.error) {
@@ -43,7 +43,7 @@ export default Controller.extend(AuthenticatedController, {
         });
       },
       nextUnread: function() {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
           api.requestOne('forumUnread')
           .then( (response) => {
               if (response.error) {
@@ -54,7 +54,7 @@ export default Controller.extend(AuthenticatedController, {
                   this.transitionToRoute('forum-topic', response.category_id, response.post_id);
               }
               else {
-                  this.get('flashMessages').warning('No more unread messages.');                    
+                  this.flashMessages.warning('No more unread messages.');                    
               }
           });
       }

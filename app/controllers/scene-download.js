@@ -7,9 +7,9 @@ export default Controller.extend({
   gameApi: service(),
     
   reloadScene: function() {
-    let showOoc = this.get('showOoc');
-    let showSystem = this.get('showSystem');
-    let api = this.get('gameApi');
+    let showOoc = this.showOoc;
+    let showSystem = this.showSystem;
+    let api = this.gameApi;
     return api.requestOne('downloadScene', { id: this.get('model.id'), 
             show_ooc: showOoc, show_system: showSystem })
       .then( (response) => {
@@ -21,12 +21,12 @@ export default Controller.extend({
   },
   actions: {
     toggleOoc() {
-      this.set('showOoc', !this.get('showOoc'));
+      this.set('showOoc', !this.showOoc);
       this.reloadScene();
     },
     
     toggleSystem() {
-      this.set('showSystem', !this.get('showSystem'));
+      this.set('showSystem', !this.showSystem);
       this.reloadScene();
     },
       

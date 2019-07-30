@@ -156,12 +156,14 @@
                       {{#if scene.can_edit}}
                       <li>{{#link-to 'scene-edit' scene.id}}Edit Scene{{/link-to}}</li>
                       <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
-                      {{live-scene-places scene=scene}}
                       {{/if}}
 
                       {{#if (and scene.can_join isApproved)}}
                         {{#if (not scene.completed)}}
                         {{live-scene-spell spells=spells scene=scene}}
+                        
+                        {{live-scene-places scene=scene}}
+
                         {{#if scene.fs3_enabled}}
                         {{live-scene-fs3 abilities=abilities scene=scene}}
                         {{/if}}
@@ -177,7 +179,7 @@
                          {{/if}}
                        {{/if}}
 
-                       {{#if scene.can_delete}}
+                       {{#if (and scene.can_delete scene.completed)}}
                        <li><a href="#" {{action (mut confirmDeleteScene) true}}>Delete Scene</a></li>
                        {{/if}}
 

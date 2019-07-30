@@ -16,9 +16,9 @@ export default Component.extend({
                 this.set('preview', null);
                 return;
             }
-            let api = this.get('gameApi');
+            let api = this.gameApi;
 
-            api.requestOne('markdownPreview', { text: this.get('text') })
+            api.requestOne('markdownPreview', { text: this.text })
             .then( (response) => {
                 if (response.error) {
                     return;

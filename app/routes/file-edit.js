@@ -1,3 +1,4 @@
+import EmberObject from '@ember/object';
 import Route from '@ember/routing/route';
 import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
 
@@ -8,6 +9,6 @@ export default Route.extend(AuthenticatedRoute, {
         let name = params['name'];
         let path = `${folder}/${name}`;
         
-        return Ember.Object.create({ path: path, folder: folder, name: name, new_folder: folder, new_name: name });
+        return EmberObject.create({ path: path, folder: folder, name: name, new_folder: folder, new_name: name });
     }
 });

@@ -7,6 +7,10 @@
 
         <p>{{model.summary}}</p>
 
+        {{#if model.content_warning}}
+        <div class="alert alert-danger"><b>Content Warning:</b> {{model.content_warning}}</div>
+        {{/if}}
+
         <p><b>Date:</b> {{model.icdate}}</p>
 
         <p><b>Location:</b> {{model.location}}</p>
@@ -61,12 +65,12 @@
 
         {{#if isApproved}}
             {{#if model.has_liked}}
-            <button {{action 'like' false}} class="badge badge-likes"><i class="fa fa-heart" area-hidden="true"></i> {{model.likes}}</button>
+            <button {{action 'like' false}} class="badge badge-likes"><i class="fa fa-heart" aria-label="Liked"></i> {{model.likes}}</button>
             {{else}}
-            <button {{action 'like' true}} class="badge badge-likes"><i class="far fa-heart" area-hidden="true"></i> {{model.likes}}</button>
+            <button {{action 'like' true}} class="badge badge-likes"><i class="far fa-heart" area-hidden="Like"></i> {{model.likes}}</button>
             {{/if}}
         {{else}}
-            <span class="badge badge-likes"><i class="far fa-heart" area-hidden="true"></i> {{model.likes}}</span>
+            <span class="badge badge-likes"><i class="far fa-heart" area-label="Likes"></i> {{model.likes}}</span>
         {{/if}}
 
          </div>

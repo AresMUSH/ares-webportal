@@ -10,11 +10,7 @@ export default Service.extend({
     windowVisible: true,
     socket: null,
     charId: null,
-    chatCallback: null,
-    jobsCallback: null,
-    sceneCallback: null,
-    combatCallback: null,
-    manageCallback: null,
+    callbacks: {},
     connected: false,
 
     socketUrl() {
@@ -23,15 +19,15 @@ export default Service.extend({
     },
 
     checkSession(charId) {
-        let socket = this.get('socket');
-        if (!socket || this.get('charId') != charId) {
+        let socket = this.socket;
+        if (!socket || this.charId != charId) {
             this.sessionStarted(charId);
         }
     },
 
     highlightFavicon() {
-      if (!this.get('windowVisible')) {
-        this.get('favicon').changeFavicon(true);
+      if (!this.windowVisible) {
+        this.favicon.changeFavicon(true);
       }
     },
 
@@ -42,9 +38,9 @@ export default Service.extend({
           alertify.notify(msg, type, timeOutSecs);
         }
 
-       if (!this.get('windowVisible')) {
-            this.get('favicon').changeFavicon(true);
-            if (this.get('browserNotification') && this.get('browserNotification.permission') === "granted") {
+       if (!this.windowVisible) {
+            this.favicon.changeFavicon(true);
+            if (this.browserNotification && this.get('browserNotification.permission') === "granted") {
                 try {
                   var doc = new DOMParser().parseFromString(msg, 'text/html');
                   var cleanMsg =  doc.body.textContent || "";
@@ -76,7 +72,7 @@ export default Service.extend({
     },
 
     sessionStarted(charId) {
-        let socket = this.get('socket');
+        let socket = this.socket;
         this.set('charId', charId);
 
         if (socket) {
@@ -102,8 +98,8 @@ export default Service.extend({
             };
             this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
 
-            if (this.get('browserNotification')) {
-                this.get('browserNotification').requestPermission();
+            if (this.browserNotification) {
+                this.browserNotification.requestPermission();
             }
         }
         catch(error)
@@ -126,11 +122,11 @@ export default Service.extend({
     sendCharId() {
       let cmd = {
         'type': 'identify',
-        'data': { 'id': this.get('charId') }
+        'data': { 'id': this.charId }
       };
       let json = JSON.stringify(cmd);
       try {
-        let socket = this.get('socket');
+        let socket = this.socket;
         if (socket) {
           socket.send(json);
         }
@@ -139,6 +135,14 @@ export default Service.extend({
         // Socket closed already.
       }
 
+    },
+
+    removeCallback( notification ) {
+      delete this.callbacks[notification];
+    },
+
+    setupCallback( notification, method ) {
+      this.callbacks[notification] = method;
     },
 
     handleConnect() {
@@ -192,54 +196,24 @@ export default Service.extend({
         if (!recipient || recipient === self.get('charId')) {
             var formatted_msg = ansi_up.ansi_to_html(data.args.message, { use_classes: true });
             var notify = true;
-            if (notification_type == "new_mail") {
-              // Deprecated
+
+            if (this.callbacks[notification_type]) {
+              this.callbacks[notification_type](notification_type, data.args.message, data.args.timestamp);
+              notify = false;
             }
-            else if (notification_type == "job_update") {
-                if (this.get('jobsCallback')) {
-                    this.get('jobsCallback')(data.args.message);
-                }
-                notify = false;
-            }
-            else if (notification_type == "new_chat") {
-                if (this.get('chatCallback')) {
-                    this.get('chatCallback')(data.args.message, data.args.timestamp);
-                }
-                notify = false;
-            }
-            else if (notification_type == "new_page") {
-                if (this.get('chatCallback')) {
-                    this.get('chatCallback')(data.args.message, data.args.timestamp);
-                }
-                notify = false;
-            }
-            else if (notification_type == "new_scene_activity") {
-                if (this.get('sceneCallback')) {
-                    this.get('sceneCallback')(data.args.message, data.args.timestamp);
-                }
-                notify = false;
-            }
-            else if (notification_type == "combat_activity") {
-                if (this.get('combatCallback')) {
-                    this.get('combatCallback')(data.args.message, notification_type);
-                }
-                notify = false;
-            }
-            else if (notification_type == "new_combat_turn") {
-                if (this.get('combatCallback')) {
-                    this.get('combatCallback')(data.args.message, notification_type);
-                }
+
+            if (notification_type == "job_update" ||
+                notification_type == "new_chat" ||
+                notification_type == "new_page" ||
+                notification_type == "new_scene_activity" ||
+                notification_type == "combat_activity" ||
+                notification_type == "new_combat_turn" ||
+                notification_type == "manage_activity") {
                 notify = false;
             }
             else if (notification_type == "notification_update") {
               var notification_badge = $('#notificationBadge');
               notification_badge.text(data.args.message);
-              notify = false;
-            }
-            else if (notification_type == "manage_activity") {
-              if (this.get('manageCallback')) {
-                  this.get('manageCallback')(data.args.message, notification_type);
-              }
               notify = false;
             }
 

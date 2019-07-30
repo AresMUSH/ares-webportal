@@ -8,7 +8,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
     gameApi: service(),
         
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('scene', { id: params['id'] })
             .then(response => { 
                 if (response.unshared) {

@@ -9,7 +9,7 @@ export default Route.extend(DefaultRoute, RouteResetOnExit, ReloadableRoute, {
     gameSocket: service(),
   
     model: function(params) {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('combat', { id: params['id'] });
     },
 
@@ -21,7 +21,8 @@ export default Route.extend(DefaultRoute, RouteResetOnExit, ReloadableRoute, {
     },
 
     deactivate: function() {
-        this.get('gameSocket').set('combatCallback', null);
+      this.gameSocket.removeCallback('combat_activity');
+      this.gameSocket.removeCallback('new_combat_turn');
     },
     
 });

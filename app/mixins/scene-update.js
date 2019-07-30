@@ -1,3 +1,4 @@
+import { set } from '@ember/object';
 import Mixin from '@ember/object/mixin';
 import { inject as service } from '@ember/service';
 
@@ -29,8 +30,8 @@ export default Mixin.create({
       let poses = scene.get('poses');
       poses.forEach((p) => {
         if (p.id === poseData.id) {
-          Ember.set(p, 'pose', poseData.pose);
-          Ember.set(p, 'raw_pose', poseData.raw_pose);
+          set(p, 'pose', poseData.pose);
+          set(p, 'raw_pose', poseData.raw_pose);
         }
       });
       notify = false;

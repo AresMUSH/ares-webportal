@@ -1,9 +1,17 @@
 <div class="relationship-icon-container">
-{{#link-to "char" char.name}}
+{{#if char.is_npc}}
     {{#if char.icon}}
     <img class="relationship-icon" src="/game/uploads/{{char.icon}}" alt="{{char.name}}'s icon" >
     {{else}}
     <img class="relationship-icon" src="/game/uploads/theme_images/noicon.png" alt="{{char.name}}'s icon"  >
     {{/if}}
-{{/link-to}}
+{{else}}
+  {{#link-to "char" char.name}}
+      {{#if char.icon}}
+      <img class="relationship-icon" src="/game/uploads/{{char.icon}}" alt="{{char.name}}'s icon" >
+      {{else}}
+      <img class="relationship-icon" src="/game/uploads/theme_images/noicon.png" alt="{{char.name}}'s icon"  >
+      {{/if}}
+  {{/link-to}}
+{{/if}}
 </div>

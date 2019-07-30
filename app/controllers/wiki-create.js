@@ -9,7 +9,7 @@ export default Controller.extend({
     actions: {
         
         save() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             let tags = this.get('model.tags') || [];
             if (!Array.isArray(tags)) {
                 tags = tags.split(/[\s,]/);
@@ -25,7 +25,7 @@ export default Controller.extend({
                 }
                 this.transitionToRoute('wiki-page',                          
                           response.name);
-                this.get('flashMessages').success('Page created!');
+                this.flashMessages.success('Page created!');
             });
         }
     }

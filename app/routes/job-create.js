@@ -1,3 +1,4 @@
+import EmberObject from '@ember/object';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
@@ -9,13 +10,13 @@ export default Route.extend(DefaultRoute, RouteResetOnExit, {
     gameSocket: service(),
     
     model: function() {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         
         return RSVP.hash({
              options: api.requestOne('jobOptions'),
              characters: api.requestMany('characters', { select: 'all' })
            })
-           .then((model) => Ember.Object.create(model));
+           .then((model) => EmberObject.create(model));
     },
     
     setupController: function(controller, model) {

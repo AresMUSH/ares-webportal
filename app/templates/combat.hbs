@@ -96,14 +96,14 @@
         <td>
             {{#if c.is_ko}}
             <span class="combat-damage hint--left" aria-label="{{c.wound_display}}">
-                <i class="fa fa-crosshairs" aria-hidden="true"></i>
+                <i class="fa fa-crosshairs" aria-label="Knocked Out"></i>
                 K O
                 <i class="fa fa-crosshairs" aria-hidden="true"></i>
             </span>
             {{else}}
               <span class="combat-damage hint--left" aria-label="{{c.wound_display}}">
                 {{#each c.damage_boxes}}
-                    <i class="fa fa-heartbeat combat-damage" aria-hidden="true"></i>
+                    <i class="fa fa-heartbeat combat-damage" aria-label="Damage Box"></i>
                 {{/each}}
               </span>
             {{/if}}

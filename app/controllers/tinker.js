@@ -4,14 +4,14 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     handleSave: function() {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         api.requestOne('saveTinker', { text: this.get('model.text') }, null)
         .then( (response) => {
             if (response.error) {
                 return;
             }
         
-        this.get('flashMessages').success('File saved!  You can now use the tinker command in-game.');
+        this.flashMessages.success('File saved!  You can now use the tinker command in-game.');
         });  
     },
     actions: {

@@ -23,7 +23,11 @@ export default Controller.extend({
         });
 
         this.get('model.relationships').forEach(function(r) {
-            relationships[r.name] = { text: r.text, order: r.order, category: r.category };
+            relationships[r.name] = { text: r.text,
+              order: r.order,
+              category: r.category,
+              is_npc: r.is_npc,
+              npc_image: r.is_npc ? r.npc_image : null };
         });
 
         let tags = this.get('model.tags') || [];
@@ -95,23 +99,23 @@ export default Controller.extend({
         },
         save() {
             if (this.get('model.profile').filter(p => p.name.length == 0).length > 0) {
-                this.get('flashMessages').danger('Profile names cannot be blank.');
+                this.flashMessages.danger('Profile names cannot be blank.');
                 return;
             }
 
             if (this.get('model.relationships').filter(r => r.name.length == 0).length > 0) {
-                this.get('flashMessages').danger('Relationship names cannot be blank.');
+                this.flashMessages.danger('Relationship names cannot be blank.');
                 return;
             }
 
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('profileSave', this.buildQueryDataForChar(), null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
 
-                this.get('flashMessages').success('Saved!');
+                this.flashMessages.success('Saved!');
                 this.transitionToRoute('char', this.get('model.name'));
 
             });

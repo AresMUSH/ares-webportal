@@ -13,18 +13,18 @@ export default Component.extend({
   actions: {
 
       changePlace() {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
 
           // Needed because the onChange event doesn't get triggered when the list is 
           // first loaded, so the place string is empty.
           let defaultPlace = this.get('scene.places')[0] ? this.get('scene.places')[0].name : null;
-          let newPlace = this.get('newPlace') || defaultPlace;
+          let newPlace = this.newPlace || defaultPlace;
     
           this.set('selectPlace', false);
           this.set('newPlace', null);
           
           if (!newPlace) {
-              this.get('flashMessages').danger("You haven't selected a place.");
+              this.flashMessages.danger("You haven't selected a place.");
               return;
           }
 
@@ -37,8 +37,19 @@ export default Component.extend({
           });
       },
       
+      leavePlace() {
+          let api = this.gameApi;
+
+          api.requestOne('leavePlace', { scene_id: this.get('scene.id') })
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+          });
+      },
+      
       viewPlaces() {
-          let api = this.get('gameApi');
+          let api = this.gameApi;
 
           api.requestOne('viewPlaces', { scene_id: this.get('scene.id') })
           .then( (response) => {

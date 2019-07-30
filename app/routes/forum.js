@@ -8,7 +8,7 @@ export default Route.extend(DefaultRoute, ReloadableRoute, {
     session: service(),
     
     model: function() {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('forumList');
     }
 });

@@ -15,7 +15,7 @@ export default Route.extend(UnauthenticatedRouteMixin, {
     },    
 
     model: function() {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('loginInfo');
     }
 });

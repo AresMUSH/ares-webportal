@@ -25,10 +25,12 @@
 </table>
 
 <br>
+
+{{#if model.content_warning}}
+<div class="alert alert-danger"><b>Content Warning:</b> {{model.content_warning}}</div>
+{{/if}}
     
-<div class="ansi">
-    {{{ansi-format text=model.description}}}
-</div>
+{{{ansi-format text=model.description}}}
 
 <hr>
 

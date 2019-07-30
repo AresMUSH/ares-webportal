@@ -12,14 +12,14 @@ export default Controller.extend({
             this.set('model.config.status', val);
         },
         save() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('saveGame', { config: this.get('model.config') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
         
-            this.get('flashMessages').success('Config saved!');
+            this.flashMessages.success('Config saved!');
             this.transitionToRoute('setup');
             });  
         }

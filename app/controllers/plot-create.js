@@ -28,20 +28,21 @@ export default Controller.extend({
         },
 
         save: function() {
-            let api = this.get('gameApi');
+            let api = this.gameApi;
             api.requestOne('createPlot', {
-               title: this.get('title'),
-               summary: this.get('summary'),
+               title: this.title,
+               summary: this.summary,
+               content_warning: this.get('model.plot.content_warning'),
                storyteller_id: this.get('storyteller.id'),
                storytellers: (this.get('storytellers') || []).map(storyteller => storyteller.name),
-               description: this.get('description')}, null)
+               description: this.description}, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
                 this.transitionToRoute('plot',
                           response.id);
-                this.get('flashMessages').success('Plot created!');
+                this.flashMessages.success('Plot created!');
             });
         }
     }

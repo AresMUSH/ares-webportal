@@ -8,7 +8,7 @@
   <button class="btn btn-default visible-sm visible-xs hidden-md" type="button" data-toggle="collapse" data-target="#channelMenuCollapse" aria-expanded="false" aria-controls="channelMenuCollapse">
       <i class="fas fa-bars"></i>
       {{#if anyNewActivity}}
-      <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+      <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
       {{/if}}
     </button>
 
@@ -27,7 +27,7 @@
                 <i class="fa fa-microphone-slash"></i>
             {{/if}}
             {{#if (and channel.is_page channel.is_unread)}}
-              <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-hidden="true"></i></span>
+              <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
             {{else}}
               <span class="label label-pill label-primary">{{channel.new_messages}}</span>
             {{/if}}

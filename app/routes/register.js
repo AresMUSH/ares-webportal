@@ -7,7 +7,7 @@ export default Route.extend(UnauthenticatedRouteMixin, {
     routeIfAlreadyAuthenticated: 'home',
     
     model: function() {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         return api.requestOne('loginInfo');
     }
 });

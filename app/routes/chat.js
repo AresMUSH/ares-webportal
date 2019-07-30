@@ -1,3 +1,4 @@
+import EmberObject from '@ember/object';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
@@ -14,16 +15,17 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, RouteResetOnExi
     },
     
     deactivate: function() {
-        this.set('gameSocket.chatCallback', null);
+        this.gameSocket.removeCallback('new_chat');
+        this.gameSocket.removeCallback('new_page');
     },
     
     model: function() {
-        let api = this.get('gameApi');
+        let api = this.gameApi;
         
         return RSVP.hash({
              chat: api.requestMany('chat'),
              characters: api.requestMany('characters', { select: 'all' })
            })
-           .then((model) => Ember.Object.create(model));
+           .then((model) => EmberObject.create(model));
     }
 });
