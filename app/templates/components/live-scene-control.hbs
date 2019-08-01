@@ -161,7 +161,7 @@
                       {{#if (and scene.can_join isApproved)}}
                         {{#if (not scene.completed)}}
                         {{live-scene-spell spells=spells scene=scene}}
-                        
+
                         {{live-scene-places scene=scene}}
 
                         {{#if scene.fs3_enabled}}
@@ -200,8 +200,6 @@
                   <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
                   <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
                   <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
-
-
                   {{/if}}
 
 
