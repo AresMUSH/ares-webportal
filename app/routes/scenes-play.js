@@ -30,7 +30,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
              scenes: api.requestMany('myScenes'),
              abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }),
              spells:  api.request('charSpells', { id: this.get('session.data.authenticated.id') }),
-             locations: api.request('sceneLocations', { id: params['id'] })
+             locations: api.request('sceneLocations', { id: params['id'] }) 
            })
            .then((model) => EmberObject.create(model));
     },
