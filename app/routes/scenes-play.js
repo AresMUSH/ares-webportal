@@ -29,16 +29,17 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
         return RSVP.hash({
              scenes: api.requestMany('myScenes'),
              abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }),
+             spells:  api.request('charSpells', { id: this.get('session.data.authenticated.id') }),
              locations: api.request('sceneLocations', { id: params['id'] })
            })
            .then((model) => EmberObject.create(model));
     },
-    
+
     setupController: function(controller, model) {
       this._super(controller, model);
       if (model.scenes.length > 0) {
         controller.set('currentScene', model.scenes[0]);
-        controller.set('currentScene.is_unread', false);        
+        controller.set('currentScene.is_unread', false);
       }
       else {
         this.controllerFor('application').set('hideSidebar', false);
