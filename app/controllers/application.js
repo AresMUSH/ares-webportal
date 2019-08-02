@@ -90,6 +90,9 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
          .then(() => {
            window.location.replace('/');
          });
+      },
+      toggleAltSelection: function() {
+        this.set('showAltSelection', !this.showAltSelection);
       }
     }
     
