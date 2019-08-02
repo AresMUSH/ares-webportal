@@ -1,4 +1,6 @@
 {{title pageTitle}}
+<a name="top"></a>
+
 <h1>{{model.icdate}} - {{model.title}}</h1>
         
 <div class="row log-wrap">
@@ -77,7 +79,7 @@
 
 </div>
 
-<p><a href="#bottom"><i class="fas fa-chevron-circle-down"></i> Jump to End</a></p>
+<p><a href="#bottom"><i class="fas fa-chevron-circle-down"></i> Jump to Bottom</a></p>
 
 
 <div class="scene-log">
@@ -86,7 +88,10 @@
     
 <a name="bottom"></a>
 
-<br>
+<br/>
+
+<p><a href="#top"><i class="fas fa-chevron-circle-up"></i> Jump to Top</a></p>
+
 <p>
     <b>Tags:</b>  
     {{#each model.tags as |tag|}}
