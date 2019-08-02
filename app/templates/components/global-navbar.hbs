@@ -34,7 +34,7 @@
                         {{#if model.alts}}
                         {{#each model.alts as |alt|}}
                           {{#if (not (eq alt.name currentUser.name)) }}
-                            <li><a href="#" {{action 'switchAlt' alt.name}}>Switch to {{alt.name}}.</a></li>
+                            <li><a href="#" {{action 'switchAlt' alt.name}}>Switch to {{alt.name}}</a></li>
                           {{/if}}
                         {{/each}}
                         {{/if}} 

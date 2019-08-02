@@ -56,29 +56,48 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
       if (!config) {
         return [];
       }
-      
-      config.forEach(n => {
-        let menuOK = true;
-        try {
-          n.menu.forEach(m => {
-            let route = m.route;
-            if (route && !availableRoutes.includes(route)) {
-              console.log(`Bad route in menu: ${route}`);
-              menuOK = false;
+
+      try {
+        config.forEach(n => {
+          let menuOK = true;
+          try {
+            n.menu.forEach(m => {
+              let route = m.route;
+              if (route) {
+                
+               if (!availableRoutes.includes(route)) {
+                console.log(`Bad route in menu: ${route}`);
+                menuOK = false;
+               }
+               
+               let routeHasId = this.routeHasId(route);
+               if (m.id && !routeHasId) {
+                 console.log(`Menu ${route} has an ID when it shouldn't.`);
+                 menuOK = false;
+               }
+               
+               if (!m.id && routeHasId) {
+                 console.log(`Menu ${route} is missing ID.`);
+                 menuOK = false;
+               }
+             }
+            });
+            if (menuOK) {
+              nav.push(n); 
+            } else {
+              nav.push({ title: `MENU ERROR` });
             }
-          })
-          if (menuOK) {
-            nav.push(n); 
-          } else {
+          }
+          catch(error) {
+            console.log(`Bad menu config under ${n.title}.`);
             nav.push({ title: `MENU ERROR` });
           }
-        }
-        catch(error) {
-          console.log(`Bad menu config under ${n.title}.`);
-          nav.push({ title: `MENU ERROR` });
-        }
-      });
-      
+        });
+      }
+      catch(error) {
+        console.log("Bad menu config.");
+        nav.push({ title: `MENU ERROR` });
+      }
       return nav;
       
     }.property('model'),
