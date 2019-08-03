@@ -19,9 +19,10 @@
 </div>
 
 
-       <div class="hint pull-right">
+       <div class="hint pull-right text-right">
+
+           <p>{{model.date}}</p>
            
-         {{tooltip-icon position='left' message=model.date icon='fas fa-clock'}}
            
            {{#if model.can_edit}}
              {{#if (not model.editActive)}}
@@ -33,6 +34,8 @@
              </a>
              {{/if}}
            {{/if}}
+           
+           
        </div>
        
        <p>{{char-icon-inline char=model.author}}</p>
@@ -62,9 +65,9 @@
      <div>
        
        
-       <div class="hint pull-right">
+       <div class="hint pull-right text-right">
            
-           {{tooltip-icon position='left' message=reply.date icon='fas fa-clock'}}
+           <p>{{reply.date}}</p>
            
            {{#if reply.can_edit}}
              {{#if (not reply.editActive)}}

@@ -89,10 +89,7 @@ export default Component.extend({
                     file.set('upload_message', 'Upload Succeeded!');                    
                     file.set('upload_success', true);
                     
-                    let any_left = this.files.some(f => !f.upload_success);
-                    if (!any_left) {
-                        this.sendAction('uploaded', response.folder, response.name);
-                    }
+                    this.sendAction('uploaded', response.folder, response.name);
                 }
             });
         }

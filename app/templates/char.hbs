@@ -93,7 +93,7 @@
         
         <p>{{#link-to 'files'}}All Files{{/link-to}}</p>
     
-        {{file-uploader folder=model.char.name}}
+        {{file-uploader folder=model.char.name uploaded=(action "fileUploaded")}}
         </div>
     </div>
 {{/if}}

@@ -64,7 +64,7 @@
             {{scene.location}}</p>
         
           {{#if scene.summary}}
-          <p>{{scene.summary}}
+          <p>{{{ansi-format text=scene.summary}}}
           </p>
           {{/if}}
         {{/if}}

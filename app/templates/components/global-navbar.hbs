@@ -30,6 +30,15 @@
                         <li>{{#link-to 'mail'}}Mail{{/link-to}}</li>
                         <li>{{#link-to 'jobs'}}{{#if model.jobs_admin}}Jobs{{else}}Requests{{/if}}{{/link-to}}</li>
                         <li>{{#link-to 'account'}}Account{{/link-to}}</li>
+
+                        {{#if model.alts}}
+                        {{#each model.alts as |alt|}}
+                          {{#if (not (eq alt.name currentUser.name)) }}
+                            <li><a href="#" {{action 'switchAlt' alt.name}}>Switch to {{alt.name}}</a></li>
+                          {{/if}}
+                        {{/each}}
+                        {{/if}} 
+
                         <li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
                         
                       </ul>
@@ -38,6 +47,7 @@
                   <li class="hidden-xl  hidden-lg  hidden-md">{{#link-to 'login' (query-params redirect=currentRoute)}}Login{{/link-to}}</li>
                   {{/if}}
 
+            
             {{#each topNavbar as |sec|}}
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
