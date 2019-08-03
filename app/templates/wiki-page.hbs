@@ -1,9 +1,41 @@
 {{title model.heading}}
+<a name="top"></a>
 <h1>{{model.heading}}</h1>
+
+<div class="row wiki-breadcrumbs">
+    <div class="col col-xs-10">
+      <span class="wiki-breadcrumb">
+        {{#each model.breadcrumbs as |crumb index|}}
+          {{#if (not (eq index 0) ) }}
+          <i class="fas fa-angle-double-right" aria-hidden="true"></i>
+          {{/if}}
+          {{#if crumb.url}}
+          <a href="/wiki/{{crumb.url}}">{{crumb.title}}</a> 
+          {{else}}
+          {{crumb.title}}
+          {{/if}}
+        {{/each}}
+      </span>
+    </div>
+    
+    <div class="col col-xs-2">
+        <a href="#bottom"><i class="fas fa-chevron-circle-down" aria-hidden="true"></i> Jump to Bottom</a>
+    </div>
+</div>
+
 
 {{{ansi-format text=model.text}}}
 
 <hr>
+
+<div class="row">
+    <div class="col col-xs-12">
+      <div class="pull-right">
+        <a name="bottom"></a>
+        <p><a href="#top"><i class="fas fa-chevron-circle-up"></i> Jump to Top</a></p>
+      </div>
+    </div>
+</div>
 
 <b>Tags:</b>  
     {{#each model.tags as |tag|}}
