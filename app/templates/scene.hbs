@@ -7,7 +7,7 @@
        
     <div class="log-box">
        
-        <p>{{model.summary}}</p>
+        <p>{{{ansi-format text=model.summary}}}</p>
 
         {{#if model.content_warning}}
         <div class="alert alert-danger"><b>Content Warning:</b> {{model.content_warning}}</div>

@@ -29,7 +29,7 @@
         
         {{scene-tag scene=scene}}
        
-        <p>{{scene.summary}}
+        <p>{{{ansi-format text=scene.summary}}}
           {{#if scene.content_warning}}
           {{content-warning-tag warning=scene.content_warning}}
           {{/if}}
