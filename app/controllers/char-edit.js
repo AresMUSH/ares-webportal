@@ -66,11 +66,9 @@ export default Controller.extend({
             this.get('model.relationships').pushObject({ name: '', text: '', key: count + 1 });
         },
         fileUploaded(folder, name) {
-            folder = folder.toLowerCase();
-            name = name.toLowerCase();
             let model_folder = this.get('model.name').toLowerCase();
             if (folder === model_folder) {
-                if (!this.get('model.files').some( f => f.name.toLowerCase() == name && f.folder.toLowerCase() == model_folder )) {
+                if (!this.get('model.files').some( f => f.name == name && f.folder == model_folder )) {
                     this.get('model.files').pushObject( { name: name, path: `${folder}/${name}` });
                 }
             }

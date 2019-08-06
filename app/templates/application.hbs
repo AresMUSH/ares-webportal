@@ -16,7 +16,7 @@
                    {{#if isAuthenticated}}
                        <p>Welcome, {{currentUser.name}}.
                         {{#if model.alts}}
-                         <a href="#" {{action (mut showAltSelection) true}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a>
+                         <a href="#" {{action 'toggleAltSelection'}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a>
                          {{/if}}
                        </p>
                        {{#if showAltSelection}}

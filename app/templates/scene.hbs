@@ -1,11 +1,13 @@
 {{title pageTitle}}
+<a name="top"></a>
+
 <h1>{{model.icdate}} - {{model.title}}</h1>
 
 <div class="row log-wrap">
 
     <div class="log-box">
 
-        <p>{{model.summary}}</p>
+        <p>{{{ansi-format text=model.summary}}}</p>
 
         {{#if model.content_warning}}
         <div class="alert alert-danger"><b>Content Warning:</b> {{model.content_warning}}</div>
@@ -94,7 +96,7 @@
 
 </div>
 
-<p><a href="#bottom"><i class="fas fa-chevron-circle-down"></i> Jump to End</a></p>
+<p><a href="#bottom"><i class="fas fa-chevron-circle-down"></i> Jump to Bottom</a></p>
 
 
 <div class="row">
@@ -132,7 +134,10 @@
 
 <a name="bottom"></a>
 
-<br>
+<br/>
+
+<p><a href="#top"><i class="fas fa-chevron-circle-up"></i> Jump to Top</a></p>
+
 <p>
     <b>Tags:</b>
     {{#each model.tags as |tag|}}
