@@ -91,6 +91,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
+                this.charErrors.clear();
                 if (response.alerts) {
                   response.alerts.forEach( r => this.charErrors.pushObject(r) );
                 }
