@@ -8,18 +8,6 @@ export default Controller.extend({
     
     actions: {
 
-        edit: function() {
-            let api = this.gameApi;
-            api.requestOne('editArea', { id: this.get('model.area.id') }, null)
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                this.transitionToRoute('locations');
-                this.flashMessages.success('Area updated!');
-            });
-        },
-        
         delete() {
             let api = this.gameApi;
             this.set('confirmDelete', false);

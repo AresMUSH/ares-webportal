@@ -60,7 +60,7 @@
 <ul>
 {{#each searchResults as |loc|}}
   {{#if loc.area_id}}
-    <li>{{#link-to 'location' loc.area_id}}{{loc.name_and_area}}{{/link-to}}</li>
+    <li>{{#link-to 'area' loc.area_id}}{{loc.name_and_area}}{{/link-to}}</li>
   {{else}}
     <li>{{#link-to 'locations'}}{{loc.name_and_area}}{{/link-to}}</li>
   {{/if}}
