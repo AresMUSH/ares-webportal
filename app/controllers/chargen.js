@@ -52,7 +52,13 @@ export default Controller.extend({
         },
         
         groupChanged(group, val) {
+          if (val) {
             this.set(`model.char.groups.${group}`, val);
+          } else {
+            this.set(`model.char.groups.${group}.value`, '');
+            this.set(`model.char.groups.${group}.desc`, '');
+          }
+            
         },
         
         fileUploaded(folder, name) {

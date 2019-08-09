@@ -100,7 +100,7 @@
                       {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
                         {{input type="text" size=25 value=group.value}}
                       {{else}}
-                        {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" onchange=(action "groupChanged" key) as |g|}}
+                        {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" allowClear=true onchange=(action "groupChanged" key) as |g|}}
                         {{g.value}} {{if g.desc '-'}} {{g.desc}}
                       {{/power-select}}
                       {{/if}}
