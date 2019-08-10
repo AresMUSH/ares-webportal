@@ -11,9 +11,12 @@ export default Component.extend({
   gameApi: service(),
   
   didInsertElement: function() {
-    this.set('fs3Data', this.buildFs3QueryData());
+    let self = this;
+    this.set('updateCallback', function() { return self.onUpdate(); } );
+    this.set('validateCallback', function() { return self.validateChar(); } );
     this.validateChar();
   },
+  
   
   attrPoints: function() {
     let total = this.countPointsInGroup(this.get('model.char.fs3.fs3_attributes'), 0, 2, 2);
@@ -35,7 +38,7 @@ export default Component.extend({
     return (points <= free_points) ? 0 : (points - free_points);
   },
     
-  buildFs3QueryData: function() {
+  onUpdate: function() {
     if (this.get('model.app.game.disabled_plugins.fs3skills')) {
       return {};
     }
@@ -136,8 +139,6 @@ export default Component.extend({
     if (totalAp > maxAp) {
       this.charErrors.pushObject(`You can only spend ${maxAp} ability points.  You have spent ${totalAp}.`);
     }
-        
-    this.set('fs3Data', this.buildFs3QueryData());
   },
     
   actions: {
@@ -163,7 +164,6 @@ export default Component.extend({
       this.validateChar();
     },
     reset() {
-      this.set('fs3Data', this.buildFs3QueryData());
       this.sendAction('reset');
     }
   }
