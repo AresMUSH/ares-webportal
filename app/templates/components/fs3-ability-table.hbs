@@ -1,0 +1,20 @@
+<div class="char-ability-title">{{title}}</div>
+
+  <table class="char-ability-list">
+  {{#each list as |ability| }}
+  <tr>
+    <td>{{ability.name}}</td>
+    <td>{{fs3-dots rating=ability.rating max=max}}
+    
+    {{#if showSpecs}}
+    <br>
+        {{#if ability.specialties}}
+          ({{ability.specialties}})
+        {{/if}}
+    {{/if}}
+    
+    </td>
+    <td>{{ability.rating_name}}</td>
+  </tr>
+  {{/each}}
+</table>

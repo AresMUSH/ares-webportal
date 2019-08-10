@@ -1,48 +1,36 @@
-<b>Attributes</b>
-<ul class="char-ability-list">
-{{#each char.fs3.attributes as |ability| }}
-<li>
-  {{ability.name}}: {{ability.rating_name}}
-</li>
-{{/each}}
-</ul>
+<div class="row">
+  <div class="col col-md-6 col-sm-12">
 
-<b>Action Skills</b>
-<ul class="char-ability-list">
-{{#each char.fs3.action_skills as |ability| }}
-<li>
-  {{ability.name}}: {{ability.rating_name}} 
-  {{#if ability.specialties}}
-  ({{ability.specialties}})
-  {{/if}}
-</li>
-{{/each}}
-</ul>
+    {{fs3-ability-table title='Attributes' list=char.fs3.attributes max=4 showSpecs=false}}
+    
+  </div>
+  
+  <div class="col col-md-6 col-sm-12">
+  
+    {{fs3-ability-table title='Action Skills' list=char.fs3.action_skills max=8 showSpecs=true}}
+  
+  </div>
+</div>
 
-<b>Background Skills</b>
-<ul class="char-ability-list">
-{{#each char.fs3.backgrounds as |ability| }}
-<li>
-  {{ability.name}}: {{ability.rating_name}}
-</li>
-{{/each}}
-</ul>
+<div class="row">
+  <div class="col col-md-6 col-sm-12">
+    {{fs3-ability-table title='Background Skills' list=char.fs3.backgrounds max=3}}  
+  </div>
 
-<b>Language Skills</b>
-<ul class="char-ability-list">
-{{#each char.fs3.languages as |ability| }}
-<li>
-  {{ability.name}}: {{ability.rating_name}}
-</li>
-{{/each}}
-</ul>
+  <div class="col col-md-6 col-sm-12">
+
+    {{fs3-ability-table title='Languages' list=char.fs3.languages max=3}}  
+
+  </div>
+</div>
+
 {{#if char.fs3.use_advantages}}
-<b>Advantages</b>
-<ul class="char-ability-list">
-{{#each char.fs3.advantages as |ability| }}
-<li>
-  {{ability.name}}: {{ability.rating_name}}
-</li>
-{{/each}}
-</ul>
+<div class="row">
+  <div class="col col-md-6 col-sm-12">
+
+    {{fs3-ability-table title='Advantages' list=char.fs3.advantages max=3}}  
+
+  </div>
+</div>
+
 {{/if}}
