@@ -19,7 +19,7 @@ export default Route.extend(DefaultRoute, ReloadableRoute, {
         return RSVP.hash({
             char: api.requestOne('character', { id: params['id'] }),
             game: this.modelFor('application').game,
-            scenes: api.requestOne('scenes', { char_id: params['id'], filter: 'Recent', page: 1 }),
+            scenes: api.requestOne('scenes', { char_id: params['id'], filter: 'All', page: 1 }),
             sceneTypes: api.requestMany('sceneTypes') })
             .then((model) => EmberObject.create(model));
     }

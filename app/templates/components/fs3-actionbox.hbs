@@ -7,8 +7,10 @@
 <button class="fs3-skillbutton" id="dec-skill" {{action "decrement"}}>-</button>
 </div>
 
-<div class="col-sm-2">
-{{rating}} ({{ratingName}})
+<div class="col-sm-3">
+{{fs3-dots rating=rating max=8}}
+<br>
+{{ratingName}}
 </div>
 
 <div class="col-sm-1">

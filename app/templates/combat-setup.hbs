@@ -7,9 +7,9 @@
 
 <hr>
 
+
 {{#each-in model.combatants as |id comb| }}
 
-{{#if (not comb.is_npc)}}
 <p>
   {{comb.name}}
 </p>
@@ -124,7 +124,6 @@
 
 <hr>
 
-{{/if}}
 
 {{/each-in}}
 

@@ -1,7 +1,33 @@
-<li>{{#link-to 'location' area.id}}{{area.name}}{{/link-to}}
+<h3>{{area.name}}</h3>
+
+<p>{{{ansi-format text=area.summary}}}</p>
+
+{{#if area.rooms}}
+
+<p><b>Locations</b></p>
 <ul>
-  {{#each area.children as |c| }}
-  {{area-directory area=c}}
+  {{#each area.rooms as |r|}}
+  <li>{{#link-to 'location' r.id}}{{r.name}}{{/link-to}}  </li>
   {{/each}}
 </ul>
-</li>
+{{/if}}
+
+{{#if area.children}}
+<p><b>Areas Within</b></p>
+
+<ul>
+  {{#each area.children as |c| }}
+  <li>{{#link-to 'area' c.id}}{{c.name}}{{/link-to}}</li>
+  {{/each}}
+</ul>
+{{/if}}
+
+<br/>
+<div class="row">
+  <div class="col col-xs-12">
+    {{#link-to 'area' area.id}}Learn More...{{/link-to}}
+    <div class="pull-right">
+    <a href="#top"><i class="fas fa-chevron-circle-up" aria-hidden="true"></i> Jump to Top</a>
+    </div>
+  </div>
+</div>

@@ -18,6 +18,8 @@ Router.map(function() {
 
   this.route('account');
   this.route('app-review', { path: '/app/:id' });
+  this.route('area', { path: '/area/:id'});
+  this.route('area-edit', { path: '/area/:id/edit'});
   this.route('census');
   this.route('census-group', { path: '/census/:filter' });
   this.route('characters', { path: '/chars'});
@@ -60,7 +62,6 @@ Router.map(function() {
   this.route('job-create');
   this.route('locations');
   this.route('location', { path: '/location/:id'});
-  this.route('location-edit', { path: '/location/:id/edit'});
   this.route('logs');
   this.route('log', { path: '/log/:file' });
   this.route('login', { path: '/login', query_params: ['redirect'] });

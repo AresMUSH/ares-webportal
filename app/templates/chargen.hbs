@@ -100,7 +100,7 @@
                       {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
                         {{input type="text" size=25 value=group.value}}
                       {{else}}
-                        {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" onchange=(action "groupChanged" key) as |g|}}
+                        {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" allowClear=true onchange=(action "groupChanged" key) as |g|}}
                         {{g.value}} {{if g.desc '-'}} {{g.desc}}
                       {{/power-select}}
                       {{/if}}
@@ -119,7 +119,7 @@
               {{#if model.app.game.disabled_plugins.fs3skills}}
                 <p>Your game does not support setting abilities/skills through the web chargen.  You'll need to complete chargen using in-game commands.</p>
               {{else}}
-                  {{fs3-chargen model=model anyGroupMissing=anyGroupMissing charErrors=charErrors fs3Data=fs3Data reset=(action 'reset')}}
+                  {{fs3-chargen model=model anyGroupMissing=anyGroupMissing charErrors=charErrors updateCallback=fs3UpdateCallback validateCallback=fs3ValidateCallback reset=(action 'reset')}}
               {{/if}}
               
             </div>

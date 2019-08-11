@@ -27,6 +27,7 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
         this.loadModel().then( newModel => {
             this.controllerFor('application').set('sidebar', newModel);
             this.controllerFor('application').set('refreshSidebar', newModel.timestamp);
+            this.gameSocket.updateNotificationBadge(newModel.notification_count);
         });        
     },
     
@@ -82,7 +83,7 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
     },
 
     actions: {
-        willTransition() {
+        didTransition() {
            this.doReload();
         },
         error(error) {
