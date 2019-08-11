@@ -12,7 +12,8 @@ export default Controller.extend(AuthenticatedController, {
             let api = this.gameApi;
             api.requestOne('editArea', { id: this.get('model.id'),
                name: this.get('model.name'), 
-               description: this.get('model.description') }, null)
+               description: this.get('model.description'),
+               summary: this.get('model.summary') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;

@@ -2,7 +2,12 @@
 <h1>Edit Area</h1>
 
 <p><b>Name:</b></p>
-<p>{{input type="text" size=25 id="name" enter=(action "create")  value=model.name}}</p>
+<p>{{input type="text" size=25 id="name" enter=(action "edit")  value=model.name}}</p>
+
+<p><b>Summary:</b></p>
+
+{{markdown-editor text=model.summary}}
+
 
 <p><b>Description:</b></p>
 
