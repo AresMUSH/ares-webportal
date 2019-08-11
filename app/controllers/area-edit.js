@@ -10,15 +10,15 @@ export default Controller.extend(AuthenticatedController, {
 
         edit: function() {
             let api = this.gameApi;
-            api.requestOne('editArea', { id: this.get('model.id'),
-               name: this.get('model.name'), 
-               description: this.get('model.description'),
-               summary: this.get('model.summary') }, null)
+            api.requestOne('editArea', { id: this.get('model.area.id'),
+               name: this.get('model.area.name'), 
+               description: this.get('model.area.description'),
+               summary: this.get('model.area.summary') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('location', this.get('model.id'));
+                this.transitionToRoute('area', this.get('model.area.id'));
                 this.flashMessages.success('Area updated!');
             });
         }
