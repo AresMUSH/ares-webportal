@@ -1,81 +1,36 @@
-<div class="sheet_table">
-  <div class="row">
-    <div class="col-sm-12">
-      <div class="pull-right alpha-numeric-switch" data-toggle="tooltip" title="Toggle Dots"><i class="fas fa-info-circle"></i></div>
-    </div>
+<div class="row">
+  <div class="col col-md-6 col-sm-12">
+
+    {{fs3-ability-table title='Attributes' list=char.fs3.attributes max=4 showSpecs=false}}
+
   </div>
-  <div class="row">
-    <div class="col-sm-12 col-md-6">
-      <h1>Attributes</h1>
-      <ul class="char-ability-list">
-      {{#each char.fs3.attributes as |ability| }}
-      <li>
-        <div class="rating-block">
-          <b>{{ability.name}}</b>: <div class="rating-wrapper">{{fs3-rating class="rating-numeric" rating=(attr-rating rating=ability.rating max=4)}}<div class="rating-alpha">{{ability.rating_name}}</div></div>
-        </div>
-      </li>
-      {{/each}}
-      </ul>
-    </div>
-    <div class="col-sm-12 col-md-6">
-      <h1>Action Skills</h1>
-      <ul class="char-ability-list">
-      {{#each char.fs3.action_skills as |ability| }}
-        {{#if ability.rating}}
-        <li>
-          <div class="rating-block">
-            <b>{{ability.name}}</b>: <div class="rating-wrapper">{{fs3-rating class="rating-numeric" rating=(attr-rating rating=ability.rating max=8)}}<div class="rating-alpha">{{ability.rating_name}}</div></div>
-          </div>
-        </li>
-        {{/if}}
-      {{/each}}
-      </ul>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12 col-md-6">
-      <h1>Background Skills</h1>
-      <ul class="char-ability-list">
-      {{#each char.fs3.backgrounds as |ability| }}
-      <li>
-        <div class="rating-block">
-          <b>{{ability.name}}</b>: <div class="rating-wrapper">{{fs3-rating class="rating-numeric" rating=(attr-rating rating=ability.rating max=3)}}<div class="rating-alpha">{{ability.rating_name}}</div></div>
-        </div>
-      </li>
-      {{/each}}
-      </ul>
-    </div>
-    <div class="col-sm-12 col-md-6">
-      <h1>Language Skills</h1>
-      <ul class="char-ability-list">
-      {{#each char.fs3.languages as |ability| }}
-      <li>
-        <b>{{ability.name}}</b>: {{ability.rating_name}}
-      </li>
-      {{/each}}
-      </ul>
-    </div>
+
+  <div class="col col-md-6 col-sm-12">
+
+    {{fs3-ability-table title='Action Skills' list=char.fs3.action_skills max=8 showSpecs=true}}
+
   </div>
 </div>
-  <script type="text/javascript">
-    $('.alpha-numeric-switch').click(function (e) {
-      console.log('click heard', e)
-      $('.rating-numeric').toggle();
-      $('.rating-alpha').toggle();
-    });
-  </script>
 
+<div class="row">
+  <div class="col col-md-6 col-sm-12">
+    {{fs3-ability-table title='Background Skills' list=char.fs3.backgrounds max=3}}
+  </div>
 
+  <div class="col col-md-6 col-sm-12">
 
+    {{fs3-ability-table title='Languages' list=char.fs3.languages max=3}}
 
+  </div>
+</div>
 
 {{#if char.fs3.use_advantages}}
-<b>Advantages</b>
-<ul class="char-ability-list">
-{{#each char.fs3.advantages as |ability| }}
-<li>
-  {{ability.name}}: {{ability.rating_name}}
-</li>
-{{/each}}
-</ul>
+<div class="row">
+  <div class="col col-md-6 col-sm-12">
+
+    {{fs3-ability-table title='Advantages' list=char.fs3.advantages max=3}}
+
+  </div>
+</div>
+
 {{/if}}

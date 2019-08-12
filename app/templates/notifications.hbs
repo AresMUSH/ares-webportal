@@ -2,6 +2,14 @@
 <h1>Notifications</h1>
 
 
+<div class="row">
+    
+    <div class="col pull-right">
+        <a href="#" {{action "markAllRead"}} class="btn btn-primary">Mark All Read</a>
+    </div>
+    
+</div>
+
 <table class="table table-striped">
 
 
@@ -15,17 +23,17 @@
   <td>{{{ansi-format text=notification.message}}}</td>
   <td>
     {{#if (eq notification.type 'mail')}}
-      {{#link-to 'mail-message' (get notification.data 0)}}View{{/link-to}}
+      {{#link-to 'mail-message' notification.reference_id}}View{{/link-to}}
     {{else if (eq notification.type 'forum')}}
       {{#link-to 'forum-topic' (get notification.data 0) (get notification.data 1)}}View{{/link-to}}
     {{else if (eq notification.type 'job')}}
-      {{#link-to 'job' (get notification.data 0)}}View{{/link-to}}
+      {{#link-to 'job' notification.reference_id}}View{{/link-to}}
     {{else if (eq notification.type 'pm')}}
       {{#link-to 'chat'}}View{{/link-to}}
     {{else if (eq notification.type 'scene')}}
       {{#link-to 'scenes-play'}}View{{/link-to}}
     {{else if (eq notification.type 'event')}}
-      {{#link-to 'event' (get notification.data 0)}}View{{/link-to}}
+      {{#link-to 'event' notification.reference_id}}View{{/link-to}}
     {{/if}}
   </td>
 </tr>

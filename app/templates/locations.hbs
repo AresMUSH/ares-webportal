@@ -6,28 +6,30 @@
 <h1>Locations</h1>
 <p>The locations directory allows you to browse locations (aka 'rooms') on the game, organized by 'area'.</p>
 
+<a name="top"></a>
+
 <div class="pull-right">
   {{#link-to 'search-locations' class="btn btn-default"}}<i class="fa fa-search" aria-hidden="true"></i> Search Locations{{/link-to}}  
 </div>
 
 <h2>Area Directory</h2>
-
-  <ul>
+  
+<ul>
   {{#each model.directory as |area| }}
+      <li><a href="#{{area.id}}">{{area.name}}</a></li>
+  {{/each}}
+</ul>
+  
+  {{#each model.directory as |area| }}
+  <hr/>
+  <a name="{{area.id}}"></a>
       {{area-directory area=area}}
   {{/each}}
-  </ul>
 
 <h2>Other Rooms</h2>
 
-{{#each model.orphan_rooms as |r|}}
-<div class="panel panel-default">
-   <div class="panel-heading">{{r.name}}</div>
-   <div class="panel-body">
-       {{{ansi-format text=r.description}}}
-       {{#link-to 'scene-create' (query-params location=loc.name_and_area) class="btn btn-default pull-right"}}Start Scene Here{{/link-to}}
-   </div>
-</div>
+{{#each model.orphan_rooms as |room|}}
+{{#link-to 'location' room.id}}{{room.name}}{{/link-to}}
 {{/each}}
 
 {{outlet}}

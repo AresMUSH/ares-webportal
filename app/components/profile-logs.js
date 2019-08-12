@@ -3,11 +3,11 @@ import { inject as service } from '@ember/service';
 
 export default Component.extend({
   gameApi: service(),
-  filter: 'Recent',
+  filter: 'All',
   page: 1,
   
   resetOnExit: function() {
-    this.set('filter', 'Recent');
+    this.set('filter', 'All');
     this.set('page', 1);
   },
   

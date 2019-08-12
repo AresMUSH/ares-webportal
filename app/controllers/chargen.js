@@ -5,8 +5,8 @@ export default Controller.extend({
     flashMessages: service(),
     gameApi: service(),
     charErrors: [],
-    toggleCharChange: false,
-    fs3Data: {},
+    fs3UpdateCallback: null,
+    fs3ValidateCallback: null,
 
     genders: function() {
         return [ { value: 'Male' }, { value: 'Female' }, { value: 'Other' }];
@@ -22,9 +22,11 @@ export default Controller.extend({
             }
         });
         return anyMissing;
-    }.property('toggleCharChange', 'model'),
+    }.property('model'),
 
     buildQueryDataForChar: function() {
+
+      let fs3 = this.fs3UpdateCallback ? this.fs3UpdateCallback() : null;
 
         return {
             id: this.get('model.char.id'),
@@ -37,14 +39,11 @@ export default Controller.extend({
             profile_image: this.get('model.char.profile_image'),
             background: this.get('model.char.background'),
             lastwill: this.get('model.char.lastwill'),
-            fs3: this.fs3Data
+            fs3: fs3
         };
     },
 
 
-    toggleCharChanged: function() {
-        this.set('toggleCharChange', !this.toggleCharChange);
-    },
 
     actions: {
 
@@ -61,7 +60,13 @@ export default Controller.extend({
         },
 
         groupChanged(group, val) {
+          if (val) {
             this.set(`model.char.groups.${group}`, val);
+          } else {
+            this.set(`model.char.groups.${group}.value`, '');
+            this.set(`model.char.groups.${group}.desc`, '');
+          }
+
         },
 
         fileUploaded(folder, name) {
@@ -99,6 +104,10 @@ export default Controller.extend({
             .then( (response) => {
                 if (response.error) {
                     return;
+                }
+                this.charErrors.clear();
+                if (this.fs3ValidateCallback) {
+                  this.fs3ValidateCallback();
                 }
                 if (response.alerts) {
                   response.alerts.forEach( r => this.charErrors.pushObject(r) );

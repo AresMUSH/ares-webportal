@@ -169,6 +169,11 @@ export default Service.extend({
       job_badge.text(count);
     },
 
+    updateNotificationBadge(count) {
+      var notification_badge = $('#notificationBadge');
+      notification_badge.text(count);
+    },
+
     handleMessage(self, evt) {
 
         var data;
@@ -212,8 +217,7 @@ export default Service.extend({
                 notify = false;
             }
             else if (notification_type == "notification_update") {
-              var notification_badge = $('#notificationBadge');
-              notification_badge.text(data.args.message);
+              this.updateNotificationBadge(data.args.message);
               notify = false;
             }
 
