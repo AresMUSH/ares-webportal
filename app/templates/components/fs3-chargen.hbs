@@ -47,6 +47,41 @@
          <b>{{att.name}}</b> - {{att.desc}}
      {{/fs3-attrbox}}
      {{/each}}
+     <br>
+     <div class="cg-tip-table">
+       <p><b>What level should I choose?</b></p>
+       <table>
+       <thead>
+         <tr>
+           <th>Rating</th>
+           <th>Summary</th>
+           <th>Description</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr>
+           <td>1</td>
+           <td>Poor</td>
+           <td>You are below average.  (less than 40th percentile)</td>
+         </tr>
+         <tr>
+           <td>2</td>
+           <td>Average</td>
+           <td>You are about average.  (40-60th percentile)</td>
+         </tr>
+         <tr>
+           <td>3</td>
+           <td>Good</td>
+           <td>You’re better than average.   (60-80th percentile)</td>
+         </tr>
+         <tr>
+           <td>4</td>
+           <td>Exceptional</td>
+           <td>You’re considerably above average. (more than 80th percentile)</td>
+         </tr>
+       </tbody>
+     </table>
+     </div>
 
    </div>
   </div>
@@ -69,7 +104,72 @@
          <b>{{skill.name}}</b> - {{skill.desc}}
      {{/fs3-actionbox}}
      {{/each}}
-
+     <br>
+     <div class="cg-tip-table">
+       <p><b>What level should I choose?</b></p>
+         <table>
+         <tr>
+         <th class="tg-0pky">Level</th>
+         <th class="tg-0pky">Label</th>
+         <th class="tg-0pky">Description</th>
+         <th class="tg-0pky">Examples</th>
+         </tr>
+         <tr>
+         <td class="tg-0lax">0</td>
+         <td class="tg-0lax">Unskilled</td>
+         <td class="tg-0lax">Worse than most people, specifically bad or lacking even the most basic knowledge.</td>
+         <td class="tg-0lax">You grew up in a cave or something and know absolutely nothing about this.</td>
+         </tr>
+         <tr>
+         <td class="tg-0pky">1</td>
+         <td class="tg-0pky">Everyman</td>
+         <td class="tg-0pky">You know what the average inhabitant of the game world would know.</td>
+         <td class="tg-0pky">Everyone is capable at this level except through special circumstances.</td>
+         </tr>
+         <tr>
+         <td class="tg-0pky">2</td>
+         <td class="tg-0pky">Fair</td>
+         <td class="tg-0pky">You’ve still got a lot to learn, but you can handle easy stuff.</td>
+         <td class="tg-0pky"> A high school graduate, a year or less in a job, a year or two of casual training from someone experienced.</td>
+         </tr>
+         <tr>
+         <td class="tg-0pky">3</td>
+         <td class="tg-0pky">Competent</td>
+         <td class="tg-0pky">You have competence at a junior-professional level, but lack finesse or experience.</td>
+         <td class="tg-0pky">An undergraduate student, two to five years in a job, several years of casual training from someone experienced.</td>
+         </tr>
+         <tr>
+         <td class="tg-0pky">4</td>
+         <td class="tg-0pky">Good</td>
+         <td class="tg-0pky">You are thoroughly competent at a general professional level.</td>
+         <td class="tg-0pky">A bachelor's degree, five to seven years in a job, more than 5 years of casual training from someone experienced.</td>
+         </tr>
+         <tr>
+         <td class="tg-0pky">5</td>
+         <td class="tg-0pky">Great</td>
+         <td class="tg-0pky">You understand nuances and shortcuts, and can handle even challenging situations with ease.</td>
+         <td class="tg-0pky">Seven to fifteen years in a job, more than 10 years of casual training from someone experienced.</td>
+         </tr>
+         <tr>
+         <td class="tg-0pky">6</td>
+         <td class="tg-0pky">Exceptional</td>
+         <td class="tg-0pky">You are an expert, and can pull through even in dire circumstances.</td>
+         <td class="tg-0pky">A PhD or MD, more than fifteen years in a job.</td>
+         </tr>
+         <tr>
+         <td class="tg-0pky">7</td>
+         <td class="tg-0pky">Amazing</td>
+         <td class="tg-0pky">You have mastered your field and few can compare.</td>
+         <td class="tg-0pky">A leading expert in a field. A star athlete, known physician, well-published author, etc.</td>
+         </tr>
+         <tr>
+         <td class="tg-0pky">8</td>
+         <td class="tg-0pky">Legendary</td>
+         <td class="tg-0pky">You are one of the best that’s ever lived. </td>
+         <td class="tg-0pky">Einstein, Stephen Hawking, Shakespeare, or Beethoven.</td>
+         </tr>
+         </table>
+       </div>
 
    </div>
   </div>
@@ -96,6 +196,38 @@
      {{/each}}
 
      <button class="btn btn-default" id="addbg" {{action (mut selectBackgroundSkill) true}}>Add Background Skill</button>
+     <br>
+     <div class="cg-tip-table">
+
+       <p><b>What level should I choose?</b></p>
+       <table>
+       <tr>
+         <th>Label</th>
+         <th>Description</th>
+         <th>Examples</th>
+       </tr>
+       <tr>
+         <td>Everyman</td>
+         <td>You know what the average inhabitant of the game world would know. <br><br>There is no need to add a background skill for this level. It is assumed everyone generally has everyman capabilities.</td>
+         <td>Everyone is capable at this level except through special circumstances.</td>
+       </tr>
+       <tr>
+         <td>Fair</td>
+         <td>Interests and casual studies.</td>
+         <td>Playing in a bar league, a hobby, some college or equivalent study that never went anywhere</td>
+       </tr>
+       <tr>
+         <td>Good</td>
+         <td>Professional or semi-professional competence.</td>
+         <td>A minor league or college athlete, a serious hobbyist, a college degree with some professional experience.</td>
+       </tr>
+       <tr>
+         <td>Exceptional</td>
+         <td>Notable expertise in your field</td>
+         <td>A major league athlete, an advanced degree, a renowned expert.</td>
+       </tr>
+     </table>
+     </div>
 
    </div>
   </div>
