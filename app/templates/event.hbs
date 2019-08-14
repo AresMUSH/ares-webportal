@@ -40,10 +40,14 @@
  <div>
  
      <p>{{char-icon-inline char=s.char}}</p>
-  
      {{#if s.comment}}
      {{{ansi-format text=s.comment}}}
-     {{/if}}     
+     {{/if}}
+     
+     {{#if model.can_manage}}
+     <p>  <button {{action 'cancelSignup' s.char.name}}><i class="fa fa-trash" aria-label="Cancel Signup"></i></button></p>
+     {{/if}}
+     
  
      <hr>
   </div>
