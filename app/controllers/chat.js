@@ -1,5 +1,6 @@
 import { set } from '@ember/object';
 import Controller from '@ember/controller';
+import { timeDiff } from 'ares-webportal/helpers/time-diff';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
@@ -44,7 +45,7 @@ export default Controller.extend({
         if (!channel) {
           channel = this.addPageChannel(channelKey, channelTitle);
         }
-        channel.messages.pushObject({message: newMessage, timestamp: timestamp });
+        channel.messages.pushObject({message: newMessage, timestamp: timestamp, timediff: timeDiff({}, { time: timestamp }) });
         set(channel, 'last_activity', Date.now());
         if (channelKey === this.get('selectedChannel.key')) {
             this.scrollChatWindow();
@@ -97,6 +98,18 @@ export default Controller.extend({
       catch(error) {
         // This happens sometimes when transitioning away from screen.
       }   
+    },
+    
+    updateTimestamps: function() {
+      let channels = this.get('model.chat');
+      channels.forEach(channel => {
+        let messages = channel.messages || [];
+        messages.forEach(msg => {
+          if (msg.timediff) {
+           Ember.set(msg, 'timediff', timeDiff({}, { time: msg.timestamp })) 
+          }
+        })
+      })
     },
     
     setupCallback: function() {

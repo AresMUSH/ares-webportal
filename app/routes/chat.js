@@ -9,14 +9,20 @@ import RSVP from 'rsvp';
 export default Route.extend(AuthenticatedRoute, ReloadableRoute, RouteResetOnExit, {
     gameApi: service(),
     gameSocket: service(),
+    updateTimerId: null,
     
     activate: function() {
-        this.controllerFor('chat').setupCallback();
+      let controller = this.controllerFor('chat');
+        controller.setupCallback();
+        let timer = window.setInterval(controller.updateTimestamps.bind(controller), 1000*15); // Update each five mins
+        this.set('updateTimerId', timer);
+        
     },
     
     deactivate: function() {
         this.gameSocket.removeCallback('new_chat');
         this.gameSocket.removeCallback('new_page');
+        window.clearInterval(this.updateTimerId);
     },
     
     model: function() {
