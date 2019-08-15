@@ -1,5 +1,6 @@
 import { set } from '@ember/object';
 import Mixin from '@ember/object/mixin';
+import { localTime } from 'ares-webportal/helpers/local-time';
 import { inject as service } from '@ember/service';
 
 export default Mixin.create({
@@ -14,7 +15,7 @@ export default Mixin.create({
     let activityData = splitMsg[3];
     let notify = true;
 
-    let localTimestamp = moment.utc(timestamp).local().format('HH:mm A');
+    let localTimestamp = localTime(timestamp); 
     scene.set('is_unread', false);
     
     if (activityType == 'new_pose') {
