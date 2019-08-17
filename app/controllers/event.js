@@ -35,9 +35,9 @@ export default Controller.extend(AuthenticatedController, {
                 this.flashMessages.success('Signed up!');
             });
         },
-        cancelSignup: function() {
+        cancelSignup: function(name) {
             let api = this.gameApi;
-            api.requestOne('eventCancelSignup', { event_id: this.get('model.id') })
+            api.requestOne('eventCancelSignup', { event_id: this.get('model.id'), name: name }, 'events')
             .then( (response) => {
                 if (response.error) {
                     return;

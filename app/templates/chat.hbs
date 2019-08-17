@@ -125,7 +125,11 @@
     
           <div id="chat-window">
           {{#each channel.messages as |message|}}
-              <div class="timestamp-tip">{{message.timestamp}}</div>
+              <div class="timestamp-tip">{{message.timestamp}} 
+                {{#if message.timediff}}
+                ({{message.timediff}} ago)
+                {{/if}}
+              </div>
               {{{ansi-format text=message.message}}}
           {{/each}}
           </div>

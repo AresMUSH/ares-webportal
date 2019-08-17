@@ -11,7 +11,8 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, RouteResetOnExi
     gameSocket: service(),
     
     activate: function() {
-        this.controllerFor('chat').setupCallback();
+      let controller = this.controllerFor('chat');
+      controller.setupCallback();        
     },
     
     deactivate: function() {

@@ -10,14 +10,14 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     session: service(),
     favicon: service(),
     
-    onSceneActivity: function(type, msg /* , timestamp */ ) {
+    onSceneActivity: function(type, msg, timestamp ) {
         let splitMsg = msg.split('|');
         let sceneId = splitMsg[0];       
         let char = splitMsg[1];
         let currentUsername = this.get('currentUser.name');
         
         if (sceneId === this.get('model.scene.id')) {
-          let notify = this.updateSceneData(this.get('model.scene'), msg);
+          let notify = this.updateSceneData(this.get('model.scene'), msg, timestamp);
           
           if (notify && (char != currentUsername)) {
             this.gameSocket.notify(`New activity from ${char} in scene ${sceneId}.`);
