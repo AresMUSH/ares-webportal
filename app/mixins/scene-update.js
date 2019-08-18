@@ -1,12 +1,13 @@
 import { set } from '@ember/object';
 import Mixin from '@ember/object/mixin';
+import { localTime } from 'ares-webportal/helpers/local-time';
 import { inject as service } from '@ember/service';
 
 export default Mixin.create({
   session: service(),
   flashMessages: service(),
     
-  updateSceneData: function(scene, msg) {
+  updateSceneData: function(scene, msg, timestamp) {
     let splitMsg = msg.split('|');
     //let sceneId = splitMsg[0];
     //let char = splitMsg[1];
@@ -14,6 +15,7 @@ export default Mixin.create({
     let activityData = splitMsg[3];
     let notify = true;
 
+    let localTimestamp = localTime(timestamp); 
     scene.set('is_unread', false);
     
     if (activityType == 'new_pose') {
@@ -23,11 +25,13 @@ export default Mixin.create({
         poseData.can_edit = true;
         poseData.can_delete = true;
       }
+      poseData.timestamp = localTimestamp;
       poses.pushObject(poseData);
       scene.get('pose_order').setObjects(poseData.pose_order);
     } else if (activityType == 'pose_updated') {
       let poseData = JSON.parse(activityData);
       let poses = scene.get('poses');
+      poseData.timestamp = localTimestamp;
       poses.forEach((p) => {
         if (p.id === poseData.id) {
           set(p, 'pose', poseData.pose);

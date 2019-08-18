@@ -1,5 +1,6 @@
 import { set } from '@ember/object';
 import Controller from '@ember/controller';
+import { localTime } from 'ares-webportal/helpers/local-time';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
@@ -41,10 +42,12 @@ export default Controller.extend({
         let channelTitle = splitMsg[1];
         let newMessage = splitMsg[2];
         let channel = this.getChannel(channelKey);
+        let localTimestamp = localTime(timestamp); 
+
         if (!channel) {
           channel = this.addPageChannel(channelKey, channelTitle);
         }
-        channel.messages.pushObject({message: newMessage, timestamp: timestamp });
+        channel.messages.pushObject({message: newMessage, timestamp: localTimestamp});
         set(channel, 'last_activity', Date.now());
         if (channelKey === this.get('selectedChannel.key')) {
             this.scrollChatWindow();
