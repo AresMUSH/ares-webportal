@@ -17,7 +17,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       return this.get('model.scenes').any(s => s.is_unread );
     }.property('model.scenes.@each.is_unread'),
   
-    onSceneActivity: function(type, msg /* , timestamp */ ) {
+    onSceneActivity: function(type, msg, timestamp ) {
       let splitMsg = msg.split('|');
       let sceneId = splitMsg[0];
       let char = splitMsg[1];
@@ -28,7 +28,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         if (sceneId === this.get('currentScene.id')) {
           let scene = this.currentScene;
           
-          notify = this.updateSceneData(scene, msg);
+          notify = this.updateSceneData(scene, msg, timestamp);
 
           if (currentUsername != char) {
             scene.set('is_unread', false);
@@ -46,7 +46,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         else {
             this.get('model.scenes').forEach(s => {
                 if (s.id === sceneId) {
-                  notify = this.updateSceneData(s, msg);
+                  notify = this.updateSceneData(s, msg, timestamp);
                   if (currentUsername != char) {
                     s.set('is_unread', true);
                     this.gameSocket.notify(`New activity from ${char} in one of your other scenes (${sceneId}).`);

@@ -1,0 +1,30 @@
+{{title 'Admins'}}
+<h1>Admins</h1>
+
+<p>This page lists the game's administrators.  </p>
+
+
+{{#each model as |role|}}
+<h2>{{role.name}}</h2>
+    
+      <div>
+        
+         {{#each role.chars as |c|}}
+   
+         <div class="profile-gallery">
+             {{char-icon char=c}}
+             
+             {{#if c.title}}
+             <p class="text-center"><b>{{c.title}}</b></p>
+             {{/if}}
+         </div>
+         {{/each}}
+     
+      </div>
+
+    <div class="clearfix"> </div>
+    
+    
+{{/each}}
+
+{{outlet}}
