@@ -35,7 +35,7 @@
     onSubmit=(action "addSceneRoll")
     onHide=(action (mut selectSkillRoll) null)}}
 
-    <p class="hint">For both types of rolls, you can use a rating number to roll for a NPC. An average attribute is automatically factored in, so rolling a skill of "3" will roll 5 dice total for the NPC.</p>
+    <p class="hint">You can use a rating number to roll for a NPC. An average attribute is automatically factored in, so rolling a skill of "3" will roll 5 dice total for the NPC.</p>
     
 
     <p><b>Regular Roll</b></p>
@@ -48,7 +48,14 @@
     {{input type="text" size=25 id="rollString" enter=(action "addSceneRoll")  value=rollString}}
 
    <hr>
+    <p><b>Roll for Another PC</b></p>
     
+    <p>
+      Character: {{input type="text" size=15 id="pcRollName" enter=(action "addSceneRoll") value=pcRollName}} 
+      Ability: {{input type="text" size=15 id="pcRollSkill" enter=(action "addSceneRoll") value=pcRollSkill}}<br>
+    </p>
+      
+    <hr>
     <p><b>Opposed Roll</b></p>
     <p>Enter two character and ability names.</p>
     <p>
