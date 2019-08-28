@@ -9,9 +9,9 @@
   src="https://www.google.com/maps/embed/v1/place?q={{model.portal.latitude}}%20{{model.portal.longitude}}&key=AIzaSyDtQxW3ou9wLCgpLzTHiYQCKLv4YBM3t1c&maptype=satellite" allowfullscreen></iframe>
   </span>
   {{/if}}
-  <div class="ooc"> <b>This is a GM resource and is for OOC reference only.</b></div>
+  <div class="ooc"> <b>This is a GM resource and is for OOC reference only. While some of the information here is ICly known, some of it may not be.</b></div>
   <div class="portal-card">
-    <div class="portal-card-heading">{{model.portal.name}} </div>    
+    <div class="portal-card-heading">{{model.portal.name}} </div>
     <div class="portal-card-body">
       {{#if model.portal.gms}}<i>For more information, see {{#each model.portal.gms as |gm|}}
       {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
