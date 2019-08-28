@@ -10,7 +10,7 @@ export default Component.extend({
         
         switch (this.rating) {
             case 0:
-                name = "Unskilled";
+                name = "Incapable";
                 break;
             case 1:
                 name = "Everyman";
