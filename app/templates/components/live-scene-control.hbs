@@ -192,6 +192,7 @@
                 <div class="pull-right">
                 
                   {{#if (not scene.completed)}}
+				  {{live-scene-txt scenePose=scenePose scene=scene}}
                   <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
                   <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
                   <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
