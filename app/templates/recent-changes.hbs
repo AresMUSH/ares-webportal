@@ -4,7 +4,7 @@
 <p>This list includes wiki pages and profiles.  For scenes, check the {{#link-to 'scenes'}}Scenes{{/link-to}} archive.</p>
 
 <table class="table table-striped">
-    
+
    {{#each model as |change|}}
    <tr>
        <td>
@@ -16,6 +16,10 @@
          Event
          {{else if (eq change.type 'scene')}}
          Scene
+         {{else if (eq change.type 'creature')}}
+         Creature Page
+         {{else if (eq change.type 'portal')}}
+         Portal Page
          {{else if (eq change.type 'file')}}
          File
          {{else}}

@@ -8,6 +8,10 @@
  {{#link-to 'event' change.data.id}}{{change.message}}{{/link-to}}
 {{else if (eq change.type 'scene')}}
  {{#link-to 'scene' change.data.id}}{{change.message}}{{/link-to}}
+ {{else if (eq change.type 'creature')}}
+  {{#link-to 'creature' change.data.id}}{{change.message}}{{/link-to}}
+{{else if (eq change.type 'portal')}}
+ {{#link-to 'portal' change.data.id}}{{change.message}}{{/link-to}}
 {{else}}
  {{change.message}}
 {{/if}}
