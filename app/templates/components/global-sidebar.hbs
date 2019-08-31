@@ -14,7 +14,7 @@
     <div class="alert alert-danger">The website can't contact the game.  It may be down.</div>
 {{else}}
     <p>Today is {{model.game.ictime}}.
-    <br>{{model.game.who_count}} character(s) online.
+    <br>{{model.game.whos_online.who_count}} character(s) online.
     <br>{{model.game.scene_count}} scene(s) are in progress.
   </p>
   
@@ -39,7 +39,7 @@
   {{#each model.upcoming_events as |event|}}
   <p><b>{{#link-to 'event' event.id}}{{event.title}}{{/link-to}}</b> 
     {{#if event.content_warning}}
-    {{content-warning-tag warning=event.content_warning}}
+    {{content-warning-tag warning=event.content_warning position='top-left'}}
     {{/if}}
   <br>{{event.date}} {{event.start_datetime_local}} ({{event.start_time_standard}})</p>
   {{/each}}
@@ -60,7 +60,7 @@
    <p>{{#link-to 'scene' scene.id}}{{scene.icdate}} - {{scene.title}}{{/link-to}}
        {{scene-tag scene=scene}}
        {{#if scene.content_warning}}
-       {{content-warning-tag warning=scene.content_warning}}
+       {{content-warning-tag warning=scene.content_warning position='top-left'}}
        {{/if}}
        <br></p>
    {{/each}}
