@@ -1,0 +1,17 @@
+{{title "Achievements"}}
+<h1>Achievements</h1>
+
+<table>
+  {{#each model as |achievement|}}
+  <tr>
+    <td><i class="fa {{achievement.type_icon}} fa-2x" aria-hidden="true"></i> &nbsp; {{achievement.message}}</td>
+    <td>{{#each achievement.chars as |char|}}
+      {{char.name}}
+        {{#if char.count}} 
+        ({{char.count}})
+        {{/if}}
+       {{/each}}
+    </td>
+  </tr>
+  {{/each}}
+</table>
