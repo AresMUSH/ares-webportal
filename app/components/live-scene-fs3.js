@@ -9,6 +9,8 @@ export default Component.extend({
   vsRoll2: null,
   vsName1: null,
   vsName2: null,
+  pcRollSkill: null,
+  pcRollName: null,
   rollString: null,
   tagName: '',
   gameApi: service(),
@@ -26,6 +28,8 @@ export default Component.extend({
       let vsRoll2 = this.vsRoll2;
       let vsName1 = this.vsName1;
       let vsName2 = this.vsName2;
+      let pcRollSkill = this.pcRollSkill;
+      let pcRollName = this.pcRollName;
           
       if (!rollString) {
         this.flashMessages.danger("You haven't selected an ability to roll.");
@@ -38,19 +42,30 @@ export default Component.extend({
           return;
         }
       }
+      
+      if (pcRollSkill || pcRollName) {
+        if (!pcRollSkill || !pcRollName) {
+          this.flashMessages.danger("You have to provide all skill information to roll for a PC.");
+          return;
+        }
+      }
       this.set('selectSkillRoll', false);
       this.set('rollString', null);
       this.set('vsRoll1', null);
       this.set('vsRoll2', null);
       this.set('vsName1', null);
       this.set('vsName2', null);
+      this.set('pcRollSkill', null);
+      this.set('pcRollName', null);
 
       api.requestOne('addSceneRoll', { scene_id: this.get('scene.id'),
          roll_string: rollString,
          vs_roll1: vsRoll1,
          vs_roll2: vsRoll2,
          vs_name1: vsName1,
-         vs_name2: vsName2 })
+         vs_name2: vsName2,
+         pc_name: pcRollName,
+         pc_skill: pcRollSkill }, null)
       .then( (response) => {
         if (response.error) {
           return;
