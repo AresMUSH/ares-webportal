@@ -30,7 +30,7 @@
     <td>
         {{#link-to 'event' event.id}}{{event.title}}{{/link-to}}
         {{#if event.content_warning}}
-        {{content-warning-tag warning=event.content_warning}}
+        {{content-warning-tag warning=event.content_warning position='top-right'}}
         {{/if}}
     </td>
 

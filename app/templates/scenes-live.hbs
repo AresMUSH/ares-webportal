@@ -86,7 +86,7 @@
         <p>{{scene.location}}</p>
         {{#if (or scene.can_view (not scene.is_private))}}
           <p>{{#if scene.content_warning}}
-          {{content-warning-tag warning=scene.content_warning}}
+          {{content-warning-tag warning=scene.content_warning position='top'}}
           {{/if}}
           </p>
           {{#if scene.summary}}
