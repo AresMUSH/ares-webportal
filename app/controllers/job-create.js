@@ -8,6 +8,7 @@ export default Controller.extend({
   title: '',
   category: '',
   description: '',
+  template: '',
   submitter: null,
   participants: [],
     
@@ -22,6 +23,11 @@ export default Controller.extend({
   actions: {
     changeCategory: function(cat) {
       this.set('category', cat);
+      let category_template = this.get(`model.options.category_templates.${cat}`);
+      if (!this.description || this.description == this.template) {
+        this.set('description', category_template);
+      }
+      this.set('template', category_template);
     },
       
     createJob: function() {
