@@ -1,7 +1,7 @@
 {{title 'Events'}}
 <h1>Events</h1>
 
-<p>The events calendar helps you schedule scenes with other players.</p>
+<p>The events calendar helps you schedule scenes with other players.  Events you've signed up for are indicated with a <i class="fas fa-calendar-check" aria-label="Signed Up"></i> icon.</p>
 
 <div class="row">
     <div class="col col-xs-12">
@@ -19,6 +19,7 @@
 
 <thead>
     <tr>
+        <th></th>
         <th>Title</th>
         <th>Organizer</th>
         <th>Date/Time</th>
@@ -27,6 +28,11 @@
         
 {{#each model.events as |event|}}
 <tr>
+  <td>
+    {{#if event.is_signed_up}}
+    <i class="fas fa-calendar-check fa-2x" aria-label="Signed Up"></i>
+    {{/if}}
+  </td>
     <td>
         {{#link-to 'event' event.id}}{{event.title}}{{/link-to}}
         {{#if event.content_warning}}
