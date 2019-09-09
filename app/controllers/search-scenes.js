@@ -65,6 +65,7 @@ export default Controller.extend({
       this.resetOnExit();
     },
     search() {
+      this.set('page', 1);
       this.updateScenesList();
     },
     sceneTypeChanged(sceneType) {
