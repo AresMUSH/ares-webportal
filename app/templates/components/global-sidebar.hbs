@@ -47,7 +47,14 @@
       <h2>Upcoming Events <i class="fa fa-calendar" aria-hidden="true"></i></h2>
   </div>
   {{#each model.upcoming_events as |event|}}
-  <p><b>{{#link-to 'event' event.id}}{{event.title}}{{/link-to}}</b> 
+  <p><b>{{#link-to 'event' event.id}}
+    
+    {{#if event.is_signed_up}}
+    <i class="fas fa-calendar-check" aria-label="Signed Up"></i>
+    {{/if}}
+    {{event.title}}
+    
+    {{/link-to}}</b> 
     {{#if event.content_warning}}
     {{content-warning-tag warning=event.content_warning position='top-left'}}
     {{/if}}
@@ -103,7 +110,7 @@
 
    </div>
    {{#each model.recent_changes as |change|}}
-   <p>
+   <p class='sidebar-list'>
      {{recent-change-link change=change}}
    </p>
    {{/each}}
