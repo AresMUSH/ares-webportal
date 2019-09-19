@@ -14,20 +14,24 @@ export default Controller.extend({
     
   resetOnExit: function() {
     this.set('title', '');
-    this.set('category', this.get('model.options.request_category'));
+    this.setCategory(this.get('model.options.request_category'));
     this.set('description', '');
     this.set('submitter', null);
     this.set('participants', []);
   },
+  
+  setCategory: function(cat) {
+    this.set('category', cat);
+    let category_template = this.get(`model.options.category_templates.${cat}`);
+    if (!this.description || this.description == this.template) {
+      this.set('description', category_template);
+    }
+    this.set('template', category_template);
+  },
     
   actions: {
     changeCategory: function(cat) {
-      this.set('category', cat);
-      let category_template = this.get(`model.options.category_templates.${cat}`);
-      if (!this.description || this.description == this.template) {
-        this.set('description', category_template);
-      }
-      this.set('template', category_template);
+      this.setCategory(cat);
     },
       
     createJob: function() {
