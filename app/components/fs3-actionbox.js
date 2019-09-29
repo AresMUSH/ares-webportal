@@ -2,43 +2,34 @@ import Component from '@ember/component';
 
 export default Component.extend({
     minRating: 0,
-    maxRating: 8,
+    maxRating: 5,
   
     
     getRatingName: function() {
         let name = "";
         
+    getRatingName: function() {
+        let name = "";
+        
         switch (this.rating) {
-            case 0:
-                name = "Incapable";
-                break;
             case 1:
-                name = "Everyman";
+                name = "Poor";
                 break;
             case 2:
-                name =  "Fair";
+                name = "Average";
                 break;
             case 3:
-                name =  "Competent";
-                break;
-            case 4:
                 name =  "Good";
                 break;
+            case 4:
+                name =  "Exceptional";
+                break;
             case 5:
-                name = "Great";
-                break;
-            case 6:
-                name = "Exceptional";
-                break;
-            case 7:
-                name = "Amazing";
-                break;
-            case 8:
-                name = "Legendary";
-                break;
+                name =  "Amazing";
+                break;				
         }
         return name;
-    },
+    },,
     
     actions: { 
         increment() {
