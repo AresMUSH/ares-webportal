@@ -27,7 +27,7 @@ export default Component.extend({
                 break;				
         }
         return name;
-    },,
+    },
     
     actions: { 
         increment() {
