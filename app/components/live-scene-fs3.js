@@ -31,7 +31,7 @@ export default Component.extend({
       let pcRollSkill = this.pcRollSkill;
       let pcRollName = this.pcRollName;
           
-      if (!rollString) {
+      if (!rollString && !vsRoll1 && !pcRollSkill) {
         this.flashMessages.danger("You haven't selected an ability to roll.");
         return;
       }

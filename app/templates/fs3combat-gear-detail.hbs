@@ -11,4 +11,21 @@
 </tr>
 {{/each}}
 
+{{#if model.specials}}
+<h3>Available Specials</h3>
+
+
+{{#each model.specials as |value|}}
+<tr>
+    <td><b>{{value.title}}</b></td>
+    <td>
+      
+      {{#each value.effects as |effect|}}
+      {{effect}}<br>
+      {{/each}}
+    </td>
+</tr>
+{{/each}}
+{{/if}}
+
 </table>
