@@ -4,9 +4,7 @@ export default Component.extend({
     minRating: 0,
     maxRating: 5,
     
-    getRatingName: function() {
-        let name = "";
-        
+       
     getRatingName: function() {
         let name = "";
         
@@ -28,7 +26,7 @@ export default Component.extend({
                 break;				
         }
         return name;
-    },},
+    },
     
     actions: { 
         increment() {
