@@ -5,9 +5,7 @@ export default Component.extend({
     maxRating: 5,
   
     
-    getRatingName: function() {
-        let name = "";
-        
+      
     getRatingName: function() {
         let name = "";
         
