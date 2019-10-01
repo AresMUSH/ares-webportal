@@ -13,23 +13,36 @@
 </div>
 
 <h2>Area Directory</h2>
+
   
-<ul>
-  {{#each model.directory as |area| }}
-      <li><a href="#{{area.id}}">{{area.name}}</a></li>
+ <ul class="nav nav-tabs" role="tablist">
+
+  {{#each topLevelAreas as |area index| }}
+   <li role="presentation" class="{{if (eq index 0) 'active' }}"><a href="#{{area.id}}" aria-controls="{{area.id}}" role="tab" data-toggle="tab">{{area.name}}</a></li>
   {{/each}}
+   <li role="presentation"><a href="#unassigned" aria-controls="unassigned" role="tab" data-toggle="tab">No Area</a></li>
+
 </ul>
-  
-  {{#each model.directory as |area| }}
-  <hr>
-  <a name="{{area.id}}"></a>
-      {{area-directory area=area}}
+
+<div class="tab-content">
+
+  {{#each topLevelAreas as |area index| }}
+  <div role="tabpanel" class="tab-pane {{if (eq index 0) 'active' }}" id="{{area.id}}">
+
+    <a name="{{area.id}}"></a>
+    {{area-directory area=area}}
+      
+  </div>
   {{/each}}
 
-<h2>Other Rooms</h2>
+  <div role="tabpanel" class="tab-pane active" id="unassigned">
 
-{{#each model.orphan_rooms as |room|}}
-{{#link-to 'location' room.id}}{{room.name}}{{/link-to}}
-{{/each}}
+  <h3>Locations With No Area</h3>
+  {{#each model.orphan_rooms as |room|}}
+  {{#link-to 'location' room.id}}{{room.name}}{{/link-to}}
+  {{/each}}
+  
+  </div>
+</div>
 
 {{outlet}}
