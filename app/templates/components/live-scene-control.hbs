@@ -130,10 +130,10 @@
 
           {{#if (not scene.completed)}}
           
+            {{pose-order poseOrder=scene.pose_order playerName=playerName}}
+          
             {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
-            
-              {{pose-order poseOrder=scene.pose_order playerName=playerName}}
-            
+                        
           {{/if}}
           
           
@@ -146,6 +146,25 @@
       <div class="row">
           <div class="col col-xs-12">
 
+              {{#if isApproved}}
+        
+                <div class="pull-right">
+                
+                  {{#if (not scene.completed)}}
+                  <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
+                  <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
+                  <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
+                  <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
+
+
+                  {{/if}}
+        
+                
+        
+                </div>
+        
+              {{/if}}
+    
               <ul class="nav navbar-nav">    
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -173,7 +192,12 @@
                          {{else}}
                          <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li> 
                          <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
+
+                                         
                          {{/if}}
+                         
+                         
+                         
                        {{/if}}
                        
                        {{#if (and scene.can_delete scene.completed)}}
@@ -186,27 +210,6 @@
                     </ul>
                   </li>
               </ul>
-        
-              {{#if isApproved}}
-        
-                <div class="pull-right">
-                
-                  {{#if (not scene.completed)}}
-                  <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
-                  <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
-                  <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
-                  <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
-
-
-                  {{/if}}
-        
-                
-        
-                </div>
-        
-              {{/if}}
-    
-
            </div>
        </div>
      
