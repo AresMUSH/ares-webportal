@@ -14,10 +14,6 @@ export default Component.extend(AuthenticatedController, {
     flashMessages: service(),
     gameSocket: service(),
     session: service(),
-  
-    scenePoses: function() {
-        return this.get('scene.poses').map(p => EmberObject.create(p));  
-    }.property('scene.poses.@each.pose'),
       
     actions: { 
       locationSelected(loc) {
@@ -44,10 +40,10 @@ export default Component.extend(AuthenticatedController, {
       },
       
       editScenePose(scenePose) { 
-          scenePose.set('editActive', true);
+          Ember.set(scenePose, 'editActive', true);
       },
       cancelScenePoseEdit(scenePose) {
-          scenePose.set('editActive', false);
+          Ember.set(scenePose, 'editActive', false);
       },
       deleteScenePose() {
           let api = this.gameApi;
@@ -79,13 +75,13 @@ export default Component.extend(AuthenticatedController, {
         });
       },
       saveScenePose(scenePose, notify) {
-          let pose = scenePose.get('raw_pose');
+          let pose = scenePose.raw_pose;
           if (pose.length === 0) {
               this.flashMessages.danger("You haven't entered anything.");
               return;
           }
-          scenePose.set('editActive', false);
-          scenePose.set('pose', pose);
+          Ember.set(scenePose, 'editActive', false);
+          Ember.set(scenePose, 'pose', pose);
 
           let api = this.gameApi;
           api.requestOne('editScenePose', { scene_id: this.get('scene.id'),
@@ -94,7 +90,7 @@ export default Component.extend(AuthenticatedController, {
               if (response.error) {
                   return;
               }
-              scenePose.set('pose', response.pose);
+              Ember.set(scenePose, 'pose', response.pose);
           });
           this.set('scenePose', '');
       },

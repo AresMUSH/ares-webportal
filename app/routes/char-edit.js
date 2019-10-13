@@ -1,5 +1,7 @@
+import EmberObject from '@ember/object';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
+import RSVP from 'rsvp';
 import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
 
 export default Route.extend(AuthenticatedRoute, {
@@ -7,6 +9,12 @@ export default Route.extend(AuthenticatedRoute, {
     
     model: function(params) {
         let api = this.gameApi;
-        return api.requestOne('profileEdit', { id: params['id'] });
+        
+        return RSVP.hash({
+            char: api.requestOne('profileEdit', { id: params['id'] }),
+            cgInfo: api.requestOne('chargenInfo')
+        })
+            .then((model) => EmberObject.create(model));
+            
     }
 });
