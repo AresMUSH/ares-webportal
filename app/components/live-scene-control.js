@@ -10,11 +10,20 @@ export default Component.extend(AuthenticatedController, {
     confirmDeleteScene: false,
     selectLocation: false,
     newLocation: null,
+    poseType: { title: 'Pose', id: 'pose' },
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
     session: service(),
-      
+    
+    poseTypes: function() {
+      return [
+        { title: 'Pose', id: 'pose' },
+        { title: 'GM Emit', id: 'gm' },
+        { title: 'Scene Set', id: 'setpose' }
+      ];
+    }.property(),
+  
     actions: { 
       locationSelected(loc) {
           this.set('newLocation', loc);  
@@ -167,6 +176,10 @@ export default Component.extend(AuthenticatedController, {
       },
       unpauseScroll() {
         this.sendAction('setScroll', true);
+      },
+      
+      poseTypeChanged(newType) {
+        this.set('poseType', newType);
       }
     }
 });
