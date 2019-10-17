@@ -3,7 +3,11 @@
   <table class="char-ability-list">
   {{#each list as |ability| }}
   <tr>
-    <td>{{ability.name}}</td>
+    <td>{{ability.name}} 
+      {{#if ability.linked_attr}}
+      <span class="fs3-linked-attr">({{ability.linked_attr}})</span>
+      {{/if}}
+    </td>
     <td>{{fs3-dots rating=ability.rating max=max}}
     
     {{#if showSpecs}}
