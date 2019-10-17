@@ -11,11 +11,15 @@ export default Component.extend(AuthenticatedController, {
     selectLocation: false,
     newLocation: null,
     poseType: { title: 'Pose', id: 'pose' },
+    poseChar: null,
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
     session: service(),
     
+    didInsertElement: function() {
+      this.set('poseChar', this.get('scene.poseable_chars')[0]);
+    },
     poseTypes: function() {
       return [
         { title: 'Pose', id: 'pose' },
@@ -113,7 +117,9 @@ export default Component.extend(AuthenticatedController, {
           let api = this.gameApi;
           this.set('scenePose', '');
           api.requestOne('addScenePose', { id: this.get('scene.id'),
-              pose: pose, pose_type: poseType })
+              pose: pose, 
+              pose_type: poseType,
+              pose_char: this.get('poseChar.id') })
           .then( (response) => {
               if (response.error) {
                   return;
@@ -180,6 +186,10 @@ export default Component.extend(AuthenticatedController, {
       
       poseTypeChanged(newType) {
         this.set('poseType', newType);
+      },
+      
+      poseCharChanged(newChar) { 
+        this.set('poseChar', newChar);
       }
     }
 });

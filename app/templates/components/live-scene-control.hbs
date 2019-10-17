@@ -157,6 +157,13 @@
                                 {{poseType.title}}
                                 {{/power-select}}
                 </div>
+                
+                <div class="scene-char-select" >
+                
+                {{#power-select selected=poseChar options=scene.poseable_chars searchField='name' onchange=(action "poseCharChanged") as |poseChar|}}
+                                {{char-icon-tiny char=poseChar}}
+                                {{/power-select}}
+                </div>
               </div>
                 
                 <div class="col col-sm-6 col-xs-12">
