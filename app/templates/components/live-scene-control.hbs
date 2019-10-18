@@ -184,7 +184,10 @@
                     
 
                           {{live-scene-places scene=scene}}
+
+                          <li role="separator" class="divider"></li>
                         
+                          <li><a href="#" {{action (mut managePoseOrder) true}}>Manage Pose Order</a></li>
                     
                           {{#if scene.fs3_enabled}}
                           {{live-scene-fs3 abilities=abilities scene=scene}}
@@ -279,5 +282,38 @@
       {{/power-select}}
        <b>Custom Location:</b> {{input type="text" size=25 id="newLocation" enter=(action "changeLocation")  value=newLocation}}
          </p>
+    {{/bs-modal-simple}}
+    
+    {{#bs-modal-simple
+        title="Manage Pose Order"
+        closeTitle="Cancel"
+        size=null
+        fade=false
+        open=managePoseOrder
+        onHide=(action (mut managePoseOrder) null)}}
+        
+        <table>
+        {{#each scene.pose_order as |po|}}
+        <tr>
+        <td>
+        {{po.name}} 
+        </td>
+        <td>
+           <a href="#" {{action 'dropPoseOrder' po.name}}> {{tooltip-icon position='left' message='Skip Turn' icon='fa fa-times-circle'}} </a>
+        </td>
+        </tr>
+        {{/each}}
+      </table>
+      
+      <br>
+      
+      {{#if (eq scene.pose_order_type '3-per')}}
+        Switch to regular pose order: <a href="#" {{action 'switchPoseOrderType' 'normal'}}>
+          {{tooltip-icon position='left' message='Regular Order' icon='fa fa-user'}}</a>
+      {{else}}
+        Switch to 3-per pose order: <a href="#" {{action 'switchPoseOrderType' '3-per'}}>
+          {{tooltip-icon position='left' message='3-Per Order' icon='fa fa-users'}}
+        </a>
+      {{/if}}
     {{/bs-modal-simple}}
           

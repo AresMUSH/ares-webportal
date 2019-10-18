@@ -9,6 +9,7 @@ export default Component.extend(AuthenticatedController, {
     confirmDeleteScenePose: false,
     confirmDeleteScene: false,
     selectLocation: false,
+    managePoseOrder: false,
     newLocation: null,
     poseType: { title: 'Pose', id: 'pose' },
     poseChar: null,
@@ -20,12 +21,17 @@ export default Component.extend(AuthenticatedController, {
     didInsertElement: function() {
       this.set('poseChar', this.get('scene.poseable_chars')[0]);
     },
+    
     poseTypes: function() {
       return [
         { title: 'Pose', id: 'pose' },
         { title: 'GM Emit', id: 'gm' },
         { title: 'Scene Set', id: 'setpose' }
       ];
+    }.property(),
+    
+    poseOrderTypes: function() {
+      return [ '3-per', 'normal' ];
     }.property(),
   
     actions: { 
@@ -190,6 +196,29 @@ export default Component.extend(AuthenticatedController, {
       
       poseCharChanged(newChar) { 
         this.set('poseChar', newChar);
+      },
+      
+      switchPoseOrderType(newType) {
+        let api = this.gameApi;
+        api.requestOne('switchPoseOrder', { id: this.get('scene.id'), type: newType }, null)
+        .then( (response) => {
+          this.set('managePoseOrder', false);
+            if (response.error) {
+                return;
+            }
+            this.set('scene.pose_order_type', newType);
+        });
+      },
+      
+      dropPoseOrder(name) {
+        let api = this.gameApi;
+        api.requestOne('dropPoseOrder', { id: this.get('scene.id'), name: name }, null)
+        .then( (response) => {
+            this.set('managePoseOrder', false);
+            if (response.error) {
+                return;
+            }
+        });
       }
     }
 });
