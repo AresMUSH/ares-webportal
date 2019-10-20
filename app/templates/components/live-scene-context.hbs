@@ -17,6 +17,10 @@
         {{{ansi-format text=scene.location.description}}}
         {{/if}}
     
+        {{#each scene.location.details as |detail|}}
+        <p><i>{{detail.name}}:</i> {{{ansi-format text=detail.desc}}}</p>
+        {{/each}}
+        
         {{#if scene.location.scene_set}}
         <div class="scene-set-pose">
           {{{ansi-format text=scene.location.scene_set}}}
