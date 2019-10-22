@@ -147,7 +147,6 @@
                 
                 <button {{action 'addPose' poseType.id}} class="btn btn-primary">Add {{poseType.title}}</button>
                 <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC</button>
-                {{/if}}
                 
                 {{live-scene-custom-scenepose scenePose=scenePose scene=scene}}
                 
@@ -164,6 +163,9 @@
                                 {{char-icon-tiny char=poseChar}}
                                 {{/power-select}}
                 </div>
+                
+                {{/if}}
+                
               </div>
                 
                 <div class="col col-sm-6 col-xs-12">
