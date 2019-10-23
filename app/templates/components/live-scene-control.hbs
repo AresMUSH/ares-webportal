@@ -28,8 +28,7 @@
 
     <div class="ansi scene-log" id="live-scene-log">
 
-
-    {{#each scenePoses as |pose|}}
+    {{#each scene.poses as |pose|}}
             <div class="hint pull-right">
 
 
@@ -124,93 +123,116 @@
         This scene has changed status since you opened it.  Please reload the page.
       </div>
 
-    {{else}}
+    {{else if (not isApproved)}}
+      <div class="alert alert-warning">You must be approved to join a scene.</div>
 
-      {{#if (and scene.can_join isApproved)}}
+    {{else}}
 
           {{#if (not scene.completed)}}
 
-            {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose" "pose")}}
+            {{pose-order poseOrder=scene.pose_order playerName=playerName}}
 
-              {{pose-order poseOrder=scene.pose_order playerName=playerName}}
+            {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose")}}
 
-          {{/if}}
+           {{/if}}
 
-
-
-      {{else}}
-           <p>You must be approved to join a scene.</p>
-      {{/if}}
+    <div class="row">
 
 
-      <div class="row">
-          <div class="col col-xs-12">
+              <div class="col col-sm-6 col-xs-12">
 
-              <ul class="nav navbar-nav">
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-                    <span class="btn btn-default" href="#">Scene Menu <span class="caret"></span></span> </a>
-                    <ul class="dropdown-menu">
+                {{#if (not scene.completed)}}
 
-                      {{#if scene.can_edit}}
-                      <li>{{#link-to 'scene-edit' scene.id}}Edit Scene{{/link-to}}</li>
-                      <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
-                      {{/if}}
+                <button {{action 'addPose' poseType.id}} class="btn btn-primary">Add {{poseType.title}}</button>
+                <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC</button>
+                {{/if}}
 
-                      {{#if (and scene.can_join isApproved)}}
-                        {{#if (not scene.completed)}}
-                        {{live-scene-spell spells=spells scene=scene}}
+                {{live-scene-custom-scenepose scenePose=scenePose scene=scene}}
 
-                        {{live-scene-places scene=scene}}
+                <div class="scene-pose-select" >
 
-                        {{#if scene.fs3_enabled}}
-                        {{live-scene-fs3 abilities=abilities scene=scene}}
+                {{#power-select selected=poseType options=poseTypes searchField='title' onchange=(action "poseTypeChanged") as |poseType|}}
+                                {{poseType.title}}
+                                {{/power-select}}
+                </div>
+
+                <div class="scene-char-select" >
+
+                {{#power-select selected=poseChar options=scene.poseable_chars searchField='name' onchange=(action "poseCharChanged") as |poseChar|}}
+                                {{char-icon-tiny char=poseChar}}
+                                {{/power-select}}
+                </div>
+              </div>
+
+                <div class="col col-sm-6 col-xs-12">
+
+                {{#if (not scene.completed)}}
+
+
+                <ul class="nav scene-menu">
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                      <span class="btn btn-default" href="#">Play <span class="caret"></span></span> </a>
+                      <ul class="dropdown-menu">
+
+                        {{#if scene.can_edit}}
+                        <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
                         {{/if}}
 
 
+                          {{live-scene-places scene=scene}}
 
-                         <li role="separator" class="divider"></li>
+                          <li role="separator" class="divider"></li>
 
-                         <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li>
-                         {{else}}
-                         <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li>
-                         <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li>
-                         {{/if}}
-                       {{/if}}
+                          <li><a href="#" {{action (mut managePoseOrder) true}}>Manage Pose Order</a></li>
 
-                       {{#if (and scene.can_delete scene.completed)}}
-                       <li><a href="#" {{action (mut confirmDeleteScene) true}}>Delete Scene</a></li>
-                       {{/if}}
+                          {{#if scene.fs3_enabled}}
+                          {{live-scene-fs3 abilities=abilities scene=scene}}
+                          {{/if}}
 
+                          {{live-scene-custom-play scene=scene abilities=abilities}}
 
-                    <li>{{#link-to 'scene-download' scene.id}}Download Scene{{/link-to}}</li>
-
-                    </ul>
-                  </li>
-              </ul>
-
-              {{#if (and scene.can_join isApproved)}}
-
-                <div class="pull-right">
-
-                  {{#if (not scene.completed)}}
-                  {{live-scene-txt scenePose=scenePose scene=scene}}
-                  <button {{action 'addPose' 'setpose'}} class="btn btn-default">Add Scene Set</button>
-                  <button {{action 'addPose' 'gm'}} class="btn btn-default">Add GM Pose</button>
-                  <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC Comment</button>
-                  <button {{action 'addPose' 'pose'}} class="btn btn-primary">Add Pose</button>
-                  {{/if}}
-
-
-
-                </div>
+                      </ul>
+                    </li>
+                  </ul>
 
               {{/if}}
 
+            <ul class="nav scene-menu">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-           </div>
-       </div>
+                  <span class="btn btn-default" href="#">Manage <span class="caret"></span></span> </a>
+                  <ul class="dropdown-menu">
+
+                    {{#if scene.can_edit}}
+                    <li>{{#link-to 'scene-edit' scene.id}}Edit Scene{{/link-to}}</li>
+                      {{#if (not scene.completed)}}
+                       <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li>
+                       {{else}}
+                       <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li>
+                       <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li>
+                       {{/if}}
+
+                       {{#if scene.can_delete}}
+                       <li role="separator" class="divider"></li>
+                       <li><a href="#" {{action (mut confirmDeleteScene) true}}>Delete Scene</a></li>
+                       {{/if}}
+
+                     {{/if}}
+
+
+
+                  <li>{{#link-to 'scene-download' scene.id}}Download Scene{{/link-to}}</li>
+
+                  </ul>
+                </li>
+            </ul>
+          </div>
+
+      </div>
 
     {{/if}}
 
@@ -259,4 +281,37 @@
       {{/power-select}}
        <b>Custom Location:</b> {{input type="text" size=25 id="newLocation" enter=(action "changeLocation")  value=newLocation}}
          </p>
+    {{/bs-modal-simple}}
+
+    {{#bs-modal-simple
+        title="Manage Pose Order"
+        closeTitle="Cancel"
+        size=null
+        fade=false
+        open=managePoseOrder
+        onHide=(action (mut managePoseOrder) null)}}
+
+        <table>
+        {{#each scene.pose_order as |po|}}
+        <tr>
+        <td>
+        {{po.name}}
+        </td>
+        <td>
+           <a href="#" {{action 'dropPoseOrder' po.name}}> {{tooltip-icon position='left' message='Skip Turn' icon='fa fa-times-circle'}} </a>
+        </td>
+        </tr>
+        {{/each}}
+      </table>
+
+      <br>
+
+      {{#if (eq scene.pose_order_type '3-per')}}
+        Switch to regular pose order: <a href="#" {{action 'switchPoseOrderType' 'normal'}}>
+          {{tooltip-icon position='left' message='Regular Order' icon='fa fa-user'}}</a>
+      {{else}}
+        Switch to 3-per pose order: <a href="#" {{action 'switchPoseOrderType' '3-per'}}>
+          {{tooltip-icon position='left' message='3-Per Order' icon='fa fa-users'}}
+        </a>
+      {{/if}}
     {{/bs-modal-simple}}

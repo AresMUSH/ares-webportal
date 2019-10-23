@@ -38,10 +38,12 @@
     </div>
 </div>
 
+{{#if model.tags}}
 <b>Tags:</b>
     {{#each model.tags as |tag|}}
     {{#link-to 'wiki-tag' tag}}{{tag}}{{/link-to}}
     {{/each}}
+{{/if}}
 
 <div class="row">
     <div class="col col-xs-12">

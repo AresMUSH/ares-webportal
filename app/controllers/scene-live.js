@@ -37,8 +37,9 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     },
 
     scrollSceneWindow: function() {
-      // Unless scrolling paused
-      if (this.scrollPaused) {
+      // Unless scrolling paused or edit active
+      let poseEditActive =  this.get('model.scene.poses').some(p => p.editActive);
+      if (this.scrollPaused || poseEditActive) {
         return;
       }
 

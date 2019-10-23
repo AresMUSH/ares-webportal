@@ -21,8 +21,9 @@ export default Controller.extend({
             }
             else {
               this.flashMessages.success('Config saved!');
+              this.transitionToRoute('setup');
             }
-            this.transitionToRoute('setup');
+            
             });  
         }
         

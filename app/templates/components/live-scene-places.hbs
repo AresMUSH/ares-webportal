@@ -1,6 +1,6 @@
 <li role="separator" class="divider"></li>
 
-{{#if scene.places}}
+{{#if (not scene.completed)}}
   <li><a href="#" {{action 'viewPlaces'}}>View Places</a></li>
   <li><a href="#" {{action (mut selectPlace) true}}>Join a Place</a></li>
   <li><a href="#" {{action 'leavePlace'}}>Leave Place</a></li>

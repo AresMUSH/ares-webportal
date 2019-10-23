@@ -3,20 +3,18 @@
   <table class="char-ability-list">
   {{#each list as |ability| }}
   <tr>
-    {{#if ability.rating}}
-      <td>{{ability.name}}</td>
-
-      <td>{{fs3-dots rating=ability.rating max=max}}
-
-      {{#if showSpecs}}
-      <br>
-          {{#if ability.specialties}}
-            ({{ability.specialties}})
-          {{/if}}
+    <td>{{ability.name}}
+      {{#if ability.linked_attr}}
+      <span class="fs3-linked-attr">({{ability.linked_attr}})</span>
       {{/if}}
+    </td>
+    <td>{{fs3-dots rating=ability.rating max=max}}
 
-      </td>
-      <td>{{ability.rating_name}}</td>
+    {{#if showSpecs}}
+    <br>
+        {{#if ability.specialties}}
+          ({{ability.specialties}})
+        {{/if}}
     {{/if}}
   </tr>
   {{/each}}
