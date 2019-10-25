@@ -6,7 +6,7 @@
 <p><label for="name">Name:</label></p>
 <p>{{input type='text' size=25 id='name' value=model.config.name}}</p>
 
-<p><label for="name">Website:</label></p>
+<p><label for="name">Website:</label> <span class="hint">(Leave blank to use your web portal address.)</span></p>
 <p>{{input type='text' size=25 id='website' value=model.config.website}}</p>
 
 <p><label for="name">Category:</label>
@@ -25,12 +25,16 @@
                         
 </p>
 
+<div class="panel panel-body">
 <p>
-    <b>Public Game:</b>
+    <b>Public Game?:</b>
 
     {{input type='checkbox' checked=model.config.public_game}}
 </p>
 
+<p class="hint">Only public games are advertised on AresCentral.  You will not be able to link player handles until either your game is public or you use the <code>game/register</code> command to manually register your game.</p>
+
+</div>
 
 <p><b>Description:</b></p>
 
