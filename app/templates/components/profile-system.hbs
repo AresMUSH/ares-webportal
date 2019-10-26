@@ -22,6 +22,10 @@
     <li><a data-toggle="tab" href="#systemspells">Spells</a></li>
   {{/if}}
 
+  {{#if char.spells}}
+    <li><a data-toggle="tab" href="#systemspellcards">Spell Cards</a></li>
+  {{/if}}
+
   {{#if char.achievements}}
       <li><a data-toggle="tab" href="#achievements">Achievements</a></li>
   {{/if}}
@@ -84,6 +88,12 @@
   {{#if char.spells}}
   <div id="systemspells" class="tab-pane fade">
     {{char-spells char=char}}
+  </div>
+  {{/if}}
+
+  {{#if char.spells}}
+  <div id="systemspellcards" class="tab-pane fade">
+    {{char-spell-cards char=char}}
   </div>
   {{/if}}
 
