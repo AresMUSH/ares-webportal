@@ -62,15 +62,15 @@
                       <img alt="System Profile Icon"  class="small-profile-icon {{icon-class}}" src="/game/uploads/theme_images/noicon.png" >
                       Scene Restarted
                   {{else}}
-                      {{#link-to "char" pose.char.name}}
+                      <a href="#" {{action (mut characterCard) pose.char.name}}>
                           {{#if pose.char.icon}}
                           <img alt="{{pose.char.name}}'s icon" class="small-profile-icon {{icon-class}}" src="/game/uploads/{{pose.char.icon}}" >
                           {{else}}
                           <img alt="{{pose.char.name}}'s icon" class="small-profile-icon {{icon-class}}" src="/game/uploads/theme_images/noicon.png" >
                           {{/if}}
-                      {{/link-to}}
-
-                      {{#link-to "char" pose.char.name}} {{pose.char.name}} {{/link-to}}
+                          
+                          {{pose.char.name}}
+                      </a>
                     {{/if}}
                 </div>
                  {{#if pose.editActive}}
@@ -304,4 +304,21 @@
         </a>
       {{/if}}
     {{/bs-modal-simple}}
+    
+    {{#bs-modal-simple
+      title=characterCard
+      closeTitle="Close"
+      size=null
+      fade=false
+      open=characterCard
+      onHide=(action (mut characterCard) null)}}
+      
+      {{#if scene.use_custom_char_chards}}
+        {{char-card-custom char=characterCardInfo}}
+      {{else}}
+        {{char-card char=characterCardInfo}}
+      {{/if}}
+      
+    {{/bs-modal-simple}}
+    
           
