@@ -72,6 +72,12 @@
   {{#if char.description}}
   <div id="systemdesc" class="tab-pane fade">
        {{{ansi-format text=char.description}}}
+       
+       {{#if char.details}}
+       {{#each char.details as |detail|}}
+       <b>{{detail.name}}</b>: {{{ansi-format text=detail.desc}}}
+       {{/each}}
+       {{/if}}
   </div>
   {{/if}}
   
