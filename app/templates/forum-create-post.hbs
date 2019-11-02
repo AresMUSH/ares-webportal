@@ -7,8 +7,10 @@
     <p><b>Message:</b></p>
     {{markdown-editor text=message}}
 
+<div class="pull-right">
     {{#link-to 'forum-category' model.id class='btn btn-default'}}Cancel{{/link-to}}
     <button {{action "addPost"}} class="btn btn-primary">Post</button>
+</div>
     
 {{else}}
 
