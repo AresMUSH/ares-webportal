@@ -145,6 +145,10 @@
              <div class="pose-buttons">
                  <button {{action 'addPose' poseType.id}} class="btn btn-primary">Add {{poseType.title}}</button>
                  <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC</button>
+                 
+                 {{#if txtExtraInstalled}}
+                   {{live-scene-txt scenePose=scenePose scene=scene}}
+                 {{/if}}
                 
              {{live-scene-custom-scenepose scenePose=scenePose scene=scene}}
              </div>
@@ -186,6 +190,10 @@
                              {{#if scene.fs3_enabled}}
                                  {{live-scene-fs3 abilities=abilities scene=scene}}
                              {{/if}}
+                             
+                             {{#if cookiesExtraInstalled}}
+                               {{live-scene-cookies scene=scene}}
+                             {{/if}}                             
                           
                              {{live-scene-custom-play scene=scene abilities=abilities}}
                           

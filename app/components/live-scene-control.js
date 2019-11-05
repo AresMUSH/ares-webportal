@@ -40,6 +40,14 @@ export default Component.extend(AuthenticatedController, {
       return participant ? participant.char_card : {};
     }.property('characterCard'),
   
+    txtExtraInstalled: function() {
+      return this.get('scene.extras_installed').some(e => e == 'txt');
+    }.property(),
+    
+    cookiesExtraInstalled: function() {
+      return this.get('scene.extras_installed').some(e => e == 'cookies');
+    }.property(),
+    
     actions: { 
       locationSelected(loc) {
           this.set('newLocation', loc);  
