@@ -59,6 +59,7 @@ Router.map(function() {
   this.route('groups');
   this.route('help');
   this.route('help-topic', { path: '/help/:topic' });
+  this.route('help-override', { path: '/help/:topic/override' });
   this.route('jobs');
   this.route('job', { path: '/job/:id' });
   this.route('job-create');
