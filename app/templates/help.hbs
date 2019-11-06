@@ -11,12 +11,18 @@
 
 {{#each model as |toc|}}
     <h3 class="help-heading">{{toc.toc_category}}</h3>
-
-    <ul>
-    {{#each toc.topics as |topic|}}
     
+    <ul class="tutorial-help-list">
+    {{#each toc.tutorials as |topic|}}
     <li>{{#link-to 'help-topic' topic.topic}}{{topic.name}}{{/link-to}} - {{topic.summary}}</li>
     {{/each}}
+    </ul>
+
+    <div class="reference-help-title">Command Topics:</div>
+    <ul class="reference-help-list">
+      {{#each toc.topics as |topic|}}
+      <li>{{#link-to 'help-topic' topic.topic}}{{topic.name}}{{/link-to}}</li>
+      {{/each}}
     </ul>
 {{/each}}
 

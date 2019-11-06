@@ -20,6 +20,8 @@
 {{markdown-editor text=model.description}}
 
 
-{{#link-to 'event' model.id class="btn btn-default"}}Cancel{{/link-to}}
-<button {{action "edit"}} class="btn btn-primary">Save</button>
+<div class="pull-right">
+  {{#link-to 'event' model.id class="btn btn-default"}}Cancel{{/link-to}}
+  <button {{action "edit"}} class="btn btn-primary">Save</button>
+</div>
 {{flash-messages}}
