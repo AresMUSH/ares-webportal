@@ -39,8 +39,6 @@ export default Controller.extend({
             tags = tags.split(/[\s,]/);
         }
 
-        let gallery = this.get('model.char.gallery').map(g => g.path);
-
         let profile_image = this.get('model.char.profile_image.name');
         let profile_icon = this.get('model.char.profile_icon.name');
 
@@ -51,7 +49,6 @@ export default Controller.extend({
             plot_prefs: this.get('model.char.plot_prefs'),
             relationships: relationships,
             relationships_category_order: this.get('model.char.relationships_category_order'),
-            gallery: gallery,
             profile: profile,
             bg_shared: this.get('model.char.bg_shared'),
             lastwill: this.get('model.char.lastwill'),
@@ -76,9 +73,6 @@ export default Controller.extend({
                     this.get('model.char.files').pushObject( { name: name, path: `${folder}/${name}` });
                 }
             }
-        },
-        galleryChanged(files) {
-            this.set('model.char.gallery', files);
         },
         genderChanged(val) {
             this.set('model.char.demographics.gender.value', val.value);

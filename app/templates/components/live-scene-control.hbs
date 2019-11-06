@@ -61,15 +61,15 @@
                       <img alt="System Profile Icon"  class="small-profile-icon {{icon-class}}" src="/game/uploads/theme_images/noicon.png" >
                       Scene Restarted
                   {{else}}
-                      {{#link-to "char" pose.char.name}}
+                      <a href="#" {{action (mut characterCard) pose.char.name}}>
                           {{#if pose.char.icon}}
                           <img alt="{{pose.char.name}}'s icon" class="small-profile-icon {{icon-class}}" src="/game/uploads/{{pose.char.icon}}" >
                           {{else}}
                           <img alt="{{pose.char.name}}'s icon" class="small-profile-icon {{icon-class}}" src="/game/uploads/theme_images/noicon.png" >
                           {{/if}}
-                      {{/link-to}}
 
-                      {{#link-to "char" pose.char.name}} {{pose.char.name}} {{/link-to}}
+                          {{pose.char.name}}
+                      </a>
                     {{/if}}
                 </div>
                  {{#if pose.editActive}}
@@ -135,109 +135,103 @@
 
             {{pose-order poseOrder=scene.pose_order playerName=playerName}}
 
-            {{cmd-box value=scenePose rows=6 allowMultiLine=true onEnter=(action "addPose")}}
+            {{cmd-box value=scenePose rows=6 allowMultiLine=true class="scene-pose-box" onEnter=(action "addPose" poseType.id)}}
 
            {{/if}}
 
-    <div class="row">
+ <div class="row pose-ui">
 
+         <div class="col col-sm-6 col-xs-12 scene-buttons">
+             {{#if (not scene.completed)}}
 
-              <div class="col col-sm-6 col-xs-12">
+             <div class="pose-buttons">
+                 <button {{action 'addPose' poseType.id}} class="btn btn-primary">Add {{poseType.title}}</button>
+                 <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC</button>
 
+                 {{#if txtExtraInstalled}}
+                   {{live-scene-txt scenePose=scenePose scene=scene}}
+                 {{/if}}
 
-                {{#if (not scene.completed)}}
+             {{live-scene-custom-scenepose scenePose=scenePose scene=scene}}
+             </div>
 
-                <button {{action 'addPose' poseType.id}} class="btn btn-primary">Add {{poseType.title}}</button>
-                {{live-scene-txt scenePose=scenePose scene=scene}}
-                <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC</button>
-                {{/if}}
+             <div class="scene-pose-select">
+                 {{#power-select selected=poseType options=poseTypes searchField='title' onchange=(action "poseTypeChanged") as |poseType|}}
+                     {{poseType.title}}
+                 {{/power-select}}
+             </div>
 
-                {{live-scene-custom-scenepose scenePose=scenePose scene=scene}}
+             <div class="scene-char-select" >
+                 {{#power-select selected=poseChar options=scene.poseable_chars searchField='name' onchange=(action "poseCharChanged") as |poseChar|}}
+                     {{char-icon-tiny char=poseChar}}
+                 {{/power-select}}
+             </div>
+             {{/if}}
 
-                <div class="scene-pose-select" >
+         </div>
 
-                {{#power-select selected=poseType options=poseTypes searchField='title' onchange=(action "poseTypeChanged") as |poseType|}}
-                                {{poseType.title}}
-                                {{/power-select}}
-                </div>
+         <div class="col col-sm-6 col-xs-12 scene-dropdowns">
 
-                <div class="scene-char-select" >
+             {{#if (not scene.completed)}}
+                 <ul class="nav scene-menu">
+                     <li class="dropdown">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             <span class="btn btn-default" href="#">Play <span class="caret"></span></span>
+                         </a>
+                         <ul class="dropdown-menu">
+                             {{#if scene.can_edit}}
+                                 <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
+                             {{/if}}
 
-                {{#power-select selected=poseChar options=scene.poseable_chars searchField='name' onchange=(action "poseCharChanged") as |poseChar|}}
-                                {{char-icon-tiny char=poseChar}}
-                                {{/power-select}}
-                </div>
-              </div>
+                             {{live-scene-places scene=scene}}
 
-                <div class="col col-sm-6 col-xs-12">
+                             <li role="separator" class="divider"></li>
 
-                {{#if (not scene.completed)}}
+                             <li><a href="#" {{action (mut managePoseOrder) true}}>Manage Pose Order</a></li>
 
+                             {{#if scene.fs3_enabled}}
+                                 {{live-scene-fs3 abilities=abilities scene=scene}}
+                             {{/if}}
 
-                <ul class="nav scene-menu">
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             {{#if cookiesExtraInstalled}}
+                               {{live-scene-cookies scene=scene}}
+                             {{/if}}
 
-                      <span class="btn btn-default" href="#">Play <span class="caret"></span></span> </a>
-                      <ul class="dropdown-menu">
+                             {{live-scene-custom-play scene=scene abilities=abilities}}
 
-                        {{#if scene.can_edit}}
-                        <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
-                        {{/if}}
-                        <li role="separator" class="divider"></li>
-                        {{live-scene-spell spells=spells scene=scene}}
-                        {{#if scene.fs3_enabled}}
-                        {{live-scene-fs3 abilities=abilities scene=scene}}
-                        {{/if}}
+                         </ul>
+                     </li>
+                 </ul>
+             {{/if}}
 
-                          {{live-scene-places scene=scene}}
+             <ul class="nav scene-menu">
+                 <li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                         <span class="btn btn-default" href="#">Manage <span class="caret"></span></span>
+                     </a>
+                     <ul class="dropdown-menu">
+                         {{#if scene.can_edit}}
+                             <li>{{#link-to 'scene-edit' scene.id}}Edit Scene{{/link-to}}</li>
+                             {{#if (not scene.completed)}}
+                                 <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li>
+                             {{else}}
+                                 <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li>
+                                 <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li>
+                             {{/if}}
 
-                          <li role="separator" class="divider"></li>
+                             {{#if scene.can_delete}}
+                                 <li role="separator" class="divider"></li>
+                                 <li><a href="#" {{action (mut confirmDeleteScene) true}}>Delete Scene</a></li>
+                             {{/if}}
+                         {{/if}}
 
-                          <li><a href="#" {{action (mut managePoseOrder) true}}>Manage Pose Order</a></li>
+                         <li>{{#link-to 'scene-download' scene.id}}Download Scene{{/link-to}}</li>
+                     </ul>
+                 </li>
+             </ul>
+         </div>
 
-
-                          {{live-scene-custom-play scene=scene abilities=abilities}}
-
-                      </ul>
-                    </li>
-                  </ul>
-
-              {{/if}}
-
-            <ul class="nav scene-menu">
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-                  <span class="btn btn-default" href="#">Manage <span class="caret"></span></span> </a>
-                  <ul class="dropdown-menu">
-
-                    {{#if scene.can_edit}}
-                    <li>{{#link-to 'scene-edit' scene.id}}Edit Scene{{/link-to}}</li>
-                      {{#if (not scene.completed)}}
-                       <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li>
-                       {{else}}
-                       <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li>
-                       <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li>
-                       {{/if}}
-
-                       {{#if scene.can_delete}}
-                       <li role="separator" class="divider"></li>
-                       <li><a href="#" {{action (mut confirmDeleteScene) true}}>Delete Scene</a></li>
-                       {{/if}}
-
-                     {{/if}}
-
-
-
-                  <li>{{#link-to 'scene-download' scene.id}}Download Scene{{/link-to}}</li>
-
-                  </ul>
-                </li>
-            </ul>
-          </div>
-
-      </div>
+     </div>
 
     {{/if}}
 
@@ -319,4 +313,20 @@
           {{tooltip-icon position='left' message='3-Per Order' icon='fa fa-users'}}
         </a>
       {{/if}}
+    {{/bs-modal-simple}}
+
+    {{#bs-modal-simple
+      title=characterCard
+      closeTitle="Close"
+      size=null
+      fade=false
+      open=characterCard
+      onHide=(action (mut characterCard) null)}}
+
+      {{#if scene.use_custom_char_chards}}
+        {{char-card-custom char=characterCardInfo}}
+      {{else}}
+        {{char-card char=characterCardInfo}}
+      {{/if}}
+
     {{/bs-modal-simple}}

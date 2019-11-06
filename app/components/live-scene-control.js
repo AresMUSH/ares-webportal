@@ -10,6 +10,7 @@ export default Component.extend(AuthenticatedController, {
     confirmDeleteScene: false,
     selectLocation: false,
     managePoseOrder: false,
+    characterCard: false,
     newLocation: null,
     poseType: { title: 'Pose', id: 'pose' },
     poseChar: null,
@@ -32,6 +33,19 @@ export default Component.extend(AuthenticatedController, {
 
     poseOrderTypes: function() {
       return [ '3-per', 'normal' ];
+    }.property(),
+
+    characterCardInfo: function() {
+      let participant = this.get('scene.participants').find(p => p.name == this.characterCard);
+      return participant ? participant.char_card : {};
+    }.property('characterCard'),
+
+    txtExtraInstalled: function() {
+      return this.get('scene.extras_installed').some(e => e == 'txt');
+    }.property(),
+
+    cookiesExtraInstalled: function() {
+      return this.get('scene.extras_installed').some(e => e == 'cookies');
     }.property(),
 
     actions: {
