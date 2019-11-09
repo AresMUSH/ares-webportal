@@ -1,5 +1,5 @@
-import EmberObject from '@ember/object';
 import Component from '@ember/component';
+import { set } from '@ember/object';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
@@ -73,10 +73,10 @@ export default Component.extend(AuthenticatedController, {
       },
       
       editScenePose(scenePose) { 
-          Ember.set(scenePose, 'editActive', true);
+          set(scenePose, 'editActive', true);
       },
       cancelScenePoseEdit(scenePose) {
-          Ember.set(scenePose, 'editActive', false);
+          set(scenePose, 'editActive', false);
       },
       deleteScenePose() {
           let api = this.gameApi;
@@ -113,8 +113,8 @@ export default Component.extend(AuthenticatedController, {
               this.flashMessages.danger("You haven't entered anything.");
               return;
           }
-          Ember.set(scenePose, 'editActive', false);
-          Ember.set(scenePose, 'pose', pose);
+          set(scenePose, 'editActive', false);
+          set(scenePose, 'pose', pose);
 
           let api = this.gameApi;
           api.requestOne('editScenePose', { scene_id: this.get('scene.id'),
@@ -123,7 +123,7 @@ export default Component.extend(AuthenticatedController, {
               if (response.error) {
                   return;
               }
-              Ember.set(scenePose, 'pose', response.pose);
+              set(scenePose, 'pose', response.pose);
           });
           this.set('scenePose', '');
       },

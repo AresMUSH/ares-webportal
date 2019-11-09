@@ -1,3 +1,4 @@
+import $ from "jquery"
 import { inject as service } from '@ember/service';
 import Route from '@ember/routing/route';
 import RestrictedRoute from 'ares-webportal/mixins/restricted-route';
