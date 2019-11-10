@@ -181,13 +181,11 @@
                          <ul class="dropdown-menu">
                              {{#if scene.can_edit}}
                                  <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
+                                 <li><a href="#" {{action (mut managePoseOrder) true}}>Manage Pose Order</a></li>
                              {{/if}}
-
-                             {{live-scene-places scene=scene}}
-
                              <li role="separator" class="divider"></li>
 
-                             <li><a href="#" {{action (mut managePoseOrder) true}}>Manage Pose Order</a></li>
+                             {{live-scene-custom-play scene=scene abilities=abilities spells=spells}}
 
                              {{#if scene.fs3_enabled}}
                                  {{live-scene-fs3 abilities=abilities scene=scene}}
@@ -197,7 +195,9 @@
                                {{live-scene-cookies scene=scene}}
                              {{/if}}
 
-                             {{live-scene-custom-play scene=scene abilities=abilities}}
+                             {{live-scene-places scene=scene}}
+
+
 
                          </ul>
                      </li>
