@@ -1,7 +1,7 @@
 {{title model.file}}
 <h1>Edit {{model.file}} Config</h1>
 
-<div class="alert alert-info">See the <a href="{{model.help}}">Configuration Help</a> for an explanation for all of these options.</div>
+<div class="alert alert-info">See the <a href="{{model.help}}" target="_blank" rel="nofollow noopener">Configuration Help</a> for an explanation for all of these options.</div>
     
     {{#each-in config as |key config|}}
         <h2>{{config.key}} <button class="btn btn-default btn-sm" {{action 'removeKey' config.key}}><i class="fa fa-trash" aria-label="Delete Key"></i></button></h2>
