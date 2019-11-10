@@ -5,7 +5,12 @@ export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
     queryParams: [ 'title' ],
-
+    template: { title: 'blank', text: '' },
+  
+    resetOnExit: function() {
+        this.set('title', null);
+    },
+    
     actions: {
         
         save() {
@@ -27,6 +32,11 @@ export default Controller.extend({
                           response.name);
                 this.flashMessages.success('Page created!');
             });
+        },
+        
+        templateChanged(template) {
+          this.set('model.text', template.text);
+          this.set('template', template);
         }
     }
 });

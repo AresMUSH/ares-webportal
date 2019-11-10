@@ -1,17 +1,21 @@
 module.exports = {
   root: true,
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
+  plugins: [
+    'ember'
+  ],
   extends: [
     'eslint:recommended',
+    'plugin:ember/recommended'
   ],
   
   env: {
       browser: true,
       jquery: true
-
   },
   
   "globals": {
@@ -26,7 +30,15 @@ module.exports = {
       },
     plugins: ['ember'],
     rules: {
-      'no-console': 'off'
+      'no-console': 'off',
+      'ember/no-new-mixins': 'off',
+      'ember/no-function-prototype-extensions': 'off',
+      'ember/avoid-leaking-state-in-ember-objects': 'off',
+      'ember/routes-segments-snake-case': 'off',
+      'ember/jquery-ember-run': 'off',
+      'ember/closure-actions': 'off',
+      'ember/no-observers': 'off'
+
     },
       
   overrides: [
