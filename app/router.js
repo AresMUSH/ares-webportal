@@ -46,7 +46,7 @@ Router.map(function() {
   this.route('files');
   this.route('file', { path: '/file/:folder/:name' });
   this.route('file-edit', { path: '/file/edit/:folder/:name' });
-  this.route('forum', { path: '/forum' });
+  this.route('forum');
   this.route('forum-category', { path: '/forum/:category_id'});
   this.route('forum-topic', { path: '/forum/:category_id/:topic_id'});
   this.route('forum-create-post', { path: '/forum/:category_id/create-post' })
@@ -67,7 +67,7 @@ Router.map(function() {
   this.route('location', { path: '/location/:id'});
   this.route('logs');
   this.route('log', { path: '/log/:file' });
-  this.route('login', { path: '/login', query_params: ['redirect'] });
+  this.route('login', { query_params: ['redirect'] });
   this.route('logout');
   this.route('mail');
   this.route('mail-message', { path: '/mail/:id'});
@@ -75,7 +75,7 @@ Router.map(function() {
   this.route('manage');
   this.route('notifications');
   this.route('play');
-  this.route('players', { path: '/players'});
+  this.route('players');
   this.route('player', { path: '/player/:id'});
   this.route('plots');
   this.route('plot', { path: '/plot/:id' });
@@ -107,7 +107,7 @@ Router.map(function() {
   this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
   this.route('tos');
-  this.route('who', { path: '/who'});
+  this.route('who');
   this.route('wiki');
   this.route('wiki-page', { path: '/wiki/:id'});
   this.route('wiki-all', { path: '/wiki/all'});
