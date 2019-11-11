@@ -39,9 +39,6 @@ export default Controller.extend({
             tags = tags.split(/[\s,]/);
         }
                 
-        let profile_image = this.get('model.char.profile_image.name');
-        let profile_icon = this.get('model.char.profile_icon.name');
-
         return { 
             id: this.get('model.char.id'),
             demographics: demographics,
@@ -51,8 +48,9 @@ export default Controller.extend({
             profile: profile,
             bg_shared: this.get('model.char.bg_shared'),
             lastwill: this.get('model.char.lastwill'),
-            profile_image: profile_image,
-            profile_icon: profile_icon,
+            profile_image: this.get('model.char.profile_image.name'),
+            profile_icon: this.get('model.char.profile_icon.name'),
+            profile_gallery: this.get('model.char.profile_gallery'),
             tags: tags
         };
     }, 

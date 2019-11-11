@@ -59,11 +59,22 @@
             
             <div class="form-group row">
                 <div class="col-sm-3">
+                        <b>Profile Gallery</b>
+                </div>
+                
+                <div class="col-sm-9">
+                      {{input type="text" size=100 value=model.char.profile_gallery}}
+                    <p class="hint">List image files in the order you want them shown (folder/file1.jpg folder/file2.jpg etc.), or leave blank to just show all images from your character's folder.</p>
+                </div>
+            </div>
+            
+            <div class="form-group row">
+                <div class="col-sm-3">
                         <b>Page Tags</b>
                 </div>
                 
                 <div class="col-sm-9">
-                    {{input type="text" size=25 value=model.char.tags}}
+                    {{input type="text" size=50 value=model.char.tags}}
                     
                 </div>
             </div>

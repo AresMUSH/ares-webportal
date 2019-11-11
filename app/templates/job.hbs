@@ -176,7 +176,11 @@
 <hr>
 
 {{#each model.job.replies as |r|}}
- <div>
+ <div class="job-reply {{if r.admin_only 'admin-only-reply' '' }}">
+     {{#if r.admin_only}}
+     <div class="label admin-only-reply-label">To Admins Only</div>
+     {{/if}}
+     
      
      <p>{{char-icon-inline char=r.author}}</p>
      <p><i> {{r.created}} </i> 
@@ -184,17 +188,10 @@
         <a href="#" {{action 'deleteReply' r.id}}><i class="fa fa-trash" aria-label="Delete Reply"></i></a>     
       {{/if}}
       </p>
-     
-     
-         {{#if r.admin_only}}
-         <div class="label label-danger">To Admins Only</div>
-         {{/if}}
-         
+             
          {{{ansi-format text=r.message}}}
-         
-     
-     <hr>
   </div>
+     <hr>
 {{/each}}
 
 <div class="inline-response">
@@ -203,8 +200,15 @@
     {{#if model.job.is_category_admin}}
         Respond to Admin Only? {{input type='checkbox' checked=replyAdminOnly}} 
     {{/if}}
+
+  <div class="{{if replyAdminOnly 'admin-only-reply' ''}}">
+    {{#if replyAdminOnly}}
+    <div class="label admin-only-reply-label">To Admins Only</div>
+    {{/if}}
+    <div>
+    </div>
         {{markdown-editor text=reply}}
-        
+    </div>
 </div>
 
 
