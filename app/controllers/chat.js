@@ -1,3 +1,4 @@
+import $ from "jquery"
 import { set } from '@ember/object';
 import Controller from '@ember/controller';
 import { localTime } from 'ares-webportal/helpers/local-time';
