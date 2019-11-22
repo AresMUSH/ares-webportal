@@ -3,6 +3,7 @@
     <li><a data-toggle="tab" href="#scenelist">Scenes</a></li>
     <li><a data-toggle="tab" href="#plotprefs">Plot Preferences</a></li>
     {{#if char.lore_hook_name}}<li><a data-toggle="tab" href="#lore-hook">Lore Hook</a></li>{{/if}}
+    <li><a data-toggle="tab" href="#comps">Comps</a></li>
 </ul>
 
 
@@ -40,5 +41,9 @@
         {{char.lore_hook_desc}}
       </div>
     {{/if}}
+
+    <div id="comps" class="tab-pane fade ">
+      {{char-comps char=char}}
+    </div>
 
 </div>

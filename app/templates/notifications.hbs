@@ -3,11 +3,11 @@
 
 
 <div class="row">
-    
+
     <div class="col pull-right">
         <a href="#" {{action "markAllRead"}} class="btn btn-primary">Mark All Read</a>
     </div>
-    
+
 </div>
 
 <table class="table table-striped">
@@ -35,6 +35,10 @@
     {{else if (eq notification.type 'event')}}
       {{#link-to 'event' notification.reference_id}}View{{/link-to}}
     {{else if (eq notification.type 'achievement')}}
+      {{#link-to 'char' currentUser.id}}View{{/link-to}}
+    {{else if (eq notification.type 'comp')}}
+      {{#link-to 'char' currentUser.id}}View{{/link-to}}
+    {{else if (eq notification.type 'potion')}}
       {{#link-to 'char' currentUser.id}}View{{/link-to}}
     {{/if}}
   </td>
