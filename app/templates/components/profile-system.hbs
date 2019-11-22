@@ -26,6 +26,10 @@
     <li><a data-toggle="tab" href="#systemspellcards">Spell Cards</a></li>
   {{/if}}
 
+  {{#if char.magic_items}}
+    <li><a data-toggle="tab" href="#systemitems">Magic Items</a></li>
+  {{/if}}
+
   {{#if char.achievements}}
       <li><a data-toggle="tab" href="#achievements">Achievements</a></li>
   {{/if}}
@@ -69,7 +73,7 @@
   {{#if char.description}}
   <div id="systemdesc" class="tab-pane fade">
        {{{ansi-format text=char.description}}}
-       
+
        {{#if char.details}}
        {{#each char.details as |detail|}}
        <b>{{detail.name}}</b>: {{{ansi-format text=detail.desc}}}
@@ -100,6 +104,12 @@
   {{#if char.spells}}
   <div id="systemspellcards" class="tab-pane fade">
     {{char-spell-cards char=char}}
+  </div>
+  {{/if}}
+
+  {{#if char.magic_items}}
+  <div id="systemitems" class="tab-pane fade">
+    {{char-magic-items char=char}}
   </div>
   {{/if}}
 
