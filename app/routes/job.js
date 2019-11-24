@@ -9,6 +9,14 @@ export default Route.extend(DefaultRoute, ReloadableRoute, {
     gameApi: service(),
     gameSocket: service(),
     
+    activate: function() {
+        this.controllerFor('job').setupCallback();
+    },
+
+    deactivate: function() {
+      this.gameSocket.removeCallback('job_update');
+    },
+    
     model: function(params) {
         let api = this.gameApi;
 

@@ -13,6 +13,12 @@
 
 </p>
 
+  {{#if newActivity}}
+      <div class="alert alert-warning">
+        There has been new activity on this job.  Reload the page to update it.
+      </div>
+  {{/if}}
+  
 <table>
   <tr>
     <td>
@@ -201,6 +207,12 @@
      <hr>
 {{/each}}
 
+  {{#if newActivity}}
+      <div class="alert alert-warning">
+        There has been new activity on this job.  Reload the page to update it.
+      </div>
+  {{/if}}
+  
 <div class="inline-response">
 <h3>Add Reply</h3>
 
