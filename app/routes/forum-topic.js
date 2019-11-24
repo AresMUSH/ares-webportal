@@ -6,8 +6,20 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
     gameApi: service(),
+    gameSocket: service(),
     session: service(),
     
+    activate: function() {
+        this.controllerFor('forum-topic').setupCallback();
+        $(window).on('beforeunload', () => {
+            this.deactivate();
+        });
+    },
+
+    deactivate: function() {
+        this.gameSocket.removeCallback('new_forum_activity');
+    },
+  
     model: function(params) {
         let api = this.gameApi;
         return api.requestOne('forumTopic', { topic_id: params['topic_id'] });
