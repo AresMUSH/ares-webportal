@@ -4,11 +4,35 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
+    gameSocket: service(),
     flashMessages: service(),
     
     anyHidden: function() {
       return this.get('model.hidden').length > 0;
     }.property('model.hidden'),
+
+    onForumActivity: function(type, msg, timestamp ) {
+     let data = JSON.parse(msg);
+     if (data.type == 'new_forum_post' || data.type == 'forum_reply') {
+       let category = this.get('model.categories').find(c => c.id == data.category);
+       if (category) {
+         Ember.set(category, 'last_activity', {
+           author: data.author.name,
+           date: timestamp,
+           id: data.post,
+           subject: data.subject,
+           type: data.type == 'new_forum_post' ? 'post' : 'reply'
+         });
+         Ember.set(category, 'unread', true);
+       }
+     }
+    },
+        
+    setupCallback: function() {
+        let self = this;
+        this.gameSocket.setupCallback('new_forum_activity', function(type, msg, timestamp) {
+            self.onForumActivity(type, msg, timestamp) } );
+    },
     
     actions: {
       catchup: function() {

@@ -7,6 +7,7 @@ export default Controller.extend(AuthenticatedController, {
     reply: '',
     gameApi: service(),
     session: service(),
+    gameSocket: service(),
     flashMessages: service(),
     confirmDeleteTopic: null,
     confirmDeleteReply: null,
@@ -15,6 +16,44 @@ export default Controller.extend(AuthenticatedController, {
         this.set('reply', '');
         this.set('confirmDeleteReply', null);
         this.set('confirmDeleteTopic', null);
+    },
+    
+    onForumActivity: function(type, msg, timestamp ) {
+     let data = JSON.parse(msg);
+     if (data.post != this.get('model.id')) {
+       return;
+     }
+     let currentUserId = this.get('currentUser.id');
+     
+     if (data.type == 'forum_reply') {
+       this.get('model.replies').pushObject( {
+         author: data.author,
+         date: timestamp,
+         id: data.reply,
+         message: data.message,
+         raw_message: data.raw_message,
+         can_edit: currentUserId == data.author.id
+       });
+     }
+     else if (data.type == 'forum_edited') {
+       this.set('model.message', data.message);
+       this.set('model.raw_message', data.raw_message);
+       this.set('model.can_edit', currentUserId == data.author.id);
+     }
+     else if (data.type == 'reply_edited') {
+       let reply = this.get('model.replies').find(r => r.id == data.reply);
+       if (reply) {
+         Ember.set(reply, 'can_edit', currentUserId == data.author.id);
+         Ember.set(reply, 'message', data.message);  
+         Ember.set(reply, 'raw_message', data.raw_message);       
+       }
+     }
+    },
+        
+    setupCallback: function() {
+        let self = this;
+        this.gameSocket.setupCallback('new_forum_activity', function(type, msg, timestamp) {
+            self.onForumActivity(type, msg, timestamp) } );
     },
     
     actions: {
@@ -27,7 +66,6 @@ export default Controller.extend(AuthenticatedController, {
                     return;
                 }
                 this.set('reply', '');
-                this.send('reloadModel');
               this.flashMessages.success('Reply added!');
             });
         },
@@ -59,7 +97,6 @@ export default Controller.extend(AuthenticatedController, {
               }
               set(reply, 'editActive', false);
              this.flashMessages.success('Reply edited!');
-             this.send('reloadModel');
           });
         },
         
@@ -75,7 +112,6 @@ export default Controller.extend(AuthenticatedController, {
               }
               this.set('model.editActive', false);
               this.flashMessages.success('Post edited!');
-              this.send('reloadModel');
           });
         },
         

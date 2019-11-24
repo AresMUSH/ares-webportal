@@ -13,6 +13,12 @@
 
 </p>
 
+  {{#if newActivity}}
+      <div class="alert alert-warning">
+        There has been new activity on this job.  Reload the page to update it.
+      </div>
+  {{/if}}
+  
 <table>
   <tr>
     <td>
@@ -177,23 +183,36 @@
 
 {{#each model.job.replies as |r|}}
  <div class="job-reply {{if r.admin_only 'admin-only-reply' '' }}">
+     <div class="hint pull-right text-right">
+
+         <p>{{r.created}}</p>
+     
+         {{#if model.job.is_job_admin}}
+           <a href="#" {{action 'deleteReply' r.id}}><i class="fa fa-trash" aria-label="Delete Reply"></i></a>     
+         {{/if}}
+     
+     </div>
+     
+     
      {{#if r.admin_only}}
      <div class="label admin-only-reply-label">To Admins Only</div>
      {{/if}}
      
-     
      <p>{{char-icon-inline char=r.author}}</p>
-     <p><i> {{r.created}} </i> 
-      {{#if model.job.is_job_admin}}
-        <a href="#" {{action 'deleteReply' r.id}}><i class="fa fa-trash" aria-label="Delete Reply"></i></a>     
-      {{/if}}
-      </p>
+       
+     
              
          {{{ansi-format text=r.message}}}
   </div>
      <hr>
 {{/each}}
 
+  {{#if newActivity}}
+      <div class="alert alert-warning">
+        There has been new activity on this job.  Reload the page to update it.
+      </div>
+  {{/if}}
+  
 <div class="inline-response">
 <h3>Add Reply</h3>
 
@@ -226,7 +245,11 @@
                 <li>{{#link-to 'app-review' model.job.author.id}}App Review for {{model.job.author.name}}{{/link-to}}</li>
                 <li>{{#link-to 'char' model.job.author.name}}Profile for {{model.job.author.name}}{{/link-to}}</li>
               {{/if}}
-              </ul>
+              {{#if model.job.fs3_enabled}}
+              <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Ability Roll</a></li>
+              {{/if}}
+              
+            </ul>
             </li>
         </ul>
     {{/if}}
@@ -236,6 +259,8 @@
         </div>
   </div>
 </div>
+
+{{fs3-roll job=model.job destinationType='job' abilities=model.abilities selectSkillRoll=selectSkillRoll}}
 
 {{flash-messages}}
 {{outlet}}
