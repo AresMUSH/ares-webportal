@@ -200,6 +200,7 @@ export default Service.extend({
             }
             
             if (notification_type == "job_update" ||
+                notification_type == "new_forum_activity" ||
                 notification_type == "new_chat" || 
                 notification_type == "new_page" ||
                 notification_type == "new_scene_activity" ||
