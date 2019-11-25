@@ -6,19 +6,49 @@ export default Controller.extend({
   replyAdminOnly: true,
   editParticipants: false,
   newParticipants: [],
+  newActivity: false,
 
   gameApi: service(),
+  gameSocket: service(),
   session: service(),
   flashMessages: service(),
 
-
   setup: function() {
     this.set('reply', '');
+    this.set('newActivity', false);
     this.set('replyAdminOnly', this.get('model.job.is_category_admin') ? true : false );
     this.set('editParticipants', false);
     this.set('newParticipants', this.get('model.job.participants'));
   }.observes('model'),
 
+  setupCallback: function() {
+      let self = this;
+      this.gameSocket.setupCallback('job_update', function(type, msg, timestamp) {
+          self.onJobsMessage(type, msg, timestamp) } );
+  },
+
+  onJobsMessage: function(type, msg, timestamp ) {
+    let splitMsg = msg.split('|');
+    let jobId = splitMsg[0]; // Message = splitMsg[1]
+    let data = splitMsg[2];
+
+    if (data) {
+      data = JSON.parse(data);
+    }
+    if (jobId == this.get('model.job.id')) {
+      if (data && data.type == 'job_reply') {
+        this.get('model.job.replies').pushObject( {
+          admin_only: data.admin_only,
+          author: data.author,
+          created: timestamp,
+          id: data.reply_id,
+          message: data.message
+        });
+      } else {
+        this.set('newActivity', true);
+      }
+    }
+  },
 
   actions: {
     addReply() {
@@ -32,7 +62,6 @@ export default Controller.extend({
         }
         this.set('reply', '');
         this.set('replyAdminOnly', true);
-        this.send('reloadModel');
         this.flashMessages.success('Reply added!');
       });
     },
@@ -81,6 +110,7 @@ export default Controller.extend({
         this.flashMessages.success('Job changed to ' + data + '.');
       });
     },
+
     participantsChanged: function(newParticipants) {
         this.set('newParticipants', newParticipants);
     },
