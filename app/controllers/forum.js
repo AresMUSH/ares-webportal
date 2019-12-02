@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
@@ -7,9 +8,9 @@ export default Controller.extend(AuthenticatedController, {
     gameSocket: service(),
     flashMessages: service(),
     
-    anyHidden: function() {
+    anyHidden: computed('model.hidden', function() {
       return this.get('model.hidden').length > 0;
-    }.property('model.hidden'),
+    }),
 
     onForumActivity: function(type, msg, timestamp ) {
      let data = JSON.parse(msg);

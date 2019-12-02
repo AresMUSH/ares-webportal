@@ -30,7 +30,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     
     pageTitle: function() {
         return 'Scene ' + this.get('model.scene.id');
-    }.property('model.scene.id'),
+    }.property(),
     
 
     resetOnExit: function() {

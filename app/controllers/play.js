@@ -1,4 +1,5 @@
 import $ from "jquery"
+import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
@@ -86,13 +87,13 @@ export default Controller.extend({
     }      
   },
     
-  showDisconnect: function() {
+  showDisconnect: computed('connected', function() {
     return this.connected;
-  }.property('connected'),
+  }),
     
-  showConnect: function() {  
+  showConnect: computed('connected', function() {  
     return !this.connected;
-  }.property('connected'),
+  }),
     
   sendInput: function(msg) {
     var cmd, json;

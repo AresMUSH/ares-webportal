@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import AvailableRoutes from 'ares-webportal/mixins/available-routes';
 
@@ -36,19 +37,19 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
       return aresweb_version;
     }.property(),
     
-    currentUser: function() {
+    currentUser: computed('session.data.authenticated', function() {
         return this.get('session.data.authenticated');
-    }.property('session.data.authenticated'),
+    }),
     
-    socketConnected: function() {
+    socketConnected: computed('gameSocket.connected', function() {
       return this.get('gameSocket.connected');
-    }.property('gameSocket.connected'),
+    }),
     
-    sidebar: function() {
+    sidebar: computed('refreshSidebar', function() {
         return this.model;
-    }.property('refreshSidebar'),
+    }),
 
-    topNavbar: function() {
+    topNavbar: computed('model.top_navbar', function() {
       let config = this.get('model.top_navbar');
       let nav = [];
       let availableRoutes = this.availableRoutes();
@@ -100,7 +101,7 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
       }
       return nav;
       
-    }.property('model'),
+    }),
     
     actions: {
       switchAlt: function(alt) {

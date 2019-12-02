@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
@@ -17,7 +18,7 @@ export default Controller.extend({
     }.property(),
 
 
-    anyGroupMissing: function() {
+    anyGroupMissing: computed('model', function() {
         let groups = this.get('model.char.groups');
         let anyMissing = false;
         
@@ -27,7 +28,7 @@ export default Controller.extend({
             } 
         });
         return anyMissing;    
-    }.property('model'),
+    }),
     
     buildQueryDataForChar: function() {
         

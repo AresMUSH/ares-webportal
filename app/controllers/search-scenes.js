@@ -53,7 +53,7 @@ export default Controller.extend({
     let scene_types = types.map(s => s.name);
     let base_filters = ['Recent', 'All', 'Popular'];
     return base_filters.concat(scene_types);
-    }.property('model.sceneTypes'),
+    }.property(),
   
   actions: {
     goToPage(newPage) { 

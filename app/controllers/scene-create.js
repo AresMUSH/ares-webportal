@@ -8,7 +8,7 @@ export default Controller.extend({
     
     sceneTypes: function() { 
         return this.get('model.sceneTypes').map(p => p.get('name'));
-    }.property('model'),
+    }.property(),
     
     scenePrivacyValues: function() { 
         return [ 'Open', 'Private' ];

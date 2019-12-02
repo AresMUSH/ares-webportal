@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { set } from '@ember/object';
+import { set, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
@@ -35,10 +35,10 @@ export default Component.extend(AuthenticatedController, {
       return [ '3-per', 'normal' ];
     }.property(),
     
-    characterCardInfo: function() {
+    characterCardInfo: computed('characterCard', function() {
       let participant = this.get('scene.participants').find(p => p.name == this.characterCard);
       return participant ? participant.char_card : {};
-    }.property('characterCard'),
+    }),
   
     txtExtraInstalled: function() {
       return this.get('scene.extras_installed').some(e => e == 'txt');

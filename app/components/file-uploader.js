@@ -1,4 +1,4 @@
-import EmberObject from '@ember/object';
+import EmberObject, { computed } from '@ember/object';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
@@ -14,13 +14,13 @@ export default Component.extend({
         this.set('files', []);
     },
     
-    fileCount: function() {
+    fileCount: computed('files', function() {
         return this.get('files.length');
-    }.property('files'),
+    }),
     
-    showSelector: function() {
+    showSelector: computed('fileCount', function() {
         return !this.fileCount;
-    }.property('fileCount'),
+    }),
     
     actions: {
         filesSelected: function(e) {
