@@ -81,7 +81,7 @@ export default Component.extend({
     );
   },
     
-  skillPoints: computed('model.char.fs3.fs3_backgrounds.@each.rating', 'model.char.fs3.fs3_action_skills.@each.rating', 'model.char.fs3.fs3_languages.@each.rating', 'model.char.fs3.fs3_advantages.@each.rating', function() {
+  skillPoints: computed('model.char.fs3.{fs3_backgrounds.@each.rating,fs3_action_skills.@each.rating,fs3_advantages.@each.rating,fs3_languages.@each.rating}', function() {
     let total = 0;
     total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_action_skills'), 0, 1, 1);
     total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_backgrounds'), this.get('model.cgInfo.fs3.free_backgrounds'), 0, 1);

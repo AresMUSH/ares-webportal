@@ -1,5 +1,5 @@
 import $ from "jquery"
-import { get } from '@ember/object';
+import { get, computed } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
@@ -17,9 +17,9 @@ export default Controller.extend(AuthenticatedController, {
   confirmRemoveCombatant: false,
   combatLog: '',
     
-  pageTitle: function() {
+  pageTitle: computed(function() {
     return `Combat ${this.get('model.id')}`;
-  }.property(),
+  }),
     
   onCombatActivity: function(type, msg /* , timestamp */ ) {
       

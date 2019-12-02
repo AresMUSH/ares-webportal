@@ -23,7 +23,7 @@ export default Controller.extend({
        });
     }),
     
-    anyNewActivity: computed('model.chat.@each.is_unread', 'model.chat.@each.new_messages', function() {
+    anyNewActivity: computed('model.chat.@each.{is_unread,new_messages}', function() {
       return this.get('model.chat').any(c => c.is_unread || c.new_messages > 0);
     }),
     

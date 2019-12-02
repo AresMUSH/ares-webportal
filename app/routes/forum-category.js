@@ -1,3 +1,4 @@
+import $ from "jquery"
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import DefaultRoute from 'ares-webportal/mixins/default-route';

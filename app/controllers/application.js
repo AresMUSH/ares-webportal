@@ -13,29 +13,29 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
     showAltSelection: false,
     sidebarModel: {},
 
-    currentRoute: function() {
+    currentRoute: computed(function() {
         return window.location;
-    }.property(),
+    }),
     
-    mushName: function() { 
+    mushName: computed(function() { 
         return this.get('model.game.name');
-    }.property(),
+    }),
     
-    mushPort: function() {
+    mushPort: computed(function() {
         return aresconfig.mush_port;        
-    }.property(),
+    }),
     
-    mushHost: function() {
+    mushHost: computed(function() {
         return aresconfig.host;        
-    }.property(),
+    }),
     
-    mushVersion: function() {
+    mushVersion: computed(function() {
         return aresconfig.version;
-    }.property(),
+    }),
     
-    portalVersion: function() {
+    portalVersion: computed(function() {
       return aresweb_version;
-    }.property(),
+    }),
     
     currentUser: computed('session.data.authenticated', function() {
         return this.get('session.data.authenticated');

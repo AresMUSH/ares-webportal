@@ -9,13 +9,13 @@ export default Controller.extend({
     fs3UpdateCallback: null,
     fs3ValidateCallback: null,
     
-    genders: function() {
+    genders: computed(function() {
       let list = [];
       this.get('model.cgInfo.genders').forEach(function(g) {
         list.push({ value: g });
       });
       return list;
-    }.property(),
+    }),
 
 
     anyGroupMissing: computed('model', function() {
