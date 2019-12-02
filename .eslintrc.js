@@ -32,11 +32,9 @@ module.exports = {
     rules: {
       'no-console': 'off',
       'ember/no-new-mixins': 'off',
-      'ember/routes-segments-snake-case': 'off',
       'ember/jquery-ember-run': 'off',
       'ember/closure-actions': 'off',
       'ember/no-observers': 'off'
-
     },
       
   overrides: [
