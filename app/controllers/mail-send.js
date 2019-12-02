@@ -6,8 +6,13 @@ export default Controller.extend({
     flashMessages: service(),
     subject: '',
     message: '',
-    toList: [],
-    
+    toList: null,
+
+    init: function() {
+      this._super(...arguments);
+      this.set('toList', []);
+    },
+      
     resetOnExit: function() {
         this.set('subject', '');
         this.set('message', '');

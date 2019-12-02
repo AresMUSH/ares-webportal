@@ -3,17 +3,18 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
-    files: [],
+    files: null,
     folder: '',
     allowMulti: true,
     lockProperties: false,
     gameApi: service(),
     flashMessages: service(),
     
-    didInsertElement: function() {
-        this.set('files', []);
+    init: function() {
+      this._super(...arguments);
+      this.set('files', []);
     },
-    
+  
     fileCount: computed('files', function() {
         return this.get('files.length');
     }),

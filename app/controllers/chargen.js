@@ -5,10 +5,15 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({    
     flashMessages: service(),
     gameApi: service(),
-    charErrors: [],
+    charErrors: null,
     fs3UpdateCallback: null,
     fs3ValidateCallback: null,
-    
+
+    init: function() {
+      this._super(...arguments);
+      this.set('charErrors', []);
+    },
+      
     genders: computed(function() {
       let list = [];
       this.get('model.cgInfo.genders').forEach(function(g) {

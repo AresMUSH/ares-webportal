@@ -12,13 +12,18 @@ export default Component.extend(AuthenticatedController, {
     managePoseOrder: false,
     characterCard: false,
     newLocation: null,
-    poseType: { title: 'Pose', id: 'pose' },
+    poseType: null,
     poseChar: null,
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
     session: service(),
-    
+
+    init: function() {
+      this._super(...arguments);
+      this.set('poseType', { title: 'Pose', id: 'pose' });
+    },
+      
     didInsertElement: function() {
       this.set('poseChar', this.get('scene.poseable_chars')[0]);
     },

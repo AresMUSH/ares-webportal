@@ -11,7 +11,6 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
     hideSidebar: false,
     refreshSidebar: false,
     showAltSelection: false,
-    sidebarModel: {},
 
     currentRoute: computed(function() {
         return window.location;

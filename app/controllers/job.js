@@ -6,14 +6,19 @@ export default Controller.extend({
   reply: '',
   replyAdminOnly: true,
   editParticipants: false,
-  newParticipants: [],
+  newParticipants: null,
   newActivity: false,
     
   gameApi: service(),
   gameSocket: service(),
   session: service(),
   flashMessages: service(),
-    
+
+  init: function() {
+    this._super(...arguments);
+    this.set('newParticipants', []);
+  },
+      
   setup: observer('model', function() {
     this.set('reply', '');
     this.set('newActivity', false);

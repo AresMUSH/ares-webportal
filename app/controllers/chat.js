@@ -15,8 +15,13 @@ export default Controller.extend({
     newConversation: false,
     showReport: false,
     reportReason: '',
-    newConversationList: [],
-    
+    newConversationList: null,
+
+    init: function() {
+      this._super(...arguments);
+      this.set('newConversationList', []);
+    },
+      
     channelsByActivity: computed('model.chat.@each.last_activity', function() {
        return this.get('model.chat').sort(function(a,b){
         return new Date(b.last_activity) - new Date(a.last_activity);
