@@ -41,13 +41,6 @@
 
      <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.attrs_blurb}}}</p>
 
-
-     {{#each model.char.fs3.fs3_attributes as |att|}}
-     {{#fs3-attrbox rating=att.rating ratingName=att.rating_name maxRating=model.cgInfo.fs3.max_attr_rating  updated=(action "abilityChanged")}}
-         <b>{{att.name}}</b> - {{att.desc}}
-     {{/fs3-attrbox}}
-     {{/each}}
-     <br>
      <div class="cg-tip-table">
        <p><b>What level should I choose?</b></p>
        <table>
@@ -82,6 +75,11 @@
        </tbody>
      </table>
      </div>
+     {{#each model.char.fs3.fs3_attributes as |att|}}
+     {{#fs3-attrbox rating=att.rating ratingName=att.rating_name maxRating=model.cgInfo.fs3.max_attr_rating  updated=(action "abilityChanged")}}
+         <b>{{att.name}}</b> - {{att.desc}}
+     {{/fs3-attrbox}}
+     {{/each}}
 
    </div>
   </div>
@@ -99,12 +97,6 @@
 
      <br>
 
-     {{#each model.char.fs3.fs3_action_skills as |skill|}}
-     {{#fs3-actionbox name=skill.name rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.fs3.max_skill_rating minRating=model.cgInfo.fs3.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
-         <b>{{skill.name}}</b> - {{skill.desc}}
-     {{/fs3-actionbox}}
-     {{/each}}
-     <br>
      <div class="cg-tip-table">
        <p><b>What level should I choose?</b></p>
          <table>
@@ -171,6 +163,12 @@
          </table>
        </div>
 
+       {{#each model.char.fs3.fs3_action_skills as |skill|}}
+       {{#fs3-actionbox name=skill.name rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.fs3.max_skill_rating minRating=model.cgInfo.fs3.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
+           <b>{{skill.name}}</b> - {{skill.desc}}
+       {{/fs3-actionbox}}
+       {{/each}}
+
    </div>
   </div>
 
@@ -187,13 +185,6 @@
 
      <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.background_blurb}}} To remove a background skill, set its rating to Everyman.</p>
 
-
-     {{#each model.char.fs3.fs3_backgrounds as |skill|}}
-
-     {{#fs3-bgbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
-         <b>{{input type="text" value=skill.name size=25}}</b>
-     {{/fs3-bgbox}}
-     {{/each}}
 
      <button class="btn btn-default" id="addbg" {{action (mut selectBackgroundSkill) true}}>Add Background Skill</button>
      <br>
@@ -228,6 +219,13 @@
        </tr>
      </table>
      </div>
+
+     {{#each model.char.fs3.fs3_backgrounds as |skill|}}
+
+     {{#fs3-bgbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
+         <b>{{input type="text" value=skill.name size=25}}</b>
+     {{/fs3-bgbox}}
+     {{/each}}
 
    </div>
   </div>
