@@ -187,8 +187,7 @@
      <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.background_blurb}}} To remove a background skill, set its rating to Everyman.</p>
 
 
-     <button class="btn btn-default" id="addbg" {{action (mut selectBackgroundSkill) true}}>Add Background Skill</button>
-     <br>
+
      <div class="cg-tip-table">
 
        <p><b>What level should I choose?</b></p>
@@ -220,6 +219,8 @@
        </tr>
      </table>
      </div>
+     <br>
+     <button class="btn btn-default" id="addbg" {{action (mut selectBackgroundSkill) true}}>Add Background Skill</button>
      <br>
      {{#each model.char.fs3.fs3_backgrounds as |skill|}}
 
