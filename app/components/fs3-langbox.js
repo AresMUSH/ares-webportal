@@ -3,10 +3,10 @@ import Component from '@ember/component';
 export default Component.extend({
     minRating: 0,
     maxRating: 3,
-    
+
     getRatingName: function() {
         let name = "";
-        
+
         switch (this.rating) {
             case 0:
                 name = "Everyman";
@@ -15,7 +15,7 @@ export default Component.extend({
                 name = "Beginner";
                 break;
             case 2:
-                name =  "Intermediate";
+                name =  "Conversational";
                 break;
             case 3:
                 name =  "Fluent";
@@ -23,8 +23,8 @@ export default Component.extend({
         }
         return name;
     },
-    
-    actions: { 
+
+    actions: {
         increment() {
             var current = this.rating;
             if (current < this.maxRating) {
@@ -33,7 +33,7 @@ export default Component.extend({
             this.set('ratingName', this.getRatingName());
             this.sendAction('updated');
         },
-    
+
         decrement() {
             var current = this.rating;
             if (current > this.minRating) {
