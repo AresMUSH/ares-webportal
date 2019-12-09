@@ -19,10 +19,14 @@ export default Controller.extend({
     this.set('newParticipants', []);
   },
       
+  resetReplyAdmin: function() {
+    this.set('replyAdminOnly', this.get('model.job.is_category_admin') ? true : false );
+  },
+  
   setup: observer('model', function() {
     this.set('reply', '');
     this.set('newActivity', false);
-    this.set('replyAdminOnly', this.get('model.job.is_category_admin') ? true : false );
+    this.resetReplyAdmin();
     this.set('editParticipants', false);
     this.set('newParticipants', this.get('model.job.participants'));
   }),
@@ -67,7 +71,7 @@ export default Controller.extend({
           return;
         }
         this.set('reply', '');
-        this.set('replyAdminOnly', true);
+        this.resetReplyAdmin();
         this.flashMessages.success('Reply added!');
       });
     },
@@ -79,7 +83,7 @@ export default Controller.extend({
           return;
         }
         this.set('reply', '');
-        this.set('replyAdminOnly', true);
+        this.resetReplyAdmin();
         this.transitionToRoute('jobs');
         this.flashMessages.success('Reply added!');
       });

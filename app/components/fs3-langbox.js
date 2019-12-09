@@ -15,7 +15,7 @@ export default Component.extend({
                 name = "Beginner";
                 break;
             case 2:
-                name =  "Intermediate";
+                name =  "Conversational";
                 break;
             case 3:
                 name =  "Fluent";

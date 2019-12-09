@@ -1,0 +1,12 @@
+{{#if (not game.disabled_plugins.fs3skills)}}
+   {{#if char.fs3.show_sheet}}
+    <li><a data-toggle="tab" href="#systemfs3sheet">Sheet</a></li>
+    {{/if}}
+    {{#if char.fs3.xp}}
+    <li><a data-toggle="tab" href="#systemfs3xp">XP</a></li>
+    {{/if}}
+{{/if}}
+
+{{#if (not game.disabled_plugins.fs3combat)}}
+    <li><a data-toggle="tab" href="#systemfs3damage">Damage</a></li>
+{{/if}}
