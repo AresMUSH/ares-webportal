@@ -9,7 +9,7 @@ export default Controller.extend(AuthenticatedController, {
   gameSocket: service(),
   flashMessages: service(),
   newCombatantName: '',
-  newCombatantType: 'Soldier',
+  newCombatantType: '',
   newCombatActivity: false,
   showAddCombatant: false,
   showJoinCombat: false,
@@ -120,12 +120,20 @@ export default Controller.extend(AuthenticatedController, {
         let name = this.newCombatantName;
         let type = this.newCombatantType;
         this.set('showAddCombatant', false);
+        if (type === '') {
+          this.flashMessages.danger('You must select a combatant type.');
+          return;
+        }
         this.addToCombat(name, type, false);            
       },
       joinCombat: function() {
         let name = this.get('currentUser.name')
         let type = this.newCombatantType;
         this.set('showJoinCombat', false);
+        if (type === '') {
+          this.flashMessages.danger('You must select a combatant type.');
+          return;
+        }
         this.addToCombat(name, type, true);            
       },
       newTurn: function() {
