@@ -63,8 +63,14 @@
                 </div>
                 
                 <div class="col-sm-9">
-                      {{input type="text" size=100 value=model.char.profile_gallery}}
-                    <p class="hint">List image files in the order you want them shown (folder/file1.jpg folder/file2.jpg etc.), or leave blank to just show all images from your character's folder.</p>
+                  
+                  <div class="profile-gallery-input">
+                  {{textarea value=model.char.profile_gallery cols="80" rows=3}}
+                  
+                    <p class="hint">List image files in the order you want them shown (<code>folder/file1.jpg /folder/file2.jpg</code> etc.), or leave blank to just show all images from your character's folder.</p>
+                    
+                    </div>
+                    
                 </div>
             </div>
             

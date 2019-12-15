@@ -1,3 +1,4 @@
+import { set } from '@ember/object';
 import Controller from '@ember/controller';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import { inject as service } from '@ember/service';
@@ -27,8 +28,8 @@ export default Controller.extend(AuthenticatedController, {
       } else if (data.type == 'forum_reply') {
         let post = this.get('model.posts').find( p => p.id == data.post );
         if (post) {
-          Ember.set(post, 'last_activity', timestamp);
-          Ember.set(post, 'unread', true);
+          set(post, 'last_activity', timestamp);
+          set(post, 'unread', true);
         }
       }
     },

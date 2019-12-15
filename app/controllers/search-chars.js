@@ -4,12 +4,18 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   gameApi: service(),
   flashMessages: service(),
-  searchGroups: {},
-  searchDemographics: {},
+  searchGroups: null,
+  searchDemographics: null,
   searchName: '',
   searchTag: '',
   searchResults: null,
-    
+
+  init: function() {
+    this._super(...arguments);
+    this.set('searchGroups', {});
+    this.set('searchDemographics', {});
+  },
+      
   resetOnExit: function() {
     this.set('searchGroups', {});
     this.set('searchDemographics', {});

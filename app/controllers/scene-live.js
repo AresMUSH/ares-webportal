@@ -1,5 +1,6 @@
 import $ from "jquery"
 import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import SceneUpdate from 'ares-webportal/mixins/scene-update';
@@ -28,9 +29,9 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         }
     },
     
-    pageTitle: function() {
+    pageTitle: computed(function() {
         return 'Scene ' + this.get('model.scene.id');
-    }.property('model.scene.id'),
+    }),
     
 
     resetOnExit: function() {

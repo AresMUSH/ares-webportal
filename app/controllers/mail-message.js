@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import { observer } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
@@ -8,16 +9,22 @@ export default Controller.extend({
   fwdSubject: '',
   replyMessage: '',
   fwdMessage: '',
-  replyToList: [],
-  fwdToList: [],
+  replyToList: null,
+  fwdToList: null,
   newTag: '',
   confirmDelete: false,
 
+  init: function() {
+    this._super(...arguments);
+    this.set('fwdToList', []);
+    this.set('replyToList', []);
+  },
+  
   resetOnExit: function() {
     this.set('confirmDelete', false);
   },
   
-  setup: function() {
+  setup: observer('model.message', function() {
     this.set('replySubject', `Re: ${this.get('model.message.subject')}`);
     this.set('fwdSubject', `Fwd: ${this.get('model.message.subject')}`);
     this.set('replyToList', this.get('model.characters').filter(c => c.name === this.get('model.message.from')));
@@ -25,7 +32,7 @@ export default Controller.extend({
     this.set('replyMessage', '');
     this.set('fwdMessage', '');
     this.set('newTag', '');
-  }.observes('model.message'),
+  }),
   
   saveTags: function() {
     let api = this.gameApi;

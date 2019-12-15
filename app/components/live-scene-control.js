@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { set } from '@ember/object';
+import { set, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
@@ -12,41 +12,46 @@ export default Component.extend(AuthenticatedController, {
     managePoseOrder: false,
     characterCard: false,
     newLocation: null,
-    poseType: { title: 'Pose', id: 'pose' },
+    poseType: null,
     poseChar: null,
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
     session: service(),
-    
+
+    init: function() {
+      this._super(...arguments);
+      this.set('poseType', { title: 'Pose', id: 'pose' });
+    },
+      
     didInsertElement: function() {
       this.set('poseChar', this.get('scene.poseable_chars')[0]);
     },
     
-    poseTypes: function() {
+    poseTypes: computed(function() {
       return [
         { title: 'Pose', id: 'pose' },
         { title: 'GM Emit', id: 'gm' },
         { title: 'Scene Set', id: 'setpose' }
       ];
-    }.property(),
+    }),
     
-    poseOrderTypes: function() {
+    poseOrderTypes: computed(function() {
       return [ '3-per', 'normal' ];
-    }.property(),
+    }),
     
-    characterCardInfo: function() {
+    characterCardInfo: computed('characterCard', function() {
       let participant = this.get('scene.participants').find(p => p.name == this.characterCard);
       return participant ? participant.char_card : {};
-    }.property('characterCard'),
+    }),
   
-    txtExtraInstalled: function() {
+    txtExtraInstalled: computed(function() {
       return this.get('scene.extras_installed').some(e => e == 'txt');
-    }.property(),
+    }),
     
-    cookiesExtraInstalled: function() {
+    cookiesExtraInstalled: computed(function() {
       return this.get('scene.extras_installed').some(e => e == 'cookies');
-    }.property(),
+    }),
     
     actions: { 
       locationSelected(loc) {

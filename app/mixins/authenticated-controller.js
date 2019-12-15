@@ -1,26 +1,27 @@
 import Mixin from '@ember/object/mixin';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Mixin.create({
     session: service(),
     
-    isAuthenticated: function() {
+    isAuthenticated: computed('session.isAuthenticated', function() {
         return this.get('session.isAuthenticated');
-    }.property('session.isAuthenticated'),
+    }),
     
-    isApproved: function() {
+    isApproved: computed('session.data.authenticated.is_approved', function() {
         return this.get('session.data.authenticated.is_approved');
-    }.property('model'),
+    }),
     
-    isAdmin: function() {
+    isAdmin: computed('session.data.authenticated.is_admin', function() {
         return this.get('session.data.authenticated.is_admin');        
-    }.property('model'),
+    }),
     
-    isCoder: function() {
+    isCoder: computed('session.data.authenticated.is_coder', function() {
         return this.get('session.data.authenticated.is_coder');        
-    }.property('model'),
+    }),
     
-    currentUser: function() {
+    currentUser: computed('session.data.authenticated', function() {
         return this.get('session.data.authenticated');
-    }.property('model')
+    })
 });
