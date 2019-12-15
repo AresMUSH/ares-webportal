@@ -3,7 +3,7 @@ import Controller from '@ember/controller';
 export default Controller.extend({
 
     actions: {
-        abilityLearned: function() {
+        reloadChar: function() {
             this.send('reloadModel');
         },
         fileUploaded: function(folder, file) {

@@ -1,16 +1,17 @@
 import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
     gameApi: service(),
     flashMessages: service(),
-    genders: function() {
+    genders: computed(function() {
       let list = [];
       this.get('model.cgInfo.genders').forEach(function(g) {
         list.push({ value: g });
       });
       return list;
-    }.property(),
+    }),
   
     buildQueryDataForChar: function() {
         let demographics = {};

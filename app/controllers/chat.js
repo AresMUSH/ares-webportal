@@ -1,5 +1,5 @@
 import $ from "jquery"
-import { set } from '@ember/object';
+import { set, computed } from '@ember/object';
 import Controller from '@ember/controller';
 import { localTime } from 'ares-webportal/helpers/local-time';
 import { inject as service } from '@ember/service';
@@ -15,17 +15,22 @@ export default Controller.extend({
     newConversation: false,
     showReport: false,
     reportReason: '',
-    newConversationList: [],
-    
-    channelsByActivity: function() {
+    newConversationList: null,
+
+    init: function() {
+      this._super(...arguments);
+      this.set('newConversationList', []);
+    },
+      
+    channelsByActivity: computed('model.chat.@each.last_activity', function() {
        return this.get('model.chat').sort(function(a,b){
         return new Date(b.last_activity) - new Date(a.last_activity);
        });
-    }.property('model.chat.@each.last_activity'),
+    }),
     
-    anyNewActivity: function() {
+    anyNewActivity: computed('model.chat.@each.{is_unread,new_messages}', function() {
       return this.get('model.chat').any(c => c.is_unread || c.new_messages > 0);
-    }.property('model.chat.@each.is_unread', 'model.chat.@each.new_messages'),
+    }),
     
     resetOnExit: function() {
         this.set('selectedChannel', null);

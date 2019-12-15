@@ -1,5 +1,5 @@
 import $ from "jquery"
-import { get } from '@ember/object';
+import { get, computed } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
@@ -9,7 +9,7 @@ export default Controller.extend(AuthenticatedController, {
   gameSocket: service(),
   flashMessages: service(),
   newCombatantName: '',
-  newCombatantType: 'Soldier',
+  newCombatantType: '',
   newCombatActivity: false,
   showAddCombatant: false,
   showJoinCombat: false,
@@ -17,9 +17,9 @@ export default Controller.extend(AuthenticatedController, {
   confirmRemoveCombatant: false,
   combatLog: '',
     
-  pageTitle: function() {
+  pageTitle: computed(function() {
     return `Combat ${this.get('model.id')}`;
-  }.property(),
+  }),
     
   onCombatActivity: function(type, msg /* , timestamp */ ) {
       
@@ -120,12 +120,20 @@ export default Controller.extend(AuthenticatedController, {
         let name = this.newCombatantName;
         let type = this.newCombatantType;
         this.set('showAddCombatant', false);
+        if (type === '') {
+          this.flashMessages.danger('You must select a combatant type.');
+          return;
+        }
         this.addToCombat(name, type, false);            
       },
       joinCombat: function() {
         let name = this.get('currentUser.name')
         let type = this.newCombatantType;
         this.set('showJoinCombat', false);
+        if (type === '') {
+          this.flashMessages.danger('You must select a combatant type.');
+          return;
+        }
         this.addToCombat(name, type, true);            
       },
       newTurn: function() {

@@ -15,23 +15,14 @@
   <li><a data-toggle="tab" href="#systemdesc">Description</a></li>
   {{/if}}
   
- 
-  {{#if (not game.disabled_plugins.fs3skills)}}
-     {{#if char.fs3.show_sheet}}
-      <li><a data-toggle="tab" href="#systemsheet">Sheet</a></li>
-      {{/if}}
-      {{#if char.fs3.xp}}
-      <li><a data-toggle="tab" href="#systemxp">XP</a></li>
-      {{/if}}
-  {{/if}}
-  
-  {{#if (not game.disabled_plugins.fs3combat)}}
-      <li><a data-toggle="tab" href="#systemdamage">Damage</a></li>
-  {{/if}}
-  
+  {{profile-fs3-tabs char=char game=game}}
+
+  {{profile-custom-tabs char=char game=game}}
+
   {{#if char.achievements}}
       <li><a data-toggle="tab" href="#achievements">Achievements</a></li>
   {{/if}}
+
 </ul>
 
 
@@ -81,24 +72,9 @@
   </div>
   {{/if}}
   
-  {{#if (not game.disabled_plugins.fs3skills)}}
-    {{#if char.fs3.show_sheet}}
-      <div id="systemsheet" class="tab-pane fade">
-        {{fs3-sheet char=char}}
-      </div>
-     {{/if}}
-     {{#if char.fs3.xp}}
-      <div id="systemxp" class="tab-pane fade">
-        {{fs3-xp char=char abilityLearned=(action 'abilityLearned')}}
-      </div>
-     {{/if}}
-  {{/if}}
+  {{profile-fs3 char=char game=game reloadChar=(action 'reloadChar')}}
   
-  {{#if (not game.disabled_plugins.fs3combat)}}  
-  <div id="systemdamage" class="tab-pane fade">
-    {{fs3-damage char=char}}
-  </div>
-  {{/if}}
+  {{profile-custom char=char game=game reloadChar=(action 'reloadChar')}}
   
   {{#if char.achievements}}
   <div id="achievements" class="tab-pane fade">
