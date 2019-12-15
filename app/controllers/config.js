@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
@@ -8,9 +9,9 @@ export default Controller.extend({
     configChanged: false,
     confirmRestore: null,
     
-    config: function() {
+    config: computed('model.config', 'configChanged', function() {
         return this.get('model.config');
-    }.property('model.config', 'configChanged'),
+    }),
     
     resetOnExit: function() {
         this.set('newConfigKey', '');

@@ -1,13 +1,14 @@
 import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
 
-    teams: function() {
+    teams: computed(function() {
         return [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
-    }.property(),
+    }),
     
     actions: {
         save: function() {

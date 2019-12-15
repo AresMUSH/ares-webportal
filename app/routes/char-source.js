@@ -7,6 +7,6 @@ export default Route.extend(DefaultRoute, {
         
     model: function(params) {
         let api = this.gameApi;
-        return api.requestOne('profileSource', { char_id: params['charId'], version_id: params['versionId'] });
+        return api.requestOne('profileSource', { char_id: params['char_id'], version_id: params['version_id'] });
     }
 });

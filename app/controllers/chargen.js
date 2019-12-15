@@ -1,23 +1,29 @@
 import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
     flashMessages: service(),
     gameApi: service(),
-    charErrors: [],
+    charErrors: null,
     fs3UpdateCallback: null,
     fs3ValidateCallback: null,
-    
-    genders: function() {
+
+    init: function() {
+      this._super(...arguments);
+      this.set('charErrors', []);
+    },
+      
+    genders: computed(function() {
       let list = [];
       this.get('model.cgInfo.genders').forEach(function(g) {
         list.push({ value: g });
       });
       return list;
-    }.property(),
+    }),
 
 
-    anyGroupMissing: function() {
+    anyGroupMissing: computed('model', function() {
         let groups = this.get('model.char.groups');
         let anyMissing = false;
         
@@ -27,7 +33,7 @@ export default Controller.extend({
             } 
         });
         return anyMissing;    
-    }.property('model'),
+    }),
     
     buildQueryDataForChar: function() {
         

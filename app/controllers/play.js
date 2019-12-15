@@ -1,4 +1,5 @@
 import $ from "jquery"
+import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
@@ -9,13 +10,20 @@ export default Controller.extend({
   text2: '',
   gameSocket: service(),
   favicon: service(),
-  messages: [],
-  history1: [],
-  history2: [],
+  messages: null,
+  history1: null,
+  history2: null,
   showHistory1: false,
   showHistory2: false,
   scrollPaused: false,
-    
+
+  init: function() {
+    this._super(...arguments);
+    this.set('messages', []);
+    this.set('history1', []);
+    this.set('history2', []);
+  },
+      
   idleKeepalive: function() {
     if (this.connected) {
       this.sendInput("keepalive");
@@ -86,13 +94,13 @@ export default Controller.extend({
     }      
   },
     
-  showDisconnect: function() {
+  showDisconnect: computed('connected', function() {
     return this.connected;
-  }.property('connected'),
+  }),
     
-  showConnect: function() {  
+  showConnect: computed('connected', function() {  
     return !this.connected;
-  }.property('connected'),
+  }),
     
   sendInput: function(msg) {
     var cmd, json;

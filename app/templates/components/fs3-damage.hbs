@@ -2,13 +2,15 @@
     <thead>
         <th>Date</th>
         <th>Description</th>
-        <th>Severity</th>
+        <th>Original Severity</th>
+        <th>Current Severity</th>
     </thead>
     
       {{#each char.fs3.damage as |damage|}}
       <tr>
           <td>{{damage.date}}</td>
           <td>{{damage.description}}</td>
+          <td>{{{ansi-format text=damage.original_severity}}}</td>
           <td>{{{ansi-format text=damage.severity}}}</td>
        </tr>
       {{/each}}

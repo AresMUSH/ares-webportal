@@ -1,3 +1,4 @@
+import { observer } from '@ember/object';
 import Component from '@ember/component';
 
 export default Component.extend({
@@ -6,12 +7,12 @@ export default Component.extend({
     editorId: '',
     lines: 20,
     
-    updateText: function() {
+    updateText: observer('text', function() {
         var editor = ace.edit(this.editorId);
         if (editor.getValue() != this.text) {
             editor.setValue(this.text, -1);
         }
-    }.observes('text'),
+    }),
     
     didInsertElement: function() {
         var editor = ace.edit(this.editorId);
