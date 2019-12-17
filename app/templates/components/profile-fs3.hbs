@@ -1,0 +1,18 @@
+{{#if (not game.disabled_plugins.fs3skills)}}
+  {{#if char.fs3.show_sheet}}
+    <div id="systemfs3sheet" class="tab-pane fade">
+      {{fs3-sheet char=char}}
+    </div>
+   {{/if}}
+   {{#if char.fs3.xp}}
+    <div id="systemfs3xp" class="tab-pane fade">
+      {{fs3-xp char=char abilityLearned=(action 'reloadChar')}}
+    </div>
+   {{/if}}
+{{/if}}
+
+{{#if (not game.disabled_plugins.fs3combat)}}  
+<div id="systemfs3damage" class="tab-pane fade">
+  {{fs3-damage char=char}}
+</div>
+{{/if}}

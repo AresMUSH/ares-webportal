@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
@@ -48,12 +49,12 @@ export default Controller.extend({
     });
   },
   
-  sceneTypes: function() {
+  sceneTypes: computed(function() {
     let types = this.get('model.sceneTypes');
     let scene_types = types.map(s => s.name);
     let base_filters = ['Recent', 'All', 'Popular'];
     return base_filters.concat(scene_types);
-    }.property('model.sceneTypes'),
+    }),
   
   actions: {
     goToPage(newPage) { 

@@ -10,7 +10,12 @@ export default Controller.extend({
   description: '',
   template: '',
   submitter: null,
-  participants: [],
+  participants: null,
+
+  init: function() {
+    this._super(...arguments);
+    this.set('participants', []);
+  },
     
   resetOnExit: function() {
     this.set('title', '');

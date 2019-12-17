@@ -1,4 +1,4 @@
-import EmberObject from '@ember/object';
+import EmberObject, { computed } from '@ember/object';
 import { A } from '@ember/array';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
@@ -18,10 +18,10 @@ export default Component.extend({
   },
   
   
-  attrPoints: function() {
+  attrPoints: computed('model.char.fs3.fs3_attributes.@each.rating', function() {
     let total = this.countPointsInGroup(this.get('model.char.fs3.fs3_attributes'), 0, 2, 2);
     return total;
-  }.property('model.char.fs3.fs3_attributes.@each.rating'),
+  }),
     
   countPointsInGroup: function(list, free_points, max_free_rating, cost_per_rating) {
     if (!list) {
@@ -81,20 +81,20 @@ export default Component.extend({
     );
   },
     
-  skillPoints: function() {
+  skillPoints: computed('model.char.fs3.{fs3_backgrounds.@each.rating,fs3_action_skills.@each.rating,fs3_advantages.@each.rating,fs3_languages.@each.rating}', function() {
     let total = 0;
     total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_action_skills'), 0, 1, 1);
     total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_backgrounds'), this.get('model.cgInfo.fs3.free_backgrounds'), 0, 1);
     total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_languages'), this.get('model.cgInfo.fs3.free_languages'), 0, 1);
     total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_advantages'), 0, 0, this.get('model.cgInfo.fs3.advantages_cost'));
     return total;
-  }.property('model.char.fs3.fs3_backgrounds.@each.rating', 'model.char.fs3.fs3_action_skills.@each.rating', 'model.char.fs3.fs3_languages.@each.rating', 'model.char.fs3.fs3_advantages.@each.rating'),
+  }),
     
-  actionPoints: function() {
+  actionPoints: computed('model.char.fs3.fs3_action_skills.@each.rating', function() {
     let total = 0;
     total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_action_skills'), 0, 1, 1);
     return total;
-  }.property('model.char.fs3.fs3_action_skills.@each.rating'),
+  }),
      
   checkLimits: function(list, limits, title) {
     if (!list) {

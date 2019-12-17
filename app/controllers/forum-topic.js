@@ -43,9 +43,9 @@ export default Controller.extend(AuthenticatedController, {
      else if (data.type == 'reply_edited') {
        let reply = this.get('model.replies').find(r => r.id == data.reply);
        if (reply) {
-         Ember.set(reply, 'can_edit', currentUserId == data.author.id);
-         Ember.set(reply, 'message', data.message);  
-         Ember.set(reply, 'raw_message', data.raw_message);       
+         set(reply, 'can_edit', currentUserId == data.author.id);
+         set(reply, 'message', data.message);  
+         set(reply, 'raw_message', data.raw_message);       
        }
      }
     },

@@ -241,7 +241,7 @@
      <div class="panel-body">
 
 
-         <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.language_blurb}}} To remove a language, set its rating to Everyman.</p>
+         <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.language_blurb}}} To remove a language, set its rating to Incapable.</p>
 
        {{#each model.char.fs3.fs3_languages as |skill|}}
        {{#fs3-langbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
