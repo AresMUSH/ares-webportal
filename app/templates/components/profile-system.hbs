@@ -33,6 +33,7 @@
   {{#if char.achievements}}
       <li><a data-toggle="tab" href="#achievements">Achievements</a></li>
   {{/if}}
+
 </ul>
 
 
@@ -82,6 +83,10 @@
   </div>
   {{/if}}
 
+  {{profile-fs3-tabs char=char game=game}}
+
+  {{profile-custom-tabs char=char game=game}}
+
   {{#if (not game.disabled_plugins.fs3skills)}}
     {{#if char.fs3.show_sheet}}
       <div id="systemsheet" class="tab-pane fade">
@@ -118,6 +123,10 @@
     {{fs3-damage char=char}}
   </div>
   {{/if}}
+
+  {{profile-fs3 char=char game=game reloadChar=(action 'reloadChar')}}
+
+  {{profile-custom char=char game=game reloadChar=(action 'reloadChar')}}
 
   {{#if char.achievements}}
   <div id="achievements" class="tab-pane fade">

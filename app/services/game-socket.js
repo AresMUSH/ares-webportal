@@ -11,8 +11,13 @@ export default Service.extend({
     windowVisible: true,
     socket: null,
     charId: null,
-    callbacks: {},
+    callbacks: null,
     connected: false,
+
+    init: function() {
+      this._super(...arguments);
+      this.set('callbacks', {});
+    },
 
     socketUrl() {
 	var protocol = aresconfig.use_https ? 'wss' : 'ws';

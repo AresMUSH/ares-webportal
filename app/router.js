@@ -27,7 +27,7 @@ Router.map(function() {
   this.route('characters', { path: '/chars'});
   this.route('char', { path: '/char/:id' });
   this.route('char-edit', { path: '/char/:id/edit' });
-  this.route('char-source', { path: '/char/:charId/source/:versionId' });
+  this.route('char-source', { path: '/char/:char_id/source/:version_id' });
   this.route('chargen');
   this.route('chargen-review');
   this.route('chat');

@@ -5,8 +5,13 @@ export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
     queryParams: [ 'title' ],
-    template: { title: 'blank', text: '' },
-  
+    template: null,
+
+    init: function() {
+      this._super(...arguments);
+      this.set('template', { title: 'blank', text: '' });
+    },
+    
     resetOnExit: function() {
         this.set('title', null);
     },

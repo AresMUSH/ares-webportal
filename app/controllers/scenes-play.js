@@ -1,5 +1,6 @@
 import $ from "jquery"
 import Controller from '@ember/controller';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import SceneUpdate from 'ares-webportal/mixins/scene-update';
@@ -14,9 +15,9 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     scrollPaused: false,
     currentScene: null,
     
-    anyNewActivity: function() {
+    anyNewActivity: computed('model.scenes.@each.is_unread', function() {
       return this.get('model.scenes').any(s => s.is_unread );
-    }.property('model.scenes.@each.is_unread'),
+    }),
   
     onSceneActivity: function(type, msg, timestamp ) {
       let splitMsg = msg.split('|');

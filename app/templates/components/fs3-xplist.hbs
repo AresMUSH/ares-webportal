@@ -23,15 +23,19 @@
       {{ability.xp}} / {{ability.xp_needed}}
     </td>
     <td>
-      {{#if (eq ability.days_to_learn 0)}}
-        {{#if (gt xp 0)}}
-        <a href="#" class="btn btn-default" {{action 'learnAbility' ability}} >Learn</a>
+        {{#if (eq ability.days_to_learn 0)}}
+          {{#if (gt xp 0)}}
+            {{#if canLearn}}
+            <a href="#" class="btn btn-default" {{action 'learnAbility' ability}} >Learn</a>
+            {{else}}
+            Now
+            {{/if}}
+          {{else}}
+          Out of XP
+          {{/if}}
         {{else}}
-        Out of XP
+        in {{ability.days_to_learn}} days
         {{/if}}
-      {{else}}
-      in {{ability.days_to_learn}} days
-      {{/if}}
     </td>
     {{else}}
     <td>
