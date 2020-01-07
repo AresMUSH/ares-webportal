@@ -101,6 +101,7 @@ Router.map(function() {
   this.route('search-chars');
   this.route('search-help');
   this.route('search-forum');
+  this.route('server-info');
   this.route('setup');
   this.route('setup-colors');
   this.route('shutdown');

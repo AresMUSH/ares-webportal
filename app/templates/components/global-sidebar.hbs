@@ -10,9 +10,15 @@
   {{#if (not socketConnected)}}
     <div class="alert alert-warning">The website is not receiving live updates from the game.  Try reloading the page.</div>
   {{/if}}
-{{#if model.game_down}}
+
+  {{#if versionWarning}}
+    <div class="alert alert-danger">The website and game have {{#link-to 'server-info'}}different versions{{/link-to}}.  Try reloading the page.</div>
+  {{/if}}
+
+   {{#if model.game_down}}
     <div class="alert alert-danger">The website can't contact the game.  It may be down.</div>
-{{else}}
+   {{else}}
+   
     <p>Today is {{model.game.ictime}}.
     <br>{{model.game.who_count}} character(s) online.
     <br>{{model.game.scene_count}} scene(s) are in progress.
