@@ -9,7 +9,7 @@
   <div class="sidebar-heading">
     <h2>Wiki <i class="fas fa-user-edit"></i></h2>
   </div>
-  <p><center>{{#link-to 'wiki-create'}}New{{/link-to}} &middot; {{#link-to 'wiki-all'}}All{{/link-to}} &middot; {{#link-to wiki-tags}}Tags{{/link-to}}  &middot; {{#link-to 'files'}}Files {{/link-to}} &middot; {{#link-to 'help-topic' 'markdown'}}Format Help{{/link-to}}</center></p>
+  <p><center>{{#link-to 'wiki-create'}}New{{/link-to}} &middot; {{#link-to 'wiki-all'}}All{{/link-to}} &middot; {{#link-to 'wiki-tags'}}Tags{{/link-to}}  &middot; {{#link-to 'files'}}Files {{/link-to}} &middot; {{#link-to 'help-topic' 'markdown'}}Format Help{{/link-to}}</center></p>
 </div>
 
 
@@ -48,13 +48,13 @@
   </div>
   {{#each model.upcoming_events as |event|}}
   <p><b>{{#link-to 'event' event.id}}
-    
+
     {{#if event.is_signed_up}}
     <i class="fas fa-calendar-check" aria-label="Signed Up"></i>
     {{/if}}
     {{event.title}}
-    
-    {{/link-to}}</b> 
+
+    {{/link-to}}</b>
     {{#if event.content_warning}}
     {{content-warning-tag warning=event.content_warning position='top-left'}}
     {{/if}}
