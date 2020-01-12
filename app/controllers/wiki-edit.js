@@ -5,9 +5,11 @@ export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
     preview: null,
+    minorEdit: false,
     
     resetOnExit: function() {
         this.set('preview', null);
+        this.set('minorEdit', null);
     },
     
     actions: {
@@ -48,6 +50,7 @@ export default Controller.extend({
                title: this.get('model.title'), 
                name: this.get('model.name'),
                text: this.get('model.text'),
+               minor_edit: this.get('minorEdit'),
                tags: tags}, null)
             .then( (response) => {
                 if (response.error) {
