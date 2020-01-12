@@ -52,6 +52,7 @@
        <li role="presentation"><a href="#icon" aria-controls="misc" role="tab" data-toggle="tab">Profile Icon</a></li>
        <li role="presentation"><a href="#descs" aria-controls="misc" role="tab" data-toggle="tab">Descriptions</a></li>
        <li role="presentation"><a href="#lastwill" aria-controls="misc" role="tab" data-toggle="tab">Last Will</a></li>
+       {{chargen-custom-tabs char=model}}
      </ul>
      
      <!-- Tab panes -->
@@ -139,7 +140,7 @@
           
           <div role="tabpanel" class="tab-pane" id="icon">
 
-               <div class="cg-tip">{{{ansi-format text=model.cgInfo.icon_blurb}}}</div>
+               <div class="cg-tip">{{{ansi-format text=model.cgInfo.icon_blurb}}} <br/> See [Icons](/help/icons) for tips on sizing your profile image.</div>
 
                {{file-uploader folder=model.char.name lockProperties=true allowMulti=false uploaded=(action "fileUploaded")}}
                    
@@ -162,6 +163,8 @@
                <br>
                {{markdown-editor text=model.char.lastwill}}
            </div>
+           
+           {{chargen-custom char=model}}
                
        </div>
      
