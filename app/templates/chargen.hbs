@@ -140,7 +140,9 @@
           
           <div role="tabpanel" class="tab-pane" id="icon">
 
-               <div class="cg-tip">{{{ansi-format text=model.cgInfo.icon_blurb}}} <br/> See [Icons](/help/icons) for tips on sizing your profile image.</div>
+               <div class="cg-tip">{{{ansi-format text=model.cgInfo.icon_blurb}}} 
+                 <p>See {{#link-to 'help-topic' 'icons' target="_blank"}}Icons{{/link-to}} for tips on selecting and sizing your profile image.</p>
+              </div>
 
                {{file-uploader folder=model.char.name lockProperties=true allowMulti=false uploaded=(action "fileUploaded")}}
                    
