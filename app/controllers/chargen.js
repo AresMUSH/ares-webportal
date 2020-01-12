@@ -8,6 +8,7 @@ export default Controller.extend({
     charErrors: null,
     fs3UpdateCallback: null,
     fs3ValidateCallback: null,
+    customUpdateCallback: null,
 
     init: function() {
       this._super(...arguments);
@@ -38,6 +39,7 @@ export default Controller.extend({
     buildQueryDataForChar: function() {
         
       let fs3 = this.fs3UpdateCallback ? this.fs3UpdateCallback() : null;
+      let custom = this.customUpdateCallback ? this.customUpdateCallback() : null;
       
         return { 
             id: this.get('model.char.id'),
@@ -49,7 +51,8 @@ export default Controller.extend({
             profile_image: this.get('model.char.profile_image'),
             background: this.get('model.char.background'),
             lastwill: this.get('model.char.lastwill'),
-            fs3: fs3
+            fs3: fs3,
+            custom: custom
         };
     }, 
     

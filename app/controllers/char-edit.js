@@ -5,6 +5,8 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({    
     gameApi: service(),
     flashMessages: service(),
+    customUpdateCallback: null,
+
     genders: computed(function() {
       let list = [];
       this.get('model.cgInfo.genders').forEach(function(g) {
@@ -14,6 +16,9 @@ export default Controller.extend({
     }),
   
     buildQueryDataForChar: function() {
+      
+        let custom = this.customUpdateCallback ? this.customUpdateCallback() : null;
+      
         let demographics = {};
         let profile = {};
         let relationships = {};
@@ -52,7 +57,8 @@ export default Controller.extend({
             profile_image: this.get('model.char.profile_image.name'),
             profile_icon: this.get('model.char.profile_icon.name'),
             profile_gallery: this.get('model.char.profile_gallery'),
-            tags: tags
+            tags: tags,
+            custom: custom
         };
     }, 
     actions: {

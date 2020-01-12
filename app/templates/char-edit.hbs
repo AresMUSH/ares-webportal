@@ -169,6 +169,9 @@
         <div id="hooks" class="tab-pane fade in">
           {{markdown-editor text=model.char.rp_hooks}}
         </div>
+        
+        {{char-edit-custom char=model updateCallback=customUpdateCallback}}
+        
       
         <div id="files" class="tab-pane fade in">
             <div class="cg-tip">Files for your character page need to be in a folder matching your character's name.  They will show up in the gallery and profile image selection lists.  See [Icons](/help/icons) for tips on sizing your profile image.</div>
@@ -190,9 +193,7 @@
     
             {{file-uploader folder=model.char.name uploaded=(action "fileUploaded")}}
         </div>
-      
-        {{char-edit-custom char=model}}
-          
+                
     </div>
     
    
