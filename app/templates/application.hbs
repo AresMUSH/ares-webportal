@@ -69,11 +69,11 @@
          {{#if (not hideSidebar)}}
              {{#if model.left_sidebar}}
              <div class="col-md-3 left-sidebar">
-               {{global-sidebar model=sidebar socketConnected=socketConnected  boxStyle="sidebar-box-left"}}
+               {{global-sidebar model=sidebar socketConnected=socketConnected versionWarning=versionWarning boxStyle="sidebar-box-left"}}
              </div>
              {{/if}}
         {{/if}}
-         
+
          {{#if hideSidebar}}
              <div class="col-md-12 body-container {{if model.left_sidebar 'right-body' 'left-body'}}">
                {{flash-messages}}
@@ -94,7 +94,7 @@
          {{#if (not hideSidebar)}}
              {{#if (not model.left_sidebar)}}
              <div class="col-md-3 right-sidebar">
-                 {{global-sidebar model=sidebar socketConnected=socketConnected boxStyle="sidebar-box-right"}}
+                 {{global-sidebar model=sidebar socketConnected=socketConnected versionWarning=versionWarning boxStyle="sidebar-box-right"}}
              </div>
              {{/if}}
          {{/if}}

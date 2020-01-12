@@ -224,6 +224,7 @@
                          {{/if}}
  
                          <li>{{#link-to 'scene-download' scene.id}}Download Scene{{/link-to}}</li> 
+                         <li><a href="#" {{action (mut confirmReportScene) true}}>Report Abuse</a></li> 
                      </ul>
                  </li>
              </ul>
@@ -248,6 +249,23 @@
       onSubmit=(action "deleteScenePose")
       onHide=(action (mut confirmDeleteScenePose) null)}}
       You're about to delete this scene pose. This cannot be undone.  Are you sure?
+    {{/bs-modal-simple}}
+    
+    {{#bs-modal-simple
+      title="Confirm Report"
+      closeTitle="Cancel"
+      submitTitle="Confirm"
+      size=null
+      fade=false
+      open=confirmReportScene
+      onSubmit=(action "reportScene")
+      onHide=(action (mut confirmReportScene) null)}}
+      <p>If someone is behaving badly in a scene, you can bring it to the game admin's attention - along with an automatic, verified log of the scene (including OOC chat and any previously-edited or deleted poses).  </p>
+      
+      <p><b>Reason for Report:</b></p>
+      
+      {{textarea value=reportReason cols="40" rows=5}}
+      
     {{/bs-modal-simple}}
     
     {{#bs-modal-simple

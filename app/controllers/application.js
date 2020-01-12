@@ -102,6 +102,10 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
       
     }),
     
+    versionWarning: computed('mushVersion', 'portalVersion', function() {
+      return this.get('mushVersion') != this.get('portalVersion');
+    }),
+    
     actions: {
       switchAlt: function(alt) {
         this.set('showAltSelection', false);

@@ -2,7 +2,10 @@
 <h1>Log {{model.name}}</h1>
 
 <pre>
-{{{model.text}}}
+{{#each model.lines as |line|}}
+{{line}}     
+
+{{/each}}
 </pre>
 
 {{outlet}}
