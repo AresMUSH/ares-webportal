@@ -38,7 +38,10 @@
     <div class="row">
         <div class="col col-xs-12">
             <div class="pull-right">
-                
+
+                {{#if model.can_do_minor_edits}}
+                {{input type='checkbox' checked=minorEdit}} Minor Edit
+                {{/if}}
                 <button class="btn btn-default" {{action 'cancel'}}>Cancel</button>
                 <button class="btn btn-primary" {{action 'save'}}>Save</button>
         </div>
