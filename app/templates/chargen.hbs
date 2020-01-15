@@ -46,7 +46,15 @@
      <ul class="nav nav-tabs" role="tablist">
        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
        <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>   
-            <li role="presentation"><a href="#abilities" aria-controls="abilities" role="tab" data-toggle="tab">Abilities</a></li>
+
+        {{#if (not model.app.game.disabled_plugins.fs3skills) }}
+        <li role="presentation"><a href="#abilities" aria-controls="fs3abilities" role="tab" data-toggle="tab">Abilities</a></li>
+        {{/if}}
+        
+        {{#if traitsExtraInstalled}}
+       <li role="presentation"><a href="#traits" aria-controls="misc" role="tab" data-toggle="tab">Traits</a></li>
+       {{/if}}
+       
        <li role="presentation"><a href="#bg" aria-controls="misc" role="tab" data-toggle="tab">Background</a></li>
        <li role="presentation"><a href="#hooks" aria-controls="misc" role="tab" data-toggle="tab">RP Hooks</a></li>
        <li role="presentation"><a href="#icon" aria-controls="misc" role="tab" data-toggle="tab">Profile Icon</a></li>
@@ -115,15 +123,19 @@
                   
             </div>
 
-            <div role="tabpanel" class="tab-pane" id="abilities">
-
-              {{#if model.app.game.disabled_plugins.fs3skills}}
-                <p>Your game does not support setting abilities/skills through the web chargen.  You'll need to complete chargen using in-game commands.</p>
-              {{else}}
-                  {{fs3-chargen model=model anyGroupMissing=anyGroupMissing charErrors=charErrors updateCallback=fs3UpdateCallback validateCallback=fs3ValidateCallback reset=(action 'reset')}}
-              {{/if}}
-              
+            {{#if (not model.app.game.disabled_plugins.fs3skills) }}
+            <div role="tabpanel" class="tab-pane" id="fs3abilities">
+              {{fs3-chargen model=model anyGroupMissing=anyGroupMissing charErrors=charErrors updateCallback=fs3UpdateCallback validateCallback=fs3ValidateCallback reset=(action 'reset')}}
             </div>
+            {{/if}}
+
+          {{#if traitsExtraInstalled}}
+          <div role="tabpanel" class="tab-pane" id="traits">
+                  
+               {{traits-chargen model=model updateCallback=traitsUpdateCallback}}
+           </div>
+           {{/if}}
+           
                                    
          <div role="tabpanel" class="tab-pane" id="bg">
              <div class="cg-tip">{{{ansi-format text=model.cgInfo.bg_blurb}}}</div>

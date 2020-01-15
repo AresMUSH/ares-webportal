@@ -9,6 +9,7 @@ export default Controller.extend({
     fs3UpdateCallback: null,
     fs3ValidateCallback: null,
     customUpdateCallback: null,
+    traitsUpdateCallback: null,
 
     init: function() {
       this._super(...arguments);
@@ -23,6 +24,9 @@ export default Controller.extend({
       return list;
     }),
 
+    traitsExtraInstalled: computed(function() {
+      return this.get('model.app.game.extra_plugins').any(e => e == 'traits');
+    }),
 
     anyGroupMissing: computed('model', function() {
         let groups = this.get('model.char.groups');
@@ -40,6 +44,7 @@ export default Controller.extend({
         
       let fs3 = this.fs3UpdateCallback ? this.fs3UpdateCallback() : null;
       let custom = this.customUpdateCallback ? this.customUpdateCallback() : null;
+      let traits = this.traitsUpdateCallback ? this.traitsUpdateCallback() : null;
       
         return { 
             id: this.get('model.char.id'),
@@ -52,7 +57,8 @@ export default Controller.extend({
             background: this.get('model.char.background'),
             lastwill: this.get('model.char.lastwill'),
             fs3: fs3,
-            custom: custom
+            custom: custom,
+            traits: traits
         };
     }, 
     
