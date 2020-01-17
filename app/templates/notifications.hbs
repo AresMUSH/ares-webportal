@@ -31,7 +31,7 @@
     {{else if (eq notification.type 'pm')}}
       {{#link-to 'chat'}}View{{/link-to}}
     {{else if (eq notification.type 'scene')}}
-      {{#link-to 'scenes-play'}}View{{/link-to}}
+      {{#link-to 'scene-live' notification.reference_id}}View{{/link-to}}
     {{else if (eq notification.type 'event')}}
       {{#link-to 'event' notification.reference_id}}View{{/link-to}}
     {{else if (eq notification.type 'achievement')}}
