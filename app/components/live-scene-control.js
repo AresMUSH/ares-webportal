@@ -8,10 +8,12 @@ export default Component.extend(AuthenticatedController, {
     rollString: null,
     confirmDeleteScenePose: false,
     confirmDeleteScene: false,
+    confirmReportScene: false,
     selectLocation: false,
     managePoseOrder: false,
     characterCard: false,
     newLocation: null,
+    reportReason: null,
     poseType: null,
     poseChar: null,
     gameApi: service(),
@@ -238,6 +240,20 @@ export default Component.extend(AuthenticatedController, {
                 return;
             }
         });
-      }
+      },
+      
+      reportScene() {
+        let api = this.gameApi;
+        this.set('confirmReportScene', false);
+
+        api.requestOne('reportScene', { id: this.get('scene.id'), reason: this.get('reportReason') })
+        .then( (response) => {
+            if (response.error) {
+                return;
+            }
+            this.set('reportReason', null);
+            this.flashMessages.success('Thank you.  The scene has been reported.');
+        });
+      },
     }
 });

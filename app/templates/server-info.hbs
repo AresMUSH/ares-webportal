@@ -1,0 +1,49 @@
+<h1>Server Information</h1>
+
+  {{#if versionWarning}}
+    <div class="alert alert-warning">
+      <p><i class="fas fa-exclamation-triangle"></i> The website and game have different versions. This can cause unpredictable errors. Try doing a 'force refresh' on this page in your browser, or load the page in private/incognito mode. If the problem persists, the web portal must have failed the last upgrade.</p>
+    </div>
+  {{/if}}
+  
+<table>
+  <tr>
+    <td class="col-xs-3"><b>Game Engine Version:</b> </td>
+    <td>{{mushVersion}}</td>
+  </tr>
+  
+  <tr>
+    <td class="col-xs-3"><b>Web Portal Version:</b> </td>
+    <td>{{portalVersion}}</td>
+  </tr>
+  
+  <tr>
+    <td class="col-xs-3"><b>Server Uptime:</b> </td>
+    <td>{{model.server_uptime}} (started {{model.server_start}})</td>
+  </tr>
+  
+  <tr>
+    <td class="col-xs-3"><b>Database Stats:</b> </td>
+    <td>
+      <ul>
+        <li>Characters: {{model.num_characters}}</li>
+        <li>Rooms: {{model.num_rooms}}</li>
+        <li>Exits: {{model.num_exits}}</li>
+      </ul>
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="col-xs-3"><b>Database Migrations:</b> </td>
+    <td>{{#each model.migrations as |migration|}}
+      {{migration}}
+      {{/each}}
+    </td>
+  </tr>
+  
+  <tr>
+    <td class="col-xs-3"><b>License</b></td>
+    <td><a href="http://www.aresmush.com/license">http://www.aresmush.com/license</a></td>
+  </tr>
+  
+</table>
