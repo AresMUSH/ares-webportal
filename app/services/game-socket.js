@@ -54,6 +54,7 @@ export default Service.extend({
                   new Notification(`Activity in ${aresconfig.game_name}`, 
                     {
                       icon: '/game/uploads/theme_images/notification.png',
+                      badge: '/game/uploads/theme_images/notification.png',
                       body: cleanMsg,
                       tag: aresconfig.game_name,
                       renotify: true

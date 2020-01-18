@@ -4,7 +4,7 @@ import Component from '@ember/component';
 export default Component.extend({
   tagName: 'span',
 
-  privacy: computed('scene.is_private', 'scene.limit', function() {
+  privacy: computed('scene.{is_private,limit}', function() {
     if (this.get('scene.is_private')) {
       return 'Private';
     }

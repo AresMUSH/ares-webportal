@@ -4,7 +4,7 @@ export default Component.extend({
   
     actions: {
         goToPage(newPage) { 
-          this.sendAction('goToPage', newPage);
+          this.goToPage(newPage);
         }
     }
 });

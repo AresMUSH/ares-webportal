@@ -7,7 +7,7 @@ const Router = EmberRouter.extend({
     
  init() {
       this._super(...arguments);
-      this.on('routeDidChange', transition => {
+      this.on('routeDidChange', function() {
         window.scrollTo(0, 0);
       });
     }

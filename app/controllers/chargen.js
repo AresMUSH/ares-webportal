@@ -6,6 +6,22 @@ export default Controller.extend({
     flashMessages: service(),
     gameApi: service(),
     charErrors: null,
+  
+    /* These callbacks are wired up a little weird.  
+  
+       In the template initialization, we connect these properties to a property in the component:
+           {{fs3-chargen model=model updateCallback=fs3UpdateCallback ... }}
+
+       Now the component's updateCallback ---binds to---> fs3UpdateCallback, which is null
+   
+       THEN in the component's didInsertElement method, we UPDATE updateCallback to point to a function.
+  
+           this.set('updateCallback', function() { return self.onUpdate(); } );
+  
+       Because of the binding, setting updateCallback in the component ALSO sets fs3UpdateCallback here in the controller
+  
+       So now fs3UpdateCallback references a function in the component that we can call to build the query data.
+    */
     fs3UpdateCallback: null,
     fs3ValidateCallback: null,
     customUpdateCallback: null,

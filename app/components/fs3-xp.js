@@ -16,7 +16,7 @@ export default Component.extend({
                 }
             
                 this.flashMessages.success('Learned!');
-                this.sendAction('abilityLearned');
+                this.abilityLearned();
             });
         },
         learnNewAbility() {
@@ -34,7 +34,7 @@ export default Component.extend({
                   }
             
                   this.flashMessages.success('Learned!');
-                  this.sendAction('abilityLearned');
+                  this.abilityLearned();
               });
           }
         

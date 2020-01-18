@@ -33,7 +33,6 @@ module.exports = {
       'no-console': 'off',
       'ember/no-new-mixins': 'off',
       'ember/jquery-ember-run': 'off',
-      'ember/closure-actions': 'off',
       'ember/no-observers': 'off'
     },
       
