@@ -73,6 +73,8 @@ Router.map(function() {
   this.route('mail-message', { path: '/mail/:id'});
   this.route('mail-send');
   this.route('manage');
+  this.route('notes', { path: '/char/:id/notes' });
+  this.route('notes-edit', { path: '/char/:id/notes/edit' });
   this.route('notifications');
   this.route('play');
   this.route('players');
