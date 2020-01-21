@@ -6,6 +6,7 @@
         <li><a data-toggle="tab" href="#relationships">Relationships</a></li>
         <li><a data-toggle="tab" href="#hooks">RP Hooks</a></li>
         <li><a data-toggle="tab" href="#files">Files</a></li>
+        {{char-edit-custom-tabs char=model}}
     </ul>
     
     
@@ -42,6 +43,8 @@
                     {{#power-select selected=model.char.profile_image allowClear=true searchField="name" options=model.char.files onchange=(action "profileImageChanged") as |file|}}
                     {{file.name}}
                     {{/power-select}}
+                    
+                    <p class="hint">See {{#link-to 'help-topic' 'icons'}}Icons{{/link-to}} for tips on selecting and sizing your profile image.</p>
                 </div>
             </div>
             
@@ -54,6 +57,8 @@
                     {{#power-select selected=model.char.profile_icon allowClear=true searchField="name" options=model.char.files onchange=(action "profileIconChanged") as |file|}}
                     {{file.name}}
                     {{/power-select}}
+                    
+                    <p class="hint">See {{#link-to 'help-topic' 'icons'}}Icons{{/link-to}} for tips on selecting and sizing your profile image.</p>
                 </div>
             </div>
             
@@ -67,7 +72,7 @@
                   <div class="profile-gallery-input">
                   {{textarea value=model.char.profile_gallery cols="80" rows=3}}
                   
-                    <p class="hint">List image files in the order you want them shown (<code>folder/file1.jpg /folder/file2.jpg</code> etc.), or leave blank to just show all images from your character's folder.</p>
+                    <p class="hint">List image files in the order you want them shown (<code>folder/file1.jpg /folder/file2.jpg</code> etc.), or leave this blank to just show all images from your character's folder.</p>
                     
                     </div>
                     
@@ -164,9 +169,12 @@
         <div id="hooks" class="tab-pane fade in">
           {{markdown-editor text=model.char.rp_hooks}}
         </div>
+        
+        {{char-edit-custom char=model.char updateCallback=customUpdateCallback}}
+        
       
         <div id="files" class="tab-pane fade in">
-            <div class="cg-tip">Files for your character page need to be in a folder matching your character's name.  They will show up in the gallery and profile image selection lists.</div>
+            <div class="cg-tip">Files for your character page need to be in a folder matching your character's name.  They will show up in the gallery and profile image selection lists.  See [Icons](/help/icons) for tips on sizing your profile image.</div>
             <hr>
         
             <div>
@@ -185,8 +193,7 @@
     
             {{file-uploader folder=model.char.name uploaded=(action "fileUploaded")}}
         </div>
-      
-          
+                
     </div>
     
    

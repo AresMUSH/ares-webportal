@@ -4,7 +4,7 @@ export default Component.extend({
    
     actions: { 
         learnAbility(ability) {
-            this.sendAction('learnAbility', ability);
+            this.learnAbility(ability);
         }
     }
 });

@@ -164,7 +164,7 @@ export default Component.extend({
       this.validateChar();
     },
     reset() {
-      this.sendAction('reset');
+      this.reset();
     }
   }
     

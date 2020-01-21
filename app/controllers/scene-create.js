@@ -54,6 +54,7 @@ export default Controller.extend({
                related_scenes: (this.get('model.scene.related_scenes') || []).map(s => s.id),
                tags: tags,
                content_warning: this.get('model.scene.content_warning'),
+               limit: this.get('model.scene.limit'),
                log: this.get('model.scene.log')}, null)
             .then( (response) => {
                 if (response.error) {
