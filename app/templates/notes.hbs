@@ -14,7 +14,7 @@
   
   {{#each model.notes as |section index|}}
   
-  <div id="{{section.key}}" class="tab-pane fade ansi {{if (eq index 0) 'active' }}">
+  <div id="{{section.key}}" class="tab-pane {{if (eq index 0) 'active' }}">
     {{#if section.notes}}
       {{{ansi-format text=section.notes}}}
     {{/if}}
