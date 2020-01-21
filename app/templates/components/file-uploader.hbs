@@ -8,6 +8,8 @@
         {{#if showSelector}}
         <p>Select files for upload...</p>
         
+        <p class="alert alert-info">Please consider copyright when uploading images, and add attributions to pages where they're used as needed.</p>
+        
         {{#if allowMulti}}
         <input type="file"
            multiple
@@ -21,7 +23,9 @@
         
         {{else}}
 
-           <div class="alert alert-info"> {{fileCount}} files selected for upload. Please review the options, then click the upload button for <b>each file</b> to commence the upload.</div>
+           <div class="alert alert-info"> 
+             {{fileCount}} files selected for upload. Review the options, then click the upload button for <b>each file</b> to commence the upload.
+             </div>
 
             <table class="table">
         

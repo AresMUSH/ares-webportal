@@ -7,11 +7,11 @@ export default TextArea.extend({
     keyDown: function(event) {
       if (event.keyCode == 13) {
         if (event.ctrlKey || event.metaKey) {
-          this.sendAction('onEnter');
+          this.onEnter();
           event.preventDefault();
         }
         else if (!this.allowMultiLine) {
-          this.sendAction('onEnter');
+          this.onEnter();
           event.preventDefault();
         }
       }

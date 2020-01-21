@@ -59,9 +59,12 @@
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">
-            
+        
         {{#if model.char.last_profile_version}}
             {{#link-to 'char-source' model.char.id model.char.last_profile_version class="btn btn-default"}}Source/History{{/link-to}}
+        {{/if}}
+        {{#if model.char.show_notes}}
+          {{#link-to 'notes' model.char.name class="btn btn-default"}}Notes{{/link-to}}
         {{/if}}
         {{#if model.char.can_manage}}
           <button {{action (mut showFiles) true}} class="btn btn-default">Files</button>

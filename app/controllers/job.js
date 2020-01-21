@@ -1,5 +1,4 @@
 import Controller from '@ember/controller';
-import { observer } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
@@ -23,13 +22,13 @@ export default Controller.extend({
     this.set('replyAdminOnly', this.get('model.job.is_category_admin') ? true : false );
   },
   
-  setup: observer('model', function() {
+  setup: function() {
     this.set('reply', '');
     this.set('newActivity', false);
     this.resetReplyAdmin();
     this.set('editParticipants', false);
     this.set('newParticipants', this.get('model.job.participants'));
-  }),
+  },
     
   setupCallback: function() {
       let self = this;

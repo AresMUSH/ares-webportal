@@ -71,7 +71,7 @@
    </div>
    {{#each model.recent_scenes as |scene|}}
    <p>{{#link-to 'scene' scene.id}}{{scene.icdate}} - {{scene.title}}{{/link-to}}
-       {{scene-tag scene=scene}}
+       {{scene-type-tag scene=scene}}
        {{#if scene.content_warning}}
        {{content-warning-tag warning=scene.content_warning position='top-left'}}
        {{/if}}

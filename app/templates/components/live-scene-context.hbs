@@ -3,7 +3,7 @@
         {{scene.location.name}}
     </div>
     <div class="panel-body">
-    
+            
         {{#if scene.summary}}
         <p> {{{ansi-format text=scene.summary}}} </p>
         <hr>
@@ -32,6 +32,14 @@
           {{char-icon-inline char=who}}
         {{/each}}
         </div>
+
+        <hr>
         
+        {{scene-privacy-tag scene=scene}}
+        {{scene-type-tag scene=scene}}
+        
+        {{#if scene.limit}}
+        <p><b>Limited Participation:</b> {{scene.limit}}</p>
+        {{/if}}
     </div>
 </div>
