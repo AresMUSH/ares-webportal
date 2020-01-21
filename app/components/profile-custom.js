@@ -5,7 +5,7 @@ export default Component.extend({
   
   actions: { 
       reloadChar() {
-          this.sendAction('reloadChar');
+          this.reloadChar();
       }
   }
 });

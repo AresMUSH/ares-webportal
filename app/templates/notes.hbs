@@ -1,0 +1,34 @@
+{{title Notes}}
+<h1>Notes - {{model.name}}</h1>
+
+
+<ul class="nav nav-tabs">
+    {{#each model.notes as |section index| }}
+        <li class="{{if (eq index 0) 'active' }}"><a data-toggle="tab" href="#{{section.key}}">{{section.name}} Notes</a></li>
+    {{/each}}
+</ul>
+
+
+<div class="tab-content">
+
+  
+  {{#each model.notes as |section index|}}
+  
+  <div id="{{section.key}}" class="tab-pane {{if (eq index 0) 'active' }}">
+    {{#if section.notes}}
+      {{{ansi-format text=section.notes}}}
+    {{/if}}
+      
+  </div>
+  
+  {{/each}}
+  
+ </div>
+ 
+ <div class="pull-right">
+         {{#link-to 'char' model.name class="btn btn-default"}}Back{{/link-to}}  
+           
+         {{#if model.can_edit}}
+           {{#link-to 'notes-edit' model.name class="btn btn-primary"}}Edit{{/link-to}}
+         {{/if}}
+ </div>

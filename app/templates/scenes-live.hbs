@@ -43,13 +43,12 @@
          - {{scene.title}}
         {{/if}}
         {{/link-to}}
-        
-        {{#if scene.is_private}}
-        <span class="label label-danger">Private</span>
-        {{else}}
-        <span class="label label-success">Open</span>
+        <br>
+        {{scene-privacy-tag scene=scene}}
+        {{scene-type-tag scene=scene}}
+        {{#if scene.content_warning}}
+        {{content-warning-tag warning=scene.content_warning position='top'}}
         {{/if}}
-        {{scene-tag scene=scene}}
     </td>
     <td>
       
@@ -58,16 +57,16 @@
         {{/each}}
         
         {{#if (or scene.can_view (not scene.is_private))}}
-          <p>{{#if scene.content_warning}}
-          {{content-warning-tag warning=scene.content_warning position='top'}}
-          {{/if}}
- 
-            {{scene.location}}</p>
+          <p>{{scene.location}}</p>
         
           {{#if scene.summary}}
           <p>{{{ansi-format text=scene.summary}}}
           </p>
           {{/if}}
+        {{/if}}
+
+        {{#if scene.limit}}
+        <p><b>Limited Participation:</b> {{scene.limit}}</p>
         {{/if}}
         
     </td>
