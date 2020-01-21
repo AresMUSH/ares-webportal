@@ -3,8 +3,8 @@
 
 
 <ul class="nav nav-tabs">
-    {{#each model.notes as |section| }}
-        <li><a data-toggle="tab" href="#{{section.key}}">{{section.name}} Notes</a></li>
+    {{#each model.notes as |section index| }}
+        <li class="{{if (eq index 0) 'active' }}"><a data-toggle="tab" href="#{{section.key}}">{{section.name}} Notes</a></li>
     {{/each}}
 </ul>
 
@@ -12,11 +12,12 @@
 <div class="tab-content">
 
   
-  {{#each model.notes as |section|}}
+  {{#each model.notes as |section index|}}
   
-  <div id="{{section.key}}" class="tab-pane fade ansi">
-  
+  <div id="{{section.key}}" class="tab-pane fade ansi {{if (eq index 0) 'active' }}">
+    {{#if section.notes}}
       {{{ansi-format text=section.notes}}}
+    {{/if}}
       
   </div>
   
