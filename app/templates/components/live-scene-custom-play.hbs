@@ -1,0 +1,16 @@
+<li><a href="#" {{action (mut showRollDice) true}}>Roll Dice</a></li> 
+
+{{#bs-modal-simple
+  title="Roll Dice"
+  closeTitle="Cancel"
+  submitTitle="Roll"
+  size=null
+  fade=false
+  open=showRollDice
+  onSubmit=(action "rollDice")
+  onHide=(action (mut showRollDice) null)}}
+  
+  {{input type="text" size=25 id="diceString" value=diceString}}
+  <p class="hint">Enter a dice string in the form 5d6 or 2d10.</p>
+  
+{{/bs-modal-simple}}
