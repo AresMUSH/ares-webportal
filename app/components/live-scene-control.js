@@ -111,7 +111,8 @@ export default Component.extend(AuthenticatedController, {
                 return;
             }
             this.flashMessages.success('The scene has been deleted.');
-            this.sendAction('refresh');
+            this.refresh();
+
         });
       },
       saveScenePose(scenePose, notify) {
@@ -151,7 +152,7 @@ export default Component.extend(AuthenticatedController, {
               if (response.error) {
                   return;
               }
-              this.sendAction('scrollScene');
+              this.scrollScene();
           });
       },
 
@@ -173,11 +174,12 @@ export default Component.extend(AuthenticatedController, {
               }
               else if (status === 'stop') {
                   this.flashMessages.success('The scene has been stopped.');
-                  this.sendAction('refresh');
+                  this.refresh();
               }
               else if (status === 'restart') {
                   this.flashMessages.success('The scene has been restarted.');
-                  this.sendAction('refresh');
+                  this.refresh();
+
               }
           });
       },
@@ -195,20 +197,20 @@ export default Component.extend(AuthenticatedController, {
               this.scene.set('is_watching', option);
 
               if (option) {
-                this.sendAction('refresh');
+                this.refresh();
               }
           });
       },
 
       scrollDown() {
-        this.sendAction('scrollScene');
+        this.scrollScene();
       },
 
       pauseScroll() {
-        this.sendAction('setScroll', false);
+        this.setScroll(false);
       },
       unpauseScroll() {
-        this.sendAction('setScroll', true);
+        this.setScroll(true);
       },
 
       poseTypeChanged(newType) {
@@ -241,7 +243,7 @@ export default Component.extend(AuthenticatedController, {
             }
         });
       },
-      
+
       reportScene() {
         let api = this.gameApi;
         this.set('confirmReportScene', false);

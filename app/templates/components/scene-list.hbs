@@ -27,7 +27,7 @@
         <td>
         {{#link-to 'scene' scene.id}}{{scene.icdate}} - {{scene.title}}{{/link-to}}
         
-        {{scene-tag scene=scene}}
+        {{scene-type-tag scene=scene}}
        
         <p>{{{ansi-format text=scene.summary}}}
           {{#if scene.content_warning}}

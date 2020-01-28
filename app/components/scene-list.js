@@ -11,10 +11,10 @@ export default Component.extend({
     
     actions: {
         filterChanged(newFilter) {
-          this.sendAction('filterChanged', newFilter);
+          this.filterChanged(newFilter);
         },
         goToPage(newPage) { 
-          this.sendAction('goToPage', newPage);
+          this.goToPage(newPage);
         }
     }
 

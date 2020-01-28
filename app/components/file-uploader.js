@@ -90,7 +90,7 @@ export default Component.extend({
                     file.set('upload_message', 'Upload Succeeded!');                    
                     file.set('upload_success', true);
                     
-                    this.sendAction('uploaded', response.folder, response.name);
+                    this.uploaded(response.folder, response.name);
                 }
             });
         }

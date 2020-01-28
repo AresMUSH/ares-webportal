@@ -34,6 +34,12 @@
       <li><a data-toggle="tab" href="#achievements">Achievements</a></li>
   {{/if}}
 
+  {{#if traitsExtraInstalled}}
+    <li><a data-toggle="tab" href="#systemtraits">Traits</a></li>
+  {{/if}}
+
+  {{profile-custom-tabs char=char game=game}}
+
 </ul>
 
 
@@ -126,11 +132,16 @@
 
   {{profile-fs3 char=char game=game reloadChar=(action 'reloadChar')}}
 
-  {{profile-custom char=char game=game reloadChar=(action 'reloadChar')}}
+  {{#if traitsExtraInstalled}}
+    {{profile-traits char=char}}
+  {{/if}}
 
   {{#if char.achievements}}
   <div id="achievements" class="tab-pane fade">
       {{char-achievements achievements=char.achievements}}
   </div>
   {{/if}}
+
+  {{profile-custom char=char game=game reloadChar=(action 'reloadChar')}}
+
 </div>
