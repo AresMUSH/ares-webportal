@@ -26,14 +26,14 @@
     
     <tr>
         <td>
-            {{char-icon char=char}}
+            <CharIcon @char={{char}} />
          </td>
          
          
          <td>
              <b>{{char.military_name}}</b>
              <br>
-              {{{ansi-format text=char.roster_notes}}}
+              <AnsiFormat @text={{char.roster_notes}} />
          </td>
          
          {{#each-in char.fields as |field value| }}
@@ -83,16 +83,8 @@
 
 
 
-{{#bs-modal-simple
-    title="Confirm Claim"
-    closeTitle="Cancel"
-    submitTitle="Confirm"
-    size=null
-    fade=false
-    open=confirmClaim
-    onSubmit=(action "claimRoster")
-    onHide=(action (mut confirmClaim) null)}}
+<BsModalSimple @title="Confirm Claim" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmClaim}} @onSubmit={{action "claimRoster"}} @onHide={{action (mut confirmClaim) null}}>
     You're about to claim the character {{confirmClaim.name}} from the roster. Are you sure?
-  {{/bs-modal-simple}}
+  </BsModalSimple>
   
 {{outlet}}

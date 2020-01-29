@@ -4,7 +4,7 @@
 <div class="row">
     
     <div class="col pull-right">
-       {{#link-to 'search-help' class="btn btn-default"}}<i class="fa fa-search" aria-hidden="true"></i> Search Help{{/link-to}}  
+       <LinkTo @route="search-help" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> Search Help</LinkTo>  
     </div>
     
 </div>
@@ -14,14 +14,14 @@
     
     <ul class="tutorial-help-list">
     {{#each toc.tutorials as |topic|}}
-    <li>{{#link-to 'help-topic' topic.topic}}{{topic.name}}{{/link-to}} - {{topic.summary}}</li>
+    <li><LinkTo @route="help-topic" @model={{topic.topic}}>{{topic.name}}</LinkTo> - {{topic.summary}}</li>
     {{/each}}
     </ul>
 
     <div class="reference-help-title">Command Topics:</div>
     <ul class="reference-help-list">
       {{#each toc.topics as |topic|}}
-      <li>{{#link-to 'help-topic' topic.topic}}{{topic.name}}{{/link-to}}</li>
+      <li><LinkTo @route="help-topic" @model={{topic.topic}}>{{topic.name}}</LinkTo></li>
       {{/each}}
     </ul>
 {{/each}}

@@ -14,7 +14,7 @@
 <ul>
 {{#each model.logs as |log| }}
 
-    <li>{{#link-to 'log' log.name}}{{log.name}}{{/link-to}}</li>
+    <li><LinkTo @route="log" @model={{log.name}}>{{log.name}}</LinkTo></li>
 {{/each}}
 </ul>
 

@@ -1,13 +1,13 @@
 <h3>{{area.name}}</h3>
 
-<p>{{{ansi-format text=area.summary}}}</p>
+<p><AnsiFormat @text={{area.summary}} /></p>
 
 {{#if area.rooms}}
 
 <p><b>Locations</b></p>
 <ul>
   {{#each area.rooms as |r|}}
-  <li>{{#link-to 'location' r.id}}{{r.name}}{{/link-to}}  </li>
+  <li><LinkTo @route="location" @model={{r.id}}>{{r.name}}</LinkTo>  </li>
   {{/each}}
 </ul>
 {{/if}}
@@ -17,7 +17,7 @@
 
 <ul>
   {{#each area.children as |c| }}
-  <li>{{#link-to 'area' c.id}}{{c.name}}{{/link-to}}</li>
+  <li><LinkTo @route="area" @model={{c.id}}>{{c.name}}</LinkTo></li>
   {{/each}}
 </ul>
 {{/if}}
@@ -25,6 +25,6 @@
 <br>
 <div class="row">
   <div class="col col-xs-12">
-    {{#link-to 'area' area.id}}Learn More...{{/link-to}}
+    <LinkTo @route="area" @model={{area.id}}>Learn More...</LinkTo>
   </div>
 </div>

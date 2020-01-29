@@ -12,11 +12,11 @@
                 <ul class="dropdown-menu">
                  <li> <a href="#" {{action (mut showAddCombatant) true}}>Add Combatant</a></li>
                 {{#if model.can_manage}}
-                 <li> {{#link-to 'combat-setup' model.id}}Setup NPCs{{/link-to}}</li>
-                 <li> {{#link-to 'combat-teams' model.id}}Setup Teams{{/link-to}}</li>
+                 <li> <LinkTo @route="combat-setup" @model={{model.id}}>Setup NPCs</LinkTo></li>
+                 <li> <LinkTo @route="combat-teams" @model={{model.id}}>Setup Teams</LinkTo></li>
                  <li> <a href="#" {{action (mut confirmStopCombat) true}}>Stop Combat</a></li>
                 {{/if}}
-                <li>{{#link-to 'combat-log' model.id}}View Log{{/link-to}}</li> 
+                <li><LinkTo @route="combat-log" @model={{model.id}}>View Log</LinkTo></li> 
 
                 </ul>
               </li>
@@ -39,7 +39,7 @@
             </div>
             
             <div class="clearfix"></div>
-            <p>{{#link-to 'combats'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Combat List{{/link-to}}</p>
+            <p><LinkTo @route="combats"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Combat List</LinkTo></p>
             
         </div>
     </div>
@@ -53,7 +53,7 @@
     <div id="combat-log">
       <p><i>Organized by {{model.organizer}}</i> </p>
 
-      {{{ansi-format text=combatLog}}}
+      <AnsiFormat @text={{combatLog}} />
     </div>
   
     {{#if newCombatActivity}}
@@ -90,7 +90,7 @@
           {{#if c.is_npc}}
             {{c.name}}
           {{else}}
-            {{#link-to 'char' c.name}}{{c.name}}{{/link-to}}
+            <LinkTo @route="char" @model={{c.name}}>{{c.name}}</LinkTo>
           {{/if}}
         </td>
         
@@ -131,11 +131,11 @@
         
         <td>
             {{#if currentUser}}
-                {{#link-to 'combatant-edit' c.id}}
-                {{tooltip-icon position='left' message='Edit combatant.' icon='fa fa-edit'}}
-                {{/link-to}}
+                <LinkTo @route="combatant-edit" @model={{c.id}}>
+                <TooltipIcon @position="left" @message="Edit combatant." @icon="fa fa-edit" />
+                </LinkTo>
                 <a href="#" {{action (mut confirmRemoveCombatant) c.name }} >
-                  {{tooltip-icon position='left' message='Remove combatant.' icon='fas fa-ban'}}
+                  <TooltipIcon @position="left" @message="Remove combatant." @icon="fas fa-ban" />
                 </a>
             {{/if}}
         </td>
@@ -152,64 +152,32 @@
 </div>
    
 
-        {{flash-messages}}
+        <FlashMessages />
 
 
-{{#bs-modal-simple
-    title="Confirm Remove"
-    closeTitle="Cancel"
-    submitTitle="Confirm"
-    size=null
-    fade=false
-    open=confirmRemoveCombatant
-    onSubmit=(action "removeCombatant" confirmRemoveCombatant)
-    onHide=(action (mut confirmRemoveCombatant) null)}}
+<BsModalSimple @title="Confirm Remove" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmRemoveCombatant}} @onSubmit={{action "removeCombatant" confirmRemoveCombatant}} @onHide={{action (mut confirmRemoveCombatant) null}}>
     This will remove them from combat.  Are you sure?
-  {{/bs-modal-simple}}
+  </BsModalSimple>
   
-  {{#bs-modal-simple
-      title="Confirm Stop"
-      closeTitle="Cancel"
-      submitTitle="Confirm"
-      size=null
-      fade=false
-      open=confirmStopCombat
-      onSubmit=(action "stopCombat")
-      onHide=(action (mut confirmStopCombat) null)}}
+  <BsModalSimple @title="Confirm Stop" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmStopCombat}} @onSubmit={{action "stopCombat"}} @onHide={{action (mut confirmStopCombat) null}}>
       This will stop the combat.  Are you sure?
-    {{/bs-modal-simple}}
+    </BsModalSimple>
 
-{{#bs-modal-simple
-    title="Add Combatant"
-    closeTitle="Cancel"
-    submitTitle="Add"
-    size=null
-    fade=false
-    open=showAddCombatant
-    onSubmit=(action "addCombatant")
-    onHide=(action (mut showAddCombatant) null)}}
+<BsModalSimple @title="Add Combatant" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{false}} @open={{showAddCombatant}} @onSubmit={{action "addCombatant"}} @onHide={{action (mut showAddCombatant) null}}>
         <p><b>Name(s):</b> </p>
-            <p>{{input type="text"  size=25 value=newCombatantName}}</p>
-        <p><b>Type:</b> {{#power-select selected=newCombatantType options=model.combatant_types onchange=(action "combatantTypeChanged") as |type|}}
+            <p><Input @type="text" @size={{25}} @value={{newCombatantName}} /></p>
+        <p><b>Type:</b> <PowerSelect @selected={{newCombatantType}} @options={{model.combatant_types}} @onchange={{action "combatantTypeChanged"}} as |type|>
           {{type}}
-        {{/power-select}}</p>
+        </PowerSelect></p>
         <div class="hint">You can add multiple combatants at once, as long as they're the same combatant type. List their names separated by spaces.</div>
-  {{/bs-modal-simple}}
+  </BsModalSimple>
 
 
-{{#bs-modal-simple
-    title="Join Combat"
-    closeTitle="Cancel"
-    submitTitle="Join"
-    size=null
-    fade=false
-    open=showJoinCombat
-    onSubmit=(action "joinCombat")
-    onHide=(action (mut showJoinCombat) null)}}
-        <p><b>Type:</b> {{#power-select selected=newCombatantType options=model.combatant_types onchange=(action "combatantTypeChanged") as |type|}}
+<BsModalSimple @title="Join Combat" @closeTitle="Cancel" @submitTitle="Join" @size={{null}} @fade={{false}} @open={{showJoinCombat}} @onSubmit={{action "joinCombat"}} @onHide={{action (mut showJoinCombat) null}}>
+        <p><b>Type:</b> <PowerSelect @selected={{newCombatantType}} @options={{model.combatant_types}} @onchange={{action "combatantTypeChanged"}} as |type|>
           {{type}}
-        {{/power-select}}</p>
-  {{/bs-modal-simple}}
+        </PowerSelect></p>
+  </BsModalSimple>
 
 
 {{outlet}}

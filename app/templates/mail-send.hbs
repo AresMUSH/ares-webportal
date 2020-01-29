@@ -8,9 +8,9 @@
     
     <div class="col-sm-10">
       
-      {{#power-select-multiple selected=toList options=model searchField="name" onchange=(action "toListChanged") as |char|}}
+      <PowerSelectMultiple @selected={{toList}} @options={{model}} @searchField="name" @onchange={{action "toListChanged"}} as |char|>
         {{char.name}}
-      {{/power-select-multiple}}
+      </PowerSelectMultiple>
       
     </div>
 </div>
@@ -21,17 +21,17 @@
     </div>
     
     <div class="col-sm-10">
-          {{input type="text" size=25 id="subject" value=subject }}
+          <Input @type="text" @size={{25}} @id="subject" @value={{subject}} />
     </div>
 </div>
 
 <p><b>Message:</b></p>
-{{markdown-editor text=message}}
+<MarkdownEditor @text={{message}} />
 
-{{#link-to 'mail' class='btn btn-default'}}Cancel{{/link-to}}
+<LinkTo @route="mail" class="btn btn-default">Cancel</LinkTo>
 <button {{action "sendMail"}} class="btn btn-primary">Send</button>
 
-{{flash-messages}}
+<FlashMessages />
 
 
 {{outlet}}

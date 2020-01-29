@@ -2,7 +2,7 @@
 <h1>Characters</h1>
 
 <div class="pull-right">
-  {{#link-to 'search-chars'}}<i class="fa fa-search" aria-hidden="true"></i> Search Characters{{/link-to}}  
+  <LinkTo @route="search-chars"><i class="fa fa-search" aria-hidden="true"></i> Search Characters</LinkTo>  
 </div>
 <p>Here you can browse the profiles for all approved characters.</p>
 <div class="clearfix"/>
@@ -26,12 +26,12 @@
 
     {{#each group.subgroups as |subgroup|}}
   
-          {{char-group-list name=subgroup.name chars=subgroup.chars}}
+          <CharGroupList @name={{subgroup.name}} @chars={{subgroup.chars}} />
         
     {{/each}}
 
     {{#if group.has_npcs}}
-        {{char-group-list name="NPCs" chars=group.npcs}}
+        <CharGroupList @name="NPCs" @chars={{group.npcs}} />
     {{/if}}
                  
   </div>
@@ -41,16 +41,16 @@
   <div id="roster" class="tab-pane fade in">
       <h2>Roster</h2>
 
-      See {{#link-to 'roster'}}Roster{{/link-to}} for ready-made characters on the roster.
+      See <LinkTo @route="roster">Roster</LinkTo> for ready-made characters on the roster.
   </div>
   {{/if}}
 
    <div id="idle" class="tab-pane fade in">
-      {{char-group-list name="" chars=model.characters.idle}}
+      <CharGroupList @name="" @chars={{model.characters.idle}} />
   </div>
   
    <div id="dead" class="tab-pane fade in">
-      {{char-group-list name="" chars=model.characters.dead}}
+      <CharGroupList @name="" @chars={{model.characters.dead}} />
   </div>
 </div>
 

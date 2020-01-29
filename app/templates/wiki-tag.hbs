@@ -4,7 +4,7 @@
 <h2>Pages</h2>
 <ul>
 {{#each model.content.pages as |page| }}
-<li>{{#link-to 'wiki-page' page.id}}{{page.heading}}{{/link-to}}</li>
+<li><LinkTo @route="wiki-page" @model={{page.id}}>{{page.heading}}</LinkTo></li>
 {{/each}}
 </ul>
 
@@ -12,7 +12,7 @@
 
 <ul>
 {{#each model.content.scenes as |scene| }}
-<li>{{#link-to 'scene' scene.id}}{{scene.title}}{{/link-to}}</li>
+<li><LinkTo @route="scene" @model={{scene.id}}>{{scene.title}}</LinkTo></li>
 {{/each}}
 </ul>
 
@@ -20,6 +20,6 @@
 
 <ul>
 {{#each model.content.chars as |char| }}
-<li>{{#link-to 'char' char.name}}{{char.name}}{{/link-to}}</li>
+<li><LinkTo @route="char" @model={{char.name}}>{{char.name}}</LinkTo></li>
 {{/each}}
 </ul>

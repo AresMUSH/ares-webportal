@@ -2,7 +2,7 @@
 
 <h1>Search Wiki</h1>
 
-{{search-bar}}
+<SearchBar />
 
 <p>The search will only match wiki pages that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
 
@@ -21,7 +21,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="text" value=searchText enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="text" @value={{searchText}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -33,7 +33,7 @@
   </div>
   
   <div class="col col-xs-8">
-        <p>{{input type="text" size=25 id="tag"  value=searchTag enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="tag" @value={{searchTag}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -54,13 +54,13 @@
 
 <hr>
 
-{{flash-messages}}
+<FlashMessages />
 
 {{#if searchResults}}
 
 <ul>
 {{#each searchResults as |page|}}
-<li>{{#link-to 'wiki-page' page.id}}{{page.heading}}{{/link-to}}</li>
+<li><LinkTo @route="wiki-page" @model={{page.id}}>{{page.heading}}</LinkTo></li>
 {{/each}}
 </ul>
 

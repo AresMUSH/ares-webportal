@@ -2,7 +2,7 @@
 
 <h1>Search Locations</h1>
 
-{{search-bar}}
+<SearchBar />
   
 <p>The search will only match locations that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
 
@@ -21,7 +21,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="name"  value=searchName enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="name" @value={{searchName}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -32,7 +32,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="desc"  value=searchDesc enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="desc" @value={{searchDesc}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -53,16 +53,16 @@
 
 <hr>
 
-{{flash-messages}}
+<FlashMessages />
 
 {{#if searchResults}}
 
 <ul>
 {{#each searchResults as |loc|}}
   {{#if loc.area_id}}
-    <li>{{#link-to 'area' loc.area_id}}{{loc.name_and_area}}{{/link-to}}</li>
+    <li><LinkTo @route="area" @model={{loc.area_id}}>{{loc.name_and_area}}</LinkTo></li>
   {{else}}
-    <li>{{#link-to 'locations'}}{{loc.name_and_area}}{{/link-to}}</li>
+    <li><LinkTo @route="locations">{{loc.name_and_area}}</LinkTo></li>
   {{/if}}
 {{/each}}
 </ul>
