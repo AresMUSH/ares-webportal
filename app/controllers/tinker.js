@@ -3,6 +3,8 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     gameApi: service(),
+    resetEditor: null,  // This will be set to a function by the component binding.  We can call that function to reset the editor text.
+  
     handleSave: function() {
         let api = this.gameApi;
         api.requestOne('saveTinker', { text: this.get('model.text') }, null)
@@ -19,7 +21,7 @@ export default Controller.extend({
             this.set('model.text', text);
         },
         reset: function() {
-            this.set('model.text', this.get('model.default'));
+            this.resetEditor(this.get('model.default'));
             this.handleSave();
         },
         save: function() { 

@@ -81,7 +81,7 @@
 <h4>Hidden</h4>
 {{#each model.hidden as |forum|}}
 {{#link-to 'forum-category' forum.id}}{{forum.name}}{{/link-to}}          
-    <a href="#" {{action 'hideCategory' forum true}} >
+    <a href="#" {{action 'hideCategory' forum false}} >
       [{{tooltip-icon position='top' message='Show category.' icon='fa fa-eye'}}]
     </a> &nbsp; &nbsp;
 {{/each}}

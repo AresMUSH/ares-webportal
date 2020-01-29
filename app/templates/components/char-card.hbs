@@ -19,6 +19,9 @@
           </div>
       </div>
       {{/each}}
+      {{#if (not char.demographics)}}
+      No demographics available.  Try reloading the scene page.
+      {{/if}}
     {{/if}}
     
     {{#if char.status_message}}
@@ -34,8 +37,9 @@
     
 <div class="row">
   <div class="col col-xs-12">
-    
+    {{#if char.description}}
     {{{ansi-format text=char.description}}}
+    {{/if}}
     
   </div>
 </div>

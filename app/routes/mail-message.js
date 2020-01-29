@@ -22,5 +22,11 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, RouteResetOnExi
           return EmberObject.create(model);
           }
         );
+    },
+    
+    setupController: function(controller, model) {
+      this._super(controller, model);
+      controller.setup();
     }
+    
 });
