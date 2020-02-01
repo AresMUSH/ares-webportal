@@ -60,7 +60,7 @@
                 <div class="scene-pose-header">		
                   {{#if pose.restarted_scene_pose}}
                       <img alt="System Profile Icon"  class="small-profile-icon <IconClass />"  src="/game/uploads/theme_images/noicon.png" >
-                      Scene Restarted
+                      Combined Poses
                   {{else}}
                       <a href="#" {{action (mut characterCard) pose.char.name}}>
                           {{#if pose.char.icon}}
@@ -215,6 +215,7 @@
                              {{else}}
                                  <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li> 
                                  <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
+                                 <li><a href="#" {{action 'collapseScene'}}>Collapse Scene Poses</a></li> 
                              {{/if}}
    
                              {{#if scene.can_delete}}
@@ -222,12 +223,22 @@
                                  <li><a href="#" {{action (mut confirmDeleteScene) true}}>Delete Scene</a></li> 
                              {{/if}}
                          {{/if}}
- 
+                     </ul>
+                 </li>
+             </ul>
+             
+             <ul class="nav scene-menu">    
+                 <li class="dropdown">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                         <span class="btn btn-default" href="#">Other <span class="caret"></span></span>
+                     </a>
+                     <ul class="dropdown-menu">
                          <li><LinkTo @route="scene-download" @model={{scene.id}}>Download Scene</LinkTo></li> 
                          <li><a href="#" {{action (mut confirmReportScene) true}}>Report Abuse</a></li> 
                      </ul>
                  </li>
              </ul>
+             
          </div>
 
      </div>        
