@@ -24,6 +24,10 @@
   {{#if traitsExtraInstalled}}
     <li><a data-toggle="tab" href="#systemtraits">Traits</a></li>
   {{/if}}
+  
+  {{#if fateExtraInstalled}}
+    <li><a data-toggle="tab" href="#systemfate">Sheet</a></li>
+  {{/if}}
 
   <ProfileCustomTabs @char={{char}} @game={{game}} />
 
@@ -80,6 +84,10 @@
   
   {{#if traitsExtraInstalled}}
     <ProfileTraits @char={{char}} />
+  {{/if}}
+  
+  {{#if fateExtraInstalled}}
+    <ProfileFate @char={{char}} />
   {{/if}}
   
   {{#if char.achievements}}
