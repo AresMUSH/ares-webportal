@@ -9,7 +9,11 @@
 {{/if}}
 
 
-<p><label>Storyteller:</label> <CharIconInline @char={{model.plot.storyteller}} /></p>
+<p><label>Storytellers:</label> 
+  {{#each model.plot.storytellers as |storyteller|}}
+  {{char-icon-inline char=storyteller}}
+  {{/each}}
+</p>
 
     <h2>Scenes</h2>
     

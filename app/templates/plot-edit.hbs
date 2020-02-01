@@ -10,20 +10,21 @@
     </div> 
   </div>
   
-   <div class="form-group row">
+  <div class="form-group row">
     <div class="col-sm-3">
-        <label for="storyteller" class="col-form-label">Storyteller:</label>
+      <b>Storytellers:</b>
     </div>
+
     <div class="col-sm-9">
-        <PowerSelect @selected={{model.plot.storyteller}} @options={{model.characters}} @searchField="name" @onchange={{action "storytellerChanged"}} as |char|>
-          {{char.name}}
-        </PowerSelect>
-    </div> 
+      {{#power-select-multiple  selected=model.plot.storytellers options=model.characters searchField="name" onchange=(action "storytellersChanged") as |char|}}
+        {{char.name}}
+      {{/power-select-multiple}}
+    </div>
   </div>
   
    <div class="form-group row">
     <div class="col-sm-3">
-        <label for="storyteller" class="col-form-label">Plot Completed:</label>
+        <label for="completed" class="col-form-label">Plot Completed:</label>
     </div>
     <div class="col-sm-9">
         <Input @type="checkbox" @checked={{model.plot.completed}} /> 
