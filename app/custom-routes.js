@@ -3,4 +3,4 @@ export default function setupCustomRoutes(router) {
   // For example:
   // router.route('yourroute');
   
-};
+}
