@@ -39,13 +39,13 @@
        </div>
    <div class="panel-body">
 
-     <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.attrs_blurb}}}</p>
+     <p class="cg-tip"><AnsiFormat @text={{model.cgInfo.fs3.abilities.attrs_blurb}} /></p>
 
 
      {{#each model.char.fs3.fs3_attributes as |att|}}
-     {{#fs3-attrbox rating=att.rating ratingName=att.rating_name maxRating=model.cgInfo.fs3.max_attr_rating  updated=(action "abilityChanged")}}
+     <Fs3Attrbox @rating={{att.rating}} @ratingName={{att.rating_name}} @maxRating={{model.cgInfo.fs3.max_attr_rating}} @updated={{action "abilityChanged"}}>
          <b>{{att.name}}</b> - {{att.desc}}
-     {{/fs3-attrbox}}
+     </Fs3Attrbox>
      {{/each}}
 
    </div>
@@ -60,14 +60,14 @@
        </div>
    <div class="panel-body">
 
-     <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.action_blurb}}}</p>
+     <p class="cg-tip"><AnsiFormat @text={{model.cgInfo.fs3.abilities.action_blurb}} /></p>
      
      <br>
    
      {{#each model.char.fs3.fs3_action_skills as |skill|}}
-     {{#fs3-actionbox name=skill.name rating=skill.rating ratingName=skill.rating_name maxRating=model.cgInfo.fs3.max_skill_rating minRating=model.cgInfo.fs3.min_action_skill_rating updated=(action "abilityChanged") specialties=skill.specialties}}
+     <Fs3Actionbox @name={{skill.name}} @rating={{skill.rating}} @ratingName={{skill.rating_name}} @maxRating={{model.cgInfo.fs3.max_skill_rating}} @minRating={{model.cgInfo.fs3.min_action_skill_rating}} @updated={{action "abilityChanged"}} @specialties={{skill.specialties}}>
          <b>{{skill.name}}</b> - {{skill.desc}}
-     {{/fs3-actionbox}}
+     </Fs3Actionbox>
      {{/each}}
      
 
@@ -85,14 +85,14 @@
        </div>
    <div class="panel-body">
 
-     <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.background_blurb}}} To remove a background skill, set its rating to Everyman.</p>
+     <p class="cg-tip"><AnsiFormat @text={{model.cgInfo.fs3.abilities.background_blurb}} /> To remove a background skill, set its rating to Everyman.</p>
 
 
      {{#each model.char.fs3.fs3_backgrounds as |skill|}}
 
-     {{#fs3-bgbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
-         <b>{{input type="text" value=skill.name size=25}}</b>
-     {{/fs3-bgbox}}
+     <Fs3Bgbox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{action "abilityChanged"}}>
+         <b><Input @type="text" @value={{skill.name}} @size={{25}} /></b>
+     </Fs3Bgbox>
      {{/each}}
 
      <button class="btn btn-default" id="addbg" {{action (mut selectBackgroundSkill) true}}>Add Background Skill</button>
@@ -109,12 +109,12 @@
      <div class="panel-body">
 
 
-         <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.language_blurb}}} To remove a language, set its rating to Everyman.</p>
+         <p class="cg-tip"><AnsiFormat @text={{model.cgInfo.fs3.abilities.language_blurb}} /> To remove a language, set its rating to Everyman.</p>
 
        {{#each model.char.fs3.fs3_languages as |skill|}}
-       {{#fs3-langbox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
+       <Fs3Langbox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{action "abilityChanged"}}>
            <b>{{skill.name}}</b> - {{skill.desc}}
-       {{/fs3-langbox}}
+       </Fs3Langbox>
        {{/each}}
                 
      </div>
@@ -130,12 +130,12 @@
        <div class="panel-body">
 
 
-           <p class="cg-tip">{{{ansi-format text=model.cgInfo.fs3.abilities.advantages_blurb}}} To remove an advantage, set its rating to Everyman.</p>
+           <p class="cg-tip"><AnsiFormat @text={{model.cgInfo.fs3.abilities.advantages_blurb}} /> To remove an advantage, set its rating to Everyman.</p>
 
          {{#each model.char.fs3.fs3_advantages as |skill|}}
-         {{#fs3-advantagebox rating=skill.rating ratingName=skill.rating_name updated=(action "abilityChanged")}}
+         <Fs3Advantagebox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{action "abilityChanged"}}>
              <b>{{skill.name}}</b> - {{skill.desc}}
-         {{/fs3-advantagebox}}
+         </Fs3Advantagebox>
          {{/each}}
                 
        </div>
@@ -147,16 +147,8 @@
 </div>
 
 
-{{#bs-modal-simple
-    title="Add Background Skill"
-    closeTitle="Cancel"
-    submitTitle="Add"
-    size=null
-    fade=false
-    open=selectBackgroundSkill
-    onSubmit=(action "addBackgroundSkill")
-    onHide=(action (mut selectBackgroundSkill) null)}}
+<BsModalSimple @title="Add Background Skill" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{false}} @open={{selectBackgroundSkill}} @onSubmit={{action "addBackgroundSkill"}} @onHide={{action (mut selectBackgroundSkill) null}}>
     <p>Enter a skill name.</p>
-    {{input type="text" size=25 id="bgSkill" enter=(action "addBackgroundSkill")  value=newBgSkill}}
+    <Input @type="text" @size={{25}} @id="bgSkill" @enter={{action "addBackgroundSkill"}} @value={{newBgSkill}} />
 
-  {{/bs-modal-simple}}
+  </BsModalSimple>

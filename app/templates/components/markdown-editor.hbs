@@ -4,24 +4,24 @@
         <div class="pull-right markdown-controls">
     <a href="#" {{action 'preview'}}>
         {{#if preview}}
-          {{tooltip-icon position='right' message='Hide preview.' icon='fa fa-eye-slash'}}
+          <TooltipIcon @position="right" @message="Hide preview." @icon="fa fa-eye-slash" />
         {{else}}
-          {{tooltip-icon position='right' message='Show preview.' icon='fa fa-eye'}}
+          <TooltipIcon @position="right" @message="Show preview." @icon="fa fa-eye" />
         {{/if}}
     </a>
     
     <a href="#" {{action 'showHelp'}}>
-      {{tooltip-icon position='right' message='Formatting help.' icon='fa fa-question-circle'}}
+      <TooltipIcon @position="right" @message="Formatting help." @icon="fa fa-question-circle" />
     </a>
     </div>
     
         
-{{textarea value=text cols="80" rows=rows enter=onEnter}}
+<Textarea @value={{text}} @cols="80" @rows={{rows}} @enter={{onEnter}} />
 {{#if preview}}
 
 <div class="panel panel-default">
     <div class="panel-body">
-        {{{ansi-format text=preview}}}
+        <AnsiFormat @text={{preview}} />
         
     </div>
 </div>

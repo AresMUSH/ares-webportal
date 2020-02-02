@@ -1,23 +1,23 @@
 {{title model.name}}
 <h1>{{model.name}}</h1>
 
-{{{ansi-format text=model.description}}}
+<AnsiFormat @text={{model.description}} />
 
 {{#each model.details as |detail|}}
-<p><i>{{detail.name}}:</i> {{{ansi-format text=detail.desc}}}</p>
+<p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
 {{/each}}
 
 
 {{#if model.area}}
 <h3>Located In</h3>
 
-{{#link-to 'area' model.area.id}}{{model.area.full_name}}{{/link-to}}
+<LinkTo @route="area" @model={{model.area.id}}>{{model.area.full_name}}</LinkTo>
 {{/if}}
 
 {{#if model.owners}}
 <h3>Owners</h3>
   {{#each model.owners as |owner|}}
-    {{char-icon-inline char=owner}}
+    <CharIconInline @char={{owner}} />
   {{/each}}
 {{/if}}
 
@@ -25,7 +25,7 @@
 
 <ul>
   {{#each model.destinations as |dest|}}
-  <li>{{#link-to 'location' dest.id}}{{dest.name}}{{/link-to}}</li>
+  <li><LinkTo @route="location" @model={{dest.id}}>{{dest.name}}</LinkTo></li>
   {{/each}}
 </ul>
 
@@ -33,9 +33,9 @@
     <div class="row">
         <div class="col col-xs-12">
 
-<p>{{#link-to 'locations'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations{{/link-to}}</p>
+<p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
                 
-        {{#link-to 'scene-create' (query-params location=model.name_and_area) class="btn btn-primary pull-right"}}Start Scene Here{{/link-to}}
+        <LinkTo @route="scene-create" @query={{hash location=model.name_and_area}} class="btn btn-primary pull-right">Start Scene Here</LinkTo>
         
         </div>
     </div>

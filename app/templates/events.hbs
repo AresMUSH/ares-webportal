@@ -8,7 +8,7 @@
         <div class="pull-right">
  
           {{#if isApproved}}
-              {{#link-to 'event-create' class="btn btn-primary"}}Create Event{{/link-to}}
+              <LinkTo @route="event-create" class="btn btn-primary">Create Event</LinkTo>
           {{/if}}
 
       </div>
@@ -34,9 +34,9 @@
     {{/if}}
   </td>
     <td>
-        {{#link-to 'event' event.id}}{{event.title}}{{/link-to}}
+        <LinkTo @route="event" @model={{event.id}}>{{event.title}}</LinkTo>
         {{#if event.content_warning}}
-        {{content-warning-tag warning=event.content_warning position='top-right'}}
+        <ContentWarningTag @warning={{event.content_warning}} @position="top-right" />
         {{/if}}
     </td>
     

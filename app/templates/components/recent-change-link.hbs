@@ -1,13 +1,13 @@
 {{#if (eq change.type 'char')}}
- {{#link-to 'char' change.data.char_name}}{{change.message}}{{/link-to}}
+ <LinkTo @route="char" @model={{change.data.char_name}}>{{change.message}}</LinkTo>
 {{else if (eq change.type 'wiki')}}
- {{#link-to 'wiki-page' change.data.page_name}}{{change.message}}{{/link-to}}
+ <LinkTo @route="wiki-page" @model={{change.data.page_name}}>{{change.message}}</LinkTo>
 {{else if (eq change.type 'file')}}
- {{#link-to 'file' change.data.folder change.data.name}}{{change.message}}{{/link-to}}
+ <LinkTo @route="file" @models={{array change.data.folder change.data.name}}>{{change.message}}</LinkTo>
 {{else if (eq change.type 'event')}}
- {{#link-to 'event' change.data.id}}{{change.message}}{{/link-to}}
+ <LinkTo @route="event" @model={{change.data.id}}>{{change.message}}</LinkTo>
 {{else if (eq change.type 'scene')}}
- {{#link-to 'scene' change.data.id}}{{change.message}}{{/link-to}}
+ <LinkTo @route="scene" @model={{change.data.id}}>{{change.message}}</LinkTo>
 {{else}}
  {{change.message}}
 {{/if}}

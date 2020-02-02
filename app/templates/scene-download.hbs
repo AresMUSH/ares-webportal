@@ -4,8 +4,8 @@
 <p>Scene is already shared, so you can only download the finished, clean log.</p> 
 {{else}}
 <p>
-  {{input type='checkbox' checked=showOoc click=(action 'toggleOoc')}} Show OOC <br>
-  {{input type='checkbox' checked=showSystem click=(action 'toggleSystem')}} Show System Messages (rolls, combat, etc.)
+  <Input @type="checkbox" @checked={{showOoc}} @click={{action "toggleOoc"}} /> Show OOC <br>
+  <Input @type="checkbox" @checked={{showSystem}} @click={{action "toggleSystem"}} /> Show System Messages (rolls, combat, etc.)
   
 </p>
 

@@ -5,42 +5,34 @@
     
     {{#each-in config as |key config|}}
         <h2>{{config.key}} <button class="btn btn-default btn-sm" {{action 'removeKey' config.key}}><i class="fa fa-trash" aria-label="Delete Key"></i></button></h2>
-           {{yaml-editor editorId=config.key text=config.new_value rows=config.rows}}
+           <YamlEditor @editorId={{config.key}} @text={{config.new_value}} @rows={{config.rows}} />
            
     {{/each-in}}
     
     <h3>Add New Config Key</h3>
     
     <p>
-         <b>Key Name:</b> {{input type="text" size=25 value=newConfigKey}}
+         <b>Key Name:</b> <Input @type="text" @size={{25}} @value={{newConfigKey}} />
         <button {{action 'addNew'}} class="btn btn-default">Add</button>
     </p>
     
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">
-            {{#link-to 'setup' class="btn btn-default"}}Cancel{{/link-to}}
+            <LinkTo @route="setup" class="btn btn-default">Cancel</LinkTo>
             <button {{action (mut confirmRestore) true}}  class="btn btn-warning">Restore Defaults</button>
-            {{#link-to 'textfile' 'config' model.file class="btn btn-default"}}Advanced Editor{{/link-to}}
+            <LinkTo @route="textfile" @models={{array 'config' model.file}} class="btn btn-default">Advanced Editor</LinkTo>
             <button {{action 'save'}} class="btn btn-primary">Save</button>
         </div>
         
-        {{flash-messages}}
+        <FlashMessages />
     </div>
 </div>
 
 
-{{#bs-modal-simple
-    title="Confirm Restore"
-    closeTitle="Cancel"
-    submitTitle="Confirm"
-    size=null
-    fade=false
-    open=confirmRestore
-    onSubmit=(action "restoreDefaults")
-    onHide=(action (mut confirmRestore) null)}}
+<BsModalSimple @title="Confirm Restore" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmRestore}} @onSubmit={{action "restoreDefaults"}} @onHide={{action (mut confirmRestore) null}}>
     This will revert this configuration file to the default settings. Are you sure?
-  {{/bs-modal-simple}}
+  </BsModalSimple>
   
   
 {{outlet}}

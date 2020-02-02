@@ -4,19 +4,19 @@
 <p>The scenes archive catalogs roleplay scenes from the game.  Only completed scenes show up here.  You can filter by type of scene or by the title or participant names.</p>
 
 
-<div class="alert alert-info">For scenes that are still in progress or not yet shared, see the {{#link-to 'scenes-live'}}Active Scenes{{/link-to}} list.</div>
+<div class="alert alert-info">For scenes that are still in progress or not yet shared, see the <LinkTo @route="scenes-live">Active Scenes</LinkTo> list.</div>
 
 <div class="row">
     
     <div class="col pull-right">
-       {{#link-to 'search-scenes' class="btn btn-default"}}<i class="fa fa-search" aria-hidden="true"></i> Search Scenes{{/link-to}}  
+       <LinkTo @route="search-scenes" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> Search Scenes</LinkTo>  
        {{#if isApproved}}
-        {{#link-to 'scene-create' class="btn btn-primary"}}Create Scene{{/link-to}}
+        <LinkTo @route="scene-create" class="btn btn-primary">Create Scene</LinkTo>
         {{/if}}
     </div>
     
 </div>
 
-{{scene-list scenes=model.scenes.scenes pages=model.scenes.pages sceneTypes=model.sceneTypes filter=filter page=page filterChanged=(action "filterChanged") goToPage=(action "goToPage")}}
+<SceneList @scenes={{model.scenes.scenes}} @pages={{model.scenes.pages}} @sceneTypes={{model.sceneTypes}} @filter={{filter}} @page={{page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
 
 {{outlet}}

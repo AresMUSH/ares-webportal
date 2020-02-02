@@ -12,7 +12,7 @@
     
     <div id="scenelist" class="tab-pane fade ">
   
-        {{scene-list scenes=scenes.scenes pages=scenes.pages sceneTypes=sceneTypes filter=filter page=page filterChanged=(action "filterChanged") goToPage=(action "goToPage")}}
+        <SceneList @scenes={{scenes.scenes}} @pages={{scenes.pages}} @sceneTypes={{sceneTypes}} @filter={{filter}} @page={{page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
       
     </div>
     

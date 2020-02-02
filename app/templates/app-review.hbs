@@ -7,7 +7,7 @@
 <p>You can view the character's background, sheet, and RP hooks on their character page.  This will open in a new tab so you can easily flip back to this one when finished.</p>
 
        <p>
-          {{#link-to 'char' model.id class="btn btn-primary" target="_blank"}}View Character{{/link-to}}
+          <LinkTo @route="char" @model={{model.id}} class="btn btn-primary" @target="_blank">View Character</LinkTo>
       </p>
 
 <h2>View Errors</h2>
@@ -20,21 +20,8 @@
 
 <div class="panel panel-default">
     <div class="panel-body">
-        <pre class="ansi app-status">
-{{#if model.abilities}}
-{{{ansi-format text=model.abilities}}} 
-{{/if}}
-{{{ansi-format text=model.demographics}}}
-{{{ansi-format text=model.background}}}
-{{{ansi-format text=model.desc}}}
-{{{ansi-format text=model.hooks}}}
-{{#if model.ranks}}
-{{{ansi-format text=model.ranks}}}
-{{/if}}
-{{#if model.custom}}
-{{{ansi-format text=model.custom}}}
-{{/if}}
-        </pre>
+        <pre class="ansi app-status">{{#if model.abilities}}<AnsiFormat @text={{model.abilities}} /> 
+{{/if}}<AnsiFormat @text={{model.demographics}} /><AnsiFormat @text={{model.background}} /><AnsiFormat @text={{model.desc}} /><AnsiFormat @text={{model.hooks}} />{{#if model.ranks}}<AnsiFormat @text={{model.ranks}} />{{/if}}{{#if model.custom}}<AnsiFormat @text={{model.custom}} />{{/if}}        </pre>
     </div>
 </div>
 
@@ -44,11 +31,11 @@
       
        <p>Reject or approve the character using the button below.  Any notes you add in the textbox will be sent to the applicant via the approval job.</p>
        
-       {{textarea value=appNotes cols="80" rows=5}}
+       <Textarea @value={{appNotes}} @cols="80" @rows={{5}} />
        
        
       <p>
-          {{#link-to 'job' model.job class="btn btn-default"}}Back to Job{{/link-to}}
+          <LinkTo @route="job" @model={{model.job}} class="btn btn-default">Back to Job</LinkTo>
           <button name="reject" {{action 'rejectChar'}} class="btn btn-warning">Reject</button>
           <button name="approve" {{action 'approveChar'}} class="btn btn-success">Approve</button>
       </p>

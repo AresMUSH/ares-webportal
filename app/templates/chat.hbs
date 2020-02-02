@@ -67,17 +67,17 @@
   {{#if selectedChannel}}
 
     <b>{{selectedChannel.title}}</b> <a href="#" {{action "scrollDown"}}>
-      {{tooltip-icon position='left' message='Scroll to bottom.' icon='fas fa-chevron-circle-down'}}
+      <TooltipIcon @position="left" @message="Scroll to bottom." @icon="fas fa-chevron-circle-down" />
       </a>
 
   
     {{#if scrollPaused}}
             <a href="#" {{action "unpauseScroll"}}>
-              {{tooltip-icon position='left' message='Resume scrolling.' icon='fas fa-play'}}
+              <TooltipIcon @position="left" @message="Resume scrolling." @icon="fas fa-play" />
             </a>
     {{else}}
             <a href="#" {{action "pauseScroll"}}>
-              {{tooltip-icon position='left' message='Pause scrolling.' icon='fas fa-pause'}}
+              <TooltipIcon @position="left" @message="Pause scrolling." @icon="fas fa-pause" />
             </a>
     {{/if}}
         
@@ -89,11 +89,11 @@
 
     <div class="panel panel-default">
       <div class="panel-body">
-        <b>To:</b>{{#power-select-multiple selected=newConversationList options=model.characters searchField="name" onchange=(action "conversationListChanged") as |char|}}
+        <b>To:</b><PowerSelectMultiple @selected={{newConversationList}} @options={{model.characters}} @searchField="name" @onchange={{action "conversationListChanged"}} as |char|>
             {{char.name}}
-          {{/power-select-multiple}}
+          </PowerSelectMultiple>
       
-          {{cmd-box value=chatMessage class="chat-box" cols="80" rows="6" onEnter=(action "startConversation") }}
+          <CmdBox @value={{chatMessage}} @class="chat-box" @cols="80" @rows="6" @onEnter={{action "startConversation"}} />
       
           <button class="btn-primary btn" {{action "startConversation"}}>Send Message</button>
       </div>
@@ -130,7 +130,7 @@
                 ({{message.timediff}} ago)
                 {{/if}}
               </div>
-              {{{ansi-format text=message.message}}}
+              <AnsiFormat @text={{message.message}} />
           {{/each}}
           </div>
 
@@ -140,7 +140,7 @@
           {{/if}}
     
           {{#if channel.can_talk}}
-            {{cmd-box value=chatMessage class="chat-box" cols="80" rows="6" onEnter=(action "send") }}
+            <CmdBox @value={{chatMessage}} @class="chat-box" @cols="80" @rows="6" @onEnter={{action "send"}} />
           {{/if}}
 
 
@@ -205,7 +205,7 @@
 
                 <div class="icon-row">
                 {{#each channel.who as |who|}}
-                  {{char-icon-inline char=who }}
+                  <CharIconInline @char={{who}} />
                   {{#if who.muted}}<i class="fa fa-microphone-slash"></i>{{/if}}
 
                 {{/each}}
@@ -225,33 +225,25 @@
 </div>
 
 
-{{#bs-modal-simple
-    title="Report Offensive Chat"
-    closeTitle="Cancel"
-    submitTitle="Report"
-    size=null
-    fade=false
-    open=showReport
-    onSubmit=(action "reportChat")
-    onHide=(action (mut showReport) null)}}
+<BsModalSimple @title="Report Offensive Chat" @closeTitle="Cancel" @submitTitle="Report" @size={{null}} @fade={{false}} @open={{showReport}} @onSubmit={{action "reportChat"}} @onHide={{action (mut showReport) null}}>
         
         <p>Select the offensive messages below and enter a reason in the text box.</p>
-        <p>{{input type="text"  size=50 value=reportReason}}</p>
+        <p><Input @type="text" @size={{50}} @value={{reportReason}} /></p>
         
         <div class="chat-report">
         <table>
         {{#each selectedChannel.messages as |message|}}
         <tr>
-          <td>{{input type='checkbox' checked=message.checked}}</td>
-          <td>{{{ansi-format text=message.message}}}</td>
+          <td><Input @type="checkbox" @checked={{message.checked}} /></td>
+          <td><AnsiFormat @text={{message.message}} /></td>
         </tr>
         {{/each}}
         </table>
         </div>
         
-  {{/bs-modal-simple}}
+  </BsModalSimple>
 
 
 
-{{flash-messages}}
+<FlashMessages />
 {{outlet}}

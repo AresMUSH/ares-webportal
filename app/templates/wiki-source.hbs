@@ -10,14 +10,14 @@
     {{#each model.versions as |v|}}
     <li>
      
-     {{#link-to 'wiki-source' model.page_id v.id}}
+     <LinkTo @route="wiki-source" @models={{array model.page_id v.id}}>
      {{#if (eq v.id model.version_id)}}
      <i class="far fa-dot-circle fa-fw" aria-label="Current Version"></i>
      {{else}}
      <i class="far fa-circle fa-fw" aria-label="Other Version"></i>
      {{/if}}
      
-     {{v.created}} ({{v.author}}){{/link-to}}
+     {{v.created}} ({{v.author}})</LinkTo>
      </li>
     {{/each}}
 </ol>
@@ -68,4 +68,4 @@
   </div>
 </div>
 
-{{#link-to 'wiki-page' model.name}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Page{{/link-to}}
+<LinkTo @route="wiki-page" @model={{model.name}}><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Page</LinkTo>

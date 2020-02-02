@@ -2,7 +2,7 @@
 
 <h1>Search Help</h1>
 
-{{search-bar}}
+<SearchBar />
 
 <p>The search will only match help topics that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
 
@@ -21,7 +21,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="text" value=searchText enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="text" @value={{searchText}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -40,7 +40,7 @@
 
 <hr>
 
-{{flash-messages}}
+<FlashMessages />
 
 {{#if searchResults}}
 
@@ -50,7 +50,7 @@
 
 <ul>
 {{#each searchResults.probable_matches as |topic|}}
-<li>{{#link-to 'help-topic' topic.id}}{{topic.name}}{{/link-to}} - {{topic.summary}}</li>
+<li><LinkTo @route="help-topic" @model={{topic.id}}>{{topic.name}}</LinkTo> - {{topic.summary}}</li>
 {{/each}}
 </ul>
 
@@ -65,7 +65,7 @@ None
 
 <ul>
 {{#each searchResults.possible_matches as |topic|}}
-<li>{{#link-to 'help-topic' topic.id}}{{topic.name}}{{/link-to}} - {{topic.summary}}</li>
+<li><LinkTo @route="help-topic" @model={{topic.id}}>{{topic.name}}</LinkTo> - {{topic.summary}}</li>
 {{/each}}
 </ul>
 
