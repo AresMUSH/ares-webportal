@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
+  diceReason: null,
   tagName: '',
   diceString: '',
   
@@ -12,6 +13,7 @@ export default Component.extend({
 
     rollDice() {
       let api = this.gameApi;
+	  let diceReason = this.diceReason;
       let dice = this.diceString;
       this.set('showRollDice', null);
       this.set('diceString', '');
