@@ -20,22 +20,22 @@
         {{/if}}
       </td>
   <td>{{notification.timestamp}}</td>
-  <td>{{{ansi-format text=notification.message}}}</td>
+  <td><AnsiFormat @text={{notification.message}} /></td>
   <td>
     {{#if (eq notification.type 'mail')}}
-      {{#link-to 'mail-message' notification.reference_id}}View{{/link-to}}
+      <LinkTo @route="mail-message" @model={{notification.reference_id}}>View</LinkTo>
     {{else if (eq notification.type 'forum')}}
-      {{#link-to 'forum-topic' (get notification.data 0) (get notification.data 1)}}View{{/link-to}}
+      <LinkTo @route="forum-topic" @models={{array (get notification.data 0) (get notification.data 1)}}>View</LinkTo>
     {{else if (eq notification.type 'job')}}
-      {{#link-to 'job' notification.reference_id}}View{{/link-to}}
+      <LinkTo @route="job" @model={{notification.reference_id}}>View</LinkTo>
     {{else if (eq notification.type 'pm')}}
-      {{#link-to 'chat'}}View{{/link-to}}
+      <LinkTo @route="chat">View</LinkTo>
     {{else if (eq notification.type 'scene')}}
-      {{#link-to 'scene-live' notification.reference_id}}View{{/link-to}}
+      <LinkTo @route="scene-live" @model={{notification.reference_id}}>View</LinkTo>
     {{else if (eq notification.type 'event')}}
-      {{#link-to 'event' notification.reference_id}}View{{/link-to}}
+      <LinkTo @route="event" @model={{notification.reference_id}}>View</LinkTo>
     {{else if (eq notification.type 'achievement')}}
-      {{#link-to 'char' currentUser.id}}View{{/link-to}}
+      <LinkTo @route="char" @model={{currentUser.id}}>View</LinkTo>
     {{/if}}
   </td>
 </tr>

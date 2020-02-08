@@ -13,7 +13,7 @@
 
 {{#each model as |player|}}
 <h2>{{player.name}}</h2>
-    {{char-gallery chars=player.alts title=""}}
+    <CharGallery @chars={{player.alts}} @title="" />
 {{/each}}
 
 {{outlet}}

@@ -6,19 +6,20 @@
         <label for="title" class="col-form-label">Title:</label>
     </div>
     <div class="col-sm-9">
-         {{input type="text" size=25 id="title" enter=(action "save")  value=title}}
+         <Input @type="text" @size={{25}} @id="title" @enter={{action "save"}} @value={{title}} />
     </div> 
   </div>
   
-   <div class="form-group row">
+  <div class="form-group row">
     <div class="col-sm-3">
-        <label for="storyteller" class="col-form-label">Storyteller:</label>
+      <b>Storytellers:</b>
     </div>
+
     <div class="col-sm-9">
-        {{#power-select options=model selected=storyteller searchField="name" onchange=(action "storytellerChanged") as |char|}}
-          {{char.name}}
-        {{/power-select}}
-    </div> 
+      {{#power-select-multiple  selected=storytellers options=model searchField="name" onchange=(action "storytellersChanged") as |char|}}
+        {{char.name}}
+      {{/power-select-multiple}}
+    </div>
   </div>
   
    <div class="form-group row">
@@ -26,7 +27,7 @@
         <label for="summary" class="col-form-label">Summary:</label>
     </div>
     <div class="col-sm-9">
-       {{markdown-editor text=summary}}
+       <MarkdownEditor @text={{summary}} />
     </div> 
   </div>
      
@@ -36,7 +37,7 @@
             <label for="title" class="col-form-label">Content Warning:</label>
         </div>
         <div class="col-sm-9">
-            {{input type="text" size=25 id="content_warning" value=contentWarning}}
+            <Input @type="text" @size={{25}} @id="content_warning" @value={{contentWarning}} />
         </div>
       </div>
       
@@ -45,15 +46,15 @@
         <label for="description" class="col-form-label">Description:</label>
        </div>
        <div class="col-sm-9">
-        {{markdown-editor text=description}}
+        <MarkdownEditor @text={{description}} />
        </div> 
      </div>
         
 
 <div class="pull-right">
-        <p> {{#link-to 'plots' class="btn btn-default"}}Cancel{{/link-to}}  
+        <p> <LinkTo @route="plots" class="btn btn-default">Cancel</LinkTo>  
         <button {{action 'save'}} class="btn btn-primary">Save</button> </p>
 </div>
         
-{{flash-messages}}
+<FlashMessages />
 {{outlet}}

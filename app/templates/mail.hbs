@@ -11,7 +11,7 @@
 
         <div class="pull-right">
  
-        {{#link-to 'mail-send' class="btn btn-primary"}}Send Mail{{/link-to}}
+        <LinkTo @route="mail-send" class="btn btn-primary">Send Mail</LinkTo>
   </div>
   </div>
 </div>
@@ -38,7 +38,7 @@
         <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="Unread Message"></i></span>
         {{/if}}
         
-        {{#link-to 'mail-message' m.id}}{{m.subject}}{{/link-to}}
+        <LinkTo @route="mail-message" @model={{m.id}}>{{m.subject}}</LinkTo>
     </td>
     
     <td>

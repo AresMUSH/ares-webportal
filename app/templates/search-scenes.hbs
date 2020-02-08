@@ -2,7 +2,7 @@
 
 <h1>Search Scenes</h1>
 
-{{search-bar}}
+<SearchBar />
 
 <p>The search will only match scenes that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
 
@@ -21,7 +21,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="title"  value=searchTitle enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="title" @value={{searchTitle}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -33,7 +33,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="participant"  value=searchParticipant enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="participant" @value={{searchParticipant}} @enter={{action "search"}} /></p>
         <p class="hint">Enter one or more participant names (space-separated).</p>
   </div>
   
@@ -46,7 +46,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="icdate"  value=searchDate enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="icdate" @value={{searchDate}} @enter={{action "search"}} /></p>
         <p class="hint">Matches the beginning of a scene's IC date, e.g. 2018-04 will find all scenes from April.</p>
   </div>
   
@@ -60,9 +60,9 @@
   
   <div class="col col-xs-9">
 
-    {{#power-select selected=searchType options=sceneTypes onchange=(action "sceneTypeChanged") as |name|}}
+    <PowerSelect @selected={{searchType}} @options={{sceneTypes}} @onchange={{action "sceneTypeChanged"}} as |name|>
       {{name}}
-    {{/power-select}}
+    </PowerSelect>
     <br>
   </div>
   
@@ -75,7 +75,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="location"  value=searchLocation enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="location" @value={{searchLocation}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -87,7 +87,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="tag"  value=searchTag enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="tag" @value={{searchTag}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -100,7 +100,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="log"  value=searchLog enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="log" @value={{searchLog}} @enter={{action "search"}} /></p>
 
         <p class="hint">Matches a whole word or phrase from a log's summary or full log text.</p>
   </div>
@@ -123,11 +123,11 @@
 
 <hr>
 
-{{flash-messages}}
+<FlashMessages />
 
 {{#if searchResults.pages}}
 
-{{scene-list scenes=searchResults.scenes pages=searchResults.pages sceneTypes=model.sceneTypes filter=searchType page=page hideSearch=true goToPage=(action "goToPage")}}
+<SceneList @scenes={{searchResults.scenes}} @pages={{searchResults.pages}} @sceneTypes={{model.sceneTypes}} @filter={{searchType}} @page={{page}} @hideSearch={{true}} @goToPage={{action "goToPage"}} />
 
 {{else}}
 <p>No search results.</p>

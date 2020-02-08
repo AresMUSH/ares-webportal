@@ -4,19 +4,19 @@
 <p>Enter your character information.  Your web login will be the same as your game login.</p>
         
         {{#if model.terms_of_service}}
-            <div class="ansi alert alert-info">By playing here, you agree to the policies listed on the {{#link-to 'tos'}}Terms of Service{{/link-to}} page.</div>
+            <div class="ansi alert alert-info">By playing here, you agree to the policies listed on the <LinkTo @route="tos">Terms of Service</LinkTo> page.</div>
         {{/if}}
         
 <div class="panel panel-default">
     <div class="panel-body">
 
         
-        <p>{{input type="text" id="name" placeholder="Name" enter=(action "register")  value=name autofocus=true }}</p>
-        <p>{{input type="password" placeholder="Password" enter=(action "register")  id="password" value=password }}</p>
-        <p>{{input type="password" placeholder="Confirm Password" enter=(action "register")  id="confirmPassword" value=confirmPassword }}</p>
+        <p><Input @type="text" @id="name" placeholder="Name" @enter={{action "register"}} @value={{name}} @autofocus={{true}} /></p>
+        <p><Input @type="password" placeholder="Password" @enter={{action "register"}} @id="password" @value={{password}} /></p>
+        <p><Input @type="password" placeholder="Confirm Password" @enter={{action "register"}} @id="confirmPassword" @value={{confirmPassword}} /></p>
         
         {{#if model.recaptcha}}
-        {{g-recaptcha onSuccess=(action "recaptchaResolved") ref=(mut recaptchaControl) sitekey=model.recaptcha}}
+        <GRecaptcha @onSuccess={{action "recaptchaResolved"}} @ref={{mut recaptchaControl}} @sitekey={{model.recaptcha}} />
         {{/if}}
 
         <button {{action "register"}} class="btn btn-primary">Register</button>

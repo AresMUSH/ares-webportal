@@ -7,7 +7,7 @@
 {{#each model.values as |value|}}
 <tr>
     <td><b>{{value.title}}</b></td>
-    <td>{{{ansi-format text=value.detail}}}</td>
+    <td><AnsiFormat @text={{value.detail}} /></td>
 </tr>
 {{/each}}
 

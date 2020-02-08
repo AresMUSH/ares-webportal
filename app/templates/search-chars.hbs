@@ -2,7 +2,7 @@
 
 <h1>Search Characters</h1>
 
-{{search-bar}}
+<SearchBar />
 
 <p>The search will only match characters that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
 
@@ -24,7 +24,7 @@
   </div>
   
   <div class="col col-xs-9 col-md-4">
-        <p>{{input type="text" size=25  value=(mut (get searchGroups key)) enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @value={{mut (get searchGroups key)}} @enter={{action "search"}} /></p>
   </div>
   
 {{/each-in}}
@@ -40,7 +40,7 @@
   </div>
   
   <div class="col col-xs-9 col-md-4">
-        <p>{{input type="text" size=25  value=(mut (get searchDemographics demo)) enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @value={{mut (get searchDemographics demo)}} @enter={{action "search"}} /></p>
   </div>
   
 {{/each}}
@@ -55,7 +55,7 @@
   </div>
   
   <div class="col col-xs-9 col-md-4">
-        <p>{{input type="text" size=25 id="name"  value=searchName enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="name" @value={{searchName}} @enter={{action "search"}} /></p>
   </div>
   
   
@@ -64,7 +64,7 @@
   </div>
   
   <div class="col col-xs-9 col-md-4">
-        <p>{{input type="text" size=25 id="tag"  value=searchTag enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="tag" @value={{searchTag}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -76,7 +76,7 @@
   </div>
   
   <div class="col col-xs-9 col-md-4">
-        <p>{{input type="text" size=25 id="relation"  value=searchRelation enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="relation" @value={{searchRelation}} @enter={{action "search"}} /></p>
   </div>
 
   
@@ -97,11 +97,11 @@
 
 </div>
 
-{{flash-messages}}
+<FlashMessages />
 
 {{#if searchResults}}
 
-{{char-group-list name="Results" chars=searchResults}}
+<CharGroupList @name="Results" @chars={{searchResults}} />
 
 
 {{else}}

@@ -24,7 +24,7 @@
 </div>
 
 
-{{{ansi-format text=model.text}}}
+<AnsiFormat @text={{model.text}} />
 
 <hr>
 
@@ -40,7 +40,7 @@
 {{#if model.tags}}
 <b>Tags:</b>  
     {{#each model.tags as |tag|}}
-    {{#link-to 'wiki-tag' tag}}{{tag}}{{/link-to}}
+    <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
     {{/each}}
 {{/if}}
 
@@ -51,10 +51,10 @@
   {{#if model.can_delete}}
         <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete Page</button>
   {{/if}}
-      {{#link-to 'wiki-source' model.name model.current_version_id class="btn btn-default"}}Source/History{{/link-to}}
+      <LinkTo @route="wiki-source" @models={{array model.name model.current_version_id}} class="btn btn-default">Source/History</LinkTo>
       
    {{#if model.can_edit}}
-        {{#link-to 'wiki-edit' model.name class="btn btn-primary"}}Edit{{/link-to}} 
+        <LinkTo @route="wiki-edit" @model={{model.name}} class="btn btn-primary">Edit</LinkTo> 
    {{else}}
       <button class="btn btn-primary" disabled="true">Edit</button>
    {{/if}} 
@@ -68,20 +68,12 @@
   </div>
 </div>
 
-{{flash-messages}}
+<FlashMessages />
 
 
-{{#bs-modal-simple
-    title="Confirm Delete"
-    closeTitle="Cancel"
-    submitTitle="Confirm"
-    size=null
-    fade=false
-    open=confirmDelete
-    onSubmit=(action "delete")
-    onHide=(action (mut confirmDelete) null)}}
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) null}}>
     You're about to delete page {{model.heading}}. This cannot be undone.  Are you sure?
-  {{/bs-modal-simple}}
+  </BsModalSimple>
   
 {{outlet}}
 

@@ -6,7 +6,7 @@
 <a name="top"></a>
 
 <div class="pull-right">
-  {{#link-to 'search-locations' class="btn btn-default"}}<i class="fa fa-search" aria-hidden="true"></i> Search Locations{{/link-to}}  
+  <LinkTo @route="search-locations" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> Search Locations</LinkTo>  
 </div>
 
 <h2>Area Directory</h2>
@@ -27,7 +27,7 @@
   <div role="tabpanel" class="tab-pane {{if (eq index 0) 'active' }}" id="{{area.id}}">
 
     <a name="{{area.id}}"></a>
-    {{area-directory area=area}}
+    <AreaDirectory @area={{area}} />
       
   </div>
   {{/each}}
@@ -36,7 +36,7 @@
 
   <h3>Locations With No Area</h3>
   {{#each model.orphan_rooms as |room|}}
-  {{#link-to 'location' room.id}}{{room.name}}{{/link-to}}
+  <LinkTo @route="location" @model={{room.id}}>{{room.name}}</LinkTo>
   {{/each}}
   
   </div>

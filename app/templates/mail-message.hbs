@@ -1,7 +1,7 @@
 {{title model.message.subject}}
 <h1>{{model.message.subject}}</h1>
 
-<p>{{#link-to 'mail'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Mail{{/link-to}}</p>
+<p><LinkTo @route="mail"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Mail</LinkTo></p>
 
 {{#if model.message.in_trash}}
 <div class="alert alert-warning">This message is in the trash.</div>
@@ -33,11 +33,11 @@
         </td>
         <td>
             
-             {{#power-select-multiple selected=model.message.tags options=model.message.all_tags onchange=(action "tagsChanged") as |tag|}}
+             <PowerSelectMultiple @selected={{model.message.tags}} @options={{model.message.all_tags}} @onchange={{action "tagsChanged"}} as |tag|>
                {{tag}}
-             {{/power-select-multiple}}
+             </PowerSelectMultiple>
              
-             {{input type="text" size=10 id="newTag" value=newTag }} 
+             <Input @type="text" @size={{10}} @id="newTag" @value={{newTag}} /> 
              <a href="#" {{action 'addNewTag'}}><i class="fa fa-plus" aria-label="Add Tag"></i></a>     
 
         </td>
@@ -55,7 +55,7 @@
 </table>
 <hr>
     
-{{{ansi-format text=model.message.body}}}
+<AnsiFormat @text={{model.message.body}} />
 
 <hr>
         <div class="pull-right">
@@ -81,12 +81,12 @@
       <div class="panel-body">
       <h3>Reply</h3>
       <p><b>To:</b> <a href="#" {{action 'replyAll'}}>[Reply All]</a>
-        {{#power-select-multiple selected=replyToList options=model.characters searchField="name" onchange=(action "replyToListChanged") as |char|}}
+        <PowerSelectMultiple @selected={{replyToList}} @options={{model.characters}} @searchField="name" @onchange={{action "replyToListChanged"}} as |char|>
           {{char.name}}
-        {{/power-select-multiple}}
+        </PowerSelectMultiple>
       </p>
-      <p><b>Subject:</b> {{input type="text" size=25 id="replySubject" value=replySubject }}</p>
-          {{markdown-editor text=replyMessage}}
+      <p><b>Subject:</b> <Input @type="text" @size={{25}} @id="replySubject" @value={{replySubject}} /></p>
+          <MarkdownEditor @text={{replyMessage}} />
           <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>    
         </div>
     </div>
@@ -104,18 +104,18 @@
       <div class="panel-body">
       <h3>Forward</h3>
       <p><b>To:</b>
-      {{#power-select-multiple selected=fwdToList options=model.characters searchField="name" onchange=(action "fwdToListChanged") as |char|}}
+      <PowerSelectMultiple @selected={{fwdToList}} @options={{model.characters}} @searchField="name" @onchange={{action "fwdToListChanged"}} as |char|>
         {{char.name}}
-      {{/power-select-multiple}}
+      </PowerSelectMultiple>
       </p> 
-      <p><b>Subject:</b> {{input type="text" size=25 id="fwdSubject" value=fwdSubject }}</p>
+      <p><b>Subject:</b> <Input @type="text" @size={{25}} @id="fwdSubject" @value={{fwdSubject}} /></p>
       <b>Original Message:</b>
-      {{{ansi-format text=model.message.body}}}
-          {{markdown-editor text=fwdMessage}}
+      <AnsiFormat @text={{model.message.body}} />
+          <MarkdownEditor @text={{fwdMessage}} />
           <button class="btn btn-primary" {{action 'sendForward'}}>Send</button>    
         </div>
     </div>
 </div>
 
-{{flash-messages}}
+<FlashMessages />
 {{outlet}}

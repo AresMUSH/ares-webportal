@@ -21,16 +21,16 @@
         
         <div class="row relationship-row">
             <div class="col col-xs-12 col-sm-3">
-                {{relationship-icon char=ship}}
+                <RelationshipIcon @char={{ship}} />
             </div>
             
             <div class="col col-xs-12 col-sm-8 ansi">
                 {{#if ship.is_npc}}
                 <b>{{ship.name}}</b> (NPC)
                 {{else}}
-                <b>{{#link-to 'char' ship.name}}{{ship.name}}{{/link-to}}</b>
+                <b><LinkTo @route="char" @model={{ship.name}}>{{ship.name}}</LinkTo></b>
                 {{/if}}
-                {{{ansi-format text=ship.text}}}
+                <AnsiFormat @text={{ship.text}} />
             </div>
         </div>
         

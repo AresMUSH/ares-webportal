@@ -15,7 +15,7 @@
       {{/if}}
     </td>
     <td>
-         {{#link-to 'forum-topic' post.category_id post.id}}{{post.title}}{{/link-to}}
+         <LinkTo @route="forum-topic" @models={{array post.category_id post.id}}>{{post.title}}</LinkTo>
      </td>
      <td>{{post.author}} @ {{post.date}}
      </td>
