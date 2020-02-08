@@ -3,21 +3,8 @@
 
 <div class="panel panel-default">
     <div class="panel-body">
-        <pre class="ansi app-status">
-{{#if model.abilities}}
-{{{ansi-format text=model.abilities}}} 
-{{/if}}
-{{{ansi-format text=model.demographics}}}
-{{{ansi-format text=model.background}}}
-{{{ansi-format text=model.desc}}}
-{{{ansi-format text=model.hooks}}}
-{{#if model.ranks}}
-{{{ansi-format text=model.ranks}}}
-{{/if}}
-{{#if model.custom}}
-{{{ansi-format text=model.custom}}}
-{{/if}}
-        </pre>
+        <pre class="ansi app-status">{{#if model.abilities}}<AnsiFormat @text={{model.abilities}} /> 
+{{/if}}<AnsiFormat @text={{model.demographics}} /><AnsiFormat @text={{model.background}} /><AnsiFormat @text={{model.desc}} /><AnsiFormat @text={{model.hooks}} />{{#if model.ranks}}<AnsiFormat @text={{model.ranks}} />{{/if}}{{#if model.custom}}<AnsiFormat @text={{model.custom}} />{{/if}}        </pre>
     </div>
 </div>
 
@@ -32,18 +19,18 @@
          <hr>
          <p>If you want to make any special notes about your application, you can enter them below.</p>
        
-         {{textarea value=appNotes cols="80" rows=5}}
+         <Textarea @value={{appNotes}} @cols="80" @rows={{5}} />
        
        
         <p>
-            {{#link-to 'chargen' class="btn btn-default"}}Back to Chargen{{/link-to}}
+            <LinkTo @route="chargen" class="btn btn-default">Back to Chargen</LinkTo>
             <button name="submit" {{action 'submit'}} class="btn btn-success">Submit</button>
         </p>
       {{else}}
           <p>You'll need to log onto the game to complete character creation and submit your application.</p>
           <hr>
           <p>
-            {{#link-to 'chargen' class="btn btn-default"}}Back to Chargen{{/link-to}}
+            <LinkTo @route="chargen" class="btn btn-default">Back to Chargen</LinkTo>
           </p>
       {{/if}}
                    

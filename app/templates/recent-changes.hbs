@@ -1,7 +1,7 @@
 {{title 'Recent Changes'}}
 <h1>Recent Changes</h1>
 
-<p>This list includes wiki pages and profiles.  For scenes, check the {{#link-to 'scenes'}}Scenes{{/link-to}} archive.</p>
+<p>This list includes wiki pages and profiles.  For scenes, check the <LinkTo @route="scenes">Scenes</LinkTo> archive.</p>
 
 <table class="table table-striped">
     
@@ -26,16 +26,16 @@
            {{change.timestamp}}
        </td>
        <td>
-           {{recent-change-link change=change}}
+           <RecentChangeLink @change={{change}} />
        </td>
        <td>
            {{change.author}}
        </td>
        <td>
          {{#if (eq change.type 'char')}}
-           {{#link-to 'char-source' change.data.char_name change.data.version_id}}(history){{/link-to}}
+           <LinkTo @route="char-source" @models={{array change.data.char_name change.data.version_id}}>(history)</LinkTo>
          {{else if (eq change.type 'wiki')}}
-           {{#link-to 'wiki-source' change.data.page_name change.data.version_id}}(history){{/link-to}}
+           <LinkTo @route="wiki-source" @models={{array change.data.page_name change.data.version_id}}>(history)</LinkTo>
          {{/if}}
        </td>
    </tr>

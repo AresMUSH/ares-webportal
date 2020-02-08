@@ -1,13 +1,13 @@
 {{title model.job.title}}
 <h1>#{{model.job.id}} - {{model.job.title}}</h1>
 
-<p>{{#link-to 'jobs'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> 
+<p><LinkTo @route="jobs"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> 
      {{#if model.job.is_job_admin}}
      Back to Jobs
      {{else}}
      Back to Requests
      {{/if}}
-{{/link-to}}
+</LinkTo>
 
 <div class="clearfix"></div>
 
@@ -25,7 +25,7 @@
       <label>Author:</label>
     </td>
     <td>
-      {{char-icon-inline char=model.job.author}}
+      <CharIconInline @char={{model.job.author}} />
     </td>
     <td>
        {{#if model.job.is_open }}
@@ -37,8 +37,8 @@
                 <ul class="dropdown-menu">
                 <li><a href="#" {{action 'closeJob'}}>Close Job</a></li>
                 {{#if model.job.is_approval_job}}
-                <li>{{#link-to 'app-review' model.job.author.id}}App Review for {{model.job.author.name}}{{/link-to}}</li>
-                <li>{{#link-to 'char' model.job.author.name}}Profile for {{model.job.author.name}}{{/link-to}}</li>
+                <li><LinkTo @route="app-review" @model={{model.job.author.id}}>App Review for {{model.job.author.name}}</LinkTo></li>
+                <li><LinkTo @route="char" @model={{model.job.author.name}}>Profile for {{model.job.author.name}}</LinkTo></li>
                 {{/if}}
                 </ul>
               </li>
@@ -53,7 +53,7 @@
     </td>
     <td>
       {{#each model.job.participants as |participant|}}
-        {{char-icon-inline char=participant}}
+        <CharIconInline @char={{participant}} />
       {{/each}}
     </td>
     <td>
@@ -61,9 +61,9 @@
       <div class="job-participant-edit-box">
        
         {{#if editParticipants}}
-         {{#power-select-multiple selected=newParticipants options=model.characters searchField="name" onchange=(action "participantsChanged") as |char|}}
+         <PowerSelectMultiple @selected={{newParticipants}} @options={{model.characters}} @searchField="name" @onchange={{action "participantsChanged"}} as |char|>
           {{char.name}}
-        {{/power-select-multiple}}
+        </PowerSelectMultiple>
         <button class="btn btn-default" {{action (mut editParticipants) false}}>Cancel</button>
         <button class="btn btn-primary" {{action 'saveParticipants'}}>Save</button>
       {{else}}
@@ -81,7 +81,7 @@
     </td>
     <td>
       {{#if model.job.assigned_to}}
-       {{char-icon-inline char=model.job.assigned_to}} 
+       <CharIconInline @char={{model.job.assigned_to}} /> 
        {{/if}}
     </td>
     <td>
@@ -177,7 +177,7 @@
 
 <hr>
 
-    {{{ansi-format text=model.job.description}}}
+    <AnsiFormat @text={{model.job.description}} />
 
 <hr>
 
@@ -198,11 +198,11 @@
      <div class="label admin-only-reply-label">To Admins Only</div>
      {{/if}}
      
-     <p>{{char-icon-inline char=r.author}}</p>
+     <p><CharIconInline @char={{r.author}} /></p>
        
      
              
-         {{{ansi-format text=r.message}}}
+         <AnsiFormat @text={{r.message}} />
   </div>
      <hr>
 {{/each}}
@@ -217,7 +217,7 @@
 <h3>Add Reply</h3>
 
     {{#if model.job.is_category_admin}}
-        Respond to Admin Only? {{input type='checkbox' checked=replyAdminOnly}} 
+        Respond to Admin Only? <Input @type="checkbox" @checked={{replyAdminOnly}} /> 
     {{/if}}
 
   <div class="{{if replyAdminOnly 'admin-only-reply' ''}}">
@@ -226,7 +226,7 @@
     {{/if}}
     <div>
     </div>
-        {{markdown-editor text=reply}}
+        <MarkdownEditor @text={{reply}} />
     </div>
 </div>
 
@@ -242,8 +242,8 @@
               <ul class="dropdown-menu">
               <li><a href="#" {{action 'closeJob'}}>Close Job</a></li>
               {{#if model.job.is_approval_job}}
-                <li>{{#link-to 'app-review' model.job.author.id}}App Review for {{model.job.author.name}}{{/link-to}}</li>
-                <li>{{#link-to 'char' model.job.author.name}}Profile for {{model.job.author.name}}{{/link-to}}</li>
+                <li><LinkTo @route="app-review" @model={{model.job.author.id}}>App Review for {{model.job.author.name}}</LinkTo></li>
+                <li><LinkTo @route="char" @model={{model.job.author.name}}>Profile for {{model.job.author.name}}</LinkTo></li>
               {{/if}}
               {{#if model.job.fs3_enabled}}
               <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Ability Roll</a></li>
@@ -260,7 +260,7 @@
   </div>
 </div>
 
-{{fs3-roll job=model.job destinationType='job' abilities=model.abilities selectSkillRoll=selectSkillRoll}}
+<Fs3Roll @job={{model.job}} @destinationType="job" @abilities={{model.abilities}} @selectSkillRoll={{selectSkillRoll}} />
 
-{{flash-messages}}
+<FlashMessages />
 {{outlet}}

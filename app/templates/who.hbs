@@ -6,7 +6,7 @@
 <table class="table table-striped">
     {{#each model.who as |char|}}
     <tr>
-        <td> {{char-icon-inline char=char}} </td>        
+        <td> <CharIconInline @char={{char}} /> </td>        
     </tr>
     {{/each}}
 </table>

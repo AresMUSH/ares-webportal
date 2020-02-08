@@ -7,13 +7,15 @@
        
     <div class="log-box">
        
-        <p>{{{ansi-format text=model.summary}}}</p>
+        <p><AnsiFormat @text={{model.summary}} /></p>
 
         {{#if model.content_warning}}
         <div class="alert alert-danger"><b>Content Warning:</b> {{model.content_warning}}</div>
         {{/if}}
 
-        <p><b>Date:</b> {{model.icdate}}</p>
+        <p><b>IC Date:</b> {{model.icdate}}</p>
+
+        <p><b>OOC Date:</b> {{model.date_created}}</p>
 
         <p><b>Location:</b> {{model.location}}</p>
 
@@ -24,7 +26,7 @@
                   {{#if (not-eq index 0)}}
                   &nbsp;
                   {{/if}}
-                  {{#link-to 'scene' related.id}}{{related.title}}{{/link-to}}
+                  <LinkTo @route="scene" @model={{related.id}}>{{related.title}}</LinkTo>
               {{/each}}
             {{else}}
                None
@@ -46,7 +48,7 @@
         <div>
           
             
-        {{scene-type-tag scene=model}}
+        <SceneTypeTag @scene={{model}} />
          
         {{#if isApproved}}
             {{#if model.has_liked}}
@@ -67,7 +69,7 @@
     {{#each model.participants as |participant|}}
       {{#if (not participant.is_ooc)}}
         <div class="profile-gallery">    
-            {{char-icon char=participant}}
+            <CharIcon @char={{participant}} />
         </div>
       {{/if}}
     {{/each}}
@@ -83,7 +85,7 @@
 
 
 <div class="scene-log">
-    {{{ansi-format text=model.log}}}
+    <AnsiFormat @text={{model.log}} />
 </div>
     
 <a name="bottom"></a>
@@ -95,11 +97,11 @@
 <p>
     <b>Tags:</b>  
     {{#each model.tags as |tag|}}
-    {{#link-to 'wiki-tag' tag}}{{tag}}{{/link-to}}
+    <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
     {{/each}}
    </p>
    
-<p>{{#link-to "scenes"}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Scenes{{/link-to}}</p>
+<p><LinkTo @route="scenes"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Scenes</LinkTo></p>
 
 
     
@@ -115,7 +117,7 @@
 
                         {{#if model.can_edit}}
 
-                        <li>{{#link-to 'scene-edit' model.id}}Edit Scene{{/link-to}}</li>
+                        <li><LinkTo @route="scene-edit" @model={{model.id}}>Edit Scene</LinkTo></li>
                         <li><a href="#" {{action 'unshareScene'}}>Unshare Scene</a></li>
                         
                         {{#if model.can_delete}}
@@ -125,7 +127,7 @@
                          <li role="separator" class="divider"></li>
                        {{/if}}
                        
-                      <li>{{#link-to 'scene-download' model.id}}Download Scene{{/link-to}}</li> 
+                      <li><LinkTo @route="scene-download" @model={{model.id}}>Download Scene</LinkTo></li> 
  	
                       </ul>
                     </li>
@@ -139,18 +141,10 @@
 
 
 
-{{flash-messages}}
+<FlashMessages />
 
-{{#bs-modal-simple
-    title="Confirm Delete"
-    closeTitle="Cancel"
-    submitTitle="Confirm"
-    size=null
-    fade=false
-    open=confirmDelete
-    onSubmit=(action "delete")
-    onHide=(action (mut confirmDelete) null)}}
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) null}}>
     You're about to delete scene {{model.title}}. This cannot be undone.  Are you sure?
-  {{/bs-modal-simple}}
+  </BsModalSimple>
 
 {{outlet}}

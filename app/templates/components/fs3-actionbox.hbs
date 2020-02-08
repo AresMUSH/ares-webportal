@@ -8,7 +8,7 @@
 </div>
 
 <div class="col-sm-3">
-{{fs3-dots rating=rating max=8}}
+<Fs3Dots @rating={{rating}} @max={{8}} />
 <br>
 {{ratingName}}
 </div>
@@ -28,7 +28,7 @@
       {{#each specialties as |spec|}}
       
           <span class="text">&nbsp; {{spec.name}}:</span>
-          {{input type='checkbox' checked=spec.selected}} 
+          <Input @type="checkbox" @checked={{spec.selected}} /> 
           
 
       {{/each}}

@@ -6,7 +6,7 @@
         <label for="title" class="col-xs-2 col-form-label">Title:</label>
      </div>
      <div class="col-sm-9">
-       {{input type="text" size=25 id="title" enter=(action "save")  value=model.title}}
+       <Input @type="text" @size={{25}} @id="title" @enter={{action "save"}} @value={{model.title}} />
      </div> 
    </div>
    
@@ -15,7 +15,7 @@
         <label for="tags" class="col-xs-2 col-form-label">Tags:</label>
      </div>
      <div class="col-sm-9">
-        {{input type="text" size=25 id="tags" enter=(action "save")  value=model.tags}}
+        <Input @type="text" @size={{25}} @id="tags" @enter={{action "save"}} @value={{model.tags}} />
      </div> 
    </div>  
     
@@ -24,26 +24,26 @@
         <label for="tags" class="col-xs-2 col-form-label">Template:</label>
      </div>
      <div class="col-sm-9">
-      {{#power-select selected=template options=model.templates searchField="title" onchange=(action "templateChanged") as |tmp|}}
+      <PowerSelect @selected={{template}} @options={{model.templates}} @searchField="title" @onchange={{action "templateChanged"}} as |tmp|>
         {{tmp.title}}
-      {{/power-select}}
+      </PowerSelect>
      </div> 
    </div>  
     
-   {{markdown-editor text=model.text rows=30}}
+   <MarkdownEditor @text={{model.text}} @rows={{30}} />
    
     
     <div class="row">
         <div class="col col-xs-12">
             <div class="pull-right">
                 
-              {{#link-to 'wiki' class="btn btn-default"}}Cancel{{/link-to}} 
+              <LinkTo @route="wiki" class="btn btn-default">Cancel</LinkTo> 
                 <button class="btn btn-primary" {{action 'save'}}>Save</button>
         </div>
       </div>
     </div>
     
-    {{flash-messages}}
+    <FlashMessages />
     
 
 <hr>

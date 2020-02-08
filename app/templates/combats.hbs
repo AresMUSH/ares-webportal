@@ -3,7 +3,7 @@
 
 <p>The combat directory lists active combats and allows you to view combat status in a web page rather than typing 'combat' over and over in your MUSH window.</p>
 
-<p class="alert alert-info">Usually you'll want to start a combat from the scene menu of an {{#link-to 'scenes-live'}}active scene{{/link-to}}, so the scene and combat are linked. This ensures that combat results are added to the scene. If you want an orphaned combat, <a href="#" {{action 'startCombat'}}>click here</a> to start one.</p>
+<p class="alert alert-info">Usually you'll want to start a combat from the scene menu of an <LinkTo @route="scenes-live">active scene</LinkTo>, so the scene and combat are linked. This ensures that combat results are added to the scene. If you want an orphaned combat, <a href="#" {{action 'startCombat'}}>click here</a> to start one.</p>
 
 <table class="table table-striped">
 <thead>
@@ -16,7 +16,7 @@
 <tbody>
 {{#each model as |combat|}}
 <tr><td>
-    {{#link-to 'combat' combat.id}}{{combat.id}}{{/link-to}}
+    <LinkTo @route="combat" @model={{combat.id}}>{{combat.id}}</LinkTo>
 </td>
 
 <td>
@@ -25,7 +25,7 @@
 
 <td>
   {{#if combat.scene}}
-    {{#link-to 'scene-live' combat.scene}}{{combat.scene}}{{/link-to}}
+    <LinkTo @route="scene-live" @model={{combat.scene}}>{{combat.scene}}</LinkTo>
   {{/if}}
 </td>
 

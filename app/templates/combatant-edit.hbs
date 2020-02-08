@@ -7,13 +7,13 @@
     </div>
     <div class="col-sm-9">
         
-            {{#power-select selected=model.action options=model.options.actions onchange=(action "actionChanged") as |act|}}
+            <PowerSelect @selected={{model.action}} @options={{model.options.actions}} @onchange={{action "actionChanged"}} as |act|>
               {{act}}
-            {{/power-select}}
+            </PowerSelect>
             <br>
             <b>Action Args:</b> 
-            {{tooltip-icon position='right' message='Enter targets or other options for your action, like Dummy/burst,called:head.' icon='fa fa-question-circle'}}
-            {{input type="text" size=25 id="actionArgs" value=model.action_args}}
+            <TooltipIcon @position="right" @message="Enter targets or other options for your action, like Dummy/burst,called:head." @icon="fa fa-question-circle" />
+            <Input @type="text" @size={{25}} @id="actionArgs" @value={{model.action_args}} />
             
             
     </div>
@@ -26,9 +26,9 @@
     </div>
     <div class="col-sm-9">
         
-            {{#power-select selected=model.team options=teams onchange=(action "teamChanged") as |team|}}
+            <PowerSelect @selected={{model.team}} @options={{teams}} @onchange={{action "teamChanged"}} as |team|>
               {{team}}
-            {{/power-select}}
+            </PowerSelect>
             
     </div>
  
@@ -40,9 +40,9 @@
     </div>
     <div class="col-sm-9">
         
-            {{#power-select selected=model.stance options=model.options.stances onchange=(action "stanceChanged") as |stance|}}
+            <PowerSelect @selected={{model.stance}} @options={{model.options.stances}} @onchange={{action "stanceChanged"}} as |stance|>
               {{stance}}
-            {{/power-select}}
+            </PowerSelect>
             
     </div>
  
@@ -55,9 +55,9 @@
     </div>
     <div class="col-sm-9">
         
-            {{#power-select selected=model.weapon options=model.options.weapons onchange=(action "weaponChanged") as |weapon|}}
+            <PowerSelect @selected={{model.weapon}} @options={{model.options.weapons}} @onchange={{action "weaponChanged"}} as |weapon|>
               {{weapon}}
-            {{/power-select}}
+            </PowerSelect>
             
     </div>
  
@@ -72,7 +72,7 @@
             {{#each model.weapon_specials as |spec|}}
       
                 <span class="text">&nbsp; {{spec.name}}:</span>
-                {{input type='checkbox' checked=spec.selected}} 
+                <Input @type="checkbox" @checked={{spec.selected}} /> 
           
 
             {{/each}}
@@ -89,9 +89,9 @@
     </div>
     <div class="col-sm-9">
         
-            {{#power-select selected=model.armor options=model.options.armor onchange=(action "armorChanged") as |armor|}}
+            <PowerSelect @selected={{model.armor}} @options={{model.options.armor}} @onchange={{action "armorChanged"}} as |armor|>
               {{armor}}
-            {{/power-select}}
+            </PowerSelect>
             
     </div>
  
@@ -106,7 +106,7 @@
             {{#each model.armor_specials as |spec|}}
       
                 <span class="text">&nbsp; {{spec.name}}:</span>
-                {{input type='checkbox' checked=spec.selected}} 
+                <Input @type="checkbox" @checked={{spec.selected}} /> 
           
 
             {{/each}}
@@ -118,16 +118,16 @@
 <div class="form-group row">
     <div class="col-sm-3">
             <b>Vehicle:</b>           
-            {{tooltip-icon position='right' message='Enter a vehicle type to get in your own vehicle, or a character name to get into theirs.' icon='fa fa-question-circle'}}
+            <TooltipIcon @position="right" @message="Enter a vehicle type to get in your own vehicle, or a character name to get into theirs." @icon="fa fa-question-circle" />
 
     </div>
     <div class="col-sm-9">
         
-            {{input type="text" size=25 id="vehicleName" value=model.vehicle}}
+            <Input @type="text" @size={{25}} @id="vehicleName" @value={{model.vehicle}} />
             <br>
-            <b>Passenger Type:</b> {{#power-select selected=model.passenger_type options=passengerTypes onchange=(action "passengerTypeChanged") as |passengerType|}}
+            <b>Passenger Type:</b> <PowerSelect @selected={{model.passenger_type}} @options={{passengerTypes}} @onchange={{action "passengerTypeChanged"}} as |passengerType|>
               {{passengerType}}
-            {{/power-select}}
+            </PowerSelect>
             
             
     </div>
@@ -143,9 +143,9 @@
     </div>
     <div class="col-sm-9">
         
-            {{#power-select selected=model.npc_skill options=model.options.npc_skills onchange=(action "npcChanged") as |npc|}}
+            <PowerSelect @selected={{model.npc_skill}} @options={{model.options.npc_skills}} @onchange={{action "npcChanged"}} as |npc|>
               {{npc}}
-            {{/power-select}}
+            </PowerSelect>
             
     </div>
  
@@ -157,12 +157,12 @@
         <div class="col col-xs-12">
             <div class="pull-right">
     
-                <p> {{#link-to 'combat' model.combat class="btn btn-default"}}Cancel{{/link-to}}  
+                <p> <LinkTo @route="combat" @model={{model.combat}} class="btn btn-default">Cancel</LinkTo>  
                     <button class="btn btn-primary" {{action 'save'}} >Save</button>
                 </p>
     
             </div>
-        {{flash-messages}}
+        <FlashMessages />
         </div>
     </div>
     

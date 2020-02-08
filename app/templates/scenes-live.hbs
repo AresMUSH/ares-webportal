@@ -9,8 +9,8 @@
 <div class="row">
     
     <div class="col pull-right">
-        {{#link-to 'scene-create' class="btn btn-default"}}Create Scene{{/link-to}}
-        {{#link-to 'scenes-play' class="btn btn-primary"}}Play{{/link-to}}
+        <LinkTo @route="scene-create" class="btn btn-default">Create Scene</LinkTo>
+        <LinkTo @route="scenes-play" class="btn btn-primary">Play</LinkTo>
     </div>
     
 </div>
@@ -38,29 +38,29 @@
     </td>
     <td>
         
-        {{#link-to 'scene-live' scene.id}}Scene {{scene.id}}
+        <LinkTo @route="scene-live" @model={{scene.id}}>Scene {{scene.id}}
         {{#if scene.title}}
          - {{scene.title}}
         {{/if}}
-        {{/link-to}}
+        </LinkTo>
         <br>
-        {{scene-privacy-tag scene=scene}}
-        {{scene-type-tag scene=scene}}
+        <ScenePrivacyTag @scene={{scene}} />
+        <SceneTypeTag @scene={{scene}} />
         {{#if scene.content_warning}}
-        {{content-warning-tag warning=scene.content_warning position='top'}}
+        <ContentWarningTag @warning={{scene.content_warning}} @position="top" />
         {{/if}}
     </td>
     <td>
       
         {{#each scene.participants as |char|}}
-        {{char-icon-inline char=char}}
+        <CharIconInline @char={{char}} />
         {{/each}}
         
         {{#if (or scene.can_view (not scene.is_private))}}
           <p>{{scene.location}}</p>
         
           {{#if scene.summary}}
-          <p>{{{ansi-format text=scene.summary}}}
+          <p><AnsiFormat @text={{scene.summary}} />
           </p>
           {{/if}}
         {{/if}}
@@ -84,17 +84,17 @@
     <td>
       {{#if scene.watching}}
         <a href="#" {{action 'stopWatching' scene.id}}>
-          {{tooltip-icon position='left' message='Stop watching scene.' icon='fa fa-eye-slash'}}
+          <TooltipIcon @position="left" @message="Stop watching scene." @icon="fa fa-eye-slash" />
         </a>
       {{else}}
         {{#if scene.can_view}}
           <a href="#" {{action 'watchScene' scene.id}}>
-            {{tooltip-icon position='left' message='Watch scene.' icon='fa fa-eye'}}
+            <TooltipIcon @position="left" @message="Watch scene." @icon="fa fa-eye" />
           </a>
 
           {{#if (not scene.participating) }}
             <a href="#" {{action 'joinScene' scene.id}}>
-              {{tooltip-icon position='left' message='Join scene.' icon='fa fa-sign-in-alt'}}
+              <TooltipIcon @position="left" @message="Join scene." @icon="fa fa-sign-in-alt" />
             </a>
           {{/if}}
         {{/if}}
@@ -115,7 +115,7 @@
 <p>You have the following stopped, unshared scenes. Unshared scenes may be deleted after {{model.unshared_deletion_days}} days, so you should download or share them before that happens.</p>
 <ul>
 {{#each model.unshared as |scene|}}
-<li>{{#link-to 'scene-live' scene.id}}{{scene.title}}{{/link-to}} - {{scene.people}}</li>
+<li><LinkTo @route="scene-live" @model={{scene.id}}>{{scene.title}}</LinkTo> - {{scene.people}}</li>
 {{/each}}
 </ul>
 {{/if}}

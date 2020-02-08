@@ -1,5 +1,5 @@
 <div class="sidebar-box {{boxStyle}}">
-  {{#link-to 'search-wiki'}}<i class="fa fa-search" aria-hidden="true"></i> Search{{/link-to}}
+  <LinkTo @route="search-wiki"><i class="fa fa-search" aria-hidden="true"></i> Search</LinkTo>
 </div>
 
 
@@ -12,7 +12,7 @@
   {{/if}}
 
   {{#if versionWarning}}
-    <div class="alert alert-danger">The website and game have {{#link-to 'server-info'}}different versions{{/link-to}}.  Try reloading the page.</div>
+    <div class="alert alert-danger">The website and game have <LinkTo @route="server-info">different versions</LinkTo>.  Try reloading the page.</div>
   {{/if}}
 
    {{#if model.game_down}}
@@ -25,11 +25,11 @@
   </p>
   
   {{#if model.motd}}
-  <p>{{{ansi-format text=model.motd}}}</p>
+  <p><AnsiFormat @text={{model.motd}} /></p>
   {{/if}}
   
-  <p>{{#link-to 'scenes-live'}}Active Scenes{{/link-to}} | 
-      {{#link-to 'who'}}Who's Online{{/link-to}}</p>
+  <p><LinkTo @route="scenes-live">Active Scenes</LinkTo> | 
+      <LinkTo @route="who">Who's Online</LinkTo></p>
   
 {{/if}}
 
@@ -43,21 +43,21 @@
       <h2>Upcoming Events <i class="fa fa-calendar" aria-hidden="true"></i></h2>
   </div>
   {{#each model.upcoming_events as |event|}}
-  <p><b>{{#link-to 'event' event.id}}
+  <p><b><LinkTo @route="event" @model={{event.id}}>
     
     {{#if event.is_signed_up}}
     <i class="fas fa-calendar-check" aria-label="Signed Up"></i>
     {{/if}}
     {{event.title}}
     
-    {{/link-to}}</b> 
+    </LinkTo></b> 
     {{#if event.content_warning}}
-    {{content-warning-tag warning=event.content_warning position='top-left'}}
+    <ContentWarningTag @warning={{event.content_warning}} @position="top-left" />
     {{/if}}
   <br>{{event.date}} {{event.start_datetime_local}} ({{event.start_time_standard}})</p>
   {{/each}}
    <br>
-  <p>{{#link-to 'events'}}All Events{{/link-to}}</p>
+  <p><LinkTo @route="events">All Events</LinkTo></p>
   
 </div>
 {{/if}}
@@ -70,15 +70,15 @@
        
    </div>
    {{#each model.recent_scenes as |scene|}}
-   <p>{{#link-to 'scene' scene.id}}{{scene.icdate}} - {{scene.title}}{{/link-to}}
-       {{scene-type-tag scene=scene}}
+   <p><LinkTo @route="scene" @model={{scene.id}}>{{scene.icdate}} - {{scene.title}}</LinkTo>
+       <SceneTypeTag @scene={{scene}} />
        {{#if scene.content_warning}}
-       {{content-warning-tag warning=scene.content_warning position='top-left'}}
+       <ContentWarningTag @warning={{scene.content_warning}} @position="top-left" />
        {{/if}}
        <br></p>
    {{/each}}
    <br>
-   <p>{{#link-to 'scenes'}}All Scenes{{/link-to}}</p>
+   <p><LinkTo @route="scenes">All Scenes</LinkTo></p>
 </div>
 
 <div class="sidebar-box {{boxStyle}}">
@@ -93,11 +93,11 @@
           {{else}}
             posted 
           {{/if}}
-          {{#link-to 'forum-topic' post.category_id post.id}}{{post.subject}}.{{/link-to}}
+          <LinkTo @route="forum-topic" @models={{array post.category_id post.id}}>{{post.subject}}.</LinkTo>
    </p>
    {{/each}}
    <br>
-   <p>{{#link-to 'forum'}}View Forum{{/link-to}}</p>
+   <p><LinkTo @route="forum">View Forum</LinkTo></p>
 </div>
 
 <div class="sidebar-box {{boxStyle}}">
@@ -107,11 +107,11 @@
    </div>
    {{#each model.recent_changes as |change|}}
    <p class='sidebar-list'>
-     {{recent-change-link change=change}}
+     <RecentChangeLink @change={{change}} />
    </p>
    {{/each}}
    
    <br>
-   <p>{{#link-to 'recent-changes'}}More Changes{{/link-to}}</p>
+   <p><LinkTo @route="recent-changes">More Changes</LinkTo></p>
    
 </div>

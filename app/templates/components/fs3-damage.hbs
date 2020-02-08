@@ -10,8 +10,8 @@
       <tr>
           <td>{{damage.date}}</td>
           <td>{{damage.description}}</td>
-          <td>{{{ansi-format text=damage.original_severity}}}</td>
-          <td>{{{ansi-format text=damage.severity}}}</td>
+          <td><AnsiFormat @text={{damage.original_severity}} /></td>
+          <td><AnsiFormat @text={{damage.severity}} /></td>
        </tr>
       {{/each}}
 </table>

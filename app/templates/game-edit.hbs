@@ -4,24 +4,24 @@
 <p>This information will be used on your web portal and in the <a href="http://arescentral.aresmush.com">AresCentral Game Directory</a> to advertise your game.</p>
 
 <p><label for="name">Name:</label></p>
-<p>{{input type='text' size=25 id='name' value=model.config.name}}</p>
+<p><Input @type="text" @size={{25}} @id="name" @value={{model.config.name}} /></p>
 
 <p><label for="name">Website:</label> <span class="hint">(Leave blank to use your web portal address.)</span></p>
-<p>{{input type='text' size=25 id='website' value=model.config.website}}</p>
+<p><Input @type="text" @size={{25}} @id="website" @value={{model.config.website}} /></p>
 
 <p><label for="name">Category:</label>
 
-{{#power-select selected=model.config.category options=model.category_options onchange=(action "categoryChanged") as |category|}}
+<PowerSelect @selected={{model.config.category}} @options={{model.category_options}} @onchange={{action "categoryChanged"}} as |category|>
   {{category}}
-{{/power-select}}
+</PowerSelect>
 
 </p>
 
 <p><label for="name">Status:</label>
 
-{{#power-select selected=model.config.status options=model.status_options onchange=(action "statusChanged") as |status|}}
+<PowerSelect @selected={{model.config.status}} @options={{model.status_options}} @onchange={{action "statusChanged"}} as |status|>
   {{status}}
-{{/power-select}}
+</PowerSelect>
                         
 </p>
 
@@ -29,7 +29,7 @@
 <p>
     <b>Public Game?:</b>
 
-    {{input type='checkbox' checked=model.config.public_game}}
+    <Input @type="checkbox" @checked={{model.config.public_game}} />
 </p>
 
 <p class="hint">Only public games are advertised on AresCentral.  You will not be able to link player handles until either your game is public or you use the <code>game/register</code> command to manually register your game.</p>
@@ -38,13 +38,13 @@
 
 <p><b>Description:</b></p>
 
-{{markdown-editor text=model.config.description}}
+<MarkdownEditor @text={{model.config.description}} />
 
 
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">
-          {{#link-to 'setup' class="btn btn-default"}}Cancel{{/link-to}}
+          <LinkTo @route="setup" class="btn btn-default">Cancel</LinkTo>
 
           <button {{action 'save'}} class="btn btn-primary">Save</button>
           
@@ -52,5 +52,5 @@
   </div>
 </div>
 
-{{flash-messages}}
+<FlashMessages />
 {{outlet}}

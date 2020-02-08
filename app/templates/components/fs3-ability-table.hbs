@@ -8,7 +8,7 @@
       <span class="fs3-linked-attr">({{ability.linked_attr}})</span>
       {{/if}}
     </td>
-    <td>{{fs3-dots rating=ability.rating max=max}}
+    <td><Fs3Dots @rating={{ability.rating}} @max={{max}} />
     
     {{#if showSpecs}}
     <br>

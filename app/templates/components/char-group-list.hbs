@@ -6,7 +6,7 @@
           {{#each chars as |c| }}
     
           <div class="profile-gallery">
-              {{char-icon char=c}}
+              <CharIcon @char={{c}} />
           </div>
           
           {{/each}}

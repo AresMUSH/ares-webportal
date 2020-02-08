@@ -11,7 +11,7 @@
 
      <ul class="nav navbar-nav navbar-right">
                   
-            <li>{{#link-to 'home'}}Home{{/link-to}}</li>
+            <li><LinkTo @route="home">Home</LinkTo></li>
 
             {{#if isAuthenticated}}
 
@@ -25,11 +25,11 @@
                       {{/if}}
                       <span class="caret"></span></a>
                       <ul class="dropdown-menu">
-                        <li>{{#link-to 'notifications'}}Notifications{{/link-to}}</li>
-                        <li>{{#link-to 'char' currentUser.id}}Profile{{/link-to}}</li>
-                        <li>{{#link-to 'mail'}}Mail{{/link-to}}</li>
-                        <li>{{#link-to 'jobs'}}{{#if model.jobs_admin}}Jobs{{else}}Requests{{/if}}{{/link-to}}</li>
-                        <li>{{#link-to 'account'}}Account{{/link-to}}</li>
+                        <li><LinkTo @route="notifications">Notifications</LinkTo></li>
+                        <li><LinkTo @route="char" @model={{currentUser.id}}>Profile</LinkTo></li>
+                        <li><LinkTo @route="mail">Mail</LinkTo></li>
+                        <li><LinkTo @route="jobs">{{#if model.jobs_admin}}Jobs{{else}}Requests{{/if}}</LinkTo></li>
+                        <li><LinkTo @route="account">Account</LinkTo></li>
 
                         {{#if model.alts}}
                         {{#each model.alts as |alt|}}
@@ -39,12 +39,12 @@
                         {{/each}}
                         {{/if}} 
 
-                        <li>{{#link-to 'logout'}}Logout{{/link-to}}</li>
+                        <li><LinkTo @route="logout">Logout</LinkTo></li>
                         
                       </ul>
                     </li>
                   {{else}}
-                  <li class="hidden-xl  hidden-lg  hidden-md">{{#link-to 'login' (query-params redirect=currentRoute)}}Login{{/link-to}}</li>
+                  <li class="hidden-xl  hidden-lg  hidden-md"><LinkTo @route="login" @query={{hash redirect=currentRoute}}>Login</LinkTo></li>
                   {{/if}}
 
             
@@ -62,9 +62,9 @@
                     {{else}}
                       <li>
                       {{#if navItem.id}}
-                        {{#link-to navItem.route navItem.id}}{{{navItem.title}}}{{/link-to}}
+                        <LinkTo @route={{navItem.route}} @model={{navItem.id}}>{{{navItem.title}}}</LinkTo>
                       {{else}}
-                        {{#link-to navItem.route}}{{{navItem.title}}}{{/link-to}}
+                        <LinkTo @route={{navItem.route}}>{{{navItem.title}}}</LinkTo>
                       {{/if}}
                       </li>
                     {{/if}}
@@ -80,15 +80,15 @@
                       
                              Admin <span class="caret"></span></a>
                              <ul class="dropdown-menu">
-                               <li>{{#link-to 'jobs'}}Jobs{{/link-to}}</li>
-                               <li>{{#link-to 'setup'}}Setup{{/link-to}}</li>
-                               <li>{{#link-to 'manage'}}Manage{{/link-to}}</li>
-                               <li>{{#link-to 'logs'}}Logs{{/link-to}}</li>
-                               <li>{{#link-to "files"}}Files{{/link-to}}</li>
-                               <li>{{#link-to "server-info"}}Server{{/link-to}}</li>
+                               <li><LinkTo @route="jobs">Jobs</LinkTo></li>
+                               <li><LinkTo @route="setup">Setup</LinkTo></li>
+                               <li><LinkTo @route="manage">Manage</LinkTo></li>
+                               <li><LinkTo @route="logs">Logs</LinkTo></li>
+                               <li><LinkTo @route="files">Files</LinkTo></li>
+                               <li><LinkTo @route="server-info">Server</LinkTo></li>
 
                                {{#if isCoder}}
-                               <li>{{#link-to 'tinker'}}Tinker{{/link-to}}</li>
+                               <li><LinkTo @route="tinker">Tinker</LinkTo></li>
                                {{/if}}
                              </ul>
                            </li>
