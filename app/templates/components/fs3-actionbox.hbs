@@ -4,39 +4,20 @@
 </div>
 
 <div class="col-sm-1">
-<button class="fs3-skillbutton" id="dec-skill" {{action "decrement"}}>-</button>
+<button class="fs3-skillbutton" id="dec-attr" {{action "decrement"}}>-</button>
 </div>
 
-<div class="col-sm-3">
-{{fs3-dots rating=rating max=5}}
+<div class="col-sm-2">
+<Fs3Dots @rating={{rating}} @max={{4}} />
 <br>
 {{ratingName}}
 </div>
 
 <div class="col-sm-1">
-<button class="fs3-skillbutton" id="inc-skill" {{action "increment"}}>+</button>
+<button class="fs3-skillbutton" id="inc-attr" {{action "increment"}}>+</button>
 </div>
 
 </div>
-
-{{#if specialties}}
-  {{#if (gt rating 2)}}
-  <div class="row">
-  <div class="col-sm-12">
-       <p><i>Select At Least One Specialty</i> </p>
-       
-      {{#each specialties as |spec|}}
-      
-          <span class="text">&nbsp; {{spec.name}}:</span>
-          {{input type='checkbox' checked=spec.selected}} 
-          
-
-      {{/each}}
-      
-  </div>
-  </div>
-  {{/if}}
-{{/if}}
 
 <div class="row">
 <div class="col-sm-12 fs3-divider">&nbsp;</div>
