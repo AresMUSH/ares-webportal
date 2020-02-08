@@ -1,25 +1,25 @@
 <div class="row">
   <div class="col col-md-6 col-sm-12">
 
-    {{fs3-ability-table title='Attributes' list=char.fs3.attributes max=4 showSpecs=false}}
+    <Fs3AbilityTable @title="Attributes" @list={{char.fs3.attributes}} @max={{4}} @showSpecs={{false}} />
     
   </div>
   
   <div class="col col-md-6 col-sm-12">
   
-    {{fs3-ability-table title='Action Skills' list=char.fs3.action_skills max=8 showSpecs=true}}
+    <Fs3AbilityTable @title="Action Skills" @list={{char.fs3.action_skills}} @max={{8}} @showSpecs={{true}} />
   
   </div>
 </div>
 
 <div class="row">
   <div class="col col-md-6 col-sm-12">
-    {{fs3-ability-table title='Background Skills' list=char.fs3.backgrounds max=3}}  
+    <Fs3AbilityTable @title="Background Skills" @list={{char.fs3.backgrounds}} @max={{3}} />  
   </div>
 
   <div class="col col-md-6 col-sm-12">
 
-    {{fs3-ability-table title='Languages' list=char.fs3.languages max=3}}  
+    <Fs3AbilityTable @title="Languages" @list={{char.fs3.languages}} @max={{3}} />  
 
   </div>
 </div>
@@ -28,7 +28,7 @@
 <div class="row">
   <div class="col col-md-6 col-sm-12">
 
-    {{fs3-ability-table title='Advantages' list=char.fs3.advantages max=3}}  
+    <Fs3AbilityTable @title="Advantages" @list={{char.fs3.advantages}} @max={{3}} />  
 
   </div>
 </div>

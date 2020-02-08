@@ -4,20 +4,20 @@
 
         
         {{#if model.terms_of_service}}
-            <div class="ansi alert alert-info">By playing here, you agree to the policies listed on the {{#link-to 'tos'}}Terms of Service{{/link-to}} page.</div>
+            <div class="ansi alert alert-info">By playing here, you agree to the policies listed on the <LinkTo @route="tos">Terms of Service</LinkTo> page.</div>
         {{/if}}
         
 <div class="panel panel-default">
     <div class="panel-body">
 
-        <p>{{input type="text" id="name" placeholder="Name" enter=(action "login")  value=name autofocus=true }}</p>
-        <p>{{input type="password" placeholder="Password" enter=(action "login")  id="password" value=password }}</p>
+        <p><Input @type="text" @id="name" placeholder="Name" @enter={{action "login"}} @value={{name}} @autofocus={{true}} /></p>
+        <p><Input @type="password" placeholder="Password" @enter={{action "login"}} @id="password" @value={{password}} /></p>
         
         <button {{action "login"}} class="btn btn-primary">Login</button>
             
         <p>Don't have a character yet? 
         {{#if model.enable_registration}}
-        {{#link-to "register"}}Create one.{{/link-to}}
+        <LinkTo @route="register">Create one.</LinkTo>
         {{else}}
         Create one from inside the game first.
         {{/if}}

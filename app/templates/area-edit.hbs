@@ -2,19 +2,19 @@
 <h1>Edit Area</h1>
 
 <p><b>Name:</b></p>
-<p>{{input type="text" size=25 id="name" enter=(action "edit")  value=model.area.name}}</p>
+<p><Input @type="text" @size={{25}} @id="name" @enter={{action "edit"}} @value={{model.area.name}} /></p>
 
 <p><b>Summary:</b></p>
 
-{{markdown-editor text=model.area.summary}}
+<MarkdownEditor @text={{model.area.summary}} />
 
 
 <p><b>Description:</b></p>
 
-{{markdown-editor text=model.area.description}}
+<MarkdownEditor @text={{model.area.description}} />
 
 
-{{#link-to 'locations' class="btn btn-default"}}Cancel{{/link-to}}
+<LinkTo @route="locations" class="btn btn-default">Cancel</LinkTo>
 <button {{action "edit"}} class="btn btn-primary">Save</button>
-{{flash-messages}}
+<FlashMessages />
 

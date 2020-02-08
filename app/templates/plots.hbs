@@ -8,7 +8,7 @@
 <div class="row">
     
     <div class="col pull-right">
-        {{#link-to 'plot-create' class="btn btn-primary"}}Create Plot{{/link-to}}
+        <LinkTo @route="plot-create" class="btn btn-primary">Create Plot</LinkTo>
     </div>
     
 </div>
@@ -21,7 +21,7 @@
 <thead>
     <tr>
         <th class="col-xs-3">Plot</th>
-        <th class="col-xs-2">Storyteller</th>
+        <th class="col-xs-2">Storytellers</th>
         <th class="col-xs-3">Dates</th>
         <th class="col-xs-4">Summary</th>
     </tr>
@@ -33,18 +33,20 @@
   {{#if (not plot.completed) }}
     <tr>
         <td>
-        {{#link-to 'plot' plot.id}}{{plot.title}}{{/link-to}}
+        <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
         </td>
         <td>
-        {{#link-to 'char' plot.storyteller.name}}{{plot.storyteller.name}}{{/link-to}}
+          {{#each plot.storytellers as |storyteller|}}
+            <LinkTo @route="char" @model="{{storyteller.name}}">{{storyteller.name}}</LinkTo>
+          {{/each}}
         </td>
         <td>
         {{plot.start_date}} - {{plot.end_date}}
         </td>        
         <td>
-            {{{ansi-format text=plot.summary}}}
+            <AnsiFormat @text={{plot.summary}} />
             {{#if plot.content_warning}}
-            {{content-warning-tag warning=plot.content_warning}}
+            <ContentWarningTag @warning={{plot.content_warning}} />
             {{/if}}
             
         </td>
@@ -61,9 +63,9 @@
 {{#each model as |plot|}}
   {{#if plot.completed }}
     <li>
-        {{#link-to 'plot' plot.id}}{{plot.title}}{{/link-to}}
+        <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
         
-            {{{ansi-format text=plot.summary}}}
+            <AnsiFormat @text={{plot.summary}} />
     </li>
   {{/if}}
 {{/each}}

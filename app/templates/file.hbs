@@ -13,31 +13,23 @@
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">
-          {{#link-to 'files' class="btn btn-default"}}Back to Files{{/link-to}}
+          <LinkTo @route="files" class="btn btn-default">Back to Files</LinkTo>
 
           {{#if model.can_edit}}
               <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
           
-              {{#link-to 'file-edit' model.folder model.name class="btn btn-primary"}}Edit{{/link-to}}
+              <LinkTo @route="file-edit" @models={{array model.folder model.name}} class="btn btn-primary">Edit</LinkTo>
           {{/if}}
          </div>
   </div>
 </div>
-{{flash-messages}}
+<FlashMessages />
 
-{{file-uploader folder=model.folder file=model.name}}
+<FileUploader @folder={{model.folder}} @file={{model.name}} />
 
 
-{{#bs-modal-simple
-    title="Confirm Delete"
-    closeTitle="Cancel"
-    submitTitle="Confirm"
-    size=null
-    fade=false
-    open=confirmDelete
-    onSubmit=(action "delete")
-    onHide=(action (mut confirmDelete) null)}}
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) null}}>
     You're about to delete file {{model.name}}. This cannot be undone.  Are you sure?
-  {{/bs-modal-simple}}
+  </BsModalSimple>
   
 {{outlet}}

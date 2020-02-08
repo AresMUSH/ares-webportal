@@ -2,25 +2,25 @@
 <h1>New Event</h1>
 
 <p><b>Title:</b></p>
-<p>{{input type="text"  size=25 id="title" enter=(action "create")  value=title}}</p>
+<p><Input @type="text" @size={{25}} @id="title" @enter={{action "create"}} @value={{title}} /></p>
 
 <p><b>Date:</b></p>
-<p>{{pikaday-input onSelection=(action 'changeDate') format=model.game.date_entry_format}} </p>
+<p><PikadayInput @onSelection={{action "changeDate"}} @format={{model.game.date_entry_format}} /> </p>
 
 <p><b>Start Time:</b></p>
 <div class="hint">Use <b>server time</b> in the same format as the server time.  The current server time is {{model.server_time}}.</div>
-<p>{{input type="text" id="time" size="25" enter=(action "create")  value=time }}</p>
+<p><Input @type="text" @id="time" @size="25" @enter={{action "create"}} @value={{time}} /></p>
 
 <p><b>Content Warning:</b></p>
-<p> {{input type="text" size=25 id="content_warning" value=content_warning}} </p>   
+<p> <Input @type="text" @size={{25}} @id="content_warning" @value={{content_warning}} /> </p>   
 
 <p><b>Description:</b></p>
 
-{{markdown-editor text=description}}
+<MarkdownEditor @text={{description}} />
 
 <div class="pull-right">
-  {{#link-to 'events' class="btn btn-default"}}Cancel{{/link-to}}
+  <LinkTo @route="events" class="btn btn-default">Cancel</LinkTo>
   <button {{action "create"}} class="btn btn-primary">Create</button>
 </div>
 
-{{flash-messages}}
+<FlashMessages />

@@ -1,8 +1,8 @@
 <span class="inline-block">
     {{#if char.icon}}
-    <img alt="{{char.name}}'s icon" class="tiny-profile-icon {{icon-class}} icon-status-{{char.status}} {{if (eq char.status 'offline') 'faded'}}" src="/game/uploads/{{char.icon}}" >
+    <img alt="{{char.name}}'s icon" class="tiny-profile-icon <IconClass /> icon-status-{{char.status}} {{if (eq char.status 'offline') 'faded'}}" src="/game/uploads/{{char.icon}}" >
     {{else}}
-    <img alt="{{char.name}}'s icon" class="tiny-profile-icon {{icon-class}} icon-status-{{char.status}}" src="/game/uploads/theme_images/noicon.png" >
+    <img alt="{{char.name}}'s icon" class="tiny-profile-icon <IconClass /> icon-status-{{char.status}}" src="/game/uploads/theme_images/noicon.png" >
     {{/if}}
 
 {{char.name}}

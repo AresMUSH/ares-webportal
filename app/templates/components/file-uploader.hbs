@@ -37,9 +37,9 @@
                       {{#if lockProperties}}
                       <p><label class="col-xs-5">Folder:</label> {{f.folder}}</p>
                       {{else}}
-                      <p><label class="col-xs-5">Name:</label> {{input type='text' value=f.name}}</p>
-                      <p><label class="col-xs-5">Folder:</label> {{input type='text' value=f.folder}}</p>
-                      <p><label class="col-xs-5">Overwrite?</label> {{input type='checkbox' checked=f.allowOverwrite}}</p>
+                      <p><label class="col-xs-5">Name:</label> <Input @type="text" @value={{f.name}} /></p>
+                      <p><label class="col-xs-5">Folder:</label> <Input @type="text" @value={{f.folder}} /></p>
+                      <p><label class="col-xs-5">Overwrite?</label> <Input @type="checkbox" @checked={{f.allowOverwrite}} /></p>
                       {{/if}}
                     {{/if}}
                     

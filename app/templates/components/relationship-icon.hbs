@@ -6,12 +6,12 @@
     <img class="relationship-icon" src="/game/uploads/theme_images/noicon.png" alt="{{char.name}}'s icon"  >
     {{/if}}
 {{else}}
-  {{#link-to "char" char.name}}
+  <LinkTo @route="char" @model={{char.name}}>
       {{#if char.icon}}
       <img class="relationship-icon" src="/game/uploads/{{char.icon}}" alt="{{char.name}}'s icon" >
       {{else}}
       <img class="relationship-icon" src="/game/uploads/theme_images/noicon.png" alt="{{char.name}}'s icon"  >
       {{/if}}
-  {{/link-to}}
+  </LinkTo>
 {{/if}}
 </div>

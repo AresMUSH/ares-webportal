@@ -5,7 +5,7 @@
     <div class="panel-body">
             
         {{#if scene.summary}}
-        <p> {{{ansi-format text=scene.summary}}} </p>
+        <p> <AnsiFormat @text={{scene.summary}} /> </p>
         <hr>
         {{/if}}        
 
@@ -14,29 +14,29 @@
         {{/if}}
     
         {{#if scene.location.description}}
-        {{{ansi-format text=scene.location.description}}}
+        <AnsiFormat @text={{scene.location.description}} />
         {{/if}}
     
         {{#each scene.location.details as |detail|}}
-        <p><i>{{detail.name}}:</i> {{{ansi-format text=detail.desc}}}</p>
+        <p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
         {{/each}}
         
         {{#if scene.location.scene_set}}
         <div class="scene-set-pose">
-          {{{ansi-format text=scene.location.scene_set}}}
+          <AnsiFormat @text={{scene.location.scene_set}} />
         </div>
         {{/if}}
         
         <div class="icon-row">
         {{#each scene.participants as |who|}}
-          {{char-icon-inline char=who}}
+          <CharIconInline @char={{who}} />
         {{/each}}
         </div>
 
         <hr>
         
-        {{scene-privacy-tag scene=scene}}
-        {{scene-type-tag scene=scene}}
+        <ScenePrivacyTag @scene={{scene}} />
+        <SceneTypeTag @scene={{scene}} />
         
         {{#if scene.limit}}
         <p><b>Limited Participation:</b> {{scene.limit}}</p>

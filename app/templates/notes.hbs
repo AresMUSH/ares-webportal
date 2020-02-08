@@ -1,4 +1,4 @@
-{{title Notes}}
+{{title 'Notes'}}
 <h1>Notes - {{model.name}}</h1>
 
 
@@ -15,10 +15,7 @@
   {{#each model.notes as |section index|}}
   
   <div id="{{section.key}}" class="tab-pane {{if (eq index 0) 'active' }}">
-    {{#if section.notes}}
-      {{{ansi-format text=section.notes}}}
-    {{/if}}
-      
+      <AnsiFormat @text={{section.notes}} />
   </div>
   
   {{/each}}
@@ -26,9 +23,9 @@
  </div>
  
  <div class="pull-right">
-         {{#link-to 'char' model.name class="btn btn-default"}}Back{{/link-to}}  
+         <LinkTo @route="char" @model={{model.name}} class="btn btn-default">Back</LinkTo>  
            
          {{#if model.can_edit}}
-           {{#link-to 'notes-edit' model.name class="btn btn-primary"}}Edit{{/link-to}}
+           <LinkTo @route="notes-edit" @model={{model.name}} class="btn btn-primary">Edit</LinkTo>
          {{/if}}
  </div>

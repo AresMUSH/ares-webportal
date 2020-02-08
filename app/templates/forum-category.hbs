@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col col-xs-12">
 
-<p>{{#link-to 'forum'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Forums{{/link-to}}</p>
+<p><LinkTo @route="forum"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Forums</LinkTo></p>
 
         <div class="pull-right">
  
@@ -14,7 +14,7 @@
           <button {{action 'nextUnread'}} class="btn btn-default">Next Unread</button>
  
           {{#if model.can_post}}
-          {{#link-to 'forum-create-post' model.id class='btn btn-primary'}}Add Post{{/link-to}}
+          <LinkTo @route="forum-create-post" @model={{model.id}} class="btn btn-primary">Add Post</LinkTo>
           {{/if}}
           
           
@@ -22,6 +22,6 @@
   </div>
 </div>
 
-{{forum-post-list posts=model.posts}}
+<ForumPostList @posts={{model.posts}} />
 
 {{outlet}}

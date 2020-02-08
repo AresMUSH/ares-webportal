@@ -3,7 +3,7 @@
 
 <p>Quickly update everyone's teams in combat.  This won't affect their other settings.</p>
 
-<p>{{#link-to 'combat' model.id}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Combat{{/link-to}}</p>
+<p><LinkTo @route="combat" @model={{model.id}}><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Combat</LinkTo></p>
 
 <hr>
 
@@ -14,9 +14,9 @@
 <tr>
   <td>{{comb.name}}</td>
   <td>
-    {{#power-select selected=comb.team options=teams onchange=(action "teamChanged" id) as |team|}}
+    <PowerSelect @selected={{comb.team}} @options={{teams}} @onchange={{action "teamChanged" id}} as |team|>
       {{team}}
-    {{/power-select}}
+    </PowerSelect>
   </td>
 </tr>
 
@@ -29,12 +29,12 @@
         <div class="col col-xs-12">
             <div class="pull-right">
     
-                <p> {{#link-to 'combat' model.id class="btn btn-default"}}Cancel{{/link-to}}  
+                <p> <LinkTo @route="combat" @model={{model.id}} class="btn btn-default">Cancel</LinkTo>  
                     <button class="btn btn-primary" {{action 'save'}} >Save</button>
                 </p>
     
             </div>
-        {{flash-messages}}
+        <FlashMessages />
         </div>
     </div>
     

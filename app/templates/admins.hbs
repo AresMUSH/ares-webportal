@@ -12,7 +12,7 @@
          {{#each role.chars as |c|}}
    
          <div class="profile-gallery">
-             {{char-icon char=c}}
+             <CharIcon @char={{c}} />
              
              {{#if c.title}}
              <p class="text-center"><b>{{c.title}}</b></p>

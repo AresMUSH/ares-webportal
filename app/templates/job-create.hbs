@@ -14,7 +14,7 @@
      <label>Title:</label>
    </td>
    <td>
-     <p>{{input type='text' size=25 id='title' value=title}}</p>
+     <p><Input @type="text" @size={{25}} @id="title" @value={{title}} /></p>
    </td>
    <td>
      &nbsp;
@@ -28,9 +28,9 @@
     
      <td>
       
-       {{#power-select selected=submitter options=model.characters searchField="name" onchange=(action "submitterChanged") as |char|}}
+       <PowerSelect @selected={{submitter}} @options={{model.characters}} @searchField="name" @onchange={{action "submitterChanged"}} as |char|>
          {{char.name}}
-       {{/power-select}}
+       </PowerSelect>
       
      </td>
  </tr>
@@ -42,9 +42,9 @@
     
      <td>
       
-        {{#power-select-multiple selected=participants options=model.characters searchField="name" onchange=(action "participantsChanged") as |char|}}
+        <PowerSelectMultiple @selected={{participants}} @options={{model.characters}} @searchField="name" @onchange={{action "participantsChanged"}} as |char|>
          {{char.name}}
-       {{/power-select-multiple}}
+       </PowerSelectMultiple>
       
      </td>
  </tr>
@@ -83,13 +83,13 @@
 </table>
 
      
- {{markdown-editor text=description}}
+ <MarkdownEditor @text={{description}} />
    
 <div class="pull-right">
 <button class="btn btn-primary" {{action 'createJob'}}>Create</button>
 </div>
 
-{{flash-messages}}
+<FlashMessages />
 {{outlet}}
 
 

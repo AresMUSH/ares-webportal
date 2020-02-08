@@ -49,9 +49,9 @@
            {{/if}}
        </h3>
 
-      {{live-scene-context scene=currentScene}}
+      <LiveSceneContext @scene={{currentScene}} />
     
-       {{live-scene-control scene=currentScene locations=model.locations abilities=model.abilities places=currentScene.places scrollPaused=scrollPaused playerName=currentUser.name refresh=(action "refresh") scrollScene=(action "scrollScene") setScroll=(action "setScroll")}}
+       <LiveSceneControl @scene={{currentScene}} @locations={{model.locations}} @abilities={{model.abilities}} @places={{currentScene.places}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollScene={{action "scrollScene"}} @setScroll={{action "setScroll"}} />
        
 
     </div>

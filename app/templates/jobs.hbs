@@ -13,8 +13,8 @@
     
   <div class="pull-right">
     
-    {{#link-to 'search-jobs'}}<i class="fa fa-search" aria-hidden="true"></i> Search Jobs{{/link-to}}  &nbsp;&nbsp;
-    {{#link-to 'job-create' class="btn btn-primary"}}Create Job{{/link-to}}
+    <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Jobs</LinkTo>  &nbsp;&nbsp;
+    <LinkTo @route="job-create" class="btn btn-primary">Create Job</LinkTo>
   </div>
   
    
@@ -24,8 +24,8 @@
     <h1>Requests</h1>
   
     <div class="pull-right">
-      {{#link-to 'search-jobs'}}<i class="fa fa-search" aria-hidden="true"></i> Search Requests{{/link-to}}  &nbsp;&nbsp;
-      {{#link-to 'job-create' class="btn btn-primary"}}Create Request{{/link-to}}
+      <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Requests</LinkTo>  &nbsp;&nbsp;
+      <LinkTo @route="job-create" class="btn btn-primary">Create Request</LinkTo>
     </div>
 
   {{/if}}
@@ -61,6 +61,6 @@
       </div>
   {{/if}}
   
-{{jobs-list jobs=model.jobs.jobs pages=model.jobs.pages page=page goToPage=(action "goToPage")}}
+<JobsList @jobs={{model.jobs.jobs}} @pages={{model.jobs.pages}} @page={{page}} @goToPage={{action "goToPage"}} />
 
 {{outlet}}

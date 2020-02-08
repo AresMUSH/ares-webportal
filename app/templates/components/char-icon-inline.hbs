@@ -1,11 +1,11 @@
 <span class="inline-block">
-{{#link-to "char" char.name}}
+<LinkTo @route="char" @model={{char.name}}>
     {{#if char.icon}}
-    <img alt="{{char.name}}'s icon" class="small-profile-icon {{icon-class}} icon-status-{{char.status}} {{if (eq char.status 'offline') 'faded'}}" src="/game/uploads/{{char.icon}}" >
+    <img alt="{{char.name}}'s icon" class="small-profile-icon <IconClass /> icon-status-{{char.status}} {{if (eq char.status 'offline') 'faded'}}" src="/game/uploads/{{char.icon}}" >
     {{else}}
-    <img alt="{{char.name}}'s icon" class="small-profile-icon {{icon-class}} icon-status-{{char.status}}" src="/game/uploads/theme_images/noicon.png" >
+    <img alt="{{char.name}}'s icon" class="small-profile-icon <IconClass /> icon-status-{{char.status}}" src="/game/uploads/theme_images/noicon.png" >
     {{/if}}
-{{/link-to}}
+</LinkTo>
 
-{{#link-to "char" char.name}} {{char.name}} {{/link-to}}
+<LinkTo @route="char" @model={{char.name}}> {{char.name}} </LinkTo>
 </span>

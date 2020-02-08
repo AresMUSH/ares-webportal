@@ -3,7 +3,7 @@
 
 <p>Here you can quickly set up combat stats for all the NPCs at once.  PCs cannot be set here to avoid accidentally overwriting their settings.  You can still edit PCs individually on the main combat screen.</p>
 
-<p>{{#link-to 'combat' model.id}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Combat{{/link-to}}</p>
+<p><LinkTo @route="combat" @model={{model.id}}><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Combat</LinkTo></p>
 
 <hr>
 
@@ -16,17 +16,17 @@
 
 <div class="form-group row">
     <div class="col-xs-6">
-            <b>Action:</b>  {{#power-select selected=comb.action options=model.options.actions onchange=(action "actionChanged" id) as |act|}}
+            <b>Action:</b>  <PowerSelect @selected={{comb.action}} @options={{model.options.actions}} @onchange={{action "actionChanged" id}} as |act|>
               {{act}}
-            {{/power-select}}
+            </PowerSelect>
     </div>
     <div class="col-xs-6">
         
             <b>Action Args:</b> 
             
-            {{tooltip-icon position='top' message='Enter targets or other options for your action, like Dummy/burst,called:head.' icon='fa fa-question-circle'}}
+            <TooltipIcon @position="top" @message="Enter targets or other options for your action, like Dummy/burst,called:head." @icon="fa fa-question-circle" />
             <br>
-            {{input type="text" size=25 id=id value=comb.action_args}}
+            <Input @type="text" @size={{25}} @id={{id}} @value={{comb.action_args}} />
             
             
     </div>
@@ -40,9 +40,9 @@
     <p>
       <label>Team:</label>
   
-      {{#power-select selected=comb.team options=teams onchange=(action "teamChanged" id) as |team|}}
+      <PowerSelect @selected={{comb.team}} @options={{teams}} @onchange={{action "teamChanged" id}} as |team|>
         {{team}}
-      {{/power-select}}
+      </PowerSelect>
     </p>
 
   </div>
@@ -51,9 +51,9 @@
       
     <p>
       <label>NPC Level:</label>
-      {{#power-select selected=comb.npc_skill options=model.options.npc_skills onchange=(action "npcChanged" id) as |level|}}
+      <PowerSelect @selected={{comb.npc_skill}} @options={{model.options.npc_skills}} @onchange={{action "npcChanged" id}} as |level|>
         {{level}}
-      {{/power-select}}
+      </PowerSelect>
     </p>
   
   </div>
@@ -65,22 +65,22 @@
 
     <p>
       <label>Stance</label>
-    {{#power-select selected=comb.stance options=model.options.stances onchange=(action "stanceChanged" id) as |stance|}}
+    <PowerSelect @selected={{comb.stance}} @options={{model.options.stances}} @onchange={{action "stanceChanged" id}} as |stance|>
       {{stance}}
-    {{/power-select}}
+    </PowerSelect>
     </p>
   </div>
   
   <div class="col col-xs-6">
     <p>
       <label>Armor</label>
-    {{#power-select selected=comb.armor options=model.options.armor onchange=(action "armorChanged" id) as |armor|}}
+    <PowerSelect @selected={{comb.armor}} @options={{model.options.armor}} @onchange={{action "armorChanged" id}} as |armor|>
       {{armor}}
-    {{/power-select}}
+    </PowerSelect>
 
     {{#each comb.armor_specials as |spec|}}
         <span class="text">&nbsp; {{spec.name}}:</span>
-        {{input type='checkbox' checked=spec.selected}} 
+        <Input @type="checkbox" @checked={{spec.selected}} /> 
     {{/each}}
     </p>
   </div>
@@ -92,13 +92,13 @@
 
     <p>
       <label>Weapon</label>
-    {{#power-select selected=comb.weapon options=model.options.weapons onchange=(action "weaponChanged" id) as |weapon|}}
+    <PowerSelect @selected={{comb.weapon}} @options={{model.options.weapons}} @onchange={{action "weaponChanged" id}} as |weapon|>
       {{weapon}}
-    {{/power-select}}
+    </PowerSelect>
 
     {{#each comb.weapon_specials as |spec|}}
         <span class="text">&nbsp; {{spec.name}}:</span>
-        {{input type='checkbox' checked=spec.selected}} 
+        <Input @type="checkbox" @checked={{spec.selected}} /> 
     {{/each}}
 
     </p>
@@ -108,14 +108,14 @@
   <div class="col-sm-6">
           <b>Vehicle:</b>
           
-          {{tooltip-icon position='top' message='Enter a vehicle type to get in your own vehicle, or a character name to get into theirs.' icon='fa fa-question-circle'}}
+          <TooltipIcon @position="top" @message="Enter a vehicle type to get in your own vehicle, or a character name to get into theirs." @icon="fa fa-question-circle" />
           <br>
-          {{input type="text" size=25 value=comb.vehicle}}
+          <Input @type="text" @size={{25}} @value={{comb.vehicle}} />
           <br>
           <b>Passenger Type:</b>
-          {{#power-select selected=comb.passenger_type options=passengerTypes onchange=(action "passengerTypeChanged" id) as |passengerType|}}
+          <PowerSelect @selected={{comb.passenger_type}} @options={{passengerTypes}} @onchange={{action "passengerTypeChanged" id}} as |passengerType|>
             {{passengerType}}
-          {{/power-select}}
+          </PowerSelect>
           
           
           
@@ -133,12 +133,12 @@
         <div class="col col-xs-12">
             <div class="pull-right">
     
-                <p> {{#link-to 'combat' model.id class="btn btn-default"}}Cancel{{/link-to}}  
+                <p> <LinkTo @route="combat" @model={{model.id}} class="btn btn-default">Cancel</LinkTo>  
                     <button class="btn btn-primary" {{action 'save'}} >Save</button>
                 </p>
     
             </div>
-        {{flash-messages}}
+        <FlashMessages />
         </div>
     </div>
     
