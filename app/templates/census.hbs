@@ -1,7 +1,7 @@
 {{title "Census"}}
 <h1>All Characters</h1>
 
-{{census-nav types=model.types}}
+<CensusNav @types={{model.types}} />
 
 <div class="table-responsive">
 
@@ -19,7 +19,7 @@
   {{#each-in char as |field value| }}
     <td>
       {{#if (eq field 'char')}}
-        {{char-icon-inline char=value}}
+        <CharIconInline @char={{value}} />
       {{else}}
         {{value}}
       {{/if}}

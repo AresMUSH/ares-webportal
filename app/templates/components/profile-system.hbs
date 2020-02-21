@@ -30,6 +30,8 @@
     <li><a data-toggle="tab" href="#systemitems">Magic Items</a></li>
   {{/if}}
 
+  <ProfileFs3Tabs @char={{char}} @game={{game}} />
+
   {{#if char.achievements}}
       <li><a data-toggle="tab" href="#achievements">Achievements</a></li>
   {{/if}}
@@ -38,7 +40,11 @@
     <li><a data-toggle="tab" href="#systemtraits">Traits</a></li>
   {{/if}}
 
-  {{profile-custom-tabs char=char game=game}}
+  {{#if fateExtraInstalled}}
+    <li><a data-toggle="tab" href="#systemfate">Sheet</a></li>
+  {{/if}}
+
+  <ProfileCustomTabs @char={{char}} @game={{game}} />
 
 </ul>
 
@@ -51,7 +57,7 @@
   </div>
   {{#if char.roster}}
   <div id="rosternotes" class="tab-pane fade">
-    {{{ansi-format text=char.roster.notes}}}
+    <AnsiFormat @text={{char.roster.notes}} />
 
     <p>Contact: {{char.roster.contact}}</p>
 
@@ -67,23 +73,23 @@
   {{/if}}
 
   <div id="systemhooks" class="tab-pane fade">
-      {{{ansi-format text=char.rp_hooks}}}
+      <AnsiFormat @text={{char.rp_hooks}} />
   </div>
 
 
   {{#if char.background}}
   <div id="systembg" class="tab-pane fade">
-      {{{ansi-format text=char.background}}}
+      <AnsiFormat @text={{char.background}} />
    </div>
   {{/if}}
 
   {{#if char.description}}
   <div id="systemdesc" class="tab-pane fade">
-       {{{ansi-format text=char.description}}}
+       <AnsiFormat @text={{char.description}} />
 
        {{#if char.details}}
        {{#each char.details as |detail|}}
-       <b>{{detail.name}}</b>: {{{ansi-format text=detail.desc}}}
+       <b>{{detail.name}}</b>: <AnsiFormat @text={{detail.desc}} />
        {{/each}}
        {{/if}}
   </div>
@@ -130,18 +136,22 @@
   </div>
   {{/if}}
 
-  {{profile-fs3 char=char game=game reloadChar=(action 'reloadChar')}}
+  <ProfileFs3 @char={{char}} @game={{game}} @reloadChar={{action "reloadChar"}} />
 
   {{#if traitsExtraInstalled}}
-    {{profile-traits char=char}}
+    <ProfileTraits @char={{char}} />
+  {{/if}}
+
+  {{#if fateExtraInstalled}}
+    <ProfileFate @char={{char}} />
   {{/if}}
 
   {{#if char.achievements}}
   <div id="achievements" class="tab-pane fade">
-      {{char-achievements achievements=char.achievements}}
+      <CharAchievements @achievements={{char.achievements}} />
   </div>
   {{/if}}
 
-  {{profile-custom char=char game=game reloadChar=(action 'reloadChar')}}
+  <ProfileCustom @char={{char}} @game={{game}} @reloadChar={{action "reloadChar"}} />
 
 </div>

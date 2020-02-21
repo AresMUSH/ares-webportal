@@ -15,17 +15,18 @@
 
     <div id="scenelist" class="tab-pane fade ">
 
-        {{scene-list scenes=scenes.scenes pages=scenes.pages sceneTypes=sceneTypes filter=filter page=page filterChanged=(action "filterChanged") goToPage=(action "goToPage")}}
+        <SceneList @scenes={{scenes.scenes}} @pages={{scenes.pages}} @sceneTypes={{sceneTypes}} @filter={{filter}} @page={{page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
 
-    </div>
+      </div>
 
 
-    <div id="plotprefs" class="tab-pane fade ">
-      {{#if char.plot_prefs}}
-        {{{ansi-format text=char.plot_prefs}}}
-      {{else}}
-          None.
-      {{/if}}
+      <div id="plotprefs" class="tab-pane fade ">
+        {{#if char.plot_prefs}}
+          {{{ansi-format text=char.plot_prefs}}}
+        {{else}}
+            None.
+        {{/if}}
+
     </div>
 
 

@@ -10,7 +10,6 @@ export default Controller.extend({
     summary: '',
     description: '',
     contentWarning: '',
-    storyteller: null,
     storytellers: null,
 
     resetOnExit: function() {
@@ -18,12 +17,12 @@ export default Controller.extend({
         this.set('summary', '');
         this.set('description', '');
         this.set('contentWarning', '');
-        this.set('storyteller', null);
+        this.set('storytellers', null);
     },
 
     actions: {
-        storytellerChanged(storyteller) {
-          this.set('storyteller', storyteller);
+        storytellersChanged(new_storytellers) {
+          this.set('storytellers', new_storytellers);
         },
         storytellersChanged(new_storytellers) {
           this.set('storytellers', new_storytellers);
@@ -35,7 +34,6 @@ export default Controller.extend({
                title: this.title,
                summary: this.summary,
                content_warning: this.get('contentWarning'),
-               storyteller_id: this.get('storyteller.id'),
                storytellers: (this.get('storytellers') || []).map(storyteller => storyteller.name),
                description: this.description}, null)
             .then( (response) => {

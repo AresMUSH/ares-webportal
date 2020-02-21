@@ -1,6 +1,6 @@
 <p>
-{{#link-to 'census'}}[All]{{/link-to}}&nbsp;
+<LinkTo @route="census">[All]</LinkTo>&nbsp;
 {{#each types as |type| }}
-{{#link-to 'census-group' type}}[{{type}}]{{/link-to}}&nbsp;
+<LinkTo @route="census-group" @model={{type}}>[{{type}}]</LinkTo>&nbsp;
 {{/each}}
 </p>

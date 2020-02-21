@@ -1,11 +1,11 @@
 {{#if (not hideSearch)}}
 <p><b>Select Scenes:</b> 
 
-{{#power-select selected=filter options=sceneFilters onchange=(action "filterChanged") as |name|}}
+<PowerSelect @selected={{filter}} @options={{sceneFilters}} @onchange={{action "filterChanged"}} as |name|>
   {{name}}
-{{/power-select}}
+</PowerSelect>
 
-{{#link-to 'search-scenes' class="btn btn-default"}}<i class="fa fa-search" aria-hidden="true"></i> Search Scenes{{/link-to}}  
+<LinkTo @route="search-scenes" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> Search Scenes</LinkTo>  
 
 </p>
 {{/if}}
@@ -25,13 +25,13 @@
 {{#each scenes as |scene|}}
     <tr>
         <td>
-        {{#link-to 'scene' scene.id}}{{scene.icdate}} - {{scene.title}}{{/link-to}}
+        <LinkTo @route="scene" @model={{scene.id}}>{{scene.icdate}} - {{scene.title}}</LinkTo>
         
-        {{scene-type-tag scene=scene}}
+        <SceneTypeTag @scene={{scene}} />
        
-        <p>{{{ansi-format text=scene.summary}}}
+        <p><AnsiFormat @text={{scene.summary}} />
           {{#if scene.content_warning}}
-          {{content-warning-tag warning=scene.content_warning position='top-right'}}
+          <ContentWarningTag @warning={{scene.content_warning}} @position="top-right" />
           {{/if}}
         </p>
         </td>

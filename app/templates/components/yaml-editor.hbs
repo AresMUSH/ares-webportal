@@ -1,4 +1,4 @@
-{{ace-editor text=text editorId=editorId rows=lines mode='yaml' editorChanged=(action 'textChanged')}}
+<AceEditor @text={{text}} @editorId={{editorId}} @rows={{lines}} @mode="yaml" @editorChanged={{action "textChanged"}} />
 
 
 {{#if warning}}

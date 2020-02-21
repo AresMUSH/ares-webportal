@@ -9,18 +9,18 @@
        </div>
 
        <div class="col-sm-9">
-      {{#power-select selected=model.scene.privacy options=scenePrivacyValues onchange=(action "privacyChanged") as |type|}}
+      <PowerSelect @selected={{model.scene.privacy}} @options={{scenePrivacyValues}} @onchange={{action "privacyChanged"}} as |type|>
         {{type}}
-      {{/power-select}}
+      </PowerSelect>
        </div>
      </div>
-     
+
      <div class="form-group row">
         <div class="col-sm-3">
             <label for="title" class="col-form-label">Limited Participation Notice:</label>
         </div>
         <div class="col-sm-9">
-            {{input type="text" size=100 id="limit" enter=(action "save")  value=model.scene.limit}}
+            <Input @type="text" @size={{100}} @id="limit" @enter={{action "save"}} @value={{model.scene.limit}} />
             <p class="hint">Use this for open scenes where participation is limited (by quantity, character type, etc.)</p>
         </div>
       </div>
@@ -31,7 +31,7 @@
           <label for="title" class="col-form-label">Title:</label>
       </div>
       <div class="col-sm-9">
-          {{input type="text" size=25 id="title" enter=(action "save")  value=model.scene.title}}
+          <Input @type="text" @size={{25}} @id="title" @enter={{action "save"}} @value={{model.scene.title}} />
       </div>
     </div>
 
@@ -40,7 +40,7 @@
           <label for="location" class="col-form-label">Location:</label>
       </div>
       <div class="col-sm-9">
-          {{input type="text" size=25 id="location" enter=(action "save")  value=model.scene.location}}
+          <Input @type="text" @size={{25}} @id="location" @enter={{action "save"}} @value={{model.scene.location}} />
       </div>
     </div>
 
@@ -50,7 +50,7 @@
           <label for="icdate" class="col-form-label">IC Date:</label>
       </div>
        <div class="col-sm-9">
-          {{input type="text" size=25 id="icdate" enter=(action "save")  value=model.scene.icdate}}
+          <Input @type="text" @size={{25}} @id="icdate" @enter={{action "save"}} @value={{model.scene.icdate}} />
       </div>
     </div>
 
@@ -59,9 +59,9 @@
         <label class="col-form-label">Scene Type:</label>
     </div>
      <div class="col-sm-9">
-        {{#power-select selected=model.scene.scene_type options=sceneTypes onchange=(action "typeChanged") as |type|}}
+        <PowerSelect @selected={{model.scene.scene_type}} @options={{sceneTypes}} @onchange={{action "typeChanged"}} as |type|>
           {{type}}
-        {{/power-select}}
+        </PowerSelect>
 
     </div>
   </div>
@@ -71,9 +71,9 @@
         <label class="col-form-label">Plot:</label>
      </div>
      <div class="col-sm-9">
-        {{#power-select selected=model.scene.plot options=model.plots allowClear=true searchField="title" onchange=(action "plotChanged") as |plot|}}
+        <PowerSelect @selected={{model.scene.plot}} @options={{model.plots}} @allowClear={{true}} @searchField="title" @onchange={{action "plotChanged"}} as |plot|>
           {{plot.title}}
-        {{/power-select}}
+        </PowerSelect>
      </div>
   </div>
 
@@ -107,7 +107,7 @@
         <label for="tags" class="col-form-label">Tags:</label>
     </div>
     <div class="col-sm-9">
-        {{input type="text" size=25 id="tags" enter=(action "save")  value=model.scene.tags}}
+        <Input @type="text" @size={{25}} @id="tags" @enter={{action "save"}} @value={{model.scene.tags}} />
     </div>
   </div>
 
@@ -116,9 +116,9 @@
         <label for="participants" class="col-form-label">Participants:</label>
     </div>
     <div class="col-sm-9">
-        {{#power-select-multiple selected=model.scene.participants options=model.characters searchField="name" onchange=(action "participantsChanged") as |char|}}
+        <PowerSelectMultiple @selected={{model.scene.participants}} @options={{model.characters}} @searchField="name" @onchange={{action "participantsChanged"}} as |char|>
           {{char.name}}
-        {{/power-select-multiple}}
+        </PowerSelectMultiple>
     </div>
   </div>
 
@@ -128,9 +128,9 @@
         <label for="related" class="col-form-label">Related Scenes:</label>
     </div>
     <div class="col-sm-9">
-            {{#power-select-multiple selected=model.scene.related_scenes options=model.scenes.scenes searchField="title" onchange=(action "relatedChanged") as |scene|}}
+            <PowerSelectMultiple @selected={{model.scene.related_scenes}} @options={{model.scenes.scenes}} @searchField="title" @onchange={{action "relatedChanged"}} as |scene|>
               {{scene.icdate}} {{scene.title}}
-            {{/power-select-multiple}}
+            </PowerSelectMultiple>
     </div>
   </div>
 
@@ -139,7 +139,7 @@
         <label for="summary" class="col-form-label">Summary:</label>
     </div>
     <div class="col-sm-9">
-            {{markdown-editor text=model.scene.summary}}
+            <MarkdownEditor @text={{model.scene.summary}} />
 
     </div>
    </div>
@@ -149,13 +149,13 @@
           <label for="title" class="col-form-label">Content Warning:</label>
       </div>
       <div class="col-sm-9">
-          {{input type="text" size=50 id="content_warning" enter=(action "save")  value=model.scene.content_warning}}
+          <Input @type="text" @size={{50}} @id="content_warning" @enter={{action "save"}} @value={{model.scene.content_warning}} />
       </div>
     </div>
 
     {{#if model.scene.shared}}
 
-    {{markdown-editor text=model.scene.log rows=20}}
+    <MarkdownEditor @text={{model.scene.log}} @rows={{20}} />
 
     {{/if}}
 
@@ -163,11 +163,11 @@
         <div class="col col-xs-12">
             <div class="pull-right">
 
-                {{#link-to 'scene' model.scene.id class="btn btn-default"}}Cancel{{/link-to}}
+                <LinkTo @route="scene" @model={{model.scene.id}} class="btn btn-default">Cancel</LinkTo>
                 <button class="btn btn-primary" {{action 'save'}}>Save</button>
             </div>
         </div>
     </div>
 
-{{flash-messages}}
+<FlashMessages />
 {{outlet}}

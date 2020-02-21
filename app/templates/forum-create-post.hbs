@@ -3,12 +3,12 @@
 
 {{#if model.can_post}}
             
-    <p><b>Subject:</b> {{input type="text" id="subject" value=subject size=100 }}</p>
+    <p><b>Subject:</b> <Input @type="text" @id="subject" @value={{subject}} @size={{100}} /></p>
     <p><b>Message:</b></p>
-    {{markdown-editor text=message}}
+    <MarkdownEditor @text={{message}} />
 
 <div class="pull-right">
-    {{#link-to 'forum-category' model.id class='btn btn-default'}}Cancel{{/link-to}}
+    <LinkTo @route="forum-category" @model={{model.id}} class="btn btn-default">Cancel</LinkTo>
     <button {{action "addPost"}} class="btn btn-primary">Post</button>
 </div>
     

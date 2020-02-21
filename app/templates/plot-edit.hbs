@@ -6,18 +6,7 @@
         <label for="title" class="col-form-label">Title:</label>
     </div>
     <div class="col-sm-9">
-        {{input type="text" size=25 id="title" enter=(action "save")  value=model.plot.title}}
-    </div>
-  </div>
-
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="storyteller" class="col-form-label">Storyteller:</label>
-    </div>
-    <div class="col-sm-9">
-        {{#power-select selected=model.plot.storyteller options=model.characters searchField="name" onchange=(action "storytellerChanged") as |char|}}
-          {{char.name}}
-        {{/power-select}}
+        <Input @type="text" @size={{25}} @id="title" @enter={{action "save"}} @value={{model.plot.title}} />
     </div>
   </div>
 
@@ -35,10 +24,10 @@
 
    <div class="form-group row">
     <div class="col-sm-3">
-        <label for="storyteller" class="col-form-label">Plot Completed:</label>
+        <label for="completed" class="col-form-label">Plot Completed:</label>
     </div>
     <div class="col-sm-9">
-        {{input type='checkbox' checked=model.plot.completed}}
+        <Input @type="checkbox" @checked={{model.plot.completed}} />
     </div>
   </div>
 
@@ -47,7 +36,7 @@
         <label for="summary" class="col-form-label">Summary:</label>
     </div>
     <div class="col-sm-9">
-        {{markdown-editor text=model.plot.summary}}
+        <MarkdownEditor @text={{model.plot.summary}} />
     </div>
   </div>
 
@@ -56,7 +45,7 @@
          <label for="title" class="col-form-label">Content Warning:</label>
      </div>
      <div class="col-sm-9">
-         {{input type="text" size=25 id="content_warning" value=model.plot.content_warning}}
+         <Input @type="text" @size={{25}} @id="content_warning" @value={{model.plot.content_warning}} />
      </div>
    </div>
 
@@ -65,14 +54,14 @@
         <label for="description" class="col-form-label">Events:</label>
     </div>
     <div class="col-sm-9">
-        {{markdown-editor text=model.plot.description}}
+        <MarkdownEditor @text={{model.plot.description}} />
     </div>
   </div>
 
 <div class="pull-right">
-        <p> {{#link-to 'plot' model.plot.id class="btn btn-default"}}Cancel{{/link-to}}
+        <p> <LinkTo @route="plot" @model={{model.plot.id}} class="btn btn-default">Cancel</LinkTo>
         <button {{action 'save'}} class="btn btn-primary">Save</button> </p>
 </div>
 
-{{flash-messages}}
+<FlashMessages />
 {{outlet}}

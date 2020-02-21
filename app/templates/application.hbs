@@ -1,4 +1,4 @@
-{{head-layout}}
+<HeadLayout />
 {{title model.game.name}}
 <div class="container-fluid">
     <div class="header-wrap">
@@ -8,7 +8,7 @@
 
            <div class="row">
                <div class="col-md-6 col-sm-12 col-xs-12">
-                   <div class="site-title">{{#link-to 'home'}}{{mushName}}{{/link-to}}</div>
+                   <div class="site-title"><LinkTo @route="home">{{mushName}}</LinkTo></div>
                    <div class="site-subtitle">{{mushHost}} port {{mushPort}}</div>
                </div>
                <div class="col-md-6 hidden-sm hidden-xs">
@@ -27,38 +27,38 @@
                          {{/each}}
                        {{/if}}
                        <p>
-                           {{#link-to 'notifications'}}
+                           <LinkTo @route="notifications">
                                <span class="label label-pill label-primary"><i class="fa fa-bell" aria-label='Unread Notifications'></i>
                                <span id="notificationBadge">{{model.notification_count}}</span>
                                </span>
-                           {{/link-to}}
+                           </LinkTo> 
                             |
-                           {{#link-to 'char' currentUser.name}}
+                           <LinkTo @route="char" @model={{currentUser.name}}>
                              <i class="fa fa-user" aria-label="Profile"></i>
-                           {{/link-to}} |
-                           {{#link-to 'mail'}}
+                           </LinkTo> |
+                           <LinkTo @route="mail">
                              <i class="fa fa-envelope" aria-label="Mail"></i>
-                           {{/link-to}} |
-                           {{#link-to 'jobs'}}
+                           </LinkTo> |
+                           <LinkTo @route="jobs">
                                 <i class="fa fa-list" aria-label="Jobs"></i>
-                           {{/link-to}}
-                           | {{#link-to 'account'}}
+                           </LinkTo>
+                           | <LinkTo @route="account">
                              <i class="fa fa-cogs" aria-label="Account"></i>
-                           {{/link-to}}
-                           | {{#link-to 'logout'}}
+                           </LinkTo>
+                           | <LinkTo @route="logout">
                              <i class="fa fa-sign-out-alt" aria-label="Logout"></i>
-                           {{/link-to}}
+                           </LinkTo>
                        </p>
                     {{else}}
-                        <p>{{#link-to 'login' (query-params redirect=currentRoute)}}Login{{/link-to}}
-                        | {{#link-to 'register'}}Register{{/link-to}}
+                        <p><LinkTo @route="login" @query={{hash redirect=currentRoute}}>Login</LinkTo>
+                        | <LinkTo @route="register">Register</LinkTo>
                         </p>
                     {{/if}}
                     </div>
                </div>
            </div>
        </div>
-        {{global-navbar topNavbar=topNavbar model=model isAdmin=isAdmin isCoder=isCoder isAuthenticated=isAuthenticated currentUser=currentUser currentRoute=currentRoute}}
+        <GlobalNavbar @topNavbar={{topNavbar}} @model={{model}} @isAdmin={{isAdmin}} @isCoder={{isCoder}} @isAuthenticated={{isAuthenticated}} @currentUser={{currentUser}} @currentRoute={{currentRoute}} />
     </div>
 
 
@@ -69,14 +69,14 @@
          {{#if (not hideSidebar)}}
              {{#if model.left_sidebar}}
              <div class="col-md-3 left-sidebar">
-               {{global-sidebar model=sidebar socketConnected=socketConnected versionWarning=versionWarning boxStyle="sidebar-box-left"}}
+               <GlobalSidebar @model={{sidebar}} @socketConnected={{socketConnected}} @versionWarning={{versionWarning}} @boxStyle="sidebar-box-left" />
              </div>
              {{/if}}
         {{/if}}
 
          {{#if hideSidebar}}
              <div class="col-md-12 body-container {{if model.left_sidebar 'right-body' 'left-body'}}">
-               {{flash-messages}}
+               <FlashMessages />
 
                {{#if (not socketConnected)}}
                  <div class="alert alert-warning">The website is not receiving live updates from the game.  Try reloading the page.</div>
@@ -86,7 +86,7 @@
              </div>
          {{else}}
              <div class="col-md-9 body-container {{if model.left_sidebar 'right-body' 'left-body'}}">
-               {{flash-messages}}
+               <FlashMessages />
                {{outlet}}
              </div>
          {{/if}}
@@ -94,7 +94,7 @@
          {{#if (not hideSidebar)}}
              {{#if (not model.left_sidebar)}}
              <div class="col-md-3 right-sidebar">
-                 {{global-sidebar model=sidebar socketConnected=socketConnected versionWarning=versionWarning boxStyle="sidebar-box-right"}}
+                 <GlobalSidebar @model={{sidebar}} @socketConnected={{socketConnected}} @versionWarning={{versionWarning}} @boxStyle="sidebar-box-right" />
              </div>
              {{/if}}
          {{/if}}

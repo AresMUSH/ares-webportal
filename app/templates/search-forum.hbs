@@ -2,7 +2,7 @@
 
 <h1>Search Forum</h1>
 
-{{search-bar}}
+<SearchBar />
 
 <p>The search will only match forum posts that contain ALL the specified search criteria.  Capitalization doesn't matter and the searches match entire words only.</p>
 
@@ -21,7 +21,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="title"  value=searchTitle enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="title" @value={{searchTitle}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -33,7 +33,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="author"  value=searchAuthor enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="author" @value={{searchAuthor}} @enter={{action "search"}} /></p>
         <p class="hint">Enter an author's name.  Remember that automated posts come from "System".</p>
   </div>
   
@@ -46,7 +46,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="text"  value=searchText enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="text" @value={{searchText}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -66,11 +66,11 @@
 
 <hr>
 
-{{flash-messages}}
+<FlashMessages />
 
 {{#if searchResults}}
 
-{{forum-post-list posts=searchResults}}
+<ForumPostList @posts={{searchResults}} />
 
 
 {{else}}

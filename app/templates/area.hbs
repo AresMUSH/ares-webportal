@@ -2,19 +2,19 @@
 <h1>{{model.area.name}}</h1>
 
 <p>
-  {{{ansi-format text=model.area.summary}}}
+  <AnsiFormat @text={{model.area.summary}} />
 </p>
 
 <h3>Description</h3>
 
 <p>
-    {{{ansi-format text=model.area.description}}}
+    <AnsiFormat @text={{model.area.description}} />
 </p>
 
 
 {{#if model.area.parent}}
 <h3>Located In</h3> 
-  <p>{{#link-to 'area' model.area.parent.id}}{{model.area.parent.name}}{{/link-to}}</p>
+  <p><LinkTo @route="area" @model={{model.area.parent.id}}>{{model.area.parent.name}}</LinkTo></p>
 {{/if}}
 
 
@@ -23,7 +23,7 @@
 
 <ul> 
 {{#each model.area.children as |child|}}
-  <li>{{#link-to 'area' child.id}}{{child.name}}{{/link-to}}</li>
+  <li><LinkTo @route="area" @model={{child.id}}>{{child.name}}</LinkTo></li>
 {{/each}}
 </ul>
 {{/if}}
@@ -32,11 +32,11 @@
 <h3>Locations in {{model.area.name}}</h3>
  
 {{#each model.area.rooms as |room|}}
-  <p>{{#link-to 'location' room.id}}{{room.name}}{{/link-to}}  </p>
+  <p><LinkTo @route="location" @model={{room.id}}>{{room.name}}</LinkTo>  </p>
 {{/each}}
 {{/if}}
 
-<p>{{#link-to 'locations'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations{{/link-to}}</p>
+<p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
 
 
 <div class="row">
@@ -45,23 +45,15 @@
     
         {{#if model.can_manage}}
           <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
-          {{#link-to 'area-edit' model.area.id class="btn btn-primary"}}Edit{{/link-to}}
+          <LinkTo @route="area-edit" @model={{model.area.id}} class="btn btn-primary">Edit</LinkTo>
         {{/if}}
       </div>
   </div>
 </div>        
 
-{{#bs-modal-simple
-    title="Confirm Delete"
-    closeTitle="Cancel"
-    submitTitle="Confirm"
-    size=null
-    fade=false
-    open=confirmDelete
-    onSubmit=(action "delete")
-    onHide=(action (mut confirmDelete) null)}}
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) null}}>
     You're about to delete area {{model.area.name}}. This cannot be undone.  Are you sure?
-  {{/bs-modal-simple}}
+  </BsModalSimple>
   
 
 {{outlet}}

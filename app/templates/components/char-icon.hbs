@@ -1,13 +1,13 @@
 <div class="char-icon-container">
     
 <div class="log-icon-container">
-    {{#link-to "char" char.name}}
+    <LinkTo @route="char" @model={{char.name}}>
        {{#if char.icon}}
         <img alt="{{char.name}}'s icon" class="log-icon" src="/game/uploads/{{char.icon}}" >
        {{else}}
        <img alt="{{char.name}}'s icon" class="log-icon" src="/game/uploads/theme_images/noicon.png" >
        {{/if}}
-    {{/link-to}}
+    </LinkTo>
 </div>
 
 <div class="log-icon-title-container">
