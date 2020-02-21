@@ -47,14 +47,14 @@
 
 <div class="profile-tab">
 
-    {{char-gallery chars=model.alts title="Characters"}}
+    <CharGallery @chars={{model.alts}} @title="Characters" />
         
 </div>
 {{#if model.achievements}}
 <div>
     <h3>Achievements</h3>
     
-    {{char-achievements achievements=model.achievements}}
+    <CharAchievements @achievements={{model.achievements}} />
 </div>
 {{/if}}
 <div class="row">
@@ -62,7 +62,7 @@
         <div class="pull-right">
             
         {{#if model.can_manage}}
-          {{#link-to 'char-edit' model.id class="btn btn-primary"}}Edit{{/link-to}}
+          <LinkTo @route="char-edit" @model={{model.id}} class="btn btn-primary">Edit</LinkTo>
         {{/if}}
   </div>
   </div>

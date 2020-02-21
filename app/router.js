@@ -1,5 +1,6 @@
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
+import setupCustomRoutes from 'ares-webportal/custom-routes';
 
 const Router = EmberRouter.extend({
   location: config.locationType,
@@ -15,7 +16,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('home', { path: ''});
-
+  
   this.route('account');
   this.route('achievements');
   this.route('admins');
@@ -132,6 +133,8 @@ Router.map(function() {
   this.route('wiki-source', { path: '/wiki/:page_id/source/:version_id'});
   this.route('wiki-tag', { path: '/wiki/tag/:id'});
   this.route('wiki-tags', { path: '/wiki/tags'});
+
+  setupCustomRoutes(this);
 
   // !!!!!!!!!!!!!!!!!!!!!!!!
   // This must be at the end

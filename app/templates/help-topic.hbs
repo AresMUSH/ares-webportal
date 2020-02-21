@@ -1,10 +1,10 @@
 {{title model.name}}
 <div id="help" class="help-topic">
-    {{{ansi-format text=model.help}}}
+    <AnsiFormat @text={{model.help}} />
 </div>
 
 <hr>
-<p>{{#link-to 'help'}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Help{{/link-to}}</p>
+<p><LinkTo @route="help"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Help</LinkTo></p>
 
 
 {{#if model.can_manage}}
@@ -15,25 +15,17 @@
         {{#if model.is_override}}
         <button {{action (mut confirmRestore) true}} class="btn btn-warning">Restore Default</button>
         {{/if}}
-        {{#link-to 'help-override' model.key class="btn btn-default"}}Customize{{/link-to}}
+        <LinkTo @route="help-override" @model={{model.key}} class="btn btn-default">Customize</LinkTo>
     </div>
     </div>
 </div>
 
 
-{{flash-messages}}
+<FlashMessages />
 
-{{#bs-modal-simple
-    title="Confirm Restore"
-    closeTitle="Cancel"
-    submitTitle="Confirm"
-    size=null
-    fade=false
-    open=confirmRestore
-    onSubmit=(action "restore")
-    onHide=(action (mut confirmRestore) null)}}
+<BsModalSimple @title="Confirm Restore" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmRestore}} @onSubmit={{action "restore"}} @onHide={{action (mut confirmRestore) null}}>
     This will remove your custom help file and restore the default. This cannot be undone.  Are you sure?
-  {{/bs-modal-simple}}
+  </BsModalSimple>
   
 {{/if}}
 

@@ -16,7 +16,7 @@
     {{#if ability.can_raise}}
     <td>
     <div class="progress xp-progress">
-      {{progress-bar currentValue=ability.xp maxValue=ability.xp_needed bgColor="bg-success"}}
+      <ProgressBar @currentValue={{ability.xp}} @maxValue={{ability.xp_needed}} @bgColor="bg-success" />
     </div>
     </td>
     <td class="text-center">

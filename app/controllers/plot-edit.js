@@ -6,8 +6,8 @@ export default Controller.extend({
     gameApi: service(),
 
     actions: {
-        storytellerChanged(storyteller) {
-          this.set('model.plot.storyteller', storyteller);
+        storytellersChanged(new_storytellers) {
+          this.set('model.plot.storytellers', new_storytellers);
         },
         storytellersChanged(new_storytellers) {
           this.set('model.plot.storytellers', new_storytellers);
@@ -18,7 +18,6 @@ export default Controller.extend({
             api.requestOne('editPlot', { id: this.get('model.plot.id'),
                title: this.get('model.plot.title'),
                summary: this.get('model.plot.summary'),
-               storyteller_id: this.get('model.plot.storyteller.id'),
                storytellers: (this.get('model.plot.storytellers') || []).map(storyteller => storyteller.name),
                completed: this.get('model.plot.completed'),
                content_warning: this.get('model.plot.content_warning'),

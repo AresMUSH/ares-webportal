@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col col-xs-12">
 
-<p>{{#link-to 'forum-category' model.category.id}}<i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to {{model.category.name}}{{/link-to}}</p>
+<p><LinkTo @route="forum-category" @model={{model.category.id}}><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to {{model.category.name}}</LinkTo></p>
 
         <div class="pull-right">
           {{#if isAuthenticated}}
@@ -27,10 +27,10 @@
            {{#if model.can_edit}}
              {{#if (not model.editActive)}}
              <a href="#" {{action (mut model.editActive) true}}>
-               {{tooltip-icon position='left' message='Edit topic.' icon='fa fa-edit'}}
+               <TooltipIcon @position="left" @message="Edit topic." @icon="fa fa-edit" />
              </a>
              <a href="#" {{action (mut confirmDeleteTopic) true}}>
-               {{tooltip-icon position='left' message='Delete topic.' icon='fa fa-trash'}}
+               <TooltipIcon @position="left" @message="Delete topic." @icon="fa fa-trash" />
              </a>
              {{/if}}
            {{/if}}
@@ -38,13 +38,13 @@
            
        </div>
        
-       <p>{{char-icon-inline char=model.author}}</p>
+       <p><CharIconInline @char={{model.author}} /></p>
        
        {{#if model.editActive}}
-          <p><b>Title:</b> {{input type="text" size=25 value=model.title}}</p>
+          <p><b>Title:</b> <Input @type="text" @size={{25}} @value={{model.title}} /></p>
        
           <p><b>Text:</b></p>
-          {{markdown-editor text=model.raw_message}}
+          <MarkdownEditor @text={{model.raw_message}} />
                               
           <div class="pull-right">
           <button class="btn-default" {{action (mut model.editActive) false}}>Cancel</button>
@@ -52,7 +52,7 @@
           </div>
           <div class="clearfix"></div>
         {{else}}
-         {{{ansi-format text=model.message}}}
+         <AnsiFormat @text={{model.message}} />
        {{/if}}
        
        
@@ -72,10 +72,10 @@
            {{#if reply.can_edit}}
              {{#if (not reply.editActive)}}
              <a href="#" {{action (mut reply.editActive) true}}>
-               {{tooltip-icon position='left' message='Edit reply.' icon='fa fa-edit'}}
+               <TooltipIcon @position="left" @message="Edit reply." @icon="fa fa-edit" />
              </a>
              <a href="#" {{action (mut confirmDeleteReply) reply}}>
-               {{tooltip-icon position='left' message='Delete reply.' icon='fa fa-trash'}}
+               <TooltipIcon @position="left" @message="Delete reply." @icon="fa fa-trash" />
              </a>
              {{/if}}
            {{/if}}
@@ -84,10 +84,10 @@
        </div>
        
        
-       <p>{{char-icon-inline char=reply.author}}</p>
+       <p><CharIconInline @char={{reply.author}} /></p>
           
        {{#if reply.editActive}}
-          {{markdown-editor text=reply.raw_message}}
+          <MarkdownEditor @text={{reply.raw_message}} />
                               
           <div class="pull-right">
           <button class="btn-default" {{action (mut reply.editActive) false}}>Cancel</button>
@@ -95,7 +95,7 @@
           </div>
           <div class="clearfix"></div>
         {{else}}
-         {{{ansi-format text=reply.message}}}
+         <AnsiFormat @text={{reply.message}} />
        {{/if}}
          <hr>
       </div>
@@ -117,7 +117,7 @@
     <div id="reply" class="panel-collapse collapse">
 
 
-            {{markdown-editor text=reply}}
+            <MarkdownEditor @text={{reply}} />
         
             <button {{action "addReply"}} class="btn btn-primary">Add Reply</button>
     
@@ -127,31 +127,15 @@
 {{/if}}
 
 
-{{flash-messages}}
+<FlashMessages />
 
-{{#bs-modal-simple
-    title="Confirm Delete"
-    closeTitle="Cancel"
-    submitTitle="Confirm"
-    size=null
-    fade=false
-    open=confirmDeleteReply
-    onSubmit=(action "deleteReply" confirmDeleteReply)
-    onHide=(action (mut confirmDeleteReply) null)}}
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteReply}} @onSubmit={{action "deleteReply" confirmDeleteReply}} @onHide={{action (mut confirmDeleteReply) null}}>
     You're about to delete this reply. This cannot be undone.  Are you sure?
-  {{/bs-modal-simple}}
+  </BsModalSimple>
 
-{{#bs-modal-simple
-  title="Confirm Delete"
-  closeTitle="Cancel"
-  submitTitle="Confirm"
-  size=null
-  fade=false
-  open=confirmDeleteTopic
-  onSubmit=(action "deleteTopic")
-  onHide=(action (mut confirmDeleteTopic) null)}}
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteTopic}} @onSubmit={{action "deleteTopic"}} @onHide={{action (mut confirmDeleteTopic) null}}>
   You're about to delete this topic. This cannot be undone.  Are you sure?
-{{/bs-modal-simple}}
+</BsModalSimple>
 
 
 {{outlet}}

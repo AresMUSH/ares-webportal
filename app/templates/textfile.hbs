@@ -2,19 +2,19 @@
 <h1>Edit {{model.file}} Config</h1>
 
 {{#if (eq model.file_type 'config')}}
-    {{yaml-editor editorId='config' text=model.text rows=30}}
+    <YamlEditor @editorId="config" @text={{model.text}} @rows={{30}} />
 {{else}}
-    {{textarea value=model.text cols="80" rows=30 class="code-editor"}}
+    <Textarea @value={{model.text}} @cols="80" @rows={{30}} class="code-editor" />
 {{/if}}
 
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">
-            {{#link-to 'setup' class="btn btn-default"}}Cancel{{/link-to}}
+            <LinkTo @route="setup" class="btn btn-default">Cancel</LinkTo>
             <button {{action 'save'}} class="btn btn-primary">Save</button>
         </div>
         
-        {{flash-messages}}
+        <FlashMessages />
     </div>
 </div>
 

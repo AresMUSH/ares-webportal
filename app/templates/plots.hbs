@@ -8,7 +8,7 @@
 <div class="row">
 
     <div class="col pull-right">
-        {{#link-to 'plot-create' class="btn btn-primary"}}Create Plot{{/link-to}}
+        <LinkTo @route="plot-create" class="btn btn-primary">Create Plot</LinkTo>
     </div>
 
 </div>
@@ -20,10 +20,10 @@
 
 <thead>
     <tr>
-        <th class="col-md-3">Plot</th>
-        <th class="col-md-2">Storytellers</th>
-        <th class="col-md-2">Dates</th>
-        <th class="col-md-5">Summary</th>
+        <th class="col-xs-3">Plot</th>
+        <th class="col-xs-2">Storytellers</th>
+        <th class="col-xs-3">Dates</th>
+        <th class="col-xs-4">Summary</th>
     </tr>
 </thead>
 
@@ -33,20 +33,20 @@
   {{#if (not plot.completed) }}
     <tr>
         <td>
-        {{#link-to 'plot' plot.id}}{{plot.title}}{{/link-to}}
+        <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
         </td>
         <td>
           {{#each plot.storytellers as |storyteller|}}
-            {{#link-to 'char' storyteller.name}}{{storyteller.name}}{{/link-to}}
+            <LinkTo @route="char" @model="{{storyteller.name}}">{{storyteller.name}}</LinkTo>
           {{/each}}
         </td>
         <td>
         {{plot.start_date}} - {{plot.end_date}}
         </td>
         <td>
-            {{{ansi-format text=plot.summary}}}
+            <AnsiFormat @text={{plot.summary}} />
             {{#if plot.content_warning}}
-            {{content-warning-tag warning=plot.content_warning}}
+            <ContentWarningTag @warning={{plot.content_warning}} />
             {{/if}}
 
         </td>
@@ -81,7 +81,7 @@
   {{#if plot.completed }}
     <tr>
         <td>
-        {{#link-to 'plot' plot.id}}{{plot.title}}{{/link-to}}
+        <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
         </td>
         <td>
           {{#each plot.storytellers as |storyteller|}}
@@ -92,7 +92,7 @@
         {{plot.start_date}} - {{plot.end_date}}
         </td>
         <td>
-            {{{ansi-format text=plot.summary}}}
+            <AnsiFormat @text={{plot.summary}} />
             {{#if plot.content_warning}}
             {{content-warning-tag warning=plot.content_warning}}
             {{/if}}

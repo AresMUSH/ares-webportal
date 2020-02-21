@@ -4,6 +4,6 @@
 
 <ul>
 {{#each model as |page| }}
-<li>{{#link-to 'wiki-page' page.id}}{{page.heading}}{{/link-to}}</li>
+<li><LinkTo @route="wiki-page" @model={{page.id}}>{{page.heading}}</LinkTo></li>
 {{/each}}
 </ul>

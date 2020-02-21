@@ -5,10 +5,10 @@
 
 <h2>{{group.name}}</h2>
 
-<p>{{{ansi-format text=group.desc}}}</p>
+<p><AnsiFormat @text={{group.desc}} /></p>
 
 {{#if group.wiki}}
-<p>{{#link-to 'wiki-page' group.wiki}}Wiki Page{{/link-to}}</p>
+<p><LinkTo @route="wiki-page" @model={{group.wiki}}>Wiki Page</LinkTo></p>
 {{/if}}
 
 {{#if group.freeform}}

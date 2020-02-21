@@ -3,7 +3,7 @@
 
 <ul>
 {{#each model as |tag| }}
-  <li>{{#link-to 'wiki-tag' tag}}{{tag}}{{/link-to}}</li>
+  <li><LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo></li>
 {{/each}}
 
 </ul>

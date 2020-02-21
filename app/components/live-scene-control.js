@@ -101,6 +101,18 @@ export default Component.extend(AuthenticatedController, {
               }
           });
       },
+      collapseScene() {
+        let api = this.gameApi;
+
+        api.requestOne('collapseScenePoses', { id: this.get('scene.id') })
+        .then( (response) => {
+            if (response.error) {
+                return;
+            }
+            this.flashMessages.success('The scene poses have been collapsed for editing.');
+            this.refresh(); 
+        });
+      },
       deleteScene() {
         let api = this.gameApi;
         this.set('confirmDeleteScene', false);

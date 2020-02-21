@@ -3,7 +3,7 @@
 <h1>{{model.char.name_and_nickname}}</h1>
 
 <div class="row profile-wrap">
-    {{profile-demographics char=model.char}}
+    <ProfileDemographics @char={{model.char}} />
 </div>
 
 
@@ -14,7 +14,7 @@
             <div class="panel-body status-message">
                 {{{model.char.status_message}}}
                 {{#if model.char.idle_notes}}
-                {{{ansi-format text=model.char.idle_notes}}}
+                <AnsiFormat @text={{model.char.idle_notes}} />
                 {{/if}}
             </div>
         </div>
@@ -23,29 +23,28 @@
 {{/if}}
 
 <div class="profile-tab">
-    {{profile-supplemental char=model.char}}
+    <ProfileSupplemental @char={{model.char}} />
 </div>
 
 
 <div class="profile-tab">
 
-  {{profile-system char=model.char game=model.game reloadChar=(action 'reloadChar')}}
+  <ProfileSystem @char={{model.char}} @game={{model.game}} @reloadChar={{action "reloadChar"}} />
 
 </div>
 
 
 <div class="profile-tab">
 
- {{profile-relationships char=model.char}}
+ <ProfileRelationships @char={{model.char}} />
 
  </div>
 
-
-{{profile-logs char=model.char scenes=model.scenes sceneTypes=model.sceneTypes plot_prefs=model.plot_prefs lore_hook_name=model.lore_hook_name lore_hook_desc=model.lore_hook_desc lore_hook_item=model.lore_hook_item lore_hook_pet=model.lore_hook_pet lore_hook_ancestry=model.lore_hook_ancestry}}
+<ProfileLogs @scenes={{model.scenes}} @sceneTypes={{model.sceneTypes}} @char={{model.char}} @plot_prefs={{=model.plot_prefs}} @lore_hook_name={{model.lore_hook_name}} @lore_hook_desc={{model.lore_hook_desc}} @lore_hook_item={{model.lore_hook_item}} @lore_hook_pet={{model.lore_hook_pet}} @lore_hook_ancestry={{model.lore_hook_ancestry}} />
 
 <div class="profile-tab">
 
- {{profile-gallery char=model.char}}
+ <ProfileGallery @char={{model.char}} />
 
 </div>
 
@@ -53,7 +52,7 @@
 <hr>
 <b>Tags:</b>
 {{#each model.char.tags as |tag|}}
-  {{#link-to 'wiki-tag' tag}}{{tag}}{{/link-to}}
+  <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
 {{/each}}
 
 
@@ -62,14 +61,14 @@
         <div class="pull-right">
 
         {{#if model.char.last_profile_version}}
-            {{#link-to 'char-source' model.char.id model.char.last_profile_version class="btn btn-default"}}Source/History{{/link-to}}
+            <LinkTo @route="char-source" @models={{array model.char.id model.char.last_profile_version}} class="btn btn-default">Source/History</LinkTo>
         {{/if}}
         {{#if model.char.show_notes}}
-          {{#link-to 'notes' model.char.name class="btn btn-default"}}Notes{{/link-to}}
+          <LinkTo @route="notes" @model={{model.char.name}} class="btn btn-default">Notes</LinkTo>
         {{/if}}
         {{#if model.char.can_manage}}
           <button {{action (mut showFiles) true}} class="btn btn-default">Files</button>
-          {{#link-to 'char-edit' model.char.id class="btn btn-primary"}}Edit{{/link-to}}
+          <LinkTo @route="char-edit" @model={{model.char.id}} class="btn btn-primary">Edit</LinkTo>
         {{/if}}
   </div>
   </div>
@@ -87,17 +86,17 @@
        {{#each model.char.files as |charFile|}}
 
        <div class="thumbnail-gallery">
-       {{#link-to 'file' charFile.folder charFile.name}}
+       <LinkTo @route="file" @models={{array charFile.folder charFile.name}}>
        {{file.path}} <img src="/game/uploads/{{charFile.path}}" alt="{{charFile.name}}" class="thumbnail">
-       {{/link-to}}
+       </LinkTo>
        </div>
        {{/each}}
        </div>
        <div class="clearfix"/>
 
-        <p>{{#link-to 'files'}}All Files{{/link-to}}</p>
+        <p><LinkTo @route="files">All Files</LinkTo></p>
 
-        {{file-uploader folder=model.char.name uploaded=(action "fileUploaded")}}
+        <FileUploader @folder={{model.char.name}} @uploaded={{action "fileUploaded"}} />
         </div>
     </div>
 {{/if}}

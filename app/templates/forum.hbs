@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">
-          {{#link-to 'search-forum' class="btn btn-default"}}<i class="fa fa-search" aria-hidden="true"></i> Search Forum{{/link-to}}  
+          <LinkTo @route="search-forum" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> Search Forum</LinkTo>  
 
           <button {{action 'catchup'}} class="btn btn-default">Mark All Read</button>
 
@@ -50,7 +50,7 @@
         </td>
         
          <td>
-        {{#link-to 'forum-category' forum.id}}{{forum.name}}{{/link-to}} 
+        <LinkTo @route="forum-category" @model={{forum.id}}>{{forum.name}}</LinkTo> 
         </td>
         
         <td>
@@ -60,13 +60,13 @@
             {{#if forum.last_activity}}
               {{forum.last_activity.author}} 
               {{if (eq forum.last_activity.type 'reply') 'replied to' 'posted'}}
-              {{#link-to 'forum-topic' forum.id forum.last_activity.id}}{{forum.last_activity.subject}}{{/link-to}}
+              <LinkTo @route="forum-topic" @models={{array forum.id forum.last_activity.id}}>{{forum.last_activity.subject}}</LinkTo>
               <br>{{forum.last_activity.date}}
             {{/if}}
         </td>
         <td>
           <a href="#" {{action 'hideCategory' forum true}}>
-            {{tooltip-icon position='left' message='Hide category.' icon='fa fa-eye-slash'}}
+            <TooltipIcon @position="left" @message="Hide category." @icon="fa fa-eye-slash" />
           </a>
           
         </td>
@@ -80,9 +80,9 @@
 {{#if anyHidden}}
 <h4>Hidden</h4>
 {{#each model.hidden as |forum|}}
-{{#link-to 'forum-category' forum.id}}{{forum.name}}{{/link-to}}          
+<LinkTo @route="forum-category" @model={{forum.id}}>{{forum.name}}</LinkTo>          
     <a href="#" {{action 'hideCategory' forum false}} >
-      [{{tooltip-icon position='top' message='Show category.' icon='fa fa-eye'}}]
+      [<TooltipIcon @position="top" @message="Show category." @icon="fa fa-eye" />]
     </a> &nbsp; &nbsp;
 {{/each}}
 {{/if}}

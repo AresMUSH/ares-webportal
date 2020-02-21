@@ -23,7 +23,7 @@
 
       {{#each folder.files as |file|}}
       <tr>
-      <td>{{#link-to 'file' file.folder file.name}}{{file.name}}{{/link-to}}</td>
+      <td><LinkTo @route="file" @models={{array file.folder file.name}}>{{file.name}}</LinkTo></td>
       <td>{{file.size}}KB</td>
       <td>&nbsp;</td>
       </tr>
@@ -51,6 +51,6 @@
 
 
   {{#if showUpload}}
-    {{file-uploader uploaded=(action 'uploaded') folder='misc'}}
+    <FileUploader @uploaded={{action "uploaded"}} @folder="misc" />
   {{/if}}
 {{/if}}

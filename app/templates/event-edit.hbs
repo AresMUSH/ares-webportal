@@ -2,26 +2,26 @@
 <h1>Edit Event</h1>
 
 <p><b>Title:</b></p>
-<p>{{input type="text" size=25 id="title" enter=(action "edit")  value=model.title}}</p>
+<p><Input @type="text" @size={{25}} @id="title" @enter={{action "edit"}} @value={{model.title}} /></p>
 
 <p><b>Date:</b></p>
-<p>{{pikaday-input onSelection=(action 'changeDate') value=model.date format=model.date_entry_format}} </p>
+<p><PikadayInput @onSelection={{action "changeDate"}} @value={{model.date}} @format={{model.date_entry_format}} /> </p>
 
 <p><b>Start Time:</b></p>
 <div class="hint">Use <b>server time</b> in the same format as the server time.  The current server time is {{model.server_time}}.</div>
-<p>{{input type="text" id="time" enter=(action "edit")  value=model.time }}</p>
+<p><Input @type="text" @id="time" @enter={{action "edit"}} @value={{model.time}} /></p>
 
 <p><b>Content Warning:</b></p>
-<p> {{input type="text" size=25 id="content_warning" value=model.content_warning}} </p>   
+<p> <Input @type="text" @size={{25}} @id="content_warning" @value={{model.content_warning}} /> </p>   
 
 
 <p><b>Description:</b></p>
 
-{{markdown-editor text=model.description}}
+<MarkdownEditor @text={{model.description}} />
 
 
 <div class="pull-right">
-  {{#link-to 'event' model.id class="btn btn-default"}}Cancel{{/link-to}}
+  <LinkTo @route="event" @model={{model.id}} class="btn btn-default">Cancel</LinkTo>
   <button {{action "edit"}} class="btn btn-primary">Save</button>
 </div>
-{{flash-messages}}
+<FlashMessages />

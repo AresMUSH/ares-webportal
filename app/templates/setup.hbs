@@ -7,23 +7,23 @@
    
 <h2>Game Information</h2>
 <ul>
-    <li>{{#link-to 'game-edit'}}Game Directory Information{{/link-to}}</li>
-    <li>{{#link-to 'textfile' 'text' 'connect.txt'}}Connect Screen{{/link-to}}</li>
-    <li>{{#link-to 'textfile' 'text' 'tos.txt'}}Terms of Service{{/link-to}}</li>
+    <li><LinkTo @route="game-edit">Game Directory Information</LinkTo></li>
+    <li><LinkTo @route="textfile" @models={{array 'text' 'connect.txt'}}>Connect Screen</LinkTo></li>
+    <li><LinkTo @route="textfile" @models={{array 'text' 'tos.txt'}}>Terms of Service</LinkTo></li>
 </ul>
 
 <h2>Website</h2>
 
 <ul>
-<li>{{#link-to 'setup-colors'}}Edit Theme Colors{{/link-to}}</li>
-<li>{{#link-to 'textfile' 'text' 'website.txt'}}Home Page Text{{/link-to}}</li>
-<li>{{#link-to 'files'}}Upload Files{{/link-to}} <span class="hint">(Theme images live in the theme_files folder.)</span></li>
-<li>{{#link-to 'textfile' 'style' 'custom_style.scss'}}Custom CSS Style{{/link-to}}</li>
+<li><LinkTo @route="setup-colors">Edit Theme Colors</LinkTo></li>
+<li><LinkTo @route="textfile" @models={{array 'text' 'website.txt'}}>Home Page Text</LinkTo></li>
+<li><LinkTo @route="files">Upload Files</LinkTo> <span class="hint">(Theme images live in the theme_files folder.)</span></li>
+<li><LinkTo @route="textfile" @models={{array 'style' 'custom_style.scss'}}>Custom CSS Style</LinkTo></li>
 </ul>
 
 <h2>Plugins</h2>
 <ul>
-    <li>{{#link-to 'plugins-edit'}}Enable or Disable Plugins{{/link-to}}</li>
+    <li><LinkTo @route="plugins-edit">Enable or Disable Plugins</LinkTo></li>
 </ul>
 
 <h2>Config Files</h2>
@@ -31,14 +31,14 @@
 
 <ul>
 {{#each model.config as |file|}}
-<li>{{#link-to 'config' file.name}}{{file.name}}{{/link-to}}</li>
+<li><LinkTo @route="config" @model={{file.name}}>{{file.name}}</LinkTo></li>
 {{/each}}
 </ul>
 
 <h2>Text Files</h2>
 <ul>
 {{#each model.textfiles as |file|}}
-<li>{{#link-to 'textfile' file.file_type file.name}}{{file.name}}{{/link-to}}</li>
+<li><LinkTo @route="textfile" @models={{array file.file_type file.name}}>{{file.name}}</LinkTo></li>
 {{/each}}
 </ul>
 

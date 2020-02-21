@@ -9,7 +9,7 @@
 
 {{/if}}
 
-{{search-bar}}
+<SearchBar />
   
 <p>The search will only match requests/jobs that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
 
@@ -28,7 +28,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="title"  value=searchTitle enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="title" @value={{searchTitle}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -42,7 +42,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="submitter"  value=searchSubmitter enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="submitter" @value={{searchSubmitter}} @enter={{action "search"}} /></p>
         <p class="hint">Enter a player's name.  Remember that automated jobs come from "System".</p>
   </div>
   
@@ -57,7 +57,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="text"  value=searchText enter=(action "search") }}</p>
+        <p><Input @type="text" @size={{25}} @id="text" @value={{searchText}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -80,11 +80,11 @@
 
 <hr>
 
-{{flash-messages}}
+<FlashMessages />
 
 {{#if searchResults}}
 
-{{jobs-list jobs=searchResults}}
+<JobsList @jobs={{searchResults}} />
 
 {{else}}
 <p>No search results.</p>

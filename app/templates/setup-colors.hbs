@@ -6,7 +6,7 @@
 {{#each model as |color|}}
 <tr>
     <td><b>{{color.name}}</b></td>
-    <td>{{input type="color" value=color.value }} ({{color.value}})</td>
+    <td><Input @type="color" @value={{color.value}} /> ({{color.value}})</td>
 </tr>
 {{/each}}
 
