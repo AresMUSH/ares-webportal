@@ -144,7 +144,6 @@ export default Component.extend(AuthenticatedController, {
               }
               set(scenePose, 'pose', response.pose);
           });
-          this.set('scenePose', '');
       },
       
       addPose(poseType) {

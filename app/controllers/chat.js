@@ -14,6 +14,7 @@ export default Controller.extend({
     scrollPaused: false,
     newConversation: false,
     showReport: false,
+    selectedReportMessage: null,
     reportReason: '',
     newConversationList: null,
 
@@ -40,6 +41,7 @@ export default Controller.extend({
         this.set('reportReason', '');
         this.set('showReport', false);
         this.set('newConversationList', []);
+        this.set('selectedReportMessage', null);
     },
     
     onChatMessage: function(type, msg, timestamp) {
@@ -202,23 +204,20 @@ export default Controller.extend({
           let api = this.gameApi;
           let channelKey = this.get('selectedChannel.key');
           let reason = this.reportReason;
+          let message = this.selectedReportMessage;
           this.set('reportReason', '');
           this.set('showReport', false);
+          this.set('selectedReportMessage', null);
           
-          let reportedMessages = this.get('selectedChannel.messages').filter(m => m.checked);
-          if (reportedMessages.length == 0) {
-            this.flashMessages.danger('You must select some messages to report.');
-            return;
-          }
+          
           if (reason.length == 0) {
             this.flashMessages.danger('You must enter a reason for the report.');
             return;
           }
           
-          let messages = reportedMessages.map(m => m.id);
           let command = this.get('selectedChannel.is_page') ? 'reportPage' : 'reportChat';
           
-          api.requestOne(command, { key: channelKey, messages: messages, reason: reason }, null)
+          api.requestOne(command, { key: channelKey, start_message: message, reason: reason }, null)
           .then( (response) => {
               if (response.error) {
                   return;

@@ -17,7 +17,7 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
     }),
     
     mushName: computed(function() { 
-        return this.get('model.game.name');
+        return aresconfig.game_name;
     }),
     
     mushPort: computed(function() {
