@@ -88,6 +88,7 @@ Router.map(function() {
   this.route('recent-changes');
   this.route('register');
   this.route('roster');
+  this.route('roster-claim', { path: '/roster/claim/:id' });
   this.route('routes');
   this.route('scenes');
   this.route('scenes-live');

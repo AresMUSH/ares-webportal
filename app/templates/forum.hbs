@@ -50,7 +50,11 @@
         </td>
         
          <td>
-        <LinkTo @route="forum-category" @model={{forum.id}}>{{forum.name}}</LinkTo> 
+           {{#if forum.can_read}}
+           <LinkTo @route="forum-category" @model={{forum.id}}>{{forum.name}}</LinkTo> 
+           {{else}}
+           <i>{{forum.name}} <i class="fa fa-lock" aria-label="Restricted"></i></i>
+           {{/if}}
         </td>
         
         <td>

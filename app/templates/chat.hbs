@@ -1,11 +1,36 @@
 {{title 'Chat'}}
 <h1>Chat</h1>
 
+<div class="row">
+  <div class="pull-right chat-control-row">
+
+    
+    <ul class="nav chat-add-convo">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+        <span class="btn btn-default chat-button" href="#">Add Channel <span class="caret"></span></span> </a>
+        <ul class="dropdown-menu">
+          {{#each model.chat as |channel|}}
+            {{#if channel.can_join}}
+              {{#if (not channel.enabled)}}
+                <li><a href="#" {{action 'joinChannel' channel.title}}>{{channel.title}}</a></li>
+              {{/if}}
+            {{/if}}
+        {{/each}}
+        </ul>
+      </li>
+    </ul>
+    
+    <span class="btn btn-default chat-add-convo" role="button" {{action 'newConversation'}}>New Conversation</span>
+    
+  </div>
+</div>
 
 <div class="row">
   
 <div class="col col-xs-12 col-md-3">
-    
+
   <button class="btn btn-default visible-sm visible-xs hidden-md" type="button" data-toggle="collapse" data-target="#channelMenuCollapse" aria-expanded="false" aria-controls="channelMenuCollapse">
       <i class="fas fa-bars"></i>
       {{#if anyNewActivity}}
@@ -14,7 +39,7 @@
     </button>
 
     <div class="collapse in" id="channelMenuCollapse">
-    
+        
     {{#each channelsByActivity as |channel|}}
       {{#if channel.can_join}}
         {{#if channel.enabled}}
@@ -37,27 +62,7 @@
         {{/if}}
       {{/if}}
     {{/each}}
-   
-
-    <ul class="nav chat-nav">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-        <span class="btn btn-default chat-button" href="#">Add Channel <span class="caret"></span></span> </a>
-        <ul class="dropdown-menu">
-          {{#each model.chat as |channel|}}
-            {{#if channel.can_join}}
-              {{#if (not channel.enabled)}}
-                <li><a href="#" {{action 'joinChannel' channel.title}}>{{channel.title}}</a></li>
-              {{/if}}
-            {{/if}}
-        {{/each}}
-        </ul>
-      </li>
-      <li>
-        <span class="btn btn-default chat-button" role="button" {{action 'newConversation'}}>New Conversation</span>
-      </li>
-    </ul>
+    
   </div>
   
 </div>
@@ -227,14 +232,14 @@
 
 <BsModalSimple @title="Report Offensive Chat" @closeTitle="Cancel" @submitTitle="Report" @size={{null}} @fade={{false}} @open={{showReport}} @onSubmit={{action "reportChat"}} @onHide={{action (mut showReport) null}}>
         
-        <p>Select the offensive messages below and enter a reason in the text box.</p>
+        <p>Enter a reason in the text box and select a message.  All messages after that one will be included in the report.</p>
         <p><Input @type="text" @size={{50}} @value={{reportReason}} /></p>
         
         <div class="chat-report">
         <table>
         {{#each selectedChannel.messages as |message|}}
         <tr>
-          <td><Input @type="checkbox" @checked={{message.checked}} /></td>
+          <td><Input @type="radio" @id="{{message.id}}" @name="reportMessage" onclick={{action (mut selectedReportMessage) message.id}} /></td>
           <td><AnsiFormat @text={{message.message}} /></td>
         </tr>
         {{/each}}

@@ -9,7 +9,7 @@
 <h2>{{group.name}}</h2>
 
 <div class="table-responsive">
-<table>
+<table class="roster-table">
     <thead>
         <th>Character</th>
         <th>Summary</th>
@@ -58,16 +58,7 @@
          </td>
          
          <td>
-           {{#if char.password}}
-           <div class="alert alert-success">
-             <p>Roster character claimed!  You can now log into that character with the password: {{char.password}}</p>
-             <p>Please write this password down before you leave this page, or you will have to contact staff to reset it.</p>
-           </div>
-           {{else}}
-             {{#if (not char.app_required)}}
-             <p><button {{action (mut confirmClaim) char}} class="btn btn-default">Claim</button> </p>
-             {{/if}}           
-           {{/if}}
+              <LinkTo @route="roster-claim" @model={{char.id}} class="btn btn-primary">Claim</LinkTo>
          </td>
 
         
@@ -82,9 +73,4 @@
 {{/each}}
 
 
-
-<BsModalSimple @title="Confirm Claim" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmClaim}} @onSubmit={{action "claimRoster"}} @onHide={{action (mut confirmClaim) null}}>
-    You're about to claim the character {{confirmClaim.name}} from the roster. Are you sure?
-  </BsModalSimple>
-  
 {{outlet}}
