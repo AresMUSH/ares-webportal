@@ -1,0 +1,83 @@
+{{title "Claim Roster Character"}}
+
+<h1>Claim Roster Character</h1>
+  
+<div class="row profile-wrap">
+    
+    <div class="col-md-4 col-sm-12 col-xs-12">
+    {{#if model.profile_image.name}}
+            <LinkTo @route="file" @models={{array model.profile_image.folder model.profile_image.name}}>
+                <img src="/game/uploads/{{model.profile_image.path}}" alt="{{model.name}}'s icon"  class="profile-image">
+            </LinkTo>
+    {{else}}
+        <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{model.name}}'s icon" >
+    {{/if}}
+    </div>
+
+    <div class="col-md-8 col-sm-12 col-xs-12">        
+
+        <div class="profile-box">
+        <h3>
+          {{model.military_name}}
+        </h3>
+        
+        <p>
+        <AnsiFormat @text={{model.roster.notes}} />
+        </p>
+    
+        <p>
+          {{#if model.roster.previously_played}}
+          <span class="label label-info">Previously Played</span>
+          {{/if}}
+        </p>
+    
+        <p>Any questions about this character, contact {{model.roster.contact}}.</p>
+        
+      </div>
+    </div>
+        
+</div>
+
+<div class="profile-tab">
+    
+    {{#if model.roster.app_required}}
+    <h3>App Required</h3>
+    
+    <p>This character requires an application.  Include your app below.  The app staff will get back to you.
+    </p>
+    
+    <p><b>App Details</b>:</p>
+     
+     <MarkdownEditor @text={{rosterApp}} />
+         
+    {{/if}}
+</div>
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+        
+        {{#if model.password}}
+        <div class="alert alert-success">
+          <p>Roster character claimed!  You can now log into that character with the password: {{model.password}}</p>
+          <p>Please write this password down before you leave this page, or you will have to contact staff to reset it.</p>
+        </div>
+        {{else}}
+        <LinkTo @route="char" @model={{model.id}} class="btn btn-default" @target="_blank">View Profile</LinkTo>
+          <button {{action (mut confirmClaim) true}} class="btn btn-primary">Claim</button>
+        {{/if}}
+  </div>
+  </div>
+</div>
+
+<FlashMessages />
+
+
+<BsModalSimple @title="Confirm Claim" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmClaim}} @onSubmit={{action "claimRoster"}} @onHide={{action (mut confirmClaim) null}}>
+    You're about to claim the character {{confirmClaim.name}} from the roster. Are you sure?
+  </BsModalSimple>
+  
+<p><LinkTo @route="roster"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Roster</LinkTo></p>
+
+
+{{outlet}}  
