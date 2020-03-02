@@ -14,6 +14,7 @@
     {{#if spell.effect}}
       <i>{{spell.effect}}</i>
     {{/if}}
+    {{#if spell.damage_type}}&nbsp;&#183; {{spell.damage_type}} Damage{{/if}}
   </span>
 
   <h3 style="margin:0px;">{{spell.name}}</h3>
@@ -60,8 +61,7 @@
        {{spell.spell_mod}} spell
     {{/if}}
   {{/if}}
-  {{#if spell.damage_type}}&nbsp;&#183; {{spell.damage_type}} Damage{{/if}}
-  {{#if spell.weapon}}
+    {{#if spell.weapon}}
     <hr width="95%">
     <h4>Spell Attack Stats</h4>
     {{#if spell.weapon_specials}}
