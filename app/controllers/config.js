@@ -8,6 +8,7 @@ export default Controller.extend({
     newConfigKey: '',
     configChanged: false,
     confirmRestore: null,
+    configErrors: null,
     
     config: computed('model.config', 'configChanged', function() {
         return this.get('model.config');
@@ -16,6 +17,7 @@ export default Controller.extend({
     resetOnExit: function() {
         this.set('newConfigKey', '');
         this.set('confirmRestore', null);
+        this.set('configErrors', null);
     },
     
     actions: {
@@ -64,6 +66,10 @@ export default Controller.extend({
             .then( (response) => {
                 if (response.error) {
                     return;
+                }
+                if (response.warnings) {
+                  this.set('configErrors', response.warnings);
+                  return;
                 }
         
             this.flashMessages.success('Config saved!');
