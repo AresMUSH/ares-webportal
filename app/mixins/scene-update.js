@@ -9,10 +9,10 @@ export default Mixin.create({
     
   updateSceneData: function(scene, msg, timestamp) {
     let splitMsg = msg.split('|');
-    //let sceneId = splitMsg[0];
-    //let char = splitMsg[1];
-    let activityType = splitMsg[2];
-    let activityData = splitMsg[3];
+    /* let sceneId = */ splitMsg.shift();
+    /* let char = */ splitMsg.shift();
+    let activityType = splitMsg.shift();
+    let activityData = splitMsg.join("|");
     let notify = true;
 
     let localTimestamp = localTime(timestamp); 
