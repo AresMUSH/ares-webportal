@@ -60,6 +60,7 @@
        {{spell.spell_mod}} spell
     {{/if}}
   {{/if}}
+  {{#if spell.damage_type}}&nbsp;&#183; {{spell.damage_type}} Damage{{/if}}
   {{#if spell.weapon}}
     <hr width="95%">
     <h4>Spell Attack Stats</h4>
@@ -67,7 +68,8 @@
     <p><i>Applies {{spell.name}} stats atop the stats of the weapon you are already wielding.</i></p>
     {{/if}}
     <p><i>
-      {{spell.weapon_type}}{{#if spell.weapon_shrapnel}} (Shrapnel){{/if}} {{#if spell.damage_type}}&nbsp;&#183; {{spell.damage_type}} Damage{{/if}}<br>
+      {{spell.weapon_type}}{{#if spell.weapon_shrapnel}} (Shrapnel){{/if}}
+      <br>
     </i></p>
     {{#if spell.weapon_lethality}}
       <b>Lethality:</b> {{spell.weapon_lethality}}<br>
