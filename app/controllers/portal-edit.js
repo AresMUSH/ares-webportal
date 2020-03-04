@@ -26,7 +26,7 @@ export default Controller.extend({
                gms: (this.get('model.portal.gms') || []).map(gm => gm.name),
                creatures: (this.get('model.portal.creatures') || []).map(creature => creature.id),
                location: this.get('model.portal.location'),
-               location_known: this.get('isKnown'),
+               location_known: this.get('model.portal.location_known'),
                latitude: this.get('model.portal.latitude'),
                longitude: this.get('model.portal.longitude'),
                primary_school: this.get('model.portal.primary_school.name'),
