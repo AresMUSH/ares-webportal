@@ -1,1 +1,18 @@
 
+{{#if char.spells}}
+<div id="systemspells" class="tab-pane fade">
+  {{char-spells char=char}}
+</div>
+{{/if}}
+
+{{#if char.spells}}
+<div id="systemspellcards" class="tab-pane fade">
+  {{char-spell-cards char=char}}
+</div>
+{{/if}}
+
+{{#if char.magic_items}}
+<div id="systemitems" class="tab-pane fade">
+  {{char-magic-items char=char}}
+</div>
+{{/if}}
