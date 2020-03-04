@@ -15,15 +15,13 @@
           {{#link-to 'portal-edit' model.portal.id class="btn btn-default"}}Edit Portal{{/link-to}}
         </div>
       </div>
-      <div class="col col-xs-12">
-        {{#if model.portal.latitude}}
-        <span style="float:right; margin-left: 15px;">
-          <iframe width="300" height="250" frameborder="0" style="border:0"
-        src="https://www.google.com/maps/embed/v1/place?q={{model.portal.latitude}}%20{{model.portal.longitude}}&key=AIzaSyDtQxW3ou9wLCgpLzTHiYQCKLv4YBM3t1c&maptype=satellite" allowfullscreen></iframe>
-        </span>
-        {{/if}}
-      </div>
   </div>
+  {{#if model.portal.latitude}}
+  <span style="float:right; margin-left: 15px;">
+    <iframe width="300" height="250" frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?q={{model.portal.latitude}}%20{{model.portal.longitude}}&key=AIzaSyDtQxW3ou9wLCgpLzTHiYQCKLv4YBM3t1c&maptype=satellite" allowfullscreen></iframe>
+  </span>
+  {{/if}}
   <div class="portal-card">
     <div class="portal-card-heading">{{model.portal.name}} </div>
     <div class="portal-card-body">
