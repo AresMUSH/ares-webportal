@@ -1,8 +1,17 @@
 {{title model.creature.name}}
 <h1>{{model.creature.name}}</h1>
-
+<div class="ooc"> <p><b>This is a GM resource and is for OOC reference only. While some of the information here is ICly known, some of it may not be.</b></p></div>
+<div class="row">
+    <div class="col col-xs-12">
+      <LinkTo @route="creatures"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Creatures</LinkTo>
+      <div class="pull-right">
+        {{#link-to 'creature-edit' model.creature.id class="btn btn-default"}}Edit Creature{{/link-to}}
+      </div>
+    </div>
+</div>
 <div class="ansi">
-  <div class="ooc"> <b>This is a GM resource and is for OOC reference only. While some of the information here is ICly known, some of it may not be.</b></div> 
+
+
   <div class="creature-box">
     <div class="infobox-heading">
       <div class="infobox-title-text">
@@ -16,7 +25,11 @@
         </div>
 
         <div class="infobox-subtitle">
-          {{model.creature.sapient}}
+          {{#if model.creature.sapient}}
+            Sapient
+          {{else}}
+            Non Sapient
+          {{/if}}
           <div class="infobox-minorschool">
             {{#if model.creature.minor_school}}
             {{#link-to 'schools' model.creature.minor_school.name}}
@@ -80,7 +93,12 @@
   {{scene-list scenes=model.creature.scenes sceneTypes=model.sceneTypes}}
 
   </div>
-  <div class="pull-right">
-    {{#link-to 'creatures' class="btn btn-default"}}All Creatures{{/link-to}}
-    {{#link-to 'creature-edit' model.creature.id class="btn btn-default"}}Edit{{/link-to}}</div>
+  <div class="row">
+      <div class="col col-xs-12">
+        <LinkTo @route="creatures"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Creatures</LinkTo>
+        <div class="pull-right">
+          {{#link-to 'creature-edit' model.creature.id class="btn btn-default"}}Edit Creature{{/link-to}}
+        </div>
+      </div>
+  </div>
   <script async defer src="//assets.pinterest.com/js/pinit.js"></script>

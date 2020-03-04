@@ -9,7 +9,18 @@
   src="https://www.google.com/maps/embed/v1/place?q={{model.portal.latitude}}%20{{model.portal.longitude}}&key=AIzaSyDtQxW3ou9wLCgpLzTHiYQCKLv4YBM3t1c&maptype=satellite" allowfullscreen></iframe>
   </span>
   {{/if}}
+
+
   <div class="ooc"> <b>This is a GM resource and is for OOC reference only. While some of the information here is ICly known, some of it may not be.</b></div>
+
+  <div class="row">
+      <div class="col col-xs-12">
+        <LinkTo @route="portals"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Portals</LinkTo>
+        <div class="pull-right">
+          {{#link-to 'portal-edit' model.portal.id class="btn btn-default"}}Edit Portal{{/link-to}}
+        </div>
+      </div>
+  </div>
   <div class="portal-card">
     <div class="portal-card-heading">{{model.portal.name}} </div>
     <div class="portal-card-body">
@@ -87,8 +98,12 @@
   {{scene-list scenes=model.portal.scenes sceneTypes=model.sceneTypes}}
 </div>
 
-<div class="pull-right">
-  {{#link-to 'portals' class="btn btn-default"}}All Portals{{/link-to}}
-  {{#link-to 'portal-edit' model.portal.id class="btn btn-default"}}Edit{{/link-to}}
+<div class="row">
+    <div class="col col-xs-12">
+      <LinkTo @route="portals"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Portals</LinkTo>
+      <div class="pull-right">
+        {{#link-to 'portal-edit' model.portal.id class="btn btn-default"}}Edit Portal{{/link-to}}
+      </div>
+    </div>
 </div>
 <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
