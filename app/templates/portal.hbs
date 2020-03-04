@@ -3,12 +3,7 @@
 
 <div class="ansi">
 
-  {{#if model.portal.latitude}}
-  <span style="float:right; margin-left: 15px;">
-    <iframe width="300" height="250" frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?q={{model.portal.latitude}}%20{{model.portal.longitude}}&key=AIzaSyDtQxW3ou9wLCgpLzTHiYQCKLv4YBM3t1c&maptype=satellite" allowfullscreen></iframe>
-  </span>
-  {{/if}}
+
 
 
   <div class="ooc"> <b>This is a GM resource and is for OOC reference only. While some of the information here is ICly known, some of it may not be.</b></div>
@@ -19,6 +14,14 @@
         <div class="pull-right">
           {{#link-to 'portal-edit' model.portal.id class="btn btn-default"}}Edit Portal{{/link-to}}
         </div>
+      </div>
+      <div class="col col-xs-12">
+        {{#if model.portal.latitude}}
+        <span style="float:right; margin-left: 15px;">
+          <iframe width="300" height="250" frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?q={{model.portal.latitude}}%20{{model.portal.longitude}}&key=AIzaSyDtQxW3ou9wLCgpLzTHiYQCKLv4YBM3t1c&maptype=satellite" allowfullscreen></iframe>
+        </span>
+        {{/if}}
       </div>
   </div>
   <div class="portal-card">
@@ -95,7 +98,7 @@
 <h2>Scenes</h2>
 <!-- To get the filtered list to work, I need a new get_portal_scenes api based off get_scenes_handler.rb - changing char_id to portal_id. Return scene list this way instead of via model.portal.scenes. Add said api to the route js file. -->
 <!-- <PortalLogs @scenes={{model.portal.scenes}} @sceneTypes={{model.sceneTypes}} /> -->
-  {{scene-list scenes=model.portal.scenes sceneTypes=model.sceneTypes}}
+  <SceneList @scenes={{model.portal.scenes}}  @sceneTypes={{model.sceneTypes}} @hideSearch={{true}} />
 </div>
 
 <div class="row">
