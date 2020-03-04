@@ -87,7 +87,8 @@
 
           <div class="col col-xs-3">
             <p><label>Sapient?</label>
-            {{input type="checkbox"  id="sapient"  checked=isSapient}}</p>
+              <Input @type="checkbox" @checked={{model.creature.sapient}} />
+            </p>
           </div>
 
         </div>

@@ -5,14 +5,7 @@ export default Controller.extend({
     flashMessages: service(),
     gameApi: service(),
 
-    resetOnExit: function() {
-      this.set('isSapient', false);
-    },
-
     actions: {
-        reset() {
-          this.resetOnExit();
-        },
         gmsChanged(new_gms) {
           this.set('model.creature.gms', new_gms);
         },
@@ -34,7 +27,7 @@ export default Controller.extend({
                portals: (this.get('model.creature.portals') || []).map(portal => portal.id),
                major_school: this.get('model.creature.major_school.name'),
                minor_school: this.get('model.creature.minor_school.name'),
-               sapient: this.get('isSapient'),
+               sapient: this.get('model.creature.sapient'),
                pinterest: this.get('model.creature.pinterest'),
                found: this.get('model.creature.found'),
                language: this.get('model.creature.language'),

@@ -57,7 +57,8 @@
 
           <div class="col col-xs-12">
             <p><label>Location known on WeirdNet?</label>
-            {{input type="checkbox"  id="location_known"  checked=isKnown}}</p>
+              <Input @type="checkbox" @checked={{model.portal.location_known}} />
+            <!-- {{input type="checkbox"  id="location_known"  checked=isKnown}} --></p>
           </div>
 
           <div class="col-sm-3">
