@@ -5,29 +5,14 @@
     <li><a data-toggle="tab" href="#rosternotes">Roster Info</a></li>
   {{/if}}
 
-  {{#if (not game.disabled_plugins.fs3skills)}}
-     {{#if char.fs3.show_sheet}}
-      <li><a data-toggle="tab" href="#systemsheet">Sheet</a></li>
-      {{/if}}
-      {{#if char.fs3.xp}}
-      <li><a data-toggle="tab" href="#systemxp">XP</a></li>
-      {{/if}}
+  <li><a data-toggle="tab" href="#systemhooks">RP Hooks</a></li>
+
+  {{#if char.background}}
+      <li><a data-toggle="tab" href="#systembg">Background</a></li>
   {{/if}}
 
-  {{#if (not game.disabled_plugins.fs3combat)}}
-      <li><a data-toggle="tab" href="#systemdamage">Damage</a></li>
-  {{/if}}
-
-  {{#if char.spells}}
-    <li><a data-toggle="tab" href="#systemspells">Spells</a></li>
-  {{/if}}
-
-  {{#if char.spells}}
-    <li><a data-toggle="tab" href="#systemspellcards">Spell Cards</a></li>
-  {{/if}}
-
-  {{#if char.magic_items}}
-    <li><a data-toggle="tab" href="#systemitems">Magic Items</a></li>
+  {{#if char.description}}
+  <li><a data-toggle="tab" href="#systemdesc">Description</a></li>
   {{/if}}
 
   <ProfileFs3Tabs @char={{char}} @game={{game}} />
@@ -95,22 +80,7 @@
   </div>
   {{/if}}
 
-  {{profile-fs3-tabs char=char game=game}}
-
-  {{profile-custom-tabs char=char game=game}}
-
-  {{#if (not game.disabled_plugins.fs3skills)}}
-    {{#if char.fs3.show_sheet}}
-      <div id="systemsheet" class="tab-pane fade">
-        {{fs3-sheet char=char}}
-      </div>
-     {{/if}}
-     {{#if char.fs3.xp}}
-      <div id="systemxp" class="tab-pane fade">
-        {{fs3-xp char=char abilityLearned=(action 'abilityLearned')}}
-      </div>
-     {{/if}}
-  {{/if}}
+  <ProfileFs3 @char={{char}} @game={{game}} @reloadChar={{action "reloadChar"}} />
 
   {{#if char.spells}}
   <div id="systemspells" class="tab-pane fade">
@@ -129,14 +99,6 @@
     {{char-magic-items char=char}}
   </div>
   {{/if}}
-
-  {{#if (not game.disabled_plugins.fs3combat)}}
-  <div id="systemdamage" class="tab-pane fade">
-    {{fs3-damage char=char}}
-  </div>
-  {{/if}}
-
-  <ProfileFs3 @char={{char}} @game={{game}} @reloadChar={{action "reloadChar"}} />
 
   {{#if traitsExtraInstalled}}
     <ProfileTraits @char={{char}} />
