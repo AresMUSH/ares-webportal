@@ -21,6 +21,7 @@ export default Controller.extend({
     this.set('searchDesc', '');
     this.set('searchAvailable', false);
     this.set('searchPotion', false);
+    this.set('searchLOS', false);
     this.set('searchResults', null);
   },
 
@@ -38,7 +39,8 @@ export default Controller.extend({
         searchEffect: this.get('searchEffect'),
         searchDesc: this.get('searchDesc'),
         searchAvailable: this.get('searchAvailable'),
-        searchPotion: this.get('searchPotion')
+        searchPotion: this.get('searchPotion'),
+        searchLOS: this.get('searchLOS')
       }, null)
       .then( (response) => {
         if (response.error) {
