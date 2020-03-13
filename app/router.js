@@ -39,6 +39,7 @@ Router.map(function() {
   this.route('combatant-edit', { path: '/combatant/:id' });
   this.route('combats');
   this.route('config', { path: '/config/:file' });
+  this.route('emoji');
   this.route('error');
   this.route('events');
   this.route('event', { path: '/event/:event_id'} );
