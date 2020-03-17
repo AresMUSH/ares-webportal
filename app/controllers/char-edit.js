@@ -6,14 +6,6 @@ export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
     customUpdateCallback: null,
-
-    genders: computed(function() {
-      let list = [];
-      this.get('model.cgInfo.genders').forEach(function(g) {
-        list.push({ value: g });
-      });
-      return list;
-    }),
   
     buildQueryDataForChar: function() {
       
@@ -62,41 +54,7 @@ export default Controller.extend({
         };
     }, 
     actions: {
-        addProfile() {
-            let count = this.get('model.char.profile.length');
-            this.get('model.char.profile').pushObject({ name: '', text: '', key: count + 1 });
-        },
-        addRelationship() {
-            let count = this.get('model.char.relationships.length');
-            this.get('model.char.relationships').pushObject({ name: '', text: '', key: count + 1 });
-        },
-        fileUploaded(folder, name) {
-            let model_folder = this.get('model.char.name').toLowerCase();
-            if (folder === model_folder) {
-                if (!this.get('model.char.files').some( f => f.name == name && f.folder == model_folder )) {
-                    this.get('model.char.files').pushObject( { name: name, path: `${folder}/${name}` });
-                }
-            }
-        },
-        genderChanged(val) {
-            this.set('model.char.demographics.gender.value', val.value);
-        },
-        profileImageChanged(image) {
-            this.set('model.char.profile_image', image);
-        },
-        profileIconChanged(icon) {
-            this.set('model.char.profile_icon', icon);
-        },
-        removeProfile(key) {
-            let profile = this.get('model.char.profile');
-            profile = profile.filter(p => p.key != key);
-            this.set('model.char.profile', profile);
-        },
-        removeRelationship(key) {
-            let relationships = this.get('model.char.relationships');
-            relationships = relationships.filter(p => p.key != key);
-            this.set('model.char.relationships', relationships);
-        },
+        
         save() {
             if (this.get('model.char.profile').filter(p => p.name.length == 0).length > 0) {
                 this.flashMessages.danger('Profile names cannot be blank.');
