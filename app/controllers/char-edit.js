@@ -1,5 +1,4 @@
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
@@ -14,6 +13,7 @@ export default Controller.extend({
         let demographics = {};
         let profile = {};
         let relationships = {};
+        let descs = {};
         
         let demo_entry = this.get('model.char.demographics');
         Object.keys(demo_entry).forEach(function(k) {
@@ -36,7 +36,18 @@ export default Controller.extend({
         if (!Array.isArray(tags)) {
             tags = tags.split(/[\s,]/);
         }
-                
+
+        
+        descs['current'] = this.get('model.char.descs.current');
+        descs['outfits'] = {};
+        descs['details'] = {};
+        this.get('model.char.descs.outfits').forEach(function(p) {
+            descs['outfits'][p.name] = p.desc;
+        });
+        this.get('model.char.descs.details').forEach(function(p) {
+            descs['details'][p.name] = p.desc;
+        });
+                        
         return { 
             id: this.get('model.char.id'),
             demographics: demographics,
@@ -50,6 +61,7 @@ export default Controller.extend({
             profile_icon: this.get('model.char.profile_icon.name'),
             profile_gallery: this.get('model.char.profile_gallery'),
             tags: tags,
+            descs: descs,
             custom: custom
         };
     }, 
@@ -63,6 +75,21 @@ export default Controller.extend({
             
             if (this.get('model.char.relationships').filter(r => r.name.length == 0).length > 0) {
                 this.flashMessages.danger('Relationship names cannot be blank.');
+                return;
+            }
+            
+            if (this.get('model.char.descs.outfits').filter(r => r.name.length == 0).length > 0) {
+                this.flashMessages.danger('Outfit names cannot be blank.');
+                return;
+            }
+            
+            if (this.get('model.char.descs.outfits').filter(r => r.name.includes(' ')).length > 0) {
+                this.flashMessages.danger('Outfit names cannot contain spaces.');
+                return;
+            }
+
+            if (this.get('model.char.descs.details').filter(r => r.name.length == 0).length > 0) {
+                this.flashMessages.danger('Detail names cannot be blank.');
                 return;
             }
             

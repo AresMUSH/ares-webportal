@@ -67,6 +67,7 @@ Router.map(function() {
   this.route('job-create');
   this.route('locations');
   this.route('location', { path: '/location/:id'});
+  this.route('location-edit', { path: '/location/:id/edit'});
   this.route('logs');
   this.route('log', { path: '/log/:file' });
   this.route('login', { query_params: ['redirect'] });

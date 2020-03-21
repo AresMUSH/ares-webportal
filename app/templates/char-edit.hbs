@@ -5,6 +5,7 @@
         <li><a data-toggle="tab" href="#profile">Profile</a></li>
         <li><a data-toggle="tab" href="#relationships">Relationships</a></li>
         <li><a data-toggle="tab" href="#hooks">RP Hooks</a></li>
+        <li><a data-toggle="tab" href="#descs">Descriptions</a></li>
         <li><a data-toggle="tab" href="#files">Files</a></li>
         <CharEditCustomTabs @char={{model}} />
     </ul>
@@ -16,6 +17,7 @@
       <CharEditGeneral @model={{model}} />
       <CharEditProfile @model={{model}} />
       <CharEditRelationships @model={{model}} />
+      <CharEditDescs @model={{model}} />
       
 
       <div id="hooks" class="tab-pane fade in">

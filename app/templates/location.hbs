@@ -1,9 +1,9 @@
 {{title model.name}}
 <h1>{{model.name}}</h1>
 
-<AnsiFormat @text={{model.description}} />
+<AnsiFormat @text={{model.descs.current}} />
 
-{{#each model.details as |detail|}}
+{{#each model.descs.details as |detail|}}
 <p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
 {{/each}}
 
@@ -30,13 +30,17 @@
 </ul>
 
     
+<p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
+
     <div class="row">
         <div class="col col-xs-12">
 
-<p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
-                
-        <LinkTo @route="scene-create" @query={{hash location=model.name_and_area}} class="btn btn-primary pull-right">Start Scene Here</LinkTo>
-        
+        <div class="pull-right">
+          {{#if model.can_edit}}
+          <LinkTo @route="location-edit" @model={{model.id}} class="btn btn-default">Edit</LinkTo>
+          {{/if}}
+          <LinkTo @route="scene-create" @query={{hash location=model.name_and_area}} class="btn btn-primary">Start Scene Here</LinkTo>
+        </div>
         </div>
     </div>
 
