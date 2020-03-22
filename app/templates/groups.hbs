@@ -3,28 +3,61 @@
 
 {{#each-in model as |key group| }}
 
-<h2>{{group.name}}</h2>
+{{#if (eq key 'all_ranks')}}
+  <h2>Ranks</h2>
 
-<p><AnsiFormat @text={{group.desc}} /></p>
+  <i class="fa fa-minus-circle"></i> = Not allowed in character creation.
 
-{{#if group.wiki}}
-<p><LinkTo @route="wiki-page" @model={{group.wiki}}>Wiki Page</LinkTo></p>
-{{/if}}
-
-{{#if group.freeform}}
-<i>Freeform group.  No specific values.</i>
+  {{#each-in group as |faction rankGroups|}}
+  <h4>{{faction}}</h4>
+  <table>
+    <tr>
+    {{#each-in rankGroups as |rankGroupName ranks|}}
+    <th><b>{{rankGroupName}}</b></th>
+    {{/each-in}}
+    </tr>
+    <tr>
+    {{#each-in rankGroups as |rankGroupName ranks |}}
+    <td>
+      <ol>
+        {{#each-in ranks as |rankName allowedInCg|}}
+        <li>{{rankName}} 
+          {{#if (not allowedInCg)}}
+          <i class="fa fa-minus-circle"></i>
+          {{/if}}
+        </li>
+        {{/each-in}}
+      </ol>
+    </td>
+    {{/each-in}}
+    </tr>
+  </table>
+  {{/each-in}}
+  
+{{else if (eq key 'rank')}}
 {{else}}
-<ul>
-  {{#each group.values as |v| }}
-  <li><b>{{v.value}}</b>
-    {{#if v.desc}}
-    - {{v.desc}}
-    {{/if}}
-    </li>
-  {{/each}}
-</ul>
-{{/if}}
+  <h2>{{group.name}}</h2>
 
+  <p><AnsiFormat @text={{group.desc}} /></p>
+
+  {{#if group.wiki}}
+  <p><LinkTo @route="wiki-page" @model={{group.wiki}}>Wiki Page</LinkTo></p>
+  {{/if}}
+
+  {{#if group.freeform}}
+  <i>Freeform group.  No specific values.</i>
+  {{else}}
+  <ul>
+    {{#each group.values as |v| }}
+    <li><b>{{v.value}}</b>
+      {{#if v.desc}}
+      - {{v.desc}}
+      {{/if}}
+      </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+{{/if}}
 {{/each-in}}
 
 

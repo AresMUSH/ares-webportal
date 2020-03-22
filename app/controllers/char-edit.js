@@ -1,19 +1,10 @@
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
     gameApi: service(),
     flashMessages: service(),
     customUpdateCallback: null,
-
-    genders: computed(function() {
-      let list = [];
-      this.get('model.cgInfo.genders').forEach(function(g) {
-        list.push({ value: g });
-      });
-      return list;
-    }),
   
     buildQueryDataForChar: function() {
       
@@ -22,6 +13,7 @@ export default Controller.extend({
         let demographics = {};
         let profile = {};
         let relationships = {};
+        let descs = {};
         
         let demo_entry = this.get('model.char.demographics');
         Object.keys(demo_entry).forEach(function(k) {
@@ -44,7 +36,18 @@ export default Controller.extend({
         if (!Array.isArray(tags)) {
             tags = tags.split(/[\s,]/);
         }
-                
+
+        
+        descs['current'] = this.get('model.char.descs.current');
+        descs['outfits'] = {};
+        descs['details'] = {};
+        this.get('model.char.descs.outfits').forEach(function(p) {
+            descs['outfits'][p.name] = p.desc;
+        });
+        this.get('model.char.descs.details').forEach(function(p) {
+            descs['details'][p.name] = p.desc;
+        });
+                        
         return { 
             id: this.get('model.char.id'),
             demographics: demographics,
@@ -58,45 +61,12 @@ export default Controller.extend({
             profile_icon: this.get('model.char.profile_icon.name'),
             profile_gallery: this.get('model.char.profile_gallery'),
             tags: tags,
+            descs: descs,
             custom: custom
         };
     }, 
     actions: {
-        addProfile() {
-            let count = this.get('model.char.profile.length');
-            this.get('model.char.profile').pushObject({ name: '', text: '', key: count + 1 });
-        },
-        addRelationship() {
-            let count = this.get('model.char.relationships.length');
-            this.get('model.char.relationships').pushObject({ name: '', text: '', key: count + 1 });
-        },
-        fileUploaded(folder, name) {
-            let model_folder = this.get('model.char.name').toLowerCase();
-            if (folder === model_folder) {
-                if (!this.get('model.char.files').some( f => f.name == name && f.folder == model_folder )) {
-                    this.get('model.char.files').pushObject( { name: name, path: `${folder}/${name}` });
-                }
-            }
-        },
-        genderChanged(val) {
-            this.set('model.char.demographics.gender.value', val.value);
-        },
-        profileImageChanged(image) {
-            this.set('model.char.profile_image', image);
-        },
-        profileIconChanged(icon) {
-            this.set('model.char.profile_icon', icon);
-        },
-        removeProfile(key) {
-            let profile = this.get('model.char.profile');
-            profile = profile.filter(p => p.key != key);
-            this.set('model.char.profile', profile);
-        },
-        removeRelationship(key) {
-            let relationships = this.get('model.char.relationships');
-            relationships = relationships.filter(p => p.key != key);
-            this.set('model.char.relationships', relationships);
-        },
+        
         save() {
             if (this.get('model.char.profile').filter(p => p.name.length == 0).length > 0) {
                 this.flashMessages.danger('Profile names cannot be blank.');
@@ -105,6 +75,21 @@ export default Controller.extend({
             
             if (this.get('model.char.relationships').filter(r => r.name.length == 0).length > 0) {
                 this.flashMessages.danger('Relationship names cannot be blank.');
+                return;
+            }
+            
+            if (this.get('model.char.descs.outfits').filter(r => r.name.length == 0).length > 0) {
+                this.flashMessages.danger('Outfit names cannot be blank.');
+                return;
+            }
+            
+            if (this.get('model.char.descs.outfits').filter(r => r.name.includes(' ')).length > 0) {
+                this.flashMessages.danger('Outfit names cannot contain spaces.');
+                return;
+            }
+
+            if (this.get('model.char.descs.details').filter(r => r.name.length == 0).length > 0) {
+                this.flashMessages.danger('Detail names cannot be blank.');
                 return;
             }
             

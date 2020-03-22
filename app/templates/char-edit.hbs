@@ -5,6 +5,7 @@
         <li><a data-toggle="tab" href="#profile">Profile</a></li>
         <li><a data-toggle="tab" href="#relationships">Relationships</a></li>
         <li><a data-toggle="tab" href="#hooks">RP Hooks</a></li>
+        <li><a data-toggle="tab" href="#descs">Descriptions</a></li>
         <li><a data-toggle="tab" href="#files">Files</a></li>
         <CharEditCustomTabs @char={{model}} />
     </ul>
@@ -13,188 +14,21 @@
 
     <div class="tab-content">
 
-        <div id="general" class="tab-pane fade in active">
-            
-            {{#each-in model.char.demographics as |key demo|}}
-            <div class="form-group row">
-                <div class="col-sm-3">
-                        <b>{{demo.name}}</b> 
-                </div>
-                <div class="col-sm-9">
-                    {{#if (eq demo.name 'Gender') }}
-                        
-                        <PowerSelect @selected={{model.char.demographics.gender}} @searchField="value" @options={{genders}} @onchange={{action "genderChanged"}} as |gender|>
-                          {{gender.value}}
-                        </PowerSelect>
-                        
-                    {{else}}
-                        <Input @type="text" @size={{25}} @value={{demo.value}} />
-                    {{/if}}
-                </div>
-            </div>
-            {{/each-in}}
-            
-            <div class="form-group row">
-                <div class="col-sm-3">
-                        <b>Profile Image</b>
-                </div>
-                
-                <div class="col-sm-9">
-                    <PowerSelect @selected={{model.char.profile_image}} @allowClear={{true}} @searchField="name" @options={{model.char.files}} @onchange={{action "profileImageChanged"}} as |file|>
-                    {{file.name}}
-                    </PowerSelect>
-                    
-                    <p class="hint">See <LinkTo @route="help-topic" @model="icons">Icons</LinkTo> for tips on selecting and sizing your profile image.</p>
-                </div>
-            </div>
-            
-            <div class="form-group row">
-                <div class="col-sm-3">
-                        <b>Profile Icon</b>
-                </div>
-                
-                <div class="col-sm-9">
-                    <PowerSelect @selected={{model.char.profile_icon}} @allowClear={{true}} @searchField="name" @options={{model.char.files}} @onchange={{action "profileIconChanged"}} as |file|>
-                    {{file.name}}
-                    </PowerSelect>
-                    
-                    <p class="hint">See <LinkTo @route="help-topic" @model="icons">Icons</LinkTo> for tips on selecting and sizing your profile image.</p>
-                </div>
-            </div>
-            
-            <div class="form-group row">
-                <div class="col-sm-3">
-                        <b>Profile Gallery</b>
-                </div>
-                
-                <div class="col-sm-9">
-                  
-                  <div class="profile-gallery-input">
-                  <Textarea @value={{model.char.profile_gallery}} @cols="80" @rows={{3}} />
-                  
-                    <p class="hint">List image files in the order you want them shown (<code>folder/file1.jpg /folder/file2.jpg</code> etc.), or leave this blank to just show all images from your character's folder.</p>
-                    
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="form-group row">
-                <div class="col-sm-3">
-                        <b>Page Tags</b>
-                </div>
-                
-                <div class="col-sm-9">
-                    <Input @type="text" @size={{50}} @value={{model.char.tags}} />
-                    
-                </div>
-            </div>
-            
-            <div class="form-group row">
-                <div class="col-sm-3">
-                        <b>Share Background</b>
-                </div>
-                
-                <div class="col-sm-9">
-                      <Input @type="checkbox" @checked={{model.char.bg_shared}} />
-                </div>
-            </div>
-            
-            
-            <div class="form-group row">
-                <div class="col-sm-3">
-                        <b>Last Will</b>
-                </div>
-                
-                <div class="col-sm-9">
-                      <MarkdownEditor @text={{model.char.lastwill}} />
-                </div>
-            </div>
-            
-            
-            
-            
-        </div>
+      <CharEditGeneral @model={{model}} />
+      <CharEditProfile @model={{model}} />
+      <CharEditRelationships @model={{model}} />
+      <CharEditDescs @model={{model}} />
       
-        <div id="profile" class="tab-pane fade in">
-           
-           {{#each model.char.profile as |profile|}}
-           <p>
-           <Input @type="text" @size={{25}} @value={{profile.name}} placeholder="Enter section name." />
-           <button class="btn btn-default" {{action 'removeProfile' profile.key}}><i class="fa fa-trash" aria-label="Remove Section"></i></button>
-           </p>
-           <MarkdownEditor @text={{profile.text}} />
-            <hr>
-           {{/each}}
-           
-           <button class="btn btn-default" {{action 'addProfile'}}>Add Profile Section <i class="fa fa-plus" aria-label="Add Section"></i></button>
-        </div>
-    
-        <div id="relationships" class="tab-pane fade in">
-            <p><b>Category Order:</b> <Input @type="text" @size={{50}} @value={{model.char.relationships_category_order}} placeholder="Order (Optional)." /></p>
-            <p class="hint">List categories, separated by commas, in the order you want them to appear on your relationship display.</p>
-            <hr>
 
-            {{#each model.char.relationships as |relationship|}}
-            <p>
-            <Input @type="text" @size={{25}} @value={{relationship.name}} placeholder="Enter name." />
-            
-            Category: <Input @type="text" @size={{25}} @value={{relationship.category}} placeholder="Enter category." />
-                        
-            <button class="btn btn-default" {{action 'removeRelationship' relationship.key}}><i class="fa fa-trash" aria-label="Remove Relationship"></i></button>
-            </p>
-            
-            <p>
-            
-            Order: <Input @type="text" @size={{25}} @value={{relationship.order}} placeholder="Order (Optional)." />
-                        
-            Off-Game NPC: <Input @type="checkbox" @checked={{relationship.is_npc}} /> 
-            
-            {{#if relationship.is_npc}}
-            NPC Image: <Input @type="text" @size={{25}} @value={{relationship.npc_image}} placeholder="folder/filename.ext (Optional)." />
-            {{/if}}
-            
-            </p>
-            
-            <MarkdownEditor @text={{relationship.text}} />
-            
-            <hr>
-            {{/each}}
-           
-            <button class="btn btn-default" {{action 'addRelationship'}}>Add Relationship <i class="fa fa-plus" aria-hidden="true"></i></button>
-            
-          
-        </div>
-      
-        <div id="hooks" class="tab-pane fade in">
+      <div id="hooks" class="tab-pane fade in">
           <MarkdownEditor @text={{model.char.rp_hooks}} />
         </div>
         
-        <CharEditCustom @char={{model.char}} @updateCallback={{customUpdateCallback}} />
+      <CharEditCustom @char={{model.char}} @updateCallback={{customUpdateCallback}} />
         
-      
-        <div id="files" class="tab-pane fade in">
-            <div class="cg-tip">Files for your character page need to be in a folder matching your character's name.  They will show up in the gallery and profile image selection lists.  See [Icons](/help/icons) for tips on sizing your profile image.</div>
-            <hr>
-        
-            <div>
-            {{#each model.char.files as |file|}}
-            
-            <div class="thumbnail-gallery">
-            <LinkTo @route="file" @models={{array file.folder file.name}}>
-            {{file.path}} <img src="/game/uploads/{{file.path}}" alt="{{file.name}}" class="thumbnail">
-            </LinkTo>
-            </div>
-            {{/each}}
-            </div>
-            <div class="clearfix"/>
-        
-            <p><LinkTo @route="files">All Files</LinkTo></p>
-    
-            <FileUploader @folder={{model.char.name}} @uploaded={{action "fileUploaded"}} />
-        </div>
-                
+      <CharEditFiles @model={{model}} />
     </div>
+        
     
    
     

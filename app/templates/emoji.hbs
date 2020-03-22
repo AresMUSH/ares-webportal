@@ -1,0 +1,72 @@
+{{title "Emoji"}}
+
+<h1>Emoji</h1>
+
+{{#if model.allowed}}
+
+<p>AresMUSH supports standard <a href="https://unicode.org/emoji/charts/full-emoji-list.html" target="_blank" rel="nofollow noopener">Unicode emoji</a>.  You can copy/paste them from this list, or use the names like <code>:grin:</code>.  Be aware that some MUSH clients may not be able to display emoji.</p>
+
+<div class="toc">
+  <b>Table of Contents</b>
+  <ul>
+    <li><a href="#quick">Quickref</a></li>
+    <li><a href="#emoji">Emoji</a></li>
+    <li><a href="#smileys">Smileys</a></li>
+  </ul>
+</div>
+
+
+<a name="quick"></a>
+
+<h2>Quickref</h2>
+
+{{#each model.aliases as |emoji|}}
+<div class="col col-xs-4">
+  <div class="col col-xs-2 emoji-example">
+  {{emoji.display}}
+  </div>
+  <div class="col col-xs-10">
+  :{{emoji.name}}:
+  </div>
+</div>
+{{/each}}
+
+<div class="clearfix"/>
+
+
+<a name="emoji"></a>
+
+<h2>Emoji</h2>
+
+{{#each model.emoji as |emoji|}}
+<div class="col col-xs-4">
+  <div class="col col-xs-2 emoji-example">
+  {{emoji.display}}
+  </div>
+  <div class="col col-xs-10">
+  :{{emoji.name}}:
+  </div>
+</div>
+{{/each}}
+
+<div class="clearfix"/>
+
+<a name="smileys"></a>
+
+<h2>Smileys</h2>
+
+{{#each model.smileys as |emoji|}}
+<div class="col col-xs-4">
+  <div class="col col-xs-3 emoji-example">
+    <code>{{{emoji.name}}}</code>
+  </div>
+  <div class="col col-xs-9 emoji-example">
+  {{emoji.display}} 
+  </div>
+</div>
+{{/each}}
+
+
+{{else}}
+<p>This game does not have emoji enabled.  :sadface:</p>
+{{/if}}

@@ -39,6 +39,7 @@ Router.map(function() {
   this.route('combatant-edit', { path: '/combatant/:id' });
   this.route('combats');
   this.route('config', { path: '/config/:file' });
+  this.route('emoji');
   this.route('error');
   this.route('events');
   this.route('event', { path: '/event/:event_id'} );
@@ -66,6 +67,7 @@ Router.map(function() {
   this.route('job-create');
   this.route('locations');
   this.route('location', { path: '/location/:id'});
+  this.route('location-edit', { path: '/location/:id/edit'});
   this.route('logs');
   this.route('log', { path: '/log/:file' });
   this.route('login', { query_params: ['redirect'] });

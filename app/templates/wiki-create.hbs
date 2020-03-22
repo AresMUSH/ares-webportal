@@ -1,15 +1,29 @@
 {{title 'Create New Page'}}
 <h1>Create New Page</h1>
-    
+
+        
     <div class="form-group row">
      <div class="col-sm-3">
         <label for="title" class="col-xs-2 col-form-label">Title:</label>
      </div>
      <div class="col-sm-9">
        <Input @type="text" @size={{25}} @id="title" @enter={{action "save"}} @value={{model.title}} />
+
+        <div class="hint">This is the page title that the players see.</div>
      </div> 
    </div>
-   
+
+     <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="name" class="col-xs-2 col-form-label">Page Name:</label>
+      </div>
+      <div class="col-sm-9">
+        <Input @type="text" @size={{25}} @id="name" @enter={{action "save"}} @value={{model.name}} />
+        
+        <div class="hint">If blank, the page title will be converted into a name.</div>
+      </div> 
+    </div>
+       
     <div class="form-group row">
      <div class="col-sm-3">
         <label for="tags" class="col-xs-2 col-form-label">Tags:</label>

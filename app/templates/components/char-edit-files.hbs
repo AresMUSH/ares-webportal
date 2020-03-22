@@ -1,0 +1,22 @@
+<div id="files" class="tab-pane fade in">
+    <div class="cg-tip">Files for your character page need to be in a folder matching your character's name.  They will show up in the gallery and profile image selection lists.  See <LinkTo @route="help-topic" @model="icons" target="_blank">Icons</LinkTo> for tips on sizing your profile image.</div>
+
+    <hr>
+
+    <div>
+      {{#each model.char.files as |file|}}
+    
+      <div class="thumbnail-gallery">
+        <LinkTo @route="file" @models={{array file.folder file.name}}>
+          {{file.path}} <img src="/game/uploads/{{file.path}}" alt="{{file.name}}" class="thumbnail">
+        </LinkTo>
+      </div>
+      {{/each}}
+    </div>
+    <div class="clearfix"/>
+
+    <p><LinkTo @route="files" target="_blank">All Files</LinkTo></p>
+
+    <FileUploader @folder={{model.char.name}} @uploaded={{action "fileUploaded"}} />
+</div>
+        

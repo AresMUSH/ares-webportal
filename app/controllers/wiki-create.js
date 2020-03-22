@@ -28,6 +28,7 @@ export default Controller.extend({
             api.requestOne('createWiki', {
                title: this.get('model.title'), 
                text: this.get('model.text'),
+               name: this.get('model.name'),
                tags: tags}, null)
             .then( (response) => {
                 if (response.error) {
