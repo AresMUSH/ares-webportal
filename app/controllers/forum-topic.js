@@ -11,11 +11,17 @@ export default Controller.extend(AuthenticatedController, {
     flashMessages: service(),
     confirmDeleteTopic: null,
     confirmDeleteReply: null,
+    author: null,
     
     resetOnExit: function() {
         this.set('reply', '');
         this.set('confirmDeleteReply', null);
         this.set('confirmDeleteTopic', null);
+        this.set('author', null);
+    },
+    
+    setup: function() {
+      this.set('author', this.get('model.authors')[0]);
     },
     
     onForumActivity: function(type, msg, timestamp ) {
@@ -60,7 +66,8 @@ export default Controller.extend(AuthenticatedController, {
         addReply() {
             let api = this.gameApi;
             api.requestOne('forumReply', { topic_id: this.get('model.id'), 
-               reply: this.reply}, null)
+               reply: this.reply,
+               author_id: this.get('author.id') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -138,6 +145,9 @@ export default Controller.extend(AuthenticatedController, {
             this.transitionToRoute('forum-category', this.get('model.category.id'));
             this.flashMessages.success('Post deleted!');
           });
+        },
+        authorChanged(author) {
+          this.set('author', author);
         }
     }
 });
