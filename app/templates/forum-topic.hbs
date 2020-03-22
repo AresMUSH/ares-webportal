@@ -116,11 +116,18 @@
     </div>
     <div id="reply" class="panel-collapse collapse">
 
-
-            <MarkdownEditor @text={{reply}} />
-        
-            <button {{action "addReply"}} class="btn btn-primary">Add Reply</button>
+      <div class="forum-reply-panel">
+         <p><b>Reply As:</b>        <div class="forum-char-select" >
+                     <PowerSelect @selected={{author}} @options={{model.authors}} @searchField="name" @onchange={{action "authorChanged"}} as |author|>
+                         <CharIconTiny @char={{author}} />
+                     </PowerSelect>
+                 </div>
+         </p>
     
+        <MarkdownEditor @text={{reply}} />
+  
+        <button {{action "addReply"}} class="btn btn-primary">Add Reply</button>
+      </div>
     </div>
 </div>
 

@@ -7,10 +7,16 @@ export default Controller.extend({
     gameApi: service(),
     session: service(),
     flashMessages: service(),
+    author: null,
     
     resetOnExit: function() {
         this.set('subject', '');
         this.set('message', '');
+        this.set('author', null);
+    },
+    
+    setup: function() {
+      this.set('author', this.get('model.authors')[0]);
     },
     
     actions: {
@@ -18,7 +24,8 @@ export default Controller.extend({
             let api = this.gameApi;
             api.requestOne('forumPost', { category_id: this.get('model.id'), 
                subject: this.subject,
-               message: this.message }, null)
+               message: this.message,
+               author_id: this.get('author.id') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -28,6 +35,9 @@ export default Controller.extend({
                           response.id);
                 this.flashMessages.success('Topic added!');
             });
+        },
+        authorChanged(author) {
+          this.set('author', author);
         }
     }
 });

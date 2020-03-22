@@ -10,10 +10,18 @@
     
 </div>
 
+{{#if model.alts}}
+  <div class="alert alert-info">
+  {{#each model.alts as |alt|}}
+  <p>{{alt.name}} has {{alt.count}} unread notifications.</p>
+  {{/each}}
+  </div>
+{{/if}}
+
 <table class="table table-striped">
 
 
-{{#each model as |notification|}}
+{{#each model.notices as |notification|}}
 <tr>
   <td>{{#if notification.is_unread}}
         <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="Unread Notification"></i></span>
