@@ -183,10 +183,11 @@
                                  <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
                                  <li><a href="#" {{action (mut managePoseOrder) true}}>Manage Pose Order</a></li>
                              {{/if}}
-                             <li role="separator" class="divider"></li>
+
 
                              <LiveScenePlaces @scene={{scene}} />
-
+                             <li role="separator" class="divider"></li>
+                             <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} @spells={{spells}}/>
                              {{#if scene.fs3_enabled}}
                                  <LiveSceneFs3 @abilities={{abilities}} @scene={{scene}} />
                              {{/if}}
@@ -195,7 +196,6 @@
                                <LiveSceneCookies @scene={{scene}} />
                              {{/if}}
 
-                             <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} />
 
                          </ul>
                      </li>
