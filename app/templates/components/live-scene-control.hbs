@@ -69,7 +69,12 @@
                           <img alt="{{pose.char.name}}'s icon" class="small-profile-icon <IconClass />" src="/game/uploads/theme_images/noicon.png" >
                           {{/if}}
                           
-                          {{pose.char.name}}
+                          {{#if pose.char.nick}}
+                            {{pose.char.nick}}
+                          {{else}}
+                            {{pose.char.name}} 
+                          {{/if}}
+                          
                       </a>
                     {{/if}}
                 </div>
