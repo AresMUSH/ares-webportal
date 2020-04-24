@@ -42,8 +42,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
           if (notify) {
             this.gameSocket.notify(`New activity from ${char} in scene ${sceneId}.`);
             this.scrollSceneWindow();
-          }
-          
+          }          
         }
         else {
             this.get('model.scenes').forEach(s => {
@@ -56,6 +55,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
                 }
             });            
         }
+        this.markSceneRead(sceneId);
     },
 
     resetOnExit: function() {
@@ -84,6 +84,10 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
           // This happens sometimes when transitioning away from screen.
         }   
   
+    },
+    
+    markSceneRead: function(sceneId) {
+      this.gameApi.requestOne('markSceneRead', { id: sceneId });
     },
     
     actions: {

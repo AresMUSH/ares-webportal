@@ -26,6 +26,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
           }
           
           this.scrollSceneWindow();
+          this.markSceneRead();
         }
     },
     
@@ -60,6 +61,10 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         let self = this;
         this.gameSocket.setupCallback('new_scene_activity', function(type, msg, timestamp) {
             self.onSceneActivity(type, msg, timestamp) } );
+    },
+    
+    markSceneRead: function() {
+      this.gameApi.requestOne('markSceneRead', { id: this.get('model.scene.id') });
     },
     
     actions: {
