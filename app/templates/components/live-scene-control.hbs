@@ -17,16 +17,14 @@
   {{/if}}
 
  &nbsp; 
-    {{#if scrollPaused}}
-    <br>
-       <span class="label label-warning">Scrolling is paused!</span>
+    {{#if sceneAlerts}}
+    <div class="alert alert-warning">
+      {{#each sceneAlerts as |alert|}}
+      <p>{{alert}}</p>
+      {{/each}}
+    </div>
     {{/if}}
     
-    {{#if (not scene.is_watching)}}
-    <br>
-       <span class="label label-warning">You are not watching this scene and will not be notified of new scene activity.</span>
-
-    {{/if}}
     
     <LiveSceneContext @scene={{scene}} />
     
@@ -39,18 +37,14 @@
                 
                 
                 {{#if (not pose.is_system_pose)}}
-                  <TooltipIcon @position="left" @message={{pose.timestamp}} @icon="fas fa-clock" />
+                  <div class="timestamp-tip">{{pose.timestamp}}</div>
                 {{/if}}
                 {{#if (not scene.reload_required)}}
                   {{#if (and isApproved pose.can_edit)}}
                     {{#if (not pose.editActive)}}
-                    <a href="#" {{action 'editScenePose' pose}}>
-                      <TooltipIcon @position="left" @message="Edit Pose" @icon="fa fa-edit" />
-                    </a>
+                    <a href="#" {{action 'editScenePose' pose}}><i class="fas fa-edit"></i></a>
                     {{#if pose.can_delete}}
-                    <a href="#" {{action (mut confirmDeleteScenePose) pose}}>
-                      <TooltipIcon @position="left" @message="Delete Pose" @icon="fa fa-trash" />                      
-                    </a>
+                    <a href="#" {{action (mut confirmDeleteScenePose) pose}}><i class="fas fa-trash"></i></a>
                     {{/if}}
                     {{/if}}
                   {{/if}}
@@ -119,22 +113,16 @@
 
     </div>
 
-  {{#if scrollPaused}}
-     <span class="label label-warning">Scrolling is paused!</span>
-  {{/if}}
-  
-
-    {{#if (not scene.is_watching)}}
-       <span class="label label-warning">You are not watching this scene and will not be notified of new scene activity.</span>
+    {{#if sceneAlerts}}
+    <div class="alert alert-warning">
+      {{#each sceneAlerts as |alert|}}
+      <p>{{alert}}</p>
+      {{/each}}
+    </div>
     {{/if}}
+    
 
-
-    {{#if scene.reload_required}}
-      <div class="alert alert-warning">
-        This scene has changed status since you opened it.  Please reload the page.
-      </div>
-
-    {{else if (not isApproved)}}
+    {{#if (not isApproved)}}
       <div class="alert alert-warning">You must be approved to join a scene.</div>
       
     {{else}}

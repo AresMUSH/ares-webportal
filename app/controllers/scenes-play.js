@@ -18,12 +18,9 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
   
     // Chat
     selectedChannel: null,
-    chatMessage: '',
     newConversation: false,
-    showReport: false,
-    selectedReportMessage: null,
-    reportReason: '',
     newConversationList: null,
+    showAddChannel: null,
     
     // Both
     scrollPaused: false,
@@ -145,7 +142,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
             }, 400);    
         }  
         
-        let sceneWindow = $('#chat-window')[0];
+        let sceneWindow = $('#live-scene-log')[0];
         if (sceneWindow) {
           $('#live-scene-log').stop().animate({
               scrollTop: $('#live-scene-log')[0].scrollHeight
@@ -187,7 +184,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     },
     
     markSceneRead: function(sceneId) {
-     // this.gameApi.requestOne('markSceneRead', { id: sceneId }, null);
+     this.gameApi.requestOne('markSceneRead', { id: sceneId }, null);
     },
     
     markPageThreadRead: function(threadId) {
@@ -201,7 +198,20 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     },
     
     actions: {        
-        
+            
+      joinChannel: function(channelName) {
+          let api = this.gameApi;
+                    
+          api.requestOne('joinChannel', { channel: channelName }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              this.send('refresh');
+          });
+      },
+    
+      
         refresh() {
             this.resetOnExit();
             this.send('reloadModel');
@@ -248,109 +258,13 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
             this.set('newConversationList', newList);
         },
         
-        joinChannel: function(channelName) {
-            let api = this.gameApi;
-                        
-            api.requestOne('joinChannel', { channel: channelName }, null)
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                this.send('reloadModel');
-            });
-        },
-        
-        leaveChannel: function() {
-            let api = this.gameApi;
-            let channelKey = this.get('selectedChannel.key');
-                        
-            api.requestOne('leaveChannel', { channel: channelKey }, null)
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                this.send('reloadModel');
-            });
-        },
-        
-        muteChannel: function(mute) {
-            let api = this.gameApi;
-            let channelKey = this.get('selectedChannel.key');
-                        
-            api.requestOne('muteChannel', { channel: channelKey, mute: mute }, null)
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                this.send('reloadModel');
-            });
-        },
-        
-        newConversation: function() {
-          this.set('selectedChannel', null);
-          this.set('newConversation', true);
-        },
-        
-        reportChat: function() {
-          let api = this.gameApi;
-          let channelKey = this.get('selectedChannel.key');
-          let reason = this.reportReason;
-          let message = this.selectedReportMessage;
-          this.set('reportReason', '');
-          this.set('showReport', false);
-          this.set('selectedReportMessage', null);
-          
-          
-          if (reason.length == 0) {
-            this.flashMessages.danger('You must enter a reason for the report.');
-            return;
-          }
-          
-          let command = this.get('selectedChannel.is_page') ? 'reportPage' : 'reportChat';
-          
-          api.requestOne(command, { key: channelKey, start_message: message, reason: reason }, null)
-          .then( (response) => {
-              if (response.error) {
-                  return;
-              }
-              this.flashMessages.success('The messages have been reported to the game admin.');
-          });
-          
-        },
-        
-        send: function() {
-            let api = this.gameApi;
-            let channelKey = this.get('selectedChannel.key');
-            let message = this.chatMessage;
-            this.set(`chatMessage`, '');
-                      
-            if (this.get('selectedChannel.is_page'))  {
-              api.requestOne('sendPage', { thread_id: channelKey, message: message }, null)
-              .then( (response) => {
-                  if (response.error) {
-                      return;
-                  }
-              }); 
-            } else {
-              api.requestOne('chatTalk', { channel: channelKey, message: message }, null)
-              .then( (response) => {
-                  if (response.error) {
-                      return;
-                  }
-              });
-            }
-        },
-        
-        selectPageGroup: function(group) {
-          this.set('selectedPageGroup', group);
-          this.scrollPageWindow();
-        },
         
         startConversation: function() {
           let api = this.gameApi;
           let message = this.chatMessage;
           let names = (this.newConversationList || []).map(p => p.name);
           this.set(`chatMessage`, '');
+          this.set('selectedChannel', null);
           this.set('newConversation', false);
           this.set('newConversationList', []);
 
@@ -359,8 +273,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
               if (response.error) {
                   return;
               }
-              let channel = this.getChannel(response.thread);              
-              this.send('changeChannel', channel);
+              this.send('refresh');
           });
         },
 
