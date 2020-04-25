@@ -23,7 +23,7 @@
        <div class="collapse in" id="sceneMenuCollapse">
 
        <p class="play-section-title">Scenes
-       <LinkTo @route="scene-create" @target="_blank"><i class="fa fa-plus-circle" aria-label="Add Channel"></i></LinkTo>
+       <LinkTo @route="scenes-live" @target="_blank"><i class="fa fa-plus-circle" aria-label="Add Scene"></i></LinkTo>
        </p>  
 
          
@@ -111,7 +111,11 @@
        
        {{#if selectedChannel}}
 
+       {{#if selectedChannel.is_page}}
+       <h3>PMs with {{selectedChannel.title}}</h3>
+       {{else}}
        <h3>{{selectedChannel.title}}</h3>
+       {{/if}}
        
          <ChatControl @channel={{selectedChannel}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
        
