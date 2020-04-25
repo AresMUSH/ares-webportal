@@ -1,7 +1,8 @@
 import $ from "jquery"
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
+import { set, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { localTime } from 'ares-webportal/helpers/local-time';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import SceneUpdate from 'ares-webportal/mixins/scene-update';
 
@@ -11,10 +12,27 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     gameSocket: service(),
     session: service(),
     favicon: service(),
-    
-    scrollPaused: false,
+  
+    // Scenes
     currentScene: null,
+  
+    // Chat
+    selectedChannel: null,
+    chatMessage: '',
+    newConversation: false,
+    showReport: false,
+    selectedReportMessage: null,
+    reportReason: '',
+    newConversationList: null,
     
+    // Both
+    scrollPaused: false,
+
+    init: function() {
+      this._super(...arguments);
+      this.set('newConversationList', []);
+    },
+  
     anyNewActivity: computed('model.scenes.@each.is_unread', function() {
       return this.get('model.scenes').any(s => s.is_unread );
     }),
@@ -41,7 +59,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
           
           if (notify) {
             this.gameSocket.notify(`New activity from ${char} in scene ${sceneId}.`);
-            this.scrollSceneWindow();
+            this.scrollWindow();
           }          
         }
         else {
@@ -57,45 +75,132 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         }
         this.markSceneRead(sceneId);
     },
+    
+    onChatMessage: function(type, msg, timestamp) {
+        let splitMsg = msg.split('|');
+        let channelKey = splitMsg[0];
+        let channelTitle = splitMsg[1];
+        let newMessage = splitMsg[2];
+        let channel = this.getChannel(channelKey);
+        let localTimestamp = localTime(timestamp); 
+
+        if (!channel) {
+          channel = this.addPageChannel(channelKey, channelTitle);
+        }
+        channel.messages.pushObject({message: newMessage, timestamp: localTimestamp});
+        set(channel, 'last_activity', Date.now());
+        if (channelKey === this.get('selectedChannel.key')) {
+            this.scrollWindow();
+            if (channel.is_page) {
+              this.markPageThreadRead(channel.key);
+            }
+        }
+        else {
+            let messageCount = channel.new_messages || 0;
+            set(channel, 'new_messages', messageCount + 1);
+
+            if (channel.is_page) {
+              this.gameSocket.notify(`New conversation activity in ${channelTitle}.`);
+            }
+
+        }
+        // No browser notifications for channels because it's too spammy.
+        this.gameSocket.highlightFavicon();
+    },
 
     resetOnExit: function() {
         this.set('scrollPaused', false);
+        this.set('selectedChannel', null);
+        this.set('chatMessage', '');
+        this.set('scrollPaused', false);
+        this.set('newConversation', false);
+        this.set('reportReason', '');
+        this.set('showReport', false);
+        this.set('newConversationList', []);
+        this.set('selectedReportMessage', null);
     },
     
     setupCallback: function() {
         let self = this;
         this.gameSocket.setupCallback('new_scene_activity', function(type, msg, timestamp) {
             self.onSceneActivity(type, msg, timestamp) } );
+        this.gameSocket.setupCallback('new_chat', function(type, msg, timestamp) {
+            self.onChatMessage(type, msg, timestamp) } );
+        this.gameSocket.setupCallback('new_page', function(type, msg, timestamp) {
+            self.onChatMessage(type, msg, timestamp) } );
     },
     
-    scrollSceneWindow: function() {
+    scrollWindow: function() {
       // Unless scrolling paused or edit active.
-      let poseEditActive =  this.get('currentScene.poses').some(p => p.editActive);
+      let poseEditActive =  this.currentScene && this.get('currentScene.poses').some(p => p.editActive);
       if (this.scrollPaused || poseEditActive) {
         return;
       }
       
-        try {
+      try {
+        let chatWindow = $('#chat-window')[0];
+        if (chatWindow) {
+            $('#chat-window').stop().animate({
+                scrollTop: chatWindow.scrollHeight
+            }, 400);    
+        }  
+        
+        let sceneWindow = $('#chat-window')[0];
+        if (sceneWindow) {
           $('#live-scene-log').stop().animate({
               scrollTop: $('#live-scene-log')[0].scrollHeight
-          }, 400); 
+          }, 400);           
         }
-        catch(error) {
-          // This happens sometimes when transitioning away from screen.
-        }   
-  
+      }
+      catch(error) {
+        // This happens sometimes when transitioning away from screen.
+      }   
+    },
+    
+    channelsByActivity: computed('model.chat.@each.last_activity', function() {
+       return this.get('model.chat').sort(function(a,b){
+        return new Date(b.last_activity) - new Date(a.last_activity);
+       });
+    }),
+    
+    anyNewActivity: computed('model.chat.@each.{is_unread,new_messages}', function() {
+      return this.get('model.chat').any(c => c.is_unread || c.new_messages > 0);
+    }),
+    
+    addPageChannel: function(key, title) {
+      let channel = { title: title, 
+        key: key, 
+        enabled: true, 
+        can_join: true, 
+        can_talk: true,
+        is_page: true, 
+        muted: false,
+        messages: [],
+        who: []
+      };
+      this.get('model.chat').pushObject(channel);
+      return channel;
+    },
+    
+    getChannel: function(channelKey) {
+      return this.get('model.chat').find(c => c.key === channelKey);
     },
     
     markSceneRead: function(sceneId) {
-      this.gameApi.requestOne('markSceneRead', { id: sceneId });
+     // this.gameApi.requestOne('markSceneRead', { id: sceneId }, null);
     },
     
-    actions: {
-        
-        
-        scrollScene() {
-          this.scrollSceneWindow();
-        },
+    markPageThreadRead: function(threadId) {
+      let api = this.gameApi;
+      api.requestOne('markPageThreadRead', { thread_id: threadId }, null)
+      .then( (response) => {
+          if (response.error) {
+              return;
+          }
+      }); 
+    },
+    
+    actions: {        
         
         refresh() {
             this.resetOnExit();
@@ -105,8 +210,12 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         setScroll(option) {
           this.set('scrollPaused', !option);
           if (option) {
-            this.scrollSceneWindow();
+            this.scrollWindow();
           }
+        },
+        
+        scrollDown() {
+          this.scrollWindow();
         },
         
         switchScene(id) {
@@ -114,18 +223,154 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
               if (s.id === id) {
                   s.set('is_unread', false);
                   this.set('currentScene', s);
+                  this.set('selectedChannel', null);
                   let self = this;
-                  setTimeout(() => self.scrollSceneWindow(), 150, self);
-                  
-                  let api = this.gameApi;
-                  api.requestOne('markSceneRead', { id: id }, null)
-                  .then( (response) => {
-                      if (response.error) {
-                          return;
-                      }
-                  }); 
+                  setTimeout(() => self.scrollWindow(), 150, self);
+                  this.markSceneRead(id);
               }
           });   
+        },
+        
+        changeChannel: function(channel) {
+            this.set('selectedChannel', channel);
+            this.set('currentScene', null);
+            set(channel, 'new_messages', null);
+            set(channel, 'is_unread', false);
+            if (this.get('selectedChannel.is_page'))  {
+              this.markPageThreadRead(channel.key);
+            } 
+            let self = this;
+            setTimeout(() => self.scrollWindow(), 150, self);
+            
+        },
+        
+        conversationListChanged(newList) {
+            this.set('newConversationList', newList);
+        },
+        
+        joinChannel: function(channelName) {
+            let api = this.gameApi;
+                        
+            api.requestOne('joinChannel', { channel: channelName }, null)
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.send('reloadModel');
+            });
+        },
+        
+        leaveChannel: function() {
+            let api = this.gameApi;
+            let channelKey = this.get('selectedChannel.key');
+                        
+            api.requestOne('leaveChannel', { channel: channelKey }, null)
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.send('reloadModel');
+            });
+        },
+        
+        muteChannel: function(mute) {
+            let api = this.gameApi;
+            let channelKey = this.get('selectedChannel.key');
+                        
+            api.requestOne('muteChannel', { channel: channelKey, mute: mute }, null)
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.send('reloadModel');
+            });
+        },
+        
+        newConversation: function() {
+          this.set('selectedChannel', null);
+          this.set('newConversation', true);
+        },
+        
+        reportChat: function() {
+          let api = this.gameApi;
+          let channelKey = this.get('selectedChannel.key');
+          let reason = this.reportReason;
+          let message = this.selectedReportMessage;
+          this.set('reportReason', '');
+          this.set('showReport', false);
+          this.set('selectedReportMessage', null);
+          
+          
+          if (reason.length == 0) {
+            this.flashMessages.danger('You must enter a reason for the report.');
+            return;
+          }
+          
+          let command = this.get('selectedChannel.is_page') ? 'reportPage' : 'reportChat';
+          
+          api.requestOne(command, { key: channelKey, start_message: message, reason: reason }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              this.flashMessages.success('The messages have been reported to the game admin.');
+          });
+          
+        },
+        
+        send: function() {
+            let api = this.gameApi;
+            let channelKey = this.get('selectedChannel.key');
+            let message = this.chatMessage;
+            this.set(`chatMessage`, '');
+                      
+            if (this.get('selectedChannel.is_page'))  {
+              api.requestOne('sendPage', { thread_id: channelKey, message: message }, null)
+              .then( (response) => {
+                  if (response.error) {
+                      return;
+                  }
+              }); 
+            } else {
+              api.requestOne('chatTalk', { channel: channelKey, message: message }, null)
+              .then( (response) => {
+                  if (response.error) {
+                      return;
+                  }
+              });
+            }
+        },
+        
+        selectPageGroup: function(group) {
+          this.set('selectedPageGroup', group);
+          this.scrollPageWindow();
+        },
+        
+        startConversation: function() {
+          let api = this.gameApi;
+          let message = this.chatMessage;
+          let names = (this.newConversationList || []).map(p => p.name);
+          this.set(`chatMessage`, '');
+          this.set('newConversation', false);
+          this.set('newConversationList', []);
+
+          api.requestOne('sendPage', { names: names, message: message }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              let channel = this.getChannel(response.thread);              
+              this.send('changeChannel', channel);
+          });
+        },
+
+        pauseScroll() {
+          this.set('scrollPaused', true);
+        },
+        
+        unpauseScroll() {
+          this.set('scrollPaused', false);
+          this.scrollWindow();
         }
     }
 });

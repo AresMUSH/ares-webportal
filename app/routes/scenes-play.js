@@ -22,6 +22,8 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
 
     deactivate: function() {
         this.gameSocket.removeCallback('new_scene_activity');
+        this.gameSocket.removeCallback('new_chat');
+        this.gameSocket.removeCallback('new_page');
         this.controllerFor('application').set('hideSidebar', false);
     },
 
@@ -30,7 +32,9 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
         return RSVP.hash({
              scenes: api.requestMany('myScenes'),
              abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }),
-             locations: api.request('sceneLocations', { id: params['id'] })
+             locations: api.request('sceneLocations', { id: params['id'] }),
+             chat: api.requestMany('chat'),
+             characters: api.requestMany('characters', { select: 'all' })
            })
            .then((model) => EmberObject.create(model));
     },

@@ -1,3 +1,5 @@
+<a data-toggle="collapse" href="#scene-context"><i class="fas fa-info-circle"></i> Scene Details</a>
+
 <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
  &nbsp; 
   {{#if scrollPaused}}
@@ -25,6 +27,9 @@
        <span class="label label-warning">You are not watching this scene and will not be notified of new scene activity.</span>
 
     {{/if}}
+    
+    <LiveSceneContext @scene={{scene}} />
+    
     
     <div class="ansi scene-log" id="live-scene-log">
     
