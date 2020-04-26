@@ -112,6 +112,7 @@
    
 {{/if}}
 
+    <FlashMessages />
 
 
 <BsModalSimple @title="Report Offensive Chat" @closeTitle="Cancel" @submitTitle="Report" @size={{null}} @fade={{false}} @open={{showReport}} @onSubmit={{action "reportChat"}} @onHide={{action (mut showReport) null}}>
@@ -121,7 +122,7 @@
     
     <div class="chat-report">
     <table>
-    {{#each selectedChannel.messages as |message|}}
+    {{#each channel.messages as |message|}}
     <tr>
       <td><Input @type="radio" @id="{{message.id}}" @name="reportMessage" onclick={{action (mut selectedReportMessage) message.id}} /></td>
       <td><AnsiFormat @text={{message.message}} /></td>

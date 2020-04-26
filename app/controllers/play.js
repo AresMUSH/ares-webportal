@@ -106,15 +106,13 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     },
 
     resetOnExit: function() {
-        this.set('scrollPaused', false);
-        this.set('selectedChannel', null);
-        this.set('chatMessage', '');
-        this.set('scrollPaused', false);
-        this.set('newConversation', false);
-        this.set('reportReason', '');
-        this.set('showReport', false);
-        this.set('newConversationList', []);
-        this.set('selectedReportMessage', null);
+      this.set('currentScene', null);
+      this.set('selectedChannel', null);
+
+      this.set('newConversation', false);
+      this.set('newConversationList', false);
+      this.set('showAddChannel', null);
+      this.set('scrollPaused', false);
     },
     
     setupCallback: function() {
