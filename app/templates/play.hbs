@@ -4,9 +4,11 @@
 
    
        <p>
-         Here you can chat and participate in scenes you have joined or watched. If you prefer a more old-school MU client experience, you can also try the <LinkTo @route="client">web client</LinkTo>.
+         Here you can chat and participate in scenes you have joined or watched.
        </p>
-       
+       <p>
+         <b>Quick Links:</b> <LinkTo @route="client" target="_blank">Web Client</LinkTo> | <LinkTo @route="scenes-live" target="_blank">Active Scenes</LinkTo> | <LinkTo @route="scene-create" target="_blank">Create a Scene</LinkTo>
+       </p>
 
  <div class="row">
    <div class="col col-xs-12 col-md-3">
@@ -46,47 +48,39 @@
        
        
        <p class="play-section-title">Private Messages  
-       <a href="#" {{action (mut newConversation) true}}><i class="fa fa-plus-circle" aria-label="New Conversation"></i></a>
+       <a href="#" {{action (mut showNewConversation) true}}><i class="fa fa-plus-circle" aria-label="New Conversation"></i></a>
        </p>  
         
-        {{#each model.chat as |channel|}}
-         {{#if channel.is_page}}
-            {{#if channel.can_join}}
-              {{#if channel.enabled}}
-               <a href="#" {{action 'changeChannel' channel}}>
-                <div class="play-selector {{if (eq channel.key selectedChannel.key) 'play-selector-active' ''}}">                  
-                  # {{channel.title}}
-                  {{#if channel.muted}}
-                      <i class="fa fa-microphone-slash"></i>
-                  {{/if}}
-                  {{#if channel.is_unread}}
-                    <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
-                  {{/if}}
-                </div>
-              </a>
+        {{#each sortedPageThreads as |channel|}}
+           <a href="#" {{action 'changeChannel' channel}}>
+            <div class="play-selector {{if (eq channel.key selectedChannel.key) 'play-selector-active' ''}}">                  
+              # {{channel.title}}
+              {{#if channel.muted}}
+                  <i class="fa fa-microphone-slash"></i>
               {{/if}}
-            {{/if}}
-          {{/if}}
+              {{#if channel.is_unread}}
+                <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
+              {{/if}}
+            </div>
+          </a>
         {{/each}}        
        
        <p class="play-section-title">Channels
        <a href="#" {{action (mut showAddChannel) true}}><i class="fa fa-plus-circle" aria-label="Add Channel"></i></a>
        </p>  
               
-       {{#each model.chat as |channel|}}
-         {{#if (not channel.is_page)}}
-           {{#if channel.can_join}}
-             {{#if channel.enabled}}
-               <a href="#" {{action 'changeChannel' channel}}>
-                 <div class="play-selector {{if (eq channel.key selectedChannel.key) 'play-selector-active' ''}}">
-                      # {{channel.title}}
-                     {{#if channel.muted}}
-                         <i class="fa fa-microphone-slash"></i>
-                     {{/if}}                 
-                     <span class="label label-pill label-primary">{{channel.new_messages}}</span>
-                 </div>
-                 </a>
-             {{/if}}
+       {{#each sortedChannels as |channel|}}
+         {{#if channel.can_join}}
+           {{#if channel.enabled}}
+             <a href="#" {{action 'changeChannel' channel}}>
+               <div class="play-selector {{if (eq channel.key selectedChannel.key) 'play-selector-active' ''}}">
+                    # {{channel.title}}
+                   {{#if channel.muted}}
+                       <i class="fa fa-microphone-slash"></i>
+                   {{/if}}                 
+                   <span class="label label-pill label-primary">{{channel.new_messages}}</span>
+               </div>
+               </a>
            {{/if}}
          {{/if}}
        {{/each}}
@@ -127,7 +121,7 @@
 <BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAddChannel}}  @onHide={{action (mut showAddChannel) null}}>
   
   <table>
-    {{#each model.chat as |channel|}}
+    {{#each sortedChannels as |channel|}}
       {{#if channel.can_join}}
         {{#if (not channel.enabled)}}
         <tr>
@@ -151,7 +145,7 @@
   </table>
 </BsModalSimple>
   
-<BsModalSimple @title="Start Conversation" @closeTitle="Cancel" @submitTitle="Start" @size={{null}} @fade={{false}} @open={{newConversation}} @onSubmit={{action "startConversation"}}  @onHide={{action (mut newConversation) null}}>
+<BsModalSimple @title="Start Conversation" @closeTitle="Cancel" @submitTitle="Start" @size={{null}} @fade={{false}} @open={{showNewConversation}} @onSubmit={{action "startConversation"}}  @onHide={{action (mut showNewConversation) null}}>
 
 
          <div class="panel panel-default">

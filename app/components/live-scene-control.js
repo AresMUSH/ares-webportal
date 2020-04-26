@@ -137,7 +137,7 @@ export default Component.extend(AuthenticatedController, {
                 return;
             }
             this.flashMessages.success('The scene has been deleted.');
-            this.refresh(); 
+            this.set('scene.reload_required', true);
         });
       },
       saveScenePose(scenePose, notify) {

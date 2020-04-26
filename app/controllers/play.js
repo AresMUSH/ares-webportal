@@ -18,7 +18,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
   
     // Chat
     selectedChannel: null,
-    newConversation: false,
+    showNewConversation: false,
     newConversationList: null,
     showAddChannel: null,
     
@@ -32,6 +32,14 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
   
     anyNewActivity: computed('model.scenes.@each.is_unread', function() {
       return this.get('model.scenes').any(s => s.is_unread );
+    }),
+    
+    sortedChannels: computed('model.chat.@each.title', function() {
+      return this.get('model.chat').filter(c => !c.is_page).sort((a, b) => a.title.localeCompare(b.title));
+    }),
+
+    sortedPageThreads: computed('model.chat.@each.title', function() {
+      return this.get('model.chat').filter(c => c.is_page).sort((a, b) => a.title.localeCompare(b.title));
     }),
   
     onSceneActivity: function(type, msg, timestamp ) {
@@ -82,6 +90,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         let localTimestamp = localTime(timestamp); 
 
         if (!channel) {
+          return;
           channel = this.addPageChannel(channelKey, channelTitle);
         }
         channel.messages.pushObject({message: newMessage, timestamp: localTimestamp});
@@ -109,7 +118,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       this.set('currentScene', null);
       this.set('selectedChannel', null);
 
-      this.set('newConversation', false);
+      this.set('showNewConversation', false);
       this.set('newConversationList', false);
       this.set('showAddChannel', null);
       this.set('scrollPaused', false);
@@ -195,17 +204,34 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       }); 
     },
     
+    changeChannel: function(channel) {
+      this.set('selectedChannel', channel);
+      this.set('currentScene', null);
+      set(channel, 'new_messages', null);
+      set(channel, 'is_unread', false);
+      if (this.get('selectedChannel.is_page'))  {
+        this.markPageThreadRead(channel.key);
+      } 
+      let self = this;
+      setTimeout(() => self.scrollWindow(), 150, self);
+    },
+    
     actions: {        
             
       joinChannel: function(channelName) {
           let api = this.gameApi;
+          this.set('showAddChannel', false);
                     
           api.requestOne('joinChannel', { channel: channelName }, null)
           .then( (response) => {
               if (response.error) {
                   return;
               }
-              this.send('refresh');
+              let data = response.channel;
+              let channel = this.getChannel(data.key);
+              this.get('model.chat').removeObject(channel);
+              this.get('model.chat').pushObject(data);
+              this.changeChannel(data);
           });
       },
     
@@ -240,22 +266,12 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         },
         
         changeChannel: function(channel) {
-            this.set('selectedChannel', channel);
-            this.set('currentScene', null);
-            set(channel, 'new_messages', null);
-            set(channel, 'is_unread', false);
-            if (this.get('selectedChannel.is_page'))  {
-              this.markPageThreadRead(channel.key);
-            } 
-            let self = this;
-            setTimeout(() => self.scrollWindow(), 150, self);
-            
+          this.changeChannel(channel);
         },
         
         conversationListChanged(newList) {
             this.set('newConversationList', newList);
         },
-        
         
         startConversation: function() {
           let api = this.gameApi;
@@ -263,7 +279,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
           let names = (this.newConversationList || []).map(p => p.name);
           this.set(`chatMessage`, '');
           this.set('selectedChannel', null);
-          this.set('newConversation', false);
+          this.set('showNewConversation', false);
           this.set('newConversationList', []);
 
           api.requestOne('sendPage', { names: names, message: message }, null)
@@ -271,7 +287,12 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
               if (response.error) {
                   return;
               }
-              this.send('refresh');
+              let channel = this.getChannel(response.thread.key);
+              if (!channel) {
+                channel = response.thread;
+                this.get('model.chat').pushObject(channel);  
+              } 
+              this.changeChannel(channel);
           });
         },
 

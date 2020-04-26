@@ -17,7 +17,7 @@ export default Component.extend({
       alertList.push("Scrolling is paused!");
     }
     if (this.get('channel.muted')) {
-      alertList.push("This channel is muted.  You will not see new messages.");
+      alertList.push("This channel is muted.  You will not see new messages until you unmute.");
     }
     return alertList;
   }),
@@ -37,7 +37,7 @@ export default Component.extend({
             if (response.error) {
                 return;
             }
-            this.refresh();
+            this.set('channel.enabled', false);
         });
     },
     
@@ -51,10 +51,16 @@ export default Component.extend({
                 return;
             }
             if (mute) {
-              this.channel.set('muted', true);
+              this.set('channel.muted', true);
             }
             else {
-              this.refresh();
+              let self = this;
+              let existingIds = this.channel.messages.map(m => m.id);
+              let newMessages = response.channel.messages.filter(m => !existingIds.includes(m.id));
+              newMessages.forEach(m => this.channel.messages.pushObject(m));
+              this.set('channel.who', response.channel.who);
+              this.set('channel.muted', false);    
+              this.scrollDown();          
             }
         });
     },

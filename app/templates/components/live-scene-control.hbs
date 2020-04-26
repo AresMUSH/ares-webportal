@@ -176,6 +176,7 @@
             
          </div>
                 
+        {{#if (not scene.reload_required)}}
          <div class="col col-sm-6 col-xs-12 scene-dropdowns">
                 
              {{#if (not scene.completed)}}
@@ -224,11 +225,10 @@
                                  <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li> 
                                  <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
                                  <li><a href="#" {{action 'collapseScene'}}>Collapse Scene Poses</a></li> 
-                             {{/if}}
-   
-                             {{#if scene.can_delete}}
-                                 <li role="separator" class="divider"></li>
-                                 <li><a href="#" {{action (mut confirmDeleteScene) true}}>Delete Scene</a></li> 
+                                 {{#if scene.can_delete}}
+                                     <li role="separator" class="divider"></li>
+                                     <li><a href="#" {{action (mut confirmDeleteScene) true}}>Delete Scene</a></li> 
+                                 {{/if}}
                              {{/if}}
                          {{/if}}
                      </ul>
@@ -248,7 +248,7 @@
              </ul>
              
          </div>
-
+         {{/if}}
      </div>        
      
     {{/if}}          
