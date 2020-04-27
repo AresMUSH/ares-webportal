@@ -96,6 +96,7 @@ Router.map(function() {
   this.route('scenes');
   this.route('scenes-live');
   this.route('scenes-play');
+  this.route('scenes-unshared');
   this.route('scene', { path: '/scene/:id' } );
   this.route('scene-live', { path: '/scene-live/:id' });
   this.route('scene-edit', { path: '/scene/:id/edit' } );
