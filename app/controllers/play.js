@@ -30,10 +30,6 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       this.set('newConversationList', []);
     },
   
-    anyNewActivity: computed('model.scenes.@each.is_unread', function() {
-      return this.get('model.scenes').any(s => s.is_unread );
-    }),
-    
     sortedChannels: computed('model.chat.@each.title', function() {
       return this.get('model.chat').filter(c => !c.is_page).sort((a, b) => a.title.localeCompare(b.title));
     }),
@@ -90,7 +86,6 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         let localTimestamp = localTime(timestamp); 
 
         if (!channel) {
-          return;
           channel = this.addPageChannel(channelKey, channelTitle);
         }
         channel.messages.pushObject({message: newMessage, timestamp: localTimestamp});
@@ -167,9 +162,10 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
        });
     }),
     
-    anyNewActivity: computed('model.chat.@each.{is_unread,new_messages}', function() {
-      return this.get('model.chat').any(c => c.is_unread || c.new_messages > 0);
+    anyNewActivity: computed('model.chat.@each.{is_unread,new_messages}', 'model.scenes.@each.is_unread', function() {
+      return this.get('model.chat').any(c => c.is_unread || c.new_messages > 0) || this.get('model.scenes').any(s => s.is_unread );
     }),
+        
     
     addPageChannel: function(key, title) {
       let channel = { title: title, 

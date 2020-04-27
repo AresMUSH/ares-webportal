@@ -1,6 +1,4 @@
-import $ from "jquery"
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 

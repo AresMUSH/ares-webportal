@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { set, computed } from '@ember/object';
+import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
@@ -54,7 +54,6 @@ export default Component.extend({
               this.set('channel.muted', true);
             }
             else {
-              let self = this;
               let existingIds = this.channel.messages.map(m => m.id);
               let newMessages = response.channel.messages.filter(m => !existingIds.includes(m.id));
               newMessages.forEach(m => this.channel.messages.pushObject(m));

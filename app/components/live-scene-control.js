@@ -55,7 +55,7 @@ export default Component.extend(AuthenticatedController, {
       return this.get('scene.extras_installed').some(e => e == 'cookies');
     }),
     
-    sceneAlerts: computed('scene.is_watching', 'scrollPaused', 'scene.reload_required', function() {
+    sceneAlerts: computed('scene.{is_watching,reload_required}', 'scrollPaused', function() {
       let alertList = [];
       if (this.scrollPaused) {
         alertList.push("Scrolling is paused!");

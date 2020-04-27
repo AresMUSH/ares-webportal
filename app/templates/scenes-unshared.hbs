@@ -14,8 +14,7 @@
   <th class="col-xs-3">Title / Status</th>
   <th class="col-xs-5">Participants / Location / Summary</th>
   <th class="col-xs-2">Last Activity</th>
-  <th class="col-xs-1"></th>
-  <th class="col-xs-1"></th>
+  <th class="col-xs-2"></th>
 </tr>
 
 {{#each model.unshared as |scene| }}
@@ -63,26 +62,29 @@
       
     </td>
     <td>
-      {{#if (not scene.summary)}}
-      <div class="label label-danger">Missing Summary</div>
+      {{#if (not scene.can_share)}}
+
+        {{#if (not scene.summary)}}
+        <div class="label label-danger">Missing Summary</div>
+        {{/if}}
+
+        {{#if (not scene.location)}}
+         <div class="label label-danger">Missing Location</div>
+        {{/if}}
+
+        {{#if (not scene.title)}}
+        <div class="label label-danger">Missing Title</div>
+        {{/if}}
+        <br><br>
       {{/if}}
 
-      {{#if (not scene.location)}}
-       <div class="label label-danger">Missing Location</div>
-      {{/if}}
-
-      {{#if (not scene.title)}}
-      <div class="label label-danger">Missing Title</div>
-      {{/if}}
       
-    </td>
-    <td>
-      
+        <p><LinkTo @route="scene-live" @model={{scene.id}}><i class="fa fa-eye" aria-label="View Scene"></i> View </LinkTo></p>
       {{#if scene.can_edit}}
-         <LinkTo @route="scene-edit" @model={{scene.id}} class="btn btn-default">Edit</LinkTo>
-          <a href="#" {{action 'changeSceneStatus' scene.id 'restart'}} class="btn btn-default">Restart</a>
+         <p> <LinkTo @route="scene-edit" @model={{scene.id}}><i class="fa fa-edit" aria-label="Edit Scene"></i> Edit</LinkTo> </p>
+         <p><a href="#" {{action 'changeSceneStatus' scene.id 'restart'}}><i class="fa fa-play" aria-label="Restart Scene"></i> Restart</a></p>
           {{#if scene.can_share}}
-            <a href="#" {{action 'changeSceneStatus' scene.id 'share'}} class="btn btn-default">Share</a>
+          <p><a href="#" {{action 'changeSceneStatus' scene.id 'share'}}><i class="fa fa-share" aria-label="Share Scene"></i> Share</a></p>
           {{/if}}
       {{/if}}
     </td>
