@@ -57,7 +57,7 @@
     "eslint-plugin-ember": "^7.1.0",
     "eslint-plugin-node": "^10.0.0",
     "glob": "^4.0.5",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "loader.js": "^4.7.0"
   },
   "engines": {
