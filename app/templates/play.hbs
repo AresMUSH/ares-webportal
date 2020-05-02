@@ -114,6 +114,10 @@
          <ChatControl @channel={{selectedChannel}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
        
        {{/if}}
+       
+       {{#if emptyPrompt}}
+       <div class="alert alert-info">Please join a channel or scene.</div>
+       {{/if}}
 
     </div>
 </div>

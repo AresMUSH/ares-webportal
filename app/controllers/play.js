@@ -38,6 +38,10 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       return this.get('model.chat').filter(c => c.is_page).sort((a, b) => a.title.localeCompare(b.title));
     }),
   
+    emptyPrompt: computed('selectedChannel', 'currentScene', function() {
+      return !this.selectedChannel && !this.currentScene;
+    }),
+    
     onSceneActivity: function(type, msg, timestamp ) {
       let splitMsg = msg.split('|');
       let sceneId = splitMsg[0];

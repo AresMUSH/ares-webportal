@@ -44,11 +44,11 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
       if (model.scenes.length > 0) {
         controller.set('currentScene', model.scenes[0]);
         controller.set('currentScene.is_unread', false);        
-      }
-      else {
-        this.controllerFor('application').set('hideSidebar', false);
-        this.flashMessages.danger('You must watch or join a scene first.');
-        this.transitionTo('scenes-live');
+      } else {
+        let chan = controller.sortedChannels.find(c => c.enabled);
+        if (chan) {
+          controller.set('selectedChannel', chan);
+        }
       }
     }
 });

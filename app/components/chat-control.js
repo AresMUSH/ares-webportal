@@ -22,7 +22,7 @@ export default Component.extend({
     return alertList;
   }),
   
-  canTalk: computed('channel.muted', 'channel.can_talk', function() {
+  canTalk: computed('channel.{muted,can_talk}', function() {
     return this.channel.can_talk && !this.channel.muted;
   }),
   
