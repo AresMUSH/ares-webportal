@@ -84,17 +84,18 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     },
     
     onChatMessage: function(type, msg, timestamp) {
-        let splitMsg = msg.split('|');
-        let channelKey = splitMsg[0];
-        let channelTitle = splitMsg[1];
-        let newMessage = splitMsg[2];
-        let channel = this.getChannel(channelKey);
-        let localTimestamp = localTime(timestamp); 
-
+      let msgData = JSON.parse(msg);
+      let channelKey = msgData.key;
+      let channelTitle = msgData.title;
+      let newMessage = msgData.message;
+      let author = msgData.author;
+      let localTimestamp = localTime(timestamp);
+      
+      let channel = this.getChannel(channelKey);
         if (!channel) {
           channel = this.addPageChannel(channelKey, channelTitle);
         }
-        channel.messages.pushObject({message: newMessage, timestamp: localTimestamp});
+        channel.messages.pushObject({message: newMessage, timestamp: localTimestamp, author: author});
         set(channel, 'last_activity', Date.now());
         set(channel, 'is_recent', true);
         if (channelKey === this.get('selectedChannel.key')) {
