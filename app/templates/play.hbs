@@ -38,7 +38,7 @@
                {{/if}}
            </div>
          </a>
-         <div class="play-participants">
+         <div class="play-hint">
            {{#each scene.participants as |participant|}}
              {{participant.name}}
            {{/each}}
@@ -49,29 +49,40 @@
        
        <p class="play-section-title">Private Messages  
        <a href="#" {{action (mut showNewConversation) true}}><i class="fa fa-plus-circle" aria-label="New Conversation"></i></a>
+        {{#if showAllPms}}
+        <a href="#" {{action (mut showAllPms) false}}><i class="fas fa-caret-square-up" aria-label="Collapse"></i></a>
+        {{else}}
+        <a href="#" {{action (mut showAllPms) true}}><i class="fas fa-caret-square-down" aria-label="Expand"></i></a>
+        {{/if}}
        </p>  
         
         {{#each sortedPageThreads as |channel|}}
+          {{#if (or channel.is_recent showAllPms)}}
            <a href="#" {{action 'changeChannel' channel}}>
             <div class="play-selector {{if (eq channel.key selectedChannel.key) 'play-selector-active' ''}}">                  
               # {{channel.title}}
               {{#if channel.muted}}
                   <i class="fa fa-microphone-slash"></i>
               {{/if}}
-              {{#if channel.is_unread}}
-                <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
-              {{/if}}
+              <span class="label label-pill label-primary">{{channel.new_messages}}</span>
             </div>
           </a>
+          {{/if}}
         {{/each}}        
-       
+        
        <p class="play-section-title">Channels
        <a href="#" {{action (mut showAddChannel) true}}><i class="fa fa-plus-circle" aria-label="Add Channel"></i></a>
+        {{#if showAllChannels}}
+        <a href="#" {{action (mut showAllChannels) false}}><i class="fas fa-caret-square-up" aria-label="Collapse"></i></a>
+        {{else}}
+        <a href="#" {{action (mut showAllChannels) true}}><i class="fas fa-caret-square-down" aria-label="Expand"></i></a>
+        {{/if}}
        </p>  
               
        {{#each sortedChannels as |channel|}}
          {{#if channel.can_join}}
            {{#if channel.enabled}}
+            {{#if (or channel.is_recent showAllChannels)}}
              <a href="#" {{action 'changeChannel' channel}}>
                <div class="play-selector {{if (eq channel.key selectedChannel.key) 'play-selector-active' ''}}">
                     # {{channel.title}}
@@ -81,6 +92,7 @@
                    <span class="label label-pill label-primary">{{channel.new_messages}}</span>
                </div>
                </a>
+             {{/if}}
            {{/if}}
          {{/if}}
        {{/each}}
