@@ -55,6 +55,20 @@ export default Component.extend(AuthenticatedController, {
       return this.get('scene.extras_installed').some(e => e == 'cookies');
     }),
     
+    sceneAlerts: computed('scene.{is_watching,reload_required}', 'scrollPaused', function() {
+      let alertList = [];
+      if (this.scrollPaused) {
+        alertList.push("Scrolling is paused!");
+      }
+      if (!this.get('scene.is_watching')) {
+        alertList.push("You are not watching this scene.  You will not see new activity.");
+      }
+      if (this.get('scene.reload_required')) {
+        alertList.push("This scene has changed status since you opened it.  Please reload the page.");
+      }
+      return alertList;
+    }),
+    
     actions: { 
       locationSelected(loc) {
           this.set('newLocation', loc);  
@@ -123,7 +137,7 @@ export default Component.extend(AuthenticatedController, {
                 return;
             }
             this.flashMessages.success('The scene has been deleted.');
-            this.refresh(); 
+            this.set('scene.reload_required', true);
         });
       },
       saveScenePose(scenePose, notify) {
@@ -162,7 +176,7 @@ export default Component.extend(AuthenticatedController, {
               if (response.error) {
                   return;
               }
-              this.scrollScene();
+              this.scrollDown();
           });
       },
       
@@ -212,7 +226,7 @@ export default Component.extend(AuthenticatedController, {
       },
       
       scrollDown() {
-        this.scrollScene();
+        this.scrollDown();
       },
       
       pauseScroll() {

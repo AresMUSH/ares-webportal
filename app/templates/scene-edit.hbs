@@ -20,7 +20,7 @@
             <label for="title" class="col-form-label">Limited Participation Notice:</label>
         </div>
         <div class="col-sm-9">
-            <Input @type="text" @size={{100}} @id="limit" @enter={{action "save"}} @value={{model.scene.limit}} />
+            <Input @type="text" @size={{60}} @id="limit" @enter={{action "save"}} @value={{model.scene.limit}} />
             <p class="hint">Use this for open scenes where participation is limited (by quantity, character type, etc.)</p>
         </div>
       </div>
@@ -124,7 +124,7 @@
           <label for="title" class="col-form-label">Content Warning:</label>
       </div>
       <div class="col-sm-9">
-          <Input @type="text" @size={{50}} @id="content_warning" @enter={{action "save"}} @value={{model.scene.content_warning}} />
+          <Input @type="text" @size={{60}} @id="content_warning" @enter={{action "save"}} @value={{model.scene.content_warning}} />
       </div>
     </div>
 

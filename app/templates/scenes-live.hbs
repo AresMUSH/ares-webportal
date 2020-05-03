@@ -10,7 +10,7 @@
     
     <div class="col pull-right">
         <LinkTo @route="scene-create" class="btn btn-default">Create Scene</LinkTo>
-        <LinkTo @route="scenes-play" class="btn btn-primary">Play</LinkTo>
+        <LinkTo @route="play" class="btn btn-primary">Play</LinkTo>
     </div>
     
 </div>
@@ -106,19 +106,13 @@
 
 </table>
 
+</div>
+
 
 {{#if model.unshared}}
 <br>
 <hr>
-
-<h4>Unshared Scenes</h4>
-<p>You have the following stopped, unshared scenes. Unshared scenes may be deleted after {{model.unshared_deletion_days}} days, so you should download or share them before that happens.</p>
-<ul>
-{{#each model.unshared as |scene|}}
-<li><LinkTo @route="scene-live" @model={{scene.id}}>{{scene.title}}</LinkTo> - {{scene.people}}</li>
-{{/each}}
-</ul>
+<div class="alert alert-info">You have unshared scenes.  <LinkTo @route="scenes-unshared">View them</LinkTo> to share or download them before they time out.</div>
 {{/if}}
-</div>
   
 {{outlet}}
