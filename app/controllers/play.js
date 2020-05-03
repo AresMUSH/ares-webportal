@@ -21,7 +21,9 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     showNewConversation: false,
     newConversationList: null,
     showAddChannel: null,
-    
+    showAllChannels: false,
+    showAllPms: false,
+      
     // Both
     scrollPaused: false,
 
