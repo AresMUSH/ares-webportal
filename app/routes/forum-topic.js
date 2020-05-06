@@ -24,5 +24,10 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
     model: function(params) {
         let api = this.gameApi;
         return api.requestOne('forumTopic', { topic_id: params['topic_id'] });
+    },
+    
+    setupController: function(controller, model) {
+      this._super(controller, model);
+      controller.setup();
     }
 });

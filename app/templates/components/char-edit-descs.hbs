@@ -1,0 +1,42 @@
+<div id="descs" class="tab-pane fade in">
+   
+   <ul class="nav nav-tabs" role="tablist">
+       <li class="active"><a data-toggle="tab" href="#desccurrent">Main Description</a></li>
+       <li><a data-toggle="tab" href="#descoutfits">Outfits</a></li>
+       <li><a data-toggle="tab" href="#descdetails">Details</a></li>
+   </ul>
+   
+  <div class="tab-content">     
+   <div id="desccurrent" class="tab-pane fade in active">
+     <MarkdownEditor @text={{model.char.descs.current}} />
+   </div>
+
+   <div id="descoutfits" class="tab-pane fade in">
+     
+     {{#each model.char.descs.outfits as |outfit|}}
+     <p>
+     <Input @type="text" @size={{25}} @value={{outfit.name}} placeholder="Enter outfit name." />
+     <button class="btn btn-default" {{action 'removeOutfit' outfit.key}}><i class="fa fa-trash" aria-label="Remove Outfit"></i></button>
+     </p>
+     <MarkdownEditor @text={{outfit.desc}} />
+      <hr>
+     {{/each}}
+   
+     <button class="btn btn-default" {{action 'addOutfit'}}>Add Outfit <i class="fa fa-plus" aria-label="Add Outfit"></i></button>
+   
+   </div>
+
+   <div id="descdetails" class="tab-pane fade in">
+     {{#each model.char.descs.details as |detail|}}
+     <p>
+     <Input @type="text" @size={{25}} @value={{detail.name}} placeholder="Enter detail name." />
+     <button class="btn btn-default" {{action 'removeDetail' detail.key}}><i class="fa fa-trash" aria-label="Remove Detail"></i></button>
+     </p>
+     <MarkdownEditor @text={{detail.desc}} />
+      <hr>
+     {{/each}}
+   
+     <button class="btn btn-default" {{action 'addDetail'}}>Add Detail <i class="fa fa-plus" aria-label="Add Detail"></i></button>
+    </div>
+  </div>
+</div>

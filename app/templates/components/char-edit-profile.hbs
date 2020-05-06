@@ -1,0 +1,13 @@
+<div id="profile" class="tab-pane fade in">
+   
+   {{#each model.char.profile as |profile|}}
+   <p>
+   <Input @type="text" @size={{25}} @value={{profile.name}} placeholder="Enter section name." />
+   <button class="btn btn-default" {{action 'removeProfile' profile.key}}><i class="fa fa-trash" aria-label="Remove Section"></i></button>
+   </p>
+   <MarkdownEditor @text={{profile.text}} />
+    <hr>
+   {{/each}}
+   
+   <button class="btn btn-default" {{action 'addProfile'}}>Add Profile Section <i class="fa fa-plus" aria-label="Add Section"></i></button>
+</div>
