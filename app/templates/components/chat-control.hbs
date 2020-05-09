@@ -1,0 +1,148 @@
+{{#if channel.enabled}}
+
+<p>
+  <a data-toggle="collapse" href="#channel-info"><i class="fas fa-info-circle"></i> Channel Info</a>
+
+<a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
+ &nbsp; 
+  {{#if scrollPaused}}
+          <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
+          </i> Resume Scrolling</a>
+  {{else}}
+          <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause"></i> Pause Scrolling</a>
+  {{/if}}
+</p>  
+  
+<div id="channel-info" class="panel-collapse collapse">
+  
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+      <div class="icon-row">
+        {{#if channel.desc}}
+        <p>{{channel.desc}}</p>
+        {{/if}}
+        
+        <p><b>Who's On</b></p>
+        
+      {{#each channel.who as |who|}}
+        <CharIconInline @char={{who}} />
+        {{#if who.muted}}<i class="fa fa-microphone-slash"></i>{{/if}}
+
+      {{/each}}
+      </div>
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+
+
+ {{#if chatAlerts}}
+ <div class="alert alert-warning">
+   {{#each chatAlerts as |alert|}}
+   <p>{{alert}}</p>
+   {{/each}}
+ </div>
+ {{/if}}
+
+
+ <div id="chat-window">
+ {{#each channel.messages as |message|}}
+   <div class="hint pull-right">
+         <div class="timestamp-tip">{{message.timestamp}}</div>
+   </div>
+ 
+    <div class="scene-pose-header">		
+      <LinkTo @route="char" @model="{{message.author.name}}" target="_blank">
+          {{#if message.author.icon}}
+          <img alt="{{message.author.name}}'s icon" class="small-profile-icon <IconClass />" src="/game/uploads/{{message.author.icon}}" >
+          {{else}}
+          <img alt="{{message.author.name}}'s icon" class="small-profile-icon <IconClass />" src="/game/uploads/theme_images/noicon.png" >
+          {{/if}}
+          
+          {{message.author.name}} 
+      </LinkTo>
+      </div>
+      
+     <AnsiFormat @text={{message.message}} />
+ {{/each}}
+ </div>
+
+ {{#if chatAlerts}}
+ <div class="alert alert-warning">
+   {{#each chatAlerts as |alert|}}
+   <p>{{alert}}</p>
+   {{/each}}
+ </div>
+ {{/if}}
+
+ {{#if canTalk}}
+     <div class="pull-right markdown-controls">
+         <LinkTo @route='help-topic' @model='markdown' @target="_blank">
+           <TooltipIcon @position="left" @message="Formatting help." @icon="fa fa-question-circle" />
+         </LinkTo>
+
+         <LinkTo @route='emoji' @target="_blank">
+           <TooltipIcon @position="left" @message="Emoji help." @icon="fa fa-smile" />
+         </LinkTo>
+     </div>
+
+   <CmdBox @value={{chatMessage}} @class="chat-box" @cols="80" @rows="6" @onEnter={{action "send"}} />
+ {{/if}}
+
+
+   <ul class="nav navbar-nav">    
+       <li class="dropdown">
+         <a href="#" class="dropdown-toggle chat-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+         <span class="btn btn-default" href="#">Chat Menu <span class="caret"></span></span> </a>
+         <ul class="dropdown-menu">
+         {{#if (not channel.is_page)}}
+           <li><a href="#" {{action "leaveChannel"}}>Leave Channel</a></li>
+           {{#if channel.muted}}
+           <li><a href="#" {{action "muteChannel" false}}>Unmute Channel</a></li>
+           {{else}}
+           <li><a href="#" {{action "muteChannel" true}}>Mute Channel</a></li>
+           {{/if}}
+         {{/if}}
+         <li><a href="#" {{action (mut showReport) true}}>Report Abuse</a></li>
+       </ul>
+       </li>
+   </ul>
+
+
+   {{#if canTalk}}
+     <div class="pull-right">
+       <button class="btn-primary btn" {{action "send"}}>Send Message</button>
+     </div>
+   {{/if}}
+
+<div class="clearfix"></div>
+
+{{else}}
+
+<div class="alert alert-warning">You are not on this channel.</div>
+   
+{{/if}}
+
+    <FlashMessages />
+
+
+<BsModalSimple @title="Report Offensive Chat" @closeTitle="Cancel" @submitTitle="Report" @size={{null}} @fade={{false}} @open={{showReport}} @onSubmit={{action "reportChat"}} @onHide={{action (mut showReport) null}}>
+    
+    <p>Enter a reason in the text box and select a message.  All messages after that one will be included in the report.</p>
+    <p><Input @type="text" @size={{50}} @value={{reportReason}} /></p>
+    
+    <div class="chat-report">
+    <table>
+    {{#each channel.messages as |message|}}
+    <tr>
+      <td><Input @type="radio" @id="{{message.id}}" @name="reportMessage" onclick={{action (mut selectedReportMessage) message.id}} /></td>
+      <td><AnsiFormat @text={{message.message}} /></td>
+    </tr>
+    {{/each}}
+    </table>
+    </div>
+    
+</BsModalSimple>

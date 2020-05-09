@@ -9,8 +9,6 @@
          - {{model.scene.title}}
          {{/if}}
      </h1>
-
-    <LiveSceneContext @scene={{model.scene}} />
     
 </div>
 </div>
@@ -18,7 +16,7 @@
 <div class="row">
     <div class="col col-xs-12">
      
-      <LiveSceneControl @scene={{model.scene}} @locations={{model.locations}} @abilities={{model.abilities}} @places={{model.scene.places}} @playerName={{currentUser.name}} @scrollPaused={{scrollPaused}} @refresh={{action "refresh"}} @scrollScene={{action "scrollScene"}} @setScroll={{action "setScroll"}} />
+      <LiveSceneControl @scene={{model.scene}} @locations={{model.locations}} @abilities={{model.abilities}} @places={{model.scene.places}} @playerName={{currentUser.name}} @scrollPaused={{scrollPaused}} @refresh={{action "refresh"}} @scrollDown={{action "scrollScene"}} @setScroll={{action "setScroll"}} />
    </div>
 </div>
 {{outlet}}

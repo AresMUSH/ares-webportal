@@ -32,11 +32,7 @@
                         <li><LinkTo @route="account">Account</LinkTo></li>
 
                         {{#if model.alts}}
-                        {{#each model.alts as |alt|}}
-                          {{#if (not (eq alt.name currentUser.name)) }}
-                            <li><a href="#" {{action 'switchAlt' alt.name}}>Switch to {{alt.name}}</a></li>
-                          {{/if}}
-                        {{/each}}
+                            <li><a href="#" {{action (mut showAltSelection) true}}>Switch Alt</a></li>
                         {{/if}} 
 
                         <li><LinkTo @route="logout">Logout</LinkTo></li>
@@ -103,3 +99,21 @@
    
    
 </nav>
+
+
+  
+<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAltSelection}}  @onHide={{action (mut showAltSelection) null}} @onSubmit={{action (mut showAltSelection) null}}>
+
+  <table class="alts-switcher">
+  
+    {{#each model.alts as |alt|}}
+      {{#if (not (eq alt.name currentUser.name)) }}
+        <tr><td>
+        <CharIconInline @char={{alt}} @hideLink="true" /> {{alt.name}}
+        </td>
+        <td><a href="#" {{action 'switchAlt' alt.name}} class="btn btn-default">Switch</a></td>
+        </tr>
+      {{/if}}
+    {{/each}}
+  </table>
+</BsModalSimple>

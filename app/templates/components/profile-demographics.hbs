@@ -17,10 +17,10 @@
         
         {{#each char.demographics as |demo|}}
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                     <b>{{demo.name}}</b> 
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-8">
                     {{demo.value}}
             </div>
         </div>
@@ -33,10 +33,10 @@
         
         {{#each char.groups as |group|}}
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                     <b>{{group.name}}</b> 
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-8">
                     {{group.value}}
             </div>
         </div>
@@ -46,10 +46,10 @@
         {{#if char.handle}}
         
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                     <b>Player</b> 
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-8">
                     <a href="http://arescentral.aresmush.com/handle/{{char.handle}}">{{char.handle}}</a>
             </div>
         </div>
@@ -57,10 +57,10 @@
         {{/if}}
         
         <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                     <b>Last Online</b> 
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-8">
                     {{char.last_online}}
             </div>
         </div>

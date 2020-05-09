@@ -3,6 +3,15 @@
     <AnsiFormat @text={{model.help}} />
 </div>
 
+{{#if model.related_topics}}
+<h2>Other Topics in "{{model.section_title}}"</h2>
+<ul class="reference-help-list">
+{{#each model.related_topics as |related|}}
+<li><LinkTo @route='help-topic' @model={{related.key}}>{{related.title}}</LinkTo></li>
+{{/each}}
+</ul>
+{{/if}}
+
 <hr>
 <p><LinkTo @route="help"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Help</LinkTo></p>
 

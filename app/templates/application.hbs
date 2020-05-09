@@ -16,16 +16,10 @@
                    {{#if isAuthenticated}}
                        <p>Welcome, {{currentUser.name}}. 
                         {{#if model.alts}}
-                         <a href="#" {{action 'toggleAltSelection'}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a> 
+                         <a href="#" {{action (mut showAltSelection) true}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a> 
                          {{/if}}
                        </p>
-                       {{#if showAltSelection}}
-                         {{#each model.alts as |alt|}}
-                           {{#if (not (eq alt.name currentUser.name)) }}
-                             <p><i><a href="#" {{action 'switchAlt' alt.name}}>Switch to {{alt.name}}.</a></i></p>
-                           {{/if}}
-                         {{/each}}
-                       {{/if}}
+                       
                        <p>
                            <LinkTo @route="notifications">
                                <span class="label label-pill label-primary"><i class="fa fa-bell" aria-label='Unread Notifications'></i>
@@ -107,3 +101,20 @@
          <p>AresMUSH game v{{mushVersion}}, portal v{{portalVersion}}</p>
        </footer>
 </div>
+
+  
+<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAltSelection}}  @onHide={{action (mut showAltSelection) null}} @onSubmit={{action (mut showAltSelection) null}}>
+
+  <table class="alts-switcher">
+  
+    {{#each model.alts as |alt|}}
+      {{#if (not (eq alt.name currentUser.name)) }}
+        <tr><td>
+        <CharIconInline @char={{alt}} @hideLink="true" /> {{alt.name}}
+        </td>
+        <td><a href="#" {{action 'switchAlt' alt.name}} class="btn btn-default">Switch</a></td>
+        </tr>
+      {{/if}}
+    {{/each}}
+  </table>
+</BsModalSimple>
