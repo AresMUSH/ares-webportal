@@ -49,11 +49,22 @@
 
  <div id="chat-window">
  {{#each channel.messages as |message|}}
-     <span class="timestamp-tip">{{message.timestamp}} 
-       {{#if message.timediff}}
-       [({{message.timediff}} ago)]
-       {{/if}}
-      </span>
+   <div class="hint pull-right">
+         <div class="timestamp-tip">{{message.timestamp}}</div>
+   </div>
+ 
+    <div class="scene-pose-header">		
+      <LinkTo @route="char" @model="{{message.author.name}}" target="_blank">
+          {{#if message.author.icon}}
+          <img alt="{{message.author.name}}'s icon" class="small-profile-icon <IconClass />" src="/game/uploads/{{message.author.icon}}" >
+          {{else}}
+          <img alt="{{message.author.name}}'s icon" class="small-profile-icon <IconClass />" src="/game/uploads/theme_images/noicon.png" >
+          {{/if}}
+          
+          {{message.author.name}} 
+      </LinkTo>
+      </div>
+      
      <AnsiFormat @text={{message.message}} />
  {{/each}}
  </div>
