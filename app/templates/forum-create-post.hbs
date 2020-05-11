@@ -2,8 +2,17 @@
 <h1>Post to {{model.name}}</h1>
 
 {{#if model.can_post}}
-            
-    <p><b>Subject:</b> <Input @type="text" @id="subject" @value={{subject}} @size={{100}} /></p>
+
+     <p><b>Post As:</b>        <div class="forum-char-select" >
+                 <PowerSelect @selected={{author}} @options={{model.authors}} @searchField="name" @onchange={{action "authorChanged"}} as |author|>
+                     <CharIconTiny @char={{author}} />
+                 </PowerSelect>
+             </div>
+    </p>
+                 
+    <p><b>Subject:</b></p> 
+    <Input @type="text" @id="subject" @value={{subject}} @size={{100}} />
+    
     <p><b>Message:</b></p>
     <MarkdownEditor @text={{message}} />
 

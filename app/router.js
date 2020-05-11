@@ -16,7 +16,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('home', { path: ''});
-  
+
   this.route('account');
   this.route('achievements');
   this.route('admins');
@@ -43,6 +43,7 @@ Router.map(function() {
   this.route('creatures', { path: '/creatures' });
   this.route('creature-create', { path: '/creature/create' });
   this.route('creature-edit', { path: '/creature/:id/edit' })
+  this.route('emoji');
   this.route('error');
   this.route('events');
   this.route('event', { path: '/event/:event_id'} );
@@ -70,6 +71,7 @@ Router.map(function() {
   this.route('job-create');
   this.route('locations');
   this.route('location', { path: '/location/:id'});
+  this.route('location-edit', { path: '/location/:id/edit'});
   this.route('logs');
   this.route('log', { path: '/log/:file' });
   this.route('login', { query_params: ['redirect'] });

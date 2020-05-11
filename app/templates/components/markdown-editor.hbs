@@ -4,14 +4,14 @@
         <div class="pull-right markdown-controls">
     <a href="#" {{action 'preview'}}>
         {{#if preview}}
-          <TooltipIcon @position="right" @message="Hide preview." @icon="fa fa-eye-slash" />
+          <TooltipIcon @position="left" @message="Hide preview." @icon="fa fa-eye-slash" />
         {{else}}
-          <TooltipIcon @position="right" @message="Show preview." @icon="fa fa-eye" />
+          <TooltipIcon @position="left" @message="Show preview." @icon="fa fa-eye" />
         {{/if}}
     </a>
     
     <a href="#" {{action 'showHelp'}}>
-      <TooltipIcon @position="right" @message="Formatting help." @icon="fa fa-question-circle" />
+      <TooltipIcon @position="left" @message="Formatting help." @icon="fa fa-question-circle" />
     </a>
     </div>
     
