@@ -12,7 +12,7 @@
   <h4>{{faction}}</h4>
   <table>
     <tr>
-    {{#each-in rankGroups as |rankGroupName ranks|}}
+    {{#each-in rankGroups as |rankGroupName |}}
     <th><b>{{rankGroupName}}</b></th>
     {{/each-in}}
     </tr>
@@ -21,7 +21,7 @@
     <td>
       <ol>
         {{#each-in ranks as |rankName allowedInCg|}}
-        <li>{{rankName}} 
+        <li>{{rankName}}
           {{#if (not allowedInCg)}}
           <i class="fa fa-minus-circle"></i>
           {{/if}}

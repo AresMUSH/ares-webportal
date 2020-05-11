@@ -1,45 +1,48 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        {{scene.location.name}}
-    </div>
-    <div class="panel-body">
-            
-        {{#if scene.summary}}
-        <p> <AnsiFormat @text={{scene.summary}} /> </p>
-        <hr>
-        {{/if}}        
+<div id="scene-context" class="panel-collapse collapse">
 
-        {{#if scene.content_warning}}
-        <div class="alert alert-danger"><b>Content Warning:</b> {{scene.content_warning}}</div>
-        {{/if}}
-    
-        {{#if scene.location.description}}
-        <AnsiFormat @text={{scene.location.description}} />
-        {{/if}}
-    
-        {{#each scene.location.details as |detail|}}
-        <p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
-        {{/each}}
-        
-        {{#if scene.location.scene_set}}
-        <div class="scene-set-pose">
-          <AnsiFormat @text={{scene.location.scene_set}} />
-        </div>
-        {{/if}}
-        
-        <div class="icon-row">
-        {{#each scene.participants as |who|}}
-          <CharIconInline @char={{who}} />
-        {{/each}}
-        </div>
+  <div class="panel panel-default">
+      <div class="panel-body">
 
-        <hr>
+          <p><b>{{scene.location.name}}</b></p>
         
-        <ScenePrivacyTag @scene={{scene}} />
-        <SceneTypeTag @scene={{scene}} />
+          {{#if scene.summary}}
+          <p> <AnsiFormat @text={{scene.summary}} /> </p>
+          <hr>
+          {{/if}}        
+
+          {{#if scene.content_warning}}
+          <div class="alert alert-danger"><b>Content Warning:</b> {{scene.content_warning}}</div>
+          {{/if}}
+    
+          {{#if scene.location.description}}
+          <AnsiFormat @text={{scene.location.description}} />
+          {{/if}}
+    
+          {{#each scene.location.details as |detail|}}
+          <p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
+          {{/each}}
         
-        {{#if scene.limit}}
-        <p><b>Limited Participation:</b> {{scene.limit}}</p>
-        {{/if}}
-    </div>
+          {{#if scene.location.scene_set}}
+          <div class="scene-set-pose">
+            <AnsiFormat @text={{scene.location.scene_set}} />
+          </div>
+          {{/if}}
+        
+          <div class="icon-row">
+          {{#each scene.participants as |who|}}
+            <CharIconInline @char={{who}} />
+          {{/each}}
+          </div>
+
+          <hr>
+        
+          <ScenePrivacyTag @scene={{scene}} />
+          <SceneTypeTag @scene={{scene}} />
+        
+          {{#if scene.limit}}
+          <p><b>Limited Participation:</b> {{scene.limit}}</p>
+          {{/if}}
+      </div>
+  </div>
 </div>
+
