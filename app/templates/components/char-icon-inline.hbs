@@ -7,5 +7,13 @@
     {{/if}}
 </LinkTo>
 
-<LinkTo @route="char" @model={{char.name}}> {{char.name}} </LinkTo>
+{{#unless hideLink}}
+<LinkTo @route="char" @model={{char.name}}> 
+  {{#if char.nick}}
+    {{char.nick}}
+  {{else}}
+    {{char.name}} 
+  {{/if}}
+</LinkTo>
+{{/unless}}
 </span>

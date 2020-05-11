@@ -10,13 +10,5 @@ export default Route.extend(ReloadableRoute, DefaultRoute, {
     model: function(params) {
         let api = this.gameApi;
         return api.requestOne('downloadScene', { id: params['id'] });
-      },
-      
-      activate: function() {
-          this.controllerFor('application').set('hideSidebar', true);
-      },
-      deactivate: function() {
-          this.controllerFor('application').set('hideSidebar', false);
-          this.controllerFor('play').send('disconnect');
       }
 });

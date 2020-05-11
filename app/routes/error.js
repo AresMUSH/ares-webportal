@@ -6,6 +6,6 @@ export default Route.extend({
   },
   deactivate: function() {
       this.controllerFor('application').set('hideSidebar', false);
-      this.controllerFor('play').send('disconnect');
+      this.controllerFor('client').send('disconnect');
   }
 });
