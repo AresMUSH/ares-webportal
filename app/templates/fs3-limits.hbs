@@ -18,6 +18,9 @@
 <tr><td>Max Ability Points</td><td>{{model.fs3.max_ap}}</td></tr>
 <tr><td>Max Ability Points on Action Skills</td><td>{{model.fs3.max_action}}</td></tr>
 <tr><td>Max Ability Points on Attributes</td><td>{{model.fs3.max_attrs}}</td></tr>
+{{#if model.fs3.use_advantages}}
+<tr><td>Max Ability Points on Advantages</td><td>{{model.fs3.max_advantages}}</td></tr>
+{{/if}}
 <tr><td>Max Skill Rating</td><td>{{model.fs3.max_skill_rating}}</td></tr>
 <tr><td>Max Attribute Rating</td><td>{{model.fs3.max_attr_rating}}</td></tr>
 <tr><td>Min Background Skills</td><td>{{model.fs3.min_backgrounds}}</td></tr>
@@ -40,7 +43,9 @@
 
 <tr><td>Max Dots In Action Skills Above "Everyman" w/ XP <i class="fa fa-star" aria-label="Star"></i> </td><td>{{model.fs3.max_dots_action}}</td></tr>
 <tr><td>Max Dots In Attributes Above "Average" w/ XP <i class="fa fa-star" aria-label="Star"></i> </td><td>{{model.fs3.max_dots_attrs}}</td></tr>
-
+{{#if model.fs3.use_advantages}}
+<tr><td>Max Dots In Advantages w/ XP <i class="fa fa-star" aria-label="Star"></i> </td><td>{{model.fs3.max_dots_advantages}}</td></tr>
+{{/if}}
 </tbody>
 </table>
 
