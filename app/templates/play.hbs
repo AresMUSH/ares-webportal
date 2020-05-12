@@ -1,8 +1,8 @@
 {{title 'Play'}}
- 
+
  <h1>Play</h1>
 
-   
+
        <p>
          Here you can chat and participate in scenes you have joined or watched.
        </p>
@@ -12,29 +12,29 @@
 
  <div class="row">
    <div class="col col-xs-12 col-md-3">
-     
+
      <div class="play-sidebar">
-     
+
      <button class="btn btn-default visible-sm visible-xs hidden-md" type="button" data-toggle="collapse" data-target="#sceneMenuCollapse" aria-expanded="false" aria-controls="sceneMenuCollapse">
          <i class="fas fa-bars"></i>
          {{#if anyNewActivity}}
-         <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
+         <span class="label label-pill label-primary"> <i class="fa fa-flag hint--top" aria-label="New Activity"></i></span>
          {{/if}}
        </button>
 
        <div class="collapse in" id="sceneMenuCollapse">
 
        <p class="play-section-title">Scenes
-       <LinkTo @route="scenes-live" @target="_blank"><i class="fa fa-plus-circle" aria-label="Add Scene"></i></LinkTo>
-       </p>  
+       <LinkTo @route="scenes-live" @target="_blank"><i class="fa fa-plus-circle hint--top" aria-label="Add Scene" alt="Active Scenes"></i></LinkTo>
+       </p>
 
-         
+
        {{#each model.scenes as |scene|}}
          <a href="#" {{action 'switchScene' scene.id}}>
            <div class="play-selector {{if (eq scene.id currentScene.id) 'play-selector-active' ''}}">
-               #{{scene.id}} - {{scene.location.name}} 
+               #{{scene.id}} - {{scene.location.name}}
                {{#if scene.is_unread}}
-                 <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
+                 <span class="label label-pill label-primary"> <i class="fa fa-flag  hint--top" aria-label="New Activity"></i></span>
                {{/if}}
            </div>
          </a>
@@ -43,23 +43,23 @@
              {{participant.name}}
            {{/each}}
          </div>
-         
+
        {{/each}}
-       
-       
-       <p class="play-section-title">Private Messages  
-       <a href="#" {{action (mut showNewConversation) true}}><i class="fa fa-plus-circle" aria-label="New Conversation"></i></a>
+
+
+       <p class="play-section-title">Private Messages
+       <a href="#" {{action (mut showNewConversation) true}}><i class="fa fa-plus-circle hint--top" aria-label="New Conversation" alt="Active Scenes"></i></a>
         {{#if showAllPms}}
-        <a href="#" {{action (mut showAllPms) false}}><i class="fas fa-caret-square-up" aria-label="Collapse"></i></a>
+        <a href="#" {{action (mut showAllPms) false}}><i class="fas fa-caret-square-up hint--top" aria-label="Collapse"></i></a>
         {{else}}
-        <a href="#" {{action (mut showAllPms) true}}><i class="fas fa-caret-square-down" aria-label="Expand"></i></a>
+        <a href="#" {{action (mut showAllPms) true}}><i class="fas fa-caret-square-down hint--top" aria-label="Expand"></i></a>
         {{/if}}
-       </p>  
-        
+       </p>
+
         {{#each sortedPageThreads as |channel|}}
           {{#if (or channel.is_recent showAllPms)}}
            <a href="#" {{action 'changeChannel' channel}}>
-            <div class="play-selector {{if (eq channel.key selectedChannel.key) 'play-selector-active' ''}}">                  
+            <div class="play-selector {{if (eq channel.key selectedChannel.key) 'play-selector-active' ''}}">
               # {{channel.title}}
               {{#if channel.muted}}
                   <i class="fa fa-microphone-slash"></i>
@@ -68,17 +68,17 @@
             </div>
           </a>
           {{/if}}
-        {{/each}}        
-        
+        {{/each}}
+
        <p class="play-section-title">Channels
-       <a href="#" {{action (mut showAddChannel) true}}><i class="fa fa-plus-circle" aria-label="Add Channel"></i></a>
+       <a href="#" {{action (mut showAddChannel) true}}><i class="fa fa-plus-circle hint--top" aria-label="Add Channel"></i></a>
         {{#if showAllChannels}}
-        <a href="#" {{action (mut showAllChannels) false}}><i class="fas fa-caret-square-up" aria-label="Collapse"></i></a>
+        <a href="#" {{action (mut showAllChannels) false}}><i class="fas fa-caret-square-up hint--top" aria-label="Collapse"></i></a>
         {{else}}
-        <a href="#" {{action (mut showAllChannels) true}}><i class="fas fa-caret-square-down" aria-label="Expand"></i></a>
+        <a href="#" {{action (mut showAllChannels) true}}><i class="fas fa-caret-square-down hint--top" aria-label="Expand"></i></a>
         {{/if}}
-       </p>  
-              
+       </p>
+
        {{#each sortedChannels as |channel|}}
          {{#if channel.can_join}}
            {{#if channel.enabled}}
@@ -88,7 +88,7 @@
                     # {{channel.title}}
                    {{#if channel.muted}}
                        <i class="fa fa-microphone-slash"></i>
-                   {{/if}}                 
+                   {{/if}}
                    <span class="label label-pill label-primary">{{channel.new_messages}}</span>
                </div>
                </a>
@@ -96,25 +96,25 @@
            {{/if}}
          {{/if}}
        {{/each}}
-                         
+
      </div>
     </div>
-     
+
    </div>
-   
+
    <div class="col col-xs-12 col-md-9">
-      
+
       {{#if currentScene}}
       <h3>Scene {{currentScene.id}} - {{currentScene.icdate}}
           {{#if currentScene.title}}
            - {{currentScene.title}}
            {{/if}}
        </h3>
-    
+
        <LiveSceneControl @scene={{currentScene}} @locations={{model.locations}} @abilities={{model.abilities}} @places={{currentScene.places}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
-       
+
        {{/if}}
-       
+
        {{#if selectedChannel}}
 
        {{#if selectedChannel.is_page}}
@@ -122,27 +122,27 @@
        {{else}}
        <h3>{{selectedChannel.title}}</h3>
        {{/if}}
-       
+
          <ChatControl @channel={{selectedChannel}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
-       
+
        {{/if}}
-       
+
        {{#if emptyPrompt}}
        <div class="alert alert-info">Please join a channel or scene.</div>
        {{/if}}
 
     </div>
 </div>
-  
+
 <BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAddChannel}}  @onHide={{action (mut showAddChannel) null}}>
-  
+
   <table>
     {{#each sortedChannels as |channel|}}
       {{#if channel.can_join}}
         {{#if (not channel.enabled)}}
         <tr>
           <td>
-          <b>{{channel.title}}</b> 
+          <b>{{channel.title}}</b>
           </td>
           <td>
             {{#if channel.desc}}
@@ -160,7 +160,7 @@
   {{/each}}
   </table>
 </BsModalSimple>
-  
+
 <BsModalSimple @title="Start Conversation" @closeTitle="Cancel" @submitTitle="Start" @size={{null}} @fade={{false}} @open={{showNewConversation}} @onSubmit={{action "startConversation"}}  @onHide={{action (mut showNewConversation) null}}>
 
 
@@ -169,12 +169,12 @@
              <b>To:</b><PowerSelectMultiple @selected={{newConversationList}} @options={{model.characters}} @searchField="name" @onchange={{action "conversationListChanged"}} as |char|>
                  {{char.name}}
                </PowerSelectMultiple>
-      
+
                <CmdBox @value={{chatMessage}} @class="chat-box" @cols="80" @rows="6" @onEnter={{action "startConversation"}} />
-      
+
            </div>
          </div>
   </BsModalSimple>
-  
+
 
 {{outlet}}
