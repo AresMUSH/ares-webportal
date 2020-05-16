@@ -11,7 +11,7 @@ export default Controller.extend({
     }),
 
     scenePrivacyValues: computed(function() {
-        return [ 'Open', 'Private', 'Watchable' ];
+        return [ 'Open', 'Private' ];
     }),
 
     actions: {
