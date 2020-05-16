@@ -112,7 +112,11 @@
 {{#if model.unshared}}
 <br>
 <hr>
-<div class="alert alert-info">You have unshared scenes.  <LinkTo @route="scenes-unshared">View them</LinkTo> to share or download them before they time out.</div>
+<div class="alert alert-info">
+  <p>You have <LinkTo @route="scenes-unshared">unshared scenes</LinkTo>.  Share or download them before they time out.</p>
+  <p><LinkTo @route="scenes-unshared">View Unshared Scenes</LinkTo></p>
+</div>
+
 {{/if}}
   
 {{outlet}}

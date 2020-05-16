@@ -1,6 +1,8 @@
+{{#if scene}}
+
 <a data-toggle="collapse" href="#scene-context"><i class="fas fa-info-circle"></i> Scene Details</a>
 
-<a href="#" {{action "scrollDown"}}><i class="fas fa- angle-double-down"></i> Jump to End</a>
+<a href="#" {{action "scrollDown"}}><i class="fas fa-angle-double-down"></i> Jump to End</a>
  &nbsp; 
   {{#if scrollPaused}}
           <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
@@ -323,3 +325,4 @@
     </BsModalSimple>
     
           
+{{/if}}

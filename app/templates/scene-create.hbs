@@ -46,13 +46,15 @@
         <label for="location" class="col-form-label">Location:</label>
      </div>
      <div class="col-sm-9">
-       <p><Input @type="text" @size={{25}} class="col-xs-4" @id="location" @enter={{action "save"}} @value={{model.scene.location}} /></p>
+       <p>
+           <PowerSelect @selected={{newLocation}} @options={{model.locations}} @onchange={{action "locationSelected"}} as |location|>
+         {{location}}
+       </PowerSelect>
+       </p>
+       
+       <p><Input @type="text" @size={{25}} @id="location" @enter={{action "save"}} @value={{model.scene.location}} /></p>
     
-        <p>
-            <PowerSelect @selected={{newLocation}} @class="col-xs-4" @options={{model.locations}} @onchange={{action "locationSelected"}} as |location|>
-          {{location}}
-        </PowerSelect>
-        </p>
+        
      </div> 
    </div>
     
