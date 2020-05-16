@@ -11,8 +11,8 @@ export default Controller.extend({
         return this.get('model.sceneTypes').map(p => p.get('name'));
     }),
 
-    scenePrivacyValues: computed(function() { 
-        return [ 'Open', 'Private', 'Watchable' ];
+    scenePrivacyValues: computed(function() {
+        return [ 'Open', 'Private' ];
     }),
 
     actions: {
