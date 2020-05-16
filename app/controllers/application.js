@@ -111,7 +111,11 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, {
         this.set('showAltSelection', false);
         this.session.authenticate('authenticator:ares', { name: alt, password: 'ALT' })
          .then(() => {
-           window.location.replace('/');
+           let redirect = this.currentRoute;
+           if (!redirect) {
+               redirect = '/';
+           }
+           window.location.replace(redirect);
          });
       },
       toggleAltSelection: function() {

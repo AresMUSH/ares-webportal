@@ -205,17 +205,11 @@ export default Service.extend({
               notify = false;
             }
             
-            if (notification_type == "job_update" ||
-                notification_type == "new_forum_activity" ||
-                notification_type == "new_chat" || 
-                notification_type == "new_page" ||
-                notification_type == "new_scene_activity" ||
-                notification_type == "combat_activity" ||
-                notification_type == "new_combat_turn" || 
-                notification_type == "manage_activity") {
-                notify = false;
+            if (data.args.is_data) {
+              notify = false;
             }
-            else if (notification_type == "notification_update") {
+              
+            if (notification_type == "notification_update") {
               this.updateNotificationBadge(data.args.message);
               notify = false;
             }
