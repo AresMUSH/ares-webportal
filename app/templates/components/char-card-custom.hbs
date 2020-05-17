@@ -1,0 +1,63 @@
+<div class="char-card">
+  <div class="row">
+    <div class="col col-xs-4">
+      <CharIcon @char={{char}} />
+
+      {{#if char.id}}
+      <LinkTo @route="char" @model={{char.name}} @target="_blank">View Full Profile</LinkTo>
+      {{/if}}
+    </div>
+    <div class="col col-xs-8">
+      Test text goes here.
+    </div>
+    <div class="col col-xs-8">
+      {{#if (not char.is_ooc)}}
+        {{#each char.demographics as |demo|}}
+        <div class="row">
+            <div class="col-sm-3">
+              <b>{{demo.name}}:</b>
+            </div>
+            <div class="col-sm-9">
+              {{demo.value}}
+            </div>
+        </div>
+        {{/each}}
+
+        {{#if (not char.demographics)}}
+        No demographics available.  Try reloading the scene page.
+        {{/if}}
+
+        {{#each char.schools as |school|}}
+        <div class="row">
+            <div class="col-sm-3">
+              <b>{{school.school_type}}:</b>
+            </div>
+            <div class="col-sm-9">
+              {{school.school_name}}
+            </div>
+        </div>
+        {{/each}}
+
+      {{/if}}
+
+      {{#if char.status_message}}
+      <br>
+      <div class="alert alert-info">
+        {{char.status_message}}
+      </div>
+      {{/if}}
+
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-xs-12">
+      <br>
+      {{#if char.description}}
+      <AnsiFormat @text={{char.description}} />
+      {{/if}}
+
+    </div>
+  </div>
+</div>

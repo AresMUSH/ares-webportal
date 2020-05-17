@@ -310,7 +310,7 @@
       {{/if}}
     </BsModalSimple>
 
-    <BsModalSimple @title="Character Card" @closeTitle="Close" @size={{null}} @fade={{false}} @open={{characterCard}} @onHide={{action (mut characterCard) null}}>
+    <BsModalSimple  @closeTitle="Close" @size={{null}} @fade={{false}} @open={{characterCard}} @onHide={{action (mut characterCard) null}}> 
 
       {{#if scene.use_custom_char_cards}}
         <CharCardCustom @char={{characterCardInfo}} />
