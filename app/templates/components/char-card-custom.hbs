@@ -4,11 +4,8 @@
       <CharIcon @char={{char}} />
 
       {{#if char.id}}
-      <LinkTo @route="char" @model={{char.name}} @target="_blank">View Full Profile</LinkTo>
+      <LinkTo @route="char" @model={{char.name}} @target="_blank" style="font-size:80%; font-style: italic; position:relative; top:-20px;">Full Profile</LinkTo>
       {{/if}}
-    </div>
-    <div class="col col-xs-8">
-      Test text goes here.
     </div>
     <div class="col col-xs-8">
       {{#if (not char.is_ooc)}}
