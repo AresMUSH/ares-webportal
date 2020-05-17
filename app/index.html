@@ -38,11 +38,12 @@
             
     {{content-for "body"}}
     
+    <!-- Important!  Config must be first. -->
+    <script src="/game/scripts/aresconfig.js"></script>
     
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/ares-webportal.js"></script>
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
-    <script src="/game/scripts/aresconfig.js"></script>
     <script src="/scripts/ansi_up.js"></script>
     <script src="/scripts/alertify.min.js"></script>
     <script src="/scripts/aresweb_version.js"></script>

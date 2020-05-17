@@ -3,8 +3,9 @@ import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import AvailableRoutes from 'ares-webportal/mixins/available-routes';
+import AresConfig from 'ares-webportal/mixins/ares-config';
 
-export default Controller.extend(AuthenticatedController, AvailableRoutes, {
+export default Controller.extend(AuthenticatedController, AvailableRoutes, AresConfig, {
     session: service(),
     gameSocket: service(),
     gameApi: service(),

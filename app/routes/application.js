@@ -3,8 +3,9 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
+import AresConfig from 'ares-webportal/mixins/ares-config';
 
-export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
+export default Route.extend(ApplicationRouteMixin, ReloadableRoute, AresConfig, {
 
     gameApi: service(),
     session: service(),

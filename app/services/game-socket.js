@@ -1,8 +1,9 @@
 import $ from "jquery"
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
+import AresConfig from 'ares-webportal/mixins/ares-config';
 
-export default Service.extend({
+export default Service.extend(AresConfig, {
     session: service(),
     router: service(),
     flashMessages: service(),
@@ -56,7 +57,7 @@ export default Service.extend({
                       icon: '/game/uploads/theme_images/notification.png',
                       badge: '/game/uploads/theme_images/notification.png',
                       body: cleanMsg,
-                      tag: aresconfig.game_name,
+                      tag: window.aresconfig.game_name,
                       renotify: true
                     }
                    ); 
