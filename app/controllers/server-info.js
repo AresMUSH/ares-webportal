@@ -1,7 +1,8 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
+import AresConfig from 'ares-webportal/mixins/ares-config';
 
-export default Controller.extend({
+export default Controller.extend(AresConfig, {
   mushVersion: computed(function() {
       return aresconfig.version;
   }),

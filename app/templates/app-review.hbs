@@ -7,7 +7,7 @@
 <p>You can view the character's background, sheet, and RP hooks on their character page.  This will open in a new tab so you can easily flip back to this one when finished.</p>
 
        <p>
-          <LinkTo @route="char" @model={{model.id}} class="btn btn-primary" @target="_blank">View Character</LinkTo>
+          <LinkTo @route="char" @model={{model.id}} @class="btn btn-primary" @target="_blank">View Character</LinkTo>
       </p>
 
 <h2>View Errors</h2>
@@ -35,7 +35,7 @@
        
        
       <p>
-          <LinkTo @route="job" @model={{model.job}} class="btn btn-default">Back to Job</LinkTo>
+          <LinkTo @route="job" @model={{model.job}} @class="btn btn-default">Back to Job</LinkTo>
           <button name="reject" {{action 'rejectChar'}} class="btn btn-warning">Reject</button>
           <button name="approve" {{action 'approveChar'}} class="btn btn-success">Approve</button>
       </p>

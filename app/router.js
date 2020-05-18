@@ -2,17 +2,17 @@ import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 import setupCustomRoutes from 'ares-webportal/custom-routes';
 
-const Router = EmberRouter.extend({
-  location: config.locationType,
-  rootURL: config.rootURL,
+export default class Router extends EmberRouter {
+  location = config.locationType;
+  rootURL = config.rootURL;
     
  init() {
-      this._super(...arguments);
+      super.init();
       this.on('routeDidChange', function() {
         window.scrollTo(0, 0);
       });
     }
-});
+}
 
 Router.map(function() {
   this.route('home', { path: ''});
@@ -134,5 +134,3 @@ Router.map(function() {
 
   this.route('not-found', { path: '*:' });
 });
-
-export default Router;
