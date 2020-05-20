@@ -159,7 +159,7 @@
                  </a>
                  <ul class="dropdown-menu">
                    {{#if scene.can_edit}}
-                       <li><a href="#" >Change Location</a></li>
+                        <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
                    {{/if}}
 
                    <LiveScenePlaces @scene={{scene}} />
@@ -310,7 +310,7 @@
       {{/if}}
     </BsModalSimple>
 
-    <BsModalSimple  @closeTitle="Close" @size={{null}} @fade={{false}} @open={{characterCard}} @onHide={{action (mut characterCard) null}}> 
+    <BsModalSimple  @closeTitle="Close" @size={{null}} @fade={{false}} @open={{characterCard}} @onHide={{action (mut characterCard) null}}>
 
       {{#if scene.use_custom_char_cards}}
         <CharCardCustom @char={{characterCardInfo}} />
