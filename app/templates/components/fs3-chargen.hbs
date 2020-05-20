@@ -41,6 +41,13 @@
 
      <p class="cg-tip"><AnsiFormat @text={{model.cgInfo.fs3.abilities.attrs_blurb}} /></p>
 
+     <ul class="cg-tip">
+       <li>You get a rating of up to 'Average' for free. Each additional rating costs 2 points.</li>
+      <li>You can spend up to 13 additional points on attributes.</li>
+      <li>You can have up to four attributes at level 3 or higher, of which only two can be level 4.</li>
+      <li>No one may have a Magic attribute above 2.</li>
+    </ul>
+
      <div class="cg-tip-table">
        <p><b>What level should I choose?</b></p>
        <table>
@@ -96,6 +103,16 @@
 
       <p class="cg-tip"><AnsiFormat @text={{model.cgInfo.fs3.abilities.action_blurb}} /></p>
 
+
+      <ul class="cg-tip">
+        <li>You automatically get the Everyman (1) rating in each Action Skill for free. Each additional rating costs 1 point.</li>
+        <li>You can spend up to 28 points on action skills.</li>
+        <li>You can have up to six action skills at level 5 or above, of which only three can be level six or above, and only one can be level 7.</li>
+        <li>No one may start with a level 8 action skill.</li>
+        <li>Your Major School should be level 2 and your Minor School should be level 1. If you have only a Major School, it may be level 3.</li>
+        <li>For Alertness and Composure, natural ability can get you up to 3. Anything higher should reflect training or experience in those skills.</li>
+        <li>For Research, the 'what level should I take' chart refers to training, education, or experience specifically in research. For example, someone with education in a field like Library Science has a degree in Research in the same way someone with a MD has a degree in Medicine. We consider a BA or BS in any subject to provide Research at a 2, while further education or jobs where records and document-based research is common will count as experience toward higher levels. Feel free to ask if you're not sure where to put this skill.</li>
+      </ul>
      <br>
 
      <div class="cg-tip-table">
@@ -106,6 +123,7 @@
          <th class="tg-0pky">Label</th>
          <th class="tg-0pky">Description</th>
          <th class="tg-0pky">Examples</th>
+         </tr>
          </tr>
          <tr>
          <td class="tg-0lax">0</td>
@@ -135,7 +153,7 @@
          <td class="tg-0pky">4</td>
          <td class="tg-0pky">Good</td>
          <td class="tg-0pky">You are thoroughly competent at a general professional level.</td>
-         <td class="tg-0pky">A bachelor's degree, five to seven years in a job, more than 5 years of casual training from someone experienced.</td>
+         <td class="tg-0pky">A bachelor's degree in the subject, five to seven years in a job, more than 5 years of casual training from someone experienced.</td>
          </tr>
          <tr>
          <td class="tg-0pky">5</td>
@@ -147,7 +165,7 @@
          <td class="tg-0pky">6</td>
          <td class="tg-0pky">Exceptional</td>
          <td class="tg-0pky">You are an expert, and can pull through even in dire circumstances.</td>
-         <td class="tg-0pky">A PhD or MD, more than fifteen years in a job.</td>
+         <td class="tg-0pky">A PhD or MD in the subject, more than fifteen years in a job.</td>
          </tr>
          <tr>
          <td class="tg-0pky">7</td>
@@ -184,7 +202,13 @@
        </div>
    <div class="panel-body">
 
-     <p class="cg-tip"><AnsiFormat @text={{model.cgInfo.fs3.abilities.background_blurb}} /> To remove a background skill, set its rating to Everyman.</p>
+     <p class="cg-tip"><AnsiFormat @text={{model.cgInfo.fs3.abilities.background_blurb}} /> </p>
+
+     <ul class="cg-tip">
+       <li>You can have up to 6 rating points of Background Skills for free. Additional Background Skills cost 1 AP each.</li>
+        <li>You must have at least 3 background skills.</li>
+        <li>To remove a background skill, set its rating to Everyman.</li>
+      </ul>
 
 
 
