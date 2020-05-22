@@ -13,7 +13,14 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, AresConfig, 
     gameSocket: service(),
     favicon: service(),
     headData: service(),
-  
+    router: service('router'),
+    init() {
+        this._super(...arguments);
+        let self = this;
+        this.router.on('routeDidChange', function() {
+          self.doReload();
+        });
+    },
     afterModel(model) {
       try {
         this.set('headData.mushName', model.get('game.name'));
@@ -85,9 +92,6 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, AresConfig, 
     },
 
     actions: {
-        didTransition() {
-           this.doReload();
-        },
         error(error) {
             this.gameApi.reportError({ message: error });
         }
