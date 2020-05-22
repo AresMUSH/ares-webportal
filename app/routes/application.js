@@ -3,8 +3,9 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
+import AresConfig from 'ares-webportal/mixins/ares-config';
 
-export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
+export default Route.extend(ApplicationRouteMixin, ReloadableRoute, AresConfig, {
 
     gameApi: service(),
     session: service(),
@@ -12,7 +13,14 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
     gameSocket: service(),
     favicon: service(),
     headData: service(),
-  
+    router: service('router'),
+    init() {
+        this._super(...arguments);
+        let self = this;
+        this.router.on('routeDidChange', function() {
+          self.doReload();
+        });
+    },
     afterModel(model) {
       try {
         this.set('headData.mushName', model.get('game.name'));
@@ -84,9 +92,6 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, {
     },
 
     actions: {
-        didTransition() {
-           this.doReload();
-        },
         error(error) {
             this.gameApi.reportError({ message: error });
         }

@@ -27,7 +27,9 @@ export default Component.extend(AuthenticatedController, {
     },
       
     didInsertElement: function() {
-      this.set('poseChar', this.get('scene.poseable_chars')[0]);
+      if (this.scene) {
+        this.set('poseChar', this.get('scene.poseable_chars')[0]);
+      }
     },
     
     poseTypes: computed(function() {

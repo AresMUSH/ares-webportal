@@ -1,8 +1,9 @@
 import EmberObject from '@ember/object';
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
+import AresConfig from 'ares-webportal/mixins/ares-config';
 
-export default Service.extend({
+export default Service.extend(AresConfig, {
     flashMessages: service(),
     session: service(),
     router: service(),

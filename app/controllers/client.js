@@ -2,8 +2,9 @@ import $ from "jquery"
 import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import AresConfig from 'ares-webportal/mixins/ares-config';
 
-export default Controller.extend({
+export default Controller.extend(AresConfig, {
   connected: false,
   consoleText: '',
   text1: '',

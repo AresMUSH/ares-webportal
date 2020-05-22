@@ -1,17 +1,20 @@
+{{#if channel}}
+
 {{#if channel.enabled}}
 
-<p>
+<div class="chat-controls">
+
   <a data-toggle="collapse" href="#channel-info"><i class="fas fa-info-circle"></i> Channel Info</a>
 
-<a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> Jump to End</a>
- &nbsp; 
+  <a href="#" {{action "scrollDown"}}><i class="fas fa-angle-double-down"></i> Jump to End</a>
+
   {{#if scrollPaused}}
           <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
           </i> Resume Scrolling</a>
   {{else}}
           <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause"></i> Pause Scrolling</a>
   {{/if}}
-</p>  
+</div>  
   
 <div id="channel-info" class="panel-collapse collapse">
   
@@ -146,3 +149,4 @@
     </div>
     
 </BsModalSimple>
+{{/if}}

@@ -2,14 +2,6 @@
  
  <h1>Play</h1>
 
-   
-       <p>
-         Here you can chat and participate in scenes you have joined or watched.
-       </p>
-       <p>
-         <b>Quick Links:</b> <LinkTo @route="client" target="_blank">Web Client</LinkTo> | <LinkTo @route="scenes-live" target="_blank">Active Scenes</LinkTo> | <LinkTo @route="scenes-unshared">Unshared Scenes</LinkTo> | <LinkTo @route="scene-create" target="_blank">Create a Scene</LinkTo>
-       </p>
-
  <div class="row">
    <div class="col col-xs-12 col-md-3">
      
@@ -25,7 +17,23 @@
        <div class="collapse in" id="sceneMenuCollapse">
 
        <p class="play-section-title">Scenes
-       <LinkTo @route="scenes-live" @target="_blank"><i class="fa fa-plus-circle" aria-label="Add Scene"></i></LinkTo>
+       
+       <LinkTo @route="scenes-live" @target="_blank">
+         <TooltipIcon @position="right" @message="Join Scene" @icon="fa fa-play-circle" />
+       </LinkTo>
+
+       <LinkTo @route="scene-create" @target="_blank">
+         <TooltipIcon @position="right" @message="Create Scene" @icon="fa fa-plus-circle" />
+       </LinkTo>
+
+       <LinkTo @route="scenes-unshared" @target="_blank">
+         <TooltipIcon @position="right" @message="Unshared Scenes" @icon="fa fa-share-square" />
+       </LinkTo>
+
+       <LinkTo @route="who" @target="_blank">
+         <TooltipIcon @position="right" @message="Who's Online" @icon="fa fa-users" />
+       </LinkTo>
+
        </p>  
 
          
@@ -48,11 +56,17 @@
        
        
        <p class="play-section-title">Private Messages  
-       <a href="#" {{action (mut showNewConversation) true}}><i class="fa fa-plus-circle" aria-label="New Conversation"></i></a>
+       <a href="#" {{action (mut showNewConversation) true}}>
+         <TooltipIcon @position="right" @message="New Conversation" @icon="fa fa-plus-circle" />
+       </a>
         {{#if showAllPms}}
-        <a href="#" {{action (mut showAllPms) false}}><i class="fas fa-caret-square-up" aria-label="Collapse"></i></a>
+        <a href="#" {{action (mut showAllPms) false}}>
+          <TooltipIcon @position="right" @message="Hide Inactive" @icon="fa fa-caret-square-up" />
+        </a>
         {{else}}
-        <a href="#" {{action (mut showAllPms) true}}><i class="fas fa-caret-square-down" aria-label="Expand"></i></a>
+        <a href="#" {{action (mut showAllPms) true}}>
+          <TooltipIcon @position="right" @message="Show All" @icon="fa fa-caret-square-down" />
+        </a>
         {{/if}}
        </p>  
         
@@ -71,12 +85,19 @@
         {{/each}}        
         
        <p class="play-section-title">Channels
-       <a href="#" {{action (mut showAddChannel) true}}><i class="fa fa-plus-circle" aria-label="Add Channel"></i></a>
-        {{#if showAllChannels}}
-        <a href="#" {{action (mut showAllChannels) false}}><i class="fas fa-caret-square-up" aria-label="Collapse"></i></a>
-        {{else}}
-        <a href="#" {{action (mut showAllChannels) true}}><i class="fas fa-caret-square-down" aria-label="Expand"></i></a>
-        {{/if}}
+         
+         <a href="#" {{action (mut showAddChannel) true}}>
+           <TooltipIcon @position="right" @message="Add Channel" @icon="fa fa-plus-circle" />
+         </a>
+          {{#if showAllChannels}}
+          <a href="#" {{action (mut showAllChannels) false}}>
+            <TooltipIcon @position="right" @message="Hide Inactive" @icon="fa fa-caret-square-up" />
+          </a>
+          {{else}}
+          <a href="#" {{action (mut showAllChannels) true}}>
+            <TooltipIcon @position="right" @message="Show All" @icon="fa fa-caret-square-down" />
+          </a>
+          {{/if}}
        </p>  
               
        {{#each sortedChannels as |channel|}}
@@ -110,10 +131,10 @@
            - {{currentScene.title}}
            {{/if}}
        </h3>
+       {{/if}}
     
        <LiveSceneControl @scene={{currentScene}} @locations={{model.locations}} @abilities={{model.abilities}} @places={{currentScene.places}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
        
-       {{/if}}
        
        {{#if selectedChannel}}
 
@@ -122,10 +143,11 @@
        {{else}}
        <h3>{{selectedChannel.title}}</h3>
        {{/if}}
+       {{/if}}
+       
        
          <ChatControl @channel={{selectedChannel}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
        
-       {{/if}}
        
        {{#if emptyPrompt}}
        <div class="alert alert-info">Please join a channel or scene.</div>
@@ -174,6 +196,8 @@
       
            </div>
          </div>
+         
+         <FlashMessages />
   </BsModalSimple>
   
 

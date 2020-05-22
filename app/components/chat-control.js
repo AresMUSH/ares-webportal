@@ -95,6 +95,12 @@ export default Component.extend({
         let api = this.gameApi;
         let channelKey = this.get('channel.key');
         let message = this.chatMessage;
+        
+        if (message.length === 0) {
+            this.flashMessages.danger("You haven't entered anything.");
+            return;
+        }
+        
         this.set(`chatMessage`, '');
                   
         if (this.get('channel.is_page'))  {
