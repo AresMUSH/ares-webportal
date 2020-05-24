@@ -4,8 +4,6 @@
 
 <SearchBar />
 
-<p>The search will only match wiki pages that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
-
 <hr>
 
 {{#if searchResults}}
@@ -17,11 +15,11 @@
 <div class="row">
   
   <div class="col col-xs-3">
-    <label>Text:</label>
+    <label>Title:</label>
   </div>
   
   <div class="col col-xs-9">
-        <p><Input @type="text" @size={{25}} @id="text" @value={{searchText}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" @size={{25}} @id="title" @value={{searchTitle}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -38,6 +36,17 @@
   
 </div>
 
+<div class="row">
+  
+  <div class="col col-xs-3">
+    <label>Category:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+        <p><Input @type="text" @size={{25}} @id="category" @value={{searchCategory}} @enter={{action "search"}} /></p>
+  </div>
+  
+</div>
 
     
     <div class="row">
@@ -50,7 +59,10 @@
         </div>
     </div>
 
+<p class="search-hint">Search is case-insensitive and matches ALL specified criteria.</p>
+
 </div>
+
 
 <hr>
 

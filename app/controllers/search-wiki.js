@@ -4,13 +4,15 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   gameApi: service(),
   flashMessages: service(),
-  searchText: '',
+  searchTitle: '',
   searchTag: '',
+  searchCategory: '',
   searchResults: null,
     
   resetOnExit: function() {
-    this.set('searchText', '');
+    this.set('searchTitle', '');
     this.set('searchTag', '');
+    this.set('searchCategory', '');
     this.set('searchResults', null);
   },
     
@@ -22,12 +24,12 @@ export default Controller.extend({
       let api = this.gameApi;
             
       api.requestMany('searchWiki', { 
-        searchText: this.searchText,
-        searchTag: this.searchTag
-      }, null)
+        searchTitle: this.searchTitle,
+        searchTag: this.searchTag,
+        searchCategory: this.searchCategory,
+      })
       .then( (response) => {
         if (response.error) {
-          this.flashMessages.error("Oops!  Something went wrong when the website talked to the game.  Please try again and alert staff if the problem persists.");          
           return;
         }
         this.set('searchResults', response);

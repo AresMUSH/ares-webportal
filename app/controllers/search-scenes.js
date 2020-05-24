@@ -39,10 +39,9 @@ export default Controller.extend({
       searchType: this.searchType,
       searchLocation: this.searchLocation,
       page: this.page
-    }, null)
+    })
     .then( (response) => {
       if (response.error) {
-        this.flashMessages.error("Oops!  Something went wrong when the website talked to the game.  Please try again and alert staff if the problem persists.");          
         return;
       }
       this.set('searchResults', response);

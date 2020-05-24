@@ -1,0 +1,13 @@
+{{#if model.game.gcse_search_id}}
+
+  <gcse:search></gcse:search>
+
+  <script src="https://cse.google.com/cse.js?cx={{model.game.gcse_search_id}}" async defer type="text/javascript"></script>    
+
+  <LinkTo @route="search-wiki"><i class="fa fa-search" aria-hidden="true"></i> Advanced Search</LinkTo>
+
+{{else}}
+
+  <LinkTo @route="search-wiki"><i class="fa fa-search" aria-hidden="true"></i> Search</LinkTo>
+
+{{/if}}
