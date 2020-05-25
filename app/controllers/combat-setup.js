@@ -50,5 +50,9 @@ export default Controller.extend({
           this.set(`model.combatants.${id}.action`, action);
           this.set(`model.combatants.${id}.action_args`, '');
         },
+        addTarget: function(id, target) {
+          let argRef = `model.combatants.${id}.action_args`;
+          this.set(argRef, `${this.get(argRef) || ''} ${target}`);
+        },
     }
 });

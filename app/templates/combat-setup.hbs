@@ -28,6 +28,14 @@
             <br>
             <Input @type="text" @size={{25}} @id={{id}} @value={{comb.action_args}} />
             
+            <p>
+            <b>Available Targets:</b>
+            <TooltipIcon @position="right" @message="Click a target to add them to the action args list." @icon="fa fa-question-circle" />
+            
+            {{#each model.options.targets as |target|}}
+              <a href="#" {{action 'addTarget' id target}}>{{target}}</a>
+            {{/each}}
+            </p>
             
     </div>
  
