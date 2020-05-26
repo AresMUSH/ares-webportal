@@ -168,6 +168,8 @@
                      <a href="#" {{action (mut managePoseOrder) true}}>Manage Pose Order</a>
                    </li>
 
+                   <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} @spells={{spells}}/>
+
                    {{#if scene.fs3_enabled}}
                      <LiveSceneFs3 @abilities={{abilities}} @scene={{scene}} />
                    {{/if}}
@@ -176,7 +178,7 @@
                      <LiveSceneCookies @scene={{scene}} />
                    {{/if}}
 
-                   <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} />
+
                  </ul>
                </li>
              </ul>
