@@ -167,8 +167,8 @@
                    <li>
                      <a href="#" {{action (mut managePoseOrder) true}}>Manage Pose Order</a>
                    </li>
-
-                   <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} @spells={{spells}}/>
+                   <li role="separator" class="divider"></li>
+                   <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} @spells={{model.spells}}/>
 
                    {{#if scene.fs3_enabled}}
                      <LiveSceneFs3 @abilities={{abilities}} @scene={{scene}} />
