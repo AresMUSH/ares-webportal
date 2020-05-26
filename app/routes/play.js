@@ -34,16 +34,17 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
              abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }),
              locations: api.request('sceneLocations', { id: params['id'] }),
              chat: api.requestMany('chat'),
-             characters: api.requestMany('characters', { select: 'all' })
+             characters: api.requestMany('characters', { select: 'all' }),
+             spells:  api.request('charSpells', { id: this.get('session.data.authenticated.id') })
            })
            .then((model) => EmberObject.create(model));
     },
-    
+
     setupController: function(controller, model) {
       this._super(controller, model);
       if (model.scenes.length > 0) {
         controller.set('currentScene', model.scenes[0]);
-        controller.set('currentScene.is_unread', false);        
+        controller.set('currentScene.is_unread', false);
       } else {
         let chan = controller.sortedChannels.find(c => c.enabled);
         if (chan) {
