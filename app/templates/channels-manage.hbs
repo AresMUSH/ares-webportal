@@ -1,0 +1,47 @@
+{{title 'Manage Chat Channels'}}
+<h1>Manage Chat Channels</h1>
+
+
+<div class="row">
+    
+    <div class="col pull-right">
+        <LinkTo @route="channel-create" class="btn btn-default">Create Channel</LinkTo>
+    </div>
+    
+</div>
+
+<div class="table-responsive">
+<table class="table table-striped">
+    
+<tr>
+  <th class="col-xs-2">Name</th>
+  <th class="col-xs-3">Description</th>
+  <th class="col-xs-1">Color</th>
+  <th class="col-xs-2">Join Roles</th>
+  <th class="col-xs-2">Talk Roles</th>
+  <th class="col-xs-2"></th>
+</tr>
+
+{{#each @model.channels as |channel|}}
+<tr>
+  <td>{{channel.name}}</td>
+  <td>{{channel.desc}}</td>
+  <td>{{channel.color}}</td>
+  <td>{{channel.can_join}}</td>
+  <td>{{channel.can_talk}}</td>
+  <td>
+    
+    <LinkTo @route="channel-edit" @model={{channel.id}}><i class="fas fa-edit" aria-label="Edit Channel"></i></LinkTo>
+    <a href="#" {{action (mut channelToDelete) channel}}><i class="fa fa-trash" aria-label="Delete Channel"></i></a>
+    
+  </td>
+</tr>
+{{/each}}
+
+</table>
+</div>
+
+
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{channelToDelete}} @onSubmit={{action "deleteChannel" channelToDelete}} @onHide={{action (mut channelToDelete) null}}>
+    You're about to delete {{channelToDelete.name}}. This cannot be undone.  Are you sure?
+  </BsModalSimple>

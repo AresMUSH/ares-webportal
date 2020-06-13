@@ -60,5 +60,8 @@ export default Controller.extend({
             this.set('model.action', action);
             this.set('model.action_args', '');
         },
+        addTarget: function(target) {
+          this.set('model.action_args', `${this.model.action_args || ''} ${target}`);
+        },
     }
 });

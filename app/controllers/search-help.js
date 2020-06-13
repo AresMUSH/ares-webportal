@@ -21,10 +21,9 @@ export default Controller.extend({
             
       api.requestOne('searchHelp', { 
         searchText: this.searchText
-      }, null)
+      })
       .then( (response) => {
         if (response.error) {
-          this.flashMessages.error("Oops!  Something went wrong when the website talked to the game.  Please try again and alert staff if the problem persists.");          
           return;
         }
         this.set('searchResults', response);

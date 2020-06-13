@@ -6,12 +6,16 @@ export default Controller.extend({
   flashMessages: service(),
   searchText: '',
   searchTitle: '',
+  searchStatus: '',
+  searchCategory: '',
   searchSubmitter: '',
   searchResults: null,
     
   resetOnExit: function() {
     this.set('searchText', '');
     this.set('searchTitle', '');
+    this.set('searchCategory', '');
+    this.set('searchStatus', '');
     this.set('searchSubmitter', '');
     this.set('searchResults', null);
   },
@@ -26,7 +30,9 @@ export default Controller.extend({
       api.requestMany('searchJobs', { 
         searchSubmitter: this.searchSubmitter,
         searchTitle: this.searchTitle,
-        searchText: this.searchText
+        searchText: this.searchText,
+        searchCategory: this.searchCategory,
+        searchStatus: this.searchStatus
       }, null)
       .then( (response) => {
         if (response.error) {
@@ -35,6 +41,13 @@ export default Controller.extend({
         }
         this.set('searchResults', response);
       });
+    },
+    changeSearchStatus(status) {
+      this.set('searchStatus', status);
+    },
+    changeSearchCategory(cat) {
+      this.set('searchCategory', cat);
     }
+    
   }
 });

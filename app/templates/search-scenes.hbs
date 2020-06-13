@@ -4,8 +4,6 @@
 
 <SearchBar />
 
-<p>The search will only match scenes that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
-
 <hr>
 
 {{#if searchResults}}
@@ -92,22 +90,6 @@
   
 </div>
 
-
-<div class="row">
-  
-  <div class="col col-xs-3">
-        <label>Summary and Log:</label>
-  </div>
-  
-  <div class="col col-xs-9">
-        <p><Input @type="text" @size={{25}} @id="log" @value={{searchLog}} @enter={{action "search"}} /></p>
-
-        <p class="hint">Matches a whole word or phrase from a log's summary or full log text.</p>
-  </div>
-  
-</div>
-
-
     
     <div class="row">
         <div class="col col-xs-12">
@@ -118,6 +100,8 @@
             </div>
         </div>
     </div>
+
+<p class="search-hint">Search is case-insensitive and matches ALL specified criteria.</p>
 
 </div>
 

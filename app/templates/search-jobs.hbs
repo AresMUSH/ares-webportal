@@ -11,8 +11,6 @@
 
 <SearchBar />
   
-<p>The search will only match requests/jobs that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
-
 <hr>
 
 {{#if searchResults}}
@@ -33,7 +31,7 @@
   
 </div>
 
-{{#if model.jobs_admin}}
+{{#if model.is_job_admin}}
 
 <div class="row">
   
@@ -44,6 +42,67 @@
   <div class="col col-xs-9">
         <p><Input @type="text" @size={{25}} @id="submitter" @value={{searchSubmitter}} @enter={{action "search"}} /></p>
         <p class="hint">Enter a player's name.  Remember that automated jobs come from "System".</p>
+  </div>
+  
+</div>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>Category:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+    
+    {{#if searchCategory}}
+      <span class="label job-category job-category-{{searchCategory}}">&nbsp;</span> {{searchCategory}}    
+    {{else}}
+      Any
+    {{/if}}
+      <ul class="nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+          <span class="btn btn-default" href="#">Category <span class="caret"></span></span> </a>
+          <ul class="dropdown-menu">
+          {{#each model.category_values as |category| }}
+            <li><a href="#" {{action 'changeSearchCategory' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+          {{/each}}
+          </ul>
+        </li>
+    </ul>
+    
+  </div>
+  
+</div>
+
+<div class="row">
+  
+  <div class="col col-xs-3">
+        <label>Status:</label>
+  </div>
+  
+  <div class="col col-xs-9">
+    
+    {{#if searchStatus}}
+      <span class="label job-status job-status-{{searchStatus}}">&nbsp;</span> {{searchStatus}}    
+    {{else}}
+      Any
+    {{/if}}
+    
+      <ul class="nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+          <span class="btn btn-default" href="#">Status <span class="caret"></span></span> </a>
+          <ul class="dropdown-menu">
+          {{#each model.status_values as |status| }}
+            <li><a href="#" {{action 'changeSearchStatus' status}}><span class="label job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
+          {{/each}}
+          </ul>
+        </li>
+    </ul>
+    
   </div>
   
 </div>
@@ -75,6 +134,8 @@
             </div>
         </div>
     </div>
+
+<p class="search-hint">Search is case-insensitive and matches ALL specified criteria.</p>
 
 </div>
 
