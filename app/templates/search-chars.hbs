@@ -4,8 +4,6 @@
 
 <SearchBar />
 
-<p>The search will only match characters that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
-
 <hr>
 
 {{#if searchResults}}
@@ -19,6 +17,7 @@
 <div class="row">
 {{#each-in model.cgInfo.group_options as |key group| }}
   
+  {{#if (not (eq key 'all_ranks'))}}
   <div class="col col-xs-3 col-md-2">
     <label>{{group.name}}:</label>
   </div>
@@ -26,6 +25,7 @@
   <div class="col col-xs-9 col-md-4">
         <p><Input @type="text" @size={{25}} @value={{mut (get searchGroups key)}} @enter={{action "search"}} /></p>
   </div>
+  {{/if}}
   
 {{/each-in}}
 </div>
@@ -93,9 +93,12 @@
         </div>
     </div>
 
-<hr>
+<p class="search-hint">Search is case-insensitive and matches ALL specified criteria.</p>
 
 </div>
+
+<hr>
+
 
 <FlashMessages />
 

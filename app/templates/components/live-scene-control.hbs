@@ -20,7 +20,7 @@
 </div>
 
     {{#if sceneAlerts}}
-    <div class="alert alert-warning">
+    <div class="alert alert-warning scene-alerts">
       {{#each sceneAlerts as |alert|}}
       <p>{{alert}}</p>
       {{/each}}
@@ -116,7 +116,7 @@
     </div>
 
     {{#if sceneAlerts}}
-    <div class="alert alert-warning">
+    <div class="alert alert-warning scene-alerts">
       {{#each sceneAlerts as |alert|}}
       <p>{{alert}}</p>
       {{/each}}
@@ -134,21 +134,10 @@
           {{#if (not scene.completed)}}
  
             <PoseOrder @poseOrder={{scene.pose_order}} @playerName={{playerName}} />
-   
-             <div class="pull-right markdown-controls">
-                 <LinkTo @route='help-topic' @model='markdown' @target="_blank">
-                   <TooltipIcon @position="left" @message="Formatting help." @icon="fa fa-question-circle" />
-                 </LinkTo>
-
-                 <LinkTo @route='emoji' @target="_blank">
-                   <TooltipIcon @position="left" @message="Emoji help." @icon="fa fa-smile" />
-                 </LinkTo>
-             </div>
              
-             <CmdBox @value={{scenePose}} @rows={{6}} @allowMultiLine={{true}} @class="scene-pose-box" @onEnter={{action "addPose" poseType.id}} />
+             <MarkdownEditor @text={{scenePose}} @rows={{6}} @allowMultiLine={{true}} @class="scene-pose-box" @onEnter={{action "addPose" poseType.id}} />
 
              
-           
            {{/if}}
    
 

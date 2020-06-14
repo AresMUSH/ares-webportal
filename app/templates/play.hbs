@@ -192,7 +192,7 @@
                  {{char.name}}
                </PowerSelectMultiple>
       
-               <CmdBox @value={{chatMessage}} @class="chat-box" @cols="80" @rows="6" @onEnter={{action "startConversation"}} />
+               <MarkdownEditor @text={{chatMessage}} @class="chat-box" @cols="80" @rows="6" @onEnter={{action "startConversation"}} />
       
            </div>
          </div>

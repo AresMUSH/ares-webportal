@@ -15,6 +15,14 @@
             <TooltipIcon @position="right" @message="Enter targets or other options for your action, like Dummy/burst,called:head." @icon="fa fa-question-circle" />
             <Input @type="text" @size={{25}} @id="actionArgs" @value={{model.action_args}} />
             
+            <p>
+            <b>Available Targets:</b>
+            <TooltipIcon @position="right" @message="Click a target to add them to your action args list." @icon="fa fa-question-circle" />
+            
+            {{#each model.options.targets as |target|}}
+              <a href="#" {{action 'addTarget' target}}>{{target}}</a>
+            {{/each}}
+            </p>
             
     </div>
  

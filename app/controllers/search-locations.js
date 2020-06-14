@@ -5,12 +5,12 @@ export default Controller.extend({
   gameApi: service(),
   flashMessages: service(),
   searchName: '',
-  searchDesc: '',
+  searchArea: '',
   searchResults: null,
     
   resetOnExit: function() {
     this.set('searchName', '');
-    this.set('searchDesc', '');
+    this.set('searchArea', '');
     this.set('searchResults', null);
   },
     
@@ -22,7 +22,7 @@ export default Controller.extend({
       let api = this.gameApi;
             
       api.requestMany('searchLocations', { 
-        searchDesc: this.searchDesc,
+        searchArea: this.searchArea,
         searchName: this.searchName
       }, null)
       .then( (response) => {

@@ -14,6 +14,7 @@
                 {{#if model.can_manage}}
                  <li> <LinkTo @route="combat-setup" @model={{model.id}}>Setup NPCs</LinkTo></li>
                  <li> <LinkTo @route="combat-teams" @model={{model.id}}>Setup Teams</LinkTo></li>
+                 <li> <a href="#" {{action "aiActions"}}>NPC AI Actions</a></li>
                  <li> <a href="#" {{action (mut confirmStopCombat) true}}>Stop Combat</a></li>
                 {{/if}}
                 <li><LinkTo @route="combat-log" @model={{model.id}}>View Log</LinkTo></li> 

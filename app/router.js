@@ -32,6 +32,9 @@ Router.map(function() {
   this.route('chargen');
   this.route('chargen-review');
   this.route('chat');
+  this.route('channels-manage');
+  this.route('channel-create');
+  this.route('channel-edit', { path: '/channel-edit/:id' });
   this.route('client');
   this.route('combat', { path: '/combat/:id' });
   this.route('combat-log', { path: '/combat/:id/log' });

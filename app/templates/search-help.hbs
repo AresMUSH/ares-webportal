@@ -4,8 +4,6 @@
 
 <SearchBar />
 
-<p>The search will only match help topics that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
-
 <hr>
 
 {{#if searchResults}}
@@ -17,7 +15,7 @@
 <div class="row">
   
   <div class="col col-xs-3">
-    <label>Text:</label>
+    <label>Command:</label>
   </div>
   
   <div class="col col-xs-9">
@@ -35,6 +33,8 @@
             </div>
         </div>
     </div>
+
+<p class="search-hint">Search is case-insensitive and matches ALL specified criteria.</p>
 
 </div>
 
@@ -54,23 +54,6 @@
 {{/each}}
 </ul>
 
-
-{{else}}
-None
-{{/if}}
-
-<h2>Other Possible Matches</h2>
-
-{{#if searchResults.possible_matches}}
-
-<ul>
-{{#each searchResults.possible_matches as |topic|}}
-<li><LinkTo @route="help-topic" @model={{topic.id}}>{{topic.name}}</LinkTo> - {{topic.summary}}</li>
-{{/each}}
-</ul>
-
-{{else}}
-None
 {{/if}}
 
 {{else}}

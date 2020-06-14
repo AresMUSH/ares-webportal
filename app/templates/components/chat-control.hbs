@@ -42,7 +42,7 @@
 
 
  {{#if chatAlerts}}
- <div class="alert alert-warning">
+ <div class="alert alert-warning chat-alerts">
    {{#each chatAlerts as |alert|}}
    <p>{{alert}}</p>
    {{/each}}
@@ -73,7 +73,7 @@
  </div>
 
  {{#if chatAlerts}}
- <div class="alert alert-warning">
+ <div class="alert alert-warning chat-alerts">
    {{#each chatAlerts as |alert|}}
    <p>{{alert}}</p>
    {{/each}}
@@ -81,17 +81,7 @@
  {{/if}}
 
  {{#if canTalk}}
-     <div class="pull-right markdown-controls">
-         <LinkTo @route='help-topic' @model='markdown' @target="_blank">
-           <TooltipIcon @position="left" @message="Formatting help." @icon="fa fa-question-circle" />
-         </LinkTo>
-
-         <LinkTo @route='emoji' @target="_blank">
-           <TooltipIcon @position="left" @message="Emoji help." @icon="fa fa-smile" />
-         </LinkTo>
-     </div>
-
-   <CmdBox @value={{chatMessage}} @class="chat-box" @cols="80" @rows="6" @onEnter={{action "send"}} />
+   <MarkdownEditor @text={{chatMessage}} @class="chat-box" @allowMultiLine={{true}} @cols="80" @rows="6" @onEnter={{action "send"}} />
  {{/if}}
 
 
