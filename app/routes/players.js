@@ -4,9 +4,14 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(DefaultRoute, {
     gameApi: service(),
+    headData: service(),
     
     model: function() {
         let api = this.gameApi;
         return api.requestMany('players');           
+    },
+    
+    afterModel: function() {
+      this.set('headData.robotindex', true);
     }
 });

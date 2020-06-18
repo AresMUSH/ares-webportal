@@ -20,12 +20,15 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, AresConfig, 
         this.router.on('routeDidChange', function() {
           self.doReload();
         });
+        this.router.on('routeWillChange', function() {
+          self.set('headData.robotindex', false); 
+        });
     },
     afterModel(model) {
       try {
         this.set('headData.mushName', model.get('game.name'));
         this.set('headData.portalUrl', this.gameApi.portalUrl());
-        this.set('headData.mushDesc', model.get('game.description'));  
+        this.set('headData.mushDesc', model.get('game.description')); 
         }
         catch(error) {
           // Don't do anything here.

@@ -5,6 +5,7 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 export default Route.extend(DefaultRoute, {
     gameApi: service(),
     flashMessages: service(),
+    headData: service(),
     
     model: function(params) {
         let api = this.gameApi;
@@ -21,6 +22,7 @@ export default Route.extend(DefaultRoute, {
             this.flashMessages.warning('Page not found.');
             this.transitionTo('wiki');
           }
-        }  
+        }
+        this.set('headData.robotindex', true);
     }    
 });
