@@ -123,7 +123,7 @@ Router.map(function() {
   this.route('wiki');
   this.route('wiki-page', { path: '/wiki/:id'});
   this.route('wiki-all', { path: '/wiki/all'});
-  this.route('wiki-create', { path: '/wiki/create', query_params: ['title']});
+  this.route('wiki-create', { path: '/wiki/create', query_params: ['title', 'category', 'template']});
   this.route('wiki-edit', { path: '/wiki/:id/edit'});
   this.route('wiki-source', { path: '/wiki/:page_id/source/:version_id'});
   this.route('wiki-tag', { path: '/wiki/tag/:id'});
