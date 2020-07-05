@@ -28,7 +28,7 @@
                 {{#if ship.is_npc}}
                 <b>{{ship.name}}</b> (NPC)
                 {{else}}
-                <b><LinkTo @route="char" @model={{ship.name}}>{{ship.name}}</LinkTo></b>
+                <b><LinkTo @route="char" @model={{ship.name}}>{{ship.name_and_nickname}}</LinkTo></b>
                 {{/if}}
                 <AnsiFormat @text={{ship.text}} />
             </div>

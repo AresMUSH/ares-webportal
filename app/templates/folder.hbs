@@ -1,0 +1,32 @@
+{{title 'Files'}}
+
+<h1>{{model.folder}}</h1>
+
+<table class="table table-striped">
+
+  {{#each model.files as |file|}}
+  <tr>
+  <td><LinkTo @route="file" @models={{array file.folder file.name}}>{{file.name}}</LinkTo></td>
+  <td>{{file.size}}KB</td>
+  <td>&nbsp;</td>
+  </tr>
+  {{/each}}
+</table>
+
+
+{{#if isApproved}}
+
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+          <button {{action (mut showUpload) true}} class="btn btn-primary">Upload</button>
+  </div>
+  </div>
+</div>
+
+
+  {{#if showUpload}}
+    <FileUploader @uploaded={{action "uploaded"}} @folder="{{model.folder}}" />
+  {{/if}}
+{{/if}}

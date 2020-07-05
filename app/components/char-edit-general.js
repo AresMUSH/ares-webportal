@@ -7,7 +7,7 @@ export default Component.extend({
 
   genders: computed(function() {
     let list = [];
-    this.get('model.cgInfo.genders').forEach(function(g) {
+    this.get('model.char.genders').forEach(function(g) {
       list.push({ value: g });
     });
     return list;

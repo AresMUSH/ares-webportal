@@ -8,6 +8,6 @@ export default Route.extend(ReloadableRoute, DefaultRoute, {
     
     model: function() {
         let api = this.gameApi;
-        return api.requestMany('files');
+        return api.requestMany('folders');
     }
 });

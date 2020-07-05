@@ -8,6 +8,16 @@ export default Route.extend(AuthenticatedRoute, RouteResetOnExit, {
         
     model: function(params) {
         let api = this.gameApi;
-        return api.requestOne('blankWiki', { title: params['title'] });
+        return api.requestOne('blankWiki', 
+        { title: params['title'], 
+          category: params['category'], 
+          template: params['template'],
+          tags: params['tags'] 
+       });
+    },
+    
+    setupController: function(controller, model) {
+      this._super(controller, model);
+      controller.setup(model);
     }
 });
