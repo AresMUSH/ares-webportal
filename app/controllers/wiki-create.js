@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
-    queryParams: [ 'title', 'template', 'category' ],
+    queryParams: [ 'title', 'template', 'category', 'tags' ],
 
     setup: function() {
       this.set('model.text', this.get('model.template.text'));
@@ -12,6 +12,7 @@ export default Controller.extend({
     
     resetOnExit: function() {
       // Reset query params.
+      this.set('tags', null);
       this.set('title', null);
       this.set('category', null);
       this.set('template', null);

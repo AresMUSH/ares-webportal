@@ -1,13 +1,12 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
 
-export default Route.extend(ReloadableRoute, DefaultRoute, {
+export default Route.extend(DefaultRoute, {
     gameApi: service(),
     
-    model: function() {
+    model: function(params) {
         let api = this.gameApi;
-        return api.requestMany('folders');
+        return api.requestOne('files', {folder: params['folder']});
     }
 });

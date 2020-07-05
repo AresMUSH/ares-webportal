@@ -1,39 +1,18 @@
 {{title 'Files'}}
 <h1>Files</h1>
 
-<p>Click on a folder to show or hide that folder's files.</p>
-
 <p><a href="#upload"><i class="fas fa-angle-double-down"></i> Jump to Upload</a></p>
 
+
 {{#each model as |folder|}}
 
-        <a data-toggle="collapse" href="#collapse-{{folder.name}}">
+<span class="col col-xs-3">
+        <LinkTo @route="folder" @model={{folder.name}}>
             <i class="far fa-folder-open" aria-hidden="true"></i>
-            {{folder.name}} &nbsp; &nbsp;
-        </a>
+            {{folder.name}}
+        </LinkTo>
+</span>
 {{/each}}
-
-{{#each model as |folder|}}
-
-    <div id="collapse-{{folder.name}}" class="{{if folder.name 'panel-collapse collapse' 'panel-default' }}">
-      <div class="panel-body">
-      
-
-      <table class="table table-striped">
-
-      {{#each folder.files as |file|}}
-      <tr>
-      <td><LinkTo @route="file" @models={{array file.folder file.name}}>{{file.name}}</LinkTo></td>
-      <td>{{file.size}}KB</td>
-      <td>&nbsp;</td>
-      </tr>
-      {{/each}}
-      </table>
-
-      </div>
-    </div>
-{{/each}}
-
 
 
 <a name="upload"></a>
