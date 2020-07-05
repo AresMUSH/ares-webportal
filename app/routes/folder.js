@@ -4,14 +4,9 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(DefaultRoute, {
     gameApi: service(),
-    headData: service(),
     
-    model: function() {
+    model: function(params) {
         let api = this.gameApi;
-        return api.requestOne('abilities');
-    },
-    
-    afterModel: function() {
-      this.set('headData.robotindex', true);
+        return api.requestOne('files', {folder: params['folder']});
     }
 });
