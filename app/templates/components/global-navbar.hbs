@@ -68,7 +68,7 @@
                 </ul>
               </li>            
             {{/each}}
-                    
+
             {{#if (or isAdmin isCoder)}}
             
                    <li class="dropdown">
@@ -89,6 +89,20 @@
                              </ul>
                            </li>
                    
+            {{/if}}
+            
+            {{#if isWikiMgr}}
+            <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+               
+                      Admin <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><LinkTo @route="setup-colors">Theme Colors</LinkTo></li>
+                        <li><LinkTo @route="textfile" @models={{array 'text' 'website.txt'}}>Home Page Text</LinkTo></li>
+                        <li><LinkTo @route="textfile" @models={{array 'style' 'custom_style.scss'}}>Custom CSS</LinkTo></li>
+                        <li><LinkTo @route="files">Files</LinkTo></li>
+                      </ul>
+                    </li>
             {{/if}}
             
            </ul>
