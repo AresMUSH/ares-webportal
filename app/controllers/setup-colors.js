@@ -20,7 +20,12 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 
                 this.flashMessages.success('Colors saved.  You will need to refresh the page for the new colors to take effect.');
-                this.transitionToRoute('setup');
+                if (this.isWikiMgr) {
+                  this.transitionToRoute('home');
+                } else {
+                  this.transitionToRoute('setup');  
+                }
+                
                 
             });
         }
