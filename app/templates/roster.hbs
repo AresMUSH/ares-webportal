@@ -3,73 +3,51 @@
 
 <p>The roster contains ready-made characters that you can just pick up and play.  Some have been played before, as indicated by a <span class="label label-info">Previously Played</span> tag.  For most characters, you can claim them just by logging onto the game and using the roster command.  Characters marked with <span class="label label-warning">App Required</span> require a little more work so you'll need to talk to the contact person before claiming them.</p>
     
-
-
 {{#each model.roster as |group|}}
+
 <h2>{{group.name}}</h2>
 
-<div class="table-responsive">
-<table class="roster-table">
-    <thead>
-        <th>Character</th>
-        <th>Summary</th>
-        {{#each model.titles as |title|}}
-        <th>{{title}}</th>
-        {{/each}}
-        <th>Contact</th>
-        <th>Special Notes</th>
-        <th></th>
-    </thead>
-    <tbody>
-    
     {{#each group.chars as |char|}}
     
-    <tr>
-        <td>
-            <CharIcon @char={{char}} />
-         </td>
-         
-         
-         <td>
-             <b>{{char.military_name}}</b>
-             <br>
-              <AnsiFormat @text={{char.roster_notes}} />
-         </td>
-         
-         {{#each-in char.fields as |field value| }}
-         <td>{{value}}</td>
-         {{/each-in}}
-         
-         
-         <td>
-            {{char.contact}}
-        </td>
-        
-         <td>             
-                 {{#if char.previously_played}}
-                 <span class="label label-info">Previously Played</span>
-                 {{/if}}
-             
-                 {{#if char.app_required}}
-                 <span class="label label-warning">App Required</span>
-                 {{/if}}
-                 
-                 
-         </td>
-         
-         <td>
-              <LinkTo @route="roster-claim" @model={{char.id}} class="btn btn-primary">Claim</LinkTo>
-         </td>
-
-        
+    <div class="roster-char-title">{{char.military_name}}</div>
     
-    </tr>
-        
-    {{/each}}
-    </tbody>
-</table>
-</div>
 
+    <div class="row">
+      <div class="col col-xs-12 col-sm-3">
+          <CharIcon @char={{char}} />
+      </div>
+      <div class="col col-xs-12 col-sm-9">
+          
+          <p><AnsiFormat @text={{char.roster_notes}} /></p>
+           
+          
+          {{#each-in char.fields as |field value| }}
+          <div><b>{{field}}:</b> {{value}}</div>
+          {{/each-in}}
+          
+          <p><b>Contact:</b> {{char.contact}} </p>
+            
+                  
+           <div class="roster-char-warnings">
+               {{#if char.previously_played}}
+             <span class="label label-info">Previously Played</span>
+             {{/if}}
+      
+             {{#if char.app_required}}
+             <span class="label label-warning">App Required</span>
+             {{/if}}
+            
+           </div>
+           
+             
+          <div>  
+             <LinkTo @route="roster-claim" @model={{char.id}} class="btn btn-primary">Claim</LinkTo>
+           </div>
+             
+        </div>
+      </div>
+    
+    {{/each}}
 {{/each}}
 
 
