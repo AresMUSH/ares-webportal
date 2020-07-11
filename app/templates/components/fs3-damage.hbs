@@ -1,17 +1,12 @@
-<table class="table">
-    <thead>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Original Severity</th>
-        <th>Current Severity</th>
-    </thead>
-    
-      {{#each char.fs3.damage as |damage|}}
-      <tr>
-          <td>{{damage.date}}</td>
-          <td>{{damage.description}}</td>
-          <td><AnsiFormat @text={{damage.original_severity}} /></td>
-          <td><AnsiFormat @text={{damage.severity}} /></td>
-       </tr>
-      {{/each}}
-</table>
+{{#each char.fs3.damage as |damage|}}
+
+
+<div class="fs3-damage-block">
+  
+  <div class="row">
+    <div class="col col-xs-12 col-sm-4">  <div class="fs3-damage-title">{{damage.description}}</div> </div>
+    <div class="col col-xs-12 col-sm-4">{{damage.date}}</div>
+    <div class="col col-xs-12 col-sm-4"><AnsiFormat @text={{damage.original_severity}} /> (now <AnsiFormat @text={{damage.severity}} />)</div>
+  </div>
+</div>
+{{/each}}

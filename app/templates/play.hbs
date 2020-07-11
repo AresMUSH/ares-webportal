@@ -8,7 +8,7 @@
      <div class="play-sidebar">
      
      <button class="btn btn-default visible-sm visible-xs hidden-md" type="button" data-toggle="collapse" data-target="#sceneMenuCollapse" aria-expanded="false" aria-controls="sceneMenuCollapse">
-         <i class="fas fa-bars"></i>
+         <TooltipIcon @position="right" @message="Show/hide play controls." @icon="fab fa-elementor" />
          {{#if anyNewActivity}}
          <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
          {{/if}}

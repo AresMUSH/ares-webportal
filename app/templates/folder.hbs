@@ -2,13 +2,14 @@
 
 <h1>{{model.folder}}</h1>
 
+<p><LinkTo @route="files"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Files</LinkTo></p>
+
 <table class="table table-striped">
 
   {{#each model.files as |file|}}
   <tr>
   <td><LinkTo @route="file" @models={{array file.folder file.name}}>{{file.name}}</LinkTo></td>
   <td>{{file.size}}KB</td>
-  <td>&nbsp;</td>
   </tr>
   {{/each}}
 </table>

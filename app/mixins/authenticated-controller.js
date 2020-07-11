@@ -21,6 +21,10 @@ export default Mixin.create({
         return this.get('session.data.authenticated.is_coder');        
     }),
     
+    isWikiMgr: computed('session.data.authenticated.is_wiki_mgr', function() {
+        return this.get('session.data.authenticated.is_wiki_mgr');        
+    }),
+    
     currentUser: computed('session.data.authenticated', function() {
         return this.get('session.data.authenticated');
     })

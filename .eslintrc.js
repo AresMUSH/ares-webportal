@@ -38,7 +38,8 @@ module.exports = {
       'no-console': 'off',
       'ember/no-new-mixins': 'off',
       'ember/jquery-ember-run': 'off',
-      'ember/no-observers': 'off'
+      'ember/no-observers': 'off',
+      'ember/no-jquery': 'error'
     },
       
   overrides: [
@@ -61,6 +62,13 @@ module.exports = {
       env: {
         browser: false,
         node: true
+      },
+      plugins: ['node'],
+      extends: ['plugin:node/recommended'],
+      rules: {
+        // this can be removed once the following is fixed
+        // https://github.com/mysticatea/eslint-plugin-node/issues/77
+        'node/no-unpublished-require': 'off'
       }
    
     }]

@@ -16,49 +16,43 @@
 </div>
 {{/if}}
 
-<div class="table-responsive">
-<table class="table table-striped">
-    
-<tr>
-  <th></th>
-  <th class="col-xs-3">Title / Status</th>
-  <th class="col-xs-5">Participants / Location / Summary</th>
-  <th class="col-xs-1">IC Date</th>
-  <th class="col-xs-2">Last Activity</th>
-  <th class="col-xs-1"></th>
-</tr>
 
 {{#each model.active as |scene| }}
-<tr>
-    <td>
-        {{#if scene.is_unread}}
-        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
-        {{/if}}
-        
-    </td>
-    <td>
-        
-        <LinkTo @route="scene-live" @model={{scene.id}}>Scene {{scene.id}}
-        {{#if scene.title}}
-         - {{scene.title}}
-        {{/if}}
-        </LinkTo>
-        <br>
-        <ScenePrivacyTag @scene={{scene}} />
-        <SceneTypeTag @scene={{scene}} />
-        {{#if scene.content_warning}}
-        <ContentWarningTag @warning={{scene.content_warning}} @position="top" />
-        {{/if}}
-    </td>
-    <td>
+
+<div class="live-scenes-block">
+  <div class="row live-scenes-heading">
+    <div class="col col-xs-8">
+      {{#if scene.is_unread}}
+      <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
+      {{/if}}
+
+      <LinkTo @route="scene-live" @model={{scene.id}} class="scene-title">Scene {{scene.id}}
+      {{#if scene.title}}
+       - {{scene.title}}
+      {{/if}}
+      </LinkTo>
+   
+    </div>
+    
+    <div class="col col-xs-4">
+      <ScenePrivacyTag @scene={{scene}} />
+      <SceneTypeTag @scene={{scene}} />
+      {{#if scene.content_warning}}
+      <ContentWarningTag @warning={{scene.content_warning}} @position="top" />
+      {{/if}}
       
+    </div>
+  </div>
+    
+
+  <div class="row">
+    <div class="col col-xs-12 col-sm-8">
+      <div class="live-scenes-contents">
         {{#each scene.participants as |char|}}
         <CharIconInline @char={{char}} />
         {{/each}}
-        
+      
         {{#if (or scene.can_view (not scene.is_private))}}
-          <p>{{scene.location}}</p>
-        
           {{#if scene.summary}}
           <p><AnsiFormat @text={{scene.summary}} />
           </p>
@@ -66,47 +60,48 @@
         {{/if}}
 
         {{#if scene.limit}}
-        <p><b>Limited Participation:</b> {{scene.limit}}</p>
+        <div><span class="scene-info-label">Limited Participation:</span> {{scene.limit}}</div>
         {{/if}}
-        
-    </td>
-    <td>
-      <p>{{scene.icdate}}</p>
-    </td>
-    <td>
-      {{#if scene.last_posed}}
-      {{scene.last_posed}} @ 
-      {{/if}}
+
+        <div><span class="scene-info-label">IC Date:</span> {{scene.icdate}}</div>
       
-      {{scene.updated}} 
+        {{#if (or scene.can_view (not scene.is_private))}}
+          <div><span class="scene-info-label">Location:</span> {{scene.location}}</div>
+        {{/if}}
+
+        <div>
+          <span class="scene-info-label">Last Activity:</span> {{#if scene.last_posed}}
+        {{scene.last_posed}} @ 
+        {{/if}}
       
-    </td>
-    <td>
+        {{scene.updated}} 
+        </div>
+      </div>
+    </div>
+    
+    <div class="col col-xs-12 col-sm-4">
+     <div class="live-scenes-controls">
       {{#if scene.watching}}
-        <a href="#" {{action 'stopWatching' scene.id}}>
-          <TooltipIcon @position="left" @message="Stop watching scene." @icon="fa fa-eye-slash" />
-        </a>
+        <a href="#" {{action 'stopWatching' scene.id}}><i class="fa fa-eye-slash" aria-label="Stop Watching"></i> Unwatch</a>
+
       {{else}}
         {{#if scene.can_view}}
-          <a href="#" {{action 'watchScene' scene.id}}>
-            <TooltipIcon @position="left" @message="Watch scene." @icon="fa fa-eye" />
-          </a>
-
+          <a href="#" {{action 'watchScene' scene.id}}><i class="fa fa-eye" aria-label="Watch"></i> Watch</a>
+      
           {{#if (not scene.participating) }}
-            <a href="#" {{action 'joinScene' scene.id}}>
-              <TooltipIcon @position="left" @message="Join scene." @icon="fa fa-sign-in-alt" />
-            </a>
+          <a href="#" {{action 'joinScene' scene.id}}><i class="fa fa-sign-in-alt" aria-label="Join"></i> Join</a>
           {{/if}}
         {{/if}}
-    
+  
       {{/if}}
-    </td>
-</tr>
-{{/each}}
-
-</table>
-
+      </div>
+    </div>
+      
+  </div>
+    
+  
 </div>
+{{/each}}
 
 
 {{#if model.unshared}}

@@ -1,7 +1,8 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
-export default Controller.extend({    
+export default Controller.extend(AuthenticatedController, {    
     gameApi: service(),
     
     actions: {
@@ -20,8 +21,12 @@ export default Controller.extend({
               this.flashMessages.success('Config saved!  You will need to refresh the page for the new styles to take effect.');
             }
             else {
-              this.flashMessages.success('Config saved!');
-              this.transitionToRoute('setup');
+              this.flashMessages.success('Config saved! You may need to refresh the page to see the changes.');
+              if (this.isWikiMgr) {
+                this.transitionToRoute('home');
+              } else {
+                this.transitionToRoute('setup');  
+              }
             }
             
             });  
