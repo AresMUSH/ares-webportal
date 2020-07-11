@@ -22,7 +22,7 @@
     <tr>
         <th class="col-xs-3">Plot</th>
         <th class="col-xs-2">Storytellers</th>
-        <th class="col-xs-3">Dates</th>
+        <th class="col-xs-3 hidden-xs hidden-sm">Dates</th>
         <th class="col-xs-4">Summary</th>
     </tr>
 </thead>
@@ -40,7 +40,7 @@
             <LinkTo @route="char" @model="{{storyteller.name}}">{{storyteller.name}}</LinkTo>
           {{/each}}
         </td>
-        <td>
+        <td class="hidden-xs hidden-sm">
         {{plot.start_date}} - {{plot.end_date}}
         </td>        
         <td>

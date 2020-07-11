@@ -1,4 +1,4 @@
-    <div class="col-md-4 col-sm-12 col-xs-12">
+    <div class="col-md-4 col-sm-12 col-xs-12 profile-image-wrap">
     {{#if char.profile_image.name}}
             <LinkTo @route="file" @models={{array char.profile_image.folder char.profile_image.name}}>
                 <img src="/game/uploads/{{char.profile_image.path}}" alt="{{char.name}}'s icon"  class="profile-image">
@@ -8,7 +8,7 @@
     {{/if}}
     </div>
 
-    <div class="col-md-8 col-sm-12 col-xs-12">        
+    <div class="col-md-8 col-sm-12 col-xs-12 profile-demo-wrap">        
 
         <div class="profile-box">
         <div class="profile-title">
