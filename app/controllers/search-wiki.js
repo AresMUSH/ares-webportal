@@ -6,12 +6,14 @@ export default Controller.extend({
   flashMessages: service(),
   searchTitle: '',
   searchTag: '',
+  searchText: '',
   searchCategory: '',
   searchResults: null,
     
   resetOnExit: function() {
     this.set('searchTitle', '');
     this.set('searchTag', '');
+    this.set('searchText', '');
     this.set('searchCategory', '');
     this.set('searchResults', null);
   },
@@ -25,6 +27,7 @@ export default Controller.extend({
             
       api.requestMany('searchWiki', { 
         searchTitle: this.searchTitle,
+        searchText: this.searchText,
         searchTag: this.searchTag,
         searchCategory: this.searchCategory,
       })

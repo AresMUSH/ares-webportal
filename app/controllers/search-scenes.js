@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   gameApi: service(),
+  gameSocket: service(),
   flashMessages: service(),
   searchLog: '',
   searchParticipant: '',
@@ -13,6 +14,7 @@ export default Controller.extend({
   searchType: 'All',
   searchDate: '',
   searchResults: null,
+  searchInProgress: false,
   page: 1,
     
   resetOnExit: function() {
@@ -24,12 +26,37 @@ export default Controller.extend({
     this.set('searchDate', '');
     this.set('searchLocation', '');
     this.set('searchResults', null);
+    this.set('searchInProgress', false);
     this.set('page', 1);
+  },
+  
+  onSearchResults: function(type, msg, timestamp ) {
+      let splitMsg = msg.split('|');
+      let searchType = splitMsg[0];       
+      let searchToken = splitMsg[1];
+      let data = splitMsg[2];
+      let currentUsername = this.get('currentUser.name');
+      
+      if (data) {
+        data = JSON.parse(data);
+      }
+      if (searchType != 'scenes' || searchToken != this.searchInProgress) {
+        return;
+      }
+      this.set('searchInProgress', false);
+      this.set('searchResults', data);
+  },
+  
+  setupCallback: function() {
+      let self = this;
+      this.gameSocket.setupCallback('search_results', function(type, msg, timestamp) {
+          self.onSearchResults(type, msg, timestamp) } );
   },
   
   updateScenesList: function() {
     let api = this.gameApi;
-          
+    this.set('searchResults', null);
+    this.set('searchInProgress', Math.floor(Math.random() * 10000));      
     api.requestOne('searchScenes', { 
       searchLog: this.searchLog,
       searchParticipant: this.searchParticipant,
@@ -38,13 +65,14 @@ export default Controller.extend({
       searchDate: this.searchDate,
       searchType: this.searchType,
       searchLocation: this.searchLocation,
-      page: this.page
+      page: this.page,
+      searchToken: this.searchInProgress
     })
     .then( (response) => {
       if (response.error) {
+        this.set('searchInProgress', false);
         return;
       }
-      this.set('searchResults', response);
     });
   },
   
