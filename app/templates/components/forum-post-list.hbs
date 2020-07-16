@@ -15,12 +15,15 @@
       {{/if}}
     </td>
     <td>
+        {{#if post.is_pinned}}
+        <i class="fa fa-thumbtack" aria-label="Pinned"></i>
+        {{/if}}
          <LinkTo @route="forum-topic" @models={{array post.category_id post.id}}>{{post.title}}</LinkTo>
      </td>
-     <td>{{post.author}} @ {{post.date}}
+     <td>{{post.author}}
      </td>
      <td>
-       {{post.last_activity}}
+       {{post.last_updated_by}} @ {{post.last_activity}}
      </td>
    </tr>
 {{/each}}

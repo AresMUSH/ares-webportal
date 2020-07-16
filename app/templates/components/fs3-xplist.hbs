@@ -12,8 +12,10 @@
           {{#if ability.can_raise}}
             <div class="col col-xs-12 col-sm-4">
               <div class="progress xp-progress">
-                <ProgressBar @currentValue={{ability.xp}} @maxValue={{ability.xp_needed}} @bgColor="bg-success" />
-                {{ability.xp}} / {{ability.xp_needed}}
+                <ProgressBar @currentValue={{ability.xp}} @maxValue={{ability.xp_needed}} @bgColor="bg-success" @showLabel=true>
+                  TEST
+                </ProgressBar>
+                <div class="xp-progress-points">{{ability.xp}} / {{ability.xp_needed}}</div>
               </div>
             </div>
             <div class="col col-xs-12 col-sm-4">

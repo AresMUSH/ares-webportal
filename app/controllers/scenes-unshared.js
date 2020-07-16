@@ -8,7 +8,13 @@ export default Controller.extend(AuthenticatedController, {
     
     actions: {
       
-        changeSceneStatus(sceneId, status) {
+        changeSceneStatus(scene, status) {
+          let sceneId = scene.id;
+          if (status === 'share' && !scene.can_share) {
+            window.scrollTo(0, 50);
+            this.flashMessages.danger("You can't share the scene until all the scene details are set.");
+            return;
+          }
             let api = this.gameApi;
             api.requestOne('changeSceneStatus', { id: sceneId,
                 status: status }, null)
