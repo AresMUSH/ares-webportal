@@ -72,10 +72,10 @@
    </div>
    {{#each model.recent_scenes as |scene|}}
    <p><LinkTo @route="scene" @model={{scene.id}}>{{scene.icdate}} - {{scene.title}}</LinkTo>
-       <SceneTypeTag @scene={{scene}} />
        {{#if scene.content_warning}}
        <ContentWarningTag @warning={{scene.content_warning}} @position="top-left" />
        {{/if}}
+       <SceneTypeTag @scene={{scene}} />
        <br></p>
    {{/each}}
    <br>

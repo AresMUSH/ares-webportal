@@ -1,5 +1,8 @@
 {{title model.title}}
-<h1>{{model.title}}</h1>
+<h1>{{#if model.is_pinned}}
+      <i class="fa fa-thumbtack" aria-label="Pinned"></i>
+    {{/if}}
+    {{model.title}}</h1>
 
 
 <div class="row">
@@ -32,6 +35,17 @@
              <a href="#" {{action (mut confirmDeleteTopic) true}}>
                <TooltipIcon @position="left" @message="Delete topic." @icon="fa fa-trash" />
              </a>
+             {{/if}}
+           {{/if}}
+           {{#if model.can_pin}}
+             {{#if model.is_pinned}}
+               <a href="#" {{action 'pinPost' false}}>
+                 <TooltipIcon @position="left" @message="Unpin topic." @icon="fa fa-thumbtack" />
+               </a>
+             {{else}}
+               <a href="#" {{action 'pinPost' true}}>
+                 <TooltipIcon @position="left" @message="Pin topic." @icon="fa fa-thumbtack" />
+               </a>
              {{/if}}
            {{/if}}
            

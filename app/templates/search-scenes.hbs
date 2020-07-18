@@ -90,6 +90,21 @@
   
 </div>
 
+<div class="row">
+
+  <div class="col col-xs-3">
+        <label>Summary and Log:</label>
+  </div>
+
+  <div class="col col-xs-9">
+        <p><Input @type="text" @size={{25}} @id="log" @value={{searchLog}} @enter={{action "search"}} /></p>
+
+        <p class="hint">Matches a whole word or phrase from a log's summary or full log text.</p>
+  </div>
+
+</div>
+
+{{#if (not searchInProgress)}}
     
     <div class="row">
         <div class="col col-xs-12">
@@ -101,6 +116,8 @@
         </div>
     </div>
 
+{{/if}}
+
 <p class="search-hint">Search is case-insensitive and matches ALL specified criteria.</p>
 
 </div>
@@ -109,7 +126,9 @@
 
 <FlashMessages />
 
-{{#if searchResults.pages}}
+{{#if searchInProgress}}
+<i class="fas fa-spinner fa-spin"></i> Search In Progress...
+{{else if searchResults.pages}}
 
 <SceneList @scenes={{searchResults.scenes}} @pages={{searchResults.pages}} @sceneTypes={{model.sceneTypes}} @filter={{searchType}} @page={{page}} @hideSearch={{true}} @goToPage={{action "goToPage"}} />
 

@@ -1,41 +1,43 @@
 <div class="xp-list">
-  
+
   <div class="char-ability-title">{{category}}</div>
 
-
-{{#each abilities as |ability| }}
-  <div class="xp-ability">
-    <div class="xp-ability-name">{{ability.name}}</div>
-    
-    <div class="row">
-    {{#if ability.can_raise}}
-      <div class="col col-xs-12 col-sm-6">
-      
-        <div class="progress xp-progress">
-          <ProgressBar @currentValue={{ability.xp}} @maxValue={{ability.xp_needed}} @bgColor="bg-success" />
-      
-          {{ability.xp}} / {{ability.xp_needed}}
-        </div>
-      </div>
-      <div class="col col-xs-12 col-sm-6">
-        {{#if (eq ability.days_to_learn 0)}}
-          {{#if (gt xp 0)}}
-            {{#if canLearn}}
-            <a href="#" class="btn btn-default" {{action 'learnAbility' ability}} >Learn</a>
-            {{/if}}
+  <div class="row">
+    {{#each abilities as |ability| }}
+        <div class="xp-ability">
+          <div class="col col-xs-12 col-sm-4">
+            <div class="xp-ability-name">{{ability.name}}</div>
+          </div>
+          
+          {{#if ability.can_raise}}
+            <div class="col col-xs-12 col-sm-4">
+              <div class="progress xp-progress">
+                <ProgressBar @currentValue={{ability.xp}} @maxValue={{ability.xp_needed}} @bgColor="bg-success" @showLabel=true>
+                  TEST
+                </ProgressBar>
+                <div class="xp-progress-points">{{ability.xp}} / {{ability.xp_needed}}</div>
+              </div>
+            </div>
+            <div class="col col-xs-12 col-sm-4">
+              {{#if (eq ability.days_to_learn 0)}}
+                {{#if (gt xp 0)}}
+                  {{#if canLearn}}
+                  <a href="#" class="btn btn-default" {{action 'learnAbility' ability}} >Learn</a>
+                  {{/if}}
+                {{else}}
+                Out of XP
+                {{/if}}
+              {{else}}
+              Learn again in {{ability.days_to_learn}} days
+              {{/if}}
+            </div>
           {{else}}
-          Out of XP
+            <div class="col col-xs-8">
+            At Max
+            </div>
           {{/if}}
-        {{else}}
-        Learn again in {{ability.days_to_learn}} days
-        {{/if}}
-      </div>
-    {{else}}
-      <div class="col col-xs-12">
-      At Max
-      </div>
-    {{/if}}
-    </div>
+        </div>
+        <div class="clearfix"/>
+      {{/each}}
   </div>
-{{/each}}
 </div>
