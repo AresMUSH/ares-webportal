@@ -4,8 +4,6 @@
 
 <SearchBar />
 
-<p>The search will only match forum posts that contain ALL the specified search criteria.  Capitalization doesn't matter and the searches match entire words only.</p>
-
 <hr>
 
 {{#if searchResults}}
@@ -42,7 +40,7 @@
 <div class="row">
   
   <div class="col col-xs-3">
-    <label>Post and Replies:</label>
+    <label>Post and Reply Text:</label>
   </div>
   
   <div class="col col-xs-9">
@@ -61,6 +59,8 @@
             </div>
         </div>
     </div>
+
+<p class="search-hint">Search is case-insensitive and matches ALL specified criteria.</p>
 
 </div>
 

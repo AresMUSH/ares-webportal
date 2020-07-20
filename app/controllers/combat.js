@@ -161,13 +161,23 @@ export default Controller.extend(AuthenticatedController, {
       stopCombat: function() {
         this.set('confirmStopCombat', false);
         let api = this.gameApi;
-        api.requestOne('stopCombat', { id: this.get('model.id') }, null)
+        api.requestOne('stopCombat', { id: this.get('model.id') })
         .then( (response) => {
           if (response.error) {
             return;
           }
           this.flashMessages.success('Combat stopped!');
           this.transitionToRoute('combats');
+        });
+      },
+      aiActions: function() {
+        let api = this.gameApi;
+        api.requestOne('combatAiActions', { id: this.get('model.id') })
+        .then( (response) => {
+          if (response.error) {
+            return;
+          }
+          this.flashMessages.success('Actions set!');
         });
       }
     }

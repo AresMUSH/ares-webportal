@@ -87,13 +87,26 @@ export default Component.extend({
     total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_backgrounds'), this.get('model.cgInfo.fs3.free_backgrounds'), 0, 1);
     total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_languages'), this.get('model.cgInfo.fs3.free_languages'), 0, 1);
     total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_advantages'), 0, 0, this.get('model.cgInfo.fs3.advantages_cost'));
+    
+    let self = this;
+    this.get('model.char.fs3.fs3_action_skills').forEach(function(skill) {
+      total = total + self.specialtyPoints(skill);
+    });
+    
     return total;
   }),
     
+  specialtyPoints: function(skill) {
+    if (skill.specialties) {
+      let count = skill.specialties.filter(s => s.selected).length;
+      return count == 0 ? 0 : (count - 1);
+    } else {
+      return 0;
+    }
+  },
+  
   actionPoints: computed('model.char.fs3.fs3_action_skills.@each.rating', function() {
-    let total = 0;
-    total = total + this.countPointsInGroup(this.get('model.char.fs3.fs3_action_skills'), 0, 1, 1);
-    return total;
+    return this.countPointsInGroup(this.get('model.char.fs3.fs3_action_skills'), 0, 1, 1);
   }),
      
   checkLimits: function(list, limits, title) {

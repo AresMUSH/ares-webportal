@@ -1,7 +1,7 @@
 {{title "Active Scenes"}}
 <h1>Active Scenes</h1>
 
-<p>This list shows scenes that are currently in progress.  Private scenes require an invitation, but open scenes are open to anyone.   You can play in-game or via the web portal.</p>
+<p>This list shows scenes that are currently in progress.  Private scenes require an invitation, but open scenes are open to anyone.   You can play with a MUSH client or through the web portal.</p>
 
 <p>The unread flags <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity Flag"></i></span> show new activity in public scenes or scenes you're watching/participating in.</p>
 
@@ -16,103 +16,115 @@
 </div>
 {{/if}}
 
-<div class="table-responsive">
-<table class="table table-striped">
-
-<tr>
-  <th></th>
-  <th class="col-xs-3">Title / Status</th>
-  <th class="col-xs-5">Participants / Location / Summary</th>
-  <th class="col-xs-1">IC Date</th>
-  <th class="col-xs-2">Last Activity</th>
-  <th class="col-xs-1"></th>
-</tr>
 
 {{#each model.active as |scene| }}
-<tr>
-    <td>
-        {{#if scene.is_unread}}
-        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
-        {{/if}}
 
-    </td>
-    <td>
+<div class="live-scenes-block">
+  <div class="row live-scenes-heading">
 
-        <LinkTo @route="scene-live" @model={{scene.id}}>Scene {{scene.id}}
-        {{#if scene.title}}
-         - {{scene.title}}
-        {{/if}}
-        </LinkTo>
-        <br>
-        <ScenePrivacyTag @scene={{scene}} />
-        <SceneTypeTag @scene={{scene}} />
-        {{#if scene.content_warning}}
-        <ContentWarningTag @warning={{scene.content_warning}} @position="top" />
-        {{/if}}
-    </td>
-    <td>
+    <div class="col col-xs-12 col-sm-6">
+      {{#if scene.is_unread}}
+      <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
+      {{/if}}
 
+      <LinkTo @route="scene-live" @model={{scene.id}} class="scene-title">
+      {{scene.id}} -
+      {{#if scene.title}}
+        {{scene.location}} - {{scene.title}}
+      {{else}}
+        {{scene.location}}
+      {{/if}}
+
+      {{#if scene.content_warning}}
+      <ContentWarningTag @warning={{scene.content_warning}} @position="top" />
+      {{/if}}
+      </LinkTo>
+
+    </div>
+
+    <div class="col col-xs-12 col-sm-4">
+      <ScenePrivacyTag @scene={{scene}} />
+      <SceneTypeTag @scene={{scene}} />
+    </div>
+
+
+
+    <div class="col col-xs-12 col-sm-2">
+      <div class="live-scenes-controls">
+       {{#if scene.watching}}
+         <a href="#" {{action 'stopWatching' scene.id}}><i class="fa fa-eye-slash" aria-label="Stop Watching"></i></a>
+
+       {{else}}
+         {{#if scene.can_view}}
+           <a href="#" {{action 'watchScene' scene.id}}><i class="fa fa-eye" aria-label="Watch"></i></a>
+
+           {{#if (not scene.participating) }}
+           <a href="#" {{action 'joinScene' scene.id}}><i class="fa fa-sign-in-alt" aria-label="Join"></i></a>
+           {{/if}}
+         {{/if}}
+
+       {{/if}}
+       </div>
+      </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col col-xs-12 col-sm-9">
+      <div class="live-scenes-contents">
         {{#each scene.participants as |char|}}
         <CharIconInline @char={{char}} />
         {{/each}}
 
-        {{#if (or scene.can_view (not scene.is_private))}}
-          <p>{{scene.location}}</p>
-
-          {{#if scene.summary}}
-          <p><AnsiFormat @text={{scene.summary}} />
-          </p>
-          {{/if}}
-        {{/if}}
-
         {{#if scene.limit}}
-        <p><b>Limited Participation:</b> {{scene.limit}}</p>
+        <div><span class="scene-info-label">Limited Participation:</span> {{scene.limit}}</div>
         {{/if}}
 
-    </td>
-    <td>
-      <p>{{scene.icdate}}</p>
-    </td>
-    <td>
-      {{#if scene.last_posed}}
-      {{scene.last_posed}} @
-      {{/if}}
-
-      {{scene.updated}}
-
-    </td>
-    <td>
-      {{#if scene.watching}}
-        <a href="#" {{action 'stopWatching' scene.id}}>
-          <TooltipIcon @position="left" @message="Stop watching scene." @icon="fa fa-eye-slash" />
-        </a>
-      {{else}}
-        {{#if scene.can_view}}
-          <a href="#" {{action 'watchScene' scene.id}}>
-            <TooltipIcon @position="left" @message="Watch scene." @icon="fa fa-eye" />
+        {{#if scene.summary}}
+        <div class="scene-summary">
+          <a data-toggle="collapse" href="#details-{{scene.id}}" class="">
+             <i class="fa fa-caret-down" aria-label="Details"></i> Show Details
           </a>
-
-          {{#if (not scene.participating) }}
-            <a href="#" {{action 'joinScene' scene.id}}>
-              <TooltipIcon @position="left" @message="Join scene." @icon="fa fa-sign-in-alt" />
-            </a>
-          {{/if}}
+          <div id="details-{{scene.id}}" class="panel-collapse collapse">
+              <p><AnsiFormat @text={{scene.summary}} />
+              </p>
+          </div>
+        </div>
         {{/if}}
 
-      {{/if}}
-    </td>
-</tr>
-{{/each}}
+      </div>
+    </div>
 
-</table>
+    <div class="col col-xs-12 col-sm-3">
+
+      <div>
+        <span class="scene-info-label">Last:</span>
+        {{#if scene.last_posed}}
+        {{scene.last_posed}},
+        {{/if}}
+        {{scene.last_pose_time_str}}
+      </div>
+      <div>
+      <span class="scene-info-label">Date:</span> {{scene.icdate}}
+      </div>
+    </div>
+
+
+  </div>
+
 
 </div>
+{{/each}}
 
 
 {{#if model.unshared}}
 <br>
 <hr>
-<div class="alert alert-info">You have unshared scenes.  <LinkTo @route="scenes-unshared">View them</LinkTo> to share or download them before they time out.</div>
+<div class="alert alert-info">
+  <p>You have <LinkTo @route="scenes-unshared">unshared scenes</LinkTo>.  Share or download them before they time out.</p>
+  <p><LinkTo @route="scenes-unshared">View Unshared Scenes</LinkTo></p>
+</div>
+
 {{/if}}
 
 {{outlet}}

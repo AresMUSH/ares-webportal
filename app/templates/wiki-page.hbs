@@ -20,7 +20,7 @@
     </div>
 
     <div class="col col-xs-2">
-        <a href="#bottom"><i class="fas fa-chevron-circle-down" aria-hidden="true"></i> Jump to Bottom</a>
+        <a href="#bottom"><i class="fas fa-angle-double-down" aria-hidden="true"></i> Jump to End</a>
     </div>
 </div>
 
@@ -51,6 +51,8 @@
 
   {{#if model.can_delete}}
         <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete Page</button>
+  {{else}}
+        <button class="btn btn-warning" disabled="true">Delete Page</button>
   {{/if}}
       <LinkTo @route="wiki-source" @models={{array model.name model.current_version_id}} class="btn btn-default">Source/History</LinkTo>
 

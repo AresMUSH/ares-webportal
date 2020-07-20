@@ -30,7 +30,7 @@
 
 <thead>
     <th>Skill</th>
-    <th>Linked Attribute</th>
+    <th class="hidden-xs hidden-sm">Linked Attribute</th>
     <th>Description</th>
 </thead>
 
@@ -38,7 +38,7 @@
 {{#each model.action_skills as |ability| }}
 <tr>
     <td>{{ability.name}}</td> 
-    <td>{{ability.linked_attr}}</td> 
+    <td class="hidden-xs hidden-sm">{{ability.linked_attr}}</td> 
     <td>
         {{ability.description}}
         {{#if ability.specialties}}

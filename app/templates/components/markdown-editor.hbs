@@ -1,30 +1,31 @@
 <div class="panel panel-default markdown-editor">
     <div class="panel-body markdown-editor">
-        
-        <div class="pull-right markdown-controls">
-    <a href="#" {{action 'preview'}}>
-        {{#if preview}}
-          <TooltipIcon @position="left" @message="Hide preview." @icon="fa fa-eye-slash" />
-        {{else}}
-          <TooltipIcon @position="left" @message="Show preview." @icon="fa fa-eye" />
-        {{/if}}
-    </a>
+      
+      <div class="markdown-controls">
+  
+          {{#if preview}}
+             <a class="markdown-control-toggle" href="#" {{action 'preview'}}>Write</a>
+             <a class="markdown-control-toggle active">Preview</a>
+          {{else}}
+             <a class="markdown-control-toggle active">Write</a>
+             <a class="markdown-control-toggle" href="#" {{action 'preview'}}>Preview</a>
+          {{/if}}
+          
+          <a href="#" {{action 'showHelp'}}>
+            <TooltipIcon @position="left" @message="Formatting help." @icon="fa fa-question-circle" />
+          </a>
     
-    <a href="#" {{action 'showHelp'}}>
-      <TooltipIcon @position="left" @message="Formatting help." @icon="fa fa-question-circle" />
-    </a>
+          <LinkTo @route='emoji' @target="_blank">
+            <TooltipIcon @position="left" @message="Emoji help." @icon="fa fa-smile" />
+          </LinkTo>
     </div>
-    
-        
-<Textarea @value={{text}} @cols="80" @rows={{rows}} @enter={{onEnter}} />
-{{#if preview}}
 
-<div class="panel panel-default">
-    <div class="panel-body">
-        <AnsiFormat @text={{preview}} />
-        
-    </div>
-</div>
+{{#if preview}}
+  <div class="markdown-preview">
+    <AnsiFormat @text={{preview}} />
+  </div>
+{{else}}
+  <Textarea @value={{text}} @cols="80" @rows={{rows}} @keyDown={{action 'keyDown'}} />
 {{/if}}
 
 </div>

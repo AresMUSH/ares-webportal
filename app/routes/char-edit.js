@@ -11,8 +11,7 @@ export default Route.extend(AuthenticatedRoute, {
         let api = this.gameApi;
         
         return RSVP.hash({
-            char: api.requestOne('profileEdit', { id: params['id'] }),
-            cgInfo: api.requestOne('chargenInfo')
+            char: api.requestOne('profileEdit', { id: params['id'] })
         })
             .then((model) => EmberObject.create(model));
             

@@ -4,16 +4,18 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
-    queryParams: [ 'title' ],
-    template: null,
+    queryParams: [ 'title', 'template', 'category', 'tags' ],
 
-    init: function() {
-      this._super(...arguments);
-      this.set('template', { title: 'blank', text: '' });
+    setup: function() {
+      this.set('model.text', this.get('model.template.text'));
     },
     
     resetOnExit: function() {
-        this.set('title', null);
+      // Reset query params.
+      this.set('tags', null);
+      this.set('title', null);
+      this.set('category', null);
+      this.set('template', null);
     },
     
     actions: {
@@ -42,7 +44,7 @@ export default Controller.extend({
         
         templateChanged(template) {
           this.set('model.text', template.text);
-          this.set('template', template);
+          this.set('model.template', template);
         }
     }
 });

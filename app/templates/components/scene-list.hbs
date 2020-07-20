@@ -25,14 +25,17 @@
 {{#each scenes as |scene|}}
     <tr>
         <td>
-        <LinkTo @route="scene" @model={{scene.id}}>{{scene.icdate}} - {{scene.title}}</LinkTo>
+        <LinkTo @route="scene" @model={{scene.id}}>{{scene.icdate}} - {{scene.title}}
+        </LinkTo> 
         
-        <SceneTypeTag @scene={{scene}} />
-       
-        <p><AnsiFormat @text={{scene.summary}} />
-          {{#if scene.content_warning}}
+        {{#if scene.content_warning}}
           <ContentWarningTag @warning={{scene.content_warning}} @position="top-right" />
           {{/if}}
+
+
+        <SceneTypeTag @scene={{scene}} /> 
+       
+        <p><AnsiFormat @text={{scene.summary}} />
         </p>
         </td>
         <td>

@@ -10,6 +10,7 @@
 
   {{#each-in group as |faction rankGroups|}}
   <h4>{{faction}}</h4>
+  <div class="table-responsive">
   <table>
     <tr>
     {{#each-in rankGroups as |rankGroupName |}}
@@ -32,6 +33,7 @@
     {{/each-in}}
     </tr>
   </table>
+  </div>
   {{/each-in}}
   
 {{else if (eq key 'rank')}}

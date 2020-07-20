@@ -1,25 +1,28 @@
-<div class="live-scene-info">
-  <a data-toggle="collapse" href="#scene-context"><i class="fas fa-info-circle"></i> Details</a>
-  &nbsp;<b>&middot;</b>&nbsp;
+{{#if scene}}
 
-  <a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> End</a>
-  &nbsp;<b>&middot;</b>&nbsp;
-    {{#if scrollPaused}}
-            <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
-            </i> Resume</a>
-    {{else}}
-            <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause"></i> Pause</a>
-    {{/if}}
-     &nbsp;<b>&middot;</b>&nbsp;
-    {{#if scene.is_watching}}
-    <a href="#" {{action 'watchScene' false}}><i class="fas fa-eye-slash"></i> Unwatch</a>
-    {{else}}
-    <a href="#" {{action 'watchScene' true}}><i class="fas fa-eye"></i> Watch</a>
-    {{/if}}
+<div class="live-scene-controls">
+<a data-toggle="collapse" href="#scene-context"><i class="fas fa-info-circle"></i> Details</a>
+&nbsp;<b>&middot;</b>&nbsp;
+
+<a href="#" {{action "scrollDown"}}><i class="fas fa-chevron-circle-down"></i> End</a>
+&nbsp;<b>&middot;</b>&nbsp;
+  {{#if scrollPaused}}
+          <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
+          </i> Resume</a>
+  {{else}}
+          <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause"></i> Pause</a>
+  {{/if}}
+   &nbsp;<b>&middot;</b>&nbsp;
+  {{#if scene.is_watching}}
+  <a href="#" {{action 'watchScene' false}}><i class="fas fa-eye-slash"></i> Unwatch</a>
+  {{else}}
+  <a href="#" {{action 'watchScene' true}}><i class="fas fa-eye"></i> Watch</a>
+  {{/if}}
+
 </div>
- &nbsp;
+
     {{#if sceneAlerts}}
-    <div class="alert alert-warning">
+    <div class="alert alert-warning scene-alerts">
       {{#each sceneAlerts as |alert|}}
       <p>{{alert}}</p>
       {{/each}}
@@ -114,7 +117,7 @@
     </div>
 
     {{#if sceneAlerts}}
-    <div class="alert alert-warning">
+    <div class="alert alert-warning scene-alerts">
       {{#each sceneAlerts as |alert|}}
       <p>{{alert}}</p>
       {{/each}}
@@ -138,72 +141,28 @@
                  <TooltipIcon @position="top-left" @message="Formatting help." @icon="fa fa-question-circle" />
                </LinkTo>
 
-               <LinkTo @route='emoji' @target="_blank">
-                 <TooltipIcon @position="top-left" @message="Emoji help." @icon="fa fa-smile" />
-               </LinkTo>
-             </div>
-           </div>
-         {{/if}}
+    <div class="scene-controls-box">
 
-           <div class="row text-ui">
-              {{#if (not scene.completed)}}
-                <CmdBox @value={{scenePose}} @rows={{6}} @allowMultiLine={{true}} @class="scene-pose-box" @onEnter={{action "addPose" poseType.id}} />
-              {{/if}}
-              <div class="textbox-menu-options">
-         <div class="textbox-dropdowns">
-           {{#if (not scene.completed)}}
-             <ul class="nav textbox-menu">
-               <li class="dropup">
-                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                   <span class="btn btn-default" href="#">Play <span class="caret"></span></span>
-                 </a>
-                 <ul class="dropdown-menu">
-                   {{#if scene.can_edit}}
-                        <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
-                   {{/if}}
+          {{#if (not scene.completed)}}
 
-                   <LiveScenePlaces @scene={{scene}} />
-                   <li role="separator" class="divider"></li>
-                   <li>
-                     <a href="#" {{action (mut managePoseOrder) true}}>Manage Pose Order</a>
-                   </li>
-                   <li role="separator" class="divider"></li>
-                   <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} @spells={{model.spells}}/>
+            <PoseOrder @poseOrder={{scene.pose_order}} @playerName={{playerName}} />
 
-                   {{#if scene.fs3_enabled}}
-                     <LiveSceneFs3 @abilities={{abilities}} @scene={{scene}} />
-                   {{/if}}
-
-                   {{#if cookiesExtraInstalled}}
-                     <LiveSceneCookies @scene={{scene}} />
-                   {{/if}}
+             <MarkdownEditor @text={{scenePose}} @rows={{6}} @class="scene-pose-box" @onEnter={{action "addPose" poseType.id}} />
 
 
-                 </ul>
-               </li>
-             </ul>
            {{/if}}
 
-           <ul class="nav textbox-menu">
-             <li class="dropup">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                 <span class="btn btn-default" href="#">Manage <span class="caret"></span></span>
-               </a>
-               <ul class="dropdown-menu">
-                 {{#if scene.can_edit}}
-                   <li><LinkTo @route="scene-edit" @model={{scene.id}}>Edit Scene</LinkTo></li>
-                   {{#if (not scene.completed)}}
-                     <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li>
-                   {{else}}
-                     <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li>
-                     <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li>
-                     <li><a href="#" {{action 'collapseScene'}}>Collapse Scene Poses</a></li>
-                   {{/if}}
 
-                   {{#if scene.can_delete}}
-                     <li role="separator" class="divider"></li>
-                     <li><a href="#" {{action (mut confirmDeleteScene) true}}>Delete Scene</a></li>
-                   {{/if}}
+       <div class="scene-controls">
+         <div class="col col-sm-6 col-xs-12 scene-controls-right">
+             {{#if (not scene.completed)}}
+
+             <div class="pose-buttons">
+                 <button {{action 'addPose' poseType.id}} class="btn btn-primary">Add {{poseType.title}}</button>
+                 <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC</button>
+
+                 {{#if txtExtraInstalled}}
+                   <LiveSceneTxt @scenePose={{scenePose}} @scene={{scene}} />
                  {{/if}}
                </ul>
              </li>
@@ -233,23 +192,97 @@
                  <PowerSelect @selected={{poseType}} @options={{poseTypes}} @searchField="title" @onchange={{action "poseTypeChanged"}} as |poseType|>
                    {{poseType.title}}
                  </PowerSelect>
-               </div>
-
-               <!-- {{#if (gt scene.poseable_chars 1)}} -->
-                 <div class="scene-char-select">
-                   <PowerSelect @selected={{poseChar}} @options={{scene.poseable_chars}} @searchField="name" @onchange={{action "poseCharChanged"}} as |poseChar|>
-                     <CharIconTiny @char={{poseChar}} />
-                   </PowerSelect>
-                 </div>
-               <!-- {{/if}} -->
-
-               <LiveSceneCustomScenepose @scenePose={{scenePose}} @scene={{scene}} />
              </div>
-           </div>
+
+
+             {{/if}}
+
+         </div>
+
+        {{#if (not scene.reload_required)}}
+         <div class="col col-sm-6 col-xs-12 scene-controls-left">
+
+             <div class="scene-dropdowns">
+             {{#if (not scene.completed)}}
+                 <ul class="nav scene-menu">
+                     <li class="dropup">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             <span class="btn btn-default" href="#">Play <span class="caret"></span></span>
+                         </a>
+                         <ul class="dropdown-menu">
+                             {{#if scene.can_edit}}
+                                 <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
+                             {{/if}}
+
+                             <LiveScenePlaces @scene={{scene}} />
+
+                             <li role="separator" class="divider"></li>
+
+                             <li><a href="#" {{action (mut managePoseOrder) true}}>Manage Pose Order</a></li>
+
+                             {{#if scene.fs3_enabled}}
+                                 <LiveSceneFs3 @abilities={{abilities}} @scene={{scene}} />
+                             {{/if}}
+
+                             {{#if cookiesExtraInstalled}}
+                               <LiveSceneCookies @scene={{scene}} />
+                             {{/if}}
+
+                             <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} />
+
+                         </ul>
+                     </li>
+                 </ul>
+             {{/if}}
+
+             <ul class="nav scene-menu">
+                 <li class="dropup">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                         <span class="btn btn-default" href="#">Manage <span class="caret"></span></span>
+                     </a>
+                     <ul class="dropdown-menu">
+                         {{#if scene.can_edit}}
+                             <li><LinkTo @route="scene-edit" @model={{scene.id}}>Edit Scene</LinkTo></li>
+                             {{#if (not scene.completed)}}
+                                 <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li>
+                             {{else}}
+                                 <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li>
+                                 <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li>
+                                 <li><a href="#" {{action 'collapseScene'}}>Collapse Scene Poses</a></li>
+                                 {{#if scene.can_delete}}
+                                     <li role="separator" class="divider"></li>
+                                     <li><a href="#" {{action (mut confirmDeleteScene) true}}>Delete Scene</a></li>
+                                 {{/if}}
+                             {{/if}}
+                         {{/if}}
+                     </ul>
+                 </li>
+             </ul>
+
+             <ul class="nav scene-menu">
+                 <li class="dropup">
+                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                         <span class="btn btn-default" href="#">Other <span class="caret"></span></span>
+                     </a>
+                     <ul class="dropdown-menu">
+                         <li><LinkTo @route="scene-download" @model={{scene.id}}>Download Scene</LinkTo></li>
+                         <li><a href="#" {{action (mut confirmReportScene) true}}>Report Abuse</a></li>
+                     </ul>
+                 </li>
+             </ul>
+
+             </div>
+
+             <div class="scene-char-select" >
+                 <PowerSelect @selected={{poseChar}} @options={{scene.poseable_chars}} @searchField="name" @onchange={{action "poseCharChanged"}} as |poseChar|>
+                     <CharIconTiny @char={{poseChar}} />
+                 </PowerSelect>
+             </div>
+         </div>
          {{/if}}
+
        </div>
      </div>
-   </div>
 
     {{/if}}
 
@@ -321,3 +354,6 @@
       {{/if}}
 
     </BsModalSimple>
+
+
+{{/if}}
