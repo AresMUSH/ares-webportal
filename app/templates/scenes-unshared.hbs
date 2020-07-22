@@ -5,95 +5,76 @@
 
 <p>Unshared scenes may be automatically deleted after {{model.unshared_deletion_days}} days.</p>
 
+<div class="unshared-scenes-list">
+  
+  {{#each model.unshared as |scene| }}
 
-
-<div class="table-responsive">
-<table class="table table-striped">
-    
-<tr>
-  <th class="col-xs-3">Title / Status</th>
-  <th class="col-xs-5">Participants / Location / Summary</th>
-  <th class="col-xs-2">Last Activity</th>
-  <th class="col-xs-2"></th>
-</tr>
-
-{{#each model.unshared as |scene| }}
-<tr>
-    <td>
-        
-        <LinkTo @route="scene-live" @model={{scene.id}}>Scene {{scene.id}}
-        {{#if scene.title}}
-         - {{scene.title}}
+  <div class="unshared-scene-block">
+    <div class="row unshared-scenes-heading">
+      <div class="col col-xs-8">
+        <LinkTo @route="scene-live" @model={{scene.id}} class="scene-title">
+        {{scene.id}} - 
+        {{#if scene.title}}  
+          {{scene.title}}
+        {{else}}
+          {{scene.location}}
         {{/if}}
-        </LinkTo>
-        <br>
-        <ScenePrivacyTag @scene={{scene}} />
-        <SceneTypeTag @scene={{scene}} />
         {{#if scene.content_warning}}
         <ContentWarningTag @warning={{scene.content_warning}} @position="top" />
         {{/if}}
-    </td>
-    <td>
-      
-    {{#each scene.participants as |char|}}
-    <CharIconInline @char={{char}} />
-    {{/each}}
-    
-      <p>{{scene.icdate}}</p>
-    
-    
-      {{#if scene.location}}
-      <p>{{scene.location}}</p>
-       {{/if}}
-      
-    
-      {{#if scene.summary}}
-      <p><AnsiFormat @text={{scene.summary}} />
-      </p>
-      {{/if}}
-      
-    </td>
-    <td>
-      {{#if scene.last_posed}}
-      {{scene.last_posed}} @ 
-      {{/if}}
-      
-      {{scene.updated}} 
-      
-    </td>
-    <td>
-      {{#if (not scene.can_share)}}
-
-        {{#if (not scene.summary)}}
-        <div class="label label-danger">Missing Summary</div>
+        </LinkTo>
+        
+        {{#if scene.content_warning}}
+        <ContentWarningTag @warning={{scene.content_warning}} @position="top-left" />
         {{/if}}
+        
+      </div>
+      <div class="col col-xs-4">
+        
+        <ScenePrivacyTag @scene={{scene}} />
+        <SceneTypeTag @scene={{scene}} />
+      </div>
+    </div>
 
-        {{#if (not scene.location)}}
-         <div class="label label-danger">Missing Location</div>
+  <div class="row">
+
+      <div class="col col-xs-12 col-sm-8">    
+        
+        <div class="unshared-scenes-contents">
+          {{#each scene.participants as |char|}}
+          <CharIconInline @char={{char}} />
+          {{/each}}
+        </div>
+        
+        {{#if scene.summary}}
+        <div><AnsiFormat @text={{scene.summary}} />
+        </div>        
+        {{/if}}        
+        
+      </div>
+      <div class="col col-xs-12 col-sm-2">
+        {{#if scene.last_posed}}
+          <div>{{scene.last_posed}}</div>
         {{/if}}
-
-        {{#if (not scene.title)}}
-        <div class="label label-danger">Missing Title</div>
-        {{/if}}
-        <br><br>
-      {{/if}}
-
-      
-        <p><LinkTo @route="scene-live" @model={{scene.id}}><i class="fa fa-eye" aria-label="View Scene"></i> View </LinkTo></p>
-      {{#if scene.can_edit}}
-         <p> <LinkTo @route="scene-edit" @model={{scene.id}}><i class="fa fa-edit" aria-label="Edit Scene"></i> Edit</LinkTo> </p>
-         <p><a href="#" {{action 'changeSceneStatus' scene.id 'restart'}}><i class="fa fa-play" aria-label="Restart Scene"></i> Restart</a></p>
-          {{#if scene.can_share}}
-          <p><a href="#" {{action 'changeSceneStatus' scene.id 'share'}}><i class="fa fa-share" aria-label="Share Scene"></i> Share</a></p>
-          {{/if}}
-      {{/if}}
-    </td>
-      
-</tr>
-{{/each}}
-
-</table>
-
-</div>
   
+        <div>{{scene.last_pose_time_str}}</div>
+      </div>
+        
+        <div class="col col-xs-12 col-sm-2">
+          <div class="unshared-scenes-controls">
+                <LinkTo @route="scene-live" @model={{scene.id}}><i class="fa fa-eye" aria-label="View Scene"></i> View </LinkTo>
+              {{#if scene.can_edit}}
+                 <LinkTo @route="scene-edit" @model={{scene.id}}><i class="fa fa-edit" aria-label="Edit Scene"></i> Edit</LinkTo>
+                 <a href="#" {{action 'changeSceneStatus' scene 'restart'}}><i class="fa fa-play" aria-label="Restart Scene"></i> Restart</a>
+                  <a href="#" {{action 'changeSceneStatus' scene 'share'}}><i class="fa fa-share" aria-label="Share Scene"></i> Share</a>                 
+              {{/if}}
+          </div>
+        </div>
+        
+      </div>
+      
+  </div>
+  {{/each}}
+</div>
+
 {{outlet}}

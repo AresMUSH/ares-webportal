@@ -4,8 +4,6 @@
 
 <SearchBar />
 
-<p>The search will only match help topics that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
-
 <hr>
 
 {{#if searchResults}}
@@ -36,6 +34,8 @@
         </div>
     </div>
 
+<p class="search-hint">Search is case-insensitive and matches ALL specified criteria.</p>
+
 </div>
 
 <hr>
@@ -43,11 +43,8 @@
 <FlashMessages />
 
 {{#if searchResults}}
-
 <h2>Best Matches</h2>
-
 {{#if searchResults.probable_matches}}
-
 <ul>
 {{#each searchResults.probable_matches as |topic|}}
 <li><LinkTo @route="help-topic" @model={{topic.id}}>{{topic.name}}</LinkTo> - {{topic.summary}}</li>

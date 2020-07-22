@@ -7,10 +7,21 @@ export default Component.extend({
     rows: 12,
     gameApi: service(),
 
+    onEnter() {
+        this.send('onEnter');
+    },
+
     actions: {
-        onEnter() {
-            this.send('onEnter');
-        },
+
+      keyDown: function(event) {
+        if (event.keyCode == 13) {
+          if (event.ctrlKey || event.metaKey) {
+            this.onEnter();
+            event.preventDefault();
+          }
+        }
+      },
+
         preview() {
             if (this.get('preview.length') > 0) {
                 this.set('preview', null);

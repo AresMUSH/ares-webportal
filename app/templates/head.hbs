@@ -5,6 +5,11 @@ setting values on the 'head-data' service.
 --}}
 <title>{{model.title}}</title>
 
+{{#if (not model.robotindex)}}
+<meta name="robots" content="noindex">
+{{/if}}
+
+
 <meta property="og:title" content="{{model.mushName}}">
 <meta name="twitter:title" content="{{model.mushName}}">
 <meta itemprop="name" content="{{model.mushName}}">

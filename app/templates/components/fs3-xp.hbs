@@ -2,20 +2,19 @@
 
 <Fs3Xplist @category="Attributes" @abilities={{char.fs3.xp.attributes}} @xp={{char.fs3.xp.xp_points}} @canLearn={{char.fs3.xp.can_learn}} @learnAbility={{action "learnAbility"}} />
 
-<hr>
+
 
 <Fs3Xplist @category="Action Skills" @abilities={{char.fs3.xp.action_skills}} @xp={{char.fs3.xp.xp_points}} @canLearn={{char.fs3.xp.can_learn}} @learnAbility={{action "learnAbility"}} />
 
-<hr>
+
 
 <Fs3Xplist @category="Background Skills" @abilities={{char.fs3.xp.backgrounds}} @xp={{char.fs3.xp.xp_points}} @canLearn={{char.fs3.xp.can_learn}} @learnAbility={{action "learnAbility"}} />
 
-<hr>
 
 <Fs3Xplist @category="Language Skills" @abilities={{char.fs3.xp.languages}} @xp={{char.fs3.xp.xp_points}} @canLearn={{char.fs3.xp.can_learn}} @learnAbility={{action "learnAbility"}} />
 
 {{#if char.fs3.use_advantages}}
-<hr>
+
   {{#if char.fs3.xp.allow_advantages_xp}}
 
     <Fs3Xplist @category="Advantages" @abilities={{char.fs3.xp.advantages}} @xp={{char.fs3.xp.xp_points}} @canLearn={{char.fs3.xp.can_learn}} @learnAbility={{action "learnAbility"}} />
@@ -25,7 +24,7 @@
   {{/if}}
 {{/if}}
   
-<hr>
+
 
 <p><b>New Ability</b> 
   

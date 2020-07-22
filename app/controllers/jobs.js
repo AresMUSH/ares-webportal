@@ -65,6 +65,18 @@ export default Controller.extend({
         this.send('reloadModel');
         this.flashMessages.success('Jobs filtered!');
       });
+    },
+    
+    markRead() {
+      let api = this.gameApi;
+      api.requestOne('jobsCatchup')
+      .then( (response) => {
+        if (response.error) {
+          return;
+        }
+        this.send('reloadModel');
+        this.flashMessages.success('Jobs marked read!');
+      });
     }
   }
 });

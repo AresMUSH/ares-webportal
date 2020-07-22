@@ -77,6 +77,23 @@ export default Controller.extend(AuthenticatedController, {
             });
         },
         
+        pinPost(pinned) {
+            let api = this.gameApi;
+            api.requestOne('forumPin', { topic_id: this.get('model.id'), pinned: pinned })
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.set('model.is_pinned', pinned);
+                if (pinned) {
+                  this.flashMessages.success('Topic pinned!');
+                } else {
+                  this.flashMessages.success('Topic unpinned!');
+                }
+              
+            });
+        },
+        
         nextUnread: function() {
             let api = this.gameApi;
             api.requestOne('forumUnread')
