@@ -61,8 +61,8 @@
           <MarkdownEditor @text={{model.raw_message}} />
                               
           <div class="pull-right">
-          <button class="btn-default" {{action (mut model.editActive) false}}>Cancel</button>
-          <button class="btn-primary" {{action 'editPost'}}>Save</button>
+          <button class="btn btn-default" {{action (mut model.editActive) false}}>Cancel</button>
+          <button class="btn btn-primary" {{action 'editPost'}}>Save</button>
           </div>
           <div class="clearfix"></div>
         {{else}}
@@ -104,8 +104,8 @@
           <MarkdownEditor @text={{reply.raw_message}} />
                               
           <div class="pull-right">
-          <button class="btn-default" {{action (mut reply.editActive) false}}>Cancel</button>
-          <button class="btn-primary" {{action 'editReply' reply}}>Save</button>
+          <button class="btn btn-default" {{action (mut reply.editActive) false}}>Cancel</button>
+          <button class="btn btn-primary" {{action 'editReply' reply}}>Save</button>
           </div>
           <div class="clearfix"></div>
         {{else}}
