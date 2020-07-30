@@ -1,0 +1,47 @@
+{{title 'Manage Forum Categories'}}
+<h1>Manage Forum Categories</h1>
+
+
+<div class="row">
+    
+    <div class="col pull-right">
+        <LinkTo @route="forum-create" class="btn btn-default">Create Category</LinkTo>
+    </div>
+    
+</div>
+
+<div class="table-responsive">
+<table class="table table-striped">
+    
+<tr>
+  <th class="col-xs-2">Name</th>
+  <th class="col-xs-3">Description</th>
+  <th class="col-xs-1">Order</th>
+  <th class="col-xs-2">Read Roles</th>
+  <th class="col-xs-2">Write Roles</th>
+  <th class="col-xs-2"></th>
+</tr>
+
+{{#each @model.categories as |category|}}
+<tr>
+  <td>{{category.name}}</td>
+  <td><AnsiFormat @text={{category.desc}} /></td>
+  <td>{{category.order}}</td>
+  <td>{{category.can_read}}</td>
+  <td>{{category.can_write}}</td>
+  <td>
+    
+    <LinkTo @route="forum-edit" @model={{category.id}}><i class="fas fa-edit" aria-label="Edit Category"></i></LinkTo>
+    <a href="#" {{action (mut forumToDelete) category}}><i class="fa fa-trash" aria-label="Delete Category"></i></a>
+    
+  </td>
+</tr>
+{{/each}}
+
+</table>
+</div>
+
+
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{forumToDelete}} @onSubmit={{action "deleteForum" forumToDelete}} @onHide={{action (mut forumToDelete) null}}>
+    You're about to delete {{forumToDelete.name}}. This cannot be undone.  Are you sure?
+  </BsModalSimple>

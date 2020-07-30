@@ -25,7 +25,7 @@
 {{#each @model.channels as |channel|}}
 <tr>
   <td>{{channel.name}}</td>
-  <td>{{channel.desc}}</td>
+  <td><AnsiFormat @text={{channel.desc}} /></td>
   <td>{{channel.color}}</td>
   <td>{{channel.can_join}}</td>
   <td>{{channel.can_talk}}</td>
