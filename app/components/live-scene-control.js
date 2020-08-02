@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import { set, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { observer } from '@ember/object';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
 export default Component.extend(AuthenticatedController, {
@@ -21,16 +22,12 @@ export default Component.extend(AuthenticatedController, {
     gameSocket: service(),
     session: service(),
 
-    init: function() {
-      this._super(...arguments);
+    sceneObserver: observer('scene', function() {
       this.set('poseType', { title: 'Pose', id: 'pose' });
-    },
-      
-    didInsertElement: function() {
       if (this.scene) {
         this.set('poseChar', this.get('scene.poseable_chars')[0]);
       }
-    },
+    }),
     
     poseTypes: computed(function() {
       return [

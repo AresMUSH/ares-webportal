@@ -32,9 +32,6 @@
              <a href="#" {{action (mut model.editActive) true}}>
                <TooltipIcon @position="left" @message="Edit topic." @icon="fa fa-edit" />
              </a>
-             <a href="#" {{action (mut confirmDeleteTopic) true}}>
-               <TooltipIcon @position="left" @message="Delete topic." @icon="fa fa-trash" />
-             </a>
              {{/if}}
            {{/if}}
            {{#if model.can_pin}}
@@ -46,6 +43,17 @@
                <a href="#" {{action 'pinPost' true}}>
                  <TooltipIcon @position="left" @message="Pin topic." @icon="fa fa-thumbtack" />
                </a>
+             {{/if}}
+           {{/if}}
+           {{#if model.can_edit}}
+             {{#if (not model.editActive)}}
+             <a href="#" {{action (mut chooseNewCategory) true}}>
+               <TooltipIcon @position="left" @message="Move topic." @icon="fas fa-share-square" />
+             </a>
+             <a href="#" {{action (mut confirmDeleteTopic) true}}>
+               <TooltipIcon @position="left" @message="Delete topic." @icon="fa fa-trash" />
+             </a>
+             
              {{/if}}
            {{/if}}
            
@@ -150,12 +158,19 @@
 
 <FlashMessages />
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteReply}} @onSubmit={{action "deleteReply" confirmDeleteReply}} @onHide={{action (mut confirmDeleteReply) null}}>
+<BsModalSimple @title="Confirm Delete Reply" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteReply}} @onSubmit={{action "deleteReply" confirmDeleteReply}} @onHide={{action (mut confirmDeleteReply) null}}>
     You're about to delete this reply. This cannot be undone.  Are you sure?
   </BsModalSimple>
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteTopic}} @onSubmit={{action "deleteTopic"}} @onHide={{action (mut confirmDeleteTopic) null}}>
+<BsModalSimple @title="Confirm Delete Topic" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteTopic}} @onSubmit={{action "deleteTopic"}} @onHide={{action (mut confirmDeleteTopic) null}}>
   You're about to delete this topic. This cannot be undone.  Are you sure?
+</BsModalSimple>
+
+<BsModalSimple @title="Move Topic" @closeTitle="Cancel" @submitTitle="Move" @size={{null}} @fade={{false}} @open={{chooseNewCategory}} @onSubmit={{action "moveTopic"}} @onHide={{action (mut chooseNewCategory) null}}>
+
+      <PowerSelect @selected={{newCategory}} @options={{model.categories}} @onchange={{action "newCategorySelected"}} as |category|>
+        {{category.name}}
+      </PowerSelect>
 </BsModalSimple>
 
 

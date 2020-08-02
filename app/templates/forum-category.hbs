@@ -1,7 +1,12 @@
 {{title model.name}}
 <h1>{{model.name}}</h1>
 
-<p>{{model.description}}</p>
+<div class="row">
+    <div class="col col-xs-12">
+
+      <AnsiFormat @text={{model.description}} />
+  </div>
+</div>
 
 <div class="row">
     <div class="col col-xs-12">
