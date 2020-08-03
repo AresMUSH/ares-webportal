@@ -50,6 +50,8 @@
       {{#power-select-multiple  selected=model.category.can_write options=model.roles onchange=(action "writeRolesChanged") as |role|}}
         {{role}}
       {{/power-select-multiple}}
+      <div class="hint">Forums default to only allowing approved characters to post. If you want a forum where anyone can post, you must explicitly set the write role to 'everyone'.</div>
+
     </div>
   </div>
   
