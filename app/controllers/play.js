@@ -92,29 +92,30 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       let localTimestamp = localTime(timestamp);
       
       let channel = this.getChannel(channelKey);
-        if (!channel) {
-          channel = this.addPageChannel(channelKey, channelTitle);
-        }
-        channel.messages.pushObject({message: newMessage, timestamp: localTimestamp, author: author});
-        set(channel, 'last_activity', Date.now());
-        set(channel, 'is_recent', true);
-        if (channelKey === this.get('selectedChannel.key')) {
-            this.scrollWindow();
-            if (channel.is_page) {
-              this.markPageThreadRead(channel.key);
-            }
-        }
-        else {
-            let messageCount = channel.new_messages || 0;
-            set(channel, 'new_messages', messageCount + 1);
+      if (!channel) {
+        channel = this.addPageChannel(channelKey, channelTitle);
+      }
+      channel.messages.pushObject({message: newMessage, timestamp: localTimestamp, author: author});
+      set(channel, 'last_activity', Date.now());
+      set(channel, 'is_recent', true);
+      if (channelKey === this.get('selectedChannel.key')) {
+          this.scrollWindow();
+          if (channel.is_page) {
+            this.markPageThreadRead(channel.key);
+            // No browser notifications for channels because it's too spammy.
+            this.gameSocket.highlightFavicon();
+          }
+      }
+      else {
+          let messageCount = channel.new_messages || 0;
+          set(channel, 'new_messages', messageCount + 1);
 
-            if (channel.is_page) {
-              this.gameSocket.notify(`New conversation activity in ${channelTitle}.`);
-            }
-
-        }
-        // No browser notifications for channels because it's too spammy.
-        this.gameSocket.highlightFavicon();
+          if (channel.is_page) {
+            this.gameSocket.notify(`New conversation activity in ${channelTitle}.`);
+            // No browser notifications for channels because it's too spammy.
+            this.gameSocket.highlightFavicon();
+          }
+      }
     },
 
     resetOnExit: function() {

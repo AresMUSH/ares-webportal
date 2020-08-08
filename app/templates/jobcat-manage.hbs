@@ -1,0 +1,45 @@
+{{title 'Manage Job Categories'}}
+<h1>Manage Job Categories</h1>
+
+
+<div class="row">
+    
+    <div class="col pull-right">
+        <LinkTo @route="jobcat-create" class="btn btn-default">Create Category</LinkTo>
+    </div>
+    
+</div>
+
+<div class="table-responsive">
+<table class="table table-striped">
+    
+<tr>
+  <th class="col-xs-2">Name</th>
+  <th class="col-xs-3">Color</th>
+  <th class="col-xs-2">Roles</th>
+  <th class="col-xs-2"></th>
+</tr>
+
+{{#each @model.categories as |category|}}
+<tr>
+  <td>
+    <span class="label label-info job-category job-category-{{category.name}}">{{category.name}}</span>
+  </td>
+  <td>{{category.color}}</td>
+  <td>{{category.roles}}</td>
+  <td>
+    
+    <LinkTo @route="jobcat-edit" @model={{category.id}}><i class="fas fa-edit" aria-label="Edit Category"></i></LinkTo>
+    <a href="#" {{action (mut categoryToDelete) category}}><i class="fa fa-trash" aria-label="Delete Category"></i></a>
+    
+  </td>
+</tr>
+{{/each}}
+
+</table>
+</div>
+
+
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{categoryToDelete}} @onSubmit={{action "deleteCategory" categoryToDelete}} @onHide={{action (mut categoryToDelete) null}}>
+    You're about to delete {{categoryToDelete.name}}. This cannot be undone.  Are you sure?
+  </BsModalSimple>

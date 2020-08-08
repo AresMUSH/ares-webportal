@@ -9,7 +9,7 @@ export default Component.extend({
       return 'Private';
     }
     else if (this.get('scene.limit')) {
-      return 'Limited';
+      return 'Open*';
     }
     else {
       return 'Open';
@@ -17,6 +17,9 @@ export default Component.extend({
   }),
     
   labelStyle: computed('privacy', function() {
+    if (this.get('privacy') == "Open*") {
+      return "openstar";
+    }
     return this.get('privacy').toLowerCase();
   })
 });

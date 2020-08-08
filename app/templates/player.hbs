@@ -4,63 +4,63 @@
 
 <div class="row profile-wrap">
 
-
     <div class="col-md-4 col-sm-12 col-xs-12">
-                <img src="/game/uploads/{{model.icon}}" alt="{{model.name}}'s profile image" class="profile-image" >
+      {{#if model.icon}}
+          <img src="/game/uploads/{{model.icon}}" alt="{{model.name}}'s icon"  class="profile-image">
+      {{else}}
+          <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{model.name}}'s icon" >
+      {{/if}}
     </div>
 
     <div class="col-md-8 col-sm-12 col-xs-12">        
 
+        <div class="profile-box">
 
-        {{#if model.handle}}
-            <div class="profile-box">
-                                
-                <div class="row">
-                    <div class="col-sm-3">
-                            <b>Player Handle:</b> 
-                    </div>
-                    <div class="col-sm-9">
-                            {{model.handle}}
-                    </div>
-                </div>
+          <div class="row">
+              <div class="col-sm-3">
+                      <b>Handle:</b> 
+              </div>
+              <div class="col-sm-9">
+                    {{#if model.handle}}
+                    
+                       <a href="http://arescentral.aresmush.com/handle/{{model.handle}}">{{model.handle}}</a>
+                     {{else}}
+                     <a href="https://arescentral.aresmush.com/" target="_blank">Not Linked</a>
+                     {{/if}}                        
+              </div>
+          </div>
                 
-                {{#if model.admin_role_title}}
-                <div class="row">
-                    <div class="col-sm-3">
-                            <b>Title:</b> 
-                    </div>
-                    <div class="col-sm-9">
-                            {{model.admin_role_title}}
-                    </div>
-                </div>
-                {{/if}}
-                
-                
-               <div class="row">
-                   <div class="col-sm-3">
-                           <b>Profile:</b> 
-                   </div>
-                   <div class="col-sm-9">
-                         <p>View at <a href="http://arescentral.aresmush.com/handle/{{model.handle}}">AresCentral</a>.</p>  
-                   </div>
-               </div>
-                
-                
+          {{#if model.admin_role_title}}
+          <div class="row">
+              <div class="col-sm-3">
+                      <b>Title:</b> 
+              </div>
+              <div class="col-sm-9">
+                      {{model.admin_role_title}}
+              </div>
+          </div>
+          {{/if}}
                
-            </div>
-        {{/if}}
+        </div>
     </div>
 
 
 
 </div>
 
-
+{{#if model.profile}}
 <div class="profile-tab">
-
-    <CharGallery @chars={{model.alts}} @title="Characters" />
-        
+    <ProfileSupplemental @char={{model}} @title="Profile Information"/>
 </div>
+{{/if}}
+
+
+{{#if model.alts}}
+<div class="profile-tab">
+    <CharGallery @chars={{model.alts}} @title="Characters" />
+</div>
+{{/if}}
+
 {{#if model.achievements}}
 <div>
     <h3>Achievements</h3>
