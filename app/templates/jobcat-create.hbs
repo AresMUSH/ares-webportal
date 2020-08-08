@@ -1,0 +1,55 @@
+{{title "Create Job Category"}}
+<h1>Create Job Category</h1>
+
+  
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="name" class="col-form-label">Name:</label>
+    </div>
+    <div class="col-sm-9">
+        <Input @type="text" @size={{25}} @id="name" @enter={{action "save"}} @value={{name}} />
+    </div> 
+  </div>
+  
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="color" class="col-form-label">Color:</label>
+    </div>
+    <div class="col-sm-9">
+        <Input @type="text" @size={{25}} @id="color" @enter={{action "save"}} @value={{color}} />
+        <div class="hint">Web portal colors are determined by custom styling for job-category-NAME.</div>
+    </div> 
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Roles:</b>
+    </div>
+
+    <div class="col-sm-9">
+      {{#power-select-multiple  selected=roles options=model.roles onchange=(action "rolesChanged") as |role|}}
+        {{role}}
+      {{/power-select-multiple}}
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Template:</b>
+    </div>
+
+    <div class="col-sm-9">
+      <Textarea @value={{template}} @cols="80" @rows=5 @class="job-template-editor" />
+    </div>
+  </div>
+  
+  
+  
+  
+
+<div class="pull-right">
+        <p> <LinkTo @route="jobcat-manage" class="btn btn-default">Cancel</LinkTo>  
+        <button {{action 'save'}} class="btn btn-primary">Save</button> </p>
+</div>
+      
+<FlashMessages />

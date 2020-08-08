@@ -57,7 +57,7 @@
         </td>
         
         <td class="hidden-xs hidden-sm">
-        {{forum.description}}
+        <AnsiFormat @text={{forum.description}} />
         </td>
         <td>
             {{#if forum.last_activity}}

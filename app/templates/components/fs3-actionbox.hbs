@@ -20,10 +20,13 @@
 </div>
 
 {{#if specialties}}
-  {{#if (gt rating 2)}}
   <div class="row">
   <div class="col-sm-12">
-       <p><i>Select At Least One Specialty</i> </p>
+    {{#if (gt rating 2)}}
+    <div class="cg-tip">Specialty is required for ratings 3+.</div>
+    {{else}}
+    <div class="cg-tip">Specialty is optional for ratings 1-2.</div>
+    {{/if}}
        
       {{#each specialties as |spec|}}
       
@@ -35,7 +38,6 @@
       
   </div>
   </div>
-  {{/if}}
 {{/if}}
 
 <div class="row">

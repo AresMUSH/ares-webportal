@@ -60,6 +60,7 @@ export default Controller.extend({
             profile_image: this.get('model.char.profile_image.name'),
             profile_icon: this.get('model.char.profile_icon.name'),
             profile_gallery: this.get('model.char.profile_gallery'),
+            background: this.get('model.char.background'),
             tags: tags,
             descs: descs,
             custom: custom

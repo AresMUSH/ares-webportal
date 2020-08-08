@@ -17,11 +17,11 @@
      
      <div class="form-group row">
         <div class="col-sm-3">
-            <label for="title" class="col-form-label">Limited Participation Notice:</label>
+            <label for="title" class="col-form-label">Notes:</label>
         </div>
         <div class="col-sm-9">
             <Input @type="text" @size={{60}} @id="limit" @enter={{action "save"}} @value={{model.scene.limit}} />
-            <p class="hint">Use this for open scenes where participation is limited (by quantity, character type, etc.)</p>
+             <p class="hint">Use this for open scenes where participation is limited (by quantity, character type, etc.) or other special considerations apply.</p>
         </div>
       </div>
     {{/if}}

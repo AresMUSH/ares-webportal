@@ -62,6 +62,11 @@ export default Controller.extend({
   actions: {
     addReply() {
       let api = this.gameApi;
+      
+      if (this.reply.length === 0) {
+          this.flashMessages.danger("You haven't entered anything.");
+          return;
+      }
       api.requestOne('jobReply', { id: this.get('model.job.id'), 
       reply: this.reply,
       admin_only: this.replyAdminOnly}, null)

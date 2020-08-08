@@ -11,7 +11,7 @@ export default Route.extend(DefaultRoute, ReloadableRoute, {
     
     afterModel: function(model) { 
         if (model.get('char.playerbit')) {
-            this.transitionTo('player', model.get('char.id'));
+            this.transitionTo('player', model.get('char.name'));
         }
         this.set('headData.robotindex', true);
     },

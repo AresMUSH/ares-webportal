@@ -26,7 +26,7 @@
                       <span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         <li><LinkTo @route="notifications">Notifications</LinkTo></li>
-                        <li><LinkTo @route="char" @model={{currentUser.id}}>Profile</LinkTo></li>
+                        <li><LinkTo @route="char" @model={{currentUser.name}}>Profile</LinkTo></li>
                         <li><LinkTo @route="mail">Mail</LinkTo></li>
                         <li><LinkTo @route="jobs">{{#if model.jobs_admin}}Jobs{{else}}Requests{{/if}}</LinkTo></li>
                         <li><LinkTo @route="account">Account</LinkTo></li>
