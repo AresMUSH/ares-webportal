@@ -104,7 +104,7 @@ export default Controller.extend({
         
         review() {
             let api = this.gameApi;
-            api.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
+            api.requestOne('chargenSave', { id: this.get('model.char.id'),char: this.buildQueryDataForChar() })
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -115,7 +115,7 @@ export default Controller.extend({
         
         reset() {
           let api = this.gameApi;
-          api.requestOne('chargenReset', { char: this.buildQueryDataForChar() })
+          api.requestOne('chargenReset', { id: this.get('model.char.id'), char: this.buildQueryDataForChar() })
           .then( (response) => {
             if (response.error) {
               return;
@@ -127,7 +127,7 @@ export default Controller.extend({
         
         save() {
             let api = this.gameApi;
-            api.requestOne('chargenSave', { char: this.buildQueryDataForChar() })
+            api.requestOne('chargenSave', { id: this.get('model.char.id'), char: this.buildQueryDataForChar() })
             .then( (response) => {
                 if (response.error) {
                     return;
