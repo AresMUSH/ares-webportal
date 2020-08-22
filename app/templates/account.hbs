@@ -2,6 +2,7 @@
 
 <h1>Account Settings</h1>
 
+
 <h2>Player Handle</h2>
 
 {{#if model.handle}}
@@ -28,6 +29,7 @@
         
         <p><Input @type="text" @id="handleName" placeholder="Handle Name" @enter={{action "linkHandle"}} @value={{handleName}} /></p>
         <p><Input @type="text" placeholder="Link Code" @enter={{action "linkHandle"}} @id="linkCode" @value={{linkCode}} /></p>
+        <p><Input @type="password" placeholder="Confirm Password" @enter={{action "changeName"}} @id="confirmPasswordHandle" @value={{confirmPasswordHandle}} /></p>
         
         <button {{action "linkHandle"}} class="btn btn-primary">Link to Handle</button>
         
@@ -35,6 +37,26 @@
 </div>
   
 {{/if}}
+
+{{#if (not isApproved)}}
+<h2>Change Name</h2>
+
+<p>You can change your name until your character is approved.</p>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        <FlashMessages />
+        
+        <p><Input @id="name" placeholder="Name" @enter={{action "changeName"}} @value={{model.name}} /></p>
+        <p><Input @type="password" placeholder="Confirm Password" @enter={{action "changeName"}} @id="confirmPasswordName" @value={{confirmPasswordName}} /></p>
+        <button {{action "changeName"}} class="btn btn-primary">Change Name</button>
+                
+    </div>
+</div>
+
+{{/if}}
+
 
 
 <h2>Change Password</h2>

@@ -22,11 +22,19 @@ export default Component.extend(AuthenticatedController, {
     gameSocket: service(),
     session: service(),
 
-    sceneObserver: observer('scene', function() {
+    updatePoseControls: function() {
       this.set('poseType', { title: 'Pose', id: 'pose' });
       if (this.scene) {
         this.set('poseChar', this.get('scene.poseable_chars')[0]);
       }
+    },
+    
+    didInsertElement: function() {
+      this.updatePoseControls();
+    },
+    
+    sceneObserver: observer('scene', function() {
+      this.updatePoseControls();
     }),
     
     poseTypes: computed(function() {
