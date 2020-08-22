@@ -104,12 +104,12 @@ export default Controller.extend({
         
         review() {
             let api = this.gameApi;
-            api.requestOne('chargenSave', { id: this.get('model.char.id'),char: this.buildQueryDataForChar() })
+            api.requestOne('chargenSave', { id: this.get('model.char.id'), char: this.buildQueryDataForChar() })
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('chargen-review');
+                this.transitionToRoute('chargen-review', this.get('model.char.id'));
             });   
         },
         
