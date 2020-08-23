@@ -67,6 +67,9 @@
         {{#if model.char.last_profile_version}}
             <LinkTo @route="char-source" @models={{array model.char.id model.char.last_profile_version}} class="btn btn-default">Source/History</LinkTo>
         {{/if}}
+        {{#if model.char.can_approve}}
+          <LinkTo @route="chargen-char" @model={{model.char.id}} class="btn btn-default">Chargen</LinkTo>
+        {{/if}}
         {{#if model.char.show_notes}}
           <LinkTo @route="notes" @model={{model.char.name}} class="btn btn-default">Notes</LinkTo>
         {{/if}}

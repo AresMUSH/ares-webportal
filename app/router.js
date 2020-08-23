@@ -30,7 +30,8 @@ Router.map(function() {
   this.route('char-edit', { path: '/char/:id/edit' });
   this.route('char-source', { path: '/char/:char_id/source/:version_id' });
   this.route('chargen');
-  this.route('chargen-review');
+  this.route('chargen-char', { path: '/chargen/:char_id'});
+  this.route('chargen-review', { path: '/chargen-review/:char_id'});
   this.route('chat');
   this.route('channels-manage');
   this.route('channel-create');

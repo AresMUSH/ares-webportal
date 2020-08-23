@@ -1,0 +1,11 @@
+<p><b>Last On:</b> {{char.siteinfo.last_online}}</p>
+<p><b>Last IP:</b> {{char.siteinfo.last_ip}}</p>
+<p><b>Last Hostname:</b> {{char.siteinfo.last_hostname}}</p>
+{{#if char.siteinfo.findsite}}
+<p><b>Findsite Matches:</b></p>
+<ul>
+  {{#each char.siteinfo.findsite as |findsite|}}
+  <li>{{findsite.name}} - {{findsite.ip}} {{findsite.hostname}}</li>
+  {{/each}}
+</ul>
+{{/if}}

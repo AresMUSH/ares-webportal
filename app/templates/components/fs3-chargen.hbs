@@ -113,7 +113,8 @@
 
        {{#each model.char.fs3.fs3_languages as |skill|}}
        <Fs3Langbox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{action "abilityChanged"}}>
-           <b>{{skill.name}}</b> - {{skill.desc}}
+           <b>{{skill.name}}</b> 
+           {{#if skill.desc}}- {{skill.desc}}{{/if}}
        </Fs3Langbox>
        {{/each}}
                 
