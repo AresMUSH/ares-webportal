@@ -8,6 +8,7 @@ export default Controller.extend(AuthenticatedController, {
     confirmPassword: '',
     confirmPasswordName: '',
     confirmPasswordHandle: '',
+    currentPasswordEmail: '',
     handleName: '',
     linkCode: '',
     session: service(),
@@ -20,6 +21,7 @@ export default Controller.extend(AuthenticatedController, {
       this.set('confirmPassword', '');
       this.set('confirmPasswordName', '');
       this.set('confirmPasswordHandle', '');
+      this.set('currentPasswordEmail', '');
       this.set('linkCode', '');
       this.set('handleName', '');
     },
@@ -48,6 +50,19 @@ export default Controller.extend(AuthenticatedController, {
                 }            
                 this.resetOnExit();    
                 this.flashMessages.success("Your name has been changed.");
+            });
+        },
+        
+        changeEmail() {
+            
+           this.gameApi.requestOne('setEmail', 
+               { email: this.get('model.email'), confirm_password: this.currentPasswordEmail}, null)
+            .then((response) => {            
+                if (response.error) {
+                    return;
+                }            
+                this.resetOnExit();    
+                this.flashMessages.success("Your email has been changed.");
             });
         },
         
