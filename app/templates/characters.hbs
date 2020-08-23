@@ -16,6 +16,9 @@
   {{/if}}
       <li><a data-toggle="tab" href="#idle">Gone</a></li>
       <li><a data-toggle="tab" href="#dead">Dead</a></li>
+  {{#if model.characters.unapproved}}
+    <li><a data-toggle="tab" href="#unapproved">New</a></li>
+  {{/if}}
 </ul>
 
 <div class="tab-content">
@@ -52,6 +55,12 @@
    <div id="dead" class="tab-pane fade in">
       <CharGroupList @name="" @chars={{model.characters.dead}} />
   </div>
+  
+  {{#if model.characters.unapproved}}
+     <div id="unapproved" class="tab-pane fade in">
+        <CharGroupList @name="" @chars={{model.characters.unapproved}} />
+    </div>
+  {{/if}}
 </div>
 
 
