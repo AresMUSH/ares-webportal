@@ -2,7 +2,11 @@
 <div class="row">
  <div class="col col-md-12">
       
-     <h1>Create a Character</h1>
+     <h1>Create a Character 
+       {{#if model.char.can_approve}}
+       - {{model.char.name}}
+       {{/if}}
+     </h1>
      
      <p>The online character creation tool will guide you through creating your character.</p>
          
@@ -185,21 +189,25 @@
      
      <div class="alert alert-success">
     
-     {{#if model.cgInfo.allow_web_submit}}
-             <p>Remember to save often.  When you're finished, you can review your character for errors or missing information and then submit your application.</p>
+       {{#if model.cgInfo.allow_web_submit}}
+               <p>Remember to save often.  When you're finished, you can review your character for errors or missing information and then submit your application.</p>
             
-             <p>
-                 <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
-                 <button name="review" {{action 'review'}} class="btn btn-success">Review or Submit</button>
-             </p>
-     {{else}}
-             <p>Remember to save often.  You can also review your character for errors or missing information.  When you're done here, you will need to log onto the game to finish character creation and submit your application.</p>
+               <p>
+                   <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
+                   {{#if model.char.can_approve}}
+                   <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
+                   {{else}}
+                   <button name="review" {{action 'review'}} class="btn btn-success">Review or Submit</button>
+                   {{/if}}
+               </p>
+       {{else}}
+               <p>Remember to save often.  You can also review your character for errors or missing information.  When you're done here, you will need to log onto the game to finish character creation and submit your application.</p>
             
-             <p>
-                 <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
-                 <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
-             </p>     
-     {{/if}}
+               <p>
+                   <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
+                   <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
+               </p>     
+       {{/if}}
      </div>
 {{/if}}
 

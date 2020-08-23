@@ -23,14 +23,14 @@
        
        
         <p>
-            <LinkTo @route="chargen" class="btn btn-default">Back to Chargen</LinkTo>
+            <LinkTo @route="chargen-char" @model={{model.id}} class="btn btn-default">Back to Chargen</LinkTo>
             <button name="submit" {{action 'submit'}} class="btn btn-success">Submit</button>
         </p>
       {{else}}
           <p>You'll need to log onto the game to complete character creation and submit your application.</p>
           <hr>
           <p>
-            <LinkTo @route="chargen" class="btn btn-default">Back to Chargen</LinkTo>
+            <LinkTo @route="chargen-char" @model={{model.id}} class="btn btn-default">Back to Chargen</LinkTo>
           </p>
       {{/if}}
                    

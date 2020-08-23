@@ -17,18 +17,20 @@
        <div class="collapse in" id="sceneMenuCollapse">
 
        <p class="play-section-title">Scenes
-       
-       <LinkTo @route="scenes-live" @target="_blank">
-         <TooltipIcon @position="right" @message="Join Scene" @icon="fa fa-play-circle" />
-       </LinkTo>
+             
+       {{#if isApproved}}
+         <LinkTo @route="scenes-live" @target="_blank">
+           <TooltipIcon @position="right" @message="Join Scene" @icon="fa fa-play-circle" />
+         </LinkTo>
 
-       <LinkTo @route="scene-create" @target="_blank">
-         <TooltipIcon @position="right" @message="Create Scene" @icon="fa fa-plus-circle" />
-       </LinkTo>
+         <LinkTo @route="scene-create" @target="_blank">
+           <TooltipIcon @position="right" @message="Create Scene" @icon="fa fa-plus-circle" />
+         </LinkTo>
 
-       <LinkTo @route="scenes-unshared" @target="_blank">
-         <TooltipIcon @position="right" @message="Unshared Scenes" @icon="fa fa-share-square" />
-       </LinkTo>
+         <LinkTo @route="scenes-unshared" @target="_blank">
+           <TooltipIcon @position="right" @message="Unshared Scenes" @icon="fa fa-share-square" />
+         </LinkTo>
+       {{/if}}
 
        <LinkTo @route="who" @target="_blank">
          <TooltipIcon @position="right" @message="Who's Online" @icon="fa fa-users" />
