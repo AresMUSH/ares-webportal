@@ -40,6 +40,8 @@
       <LinkTo @route="chat">View</LinkTo>
     {{else if (eq notification.type 'scene')}}
       <LinkTo @route="scene-live" @model={{notification.reference_id}}>View</LinkTo>
+    {{else if (eq notification.type 'scene_deletion')}}
+      <LinkTo @route="scene-live" @model={{notification.reference_id}}>View</LinkTo>
     {{else if (eq notification.type 'event')}}
       <LinkTo @route="event" @model={{notification.reference_id}}>View</LinkTo>
     {{else if (eq notification.type 'achievement')}}
