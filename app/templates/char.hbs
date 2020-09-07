@@ -23,7 +23,7 @@
 {{/if}}
 
 <div class="profile-tab">
-    <ProfileSupplemental @char={{model.char}} />
+    <ProfileSupplemental @char={{model.char}} @title="Supplemental Information" />
 </div>
 
 
@@ -40,7 +40,11 @@
 
  </div>
 
-<ProfileLogs @scenes={{model.scenes}} @sceneTypes={{model.sceneTypes}} @char={{model.char}} @plot_prefs={{model.plot_prefs}} @lore_hook_name={{model.lore_hook_name}} @lore_hook_desc={{model.lore_hook_desc}} @lore_hook_item={{model.lore_hook_item}} @lore_hook_pet={{model.lore_hook_pet}} @lore_hook_ancestry={{model.lore_hook_ancestry}} />
+ <div class="profile-tab">
+
+<ProfileLogs @scenes={{model.scenes}} @sceneTypes={{model.sceneTypes}} @char={{model.char}} />
+
+</div>
 
 <div class="profile-tab">
 
@@ -62,6 +66,9 @@
 
         {{#if model.char.last_profile_version}}
             <LinkTo @route="char-source" @models={{array model.char.id model.char.last_profile_version}} class="btn btn-default">Source/History</LinkTo>
+        {{/if}}
+        {{#if model.char.can_approve}}
+          <LinkTo @route="chargen-char" @model={{model.char.id}} class="btn btn-default">Chargen</LinkTo>
         {{/if}}
         {{#if model.char.show_notes}}
           <LinkTo @route="notes" @model={{model.char.name}} class="btn btn-default">Notes</LinkTo>
