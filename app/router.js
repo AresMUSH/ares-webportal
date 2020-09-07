@@ -30,7 +30,8 @@ Router.map(function() {
   this.route('char-edit', { path: '/char/:id/edit' });
   this.route('char-source', { path: '/char/:char_id/source/:version_id' });
   this.route('chargen');
-  this.route('chargen-review');
+  this.route('chargen-char', { path: '/chargen/:char_id'});
+  this.route('chargen-review', { path: '/chargen-review/:char_id'});
   this.route('chat');
   this.route('channels-manage');
   this.route('channel-create');
@@ -61,6 +62,9 @@ Router.map(function() {
   this.route('forum-category', { path: '/forum/:category_id'});
   this.route('forum-topic', { path: '/forum/:category_id/:topic_id'});
   this.route('forum-create-post', { path: '/forum/:category_id/create-post' })
+  this.route('forum-create');
+  this.route('forum-edit', { path: '/forum-edit/:id' });
+  this.route('forum-manage');
   this.route('fs3-limits');
   this.route('fs3-xp-costs');
   this.route('fs3combat-gear', { path: '/fs3combat/gear/' });
@@ -74,6 +78,9 @@ Router.map(function() {
   this.route('jobs');
   this.route('job', { path: '/job/:id' });
   this.route('job-create');
+  this.route('jobcat-create');
+  this.route('jobcat-edit', { path: '/jobcat-edit/:id' });
+  this.route('jobcat-manage');
   this.route('locations');
   this.route('location', { path: '/location/:id'});
   this.route('location-edit', { path: '/location/:id/edit'});

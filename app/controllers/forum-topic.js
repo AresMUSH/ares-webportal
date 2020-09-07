@@ -11,6 +11,8 @@ export default Controller.extend(AuthenticatedController, {
     flashMessages: service(),
     confirmDeleteTopic: null,
     confirmDeleteReply: null,
+    chooseNewCategory: null,
+    newCategory: null,
     author: null,
     
     resetOnExit: function() {
@@ -18,6 +20,8 @@ export default Controller.extend(AuthenticatedController, {
         this.set('confirmDeleteReply', null);
         this.set('confirmDeleteTopic', null);
         this.set('author', null);
+        this.set('chooseNewCategory', null);
+        this.set('newCategory', null);
     },
     
     setup: function() {
@@ -165,6 +169,31 @@ export default Controller.extend(AuthenticatedController, {
         },
         authorChanged(author) {
           this.set('author', author);
+        },
+
+        
+        moveTopic() {
+            let api = this.gameApi;
+            let categoryId = this.get('newCategory.id');
+            this.set('chooseNewCategory', null);
+            if (!categoryId) {
+              this.flashMessages.danger('You must select a category.');
+              return;
+            }
+            api.requestOne('forumMove', { topic_id: this.get('model.id'), category_id: categoryId })
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                
+                this.flashMessages.success('Topic moved!');
+                this.transitionToRoute('forum-topic', response.category_id, response.post_id);
+              
+            });
+        },
+        
+        newCategorySelected(category) {
+          this.set('newCategory', category);
         }
     }
 });

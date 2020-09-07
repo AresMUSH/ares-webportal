@@ -1,0 +1,54 @@
+{{title "Create Category"}}
+<h1>Create Category</h1>
+
+  
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="name" class="col-form-label">Name:</label>
+    </div>
+    <div class="col-sm-9">
+        <Input @type="text" @size={{25}} @id="name" @enter={{action "save"}} @value={{name}} />
+    </div> 
+  </div>
+  
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="desc" class="col-form-label">Description:</label>
+    </div>
+    <div class="col-sm-9">
+        <Input @type="text" @size={{25}} @id="desc" @enter={{action "save"}} @value={{desc}} />
+    </div> 
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Can Read:</b>
+    </div>
+
+    <div class="col-sm-9">
+      {{#power-select-multiple  selected=can_read options=model.roles onchange=(action "readRolesChanged") as |role|}}
+        {{role}}
+      {{/power-select-multiple}}
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Can Write:</b>
+    </div>
+
+    <div class="col-sm-9">
+      {{#power-select-multiple  selected=can_write options=model.roles onchange=(action "writeRolesChanged") as |role|}}
+        {{role}}
+      {{/power-select-multiple}}
+      <div class="hint">Forums default to only allowing approved characters to post. If you want a forum where anyone can post, you must explicitly set the write role to 'everyone'.</div>
+    </div>
+  </div>
+  
+
+<div class="pull-right">
+        <p> <LinkTo @route="forum-manage" class="btn btn-default">Cancel</LinkTo>  
+        <button {{action 'save'}} class="btn btn-primary">Save</button> </p>
+</div>
+      
+<FlashMessages />

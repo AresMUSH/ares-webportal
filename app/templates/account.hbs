@@ -4,55 +4,108 @@
 
 <h2>Player Handle</h2>
 
-{{#if model.handle}}
-<p>Your character is linked to the handle <b>{{model.handle}}</b>.  Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your handle preferences.</p>
-{{else}}
+  <p>AresMUSH player handles provide--at your discretion--a consistent player identity across Ares games. They also enable cross-game features like a friends list and synchronized account preferences. Learn more about player handles on <a href="https://aresmush.com/handles" target="_blank" rel="nofollow noopener">aresmush.com</a></p>
 
-<p>AresMUSH player handles provide--at your discretion--a consistent player identity across Ares games. They also enable cross-game features like a friends list and synchronized account preferences.</p>
 
-<p>Learn more about player handles on <a href="https://aresmush.com/handles" target="_blank" rel="nofollow noopener">aresmush.com</a></p>
+<a data-toggle="collapse" href="#handle" class="btn btn-default btn-collapse">Manage Handle</a>
+<div id="handle" class="panel-collapse collapse">
 
-<p>To set up a player handle:</p>
+   <div class="panel panel-default">
+      <div class="panel-body">
 
-<ol>
-  <li>Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a>  and register your handle account.</li>
-  <li>Go to 'My Account -> Manage Characters'.</li>
-  <li>Click 'Get A New Link Code' and copy the code it gives you.</li>
-  <li>Enter the handle name and the code below and click 'Link to Handle'.</li>
-</ol>
+        {{#if model.handle}}
+        <p>Your character is linked to the handle <b>{{model.handle}}</b>.  Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your handle preferences.</p>
+        {{else}}
 
-<div class="panel panel-default">
-    <div class="panel-body">
 
-        <FlashMessages />
-        
-        <p><Input @type="text" @id="handleName" placeholder="Handle Name" @enter={{action "linkHandle"}} @value={{handleName}} /></p>
-        <p><Input @type="text" placeholder="Link Code" @enter={{action "linkHandle"}} @id="linkCode" @value={{linkCode}} /></p>
-        
-        <button {{action "linkHandle"}} class="btn btn-primary">Link to Handle</button>
-        
-    </div>
-</div>
+        <p>To set up a player handle:</p>
+
+        <ol>
+          <li>Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a>  and register your handle account.</li>
+          <li>Go to 'My Account -> Manage Characters'.</li>
+          <li>Click 'Get A New Link Code' and copy the code it gives you.</li>
+          <li>Enter the handle name and the code below and click 'Link to Handle'.</li>
+        </ol>
   
+          <FlashMessages />
+        
+          <p><Input @type="text" @id="handleName" placeholder="Handle Name" @enter={{action "linkHandle"}} @value={{handleName}} /></p>
+          <p><Input @type="text" placeholder="Link Code" @enter={{action "linkHandle"}} @id="linkCode" @value={{linkCode}} /></p>
+          <p><Input @type="password" placeholder="Confirm Password" @enter={{action "changeName"}} @id="confirmPasswordHandle" @value={{confirmPasswordHandle}} /></p>
+        
+          <button {{action "linkHandle"}} class="btn btn-primary">Link to Handle</button>
+        
+        {{/if}}
+        
+      </div>
+  </div>
+  
+
+</div>
+
+{{#if (not isApproved)}}
+<h2>Character Name</h2>
+
+<p>You can change your name until your character is approved.</p>
+
+<a data-toggle="collapse" href="#name" class="btn btn-default btn-collapse">Manage Name</a>
+<div id="name" class="panel-collapse collapse">
+  <div class="panel panel-default">
+      <div class="panel-body">
+
+          <FlashMessages />
+        
+          <p><Input @id="name" placeholder="Name" @enter={{action "changeName"}} @value={{model.name}} /></p>
+          <p><Input @type="password" placeholder="Confirm Password" @enter={{action "changeName"}} @id="confirmPasswordName" @value={{confirmPasswordName}} /></p>
+          <button {{action "changeName"}} class="btn btn-primary">Change Name</button>
+                
+      </div>
+  </div>
+</div>
 {{/if}}
 
+<h2>Password</h2>
 
-<h2>Change Password</h2>
+<p>You can change the password for this character. This is used to log in to both the game and the web portal.</p>
 
-<p>Enter your current password and desired new password and click 'Change Password'.</p>
+<a data-toggle="collapse" href="#password" class="btn btn-default btn-collapse">Change Password</a>
+<div id="password" class="panel-collapse collapse">
 
-<div class="panel panel-default">
-    <div class="panel-body">
+  <div class="panel panel-default">
+      <div class="panel-body">
 
-        <FlashMessages />
+          <FlashMessages />
         
-        <p><Input @type="password" @id="password" placeholder="Current Password" @enter={{action "changePassword"}} @value={{currentPassword}} /></p>
-        <p><Input @type="password" placeholder="Password" @enter={{action "changePassword"}} @id="newPassword" @value={{newPassword}} /></p>
-        <p><Input @type="password" placeholder="Confirm Password" @enter={{action "changePassword"}} @id="confirmPassword" @value={{confirmPassword}} /></p>
+          <p><Input @type="password" @id="password" placeholder="Current Password" @enter={{action "changePassword"}} @value={{currentPassword}} /></p>
+          <p><Input @type="password" placeholder="Password" @enter={{action "changePassword"}} @id="newPassword" @value={{newPassword}} /></p>
+          <p><Input @type="password" placeholder="Confirm New Password" @enter={{action "changePassword"}} @id="confirmPassword" @value={{confirmPassword}} /></p>
         
-        <button {{action "changePassword"}} class="btn btn-primary">Change Password</button>
+          <button {{action "changePassword"}} class="btn btn-primary">Change Password</button>
                 
-    </div>
+      </div>
+  </div>
+</div>
+
+
+<h2>Email</h2>
+
+<p>You may set an email to allow game admin to contact you. Your email is not displayed on your public profile; it is only accessible by admin. Consult your local game policies for how this email may be used.</p>
+
+<a data-toggle="collapse" href="#email" class="btn btn-default btn-collapse">Manage Email</a>
+<div id="email" class="panel-collapse collapse">
+
+  <div class="panel panel-default">
+      <div class="panel-body">
+
+          <FlashMessages />
+        
+          <p><Input placeholder="Email" @enter={{action "changeEmail"}} @id="email" @value={{model.email}} /></p>
+          <p><Input @type="password" @id="passwordEmail" placeholder="Confirm Password" @enter={{action "changeEmail"}} @value={{currentPasswordEmail}} /></p>
+        
+          <button {{action "changeEmail"}} class="btn btn-primary">Set Email</button>
+                
+      </div>
+  </div>
 </div>
 
 {{outlet}}
