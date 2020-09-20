@@ -12,7 +12,7 @@ export default Route.extend(AuthenticatedRoute, {
         
         return RSVP.hash({
              scene:  api.requestOne('scene', { id: params['id'], edit_mode: true  }),
-             sceneTypes: api.requestMany('sceneTypes'),
+             sceneOptions: api.requestOne('sceneOptions'),
              plots: api.requestMany('plots'),
              characters: api.requestMany('characters', { select: 'include_staff' }),
              scenes: api.requestOne('scenes', { filter: 'Related' })
