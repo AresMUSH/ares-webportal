@@ -27,19 +27,6 @@ export default Controller.extend(AuthenticatedController, {
             });
         },
         
-        delete() {
-            let api = this.gameApi;
-            this.set('confirmDelete', false);
-            api.requestOne('deleteScene', { id: this.get('model.id')})
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                this.transitionToRoute('scenes');
-                this.flashMessages.success('Scene deleted!');
-            });
-        },
-        
         unshareScene() {
             let api = this.gameApi;
             api.requestOne('changeSceneStatus', { id: this.get('model.id'),
