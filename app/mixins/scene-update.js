@@ -21,9 +21,12 @@ export default Mixin.create({
     if (activityType == 'new_pose') {
       let poseData = JSON.parse(activityData);
       let poses = scene.get('poses');
-      if (!poseData.can_edit && (poseData.char.id == this.get('session.data.authenticated.id'))) {
-        poseData.can_edit = true;
-        poseData.can_delete = true;
+      if (poseData.char.id == this.get('session.data.authenticated.id')) {
+        scene.set('can_edit', true);
+        if (!poseData.can_edit) {
+          poseData.can_edit = true;
+          poseData.can_delete = true;
+        }
       }
       poseData.timestamp = localTimestamp;
       poses.pushObject(poseData);

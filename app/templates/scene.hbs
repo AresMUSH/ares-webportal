@@ -120,10 +120,6 @@
                         <li><LinkTo @route="scene-edit" @model={{model.id}}>Edit Scene</LinkTo></li>
                         <li><a href="#" {{action 'unshareScene'}}>Unshare Scene</a></li>
                         
-                        {{#if model.can_delete}}
-                        <li><a href="#" {{action (mut confirmDelete) true}}>Delete Scene</a></li>
-                        {{/if}}
-                         
                          <li role="separator" class="divider"></li>
                        {{/if}}
                        
@@ -142,9 +138,5 @@
 
 
 <FlashMessages />
-
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) null}}>
-    You're about to delete scene {{model.title}}. This cannot be undone.  Are you sure?
-  </BsModalSimple>
 
 {{outlet}}
