@@ -13,7 +13,7 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, RouteResetOnExi
   model: function() {
     let api = this.gameApi;
     return RSVP.hash({
-      sceneTypes: api.requestMany('sceneTypes'),
+      sceneOptions: api.requestOne('sceneOptions'),
     })
     .then((model) => EmberObject.create(model));
          

@@ -6,9 +6,12 @@ export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
     queryParams: [ 'location' ],
-    
+
+    scenePacingOptions: computed(function() { 
+        return this.get('model.sceneOptions.scene_pacing');
+    }),    
     sceneTypes: computed(function() { 
-        return this.get('model.sceneTypes').map(p => p.get('name'));
+        return this.get('model.sceneOptions.scene_types').map(p => p.name);
     }),
     
     scenePrivacyValues: computed(function() { 
@@ -21,6 +24,9 @@ export default Controller.extend({
         },
         typeChanged(newType) {
             this.set('model.scene.scene_type', newType);
+        },
+        pacingChanged(newType) {
+            this.set('model.scene.scene_pacing', newType);
         },
         participantsChanged(newParticipants) {
             this.set('model.scene.participants', newParticipants);
@@ -45,6 +51,7 @@ export default Controller.extend({
                title: this.get('model.scene.title'), 
                icdate: this.get('model.scene.icdate'),
                scene_type: this.get('model.scene.scene_type'),
+               scene_pacing: this.get('model.scene.scene_pacing'),
                location: this.get('model.scene.location'),
                summary: this.get('model.scene.summary'),
                plot_id: this.get('model.scene.plot.id'),
