@@ -72,7 +72,8 @@ export default Controller.extend({
             tags: tags,
             descs: descs,
             custom: custom,
-            roster: roster
+            roster: roster,
+            roles: this.get('model.char.roles') || []
         };
     }, 
     actions: {

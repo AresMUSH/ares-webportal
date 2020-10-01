@@ -23,6 +23,9 @@ export default Component.extend({
     },
     profileIconChanged(icon) {
         this.set('model.char.profile_icon', icon);
+    },
+    rolesChanged(roles) {
+      this.set('model.char.roles', roles);
     }
   }
 });
