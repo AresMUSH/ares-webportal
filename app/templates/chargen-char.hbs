@@ -63,7 +63,7 @@
        <li role="presentation"><a href="#hooks" aria-controls="misc" role="tab" data-toggle="tab">RP Hooks</a></li>
        <li role="presentation"><a href="#icon" aria-controls="misc" role="tab" data-toggle="tab">Profile Icon</a></li>
        <li role="presentation"><a href="#descs" aria-controls="misc" role="tab" data-toggle="tab">Descriptions</a></li>
-       <li role="presentation"><a href="#lastwill" aria-controls="misc" role="tab" data-toggle="tab">Last Will</a></li>
+       <li role="presentation"><a href="#misc" aria-controls="misc" role="tab" data-toggle="tab">Misc</a></li>
        <ChargenCustomTabs @char={{model}} />
      </ul>
      
@@ -166,20 +166,27 @@
 
          <div role="tabpanel" class="tab-pane" id="descs">
              <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.desc_blurb}} /></div>
-             <br>
-             <p> <i>Main Description:</i> </p>
+             
+             <div class="chargen-section-title">Main Description</div>
              <MarkdownEditor @text={{model.char.desc}} />
              
-             <p> <i>Short Description:</i> </p>
+             <div class="chargen-section-title">Short Description</div>
              <Input @type="text" @size={{25}} @value={{model.char.shortdesc}} />
              
           </div>
           
-          <div role="tabpanel" class="tab-pane" id="lastwill">
-                         
+          <div role="tabpanel" class="tab-pane" id="misc">
+
+              <div class="chargen-section-title">Last Will</div>
                <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.lastwill_blurb}} /></div>
                <br>
                <MarkdownEditor @text={{model.char.lastwill}} />
+               
+               <div class="chargen-section-title">Player Handle</div>
+
+               <p>AresMUSH player handles provide--at your discretion--a consistent player identity across Ares games. They also enable cross-game features like a friends list and synchronized account preferences. Learn more about player handles on <a href="https://aresmush.com/handles" target="_blank" rel="nofollow noopener">aresmush.com</a> and set up your handle on your <LinkTo @route="account" @target="_blank">Account</LinkTo> page.</p>
+               
+               
            </div>
            
            <ChargenCustom @char={{model.char}} @cgInfo={{model.cgInfo}} @updateCallback={{customUpdateCallback}} />

@@ -10,6 +10,9 @@
         <li><a data-toggle="tab" href="#bg">Background</a></li>
         {{/if}}
         <li><a data-toggle="tab" href="#files">Files</a></li>
+        {{#if model.char.is_roster_manager}}
+        <li><a data-toggle="tab" href="#roster">Roster</a></li>
+        {{/if}}
         <CharEditCustomTabs @char={{model}} />
     </ul>
     
@@ -30,7 +33,11 @@
       <div id="hooks" class="tab-pane fade in">
           <MarkdownEditor @text={{model.char.rp_hooks}} />
         </div>
-        
+
+      {{#if model.char.is_roster_manager}}
+        <CharEditRoster @model={{model}} />
+      {{/if}}
+      
       <CharEditCustom @char={{model.char}} @updateCallback={{customUpdateCallback}} />
         
       <CharEditFiles @model={{model}} />
