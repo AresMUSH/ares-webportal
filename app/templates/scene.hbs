@@ -34,9 +34,14 @@
         </p>
             
         <p>
-            <b>Plot: </b>
-            {{#if model.plot}}
-                <a href="/plot/{{model.plot.id}}">{{model.plot.title}}</a>
+            <b>Plots: </b>
+            {{#if model.plots}}
+              {{#each model.plots as |plot index|}}
+                {{#if (not-eq index 0)}}
+                &nbsp;
+                {{/if}}
+                 <a href="/plot/{{plot.id}}">{{plot.title}}</a>
+               {{/each}}
             {{else}}
                 None
             {{/if}}

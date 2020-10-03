@@ -82,9 +82,9 @@
         <label class="col-form-label">Plot:</label>
      </div>
      <div class="col-sm-9">
-        <PowerSelect @selected={{model.scene.plot}} @options={{model.plots}} @allowClear={{true}} @searchField="title" @onchange={{action "plotChanged"}} as |plot|>
+        <PowerSelectMultiple @selected={{model.scene.plots}} @options={{model.plots}} @allowClear={{true}} @searchField="title" @onchange={{action "plotsChanged"}} as |plot|>
           {{plot.title}}
-        </PowerSelect>
+        </PowerSelectMultiple>
      </div>
   </div>
     

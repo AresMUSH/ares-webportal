@@ -19,8 +19,8 @@ export default Controller.extend({
     }),
     
     actions: {
-        plotChanged(new_plot) {
-            this.set('model.scene.plot', new_plot);
+        plotsChanged(new_plots) {
+            this.set('model.scene.plots', new_plots);
         },
         typeChanged(new_type) {
             this.set('model.scene.scene_type', new_type);
@@ -52,7 +52,7 @@ export default Controller.extend({
                location: this.get('model.scene.location'),
                summary: this.get('model.scene.summary'),
                privacy: this.get('model.scene.privacy'),
-               plot_id: this.get('model.scene.plot.id'),
+               plots: (this.get('model.scene.plots') || []).map(p => p.id),
                participants: (this.get('model.scene.participants') || []).map(p => p.name),
                related_scenes: (this.get('model.scene.related_scenes') || []).map(s => s.id),
                tags: tags,
