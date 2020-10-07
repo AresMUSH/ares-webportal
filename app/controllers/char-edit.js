@@ -65,6 +65,7 @@ export default Controller.extend({
             profile: profile,
             bg_shared: this.get('model.char.bg_shared'),
             lastwill: this.get('model.char.lastwill'),
+            idle_notes: this.get('model.char.idle_notes'),
             profile_image: this.get('model.char.profile_image.name'),
             profile_icon: this.get('model.char.profile_icon.name'),
             profile_gallery: this.get('model.char.profile_gallery'),

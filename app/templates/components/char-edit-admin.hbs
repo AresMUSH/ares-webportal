@@ -1,5 +1,45 @@
-<div id="roster" class="tab-pane fade in">
+<div id="admin" class="tab-pane fade in">
+  {{#if model.char.show_background_tab}}
+  <hr>
+    <h3>Background</h3>
+    
+    <MarkdownEditor @text={{model.char.background}} />
+  {{/if}}
+  
 
+  {{#if model.char.show_roles_tab}}
+  <hr>
+  <h3>Roles</h3>
+
+  
+  <PowerSelectMultiple @selected={{model.char.roles}} @options={{model.char.all_roles}} @onchange={{action "rolesChanged"}} as |role|>
+    {{role}}
+  </PowerSelectMultiple>
+  {{/if}}
+  
+
+  {{#if model.char.show_idle_tab}}
+  <hr>
+  <h3>Idle Settings</h3>
+  
+  <div class="form-group row">
+      <div class="col-sm-3">
+              <b>Idle Note</b>
+      </div>
+      
+      <div class="col-sm-9">
+        
+          <Input @type="text" @id="idleNote" placeholder="Notes" @value={{model.char.idle_notes}} />
+          
+      </div>
+  </div>
+  
+  {{/if}}
+  
+  
+  {{#if model.char.show_roster_tab}}
+  <hr>
+  <h3>Roster Settings</h3>
     <div class="form-group row">
         <div class="col-sm-3">
                 <b>On Roster</b>
@@ -56,6 +96,6 @@
             
         </div>
     </div>
-    
+    {{/if}}
 
 </div>
