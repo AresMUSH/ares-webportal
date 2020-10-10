@@ -1,4 +1,4 @@
-{{title "Idle Sweep"}}
+{{page-title "Idle Sweep"}}
 <h1>Idle Sweep</h1>
 
 <table class="table table-striped">
@@ -33,7 +33,7 @@
       <Input @type="text" @id="idleNotes{{char.id}}" placeholder="Notes" @value={{char.notes}} />
     </td>
     <td>
-      <PowerSelect @selected={{char.idle_action}}  @options={{model.idle_actions}} @onchange={{action "idleActionChanged" char}} as |idleAction|>
+      <PowerSelect @selected={{char.idle_action}}  @options={{model.idle_actions}} @onChange={{action "idleActionChanged" char}} as |idleAction|>
        {{idleAction}}
      </PowerSelect>
      

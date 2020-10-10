@@ -1,4 +1,4 @@
-{{title pageTitle}}
+{{page-title pageTitle}}
 <h1>Combat {{model.id}}</h1>
 
 
@@ -167,7 +167,7 @@
 <BsModalSimple @title="Add Combatant" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{false}} @open={{showAddCombatant}} @onSubmit={{action "addCombatant"}} @onHide={{action (mut showAddCombatant) null}}>
         <p><b>Name(s):</b> </p>
             <p><Input @type="text" @size={{25}} @value={{newCombatantName}} /></p>
-        <p><b>Type:</b> <PowerSelect @selected={{newCombatantType}} @options={{model.combatant_types}} @onchange={{action "combatantTypeChanged"}} as |type|>
+        <p><b>Type:</b> <PowerSelect @selected={{newCombatantType}} @options={{model.combatant_types}} @onChange={{action "combatantTypeChanged"}} as |type|>
           {{type}}
         </PowerSelect></p>
         <div class="hint">You can add multiple combatants at once, as long as they're the same combatant type. List their names separated by spaces.</div>
@@ -175,7 +175,7 @@
 
 
 <BsModalSimple @title="Join Combat" @closeTitle="Cancel" @submitTitle="Join" @size={{null}} @fade={{false}} @open={{showJoinCombat}} @onSubmit={{action "joinCombat"}} @onHide={{action (mut showJoinCombat) null}}>
-        <p><b>Type:</b> <PowerSelect @selected={{newCombatantType}} @options={{model.combatant_types}} @onchange={{action "combatantTypeChanged"}} as |type|>
+        <p><b>Type:</b> <PowerSelect @selected={{newCombatantType}} @options={{model.combatant_types}} @onChange={{action "combatantTypeChanged"}} as |type|>
           {{type}}
         </PowerSelect></p>
   </BsModalSimple>

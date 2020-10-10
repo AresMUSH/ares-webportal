@@ -1,10 +1,10 @@
-{{title 'Create Post'}}
+{{page-title 'Create Post'}}
 <h1>Post to {{model.name}}</h1>
 
 {{#if model.can_post}}
 
      <p><b>Post As:</b>        <div class="forum-char-select" >
-                 <PowerSelect @selected={{author}} @options={{model.authors}} @searchField="name" @onchange={{action "authorChanged"}} as |author|>
+                 <PowerSelect @selected={{author}} @options={{model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |author|>
                      <CharIconTiny @char={{author}} />
                  </PowerSelect>
              </div>

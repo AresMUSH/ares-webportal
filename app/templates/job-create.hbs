@@ -1,8 +1,8 @@
 {{#if model.options.is_job_admin}}
-  {{title 'Create Job'}}
+  {{page-title 'Create Job'}}
   <h1>Create a Job</h1>
 {{else}}
-  {{title 'Create Request'}}
+  {{page-title 'Create Request'}}
   <h1>Create a Request</h1>
 {{/if}}
 
@@ -28,7 +28,7 @@
     
      <td>
       
-       <PowerSelect @selected={{submitter}} @options={{model.characters}} @searchField="name" @onchange={{action "submitterChanged"}} as |char|>
+       <PowerSelect @selected={{submitter}} @options={{model.characters}} @searchField="name" @searchEnabled=true @onChange={{action "submitterChanged"}} as |char|>
          {{char.name}}
        </PowerSelect>
       
@@ -42,7 +42,7 @@
     
      <td>
       
-        <PowerSelectMultiple @selected={{participants}} @options={{model.characters}} @searchField="name" @onchange={{action "participantsChanged"}} as |char|>
+        <PowerSelectMultiple @selected={{participants}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
          {{char.name}}
        </PowerSelectMultiple>
       

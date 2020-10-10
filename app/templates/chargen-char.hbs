@@ -1,4 +1,4 @@
-{{title 'Create a Character'}}
+{{page-title 'Create a Character'}}
 <div class="row">
  <div class="col col-md-12">
       
@@ -82,7 +82,7 @@
                      <div class="col-sm-9">
                          {{#if (eq key 'gender') }}
                              
-                             <PowerSelect @selected={{model.char.demographics.gender}} @searchField="value" @options={{genders}} @onchange={{action "genderChanged"}} as |gender|>
+                             <PowerSelect @selected={{model.char.demographics.gender}} @searchEnabled=true @searchField="value" @options={{genders}} @onChange={{action "genderChanged"}} as |gender|>
                                {{gender.value}}
                              </PowerSelect>
                          
@@ -113,7 +113,7 @@
                       {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
                         <Input @type="text" @size={{25}} @value={{group.value}} />
                       {{else}}
-                        <PowerSelect @selected={{get model.char.groups key}} @options={{get (get model.cgInfo.group_options key) "values"}} @searchField="value" @allowClear={{true}} @onchange={{action "groupChanged" key}} as |g|>
+                        <PowerSelect @selected={{get model.char.groups key}} @options={{get (get model.cgInfo.group_options key) "values"}} @searchField="value" @allowClear={{true}} @onChange={{action "groupChanged" key}} as |g|>
                         {{g.value}} {{if g.desc '-'}} {{g.desc}}
                       </PowerSelect>
                       {{/if}}

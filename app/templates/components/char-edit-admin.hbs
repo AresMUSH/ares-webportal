@@ -12,7 +12,7 @@
   <h3>Roles</h3>
 
   
-  <PowerSelectMultiple @selected={{model.char.roles}} @options={{model.char.all_roles}} @onchange={{action "rolesChanged"}} as |role|>
+  <PowerSelectMultiple @selected={{model.char.roles}} @options={{model.char.all_roles}} @onChange={{action "rolesChanged"}} as |role|>
     {{role}}
   </PowerSelectMultiple>
   {{/if}}

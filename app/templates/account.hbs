@@ -1,4 +1,4 @@
-{{title 'Account Settings'}}
+{{page-title 'Account Settings'}}
 
 <h1>Account Settings</h1>
 
@@ -116,7 +116,7 @@
                 <p>Your timezone is {{model.timezone}}. Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your timezone, which will apply to all characters linked to your handle.</p>
                 {{else}}
                 
-                <PowerSelect @selected={{model.timezone}}  @options={{model.timezones}} @onchange={{action "timezoneChanged"}} as |tz|>
+                <PowerSelect @selected={{model.timezone}}  @options={{model.timezones}} @searchEnabled=true @onChange={{action "timezoneChanged"}} as |tz|>
                    {{tz}}
                  </PowerSelect>
                                              
