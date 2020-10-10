@@ -1,4 +1,4 @@
-{{title model.job.title}}
+{{page-title model.job.title}}
 <h1>#{{model.job.id}} - {{model.job.title}}</h1>
 
 <p><LinkTo @route="jobs"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> 
@@ -64,7 +64,7 @@
       <div class="job-participant-edit-box">
        
         {{#if editParticipants}}
-         <PowerSelectMultiple @selected={{newParticipants}} @options={{model.characters}} @searchField="name" @onchange={{action "participantsChanged"}} as |char|>
+         <PowerSelectMultiple @selected={{newParticipants}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
           {{char.name}}
         </PowerSelectMultiple>
         <button class="btn btn-default" {{action (mut editParticipants) false}}>Cancel</button>

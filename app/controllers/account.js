@@ -6,9 +6,8 @@ export default Controller.extend(AuthenticatedController, {
     newPassword: '',
     currentPassword: '',
     confirmPassword: '',
-    confirmPasswordName: '',
     confirmPasswordHandle: '',
-    currentPasswordEmail: '',
+    confirmPasswordSettings: '',
     handleName: '',
     linkCode: '',
     session: service(),
@@ -19,9 +18,8 @@ export default Controller.extend(AuthenticatedController, {
       this.set('currentPassword', '');
       this.set('newPassword', '');
       this.set('confirmPassword', '');
-      this.set('confirmPasswordName', '');
       this.set('confirmPasswordHandle', '');
-      this.set('currentPasswordEmail', '');
+      this.set('confirmPasswordSettings', '');
       this.set('linkCode', '');
       this.set('handleName', '');
     },
@@ -40,29 +38,20 @@ export default Controller.extend(AuthenticatedController, {
             });
         },
         
-        changeName() {
+        changeSettings() {
             
-           this.gameApi.requestOne('changeName', 
-               { name: this.get('model.name'), confirm_password: this.confirmPasswordName}, null)
+           this.gameApi.requestOne('updateAccountInfo', 
+               { email: this.get('model.email'), 
+                 name: this.get('model.name'),
+                 confirm_password: this.confirmPasswordSettings,
+                 timezone: this.get('model.timezone')
+               }, null)
             .then((response) => {            
                 if (response.error) {
                     return;
                 }            
                 this.resetOnExit();    
-                this.flashMessages.success("Your name has been changed.");
-            });
-        },
-        
-        changeEmail() {
-            
-           this.gameApi.requestOne('setEmail', 
-               { email: this.get('model.email'), confirm_password: this.currentPasswordEmail}, null)
-            .then((response) => {            
-                if (response.error) {
-                    return;
-                }            
-                this.resetOnExit();    
-                this.flashMessages.success("Your email has been changed.");
+                this.flashMessages.success("Your account settings have been changed.");
             });
         },
         
@@ -78,6 +67,12 @@ export default Controller.extend(AuthenticatedController, {
                 this.resetOnExit();    
                 this.flashMessages.success("You have linked this character to your Ares player handle.");
             });
+        },
+        
+        timezoneChanged(val) {
+          this.set('model.timezone', val);
         }
+        
+        
     }
 });

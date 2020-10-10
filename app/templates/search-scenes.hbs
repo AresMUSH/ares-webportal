@@ -1,4 +1,4 @@
-{{title "Search Scenes"}}
+{{page-title "Search Scenes"}}
 
 <h1>Search Scenes</h1>
 
@@ -58,7 +58,7 @@
   
   <div class="col col-xs-9">
 
-    <PowerSelect @selected={{searchType}} @options={{sceneTypes}} @onchange={{action "sceneTypeChanged"}} as |name|>
+    <PowerSelect @selected={{searchType}} @options={{sceneTypes}} @onChange={{action "sceneTypeChanged"}} as |name|>
       {{name}}
     </PowerSelect>
     <br>

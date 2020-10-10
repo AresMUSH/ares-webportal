@@ -1,4 +1,4 @@
-{{title 'Edit Combatant'}}
+{{page-title 'Edit Combatant'}}
 <h1>Edit Combatant {{model.name}}</h1>
 
 <div class="form-group row">
@@ -7,7 +7,7 @@
     </div>
     <div class="col-sm-9">
         
-            <PowerSelect @selected={{model.action}} @options={{model.options.actions}} @onchange={{action "actionChanged"}} as |act|>
+            <PowerSelect @selected={{model.action}} @options={{model.options.actions}} @onChange={{action "actionChanged"}} as |act|>
               {{act}}
             </PowerSelect>
             <br>
@@ -34,7 +34,7 @@
     </div>
     <div class="col-sm-9">
         
-            <PowerSelect @selected={{model.team}} @options={{teams}} @onchange={{action "teamChanged"}} as |team|>
+            <PowerSelect @selected={{model.team}} @options={{teams}} @onChange={{action "teamChanged"}} as |team|>
               {{team}}
             </PowerSelect>
             
@@ -48,7 +48,7 @@
     </div>
     <div class="col-sm-9">
         
-            <PowerSelect @selected={{model.stance}} @options={{model.options.stances}} @onchange={{action "stanceChanged"}} as |stance|>
+            <PowerSelect @selected={{model.stance}} @options={{model.options.stances}} @onChange={{action "stanceChanged"}} as |stance|>
               {{stance}}
             </PowerSelect>
             
@@ -63,7 +63,7 @@
     </div>
     <div class="col-sm-9">
         
-            <PowerSelect @selected={{model.weapon}} @options={{model.options.weapons}} @onchange={{action "weaponChanged"}} as |weapon|>
+            <PowerSelect @selected={{model.weapon}} @options={{model.options.weapons}} @onChange={{action "weaponChanged"}} as |weapon|>
               {{weapon}}
             </PowerSelect>
             
@@ -97,7 +97,7 @@
     </div>
     <div class="col-sm-9">
         
-            <PowerSelect @selected={{model.armor}} @options={{model.options.armor}} @onchange={{action "armorChanged"}} as |armor|>
+            <PowerSelect @selected={{model.armor}} @options={{model.options.armor}} @onChange={{action "armorChanged"}} as |armor|>
               {{armor}}
             </PowerSelect>
             
@@ -133,7 +133,7 @@
         
             <Input @type="text" @size={{25}} @id="vehicleName" @value={{model.vehicle}} />
             <br>
-            <b>Passenger Type:</b> <PowerSelect @selected={{model.passenger_type}} @options={{passengerTypes}} @onchange={{action "passengerTypeChanged"}} as |passengerType|>
+            <b>Passenger Type:</b> <PowerSelect @selected={{model.passenger_type}} @options={{passengerTypes}} @onChange={{action "passengerTypeChanged"}} as |passengerType|>
               {{passengerType}}
             </PowerSelect>
             
@@ -151,7 +151,7 @@
     </div>
     <div class="col-sm-9">
         
-            <PowerSelect @selected={{model.npc_skill}} @options={{model.options.npc_skills}} @onchange={{action "npcChanged"}} as |npc|>
+            <PowerSelect @selected={{model.npc_skill}} @options={{model.options.npc_skills}} @onChange={{action "npcChanged"}} as |npc|>
               {{npc}}
             </PowerSelect>
             
