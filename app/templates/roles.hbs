@@ -1,10 +1,16 @@
-{{page-title "Roles"}}
-<h1>Roles</h1>
+{{page-title "Roles and Permissions"}}
+<h1>Roles and Permissions</h1>
 
+<h2>Roles</h2>
 <table>
-  {{#each model as |role|}}
+  {{#each model.roles as |role|}}
   <tr>
     <td>{{role.name}}</td>
+    <td>
+      {{#each role.permissions as |permission|}}
+        {{permission}}
+      {{/each}}
+    </td>
     {{#if role.chars}}
     <td>
       
@@ -14,6 +20,17 @@
     
     </td>
     {{/if}}
+  </tr>
+  {{/each}}
+</table>
+
+<h2>Permissions</h2>
+<table>
+  {{#each model.permissions as |permission|}}
+  <tr>
+    <td>{{permission.name}}</td>
+    <td>{{permission.section}}</td>
+    <td>{{permission.description}}</td>
   </tr>
   {{/each}}
 </table>

@@ -7,6 +7,6 @@ export default Route.extend(DefaultRoute, {
         
     model: function(params) {
         let api = this.gameApi;
-        return api.requestMany('roles');
+        return api.requestOne('roles');
     }
 });
