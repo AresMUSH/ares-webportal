@@ -1,0 +1,19 @@
+{{page-title "Roles"}}
+<h1>Roles</h1>
+
+<table>
+  {{#each model as |role|}}
+  <tr>
+    <td>{{role.name}}</td>
+    {{#if role.chars}}
+    <td>
+      
+      {{#each role.chars as |char|}}
+      {{char}}
+      {{/each}}
+    
+    </td>
+    {{/if}}
+  </tr>
+  {{/each}}
+</table>

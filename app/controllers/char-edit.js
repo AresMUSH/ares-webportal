@@ -47,6 +47,14 @@ export default Controller.extend({
         this.get('model.char.descs.details').forEach(function(p) {
             descs['details'][p.name] = p.desc;
         });
+        
+        let roster = {
+          on_roster: this.get('model.char.roster.on_roster'),
+          restricted: this.get('model.char.roster.restricted'),
+          contact: this.get('model.char.roster.contact'),
+          played: this.get('model.char.roster.played'),
+          notes: this.get('model.char.roster.notes')
+        };
                         
         return { 
             id: this.get('model.char.id'),
@@ -57,13 +65,16 @@ export default Controller.extend({
             profile: profile,
             bg_shared: this.get('model.char.bg_shared'),
             lastwill: this.get('model.char.lastwill'),
+            idle_notes: this.get('model.char.idle_notes'),
             profile_image: this.get('model.char.profile_image.name'),
             profile_icon: this.get('model.char.profile_icon.name'),
             profile_gallery: this.get('model.char.profile_gallery'),
             background: this.get('model.char.background'),
             tags: tags,
             descs: descs,
-            custom: custom
+            custom: custom,
+            roster: roster,
+            roles: this.get('model.char.roles') || []
         };
     }, 
     actions: {

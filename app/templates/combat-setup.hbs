@@ -1,4 +1,4 @@
-{{title 'Combat Setup'}}
+{{page-title 'Combat Setup'}}
 <h1>Setup Combat {{model.id}}</h1>
 
 <p>Here you can quickly set up combat stats for all the NPCs at once.  PCs cannot be set here to avoid accidentally overwriting their settings.  You can still edit PCs individually on the main combat screen.</p>
@@ -16,7 +16,7 @@
 
 <div class="form-group row">
     <div class="col-xs-6">
-            <b>Action:</b>  <PowerSelect @selected={{comb.action}} @options={{model.options.actions}} @onchange={{action "actionChanged" id}} as |act|>
+            <b>Action:</b>  <PowerSelect @selected={{comb.action}} @options={{model.options.actions}} @onChange={{action "actionChanged" id}} as |act|>
               {{act}}
             </PowerSelect>
     </div>
@@ -48,7 +48,7 @@
     <p>
       <label>Team:</label>
   
-      <PowerSelect @selected={{comb.team}} @options={{teams}} @onchange={{action "teamChanged" id}} as |team|>
+      <PowerSelect @selected={{comb.team}} @options={{teams}} @onChange={{action "teamChanged" id}} as |team|>
         {{team}}
       </PowerSelect>
     </p>
@@ -59,7 +59,7 @@
       
     <p>
       <label>NPC Level:</label>
-      <PowerSelect @selected={{comb.npc_skill}} @options={{model.options.npc_skills}} @onchange={{action "npcChanged" id}} as |level|>
+      <PowerSelect @selected={{comb.npc_skill}} @options={{model.options.npc_skills}} @onChange={{action "npcChanged" id}} as |level|>
         {{level}}
       </PowerSelect>
     </p>
@@ -73,7 +73,7 @@
 
     <p>
       <label>Stance</label>
-    <PowerSelect @selected={{comb.stance}} @options={{model.options.stances}} @onchange={{action "stanceChanged" id}} as |stance|>
+    <PowerSelect @selected={{comb.stance}} @options={{model.options.stances}} @onChange={{action "stanceChanged" id}} as |stance|>
       {{stance}}
     </PowerSelect>
     </p>
@@ -82,7 +82,7 @@
   <div class="col col-xs-6">
     <p>
       <label>Armor</label>
-    <PowerSelect @selected={{comb.armor}} @options={{model.options.armor}} @onchange={{action "armorChanged" id}} as |armor|>
+    <PowerSelect @selected={{comb.armor}} @options={{model.options.armor}} @onChange={{action "armorChanged" id}} as |armor|>
       {{armor}}
     </PowerSelect>
 
@@ -100,7 +100,7 @@
 
     <p>
       <label>Weapon</label>
-    <PowerSelect @selected={{comb.weapon}} @options={{model.options.weapons}} @onchange={{action "weaponChanged" id}} as |weapon|>
+    <PowerSelect @selected={{comb.weapon}} @options={{model.options.weapons}} @onChange={{action "weaponChanged" id}} as |weapon|>
       {{weapon}}
     </PowerSelect>
 
@@ -121,7 +121,7 @@
           <Input @type="text" @size={{25}} @value={{comb.vehicle}} />
           <br>
           <b>Passenger Type:</b>
-          <PowerSelect @selected={{comb.passenger_type}} @options={{passengerTypes}} @onchange={{action "passengerTypeChanged" id}} as |passengerType|>
+          <PowerSelect @selected={{comb.passenger_type}} @options={{passengerTypes}} @onChange={{action "passengerTypeChanged" id}} as |passengerType|>
             {{passengerType}}
           </PowerSelect>
           

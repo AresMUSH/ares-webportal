@@ -19,8 +19,8 @@ export default Controller.extend({
     }),
     
     actions: {
-        plotChanged(newPlot) {
-            this.set('model.scene.plot', newPlot);
+        plotsChanged(newPlots) {
+            this.set('model.scene.plots', newPlots);
         },
         typeChanged(newType) {
             this.set('model.scene.scene_type', newType);
@@ -54,7 +54,7 @@ export default Controller.extend({
                scene_pacing: this.get('model.scene.scene_pacing'),
                location: this.get('model.scene.location'),
                summary: this.get('model.scene.summary'),
-               plot_id: this.get('model.scene.plot.id'),
+               plots: (this.get('model.scene.plots') || []).map(p => p.id),
                completed: this.get('model.scene.completed'),
                privacy: this.get('model.scene.privacy'),
                participants: (this.get('model.scene.participants') || []).map(p => p.name),

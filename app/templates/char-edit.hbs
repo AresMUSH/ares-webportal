@@ -1,4 +1,4 @@
-{{title model.char.name}}
+{{page-title model.char.name}}
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#general">General</a></li>
@@ -6,10 +6,10 @@
         <li><a data-toggle="tab" href="#relationships">Relationships</a></li>
         <li><a data-toggle="tab" href="#hooks">RP Hooks</a></li>
         <li><a data-toggle="tab" href="#descs">Descriptions</a></li>
-        {{#if model.char.is_profile_manager}}
-        <li><a data-toggle="tab" href="#bg">Background</a></li>
-        {{/if}}
         <li><a data-toggle="tab" href="#files">Files</a></li>
+        {{#if model.char.show_admin_tab}}
+        <li><a data-toggle="tab" href="#admin">Admin</a></li>
+        {{/if}}
         <CharEditCustomTabs @char={{model}} />
     </ul>
     
@@ -22,15 +22,14 @@
       <CharEditRelationships @model={{model}} />
       <CharEditDescs @model={{model}} />
       
-      {{#if model.char.is_profile_manager}}
-      <div id="bg" class="tab-pane fade in">
-          <MarkdownEditor @text={{model.char.background}} />
-      </div>
-      {{/if}}
       <div id="hooks" class="tab-pane fade in">
           <MarkdownEditor @text={{model.char.rp_hooks}} />
         </div>
-        
+
+      {{#if model.char.show_admin_tab}}
+        <CharEditAdmin @model={{model}} />
+      {{/if}}
+      
       <CharEditCustom @char={{model.char}} @updateCallback={{customUpdateCallback}} />
         
       <CharEditFiles @model={{model}} />

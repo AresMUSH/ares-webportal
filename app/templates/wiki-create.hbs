@@ -1,4 +1,4 @@
-{{title 'Create New Page'}}
+{{page-title 'Create New Page'}}
 <h1>Create New Page</h1>
 
         
@@ -38,7 +38,7 @@
         <label for="tags" class="col-xs-2 col-form-label">Template:</label>
      </div>
      <div class="col-sm-9">
-      <PowerSelect @selected={{model.template}} @options={{model.templates}} @searchField="title" @onchange={{action "templateChanged"}} as |tmp|>
+      <PowerSelect @selected={{model.template}} @options={{model.templates}} @searchField="title" @onChange={{action "templateChanged"}} as |tmp|>
         {{tmp.title}}
       </PowerSelect>
      </div> 
