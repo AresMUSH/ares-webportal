@@ -14,14 +14,14 @@ module.exports = function(defaults) {
       includePolyfill: true
     }
     
-    /* 
+    
       'ember-cli-terser': {
         enabled: false
       },
       'minifyCSS': {
         enabled: false
       }
-    */
+    
   });
 
   /*  app.import(app.bowerDirectory + '/bootstrap/dist/css/bootstrap.css');
