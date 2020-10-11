@@ -1,4 +1,4 @@
-{{title model.scene.title}}
+{{page-title model.scene.title}}
 <h1>Edit Scene {{model.scene.title}}</h1>
         
     {{#if (not model.scene.completed)}}
@@ -9,7 +9,7 @@
        </div>
 
        <div class="col-sm-9">
-      <PowerSelect @selected={{model.scene.privacy}} @options={{scenePrivacyValues}} @onchange={{action "privacyChanged"}} as |type|>
+      <PowerSelect @selected={{model.scene.privacy}} @options={{scenePrivacyValues}} @onChange={{action "privacyChanged"}} as |type|>
         {{type}}
       </PowerSelect>
        </div>
@@ -59,11 +59,22 @@
         <label class="col-form-label">Scene Type:</label>
     </div>
      <div class="col-sm-9">
-        <PowerSelect @selected={{model.scene.scene_type}} @options={{sceneTypes}} @onchange={{action "typeChanged"}} as |type|>
+        <PowerSelect @selected={{model.scene.scene_type}} @options={{sceneTypes}} @onChange={{action "typeChanged"}} as |type|>
           {{type}}
         </PowerSelect>
       
     </div>
+  </div>
+  
+   <div class="form-group row">
+    <div class="col-sm-3">
+       <label class="col-form-label">Scene Pacing:</label>
+    </div>
+    <div class="col-sm-9">
+       <PowerSelect @selected={{model.scene.scene_pacing}} @options={{scenePacingOptions}} @onChange={{action "pacingChanged"}} as |type|>
+         {{type}}
+       </PowerSelect>
+    </div> 
   </div>
     
    <div class="form-group row">
@@ -71,9 +82,9 @@
         <label class="col-form-label">Plot:</label>
      </div>
      <div class="col-sm-9">
-        <PowerSelect @selected={{model.scene.plot}} @options={{model.plots}} @allowClear={{true}} @searchField="title" @onchange={{action "plotChanged"}} as |plot|>
+        <PowerSelectMultiple @selected={{model.scene.plots}} @options={{model.plots}} @allowClear={{true}} @searchEnabled=true @searchField="title" @onChange={{action "plotsChanged"}} as |plot|>
           {{plot.title}}
-        </PowerSelect>
+        </PowerSelectMultiple>
      </div>
   </div>
     
@@ -91,7 +102,7 @@
         <label for="participants" class="col-form-label">Participants:</label>
     </div>
     <div class="col-sm-9">
-        <PowerSelectMultiple @selected={{model.scene.participants}} @options={{model.characters}} @searchField="name" @onchange={{action "participantsChanged"}} as |char|>
+        <PowerSelectMultiple @selected={{model.scene.participants}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
           {{char.name}}
         </PowerSelectMultiple>
     </div> 
@@ -103,7 +114,7 @@
         <label for="related" class="col-form-label">Related Scenes:</label>
     </div>
     <div class="col-sm-9">
-            <PowerSelectMultiple @selected={{model.scene.related_scenes}} @options={{model.scenes.scenes}} @searchField="title" @onchange={{action "relatedChanged"}} as |scene|>
+            <PowerSelectMultiple @selected={{model.scene.related_scenes}} @options={{model.scenes.scenes}} @searchEnabled=true @searchField="title" @onChange={{action "relatedChanged"}} as |scene|>
               {{scene.icdate}} {{scene.title}}
             </PowerSelectMultiple>
     </div> 

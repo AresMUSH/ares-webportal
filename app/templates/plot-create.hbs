@@ -1,4 +1,4 @@
-{{title 'Create Plot'}}
+{{page-title 'Create Plot'}}
 <h1>Create a Plot</h1>
 
    <div class="form-group row">
@@ -16,9 +16,9 @@
     </div>
 
     <div class="col-sm-9">
-      {{#power-select-multiple  selected=storytellers options=model searchField="name" onchange=(action "storytellersChanged") as |char|}}
+      <PowerSelectMultiple @selected={{storytellers}} @options={{model}} @searchEnabled=true @searchField="name" @onChange={{action "storytellersChanged"}} as |char|>
         {{char.name}}
-      {{/power-select-multiple}}
+      </PowerSelectMultiple>
     </div>
   </div>
   

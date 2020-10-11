@@ -157,7 +157,7 @@
              </div>
                 
              <div class="scene-pose-select">
-                 <PowerSelect @selected={{poseType}} @options={{poseTypes}} @searchField="title" @onchange={{action "poseTypeChanged"}} as |poseType|>
+                 <PowerSelect @selected={{poseType}} @options={{poseTypes}} @searchField="title" @onChange={{action "poseTypeChanged"}} as |poseType|>
                      {{poseType.title}}
                  </PowerSelect>
              </div>
@@ -242,7 +242,7 @@
              </div>
              
              <div class="scene-char-select" >
-                 <PowerSelect @selected={{poseChar}} @options={{scene.poseable_chars}} @searchField="name" @onchange={{action "poseCharChanged"}} as |poseChar|>
+                 <PowerSelect @selected={{poseChar}} @options={{scene.poseable_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
                      <CharIconTiny @char={{poseChar}} />
                  </PowerSelect>
              </div>
@@ -279,7 +279,7 @@
     <BsModalSimple @title="Change the Scene Location" @closeTitle="Cancel" @submitTitle="Select" @size={{null}} @fade={{false}} @open={{selectLocation}} @onSubmit={{action "changeLocation"}} @onHide={{action (mut selectLocation) null}}>
         <p>Select a location from the list or type one into the bottom box.</p>
         <p>
-          <PowerSelect @selected={{newLocation}} @options={{locations}} @onchange={{action "locationSelected"}} as |location|>
+          <PowerSelect @selected={{newLocation}} @options={{locations}} @onChange={{action "locationSelected"}} as |location|>
         {{location}}
       </PowerSelect>
        <b>Custom Location:</b> <Input @type="text" @size={{25}} @id="newLocation" @enter={{action "changeLocation"}} @value={{newLocation}} />

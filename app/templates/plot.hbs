@@ -1,4 +1,4 @@
-{{title model.plot.title}}
+{{page-title model.plot.title}}
 <h1>{{model.plot.title}}</h1>
       
   
@@ -17,7 +17,7 @@
 
     <h2>Scenes</h2>
     
-    <SceneList @scenes={{model.plot.scenes.scenes}} @pages={{model.plot.scenes.pages}} @sceneTypes={{model.sceneTypes}} @hideSearch={{true}} />
+    <SceneList @scenes={{model.plot.scenes.scenes}} @pages={{model.plot.scenes.pages}} @sceneTypes={{model.sceneOptions.scene_types}} @hideSearch={{true}} />
     
     
 {{#if model.plot.description}}

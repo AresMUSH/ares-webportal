@@ -1,4 +1,4 @@
-{{title "Edit Channel"}}
+{{page-title "Edit Channel"}}
 <h1>Edit Channel</h1>
 
   
@@ -35,9 +35,9 @@
     </div>
 
     <div class="col-sm-9">
-      {{#power-select-multiple  selected=model.channel.can_join options=model.roles onchange=(action "joinRolesChanged") as |role|}}
+      <PowerSelectMultiple @selected={{model.channel.can_join}} @options={{model.roles}} @onChange={{action "joinRolesChanged"}} as |role|>
         {{role}}
-      {{/power-select-multiple}}
+      </PowerSelectMultiple>
     </div>
   </div>
   
@@ -47,9 +47,9 @@
     </div>
 
     <div class="col-sm-9">
-      {{#power-select-multiple  selected=model.channel.can_talk options=model.roles onchange=(action "talkRolesChanged") as |role|}}
+      <PowerSelectMultiple @selected={{model.channel.can_talk}} @options={{model.roles}} @onChange={{action "talkRolesChanged"}} as |role|>
         {{role}}
-      {{/power-select-multiple}}
+      </PowerSelectMultiple>
     </div>
   </div>
   

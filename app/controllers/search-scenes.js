@@ -77,7 +77,7 @@ export default Controller.extend({
   },
   
   sceneTypes: computed(function() {
-    let types = this.get('model.sceneTypes');
+    let types = this.get('model.sceneOptions.scene_types');
     let scene_types = types.map(s => s.name);
     let base_filters = ['Recent', 'All', 'Popular'];
     return base_filters.concat(scene_types);
