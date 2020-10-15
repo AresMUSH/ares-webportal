@@ -1,4 +1,4 @@
-{{title model.title}}
+{{page-title model.title}}
 <h1>{{model.title}}</h1>
 
 <div class="ansi">
@@ -23,7 +23,7 @@
 </ul>
 
 <div class="tab-content">
-  {{#link-to 'search-spells' class="btn btn-default"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}} 
+  {{#link-to 'search-spells' class="btn btn-default"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}
   {{#each-in model.spells as |group spells|}}
   <div id="{{group}}" class="tab-pane fade in {{group}}">
 
