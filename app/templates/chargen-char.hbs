@@ -19,6 +19,19 @@
         <p>
           <button name="unsubmit" {{action 'unsubmit'}} class="btn btn-warning">Unsubmit</button>
         </p>
+     </div>
+
+{{else}}
+
+     <div class="alert alert-info">
+
+             <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen, but anything set with the in-game chargen commands will be overwritten by what you set here.</p>
+
+             <p>
+                 <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
+             </p>
+
+     </div>
 
      {{#if charErrors.length}}
      <div class="alert alert-danger">
@@ -111,7 +124,6 @@
                   {{/each-in}}
 
             </div>
-          {{/each-in}}
 
           <div class="form-group row">
             <div class="col-sm-3">
