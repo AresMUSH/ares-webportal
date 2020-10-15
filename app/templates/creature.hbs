@@ -90,7 +90,9 @@
 
 
 <h2>Scenes</h2>
-  {{scene-list scenes=model.creature.scenes sceneTypes=model.sceneTypes}}
+<SceneList @scenes={{model.creature.scenes}} @pages={{scenes.pages}} @sceneTypes={{sceneTypes}} @filter={{filter}} @page={{page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
+
+
 
   </div>
   <div class="row">
