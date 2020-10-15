@@ -1,4 +1,4 @@
-{{title "Scenes"}}
+{{page-title "Scenes"}}
 <h1>Scenes</h1>
 
 <p>The scenes archive catalogs roleplay scenes from the game.  Only completed scenes show up here.  You can filter by type of scene or by the title or participant names.</p>
@@ -17,6 +17,6 @@
     
 </div>
 
-<SceneList @scenes={{model.scenes.scenes}} @pages={{model.scenes.pages}} @sceneTypes={{model.sceneTypes}} @filter={{filter}} @page={{page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
+<SceneList @scenes={{model.scenes.scenes}} @pages={{model.scenes.pages}} @sceneTypes={{model.sceneOptions.scene_types}} @filter={{filter}} @page={{page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
 
 {{outlet}}

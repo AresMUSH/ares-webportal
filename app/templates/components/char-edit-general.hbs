@@ -8,7 +8,7 @@
         <div class="col-sm-9">
             {{#if (eq demo.name 'Gender') }}
                 
-                <PowerSelect @selected={{model.char.demographics.gender}} @searchField="value" @options={{genders}} @onchange={{action "genderChanged"}} as |gender|>
+                <PowerSelect @selected={{model.char.demographics.gender}} @searchField="value" @options={{genders}} @onChange={{action "genderChanged"}} as |gender|>
                   {{gender.value}}
                 </PowerSelect>
                 
@@ -25,7 +25,7 @@
         </div>
         
         <div class="col-sm-9">
-            <PowerSelect @selected={{model.char.profile_image}} @allowClear={{true}} @searchField="name" @options={{model.char.files}} @onchange={{action "profileImageChanged"}} as |file|>
+            <PowerSelect @selected={{model.char.profile_image}} @allowClear={{true}} @searchField="name" @options={{model.char.files}} @onChange={{action "profileImageChanged"}} as |file|>
             {{file.name}}
             </PowerSelect>
             
@@ -39,7 +39,7 @@
         </div>
         
         <div class="col-sm-9">
-            <PowerSelect @selected={{model.char.profile_icon}} @allowClear={{true}} @searchField="name" @options={{model.char.files}} @onchange={{action "profileIconChanged"}} as |file|>
+            <PowerSelect @selected={{model.char.profile_icon}} @allowClear={{true}} @searchField="name" @options={{model.char.files}} @onChange={{action "profileIconChanged"}} as |file|>
             {{file.name}}
             </PowerSelect>
             
@@ -95,7 +95,6 @@
               <MarkdownEditor @text={{model.char.lastwill}} />
         </div>
     </div>
-    
     
     
     

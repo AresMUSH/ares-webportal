@@ -1,4 +1,4 @@
-{{title 'Edit Game'}}
+{{page-title 'Edit Game'}}
 <h1>Edit Game Information</h1>
 
 <p>This information will be used on your web portal and in the <a href="http://arescentral.aresmush.com">AresCentral Game Directory</a> to advertise your game.</p>
@@ -11,7 +11,7 @@
 
 <p><label for="name">Category:</label>
 
-<PowerSelect @selected={{model.config.category}} @options={{model.category_options}} @onchange={{action "categoryChanged"}} as |category|>
+<PowerSelect @selected={{model.config.category}} @options={{model.category_options}} @onChange={{action "categoryChanged"}} as |category|>
   {{category}}
 </PowerSelect>
 
@@ -19,7 +19,7 @@
 
 <p><label for="name">Status:</label>
 
-<PowerSelect @selected={{model.config.status}} @options={{model.status_options}} @onchange={{action "statusChanged"}} as |status|>
+<PowerSelect @selected={{model.config.status}} @options={{model.status_options}} @onChange={{action "statusChanged"}} as |status|>
   {{status}}
 </PowerSelect>
                         

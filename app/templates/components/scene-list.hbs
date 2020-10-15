@@ -1,7 +1,7 @@
 {{#if (not hideSearch)}}
 <p><b>Select Scenes:</b> 
 
-<PowerSelect @selected={{filter}} @options={{sceneFilters}} @onchange={{action "filterChanged"}} as |name|>
+<PowerSelect @selected={{filter}} @options={{sceneFilters}} @onChange={{action "filterChanged"}} as |name|>
   {{name}}
 </PowerSelect>
 

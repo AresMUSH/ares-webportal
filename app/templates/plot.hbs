@@ -1,4 +1,4 @@
-{{title model.plot.title}}
+{{page-title model.plot.title}}
 <h1>{{model.plot.title}}</h1>
 
 
@@ -24,7 +24,7 @@
 
 <AnsiFormat @text={{model.plot.description}} />
 
-<h2>Scenes</h2>
+
 
 
 </div>
@@ -32,7 +32,9 @@
 
 {{/if}}
 
-<SceneList @scenes={{model.plot.scenes.scenes}} @pages={{model.plot.scenes.pages}} @sceneTypes={{model.sceneTypes}} @hideSearch={{true}} />
+<h2>Scenes</h2>
+
+<SceneList @scenes={{model.plot.scenes.scenes}} @pages={{model.plot.scenes.pages}} @sceneTypes={{model.sceneOptions.scene_types}} @hideSearch={{true}} />
 
 
 <p><LinkTo @route="plots"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Plots</LinkTo></p>
