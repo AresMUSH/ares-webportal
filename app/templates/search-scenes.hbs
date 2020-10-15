@@ -1,4 +1,4 @@
-{{title "Search Scenes"}}
+{{page-title "Search Scenes"}}
 
 <h1>Search Scenes</h1>
 
@@ -58,7 +58,7 @@
   
   <div class="col col-xs-9">
 
-    <PowerSelect @selected={{searchType}} @options={{sceneTypes}} @onchange={{action "sceneTypeChanged"}} as |name|>
+    <PowerSelect @selected={{searchType}} @options={{sceneTypes}} @onChange={{action "sceneTypeChanged"}} as |name|>
       {{name}}
     </PowerSelect>
     <br>
@@ -130,7 +130,7 @@
 <i class="fas fa-spinner fa-spin"></i> Search In Progress...
 {{else if searchResults.pages}}
 
-<SceneList @scenes={{searchResults.scenes}} @pages={{searchResults.pages}} @sceneTypes={{model.sceneTypes}} @filter={{searchType}} @page={{page}} @hideSearch={{true}} @goToPage={{action "goToPage"}} />
+<SceneList @scenes={{searchResults.scenes}} @pages={{searchResults.pages}} @sceneTypes={{model.sceneOptions.scene_types}} @filter={{searchType}} @page={{page}} @hideSearch={{true}} @goToPage={{action "goToPage"}} />
 
 {{else}}
 <p>No search results.</p>

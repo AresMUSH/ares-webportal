@@ -1,4 +1,4 @@
-{{title 'Roster'}}
+{{page-title 'Roster'}}
 <h1>Roster</h1>
 
 <p>The roster contains ready-made characters that you can just pick up and play.  Some have been played before, as indicated by a <span class="label label-info">Previously Played</span> tag.  For most characters, you can claim them just by logging onto the game and using the roster command.  Characters marked with <span class="label label-warning">App Required</span> require a little more work so you'll need to talk to the contact person before claiming them.</p>
@@ -41,6 +41,7 @@
            
              
           <div>  
+             <LinkTo @route="char" @model={{char.name}} class="btn btn-default">Profile</LinkTo>
              <LinkTo @route="roster-claim" @model={{char.id}} class="btn btn-primary">Claim</LinkTo>
            </div>
              

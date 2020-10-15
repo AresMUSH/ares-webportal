@@ -1,4 +1,4 @@
-{{title pageTitle}}
+{{page-title pageTitle}}
 <a name="top"></a>
 
 <h1>{{model.icdate}} - {{model.title}}</h1>
@@ -34,10 +34,16 @@
         </p>
 
         <p>
-
-            {{#if model.plot}}
-            <b>Plot: </b>
-                <a href="/plot/{{model.plot.id}}">{{model.plot.title}}</a>
+            <b>Plots: </b>
+            {{#if model.plots}}
+              {{#each model.plots as |plot index|}}
+                {{#if (not-eq index 0)}}
+                &nbsp;
+                {{/if}}
+                 <a href="/plot/{{plot.id}}">{{plot.title}}</a>
+               {{/each}}
+            {{else}}
+                None
             {{/if}}
         </p>
 
@@ -166,10 +172,6 @@
                         <li><LinkTo @route="scene-edit" @model={{model.id}}>Edit Scene</LinkTo></li>
                         <li><a href="#" {{action 'unshareScene'}}>Unshare Scene</a></li>
 
-                        {{#if model.can_delete}}
-                        <li><a href="#" {{action (mut confirmDelete) true}}>Delete Scene</a></li>
-                        {{/if}}
-
                          <li role="separator" class="divider"></li>
                        {{/if}}
 
@@ -188,9 +190,5 @@
 
 
 <FlashMessages />
-
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) null}}>
-    You're about to delete scene {{model.title}}. This cannot be undone.  Are you sure?
-  </BsModalSimple>
 
 {{outlet}}

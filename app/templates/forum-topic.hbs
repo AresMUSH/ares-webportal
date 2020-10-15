@@ -1,4 +1,4 @@
-{{title model.title}}
+{{page-title model.title}}
 <h1>{{#if model.is_pinned}}
       <i class="fa fa-thumbtack" aria-label="Pinned"></i>
     {{/if}}
@@ -140,7 +140,7 @@
 
       <div class="forum-reply-panel">
          <p><b>Reply As:</b>        <div class="forum-char-select" >
-                     <PowerSelect @selected={{author}} @options={{model.authors}} @searchField="name" @onchange={{action "authorChanged"}} as |author|>
+                     <PowerSelect @selected={{author}} @options={{model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |author|>
                          <CharIconTiny @char={{author}} />
                      </PowerSelect>
                  </div>
@@ -168,7 +168,7 @@
 
 <BsModalSimple @title="Move Topic" @closeTitle="Cancel" @submitTitle="Move" @size={{null}} @fade={{false}} @open={{chooseNewCategory}} @onSubmit={{action "moveTopic"}} @onHide={{action (mut chooseNewCategory) null}}>
 
-      <PowerSelect @selected={{newCategory}} @options={{model.categories}} @onchange={{action "newCategorySelected"}} as |category|>
+      <PowerSelect @selected={{newCategory}} @options={{model.categories}} @onChange={{action "newCategorySelected"}} as |category|>
         {{category.name}}
       </PowerSelect>
 </BsModalSimple>

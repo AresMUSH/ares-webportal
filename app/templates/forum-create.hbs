@@ -1,4 +1,4 @@
-{{title "Create Category"}}
+{{page-title "Create Category"}}
 <h1>Create Category</h1>
 
   
@@ -26,9 +26,9 @@
     </div>
 
     <div class="col-sm-9">
-      {{#power-select-multiple  selected=can_read options=model.roles onchange=(action "readRolesChanged") as |role|}}
+      <PowerSelectMultiple @selected={{can_read}} @options={{model.roles}} @onChange={{action "readRolesChanged"}} as |role|>
         {{role}}
-      {{/power-select-multiple}}
+      </PowerSelectMultiple>
     </div>
   </div>
   
@@ -38,9 +38,9 @@
     </div>
 
     <div class="col-sm-9">
-      {{#power-select-multiple  selected=can_write options=model.roles onchange=(action "writeRolesChanged") as |role|}}
+      <PowerSelectMultiple @selected={{can_write}} @options={{model.roles}} @onChange={{action "writeRolesChanged"}} as |role|>
         {{role}}
-      {{/power-select-multiple}}
+      </PowerSelectMultiple>
       <div class="hint">Forums default to only allowing approved characters to post. If you want a forum where anyone can post, you must explicitly set the write role to 'everyone'.</div>
     </div>
   </div>

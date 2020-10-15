@@ -1,4 +1,4 @@
-{{title model.message.subject}}
+{{page-title model.message.subject}}
 <h1>{{model.message.subject}}</h1>
 
 <p><LinkTo @route="mail"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Mail</LinkTo></p>
@@ -33,7 +33,7 @@
         </td>
         <td>
             
-             <PowerSelectMultiple @selected={{model.message.tags}} @options={{model.message.all_tags}} @onchange={{action "tagsChanged"}} as |tag|>
+             <PowerSelectMultiple @selected={{model.message.tags}} @options={{model.message.all_tags}} @onChange={{action "tagsChanged"}} as |tag|>
                {{tag}}
              </PowerSelectMultiple>
              
@@ -81,7 +81,7 @@
       <div class="panel-body">
       <h3>Reply</h3>
       <p><b>To:</b> <a href="#" {{action 'replyAll'}}>[Reply All]</a>
-        <PowerSelectMultiple @selected={{replyToList}} @options={{model.characters}} @searchField="name" @onchange={{action "replyToListChanged"}} as |char|>
+        <PowerSelectMultiple @selected={{replyToList}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "replyToListChanged"}} as |char|>
           {{char.name}}
         </PowerSelectMultiple>
       </p>
@@ -104,7 +104,7 @@
       <div class="panel-body">
       <h3>Forward</h3>
       <p><b>To:</b>
-      <PowerSelectMultiple @selected={{fwdToList}} @options={{model.characters}} @searchField="name" @onchange={{action "fwdToListChanged"}} as |char|>
+      <PowerSelectMultiple @selected={{fwdToList}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "fwdToListChanged"}} as |char|>
         {{char.name}}
       </PowerSelectMultiple>
       </p> 

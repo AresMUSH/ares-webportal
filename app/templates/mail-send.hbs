@@ -1,4 +1,4 @@
-{{title 'Send Mail'}}
+{{page-title 'Send Mail'}}
 <h1>Send Mail</h1>
 
 <div class="form-group row">
@@ -8,7 +8,7 @@
     
     <div class="col-sm-10">
       
-      <PowerSelectMultiple @selected={{toList}} @options={{model}} @searchField="name" @onchange={{action "toListChanged"}} as |char|>
+      <PowerSelectMultiple @selected={{toList}} @options={{model}} @searchEnabled=true @searchField="name" @onChange={{action "toListChanged"}} as |char|>
         {{char.name}}
       </PowerSelectMultiple>
       

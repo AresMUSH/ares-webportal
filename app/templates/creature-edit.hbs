@@ -1,4 +1,4 @@
-{{title model.creature.name}}
+{{page-title model.creature.name}}
 <h1>Edit {{model.creature.name}} </h1>
 
     <ul class="nav nav-tabs">
@@ -26,9 +26,9 @@
           </div>
 
           <div class="col-sm-9">
-            {{#power-select-multiple selected=model.creature.gms options=model.characters searchField="name" onchange=(action "gmsChanged") as |char|}}
+            <PowerSelectMultiple @selected={{model.creature.gms}} @options={{model.characters}} @searchEnabled=true @searchField="name"  @onChange={{action "gmsChanged"}} as |char|>
               {{char.name}}
-            {{/power-select-multiple}}
+            </PowerSelectMultiple>
           </div>
 
           <div class="col-sm-3">
@@ -36,9 +36,9 @@
           </div>
 
           <div class="col-sm-9">
-            {{#power-select selected=model.creature.major_school options=model.schools   onchange=(action "majorschoolChanged") as |school|}}
+            <p><PowerSelect @selected={{model.portal.creature.major_school}} @options={{model.schools}} @onChange={{action "majorschoolChanged"}} as |school|>
               {{school.name}}
-            {{/power-select}}
+            </PowerSelect></p>
           </div>
 
           <div class="col-sm-3">
@@ -46,9 +46,9 @@
           </div>
 
           <div class="col-sm-9">
-            {{#power-select selected=model.creature.minor_school options=model.schools   onchange=(action "minorschoolChanged") as |school|}}
+            <p><PowerSelect @selected={{model.portal.creature.minor_school}} @options={{model.schools}} @onChange={{action "minorschoolChanged"}} as |school|>
               {{school.name}}
-            {{/power-select}}
+            </PowerSelect></p>
           </div>
 
           <div class="col-sm-3">
@@ -64,9 +64,9 @@
           </div>
 
           <div class="col-sm-9">
-            {{#power-select-multiple selected=model.creature.portals options=model.portals searchField="name" onchange=(action "portalsChanged") as |portal|}}
+            <PowerSelectMultiple @selected={{model.creature.portals}} @options={{model.portals}} @searchEnabled=true @searchField="name"  @onChange={{action "portalsChanged"}} as |portal|>
               {{portal.name}}
-            {{/power-select-multiple}}
+            </PowerSelectMultiple>
           </div>
 
           <div class="col-sm-3">

@@ -1,4 +1,6 @@
-{{title 'Play'}}
+{{page-title 'Play'}}
+
+
 
  <div class="row">
    <div class="col col-xs-12 col-md-3">
@@ -187,7 +189,7 @@
 
          <div class="panel panel-default">
            <div class="panel-body">
-             <b>To:</b><PowerSelectMultiple @selected={{newConversationList}} @options={{model.characters}} @searchField="name" @onchange={{action "conversationListChanged"}} as |char|>
+             <b>To:</b><PowerSelectMultiple @selected={{newConversationList}} @options={{model.characters}} @searchEnabled=true  @searchField="name" @onChange={{action "conversationListChanged"}} as |char|>
                  {{char.name}}
                </PowerSelectMultiple>
 

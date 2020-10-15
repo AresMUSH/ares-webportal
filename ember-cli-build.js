@@ -20,7 +20,15 @@ module.exports = function(defaults) {
     },
     'ember-cli-babel': {
       includePolyfill: true
+    },
+  
+    'ember-cli-terser': {
+      enabled: false
+    },
+    'minifyCSS': {
+      enabled: false
     }
+    
   });
 
     app.options.minifyJS.enabled = false;

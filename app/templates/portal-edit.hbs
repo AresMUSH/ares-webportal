@@ -1,4 +1,4 @@
-{{title model.portal.name}}
+{{page-model.portal.name}}
 <h1>Edit {{model.portal.name}} Portal</h1>
 
     <ul class="nav nav-tabs">
@@ -26,9 +26,9 @@
           </div>
 
           <div class="col-sm-9">
-            <p>{{#power-select-multiple selected=model.portal.gms options=model.characters searchField="name" onchange=(action "gmsChanged") as |char|}}
+            <p><PowerSelectMultiple @selected={{model.portal.gms}} @options={{model.characters}} @searchEnabled=true @searchField="name"   @onChange={{action "gmsChanged"}} as |char|>
               {{char.name}}
-            {{/power-select-multiple}}</p>
+            </PowerSelectMultiple></p>
           </div>
 
           <div class="col-sm-3">
@@ -66,9 +66,9 @@
           </div>
 
           <div class="col-sm-9">
-            <p>{{#power-select selected=model.portal.primary_school options=model.schools   onchange=(action "primaryschoolChanged") as |school|}}
+            <p><PowerSelect @selected={{model.portal.primary_school}} @options={{model.schools}} @onChange={{action "primaryschoolChanged"}} as |school|>
               {{school.name}}
-            {{/power-select}}</p>
+            </PowerSelect></p>
           </div>
 
           <div class="col-sm-3">
@@ -76,9 +76,10 @@
           </div>
 
           <div class="col-sm-9">
-            <p>{{#power-select-multiple selected=model.portal.all_schools options=model.schools placeholder="A portal can have to 5 schools of magic total"  searchField="name" onchange=(action "allschoolsChanged") as |school|}}
-              {{school.name}}
-            {{/power-select-multiple}}</p>
+            <p>
+              <PowerSelectMultiple @selected={{model.portal.schools}} @options={{model.schools}} @searchEnabled=true @searchField="name"  @placeholder="A portal can have to 5 schools of magic total" @onChange={{action "allschoolsChanged"}} as |school|>
+                {{school.name}}
+              </PowerSelectMultiple></p>
           </div>
 
           <div class="col-sm-3">
@@ -104,9 +105,9 @@
         </div>
 
         <div class="col-sm-9">
-          {{#power-select-multiple selected=model.portal.creatures options=model.creatures searchField="name" onchange=(action "creaturesChanged") as |creature|}}
+          <PowerSelectMultiple @selected={{model.portal.creatures}} @options={{model.creatures}} @searchEnabled=true @searchField="name"  @onChange={{action "creaturesChanged"}} as |creature|>
             {{creature.name}}
-          {{/power-select-multiple}}
+          </PowerSelectMultiple>
         </div>
 
 
