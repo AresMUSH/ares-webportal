@@ -118,7 +118,7 @@
               <b>Lore Hook Preference</b>
             </div>
             <div class="col-sm-9">
-              <p>{{#power-select selected=model.char.lore_hook_pref searchField="value" options=model.cgInfo.lore_hook_prefs onchange=(action "lorehookPrefChanged") as |pref|}}
+              <p>{{#power-select selected=model.char.lore_hook_pref searchField="value" options=model.cgInfo.lore_hook_prefs onChange=(action "lorehookPrefChanged") as |pref|}}
                 {{pref.value}} - {{pref.desc}}
               {{/power-select}}</p>
                 <div class="cg-tip">{{{ansi-format text=model.cgInfo.lorehook_blurb}}}</div><br>
@@ -150,7 +150,7 @@
                 {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
                   {{input type="text" size=25 value=group.value}}
                 {{else}}
-                  <p> {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" allowClear=true onchange=(action "groupChanged" key) as |g|}}
+                  <p> {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" allowClear=true onChange=(action "groupChanged" key) as |g|}}
                   {{g.value}} {{if g.desc '-'}} {{g.desc}}
                   {{/power-select}}</p>
                 {{/if}}

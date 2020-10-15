@@ -109,9 +109,9 @@
        <label class="col-form-label">Creatures:</label>
     </div>
     <div class="col-sm-9">
-      {{#power-select-multiple selected=model.scene.creatures options=model.creatures searchField="name" onchange=(action "creaturesChanged") as |creature|}}
+      <PowerSelectMultiple  @selected={{model.scene.creatures}} @options={{model.creatures}} @onChange={{action "creaturesChanged"}} as |creature|>
         {{creature.name}}
-      {{/power-select-multiple}}
+      </PowerSelectMultiple>
     </div>
   </div>
 
