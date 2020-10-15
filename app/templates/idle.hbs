@@ -1,0 +1,66 @@
+{{page-title "Idle Sweep"}}
+<h1>Idle Sweep</h1>
+
+<table class="table table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Alerts</th>
+    <th>Last On</th>
+    <th>Last Will</th>
+    <th>Notes</th>
+    <th>Action</th>
+  </tr>
+  
+  {{#each model.chars as |char|}}
+  <tr>
+    <td>
+      {{char.name}}
+    </td>
+    <td>
+      {{#if char.approved}}
+      <TooltipIcon @position="right" @message="Approved." @icon="fas fa-user-shield" />
+      {{/if}}
+      {{#if char.warned}}
+      <TooltipIcon @position="right" @message="Warned previously." @icon="fas fa-exclamation-triangle" />
+      {{/if}}
+    </td>
+    <td>
+      {{char.last_on_formatted}} ({{char.last_on}})
+    </td>
+    
+    <td>{{char.lastwill}}</td>
+    <td>
+      <Input @type="text" @id="idleNotes{{char.id}}" placeholder="Notes" @value={{char.notes}} />
+    </td>
+    <td>
+      <PowerSelect @selected={{char.idle_action}}  @options={{model.idle_actions}} @onChange={{action "idleActionChanged" char}} as |idleAction|>
+       {{idleAction}}
+     </PowerSelect>
+     
+    </td>
+  </tr>
+  {{/each}}
+
+</table>
+  {{#if destroyingApprovedChars}}
+  <div class="alert alert-warning">Consider marking approved characters 'gone' instead of destroying them to avoid removing them from scenes, mails, forum posts, etc.</div>
+  {{/if}}
+      
+
+  {{#if idleReport}}
+    <div class="idle-status">  <AnsiFormat @text={{idleReport}} /></div>
+  {{else}}
+
+    <Input @type="text" @id="idleAddCharName" placeholder="Name" @value={{idleAddCharName}} /> <button class="btn btn-default" {{action "addChar"}}>Add Char</button>
+
+    <div class="pull-right">
+            <button class="btn btn-primary" {{action (mut confirmExecute) true}}>Execute</button>
+    </div>
+  {{/if}}
+ 
+ 
+<FlashMessages />
+
+ <BsModalSimple @title="Confirm Execute" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmExecute}} @onSubmit={{action "execute"}} @onHide={{action (mut confirmExecute) null}}>
+     You're about to proceed with the specified idle actions. This may take a minute.  Are you sure?
+ </BsModalSimple>

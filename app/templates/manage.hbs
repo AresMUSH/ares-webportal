@@ -1,4 +1,4 @@
-{{title 'Admin Tasks'}}
+{{page-title 'Admin Tasks'}}
 <h1>Admin Tasks</h1>
 
 
@@ -32,6 +32,14 @@
 
     <p><button class="btn btn-primary" {{action 'upgrade'}}>Upgrade</button></p>
 
+
+<p><hr></p>
+
+<h2>Idle Sweep</h2>
+
+<p>The idle sweep lets you prune characters whose players have left the game. See <LinkTo @route="help-topic" @model="idle" @target="_blank">Idle Sweep</LinkTo> for help.</p>
+  
+<LinkTo @route="idle" class="btn btn-primary">Idle Sweep</LinkTo>
 
 <p><hr></p>
 

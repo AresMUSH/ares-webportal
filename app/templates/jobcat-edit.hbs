@@ -1,4 +1,4 @@
-{{title "Edit Job Category"}}
+{{page-title "Edit Job Category"}}
 <h1>Edit Job Category</h1>
 
   
@@ -27,9 +27,9 @@
     </div>
 
     <div class="col-sm-9">
-      {{#power-select-multiple  selected=model.category.roles options=model.roles onchange=(action "rolesChanged") as |role|}}
+      <PowerSelectMultiple @selected={{model.category.roles}} @options={{model.roles}} @onChange={{action "rolesChanged"}} as |role|>
         {{role}}
-      {{/power-select-multiple}}
+      </PowerSelectMultiple>
     </div>
   </div>
   

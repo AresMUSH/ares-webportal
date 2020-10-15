@@ -13,7 +13,7 @@ export default Route.extend(DefaultRoute, RouteResetOnExit, {
         let api = this.gameApi;
         return RSVP.hash({
              scenes:  api.requestOne('scenes', { filter: 'Recent', page: 1 }),
-             sceneTypes: api.requestMany('sceneTypes')
+             sceneOptions: api.requestOne('sceneOptions')
            })
            .then((model) => EmberObject.create(model));
            

@@ -1,4 +1,4 @@
-{{title 'Players'}}
+{{page-title 'Players'}}
 <h1>Players</h1>
 
 <p>This page lists players and their characters (or 'alts').  </p>
@@ -9,10 +9,15 @@
         <li>Link a character to your <a href="/help/handles">AresMUSH player handle</a>.</li>
         <li>If you do not have a handle, add a <a href="/help/website/web_profile">profile tag</a> to your character's web portal profile in the form <code>player:&lt;playername&gt;</code>.  Player name can be either your main character's name or some other moniker used to tie your characters together.</li>
     </ul>
+    <p>Characters linked with the player tag are not verified through AresCentral and will not have the "@" in front of their player name.</p>
 </div>
 
 {{#each model as |player|}}
-<h2>{{player.name}}</h2>
+  {{#if player.is_handle}}
+  <h2>@{{player.name}}</h2>
+  {{else}}
+  <h2>{{player.name}}</h2>
+  {{/if}}
     <CharGallery @chars={{player.alts}} @title="" />
 {{/each}}
 

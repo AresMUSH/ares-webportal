@@ -1,4 +1,4 @@
-{{title 'Combat Teams'}}
+{{page-title 'Combat Teams'}}
 <h1>Teams for Combat {{model.id}}</h1>
 
 <p>Quickly update everyone's teams in combat.  This won't affect their other settings.</p>
@@ -14,7 +14,7 @@
 <tr>
   <td>{{comb.name}}</td>
   <td>
-    <PowerSelect @selected={{comb.team}} @options={{teams}} @onchange={{action "teamChanged" id}} as |team|>
+    <PowerSelect @selected={{comb.team}} @options={{teams}} @onChange={{action "teamChanged" id}} as |team|>
       {{team}}
     </PowerSelect>
   </td>

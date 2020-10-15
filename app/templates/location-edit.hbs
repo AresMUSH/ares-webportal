@@ -1,4 +1,4 @@
-{{title model.location.name}}
+{{page-title model.location.name}}
 <h1>Edit Location - {{model.location.name}}</h1>
 
    <div class="form-group row">
@@ -16,9 +16,9 @@
     </div>
 
     <div class="col-sm-9">
-      {{#power-select selected=model.location.area options=model.location.areas searchField="full_name" allowClear=true onchange=(action "areaChanged") as |area|}}
+      <PowerSelect @selected={{model.location.area}} @options={{model.location.areas}} @searchEnabled=true @searchField="full_name" @allowClear=true @onChange={{action "areaChanged"}} as |area|>
         {{area.full_name}}
-      {{/power-select}}
+      </PowerSelect>
     </div>
   </div>
 
@@ -27,9 +27,9 @@
        <label for="title" class="col-form-label">Owners:</label>
    </div>
     <div class="col-sm-9">
-      {{#power-select-multiple  selected=model.location.owners options=model.characters searchField="name" onchange=(action "ownersChanged") as |char|}}
+      <PowerSelectMultiple @selected={{model.location.owners}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "ownersChanged"}} as |char|>
         {{char.name}}
-      {{/power-select-multiple}}
+      </PowerSelectMultiple>
     </div>
   </div>
   
