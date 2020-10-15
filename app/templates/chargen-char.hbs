@@ -8,9 +8,7 @@
         {{/if}}
       </h1>
 
-    <p>The online character creation tool will guide you through creating your character. We recommend reading our <a href="/wiki/guides:join_us">guidelines & help</a> before getting started. You should also read the <a href="/wiki/guides:world_intro">World Intro</a> for a fast and dirty introduction to theme.</p>
-
-    <p> You can also open the <a href="/wiki/guides:character_creation" target="_blank">Character Creation Guide</a> in a new tab.</p>
+    <p class="cg-tip">{{{ansi-format text=model.cgInfo.intro_blurb}}}</p>
 
     {{#if model.char.chargen_locked}}
 
@@ -99,11 +97,7 @@
               <p>{{#power-select selected=model.char.lore_hook_pref searchField="value" options=model.cgInfo.lore_hook_prefs onchange=(action "lorehookPrefChanged") as |pref|}}
                 {{pref.value}} - {{pref.desc}}
               {{/power-select}}</p>
-              <div class="cg-tip">
-                <p>Lore Hooks are bits of fun lore that are unique to you. See <a href="/help/lore_hooks">help Lore Hooks</a> and  the <a href="https://tinyurl.com/y6zgez98">Guide to Lore Hooks</a> for more info on each type of hook.</p>
-                <p>Storytellers begin working on Lore Hooks once a character has been played for at least a month.</p>
-                <p>If you have preferences for the sort of Lore Hook you recieve, please add them to your plot preferences on your character page after approval. Generally, STs will create something that we think will be interesting for your character and that fits into the story, but we'll keep preferences in mind where possible. You can also set or change your preference any time after CG, and add specific preferences in your <a href="/help/plotprefs">plot preferences</a>.</p>
-              </div>
+                <div class="cg-tip">{{{ansi-format text=model.cgInfo.lorehook_blurb}}}</div><br>
             </div>
           </div>
 
