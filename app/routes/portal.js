@@ -17,7 +17,7 @@ export default Route.extend(DefaultRoute, ReloadableRoute, {
         let api = this.get('gameApi');
         return RSVP.hash({
             portal: api.requestOne('portal', { id: params['id'] }),
-            sceneTypes: api.requestMany('sceneTypes') })
+            sceneOptions: api.requestOne('sceneOptions') })
             .then((model) => Ember.Object.create(model));
     }
 });

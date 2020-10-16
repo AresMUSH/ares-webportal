@@ -90,7 +90,7 @@
 
 
 <h2>Scenes</h2>
-<SceneList @scenes={{model.creature.scenes}}  @sceneTypes={{sceneTypes}} @hideSearch={{true}} />
+<SceneList @scenes={{model.creature.scenes}} @pages={{model.creature.scenes.pages}} @sceneTypes={{model.sceneOptions.scene_types}} @filter={{filter}} @page={{page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}}  />
 
 
 
