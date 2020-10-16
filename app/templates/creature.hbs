@@ -87,7 +87,20 @@
     <p><h2>Events</h2>
     {{{ansi-format text=model.creature.events}}}</p>
   {{/if}}
-
+</div>
 
 <h2>Scenes</h2>
 <SceneList @scenes={{model.creature.scenes}}  @sceneTypes={{sceneTypes}} @hideSearch={{true}} />
+
+
+
+  </div>
+  <div class="row">
+      <div class="col col-xs-12">
+        <LinkTo @route="creatures"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Creatures</LinkTo>
+        <div class="pull-right">
+          {{#link-to 'creature-edit' model.creature.id class="btn btn-default"}}Edit Creature{{/link-to}}
+        </div>
+      </div>
+  </div>
+  <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
