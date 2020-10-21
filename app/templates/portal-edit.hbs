@@ -77,7 +77,9 @@
 
           <div class="col-sm-9">
             <p>
-              <PowerSelectMultiple @selected={{model.portal.schools}} @options={{model.schools}} @searchEnabled=true @searchField="name"  @placeholder="A portal can have to 5 schools of magic total" @onChange={{action "allschoolsChanged"}} as |school|>
+
+
+              <PowerSelectMultiple @selected={{model.portal.all_schools}} @options={{model.schools}} @searchEnabled=true @searchField="name"  @placeholder="A portal can have to 5 schools of magic total" @onChange={{action "allschoolsChanged"}} as |school|>
                 {{school.name}}
               </PowerSelectMultiple></p>
           </div>
