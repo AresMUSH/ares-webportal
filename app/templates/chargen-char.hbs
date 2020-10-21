@@ -1,24 +1,28 @@
 {{page-title 'Create a Character'}}
 <div class="row">
-  <div class="col col-md-12">
+ <div class="col col-md-12">
 
-      <h1>Create a Character
-        {{#if model.char.can_approve}}
-        - {{model.char.name}}
-        {{/if}}
-      </h1>
+     <h1>Create a Character
+       {{#if model.char.can_approve}}
+       - {{model.char.name}}
+       {{/if}}
+     </h1>
 
-    <p class="cg-tip">{{{ansi-format text=model.cgInfo.intro_blurb}}}</p>
+     <p>The online character creation tool will guide you through creating your character.</p>
 
-    {{#if model.char.chargen_locked}}
+       <p class="cg-tip">{{{ansi-format text=model.cgInfo.intro_blurb}}}</p>
 
-      <div class="alert alert-warning">
 
-        <p>Your application has been submitted.  Unsubmit your app to make changes.</p>
+{{#if model.char.chargen_locked}}
 
-        <p>
-          <button name="unsubmit" {{action 'unsubmit'}} class="btn btn-warning">Unsubmit</button>
-        </p>
+     <div class="alert alert-warning">
+
+             <p>Your application has been submitted.  Unsubmit your app to make changes.</p>
+
+             <p>
+                 <button name="unsubmit" {{action 'unsubmit'}} class="btn btn-warning">Unsubmit</button>
+             </p>
+
      </div>
 
 {{else}}
@@ -46,8 +50,8 @@
 
      <!-- Nav tabs -->
      <ul class="nav nav-tabs" role="tablist">
-       <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
-       <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>
+       <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">General Info</a></li>
+       <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Schools</a></li>
 
         {{#if (not model.app.game.disabled_plugins.fs3skills) }}
         <li role="presentation"><a href="#fs3abilities" aria-controls="fs3abilities" role="tab" data-toggle="tab">Abilities</a></li>
@@ -94,6 +98,18 @@
                  </div>
                  {{/each-in}}
 
+                 <div class="form-group row">
+                   <div class="col-sm-3">
+                     <b>Lore Hook Preference</b>
+                   </div>
+                   <div class="col-sm-9">
+                     <p>{{#power-select selected=model.char.lore_hook_pref searchField="value" options=model.cgInfo.lore_hook_prefs onChange=(action "lorehookPrefChanged") as |pref|}}
+                       {{pref.value}} - {{pref.desc}}
+                     {{/power-select}}</p>
+                       <div class="cg-tip">{{{ansi-format text=model.cgInfo.lorehook_blurb}}}</div><br>
+                   </div>
+                 </div>
+
           </div>
 
           <div role="tabpanel" class="tab-pane" id="groups">
@@ -125,82 +141,42 @@
 
             </div>
 
-          <div class="form-group row">
-            <div class="col-sm-3">
-              <b>Lore Hook Preference</b>
+            {{#if (not model.app.game.disabled_plugins.fs3skills) }}
+            <div role="tabpanel" class="tab-pane" id="fs3abilities">
+              <Fs3Chargen @model={{model}} @anyGroupMissing={{anyGroupMissing}} @charErrors={{charErrors}} @updateCallback={{fs3UpdateCallback}} @validateCallback={{fs3ValidateCallback}} @reset={{action "reset"}} />
             </div>
-            <div class="col-sm-9">
-              <p>{{#power-select selected=model.char.lore_hook_pref searchField="value" options=model.cgInfo.lore_hook_prefs onChange=(action "lorehookPrefChanged") as |pref|}}
-                {{pref.value}} - {{pref.desc}}
-              {{/power-select}}</p>
-                <div class="cg-tip">{{{ansi-format text=model.cgInfo.lorehook_blurb}}}</div><br>
-            </div>
+            {{/if}}
+
+          {{#if traitsExtraInstalled}}
+          <div role="tabpanel" class="tab-pane" id="traits">
+
+               <TraitsChargen @model={{model}} @updateCallback={{traitsUpdateCallback}} />
+           </div>
+           {{/if}}
+
+
+         <div role="tabpanel" class="tab-pane" id="bg">
+             <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.bg_blurb}} /></div>
+
+             <MarkdownEditor @text={{model.char.background}} />
           </div>
 
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              Profile Icon
-            </div>
-            <div class="panel-body">
-              <div class="cg-tip">{{{ansi-format text=model.cgInfo.icon_blurb}}}</div><br>
-              <p>{{file-uploader folder=model.char.name lockProperties=true allowMulti=false uploaded=(action "fileUploaded")}}</p>
-            </div>
+          <div role="tabpanel" class="tab-pane" id="hooks">
+
+               <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.hooks_blurb}} /></div>
+
+               <MarkdownEditor @text={{model.char.rp_hooks}} />
           </div>
 
-        </div>
+          <div role="tabpanel" class="tab-pane" id="icon">
 
-        <div role="tabpanel" class="tab-pane" id="groups">
-
-          <p class="cg-tip">{{{ansi-format text=model.cgInfo.groups_blurb}}}</p>
-
-          {{#each-in model.char.groups as |key group|}}
-            <div class="form-group row">
-              <div class="col-sm-3">
-                <b>{{group.name}}</b>
+               <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.icon_blurb}} />
+                 <p>See <LinkTo @route="help-topic" @model="icons" @target="_blank">Icons</LinkTo> for tips on selecting and sizing your profile image.</p>
               </div>
-              <div class="col-sm-9">
-                {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
-                  {{input type="text" size=25 value=group.value}}
-                {{else}}
-                  <p> {{#power-select selected=(get model.char.groups key) options=(get (get model.cgInfo.group_options key) 'values') searchField="value" allowClear=true onChange=(action "groupChanged" key) as |g|}}
-                  {{g.value}} {{if g.desc '-'}} {{g.desc}}
-                  {{/power-select}}</p>
-                {{/if}}
-                <p class="cg-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
-              </div>
-            </div>
-          {{/each-in}}
-        </div>
 
+               <FileUploader @folder={{model.char.name}} @lockProperties={{true}} @allowMulti={{false}} @uploaded={{action "fileUploaded"}} />
 
-        <div role="tabpanel" class="tab-pane" id="abilities">
-
-          {{#if model.app.game.disabled_plugins.fs3skills}}
-            <p>Your game does not support setting abilities/skills through the web chargen.  You'll need to complete chargen using in-game commands.</p>
-          {{else}}
-              {{fs3-chargen model=model anyGroupMissing=anyGroupMissing charErrors=charErrors updateCallback=fs3UpdateCallback validateCallback=fs3ValidateCallback reset=(action 'reset')}}
-          {{/if}}
-
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="bg">
-
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              Background
-            </div>
-            <div class="panel-body">
-              <div class="cg-tip">{{{ansi-format text=model.cgInfo.bg_blurb}}}</div>
-              {{markdown-editor text=model.char.background}}
-            </div>
           </div>
-
-        <div role="tabpanel" class="tab-pane" id="hooks">
-
-            <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.hooks_blurb}} /></div>
-
-            <MarkdownEditor @text={{model.char.rp_hooks}} />
-        </div>
 
          <div role="tabpanel" class="tab-pane" id="descs">
              <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.desc_blurb}} /></div>
@@ -255,18 +231,20 @@
        {{/if}}
      </div>
 {{/if}}
-    {{flash-messages}}
 
-    {{#if charErrors.length}}
-      <div class="alert alert-danger">
-        <p><b>Alerts:</b></p>
-        <ul>
-          {{#each charErrors as |error|}}
-          <li>{{error}}</li>
-          {{/each}}
-        </ul>
+
+   <FlashMessages />
+
+     {{#if charErrors.length}}
+     <div class="alert alert-danger">
+     <p><b>Alerts:</b></p>
+     <ul>
+     {{#each charErrors as |error|}}
+     <li>{{error}}</li>
+     {{/each}}
+     </ul>
      </div>
-    {{/if}}
+     {{/if}}
   </div>
 
 
