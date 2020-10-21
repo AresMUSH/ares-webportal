@@ -195,6 +195,13 @@
             </div>
           </div>
 
+          <div role="tabpanel" class="tab-pane" id="hooks">
+
+              <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.hooks_blurb}} /></div>
+
+              <MarkdownEditor @text={{model.char.rp_hooks}} />
+         </div
+
          <div role="tabpanel" class="tab-pane" id="descs">
              <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.desc_blurb}} /></div>
 
