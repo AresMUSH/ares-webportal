@@ -8,7 +8,15 @@ export default Controller.extend({
     order: '',
     can_read: null,
     can_write: null,
-  
+
+    resetOnExit: function() {
+      this.set('name', '');
+      this.set('desc', '');
+      this.set('order', '');
+      this.set('can_read', null);
+      this.set('can_write', null);
+    },
+    
     actions: {        
         save: function() {
           let api = this.gameApi;

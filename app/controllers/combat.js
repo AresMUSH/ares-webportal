@@ -17,7 +17,7 @@ export default Controller.extend(AuthenticatedController, {
   confirmRemoveCombatant: false,
   combatLog: '',
     
-  pageTitle: computed(function() {
+  pageTitle: computed('model.id', function() {
     return `Combat ${this.get('model.id')}`;
   }),
     
