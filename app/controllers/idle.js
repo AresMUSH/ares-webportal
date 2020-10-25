@@ -48,6 +48,13 @@ export default Controller.extend({
             }
             this.set('idleReport', response.report);
         });
+      },
+      
+      removeFromIdle: function(name) {
+        let entry = this.get('model.chars').find(c => c.name === name);
+        if (entry) {
+          this.get('model.chars').removeObject(entry);
+        }
       }
     }
     

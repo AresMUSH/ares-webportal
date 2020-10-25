@@ -8,6 +8,14 @@ export default Controller.extend({
     order: '',
     template: '',
     roles: null,
+
+    resetOnExit: function() {
+      this.set('name', '');
+      this.set('desc', '');
+      this.set('order', '');
+      this.set('template', '');
+      this.set('roles', null);
+    },
   
     actions: {        
         save: function() {
