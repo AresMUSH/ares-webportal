@@ -8,7 +8,15 @@ export default Controller.extend({
     color: '',
     can_talk: null,
     can_join: null,
-  
+
+    resetOnExit: function() {
+      this.set('name', '');
+      this.set('desc', '');
+      this.set('color', '');
+      this.set('can_talk', null);
+      this.set('can_join', null);
+    },  
+
     actions: {        
         save: function() {
           let api = this.gameApi;

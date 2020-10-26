@@ -7,7 +7,7 @@ export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     confirmDelete: false,
     
-    pageTitle: computed(function() {
+    pageTitle: computed('model.title', function() {
         return `${this.get('model.icdate')} - ${this.get('model.title')}`
     }),
     
