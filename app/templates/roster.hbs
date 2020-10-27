@@ -2,10 +2,19 @@
 <h1>Roster</h1>
 
 <p>The roster contains ready-made characters that you can just pick up and play.  Some have been played before, as indicated by a <span class="label label-info">Previously Played</span> tag.  For most characters, you can claim them just by logging onto the game and using the roster command.  Characters marked with <span class="label label-warning">App Required</span> require a little more work so you'll need to talk to the contact person before claiming them.</p>
-    
+
+<ul class="nav nav-tabs">
 {{#each model.roster as |group|}}
 
-<h2>{{group.name}}</h2>
+      <li class={{group.active_class}}><a data-toggle="tab" href="#{{group.key}}">{{group.name}}</a></li>
+{{/each}}
+</ul>
+
+<div class="tab-content">    
+
+{{#each model.roster as |group|}}
+
+  <div id="{{group.key}}" class="tab-pane fade in {{group.active_class}}">
 
     {{#each group.chars as |char|}}
     
@@ -49,7 +58,11 @@
       </div>
     
     {{/each}}
+
+</div>
+
 {{/each}}
 
+</div>
 
 {{outlet}}
