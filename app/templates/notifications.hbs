@@ -69,7 +69,7 @@
           <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
         </LinkTo>
       {{else if (eq notification.type 'potion')}}
-        <LinkTo @route="char" @model={{currentUser.id}}
+        <LinkTo @route="char" @model={{currentUser.id}}>
           <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
         </LinkTo>
       {{/if}}
