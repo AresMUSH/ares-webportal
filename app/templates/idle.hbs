@@ -9,6 +9,7 @@
     <th>Last Will</th>
     <th>Notes</th>
     <th>Action</th>
+    <th></th>
   </tr>
   
   {{#each model.chars as |char|}}
@@ -37,6 +38,9 @@
        {{idleAction}}
      </PowerSelect>
      
+    </td>
+    <td>
+      <a href="#" {{action "removeFromIdle" char.name}}><i class="fa fa-trash" aria-label="Remove"></i></a>
     </td>
   </tr>
   {{/each}}

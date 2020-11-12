@@ -13,7 +13,7 @@ export default Component.extend({
     } else if (name === "Distracted") {
       return "Distract";
     }
-    return pacing.substring(0,5);
+    return name.substring(0,5);
   }),
   
   labelStyle: computed('scene.scene_pacing', function() {
