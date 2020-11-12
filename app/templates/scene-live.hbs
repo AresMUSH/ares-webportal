@@ -16,7 +16,9 @@
 <div class="row">
     <div class="col col-xs-12">
 
-      
+      {{#each model.spells as |spell|}}
+        <option value={{spell}}>{{spell}}</option>
+      {{/each}}
 
       <LiveSceneControl @scene={{model.scene}} @locations={{model.locations}} @abilities={{model.abilities}} @spells={{model.spells}}  @places={{model.scene.places}} @playerName={{currentUser.name}} @scrollPaused={{scrollPaused}} @refresh={{action "refresh"}} @scrollDown={{action "scrollScene"}} @setScroll={{action "setScroll"}} />
    </div>
