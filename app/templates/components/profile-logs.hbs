@@ -45,11 +45,7 @@
 
     <div id="comps" class="tab-pane fade ">
       <CharComps @char={{char}}  />
-      {{#each char.comps as |comp|}}
-      <div class="comp">
-       <p>{{{ansi-format text=comp.msg}}}<i>From {{comp.from}} on {{comp.date}}</i></p></div>
-      {{/each}}
-
+      
     </div>
 
 </div>
