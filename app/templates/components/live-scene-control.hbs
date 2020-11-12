@@ -196,14 +196,7 @@
                                <LiveSceneCookies @scene={{scene}} />
                              {{/if}}
 
-                             {{#each abilities as |spell|}}
-                               <option value={{spell}}>{{spell}}</option>
-                             {{/each}}
-
-                             {{#each spells as |spell|}}
-                               <option value={{spell}}>{{spell}}</option>
-                             {{/each}}
-
+                            
                              <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} @spells={{spells}}/>
 
 
