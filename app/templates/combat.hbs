@@ -11,6 +11,9 @@
                 <span class="btn btn-default" href="#">Combat Menu <span class="caret"></span></span> </a>
                 <ul class="dropdown-menu">
                  <li> <a href="#" {{action (mut showAddCombatant) true}}>Add Combatant</a></li>
+                {{#if model.in_combat}}
+                <li> <a href="#" {{action "combatHero"}}>Hero Recovery</a></li>
+                {{/if}}
                 {{#if model.can_manage}}
                  <li> <LinkTo @route="combat-setup" @model={{model.id}}>Setup NPCs</LinkTo></li>
                  <li> <LinkTo @route="combat-teams" @model={{model.id}}>Setup Teams</LinkTo></li>
@@ -150,6 +153,8 @@
     
 </tbody>
 </table>
+
+<p><b>Luck Points:</b> {{model.luck_points}}</p>
 </div>
    
 
