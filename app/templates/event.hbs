@@ -22,6 +22,17 @@
         </td>
     </tr>
     
+    <tr>
+        <td>
+            <b>Tags:</b>
+        </td>
+        <td>
+             {{#each model.tags as |tag|}}
+             <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
+             {{/each}}
+        </td>
+    </tr>
+    
 </table>
 
 <br>

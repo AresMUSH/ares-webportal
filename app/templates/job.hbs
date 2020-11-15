@@ -231,6 +231,13 @@
     </div>
         <MarkdownEditor @text={{reply}} />
     </div>
+    
+    {{#if model.job.responses}}
+    <b>Pre-Made Responses:</b>
+     <PowerSelect @selected='' @options={{model.job.responses}} @searchEnabled=true @searchField="name" @onChange={{action "responseSelected"}} as |resp|>
+      {{resp.name}}
+    </PowerSelect>
+    {{/if}}
 </div>
 
 
