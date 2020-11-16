@@ -23,6 +23,7 @@
         <th>Title</th>
         <th>Organizer</th>
         <th>Date/Time</th>
+        <th>Tags</th>
     </tr>
 </thead>
         
@@ -44,8 +45,15 @@
         {{event.organizer}}
     </td>
     <td>
-        {{event.start_datetime_local}} ({{event.start_time_standard}})
+        {{event.start_datetime_local}}
+        <br>({{event.start_time_standard}})
     </td>      
+    <td>
+      {{#each event.tags as |tag|}}
+      <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
+      {{/each}}
+    </td>
+    
 </tr>
 
 {{/each}}
