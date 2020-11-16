@@ -15,6 +15,12 @@ export default Component.extend({
     rollString: null,
     destinationType: 'scene',
 
+    didInsertElement: function() {
+      let defaultAbility = this.abilities ? this.abilities[0] : '';
+      this.set('rollString', defaultAbility);
+    },
+
+
     actions: { 
       
       addRoll() {

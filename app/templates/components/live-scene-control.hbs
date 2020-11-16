@@ -113,6 +113,12 @@
             {{/if}}
     {{/each}}
 
+
+     {{#if commandResponse}}
+       <div class="scene-command">{{commandResponse}}</div>
+     {{/if}}
+     
+     
     </div>
 
     {{#if sceneAlerts}}
@@ -136,8 +142,6 @@
             <PoseOrder @poseOrder={{scene.pose_order}} @playerName={{playerName}} />
              
              <MarkdownEditor @text={{scenePose}} @rows={{6}} @class="scene-pose-box" @onEnter={{action "addPose" poseType.id}} />
-
-             
            {{/if}}
    
 

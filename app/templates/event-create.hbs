@@ -1,23 +1,66 @@
 {{page-title 'New Event'}}
 <h1>New Event</h1>
 
-<p><b>Title:</b></p>
-<p><Input @type="text" @size={{25}} @id="title" @enter={{action "create"}} @value={{title}} /></p>
 
-<p><b>Date:</b></p>
-<p><PikadayInput @onSelection={{action "changeDate"}} @format={{model.game.date_entry_format}} /> </p>
-
-<p><b>Start Time:</b></p>
-<div class="hint">Use <b>server time</b> in the same format as the server time.  The current server time is {{model.server_time}}.</div>
-<p><Input @type="text" @id="time" @size="25" @enter={{action "create"}} @value={{time}} /></p>
-
-<p><b>Content Warning:</b></p>
-<p> <Input @type="text" @size={{25}} @id="content_warning" @value={{content_warning}} /> </p>   
-
-<p><b>Description:</b></p>
-
-<MarkdownEditor @text={{description}} />
-
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="title" class="col-form-label">Title:</label>
+    </div>
+    <div class="col-sm-9">
+         <Input @type="text" @size={{25}} @id="title" @enter={{action "create"}} @value={{title}} />
+    </div> 
+  </div>
+  
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="date" class="col-form-label">Date:</label>
+    </div>
+    <div class="col-sm-9">
+         <PikadayInput @onSelection={{action "changeDate"}} @format={{model.game.date_entry_format}} /> 
+    </div> 
+  </div>
+  
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="startTime" class="col-form-label">Start Time:</label>
+    </div>
+    <div class="col-sm-9">
+         <Input @type="text" @id="time" @size="25" @enter={{action "create"}} @value={{time}} />
+         
+         <div class="hint">Use <b>server time</b> in the same format as the server time.  The current server time is {{model.server_time}}.</div>
+    </div> 
+  </div>
+  
+  
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="warning" class="col-form-label">Content Warning:</label>
+    </div>
+    <div class="col-sm-9">
+         <Input @type="text" @size={{25}} @id="content_warning" @enter={{action "create"}} @value={{content_warning}} /> 
+    </div> 
+  </div>
+  
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="tags" class="col-form-label">Tags:</label>
+    </div>
+    <div class="col-sm-9">
+        <Input @type="text" @size={{25}} @id="tags" @enter={{action "create"}} @value={{tags}} />
+    </div> 
+  </div>
+  
+   <div class="form-group row">
+    <div class="col-sm-3">
+        <label for="warning" class="col-form-label">Description:</label>
+    </div>
+    <div class="col-sm-9">
+         <MarkdownEditor @text={{description}} />
+         
+    </div> 
+  </div>
+  
+     
 <div class="pull-right">
   <LinkTo @route="events" class="btn btn-default">Cancel</LinkTo>
   <button {{action "create"}} class="btn btn-primary">Create</button>
