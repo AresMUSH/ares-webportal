@@ -8,6 +8,9 @@
 <div class="alert alert-danger"><b>Content Warning:</b> {{model.plot.content_warning}}</div>
 {{/if}}
 
+{{#if model.plot.description}}
+<p><a href="#details"><i class="fas fa-angle-double-down"></i> Jump to Details</a></p>
+{{/if}}
 
 <p><label>Storytellers:</label>
   {{#each model.plot.storytellers as |storyteller|}}
@@ -34,7 +37,7 @@
 
 <h2>Scenes</h2>
 
-<SceneList @scenes={{model.plot.scenes.scenes}} @pages={{model.plot.scenes.pages}} @sceneTypes={{model.sceneOptions.scene_types}} @hideSearch={{true}} />
+<SceneList @scenes={{model.scenes.scenes}} @pages={{model.scenes.pages}} @sceneTypes={{model.sceneOptions.scene_types}} @filter={{filter}} @page={{page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
 
 
 <p><LinkTo @route="plots"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Plots</LinkTo></p>

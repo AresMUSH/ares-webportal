@@ -140,6 +140,10 @@ export default Controller.extend({
         this.send('reloadModel');
         this.flashMessages.success('Participants saved.');
       });
+    },
+    
+    responseSelected: function(resp) {
+      this.set('reply', resp.value);
     }
   }
 });
