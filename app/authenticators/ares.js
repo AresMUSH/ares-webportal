@@ -10,7 +10,7 @@ export default Base.extend({
     restore(data) {
         let old = this.get('session.data.authenticated');
         if (old.id && old.id != data.id) {
-          window.location.replace('/');
+          window.location.replace(window.location || '/');
         }
         
         let api = this.gameApi;
