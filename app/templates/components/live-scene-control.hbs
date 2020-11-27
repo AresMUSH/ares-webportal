@@ -156,7 +156,7 @@
                  {{#if txtExtraInstalled}}
                    <LiveSceneTxt @scenePose={{scenePose}} @scene={{scene}} />
                  {{/if}}
-                
+                 
              <LiveSceneCustomScenepose @scenePose={{scenePose}} @scene={{scene}} />
              </div>
                 
@@ -198,7 +198,12 @@
                              
                              {{#if cookiesExtraInstalled}}
                                <LiveSceneCookies @scene={{scene}} />
-                             {{/if}}                             
+                             {{/if}}      
+                             
+                             {{#if rpgExtraInstalled}}
+                               <RpgLiveScene @scene={{scene}} />
+                             {{/if}}
+                                                    
                           
                              <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} />
                           

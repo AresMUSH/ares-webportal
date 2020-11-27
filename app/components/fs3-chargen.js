@@ -33,7 +33,6 @@ export default Component.extend({
       if (rating > max_free_rating) {
         points = points + ((rating - max_free_rating) * cost_per_rating);
       }
-      console.log `ability: ${ability.name} rating: ${rating} points: ${points}`
     });
         
     return (points <= free_points) ? 0 : (points - free_points);
