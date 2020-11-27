@@ -56,7 +56,11 @@
         {{/if}}
         
         {{#if traitsExtraInstalled}}
-       <li role="presentation"><a href="#traits" aria-controls="misc" role="tab" data-toggle="tab">Traits</a></li>
+        <li role="presentation"><a href="#traits" aria-controls="misc" role="tab" data-toggle="tab">Traits</a></li>
+       {{/if}}
+
+        {{#if rpgExtraInstalled}}
+        <li role="presentation"><a href="#rpgsheet" aria-controls="misc" role="tab" data-toggle="tab">Sheet</a></li>
        {{/if}}
        
        <li role="presentation"><a href="#bg" aria-controls="misc" role="tab" data-toggle="tab">Background</a></li>
@@ -139,6 +143,12 @@
                <TraitsChargen @model={{model}} @updateCallback={{traitsUpdateCallback}} />
            </div>
            {{/if}}
+           
+           {{#if rpgExtraInstalled}}
+             <div role="tabpanel" class="tab-pane" id="rpgsheet">
+               <RpgChargen @model={{model}} @updateCallback={{rpgUpdateCallback}} />
+             </div>
+            {{/if}}
            
                                    
          <div role="tabpanel" class="tab-pane" id="bg">

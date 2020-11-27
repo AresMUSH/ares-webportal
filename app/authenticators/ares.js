@@ -8,6 +8,10 @@ export default Base.extend({
     gameSocket: service(),
 
     restore(data) {
+        let old = this.get('session.data.authenticated');
+        if (old.id && old.id != data.id) {
+          window.location.replace(window.location || '/');
+        }
         
         let api = this.gameApi;
         return api.requestOne('checkToken', { id: data.id, token: data.token })
