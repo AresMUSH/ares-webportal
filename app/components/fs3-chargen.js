@@ -108,6 +108,10 @@ export default Component.extend({
   actionPoints: computed('model.char.fs3.fs3_action_skills.@each.rating', function() {
     return this.countPointsInGroup(this.get('model.char.fs3.fs3_action_skills'), 0, 1, 1);
   }),
+  
+  advantagePoints: computed('model.char.fs3.fs3_advantages.@each.rating', function() {
+    return this.countPointsInGroup(this.get('model.char.fs3.fs3_advantages'), 0, 0, this.get('model.cgInfo.fs3.advantages_cost'));
+  }),
      
   checkLimits: function(list, limits, title) {
     if (!list) {
@@ -137,6 +141,7 @@ export default Component.extend({
     let totalAttrs = this.attrPoints;
     let totalSkills = this.skillPoints;
     let totalAction = this.actionPoints;
+    let totalAdvantages = this.advantagePoints;
     let maxAttrs = this.get('model.cgInfo.fs3.max_attrs');
     if (totalAttrs > maxAttrs) {
       this.charErrors.pushObject(`You can only spend ${maxAttrs} points in attributes.  You have spent ${totalAttrs}.`);
@@ -145,6 +150,11 @@ export default Component.extend({
     let maxAction = this.get('model.cgInfo.fs3.max_action');
     if (totalAction > maxAction) {
       this.charErrors.pushObject(`You can only spend ${maxAction} points in action skills.  You have spent ${totalAction}.`);
+    }
+    
+    let maxAdvantages = this.get('model.cgInfo.fs3.max_advantages');
+    if (totalAdvantages > maxAdvantages) {
+      this.charErrors.pushObject(`You can only spend ${maxAdvantages} points in advantages.  You have spent ${totalAdvantages}.`);
     }
         
     let maxAp = this.get('model.cgInfo.fs3.max_ap');

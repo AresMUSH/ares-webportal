@@ -26,6 +26,7 @@ export default Controller.extend({
     fs3ValidateCallback: null,
     customUpdateCallback: null,
     traitsUpdateCallback: null,
+    rpgUpdateCallback: null,
 
     init: function() {
       this._super(...arguments);
@@ -42,6 +43,10 @@ export default Controller.extend({
 
     traitsExtraInstalled: computed(function() {
       return this.get('model.app.game.extra_plugins').any(e => e == 'traits');
+    }),
+
+    rpgExtraInstalled: computed(function() {
+      return this.get('model.app.game.extra_plugins').any(e => e == 'rpg');
     }),
 
     anyGroupMissing: computed('model', function() {
@@ -61,6 +66,7 @@ export default Controller.extend({
       let fs3 = this.fs3UpdateCallback ? this.fs3UpdateCallback() : null;
       let custom = this.customUpdateCallback ? this.customUpdateCallback() : null;
       let traits = this.traitsUpdateCallback ? this.traitsUpdateCallback() : null;
+      let rpg = this.rpgUpdateCallback ? this.rpgUpdateCallback() : null;
       
         return { 
             id: this.get('model.char.id'),
@@ -74,7 +80,8 @@ export default Controller.extend({
             lastwill: this.get('model.char.lastwill'),
             fs3: fs3,
             custom: custom,
-            traits: traits
+            traits: traits,
+            rpg: rpg
         };
     }, 
     
