@@ -200,9 +200,12 @@
                                <LiveSceneCookies @scene={{scene}} />
                              {{/if}}
 
+                             {{#if rpgExtraInstalled}}
+                               <RpgLiveScene @scene={{scene}} />
+                             {{/if}}
 
-                             <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} @spells={{spells}}/>
 
+                            <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} @spells={{spells}}/>
 
                          </ul>
                      </li>
