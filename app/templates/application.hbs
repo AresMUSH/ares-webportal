@@ -11,6 +11,7 @@
                    <div class="site-title"><LinkTo @route="home">{{mushName}}</LinkTo></div>
                    <div class="site-subtitle">{{mushHost}} port {{mushPort}}</div>
                </div>
+               
                <div class="col-md-6 hidden-sm hidden-xs">
                   <div class="text-right user-bar">
                    {{#if isAuthenticated}}
@@ -62,14 +63,14 @@
        <div class="row body-row">
          {{#if (not hideSidebar)}}
              {{#if model.left_sidebar}}
-             <div class="col-md-3 left-sidebar">
+             <div class="col-md-3 left-sidebar" role="navigation" aria-labelledby="sidebar">
                <GlobalSidebar @model={{sidebar}} @socketConnected={{socketConnected}} @versionWarning={{versionWarning}} @boxStyle="sidebar-box-left" />
              </div>
              {{/if}}
         {{/if}}
 
          {{#if hideSidebar}}
-             <div class="col-md-12 body-container {{if model.left_sidebar 'right-body' 'left-body'}}">
+             <div class="col-md-12 body-container {{if model.left_sidebar 'right-body' 'left-body'}}" role="main">
                <FlashMessages />
                
                {{#if (not socketConnected)}}
@@ -79,7 +80,7 @@
                {{outlet}}
              </div>
          {{else}}
-             <div class="col-md-9 body-container {{if model.left_sidebar 'right-body' 'left-body'}}">
+             <div class="col-md-9 body-container {{if model.left_sidebar 'right-body' 'left-body'}}" role="main">
                <FlashMessages />
                {{outlet}}
              </div>
@@ -87,7 +88,7 @@
                 
          {{#if (not hideSidebar)}}
              {{#if (not model.left_sidebar)}}
-             <div class="col-md-3 right-sidebar">
+             <div class="col-md-3 right-sidebar" role="navigation" aria-labelledby="sidebar">
                  <GlobalSidebar @model={{sidebar}} @socketConnected={{socketConnected}} @versionWarning={{versionWarning}} @boxStyle="sidebar-box-right" />
              </div>
              {{/if}}
