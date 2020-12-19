@@ -20,7 +20,7 @@
         {{/if}}
          <LinkTo @route="forum-topic" @models={{array post.category_id post.id}}>{{post.title}}</LinkTo>
      </td>
-     <td>{{post.author}}
+     <td>{{char-icon-tiny char=post.author}}
      </td>
      <td>
        {{post.last_updated_by}} @ {{post.last_activity}}
