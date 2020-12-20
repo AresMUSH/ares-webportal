@@ -147,7 +147,7 @@
 
        <div class="scene-controls">
          <div class="col col-sm-6 col-xs-12 scene-controls-right">
-             {{#if (not scene.completed)}}                
+             {{#if (and (not scene.completed) (not scene.reload_required))}} 
 
              <div class="pose-buttons">
                  <button {{action 'addPose' poseType.id}} class="btn btn-primary">Add {{poseType.title}}</button>

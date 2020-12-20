@@ -1,13 +1,24 @@
 {{page-title 'Edit Event'}}
 <h1>Edit Event</h1>
+  
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Organizer:</b>
+    </div>
 
+    <div class="col-sm-9">
+      <PowerSelect @selected={{model.event.organizer}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "organizerChanged"}} as |char|>
+        {{char.name}}
+      </PowerSelect>
+    </div>
+  </div>
 
    <div class="form-group row">
     <div class="col-sm-3">
         <label for="title" class="col-form-label">Title:</label>
     </div>
     <div class="col-sm-9">
-         <Input @type="text" @size={{25}} @id="title" @enter={{action "edit"}} @value={{model.title}} />
+         <Input @type="text" @size={{25}} @id="title" @enter={{action "edit"}} @value={{model.event.title}} />
     </div> 
   </div>
   
@@ -16,7 +27,7 @@
         <label for="date" class="col-form-label">Date:</label>
     </div>
     <div class="col-sm-9">
-         <PikadayInput @onSelection={{action "changeDate"}} @value={{model.date}} @format={{model.date_entry_format}} /> 
+         <PikadayInput @onSelection={{action "changeDate"}} @value={{model.event.date}}  @format={{model.event.date_entry_format}} /> 
     </div> 
   </div>
   
@@ -25,9 +36,9 @@
         <label for="startTime" class="col-form-label">Start Time:</label>
     </div>
     <div class="col-sm-9">
-         <Input @type="text" @id="time" @enter={{action "edit"}} @value={{model.time}} />
+         <Input @type="text" @id="time" @enter={{action "edit"}} @value={{model.event.time}} />
          
-         <div class="hint">Use <b>server time</b> in the same format as the server time.  The current server time is {{model.server_time}}.</div>
+         <div class="hint">Use <b>server time</b> in the same format as the server time.  The current server time is {{model.event.server_time}}.</div>
     </div> 
   </div>
   
@@ -37,7 +48,7 @@
         <label for="warning" class="col-form-label">Content Warning:</label>
     </div>
     <div class="col-sm-9">
-         <Input @type="text" @size={{25}} @id="content_warning" @enter={{action "edit"}} @value={{model.content_warning}} />
+         <Input @type="text" @size={{25}} @id="content_warning" @enter={{action "edit"}} @value={{model.event.content_warning}} />
     </div> 
   </div>
   
@@ -46,7 +57,7 @@
         <label for="tags" class="col-form-label">Tags:</label>
     </div>
     <div class="col-sm-9">
-        <Input @type="text" @size={{25}} @id="tags" @enter={{action "edit"}}  @value={{model.tags}} />
+        <Input @type="text" @size={{25}} @id="tags" @enter={{action "edit"}}  @value={{model.event.tags}} />
     </div> 
   </div>
   
@@ -55,7 +66,7 @@
         <label for="warning" class="col-form-label">Description:</label>
     </div>
     <div class="col-sm-9">
-         <MarkdownEditor @text={{model.description}} />
+         <MarkdownEditor @text={{model.event.description}} />
          
     </div> 
   </div>
@@ -63,7 +74,7 @@
 
 
 <div class="pull-right">
-  <LinkTo @route="event" @model={{model.id}} class="btn btn-default">Cancel</LinkTo>
+  <LinkTo @route="event" @model={{model.event.id}} class="btn btn-default">Cancel</LinkTo>
   <button {{action "edit"}} class="btn btn-primary">Save</button>
 </div>
 <FlashMessages />
