@@ -1,0 +1,122 @@
+{{page-title 'Edit Job'}}
+<h1>Edit Job {{model.job.id}}</h1>
+
+<table>
+ 
+ 
+ <tr>
+   <td>
+     <label>Title:</label>
+   </td>
+   <td>
+     <p><Input @type="text" @size={{25}} @id="title" @value={{model.job.title}} /></p>
+   </td>
+   <td>
+     &nbsp;
+   </td>
+ </tr>
+ 
+ <tr>
+    <td>
+       <label>Submitter:</label>
+     </td>
+    
+     <td>
+      
+       <PowerSelect @selected={{model.job.author}} @options={{model.characters}} @searchField="name" @searchEnabled=true @onChange={{action "submitterChanged"}} as |char|>
+         {{char.name}}
+       </PowerSelect>
+      
+     </td>
+ </tr>
+ 
+ <tr>
+    <td>
+       <label>Other Participants:</label>
+     </td>
+    
+     <td>
+      
+        <PowerSelectMultiple @selected={{model.job.participants}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
+         {{char.name}}
+       </PowerSelectMultiple>
+      
+     </td>
+ </tr>
+ 
+ <tr>
+    <td>
+       <label>Assigned To:</label>
+     </td>
+    
+     <td>
+      
+       <PowerSelect @selected={{model.job.assigned_to}} @options={{model.job.job_admins}} @searchField="name" @searchEnabled=true @onChange={{action "assigneeChanged"}} as |char|>
+         {{char.name}}
+       </PowerSelect>
+      
+     </td>
+ </tr>
+ 
+  <tr>
+    <td>
+      <label>Category:</label>
+    </td>
+    <td>
+        <span class="label label-info job-category job-category-{{model.job.category}}">
+        {{model.job.category}}
+        </span>
+    </td>
+    <td>
+          <ul class="nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+              <span class="btn btn-default" href="#">Change Category <span class="caret"></span></span> </a>
+              <ul class="dropdown-menu">
+              {{#each model.options.category_values as |category| }}
+                <li><a href="#" {{action 'changeCategory' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+              {{/each}}
+              </ul>
+            </li>
+        </ul>
+      
+    </td>
+  </tr>
+  
+  <tr>
+    <td>
+       <label>Status: </label>
+    </td>
+    <td>
+      <span class="label label-info job-status job-status-{{model.job.status}}">{{model.job.status}}</span>
+    </td>
+    <td>
+          <ul class="nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+              <span class="btn btn-default" href="#">Change Status <span class="caret"></span></span> </a>
+              <ul class="dropdown-menu">
+              {{#each model.options.status_values as |status| }}
+                <li><a href="#" {{action 'changeStatus' status}}><span class="label job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
+              {{/each}}
+              </ul>
+            </li>
+        </ul>
+    </td>
+  </tr>
+  
+</table>
+
+     
+<MarkdownEditor @text={{model.job.description}} />
+   
+<div class="pull-right">
+<button class="btn btn-primary" {{action 'saveJob'}}>Save</button>
+</div>
+
+<FlashMessages />
+{{outlet}}
+
+
