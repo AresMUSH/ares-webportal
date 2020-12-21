@@ -75,6 +75,7 @@ Router.map(function() {
   this.route('jobs');
   this.route('job', { path: '/job/:id' });
   this.route('job-create');
+  this.route('job-edit', { path: '/job/:id/edit' });
   this.route('jobcat-create');
   this.route('jobcat-edit', { path: '/jobcat-edit/:id' });
   this.route('jobcat-manage');

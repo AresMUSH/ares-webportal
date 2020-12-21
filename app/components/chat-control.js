@@ -74,8 +74,8 @@ export default Component.extend({
       this.set('selectedReportMessage', null);
       
       
-      if (reason.length == 0) {
-        this.flashMessages.danger('You must enter a reason for the report.');
+      if (reason.length == 0 || !message) {
+        this.flashMessages.danger('You must enter a reason for the report and select a message where the report begins.');
         return;
       }
       
