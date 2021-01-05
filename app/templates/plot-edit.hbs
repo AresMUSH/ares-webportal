@@ -24,11 +24,21 @@
 
    <div class="form-group row">
     <div class="col-sm-3">
-        <label for="completed" class="col-form-label">Plot Completed:</label>
+
     </div>
-    <div class="col-sm-9">
+    <div class="col-sm-3">
+        <label for="completed" class="col-form-label">Plot Completed:</label>
         <Input @type="checkbox" @checked={{model.plot.completed}} />
     </div>
+
+    <div class="col-sm-3">
+        <label for="background" class="col-form-label">Background Plot:</label>
+        <Input @type="checkbox" @checked={{model.plot.background}} />
+    </div>
+    <div class="col-sm-3">
+
+    </div>
+
   </div>
 
    <div class="form-group row">
@@ -51,9 +61,10 @@
 
    <div class="form-group row">
     <div class="col-sm-3">
-        <label for="description" class="col-form-label">Events:</label>
+        <label for="description" class="col-form-label">Information:</label>
     </div>
     <div class="col-sm-9">
+      <p><i>Do `##Title` for a new section.</i></p>
         <MarkdownEditor @text={{model.plot.description}} />
     </div>
   </div>

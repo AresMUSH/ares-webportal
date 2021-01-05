@@ -1,8 +1,6 @@
 {{page-title 'Plots'}}
 <h1>Plots</h1>
 
-<p>Plots are a way to group related scenes.</p>
-
 {{#if isApproved}}
 
 <div class="row">
@@ -31,33 +29,81 @@
 
 {{#each model as |plot|}}
   {{#if (not plot.completed) }}
-    <tr>
-        <td>
-        <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
-        </td>
-        <td>
-          {{#each plot.storytellers as |storyteller|}}
-            <LinkTo @route="char" @model="{{storyteller.name}}">{{storyteller.name}}</LinkTo>
-          {{/each}}
-        </td>
-        <td class="hidden-xs hidden-sm">
-        {{plot.start_date}} - {{plot.end_date}}
-        </td>
-        <td>
-            <AnsiFormat @text={{plot.summary}} />
-            {{#if plot.content_warning}}
-            <ContentWarningTag @warning={{plot.content_warning}} />
-            {{/if}}
+    {{#if (not plot.background) }}
+      <tr>
+          <td>
+          <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
+          </td>
+          <td>
+            {{#each plot.storytellers as |storyteller|}}
+              <LinkTo @route="char" @model="{{storyteller.name}}">{{storyteller.name}}</LinkTo>
+            {{/each}}
+          </td>
+          <td class="hidden-xs hidden-sm">
+          {{plot.start_date}} - {{plot.end_date}}
+          </td>
+          <td>
+              <AnsiFormat @text={{plot.summary}} />
+              {{#if plot.content_warning}}
+              <ContentWarningTag @warning={{plot.content_warning}} />
+              {{/if}}
 
-        </td>
-    </tr>
+          </td>
+      </tr>
+    {{/if}}
   {{/if}}
 {{/each}}
 
+</tbody>
+</table>
+
+<h2>Background Plots</h2>
+<p>Ongoing plots that currently exist in the background of the game's story.</p>
+
+<table class="table table-striped">
+
+<thead>
+    <tr>
+        <th class="col-xs-3">Plot</th>
+        <th class="col-xs-2">Storytellers</th>
+        <th class="col-xs-3 hidden-xs hidden-sm">Dates</th>
+        <th class="col-xs-4">Summary</th>
+    </tr>
+</thead>
+
+<tbody>
+
+  {{#each model as |plot|}}
+    {{#if (not plot.completed) }}
+      {{#if plot.background }}
+        <tr>
+            <td>
+            <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
+            </td>
+            <td>
+              {{#each plot.storytellers as |storyteller|}}
+                <LinkTo @route="char" @model="{{storyteller.name}}">{{storyteller.name}}</LinkTo>
+              {{/each}}
+            </td>
+            <td class="hidden-xs hidden-sm">
+            {{plot.start_date}} - {{plot.end_date}}
+            </td>
+            <td>
+                <AnsiFormat @text={{plot.summary}} />
+                {{#if plot.content_warning}}
+                <ContentWarningTag @warning={{plot.content_warning}} />
+                {{/if}}
+
+            </td>
+        </tr>
+    {{/if}}
+    {{/if}}
+  {{/each}}
 
 
 </tbody>
 </table>
+
 <br><br>
 <iframe src="https://calendar.google.com/calendar/b/3/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=spiritlakemu%40gmail.com&amp;color=%2323164E&amp;src=so41d2tcl40g5qc77e1sghiaoh6g5ld0%40import.calendar.google.com&amp;color=%235229A3&amp;ctz=America%2FDenver" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 

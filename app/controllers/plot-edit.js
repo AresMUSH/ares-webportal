@@ -20,6 +20,7 @@ export default Controller.extend({
                summary: this.get('model.plot.summary'),
                storytellers: (this.get('model.plot.storytellers') || []).map(storyteller => storyteller.name),
                completed: this.get('model.plot.completed'),
+               background: this.get('model.plot.background'),
                content_warning: this.get('model.plot.content_warning'),
                description: this.get('model.plot.description')}, null)
             .then( (response) => {
