@@ -111,7 +111,7 @@
     {{#each model.alts as |alt|}}
       {{#if (not (eq alt.name currentUser.name)) }}
         <tr><td>
-        <CharIconInline @char={{alt}} @hideLink="true" /> {{alt.name}}
+        <CharIconInline @char={{alt}} @hideLink="true" />
         </td>
         <td><a href="#" {{action 'switchAlt' alt.name}} class="btn btn-default">Switch</a></td>
         </tr>

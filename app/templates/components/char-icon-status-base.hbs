@@ -1,0 +1,5 @@
+{{#if char.icon}}
+<img alt="{{char.name}}'s icon" class="{{iconClass}} icon-status-{{char.status}} {{if (eq char.status 'offline') 'faded'}}" src="/game/uploads/{{char.icon}}" >
+{{else}}
+<img alt="{{char.name}}'s icon" class="{{iconClass}} icon-status-{{char.status}}" src="/game/uploads/theme_images/noicon.png" >
+{{/if}}

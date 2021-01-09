@@ -254,6 +254,9 @@
               <span class="btn btn-default" href="#">Job Menu <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
               <li><a href="#" {{action 'closeJob'}}>Close Job</a></li>
+              {{#if model.job.is_job_admin}}
+                <li><LinkTo @route="job-edit" @model={{model.job.id}}>Edit Job</LinkTo></li>
+              {{/if}}
               {{#if model.job.is_approval_job}}
                 <li><LinkTo @route="app-review" @model={{model.job.author.id}}>App Review for {{model.job.author.name}}</LinkTo></li>
                 <li><LinkTo @route="char" @model={{model.job.author.name}}>Profile for {{model.job.author.name}}</LinkTo></li>
