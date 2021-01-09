@@ -1,19 +1,8 @@
 <span class="inline-block">
-<LinkTo @route="char" @model={{char.name}}>
-    {{#if char.icon}}
-    <img alt="{{char.name}}'s icon" class="tiny-profile-icon <IconClass /> icon-status-{{char.status}} {{if (eq char.status 'offline') 'faded'}}" src="/game/uploads/{{char.icon}}" >
-    {{else}}
-    <img alt="{{char.name}}'s icon" class="tiny-profile-icon <IconClass /> icon-status-{{char.status}}" src="/game/uploads/theme_images/noicon.png" >
-    {{/if}}
-</LinkTo>
-
-{{#unless hideLink}}
-<LinkTo @route="char" @model={{char.name}}> 
+  <CharIconStatusBase @char={{char}} @iconClass="tiny-profile-icon" />
   {{#if char.nick}}
     {{char.nick}}
   {{else}}
     {{char.name}} 
   {{/if}}
-</LinkTo>
-{{/unless}}
 </span>

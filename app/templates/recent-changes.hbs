@@ -19,6 +19,8 @@
          Scene
          {{else if (eq change.type 'file')}}
          File
+         {{else if (eq change.type 'plot')}}
+         Plot
          {{else}}
          {{change.type}}
          {{/if}}

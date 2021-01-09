@@ -8,6 +8,8 @@
  <LinkTo @route="event" @model={{change.data.id}}>{{change.message}}</LinkTo>
 {{else if (eq change.type 'scene')}}
  <LinkTo @route="scene" @model={{change.data.id}}>{{change.message}}</LinkTo>
+{{else if (eq change.type 'plot')}}
+ <LinkTo @route="plot" @model={{change.data.id}}>{{change.message}}</LinkTo>
 {{else}}
  {{change.message}}
 {{/if}}
