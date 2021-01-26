@@ -140,6 +140,7 @@ Router.map(function() {
   this.route('shutdown');
   this.route('schools', { path: '/schools/:school'});
   this.route('spells', { path: '/spells'});
+  this.route('spells-export', { path: '/spells-export/:school'});
   this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
   this.route('tos');
