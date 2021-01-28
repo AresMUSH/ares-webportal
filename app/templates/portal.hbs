@@ -30,13 +30,13 @@
       {{/each}} </i><br> {{/if}}
       {{#if model.portal.location}}<b>Location:</b> {{model.portal.location}}<br>  {{/if}}
       {{#if model.portal.primary_school}}
-        <b>Dominant School:</b> {{#link-to 'schools' model.portal.primary_school.name}}
-      {{model.portal.primary_school.name}}
+        <b>Dominant School:</b> {{#link-to 'schools' model.portal.primary_school}}
+      {{model.portal.primary_school}}
       {{/link-to}}
       <br>{{/if}}
       {{#if model.portal.all_schools}}<b>All Schools:</b>
         {{#each model.portal.all_schools as |school|}}
-          {{#link-to 'schools' school.name}}{{school.name}}{{/link-to}}
+          {{#link-to 'schools' school}}{{school}}{{/link-to}}
         {{/each}}<br>
       {{/if}}
       {{#if model.portal.location_known}}<span class="ansi-green-fg"><i><b>This portal's location is ICly available on WeirdNet</b></i></span>

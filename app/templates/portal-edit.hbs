@@ -67,7 +67,7 @@
 
           <div class="col-sm-9">
             <p><PowerSelect @selected={{model.portal.primary_school}} @options={{model.schools}} @onChange={{action "primaryschoolChanged"}} as |school|>
-              {{school.name}}
+              {{school}}
             </PowerSelect></p>
           </div>
 
@@ -80,7 +80,7 @@
 
 
               <PowerSelectMultiple @selected={{model.portal.all_schools}} @options={{model.schools}} @searchEnabled=true @searchField="name"  @placeholder="A portal can have to 5 schools of magic total" @onChange={{action "allschoolsChanged"}} as |school|>
-                {{school.name}}
+                {{school}}
               </PowerSelectMultiple></p>
           </div>
 
