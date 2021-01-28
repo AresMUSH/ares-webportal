@@ -44,10 +44,15 @@
         <label>School:</label>
   </div>
 
-  <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="icdate"  value=searchSchool enter=(action "search")}}</p>
 
-  </div>
+    <div class="col-sm-9">
+      <p>
+        <PowerSelect @selected={{searchSchool}} @options={{model.schools}} @searchEnabled=true @searchField="name"  @onChange={{action "schoolChanged"}} as |school|>
+          {{school}}
+        </PowerSelect></p>
+    </div>
+
+
 
 </div>
 
@@ -57,8 +62,26 @@
         <label>Effect:</label>
   </div>
 
-  <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="tag"  value=searchEffect enter=(action "search")}}</p>
+
+  <div class="col-sm-9">
+    <p><PowerSelect  @selected={{searchEffect}} @options={{model.effects}} @searchEnabled=true @searchField="name" @onChange={{action "effectChanged"}} as |effect|>
+      {{effect}}
+    </PowerSelect></p>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <label>Damage Type:</label>
+  </div>
+
+
+  <div class="col-sm-9">
+    <p><PowerSelect  @selected={{searchDamage}} @options={{model.damage}} @searchEnabled=true @searchField="name" @onChange={{action "damageChanged"}} as |damage|>
+      {{damage}}
+    </PowerSelect></p>
   </div>
 
 </div>

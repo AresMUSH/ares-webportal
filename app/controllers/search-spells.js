@@ -29,6 +29,23 @@ export default Controller.extend({
     reset() {
       this.resetOnExit();
     },
+
+    damageChanged(searchDamage) {
+      this.set('searchDamage', searchDamage);
+
+    },
+
+    effectChanged(searchEffect) {
+      this.set('searchEffect', searchEffect);
+
+    },
+
+    schoolChanged(new_schools) {
+      this.set('searchSchool', new_schools);
+
+    },
+
+
     search() {
       let api = this.get('gameApi');
 
@@ -36,6 +53,7 @@ export default Controller.extend({
         searchName: this.get('searchName'),
         searchLevel: this.get('searchLevel'),
         searchSchool: this.get('searchSchool'),
+        searchDamage: this.get('searchDamage'),
         searchEffect: this.get('searchEffect'),
         searchDesc: this.get('searchDesc'),
         searchAvailable: this.get('searchAvailable'),
@@ -47,6 +65,8 @@ export default Controller.extend({
           this.get('flashMessages').error("Oops!  Something went wrong when the website talked to the game.  Please try again and alert staff is the problem persists.");
           return;
         }
+
+
 
         this.set('searchResults', response);
       });
