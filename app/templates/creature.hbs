@@ -18,8 +18,8 @@
         {{model.creature.name}}
         <div class="infobox-majorschool">
           {{#if model.creature.major_school}}
-          {{#link-to 'schools' model.creature.major_school.name}}
-          {{model.creature.major_school.name}}
+          {{#link-to 'schools' model.creature.major_school}}
+          {{model.creature.major_school}}
           {{/link-to}}
           {{/if}}
         </div>
@@ -32,8 +32,8 @@
           {{/if}}
           <div class="infobox-minorschool">
             {{#if model.creature.minor_school}}
-            {{#link-to 'schools' model.creature.minor_school.name}}
-            {{model.creature.minor_school.name}}
+            {{#link-to 'schools' model.creature.minor_school}}
+            {{model.creature.minor_school}}
             {{/link-to}}
             {{/if}}
           </div>

@@ -11,7 +11,7 @@ export default Route.extend(AuthenticatedRoute, {
 
         return RSVP.hash({
            characters: api.requestMany('characters', { select: 'include_staff' }),
-           schools: api.requestMany('getSchools'),
+           schools: api.request('getSchools'),
            portals: api.requestMany('portals'),
            creature:  Ember.Object.create({
                sapient: false})

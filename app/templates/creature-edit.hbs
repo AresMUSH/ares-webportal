@@ -36,8 +36,8 @@
           </div>
 
           <div class="col-sm-9">
-            <p><PowerSelect @selected={{model.portal.creature.major_school}} @options={{model.schools}} @onChange={{action "majorschoolChanged"}} as |school|>
-              {{school.name}}
+            <p><PowerSelect @selected={{model.creature.major_school}} @options={{model.schools}} @onChange={{action "majorschoolChanged"}} as |school|>
+              {{school}}
             </PowerSelect></p>
           </div>
 
@@ -46,8 +46,8 @@
           </div>
 
           <div class="col-sm-9">
-            <p><PowerSelect @selected={{model.portal.creature.minor_school}} @options={{model.schools}} @onChange={{action "minorschoolChanged"}} as |school|>
-              {{school.name}}
+            <p><PowerSelect @selected={{model.creature.minor_school}} @options={{model.schools}} @onChange={{action "minorschoolChanged"}} as |school|>
+              {{school}}
             </PowerSelect></p>
           </div>
 
