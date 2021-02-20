@@ -6,6 +6,7 @@ export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
     queryParams: [ 'location' ],
+    warning_tags: [],
 
     scenePacingOptions: computed(function() { 
         return this.get('model.sceneOptions.scene_pacing');
@@ -39,6 +40,10 @@ export default Controller.extend({
         },
         locationSelected(newLocation) {
           this.set('model.scene.location', newLocation);
+        },
+        warningsChanged(new_warnings) {
+          this.set('warning_tags', new_warnings);
+          this.set('model.scene.content_warning', new_warnings.join(', '));
         },
         save() {
             let api = this.gameApi;

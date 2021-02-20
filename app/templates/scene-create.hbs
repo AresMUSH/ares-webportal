@@ -149,7 +149,11 @@
           <label for="title" class="col-form-label">Content Warning:</label>
       </div>
       <div class="col-sm-9">
+        <PowerSelectMultiple @selected={{warning_tags}} @options={{model.sceneOptions.content_warnings}} @onChange={{action "warningsChanged"}} as |warning|>
+          {{warning}}
+        </PowerSelectMultiple>       
           <Input @type="text" @size={{25}} @id="content_warning" @enter={{action "save"}} @value={{model.scene.content_warning}} />
+          <p class="hint">Select from the suggested tags or write your own. Please avoid frivolous warnings.</p>
       </div>
     </div>
     
