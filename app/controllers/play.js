@@ -97,7 +97,9 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       }
       channel.messages.pushObject({message: newMessage, timestamp: localTimestamp, author: author});
       set(channel, 'last_activity', Date.now());
-      set(channel, 'is_recent', true);
+      if (!channel.is_hidden) {
+        set(channel, 'is_recent', true);
+      }
       if (channelKey === this.get('selectedChannel.key')) {
           this.scrollWindow();
           if (channel.is_page) {
