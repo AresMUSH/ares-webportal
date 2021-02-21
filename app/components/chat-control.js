@@ -10,6 +10,8 @@ export default Component.extend({
   selectedReportMessage: null,
   reportReason: '',
   chatMessage: '',
+  showPageRename: false,
+  newPageTitle: '',
   
   chatAlerts: computed('channel.muted', 'scrollPaused', function() {
     let alertList = [];
@@ -118,6 +120,42 @@ export default Component.extend({
               }
           });
         }
+    },
+    
+    hidePage: function(hidden) {
+        let api = this.gameApi;
+        let channelKey = this.get('channel.key');
+                    
+        api.requestOne('hidePageThread', { thread_id: channelKey, hidden: hidden }, null)
+        .then( (response) => {
+            if (response.error) {
+                return;
+            }
+            this.set('channel.is_hidden', hidden);
+            this.set('channel.is_recent', !hidden);
+            if (hidden) {
+              this.flashMessages.success("Conversation will no longer appear on the recent list.");  
+            } else {
+              this.flashMessages.success("Conversation will appear again on the recent list.");  
+            }
+            
+        });
+    },
+    
+    renamePage: function() {
+        let api = this.gameApi;
+        let channelKey = this.get('channel.key');
+        let title = this.newPageTitle;
+        this.set('showPageRename', false);
+                    
+        api.requestOne('setPageThreadTitle', { thread_id: channelKey, title: title }, null)
+        .then( (response) => {
+            if (response.error) {
+                return;
+            }
+            this.set('channel.title', response.title);
+            this.flashMessages.success("Conversation renamed.");  
+        });
     },
     
     scrollDown() {

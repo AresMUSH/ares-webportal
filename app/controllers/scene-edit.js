@@ -5,7 +5,8 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
-    
+    warning_tags: [],
+  
     scenePacingOptions: computed(function() { 
         return this.get('model.sceneOptions.scene_pacing');
     }), 
@@ -17,6 +18,19 @@ export default Controller.extend({
     scenePrivacyValues: computed(function() { 
         return [ 'Open', 'Private' ];
     }),
+    
+    resetOnExit: function() {
+      this.set('warning_tags', []);
+    },
+    
+    setup: function() {
+      let tags = (this.get('model.scene.content_warning') || "").split(',');
+      tags.forEach(tag => {
+        if (this.get('model.sceneOptions.content_warnings').includes(tag.trim())) {
+          this.warning_tags.pushObject(tag);
+        }
+      });
+    },
     
     actions: {
         plotsChanged(new_plots) {
@@ -36,6 +50,10 @@ export default Controller.extend({
         },
         relatedChanged(new_related) {
             this.set('model.scene.related_scenes', new_related)
+        },
+        warningsChanged(new_warnings) {
+          this.set('warning_tags', new_warnings);
+          this.set('model.scene.content_warning', new_warnings.join(', '));
         },
         save() {
             let api = this.gameApi;

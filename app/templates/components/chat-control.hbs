@@ -91,7 +91,15 @@
 
          <span class="btn btn-default" href="#">Chat Menu <span class="caret"></span></span> </a>
          <ul class="dropdown-menu">
-         {{#if (not channel.is_page)}}
+         {{#if channel.is_page}}
+           {{#if channel.is_hidden}}
+             <li><a href="#" {{action "hidePage" false}}>Unhide Conversation</a></li>
+           {{else}}
+             <li><a href="#" {{action "hidePage" true}}>Hide Conversation</a></li>
+           {{/if}}
+           <li><a href="#" {{action (mut showPageRename) true}}>Rename Conversation</a></li>
+           
+         {{else}}
            <li><a href="#" {{action "leaveChannel"}}>Leave Channel</a></li>
            {{#if channel.muted}}
            <li><a href="#" {{action "muteChannel" false}}>Unmute Channel</a></li>
@@ -137,6 +145,15 @@
     {{/each}}
     </table>
     </div>
+    
+</BsModalSimple>
+
+
+
+<BsModalSimple @title="Rename Conversation" @closeTitle="Cancel" @submitTitle="Save" @size={{null}} @fade={{false}} @open={{showPageRename}} @onSubmit={{action "renamePage"}} @onHide={{action (mut showPageRename) null}}>
+    
+    <p>Enter a new title for this conversation. Leave blank to restore the default title.</p>
+    <p><Input @type="text" @size={{50}} @value={{newPageTitle}} /></p>
     
 </BsModalSimple>
 {{/if}}

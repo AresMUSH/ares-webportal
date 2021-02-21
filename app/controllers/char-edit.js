@@ -79,6 +79,10 @@ export default Controller.extend({
         };
     }, 
     actions: {
+      
+        rolesChanged(roles) {
+          this.set('model.char.roles', roles);
+        },
         
         save() {
             if (this.get('model.char.profile').filter(p => p.name.length == 0).length > 0) {

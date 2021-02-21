@@ -7,8 +7,14 @@
         <li><a data-toggle="tab" href="#hooks">RP Hooks</a></li>
         <li><a data-toggle="tab" href="#descs">Descriptions</a></li>
         <li><a data-toggle="tab" href="#files">Files</a></li>
-        {{#if model.char.show_admin_tab}}
-        <li><a data-toggle="tab" href="#admin">Admin</a></li>
+        {{#if model.char.show_background_tab}}
+        <li><a data-toggle="tab" href="#background">Background</a></li>
+        {{/if}}
+        {{#if (or model.char.show_idle_tab model.char.show_roster_tab)}}
+        <li><a data-toggle="tab" href="#idle">Idle/Roster</a></li>
+        {{/if}}
+        {{#if (or model.char.show_idle_tab model.char.show_roles_tab)}}
+        <li><a data-toggle="tab" href="#roles">Roles</a></li>
         {{/if}}
         <CharEditCustomTabs @char={{model}} />
     </ul>
@@ -24,10 +30,24 @@
       
       <div id="hooks" class="tab-pane fade in">
           <MarkdownEditor @text={{model.char.rp_hooks}} />
-        </div>
+      </div>
 
-      {{#if model.char.show_admin_tab}}
-        <CharEditAdmin @model={{model}} />
+      {{#if model.char.show_background_tab}}
+      <div id="background" class="tab-pane fade in">
+        <MarkdownEditor @text={{model.char.background}} />
+      </div>
+      {{/if}}
+
+      {{#if (or model.char.show_idle_tab model.char.show_roster_tab)}}
+        <CharEditIdle @model={{model}} />
+      {{/if}}
+
+      {{#if model.char.show_roles_tab}}
+      <div id="roles" class="tab-pane fade in">
+        <PowerSelectMultiple @selected={{model.char.roles}} @options={{model.char.all_roles}} @onChange={{action "rolesChanged"}} as |role|>
+          {{role}}
+        </PowerSelectMultiple>
+      </div>
       {{/if}}
       
       <CharEditCustom @char={{model.char}} @updateCallback={{customUpdateCallback}} />
