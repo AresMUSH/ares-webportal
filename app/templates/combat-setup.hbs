@@ -15,12 +15,12 @@
 </p>
 
 <div class="form-group row">
-    <div class="col-xs-6">
+    <div class="col-sm-6 col-xs-12">
             <b>Action:</b>  <PowerSelect @selected={{comb.action}} @options={{model.options.actions}} @onChange={{action "actionChanged" id}} as |act|>
               {{act}}
             </PowerSelect>
     </div>
-    <div class="col-xs-6">
+    <div class="col-sm-6 col-xs-12">
         
             <b>Action Args:</b> 
             
@@ -43,7 +43,7 @@
 
 
 <div class="row">
-  <div class="col col-xs-6">
+  <div class="col col-sm-6 col-xs-12">
 
     <p>
       <label>Team:</label>
@@ -55,7 +55,7 @@
 
   </div>
     
-  <div class="col col-xs-6">
+  <div class="col col-sm-6 col-xs-12">
       
     <p>
       <label>NPC Level:</label>
@@ -69,7 +69,7 @@
 
 
 <div class="row">
-  <div class="col col-xs-6">
+  <div class="col col-sm-6 col-xs-12">
 
     <p>
       <label>Stance</label>
@@ -79,7 +79,7 @@
     </p>
   </div>
   
-  <div class="col col-xs-6">
+  <div class="col col-sm-6 col-xs-12">
     <p>
       <label>Armor</label>
     <PowerSelect @selected={{comb.armor}} @options={{model.options.armor}} @onChange={{action "armorChanged" id}} as |armor|>
@@ -95,8 +95,10 @@
 </div>
 
 
+
+
 <div class="row">
-  <div class="col col-xs-6">
+  <div class="col col-sm-6 col-xs-12">
 
     <p>
       <label>Weapon</label>
@@ -113,19 +115,20 @@
 
   </div>
   
-  <div class="col-sm-6">
-          <b>Vehicle:</b>
-          
-          <TooltipIcon @position="top" @message="Enter a vehicle type to get in your own vehicle, or a character name to get into theirs." @icon="fa fa-question-circle" />
-          <br>
-          <Input @type="text" @size={{25}} @value={{comb.vehicle}} />
-          <br>
-          <b>Passenger Type:</b>
-          <PowerSelect @selected={{comb.passenger_type}} @options={{passengerTypes}} @onChange={{action "passengerTypeChanged" id}} as |passengerType|>
-            {{passengerType}}
-          </PowerSelect>
-          
-          
+  <div class="col-sm-6 col-xs-12">
+    <p>
+         <label>Vehicle:</label>
+         
+         <TooltipIcon @position="top" @message="Enter a vehicle type to get in your own vehicle, or a character name to get into theirs." @icon="fa fa-question-circle" />
+         <br>
+         <Input @type="text" @size={{25}} @value={{comb.vehicle}} />
+         <br>
+         <label>Passenger Type:</label>
+         <PowerSelect @selected={{comb.passenger_type}} @options={{passengerTypes}} @onChange={{action "passengerTypeChanged" id}} as |passengerType|>
+           {{passengerType}}
+         </PowerSelect>
+         
+       </p>
           
   </div>
 </div>
