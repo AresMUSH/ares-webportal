@@ -2,7 +2,7 @@
     <li class="active"><a data-toggle="tab" href="#scenesindex">+</a></li>
     <li><a data-toggle="tab" href="#scenelist">Scenes</a></li>
     <li><a data-toggle="tab" href="#plotprefs">Plot Preferences</a></li>
-    {{#if char.lore_hook_name}}<li><a data-toggle="tab" href="#lore-hook">Lore Hook</a></li>{{/if}}
+    {{#if char.custom.lore_hook_name}}<li><a data-toggle="tab" href="#lore-hook">Lore Hook</a></li>{{/if}}
     <li><a data-toggle="tab" href="#comps">Comps</a></li>
 </ul>
 
@@ -21,8 +21,8 @@
 
 
       <div id="plotprefs" class="tab-pane fade ">
-        {{#if char.plot_prefs}}
-          {{{ansi-format text=char.plot_prefs}}}
+        {{#if char.custom.plot_prefs}}
+          {{{ansi-format text=char.custom.plot_prefs}}}
         {{else}}
             None.
         {{/if}}
@@ -30,22 +30,22 @@
     </div>
 
 
-    {{#if char.lore_hook_name}}
+    {{#if char.custom.lore_hook_name}}
       <div id="lore-hook" class="tab-pane fade ">
-        {{#if char.lore_hook_ancestry}}
-          <h4>{{#link-to 'creature' char.lore_hook_ancestry}}{{char.lore_hook_name}} {{/link-to}}</h4>
-        {{else if char.lore_hook_pet}}
-          <h4>{{#link-to 'creature' char.lore_hook_pet}}{{char.lore_hook_name}} {{/link-to}}</h4>
+        {{#if char.custom.lore_hook_ancestry}}
+          <h4>{{#link-to 'creature' char.custom.lore_hook_ancestry}}{{char.custom.lore_hook_name}} {{/link-to}}</h4>
+        {{else if char.custom.lore_hook_pet}}
+          <h4>{{#link-to 'creature' char.custom.lore_hook_pet}}{{char.custom.lore_hook_name}} {{/link-to}}</h4>
         {{else}}
-          <h4>{{char.lore_hook_name}}</h4>
+          <h4>{{char.custom.lore_hook_name}}</h4>
         {{/if}}
-        {{char.lore_hook_desc}}
+        {{char.custom.lore_hook_desc}}
       </div>
     {{/if}}
 
     <div id="comps" class="tab-pane fade ">
       <CharComps @char={{char}}  />
-      
+
     </div>
 
 </div>

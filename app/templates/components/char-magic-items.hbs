@@ -1,21 +1,21 @@
 <h2>Magic Items</h2>
 
-{{#each char.magic_items as |item|}}
+{{#each char.custom.magic_items as |item|}}
  <p><b>{{item.name}}</b><br>
    {{{ansi-format text=item.desc}}}</p>
 {{/each}}
 
 <h2>Potions</h2>
 <ul>
-{{#each char.potions as |potion|}}
+{{#each char.custom.potions as |potion|}}
   <li>{{potion}}</li>
 {{/each}}
 </ul>
 
-{{#if char.potions_creating}}
+{{#if char.custom.potions_creating}}
   <h3>Potions Creating</h3>
   <ul>
-  {{#each char.potions_creating as |potion|}}
+  {{#each char.custom.potions_creating as |potion|}}
     <li>{{potion}}</li>
   {{/each}}
   </ul>

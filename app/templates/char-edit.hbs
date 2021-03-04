@@ -2,10 +2,9 @@
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#general">General</a></li>
-        <li><a data-toggle="tab" href="#profile">Character Information</a></li>
-        <li><a data-toggle="tab" href="#hooks">Hooks & Preferences</a></li>
+        <li><a data-toggle="tab" href="#profile">Profile</a></li>
         <li><a data-toggle="tab" href="#relationships">Relationships</a></li>
-        <li><a data-toggle="tab" href="#hooks">RP Hooks</a></li>
+        <li><a data-toggle="tab" href="#hooks">RP Hooks & Preferences</a></li>
         <li><a data-toggle="tab" href="#descs">Descriptions</a></li>
         <li><a data-toggle="tab" href="#files">Files</a></li>
         {{#if model.char.show_background_tab}}
@@ -30,11 +29,11 @@
       <CharEditDescs @model={{model}} />
 
       <div id="hooks" class="tab-pane fade in">
+        <b>RP Hooks</b>
           <MarkdownEditor @text={{model.char.rp_hooks}} />
 
           <b>Plot Preferences</b>
-          <MarkdownEditor @text={{model.char.plot_prefs}} />
-        </div>
+          <MarkdownEditor @text={{model.char.custom.plot_prefs}} />
       </div>
 
       {{#if model.char.show_background_tab}}
@@ -58,7 +57,7 @@
       <CharEditCustom @char={{model.char}} @updateCallback={{customUpdateCallback}} />
 
       <CharEditFiles @model={{model}} />
-
+    </div>
 
 
 
