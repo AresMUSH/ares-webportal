@@ -107,26 +107,42 @@
             {{input type="checkbox"  id="sapient"  checked=isSapient}}</p><br>
           </div>
 
+          <div class="col-sm-9">
+            <MarkdownEditor @text={{model.creature.edit_short_desc}}  @rows={{5}} />
+          </div>
+
         </div>
       </div>
 
       <div id="traits" class="tab-pane fade in">
         <b>Traits & Description</b>
-        {{markdown-editor text=model.creature.edit_traits}}
+        <MarkdownEditor @text={{model.creature.edit_traits}} />
 
         <b>Magical Abilities & Spells<</b>
-        {{markdown-editor text=model.creature.edit_magical_abilities}}
+        <MarkdownEditor @text={{model.creature.edit_magical_abilities}}/>
       </div>
 
 
       <div id="society" class="tab-pane fade in">
         <b>Society</b>
-        {{markdown-editor text=model.creature.edit_society}}
+        <MarkdownEditor @text={{model.creature.edit_society}} />
       </div>
 
+
       <div id="events" class="tab-pane fade in">
+
+        <div class="col-sm-3">
+          <b>Plots</b>
+        </div>
+
+        <div class="col-sm-9">
+          <PowerSelectMultiple @selected={{model.creature.plots}} @options={{model.plots}} @searchEnabled=true @searchField="name"  @onChange={{action "plotsChanged"}} as |plot|>
+            {{plot.title}}
+          </PowerSelectMultiple>
+        </div>
+        
         <b>Events</b>
-        {{markdown-editor text=model.creature.edit_events}}
+        <MarkdownEditor @text={{model.creature.edit_events}} />
       </div>
 
     </div>

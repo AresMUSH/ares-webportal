@@ -12,6 +12,9 @@ export default Controller.extend({
         creaturesChanged(new_creatures) {
           this.set('model.portal.creatures', new_creatures);
         },
+        plotsChanged(new_plots) {
+          this.set('model.portal.plots', new_plots);
+        },
         allschoolsChanged(new_schools) {
           this.set('model.portal.all_schools', new_schools);
         },
@@ -25,6 +28,7 @@ export default Controller.extend({
                name: this.get('model.portal.name'),
                gms: (this.get('model.portal.gms') || []).map(gm => gm.name),
                creatures: (this.get('model.portal.creatures') || []).map(creature => creature.id),
+               plots: (this.get('model.portal.plots') || []).map(plot => plot.id),
                location: this.get('model.portal.location'),
                location_known: this.get('model.portal.location_known'),
                latitude: this.get('model.portal.latitude'),
@@ -38,6 +42,7 @@ export default Controller.extend({
                npcs: this.get('model.portal.edit_npcs'),
                trivia: this.get('model.portal.edit_trivia'),
                rp_suggestions: this.get('model.portal.edit_rp_suggestions'),
+               short_desc: this.get('model.portal.edit_short_desc'),
                events: this.get('model.portal.edit_events')}, null)
             .then( (response) => {
                 if (response.error) {

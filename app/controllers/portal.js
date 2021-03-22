@@ -16,7 +16,7 @@ export default Controller.extend({
     api.requestOne('scenes', {
        filter: this.filter,
        page: this.page })
-    .then( (response) => {
+    .then( (response) => { 
         if (response.error) {
           return;
         }

@@ -20,6 +20,8 @@ export default Controller.extend({
     magical_abilities: '',
     events: '',
     gms: null,
+    short_desc: '',
+    plots: '',
 
     resetOnExit: function() {
       this.set('isSapient', false);
@@ -34,6 +36,9 @@ export default Controller.extend({
         },
         portalsChanged(new_portals) {
           this.set('model.creature.portals', new_portals);
+        },
+        plotsChanged(new_plots) {
+          this.set('model.creature.plots', new_plots);
         },
         majorschoolChanged(new_schools) {
           this.set('model.creature.major_school', new_schools);
@@ -55,6 +60,7 @@ export default Controller.extend({
                found: this.get('model.creature.found'),
                language: this.get('model.creature.language'),
                traits: this.get('model.creature.edit_traits'),
+               short_desc: this.get('model.creature.edit_short_desc'),
                society: this.get('model.creature.edit_society'),
                magical_abilities: this.get('model.creature.edit_magical_abilities'),
                events: this.get('model.creature.edit_events')}, null)

@@ -11,7 +11,7 @@ export default Route.extend(DefaultRoute, ReloadableRoute, {
         if (model.get('char.playerbit')) {
             this.transitionTo('player', model.get('char.id'));
         }
-    },
+    }, 
 
     model: function(params) {
         let api = this.get('gameApi');

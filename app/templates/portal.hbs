@@ -50,6 +50,10 @@
     <div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="{{model.portal.pinterest}}"></a></div>
   {{/if}}
 
+  {{#if model.portal.short_desc}}
+    <p><i>{{{ansi-format text=model.portal.short_desc}}}</i></p>
+  {{/if}}
+
   {{#if model.portal.description}}
     <h2>Description</h2>
     {{{ansi-format text=model.portal.description}}}
@@ -86,6 +90,15 @@
   {{#if model.portal.rp_suggestions}}
     <p><h2>RP Suggestions</h2>
     {{{ansi-format text=model.portal.rp_suggestions}}}</p>
+  {{/if}}
+
+  {{#if model.portal.plots}}
+    <h2>Plots</h2>
+    <ul>
+      {{#each model.portal.plots as |plot|}}
+        <li>{{#link-to 'plot' plot.id}}{{plot.title}} {{/link-to}}</li>
+      {{/each}}
+    </ul>
   {{/if}}
 
   {{#if model.portal.events}}

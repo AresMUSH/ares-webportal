@@ -15,23 +15,21 @@
 
 
   <div id="sapient" class="tab-pane active in 'Sapient'">
-    <ul>
-      {{#each model as |creature|}}
-        {{#if creature.sapient}}
-          <li>{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}}</li>
-        {{/if}}
-      {{/each}}
-    </ul>
+    {{#each model as |creature|}}
+      {{#if creature.sapient}}
+      <p>{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}} <br>
+      <i> {{creature.short_desc}}</i></p>
+      {{/if}}
+    {{/each}}
   </div>
 
   <div id="nonsapient" class="tab-pane fade in 'Non Sapient'">
-    <ul>
-      {{#each model as |creature|}}
-        {{#unless creature.sapient}}
-          <li>{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}}</li>
-        {{/unless}}
-      {{/each}}
-    </ul>
+    {{#each model as |creature|}}
+      {{#unless creature.sapient}}
+      <p>{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}} <br>
+      <i> {{creature.short_desc}}</i></p>
+      {{/unless}}
+    {{/each}}
   </div>
 
 

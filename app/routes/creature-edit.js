@@ -12,6 +12,7 @@ export default Route.extend(AuthenticatedRoute, {
            creature:  api.requestOne('creature', { id: params['id'], edit_mode: true  }),
            characters: api.requestMany('characters', { select: 'include_staff' }),
            schools: api.request('getSchools'),
+           plots: api.requestMany('plots'),
            portals: api.requestMany('portals')
          })
          .then((model) => Ember.Object.create(model));

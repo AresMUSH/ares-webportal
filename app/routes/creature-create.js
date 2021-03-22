@@ -13,6 +13,7 @@ export default Route.extend(AuthenticatedRoute, {
            characters: api.requestMany('characters', { select: 'include_staff' }),
            schools: api.request('getSchools'),
            portals: api.requestMany('portals'),
+           plots: api.requestMany('plots'),
            creature:  Ember.Object.create({
                sapient: false})
          })

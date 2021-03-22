@@ -92,15 +92,23 @@
           <div class="col-sm-9">
             <p>{{input type="text" size=25 value=model.portal.pinterest}}</p>
           </div>
+
+          <div class="col-sm-3">
+            <b>Summary</b>
+          </div>
+
+          <div class="col-sm-9">
+            <MarkdownEditor @text={{model.portal.edit_short_desc}}  @rows={{10}} />
+          </div>
         </div>
       </div>
 
       <div id="desc" class="tab-pane fade in">
         <b>Description</b>
-        {{markdown-editor text=model.portal.edit_desc}}
+         <MarkdownEditor @text={{model.portal.edit_desc}} />
 
         <b>Society</b>
-        {{markdown-editor text=model.portal.edit_society}}
+        <MarkdownEditor @text={{model.portal.edit_society}} />
       </div>
 
       <div id="creatures" class="tab-pane fade in">
@@ -112,11 +120,10 @@
         </div>
         <br><br>
         <b>Other Creatures</b>
-        {{markdown-editor text=model.portal.edit_other_creatures}}
-
+        <MarkdownEditor @text={{model.portal.edit_other_creatures}} />
 
         <b>Important Figures</b>
-        {{markdown-editor text=model.portal.edit_npcs}}
+        <MarkdownEditor @text={{model.portal.edit_npcs}} />
       </div>
 
 
@@ -124,13 +131,23 @@
 
       <div id="events" class="tab-pane fade in">
         <b>Trivia</b>
-        {{markdown-editor text=model.portal.edit_trivia}}
+        <MarkdownEditor @text={{model.portal.edit_trivia}} />
 
         <b>RP Suggestions</b>
-        {{markdown-editor text=model.portal.edit_rp_suggestions}}
+        <MarkdownEditor @text={{model.portal.edit_rp_suggestions}} />
+
+        <div class="col-sm-3">
+          <b>Plots</b>
+        </div>
+
+        <div class="col-sm-9">
+          <PowerSelectMultiple @selected={{model.portal.plots}} @options={{model.plots}} @searchEnabled=true @searchField="name"  @onChange={{action "plotsChanged"}} as |plot|>
+            {{plot.title}}
+          </PowerSelectMultiple>
+        </div>
 
         <b>Events</b>
-        {{markdown-editor text=model.portal.edit_events}}
+        <MarkdownEditor @text={{model.portal.edit_events}} />
       </div>
 
     </div>
