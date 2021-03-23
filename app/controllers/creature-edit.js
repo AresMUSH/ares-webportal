@@ -24,6 +24,9 @@ export default Controller.extend({
         bannerImageChanged(image) {
             this.set('model.creature.banner_image', image);
         },
+        profileImageChanged(image) {
+            this.set('model.creature.profile_image', image);
+        },
         save() {
             let api = this.get('gameApi');
             api.requestOne('creatureEdit', {

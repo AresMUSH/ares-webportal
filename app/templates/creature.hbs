@@ -15,9 +15,9 @@
   <div class="row profile-wrap">
     <div class="row">
       <div class="col-md-4 col-sm-12 col-xs-12 profile-image-wrap">
-      {{#if model.creature.banner_image.name}}
-        <LinkTo @route="file" @models={{array model.creature.banner_image.folder creature.banner_image.name}}>
-            <img src="/game/uploads/{{model.creature.banner_image.path}}" alt="{{model.creature.name}}'s image"  class="profile-image">
+      {{#if model.creature.profile_image.name}}
+        <LinkTo @route="file" @models={{array model.creature.profile_image.folder creature.profile_image.name}}>
+            <img src="/game/uploads/{{model.creature.profile_image.path}}" alt="{{model.creature.name}}'s image"  class="profile-image">
         </LinkTo>
       {{else}}
           <!-- <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{creature.name}}'s image"> -->
