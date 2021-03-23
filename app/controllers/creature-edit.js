@@ -21,6 +21,9 @@ export default Controller.extend({
         minorschoolChanged(new_school) {
           this.set('model.creature.minor_school', new_school);
         },
+        bannerImageChanged(image) {
+            this.set('model.creature.banner_image', image);
+        },
         save() {
             let api = this.get('gameApi');
             api.requestOne('creatureEdit', {
@@ -30,6 +33,8 @@ export default Controller.extend({
                portals: (this.get('model.creature.portals') || []).map(portal => portal.id),
                major_school: this.get('model.creature.major_school'),
                minor_school: this.get('model.creature.minor_school'),
+               banner_image: this.get('model.creature.banner_image.name'),
+               image_gallery: this.get('model.creature.image_gallery'),
                sapient: this.get('model.creature.sapient'),
                pinterest: this.get('model.creature.pinterest'),
                found: this.get('model.creature.found'),
@@ -39,6 +44,7 @@ export default Controller.extend({
                society: this.get('model.creature.edit_society'),
                magical_abilities: this.get('model.creature.edit_magical_abilities'),
                events: this.get('model.creature.edit_events')}, null)
+
             .then( (response) => {
                 if (response.error) {
                     return;

@@ -17,8 +17,12 @@
   <div id="sapient" class="tab-pane active in 'Sapient'">
     {{#each model as |creature|}}
       {{#if creature.sapient}}
-      <p>{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}} <br>
-      <i> {{creature.short_desc}}</i></p>
+        <div class="directory-card" style="background-image: url('/game/uploads/{{creature.banner_image.path}}');">
+          <div class="directory-title">{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}}</div>
+          <div class="directory-info">
+             <p>{{creature.short_desc}}</p>
+          </div>
+        </div>
       {{/if}}
     {{/each}}
   </div>
