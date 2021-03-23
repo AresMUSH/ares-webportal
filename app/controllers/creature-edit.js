@@ -37,6 +37,7 @@ export default Controller.extend({
                major_school: this.get('model.creature.major_school'),
                minor_school: this.get('model.creature.minor_school'),
                banner_image: this.get('model.creature.banner_image.name'),
+               profile_image: this.get('model.creature.profile_image.name'),
                image_gallery: this.get('model.creature.image_gallery'),
                sapient: this.get('model.creature.sapient'),
                pinterest: this.get('model.creature.pinterest'),
