@@ -15,8 +15,14 @@ export default Controller.extend({
         plotsChanged(new_plots) {
           this.set('model.portal.plots', new_plots);
         },
-        allschoolsChanged(new_schools) {
+        allschoolsChanged(new_schools) { 
           this.set('model.portal.all_schools', new_schools);
+        },
+        bannerImageChanged(image) {
+            this.set('model.portal.banner_image', image);
+        },
+        profileImageChanged(image) {
+            this.set('model.portal.profile_image', image);
         },
         primaryschoolChanged(new_school) {
           this.set('model.portal.primary_school', new_school);
@@ -36,6 +42,9 @@ export default Controller.extend({
                primary_school: this.get('model.portal.primary_school'),
                all_schools: (this.get('model.portal.all_schools') || []).map(s => s),
                pinterest: this.get('model.portal.pinterest'),
+               banner_image: this.get('model.portal.banner_image.name'),
+               profile_image: this.get('model.portal.profile_image.name'),
+               image_gallery: this.get('model.portal.image_gallery'),
                description: this.get('model.portal.edit_desc'),
                society: this.get('model.portal.edit_society'),
                other_creatures: this.get('model.portal.edit_other_creatures'),

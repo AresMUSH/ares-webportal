@@ -16,29 +16,54 @@
         </div>
       </div>
   </div>
-  {{#if model.portal.latitude}}
-  <span style="float:right; margin-left: 15px;">
-    <iframe width="300" height="250" frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?q={{model.portal.latitude}}%20{{model.portal.longitude}}&key=AIzaSyDtQxW3ou9wLCgpLzTHiYQCKLv4YBM3t1c&maptype=satellite" allowfullscreen></iframe>
-  </span>
-  {{/if}}
-  <div class="portal-card">
-    <div class="portal-card-heading">{{model.portal.name}} </div>
-    <div class="portal-card-body">
-      {{#if model.portal.gms}}<i>For more information, see {{#each model.portal.gms as |gm|}}
-      {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
-      {{/each}} </i><br> {{/if}}
-      {{#if model.portal.location}}<b>Location:</b> {{model.portal.location}}<br>  {{/if}}
-      {{#if model.portal.primary_school}}
-        <b>Dominant School:</b> {{#link-to 'schools' model.portal.primary_school}}
-      {{model.portal.primary_school}}
-      {{/link-to}}
-      <br>{{/if}}
-      {{#if model.portal.all_schools}}<b>All Schools:</b>
-        {{#each model.portal.all_schools as |school|}}
-          {{#link-to 'schools' school}}{{school}}{{/link-to}}
-        {{/each}}<br>
+
+
+  <div class="row profile-wrap">
+    <div class="row">
+      <div class="col-md-4 col-sm-12 col-xs-12 profile-image-wrap">
+      {{#if model.portal.profile_image.name}}
+        <LinkTo @route="file" @models={{array model.portal.profile_image.folder creature.profile_image.name}}>
+            <img src="/game/uploads/{{model.portal.profile_image.path}}" alt="{{model.creature.name}}'s image"  class="profile-image">
+        </LinkTo>
+      {{else}}
+          <!-- <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{creature.name}}'s image"> -->
       {{/if}}
+      </div>
+
+      <div class="col-md-8 col-sm-12 col-xs-12 profile-demo-wrap info-box pull-right">
+        <div class="infobox-heading">
+          <div class="infobox-title-text">{{model.portal.name}} </div>
+          <div class="infobox-body">
+            {{#if model.portal.gms}}<i>For more information, see {{#each model.portal.gms as |gm|}}
+            {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
+            {{/each}} </i><br> {{/if}}
+            {{#if model.portal.location}}<b>Location:</b> {{model.portal.location}}<br>  {{/if}}
+            {{#if model.portal.primary_school}}
+              <b>Dominant School:</b> {{#link-to 'schools' model.portal.primary_school}}
+            {{model.portal.primary_school}}
+            {{/link-to}}
+            <br>{{/if}}
+            {{#if model.portal.all_schools}}<b>All Schools:</b>
+              {{#each model.portal.all_schools as |school|}}
+                {{#link-to 'schools' school}}{{school}}{{/link-to}}
+              {{/each}}<br>
+            {{/if}}
+
+
+            {{#if model.portal.latitude}}
+            <br>
+            <span style="margin: 15px;">
+              <iframe width="300" height="250" frameborder="0" style="border:0"
+            src="https://www.google.com/maps/embed/v1/place?q={{model.portal.latitude}}%20{{model.portal.longitude}}&key=AIzaSyDtQxW3ou9wLCgpLzTHiYQCKLv4YBM3t1c&maptype=satellite" allowfullscreen></iframe>
+            </span>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="short-desc">
+      <p>{{{ansi-format text=model.portal.short_desc}}}</p>
       {{#if model.portal.location_known}}<span class="ansi-green-fg"><i><b>This portal's location is ICly available on WeirdNet</b></i></span>
       {{else}}<span class="ansi-red-fg"><i><b>This portal's location is NOT ICly available on WeirdNet</b></i></span>
       {{/if}}

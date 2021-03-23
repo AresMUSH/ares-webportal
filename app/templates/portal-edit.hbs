@@ -7,7 +7,8 @@
         <li class="active"><a data-toggle="tab" href="#general">General</a></li>
         <li><a data-toggle="tab" href="#desc">Description & Society</a></li>
         <li><a data-toggle="tab" href="#creatures">Creatures & NPCs</a></li>
-        <li><a data-toggle="tab" href="#events">Trivia & Events</a></li>
+        <li><a data-toggle="tab" href="#events">Plots & Events</a></li>
+        <li><a data-toggle="tab" href="#images">Images</a></li>
     </ul>
 
 
@@ -155,6 +156,52 @@
 
         <b>Events</b>
         <MarkdownEditor @text={{model.portal.edit_events}} />
+      </div>
+
+      <div id="images" class="tab-pane fade in">
+
+        <div class="form-group row">
+            <div class="col-sm-3">
+                    <b>Banner Image</b>
+            </div>
+
+            <div class="col-sm-9">
+                <PowerSelect @selected={{model.portal.banner_image}} @allowClear={{true}} @searchField="name" @options={{model.portal.files}} @onChange={{action "bannerImageChanged"}} as |file|>
+                {{file.name}}
+                </PowerSelect>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-3">
+                    <b>Profile Image</b>
+            </div>
+
+            <div class="col-sm-9">
+                <PowerSelect @selected={{model.portal.profile_image}} @allowClear={{true}} @searchField="name" @options={{model.portal.files}} @onChange={{action "profileImageChanged"}} as |file|>
+                {{file.name}}
+                </PowerSelect>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-sm-3">
+                    <b>Image Gallery</b>
+            </div>
+
+            <div class="col-sm-9">
+
+              <div class="profile-gallery-input">
+              <Textarea @value={{model.portal.image_gallery}} @cols="80" @rows={{3}} />
+
+                <p class="hint">List image files in the order you want them shown (<code>folder/file1.jpg /folder/file2.jpg</code> etc.), or leave this blank to just show all images from the creature's folder.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <PortalEditFiles @model={{model}} />
       </div>
 
     </div>

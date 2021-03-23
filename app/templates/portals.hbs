@@ -17,30 +17,65 @@
   <ul class="nav nav-tabs">
       <li><a data-toggle="tab" href="#known">Location Known</a></li>
       <li><a data-toggle="tab" href="#unknown">Location Unknown</a></li>
+        <li><a data-toggle="tab" href="#a-z">A-Z List</a></li>
     </ul>
 
     <div class="tab-content">
 
 
   <div id="known" class="tab-pane active in 'Location Known'">
-    {{#each model as |portal|}}
+      {{#each model as |portal|}}
       {{#if portal.location_known}}
-        <p>{{#link-to 'portal' portal.id}}{{portal.name}}{{/link-to}} <br>
-        <i> {{portal.short_desc}}</i></p>
+        <div class="directory-card" style="background-image: url('/game/uploads/{{portal.banner_image.path}}');">
+          <div class="directory-title">{{#link-to 'portal' portal.id}}{{portal.name}}{{/link-to}}</div>
+          <div class="directory-info">
+             <p>{{portal.short_desc}}</p>
+          </div>
+        </div>
       {{/if}}
     {{/each}}
   </div>
 
   <div id="unknown" class="tab-pane fade in 'Location Unknown'">
     {{#each model as |portal|}}
-      {{#unless portal.location_known}}
-      <p>{{#link-to 'portal' portal.id}}{{portal.name}}{{/link-to}} <br>
-      <i> {{portal.short_desc}}</i></p>
-      {{/unless}}
-    {{/each}}
+    {{#unless portal.location_known}}
+      <div class="directory-card" style="background-image: url('/game/uploads/{{portal.banner_image.path}}');">
+        <div class="directory-title">{{#link-to 'portal' portal.id}}{{portal.name}}{{/link-to}}</div>
+        <div class="directory-info">
+           <p>{{portal.short_desc}}</p>
+        </div>
+      </div>
+    {{/unless}}
+  {{/each}}
   </div>
 
+  <div id="a-z" class="tab-pane row">
+    <div class="row">
 
+      <div class="col col-xs-6">
+        LOCATION KNOWN
+        <ul>
+          {{#each model as |portal|}}
+            {{#if portal.location_known}}
+              <li>{{#link-to 'portal' portal.id}}{{portal.name}}{{/link-to}}</li>
+            {{/if}}
+          {{/each}}
+        </ul>
+      </div>
+
+      <div class="col col-xs-6">
+        LOCATION UNKNOWN
+        <ul>
+          {{#each model as |portal|}}
+            {{#unless portal.location_known}}
+              <li>{{#link-to 'portal' portal.id}}{{portal.name}}{{/link-to}}</li>
+            {{/unless}}
+          {{/each}}
+        </ul>
+      </div>
+
+    </div>
+  </div>
 
 </div>
 
