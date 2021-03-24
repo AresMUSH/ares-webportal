@@ -129,8 +129,8 @@
 
   <div class="panel panel-default">
 
-  {{#if model.creature.display_image_gallery}}
-    {{#each model.creature.display_image_gallery as |gallery|}}
+  {{#if model.portal.display_image_gallery}}
+    {{#each model.portal.display_image_gallery as |gallery|}}
       <LinkTo @route="file" @models={{array gallery.folder gallery.name}}>
       <img src="/game/uploads/{{gallery.path}}" class="profile-gallery" alt="{{gallery.name}}" >
       </LinkTo>
