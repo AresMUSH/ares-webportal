@@ -75,10 +75,6 @@
     <div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="{{model.portal.pinterest}}"></a></div>
   {{/if}}
 
-  {{#if model.portal.short_desc}}
-    <p><i>{{{ansi-format text=model.portal.short_desc}}}</i></p>
-  {{/if}}
-
   {{#if model.portal.description}}
     <h2>Description</h2>
     {{{ansi-format text=model.portal.description}}}
@@ -130,6 +126,18 @@
     <p><h2>Events</h2>
     {{{ansi-format text=model.portal.events}}}</p>
   {{/if}}
+
+  <div class="panel panel-default">
+
+  {{#if model.creature.display_image_gallery}}
+    {{#each model.creature.display_image_gallery as |gallery|}}
+      <LinkTo @route="file" @models={{array gallery.folder gallery.name}}>
+      <img src="/game/uploads/{{gallery.path}}" class="profile-gallery" alt="{{gallery.name}}" >
+      </LinkTo>
+    {{/each}}
+  {{/if}}
+  <div class="clearfix"></div>
+  </div>
 
 <h2>Scenes</h2>
 <!-- To get the filtered list to work, I need a new get_portal_scenes api based off get_scenes_handler.rb - changing char_id to portal_id. Return scene list this way instead of via model.portal.scenes. Add said api to the route js file. -->
