@@ -12,10 +12,9 @@
 {{#if char.custom.minor_spells}}
   <h2><a href="/wiki/{{char.custom.minor_school}}">{{char.custom.minor_school}}</a></h2>
   <div class="row">
-    {{#each char.minor_spells as |spell|}}
+    {{#each char.custom.minor_spells as |spell|}}
     <div class="spell-block">
       <div>{{spell-card spell=spell}}</div>
-
       <br>
     </div>
     {{/each}}
