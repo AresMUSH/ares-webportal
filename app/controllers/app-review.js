@@ -29,6 +29,9 @@ export default Controller.extend({
               this.flashMessages.success('Character rejected!');
               this.transitionToRoute('jobs');
            });
+        },
+        responseSelected: function(resp) {
+          this.set('appNotes', resp.value);
         }
     }
 });

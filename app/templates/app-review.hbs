@@ -33,6 +33,14 @@
        
        <Textarea @value={{appNotes}} @cols="80" @rows={{5}} />
        
+       {{#if model.preset_responses}}
+          <div class="preset-responses">
+            <b>Pre-Made Responses:</b>
+            <PowerSelect @selected='' @options={{model.preset_responses}} @searchEnabled=true @searchField="name" @onChange={{action "responseSelected"}} as |resp|>
+             {{resp.name}}
+            </PowerSelect>
+          </div>
+       {{/if}}
        
       <p>
           <LinkTo @route="job" @model={{model.job}} @class="btn btn-default">Back to Job</LinkTo>
