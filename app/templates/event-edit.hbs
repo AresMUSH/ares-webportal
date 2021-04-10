@@ -43,14 +43,19 @@
   </div>
   
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="warning" class="col-form-label">Content Warning:</label>
-    </div>
-    <div class="col-sm-9">
-         <Input @type="text" @size={{25}} @id="content_warning" @enter={{action "edit"}} @value={{model.event.content_warning}} />
-    </div> 
-  </div>
+  <div class="form-group row">
+     <div class="col-sm-3">
+         <label for="title" class="col-form-label">Content Warning:</label>
+     </div>
+     <div class="col-sm-9">
+       <PowerSelectMultiple @selected={{warning_tags}} @options={{model.sceneOptions.content_warnings}} @onChange={{action "warningsChanged"}} as |warning|>
+         {{warning}}
+       </PowerSelectMultiple>
+         <Input @type="text" @size={{60}} @id="content_warning" @enter={{action "edit"}} @value={{model.event.content_warning}} />
+            <p class="hint">Select from the suggested tags or write your own. Please avoid frivolous warnings.</p>
+     </div>
+   </div>
+   
   
    <div class="form-group row">
     <div class="col-sm-3">

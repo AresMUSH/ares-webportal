@@ -39,6 +39,7 @@ export default Controller.extend({
 
         
         descs['current'] = this.get('model.char.descs.current');
+        descs['short'] = this.get('model.char.shortdesc');
         descs['outfits'] = {};
         descs['details'] = {};
         this.get('model.char.descs.outfits').forEach(function(p) {
