@@ -89,10 +89,10 @@
             
         <p><b>Existing Character Files:</b></p>
         
-       <div>
+       <div class="thumbnail-gallery">
        {{#each model.char.files as |charFile|}}
        
-       <div class="thumbnail-gallery">
+       <div class="thumbnail-gallery-item">
        <LinkTo @route="file" @models={{array charFile.folder charFile.name}}>
        {{file.path}} <img src="/game/uploads/{{charFile.path}}" alt="{{charFile.name}}" class="thumbnail">
        </LinkTo>

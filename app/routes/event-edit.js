@@ -12,7 +12,8 @@ export default Route.extend(AuthenticatedRoute, {
         let api = this.gameApi;
         return RSVP.hash({
              event: api.requestOne('event', {event_id: params['event_id'], edit_mode: true }),
-             characters: api.requestMany('characters', { select: 'include_staff' })
+             characters: api.requestMany('characters', { select: 'include_staff' }),
+             sceneOptions: api.requestOne('sceneOptions')
            })
            .then((model) => EmberObject.create(model));
     }

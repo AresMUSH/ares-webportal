@@ -8,7 +8,15 @@
 
   {{#each model.files as |file|}}
   <tr>
-  <td><LinkTo @route="file" @models={{array file.folder file.name}}>{{file.name}}</LinkTo></td>
+  <td>
+    
+    <LinkTo @route="file" @models={{array file.folder file.name}}>{{file.name}}</LinkTo>
+  
+  <LinkTo @route="file" @models={{array file.folder file.name}}>
+  <img src="/game/uploads/{{file.path}}" alt="{{file.name}}" class="thumbnail">
+  </LinkTo>
+  
+  </td>
   <td>{{file.size}}KB</td>
   </tr>
   {{/each}}
