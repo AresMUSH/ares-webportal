@@ -6,6 +6,8 @@ export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
     
+    warning_tags: [],
+  
     actions: {
         organizerChanged(org) {
           this.set('model.event.organizer', org);
@@ -38,6 +40,10 @@ export default Controller.extend(AuthenticatedController, {
                           this.get('model.event.id'));
                 this.flashMessages.success('Event updated!');
             });
-        }
+        },
+        warningsChanged(new_warnings) {
+          this.set('warning_tags', new_warnings);
+          this.set('model.event.content_warning', new_warnings.join(', '));
+        },
     }
 });

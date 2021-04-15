@@ -3,16 +3,8 @@
 
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
-module.exports = function(defaults) {
-    let app = new EmberApp(defaults, {
-
-	    minifyJS: {
-		enabled: false,
-    },
-    minifyCSS: {
-      enabled: false
-    },
-	
+module.exports = function (defaults) {
+  let app = new EmberApp(defaults, {
     'ember-bootstrap': {
       'bootstrapVersion': 3,
       'importBootstrapFont': true,
@@ -21,18 +13,18 @@ module.exports = function(defaults) {
     'ember-cli-babel': {
       includePolyfill: true
     },
-  
+
     'ember-cli-terser': {
       enabled: false
     },
     'minifyCSS': {
       enabled: false
     }
-    
+
   });
 
     app.options.minifyJS.enabled = false;
-    
+
     /*  app.import(app.bowerDirectory + '/bootstrap/dist/css/bootstrap.css');
     app.import(app.bowerDirectory + '/bootstrap/dist/js/bootstrap.js');
     app.import(app.bowerDirectory + '/bootstrap/dist/fonts/glyphicons-halflings-regular.woff', {

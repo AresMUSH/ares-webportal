@@ -4,14 +4,20 @@
 <table>
   {{#each model as |achievement|}}
   <tr>
-    <td><i class="fa {{achievement.type_icon}} fa-2x" aria-hidden="true"></i></td>
-    <td>{{achievement.message}}</td>
-    <td>{{#each achievement.chars as |char|}}
+    <td class="col-xs-1"><i class="fa {{achievement.type_icon}} fa-2x" aria-hidden="true"></i></td>
+    <td class="col-xs-2">{{achievement.message}}</td>
+    <td class="col-xs-9">{{#each achievement.chars as |char|}}
       {{char.name}}
         {{#if char.count}} 
         ({{char.count}})
         {{/if}}
        {{/each}}
+       
+       
+       {{#if achievement.levels}}
+       <p class="achievement-levels">Levels: {{achievement.levels}}</p>
+       {{/if}}
+       
     </td>
   </tr>
   {{/each}}

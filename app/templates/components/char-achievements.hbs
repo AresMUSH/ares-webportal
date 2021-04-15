@@ -11,3 +11,11 @@
 {{/if}}
 </p>
 {{/each}}
+
+{{#if sceneStats}}
+<hr>
+
+<p><b>Words Written in Scenes:</b> {{sceneStats.pose_word_count}}</p>
+<p><b>Scenes Participated In:</b> {{sceneStats.scenes_participated_in}}</p>
+<p><b>Words Per Scene (average):</b> {{sceneStats.words_per_scene}}</p>
+{{/if}}
