@@ -4,57 +4,75 @@
       <CharIcon @char={{char}} />
 
       {{#if char.id}}
-      <LinkTo @route="char" @model={{char.name}} @target="_blank" style="font-size:80%; font-style: italic; position:relative; top:-20px;">Full Profile</LinkTo>
+        <LinkTo @route="char" @model={{char.name}} @target="_blank" style="font-size:80%; font-style: italic; position:relative; top:-20px;">Full Profile</LinkTo>
       {{/if}}
     </div>
-    <div class="col col-xs-8">
-      {{#if (not char.is_ooc)}}
-        {{#each char.demographics as |demo|}}
-        <div class="row">
-            <div class="col-sm-3">
-              <b>{{demo.name}}:</b>
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab" href="#basic">+</a></li>
+      <li><a data-toggle="tab" href="#sheet">Sheet</a></li>
+    </ul>
+
+
+    <div class="tab-content">
+      <div id="basic" class="tab-pane fade in active">
+        <div class="col col-xs-9">
+          {{#if (not char.is_ooc)}}
+            {{#each char.demographics as |demo|}}
+            <div class="row">
+              <div class="col-sm-6">
+                <b>{{demo.name}}: </b>
+              </div>
+              <div class="col-sm-6">
+                {{demo.value}}
+              </div>
             </div>
-            <div class="col-sm-9">
-              {{demo.value}}
-            </div>
+            {{/each}}
+
+            {{#if (not char.demographics)}}
+            No demographics available.  Try reloading the scene page.
+            {{/if}}
+
+            {{#each char.custom.schools as |school|}}
+              <div class="row">
+                  <div class="col-sm-6">
+                    <b>{{school.school_type}}:</b>
+                  </div>
+                  <div class="col-sm-6">
+                    {{school.school_name}}
+                  </div>
+              </div>
+              {{/each}}
+
+          {{/if}}
+
+          {{#if char.status_message}}
+          <br>
+          <div class="alert alert-info">
+            {{char.status_message}}
+          </div>
+          {{/if}}
         </div>
-        {{/each}}
 
-        {{#if (not char.demographics)}}
-        No demographics available.  Try reloading the scene page.
-        {{/if}}
 
-        {{#each char.schools as |school|}}
         <div class="row">
-            <div class="col-sm-3">
-              <b>{{school.school_type}}:</b>
-            </div>
-            <div class="col-sm-9">
-              {{school.school_name}}
-            </div>
+          <div class="col col-xs-12">
+            <br>
+            {{#if char.description}}
+              <AnsiFormat @text={{char.description}} />
+            {{/if}}
+          </div>
         </div>
-        {{/each}}
 
-      {{/if}}
-
-      {{#if char.status_message}}
-      <br>
-      <div class="alert alert-info">
-        {{char.status_message}}
       </div>
-      {{/if}}
 
 
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col col-xs-12">
-      <br>
-      {{#if char.description}}
-      <AnsiFormat @text={{char.description}} />
-      {{/if}}
+      <div id="sheet" class="tab-pane fade">
+        <Fs3Sheet @char={{char.custom}} />
+      </div>
 
     </div>
+
   </div>
 </div>

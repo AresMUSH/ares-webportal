@@ -127,12 +127,13 @@
    <div class="col col-xs-12 col-md-9">
 
       {{#if currentScene}}
-      <h3>Scene {{currentScene.id}} - {{currentScene.icdate}}
+      <h3><LinkTo @route="scene" @model={{currentScene.id}}>Scene {{currentScene.id}}</LinkTo> - {{currentScene.icdate}}
           {{#if currentScene.title}}
            - {{currentScene.title}}
            {{/if}}
        </h3>
        {{/if}}
+     
 
        <LiveSceneControl @scene={{currentScene}} @locations={{model.locations}} @abilities={{model.abilities}} @spells={{model.spells}} @places={{currentScene.places}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
 
