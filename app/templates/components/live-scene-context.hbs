@@ -1,33 +1,46 @@
-<div id="scene-context" class="panel-collapse collapse">
+<!-- <div id="scene-context show" > -->
+  <div id="scene-context" class="panel-collapse collapse in">
+
 
   <div class="panel panel-default">
-      <div class="panel-body">
+      <div class="panel-body scene-details">
 
           <p><b>{{scene.location.name}}</b></p>
-        
+
           {{#if scene.summary}}
           <p> <AnsiFormat @text={{scene.summary}} /> </p>
           <hr>
-          {{/if}}        
+          {{/if}}
 
           {{#if scene.content_warning}}
           <div class="alert alert-danger"><b>Content Warning:</b> {{scene.content_warning}}</div>
           {{/if}}
-    
+
           {{#if scene.location.description}}
           <AnsiFormat @text={{scene.location.description}} />
           {{/if}}
-    
+
+          {{#if scene.location.weather}}
+            <div class="row">
+              <div class="col col-xs-2">
+                <img src={{scene.location.weather_icon}} style="padding:0px;">
+              </div>
+              <div class="col col-xs-9 weather">
+                <AnsiFormat @text={{scene.location.weather}} />
+              </div>
+            </div>
+          {{/if}}
+
           {{#each scene.location.details as |detail|}}
           <p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
           {{/each}}
-        
+
           {{#if scene.location.scene_set}}
           <div class="scene-set-pose">
             <AnsiFormat @text={{scene.location.scene_set}} />
           </div>
           {{/if}}
-        
+
           <div class="icon-row">
           {{#each scene.participants as |who|}}
             <CharIconInline @char={{who}} />
@@ -35,15 +48,14 @@
           </div>
 
           <hr>
-        
+
           <ScenePrivacyTag @scene={{scene}} />
           <ScenePacingTag @scene={{scene}} />
           <SceneTypeTag @scene={{scene}} />
-        
+
           {{#if scene.limit}}
           <p><b>Notes:</b> {{scene.limit}}</p>
           {{/if}}
       </div>
   </div>
 </div>
-

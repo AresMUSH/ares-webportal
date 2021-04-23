@@ -3,6 +3,18 @@
 
 <AnsiFormat @text={{model.descs.current}} />
 
+{{#if model.weather}}
+  <div class="row">
+    <div class="col col-xs-2">
+      <img src={{model.weather_icon}} style="padding:0px;">
+    </div>
+    <div class="col col-xs-9 weather">
+      <AnsiFormat @text={{model.weather}} />
+    </div>
+  </div>
+{{/if}}
+
+
 {{#each model.descs.details as |detail|}}
 <p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
 {{/each}}
@@ -29,7 +41,7 @@
   {{/each}}
 </ul>
 
-    
+
 <p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
 
     <div class="row">
@@ -43,5 +55,3 @@
         </div>
         </div>
     </div>
-
-

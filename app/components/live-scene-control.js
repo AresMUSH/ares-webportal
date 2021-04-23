@@ -6,6 +6,7 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 
 export default Component.extend(AuthenticatedController, {
     scenePose: '',
+    showSceneDetails: true,
     rollString: null,
     confirmDeleteScenePose: false,
     confirmDeleteScene: false,

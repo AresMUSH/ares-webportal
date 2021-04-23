@@ -1,7 +1,12 @@
 {{#if scene}}
 
 <div class="live-scene-controls">
-<a data-toggle="collapse" href="#scene-context"> <TooltipIcon @position="right" @message="Scene Details" @icon="fas fa-caret-square-down" /></a>
+  {{#if showSceneDetails}}
+    <a data-toggle="collapse" href="#scene-context" aria-expanded="true" {{action (mut showSceneDetails) false}}> <TooltipIcon @position="right" @message="Hide Scene Details" @icon="fas fa-caret-square-up" /></a>
+  {{else}}
+    <a data-toggle="collapse" href="#scene-context" aria-expanded="false" {{action (mut showSceneDetails) true}}> <TooltipIcon @position="right" @message="Show Scene Details" @icon="fas fa-caret-square-down" /></a>   
+
+  {{/if}}
 
   {{#if scene.is_watching}}
   <a href="#" {{action 'watchScene' false}}><TooltipIcon @position="right" @message="Unwatch Scene" @icon="fas fa-eye-slash" /></a>

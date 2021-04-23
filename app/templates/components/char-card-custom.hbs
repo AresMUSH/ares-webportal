@@ -11,10 +11,11 @@
     <ul class="nav nav-tabs">
       <li class="active"><a data-toggle="tab" href="#basic">+</a></li>
       <li><a data-toggle="tab" href="#sheet">Sheet</a></li>
+      <li><a data-toggle="tab" href="#spells">Spells</a></li>
     </ul>
 
 
-    <div class="tab-content">
+    <div class="tab-content plain-tab-content">
       <div id="basic" class="tab-pane fade in active">
         <div class="col col-xs-9">
           {{#if (not char.is_ooc)}}
@@ -74,16 +75,19 @@
 
             <Fs3AbilityTable @title="Attributes" @list={{char.custom.abilities.attributes}} @max={{4}} @showSpecs={{false}} />
 
+              <Fs3AbilityTable @title="Background Skills" @list={{char.custom.abilities.backgrounds}} @max={{3}} />
+
           </div>
 
           <div class="col col-md-6 col-sm-12">
 
             <Fs3AbilityTable @title="Action Skills" @list={{char.custom.abilities.action_skills}} @max={{8}} @showSpecs={{true}} />
 
+              <Fs3AbilityTable @title="Languages" @list={{char.custom.abilities.languages}} @max={{3}} />
           </div>
         </div>
 
-        <div class="row">
+        <!-- <div class="row">
           <div class="col col-md-6 col-sm-12">
             <Fs3AbilityTable @title="Background Skills" @list={{char.custom.abilities.backgrounds}} @max={{3}} />
           </div>
@@ -93,7 +97,7 @@
             <Fs3AbilityTable @title="Languages" @list={{char.custom.abilities.languages}} @max={{3}} />
 
           </div>
-        </div>
+        </div> -->
 
 
         <div class="row">
@@ -103,6 +107,58 @@
 
           </div>
         </div>
+      </div>
+
+      <div id="spells" class="tab-pane fade">
+        <h2><a href="/wiki/{{char.custom.major_school}}">{{char.custom.major_school}}</a></h2>
+        <div class="row">
+          {{#each char.custom.major_spells as |spell|}}
+          <div class="spell-block">
+            <div  class="col-sm-7 col-md-6">
+              <b>{{spell.name}}</b>
+            </div>
+            <div  class="col-sm-2 col-md-2">
+              <i>Level {{spell.level}} </i>
+            </div>
+            <br>
+          </div>
+          {{/each}}
+        </div>
+
+        {{#if char.custom.minor_spells}}
+          <h2><a href="/wiki/{{char.custom.minor_school}}">{{char.custom.minor_school}}</a></h2>
+          <div class="row">
+            {{#each char.custom.minor_spells as |spell|}}
+            <div class="spell-block">
+              <div  class="col-sm-7 col-md-6">
+                <b>{{spell.name}}</b>
+              </div>
+              <div  class="col-sm-2 col-md-2">
+                <i>Level {{spell.level}} </i>
+              </div>
+              <br>
+            </div>
+            {{/each}}
+          </div>
+        {{/if}}
+
+        {{#if char.custom.other_spells}}
+          <h2>Other Spells</h2>
+          <div class="row">
+            {{#each char.custom.other_spells as |spell|}}
+            <div class="spell-block">
+              <div  class="col-sm-7 col-md-6">
+                <b>{{spell.name}}</b>
+              </div>
+              <div  class="col-sm-2 col-md-2">
+                <i>Level {{spell.level}} </i>
+              </div>
+              <br>
+            </div>
+            {{/each}}
+          </div>
+        {{/if}}
+
       </div>
 
     </div>
