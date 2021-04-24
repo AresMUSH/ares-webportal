@@ -21,11 +21,11 @@
           {{/if}}
 
           {{#if scene.location.weather}}
-            <div class="row">
+            <div class="row weather">
               <div class="col col-xs-2">
                 <img src={{scene.location.weather_icon}} style="padding:0px;">
               </div>
-              <div class="col col-xs-9 weather">
+              <div class="col col-xs-9">
                 <AnsiFormat @text={{scene.location.weather}} />
               </div>
             </div>
