@@ -11,6 +11,8 @@ export default Component.extend({
   reportReason: '',
   chatMessage: '',
   showPageRename: false,
+  showReport: false,
+  showPageRename: false,
   newPageTitle: '',
   
   chatAlerts: computed('channel.muted', 'scrollPaused', function() {

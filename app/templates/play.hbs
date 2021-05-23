@@ -128,11 +128,12 @@
    <div class="col col-xs-12 col-md-9">
       
       {{#if currentScene}}
-      <h3>Scene {{currentScene.id}} - {{currentScene.icdate}}
+      <LinkTo @route="scene-live" @model={{currentScene.id}} class="play-scene-title">Scene {{currentScene.id}}
           {{#if currentScene.title}}
            - {{currentScene.title}}
            {{/if}}
-       </h3>
+       </LinkTo>
+       
        {{/if}}
     
        <LiveSceneControl @scene={{currentScene}} @locations={{model.locations}} @abilities={{model.abilities}} @places={{currentScene.places}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
@@ -158,7 +159,7 @@
     </div>
 </div>
   
-<BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAddChannel}}  @onHide={{action (mut showAddChannel) null}}>
+<BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAddChannel}}  @onHide={{action (mut showAddChannel) false}}>
   
   <table>
     {{#each sortedChannels as |channel|}}
@@ -185,7 +186,7 @@
   </table>
 </BsModalSimple>
   
-<BsModalSimple @title="Start Conversation" @closeTitle="Cancel" @submitTitle="Start" @size={{null}} @fade={{false}} @open={{showNewConversation}} @onSubmit={{action "startConversation"}}  @onHide={{action (mut showNewConversation) null}}>
+<BsModalSimple @title="Start Conversation" @closeTitle="Cancel" @submitTitle="Start" @size={{null}} @fade={{false}} @open={{showNewConversation}} @onSubmit={{action "startConversation"}}  @onHide={{action (mut showNewConversation) false}}>
 
 
          <div class="panel panel-default">

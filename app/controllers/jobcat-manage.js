@@ -1,10 +1,15 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 
 export default Controller.extend({
     gameApi: service(),
     categoryToDelete: null,
   
+    confirmDeleteCategory: computed('categoryToDelete', function() {
+      return this.categoryToDelete != null;
+    }),  
+    
     actions: {
         deleteCategory: function() {
           let api = this.gameApi;

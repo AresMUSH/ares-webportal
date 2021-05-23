@@ -158,15 +158,15 @@
 
 <FlashMessages />
 
-<BsModalSimple @title="Confirm Delete Reply" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteReply}} @onSubmit={{action "deleteReply" confirmDeleteReply}} @onHide={{action (mut confirmDeleteReply) null}}>
+<BsModalSimple @title="Confirm Delete Reply" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteReply}} @onSubmit={{action "deleteReply" confirmDeleteReply}} @onHide={{action (mut confirmDeleteReply) false}}>
     You're about to delete this reply. This cannot be undone.  Are you sure?
   </BsModalSimple>
 
-<BsModalSimple @title="Confirm Delete Topic" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteTopic}} @onSubmit={{action "deleteTopic"}} @onHide={{action (mut confirmDeleteTopic) null}}>
+<BsModalSimple @title="Confirm Delete Topic" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteTopic}} @onSubmit={{action "deleteTopic"}} @onHide={{action (mut confirmDeleteTopic) false}}>
   You're about to delete this topic. This cannot be undone.  Are you sure?
 </BsModalSimple>
 
-<BsModalSimple @title="Move Topic" @closeTitle="Cancel" @submitTitle="Move" @size={{null}} @fade={{false}} @open={{chooseNewCategory}} @onSubmit={{action "moveTopic"}} @onHide={{action (mut chooseNewCategory) null}}>
+<BsModalSimple @title="Move Topic" @closeTitle="Cancel" @submitTitle="Move" @size={{null}} @fade={{false}} @open={{chooseNewCategory}} @onSubmit={{action "moveTopic"}} @onHide={{action (mut chooseNewCategory) false}}>
 
       <PowerSelect @selected={{newCategory}} @options={{model.categories}} @onChange={{action "newCategorySelected"}} as |category|>
         {{category.name}}

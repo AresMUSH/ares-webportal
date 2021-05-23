@@ -14,6 +14,10 @@ export default Component.extend({
       return this.get('game.extra_plugins').any(e => e == 'rpg');
     }),
     
+    cookiesExtraInstalled: computed(function() {
+      return this.get('game.extra_plugins').any(e => e == 'cookies');
+    }),
+    
     actions: { 
         reloadChar() {
             this.reloadChar();
