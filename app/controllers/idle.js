@@ -7,12 +7,12 @@ export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
     idleAddCharName: '',
-    confirmExecute: null,
+    confirmExecute: false,
     idleReport: '',
   
     resetOnExit: function() {
       this.set('idleAddCharName', '');
-      this.set('confirmExecute', null);
+      this.set('confirmExecute', false);
       this.set('idleReport', null);
     },
   

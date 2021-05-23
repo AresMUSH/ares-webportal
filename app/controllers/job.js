@@ -7,7 +7,8 @@ export default Controller.extend({
   editParticipants: false,
   newParticipants: null,
   newActivity: false,
-    
+  selectSkillRoll: false,
+      
   gameApi: service(),
   gameSocket: service(),
   session: service(),
@@ -27,6 +28,7 @@ export default Controller.extend({
     this.set('newActivity', false);
     this.resetReplyAdmin();
     this.set('editParticipants', false);
+    this.set('selectSkillRoll', false);
     this.set('newParticipants', this.get('model.job.participants'));
   },
     

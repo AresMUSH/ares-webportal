@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Component.extend({
   selectSpendLuck: false,
+  selectSkillRoll: false,
   luckReason: null,
   tagName: '',
   gameApi: service(),

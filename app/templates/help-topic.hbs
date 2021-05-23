@@ -32,7 +32,7 @@
 
 <FlashMessages />
 
-<BsModalSimple @title="Confirm Restore" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmRestore}} @onSubmit={{action "restore"}} @onHide={{action (mut confirmRestore) null}}>
+<BsModalSimple @title="Confirm Restore" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmRestore}} @onSubmit={{action "restore"}} @onHide={{action (mut confirmRestore) false}}>
     This will remove your custom help file and restore the default. This cannot be undone.  Are you sure?
   </BsModalSimple>
   

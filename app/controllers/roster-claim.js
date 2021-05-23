@@ -4,7 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
-    confirmClaim: null,
+    confirmClaim: false,
     rosterApp: '',
 
     resetOnExit: function() {
@@ -21,7 +21,7 @@ export default Controller.extend({
             let api = this.gameApi;
             let app = this.rosterApp;
             
-            this.set('confirmClaim', null);
+            this.set('confirmClaim', false);
             this.set('rosterApp', this.get('model.roster.app_template'));
             
             if (this.get('model.roster.app_required') && !app) {

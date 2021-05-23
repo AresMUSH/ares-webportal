@@ -19,7 +19,7 @@
             <li class="dropdown hidden-xl  hidden-lg  hidden-md">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                       
-                      Welcome {{currentUser.name}}  
+                      Welcome {{currentUser.name}}
                       {{#if model.notification_count}}
                           <span class="label label-pill label-primary" id="notificationBadge"><i class="fa fa-bell" aria-label="New Notifications"></i> {{model.notification_count}}</span>
                       {{/if}}
@@ -115,11 +115,9 @@
 </nav>
 
 
-  
-<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAltSelection}}  @onHide={{action (mut showAltSelection) null}} @onSubmit={{action (mut showAltSelection) null}}>
+<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAltSelection}}  @onHide={{action (mut showAltSelection) false}} @onSubmit={{action (mut showAltSelection) false}}>
 
   <table class="alts-switcher">
-  
     {{#each model.alts as |alt|}}
       {{#if (not (eq alt.name currentUser.name)) }}
         <tr><td>
