@@ -159,7 +159,7 @@
     </div>
 </div>
   
-<BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAddChannel}}  @onHide={{action (mut showAddChannel) null}}>
+<BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAddChannel}}  @onHide={{action (mut showAddChannel) false}}>
   
   <table>
     {{#each sortedChannels as |channel|}}
@@ -186,7 +186,7 @@
   </table>
 </BsModalSimple>
   
-<BsModalSimple @title="Start Conversation" @closeTitle="Cancel" @submitTitle="Start" @size={{null}} @fade={{false}} @open={{showNewConversation}} @onSubmit={{action "startConversation"}}  @onHide={{action (mut showNewConversation) null}}>
+<BsModalSimple @title="Start Conversation" @closeTitle="Cancel" @submitTitle="Start" @size={{null}} @fade={{false}} @open={{showNewConversation}} @onSubmit={{action "startConversation"}}  @onHide={{action (mut showNewConversation) false}}>
 
 
          <div class="panel panel-default">

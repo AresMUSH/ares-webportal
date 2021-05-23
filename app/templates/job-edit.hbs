@@ -113,7 +113,8 @@
 <MarkdownEditor @text={{model.job.description}} />
    
 <div class="pull-right">
-<button class="btn btn-primary" {{action 'saveJob'}}>Save</button>
+ <LinkTo @route="job" @model={{model.job.id}} class="btn btn-default">Cancel</LinkTo>  
+ <button class="btn btn-primary" {{action 'saveJob'}}>Save</button>
 </div>
 
 <FlashMessages />

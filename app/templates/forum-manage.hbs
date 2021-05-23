@@ -42,6 +42,6 @@
 </div>
 
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{forumToDelete}} @onSubmit={{action "deleteForum" forumToDelete}} @onHide={{action (mut forumToDelete) null}}>
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteForum}} @onSubmit={{action "deleteForum" forumToDelete}} @onHide={{action (mut forumToDelete) null}}>
     You're about to delete {{forumToDelete.name}}. This cannot be undone.  Are you sure?
   </BsModalSimple>

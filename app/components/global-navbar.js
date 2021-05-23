@@ -3,6 +3,8 @@ import { inject as service } from '@ember/service';
 
 export default Component.extend({
   session: service(),
+  showAltSelection: false,
+  
   actions: {
     switchAlt: function(alt) {
       this.session.authenticate('authenticator:ares', { name: alt, password: 'ALT' })
