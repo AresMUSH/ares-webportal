@@ -1,0 +1,178 @@
+{{page-title 'Spell Fatigue'}}
+
+<h1>Spell Fatigue</h1>
+
+<p>Any magic user can become susceptible to spell casting fatigue. Succumbing to this condition is most often caused by casting many spells in rapid succession, sustained casting over prolonged periods of time, or over-reliance on new or unfamiliar spells. It can also be contributed to by spell failure, stress in combat, injury, or any number of other unknown reasons. Casting higher level spells tends to bring it on more quickly than casting the easier, lower level spells, and casting a level 8 spell brings it on immediately. If a caster receives healing to both their spell casting and their body, however, they can return to the fight via mundane means.</p>
+
+<p>The first sign of fatigue is queasiness, soon followed by an overall weakness that can make it difficult to walk, let alone focus on magic.</p>
+
+<p>Recovery from spell casting fatigue happens best with food, water, and rest, but a short burst of temporary energy can be gained by spiking one's blood sugar. There is invariably a harder crash and a longer recovery following this tactic.</p>
+
+<p>Spell fatigue and its effects are not coded, but it's something you should be aware of in your RP. You can use negative mods to reflect the effects of too much spell-casting.</p>
+
+<p>Want to know your level of fatigue? Use the calculator below!  Spell fatigue is calculated as a formula: (4 * Dice) - Total level of spells cast.</p>
+<div>
+  <h1>Spells</h1>
+  <h2><a href="/wiki/{{model.spells.major_school}}">{{model.spells.major_school}}</a></h2>
+  <div class="row">
+    {{#each model.spells.major_spells as |spell|}}
+    <div class="spell-block">
+      <div  class="col-sm-7 col-md-6">
+        <b>{{spell.name}}</b>
+      </div>
+      <div  class="col-sm-2 col-md-2">
+        <i>Level {{spell.level}} </i>
+      </div>
+      <br>
+    </div>
+    {{/each}}
+  </div>
+
+
+
+  {{#if model.spells.minor_spells}}
+    <h2><a href="/wiki/{{model.spells.minor_school}}">{{model.spells.minor_school}}</a></h2>
+    <div class="row">
+      {{#each model.spells.minor_spells as |spell|}}
+      <div class="spell-block">
+        <div  class="col-sm-7 col-md-6">
+          <b>{{spell.name}}</b>
+        </div>
+        <div  class="col-sm-2 col-md-2">
+          <i>Level {{spell.level}}</i>
+        </div>
+        <br>
+      </div>
+      {{/each}}
+    </div>
+  {{/if}}
+
+  {{#if model.spells.other_spells}}
+    <h2>Other Spells</h2>
+    <div class="row">
+      {{#each model.spells.other_spells as |spell|}}
+      <div class="spell-block">
+        <div  class="col-sm-7 col-md-6">
+          <b>{{spell.name}}</b>
+        </div>
+        <div  class="col-sm-2 col-md-2">
+          <i>Level {{spell.level}} </i>
+        </div>
+        <br>
+      </div>
+      {{/each}}
+    </div>
+  {{/if}}
+</div>
+
+
+<p>Count the total number of times you cast spells. If you cast a spell more than once, count it each time. </p>
+
+<p>Total spells cast:</p>
+
+<div class="form-group row">
+  <div class="col-sm-3">
+    <b>Level 1</b>
+  </div>
+
+  <div class="col-sm-9">
+    <p><Input @type="text" @size={{10}}  @id="Level 1" @value={{level_1}}/></p>
+  </div>
+
+  <div class="col-sm-3">
+    <b>Level 2</b>
+  </div>
+
+  <div class="col-sm-9">
+    <p><Input @type="text" @size={{10}}   @id="Level 2" @value={{level_2}}/></p>
+  </div>
+
+
+  <div class="col-sm-3">
+    <b>Level 3</b>
+  </div>
+
+  <div class="col-sm-9">
+    <p><Input @type="text" @size={{10}}   @id="Level 3" @value={{level_3}}/></p>
+  </div>
+
+
+  <div class="col-sm-3">
+    <b>Level 4</b>
+  </div>
+
+  <div class="col-sm-9">
+    <p><Input @type="text" @size={{10}}   @id="Level 4" @value={{level_4}}/></p>
+  </div>
+
+
+  <div class="col-sm-3">
+    <b>Level 5</b>
+  </div>
+
+  <div class="col-sm-9">
+    <p><Input @type="text" @size={{10}}   @id="Level 5" @value={{level_5}}/></p>
+  </div>
+
+
+  <div class="col-sm-3">
+    <b>Level 6</b>
+  </div>
+
+  <div class="col-sm-9">
+    <p><Input @type="text" @size={{10}}   @id="Level 6" @value={{level_6}}/></p>
+  </div>
+
+
+  <div class="col-sm-3">
+    <b>Level 7</b>
+  </div>
+
+  <div class="col-sm-9">
+    <p><Input @type="text" @size={{10}}   @id="Level 7" @value={{level_7}}/></p>
+  </div>
+
+
+  <div class="col-sm-3">
+    <b>Level 8</b>
+  </div>
+
+  <div class="col-sm-9">
+    <p><Input @type="text" @size={{10}}   @id="Level 8" @value={{level_8}}/></p>
+  </div>
+
+
+  <div class="col-sm-3">
+    <b>Level 9</b>
+  </div>
+
+  <div class="col-sm-9">
+    <p><Input @type="text" @size={{10}}   @id="Level 9" @value={{level_9}}/></p>
+  </div>
+
+
+</div>
+
+<div class="row">
+    <div class="col col-xs-12">
+        <div class="pull-right">
+
+            <button class="btn btn-default" {{action 'do_math'}}>Calculate Spell Fatigue</button>
+        </div>
+    </div>
+</div>
+
+<!-- Is doing math correctly, but isn't displaying results -->
+
+{{flash-messages}}
+{{mathResults}}
+
+
+
+{{#if mathResults}}
+
+{{mathResults}}
+
+{{/if}}
+
+{{outlet}}

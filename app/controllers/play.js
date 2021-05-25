@@ -284,7 +284,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
           let api = this.gameApi;
           let message = this.chatMessage;
           let names = (this.newConversationList || []).map(p => p.name);
-          
+
           if (names.length === 0) {
             this.flashMessages.danger("You haven't entered any recipients.");
             return;
@@ -293,7 +293,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
             this.flashMessages.danger("You haven't entered anything.");
             return;
           }
-          
+
           this.set(`chatMessage`, '');
           this.set('selectedChannel', null);
           this.set('showNewConversation', false);

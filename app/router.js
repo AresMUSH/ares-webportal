@@ -44,10 +44,7 @@ Router.map(function() {
   this.route('combatant-edit', { path: '/combatant/:id' });
   this.route('combats');
   this.route('config', { path: '/config/:file' });
-  this.route('creature', { path: '/creature/:id' });
-  this.route('creatures', { path: '/creatures' });
-  this.route('creature-create', { path: '/creature/create' });
-  this.route('creature-edit', { path: '/creature/:id/edit' })
+
   this.route('emoji');
   this.route('error');
   this.route('events');
@@ -90,7 +87,7 @@ Router.map(function() {
   this.route('log', { path: '/log/:file' });
   this.route('login', { query_params: ['redirect'] });
   this.route('logout');
-  this.route('lore-hooks');
+
   this.route('mail');
   this.route('mail-message', { path: '/mail/:id'});
   this.route('mail-send');
@@ -105,10 +102,7 @@ Router.map(function() {
   this.route('plot', { path: '/plot/:id' });
   this.route('plot-edit', { path: '/plot/:id/edit' });
   this.route('plot-create', { path: '/plot/create' });
-  this.route('portal', { path: '/portal/:id' });
-  this.route('portals', { path: '/portals' });
-  this.route('portal-create', { path: '/portal/create' });
-  this.route('portal-edit', { path: '/portal/:id/edit' });
+
   this.route('plugins-edit');
   this.route('recent-changes');
   this.route('register');
@@ -132,15 +126,12 @@ Router.map(function() {
   this.route('search-chars');
   this.route('search-help');
   this.route('search-forum');
-  this.route('search-spells');
-  this.route('secrets');
+
   this.route('server-info');
   this.route('setup');
   this.route('setup-colors');
   this.route('shutdown');
-  this.route('schools', { path: '/schools/:school'});
-  this.route('spells', { path: '/spells'});
-  this.route('spells-export', { path: '/spells-export/:school'});
+
   this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
   this.route('tos');

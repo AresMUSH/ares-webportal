@@ -127,7 +127,7 @@
    <div class="col col-xs-12 col-md-9">
 
       {{#if currentScene}}
-      <h3><LinkTo @route="scene" @model={{currentScene.id}}>Scene {{currentScene.id}}</LinkTo> - {{currentScene.icdate}}
+      <h3>Scene <LinkTo @route="scene" @model={{currentScene.id}}>{{currentScene.id}}</LinkTo> - {{currentScene.icdate}}
           {{#if currentScene.title}}
            - {{currentScene.title}}
            {{/if}}
