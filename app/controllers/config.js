@@ -7,7 +7,7 @@ export default Controller.extend({
     flashMessages: service(),
     newConfigKey: '',
     configChanged: false,
-    confirmRestore: null,
+    confirmRestore: false,
     configErrors: null,
     
     config: computed('model.config', 'configChanged', function() {
@@ -16,7 +16,7 @@ export default Controller.extend({
     
     resetOnExit: function() {
         this.set('newConfigKey', '');
-        this.set('confirmRestore', null);
+        this.set('confirmRestore', false);
         this.set('configErrors', null);
     },
     

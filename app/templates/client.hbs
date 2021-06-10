@@ -46,7 +46,7 @@
 <br><br>
 
 
-      <BsModalSimple @title="Load a Command" @closeTitle="Cancel" @size={{null}} @fade={{false}} @open={{showHistory1}} @onHide={{action (mut showHistory1) null}}>
+      <BsModalSimple @title="Load a Command" @closeTitle="Cancel" @size={{null}} @fade={{false}} @open={{showHistory1}} @onHide={{action (mut showHistory1) false}}>
           
           <p class="hint">Select a command to load into your input window. You can then edit it before sending it again.</p>
           
@@ -59,7 +59,7 @@
         </BsModalSimple>
         
         
-        <BsModalSimple @title="Load a Command" @closeTitle="Cancel" @size={{null}} @fade={{false}} @open={{showHistory2}} @onHide={{action (mut showHistory2) null}}>
+        <BsModalSimple @title="Load a Command" @closeTitle="Cancel" @size={{null}} @fade={{false}} @open={{showHistory2}} @onHide={{action (mut showHistory2) false}}>
           
            {{#each history2 as |h|}}
             <p><button class="btn btn-default" {{action "loadHistory2" h}}><i class="fa fa-redo" aria-hidden="true"></i></button> {{h}}</p>

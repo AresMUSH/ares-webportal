@@ -11,7 +11,7 @@
                    <div class="site-title"><LinkTo @route="home">{{mushName}}</LinkTo></div>
                    <div class="site-subtitle">{{mushHost}} port {{mushPort}}</div>
                </div>
-               
+
                <div class="col-md-6 hidden-sm hidden-xs">
                   <div class="text-right user-bar">
                    {{#if isAuthenticated}}
@@ -61,6 +61,7 @@
      <div class="body-wrap">
 
        <div class="row body-row">
+
          {{#if (not hideSidebar)}}
              {{#if model.left_sidebar}}
              <div class="col-md-3 left-sidebar" role="navigation" aria-labelledby="sidebar">
@@ -104,10 +105,9 @@
 </div>
 
 
-<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAltSelection}}  @onHide={{action (mut showAltSelection) null}} @onSubmit={{action (mut showAltSelection) null}}>
+<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAltSelection}}  @onHide={{action (mut showAltSelection) false}} @onSubmit={{action (mut showAltSelection) false}}>
 
   <table class="alts-switcher">
-
     {{#each model.alts as |alt|}}
       {{#if (not (eq alt.name currentUser.name)) }}
         <tr><td>

@@ -23,6 +23,11 @@
     <li><a data-toggle="tab" href="#systemfate">Sheet</a></li>
   {{/if}}
 
+  {{#if cookiesExtraInstalled}}
+    <li><a data-toggle="tab" href="#systemcookies">Cookies</a></li>
+  {{/if}}
+
+
   {{#if char.siteinfo}}
     <li><a data-toggle="tab" href="#systemsite">Admin</a></li>
   {{/if}}
@@ -71,6 +76,10 @@
 
   {{#if fateExtraInstalled}}
     <ProfileFate @char={{char}} />
+  {{/if}}
+
+  {{#if cookiesExtraInstalled}}
+    <ProfileCookies @char={{char}} />
   {{/if}}
 
   {{#if char.achievements}}

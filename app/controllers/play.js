@@ -20,7 +20,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     selectedChannel: null,
     showNewConversation: false,
     newConversationList: null,
-    showAddChannel: null,
+    showAddChannel: false,
     showAllChannels: false,
     showAllPms: false,
 
@@ -126,7 +126,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
 
       this.set('showNewConversation', false);
       this.set('newConversationList', false);
-      this.set('showAddChannel', null);
+      this.set('showAddChannel', false);
       this.set('scrollPaused', false);
     },
 

@@ -9,18 +9,18 @@ export default Controller.extend(AuthenticatedController, {
     session: service(),
     gameSocket: service(),
     flashMessages: service(),
-    confirmDeleteTopic: null,
-    confirmDeleteReply: null,
-    chooseNewCategory: null,
+    confirmDeleteTopic: false,
+    confirmDeleteReply: false,
+    chooseNewCategory: false,
     newCategory: null,
     author: null,
     
     resetOnExit: function() {
         this.set('reply', '');
-        this.set('confirmDeleteReply', null);
-        this.set('confirmDeleteTopic', null);
+        this.set('confirmDeleteReply', false);
+        this.set('confirmDeleteTopic', false);
         this.set('author', null);
-        this.set('chooseNewCategory', null);
+        this.set('chooseNewCategory', false);
         this.set('newCategory', null);
     },
     

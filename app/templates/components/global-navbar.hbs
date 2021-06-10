@@ -113,11 +113,9 @@
 </nav>
 
 
-
-<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAltSelection}}  @onHide={{action (mut showAltSelection) null}} @onSubmit={{action (mut showAltSelection) null}}>
+<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAltSelection}}  @onHide={{action (mut showAltSelection) false}} @onSubmit={{action (mut showAltSelection) false}}>
 
   <table class="alts-switcher">
-
     {{#each model.alts as |alt|}}
       {{#if (not (eq alt.name currentUser.name)) }}
         <tr><td>

@@ -1,6 +1,11 @@
-<!-- <div id="scene-context show" > -->
-  <div id="scene-context" class="panel-collapse collapse">
+<div class="play-scene-context-wrap">
+    <a data-toggle="collapse" href="#scene-context" class="play-scene-context-prompt">
+    {{scene.location.name}} - {{scene.icdate}}
 
+    <TooltipIcon @position="right" @message="Expand scene details." @icon="fa fa-caret-square-down" />
+   </a>
+
+<div id="scene-context" class="panel-collapse collapse">
 
   <div class="panel panel-default">
       <div class="panel-body scene-details">
@@ -58,4 +63,6 @@
           {{/if}}
       </div>
   </div>
+</div>
+
 </div>

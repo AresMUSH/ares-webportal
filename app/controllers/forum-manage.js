@@ -1,10 +1,15 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 
 export default Controller.extend({
     gameApi: service(),
     forumToDelete: null,
-  
+    
+    confirmDeleteForum: computed('forumToDelete', function() {
+      return this.forumToDelete != null;
+    }),  
+    
     actions: {
         deleteForum: function() {
           let api = this.gameApi;

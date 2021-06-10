@@ -1,9 +1,14 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 
 export default Controller.extend({
     gameApi: service(),
     channelToDelete: null,
+  
+    confirmDeleteChannel: computed('channelToDelete', function() {
+      return this.channelToDelete != null;
+    }),
   
     actions: {
         deleteChannel: function() {
