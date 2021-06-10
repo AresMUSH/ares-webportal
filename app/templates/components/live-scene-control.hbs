@@ -1,33 +1,20 @@
 {{#if scene}}
 
 <div class="live-scene-controls">
-<!-- {{#if showSceneDetails}}
-  <a data-toggle="collapse" href="#scene-context" aria-expanded="true" {{action (mut showSceneDetails) false}}> <TooltipIcon @position="right" @message="Hide Scene Info" @icon="fas fa-minus-square" /> Hide Scene Info</a> -->
 
 <a href="#" {{action "scrollDown"}}><i class="fas fa-angle-double-down"></i> Jump to End</a>
   {{#if scrollPaused}}
           <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
           </i> Resume Scrolling</a>
   {{else}}
-    <a data-toggle="collapse" href="#scene-context" aria-expanded="false" {{action (mut showSceneDetails) true}}> <TooltipIcon @position="right" @message="Show Scene Details" @icon="fas  fa-plus-square" /> Show Scene Info</a>
-
+          <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause"></i> Pause Scrolling</a>
   {{/if}}
 
   {{#if scene.is_watching}}
-  <a href="#" {{action 'watchScene' false}}><TooltipIcon @position="right" @message="Unwatch Scene" @icon="fas fa-eye-slash" /></a>
+  <a href="#" {{action 'watchScene' false}}><i class="fas fa-eye-slash"></i> Unwatch Scene</a>
   {{else}}
-  <a href="#" {{action 'watchScene' true}}><TooltipIcon @position="right" @message="Watch Scene" @icon="fas fa-eye" /></a>
+  <a href="#" {{action 'watchScene' true}}><i class="fas fa-eye"></i> Watch Scene</a>
   {{/if}}
-
-  {{#if scrollPaused}}
-          <a href="#" {{action "unpauseScroll"}}><TooltipIcon @position="right" @message="Resume Scrolling" @icon="fas fa-play" /></a>
-  {{else}}
-          <a href="#" {{action "pauseScroll"}}><TooltipIcon @position="right" @message="Pause Scrolling" @icon="fas fa-pause" /></a>
-  {{/if}}
-
-  <a href="#" {{action "scrollDown"}}><TooltipIcon @position="right" @message="Jump to End" @icon="fas fa-angle-double-down" /></a>
-
-
 
 </div>
 
@@ -217,7 +204,7 @@
                              {{/if}}
 
 
-                            <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} @spells={{spells}}/>
+                             <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} />
 
                          </ul>
                      </li>
@@ -345,4 +332,4 @@
     </BsModalSimple>
 
 
-<!-- {{/if}} -->
+{{/if}}
