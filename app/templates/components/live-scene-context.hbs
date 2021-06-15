@@ -1,9 +1,21 @@
 <div class="play-scene-context-wrap">
-    <a data-toggle="collapse" href="#scene-context" class="play-scene-context-prompt">
+    <!-- <a data-toggle="collapse" href="#scene-context" class="play-scene-context-prompt">
     {{scene.location.name}} - {{scene.icdate}}
 
     <TooltipIcon @position="right" @message="Expand scene details." @icon="fa fa-caret-square-down" />
-   </a>
+   </a> -->
+
+   {{#if showSceneDetails}}
+     <a data-toggle="collapse" href="#scene-context" aria-expanded="true" {{action (mut showSceneDetails) false}} class="play-scene-context-prompt">
+       {{scene.location.name}} - {{scene.icdate}}
+
+     <TooltipIcon @position="right" @message="Hide scene details." @icon="fas fa-minus-square" /></a>
+   {{else}}
+     <a data-toggle="collapse" href="#scene-context" aria-expanded="false" {{action (mut showSceneDetails) true}}>
+       {{scene.location.name}} - {{scene.icdate}}
+       <TooltipIcon @position="right" @message="Show Scene Details" @icon="fas  fa-plus-square" /> </a>
+
+   {{/if}}
 
 <div id="scene-context" class="panel-collapse collapse">
 

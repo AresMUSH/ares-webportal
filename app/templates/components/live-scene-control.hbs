@@ -2,19 +2,20 @@
 
 <div class="live-scene-controls">
 
-<a href="#" {{action "scrollDown"}}><i class="fas fa-angle-double-down"></i> Jump to End</a>
-  {{#if scrollPaused}}
-          <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
-          </i> Resume Scrolling</a>
+  {{#if scene.is_watching}}
+  <a href="#" {{action 'watchScene' false}}><TooltipIcon @position="right" @message="Unwatch Scene" @icon="fas fa-eye-slash" /></a>
   {{else}}
-          <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause"></i> Pause Scrolling</a>
+  <a href="#" {{action 'watchScene' true}}><TooltipIcon @position="right" @message="Watch Scene" @icon="fas fa-eye" /></a>
   {{/if}}
 
-  {{#if scene.is_watching}}
-  <a href="#" {{action 'watchScene' false}}><i class="fas fa-eye-slash"></i> Unwatch Scene</a>
+  {{#if scrollPaused}}
+          <a href="#" {{action "unpauseScroll"}}><TooltipIcon @position="right" @message="Resume Scrolling" @icon="fas fa-play" /></a>
   {{else}}
-  <a href="#" {{action 'watchScene' true}}><i class="fas fa-eye"></i> Watch Scene</a>
+          <a href="#" {{action "pauseScroll"}}><TooltipIcon @position="right" @message="Pause Scrolling" @icon="fas fa-pause" /></a>
   {{/if}}
+
+  <a href="#" {{action "scrollDown"}}><TooltipIcon @position="right" @message="Jump to End" @icon="fas fa-angle-double-down" /></a>
+
 
 </div>
 
@@ -204,7 +205,7 @@
                              {{/if}}
 
 
-                             <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} />
+                            <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} @spells={{spells}}/>
 
                          </ul>
                      </li>
@@ -267,11 +268,11 @@
         <hr>
 
 
-    <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteScenePose}} @onSubmit={{action "deleteScenePose"}} @onHide={{action (mut confirmDeleteScenePose) false}}>
+    <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteScenePose}} @onSubmit={{action "deleteScenePose"}} @onHide={{action (mut confirmDeleteScenePose) null}}>
       You're about to delete this scene pose. This cannot be undone.  Are you sure?
     </BsModalSimple>
 
-    <BsModalSimple @title="Confirm Report" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmReportScene}} @onSubmit={{action "reportScene"}} @onHide={{action (mut confirmReportScene) false}}>
+    <BsModalSimple @title="Confirm Report" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmReportScene}} @onSubmit={{action "reportScene"}} @onHide={{action (mut confirmReportScene) null}}>
       <p>If someone is behaving badly in a scene, you can bring it to the game admin's attention - along with an automatic, verified log of the scene (including OOC chat and any previously-edited or deleted poses).  </p>
 
       <p><b>Reason for Report:</b></p>
@@ -280,11 +281,11 @@
 
     </BsModalSimple>
 
-    <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteScene}} @onSubmit={{action "deleteScene"}} @onHide={{action (mut confirmDeleteScene) false}}>
+    <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteScene}} @onSubmit={{action "deleteScene"}} @onHide={{action (mut confirmDeleteScene) null}}>
         You're about to delete this scene. This cannot be undone.  Are you sure?
     </BsModalSimple>
 
-    <BsModalSimple @title="Change the Scene Location" @closeTitle="Cancel" @submitTitle="Select" @size={{null}} @fade={{false}} @open={{selectLocation}} @onSubmit={{action "changeLocation"}} @onHide={{action (mut selectLocation) false}}>
+    <BsModalSimple @title="Change the Scene Location" @closeTitle="Cancel" @submitTitle="Select" @size={{null}} @fade={{false}} @open={{selectLocation}} @onSubmit={{action "changeLocation"}} @onHide={{action (mut selectLocation) null}}>
         <p>Select a location from the list or type one into the bottom box.</p>
         <p>
           <PowerSelect @selected={{newLocation}} @options={{locations}} @onChange={{action "locationSelected"}} as |location|>
@@ -294,7 +295,7 @@
          </p>
     </BsModalSimple>
 
-    <BsModalSimple @title="Manage Pose Order" @closeTitle="Cancel" @size={{null}} @fade={{false}} @open={{managePoseOrder}} @onHide={{action (mut managePoseOrder) false}}>
+    <BsModalSimple @title="Manage Pose Order" @closeTitle="Cancel" @size={{null}} @fade={{false}} @open={{managePoseOrder}} @onHide={{action (mut managePoseOrder) null}}>
 
         <table>
         {{#each scene.pose_order as |po|}}
@@ -321,7 +322,7 @@
       {{/if}}
     </BsModalSimple>
 
-    <BsModalSimple @title="Character Card" @closeTitle="Close" @size={{null}} @fade={{false}} @open={{characterCard}} @onHide={{action (mut characterCard) false}}>
+    <BsModalSimple @title="Character Card" @closeTitle="Close" @size={{null}} @fade={{false}} @open={{characterCard}} @onHide={{action (mut characterCard) null}}>
 
       {{#if scene.use_custom_char_cards}}
         <CharCardCustom @char={{characterCardInfo}} />

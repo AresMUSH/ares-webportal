@@ -131,9 +131,7 @@
            - {{currentScene.title}}
            {{/if}}
        </LinkTo></h3>
-       <h4>{{currentScene.location.name}}</h4>
        {{/if}}
-
 
        <LiveSceneControl @scene={{currentScene}} @locations={{model.locations}} @abilities={{model.abilities}} @spells={{model.spells}} @places={{currentScene.places}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
 
