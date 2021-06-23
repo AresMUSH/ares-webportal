@@ -9,7 +9,6 @@ export default Component.extend({
   showReport: false,
   selectedReportMessage: null,
   reportReason: '',
-  chatMessage: '',
   showPageRename: false,
   showReport: false,
   showPageRename: false,
@@ -98,14 +97,14 @@ export default Component.extend({
     send: function() {
         let api = this.gameApi;
         let channelKey = this.get('channel.key');
-        let message = this.chatMessage;
+        let message = this.get('channel.draftMessage') || "";
         
         if (message.length === 0) {
             this.flashMessages.danger("You haven't entered anything.");
             return;
         }
         
-        this.set(`chatMessage`, '');
+        this.set(`channel.draftMessage`, '');
                   
         if (this.get('channel.is_page'))  {
           api.requestOne('sendPage', { thread_id: channelKey, message: message }, null)

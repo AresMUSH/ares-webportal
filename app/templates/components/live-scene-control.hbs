@@ -140,7 +140,7 @@
  
             <PoseOrder @poseOrder={{scene.pose_order}} @playerName={{playerName}} />
              
-             <MarkdownEditor @text={{scenePose}} @rows={{6}} @class="scene-pose-box" @onEnter={{action "addPose" poseType.id}} />
+             <MarkdownEditor @text={{scene.draftPose}} @rows={{6}} @class="scene-pose-box" @onEnter={{action "addPose" poseType.id}} />
            {{/if}}
    
 
