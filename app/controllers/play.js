@@ -229,8 +229,18 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       if (this.get('selectedChannel.is_page'))  {
         this.markPageThreadRead(channel.key);
       } 
+      
       let self = this;
       setTimeout(() => self.scrollWindow(), 150, self);
+    },
+    
+    switchScene: function(scene) {
+      scene.set('is_unread', false);
+      this.set('currentScene', scene);
+      this.set('selectedChannel', null);
+      let self = this;
+      setTimeout(() => self.scrollWindow(), 150, self);
+      this.markSceneRead(scene.id);
     },
     
     actions: {        
@@ -270,20 +280,46 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         },
         
         switchScene(id) {
+          let api = this.gameApi;
+          var scene;
           this.get('model.scenes').forEach(s => {
               if (s.id === id) {
-                  s.set('is_unread', false);
-                  this.set('currentScene', s);
-                  this.set('selectedChannel', null);
-                  let self = this;
-                  setTimeout(() => self.scrollWindow(), 150, self);
-                  this.markSceneRead(id);
+                scene = s;
               }
-          });   
+          });
+          
+          if (scene.lazy_loaded === true) {
+            api.requestOne('liveScene', { id: scene.id }, null)
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                scene.set('poses', response.poses);
+                scene.set('lazy_loaded', false);
+                this.switchScene(scene);
+            });
+          } else {
+            this.switchScene(scene);
+          }
         },
         
         changeChannel: function(channel) {
-          this.changeChannel(channel);
+          let api = this.gameApi;
+          
+          if (channel.lazy_loaded === true) {
+            api.requestOne('loadChatMessages', { key: channel.key, is_page: channel.is_page }, null)
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                channel.set('messages', response.messages);
+                channel.set('lazy_loaded', false);
+                this.changeChannel(channel);
+            });
+          } else {
+            this.changeChannel(channel);
+          }
+          
         },
         
         conversationListChanged(newList) {
