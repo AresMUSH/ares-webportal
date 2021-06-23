@@ -119,7 +119,15 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
           }
       }
     },
+    
+    onJoinedScene: function(type, msg, timestamp ) {
+      let sceneData = Ember.Object.create(JSON.parse(msg));
 
+      if (!this.get('model.scenes').find(s => s.id === sceneData.id)) {
+        this.model.scenes.pushObject(sceneData);
+      }
+    },
+    
     resetOnExit: function() {
       this.set('currentScene', null);
       this.set('selectedChannel', null);
@@ -138,6 +146,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
             self.onChatMessage(type, msg, timestamp) } );
         this.gameSocket.setupCallback('new_page', function(type, msg, timestamp) {
             self.onChatMessage(type, msg, timestamp) } );
+        this.gameSocket.setupCallback('joined_scene', function(type, msg, timestamp) {
+            self.onJoinedScene(type, msg, timestamp) } );
     },
     
     scrollWindow: function() {
