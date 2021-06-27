@@ -6,13 +6,13 @@
 
        <div class="title-wrap">
        
-           <div class="row">
+           <div class="row" role=”banner”>
                <div class="col-md-6 col-sm-12 col-xs-12">
                    <div class="site-title"><LinkTo @route="home">{{mushName}}</LinkTo></div>
                    <div class="site-subtitle">{{mushHost}} port {{mushPort}}</div>
                </div>
                
-               <div class="col-md-6 hidden-sm hidden-xs">
+               <div class="col-md-6 hidden-sm hidden-xs" role="navigation">
                   <div class="text-right user-bar">
                    {{#if isAuthenticated}}
                        <p>Welcome, {{currentUser.name}}. 
