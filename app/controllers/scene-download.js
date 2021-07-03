@@ -19,6 +19,10 @@ export default Controller.extend({
         this.set('model', response);
       });
   },
+  resetOnExit: function() {
+    this.set('showOoc', false);
+    this.set('showSystem', true);
+  },
   actions: {
     toggleOoc() {
       this.set('showOoc', !this.showOoc);

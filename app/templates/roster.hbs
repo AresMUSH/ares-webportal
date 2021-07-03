@@ -1,7 +1,7 @@
 {{page-title 'Roster'}}
 <h1>Roster</h1>
 
-<p>The roster contains ready-made characters that you can just pick up and play.  Some have been played before, as indicated by a <span class="label label-info">Previously Played</span> tag.  For most characters, you can claim them just by logging onto the game and using the roster command.  Characters marked with <span class="label label-warning">App Required</span> require a little more work so you'll need to talk to the contact person before claiming them.</p>
+<p>The roster contains ready-made characters.  Some have been played before, as indicated by a <span class="label label-info">Previously Played</span> tag.  For most characters, you can claim them and begin playing immediately.  Characters marked with <span class="label label-warning">App Required</span> require an application.</p>
 
 <ul class="nav nav-tabs">
 {{#each model.roster as |group|}}
@@ -38,7 +38,12 @@
             
                   
            <div class="roster-char-warnings">
-               {{#if char.previously_played}}
+             
+             {{#if char.app_pending }}
+             <span class="label label-danger">App Pending</span>
+             {{/if}}
+             
+             {{#if char.previously_played}}
              <span class="label label-info">Previously Played</span>
              {{/if}}
       
@@ -51,7 +56,9 @@
              
           <div>  
              <LinkTo @route="char" @model={{char.name}} class="btn btn-default">Profile</LinkTo>
+             {{#if (not char.app_pending)}}
              <LinkTo @route="roster-claim" @model={{char.id}} class="btn btn-primary">Claim</LinkTo>
+             {{/if}}
            </div>
              
         </div>

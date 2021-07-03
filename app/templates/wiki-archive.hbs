@@ -4,16 +4,16 @@
 
 <p>Ares can create a downloadable archive of the game's scenes, characters, and wiki pages. You can keep this for your reference even after a game closes and the web portal is no longer available.</p>
 
-<p><a class="btn btn-primary" href="/game/wiki-export.zip">Download Archive</a></p>
+<p><a class="btn btn-primary" href="/game/wiki_export.zip">Download Archive</a></p>
 
 <p>To use the archive, just unzip it and drag and drop the <code>index.html</code> file into your web browser of choice. See <a href="/help/wiki_archive">Wiki Archive Help</a> for more information.</p>
 
 <div class="alert alert-info">
-Archive created on {{model.last_exported}}.
+Archive last updated on {{model.last_exported}}.
 {{#if model.auto_export}}
-This archive will be updated nightly.
+This archive will be updated daily.
 {{else}}
-This archive is not updated automatically; ask the game admin if you need a newer copy.
+This archive is not updated automatically; ask the game admin if you would like a newer copy.
 {{/if}}
 </div>
 

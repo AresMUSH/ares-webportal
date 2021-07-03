@@ -8,7 +8,7 @@ export default Controller.extend({
     rosterApp: '',
 
     resetOnExit: function() {
-      this.set('confirmClaim', null);
+      this.set('confirmClaim', false);
       this.set('rosterApp', this.get('model.roster.app_template'));
     },
     
