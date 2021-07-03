@@ -46,6 +46,10 @@
                   <li><LinkTo @route="app-review" @model={{model.job.author.id}}>App Review for {{model.job.author.name}}</LinkTo></li>
                   <li><LinkTo @route="char" @model={{model.job.author.name}}>Profile for {{model.job.author.name}}</LinkTo></li>
                 {{/if}}
+                {{#if model.job.is_roster_job}}
+                  <li><a href="#" {{action 'approveRoster'}}>Approve Roster for {{model.job.roster_name}}</a></li>
+                  <li><a href="#" {{action 'rejectRoster'}}>Reject Roster for {{model.job.roster_name}}</a></li>
+                {{/if}}
                 </ul>
               </li>
           </ul>

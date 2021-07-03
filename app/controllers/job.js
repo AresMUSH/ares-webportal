@@ -61,6 +61,17 @@ export default Controller.extend({
     }
   },
   
+  approveRoster: function(approved) {
+    this.gameApi.requestOne('approveRoster', { name: this.get('model.job.roster_name'), approved: approved })
+    .then((response) => {
+      if (response.error) {
+        return;
+      }
+      this.send('reloadModel');
+      this.flashMessages.success('Roster app ' + (approved ? 'approved.' : 'rejected.'));
+    });
+  },
+  
   actions: {
     addReply() {
       let api = this.gameApi;
@@ -146,6 +157,15 @@ export default Controller.extend({
     
     responseSelected: function(resp) {
       this.set('reply', resp.value);
+    },
+    
+    approveRoster: function() {
+      this.approveRoster(true);
+    },
+    
+    rejectRoster: function() {
+      this.approveRoster(false);
     }
+    
   }
 });
