@@ -5,7 +5,6 @@ import { observer } from '@ember/object';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
 export default Component.extend(AuthenticatedController, {
-    scenePose: '',
     rollString: null,
     confirmDeleteScenePose: false,
     confirmDeleteScene: false,
@@ -173,13 +172,13 @@ export default Component.extend(AuthenticatedController, {
       },
       
       addPose(poseType) {
-          let pose = this.scenePose;
+          let pose = this.get('scene.draftPose') || "";
           if (pose.length === 0) {
               this.flashMessages.danger("You haven't entered anything.");
               return;
           }
           let api = this.gameApi;
-          this.set('scenePose', '');
+          this.set('scene.draftPose', '');
           api.requestOne('addScenePose', { id: this.get('scene.id'),
               pose: pose, 
               pose_type: poseType,

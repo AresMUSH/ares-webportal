@@ -132,6 +132,7 @@ Router.map(function() {
   this.route('tos');
   this.route('who');
   this.route('wiki');
+  this.route('wiki-archive');
   this.route('wiki-page', { path: '/wiki/:id'});
   this.route('wiki-all', { path: '/wiki/all'});
   this.route('wiki-create', { path: '/wiki/create', query_params: ['title', 'category', 'template', 'tags']});

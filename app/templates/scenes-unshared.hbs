@@ -71,6 +71,7 @@
                  <a href="#" {{action 'changeSceneStatus' scene 'restart'}}><i class="fa fa-play" aria-label="Restart Scene"></i> Restart</a>
                   <a href="#" {{action 'changeSceneStatus' scene 'share'}}><i class="fa fa-share" aria-label="Share Scene"></i> Share</a>                 
               {{/if}}
+                <LinkTo @route="scene-download" @model={{scene.id}}><i class="fa fa-download" aria-label="Download Scene"></i> Download </LinkTo>
           </div>
         </div>
         

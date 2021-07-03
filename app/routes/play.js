@@ -24,6 +24,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
         this.gameSocket.removeCallback('new_scene_activity');
         this.gameSocket.removeCallback('new_chat');
         this.gameSocket.removeCallback('new_page');
+        this.gameSocket.removeCallback('joined_scene');
         this.controllerFor('application').set('hideSidebar', false);
     },
 
@@ -41,14 +42,6 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     
     setupController: function(controller, model) {
       this._super(controller, model);
-      if (model.scenes.length > 0) {
-        controller.set('currentScene', model.scenes[0]);
-        controller.set('currentScene.is_unread', false);        
-      } else {
-        let chan = controller.sortedChannels.find(c => c.enabled);
-        if (chan) {
-          controller.set('selectedChannel', chan);
-        }
-      }
+      
     }
 });
