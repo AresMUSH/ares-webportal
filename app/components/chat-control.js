@@ -18,7 +18,15 @@ export default Component.extend({
   
   updatePoseControls: function() {
     if (this.channel) {
-      this.set('poseChar', (this.get('channel.poseable_chars') || [])[0]);
+      this.set('poseChar', this.poseableChars[0]);
+      let self = this;
+      this.poseableChars.some(function(c) {
+        if (self.channel.who.any(w => w.name == c.name)) {
+          self.set('poseChar', c);
+          return true;
+        }
+        return false;
+      });
     }
   },
   

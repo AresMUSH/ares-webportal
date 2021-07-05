@@ -122,7 +122,7 @@
       </div>
  
       <div class="scene-char-select">
-        <PowerSelect @selected={{poseChar}} @options={{channel.poseable_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+        <PowerSelect @selected={{poseChar}} @options={{@poseableChars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
             <CharIconTiny @char={{poseChar}} />
         </PowerSelect>
       </div>

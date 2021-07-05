@@ -149,7 +149,7 @@
        {{/if}}
        
        
-         <ChatControl @channel={{selectedChannel}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
+         <ChatControl @channel={{selectedChannel}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @poseableChars={{model.chat.pose_chars}} @setScroll={{action "setScroll"}} />
        
        
        {{#if emptyPrompt}}
