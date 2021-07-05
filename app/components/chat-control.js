@@ -14,15 +14,13 @@ export default Component.extend({
   showReport: false,
   showPageRename: false,
   newPageTitle: '',
-  poseChar: null,
   
   updatePoseControls: function() {
-    if (this.channel) {
-      this.set('poseChar', this.poseableChars[0]);
+    if (this.channel && !this.get('channel.poseChar')) {
       let self = this;
       this.poseableChars.some(function(c) {
         if (self.channel.who.any(w => w.name == c.name)) {
-          self.set('poseChar', c);
+          self.set('channel.poseChar', c);
           return true;
         }
         return false;
@@ -131,14 +129,14 @@ export default Component.extend({
         this.set(`channel.draftMessage`, '');
                   
         if (this.get('channel.is_page'))  {
-          api.requestOne('sendPage', { thread_id: channelKey, message: message, sender: this.poseChar.name }, null)
+          api.requestOne('sendPage', { thread_id: channelKey, message: message, sender: this.get('channel.poseChar.name') }, null)
           .then( (response) => {
               if (response.error) {
                   return;
               }
           }); 
         } else {
-          api.requestOne('chatTalk', { channel: channelKey, message: message, sender: this.poseChar.name }, null)
+          api.requestOne('chatTalk', { channel: channelKey, message: message, sender: this.get('channel.poseChar.name') }, null)
           .then( (response) => {
               if (response.error) {
                   return;
@@ -195,7 +193,7 @@ export default Component.extend({
     },
     
     poseCharChanged(newChar) { 
-      this.set('poseChar', newChar);
+      this.set('channel.poseChar', newChar);
     },
   }
   

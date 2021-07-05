@@ -153,10 +153,10 @@
                  <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC</button>
                  
                  {{#if txtExtraInstalled}}
-                   <LiveSceneTxt @scenePose={{scene.draftPose}} @scene={{scene}} @poseChar={{poseChar}} />
+                   <LiveSceneTxt @scenePose={{scene.draftPose}} @scene={{scene}} @poseChar={{scene.poseChar}} />
                  {{/if}}
                  
-             <LiveSceneCustomScenepose @scenePose={{scene.draftPose}} @scene={{scene}} />
+             <LiveSceneCustomScenepose @scenePose={{scene.draftPose}} @scene={{scene}} @poseChar={{scene.poseChar}} />
              </div>
                 
              <div class="scene-pose-select">
@@ -250,7 +250,7 @@
              </div>
              
              <div class="scene-char-select" >
-                 <PowerSelect @selected={{poseChar}} @options={{scene.poseable_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+                 <PowerSelect @selected={{scene.poseChar}} @options={{scene.poseable_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
                      <CharIconTiny @char={{poseChar}} />
                  </PowerSelect>
              </div>

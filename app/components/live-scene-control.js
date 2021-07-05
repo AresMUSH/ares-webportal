@@ -15,7 +15,6 @@ export default Component.extend(AuthenticatedController, {
     newLocation: null,
     reportReason: null,
     poseType: null,
-    poseChar: null,
     commandResponse: null,
     gameApi: service(),
     flashMessages: service(),
@@ -24,8 +23,8 @@ export default Component.extend(AuthenticatedController, {
 
     updatePoseControls: function() {
       this.set('poseType', { title: 'Pose', id: 'pose' });
-      if (this.scene) {
-        this.set('poseChar', this.get('scene.poseable_chars')[0]);
+      if (this.scene && !this.get('scene.poseChar')) {
+        this.set('scene.poseChar', this.get('scene.poseable_chars')[0]);
       }
     },
     
@@ -182,7 +181,7 @@ export default Component.extend(AuthenticatedController, {
           api.requestOne('addScenePose', { id: this.get('scene.id'),
               pose: pose, 
               pose_type: poseType,
-              pose_char: this.get('poseChar.id') })
+              pose_char: this.get('scene.poseChar.id') })
           .then( (response) => {
               if (response.error) {
                   return;
@@ -258,7 +257,7 @@ export default Component.extend(AuthenticatedController, {
       },
       
       poseCharChanged(newChar) { 
-        this.set('poseChar', newChar);
+        this.set('scene.poseChar', newChar);
       },
       
       switchPoseOrderType(newType) {
