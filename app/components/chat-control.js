@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { observer } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
@@ -13,6 +14,21 @@ export default Component.extend({
   showReport: false,
   showPageRename: false,
   newPageTitle: '',
+  poseChar: null,
+  
+  updatePoseControls: function() {
+    if (this.channel) {
+      this.set('poseChar', (this.get('channel.poseable_chars') || [])[0]);
+    }
+  },
+  
+  didInsertElement: function() {
+    this.updatePoseControls();
+  },
+  
+  channelObserver: observer('channel', function() {
+    this.updatePoseControls();
+  }),
   
   chatAlerts: computed('channel.muted', 'scrollPaused', function() {
     let alertList = [];
@@ -107,14 +123,14 @@ export default Component.extend({
         this.set(`channel.draftMessage`, '');
                   
         if (this.get('channel.is_page'))  {
-          api.requestOne('sendPage', { thread_id: channelKey, message: message }, null)
+          api.requestOne('sendPage', { thread_id: channelKey, message: message, char: this.poseChar.name }, null)
           .then( (response) => {
               if (response.error) {
                   return;
               }
           }); 
         } else {
-          api.requestOne('chatTalk', { channel: channelKey, message: message }, null)
+          api.requestOne('chatTalk', { channel: channelKey, message: message, char: this.poseChar.name }, null)
           .then( (response) => {
               if (response.error) {
                   return;
@@ -168,6 +184,10 @@ export default Component.extend({
     },
     unpauseScroll() {
       this.setScroll(true);
+    },
+    
+    poseCharChanged(newChar) { 
+      this.set('poseChar', newChar);
     },
   }
   

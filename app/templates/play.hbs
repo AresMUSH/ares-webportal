@@ -77,7 +77,7 @@
            <a href="#" {{action 'changeChannel' channel}}>
             <div class="play-selector {{if (eq channel.key selectedChannel.key) 'play-selector-active' ''}}">                  
               # {{channel.title}}
-              {{#if channel.muted}}
+              {{#if channel.is_hidden}}
                   <i class="fa fa-microphone-slash"></i>
               {{/if}}
               <span class="label label-pill label-primary">{{channel.new_messages}}</span>

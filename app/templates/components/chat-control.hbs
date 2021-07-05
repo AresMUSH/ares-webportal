@@ -83,41 +83,52 @@
  {{#if canTalk}}
    <MarkdownEditor @text={{channel.draftMessage}} @class="chat-box" @cols="80" @rows="6" @onEnter={{action "send"}} />
  {{/if}}
+  <div class="scene-controls">
 
+    <div class="col col-sm-6 col-xs-12 scene-controls-right">
+      {{#if canTalk}}
+         <button class="btn-primary btn" {{action "send"}}>Send Message</button>
+       {{/if}}
+    </div>
+ 
+    <div class="col col-sm-6 col-xs-12 scene-controls-left">
+      <div class="scene-dropdowns">
+        <ul class="nav scene-menu">    
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle chat-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-   <ul class="nav navbar-nav">    
-       <li class="dropdown">
-         <a href="#" class="dropdown-toggle chat-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-         <span class="btn btn-default" href="#">Chat Menu <span class="caret"></span></span> </a>
-         <ul class="dropdown-menu">
-         {{#if channel.is_page}}
-           {{#if channel.is_hidden}}
-             <li><a href="#" {{action "hidePage" false}}>Unhide Conversation</a></li>
-           {{else}}
-             <li><a href="#" {{action "hidePage" true}}>Hide Conversation</a></li>
-           {{/if}}
-           <li><a href="#" {{action (mut showPageRename) true}}>Rename Conversation</a></li>
-           
-         {{else}}
-           <li><a href="#" {{action "leaveChannel"}}>Leave Channel</a></li>
-           {{#if channel.muted}}
-           <li><a href="#" {{action "muteChannel" false}}>Unmute Channel</a></li>
-           {{else}}
-           <li><a href="#" {{action "muteChannel" true}}>Mute Channel</a></li>
-           {{/if}}
-         {{/if}}
-         <li><a href="#" {{action (mut showReport) true}}>Report Abuse</a></li>
-       </ul>
-       </li>
-   </ul>
-
-
-   {{#if canTalk}}
-     <div class="pull-right">
-       <button class="btn-primary btn" {{action "send"}}>Send Message</button>
-     </div>
-   {{/if}}
+              <span class="btn btn-default" href="#">Chat Menu <span class="caret"></span></span> </a>
+              <ul class="dropdown-menu">
+              {{#if channel.is_page}}
+                {{#if channel.is_hidden}}
+                  <li><a href="#" {{action "hidePage" false}}>Unhide Conversation</a></li>
+                {{else}}
+                  <li><a href="#" {{action "hidePage" true}}>Hide Conversation</a></li>
+                {{/if}}
+                <li><a href="#" {{action (mut showPageRename) true}}>Rename Conversation</a></li>
+          
+              {{else}}
+                <li><a href="#" {{action "leaveChannel"}}>Leave Channel</a></li>
+                {{#if channel.muted}}
+                <li><a href="#" {{action "muteChannel" false}}>Unmute Channel</a></li>
+                {{else}}
+                <li><a href="#" {{action "muteChannel" true}}>Mute Channel</a></li>
+                {{/if}}
+              {{/if}}
+              <li><a href="#" {{action (mut showReport) true}}>Report Abuse</a></li>
+            </ul>
+            </li>
+        </ul>
+      </div>
+ 
+      <div class="scene-char-select">
+        <PowerSelect @selected={{poseChar}} @options={{channel.poseable_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+            <CharIconTiny @char={{poseChar}} />
+        </PowerSelect>
+      </div>
+    </div>
+  </div>
+          
 
 <div class="clearfix"></div>
 
