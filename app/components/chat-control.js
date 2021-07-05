@@ -123,14 +123,14 @@ export default Component.extend({
         this.set(`channel.draftMessage`, '');
                   
         if (this.get('channel.is_page'))  {
-          api.requestOne('sendPage', { thread_id: channelKey, message: message, char: this.poseChar.name }, null)
+          api.requestOne('sendPage', { thread_id: channelKey, message: message, sender: this.poseChar.name }, null)
           .then( (response) => {
               if (response.error) {
                   return;
               }
           }); 
         } else {
-          api.requestOne('chatTalk', { channel: channelKey, message: message, char: this.poseChar.name }, null)
+          api.requestOne('chatTalk', { channel: channelKey, message: message, sender: this.poseChar.name }, null)
           .then( (response) => {
               if (response.error) {
                   return;

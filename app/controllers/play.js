@@ -23,6 +23,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     showAddChannel: false,
     showAllChannels: false,
     showAllPms: false,
+    poseChar: null,
+    newPage: null,
       
     // Both
     scrollPaused: false,
@@ -32,12 +34,12 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       this.set('newConversationList', []);
     },
   
-    sortedChannels: computed('model.chat.@each.title', function() {
-      return this.get('model.chat').filter(c => !c.is_page).sort((a, b) => a.title.localeCompare(b.title));
+    sortedChannels: computed('model.chat.channels.@each.title', function() {
+      return this.get('model.chat.channels').filter(c => !c.is_page).sort((a, b) => a.title.localeCompare(b.title));
     }),
 
-    sortedPageThreads: computed('model.chat.@each.title', function() {
-      return this.get('model.chat').filter(c => c.is_page).sort((a, b) => a.title.localeCompare(b.title));
+    sortedPageThreads: computed('model.chat.channels.@each.title', function() {
+      return this.get('model.chat.channels').filter(c => c.is_page).sort((a, b) => a.title.localeCompare(b.title));
     }),
   
     emptyPrompt: computed('selectedChannel', 'currentScene', function() {
@@ -138,6 +140,11 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       this.set('scrollPaused', false);
     },
     
+    setupController: function(model) {
+      this.setupCallback();
+      this.set('poseChar', model.chat.pose_chars[0]);
+    },
+    
     setupCallback: function() {
         let self = this;
         this.gameSocket.setupCallback('new_scene_activity', function(type, msg, timestamp) {
@@ -177,14 +184,14 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       }   
     },
     
-    channelsByActivity: computed('model.chat.@each.last_activity', function() {
-       return this.get('model.chat').sort(function(a,b){
+    channelsByActivity: computed('model.chat.channels.@each.last_activity', function() {
+       return this.get('model.chat.channels').sort(function(a,b){
         return new Date(b.last_activity) - new Date(a.last_activity);
        });
     }),
     
-    anyNewActivity: computed('model.chat.@each.{is_unread,new_messages}', 'model.scenes.@each.is_unread', function() {
-      return this.get('model.chat').any(c => c.is_unread || c.new_messages > 0) || this.get('model.scenes').any(s => s.is_unread );
+    anyNewActivity: computed('model.chat.channels.@each.{is_unread,new_messages}', 'model.scenes.@each.is_unread', function() {
+      return this.get('model.chat.channels').any(c => c.is_unread || c.new_messages > 0) || this.get('model.scenes').any(s => s.is_unread );
     }),
         
     
@@ -199,12 +206,12 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         messages: [],
         who: []
       };
-      this.get('model.chat').pushObject(channel);
+      this.get('model.chat.channels').pushObject(channel);
       return channel;
     },
     
     getChannel: function(channelKey) {
-      return this.get('model.chat').find(c => c.key === channelKey);
+      return this.get('model.chat.channels').find(c => c.key === channelKey);
     },
     
     markSceneRead: function(sceneId) {
@@ -256,8 +263,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
               }
               let data = response.channel;
               let channel = this.getChannel(data.key);
-              this.get('model.chat').removeObject(channel);
-              this.get('model.chat').pushObject(data);
+              this.get('model.chat.channels').removeObject(channel);
+              this.get('model.chat.channels').pushObject(data);
               this.changeChannel(data);
           });
       },
@@ -312,8 +319,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
                 if (response.error) {
                     return;
                 }
-                channel.set('messages', response.messages);
-                channel.set('lazy_loaded', false);
+                set(channel, 'messages', response.messages);
+                set(channel, 'lazy_loaded', false);
                 this.changeChannel(channel);
             });
           } else {
@@ -328,7 +335,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         
         startConversation: function() {
           let api = this.gameApi;
-          let message = this.chatMessage;
+          let message = this.newPage;
           let names = (this.newConversationList || []).map(p => p.name);
           
           if (names.length === 0) {
@@ -339,13 +346,16 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
             this.flashMessages.danger("You haven't entered anything.");
             return;
           }
+          if (!this.poseChar) {
+            this.flashMessages.danger("You hven't selected a charcter.");
+          }
           
-          this.set(`chatMessage`, '');
+          this.set(`newPage`, '');
           this.set('selectedChannel', null);
           this.set('showNewConversation', false);
           this.set('newConversationList', []);
 
-          api.requestOne('sendPage', { names: names, message: message }, null)
+          api.requestOne('sendPage', { names: names, message: message, sender: this.poseChar.name }, null)
           .then( (response) => {
               if (response.error) {
                   return;
@@ -353,7 +363,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
               let channel = this.getChannel(response.thread.key);
               if (!channel) {
                 channel = response.thread;
-                this.get('model.chat').pushObject(channel);  
+                this.get('model.chat.channels').pushObject(channel);  
               } 
               this.changeChannel(channel);
           });
@@ -366,6 +376,10 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         unpauseScroll() {
           this.set('scrollPaused', false);
           this.scrollWindow();
+        },
+        
+        poseCharChanged(char) {
+          this.set('poseChar', char);
         }
     }
 });

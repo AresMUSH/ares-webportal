@@ -191,11 +191,34 @@
 
          <div class="panel panel-default">
            <div class="panel-body">
-             <b>To:</b><PowerSelectMultiple @selected={{newConversationList}} @options={{model.characters}} @searchEnabled=true  @searchField="name" @onChange={{action "conversationListChanged"}} as |char|>
+             
+             
+              <div class="form-group row">
+               <div class="col-sm-3">
+                   <label for="to" class="col-form-label">To:</label>
+               </div>
+               <div class="col-sm-9">
+                   <PowerSelectMultiple @selected={{newConversationList}} @options={{model.characters}} @searchEnabled=true  @searchField="name" @onChange={{action "conversationListChanged"}} as |char|>
                  {{char.name}}
                </PowerSelectMultiple>
+               </div> 
+             </div>
+             
+              <div class="form-group row">
+               <div class="col-sm-3">
+                   <label for="from" class="col-form-label">From:</label>
+               </div>
+               <div class="col-sm-9">
+                 <div class="scene-char-select" >
+                   <PowerSelect @selected={{poseChar}} @options={{model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+                       <CharIconTiny @char={{poseChar}} />
+                   </PowerSelect>
+                 </div>
+               </div> 
+             </div>
+             
       
-               <MarkdownEditor @text={{chatMessage}} @class="chat-box" @cols="80" @rows="6" @onEnter={{action "startConversation"}} />
+               <MarkdownEditor @text={{newPage}} @class="chat-box" @cols="80" @rows="6" @onEnter={{action "startConversation"}} />
       
            </div>
          </div>
