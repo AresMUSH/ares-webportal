@@ -181,7 +181,21 @@
     </td>
   </tr>
   
-  
+  {{#if model.job.tags}}
+  <tr>
+    <td>
+      <label>Tags:</label>
+    </td>
+    <td> 
+      {{#each model.job.tags as |tag|}}
+      <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
+      {{/each}}
+    </td>
+    <td>
+      &nbsp;
+    </td>
+  </tr>
+  {{/if}}
 </table>
 
 <br>

@@ -9,6 +9,6 @@ export default Route.extend(DefaultRoute, {
     
     model: function(params) {
         let api = this.gameApi;
-        return api.requestOne('wikiTag', { id: params['id'] });
+        return api.requestOne('wikiTag', { id: params['id'] }, 'wiki-tags');
     }
 });

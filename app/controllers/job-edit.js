@@ -16,6 +16,12 @@ export default Controller.extend({
       
     saveJob: function() {
       let api = this.gameApi;
+      
+      let tags = this.get('model.job.tags') || [];
+      if (!Array.isArray(tags)) {
+          tags = tags.split(/[\s,]/);
+      }
+      
       api.requestOne('jobSave', { 
         id: this.get('model.job.id'),
         title: this.get('model.job.title'), 
@@ -24,7 +30,8 @@ export default Controller.extend({
         description: this.get('model.job.description'),
         assigned_to: this.get('model.job.assigned_to.name'),
         participants: (this.get('model.job.participants') || []).map(p => p.id),
-        submitter: this.get('model.job.author.name') }, null)
+        submitter: this.get('model.job.author.name'),
+        tags: tags }, null)
         .then( (response) => {
           if (response.error) {
             return;
