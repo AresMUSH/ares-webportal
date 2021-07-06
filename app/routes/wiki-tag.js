@@ -9,11 +9,6 @@ export default Route.extend(DefaultRoute, {
     
     model: function(params) {
         let api = this.gameApi;
-        return RSVP.hash(
-            { 
-                name: params['id'], 
-                content: api.requestOne('wikiTag', { id: params['id'] })
-            })
-            .then((model) => EmberObject.create(model));
+        return api.requestOne('wikiTag', { id: params['id'] });
     }
 });
