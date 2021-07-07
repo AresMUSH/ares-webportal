@@ -24,7 +24,17 @@ export default Component.extend(AuthenticatedController, {
     updatePoseControls: function() {
       this.set('poseType', { title: 'Pose', id: 'pose' });
       if (this.scene && !this.get('scene.poseChar')) {
-        this.set('scene.poseChar', this.get('scene.poseable_chars')[0]);
+       this.set('scene.poseChar', this.get('scene.poseable_chars')[0]);
+        
+        let self = this;
+        this.scene.poseable_chars.some(function(c) {
+          if (self.scene.participants.any(w => w.name == c.name)) {
+            self.set('scene.poseChar', c);
+            return true;
+          }
+          return false;
+        });
+        
       }
     },
     
