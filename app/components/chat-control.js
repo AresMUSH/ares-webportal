@@ -63,6 +63,9 @@ export default Component.extend({
                 return;
             }
             this.set('channel.enabled', response.enabled);
+            this.set('channel.poseable_chars', response.poseable_chars);
+            this.set('channel.who', response.who);
+            this.updatePoseControls();
         });
     },
     
