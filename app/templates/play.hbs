@@ -161,10 +161,14 @@
   
 <BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAddChannel}}  @onHide={{action (mut showAddChannel) false}}>
   
+    
+  <PowerSelect @selected={{poseChar}} @options={{model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+      <CharIconTiny @char={{poseChar}} />
+  </PowerSelect>
+  
   <table>
     {{#each sortedChannels as |channel|}}
       {{#if channel.can_join}}
-        {{#if (not channel.enabled)}}
         <tr>
           <td>
           <b>{{channel.title}}</b> 
@@ -180,9 +184,9 @@
             <a href="#" {{action 'joinChannel' channel.title}} class="btn btn-primary">Join</a>
           </td>
         </tr>
-        {{/if}}
       {{/if}}
   {{/each}}
+  
   </table>
 </BsModalSimple>
   

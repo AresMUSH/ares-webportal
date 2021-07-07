@@ -18,7 +18,7 @@ export default Component.extend({
   updatePoseControls: function() {
     if (this.channel && !this.get('channel.poseChar')) {
       let self = this;
-      this.poseableChars.some(function(c) {
+      this.channel.poseable_chars.some(function(c) {
         if (self.channel.who.any(w => w.name == c.name)) {
           self.set('channel.poseChar', c);
           return true;
@@ -57,12 +57,12 @@ export default Component.extend({
         let api = this.gameApi;
         let channelKey = this.get('channel.key');
                     
-        api.requestOne('leaveChannel', { channel: channelKey }, null)
+        api.requestOne('leaveChannel', { channel: channelKey, char: this.channel.poseChar.name }, null)
         .then( (response) => {
             if (response.error) {
                 return;
             }
-            this.set('channel.enabled', false);
+            this.set('channel.enabled', response.enabled);
         });
     },
     

@@ -256,7 +256,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
           let api = this.gameApi;
           this.set('showAddChannel', false);
                     
-          api.requestOne('joinChannel', { channel: channelName }, null)
+          api.requestOne('joinChannel', { channel: channelName, char: this.poseChar.name }, null)
           .then( (response) => {
               if (response.error) {
                   return;
