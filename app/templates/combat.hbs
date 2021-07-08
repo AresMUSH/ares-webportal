@@ -13,6 +13,7 @@
                  <li> <a href="#" {{action (mut showAddCombatant) true}}>Add Combatant</a></li>
                 {{#if model.in_combat}}
                 <li> <a href="#" {{action "combatHero"}}>Hero Recovery</a></li>
+                <li> <a href="#" {{action (mut showCombatCommand) true}}>Combat Command</a></li>
                 {{/if}}
                 {{#if model.can_manage}}
                  <li> <LinkTo @route="combat-setup" @model={{model.id}}>Setup NPCs</LinkTo></li>
@@ -59,12 +60,18 @@
 
       <AnsiFormat @text={{combatLog}} />
     </div>
-  
-    {{#if newCombatActivity}}
-    <div class="alert alert-warning">Your combat dashboard may be out of date.  You can get fresh data by editing something or reloading the page.</div>
-    {{/if}}
   </div>
 </div>
+
+{{#if model.in_combat}}
+  <div class="row">
+    <div class="col">
+      <Input @type="text" @size={{25}} @value={{combatCommand}} />
+      <button class="btn btn-default" {{action 'sendCommand'}} >Send Command</button>
+    </div>
+  </div>
+{{/if}}
+
 
 <div class="table-responsive">
 
@@ -184,6 +191,6 @@
           {{type}}
         </PowerSelect></p>
   </BsModalSimple>
-
+  
 
 {{outlet}}

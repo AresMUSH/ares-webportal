@@ -15,6 +15,7 @@ export default Controller.extend(AuthenticatedController, {
   showJoinCombat: false,
   confirmStopCombat: false,
   confirmRemoveCombatant: false,
+  combatCommand: '',
   combatLog: '',
     
   pageTitle: computed('model.id', function() {
@@ -59,6 +60,7 @@ export default Controller.extend(AuthenticatedController, {
     this.set('showJoinCombat', false);
     this.set('confirmStopCombat', false);
     this.set('combatLog', '');
+    this.set('combatCommand', '');
   },
     
   setupCallback: function() {
@@ -190,6 +192,23 @@ export default Controller.extend(AuthenticatedController, {
           }
           this.flashMessages.success('Actions set!');
         });
-      }
+      },
+      sendCommand: function() {
+        let api = this.gameApi;
+        api.requestOne('sendCombatCommand', { combat_id: this.get('model.id'), combatant_id: this.get('model.combatant_id'), command: this.get('combatCommand') })
+        .then( (response) => {
+          if (response.error) {
+            return;
+          }
+          if (response.message) {
+            if (response.success) {
+              this.flashMessages.success(response.message);
+            } else {
+              this.flashMessages.error(response.message);
+            }              
+          }
+          this.set('model', response.data);
+        });
+      },
     }
   });
