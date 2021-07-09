@@ -14,6 +14,10 @@ export default Route.extend(DefaultRoute, RouteResetOnExit, ReloadableRoute, {
         return api.requestOne('combat', { id: params['id'] });
     },
 
+    afterModel: function(model) {
+      this.controllerFor('combat').setupController(model);
+    },
+    
     activate: function() {
         this.controllerFor('combat').setupCallback();
         $(window).on('beforeunload', () => {

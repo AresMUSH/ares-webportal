@@ -235,6 +235,23 @@
                  </li>
              </ul>
              
+
+             {{#if scene.fs3combat_enabled}}
+               {{#if scene.combat}}
+                 <ul class="nav scene-menu">    
+                     <li class="dropup">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             <span class="btn btn-default" href="#">Combat <span class="caret"></span></span>
+                         </a>
+                         <ul class="dropdown-menu">
+                             <LiveSceneFs3combat @scene={{scene}} />
+                         </ul>
+                     </li>
+                 </ul>
+               {{/if}}
+             {{/if}}
+             
+             
              <ul class="nav scene-menu">    
                  <li class="dropup">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -246,6 +263,8 @@
                      </ul>
                  </li>
              </ul>
+             
+
              
              </div>
              
@@ -330,6 +349,5 @@
       {{/if}}
       
     </BsModalSimple>
-    
           
 {{/if}}

@@ -2,11 +2,10 @@
 
 <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Ability Roll</a></li>
 <li><a href="#" {{action (mut selectSpendLuck) true}}>Spend Luck</a></li>
+
 {{#if scene.fs3combat_enabled}}
-  {{#if scene.combat}}
-  <li><LinkTo @route="combat" @model={{scene.combat}} @target="_blank">View Combat</LinkTo></li>
-  {{else}}
-  <li><a href="#" {{action 'startCombat'}}>Start Combat</a></li>
+  {{#if (not scene.combat)}}
+    <li><a href="#" {{action 'startCombat'}}>Start Combat</a></li>
   {{/if}}
 {{/if}}
 

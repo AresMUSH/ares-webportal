@@ -15,6 +15,7 @@ export default Controller.extend(AuthenticatedController, {
   showJoinCombat: false,
   confirmStopCombat: false,
   confirmRemoveCombatant: false,
+  commandResponse: '',
   combatCommand: '',
   combatLog: '',
     
@@ -37,18 +38,22 @@ export default Controller.extend(AuthenticatedController, {
       }
       else {
         this.set('newCombatActivity', true);
-        this.set('combatLog', this.combatLog + "\n" + message);
-        try {
-          $('#combat-log').stop().animate({
-            scrollTop: $('#combat-log')[0].scrollHeight
-          }, 800); 
-        }
-        catch(error) {
-          // This happens sometimes when transitioning away from screen.
-        }   
+        this.set('combatLog', this.combatLog + message);
+        this.scrollLog();
       }
         
     }
+  },
+  
+  scrollLog: function() {
+    try {
+      $('#combat-log').stop().animate({
+        scrollTop: $('#combat-log')[0].scrollHeight
+      }, 800); 
+    }
+    catch(error) {
+      // This happens sometimes when transitioning away from screen.
+    }   
   },
     
   resetOnExit: function() {
@@ -61,8 +66,13 @@ export default Controller.extend(AuthenticatedController, {
     this.set('confirmStopCombat', false);
     this.set('combatLog', '');
     this.set('combatCommand', '');
+    this.set('commandResponse', '');
   },
-    
+  
+  setupController: function(model) {
+    this.set('combatLog', model.messages);
+  },
+  
   setupCallback: function() {
     let self = this;
     this.gameSocket.setupCallback('combat_activity', function(type, msg, timestamp) {
@@ -128,17 +138,6 @@ export default Controller.extend(AuthenticatedController, {
         }
         this.addToCombat(name, type, false);            
       },
-      combatHero: function() {
-        let api = this.gameApi;
-        api.requestOne('combatHero', { combat_id: this.get('model.id'), combatant_id: this.get('model.combatant_id') }, null)
-        .then( (response) => {
-          if (response.error) {
-            return;
-          }
-          this.set('model', response);
-          this.flashMessages.success('You spend a luck point to recover!');
-        });
-      },
       joinCombat: function() {
         let name = this.get('currentUser.name')
         let type = this.newCombatantType;
@@ -151,7 +150,7 @@ export default Controller.extend(AuthenticatedController, {
       },
       newTurn: function() {
         let api = this.gameApi;
-        api.requestOne('newCombatTurn', { id: this.get('model.id') }, null)
+        api.requestOne('newCombatTurn', { combat_id: this.get('model.id') }, null)
         .then( (response) => {
           if (response.error) {
             return;
@@ -195,20 +194,26 @@ export default Controller.extend(AuthenticatedController, {
       },
       sendCommand: function() {
         let api = this.gameApi;
-        api.requestOne('sendCombatCommand', { combat_id: this.get('model.id'), combatant_id: this.get('model.combatant_id'), command: this.get('combatCommand') })
+        
+        let command = this.get('combatCommand');
+        this.set('commandResponse', '');
+        this.set('combatCommand', '');
+        
+        api.requestOne('sendCombatCommand', { combat_id: this.get('model.id'), command: command })
         .then( (response) => {
           if (response.error) {
             return;
           }
           if (response.message) {
-            if (response.success) {
-              this.flashMessages.success(response.message);
-            } else {
-              this.flashMessages.error(response.message);
-            }              
+            this.set('commandResponse', response.message);
+          } else {
+            this.set('commandResponse', 'Command sent.');
           }
           this.set('model', response.data);
         });
       },
+      scrollLog: function() {
+        this.scrollLog();
+      }
     }
   });
