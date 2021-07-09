@@ -82,11 +82,11 @@
         <FlashMessages />
 
   
-  <BsModalSimple @title="Confirm Stop" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmStopCombat}} @onSubmit={{action "stopCombat"}} @onHide={{action (mut confirmStopCombat) false}}>
+  <BsModalSimple @title="Confirm Stop" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmStopCombat}} @onSubmit={{action "stopCombat"}} @onHide={{action (mut confirmStopCombat) false}}>
       This will stop the combat.  Are you sure?
     </BsModalSimple>
 
-<BsModalSimple @title="Add Combatant" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{false}} @open={{showAddCombatant}} @onSubmit={{action "addCombatant"}} @onHide={{action (mut showAddCombatant) false}}>
+<BsModalSimple @title="Add Combatant" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{showAddCombatant}} @onSubmit={{action "addCombatant"}} @onHide={{action (mut showAddCombatant) false}}>
         <p><b>Name(s):</b> </p>
             <p><Input @type="text" @size={{25}} @value={{newCombatantName}} /></p>
         <p><b>Type:</b> <PowerSelect @selected={{newCombatantType}} @options={{model.combatant_types}} @onChange={{action "combatantTypeChanged"}} as |type|>
@@ -96,7 +96,7 @@
   </BsModalSimple>
 
 
-<BsModalSimple @title="Join Combat" @closeTitle="Cancel" @submitTitle="Join" @size={{null}} @fade={{false}} @open={{showJoinCombat}} @onSubmit={{action "joinCombat"}} @onHide={{action (mut showJoinCombat) false}}>
+<BsModalSimple @title="Join Combat" @closeTitle="Cancel" @submitTitle="Join" @size={{null}} @fade={{true}} @open={{showJoinCombat}} @onSubmit={{action "joinCombat"}} @onHide={{action (mut showJoinCombat) false}}>
         <p><b>Type:</b> <PowerSelect @selected={{newCombatantType}} @options={{model.combatant_types}} @onChange={{action "combatantTypeChanged"}} as |type|>
           {{type}}
         </PowerSelect></p>

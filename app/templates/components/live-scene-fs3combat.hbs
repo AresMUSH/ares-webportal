@@ -7,7 +7,7 @@
 
   <li><LinkTo @route="combat" @model={{scene.combat}} @target="_blank">Manage Combat</LinkTo></li>
   {{#if scene.combat.can_manage}}
-    <li><a href="#"  {{action 'newTurn'}}>New Turn</a></li>
+    <li><a href="#"  {{action 'newTurn'}}>Start New Turn</a></li>
   {{/if}}
   
 {{else}}
@@ -17,7 +17,7 @@
 
 
     
-<BsModalSimple @title="Combat HUD" @closeTitle="Close" @size={{null}} @fade={{false}} @open={{showCombat}} @onHide={{action (mut showCombat) false}}>
+<BsModalSimple @title="Combat HUD" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{showCombat}} @onHide={{action (mut showCombat) false}}>
   
     <Fs3CombatHud @combat={{scene.combat}} />
   
@@ -25,7 +25,7 @@
 
 
     
-<BsModalSimple @title="Send Combat Command" @closeTitle="Close" @size={{null}} @fade={{false}} @open={{showCombatCommand}} @onHide={{action (mut showCombatCommand) false}}>
+<BsModalSimple @title="Send Combat Command" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{showCombatCommand}} @onHide={{action (mut showCombatCommand) false}}>
   
     {{input value=combatCommand enter='sendCommand' size=25}}
 

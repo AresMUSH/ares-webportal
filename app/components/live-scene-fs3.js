@@ -24,7 +24,7 @@ export default Component.extend({
       }
 
       api.requestOne('spendLuck', { scene_id: this.get('scene.id'),
-      reason: luckReason }, null)
+        reason: luckReason, sender: this.get('scene.poseChar.name') }, null)
       .then( (response) => {
         if (response.error) {
           return;

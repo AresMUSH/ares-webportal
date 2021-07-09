@@ -34,7 +34,7 @@
 </div>
 {{/if}}
 
-<BsModalSimple @title="Confirm Restore" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmRestore}} @onSubmit={{action "restoreDefaults"}} @onHide={{action (mut confirmRestore) false}}>
+<BsModalSimple @title="Confirm Restore" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmRestore}} @onSubmit={{action "restoreDefaults"}} @onHide={{action (mut confirmRestore) false}}>
     This will revert this configuration file to the default settings. Are you sure?
   </BsModalSimple>
   
