@@ -10,9 +10,5 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, {
     model: function() {
         let api = this.gameApi;
         return api.requestOne('loginNotices');
-    },
-    afterModel: function(model) {
-      var notification_badge = $('#notificationBadge');
-      notification_badge.text(model.notices.filter(n => n.is_unread).length);
     }
 });

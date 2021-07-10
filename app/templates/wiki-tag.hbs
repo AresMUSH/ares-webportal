@@ -1,33 +1,15 @@
 {{page-title model.name}}
 <h1>Tag - {{model.name}}</h1>
 
-<h2>Pages</h2>
+{{#each model.groups as |group|}}
+<h2>{{group.name}}</h2>
 <ul>
-{{#each model.content.pages as |page| }}
-<li><LinkTo @route="wiki-page" @model={{page.id}}>{{page.heading}}</LinkTo></li>
+{{#each group.items as |item| }}
+  {{#if (eq "AresMUSH::BbsPost" item.type)}}
+   <li><LinkTo @route="forum-topic" @models={{array 1 item.id}}>{{item.title}}</LinkTo></li>
+  {{else}}
+    <li><LinkTo @route={{item.route}} @model={{item.id}}>{{item.title}}</LinkTo></li>
+  {{/if}}
 {{/each}}
 </ul>
-
-<h2>Scenes</h2>
-
-<ul>
-{{#each model.content.scenes as |scene| }}
-<li><LinkTo @route="scene" @model={{scene.id}}>{{scene.title}}</LinkTo></li>
 {{/each}}
-</ul>
-
-<h2>Characters</h2>
-
-<ul>
-{{#each model.content.chars as |char| }}
-<li><LinkTo @route="char" @model={{char.name}}>{{char.name}}</LinkTo></li>
-{{/each}}
-</ul>
-
-<h2>Events</h2>
-
-<ul>
-{{#each model.content.events as |event| }}
-<li><LinkTo @route="event" @model={{event.id}}>{{event.title}}</LinkTo></li>
-{{/each}}
-</ul>

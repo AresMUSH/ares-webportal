@@ -6,6 +6,10 @@ export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
 
+  gameApi: service(),
+  flashMessages: service(),
+  confirmRemoveCombatant: false,
+  
     teams: computed(function() {
         return [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
     }),
@@ -62,6 +66,19 @@ export default Controller.extend({
         },
         addTarget: function(target) {
           this.set('model.action_args', `${this.model.action_args || ''} ${target}`);
+        },
+        
+        removeCombatant: function() {
+          this.set('confirmRemoveCombatant', false);
+          let api = this.gameApi;
+          api.requestOne('removeCombatant', { name: this.get('model.name'), id: this.get('model.combat') }, null)
+          .then( (response) => {
+            if (response.error) {
+              return;
+            }
+            this.transitionToRoute('combat', this.get('model.combat'));
+            this.flashMessages.success('Combatant removed!');
+          });
         },
     }
 });

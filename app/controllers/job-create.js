@@ -9,6 +9,7 @@ export default Controller.extend({
   category: '',
   description: '',
   template: '',
+  tags: '',
   submitter: null,
   participants: null,
 
@@ -41,12 +42,19 @@ export default Controller.extend({
       
     createJob: function() {
       let api = this.gameApi;
+      
+      let tags = this.get('tags') || [];
+      if (!Array.isArray(tags)) {
+          tags = tags.split(/[\s,]/);
+      }
+      
       api.requestOne('jobCreate', { 
         title: this.title, 
         category: this.category || this.get('model.options.request_category'),
         description: this.description,
         participants: (this.participants || []).map(p => p.id),
-        submitter: this.get('submitter.name') }, null)
+        submitter: this.get('submitter.name'),
+        tags: tags }, null)
         .then( (response) => {
           if (response.error) {
             return;

@@ -40,6 +40,6 @@
 </div>
 
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteCategory}} @onSubmit={{action "deleteCategory" categoryToDelete}} @onHide={{action (mut categoryToDelete) null}}>
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDeleteCategory}} @onSubmit={{action "deleteCategory" categoryToDelete}} @onHide={{action (mut categoryToDelete) null}}>
     You're about to delete {{categoryToDelete.name}}. This cannot be undone.  Are you sure?
   </BsModalSimple>
