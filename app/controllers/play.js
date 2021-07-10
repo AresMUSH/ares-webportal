@@ -95,9 +95,11 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       
       let channel = this.getChannel(channelKey);
       if (!channel) {
-        channel = this.addPageChannel(channelKey, channelTitle);
+        channel = this.model.chat.channels.pushObject(msgData);
+      } else {
+        channel.messages.pushObject({message: newMessage, timestamp: localTimestamp, author: author});  
       }
-      channel.messages.pushObject({message: newMessage, timestamp: localTimestamp, author: author});
+      
       set(channel, 'last_activity', Date.now());
       if (!channel.is_hidden) {
         set(channel, 'is_recent', true);
