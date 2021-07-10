@@ -153,10 +153,10 @@
                  <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC</button>
                  
                  {{#if txtExtraInstalled}}
-                   <LiveSceneTxt @scenePose={{scene.draftPose}} @scene={{scene}} @poseChar={{scene.poseChar}} />
+                   <LiveSceneTxt @scenePose={{scene.draftPose}} @scene={{scene}} />
                  {{/if}}
                  
-             <LiveSceneCustomScenepose @scenePose={{scene.draftPose}} @scene={{scene}} @poseChar={{scene.poseChar}} />
+             <LiveSceneCustomScenepose @scenePose={{scene.draftPose}} @scene={{scene}} />
              </div>
                 
              <div class="scene-pose-select">
