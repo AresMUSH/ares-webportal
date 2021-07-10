@@ -42,6 +42,6 @@
 </div>
 
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteChannel}} @onSubmit={{action "deleteChannel" channelToDelete}} @onHide={{action (mut channelToDelete) null}}>
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDeleteChannel}} @onSubmit={{action "deleteChannel" channelToDelete}} @onHide={{action (mut channelToDelete) null}}>
     You're about to delete {{channelToDelete.name}}. This cannot be undone.  Are you sure?
   </BsModalSimple>

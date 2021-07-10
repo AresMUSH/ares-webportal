@@ -11,6 +11,7 @@ export default Controller.extend({
   searchStatus: '',
   searchCategory: '',
   searchSubmitter: '',
+  searchTag: '',
   searchResults: null,
   searchInProgress: false,
     
@@ -20,6 +21,7 @@ export default Controller.extend({
     this.set('searchCategory', '');
     this.set('searchStatus', '');
     this.set('searchSubmitter', '');
+    this.set('searchTag', '');
     this.set('searchResults', null);
     this.set('searchInProgress', false);
   },
@@ -62,7 +64,8 @@ export default Controller.extend({
         searchText: this.searchText,
         searchCategory: this.searchCategory,
         searchStatus: this.searchStatus,
-        searchToken: this.searchInProgress      
+        searchToken: this.searchInProgress,
+        searchTag: this.searchTag
       })
       .then( (response) => {
         if (response.error) {

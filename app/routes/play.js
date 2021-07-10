@@ -13,11 +13,10 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     flashMessages: service(),
 
     activate: function() {
-        this.controllerFor('play').setupCallback();
-        this.controllerFor('application').set('hideSidebar', true);
-        $(window).on('beforeunload', () => {
-            this.deactivate();
-        });
+      this.controllerFor('application').set('hideSidebar', true);
+      $(window).on('beforeunload', () => {
+          this.deactivate();
+      });
     },
 
     deactivate: function() {
@@ -34,14 +33,13 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
              scenes: api.requestMany('myScenes'),
              abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }),
              locations: api.request('sceneLocations', { id: params['id'] }),
-             chat: api.requestMany('chat'),
+             chat: api.requestOne('chat'),
              characters: api.requestMany('characters', { select: 'all' })
            })
            .then((model) => EmberObject.create(model));
     },
     
-    setupController: function(controller, model) {
-      this._super(controller, model);
-      
+    afterModel: function(model) {
+      this.controllerFor('play').setupController(model);
     }
 });

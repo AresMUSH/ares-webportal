@@ -1,0 +1,35 @@
+{{#if scene.fs3combat_enabled}}
+  {{#if scene.combat}}
+
+  <li><a href="#" {{action (mut showCombat) true}}>Combat HUD</a></li>  
+  <li> <a href="#" {{action "combatHero"}}>Hero Recovery</a></li>
+  <li> <a href="#" {{action (mut showCombatCommand) true}}>Send Command</a></li>
+
+  <li><LinkTo @route="combat" @model={{scene.combat}} @target="_blank">Manage Combat</LinkTo></li>
+  {{#if scene.combat.can_manage}}
+    <li><a href="#"  {{action 'newTurn'}}>Start New Turn</a></li>
+  {{/if}}
+  
+{{else}}
+  <li><a href="#" {{action 'startCombat'}}>Start Combat</a></li>
+  {{/if}}
+{{/if}}
+
+
+    
+<BsModalSimple @title="Combat HUD" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{showCombat}} @onHide={{action (mut showCombat) false}}>
+  
+    <Fs3CombatHud @combat={{scene.combat}} />
+  
+</BsModalSimple>
+
+
+    
+<BsModalSimple @title="Send Combat Command" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{showCombatCommand}} @onHide={{action (mut showCombatCommand) false}}>
+  
+    {{input value=combatCommand enter='sendCommand' size=25}}
+
+    <button class="btn btn-default" {{action 'sendCommand'}} >Send Command</button>
+    <div class="label label-info">{{commandResponse}}</div>
+  
+</BsModalSimple>

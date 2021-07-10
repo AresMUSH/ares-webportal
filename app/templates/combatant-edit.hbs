@@ -166,6 +166,7 @@
             <div class="pull-right">
     
                 <p> <LinkTo @route="combat" @model={{model.combat}} class="btn btn-default">Cancel</LinkTo>  
+                    <button class="btn btn-warning" {{action (mut confirmRemoveCombatant) true}} >Remove</button>
                     <button class="btn btn-primary" {{action 'save'}} >Save</button>
                 </p>
     
@@ -174,4 +175,9 @@
         </div>
     </div>
     
+
+<BsModalSimple @title="Confirm Remove" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmRemoveCombatant}} @onSubmit={{action "removeCombatant"}} @onHide={{action (mut confirmRemoveCombatant) false}}>
+    This will remove them from combat.  Are you sure?
+  </BsModalSimple>   
+
 {{outlet}}

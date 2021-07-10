@@ -123,6 +123,23 @@
                 {{/if}}
               </div>
             </div>
+            
+            
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                  Unified Play Screen <LinkTo @route="help-topic" @model="play" @target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
+                </div>
+    
+                <div class="panel-body">
+          
+                  Unified Play Enabled <Input @type="checkbox" @checked={{model.unified_play_screen}} /> 
+
+                </div>
+              </div>
+              
+            
+            
+            
           
           <p><Input @type="password" @id="passwordEmail" placeholder="Confirm Password" @value={{confirmPasswordSettings}} /></p>
           <button {{action "changeSettings"}} class="btn btn-primary">Save Settings</button>
