@@ -202,6 +202,10 @@
                              {{#if rpgExtraInstalled}}
                                <RpgLiveScene @scene={{scene}} />
                              {{/if}}
+                             
+                             {{#if fateExtraInstalled}}
+                               <LiveSceneFate @scene={{scene}} />
+                             {{/if}}
                                                     
                           
                              <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} />

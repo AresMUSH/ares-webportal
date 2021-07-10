@@ -75,6 +75,10 @@ export default Component.extend(AuthenticatedController, {
       return this.get('scene.extras_installed').some(e => e == 'rpg');
     }),
     
+    fateExtraInstalled: computed(function() {
+      return this.get('scene.extras_installed').any(e => e == 'fate');
+    }),
+    
     sceneAlerts: computed('scene.{is_watching,reload_required}', 'scrollPaused', function() {
       let alertList = [];
       if (this.scrollPaused) {
