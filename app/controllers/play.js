@@ -95,11 +95,9 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       
       let channel = this.getChannel(channelKey);
       if (!channel) {
-        channel = this.model.chat.channels.pushObject(msgData);
-      } else {
-        channel.messages.pushObject({message: newMessage, timestamp: localTimestamp, author: author});  
+        channel = this.addPageChannel(msgData);
       }
-      
+      channel.messages.pushObject({message: newMessage, timestamp: localTimestamp, author: author});
       set(channel, 'last_activity', Date.now());
       if (!channel.is_hidden) {
         set(channel, 'is_recent', true);
@@ -197,14 +195,15 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     }),
         
     
-    addPageChannel: function(key, title) {
-      let channel = { title: title, 
-        key: key, 
+    addPageChannel: function(data) {
+      let channel = { title: data.title, 
+        key: data.key, 
         enabled: true, 
         can_join: true, 
         can_talk: true,
         is_page: true, 
         muted: false,
+        poseable_chars: data.poseable_chars,
         messages: [],
         who: []
       };
