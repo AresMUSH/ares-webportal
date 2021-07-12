@@ -65,6 +65,6 @@
  
 <FlashMessages />
 
- <BsModalSimple @title="Confirm Execute" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmExecute}} @onSubmit={{action "execute"}} @onHide={{action (mut confirmExecute) false}}>
+ <BsModalSimple @title="Confirm Execute" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmExecute}} @onSubmit={{action "execute"}} @onHide={{action (mut confirmExecute) false}}>
      You're about to proceed with the specified idle actions. This may take a minute.  Are you sure?
  </BsModalSimple>

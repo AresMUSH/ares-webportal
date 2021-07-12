@@ -49,6 +49,7 @@ export default Controller.extend(AuthenticatedController, {
        this.set('model.message', data.message);
        this.set('model.raw_message', data.raw_message);
        this.set('model.can_edit', currentUserId == data.author.id);
+       this.set('model.tags', data.tags);
      }
      else if (data.type == 'reply_edited') {
        let reply = this.get('model.replies').find(r => r.id == data.reply);

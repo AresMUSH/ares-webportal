@@ -75,7 +75,7 @@
            <a href="#" {{action 'changeChannel' channel}}>
             <div class="play-selector {{if (eq channel.key selectedChannel.key) 'play-selector-active' ''}}">
               # {{channel.title}}
-              {{#if channel.muted}}
+              {{#if channel.is_hidden}}
                   <i class="fa fa-microphone-slash"></i>
               {{/if}}
               <span class="label label-pill label-primary">{{channel.new_messages}}</span>
@@ -146,22 +146,26 @@
        {{/if}}
 
 
-         <ChatControl @channel={{selectedChannel}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
+         <ChatControl @channel={{selectedChannel}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @poseableChars={{model.chat.pose_chars}} @setScroll={{action "setScroll"}} />
 
 
        {{#if emptyPrompt}}
-       <div class="alert alert-info">Please join a channel or scene.</div>
+       <div class="alert alert-info">Please select or join a channel or scene.</div>
        {{/if}}
 
     </div>
 </div>
 
-<BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAddChannel}}  @onHide={{action (mut showAddChannel) false}}>
+<BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{showAddChannel}}  @onHide={{action (mut showAddChannel) false}}>
+
+
+  <PowerSelect @selected={{poseChar}} @options={{model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+      <CharIconTiny @char={{poseChar}} />
+  </PowerSelect>
 
   <table>
     {{#each sortedChannels as |channel|}}
       {{#if channel.can_join}}
-        {{#if (not channel.enabled)}}
         <tr>
           <td>
           <b>{{channel.title}}</b>
@@ -177,22 +181,45 @@
             <a href="#" {{action 'joinChannel' channel.title}} class="btn btn-primary">Join</a>
           </td>
         </tr>
-        {{/if}}
       {{/if}}
   {{/each}}
+
   </table>
 </BsModalSimple>
 
-<BsModalSimple @title="Start Conversation" @closeTitle="Cancel" @submitTitle="Start" @size={{null}} @fade={{false}} @open={{showNewConversation}} @onSubmit={{action "startConversation"}}  @onHide={{action (mut showNewConversation) false}}>
+<BsModalSimple @title="Start Conversation" @closeTitle="Cancel" @submitTitle="Start" @size={{null}} @fade={{true}} @open={{showNewConversation}} @onSubmit={{action "startConversation"}}  @onHide={{action (mut showNewConversation) false}}>
 
 
          <div class="panel panel-default">
            <div class="panel-body">
-             <b>To:</b><PowerSelectMultiple @selected={{newConversationList}} @options={{model.characters}} @searchEnabled=true  @searchField="name" @onChange={{action "conversationListChanged"}} as |char|>
+
+
+              <div class="form-group row">
+               <div class="col-sm-3">
+                   <label for="to" class="col-form-label">To:</label>
+               </div>
+               <div class="col-sm-9">
+                   <PowerSelectMultiple @selected={{newConversationList}} @options={{model.characters}} @searchEnabled=true  @searchField="name" @onChange={{action "conversationListChanged"}} as |char|>
                  {{char.name}}
                </PowerSelectMultiple>
+               </div>
+             </div>
 
-               <MarkdownEditor @text={{chatMessage}} @class="chat-box" @cols="80" @rows="6" @onEnter={{action "startConversation"}} />
+              <div class="form-group row">
+               <div class="col-sm-3">
+                   <label for="from" class="col-form-label">From:</label>
+               </div>
+               <div class="col-sm-9">
+                 <div class="scene-char-select" >
+                   <PowerSelect @selected={{poseChar}} @options={{model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+                       <CharIconTiny @char={{poseChar}} />
+                   </PowerSelect>
+                 </div>
+               </div>
+             </div>
+
+
+               <MarkdownEditor @text={{newPage}} @class="chat-box" @cols="80" @rows="6" @onEnter={{action "startConversation"}} />
 
            </div>
          </div>

@@ -5,8 +5,6 @@ import { observer } from '@ember/object';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
 export default Component.extend(AuthenticatedController, {
-    scenePose: '',
-    // showSceneDetails: false,
     rollString: null,
     confirmDeleteScenePose: false,
     confirmDeleteScene: false,
@@ -17,7 +15,6 @@ export default Component.extend(AuthenticatedController, {
     newLocation: null,
     reportReason: null,
     poseType: null,
-    poseChar: null,
     commandResponse: null,
     gameApi: service(),
     flashMessages: service(),
@@ -26,8 +23,18 @@ export default Component.extend(AuthenticatedController, {
 
     updatePoseControls: function() {
       this.set('poseType', { title: 'Pose', id: 'pose' });
-      if (this.scene) {
-        this.set('poseChar', this.get('scene.poseable_chars')[0]);
+      if (this.scene && !this.get('scene.poseChar')) {
+       this.set('scene.poseChar', this.get('scene.poseable_chars')[0]);
+
+        let self = this;
+        this.scene.poseable_chars.some(function(c) {
+          if (self.scene.participants.any(w => w.name == c.name)) {
+            self.set('scene.poseChar', c);
+            return true;
+          }
+          return false;
+        });
+
       }
     },
 
@@ -66,6 +73,10 @@ export default Component.extend(AuthenticatedController, {
 
     rpgExtraInstalled: computed(function() {
       return this.get('scene.extras_installed').some(e => e == 'rpg');
+    }),
+
+    fateExtraInstalled: computed(function() {
+      return this.get('scene.extras_installed').any(e => e == 'fate');
     }),
 
     sceneAlerts: computed('scene.{is_watching,reload_required}', 'scrollPaused', function() {
@@ -174,17 +185,17 @@ export default Component.extend(AuthenticatedController, {
       },
 
       addPose(poseType) {
-          let pose = this.scenePose;
+          let pose = this.get('scene.draftPose') || "";
           if (pose.length === 0) {
               this.flashMessages.danger("You haven't entered anything.");
               return;
           }
           let api = this.gameApi;
-          this.set('scenePose', '');
+          this.set('scene.draftPose', '');
           api.requestOne('addScenePose', { id: this.get('scene.id'),
               pose: pose,
               pose_type: poseType,
-              pose_char: this.get('poseChar.id') })
+              pose_char: this.get('scene.poseChar.id') })
           .then( (response) => {
               if (response.error) {
                   return;
@@ -261,7 +272,7 @@ export default Component.extend(AuthenticatedController, {
       },
 
       poseCharChanged(newChar) {
-        this.set('poseChar', newChar);
+        this.set('scene.poseChar', newChar);
       },
 
       switchPoseOrderType(newType) {

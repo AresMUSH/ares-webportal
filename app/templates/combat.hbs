@@ -11,9 +11,6 @@
                 <span class="btn btn-default" href="#">Combat Menu <span class="caret"></span></span> </a>
                 <ul class="dropdown-menu">
                  <li> <a href="#" {{action (mut showAddCombatant) true}}>Add Combatant</a></li>
-                {{#if model.in_combat}}
-                <li> <a href="#" {{action "combatHero"}}>Hero Recovery</a></li>
-                {{/if}}
                 {{#if model.can_manage}}
                  <li> <LinkTo @route="combat-setup" @model={{model.id}}>Setup NPCs</LinkTo></li>
                  <li> <LinkTo @route="combat-teams" @model={{model.id}}>Setup Teams</LinkTo></li>
@@ -51,121 +48,45 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     Combat Activity
+
+    (
+    {{#if model.scene}}
+      <i>Scene <LinkTo @route="scene-live" @model={{model.scene}}>{{model.scene}}</LinkTo></i>.
+    {{/if}}
+    <i>Organized by {{model.organizer}}</i>
+    )
   </div>
   <div class="panel-body">
-
+    <a href="#" {{action "scrollLog"}}><i class="fas fa-angle-double-down"></i> Jump to End</a>
     <div id="combat-log">
-      <p><i>Organized by {{model.organizer}}</i> </p>
-
       <AnsiFormat @text={{combatLog}} />
     </div>
-
-    {{#if newCombatActivity}}
-    <div class="alert alert-warning">Your combat dashboard may be out of date.  You can get fresh data by editing something or reloading the page.</div>
-    {{/if}}
   </div>
 </div>
 
-<div class="table-responsive">
+{{#if model.in_combat}}
+  <div class="row">
+    <div class="col">
 
-<table class="table">
-<tbody>
-<tr>
-    <th>Name</th>
-    <th>Damage</th>
-    <th>Weapon</th>
-    <th>Armor</th>
-    <th>Stance</th>
-    <th>Action</th>
-    <th></th>
+      {{input value=combatCommand enter='sendCommand' size=25}}
 
-</tr>
+      <button class="btn btn-default" {{action 'sendCommand'}} >Send Command</button>
+      <div class="label label-info">{{commandResponse}}</div>
+    </div>
+  </div>
+{{/if}}
 
-
-{{#each model.teams as |t| }}
-
-<tr><td colspan="6"><h3>Team {{t.team}}</h3></td></tr>
-
-    {{#each t.combatants as |c| }}
-
-    <tr>
-        <td>
-          {{#if c.is_npc}}
-            {{c.name}}
-          {{else}}
-            <LinkTo @route="char" @model={{c.name}}>{{c.name}}</LinkTo>
-          {{/if}}
-        </td>
-
-        <td>
-            {{#if c.is_ko}}
-            <span class="combat-damage hint--left" aria-label="{{c.wound_display}}">
-                <i class="fa fa-crosshairs" aria-label="Knocked Out"></i>
-                K O
-                <i class="fa fa-crosshairs" aria-hidden="true"></i>
-            </span>
-            {{else}}
-              <span class="combat-damage hint--left" aria-label="{{c.wound_display}}">
-                {{#each c.damage_boxes}}
-                    <i class="fa fa-heartbeat combat-damage" aria-label="Damage Box"></i>
-                {{/each}}
-              </span>
-            {{/if}}
-        </td>
-
-        <td>
-            {{c.weapon}} {{c.ammo}}
-        </td>
-        <td>
-            {{c.armor}}
-        </td>
-
-
-        <td>
-            {{c.stance}}
-        </td>
-
-        <td>
-            {{c.action}}
-        </td>
-
-        <td>
-            {{#if currentUser}}
-                <LinkTo @route="combatant-edit" @model={{c.id}}>
-                <TooltipIcon @position="left" @message="Edit combatant." @icon="fa fa-edit" />
-                </LinkTo>
-                <a href="#" {{action (mut confirmRemoveCombatant) c.name }} >
-                  <TooltipIcon @position="left" @message="Remove combatant." @icon="fas fa-ban" />
-                </a>
-            {{/if}}
-        </td>
-    </tr>
-
-    {{/each}}
-
-
-{{/each}}
-
-
-</tbody>
-</table>
-
-<p><b>Luck Points:</b> {{model.luck_points}}</p>
-</div>
+<Fs3CombatHud @combat={{model}} />
 
 
         <FlashMessages />
 
 
-<BsModalSimple @title="Confirm Remove" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmRemoveCombatant}} @onSubmit={{action "removeCombatant" confirmRemoveCombatant}} @onHide={{action (mut confirmRemoveCombatant) false}}>
-    This will remove them from combat.  Are you sure?
-  </BsModalSimple>
-
-  <BsModalSimple @title="Confirm Stop" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmStopCombat}} @onSubmit={{action "stopCombat"}} @onHide={{action (mut confirmStopCombat) false}}>
+  <BsModalSimple @title="Confirm Stop" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmStopCombat}} @onSubmit={{action "stopCombat"}} @onHide={{action (mut confirmStopCombat) false}}>
       This will stop the combat.  Are you sure?
     </BsModalSimple>
 
-<BsModalSimple @title="Add Combatant" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{false}} @open={{showAddCombatant}} @onSubmit={{action "addCombatant"}} @onHide={{action (mut showAddCombatant) false}}>
+<BsModalSimple @title="Add Combatant" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{showAddCombatant}} @onSubmit={{action "addCombatant"}} @onHide={{action (mut showAddCombatant) false}}>
         <p><b>Name(s):</b> </p>
             <p><Input @type="text" @size={{25}} @value={{newCombatantName}} /></p>
         <p><b>Type:</b> <PowerSelect @selected={{newCombatantType}} @options={{model.combatant_types}} @onChange={{action "combatantTypeChanged"}} as |type|>
@@ -175,7 +96,7 @@
   </BsModalSimple>
 
 
-<BsModalSimple @title="Join Combat" @closeTitle="Cancel" @submitTitle="Join" @size={{null}} @fade={{false}} @open={{showJoinCombat}} @onSubmit={{action "joinCombat"}} @onHide={{action (mut showJoinCombat) false}}>
+<BsModalSimple @title="Join Combat" @closeTitle="Cancel" @submitTitle="Join" @size={{null}} @fade={{true}} @open={{showJoinCombat}} @onSubmit={{action "joinCombat"}} @onHide={{action (mut showJoinCombat) false}}>
         <p><b>Type:</b> <PowerSelect @selected={{newCombatantType}} @options={{model.combatant_types}} @onChange={{action "combatantTypeChanged"}} as |type|>
           {{type}}
         </PowerSelect></p>

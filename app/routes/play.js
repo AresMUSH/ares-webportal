@@ -13,17 +13,17 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     flashMessages: service(),
 
     activate: function() {
-        this.controllerFor('play').setupCallback();
-        this.controllerFor('application').set('hideSidebar', true);
-        $(window).on('beforeunload', () => {
-            this.deactivate();
-        });
+      this.controllerFor('application').set('hideSidebar', true);
+      $(window).on('beforeunload', () => {
+          this.deactivate();
+      });
     },
 
     deactivate: function() {
         this.gameSocket.removeCallback('new_scene_activity');
         this.gameSocket.removeCallback('new_chat');
         this.gameSocket.removeCallback('new_page');
+        this.gameSocket.removeCallback('joined_scene');
         this.controllerFor('application').set('hideSidebar', false);
     },
 
@@ -31,25 +31,16 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
         let api = this.gameApi;
         return RSVP.hash({
              scenes: api.requestMany('myScenes'),
-             abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }), 
+             abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }),
              locations: api.request('sceneLocations', { id: params['id'] }),
-             chat: api.requestMany('chat'),
+             chat: api.requestOne('chat'),
              characters: api.requestMany('characters', { select: 'all' }),
              spells:  api.request('charSpellList', { id: this.get('session.data.authenticated.id') })
            })
            .then((model) => EmberObject.create(model));
     },
 
-    setupController: function(controller, model) {
-      this._super(controller, model);
-      if (model.scenes.length > 0) {
-        controller.set('currentScene', model.scenes[0]);
-        controller.set('currentScene.is_unread', false);
-      } else {
-        let chan = controller.sortedChannels.find(c => c.enabled);
-        if (chan) {
-          controller.set('selectedChannel', chan);
-        }
-      }
+    afterModel: function(model) {
+      this.controllerFor('play').setupController(model);
     }
 });

@@ -29,7 +29,7 @@ export default Component.extend({
           }
 
           api.requestOne('changePlace', { scene_id: this.get('scene.id'),
-              place_name: newPlace }, null)
+              place_name: newPlace, sender: this.get('scene.poseChar.name') }, null)
           .then( (response) => {
               if (response.error) {
                   return;
@@ -40,7 +40,7 @@ export default Component.extend({
       leavePlace() {
           let api = this.gameApi;
 
-          api.requestOne('leavePlace', { scene_id: this.get('scene.id') })
+          api.requestOne('leavePlace', { scene_id: this.get('scene.id'), sender: this.get('scene.poseChar.name') })
           .then( (response) => {
               if (response.error) {
                   return;

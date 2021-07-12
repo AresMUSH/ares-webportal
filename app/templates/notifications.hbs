@@ -10,61 +10,29 @@
 
 </div>
 
-{{#if model.alts}}
-  <div class="alert alert-info">
-  {{#each model.alts as |alt|}}
-  <p>{{alt.name}} has {{alt.count}} unread notifications.</p>
+
+<ul class="nav nav-tabs">
+  {{#each model.chars as |char index| }}
+  <li class="{{if (eq index 0) 'active' }}">
+    <a data-toggle="tab" href="#{{char.name}}">
+    {{char.name}}
+    {{#if char.has_unread}}
+      <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="Unread Notification"></i></span>
+    {{/if}}
+    </a>
+  </li>
   {{/each}}
-  </div>
-{{/if}}
 
-<table class="table table-striped notifications-list">
+</ul>
 
+<div class="tab-content">
 
-{{#each model.notices as |notification|}}
-<tr>
-  <td>{{#if notification.is_unread}}
-        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="Unread Notification"></i></span>
-        {{/if}}
-      </td>
-  <td>{{notification.timestamp}}</td>
-  <td><AnsiFormat @text={{notification.message}} /></td>
-  <td>
+{{#each model.chars as |char index| }}
 
-    <div class="notification-controls">
-      {{#if (eq notification.type 'mail')}}
-        <LinkTo @route="mail-message" @model={{notification.reference_id}}>
-          <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-        </LinkTo>
-      {{else if (eq notification.type 'forum')}}
-        <LinkTo @route="forum-topic" @models={{array (get notification.data 0) (get notification.data 1)}}>
-          <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-        </LinkTo>
-      {{else if (eq notification.type 'job')}}
-        <LinkTo @route="job" @model={{notification.reference_id}}>
-          <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-        </LinkTo>
-      {{else if (eq notification.type 'pm')}}
-        <LinkTo @route="chat">
-          <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-        </LinkTo>
-      {{else if (eq notification.type 'scene')}}
-        <LinkTo @route="scene-live" @model={{notification.reference_id}}>
-          <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-        </LinkTo>
-      {{else if (eq notification.type 'scene_deletion')}}
-        <LinkTo @route="scene-live" @model={{notification.reference_id}}>
-          <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-        </LinkTo>
-      {{else if (eq notification.type 'event')}}
-        <LinkTo @route="event" @model={{notification.reference_id}}>
-          <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-        </LinkTo>
-      {{else if (eq notification.type 'achievement')}}
-        <LinkTo @route="char" @model={{currentUser.id}}>
-          <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-        </LinkTo>
-      {{else if (eq notification.type 'comp')}}
+    <div id="{{char.name}}" class="tab-pane fade in {{if (eq index 0) 'active' }}">
+      <NotificationList @notices={{char.notices}} />
+
+      <!-- {{else if (eq notification.type 'comp')}}
         <LinkTo @route="char" @model={{currentUser.id}}>
           <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
         </LinkTo>
@@ -75,22 +43,11 @@
       {{else if (eq notification.type 'item')}}
         <LinkTo @route="char" @model={{currentUser.id}}>
           <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-        </LinkTo>
-      {{/if}}
-
-      {{#if notification.is_unread}}
-      <a href="#" {{action "markRead" notification.id false}}>
-        <TooltipIcon @position="left" @message="Mark Read" @icon="fa fa-ban" />
-      </a>
-      {{else}}
-      <a href="#" {{action "markRead" notification.id true}}>
-        <TooltipIcon @position="left" @message="Mark Unread" @icon="fa fa-flag" />
-      </a>
-      {{/if}}
+        </LinkTo> -->
     </div>
-  </td>
-</tr>
+
 {{/each}}
-</table>
+
+</div>
 
 {{outlet}}

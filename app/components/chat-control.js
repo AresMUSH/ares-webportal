@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { observer } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
@@ -9,11 +10,31 @@ export default Component.extend({
   showReport: false,
   selectedReportMessage: null,
   reportReason: '',
-  chatMessage: '',
   showPageRename: false,
   showReport: false,
   showPageRename: false,
   newPageTitle: '',
+  
+  updatePoseControls: function() {
+    if (this.channel && !this.get('channel.poseChar')) {
+      let self = this;
+      this.channel.poseable_chars.some(function(c) {
+        if (self.channel.who.any(w => w.name == c.name)) {
+          self.set('channel.poseChar', c);
+          return true;
+        }
+        return false;
+      });
+    }
+  },
+  
+  didInsertElement: function() {
+    this.updatePoseControls();
+  },
+  
+  channelObserver: observer('channel', function() {
+    this.updatePoseControls();
+  }),
   
   chatAlerts: computed('channel.muted', 'scrollPaused', function() {
     let alertList = [];
@@ -36,12 +57,15 @@ export default Component.extend({
         let api = this.gameApi;
         let channelKey = this.get('channel.key');
                     
-        api.requestOne('leaveChannel', { channel: channelKey }, null)
+        api.requestOne('leaveChannel', { channel: channelKey, char: this.channel.poseChar.name }, null)
         .then( (response) => {
             if (response.error) {
                 return;
             }
-            this.set('channel.enabled', false);
+            this.set('channel.enabled', response.enabled);
+            this.set('channel.poseable_chars', response.poseable_chars);
+            this.set('channel.who', response.who);
+            this.updatePoseControls();
         });
     },
     
@@ -98,24 +122,24 @@ export default Component.extend({
     send: function() {
         let api = this.gameApi;
         let channelKey = this.get('channel.key');
-        let message = this.chatMessage;
+        let message = this.get('channel.draftMessage') || "";
         
         if (message.length === 0) {
             this.flashMessages.danger("You haven't entered anything.");
             return;
         }
         
-        this.set(`chatMessage`, '');
+        this.set(`channel.draftMessage`, '');
                   
         if (this.get('channel.is_page'))  {
-          api.requestOne('sendPage', { thread_id: channelKey, message: message }, null)
+          api.requestOne('sendPage', { thread_id: channelKey, message: message, sender: this.get('channel.poseChar.name') }, null)
           .then( (response) => {
               if (response.error) {
                   return;
               }
           }); 
         } else {
-          api.requestOne('chatTalk', { channel: channelKey, message: message }, null)
+          api.requestOne('chatTalk', { channel: channelKey, message: message, sender: this.get('channel.poseChar.name') }, null)
           .then( (response) => {
               if (response.error) {
                   return;
@@ -169,6 +193,10 @@ export default Component.extend({
     },
     unpauseScroll() {
       this.setScroll(true);
+    },
+    
+    poseCharChanged(newChar) { 
+      this.set('channel.poseChar', newChar);
     },
   }
   

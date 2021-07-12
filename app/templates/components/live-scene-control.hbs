@@ -141,7 +141,7 @@
 
             <PoseOrder @poseOrder={{scene.pose_order}} @playerName={{playerName}} />
 
-             <MarkdownEditor @text={{scenePose}} @rows={{6}} @class="scene-pose-box" @onEnter={{action "addPose" poseType.id}} />
+             <MarkdownEditor @text={{scene.draftPose}} @rows={{6}} @class="scene-pose-box" @onEnter={{action "addPose" poseType.id}} />
            {{/if}}
 
 
@@ -154,10 +154,10 @@
                  <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC</button>
 
                  {{#if txtExtraInstalled}}
-                   <LiveSceneTxt @scenePose={{scenePose}} @scene={{scene}} />
+                   <LiveSceneTxt @scenePose={{scene.draftPose}} @scene={{scene}} />
                  {{/if}}
 
-             <LiveSceneCustomScenepose @scenePose={{scenePose}} @scene={{scene}} />
+             <LiveSceneCustomScenepose @scenePose={{scene.draftPose}} @scene={{scene}} />
              </div>
 
              <div class="scene-pose-select">
@@ -204,8 +204,12 @@
                                <RpgLiveScene @scene={{scene}} />
                              {{/if}}
 
+                             {{#if fateExtraInstalled}}
+                               <LiveSceneFate @scene={{scene}} />
+                             {{/if}}
 
-                            <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} @spells={{spells}}/>
+
+                             <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} @spells={{spells}} />
 
                          </ul>
                      </li>
@@ -236,6 +240,23 @@
                  </li>
              </ul>
 
+
+             {{#if scene.fs3combat_enabled}}
+               {{#if scene.combat}}
+                 <ul class="nav scene-menu">
+                     <li class="dropup">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             <span class="btn btn-default" href="#">Combat <span class="caret"></span></span>
+                         </a>
+                         <ul class="dropdown-menu">
+                             <LiveSceneFs3combat @scene={{scene}} />
+                         </ul>
+                     </li>
+                 </ul>
+               {{/if}}
+             {{/if}}
+
+
              <ul class="nav scene-menu">
                  <li class="dropup">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -248,10 +269,12 @@
                  </li>
              </ul>
 
+
+
              </div>
 
              <div class="scene-char-select" >
-                 <PowerSelect @selected={{poseChar}} @options={{scene.poseable_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+                 <PowerSelect @selected={{scene.poseChar}} @options={{scene.poseable_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
                      <CharIconTiny @char={{poseChar}} />
                  </PowerSelect>
              </div>
@@ -268,11 +291,11 @@
         <hr>
 
 
-    <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteScenePose}} @onSubmit={{action "deleteScenePose"}} @onHide={{action (mut confirmDeleteScenePose) null}}>
+    <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDeleteScenePose}} @onSubmit={{action "deleteScenePose"}} @onHide={{action (mut confirmDeleteScenePose) false}}>
       You're about to delete this scene pose. This cannot be undone.  Are you sure?
     </BsModalSimple>
 
-    <BsModalSimple @title="Confirm Report" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmReportScene}} @onSubmit={{action "reportScene"}} @onHide={{action (mut confirmReportScene) null}}>
+    <BsModalSimple @title="Confirm Report" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmReportScene}} @onSubmit={{action "reportScene"}} @onHide={{action (mut confirmReportScene) false}}>
       <p>If someone is behaving badly in a scene, you can bring it to the game admin's attention - along with an automatic, verified log of the scene (including OOC chat and any previously-edited or deleted poses).  </p>
 
       <p><b>Reason for Report:</b></p>
@@ -281,11 +304,11 @@
 
     </BsModalSimple>
 
-    <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDeleteScene}} @onSubmit={{action "deleteScene"}} @onHide={{action (mut confirmDeleteScene) null}}>
+    <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDeleteScene}} @onSubmit={{action "deleteScene"}} @onHide={{action (mut confirmDeleteScene) false}}>
         You're about to delete this scene. This cannot be undone.  Are you sure?
     </BsModalSimple>
 
-    <BsModalSimple @title="Change the Scene Location" @closeTitle="Cancel" @submitTitle="Select" @size={{null}} @fade={{false}} @open={{selectLocation}} @onSubmit={{action "changeLocation"}} @onHide={{action (mut selectLocation) null}}>
+    <BsModalSimple @title="Change the Scene Location" @closeTitle="Cancel" @submitTitle="Select" @size={{null}} @fade={{true}} @open={{selectLocation}} @onSubmit={{action "changeLocation"}} @onHide={{action (mut selectLocation) false}}>
         <p>Select a location from the list or type one into the bottom box.</p>
         <p>
           <PowerSelect @selected={{newLocation}} @options={{locations}} @onChange={{action "locationSelected"}} as |location|>
@@ -295,7 +318,7 @@
          </p>
     </BsModalSimple>
 
-    <BsModalSimple @title="Manage Pose Order" @closeTitle="Cancel" @size={{null}} @fade={{false}} @open={{managePoseOrder}} @onHide={{action (mut managePoseOrder) null}}>
+    <BsModalSimple @title="Manage Pose Order" @closeTitle="Cancel" @size={{null}} @fade={{true}} @open={{managePoseOrder}} @onHide={{action (mut managePoseOrder) false}}>
 
         <table>
         {{#each scene.pose_order as |po|}}
@@ -322,7 +345,7 @@
       {{/if}}
     </BsModalSimple>
 
-    <BsModalSimple @title="Character Card" @closeTitle="Close" @size={{null}} @fade={{false}} @open={{characterCard}} @onHide={{action (mut characterCard) null}}>
+    <BsModalSimple @title="Character Card" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{characterCard}} @onHide={{action (mut characterCard) false}}>
 
       {{#if scene.use_custom_char_cards}}
         <CharCardCustom @char={{characterCardInfo}} />
@@ -331,6 +354,5 @@
       {{/if}}
 
     </BsModalSimple>
-
 
 {{/if}}

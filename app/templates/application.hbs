@@ -6,13 +6,13 @@
 
        <div class="title-wrap">
 
-           <div class="row">
+           <div class="row" role=”banner”>
                <div class="col-md-6 col-sm-12 col-xs-12">
                    <div class="site-title"><LinkTo @route="home">{{mushName}}</LinkTo></div>
                    <div class="site-subtitle">{{mushHost}} port {{mushPort}}</div>
                </div>
 
-               <div class="col-md-6 hidden-sm hidden-xs">
+               <div class="col-md-6 hidden-sm hidden-xs" role="navigation">
                   <div class="text-right user-bar">
                    {{#if isAuthenticated}}
                        <p>Welcome, {{currentUser.name}}.
@@ -105,7 +105,7 @@
 </div>
 
 
-<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{false}} @closeTitle="Cancel" @open={{showAltSelection}}  @onHide={{action (mut showAltSelection) false}} @onSubmit={{action (mut showAltSelection) false}}>
+<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{showAltSelection}}  @onHide={{action (mut showAltSelection) false}} @onSubmit={{action (mut showAltSelection) false}}>
 
   <table class="alts-switcher">
     {{#each model.alts as |alt|}}

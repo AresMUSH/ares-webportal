@@ -19,8 +19,16 @@
   {{char-icon-inline char=storyteller}}
   {{/each}}
 </p>
-
 <hr>
+
+{{#if model.plot.tags}}
+<b>Tags:</b>
+    {{#each model.plot.tags as |tag|}}
+    <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
+    {{/each}}
+{{/if}}
+
+
 
 
 {{#if model.plot.description}}
@@ -61,8 +69,10 @@
 
 <FlashMessages />
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{false}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) false}}>
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) false}}>
     You're about to delete plot {{model.plot.title}}. This cannot be undone.  Are you sure?
   </BsModalSimple>
 
 {{outlet}}
+
+    <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
