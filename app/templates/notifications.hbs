@@ -32,18 +32,7 @@
     <div id="{{char.name}}" class="tab-pane fade in {{if (eq index 0) 'active' }}">
       <NotificationList @notices={{char.notices}} />
 
-      <!-- {{else if (eq notification.type 'comp')}}
-        <LinkTo @route="char" @model={{currentUser.id}}>
-          <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-        </LinkTo>
-      {{else if (eq notification.type 'potion')}}
-        <LinkTo @route="char" @model={{currentUser.id}}>
-          <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-        </LinkTo>
-      {{else if (eq notification.type 'item')}}
-        <LinkTo @route="char" @model={{currentUser.id}}>
-          <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-        </LinkTo> -->
+
     </div>
 
 {{/each}}
