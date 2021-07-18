@@ -48,11 +48,6 @@
 
 </div>
 
-{{#if model.profile}}
-<div class="profile-tab">
-    <ProfileSupplemental @char={{model}} @title="Profile Information"/>
-</div>
-{{/if}}
 
 
 {{#if model.alts}}
@@ -61,22 +56,49 @@
 </div>
 {{/if}}
 
-{{#if model.rp_prefs}}
-<div>
-  <h3>RP Preferences</h3>
-  <AnsiFormat @text={{model.rp_prefs}} />
+{{#if model.profile}}
+<div class="profile-tab">
+    <ProfileSupplemental @char={{model}} @title="Profile Information"/>
 </div>
 {{/if}}
 
-{{#if model.achievements}}
-<div>
-    <h3>Achievements</h3>
+
+<div class="profile-tab">
+    <ul class="nav nav-tabs">
     
-    <CharAchievements @achievements={{model.achievements}} />
-</div>
-{{/if}}
+      <li class="active"><a data-toggle="tab" href="#systeminfo">+</a></li>
+    
+      {{#if model.rp_prefs}}
+        <li><a data-toggle="tab" href="#systemprefs">RP Prefs</a></li>
+      {{/if}}
+      
 
+      {{#if model.achievements}}
+          <li><a data-toggle="tab" href="#systemachievements">Achievements</a></li>
+      {{/if}}
+    </ul>
+    
+
+    <div class="tab-content">
+      <div id="systeminfo" class="tab-pane fade in active">
+          <div class="tab-cover">System Information</div>
+      </div>
+      
+      {{#if model.rp_prefs}}
+        <div id="systemprefs" class="tab-pane fade">
+          <AnsiFormat @text={{model.rp_prefs}} />
+        </div>
+      {{/if}}
+      
   
+      {{#if model.achievements}}
+      <div id="systemachievements" class="tab-pane fade">
+          <CharAchievements @achievements={{model.achievements}} @sceneStats={{model.scene_stats}}/>
+      </div>
+      {{/if}}
+    </div>
+</div>
+
 
 <div class="row">
     <div class="col col-xs-12">
