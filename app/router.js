@@ -101,6 +101,7 @@ Router.map(function() {
   this.route('plot-edit', { path: '/plot/:id/edit' });
   this.route('plot-create', { path: '/plot/create' });
   this.route('plugins-edit');
+  this.route('prefs');
   this.route('recent-changes');
   this.route('register');
   this.route('roles');

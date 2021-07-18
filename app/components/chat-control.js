@@ -198,6 +198,35 @@ export default Component.extend({
     poseCharChanged(newChar) { 
       this.set('channel.poseChar', newChar);
     },
+    
+    download() {
+      
+      let api = this.gameApi;
+      let channelKey = this.get('channel.key');
+      let is_page = this.get('channel.is_page');
+                  
+      api.requestOne('downloadChat', { key: channelKey, is_page: is_page }, null)
+      .then( (response) => {
+          if (response.error) {
+              return;
+          }
+          var element = document.createElement('a');
+          element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(response.log));
+          element.setAttribute('download', this.get('channel.title'));
+
+          element.style.display = 'none';
+          document.body.appendChild(element);
+
+          element.click();
+
+          document.body.removeChild(element);
+      });
+      
+      
+     
+           
+           
+    }
   }
   
 });
