@@ -25,5 +25,7 @@ module.exports = function(app) {
   proxies.forEach(route => route(app));
   
   var express = require('express');
+  
+  // This links up the /game/ directory for debugging.
   app.use('/game', express.static('../aresmush/game'));
 };

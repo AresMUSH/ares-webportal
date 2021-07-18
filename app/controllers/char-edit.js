@@ -72,6 +72,7 @@ export default Controller.extend({
             profile_gallery: this.get('model.char.profile_gallery'),
             profile_order: this.get('model.char.profile_order'),
             background: this.get('model.char.background'),
+            rp_prefs: this.get("model.char.rp_prefs"),
             tags: tags,
             descs: descs,
             custom: custom,

@@ -37,6 +37,10 @@
     <li><a data-toggle="tab" href="#systemcookies">Cookies</a></li>
   {{/if}}
   
+  {{#if prefsExtraInstalled}}
+    <li><a data-toggle="tab" href="#systemprefs">RP Prefs</a></li>
+  {{/if}}
+  
   
   {{#if char.siteinfo}}
     <li><a data-toggle="tab" href="#systemsite">Admin</a></li>
@@ -109,6 +113,12 @@
   
   {{#if cookiesExtraInstalled}}
     <ProfileCookies @char={{char}} />
+  {{/if}}
+  
+  {{#if prefsExtraInstalled}}
+    <div id="systemprefs" class="tab-pane fade">
+      <AnsiFormat @text={{char.rp_prefs}} />
+    </div>
   {{/if}}
   
   {{#if char.achievements}}

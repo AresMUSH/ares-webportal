@@ -61,6 +61,13 @@
 </div>
 {{/if}}
 
+{{#if model.rp_prefs}}
+<div>
+  <h3>RP Preferences</h3>
+  <AnsiFormat @text={{model.rp_prefs}} />
+</div>
+{{/if}}
+
 {{#if model.achievements}}
 <div>
     <h3>Achievements</h3>
@@ -68,6 +75,9 @@
     <CharAchievements @achievements={{model.achievements}} />
 </div>
 {{/if}}
+
+  
+
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">

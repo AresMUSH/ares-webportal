@@ -5,6 +5,9 @@
         <li><a data-toggle="tab" href="#profile">Profile</a></li>
         <li><a data-toggle="tab" href="#relationships">Relationships</a></li>
         <li><a data-toggle="tab" href="#hooks">RP Hooks</a></li>
+        {{#if model.char.rp_prefs}}
+        <li><a data-toggle="tab" href="#rpprefs">RP Prefs</a></li>
+        {{/if}}
         <li><a data-toggle="tab" href="#descs">Descriptions</a></li>
         <li><a data-toggle="tab" href="#files">Files</a></li>
         {{#if model.char.show_background_tab}}
@@ -31,6 +34,12 @@
       <div id="hooks" class="tab-pane fade in">
           <MarkdownEditor @text={{model.char.rp_hooks}} />
       </div>
+      
+      {{#if model.char.rp_prefs}}
+      <div id="rpprefs" class="tab-pane fade in">
+          <MarkdownEditor @text={{model.char.rp_prefs}} />
+      </div>
+      {{/if}}
 
       {{#if model.char.show_background_tab}}
       <div id="background" class="tab-pane fade in">
