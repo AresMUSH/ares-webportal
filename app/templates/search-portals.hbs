@@ -1,0 +1,103 @@
+{{page-title "Search Portals"}}
+
+<h1>Search Portals</h1>
+
+{{search-bar}}
+
+<p>The search will only match portals that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
+
+<hr/>
+
+{{#if searchResults}}
+<a data-toggle="collapse" href="#searchFields"><button class="btn btn-default btn-collapse">Show/Hide Search</button></a>
+{{/if}}
+
+<div id="searchFields" class="panel-collapse collapse {{if searchResults '' 'in'}}">
+
+<div class="row">
+
+  <div class="col col-xs-3">
+    <label>Name:</label>
+  </div>
+
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=25 id="title"  value=searchName enter=(action "search")}}</p>
+  </div>
+
+</div>
+
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <label>School:</label>
+  </div>
+
+
+    <div class="col-sm-9">
+      <p>
+        <PowerSelect @selected={{searchSchool}} @options={{model.schools}} @searchEnabled=true @searchField="name"  @onChange={{action "schoolChanged"}} as |school|>
+          {{school}}
+        </PowerSelect></p>
+    </div>
+
+
+
+</div>
+
+
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <label>Full Text:</label>
+  </div>
+
+  <div class="col col-xs-9">
+        <p>{{input type="text" size=25 id="desc"  value=searchText enter=(action "search")}}</p>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <p><label>Location Known?</label>
+
+        {{input type="checkbox"  id="known"  checked=searchKnown}}</p>
+
+  </div>
+
+
+</div>
+
+
+
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="pull-right">
+
+                <button class="btn btn-default" {{action 'reset'}}>Reset</button>
+                <button class="btn btn-primary" {{action 'search'}}>Search</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<hr/>
+
+{{flash-messages}}
+
+{{#if searchResults}}
+{{#each searchResults as |portal|}}
+{{portal}}
+  {{portal.name}}
+{{/each}}
+
+
+{{else}}
+<p>No search results.</p>
+{{/if}}
+
+{{outlet}}

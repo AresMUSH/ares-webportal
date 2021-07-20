@@ -12,6 +12,7 @@ export default function setupCustomRoutes(router) {
   router.route('portal-create', { path: '/portal/create' });
   router.route('portal-edit', { path: '/portal/:id/edit' });
   router.route('lore-hooks');
+  router.route('search-portals');
   router.route('search-spells');
   router.route('secrets');
   router.route('schools', { path: '/schools/:school'});
