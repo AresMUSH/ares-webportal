@@ -5,6 +5,20 @@
     <li><a data-toggle="tab" href="#rosternotes">Roster Info</a></li>
   {{/if}}
 
+  <li><a data-toggle="tab" href="#systemhooks">RP Hooks</a></li>
+
+  {{#if prefsExtraInstalled}}
+    <li><a data-toggle="tab" href="#systemprefs">RP Prefs</a></li>
+  {{/if}}
+
+  {{#if char.background}}
+      <li><a data-toggle="tab" href="#systembg">Background</a></li>
+  {{/if}}
+
+  {{#if char.description}}
+  <li><a data-toggle="tab" href="#systemdesc">Description</a></li>
+  {{/if}}
+
   <ProfileFs3Tabs @char={{char}} @game={{game}} />
 
   {{#if char.achievements}}
@@ -26,7 +40,6 @@
   {{#if cookiesExtraInstalled}}
     <li><a data-toggle="tab" href="#systemcookies">Cookies</a></li>
   {{/if}}
-
 
   {{#if char.siteinfo}}
     <li><a data-toggle="tab" href="#systemsite">Admin</a></li>
@@ -63,6 +76,30 @@
   <div id="systemhooks" class="tab-pane fade">
       <AnsiFormat @text={{char.rp_hooks}} />
   </div>
+
+  {{#if prefsExtraInstalled}}
+    <div id="systemprefs" class="tab-pane fade">
+      <AnsiFormat @text={{char.rp_prefs}} />
+    </div>
+  {{/if}}
+
+  {{#if char.background}}
+  <div id="systembg" class="tab-pane fade">
+      <AnsiFormat @text={{char.background}} />
+   </div>
+  {{/if}}
+
+  {{#if char.description}}
+  <div id="systemdesc" class="tab-pane fade">
+       <AnsiFormat @text={{char.description}} />
+
+       {{#if char.details}}
+       {{#each char.details as |detail|}}
+       <b>{{detail.name}}</b>: <AnsiFormat @text={{detail.desc}} />
+       {{/each}}
+       {{/if}}
+  </div>
+  {{/if}}
 
   <ProfileFs3 @char={{char}} @game={{game}} @reloadChar={{action "reloadChar"}} />
 

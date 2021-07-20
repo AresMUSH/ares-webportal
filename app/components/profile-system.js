@@ -18,6 +18,10 @@ export default Component.extend({
       return this.get('game.extra_plugins').any(e => e == 'cookies');
     }),
     
+    prefsExtraInstalled: computed(function() {
+      return this.get('game.extra_plugins').any(e => e == 'prefs');
+    }),
+    
     actions: { 
         reloadChar() {
             this.reloadChar();

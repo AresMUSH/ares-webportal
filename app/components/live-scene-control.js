@@ -64,19 +64,23 @@ export default Component.extend(AuthenticatedController, {
     }),
 
     txtExtraInstalled: computed(function() {
-      return this.get('scene.extras_installed').some(e => e == 'txt');
+      return this.isExtraInstalled('txt');
     }),
 
     cookiesExtraInstalled: computed(function() {
-      return this.get('scene.extras_installed').some(e => e == 'cookies');
+      return this.isExtraInstalled('cookies');
     }),
 
     rpgExtraInstalled: computed(function() {
-      return this.get('scene.extras_installed').some(e => e == 'rpg');
+      return this.isExtraInstalled('rpg');
     }),
 
     fateExtraInstalled: computed(function() {
-      return this.get('scene.extras_installed').any(e => e == 'fate');
+      return this.isExtraInstalled('fate');
+    }),
+
+    diceExtraInstalled: computed(function() {
+      return this.isExtraInstalled('dice');
     }),
 
     sceneAlerts: computed('scene.{is_watching,reload_required}', 'scrollPaused', function() {
@@ -92,6 +96,10 @@ export default Component.extend(AuthenticatedController, {
       }
       return alertList;
     }),
+
+    isExtraInstalled(name) {
+       return this.get('scene.extras_installed').any(e => e == name);
+    },
 
     actions: {
       locationSelected(loc) {

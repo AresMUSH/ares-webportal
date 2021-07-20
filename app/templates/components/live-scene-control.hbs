@@ -184,13 +184,12 @@
                          <ul class="dropdown-menu">
                              {{#if scene.can_edit}}
                                  <li><a href="#" {{action (mut selectLocation) true}}>Change Location</a></li>
+                                 <li><a href="#" {{action (mut managePoseOrder) true}}>Manage Pose Order</a></li>
                              {{/if}}
 
                              <LiveScenePlaces @scene={{scene}} />
 
                              <li role="separator" class="divider"></li>
-
-                             <li><a href="#" {{action (mut managePoseOrder) true}}>Manage Pose Order</a></li>
 
                              {{#if scene.fs3_enabled}}
                                  <LiveSceneFs3 @abilities={{abilities}} @scene={{scene}} />
@@ -209,12 +208,32 @@
                              {{/if}}
 
 
-                             <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} @spells={{spells}} />
+                             {{#if diceExtraInstalled}}
+                             <LiveSceneDice @scene={{scene}} />
+                             {{/if}}
+
+                             <LiveSceneCustomPlay @scene={{scene}} @abilities={{abilities}} />
 
                          </ul>
                      </li>
                  </ul>
              {{/if}}
+
+             {{#if scene.fs3combat_enabled}}
+               {{#if scene.combat}}
+                 <ul class="nav scene-menu">
+                     <li class="dropup">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             <span class="btn btn-default" href="#">Combat <span class="caret"></span></span>
+                         </a>
+                         <ul class="dropdown-menu">
+                             <LiveSceneFs3combat @scene={{scene}} />
+                         </ul>
+                     </li>
+                 </ul>
+               {{/if}}
+             {{/if}}
+
 
              <ul class="nav scene-menu">
                  <li class="dropup">
@@ -239,22 +258,6 @@
                      </ul>
                  </li>
              </ul>
-
-
-             {{#if scene.fs3combat_enabled}}
-               {{#if scene.combat}}
-                 <ul class="nav scene-menu">
-                     <li class="dropup">
-                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                             <span class="btn btn-default" href="#">Combat <span class="caret"></span></span>
-                         </a>
-                         <ul class="dropdown-menu">
-                             <LiveSceneFs3combat @scene={{scene}} />
-                         </ul>
-                     </li>
-                 </ul>
-               {{/if}}
-             {{/if}}
 
 
              <ul class="nav scene-menu">
