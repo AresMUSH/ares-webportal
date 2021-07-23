@@ -22,8 +22,8 @@ export default Component.extend({
         this.set('scenePose', '');
         api.requestOne('addTxt', { scene_id: this.get('scene.id'),
             pose: pose,
-            pose_char: this.get('poseChar.id') }, null)
-        .then( (response) => { 
+            pose_char: this.get('scene.poseChar.id') }, null)
+        .then( (response) => {
             if (response.error) {
                 this.get('flashMessages').error(response.error);
                 return;
