@@ -92,7 +92,8 @@ export default Controller.extend({
       let api = this.gameApi;
       api.requestOne('sendMail', { subject: this.replySubject, 
       message: this.replyMessage,
-      to_list: (this.replyToList || []).map (p => p.name )}, null)
+      to_list: (this.replyToList || []).map (p => p.name ),
+      thread: this.id }, null)
       .then( (response) => {
         if (response.error) {
           return;
