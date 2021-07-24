@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     
     actions: {
         
@@ -16,7 +17,7 @@ export default Controller.extend({
                     return;
                 }
                 
-                this.transitionToRoute('setup');
+                this.router.transitionToRoute('setup');
                 this.flashMessages.success('Plugins updated!');
             });
         }

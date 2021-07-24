@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     gameApi: service(),
+    router: service(),
     name: '',
     desc: '',
     order: '',
@@ -30,7 +31,7 @@ export default Controller.extend({
               if (response.error) {
                   return;
               }
-              this.transitionToRoute('forum-manage');
+              this.router.transitionToRoute('forum-manage');
               this.flashMessages.success('Forum category created!');
           });
         },

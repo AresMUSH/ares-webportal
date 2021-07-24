@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     confirmClaim: false,
     rosterApp: '',
 
@@ -37,7 +38,7 @@ export default Controller.extend({
                   this.set('model.password', response.password);
                 } else {
                   this.flashMessages.success('App submitted.');
-                  this.transitionToRoute('roster');
+                  this.router.transitionToRoute('roster');
                 }
                 
             });

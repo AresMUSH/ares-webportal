@@ -5,6 +5,7 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     
     actions: {
       
@@ -24,11 +25,11 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 if (status === 'share') {
                     this.flashMessages.success('The scene has been shared.');
-                    this.transitionToRoute('scene', sceneId); 
+                    this.router.transitionToRoute('scene', sceneId); 
                 }
                 else if (status === 'restart') {
                     this.flashMessages.success('The scene has been restarted.');
-                    this.transitionToRoute('scene-live', sceneId); 
+                    this.router.transitionToRoute('scene-live', sceneId); 
                 }
             });
         },

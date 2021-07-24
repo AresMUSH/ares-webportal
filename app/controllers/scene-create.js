@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     queryParams: [ 'location' ],
     warning_tags: [],
 
@@ -72,7 +73,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('scene',                          
+                this.router.transitionToRoute('scene',                          
                           response.id);
                 this.flashMessages.success('Scene updated!');
             });

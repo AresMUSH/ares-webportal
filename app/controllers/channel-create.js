@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     gameApi: service(),
+    router: service(),
     name: '',
     desc: '',
     color: '',
@@ -30,7 +31,7 @@ export default Controller.extend({
               if (response.error) {
                   return;
               }
-              this.transitionToRoute('channels-manage');
+              this.router.transitionToRoute('channels-manage');
               this.flashMessages.success('Channel created!');
           });
         },

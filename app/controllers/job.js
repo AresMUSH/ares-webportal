@@ -13,6 +13,7 @@ export default Controller.extend({
   gameSocket: service(),
   session: service(),
   flashMessages: service(),
+  router: service(),
 
   init: function() {
     this._super(...arguments);
@@ -101,7 +102,7 @@ export default Controller.extend({
         }
         this.set('reply', '');
         this.resetReplyAdmin();
-        this.transitionToRoute('jobs');
+        this.router.transitionToRoute('jobs');
         this.flashMessages.success('Reply added!');
       });
     },

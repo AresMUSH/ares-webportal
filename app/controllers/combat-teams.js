@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
 
     teams: computed(function() {
         return [ '1', '2', '3', '4', '5', '6', '7', '8', '9' ];
@@ -20,7 +21,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('combat', this.get('model.id'));
+                this.router.transitionToRoute('combat', this.get('model.id'));
                 this.flashMessages.success('Combat saved!');
             });
         },

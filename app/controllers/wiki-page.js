@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
+    router: service(),
     confirmDelete: false,
     
     actions: {
@@ -15,7 +16,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('wiki');
+                this.router.transitionToRoute('wiki');
                 this.flashMessages.success('Page deleted!');
             });
         }

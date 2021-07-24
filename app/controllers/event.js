@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     confirmDelete: false,
   
     resetOnExit: function() {
@@ -20,7 +21,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('events');
+                this.router.transitionToRoute('events');
                 this.flashMessages.success('Event deleted!');
             });
         },
@@ -31,7 +32,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('events');
+                this.router.transitionToRoute('events');
                 this.flashMessages.success('Signed up!');
             });
         },
@@ -42,7 +43,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('events');
+                this.router.transitionToRoute('events');
                 this.flashMessages.success('Signup canceled.');
             });
         }

@@ -8,6 +8,7 @@ export default Controller.extend(AuthenticatedController, {
   gameApi: service(),
   gameSocket: service(),
   flashMessages: service(),
+  router: service(),
   newCombatantName: '',
   newCombatantType: '',
   newCombatActivity: false,
@@ -179,7 +180,7 @@ export default Controller.extend(AuthenticatedController, {
             return;
           }
           this.flashMessages.success('Combat stopped!');
-          this.transitionToRoute('combats');
+          this.router.transitionToRoute('combats');
         });
       },
       aiActions: function() {

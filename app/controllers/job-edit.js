@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   flashMessages: service(),
   gameApi: service(),
+  router: service(),
   
   actions: {
     changeCategory: function(cat) {
@@ -36,7 +37,7 @@ export default Controller.extend({
           if (response.error) {
             return;
           }
-          this.transitionToRoute('job', response.id);
+          this.router.transitionToRoute('job', response.id);
           this.flashMessages.success('Job saved!');
         });
       },

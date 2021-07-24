@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     warning_tags: [],
   
     scenePacingOptions: computed(function() { 
@@ -82,7 +83,7 @@ export default Controller.extend({
                     return;
                 }
                 
-                this.transitionToRoute('scene', this.get('model.scene.id'));
+                this.router.transitionToRoute('scene', this.get('model.scene.id'));
                 this.flashMessages.success('Scene updated!');
             });
         }

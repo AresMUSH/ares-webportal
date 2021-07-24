@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   flashMessages: service(),
   gameApi: service(),
+  router: service(),
     
   actions: {
     addDetail() {
@@ -43,7 +44,7 @@ export default Controller.extend({
         if (response.error) {
           return;
         }
-        this.transitionToRoute('location',                          
+        this.router.transitionToRoute('location',                          
         this.get('model.location.id'));
         this.flashMessages.success('Location updated!');
       });

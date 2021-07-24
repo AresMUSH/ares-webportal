@@ -5,6 +5,7 @@ export default Controller.extend({
     flashMessages: service(),
     gameApi: service(),
     session: service(),
+    router: service(),
     
     title: '',
     summary: '',
@@ -47,7 +48,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('plot',                          
+                this.router.transitionToRoute('plot',                          
                           response.id);
                 this.flashMessages.success('Plot created!');
             });

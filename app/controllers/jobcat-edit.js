@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     gameApi: service(),
+    router: service(),
   
     actions: {        
         save: function() {
@@ -16,7 +17,7 @@ export default Controller.extend({
               if (response.error) {
                   return;
               }
-              this.transitionToRoute('jobcat-manage');
+              this.router.transitionToRoute('jobcat-manage');
               this.flashMessages.success('Category updated!');
           });
         },

@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     
     actions: {
         
@@ -22,7 +23,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('notes', this.get('model.name'));
+                this.router.transitionToRoute('notes', this.get('model.name'));
                 this.flashMessages.success('Notes saved!');
             });
         }

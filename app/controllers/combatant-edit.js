@@ -5,10 +5,8 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
-
-  gameApi: service(),
-  flashMessages: service(),
-  confirmRemoveCombatant: false,
+    router: service(),
+    confirmRemoveCombatant: false,
   
     teams: computed(function() {
         return [ 1, 2, 3, 4, 5, 6, 7, 8, 9 ];
@@ -38,7 +36,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('combat', this.get('model.combat'));
+                this.router.transitionToRoute('combat', this.get('model.combat'));
                 this.flashMessages.success('Combatant saved!');
             });
         },
@@ -76,7 +74,7 @@ export default Controller.extend({
             if (response.error) {
               return;
             }
-            this.transitionToRoute('combat', this.get('model.combat'));
+            this.router.transitionToRoute('combat', this.get('model.combat'));
             this.flashMessages.success('Combatant removed!');
           });
         },

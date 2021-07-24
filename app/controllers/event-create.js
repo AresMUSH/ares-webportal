@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     title: '',
     date: '',
     time: '',
@@ -46,7 +47,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('event',                          
+                this.router.transitionToRoute('event',                          
                           response.id);
                 this.flashMessages.success('Event added!');
             });

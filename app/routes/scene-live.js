@@ -10,6 +10,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     gameApi: service(),
     gameSocket: service(),
     session: service(),
+    router: service(),
 
     activate: function() {
         this.controllerFor('scene-live').setupCallback();
@@ -34,7 +35,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
            .then((model) =>  {
              
              if (model.scene.shared) {
-               this.transitionTo('scene', params['id']);             
+               this.router.transitionTo('scene', params['id']);             
              }
              else
              {

@@ -4,6 +4,7 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 
 export default Controller.extend(AuthenticatedController, {    
     gameApi: service(),
+    router: service(),
     
     actions: {
         
@@ -23,9 +24,9 @@ export default Controller.extend(AuthenticatedController, {
             else {
               this.flashMessages.success('Config saved! You may need to refresh the page to see the changes.');
               if (this.isWikiMgr) {
-                this.transitionToRoute('home');
+                this.router.transitionToRoute('home');
               } else {
-                this.transitionToRoute('setup');  
+                this.router.transitionToRoute('setup');  
               }
             }
             

@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     gameApi: service(),
+    router: service(),
     
     actions: {
         categoryChanged(val) {
@@ -20,7 +21,7 @@ export default Controller.extend({
                 }
         
             this.flashMessages.success('Config saved!');
-            this.transitionToRoute('setup');
+            this.router.transitionToRoute('setup');
             });  
         }
     }

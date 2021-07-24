@@ -8,6 +8,7 @@ export default Controller.extend(AuthenticatedController, {
     gameSocket: service(),
     session: service(),
     flashMessages: service(),
+    router: service(),
     
     onForumActivity: function(type, msg, timestamp ) {
      let data = JSON.parse(msg);
@@ -50,7 +51,7 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 
                 if (response.post_id) {
-                    this.transitionToRoute('forum-topic', response.category_id, response.post_id);
+                    this.router.transitionToRoute('forum-topic', response.category_id, response.post_id);
                 }
                 else {
                     this.flashMessages.warning('No more unread messages.');                    
