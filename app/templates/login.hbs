@@ -3,7 +3,7 @@
 
 
         
-        {{#if model.terms_of_service}}
+        {{#if this.model.terms_of_service}}
             <div class="ansi alert alert-info">By playing here, you agree to the policies listed on the <LinkTo @route="tos">Terms of Service</LinkTo> page.</div>
         {{/if}}
         
@@ -16,7 +16,7 @@
         <button {{action "login"}} class="btn btn-primary">Login</button>
             
         <p>Don't have a character yet? 
-        {{#if model.enable_registration}}
+        {{#if this.model.enable_registration}}
         <LinkTo @route="register">Create one.</LinkTo>
         {{else}}
         Create one from inside the game first.

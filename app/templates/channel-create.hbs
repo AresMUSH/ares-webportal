@@ -35,7 +35,7 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelectMultiple @selected={{can_join}} @options={{model.roles}} @onChange={{action "joinRolesChanged"}} as |role|>
+      <PowerSelectMultiple @selected={{can_join}} @options={{this.model.roles}} @onChange={{action "joinRolesChanged"}} as |role|>
         {{role}}
       </PowerSelectMultiple>
     </div>
@@ -47,7 +47,7 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelectMultiple  @selected={{can_talk}} @options={{model.roles}} @onChange={{action "talkRolesChanged"}} as |role|>
+      <PowerSelectMultiple  @selected={{can_talk}} @options={{this.model.roles}} @onChange={{action "talkRolesChanged"}} as |role|>
         {{role}}
       </PowerSelectMultiple>
     </div>

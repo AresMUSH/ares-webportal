@@ -1,8 +1,8 @@
-{{page-title model.name}}
-<h1>Log {{model.name}}</h1>
+{{page-title this.model.name}}
+<h1>Log {{this.model.name}}</h1>
 
 <pre>
-{{#each model.lines as |line|}}
+{{#each this.model.lines as |line|}}
 {{line}}     
 
 {{/each}}

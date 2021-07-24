@@ -34,14 +34,14 @@
 
 
 <ul>
-{{#each model.config as |file|}}
+{{#each this.model.config as |file|}}
 <li><LinkTo @route="config" @model={{file.name}}>{{file.name}}</LinkTo></li>
 {{/each}}
 </ul>
 
 <h2>Text Files</h2>
 <ul>
-{{#each model.textfiles as |file|}}
+{{#each this.model.textfiles as |file|}}
 <li><LinkTo @route="textfile" @models={{array file.file_type file.name}}>{{file.name}}</LinkTo></li>
 {{/each}}
 </ul>

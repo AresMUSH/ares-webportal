@@ -4,7 +4,7 @@
 <p>The roster contains ready-made characters.  Some have been played before, as indicated by a <span class="label label-info">Previously Played</span> tag.  For most characters, you can claim them and begin playing immediately.  Characters marked with <span class="label label-warning">App Required</span> require an application.</p>
 
 <ul class="nav nav-tabs">
-{{#each model.roster as |group|}}
+{{#each this.model.roster as |group|}}
 
       <li class={{group.active_class}}><a data-toggle="tab" href="#{{group.key}}">{{group.name}}</a></li>
 {{/each}}
@@ -12,7 +12,7 @@
 
 <div class="tab-content">    
 
-{{#each model.roster as |group|}}
+{{#each this.model.roster as |group|}}
 
   <div id="{{group.key}}" class="tab-pane fade in {{group.active_class}}">
 

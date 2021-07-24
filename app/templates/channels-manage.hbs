@@ -22,7 +22,7 @@
   <th class="col-xs-2"></th>
 </tr>
 
-{{#each @model.channels as |channel|}}
+{{#each @this.model.channels as |channel|}}
 <tr>
   <td>{{channel.name}}</td>
   <td><AnsiFormat @text={{channel.desc}} /></td>

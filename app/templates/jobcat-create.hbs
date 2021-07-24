@@ -27,7 +27,7 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelectMultiple @selected={{roles}} @options={{model.roles}} @onChange={{action "rolesChanged"}} as |role|>
+      <PowerSelectMultiple @selected={{roles}} @options={{this.model.roles}} @onChange={{action "rolesChanged"}} as |role|>
         {{role}}
       </PowerSelectMultiple>
     </div>
@@ -39,7 +39,7 @@
     </div>
 
     <div class="col-sm-9">
-      <Textarea @value={{template}} @cols="80" @rows=5 @class="job-template-editor" />
+      <Textarea @value={{template}} cols={{80}} rows=5 @class="job-template-editor" />
     </div>
   </div>
   

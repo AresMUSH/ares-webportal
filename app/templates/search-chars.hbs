@@ -15,7 +15,7 @@
 <h3>Groups</h3>
 
 <div class="row">
-{{#each-in model.cgInfo.group_options as |key group| }}
+{{#each-in this.model.cgInfo.group_options as |key group| }}
   
   {{#if (not (eq key 'all_ranks'))}}
   <div class="col col-xs-3 col-md-2">
@@ -33,7 +33,7 @@
 <h3>Demographics</h3>
 
 <div class="row">
-{{#each model.cgInfo.demographics as |demo| }}
+{{#each this.model.cgInfo.demographics as |demo| }}
   
   <div class="col col-xs-3 col-md-2">
     <label>{{demo}}:</label>

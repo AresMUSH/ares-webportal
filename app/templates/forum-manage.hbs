@@ -22,7 +22,7 @@
   <th class="col-xs-2"></th>
 </tr>
 
-{{#each @model.categories as |category|}}
+{{#each @this.model.categories as |category|}}
 <tr>
   <td>{{category.name}}</td>
   <td><AnsiFormat @text={{category.desc}} /></td>

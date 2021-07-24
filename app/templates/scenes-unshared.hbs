@@ -3,13 +3,13 @@
 
 <p>These scenes have been stopped but not shared.</p>
 
-{{#if model.delete_unshared}}
-<div class="alert alert-warning">Unshared scenes will be automatically deleted after {{model.unshared_deletion_days}} days.</div>
+{{#if this.model.delete_unshared}}
+<div class="alert alert-warning">Unshared scenes will be automatically deleted after {{this.model.unshared_deletion_days}} days.</div>
 {{/if}}
 
 <div class="unshared-scenes-list">
   
-  {{#each model.unshared as |scene| }}
+  {{#each this.model.unshared as |scene| }}
 
   <div class="unshared-scene-block">
     <div class="row unshared-scenes-heading">

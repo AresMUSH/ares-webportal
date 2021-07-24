@@ -19,27 +19,27 @@
        <p class="play-section-title">Scenes
              
        {{#if isApproved}}
-         <LinkTo @route="scenes-live" @target="_blank">
+         <LinkTo @route="scenes-live" target="_blank">
            <TooltipIcon @position="right" @message="Join Scene" @icon="fa fa-play-circle" />
          </LinkTo>
 
-         <LinkTo @route="scene-create" @target="_blank">
+         <LinkTo @route="scene-create" target="_blank">
            <TooltipIcon @position="right" @message="Create Scene" @icon="fa fa-plus-circle" />
          </LinkTo>
 
-         <LinkTo @route="scenes-unshared" @target="_blank">
+         <LinkTo @route="scenes-unshared" target="_blank">
            <TooltipIcon @position="right" @message="Unshared Scenes" @icon="fa fa-share-square" />
          </LinkTo>
        {{/if}}
 
-       <LinkTo @route="who" @target="_blank">
+       <LinkTo @route="who" target="_blank">
          <TooltipIcon @position="right" @message="Who's Online" @icon="fa fa-users" />
        </LinkTo>
 
        </p>  
 
          
-       {{#each model.scenes as |scene|}}
+       {{#each this.model.scenes as |scene|}}
          <a href="#" {{action 'switchScene' scene.id}}>
            <div class="play-selector {{if (eq scene.id currentScene.id) 'play-selector-active' ''}}">
                #{{scene.id}} - {{scene.location.name}} 
@@ -136,7 +136,7 @@
        
        {{/if}}
     
-       <LiveSceneControl @scene={{currentScene}} @locations={{model.locations}} @abilities={{model.abilities}} @places={{currentScene.places}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
+       <LiveSceneControl @scene={{currentScene}} @locations={{this.model.locations}} @abilities={{this.model.abilities}} @places={{currentScene.places}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
        
        
        {{#if selectedChannel}}
@@ -149,7 +149,7 @@
        {{/if}}
        
        
-         <ChatControl @channel={{selectedChannel}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @poseableChars={{model.chat.pose_chars}} @setScroll={{action "setScroll"}} />
+         <ChatControl @channel={{selectedChannel}} @scrollPaused={{scrollPaused}} @playerName={{currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @poseableChars={{this.model.chat.pose_chars}} @setScroll={{action "setScroll"}} />
        
        
        {{#if emptyPrompt}}
@@ -162,7 +162,7 @@
 <BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{showAddChannel}}  @onHide={{action (mut showAddChannel) false}}>
   
     
-  <PowerSelect @selected={{poseChar}} @options={{model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+  <PowerSelect @selected={{poseChar}} @options={{this.model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
       <CharIconTiny @char={{poseChar}} />
   </PowerSelect>
   
@@ -202,7 +202,7 @@
                    <label for="to" class="col-form-label">To:</label>
                </div>
                <div class="col-sm-9">
-                   <PowerSelectMultiple @selected={{newConversationList}} @options={{model.characters}} @searchEnabled=true  @searchField="name" @onChange={{action "conversationListChanged"}} as |char|>
+                   <PowerSelectMultiple @selected={{newConversationList}} @options={{this.model.characters}} @searchEnabled=true  @searchField="name" @onChange={{action "conversationListChanged"}} as |char|>
                  {{char.name}}
                </PowerSelectMultiple>
                </div> 
@@ -214,7 +214,7 @@
                </div>
                <div class="col-sm-9">
                  <div class="scene-char-select" >
-                   <PowerSelect @selected={{poseChar}} @options={{model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+                   <PowerSelect @selected={{poseChar}} @options={{this.model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
                        <CharIconTiny @char={{poseChar}} />
                    </PowerSelect>
                  </div>
@@ -222,7 +222,7 @@
              </div>
              
       
-               <MarkdownEditor @text={{newPage}} @class="chat-box" @cols="80" @rows="6" @onEnter={{action "startConversation"}} />
+               <MarkdownEditor @text={{newPage}} @class="chat-box" cols={{80}} rows="6" @onEnter={{action "startConversation"}} />
       
            </div>
          </div>

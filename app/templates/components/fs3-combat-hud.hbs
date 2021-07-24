@@ -27,7 +27,7 @@
           {{#if c.is_npc}}
             {{c.name}}
           {{else}}
-            <LinkTo @route="char" @model={{c.name}} @target="_blank">{{c.name}}</LinkTo>
+            <LinkTo @route="char" @model={{c.name}} target="_blank">{{c.name}}</LinkTo>
           {{/if}}
         </td>
         
@@ -68,7 +68,7 @@
         
         <td>
             {{#if combat.can_manage}}
-                <LinkTo @route="combatant-edit" @model={{c.id}} @target="_blank">
+                <LinkTo @route="combatant-edit" @model={{c.id}} target="_blank">
                 <TooltipIcon @position="left" @message="Edit combatant." @icon="fa fa-edit" />
                 </LinkTo>
             {{/if}}

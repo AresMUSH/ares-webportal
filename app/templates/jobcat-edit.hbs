@@ -7,7 +7,7 @@
         <label for="name" class="col-form-label">Name:</label>
     </div>
     <div class="col-sm-9">
-        <Input @type="text" @size={{25}} @id="name" @enter={{action "save"}} @value={{model.category.name}} />
+        <Input @type="text" @size={{25}} @id="name" @enter={{action "save"}} @value={{this.model.category.name}} />
     </div> 
   </div>
   
@@ -16,7 +16,7 @@
         <label for="color" class="col-form-label">Color:</label>
     </div>
     <div class="col-sm-9">
-        <Input @type="text" @size={{25}} @id="color" @enter={{action "save"}} @value={{model.category.color}} />
+        <Input @type="text" @size={{25}} @id="color" @enter={{action "save"}} @value={{this.model.category.color}} />
         <div class="hint">Web portal colors are determined by custom styling for job-category-NAME.</div>
     </div> 
   </div>  
@@ -27,7 +27,7 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelectMultiple @selected={{model.category.roles}} @options={{model.roles}} @onChange={{action "rolesChanged"}} as |role|>
+      <PowerSelectMultiple @selected={{this.model.category.roles}} @options={{this.model.roles}} @onChange={{action "rolesChanged"}} as |role|>
         {{role}}
       </PowerSelectMultiple>
     </div>
@@ -39,7 +39,7 @@
     </div>
 
     <div class="col-sm-9">
-      <Textarea @value={{model.category.template}} @cols="80" @rows=5 @class="job-template-editor" />
+      <Textarea @value={{this.model.category.template}} cols={{80}} rows=5 @class="job-template-editor" />
     </div>
   </div>
 

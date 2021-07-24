@@ -1,4 +1,4 @@
-{{#if model.jobs_admin}}
+{{#if this.model.jobs_admin}}
 {{page-title "Search Jobs"}}
 
 <h1>Search Jobs</h1>
@@ -31,7 +31,7 @@
   
 </div>
 
-{{#if model.is_job_admin}}
+{{#if this.model.is_job_admin}}
 
 <div class="row">
   
@@ -65,7 +65,7 @@
 
           <span class="btn btn-default" href="#">Category <span class="caret"></span></span> </a>
           <ul class="dropdown-menu">
-          {{#each model.category_values as |category| }}
+          {{#each this.model.category_values as |category| }}
             <li><a href="#" {{action 'changeSearchCategory' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
           {{/each}}
           </ul>
@@ -96,7 +96,7 @@
 
           <span class="btn btn-default" href="#">Status <span class="caret"></span></span> </a>
           <ul class="dropdown-menu">
-          {{#each model.status_values as |status| }}
+          {{#each this.model.status_values as |status| }}
             <li><a href="#" {{action 'changeSearchStatus' status}}><span class="label job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
           {{/each}}
           </ul>

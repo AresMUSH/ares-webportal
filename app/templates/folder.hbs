@@ -1,12 +1,12 @@
 {{page-title 'Files'}}
 
-<h1>{{model.folder}}</h1>
+<h1>{{this.model.folder}}</h1>
 
 <p><LinkTo @route="files"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Files</LinkTo></p>
 
 <table class="table table-striped">
 
-  {{#each model.files as |file|}}
+  {{#each this.model.files as |file|}}
   <tr>
   <td>
     
@@ -22,7 +22,7 @@
   {{/each}}
 </table>
 
-<b>Folder Size:</b> {{model.folder_size}}KB
+<b>Folder Size:</b> {{this.model.folder_size}}KB
 
 {{#if isApproved}}
 
@@ -37,6 +37,6 @@
 
 
   {{#if showUpload}}
-    <FileUploader @uploaded={{action "uploaded"}} @folder="{{model.folder}}" />
+    <FileUploader @uploaded={{action "uploaded"}} @folder="{{this.model.folder}}" />
   {{/if}}
 {{/if}}

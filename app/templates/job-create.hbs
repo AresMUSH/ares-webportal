@@ -1,4 +1,4 @@
-{{#if model.options.is_job_admin}}
+{{#if this.model.options.is_job_admin}}
   {{page-title 'Create Job'}}
   <h1>Create a Job</h1>
 {{else}}
@@ -28,7 +28,7 @@
     
      <td>
       
-       <PowerSelect @selected={{submitter}} @options={{model.characters}} @searchField="name" @searchEnabled=true @onChange={{action "submitterChanged"}} as |char|>
+       <PowerSelect @selected={{submitter}} @options={{this.model.characters}} @searchField="name" @searchEnabled=true @onChange={{action "submitterChanged"}} as |char|>
          {{char.name}}
        </PowerSelect>
       
@@ -42,7 +42,7 @@
     
      <td>
       
-        <PowerSelectMultiple @selected={{participants}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
+        <PowerSelectMultiple @selected={{participants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
          {{char.name}}
        </PowerSelectMultiple>
       
@@ -67,8 +67,8 @@
             {{category}}
             </span>
           {{else}}
-            <span class="label label-info job-category job-category-{{model.options.request_category}}">
-            {{model.options.request_category}}
+            <span class="label label-info job-category job-category-{{this.model.options.request_category}}">
+            {{this.model.options.request_category}}
             </span>
           {{/if}}
     </td>
@@ -79,7 +79,7 @@
 
               <span class="btn btn-default" href="#">Change Category <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
-              {{#each model.options.category_values as |category| }}
+              {{#each this.model.options.category_values as |category| }}
                 <li><a href="#" {{action 'changeCategory' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
               {{/each}}
               </ul>

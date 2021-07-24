@@ -1,5 +1,5 @@
 <div id="idle" class="tab-pane fade in">
-  {{#if model.char.show_idle_tab}}
+  {{#if this.model.char.show_idle_tab}}
   <hr>
   <h3>Idle Settings</h3>
 
@@ -10,7 +10,7 @@
   
     <div class="col-sm-9">
     
-        <Input @type="text" @id="idleNote" placeholder="Notes" @value={{model.char.idle_notes}} />
+        <Input @type="text" @id="idleNote" placeholder="Notes" @value={{this.model.char.idle_notes}} />
       
     </div>
   </div>
@@ -18,7 +18,7 @@
   {{/if}}
 
 
-  {{#if model.char.show_roster_tab}}
+  {{#if this.model.char.show_roster_tab}}
   <hr>
   <h3>Roster Settings</h3>
   <div class="form-group row">
@@ -27,7 +27,7 @@
       </div>
     
       <div class="col-sm-9">
-            <Input @type="checkbox" @checked={{model.char.roster.on_roster}} />
+            <Input @type="checkbox" @checked={{this.model.char.roster.on_roster}} />
       </div>
   </div>
 
@@ -38,7 +38,7 @@
       </div>
     
       <div class="col-sm-9">
-            <Input @type="checkbox" @checked={{model.char.roster.restricted}} />
+            <Input @type="checkbox" @checked={{this.model.char.roster.restricted}} />
       </div>
   </div>
 
@@ -49,7 +49,7 @@
     
       <div class="col-sm-9">
       
-          <Input @type="text" @id="handleName" placeholder="Roster Contact" @value={{model.char.roster.contact}} />
+          <Input @type="text" @id="handleName" placeholder="Roster Contact" @value={{this.model.char.roster.contact}} />
         
       </div>
   </div>
@@ -60,7 +60,7 @@
       </div>
     
       <div class="col-sm-9">
-            <Input @type="checkbox" @checked={{model.char.roster.played}} />
+            <Input @type="checkbox" @checked={{this.model.char.roster.played}} />
       </div>
   </div>
 
@@ -73,7 +73,7 @@
     
       <div class="col-sm-9">
       
-          <MarkdownEditor @text={{model.char.roster.notes}} />
+          <MarkdownEditor @text={{this.model.char.roster.notes}} />
         
       </div>
   </div>

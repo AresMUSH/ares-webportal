@@ -1,12 +1,12 @@
-{{page-title model.name}}
+{{page-title this.model.name}}
 <div id="help" class="help-topic">
-    <AnsiFormat @text={{model.help}} />
+    <AnsiFormat @text={{this.model.help}} />
 </div>
 
-{{#if model.related_topics}}
-<h2>Other Topics in "{{model.section_title}}"</h2>
+{{#if this.model.related_topics}}
+<h2>Other Topics in "{{this.model.section_title}}"</h2>
 <ul class="reference-help-list">
-{{#each model.related_topics as |related|}}
+{{#each this.model.related_topics as |related|}}
 <li><LinkTo @route='help-topic' @model={{related.key}}>{{related.title}}</LinkTo></li>
 {{/each}}
 </ul>
@@ -16,15 +16,15 @@
 <p><LinkTo @route="help"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Help</LinkTo></p>
 
 
-{{#if model.can_manage}}
+{{#if this.model.can_manage}}
 
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">
-        {{#if model.is_override}}
+        {{#if this.model.is_override}}
         <button {{action (mut confirmRestore) true}} class="btn btn-warning">Restore Default</button>
         {{/if}}
-        <LinkTo @route="help-override" @model={{model.key}} class="btn btn-default">Customize</LinkTo>
+        <LinkTo @route="help-override" @model={{this.model.key}} class="btn btn-default">Customize</LinkTo>
     </div>
     </div>
 </div>

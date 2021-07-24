@@ -1,15 +1,15 @@
 <div class="row">
   <div class="col col-xs-4">
-    <CharIcon @char={{char}} />
+    <CharIcon @char={{this.char}} />
 
-    {{#if char.id}}
-    <LinkTo @route="char" @model={{char.name}} @target="_blank">View Full Profile</LinkTo>
+    {{#if this.char.id}}
+    <LinkTo @route="char" @model={{this.char.name}} target="_blank">View Full Profile</LinkTo>
     {{/if}}
     
   </div>  
   <div class="col col-xs-8">
-    {{#if (not char.is_ooc)}}
-      {{#each char.demographics as |demo|}}
+    {{#if (not this.char.is_ooc)}}
+      {{#each this.char.demographics as |demo|}}
       <div class="row">
           <div class="col-sm-3">
             <b>{{demo.name}}</b> 
@@ -19,15 +19,15 @@
           </div>
       </div>
       {{/each}}
-      {{#if (not char.demographics)}}
+      {{#if (not this.char.demographics)}}
       No demographics available.  Try reloading the scene page.
       {{/if}}
     {{/if}}
     
-    {{#if char.status_message}}
+    {{#if this.char.status_message}}
     <br>
     <div class="alert alert-info">
-      {{char.status_message}}
+      {{this.char.status_message}}
     </div>
     {{/if}}
     
@@ -37,8 +37,8 @@
     
 <div class="row">
   <div class="col col-xs-12">
-    {{#if char.description}}
-    <AnsiFormat @text={{char.description}} />
+    {{#if this.char.description}}
+    <AnsiFormat @text={{this.char.description}} />
     {{/if}}
     
   </div>

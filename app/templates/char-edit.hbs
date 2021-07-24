@@ -1,22 +1,22 @@
-{{page-title model.char.name}}
+{{page-title this.model.char.name}}
 
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#general">General</a></li>
         <li><a data-toggle="tab" href="#profile">Profile</a></li>
         <li><a data-toggle="tab" href="#relationships">Relationships</a></li>
         <li><a data-toggle="tab" href="#hooks">RP Hooks</a></li>
-        {{#if model.char.rp_prefs}}
+        {{#if this.model.char.rp_prefs}}
         <li><a data-toggle="tab" href="#rpprefs">RP Prefs</a></li>
         {{/if}}
         <li><a data-toggle="tab" href="#descs">Descriptions</a></li>
         <li><a data-toggle="tab" href="#files">Files</a></li>
-        {{#if model.char.show_background_tab}}
+        {{#if this.model.char.show_background_tab}}
         <li><a data-toggle="tab" href="#background">Background</a></li>
         {{/if}}
-        {{#if (or model.char.show_idle_tab model.char.show_roster_tab)}}
+        {{#if (or this.model.char.show_idle_tab this.model.char.show_roster_tab)}}
         <li><a data-toggle="tab" href="#idle">Idle/Roster</a></li>
         {{/if}}
-        {{#if (or model.char.show_idle_tab model.char.show_roles_tab)}}
+        {{#if (or this.model.char.show_idle_tab this.model.char.show_roles_tab)}}
         <li><a data-toggle="tab" href="#roles">Roles</a></li>
         {{/if}}
         <CharEditCustomTabs @char={{model}} />
@@ -32,34 +32,34 @@
       <CharEditDescs @model={{model}} />
       
       <div id="hooks" class="tab-pane fade in">
-          <MarkdownEditor @text={{model.char.rp_hooks}} />
+          <MarkdownEditor @text={{this.model.char.rp_hooks}} />
       </div>
       
-      {{#if model.char.rp_prefs}}
+      {{#if this.model.char.rp_prefs}}
       <div id="rpprefs" class="tab-pane fade in">
-          <MarkdownEditor @text={{model.char.rp_prefs}} />
+          <MarkdownEditor @text={{this.model.char.rp_prefs}} />
       </div>
       {{/if}}
 
-      {{#if model.char.show_background_tab}}
+      {{#if this.model.char.show_background_tab}}
       <div id="background" class="tab-pane fade in">
-        <MarkdownEditor @text={{model.char.background}} />
+        <MarkdownEditor @text={{this.model.char.background}} />
       </div>
       {{/if}}
 
-      {{#if (or model.char.show_idle_tab model.char.show_roster_tab)}}
+      {{#if (or this.model.char.show_idle_tab this.model.char.show_roster_tab)}}
         <CharEditIdle @model={{model}} />
       {{/if}}
 
-      {{#if model.char.show_roles_tab}}
+      {{#if this.model.char.show_roles_tab}}
       <div id="roles" class="tab-pane fade in">
-        <PowerSelectMultiple @selected={{model.char.roles}} @options={{model.char.all_roles}} @onChange={{action "rolesChanged"}} as |role|>
+        <PowerSelectMultiple @selected={{this.model.char.roles}} @options={{this.model.char.all_roles}} @onChange={{action "rolesChanged"}} as |role|>
           {{role}}
         </PowerSelectMultiple>
       </div>
       {{/if}}
       
-      <CharEditCustom @char={{model.char}} @updateCallback={{customUpdateCallback}} />
+      <CharEditCustom @char={{this.model.char}} @updateCallback={{customUpdateCallback}} />
         
       <CharEditFiles @model={{model}} />
     </div>
@@ -71,7 +71,7 @@
         <div class="col col-xs-12">
             <div class="pull-right">
     
-                <p> <LinkTo @route="char" @model={{model.char.name}} class="btn btn-default">Cancel</LinkTo>  
+                <p> <LinkTo @route="char" @model={{this.model.char.name}} class="btn btn-default">Cancel</LinkTo>  
                     <button class="btn btn-primary" {{action 'save'}} >Save</button>
                 </p>
     

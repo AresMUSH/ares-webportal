@@ -1,7 +1,7 @@
-{{page-title model.name}}
-<h1>Tag - {{model.name}}</h1>
+{{page-title this.model.name}}
+<h1>Tag - {{this.model.name}}</h1>
 
-{{#each model.groups as |group|}}
+{{#each this.model.groups as |group|}}
 <h2>{{group.name}}</h2>
 <ul>
 {{#each group.items as |item| }}

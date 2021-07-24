@@ -1,12 +1,12 @@
-{{#if scene.fs3combat_enabled}}
-  {{#if scene.combat}}
+{{#if this.scene.fs3combat_enabled}}
+  {{#if this.scene.combat}}
 
-  <li><a href="#" {{action (mut showCombat) true}}>Combat HUD</a></li>  
+  <li><a href="#" {{action (mut this.showCombat) true}}>Combat HUD</a></li>  
   <li> <a href="#" {{action "combatHero"}}>Hero Recovery</a></li>
-  <li> <a href="#" {{action (mut showCombatCommand) true}}>Send Command</a></li>
+  <li> <a href="#" {{action (mut this.showCombatCommand) true}}>Send Command</a></li>
 
-  <li><LinkTo @route="combat" @model={{scene.combat}} @target="_blank">Manage Combat</LinkTo></li>
-  {{#if scene.combat.can_manage}}
+  <li><LinkTo @route="combat" @model={{this.scene.combat}} target="_blank">Manage Combat</LinkTo></li>
+  {{#if this.scene.combat.can_manage}}
     <li><a href="#"  {{action 'newTurn'}}>Start New Turn</a></li>
   {{/if}}
   
@@ -17,19 +17,19 @@
 
 
     
-<BsModalSimple @title="Combat HUD" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{showCombat}} @onHide={{action (mut showCombat) false}}>
+<BsModalSimple @title="Combat HUD" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{this.showCombat}} @onHide={{action (mut this.showCombat) false}}>
   
-    <Fs3CombatHud @combat={{scene.combat}} />
+    <Fs3CombatHud @combat={{this.scene.combat}} />
   
 </BsModalSimple>
 
 
     
-<BsModalSimple @title="Send Combat Command" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{showCombatCommand}} @onHide={{action (mut showCombatCommand) false}}>
+<BsModalSimple @title="Send Combat Command" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{this.showCombatCommand}} @onHide={{action (mut this.showCombatCommand) false}}>
   
-    <Input @value={{combatCommand}} @enter="sendCommand" @size={{25}} />
+    <Input @value={{this.combatCommand}} @enter="sendCommand" @size={{25}} />
 
     <button class="btn btn-default" {{action 'sendCommand'}} >Send Command</button>
-    <div class="label label-info">{{commandResponse}}</div>
+    <div class="label label-info">{{this.commandResponse}}</div>
   
 </BsModalSimple>

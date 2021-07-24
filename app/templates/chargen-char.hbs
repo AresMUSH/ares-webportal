@@ -3,15 +3,15 @@
  <div class="col col-md-12">
       
      <h1>Create a Character 
-       {{#if model.char.can_approve}}
-       - {{model.char.name}}
+       {{#if this.model.char.can_approve}}
+       - {{this.model.char.name}}
        {{/if}}
      </h1>
      
      <p>The online character creation tool will guide you through creating your character.</p>
          
 
-{{#if model.char.chargen_locked}}
+{{#if this.model.char.chargen_locked}}
 
      <div class="alert alert-warning">
     
@@ -51,7 +51,7 @@
        <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
        <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>   
 
-        {{#if (not model.app.game.disabled_plugins.fs3skills) }}
+        {{#if (not this.model.app.game.disabled_plugins.fs3skills) }}
         <li role="presentation"><a href="#fs3abilities" aria-controls="fs3abilities" role="tab" data-toggle="tab">Abilities</a></li>
         {{/if}}
         
@@ -75,10 +75,10 @@
      <div class="tab-content">
        <div role="tabpanel" class="tab-pane active" id="demographics">
                  
-           <p class="cg-tip"><AnsiFormat @text={{model.cgInfo.demographics_blurb}} /></p>
+           <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.demographics_blurb}} /></p>
 
                 
-                 {{#each-in model.char.demographics as |key demo|}}
+                 {{#each-in this.model.char.demographics as |key demo|}}
                  <div class="form-group row">
                      <div class="col-sm-3">
                              <b>{{demo.name}}</b> 
@@ -86,13 +86,13 @@
                      <div class="col-sm-9">
                          {{#if (eq key 'gender') }}
                              
-                             <PowerSelect @selected={{model.char.demographics.gender}} @searchEnabled=true @searchField="value" @options={{genders}} @onChange={{action "genderChanged"}} as |gender|>
+                             <PowerSelect @selected={{this.model.char.demographics.gender}} @searchEnabled=true @searchField="value" @options={{genders}} @onChange={{action "genderChanged"}} as |gender|>
                                {{gender.value}}
                              </PowerSelect>
                          
                          {{else if (eq key 'age')}}
                              <Input @type="text" @size={{25}} @value={{demo.value}} />
-                             <div class="cg-tip">Enter an age or a birthdate in {{model.cgInfo.date_format}} format.</div>
+                             <div class="cg-tip">Enter an age or a birthdate in {{this.model.cgInfo.date_format}} format.</div>
                          {{else}}
                              <Input @type="text" @size={{25}} @value={{demo.value}} />
                          {{/if}}
@@ -104,24 +104,24 @@
           
           <div role="tabpanel" class="tab-pane" id="groups">
                   
-              <p class="cg-tip"><AnsiFormat @text={{model.cgInfo.groups_blurb}} /></p>
+              <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.groups_blurb}} /></p>
                                     
                   
-                  {{#each-in model.char.groups as |key group|}}
+                  {{#each-in this.model.char.groups as |key group|}}
                   <div class="form-group row">
                       <div class="col-sm-3">
                               <b>{{group.name}}</b>                               
                       </div>
                       <div class="col-sm-9">
                           
-                      {{#if (get (get model.cgInfo.group_options key) 'freeform')}}
+                      {{#if (get (get this.model.cgInfo.group_options key) 'freeform')}}
                         <Input @type="text" @size={{25}} @value={{group.value}} />
                       {{else}}
-                        <PowerSelect @selected={{get model.char.groups key}} @options={{get (get model.cgInfo.group_options key) "values"}} @searchField="value" @allowClear={{true}} @onChange={{action "groupChanged" key}} as |g|>
+                        <PowerSelect @selected={{get this.model.char.groups key}} @options={{get (get this.model.cgInfo.group_options key) "values"}} @searchField="value" @allowClear={{true}} @onChange={{action "groupChanged" key}} as |g|>
                         {{g.value}} {{if g.desc '-'}} {{g.desc}}
                       </PowerSelect>
                       {{/if}}
-                         <p class="cg-tip"> {{get (get model.cgInfo.group_options key) 'desc'}} </p>
+                         <p class="cg-tip"> {{get (get this.model.cgInfo.group_options key) 'desc'}} </p>
                          
                       </div>
                       
@@ -131,7 +131,7 @@
                   
             </div>
 
-            {{#if (not model.app.game.disabled_plugins.fs3skills) }}
+            {{#if (not this.model.app.game.disabled_plugins.fs3skills) }}
             <div role="tabpanel" class="tab-pane" id="fs3abilities">
               <Fs3Chargen @model={{model}} @anyGroupMissing={{anyGroupMissing}} @charErrors={{charErrors}} @updateCallback={{fs3UpdateCallback}} @validateCallback={{fs3ValidateCallback}} @reset={{action "reset"}} />
             </div>
@@ -152,66 +152,66 @@
            
                                    
          <div role="tabpanel" class="tab-pane" id="bg">
-             <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.bg_blurb}} /></div>
+             <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.bg_blurb}} /></div>
            
-             <MarkdownEditor @text={{model.char.background}} />
+             <MarkdownEditor @text={{this.model.char.background}} />
           </div>
           
           <div role="tabpanel" class="tab-pane" id="hooks">
           
-               <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.hooks_blurb}} /></div>
+               <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.hooks_blurb}} /></div>
 
-               <MarkdownEditor @text={{model.char.rp_hooks}} />
+               <MarkdownEditor @text={{this.model.char.rp_hooks}} />
           </div>
           
           <div role="tabpanel" class="tab-pane" id="icon">
 
-               <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.icon_blurb}} /> 
-                 <p>See <LinkTo @route="help-topic" @model="icons" @target="_blank">Icons</LinkTo> for tips on selecting and sizing your profile image.</p>
+               <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.icon_blurb}} /> 
+                 <p>See <LinkTo @route="help-topic" @model="icons" target="_blank">Icons</LinkTo> for tips on selecting and sizing your profile image.</p>
               </div>
 
-               <FileUploader @folder={{model.char.name}} @lockProperties={{true}} @allowMulti={{false}} @uploaded={{action "fileUploaded"}} />
+               <FileUploader @folder={{this.model.char.name}} @lockProperties={{true}} @allowMulti={{false}} @uploaded={{action "fileUploaded"}} />
                    
           </div>
 
          <div role="tabpanel" class="tab-pane" id="descs">
-             <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.desc_blurb}} /></div>
+             <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.desc_blurb}} /></div>
              
              <div class="chargen-section-title">Main Description</div>
-             <MarkdownEditor @text={{model.char.desc}} />
+             <MarkdownEditor @text={{this.model.char.desc}} />
              
              <div class="chargen-section-title">Short Description</div>
-             <Input @type="text" @size={{25}} @value={{model.char.shortdesc}} />
+             <Input @type="text" @size={{25}} @value={{this.model.char.shortdesc}} />
              
           </div>
           
           <div role="tabpanel" class="tab-pane" id="misc">
 
               <div class="chargen-section-title">Last Will</div>
-               <div class="cg-tip"><AnsiFormat @text={{model.cgInfo.lastwill_blurb}} /></div>
+               <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.lastwill_blurb}} /></div>
                <br>
-               <MarkdownEditor @text={{model.char.lastwill}} />
+               <MarkdownEditor @text={{this.model.char.lastwill}} />
                
                <div class="chargen-section-title">Player Handle</div>
 
-               <p>AresMUSH player handles provide--at your discretion--a consistent player identity across Ares games. They also enable cross-game features like a friends list and synchronized account preferences. Learn more about player handles on <a href="https://aresmush.com/handles" target="_blank" rel="nofollow noopener">aresmush.com</a> and set up your handle on your <LinkTo @route="account" @target="_blank">Account</LinkTo> page.</p>
+               <p>AresMUSH player handles provide--at your discretion--a consistent player identity across Ares games. They also enable cross-game features like a friends list and synchronized account preferences. Learn more about player handles on <a href="https://aresmush.com/handles" target="_blank" rel="nofollow noopener">aresmush.com</a> and set up your handle on your <LinkTo @route="account" target="_blank">Account</LinkTo> page.</p>
                
                
            </div>
            
-           <ChargenCustom @char={{model.char}} @cgInfo={{model.cgInfo}} @updateCallback={{customUpdateCallback}} />
+           <ChargenCustom @char={{this.model.char}} @cgInfo={{this.model.cgInfo}} @updateCallback={{customUpdateCallback}} />
                
        </div>
      
      
      <div class="alert alert-success">
     
-       {{#if model.cgInfo.allow_web_submit}}
+       {{#if this.model.cgInfo.allow_web_submit}}
                <p>Remember to save often.  When you're finished, you can review your character for errors or missing information and then submit your application.</p>
             
                <p>
                    <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
-                   {{#if model.char.can_approve}}
+                   {{#if this.model.char.can_approve}}
                    <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
                    {{else}}
                    <button name="review" {{action 'review'}} class="btn btn-success">Review or Submit</button>

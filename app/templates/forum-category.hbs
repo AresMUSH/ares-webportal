@@ -1,10 +1,10 @@
-{{page-title model.name}}
-<h1>{{model.name}}</h1>
+{{page-title this.model.name}}
+<h1>{{this.model.name}}</h1>
 
 <div class="row">
     <div class="col col-xs-12">
 
-      <AnsiFormat @text={{model.description}} />
+      <AnsiFormat @text={{this.model.description}} />
   </div>
 </div>
 
@@ -18,8 +18,8 @@
           <button {{action 'catchup'}} class="btn btn-default">Mark All Read</button>
           <button {{action 'nextUnread'}} class="btn btn-default">Next Unread</button>
  
-          {{#if model.can_post}}
-          <LinkTo @route="forum-create-post" @model={{model.id}} class="btn btn-primary">Add Post</LinkTo>
+          {{#if this.model.can_post}}
+          <LinkTo @route="forum-create-post" @model={{this.model.id}} class="btn btn-primary">Add Post</LinkTo>
           {{/if}}
           
           
@@ -27,6 +27,6 @@
   </div>
 </div>
 
-<ForumPostList @posts={{model.posts}} />
+<ForumPostList @posts={{this.model.posts}} />
 
 {{outlet}}

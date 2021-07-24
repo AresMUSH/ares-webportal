@@ -1,11 +1,11 @@
-{{#if model.options.is_job_admin}}
+{{#if this.model.options.is_job_admin}}
 
   {{page-title 'Jobs'}}
   <h1>Jobs</h1>
 
-  {{#if model.options.reboot_required_notice}}
+  {{#if this.model.options.reboot_required_notice}}
       <div class="alert alert-warning">
-        <i class="fas fa-exclamation-triangle"></i> <strong>Reboot Required!</strong> {{model.options.reboot_required_notice}}
+        <i class="fas fa-exclamation-triangle"></i> <strong>Reboot Required!</strong> {{this.model.options.reboot_required_notice}}
       </div>
   {{/if}}
      
@@ -35,13 +35,13 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-        <span href="#" class="btn btn-default">{{model.jobs.jobs_filter}} <span class="caret"></span></span> </a>
+        <span href="#" class="btn btn-default">{{this.model.jobs.jobs_filter}} <span class="caret"></span></span> </a>
         <ul class="dropdown-menu">
-          {{#each model.options.status_filters as |filter| }}
+          {{#each this.model.options.status_filters as |filter| }}
             <li><a href="#" {{action 'filterJobs' filter}}><span class="label job-category job-category-general">&nbsp;</span> {{filter}}</a></li>
           {{/each}}
           
-          {{#each model.options.category_values as |category| }}
+          {{#each this.model.options.category_values as |category| }}
             <li><a href="#" {{action 'filterJobs' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
           {{/each}}
           
@@ -59,6 +59,6 @@
       </div>
   {{/if}}
   
-<JobsList @jobs={{model.jobs.jobs}} @pages={{model.jobs.pages}} @page={{page}} @goToPage={{action "goToPage"}} />
+<JobsList @jobs={{this.model.jobs.jobs}} @pages={{this.model.jobs.pages}} @page={{page}} @goToPage={{action "goToPage"}} />
 
 {{outlet}}

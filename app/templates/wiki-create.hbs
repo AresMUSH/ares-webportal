@@ -7,7 +7,7 @@
         <label for="title" class="col-xs-2 col-form-label">Title:</label>
      </div>
      <div class="col-sm-9">
-       <Input @type="text" @size={{25}} @id="title" @enter={{action "save"}} @value={{model.title}} />
+       <Input @type="text" @size={{25}} @id="title" @enter={{action "save"}} @value={{this.model.title}} />
 
         <div class="hint">This is the page title that the players see.</div>
      </div> 
@@ -18,7 +18,7 @@
         <label for="name" class="col-xs-2 col-form-label">Page Name:</label>
       </div>
       <div class="col-sm-9">
-        <Input @type="text" @size={{25}} @id="name" @enter={{action "save"}} @value={{model.name}} />
+        <Input @type="text" @size={{25}} @id="name" @enter={{action "save"}} @value={{this.model.name}} />
         
         <div class="hint">If blank, the page title will be converted into a name.</div>
       </div> 
@@ -29,7 +29,7 @@
         <label for="tags" class="col-xs-2 col-form-label">Tags:</label>
      </div>
      <div class="col-sm-9">
-        <Input @type="text" @size={{25}} @id="tags" @enter={{action "save"}} @value={{model.tags}} />
+        <Input @type="text" @size={{25}} @id="tags" @enter={{action "save"}} @value={{this.model.tags}} />
      </div> 
    </div>  
     
@@ -38,13 +38,13 @@
         <label for="tags" class="col-xs-2 col-form-label">Template:</label>
      </div>
      <div class="col-sm-9">
-      <PowerSelect @selected={{model.template}} @options={{model.templates}} @searchField="title" @onChange={{action "templateChanged"}} as |tmp|>
+      <PowerSelect @selected={{this.model.template}} @options={{this.model.templates}} @searchField="title" @onChange={{action "templateChanged"}} as |tmp|>
         {{tmp.title}}
       </PowerSelect>
      </div> 
    </div>  
     
-   <MarkdownEditor @text={{model.text}} @rows={{30}} />
+   <MarkdownEditor @text={{this.model.text}} rows={{30}} />
    
     
     <div class="row">

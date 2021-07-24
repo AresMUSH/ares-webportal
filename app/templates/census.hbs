@@ -1,20 +1,20 @@
 {{page-title "Census"}}
 <h1>All Characters</h1>
 
-<CensusNav @types={{model.types}} />
+<CensusNav @types={{this.model.types}} />
 
 <div class="table-responsive">
 
 <table class="table table-striped">
     <tr>
         <th></th>
-        {{#each model.census.titles as |title|}}
+        {{#each this.model.census.titles as |title|}}
         <th>{{title}}</th>
         {{/each}}
     </tr>
     
     
-{{#each model.census.chars as |char| }}
+{{#each this.model.census.chars as |char| }}
 <tr>
   {{#each-in char as |field value| }}
     <td>

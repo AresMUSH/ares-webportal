@@ -4,7 +4,7 @@
     <hr>
 
     <div>
-      {{#each model.char.files as |file|}}
+      {{#each this.model.char.files as |file|}}
     
       <div class="thumbnail-gallery">
         <LinkTo @route="file" @models={{array file.folder file.name}}>
@@ -17,6 +17,6 @@
 
     <p><LinkTo @route="files" target="_blank">All Files</LinkTo></p>
 
-    <FileUploader @folder={{model.char.name}} @uploaded={{action "fileUploaded"}} />
+    <FileUploader @folder={{this.model.char.name}} @uploaded={{action "fileUploaded"}} />
 </div>
         

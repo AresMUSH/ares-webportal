@@ -1,21 +1,21 @@
-{{page-title model.name}}
-<h1>{{model.name}}</h1>
+{{page-title this.model.name}}
+<h1>{{this.model.name}}</h1>
 
 <table class="table table-striped">
     
 
-{{#each model.values as |value|}}
+{{#each this.model.values as |value|}}
 <tr>
     <td><b>{{value.title}}</b></td>
     <td><AnsiFormat @text={{value.detail}} /></td>
 </tr>
 {{/each}}
 
-{{#if model.specials}}
+{{#if this.model.specials}}
 <h3>Available Specials</h3>
 
 
-{{#each model.specials as |value|}}
+{{#each this.model.specials as |value|}}
 <tr>
     <td><b>{{value.title}}</b></td>
     <td>

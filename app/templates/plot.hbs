@@ -1,44 +1,44 @@
-{{page-title model.plot.title}}
-<h1>{{model.plot.title}}</h1>
+{{page-title this.model.plot.title}}
+<h1>{{this.model.plot.title}}</h1>
 
 <p><LinkTo @route="plots"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Plots</LinkTo></p>
       
   
-<p><AnsiFormat @text={{model.plot.summary}} /></p>
+<p><AnsiFormat @text={{this.model.plot.summary}} /></p>
 
-{{#if model.plot.content_warning}}
-<div class="alert alert-danger"><b>Content Warning:</b> {{model.plot.content_warning}}</div>
+{{#if this.model.plot.content_warning}}
+<div class="alert alert-danger"><b>Content Warning:</b> {{this.model.plot.content_warning}}</div>
 {{/if}}
 
-{{#if model.plot.description}}
+{{#if this.model.plot.description}}
 <p><a href="#details"><i class="fas fa-angle-double-down"></i> Jump to Details</a></p>
 {{/if}}
 
 <p><label>Storytellers:</label> 
-  {{#each model.plot.storytellers as |storyteller|}}
+  {{#each this.model.plot.storytellers as |storyteller|}}
   <CharIconInline @char={{storyteller}} />
   {{/each}}
 </p>
 
 
-{{#if model.plot.tags}}
+{{#if this.model.plot.tags}}
 <b>Tags:</b>  
-    {{#each model.plot.tags as |tag|}}
+    {{#each this.model.plot.tags as |tag|}}
     <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
     {{/each}}
 {{/if}}
 
     <h2>Scenes</h2>
         
-    <SceneList @scenes={{model.scenes.scenes}} @pages={{model.scenes.pages}} @sceneTypes={{model.sceneOptions.scene_types}} @filter={{filter}} @page={{page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
+    <SceneList @scenes={{this.model.scenes.scenes}} @pages={{this.model.scenes.pages}} @sceneTypes={{this.model.sceneOptions.scene_types}} @filter={{filter}} @page={{page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
     
     
-{{#if model.plot.description}}
+{{#if this.model.plot.description}}
 <div>
 <a name="details"></a>
 <h2>Details</h2>
 
-<AnsiFormat @text={{model.plot.description}} />
+<AnsiFormat @text={{this.model.plot.description}} />
 
 </div>
 {{/if}}
@@ -56,7 +56,7 @@
         {{#if isAdmin}}
         <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
         {{/if}}
-        <LinkTo @route="plot-edit" @model={{model.plot.id}} class="btn btn-primary">Edit</LinkTo>
+        <LinkTo @route="plot-edit" @model={{this.model.plot.id}} class="btn btn-primary">Edit</LinkTo>
     </div>
     </div>
 </div>
@@ -66,7 +66,7 @@
 <FlashMessages />
 
 <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) false}}>
-    You're about to delete plot {{model.plot.title}}. This cannot be undone.  Are you sure?
+    You're about to delete plot {{this.model.plot.title}}. This cannot be undone.  Are you sure?
   </BsModalSimple>
   
 {{outlet}}

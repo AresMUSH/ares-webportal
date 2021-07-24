@@ -19,23 +19,23 @@
   
   <tr>
     <td class="col-xs-3"><b>Server Uptime:</b> </td>
-    <td>{{model.server_uptime}} (started {{model.server_start}})</td>
+    <td>{{this.model.server_uptime}} (started {{this.model.server_start}})</td>
   </tr>
   
   <tr>
     <td class="col-xs-3"><b>Database Stats:</b> </td>
     <td>
       <ul>
-        <li>Characters: {{model.num_characters}}</li>
-        <li>Rooms: {{model.num_rooms}}</li>
-        <li>Exits: {{model.num_exits}}</li>
+        <li>Characters: {{this.model.num_characters}}</li>
+        <li>Rooms: {{this.model.num_rooms}}</li>
+        <li>Exits: {{this.model.num_exits}}</li>
       </ul>
     </td>
   </tr>
   
   <tr>
     <td class="col-xs-3"><b>Database Migrations:</b> </td>
-    <td>{{#each model.migrations as |migration|}}
+    <td>{{#each this.model.migrations as |migration|}}
       <span class="server-migration">{{migration}}</span>
       {{/each}}
     </td>
