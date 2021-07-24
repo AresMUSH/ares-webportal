@@ -46,7 +46,7 @@
                {{tag}}
              </PowerSelectMultiple>
              
-             <Input @type="text" @size={{10}} id="newTag" @value={{newTag}} /> 
+             <input type="text" size={{10}} id="newTag" value={{newTag}} /> 
              <a href="#" {{action 'addNewTag'}}><i class="fa fa-plus" aria-label="Add Tag"></i></a>     
 
         </td>
@@ -94,7 +94,7 @@
           {{char.name}}
         </PowerSelectMultiple>
       </p>
-      <p><b>Subject:</b> <Input @type="text" @size={{25}} id="replySubject" @value={{replySubject}} /></p>
+      <p><b>Subject:</b> <input type="text" size={{25}} id="replySubject" value={{replySubject}} /></p>
           <MarkdownEditor @text={{replyMessage}} />
           <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>    
         </div>
@@ -117,7 +117,7 @@
         {{char.name}}
       </PowerSelectMultiple>
       </p> 
-      <p><b>Subject:</b> <Input @type="text" @size={{25}} id="fwdSubject" @value={{fwdSubject}} /></p>
+      <p><b>Subject:</b> <input type="text" size={{25}} id="fwdSubject" value={{fwdSubject}} /></p>
       <b>Original Message:</b>
       <AnsiFormat @text={{this.model.message.body}} />
           <MarkdownEditor @text={{fwdMessage}} />

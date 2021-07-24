@@ -20,7 +20,7 @@
      
      {{#each this.model.char.descs.outfits as |outfit|}}
      <p>
-     <Input @type="text" @size={{25}} @value={{outfit.name}} placeholder="Enter outfit name." />
+     <input type="text" size={{25}} value={{outfit.name}} placeholder="Enter outfit name." />
      <button class="btn btn-default" {{action 'removeOutfit' outfit.key}}><i class="fa fa-trash" aria-label="Remove Outfit"></i></button>
      </p>
      <MarkdownEditor @text={{outfit.desc}} />
@@ -34,7 +34,7 @@
    <div id="descdetails" class="tab-pane fade in">
      {{#each this.model.char.descs.details as |detail|}}
      <p>
-     <Input @type="text" @size={{25}} @value={{detail.name}} placeholder="Enter detail name." />
+     <input type="text" size={{25}} value={{detail.name}} placeholder="Enter detail name." />
      <button class="btn btn-default" {{action 'removeDetail' detail.key}}><i class="fa fa-trash" aria-label="Remove Detail"></i></button>
      </p>
      <MarkdownEditor @text={{detail.desc}} />

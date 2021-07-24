@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#supplementalindex">+</a></li>
-    {{#each char.profile as |profile| }}
+    {{#each this.char.profile as |profile| }}
         <li><a data-toggle="tab" href="#{{profile.key}}">{{profile.name}}</a></li>
     {{/each}}
 </ul>
@@ -9,10 +9,10 @@
 <div class="tab-content">
 
   <div id="supplementalindex" class="tab-pane fade in active">
-      <div class="tab-cover">{{title}}</div>
+      <div class="tab-cover">{{this.title}}</div>
   </div>
   
-  {{#each char.profile as |profile|}}
+  {{#each this.char.profile as |profile|}}
   
   <div id="{{profile.key}}" class="tab-pane fade ansi">
   

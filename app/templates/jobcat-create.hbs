@@ -7,7 +7,7 @@
         <label for="name" class="col-form-label">Name:</label>
     </div>
     <div class="col-sm-9">
-        <Input @type="text" @size={{25}} id="name" @enter={{action "save"}} @value={{name}} />
+        <input type="text" size={{25}} id="name" enter={{action "save"}} value={{name}} />
     </div> 
   </div>
   
@@ -16,7 +16,7 @@
         <label for="color" class="col-form-label">Color:</label>
     </div>
     <div class="col-sm-9">
-        <Input @type="text" @size={{25}} id="color" @enter={{action "save"}} @value={{color}} />
+        <input type="text" size={{25}} id="color" enter={{action "save"}} value={{color}} />
         <div class="hint">Web portal colors are determined by custom styling for job-category-NAME.</div>
     </div> 
   </div>
@@ -39,7 +39,7 @@
     </div>
 
     <div class="col-sm-9">
-      <Textarea @value={{template}} cols={{80}} rows=5 @class="job-template-editor" />
+      <Textarea value={{template}} cols={{80}} rows=5 @class="job-template-editor" />
     </div>
   </div>
   

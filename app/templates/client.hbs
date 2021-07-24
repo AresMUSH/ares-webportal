@@ -25,7 +25,7 @@
 {{/each}}
 </div>
 
-<CmdBox @value={{text1}} id="sendMsg" cols={{80}} rows="6" @onEnter={{action "sendMsg1"}} />
+<CmdBox value={{text1}} id="sendMsg" cols={{80}} rows="6" @onEnter={{action "sendMsg1"}} />
     
 <button class="sendButton btn-primary btn" {{action "sendMsg1"}}>Send Text</button>
 <button class="btn btn-default" {{action (mut showHistory1) true}}>
@@ -36,7 +36,7 @@
    <span class="label label-warning">Scrolling is paused!</span>
 {{/if}}
 
-<CmdBox @value={{text2}} id="sendMsg2" cols={{80}} rows="6" @onEnter={{action "sendMsg2"}} />
+<CmdBox value={{text2}} id="sendMsg2" cols={{80}} rows="6" @onEnter={{action "sendMsg2"}} />
 
 <button class="sendButton2 btn-primary btn" {{action "sendMsg2"}}>Send Text</button>
 <button class="btn btn-default" {{action (mut showHistory2) true}}>

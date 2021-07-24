@@ -91,10 +91,10 @@
                              </PowerSelect>
                          
                          {{else if (eq key 'age')}}
-                             <Input @type="text" @size={{25}} @value={{demo.value}} />
+                             <input type="text" size={{25}} value={{demo.value}} />
                              <div class="cg-tip">Enter an age or a birthdate in {{this.model.cgInfo.date_format}} format.</div>
                          {{else}}
-                             <Input @type="text" @size={{25}} @value={{demo.value}} />
+                             <input type="text" size={{25}} value={{demo.value}} />
                          {{/if}}
                      </div>
                  </div>
@@ -115,7 +115,7 @@
                       <div class="col-sm-9">
                           
                       {{#if (get (get this.model.cgInfo.group_options key) 'freeform')}}
-                        <Input @type="text" @size={{25}} @value={{group.value}} />
+                        <input type="text" size={{25}} value={{group.value}} />
                       {{else}}
                         <PowerSelect @selected={{get this.model.char.groups key}} @options={{get (get this.model.cgInfo.group_options key) "values"}} @searchField="value" @allowClear={{true}} @onChange={{action "groupChanged" key}} as |g|>
                         {{g.value}} {{if g.desc '-'}} {{g.desc}}
@@ -181,7 +181,7 @@
              <MarkdownEditor @text={{this.model.char.desc}} />
              
              <div class="chargen-section-title">Short Description</div>
-             <Input @type="text" @size={{25}} @value={{this.model.char.shortdesc}} />
+             <input type="text" size={{25}} value={{this.model.char.shortdesc}} />
              
           </div>
           

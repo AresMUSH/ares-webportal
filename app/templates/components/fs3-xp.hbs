@@ -30,7 +30,7 @@
   
     {{#if (and (gt char.fs3.xp.xp_points 0) char.fs3.xp.can_learn)}}
   
-    <Input @type="text" @size={{25}} @value={{newAbility}} />
+    <input type="text" size={{25}} value={{newAbility}} />
     <a href="#" class="btn btn-default" {{action 'learnNewAbility'}} >Learn</a>
     
     {{else}}

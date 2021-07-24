@@ -302,7 +302,7 @@
       
       <p><b>Reason for Report:</b></p>
       
-      <Textarea @value={{this.reportReason}} cols="40" rows={{5}} />
+      <Textarea value={{this.reportReason}} cols="40" rows={{5}} />
       
     </BsModalSimple>
     
@@ -316,7 +316,7 @@
           <PowerSelect @selected={{this.newLocation}} @options={{this.locations}} @onChange={{action "locationSelected"}} as |location|>
         {{location}}
       </PowerSelect>
-       <b>Custom Location:</b> <Input @type="text" @size={{25}} id="newLocation" @enter={{action "changeLocation"}} @value={{this.newLocation}} />
+       <b>Custom Location:</b> <input type="text" size={{25}} id="newLocation" enter={{action "changeLocation"}} value={{this.newLocation}} />
          </p>
     </BsModalSimple>
     

@@ -29,9 +29,9 @@
   
           <FlashMessages />
         
-          <p><Input @type="text" id="handleName" placeholder="Handle Name" @value={{handleName}} /></p>
-          <p><Input @type="text" placeholder="Link Code" id="linkCode" @value={{linkCode}} /></p>
-          <p><Input @type="password" placeholder="Confirm Password" id="confirmPasswordHandle" @value={{confirmPasswordHandle}} /></p>
+          <p><input type="text" id="handleName" placeholder="Handle Name" value={{handleName}} /></p>
+          <p><input type="text" placeholder="Link Code" id="linkCode" value={{linkCode}} /></p>
+          <p><Input @type="password" placeholder="Confirm Password" id="confirmPasswordHandle" value={{confirmPasswordHandle}} /></p>
         
           <button {{action "linkHandle"}} class="btn btn-primary">Link to Handle</button>
         
@@ -55,9 +55,9 @@
 
           <FlashMessages />
         
-          <p><Input @type="password" id="password" placeholder="Current Password" @value={{currentPassword}} /></p>
-          <p><Input @type="password" placeholder="Password" id="newPassword" @value={{newPassword}} /></p>
-          <p><Input @type="password" placeholder="Confirm New Password"  id="confirmPassword" @value={{confirmPassword}} /></p>
+          <p><Input @type="password" id="password" placeholder="Current Password" value={{currentPassword}} /></p>
+          <p><Input @type="password" placeholder="Password" id="newPassword" value={{newPassword}} /></p>
+          <p><Input @type="password" placeholder="Confirm New Password"  id="confirmPassword" value={{confirmPassword}} /></p>
         
           <button {{action "changePassword"}} class="btn btn-primary">Change Password</button>
                 
@@ -87,7 +87,7 @@
               {{#if isApproved}}
               <p>You are already approved. Submit a <LinkTo @route="jobs">request</LinkTo> to ask for a name change.</p>
               {{else}}
-              <p><Input id="name" placeholder="Name" @value={{model.name}} /></p>
+              <p><Input id="name" placeholder="Name" value={{model.name}} /></p>
               {{/if}}
               
             </div>
@@ -100,7 +100,7 @@
           
             <div class="panel-body">
                         
-              <p><Input placeholder="Email" id="email" @value={{model.email}} /></p>
+              <p><Input placeholder="Email" id="email" value={{model.email}} /></p>
             </div>
           </div>
             
@@ -141,7 +141,7 @@
             
             
           
-          <p><Input @type="password" id="passwordEmail" placeholder="Confirm Password" @value={{confirmPasswordSettings}} /></p>
+          <p><Input @type="password" id="passwordEmail" placeholder="Confirm Password" value={{confirmPasswordSettings}} /></p>
           <button {{action "changeSettings"}} class="btn btn-primary">Save Settings</button>
              
           <FlashMessages />

@@ -1,8 +1,8 @@
        <div>
 
-          <h3>{{title}}</h3>
+          <h3>{{this.title}}</h3>
          
-          {{#each chars as |c|}}
+          {{#each this.chars as |c|}}
     
           <div class="profile-gallery">
               <CharIcon @char={{c}} />

@@ -19,17 +19,17 @@
         {{#if (or this.model.char.show_idle_tab this.model.char.show_roles_tab)}}
         <li><a data-toggle="tab" href="#roles">Roles</a></li>
         {{/if}}
-        <CharEditCustomTabs @char={{model}} />
+        <CharEditCustomTabs @char={{this.model}} />
     </ul>
     
     
 
     <div class="tab-content">
 
-      <CharEditGeneral @model={{model}} />
-      <CharEditProfile @model={{model}} />
-      <CharEditRelationships @model={{model}} />
-      <CharEditDescs @model={{model}} />
+      <CharEditGeneral @model={{this.model}} />
+      <CharEditProfile @model={{this.model}} />
+      <CharEditRelationships @model={{this.model}} />
+      <CharEditDescs @model={{this.model}} />
       
       <div id="hooks" class="tab-pane fade in">
           <MarkdownEditor @text={{this.model.char.rp_hooks}} />
@@ -48,7 +48,7 @@
       {{/if}}
 
       {{#if (or this.model.char.show_idle_tab this.model.char.show_roster_tab)}}
-        <CharEditIdle @model={{model}} />
+        <CharEditIdle @model={{this.model}} />
       {{/if}}
 
       {{#if this.model.char.show_roles_tab}}
@@ -59,9 +59,9 @@
       </div>
       {{/if}}
       
-      <CharEditCustom @char={{this.model.char}} @updateCallback={{customUpdateCallback}} />
+      <CharEditCustom @char={{this.model.char}} @updateCallback={{this.customUpdateCallback}} />
         
-      <CharEditFiles @model={{model}} />
+      <CharEditFiles @model={{this.model}} />
     </div>
         
     

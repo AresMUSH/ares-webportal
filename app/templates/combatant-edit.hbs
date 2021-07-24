@@ -13,7 +13,7 @@
             <br>
             <b>Action Args:</b> 
             <TooltipIcon @position="right" @message="Enter targets or other options for your action, like Dummy/burst,called:head." @icon="fa fa-question-circle" />
-            <Input @type="text" @size={{25}} id="actionArgs" @value={{this.model.action_args}} />
+            <input type="text" size={{25}} id="actionArgs" value={{this.model.action_args}} />
             
             <p>
             <b>Available Targets:</b>
@@ -131,7 +131,7 @@
     </div>
     <div class="col-sm-9">
         
-            <Input @type="text" @size={{25}} id="vehicleName" @value={{this.model.vehicle}} />
+            <input type="text" size={{25}} id="vehicleName" value={{this.model.vehicle}} />
             <br>
             <b>Passenger Type:</b> <PowerSelect @selected={{this.model.passenger_type}} @options={{passengerTypes}} @onChange={{action "passengerTypeChanged"}} as |passengerType|>
               {{passengerType}}

@@ -63,7 +63,7 @@
        <p><CharIconInline @char={{this.model.author}} /></p>
        
        {{#if this.model.editActive}}
-          <p><b>Title:</b> <Input @type="text" @size={{25}} @value={{this.model.title}} /></p>
+          <p><b>Title:</b> <input type="text" size={{25}} value={{this.model.title}} /></p>
        
           <p><b>Text:</b></p>
           <MarkdownEditor @text={{this.model.raw_message}} />
