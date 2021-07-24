@@ -10,25 +10,25 @@
         <option value={{ability}}>{{ability}}</option>
       {{/each}}
     </select>
-    <Input @type="text" @size={{25}} @id="rollString" @enter={{action "addRoll"}} @value={{this.rollString}} />
+    <Input @type="text" @size={{25}} id="rollString" @enter={{action "addRoll"}} @value={{this.rollString}} />
 
    <hr>
     <p><b>Roll for Another PC</b></p>
     
     <p>
-      Character: <Input @type="text" @size={{15}} @id="pcRollName" @enter={{action "addRoll"}} @value={{this.pcRollName}} /> 
-      Ability: <Input @type="text" @size={{15}} @id="pcRollSkill" @enter={{action "addRoll"}} @value={{this.pcRollSkill}} /><br>
+      Character: <Input @type="text" @size={{15}} id="pcRollName" @enter={{action "addRoll"}} @value={{this.pcRollName}} /> 
+      Ability: <Input @type="text" @size={{15}} id="pcRollSkill" @enter={{action "addRoll"}} @value={{this.pcRollSkill}} /><br>
     </p>
       
     <hr>
     <p><b>Opposed Roll</b></p>
     <p>Enter two character and ability names.</p>
     <p>
-      Character: <Input @type="text" @size={{15}} @id="vsName1" @enter={{action "addRoll"}} @value={{this.vsName1}} /> 
-      Ability: <Input @type="text" @size={{15}} @id="vsRoll1" @enter={{action "addRoll"}} @value={{this.vsRoll1}} /><br>
+      Character: <Input @type="text" @size={{15}} id="vsName1" @enter={{action "addRoll"}} @value={{this.vsName1}} /> 
+      Ability: <Input @type="text" @size={{15}} id="vsRoll1" @enter={{action "addRoll"}} @value={{this.vsRoll1}} /><br>
      vs<br>
-      Character: <Input @type="text" @size={{15}} @id="vsName2" @enter={{action "addRoll"}} @value={{this.vsName2}} /> 
-      Ability: <Input @type="text" @size={{15}} @id="vsRoll2" @enter={{action "addRoll"}} @value={{vvsRoll2}} /><br>
+      Character: <Input @type="text" @size={{15}} id="vsName2" @enter={{action "addRoll"}} @value={{this.vsName2}} /> 
+      Ability: <Input @type="text" @size={{15}} id="vsRoll2" @enter={{action "addRoll"}} @value={{vvsRoll2}} /><br>
     </p>
     
   </BsModalSimple>

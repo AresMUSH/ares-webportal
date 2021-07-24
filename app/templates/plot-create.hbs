@@ -6,7 +6,7 @@
         <label for="title" class="col-form-label">Title:</label>
     </div>
     <div class="col-sm-9">
-         <Input @type="text" @size={{25}} @id="title" @enter={{action "save"}} @value={{title}} />
+         <Input @type="text" @size={{25}} id="title" @enter={{action "save"}} @value={{title}} />
     </div> 
   </div>
   
@@ -37,7 +37,7 @@
             <label for="title" class="col-form-label">Content Warning:</label>
         </div>
         <div class="col-sm-9">
-            <Input @type="text" @size={{25}} @id="content_warning" @value={{contentWarning}} />
+            <Input @type="text" @size={{25}} id="content_warning" @value={{contentWarning}} />
         </div>
       </div>
       
@@ -46,7 +46,7 @@
              <label for="tags" class="col-form-label">Tags:</label>
          </div>
          <div class="col-sm-9">
-             <Input @type="text" @size={{25}} @id="tags" @value={{tags}} />
+             <Input @type="text" @size={{25}} id="tags" @value={{tags}} />
          </div>
        </div>
        

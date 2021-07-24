@@ -35,11 +35,11 @@
 
      </div>
           
-     {{#if charErrors.length}}
+     {{#if this.charErrors.length}}
      <div class="alert alert-danger">
      <p><b>Alerts:</b></p>
      <ul>
-     {{#each charErrors as |error|}}
+     {{#each this.charErrors as |error|}}
      <li>{{error}}</li>
      {{/each}}
      </ul>
@@ -55,11 +55,11 @@
         <li role="presentation"><a href="#fs3abilities" aria-controls="fs3abilities" role="tab" data-toggle="tab">Abilities</a></li>
         {{/if}}
         
-        {{#if traitsExtraInstalled}}
+        {{#if this.traitsExtraInstalled}}
         <li role="presentation"><a href="#traits" aria-controls="misc" role="tab" data-toggle="tab">Traits</a></li>
        {{/if}}
 
-        {{#if rpgExtraInstalled}}
+        {{#if this.rpgExtraInstalled}}
         <li role="presentation"><a href="#rpgsheet" aria-controls="misc" role="tab" data-toggle="tab">Sheet</a></li>
        {{/if}}
        
@@ -68,7 +68,7 @@
        <li role="presentation"><a href="#icon" aria-controls="misc" role="tab" data-toggle="tab">Profile Icon</a></li>
        <li role="presentation"><a href="#descs" aria-controls="misc" role="tab" data-toggle="tab">Descriptions</a></li>
        <li role="presentation"><a href="#misc" aria-controls="misc" role="tab" data-toggle="tab">Misc</a></li>
-       <ChargenCustomTabs @char={{model}} />
+       <ChargenCustomTabs @char={{this.model}} />
      </ul>
      
      <!-- Tab panes -->
@@ -86,7 +86,7 @@
                      <div class="col-sm-9">
                          {{#if (eq key 'gender') }}
                              
-                             <PowerSelect @selected={{this.model.char.demographics.gender}} @searchEnabled=true @searchField="value" @options={{genders}} @onChange={{action "genderChanged"}} as |gender|>
+                             <PowerSelect @selected={{this.model.char.demographics.gender}} @searchEnabled=true @searchField="value" @options={{this.genders}} @onChange={{action "genderChanged"}} as |gender|>
                                {{gender.value}}
                              </PowerSelect>
                          
@@ -137,16 +137,16 @@
             </div>
             {{/if}}
 
-          {{#if traitsExtraInstalled}}
+          {{#if this.traitsExtraInstalled}}
           <div role="tabpanel" class="tab-pane" id="traits">
                   
-               <TraitsChargen @model={{model}} @updateCallback={{traitsUpdateCallback}} />
+               <TraitsChargen @model={{this.model}} @updateCallback={{traitsUpdateCallback}} />
            </div>
            {{/if}}
            
-           {{#if rpgExtraInstalled}}
+           {{#if this.rpgExtraInstalled}}
              <div role="tabpanel" class="tab-pane" id="rpgsheet">
-               <RpgChargen @model={{model}} @updateCallback={{rpgUpdateCallback}} />
+               <RpgChargen @model={{this.model}} @updateCallback={{rpgUpdateCallback}} />
              </div>
             {{/if}}
            
@@ -231,11 +231,11 @@
      
    <FlashMessages />
    
-     {{#if charErrors.length}}
+     {{#if this.charErrors.length}}
      <div class="alert alert-danger">
      <p><b>Alerts:</b></p>
      <ul>
-     {{#each charErrors as |error|}}
+     {{#each this.charErrors as |error|}}
      <li>{{error}}</li>
      {{/each}}
      </ul>

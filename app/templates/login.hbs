@@ -1,4 +1,4 @@
-{{page-title Log In}}
+{{page-title 'Log In'}}
 <p>Log in using your character information. Your web login is the same as your game login.</p>
 
 
@@ -10,8 +10,8 @@
 <div class="panel panel-default">
     <div class="panel-body">
 
-        <p><Input @type="text" @id="name" placeholder="Name" @enter={{action "login"}} @value={{name}} @autofocus={{true}} /></p>
-        <p><Input @type="password" placeholder="Password" @enter={{action "login"}} @id="password" @value={{password}} /></p>
+        <p><Input @type="text" id="name" placeholder="Name" @enter={{action "login"}} @value={{this.name}} autofocus={{true}} /></p>
+        <p><Input @type="password" placeholder="Password" @enter={{action "login"}} id="password" @value={{this.password}} /></p>
         
         <button {{action "login"}} class="btn btn-primary">Login</button>
             

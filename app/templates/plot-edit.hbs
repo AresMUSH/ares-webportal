@@ -6,7 +6,7 @@
         <label for="title" class="col-form-label">Title:</label>
     </div>
     <div class="col-sm-9">
-        <Input @type="text" @size={{25}} @id="title" @enter={{action "save"}} @value={{this.model.plot.title}} />
+        <Input @type="text" @size={{25}} id="title" @enter={{action "save"}} @value={{this.model.plot.title}} />
     </div> 
   </div>
   
@@ -45,7 +45,7 @@
          <label for="warning" class="col-form-label">Content Warning:</label>
      </div>
      <div class="col-sm-9">
-         <Input @type="text" @size={{25}} @id="content_warning" @value={{this.model.plot.content_warning}} />
+         <Input @type="text" @size={{25}} id="content_warning" @value={{this.model.plot.content_warning}} />
      </div>
    </div>
   
@@ -63,7 +63,7 @@
          <label for="tags" class="col-form-label">Tags:</label>
      </div>
      <div class="col-sm-9">
-         <Input @type="text" @size={{25}} @id="tags" @value={{this.model.plot.tags}} />
+         <Input @type="text" @size={{25}} id="tags" @value={{this.model.plot.tags}} />
      </div>
    </div>
     
