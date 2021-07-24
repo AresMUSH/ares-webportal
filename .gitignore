@@ -36,3 +36,8 @@ errors.txt
 
 aresconfig.js
 calendar.ics
+
+# Ember upgrade junk
+
+codemods.log
+MODULE_REPORT.md

@@ -309,7 +309,7 @@ export default Component.extend(AuthenticatedController, {
         let api = this.gameApi;
         this.set('confirmReportScene', false);
 
-        api.requestOne('reportScene', { id: this.get('scene.id'), reason: this.get('reportReason') })
+        api.requestOne('reportScene', { id: this.get('scene.id'), reason: this.reportReason })
         .then( (response) => {
             if (response.error) {
                 return;

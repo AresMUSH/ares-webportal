@@ -20,11 +20,11 @@ export default Controller.extend({
     actions: {        
         save: function() {
           let api = this.gameApi;
-          api.requestOne('jobCategoryCreate', { id: this.get('id'),
-             name: this.get('name'), 
-             color: this.get('color'),
-             template: this.get('template'),
-             roles: (this.get('roles') || [])}, null)
+          api.requestOne('jobCategoryCreate', { id: this.id,
+             name: this.name, 
+             color: this.color,
+             template: this.template,
+             roles: (this.roles || [])}, null)
           .then( (response) => {
               if (response.error) {
                   return;

@@ -37,7 +37,7 @@
         </td>
         <td>
           {{#each plot.storytellers as |storyteller|}}
-            {{char-icon-tiny char=storyteller}}
+            <CharIconTiny @char={{storyteller}} />
           {{/each}}
         </td>
         <td class="hidden-xs hidden-sm">

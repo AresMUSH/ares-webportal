@@ -61,7 +61,7 @@
         </td>
         <td>
             {{#if forum.last_activity}}
-              {{char-icon-tiny char=forum.last_activity.author}} {{forum.last_activity.date}}
+              <CharIconTiny @char={{forum.last_activity.author}} /> {{forum.last_activity.date}}
               <br>
               {{if (eq forum.last_activity.type 'reply') 'Replied to' 'Posted'}}
               <LinkTo @route="forum-topic" @models={{array forum.id forum.last_activity.id}}>{{forum.last_activity.subject}}</LinkTo>

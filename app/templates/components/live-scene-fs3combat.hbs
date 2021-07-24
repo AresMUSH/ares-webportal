@@ -27,7 +27,7 @@
     
 <BsModalSimple @title="Send Combat Command" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{showCombatCommand}} @onHide={{action (mut showCombatCommand) false}}>
   
-    {{input value=combatCommand enter='sendCommand' size=25}}
+    <Input @value={{combatCommand}} @enter="sendCommand" @size={{25}} />
 
     <button class="btn btn-default" {{action 'sendCommand'}} >Send Command</button>
     <div class="label label-info">{{commandResponse}}</div>

@@ -43,7 +43,7 @@ export default Controller.extend({
     createJob: function() {
       let api = this.gameApi;
       
-      let tags = this.get('tags') || [];
+      let tags = this.tags || [];
       if (!Array.isArray(tags)) {
           tags = tags.split(/[\s,]/);
       }

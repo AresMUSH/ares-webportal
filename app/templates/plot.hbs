@@ -16,7 +16,7 @@
 
 <p><label>Storytellers:</label> 
   {{#each model.plot.storytellers as |storyteller|}}
-  {{char-icon-inline char=storyteller}}
+  <CharIconInline @char={{storyteller}} />
   {{/each}}
 </p>
 

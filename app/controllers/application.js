@@ -104,7 +104,7 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, AresC
     }),
     
     versionWarning: computed('mushVersion', 'portalVersion', function() {
-      return this.get('mushVersion') != this.get('portalVersion');
+      return this.mushVersion != this.portalVersion;
     }),
     
     actions: {

@@ -50,7 +50,7 @@ export default Controller.extend({
                title: this.get('model.title'), 
                name: this.get('model.name'),
                text: this.get('model.text'),
-               minor_edit: this.get('minorEdit'),
+               minor_edit: this.minorEdit,
                tags: tags}, null)
             .then( (response) => {
                 if (response.error) {
