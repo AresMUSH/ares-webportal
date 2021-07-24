@@ -3,7 +3,7 @@
 
 
 <ul>
-{{#each model as |page| }}
+{{#each this.model as |page| }}
 <li><LinkTo @route="wiki-page" @model={{page.id}}>{{page.heading}}</LinkTo></li>
 {{/each}}
 </ul>

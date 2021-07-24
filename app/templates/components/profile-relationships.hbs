@@ -1,7 +1,7 @@
 
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#relationshipindex">+</a></li>
-    {{#each char.relationships as |cat|}}
+    {{#each this.char.relationships as |cat|}}
     <li><a data-toggle="tab" href="#{{cat.key}}">{{cat.name}}</a></li>
     {{/each}}
 </ul>
@@ -13,7 +13,7 @@
       <div class="tab-cover">Relationships</div>
   </div>
   
-  {{#each char.relationships as |cat|}}
+  {{#each this.char.relationships as |cat|}}
 
   <div id="{{cat.key}}" class="tab-pane fade">
     

@@ -1,4 +1,4 @@
-{{page-title pageTitle}}
+{{page-title this.pageTitle}}
 <a name="top"></a>
 
 <h1>{{this.model.icdate}} - {{this.model.title}}</h1>
@@ -53,9 +53,9 @@
         <div>
           
             
-        <SceneTypeTag @scene={{model}} />
+        <SceneTypeTag @scene={{this.model}} />
          
-        {{#if isApproved}}
+        {{#if this.isApproved}}
             {{#if this.model.has_liked}}
             <button {{action 'like' false}} class="badge badge-likes"><i class="fa fa-heart" aria-label="Liked"></i> {{this.model.likes}}</button>
             {{else}}

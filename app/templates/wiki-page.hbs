@@ -49,7 +49,7 @@
         <div class="pull-right">
  
   {{#if this.model.can_delete}}
-        <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete Page</button>
+        <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete Page</button>
   {{else}}
         <button class="btn btn-warning" disabled="true">Delete Page</button>
   {{/if}}
@@ -73,7 +73,7 @@
 <FlashMessages />
 
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) false}}>
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut this.confirmDelete) false}}>
     You're about to delete page {{this.model.heading}}. This cannot be undone.  Are you sure?
   </BsModalSimple>
   

@@ -1,4 +1,4 @@
-{{page-title pageTitle}}
+{{page-title this.pageTitle}}
 <h1>Combat {{this.model.id}}</h1>
 
 
@@ -10,12 +10,12 @@
 
                 <span class="btn btn-default" href="#">Combat Menu <span class="caret"></span></span> </a>
                 <ul class="dropdown-menu">
-                 <li> <a href="#" {{action (mut showAddCombatant) true}}>Add Combatant</a></li>
+                 <li> <a href="#" {{action (mut this.showAddCombatant) true}}>Add Combatant</a></li>
                 {{#if this.model.can_manage}}
                  <li> <LinkTo @route="combat-setup" @model={{this.model.id}}>Setup NPCs</LinkTo></li>
                  <li> <LinkTo @route="combat-teams" @model={{this.model.id}}>Setup Teams</LinkTo></li>
                  <li> <a href="#" {{action "aiActions"}}>NPC AI Actions</a></li>
-                 <li> <a href="#" {{action (mut confirmStopCombat) true}}>Stop Combat</a></li>
+                 <li> <a href="#" {{action (mut this.confirmStopCombat) true}}>Stop Combat</a></li>
                 {{/if}}
                 <li><LinkTo @route="combat-log" @model={{this.model.id}}>View Log</LinkTo></li> 
 
@@ -28,8 +28,8 @@
               
               {{#if this.model.in_combat}}
                       <button class="btn btn-warning" {{action 'leaveCombat'}} >Leave Combat</button>
-              {{else if currentUser.name}}
-                      <button class="btn btn-primary" {{action (mut showJoinCombat) true }} >Join Combat</button>
+              {{else if this.currentUser.name}}
+                      <button class="btn btn-primary" {{action (mut this.showJoinCombat) true }} >Join Combat</button>
               {{/if}}
 
               {{#if this.model.can_manage}}
@@ -59,7 +59,7 @@
   <div class="panel-body">
     <a href="#" {{action "scrollLog"}}><i class="fas fa-angle-double-down"></i> Jump to End</a>
     <div id="combat-log">
-      <AnsiFormat @text={{combatLog}} />
+      <AnsiFormat @text={{this.combatLog}} />
     </div>
   </div>
 </div>
@@ -68,36 +68,36 @@
   <div class="row">
     <div class="col">
 
-      <Input value={{combatCommand}} enter="sendCommand" size={{25}} />
+      <Input value={{this.combatCommand}} enter="sendCommand" size={{25}} />
 
       <button class="btn btn-default" {{action 'sendCommand'}} >Send Command</button>
-      <div class="label label-info">{{commandResponse}}</div>
+      <div class="label label-info">{{this.commandResponse}}</div>
     </div>
   </div>
 {{/if}}
 
-<Fs3CombatHud @combat={{model}} />
+<Fs3CombatHud @combat={{this.model}} />
    
 
         <FlashMessages />
 
   
-  <BsModalSimple @title="Confirm Stop" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmStopCombat}} @onSubmit={{action "stopCombat"}} @onHide={{action (mut confirmStopCombat) false}}>
+  <BsModalSimple @title="Confirm Stop" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmStopCombat}} @onSubmit={{action "stopCombat"}} @onHide={{action (mut this.confirmStopCombat) false}}>
       This will stop the combat.  Are you sure?
     </BsModalSimple>
 
-<BsModalSimple @title="Add Combatant" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{showAddCombatant}} @onSubmit={{action "addCombatant"}} @onHide={{action (mut showAddCombatant) false}}>
+<BsModalSimple @title="Add Combatant" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{this.showAddCombatant}} @onSubmit={{action "addCombatant"}} @onHide={{action (mut this.showAddCombatant) false}}>
         <p><b>Name(s):</b> </p>
-            <p><input type="text" size={{25}} value={{newCombatantName}} /></p>
-        <p><b>Type:</b> <PowerSelect @selected={{newCombatantType}} @options={{this.model.combatant_types}} @onChange={{action "combatantTypeChanged"}} as |type|>
+            <p><input type="text" size={{25}} value={{this.newCombatantName}} /></p>
+        <p><b>Type:</b> <PowerSelect @selected={{this.newCombatantType}} @options={{this.model.combatant_types}} @onChange={{action "combatantTypeChanged"}} as |type|>
           {{type}}
         </PowerSelect></p>
         <div class="hint">You can add multiple combatants at once, as long as they're the same combatant type. List their names separated by spaces.</div>
   </BsModalSimple>
 
 
-<BsModalSimple @title="Join Combat" @closeTitle="Cancel" @submitTitle="Join" @size={{null}} @fade={{true}} @open={{showJoinCombat}} @onSubmit={{action "joinCombat"}} @onHide={{action (mut showJoinCombat) false}}>
-        <p><b>Type:</b> <PowerSelect @selected={{newCombatantType}} @options={{this.model.combatant_types}} @onChange={{action "combatantTypeChanged"}} as |type|>
+<BsModalSimple @title="Join Combat" @closeTitle="Cancel" @submitTitle="Join" @size={{null}} @fade={{true}} @open={{this.showJoinCombat}} @onSubmit={{action "joinCombat"}} @onHide={{action (mut this.showJoinCombat) false}}>
+        <p><b>Type:</b> <PowerSelect @selected={{this.newCombatantType}} @options={{this.model.combatant_types}} @onChange={{action "combatantTypeChanged"}} as |type|>
           {{type}}
         </PowerSelect></p>
   </BsModalSimple>

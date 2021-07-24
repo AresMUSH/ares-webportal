@@ -4,7 +4,7 @@
 <p><a href="#upload"><i class="fas fa-angle-double-down"></i> Jump to Upload</a></p>
 
 
-{{#each model as |folder|}}
+{{#each this.model as |folder|}}
 
 <span class="col col-xs-3">
         <LinkTo @route="folder" @model={{folder.name}}>
@@ -17,19 +17,19 @@
 
 <a name="upload"></a>
 
-{{#if isApproved}}
+{{#if this.isApproved}}
 
 
 <div class="row">
     <div class="col col-xs-12">
         <div class="pull-right">
-          <button {{action (mut showUpload) true}} class="btn btn-primary">Upload</button>
+          <button {{action (mut this.showUpload) true}} class="btn btn-primary">Upload</button>
   </div>
   </div>
 </div>
 
 
-  {{#if showUpload}}
+  {{#if this.showUpload}}
     <FileUploader @uploaded={{action "uploaded"}} @folder="misc" />
   {{/if}}
 {{/if}}

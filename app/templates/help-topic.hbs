@@ -22,7 +22,7 @@
     <div class="col col-xs-12">
         <div class="pull-right">
         {{#if this.model.is_override}}
-        <button {{action (mut confirmRestore) true}} class="btn btn-warning">Restore Default</button>
+        <button {{action (mut this.confirmRestore) true}} class="btn btn-warning">Restore Default</button>
         {{/if}}
         <LinkTo @route="help-override" @model={{this.model.key}} class="btn btn-default">Customize</LinkTo>
     </div>
@@ -32,7 +32,7 @@
 
 <FlashMessages />
 
-<BsModalSimple @title="Confirm Restore" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmRestore}} @onSubmit={{action "restore"}} @onHide={{action (mut confirmRestore) false}}>
+<BsModalSimple @title="Confirm Restore" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmRestore}} @onSubmit={{action "restore"}} @onHide={{action (mut this.confirmRestore) false}}>
     This will remove your custom help file and restore the default. This cannot be undone.  Are you sure?
   </BsModalSimple>
   

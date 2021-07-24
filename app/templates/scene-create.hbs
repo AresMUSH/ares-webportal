@@ -13,7 +13,7 @@
          <label class="col-form-label">Scene Privacy:</label>
       </div>
       <div class="col-sm-9">
-        <PowerSelect @selected={{this.model.scene.privacy}} @options={{scenePrivacyValues}} @onChange={{action "privacyChanged"}} as |type|>
+        <PowerSelect @selected={{this.model.scene.privacy}} @options={{this.scenePrivacyValues}} @onChange={{action "privacyChanged"}} as |type|>
           {{type}}
         </PowerSelect>
       </div> 
@@ -47,7 +47,7 @@
      </div>
      <div class="col-sm-9">
        <p>
-           <PowerSelect  @searchEnabled=true @selected={{newLocation}} @options={{this.model.locations}} @searchEnabled=true  @onChange={{action "locationSelected"}} as |location|>
+           <PowerSelect  @searchEnabled=true @selected={{this.newLocation}} @options={{this.model.locations}} @searchEnabled=true  @onChange={{action "locationSelected"}} as |location|>
          {{location}}
        </PowerSelect>
        </p>
@@ -73,7 +73,7 @@
         <label class="col-form-label">Scene Type:</label>
      </div>
      <div class="col-sm-9">
-        <PowerSelect @selected={{this.model.scene.scene_type}} @options={{sceneTypes}} @onChange={{action "typeChanged"}} as |type|>
+        <PowerSelect @selected={{this.model.scene.scene_type}} @options={{this.sceneTypes}} @onChange={{action "typeChanged"}} as |type|>
           {{type}}
         </PowerSelect>
      </div> 
@@ -84,7 +84,7 @@
         <label class="col-form-label">Scene Pacing:</label>
      </div>
      <div class="col-sm-9">
-        <PowerSelect @selected={{this.model.scene.scene_pacing}} @options={{scenePacingOptions}} @onChange={{action "pacingChanged"}} as |type|>
+        <PowerSelect @selected={{this.model.scene.scene_pacing}} @options={{this.scenePacingOptions}} @onChange={{action "pacingChanged"}} as |type|>
           {{type}}
         </PowerSelect>
      </div> 
@@ -149,7 +149,7 @@
           <label for="title" class="col-form-label">Content Warning:</label>
       </div>
       <div class="col-sm-9">
-        <PowerSelectMultiple @selected={{warning_tags}} @options={{this.model.sceneOptions.content_warnings}} @onChange={{action "warningsChanged"}} as |warning|>
+        <PowerSelectMultiple @selected={{this.warning_tags}} @options={{this.model.sceneOptions.content_warnings}} @onChange={{action "warningsChanged"}} as |warning|>
           {{warning}}
         </PowerSelectMultiple>       
           <input type="text" size={{25}} id="content_warning" enter={{action "save"}} value={{this.model.scene.content_warning}} />

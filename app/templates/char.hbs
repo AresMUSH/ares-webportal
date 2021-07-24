@@ -74,7 +74,7 @@
           <LinkTo @route="notes" @model={{this.model.char.name}} class="btn btn-default">Notes</LinkTo>
         {{/if}}
         {{#if this.model.char.can_manage}}
-          <button {{action (mut showFiles) true}} class="btn btn-default">Files</button>
+          <button {{action (mut this.showFiles) true}} class="btn btn-default">Files</button>
           <LinkTo @route="char-edit" @model={{this.model.char.id}} class="btn btn-primary">Edit</LinkTo>
         {{/if}}
   </div>
@@ -82,7 +82,7 @@
 </div>
 
 {{#if this.model.char.can_manage}}
-{{#if showFiles}}
+{{#if this.showFiles}}
     <div class="panel panel-default">
         
         <div class="panel-body">

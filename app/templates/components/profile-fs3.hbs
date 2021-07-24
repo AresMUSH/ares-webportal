@@ -1,18 +1,18 @@
-{{#if (not game.disabled_plugins.fs3skills)}}
-  {{#if char.fs3.show_sheet}}
+{{#if (not this.game.disabled_plugins.fs3skills)}}
+  {{#if this.char.fs3.show_sheet}}
     <div id="systemfs3sheet" class="tab-pane fade">
-      <Fs3Sheet @char={{char}} />
+      <Fs3Sheet @char={{this.char}} />
     </div>
    {{/if}}
-   {{#if char.fs3.xp}}
+   {{#if this.char.fs3.xp}}
     <div id="systemfs3xp" class="tab-pane fade">
-      <Fs3Xp @char={{char}} @abilityLearned={{action "reloadChar"}} />
+      <Fs3Xp @char={{this.char}} @abilityLearned={{action "reloadChar"}} />
     </div>
    {{/if}}
 {{/if}}
 
-{{#if (not game.disabled_plugins.fs3combat)}}  
+{{#if (not this.game.disabled_plugins.fs3combat)}}  
 <div id="systemfs3damage" class="tab-pane fade">
-  <Fs3Damage @char={{char}} />
+  <Fs3Damage @char={{this.char}} />
 </div>
 {{/if}}
