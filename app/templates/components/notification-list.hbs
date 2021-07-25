@@ -1,6 +1,6 @@
 <table class="table table-striped notifications-list">
 
-{{#each notices as |notification|}}
+{{#each this.notices as |notification|}}
 <tr>
   <td>{{#if notification.is_unread}}
         <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="Unread Notification"></i></span>
@@ -40,7 +40,7 @@
           <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
         </LinkTo>
       {{else if (eq notification.type 'achievement')}}
-        <LinkTo @route="char" @model={{currentUser.id}}>
+        <LinkTo @route="char" @model={{this.char.name}}>
           <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
         </LinkTo>
       {{/if}}
