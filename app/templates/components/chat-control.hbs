@@ -81,7 +81,7 @@
  {{/if}}
 
  {{#if this.canTalk}}
-   <MarkdownEditor @text={{this.channel.draftMessage}} @class="chat-box" cols={{80}} rows="6" @onEnter={{action "send"}} />
+   <MarkdownEditor @text={{this.channel.draftMessage}} class="chat-box" cols={{80}} rows="6" @onEnter={{action "send"}} />
  {{/if}}
   <div class="scene-controls">
 

@@ -214,15 +214,15 @@
                </div>
                <div class="col-sm-9">
                  <div class="scene-char-select" >
-                   <PowerSelect @selected={{poseChar}} @options={{this.model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
-                       <CharIconTiny @char={{poseChar}} />
+                   <PowerSelect @selected={{this.poseChar}} @options={{this.model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+                       <CharIconTiny @char={{this.poseChar}} />
                    </PowerSelect>
                  </div>
                </div> 
              </div>
              
       
-               <MarkdownEditor @text={{this.newPage}} @class="chat-box" cols={{80}} rows="6" @onEnter={{action "startConversation"}} />
+               <MarkdownEditor @text={{this.newPage}} class="chat-box" cols={{80}} rows="6" @onEnter={{action "startConversation"}} />
       
            </div>
          </div>

@@ -150,6 +150,6 @@
 
 <BsModalSimple @title="Add Background Skill" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{this.selectBackgroundSkill}} @onSubmit={{action "addBackgroundSkill"}} @onHide={{action (mut this.selectBackgroundSkill) false}}>
     <p>Enter a skill name.</p>
-    <Input @type="text" size={{25}} id="bgSkill" enter={{action "addBackgroundSkill"}} @value={{this.newBgSkill}} />
+    <Input @type="text" size={{25}} id="bgSkill" @enter={{action "addBackgroundSkill"}} @value={{this.newBgSkill}} />
 
   </BsModalSimple>

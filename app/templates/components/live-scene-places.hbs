@@ -28,6 +28,6 @@
       </option>
     {{/each}}
   </select>
-  <Input @type="text" size={{25}} id="newPlace" enter={{action "changePlace"}} @value={{this.newPlace}} />
+  <Input @type="text" size={{25}} id="newPlace" @enter={{action "changePlace"}} @value={{this.newPlace}} />
 
 </BsModalSimple>

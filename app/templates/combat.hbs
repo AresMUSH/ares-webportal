@@ -68,7 +68,7 @@
   <div class="row">
     <div class="col">
 
-      <Input @value={{this.combatCommand}} enter="sendCommand" size={{25}} />
+      <Input @value={{this.combatCommand}} @enter="sendCommand" size={{25}} />
 
       <button class="btn btn-default" {{action 'sendCommand'}} >Send Command</button>
       <div class="label label-info">{{this.commandResponse}}</div>

@@ -140,7 +140,7 @@
  
             <PoseOrder @poseOrder={{this.scene.pose_order}} @playerName={{this.playerName}} />
              
-             <MarkdownEditor @text={{this.scene.draftPose}} rows={{6}} @class="scene-pose-box" @onEnter={{action "addPose" this.poseType.id}} />
+             <MarkdownEditor @text={{this.scene.draftPose}} rows={{6}} class="scene-pose-box" @onEnter={{action "addPose" this.poseType.id}} />
            {{/if}}
    
 
@@ -316,7 +316,7 @@
           <PowerSelect @selected={{this.newLocation}} @options={{this.locations}} @onChange={{action "locationSelected"}} as |location|>
         {{location}}
       </PowerSelect>
-       <b>Custom Location:</b> <Input @type="text" size={{25}} id="newLocation" enter={{action "changeLocation"}} @value={{this.newLocation}} />
+       <b>Custom Location:</b> <Input @type="text" size={{25}} id="newLocation" @enter={{action "changeLocation"}} @value={{this.newLocation}} />
          </p>
     </BsModalSimple>
     
