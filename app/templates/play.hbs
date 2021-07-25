@@ -162,7 +162,7 @@
 <BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{this.showAddChannel}}  @onHide={{action (mut this.showAddChannel) false}}>
   
     
-  <PowerSelect @selected={{poseChar}} @options={{this.model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+  <PowerSelect @selected={{this.poseChar}} @options={{this.model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
       <CharIconTiny @char={{poseChar}} />
   </PowerSelect>
   
