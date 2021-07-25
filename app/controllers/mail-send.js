@@ -30,7 +30,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('mail');
+                this.router.transitionTo('mail');
                 this.flashMessages.success('Sent!');
             });
         },

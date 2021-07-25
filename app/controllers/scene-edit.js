@@ -83,7 +83,7 @@ export default Controller.extend({
                     return;
                 }
                 
-                this.router.transitionToRoute('scene', this.get('model.scene.id'));
+                this.router.transitionTo('scene', this.get('model.scene.id'));
                 this.flashMessages.success('Scene updated!');
             });
         }

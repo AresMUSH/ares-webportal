@@ -20,7 +20,7 @@ export default Controller.extend({
                     return;
                 }
                 this.flashMessages.success('You have submitted your application.  Check for responses to your app under Help->Requests.');
-                this.router.transitionToRoute('chargen');
+                this.router.transitionTo('chargen');
             });   
         }
     }

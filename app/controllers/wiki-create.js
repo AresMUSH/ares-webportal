@@ -37,7 +37,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('wiki-page',                          
+                this.router.transitionTo('wiki-page',                          
                           response.name);
                 this.flashMessages.success('Page created!');
             });

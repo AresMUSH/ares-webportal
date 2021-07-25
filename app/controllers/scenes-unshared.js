@@ -25,11 +25,11 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 if (status === 'share') {
                     this.flashMessages.success('The scene has been shared.');
-                    this.router.transitionToRoute('scene', sceneId); 
+                    this.router.transitionTo('scene', sceneId); 
                 }
                 else if (status === 'restart') {
                     this.flashMessages.success('The scene has been restarted.');
-                    this.router.transitionToRoute('scene-live', sceneId); 
+                    this.router.transitionTo('scene-live', sceneId); 
                 }
             });
         },

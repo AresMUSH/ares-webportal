@@ -44,7 +44,7 @@ export default Controller.extend({
         if (response.error) {
           return;
         }
-        this.router.transitionToRoute('location',                          
+        this.router.transitionTo('location',                          
         this.get('model.location.id'));
         this.flashMessages.success('Location updated!');
       });

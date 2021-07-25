@@ -6,7 +6,7 @@
         <label for="title" class="col-form-label">Title:</label>
     </div>
     <div class="col-sm-9">
-         <input type="text" size={{25}} id="title" enter={{action "save"}} value={{title}} />
+         <Input @type="text" size={{25}} id="title" enter={{action "save"}} @value={{this.title}} />
     </div> 
   </div>
   
@@ -16,7 +16,7 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelectMultiple @selected={{storytellers}} @options={{model}} @searchEnabled=true @searchField="name" @onChange={{action "storytellersChanged"}} as |char|>
+      <PowerSelectMultiple @selected={{this.storytellers}} @options={{this.model}} @searchEnabled=true @searchField="name" @onChange={{action "storytellersChanged"}} as |char|>
         {{char.name}}
       </PowerSelectMultiple>
     </div>
@@ -27,7 +27,7 @@
         <label for="summary" class="col-form-label">Summary:</label>
     </div>
     <div class="col-sm-9">
-       <MarkdownEditor @text={{summary}} />
+       <MarkdownEditor @text={{this.summary}} />
     </div> 
   </div>
      
@@ -37,7 +37,7 @@
             <label for="title" class="col-form-label">Content Warning:</label>
         </div>
         <div class="col-sm-9">
-            <input type="text" size={{25}} id="content_warning" value={{contentWarning}} />
+            <Input @type="text" size={{25}} id="content_warning" @value={{this.contentWarning}} />
         </div>
       </div>
       
@@ -46,7 +46,7 @@
              <label for="tags" class="col-form-label">Tags:</label>
          </div>
          <div class="col-sm-9">
-             <input type="text" size={{25}} id="tags" value={{tags}} />
+             <Input @type="text" size={{25}} id="tags" @value={{this.tags}} />
          </div>
        </div>
        
@@ -55,7 +55,7 @@
         <label for="description" class="col-form-label">Description:</label>
        </div>
        <div class="col-sm-9">
-        <MarkdownEditor @text={{description}} />
+        <MarkdownEditor @text={{this.description}} />
        </div> 
      </div>
         

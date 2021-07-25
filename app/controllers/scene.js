@@ -37,7 +37,7 @@ export default Controller.extend(AuthenticatedController, {
                     return;
                 }
                 this.flashMessages.success('The scene is no longer shared.');
-                this.router.transitionToRoute('scene-live', this.get('model.id'));
+                this.router.transitionTo('scene-live', this.get('model.id'));
             });
         },
     }

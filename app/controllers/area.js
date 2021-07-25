@@ -17,7 +17,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('locations');
+                this.router.transitionTo('locations');
                 this.flashMessages.success('Area deleted!');
             });
         }

@@ -47,7 +47,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('event',                          
+                this.router.transitionTo('event',                          
                           response.id);
                 this.flashMessages.success('Event added!');
             });

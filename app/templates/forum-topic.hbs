@@ -11,7 +11,7 @@
 <p><LinkTo @route="forum-category" @model={{this.model.category.id}}><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to {{this.model.category.name}}</LinkTo></p>
 
         <div class="pull-right">
-          {{#if isAuthenticated}}
+          {{#if this.isAuthenticated}}
           <button {{action 'nextUnread'}} class="btn btn-default">Next Unread</button>
           {{/if}}
          </div>
@@ -47,10 +47,10 @@
            {{/if}}
            {{#if this.model.can_edit}}
              {{#if (not this.model.editActive)}}
-             <a href="#" {{action (mut chooseNewCategory) true}}>
+             <a href="#" {{action (mut this.chooseNewCategory) true}}>
                <TooltipIcon @position="left" @message="Move topic." @icon="fas fa-share-square" />
              </a>
-             <a href="#" {{action (mut confirmDeleteTopic) true}}>
+             <a href="#" {{action (mut this.confirmDeleteTopic) true}}>
                <TooltipIcon @position="left" @message="Delete topic." @icon="fa fa-trash" />
              </a>
              
@@ -63,7 +63,7 @@
        <p><CharIconInline @char={{this.model.author}} /></p>
        
        {{#if this.model.editActive}}
-          <p><b>Title:</b> <input type="text" size={{25}} value={{this.model.title}} /></p>
+          <p><b>Title:</b> <Input @type="text" size={{25}} @value={{this.model.title}} /></p>
        
           <p><b>Text:</b></p>
           <MarkdownEditor @text={{this.model.raw_message}} />
@@ -102,7 +102,7 @@
              <a href="#" {{action (mut reply.editActive) true}}>
                <TooltipIcon @position="left" @message="Edit reply." @icon="fa fa-edit" />
              </a>
-             <a href="#" {{action (mut confirmDeleteReply) reply}}>
+             <a href="#" {{action (mut this.confirmDeleteReply) reply}}>
                <TooltipIcon @position="left" @message="Delete reply." @icon="fa fa-trash" />
              </a>
              {{/if}}
@@ -146,13 +146,13 @@
 
       <div class="forum-reply-panel">
          <p><b>Reply As:</b>        <div class="forum-char-select" >
-                     <PowerSelect @selected={{author}} @options={{this.model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |author|>
-                         <CharIconTiny @char={{author}} />
+                     <PowerSelect @selected={{this.author}} @options={{this.model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |author|>
+                         <CharIconTiny @char={{this.author}} />
                      </PowerSelect>
                  </div>
          </p>
     
-        <MarkdownEditor @text={{reply}} />
+        <MarkdownEditor @text={{this.reply}} />
   
         <button {{action "addReply"}} class="btn btn-primary">Add Reply</button>
       </div>
@@ -164,15 +164,15 @@
 
 <FlashMessages />
 
-<BsModalSimple @title="Confirm Delete Reply" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDeleteReply}} @onSubmit={{action "deleteReply" confirmDeleteReply}} @onHide={{action (mut confirmDeleteReply) false}}>
+<BsModalSimple @title="Confirm Delete Reply" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDeleteReply}} @onSubmit={{action "deleteReply" this.confirmDeleteReply}} @onHide={{action (mut this.confirmDeleteReply) false}}>
     You're about to delete this reply. This cannot be undone.  Are you sure?
   </BsModalSimple>
 
-<BsModalSimple @title="Confirm Delete Topic" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDeleteTopic}} @onSubmit={{action "deleteTopic"}} @onHide={{action (mut confirmDeleteTopic) false}}>
+<BsModalSimple @title="Confirm Delete Topic" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDeleteTopic}} @onSubmit={{action "deleteTopic"}} @onHide={{action (mut this.confirmDeleteTopic) false}}>
   You're about to delete this topic. This cannot be undone.  Are you sure?
 </BsModalSimple>
 
-<BsModalSimple @title="Move Topic" @closeTitle="Cancel" @submitTitle="Move" @size={{null}} @fade={{true}} @open={{chooseNewCategory}} @onSubmit={{action "moveTopic"}} @onHide={{action (mut chooseNewCategory) false}}>
+<BsModalSimple @title="Move Topic" @closeTitle="Cancel" @submitTitle="Move" @size={{null}} @fade={{true}} @open={{this.chooseNewCategory}} @onSubmit={{action "moveTopic"}} @onHide={{action (mut this.chooseNewCategory) false}}>
 
       <PowerSelect @selected={{newCategory}} @options={{this.model.categories}} @onChange={{action "newCategorySelected"}} as |category|>
         {{category.name}}

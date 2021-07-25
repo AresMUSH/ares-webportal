@@ -64,7 +64,7 @@ export default Controller.extend({
                     return;
                 }
         
-            this.router.transitionToRoute('shutdown');
+            this.router.transitionTo('shutdown');
             });  
         },
         

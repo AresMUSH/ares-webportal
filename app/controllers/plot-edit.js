@@ -33,7 +33,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('plot',                          
+                this.router.transitionTo('plot',                          
                           this.get('model.plot.id'));
                 this.flashMessages.success('Plot updated!');
             });

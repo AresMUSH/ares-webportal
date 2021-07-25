@@ -68,7 +68,7 @@
   <div class="row">
     <div class="col">
 
-      <Input value={{this.combatCommand}} enter="sendCommand" size={{25}} />
+      <Input @value={{this.combatCommand}} enter="sendCommand" size={{25}} />
 
       <button class="btn btn-default" {{action 'sendCommand'}} >Send Command</button>
       <div class="label label-info">{{this.commandResponse}}</div>
@@ -88,7 +88,7 @@
 
 <BsModalSimple @title="Add Combatant" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{this.showAddCombatant}} @onSubmit={{action "addCombatant"}} @onHide={{action (mut this.showAddCombatant) false}}>
         <p><b>Name(s):</b> </p>
-            <p><input type="text" size={{25}} value={{this.newCombatantName}} /></p>
+            <p><Input @type="text" size={{25}} @value={{this.newCombatantName}} /></p>
         <p><b>Type:</b> <PowerSelect @selected={{this.newCombatantType}} @options={{this.model.combatant_types}} @onChange={{action "combatantTypeChanged"}} as |type|>
           {{type}}
         </PowerSelect></p>

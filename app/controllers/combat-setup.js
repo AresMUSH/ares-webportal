@@ -25,7 +25,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('combat', this.get('model.id'));
+                this.router.transitionTo('combat', this.get('model.id'));
                 this.flashMessages.success('Combat saved!');
             });
         },

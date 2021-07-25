@@ -53,12 +53,12 @@
 
 <div class="clearfix"></div>
 
-  {{#if newJobs}}
+  {{#if this.newJobs}}
       <div class="alert alert-warning">
         New jobs are available.  Reload the page to see them.
       </div>
   {{/if}}
   
-<JobsList @jobs={{this.model.jobs.jobs}} @pages={{this.model.jobs.pages}} @page={{page}} @goToPage={{action "goToPage"}} />
+<JobsList @jobs={{this.model.jobs.jobs}} @pages={{this.model.jobs.pages}} @page={{this.page}} @goToPage={{action "goToPage"}} />
 
 {{outlet}}

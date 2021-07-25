@@ -8,7 +8,7 @@
         <th>Submitter</th>
         <th>Handled By</th>
     </tr>
-{{#each jobs as |job|}}
+{{#each this.jobs as |job|}}
     <tr><td>
         {{#if job.unread}}
         <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
@@ -37,8 +37,8 @@
 </table>
 </div>
 
-{{#each pages as |pg|}}
-{{#if (eq pg page)}}
+{{#each this.pages as |pg|}}
+{{#if (eq pg this.page)}}
 <button class="btn btn-primary" {{action "goToPage" pg}}>{{pg}}</button>
 {{else}}
 <button class="btn btn-default" {{action "goToPage" pg}}>{{pg}}</button>

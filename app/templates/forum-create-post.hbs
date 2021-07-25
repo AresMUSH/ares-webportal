@@ -4,17 +4,17 @@
 {{#if this.model.can_post}}
 
      <p><b>Post As:</b>        <div class="forum-char-select" >
-                 <PowerSelect @selected={{author}} @options={{this.model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |author|>
-                     <CharIconTiny @char={{author}} />
+                 <PowerSelect @selected={{this.author}} @options={{this.model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |author|>
+                     <CharIconTiny @char={{this.author}} />
                  </PowerSelect>
              </div>
     </p>
                  
     <p><b>Subject:</b></p> 
-    <input type="text" id="subject" value={{subject}} size={{100}} />
+    <Input @type="text" id="subject" @value={{this.subject}} size={{100}} />
     
     <p><b>Message:</b></p>
-    <MarkdownEditor @text={{message}} />
+    <MarkdownEditor @text={{this.message}} />
 
 <div class="pull-right">
     <LinkTo @route="forum-category" @model={{this.model.id}} class="btn btn-default">Cancel</LinkTo>

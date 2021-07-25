@@ -13,7 +13,7 @@
                 </PowerSelect>
                 
             {{else}}
-                <input type="text" size={{25}} value={{demo.value}} />
+                <Input @type="text" size={{25}} @value={{demo.value}} />
             {{/if}}
         </div>
     </div>
@@ -55,7 +55,7 @@
         <div class="col-sm-9">
           
           <div class="profile-gallery-input">
-          <Textarea value={{this.model.char.profile_gallery}} cols={{80}} rows={{3}} />
+          <Textarea @value={{this.model.char.profile_gallery}} cols={{80}} rows={{3}} />
           
             <p class="hint">List image files in the order you want them shown (<code>folder/file1.jpg /folder/file2.jpg</code> etc.), or leave this blank to just show all images from your character's folder.</p>
             
@@ -70,7 +70,7 @@
         </div>
         
         <div class="col-sm-9">
-            <input type="text" size={{50}} value={{this.model.char.tags}} />
+            <Input @type="text" size={{50}} @value={{this.model.char.tags}} />
             
         </div>
     </div>

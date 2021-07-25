@@ -16,7 +16,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('wiki');
+                this.router.transitionTo('wiki');
                 this.flashMessages.success('Page deleted!');
             });
         }

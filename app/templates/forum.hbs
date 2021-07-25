@@ -7,7 +7,7 @@
 <div class="alert alert-warning">The forum is muted.  You will not see notifications for new posts or replies.</div>
 {{/if}}
   
-{{#if isAuthenticated}}
+{{#if this.isAuthenticated}}
 
 <div class="row">
     <div class="col col-xs-12">
@@ -81,7 +81,7 @@
 </table>
 
 
-{{#if anyHidden}}
+{{#if this.anyHidden}}
 <h4>Hidden</h4>
 {{#each this.model.hidden as |forum|}}
 <LinkTo @route="forum-category" @model={{forum.id}}>{{forum.name}}</LinkTo>          

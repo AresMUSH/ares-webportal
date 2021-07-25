@@ -102,7 +102,7 @@ export default Controller.extend({
         }
         this.set('reply', '');
         this.resetReplyAdmin();
-        this.router.transitionToRoute('jobs');
+        this.router.transitionTo('jobs');
         this.flashMessages.success('Reply added!');
       });
     },

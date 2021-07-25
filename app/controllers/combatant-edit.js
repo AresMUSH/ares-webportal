@@ -36,7 +36,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('combat', this.get('model.combat'));
+                this.router.transitionTo('combat', this.get('model.combat'));
                 this.flashMessages.success('Combatant saved!');
             });
         },
@@ -74,7 +74,7 @@ export default Controller.extend({
             if (response.error) {
               return;
             }
-            this.router.transitionToRoute('combat', this.get('model.combat'));
+            this.router.transitionTo('combat', this.get('model.combat'));
             this.flashMessages.success('Combatant removed!');
           });
         },

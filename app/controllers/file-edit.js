@@ -19,7 +19,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('file', response.folder, response.name );
+                this.router.transitionTo('file', response.folder, response.name );
             this.flashMessages.success('File saved!');
             });
         }

@@ -9,7 +9,7 @@
 
 <BsModalSimple @title="Spend a Luck Point" @closeTitle="Cancel" @submitTitle="Spend" @size={{null}} @fade={{true}} @open={{this.selectSpendLuck}} @onSubmit={{action "spendLuck"}} @onHide={{action (mut this.selectSpendLuck) false}}>
   
-  <b>Reason:</b> <input type="text" size={{25}} id="luckReason" enter={{action "spendLuck"}} value={{this.luckReason}} />
+  <b>Reason:</b> <Input @type="text" size={{25}} id="luckReason" enter={{action "spendLuck"}} @value={{this.luckReason}} />
 
 </BsModalSimple>
 

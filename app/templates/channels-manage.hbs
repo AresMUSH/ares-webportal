@@ -22,7 +22,7 @@
   <th class="col-xs-2"></th>
 </tr>
 
-{{#each @this.model.channels as |channel|}}
+{{#each this.model.channels as |channel|}}
 <tr>
   <td>{{channel.name}}</td>
   <td><AnsiFormat @text={{channel.desc}} /></td>
@@ -32,7 +32,7 @@
   <td>
     
     <LinkTo @route="channel-edit" @model={{channel.id}}><i class="fas fa-edit" aria-label="Edit Channel"></i></LinkTo>
-    <a href="#" {{action (mut channelToDelete) channel}}><i class="fa fa-trash" aria-label="Delete Channel"></i></a>
+    <a href="#" {{action (mut this.channelToDelete) channel}}><i class="fa fa-trash" aria-label="Delete Channel"></i></a>
     
   </td>
 </tr>
@@ -42,6 +42,6 @@
 </div>
 
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDeleteChannel}} @onSubmit={{action "deleteChannel" channelToDelete}} @onHide={{action (mut channelToDelete) null}}>
-    You're about to delete {{channelToDelete.name}}. This cannot be undone.  Are you sure?
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDeleteChannel}} @onSubmit={{action "deleteChannel" this.channelToDelete}} @onHide={{action (mut this.channelToDelete) null}}>
+    You're about to delete {{this.channelToDelete.name}}. This cannot be undone.  Are you sure?
   </BsModalSimple>

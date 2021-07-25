@@ -109,7 +109,7 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 
                 if (response.post_id) {
-                    this.router.transitionToRoute('forum-topic', response.category_id, response.post_id);
+                    this.router.transitionTo('forum-topic', response.category_id, response.post_id);
                 }
                 else {
                     this.flashMessages.warning('No more unread messages.');                    
@@ -165,7 +165,7 @@ export default Controller.extend(AuthenticatedController, {
               if (response.error) {
                 return;
               }
-            this.router.transitionToRoute('forum-category', this.get('model.category.id'));
+            this.router.transitionTo('forum-category', this.get('model.category.id'));
             this.flashMessages.success('Post deleted!');
           });
         },
@@ -189,7 +189,7 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 
                 this.flashMessages.success('Topic moved!');
-                this.router.transitionToRoute('forum-topic', response.category_id, response.post_id);
+                this.router.transitionTo('forum-topic', response.category_id, response.post_id);
               
             });
         },

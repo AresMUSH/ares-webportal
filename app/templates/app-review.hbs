@@ -31,7 +31,7 @@
       
        <p>Reject or approve the character using the button below.  Any notes you add in the textbox will be sent to the applicant via the approval job.</p>
        
-       <Textarea value={{appNotes}} cols={{80}} rows={{5}} />
+       <Textarea @value={{appNotes}} cols={{80}} rows={{5}} />
        
        {{#if this.model.preset_responses}}
           <div class="preset-responses">

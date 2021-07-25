@@ -17,7 +17,7 @@ export default Controller.extend({
                     return;
                 }
                 
-                this.router.transitionToRoute('setup');
+                this.router.transitionTo('setup');
                 this.flashMessages.success('Plugins updated!');
             });
         }

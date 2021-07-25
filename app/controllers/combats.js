@@ -15,7 +15,7 @@ export default Controller.extend({
                   return;
               }
               this.flashMessages.success('Combat started!');
-              this.router.transitionToRoute('combat', response.id);
+              this.router.transitionTo('combat', response.id);
           });
         }
     }

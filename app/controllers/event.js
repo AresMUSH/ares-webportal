@@ -21,7 +21,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('events');
+                this.router.transitionTo('events');
                 this.flashMessages.success('Event deleted!');
             });
         },
@@ -32,7 +32,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('events');
+                this.router.transitionTo('events');
                 this.flashMessages.success('Signed up!');
             });
         },
@@ -43,7 +43,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('events');
+                this.router.transitionTo('events');
                 this.flashMessages.success('Signup canceled.');
             });
         }

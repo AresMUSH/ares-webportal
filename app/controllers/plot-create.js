@@ -48,7 +48,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('plot',                          
+                this.router.transitionTo('plot',                          
                           response.id);
                 this.flashMessages.success('Plot created!');
             });

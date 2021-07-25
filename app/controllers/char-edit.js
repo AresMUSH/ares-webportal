@@ -121,7 +121,7 @@ export default Controller.extend({
                 }
             
                 this.flashMessages.success('Saved!');
-                this.router.transitionToRoute('char', this.get('model.char.name'));
+                this.router.transitionTo('char', this.get('model.char.name'));
                 
             });
         }

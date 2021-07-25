@@ -73,7 +73,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('scene',                          
+                this.router.transitionTo('scene',                          
                           response.id);
                 this.flashMessages.success('Scene updated!');
             });

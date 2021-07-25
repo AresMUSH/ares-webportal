@@ -38,7 +38,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('plots');
+                this.router.transitionTo('plots');
                 this.flashMessages.success('Plot deleted!');
             });
         },

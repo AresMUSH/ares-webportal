@@ -180,7 +180,7 @@ export default Controller.extend(AuthenticatedController, {
             return;
           }
           this.flashMessages.success('Combat stopped!');
-          this.router.transitionToRoute('combats');
+          this.router.transitionTo('combats');
         });
       },
       aiActions: function() {

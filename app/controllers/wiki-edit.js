@@ -23,7 +23,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('wiki-page',                          
+                this.router.transitionTo('wiki-page',                          
                           this.get('model.name'));
             });
         },
@@ -57,7 +57,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('wiki-page',                          
+                this.router.transitionTo('wiki-page',                          
                           this.get('model.name'));
                 this.flashMessages.success('Page updated!');
             });

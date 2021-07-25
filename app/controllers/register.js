@@ -26,7 +26,7 @@ export default Controller.extend({
                     return;
                 }                
                 this.flashMessages.success("Your character has been created.  Please log in.");
-                this.router.transitionToRoute('login');
+                this.router.transitionTo('login');
             });
         }
     }

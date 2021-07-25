@@ -23,7 +23,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('notes', this.get('model.name'));
+                this.router.transitionTo('notes', this.get('model.name'));
                 this.flashMessages.success('Notes saved!');
             });
         }

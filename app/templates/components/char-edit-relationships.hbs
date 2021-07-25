@@ -1,26 +1,26 @@
 
 <div id="relationships" class="tab-pane fade in">
-    <p><b>Category Order:</b> <input type="text" size={{50}} value={{this.model.char.relationships_category_order}} placeholder="Order (Optional)." /></p>
+    <p><b>Category Order:</b> <Input @type="text" size={{50}} @value={{this.model.char.relationships_category_order}} placeholder="Order (Optional)." /></p>
     <p class="hint">List categories, separated by commas, in the order you want them to appear on your relationship display.</p>
     <hr>
 
     {{#each this.model.char.relationships as |relationship|}}
     <p>
-    <input type="text" size={{25}} value={{relationship.name}} placeholder="Enter name." />
+    <Input @type="text" size={{25}} @value={{relationship.name}} placeholder="Enter name." />
     
-    Category: <input type="text" size={{25}} value={{relationship.category}} placeholder="Enter category." />
+    Category: <Input @type="text" size={{25}} @value={{relationship.category}} placeholder="Enter category." />
                 
     <button class="btn btn-default" {{action 'removeRelationship' relationship.key}}><i class="fa fa-trash" aria-label="Remove Relationship"></i></button>
     </p>
     
     <p>
     
-    Order: <input type="text" size={{25}} value={{relationship.order}} placeholder="Order (Optional)." />
+    Order: <Input @type="text" size={{25}} @value={{relationship.order}} placeholder="Order (Optional)." />
                 
     Off-Game NPC: <Input @type="checkbox" @checked={{relationship.is_npc}} /> 
     
     {{#if relationship.is_npc}}
-    NPC Image: <input type="text" size={{25}} value={{relationship.npc_image}} placeholder="folder/filename.ext (Optional)." />
+    NPC Image: <Input @type="text" size={{25}} @value={{relationship.npc_image}} placeholder="folder/filename.ext (Optional)." />
     {{/if}}
     
     </p>

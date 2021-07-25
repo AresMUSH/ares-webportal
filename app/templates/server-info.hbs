@@ -1,6 +1,6 @@
 <h1>Server Information</h1>
 
-  {{#if versionWarning}}
+  {{#if this.versionWarning}}
     <div class="alert alert-warning">
       <p><i class="fas fa-exclamation-triangle"></i> The website and game have different versions. This can cause unpredictable errors. Try doing a 'force refresh' on this page in your browser, or load the page in private/incognito mode. If the problem persists, the web portal must have failed the last upgrade.</p>
     </div>
@@ -9,12 +9,12 @@
 <table>
   <tr>
     <td class="col-xs-3"><b>Game Engine Version:</b> </td>
-    <td>{{mushVersion}}</td>
+    <td>{{this.mushVersion}}</td>
   </tr>
   
   <tr>
     <td class="col-xs-3"><b>Web Portal Version:</b> </td>
-    <td>{{portalVersion}}</td>
+    <td>{{this.portalVersion}}</td>
   </tr>
   
   <tr>

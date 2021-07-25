@@ -22,9 +22,9 @@ export default Controller.extend(AuthenticatedController, {
                 
                 this.flashMessages.success('Colors saved.  You will need to refresh the page for the new colors to take effect.');
                 if (this.isWikiMgr) {
-                  this.router.transitionToRoute('home');
+                  this.router.transitionTo('home');
                 } else {
-                  this.router.transitionToRoute('setup');  
+                  this.router.transitionTo('setup');  
                 }
                 
                 

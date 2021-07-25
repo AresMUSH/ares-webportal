@@ -91,11 +91,11 @@
      {{#each this.model.char.fs3.fs3_backgrounds as |skill|}}
 
      <Fs3Bgbox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{action "abilityChanged"}}>
-         <b><input type="text" value={{skill.name}} size={{25}} /></b>
+         <b><Input @type="text" @value={{skill.name}} size={{25}} /></b>
      </Fs3Bgbox>
      {{/each}}
 
-     <button class="btn btn-default" id="addbg" {{action (mut selectBackgroundSkill) true}}>Add Background Skill</button>
+     <button class="btn btn-default" id="addbg" {{action (mut this.selectBackgroundSkill) true}}>Add Background Skill</button>
 
    </div>
   </div>
@@ -148,8 +148,8 @@
 </div>
 
 
-<BsModalSimple @title="Add Background Skill" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{selectBackgroundSkill}} @onSubmit={{action "addBackgroundSkill"}} @onHide={{action (mut selectBackgroundSkill) false}}>
+<BsModalSimple @title="Add Background Skill" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{this.selectBackgroundSkill}} @onSubmit={{action "addBackgroundSkill"}} @onHide={{action (mut this.selectBackgroundSkill) false}}>
     <p>Enter a skill name.</p>
-    <input type="text" size={{25}} id="bgSkill" enter={{action "addBackgroundSkill"}} value={{newBgSkill}} />
+    <Input @type="text" size={{25}} id="bgSkill" enter={{action "addBackgroundSkill"}} @value={{this.newBgSkill}} />
 
   </BsModalSimple>

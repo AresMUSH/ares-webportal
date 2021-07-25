@@ -6,7 +6,7 @@
         <label for="title" class="col-form-label">Name:</label>
     </div>
     <div class="col-sm-9">
-        <input type="text" size={{25}} id="name" enter={{action "save"}} value={{this.model.location.name}} />
+        <Input @type="text" size={{25}} id="name" enter={{action "save"}} @value={{this.model.location.name}} />
     </div> 
   </div>
   
@@ -44,7 +44,7 @@
     
      {{#each this.model.location.descs.details as |detail|}}
      <p>
-     <input type="text" size={{25}} value={{detail.name}} placeholder="Enter detail name." />
+     <Input @type="text" size={{25}} @value={{detail.name}} placeholder="Enter detail name." />
      <button class="btn btn-default" {{action 'removeDetail' detail.key}}><i class="fa fa-trash" aria-label="Remove Detail"></i></button>
      </p>
      <MarkdownEditor @text={{detail.desc}} />

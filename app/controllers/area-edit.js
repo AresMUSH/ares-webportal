@@ -19,7 +19,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('area', this.get('model.area.id'));
+                this.router.transitionTo('area', this.get('model.area.id'));
                 this.flashMessages.success('Area updated!');
             });
         }

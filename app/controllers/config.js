@@ -74,7 +74,7 @@ export default Controller.extend({
                 }
         
             this.flashMessages.success('Config saved!');
-            this.router.transitionToRoute('setup');  
+            this.router.transitionTo('setup');  
             });  
         }
         

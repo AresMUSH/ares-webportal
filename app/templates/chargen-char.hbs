@@ -91,10 +91,10 @@
                              </PowerSelect>
                          
                          {{else if (eq key 'age')}}
-                             <input type="text" size={{25}} value={{demo.value}} />
+                             <Input @type="text" size={{25}} @value={{demo.value}} />
                              <div class="cg-tip">Enter an age or a birthdate in {{this.model.cgInfo.date_format}} format.</div>
                          {{else}}
-                             <input type="text" size={{25}} value={{demo.value}} />
+                             <Input @type="text" size={{25}} @value={{demo.value}} />
                          {{/if}}
                      </div>
                  </div>
@@ -115,7 +115,7 @@
                       <div class="col-sm-9">
                           
                       {{#if (get (get this.model.cgInfo.group_options key) 'freeform')}}
-                        <input type="text" size={{25}} value={{group.value}} />
+                        <Input @type="text" size={{25}} @value={{group.value}} />
                       {{else}}
                         <PowerSelect @selected={{get this.model.char.groups key}} @options={{get (get this.model.cgInfo.group_options key) "values"}} @searchField="value" @allowClear={{true}} @onChange={{action "groupChanged" key}} as |g|>
                         {{g.value}} {{if g.desc '-'}} {{g.desc}}
@@ -133,20 +133,20 @@
 
             {{#if (not this.model.app.game.disabled_plugins.fs3skills) }}
             <div role="tabpanel" class="tab-pane" id="fs3abilities">
-              <Fs3Chargen @model={{model}} @anyGroupMissing={{anyGroupMissing}} @charErrors={{charErrors}} @updateCallback={{fs3UpdateCallback}} @validateCallback={{fs3ValidateCallback}} @reset={{action "reset"}} />
+              <Fs3Chargen @model={{this.model}} @anyGroupMissing={{this.anyGroupMissing}} @charErrors={{this.charErrors}} @updateCallback={{this.fs3UpdateCallback}} @validateCallback={{this.fs3ValidateCallback}} @reset={{action "reset"}} />
             </div>
             {{/if}}
 
           {{#if this.traitsExtraInstalled}}
           <div role="tabpanel" class="tab-pane" id="traits">
                   
-               <TraitsChargen @model={{this.model}} @updateCallback={{traitsUpdateCallback}} />
+               <TraitsChargen @model={{this.model}} @updateCallback={{this.traitsUpdateCallback}} />
            </div>
            {{/if}}
            
            {{#if this.rpgExtraInstalled}}
              <div role="tabpanel" class="tab-pane" id="rpgsheet">
-               <RpgChargen @model={{this.model}} @updateCallback={{rpgUpdateCallback}} />
+               <RpgChargen @model={{this.model}} @updateCallback={{this.rpgUpdateCallback}} />
              </div>
             {{/if}}
            
@@ -181,7 +181,7 @@
              <MarkdownEditor @text={{this.model.char.desc}} />
              
              <div class="chargen-section-title">Short Description</div>
-             <input type="text" size={{25}} value={{this.model.char.shortdesc}} />
+             <Input @type="text" size={{25}} @value={{this.model.char.shortdesc}} />
              
           </div>
           
@@ -199,7 +199,7 @@
                
            </div>
            
-           <ChargenCustom @char={{this.model.char}} @cgInfo={{this.model.cgInfo}} @updateCallback={{customUpdateCallback}} />
+           <ChargenCustom @char={{this.model.char}} @cgInfo={{this.model.cgInfo}} @updateCallback={{this.customUpdateCallback}} />
                
        </div>
      

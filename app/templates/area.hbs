@@ -44,14 +44,14 @@
         <div class="pull-right">
     
         {{#if this.model.can_manage}}
-          <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
+          <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete</button>
           <LinkTo @route="area-edit" @model={{this.model.area.id}} class="btn btn-primary">Edit</LinkTo>
         {{/if}}
       </div>
   </div>
 </div>        
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) false}}>
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut this.confirmDelete) false}}>
     You're about to delete area {{this.model.area.name}}. This cannot be undone.  Are you sure?
   </BsModalSimple>
   

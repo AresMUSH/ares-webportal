@@ -13,7 +13,7 @@
 
 </p>
 
-  {{#if newActivity}}
+  {{#if this.newActivity}}
       <div class="alert alert-warning">
         There has been new activity on this job.  Reload the page to update it.
       </div>
@@ -40,7 +40,7 @@
                   <li><LinkTo @route="job-edit" @model={{this.model.job.id}}>Edit Job</LinkTo></li>
                 {{/if}}
                 {{#if this.model.job.fs3_enabled}}
-                  <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Ability Roll</a></li>
+                  <li><a href="#" {{action (mut this.selectSkillRoll) true}}>Add Ability Roll</a></li>
                 {{/if}}
                 {{#if this.model.job.is_approval_job}}
                   <li><LinkTo @route="app-review" @model={{this.model.job.author.id}}>App Review for {{this.model.job.author.name}}</LinkTo></li>
@@ -70,14 +70,14 @@
       
       <div class="job-participant-edit-box">
        
-        {{#if editParticipants}}
-         <PowerSelectMultiple @selected={{newParticipants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
+        {{#if this.editParticipants}}
+         <PowerSelectMultiple @selected={{this.newParticipants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
           {{char.name}}
         </PowerSelectMultiple>
-        <button class="btn btn-default" {{action (mut editParticipants) false}}>Cancel</button>
+        <button class="btn btn-default" {{action (mut this.editParticipants) false}}>Cancel</button>
         <button class="btn btn-primary" {{action 'saveParticipants'}}>Save</button>
       {{else}}
-        <button class="btn btn-default" {{action (mut editParticipants) true}}>Edit</button>
+        <button class="btn btn-default" {{action (mut this.editParticipants) true}}>Edit</button>
       {{/if}}
         
         </div>
@@ -234,7 +234,7 @@
      <hr>
 {{/each}}
 
-  {{#if newActivity}}
+  {{#if this.newActivity}}
       <div class="alert alert-warning">
         There has been new activity on this job.  Reload the page to update it.
       </div>
@@ -244,16 +244,16 @@
 <h3>Add Reply</h3>
 
     {{#if this.model.job.is_category_admin}}
-        Respond to Admin Only? <Input @type="checkbox" @checked={{replyAdminOnly}} /> 
+        Respond to Admin Only? <Input @type="checkbox" @checked={{this.replyAdminOnly}} /> 
     {{/if}}
 
-  <div class="{{if replyAdminOnly 'admin-only-reply' ''}}">
-    {{#if replyAdminOnly}}
+  <div class="{{if this.replyAdminOnly 'admin-only-reply' ''}}">
+    {{#if this.replyAdminOnly}}
     <div class="label admin-only-reply-label">To Admins Only</div>
     {{/if}}
     <div>
     </div>
-        <MarkdownEditor @text={{reply}} />
+        <MarkdownEditor @text={{this.reply}} />
     </div>
     
     {{#if this.model.job.responses}}
@@ -290,7 +290,7 @@
                 <li><LinkTo @route="char" @model={{this.model.job.author.name}}>Profile for {{this.model.job.author.name}}</LinkTo></li>
               {{/if}}
               {{#if this.model.job.fs3_enabled}}
-              <li><a href="#" {{action (mut selectSkillRoll) true}}>Add Ability Roll</a></li>
+              <li><a href="#" {{action (mut this.selectSkillRoll) true}}>Add Ability Roll</a></li>
               {{/if}}
               
             </ul>
@@ -304,7 +304,7 @@
   </div>
 </div>
 
-<Fs3Roll @job={{this.model.job}} @destinationType="job" @abilities={{this.model.abilities}} @selectSkillRoll={{selectSkillRoll}} />
+<Fs3Roll @job={{this.model.job}} @destinationType="job" @abilities={{this.model.abilities}} @selectSkillRoll={{this.selectSkillRoll}} />
 
 <FlashMessages />
 {{outlet}}

@@ -3,12 +3,12 @@
 
 
 
-{{#if status}}
+{{#if this.status}}
 <p>The upgrade/deploy task may take a couple minutes.  The status will update below.  Be sure to pay attention to any errors displayed.</p>
 
 <hr>
 
-<pre id="manageLog" class="console">  <AnsiFormat @text={{status}} /></pre>
+<pre id="manageLog" class="console">  <AnsiFormat @text={{this.status}} /></pre>
 
 <hr>
 

@@ -145,7 +145,7 @@
 <BsModalSimple @title="Report Offensive Chat" @closeTitle="Cancel" @submitTitle="Report" @size={{null}} @fade={{true}} @open={{this.showReport}} @onSubmit={{action "reportChat"}} @onHide={{action (mut this.showReport) false}}>
     
     <p>Enter a reason in the text box and select a message.  All messages after that one will be included in the report.</p>
-    <p><input type="text" size={{50}} value={{this.reportReason}} /></p>
+    <p><Input @type="text" size={{50}} @value={{this.reportReason}} /></p>
     
     <div class="chat-report">
     <table>
@@ -165,7 +165,7 @@
 <BsModalSimple @title="Rename Conversation" @closeTitle="Cancel" @submitTitle="Save" @size={{null}} @fade={{true}} @open={{this.showPageRename}} @onSubmit={{action "renamePage"}} @onHide={{action (mut this.showPageRename) false}}>
     
     <p>Enter a new title for this conversation. Leave blank to restore the default title.</p>
-    <p><input type="text" size={{50}} value={{this.newPageTitle}} /></p>
+    <p><Input @type="text" size={{50}} @value={{this.newPageTitle}} /></p>
     
 </BsModalSimple>
 {{/if}}

@@ -24,9 +24,9 @@ export default Controller.extend(AuthenticatedController, {
             else {
               this.flashMessages.success('Config saved! You may need to refresh the page to see the changes.');
               if (this.isWikiMgr) {
-                this.router.transitionToRoute('home');
+                this.router.transitionTo('home');
               } else {
-                this.router.transitionToRoute('setup');  
+                this.router.transitionTo('setup');  
               }
             }
             

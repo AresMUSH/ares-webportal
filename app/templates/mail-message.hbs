@@ -46,7 +46,7 @@
                {{tag}}
              </PowerSelectMultiple>
              
-             <input type="text" size={{10}} id="newTag" value={{newTag}} /> 
+             <Input @type="text" size={{10}} id="newTag" @value={{this.newTag}} /> 
              <a href="#" {{action 'addNewTag'}}><i class="fa fa-plus" aria-label="Add Tag"></i></a>     
 
         </td>
@@ -90,12 +90,12 @@
       <div class="panel-body">
       <h3>Reply</h3>
       <p><b>To:</b> <a href="#" {{action 'replyAll'}}>[Reply All]</a>
-        <PowerSelectMultiple @selected={{replyToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "replyToListChanged"}} as |char|>
+        <PowerSelectMultiple @selected={{this.replyToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "replyToListChanged"}} as |char|>
           {{char.name}}
         </PowerSelectMultiple>
       </p>
-      <p><b>Subject:</b> <input type="text" size={{25}} id="replySubject" value={{replySubject}} /></p>
-          <MarkdownEditor @text={{replyMessage}} />
+      <p><b>Subject:</b> <Input @type="text" size={{25}} id="replySubject" @value={{this.replySubject}} /></p>
+          <MarkdownEditor @text={{this.replyMessage}} />
           <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>    
         </div>
     </div>
@@ -113,14 +113,14 @@
       <div class="panel-body">
       <h3>Forward</h3>
       <p><b>To:</b>
-      <PowerSelectMultiple @selected={{fwdToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "fwdToListChanged"}} as |char|>
+      <PowerSelectMultiple @selected={{this.fwdToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "fwdToListChanged"}} as |char|>
         {{char.name}}
       </PowerSelectMultiple>
       </p> 
-      <p><b>Subject:</b> <input type="text" size={{25}} id="fwdSubject" value={{fwdSubject}} /></p>
+      <p><b>Subject:</b> <Input @type="text" size={{25}} id="fwdSubject" @value={{this.fwdSubject}} /></p>
       <b>Original Message:</b>
       <AnsiFormat @text={{this.model.message.body}} />
-          <MarkdownEditor @text={{fwdMessage}} />
+          <MarkdownEditor @text={{this.fwdMessage}} />
           <button class="btn btn-primary" {{action 'sendForward'}}>Send</button>    
         </div>
     </div>

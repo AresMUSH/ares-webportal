@@ -1,7 +1,7 @@
 {{page-title "Tinker"}}
 <h1>Tinker Command</h1>
     
-    <AceEditor @editorId="editor" @resetEditorCallback={{resetEditor}} @text={{this.model.text}} @mode="html_ruby" @editorChanged={{action "editorChanged"}} />
+    <AceEditor @editorId="editor" @resetEditorCallback={{this.resetEditor}} @text={{this.model.text}} @mode="html_ruby" @editorChanged={{action "editorChanged"}} />
 
 <div class="row">
     <div class="col col-xs-12">

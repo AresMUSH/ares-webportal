@@ -8,6 +8,6 @@ export default Route.extend({
     
     beforeModel: function() {
         this.session.invalidate();
-        this.router.transitionToRoute('home');
+        this.router.transitionTo('home');
     }
 });

@@ -117,7 +117,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('chargen-review', this.get('model.char.id'));
+                this.router.transitionTo('chargen-review', this.get('model.char.id'));
             });   
         },
         

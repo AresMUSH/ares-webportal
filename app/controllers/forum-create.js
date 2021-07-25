@@ -31,7 +31,7 @@ export default Controller.extend({
               if (response.error) {
                   return;
               }
-              this.router.transitionToRoute('forum-manage');
+              this.router.transitionTo('forum-manage');
               this.flashMessages.success('Forum category created!');
           });
         },

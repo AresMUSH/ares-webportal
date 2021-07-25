@@ -26,7 +26,7 @@
             
             <TooltipIcon @position="top" @message="Enter targets or other options for your action, like Dummy/burst,called:head." @icon="fa fa-question-circle" />
             <br>
-            <input type="text" size={{25}} id={{id}} value={{comb.action_args}} />
+            <Input @type="text" size={{25}} id={{id}} @value={{comb.action_args}} />
             
             <p>
             <b>Available Targets:</b>
@@ -48,7 +48,7 @@
     <p>
       <label>Team:</label>
   
-      <PowerSelect @selected={{comb.team}} @options={{teams}} @onChange={{action "teamChanged" id}} as |team|>
+      <PowerSelect @selected={{comb.team}} @options={{this.teams}} @onChange={{action "teamChanged" id}} as |team|>
         {{team}}
       </PowerSelect>
     </p>
@@ -121,10 +121,10 @@
          
          <TooltipIcon @position="top" @message="Enter a vehicle type to get in your own vehicle, or a character name to get into theirs." @icon="fa fa-question-circle" />
          <br>
-         <input type="text" size={{25}} value={{comb.vehicle}} />
+         <Input @type="text" size={{25}} @value={{comb.vehicle}} />
          <br>
          <label>Passenger Type:</label>
-         <PowerSelect @selected={{comb.passenger_type}} @options={{passengerTypes}} @onChange={{action "passengerTypeChanged" id}} as |passengerType|>
+         <PowerSelect @selected={{comb.passenger_type}} @options={{this.passengerTypes}} @onChange={{action "passengerTypeChanged" id}} as |passengerType|>
            {{passengerType}}
          </PowerSelect>
          

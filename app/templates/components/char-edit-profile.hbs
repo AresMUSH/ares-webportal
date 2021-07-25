@@ -1,12 +1,12 @@
 <div id="profile" class="tab-pane fade in">
-    <p><b>Section Order:</b> <input type="text" size={{50}} value={{this.model.char.profile_order}} placeholder="Order (Optional)." /></p>
+    <p><b>Section Order:</b> <Input @type="text" size={{50}} @value={{this.model.char.profile_order}} placeholder="Order (Optional)." /></p>
    <p class="hint">List section names, separated by commas, in the order you want them to appear on your profile display.</p>
    
    <hr>
    
    {{#each this.model.char.profile as |profile|}}
    <p>
-   <input type="text" size={{25}} value={{profile.name}} placeholder="Enter section name." />
+   <Input @type="text" size={{25}} @value={{profile.name}} placeholder="Enter section name." />
    <button class="btn btn-default" {{action 'removeProfile' profile.key}}><i class="fa fa-trash" aria-label="Remove Section"></i></button>
    </p>
    <MarkdownEditor @text={{profile.text}} />

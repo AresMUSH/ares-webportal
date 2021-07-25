@@ -60,7 +60,7 @@ export default Controller.extend({
           if (response.error) {
             return;
           }
-          this.router.transitionToRoute('job', response.id);
+          this.router.transitionTo('job', response.id);
           this.flashMessages.success('Job created!');
         });
       },

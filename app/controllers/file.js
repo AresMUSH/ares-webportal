@@ -20,7 +20,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-            this.router.transitionToRoute('files');
+            this.router.transitionTo('files');
             this.flashMessages.success('File deleted!');
             });
         }

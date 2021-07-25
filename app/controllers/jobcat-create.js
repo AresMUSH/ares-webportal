@@ -30,7 +30,7 @@ export default Controller.extend({
               if (response.error) {
                   return;
               }
-              this.router.transitionToRoute('jobcat-manage');
+              this.router.transitionTo('jobcat-manage');
               this.flashMessages.success('Job category created!');
           });
         },

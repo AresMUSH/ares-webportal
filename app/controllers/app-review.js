@@ -16,7 +16,7 @@ export default Controller.extend({
                 }
                 this.set('appNotes', '');
               this.flashMessages.success('Character approved!');
-              this.router.transitionToRoute('char', this.get('model.name'));
+              this.router.transitionTo('char', this.get('model.name'));
             });
         },
         rejectChar() {
@@ -28,7 +28,7 @@ export default Controller.extend({
                 }
               this.set('appNotes', '');
               this.flashMessages.success('Character rejected!');
-              this.router.transitionToRoute('jobs');
+              this.router.transitionTo('jobs');
            });
         },
         responseSelected: function(resp) {

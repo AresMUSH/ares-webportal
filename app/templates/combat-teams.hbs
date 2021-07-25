@@ -14,7 +14,7 @@
 <tr>
   <td>{{comb.name}}</td>
   <td>
-    <PowerSelect @selected={{comb.team}} @options={{teams}} @onChange={{action "teamChanged" id}} as |team|>
+    <PowerSelect @selected={{comb.team}} @options={{this.teams}} @onChange={{action "teamChanged" id}} as |team|>
       {{team}}
     </PowerSelect>
   </td>

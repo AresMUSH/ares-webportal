@@ -31,7 +31,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.router.transitionToRoute('forum-topic', 
+                this.router.transitionTo('forum-topic', 
                           this.get('model.id'), 
                           response.id);
                 this.flashMessages.success('Topic added!');

@@ -6,11 +6,11 @@
 
 <hr>
 
-{{#if searchResults}}
+{{#if this.searchResults}}
 <a data-toggle="collapse" href="#searchFields" class="btn btn-default btn-collapse">Show/Hide Search</a>
 {{/if}}
 
-<div id="searchFields" class="panel-collapse collapse {{if searchResults '' 'in'}}">
+<div id="searchFields" class="panel-collapse collapse {{if this.searchResults '' 'in'}}">
 
 <div class="row">
   
@@ -19,7 +19,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><input type="text" size={{25}} id="title" value={{searchTitle}} enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="title" @value={{this.searchTitle}} enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -31,7 +31,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><input type="text" size={{25}} id="author" value={{searchAuthor}} enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="author" @value={{this.searchAuthor}} enter={{action "search"}} /></p>
         <p class="hint">Enter an author's name.  Remember that automated posts come from "System".</p>
   </div>
   
@@ -44,7 +44,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><input type="text" size={{25}} id="text" value={{searchText}} enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="text" @value={{this.searchText}} enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -68,9 +68,9 @@
 
 <FlashMessages />
 
-{{#if searchResults}}
+{{#if this.searchResults}}
 
-<ForumPostList @posts={{searchResults}} />
+<ForumPostList @posts={{this.searchResults}} />
 
 
 {{else}}

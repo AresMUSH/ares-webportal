@@ -18,7 +18,7 @@ export default Controller.extend({
               if (response.error) {
                   return;
               }
-              this.router.transitionToRoute('channels-manage');
+              this.router.transitionTo('channels-manage');
               this.flashMessages.success('Channel updated!');
           });
         },

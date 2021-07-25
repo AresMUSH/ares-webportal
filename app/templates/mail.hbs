@@ -1,5 +1,5 @@
-{{page-title tag}}
-<h1>Mail - {{tag}}</h1>
+{{page-title this.tag}}
+<h1>Mail - {{this.tag}}</h1>
 
 <div class="row">
     <div class="col col-xs-12">
@@ -22,7 +22,7 @@
 <thead>
     <tr>
         <th>Subject</th>
-        {{#if sentMail}}
+        {{#if this.sentMail}}
             <th>To</th>
         {{else}}
             <th>From</th>
@@ -31,7 +31,7 @@
     </tr>
 </thead>
         
-{{#each messages as |m| }}
+{{#each this.messages as |m| }}
 <tr>
     <td>
         {{#if m.unread}}
@@ -42,7 +42,7 @@
     </td>
     
     <td>
-        {{#if sentMail}}
+        {{#if this.sentMail}}
             {{m.to_list}}
         {{else}}
             {{m.from}}

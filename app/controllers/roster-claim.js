@@ -38,7 +38,7 @@ export default Controller.extend({
                   this.set('model.password', response.password);
                 } else {
                   this.flashMessages.success('App submitted.');
-                  this.router.transitionToRoute('roster');
+                  this.router.transitionTo('roster');
                 }
                 
             });

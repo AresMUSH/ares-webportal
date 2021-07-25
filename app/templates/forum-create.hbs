@@ -7,7 +7,7 @@
         <label for="name" class="col-form-label">Name:</label>
     </div>
     <div class="col-sm-9">
-        <input type="text" size={{25}} id="name" enter={{action "save"}} value={{name}} />
+        <Input @type="text" size={{25}} id="name" enter={{action "save"}} @value={{this.name}} />
     </div> 
   </div>
   
@@ -16,7 +16,7 @@
         <label for="desc" class="col-form-label">Description:</label>
     </div>
     <div class="col-sm-9">
-        <input type="text" size={{25}} id="desc" enter={{action "save"}} value={{desc}} />
+        <Input @type="text" size={{25}} id="desc" enter={{action "save"}} @value={{this.desc}} />
     </div> 
   </div>
   
@@ -26,7 +26,7 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelectMultiple @selected={{can_read}} @options={{this.model.roles}} @onChange={{action "readRolesChanged"}} as |role|>
+      <PowerSelectMultiple @selected={{this.can_read}} @options={{this.model.roles}} @onChange={{action "readRolesChanged"}} as |role|>
         {{role}}
       </PowerSelectMultiple>
     </div>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelectMultiple @selected={{can_write}} @options={{this.model.roles}} @onChange={{action "writeRolesChanged"}} as |role|>
+      <PowerSelectMultiple @selected={{this.can_write}} @options={{this.model.roles}} @onChange={{action "writeRolesChanged"}} as |role|>
         {{role}}
       </PowerSelectMultiple>
       <div class="hint">Forums default to only allowing approved characters to post. If you want a forum where anyone can post, you must explicitly set the write role to 'everyone'.</div>
