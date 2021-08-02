@@ -6,9 +6,9 @@
 <ul>
 {{#each group.items as |item| }}
   {{#if (eq "AresMUSH::BbsPost" item.type)}}
-   <li><LinkTo @route="forum-topic" @models={{array 1 item.id}}>{{item.title}}</LinkTo></li>
+   <li><LinkTo @route="forum-topic" @models={{array 1 item.route_id}}>{{item.title}}</LinkTo></li>
   {{else}}
-    <li><LinkTo @route={{item.route}} @model={{item.id}}>{{item.title}}</LinkTo></li>
+    <li><LinkTo @route={{item.route}} @model={{item.route_id}}>{{item.title}}</LinkTo></li>
   {{/if}}
 {{/each}}
 </ul>
