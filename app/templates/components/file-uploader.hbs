@@ -11,12 +11,12 @@
         <p class="alert alert-info">Please consider copyright when uploading images, and add attributions to pages where they're used as needed.</p>
         
         {{#if this.allowMulti}}
-        <Input type="file"
+        <input type="file"
            multiple
            accept="image/*" 
            onchange={{action "filesSelected"}} />
         {{else}}
-        <Input type="file"
+        <input type="file"
            accept="image/*" 
            onchange={{action "filesSelected"}} />
         {{/if}}
