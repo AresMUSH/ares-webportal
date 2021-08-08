@@ -1,6 +1,15 @@
 {{page-title this.model.heading}}
 <h1>{{this.model.heading}}</h1>
 
+     <div class="form-group row">
+      <div class="col-sm-3">
+        <label for="title" class="col-xs-2 col-form-label">Title:</label>
+      </div>
+      <div class="col-sm-9">
+        <Input @type="text" size={{25}} id="title" @enter={{action "save"}} @value={{this.model.title}} />
+      </div> 
+    </div>
+    
 {{#if this.model.can_change_name}}
     
      <div class="form-group row">
@@ -14,14 +23,6 @@
     
 {{/if}}
 
-     <div class="form-group row">
-      <div class="col-sm-3">
-        <label for="title" class="col-xs-2 col-form-label">Title:</label>
-      </div>
-      <div class="col-sm-9">
-        <Input @type="text" size={{25}} id="title" @enter={{action "save"}} @value={{this.model.title}} />
-      </div> 
-    </div>
     
      <div class="form-group row">
       <div class="col-sm-3">
