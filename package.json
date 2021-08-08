@@ -104,7 +104,7 @@
   "ember": {
     "edition": "octane"
   },
-  "disabled" {
+  "disabled": {
     "ember-cli-deprecation-workflow": "^2.0.0" 
   }
 }
