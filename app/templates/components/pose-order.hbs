@@ -1,6 +1,6 @@
-{{updatePoseOrder}}<div class="scene-pose-order">
-<label>Pose Order:</label> {{#each poseOrder as |po|}}
-{{#if (eq po.name playerName)}}
+{{this.updatePoseOrder}}<div class="scene-pose-order">
+<label>Pose Order:</label> {{#each this.poseOrder as |po|}}
+{{#if (eq po.name this.playerName)}}
   <span class="your-pose-order">{{po.name}}</span>
 {{else}}
   {{po.name}}

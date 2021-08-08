@@ -6,6 +6,7 @@ export default Controller.extend({
     gameApi: service(),
     gameSocket: service(),
     flashMessages: service(),
+    router: service(),
     status: '',
 
     resetOnExit: function() {
@@ -63,7 +64,7 @@ export default Controller.extend({
                     return;
                 }
         
-            this.transitionToRoute('shutdown');
+            this.router.transitionTo('shutdown');
             });  
         },
         

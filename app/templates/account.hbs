@@ -13,8 +13,8 @@
    <div class="panel panel-default">
       <div class="panel-body">
 
-        {{#if model.handle}}
-        <p>Your character is linked to the handle <b>{{model.handle}}</b>.  Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your handle preferences.</p>
+        {{#if this.model.handle}}
+        <p>Your character is linked to the handle <b>{{this.model.handle}}</b>.  Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your handle preferences.</p>
         {{else}}
 
 
@@ -29,9 +29,9 @@
   
           <FlashMessages />
         
-          <p><Input @type="text" @id="handleName" placeholder="Handle Name" @value={{handleName}} /></p>
-          <p><Input @type="text" placeholder="Link Code" @id="linkCode" @value={{linkCode}} /></p>
-          <p><Input @type="password" placeholder="Confirm Password" @id="confirmPasswordHandle" @value={{confirmPasswordHandle}} /></p>
+          <p><Input @type="text" id="handleName" placeholder="Handle Name" @value={{this.handleName}} /></p>
+          <p><Input @type="text" placeholder="Link Code" id="linkCode" @value={{this.linkCode}} /></p>
+          <p><Input @type="password" placeholder="Confirm Password" id="confirmPasswordHandle" @value={{this.confirmPasswordHandle}} /></p>
         
           <button {{action "linkHandle"}} class="btn btn-primary">Link to Handle</button>
         
@@ -55,9 +55,9 @@
 
           <FlashMessages />
         
-          <p><Input @type="password" @id="password" placeholder="Current Password" @value={{currentPassword}} /></p>
-          <p><Input @type="password" placeholder="Password" @id="newPassword" @value={{newPassword}} /></p>
-          <p><Input @type="password" placeholder="Confirm New Password"  @id="confirmPassword" @value={{confirmPassword}} /></p>
+          <p><Input @type="password" id="password" placeholder="Current Password" @value={{this.currentPassword}} /></p>
+          <p><Input @type="password" placeholder="Password" id="newPassword" @value={{this.newPassword}} /></p>
+          <p><Input @type="password" placeholder="Confirm New Password"  id="confirmPassword" @value={{this.confirmPassword}} /></p>
         
           <button {{action "changePassword"}} class="btn btn-primary">Change Password</button>
                 
@@ -84,10 +84,10 @@
             </div>
           
             <div class="panel-body">
-              {{#if isApproved}}
+              {{#if this.isApproved}}
               <p>You are already approved. Submit a <LinkTo @route="jobs">request</LinkTo> to ask for a name change.</p>
               {{else}}
-              <p><Input @id="name" placeholder="Name" @value={{model.name}} /></p>
+              <p><Input id="name" placeholder="Name" @value={{this.model.name}} /></p>
               {{/if}}
               
             </div>
@@ -95,28 +95,28 @@
         
           <div class="panel panel-default">
             <div class="panel-heading">
-              Email <LinkTo @route="help-topic" @model="email" @target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
+              Email <LinkTo @route="help-topic" @model="email" target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
             </div>
           
             <div class="panel-body">
                         
-              <p><Input placeholder="Email" @id="email" @value={{model.email}} /></p>
+              <p><Input placeholder="Email" id="email" @value={{this.model.email}} /></p>
             </div>
           </div>
             
           
           <div class="panel panel-default">
               <div class="panel-heading">
-                Timezone <LinkTo @route="help-topic" @model="timezone" @target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
+                Timezone <LinkTo @route="help-topic" @model="timezone" target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
               </div>
     
               <div class="panel-body">
           
-                {{#if model.handle}}
-                <p>Your timezone is {{model.timezone}}. Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your timezone, which will apply to all characters linked to your handle.</p>
+                {{#if this.model.handle}}
+                <p>Your timezone is {{this.model.timezone}}. Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your timezone, which will apply to all characters linked to your handle.</p>
                 {{else}}
                 
-                <PowerSelect @selected={{model.timezone}}  @options={{model.timezones}} @searchEnabled=true @onChange={{action "timezoneChanged"}} as |tz|>
+                <PowerSelect @selected={{this.model.timezone}}  @options={{this.model.timezones}} @searchEnabled=true @onChange={{action "timezoneChanged"}} as |tz|>
                    {{tz}}
                  </PowerSelect>
                                              
@@ -127,12 +127,12 @@
             
             <div class="panel panel-default">
                 <div class="panel-heading">
-                  Unified Play Screen <LinkTo @route="help-topic" @model="play" @target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
+                  Unified Play Screen <LinkTo @route="help-topic" @model="play" target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
                 </div>
     
                 <div class="panel-body">
           
-                  Unified Play Enabled <Input @type="checkbox" @checked={{model.unified_play_screen}} /> 
+                  Unified Play Enabled <Input @type="checkbox" @checked={{this.model.unified_play_screen}} /> 
 
                 </div>
               </div>
@@ -141,7 +141,7 @@
             
             
           
-          <p><Input @type="password" @id="passwordEmail" placeholder="Confirm Password" @value={{confirmPasswordSettings}} /></p>
+          <p><Input @type="password" id="passwordEmail" placeholder="Confirm Password" @value={{this.confirmPasswordSettings}} /></p>
           <button {{action "changeSettings"}} class="btn btn-primary">Save Settings</button>
              
           <FlashMessages />

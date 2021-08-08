@@ -12,7 +12,7 @@
     <th></th>
   </tr>
   
-  {{#each model.chars as |char|}}
+  {{#each this.model.chars as |char|}}
   <tr>
     <td>
       {{char.name}}
@@ -31,10 +31,10 @@
     
     <td>{{char.lastwill}}</td>
     <td>
-      <Input @type="text" @id="idleNotes{{char.id}}" placeholder="Notes" @value={{char.notes}} />
+      <Input @type="text" id="idleNotes{{char.id}}" placeholder="Notes" @value={{char.notes}} />
     </td>
     <td>
-      <PowerSelect @selected={{char.idle_action}}  @options={{model.idle_actions}} @onChange={{action "idleActionChanged" char}} as |idleAction|>
+      <PowerSelect @selected={{char.idle_action}}  @options={{this.model.idle_actions}} @onChange={{action "idleActionChanged" char}} as |idleAction|>
        {{idleAction}}
      </PowerSelect>
      
@@ -55,7 +55,7 @@
     <div class="idle-status">  <AnsiFormat @text={{idleReport}} /></div>
   {{else}}
 
-    <Input @type="text" @id="idleAddCharName" placeholder="Name" @value={{idleAddCharName}} /> <button class="btn btn-default" {{action "addChar"}}>Add Char</button>
+    <Input @type="text" id="idleAddCharName" placeholder="Name" @value={{idleAddCharName}} /> <button class="btn btn-default" {{action "addChar"}}>Add Char</button>
 
     <div class="pull-right">
             <button class="btn btn-primary" {{action (mut confirmExecute) true}}>Execute</button>

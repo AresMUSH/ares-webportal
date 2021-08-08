@@ -12,7 +12,7 @@
 </thead>
 
 <tbody>
-{{#each-in model.fs3.xp_costs.attribute as |currentLevel xpCost| }}
+{{#each-in this.model.fs3.xp_costs.attribute as |currentLevel xpCost| }}
 <tr><td>{{currentLevel}}</td><td>{{xpCost}}</td></tr>
 {{/each-in}}
 </tbody>
@@ -28,7 +28,7 @@
 </thead>
 
 <tbody>
-{{#each-in model.fs3.xp_costs.action as |currentLevel xpCost| }}
+{{#each-in this.model.fs3.xp_costs.action as |currentLevel xpCost| }}
 <tr><td>{{currentLevel}}</td><td>{{xpCost}}</td></tr>
 {{/each-in}}
 </tbody>
@@ -44,7 +44,7 @@
 </thead>
 
 <tbody>
-{{#each-in model.fs3.xp_costs.background as |currentLevel xpCost| }}
+{{#each-in this.model.fs3.xp_costs.background as |currentLevel xpCost| }}
 <tr><td>{{currentLevel}}</td><td>{{xpCost}}</td></tr>
 {{/each-in}}
 </tbody>
@@ -61,16 +61,16 @@
 </thead>
 
 <tbody>
-{{#each-in model.fs3.xp_costs.language as |currentLevel xpCost| }}
+{{#each-in this.model.fs3.xp_costs.language as |currentLevel xpCost| }}
 <tr><td>{{currentLevel}}</td><td>{{xpCost}}</td></tr>
 {{/each-in}}
 </tbody>
 </table>
 
-{{#if model.fs3.use_advantages}}
+{{#if this.model.fs3.use_advantages}}
   <h2>Advantages</h2>
 
-  {{#if (not model.fs3.allow_advantages_xp)}}
+  {{#if (not this.model.fs3.allow_advantages_xp)}}
      <p class="alert alert-info">Advantages cannot be raised directly with XP. Contact staff.</p>
   {{/if}}
 
@@ -82,7 +82,7 @@
   </thead>
 
   <tbody>
-  {{#each-in model.fs3.xp_costs.advantage as |currentLevel xpCost| }}
+  {{#each-in this.model.fs3.xp_costs.advantage as |currentLevel xpCost| }}
   <tr><td>{{currentLevel}}</td><td>{{xpCost}}</td></tr>
   {{/each-in}}
   </tbody>

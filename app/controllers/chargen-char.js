@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({    
     flashMessages: service(),
     gameApi: service(),
+    router: service(),
     charErrors: null,
   
     /* These callbacks are wired up a little weird.  
@@ -116,7 +117,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('chargen-review', this.get('model.char.id'));
+                this.router.transitionTo('chargen-review', this.get('model.char.id'));
             });   
         },
         

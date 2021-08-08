@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     flashMessages: service(),
     gameApi: service(),
+    router: service(),
     
     actions: {
         storytellersChanged(new_storytellers) {
@@ -32,7 +33,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('plot',                          
+                this.router.transitionTo('plot',                          
                           this.get('model.plot.id'));
                 this.flashMessages.success('Plot updated!');
             });

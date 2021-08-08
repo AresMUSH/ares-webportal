@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({    
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     customUpdateCallback: null,
   
     buildQueryDataForChar: function() {
@@ -120,7 +121,7 @@ export default Controller.extend({
                 }
             
                 this.flashMessages.success('Saved!');
-                this.transitionToRoute('char', this.get('model.char.name'));
+                this.router.transitionTo('char', this.get('model.char.name'));
                 
             });
         }

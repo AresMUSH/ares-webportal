@@ -1,10 +1,10 @@
 {{page-title "Who's Online"}}
 <h1>Who's Online</h1>
 
-<p>{{model.who_count}} character(s) online.</p>
+<p>{{this.model.who_count}} character(s) online.</p>
 
 <table class="table table-striped">
-    {{#each model.who as |char|}}
+    {{#each this.model.who as |char|}}
     <tr>
         <td> <CharIconInline @char={{char}} /> </td>        
     </tr>

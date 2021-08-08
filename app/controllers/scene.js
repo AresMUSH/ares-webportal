@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
+    router: service(),
     confirmDelete: false,
     
     pageTitle: computed('model.title', function() {
@@ -36,7 +37,7 @@ export default Controller.extend(AuthenticatedController, {
                     return;
                 }
                 this.flashMessages.success('The scene is no longer shared.');
-                this.transitionToRoute('scene-live', this.get('model.id'));
+                this.router.transitionTo('scene-live', this.get('model.id'));
             });
         },
     }

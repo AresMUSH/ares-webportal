@@ -1,6 +1,6 @@
 <div id="general" class="tab-pane fade in active">
     
-    {{#each-in model.char.demographics as |key demo|}}
+    {{#each-in this.model.char.demographics as |key demo|}}
     <div class="form-group row">
         <div class="col-sm-3">
                 <b>{{demo.name}}</b> 
@@ -8,12 +8,12 @@
         <div class="col-sm-9">
             {{#if (eq demo.name 'Gender') }}
                 
-                <PowerSelect @selected={{model.char.demographics.gender}} @searchField="value" @options={{genders}} @onChange={{action "genderChanged"}} as |gender|>
+                <PowerSelect @selected={{this.model.char.demographics.gender}} @searchField="value" @options={{this.genders}} @onChange={{action "genderChanged"}} as |gender|>
                   {{gender.value}}
                 </PowerSelect>
                 
             {{else}}
-                <Input @type="text" @size={{25}} @value={{demo.value}} />
+                <Input @type="text" size={{25}} @value={{demo.value}} />
             {{/if}}
         </div>
     </div>
@@ -25,7 +25,7 @@
         </div>
         
         <div class="col-sm-9">
-            <PowerSelect @selected={{model.char.profile_image}} @allowClear={{true}} @searchField="name" @options={{model.char.files}} @onChange={{action "profileImageChanged"}} as |file|>
+            <PowerSelect @selected={{this.model.char.profile_image}} @allowClear={{true}} @searchField="name" @options={{this.model.char.files}} @onChange={{action "profileImageChanged"}} as |file|>
             {{file.name}}
             </PowerSelect>
             
@@ -39,7 +39,7 @@
         </div>
         
         <div class="col-sm-9">
-            <PowerSelect @selected={{model.char.profile_icon}} @allowClear={{true}} @searchField="name" @options={{model.char.files}} @onChange={{action "profileIconChanged"}} as |file|>
+            <PowerSelect @selected={{this.model.char.profile_icon}} @allowClear={{true}} @searchField="name" @options={{this.model.char.files}} @onChange={{action "profileIconChanged"}} as |file|>
             {{file.name}}
             </PowerSelect>
             
@@ -55,7 +55,7 @@
         <div class="col-sm-9">
           
           <div class="profile-gallery-input">
-          <Textarea @value={{model.char.profile_gallery}} @cols="80" @rows={{3}} />
+          <Textarea @value={{this.model.char.profile_gallery}} cols={{80}} rows={{3}} />
           
             <p class="hint">List image files in the order you want them shown (<code>folder/file1.jpg /folder/file2.jpg</code> etc.), or leave this blank to just show all images from your character's folder.</p>
             
@@ -70,7 +70,7 @@
         </div>
         
         <div class="col-sm-9">
-            <Input @type="text" @size={{50}} @value={{model.char.tags}} />
+            <Input @type="text" size={{50}} @value={{this.model.char.tags}} />
             
         </div>
     </div>
@@ -81,7 +81,7 @@
         </div>
         
         <div class="col-sm-9">
-              <Input @type="checkbox" @checked={{model.char.bg_shared}} />
+              <Input @type="checkbox" @checked={{this.model.char.bg_shared}} />
         </div>
     </div>
     
@@ -92,7 +92,7 @@
         </div>
         
         <div class="col-sm-9">
-              <MarkdownEditor @text={{model.char.lastwill}} />
+              <MarkdownEditor @text={{this.model.char.lastwill}} />
         </div>
     </div>
     

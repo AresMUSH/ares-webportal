@@ -3,8 +3,8 @@
 
 <div class="panel panel-default">
     <div class="panel-body">
-        <pre class="ansi app-status">{{#if model.abilities}}<AnsiFormat @text={{model.abilities}} /> 
-{{/if}}<AnsiFormat @text={{model.demographics}} /><AnsiFormat @text={{model.background}} /><AnsiFormat @text={{model.desc}} /><AnsiFormat @text={{model.hooks}} />{{#if model.ranks}}<AnsiFormat @text={{model.ranks}} />{{/if}}{{#if model.custom}}<AnsiFormat @text={{model.custom}} />{{/if}}        </pre>
+        <pre class="ansi app-status">{{#if this.model.abilities}}<AnsiFormat @text={{this.model.abilities}} /> 
+{{/if}}<AnsiFormat @text={{this.model.demographics}} /><AnsiFormat @text={{this.model.background}} /><AnsiFormat @text={{this.model.desc}} /><AnsiFormat @text={{this.model.hooks}} />{{#if this.model.ranks}}<AnsiFormat @text={{this.model.ranks}} />{{/if}}{{#if this.model.custom}}<AnsiFormat @text={{this.model.custom}} />{{/if}}        </pre>
     </div>
 </div>
 
@@ -14,23 +14,23 @@
        <p><span class="ansi-bright-red-fg">Red</span> issues will probably hold up your app.</p>
        <p><span class="ansi-bright-yellow-fg">Yellow</span> may be OK if it suits your character.</p>
 
-       {{#if model.allow_web_submit}}
+       {{#if this.model.allow_web_submit}}
          <p>If you're happy with your character, submit them for review by the game admin.</p>
          <hr>
          <p>If you want to make any special notes about your application, you can enter them below.</p>
        
-         <Textarea @value={{appNotes}} @cols="80" @rows={{5}} />
+         <Textarea @value={{this.appNotes}} cols={{80}} rows={{5}} />
        
        
         <p>
-            <LinkTo @route="chargen-char" @model={{model.id}} class="btn btn-default">Back to Chargen</LinkTo>
+            <LinkTo @route="chargen-char" @model={{this.model.id}} class="btn btn-default">Back to Chargen</LinkTo>
             <button name="submit" {{action 'submit'}} class="btn btn-success">Submit</button>
         </p>
       {{else}}
           <p>You'll need to log onto the game to complete character creation and submit your application.</p>
           <hr>
           <p>
-            <LinkTo @route="chargen-char" @model={{model.id}} class="btn btn-default">Back to Chargen</LinkTo>
+            <LinkTo @route="chargen-char" @model={{this.model.id}} class="btn btn-default">Back to Chargen</LinkTo>
           </p>
       {{/if}}
                    

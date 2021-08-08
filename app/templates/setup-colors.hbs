@@ -3,10 +3,10 @@
 
 <table>
     
-{{#each model as |color|}}
+{{#each this.model as |color|}}
 <tr>
     <td><b>{{color.name}}</b></td>
-    <td><Input @type="color" @value={{color.value}} /> ({{color.value}})</td>
+    <td><Input @type="color" class="color-select" @value={{color.value}} /> ({{color.value}})</td>
 </tr>
 {{/each}}
 

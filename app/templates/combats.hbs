@@ -14,7 +14,7 @@
 </thead>
 
 <tbody>
-{{#each model as |combat|}}
+{{#each this.model as |combat|}}
 <tr><td>
     <LinkTo @route="combat" @model={{combat.id}}>{{combat.id}}</LinkTo>
 </td>

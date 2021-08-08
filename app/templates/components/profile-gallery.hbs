@@ -1,7 +1,7 @@
 <div class="panel panel-default">
 
-{{#if char.profile_gallery}}
-    {{#each char.profile_gallery as |gallery|}}
+{{#if this.char.profile_gallery}}
+    {{#each this.char.profile_gallery as |gallery|}}
         <LinkTo @route="file" @models={{array gallery.folder gallery.name}}>
         <img src="/game/uploads/{{gallery.path}}" class="profile-gallery" alt="{{gallery.name}}" >
         </LinkTo>

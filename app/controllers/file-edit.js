@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
+    router: service(),
     
     actions: {        
         save: function() {
@@ -18,7 +19,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('file', response.folder, response.name );
+                this.router.transitionTo('file', response.folder, response.name );
             this.flashMessages.success('File saved!');
             });
         }

@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     gameApi: service(),
+    router: service(),
     appNotes: '',
     
     actions: {
@@ -15,7 +16,7 @@ export default Controller.extend({
                 }
                 this.set('appNotes', '');
               this.flashMessages.success('Character approved!');
-              this.transitionToRoute('char', this.get('model.name'));
+              this.router.transitionTo('char', this.get('model.name'));
             });
         },
         rejectChar() {
@@ -27,7 +28,7 @@ export default Controller.extend({
                 }
               this.set('appNotes', '');
               this.flashMessages.success('Character rejected!');
-              this.transitionToRoute('jobs');
+              this.router.transitionTo('jobs');
            });
         },
         responseSelected: function(resp) {

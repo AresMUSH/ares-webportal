@@ -11,8 +11,8 @@
 </div>
 
 
-<ul class="nav nav-tabs">
-  {{#each model.chars as |char index| }}
+<ul class="nav nav-tabs notification-nav">
+  {{#each this.model.chars as |char index| }}
   <li class="{{if (eq index 0) 'active' }}">
     <a data-toggle="tab" href="#{{char.name}}">
     {{char.name}}
@@ -27,10 +27,10 @@
 
 <div class="tab-content">
 
-{{#each model.chars as |char index| }}
+{{#each this.model.chars as |char index| }}
 
     <div id="{{char.name}}" class="tab-pane fade in {{if (eq index 0) 'active' }}">
-      <NotificationList @notices={{char.notices}} @currentUser={{currentUser}} />
+      <NotificationList @notices={{char.notices}} @char={{char}} />
     </div>
   
 {{/each}}

@@ -6,6 +6,7 @@ export default Route.extend(DefaultRoute, {
     gameApi: service(),
     flashMessages: service(),
     headData: service(),
+    router: service(),
     
     model: function(params) {
         let api = this.gameApi;
@@ -16,11 +17,11 @@ export default Route.extend(DefaultRoute, {
         if (model.not_found) {
           if (this.get('session.isAuthenticated')) {
             this.flashMessages.warning('That page was not found, but you can create it.');
-            this.transitionTo('wiki-create', { queryParams: { title: model.title || "" }});
+            this.router.transitionTo('wiki-create', { queryParams: { title: model.title || "" }});
           }
           else {
             this.flashMessages.warning('Page not found.');
-            this.transitionTo('wiki');
+            this.router.transitionTo('wiki');
           }
         }
         this.set('headData.robotindex', true);

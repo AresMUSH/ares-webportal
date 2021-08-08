@@ -7,6 +7,6 @@ export default Route.extend(DefaultRoute, {
     
     model: function() {
         let api = this.gameApi;
-        return api.requestMany('wikiPageList');
+        return api.requestOne('wikiPageList');
     }
 });

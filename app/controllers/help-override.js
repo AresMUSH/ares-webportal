@@ -5,6 +5,7 @@ export default Controller.extend({
     flashMessages: service(),
     gameApi: service(),
     session: service(),
+    router: service(),
     
     actions: {
         
@@ -17,7 +18,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('help-topic',                          
+                this.router.transitionTo('help-topic',                          
                           response.topic);
                 this.flashMessages.success('Custom help file created!');
             });

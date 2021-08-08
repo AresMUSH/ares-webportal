@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({    
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     newConfigKey: '',
     configChanged: false,
     confirmRestore: false,
@@ -73,7 +74,7 @@ export default Controller.extend({
                 }
         
             this.flashMessages.success('Config saved!');
-            this.transitionToRoute('setup');  
+            this.router.transitionTo('setup');  
             });  
         }
         

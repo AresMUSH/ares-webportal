@@ -1,24 +1,24 @@
 <span class="inline-block">
-  {{#if hideLink}}
-      <CharIconStatusBase @char={{char}} @iconClass="small-profile-icon" />
+  {{#if this.hideLink}}
+      <CharIconStatusBase @char={{this.char}} @iconClass="small-profile-icon" />
   {{else}}
-    <LinkTo @route="char" @model={{char.name}}>
-        <CharIconStatusBase @char={{char}} @iconClass="small-profile-icon" />
+    <LinkTo @route="char" @model={{this.char.name}}>
+        <CharIconStatusBase @char={{this.char}} @iconClass="small-profile-icon" />
     </LinkTo>
   {{/if}}
 
-{{#if hideLink}}
-  {{#if char.nick}}
-    {{char.nick}}
+{{#if this.hideLink}}
+  {{#if this.char.nick}}
+    {{this.char.nick}}
   {{else}}
-    {{char.name}} 
+    {{this.char.name}} 
   {{/if}}
 {{else}}
-  <LinkTo @route="char" @model={{char.name}}> 
-    {{#if char.nick}}
-      {{char.nick}}
+  <LinkTo @route="char" @model={{this.char.name}}> 
+    {{#if this.char.nick}}
+      {{this.char.nick}}
     {{else}}
-      {{char.name}} 
+      {{this.char.name}} 
     {{/if}}
   </LinkTo>
 {{/if}}

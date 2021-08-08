@@ -6,11 +6,11 @@
   
 <hr>
 
-{{#if searchResults}}
+{{#if this.searchResults}}
 <a data-toggle="collapse" href="#searchFields" class="btn btn-default btn-collapse">Show/Hide Search</a>
 {{/if}}
 
-<div id="searchFields" class="panel-collapse collapse {{if searchResults '' 'in'}}">
+<div id="searchFields" class="panel-collapse collapse {{if this.searchResults '' 'in'}}">
 
 <div class="row">
   
@@ -19,7 +19,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><Input @type="text" @size={{25}} @id="name" @value={{searchName}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="name" @value={{this.searchName}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -30,7 +30,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><Input @type="text" @size={{25}} @id="area" @value={{searchArea}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="area" @value={{this.searchArea}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -55,10 +55,10 @@
 
 <FlashMessages />
 
-{{#if searchResults}}
+{{#if this.searchResults}}
 
 <ul>
-{{#each searchResults as |loc|}}
+{{#each this.searchResults as |loc|}}
   {{#if loc.area_id}}
     <li><LinkTo @route="area" @model={{loc.area_id}}>{{loc.name_and_area}}</LinkTo></li>
   {{else}}

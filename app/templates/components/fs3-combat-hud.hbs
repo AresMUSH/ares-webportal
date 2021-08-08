@@ -16,7 +16,7 @@
 </tr>
 
 
-{{#each combat.teams as |t| }}    
+{{#each this.combat.teams as |t| }}    
 
 <tr><td colspan="6"><h3>Team {{t.team}}</h3></td></tr>
 
@@ -27,7 +27,7 @@
           {{#if c.is_npc}}
             {{c.name}}
           {{else}}
-            <LinkTo @route="char" @model={{c.name}} @target="_blank">{{c.name}}</LinkTo>
+            <LinkTo @route="char" @model={{c.name}} target="_blank">{{c.name}}</LinkTo>
           {{/if}}
         </td>
         
@@ -67,8 +67,8 @@
         </td>
         
         <td>
-            {{#if combat.can_manage}}
-                <LinkTo @route="combatant-edit" @model={{c.id}} @target="_blank">
+            {{#if this.combat.can_manage}}
+                <LinkTo @route="combatant-edit" @model={{c.id}} target="_blank">
                 <TooltipIcon @position="left" @message="Edit combatant." @icon="fa fa-edit" />
                 </LinkTo>
             {{/if}}

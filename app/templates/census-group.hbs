@@ -1,7 +1,7 @@
-{{page-title model.census.title}}
-<h1>{{model.census.title}}</h1>
+{{page-title this.model.census.title}}
+<h1>{{this.model.census.title}}</h1>
 
-<CensusNav @types={{model.types}} />
+<CensusNav @types={{this.model.types}} />
 
 <table class="table table-striped">
     <tr>
@@ -11,7 +11,7 @@
     </tr>
     
     
-{{#each model.census.groups as |group| }}
+{{#each this.model.census.groups as |group| }}
 <tr>
     <td>{{group.name}}</td>
     <td>{{group.count}}</td>

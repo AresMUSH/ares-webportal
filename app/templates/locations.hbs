@@ -14,7 +14,7 @@
   
  <ul class="nav nav-tabs" role="tablist">
 
-  {{#each topLevelAreas as |area index| }}
+  {{#each this.topLevelAreas as |area index| }}
    <li role="presentation" class="{{if (eq index 0) 'active' }}"><a href="#{{area.id}}" aria-controls="{{area.id}}" role="tab" data-toggle="tab">{{area.name}}</a></li>
   {{/each}}
    <li role="presentation"><a href="#unassigned" aria-controls="unassigned" role="tab" data-toggle="tab">No Area</a></li>
@@ -23,7 +23,7 @@
 
 <div class="tab-content">
 
-  {{#each topLevelAreas as |area index| }}
+  {{#each this.topLevelAreas as |area index| }}
   <div role="tabpanel" class="tab-pane {{if (eq index 0) 'active' }}" id="{{area.id}}">
 
     <a name="{{area.id}}"></a>
@@ -35,7 +35,7 @@
   <div role="tabpanel" class="tab-pane" id="unassigned">
 
   <h3>Locations With No Area</h3>
-  {{#each model.orphan_rooms as |room|}}
+  {{#each this.model.orphan_rooms as |room|}}
   <LinkTo @route="location" @model={{room.id}}>{{room.name}}</LinkTo>
   {{/each}}
   

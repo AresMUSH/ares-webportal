@@ -3,11 +3,11 @@
 
 <p>The forum enables MU-wide discussion topics, available in-game and on the web portal.</p>
 
-{{#if model.is_muted}}
+{{#if this.model.is_muted}}
 <div class="alert alert-warning">The forum is muted.  You will not see notifications for new posts or replies.</div>
 {{/if}}
   
-{{#if isAuthenticated}}
+{{#if this.isAuthenticated}}
 
 <div class="row">
     <div class="col col-xs-12">
@@ -16,7 +16,7 @@
 
           <button {{action 'catchup'}} class="btn btn-default">Mark All Read</button>
 
-          {{#if model.is_muted}}
+          {{#if this.model.is_muted}}
             <button {{action 'muteForum' false}} class="btn btn-default"><i class="fa fa-play" aria-hidden="true"></i> Unmute</button>
           {{else}}
             <button {{action 'muteForum' true}} class="btn btn-default"><i class="fa fa-pause" aria-hidden="true"></i> Mute</button>
@@ -40,7 +40,7 @@
 </thead>
      
 <tbody>
-{{#each model.categories as |forum|}}
+{{#each this.model.categories as |forum|}}
     <tr>
         <td>
           {{#if forum.unread}}
@@ -61,7 +61,7 @@
         </td>
         <td>
             {{#if forum.last_activity}}
-              {{char-icon-tiny char=forum.last_activity.author}} {{forum.last_activity.date}}
+              <CharIconTiny @char={{forum.last_activity.author}} /> {{forum.last_activity.date}}
               <br>
               {{if (eq forum.last_activity.type 'reply') 'Replied to' 'Posted'}}
               <LinkTo @route="forum-topic" @models={{array forum.id forum.last_activity.id}}>{{forum.last_activity.subject}}</LinkTo>
@@ -81,9 +81,9 @@
 </table>
 
 
-{{#if anyHidden}}
+{{#if this.anyHidden}}
 <h4>Hidden</h4>
-{{#each model.hidden as |forum|}}
+{{#each this.model.hidden as |forum|}}
 <LinkTo @route="forum-category" @model={{forum.id}}>{{forum.name}}</LinkTo>          
     <a href="#" {{action 'hideCategory' forum false}} >
       [<TooltipIcon @position="top" @message="Show category." @icon="fa fa-eye" />]

@@ -5,6 +5,7 @@ export default Controller.extend({
     flashMessages: service(),
     gameApi: service(),
     session: service(),
+    router: service(),
     
     title: '',
     summary: '',
@@ -30,7 +31,7 @@ export default Controller.extend({
         save: function() {
             let api = this.gameApi;
             
-            let tags = this.get('tags') || [];
+            let tags = this.tags || [];
             if (!Array.isArray(tags)) {
                 tags = tags.split(/[\s,]/);
             }
@@ -38,8 +39,8 @@ export default Controller.extend({
             api.requestOne('createPlot', { 
                title: this.title, 
                summary: this.summary,
-               content_warning: this.get('contentWarning'),
-               storytellers: (this.get('storytellers') || []).map(storyteller => storyteller.name),
+               content_warning: this.contentWarning,
+               storytellers: (this.storytellers || []).map(storyteller => storyteller.name),
                description: this.description,
               tags: tags
             }, null)
@@ -47,7 +48,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('plot',                          
+                this.router.transitionTo('plot',                          
                           response.id);
                 this.flashMessages.success('Plot created!');
             });

@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     gameApi: service(),
+    router: service(),
     name: '',
     desc: '',
     color: '',
@@ -20,17 +21,17 @@ export default Controller.extend({
     actions: {        
         save: function() {
           let api = this.gameApi;
-          api.requestOne('createChannel', { id: this.get('id'),
-             name: this.get('name'), 
-             desc: this.get('desc'),
-             can_talk: (this.get('can_talk') || []),
-             can_join: (this.get('can_join') || []),
-             color: this.get('color')}, null)
+          api.requestOne('createChannel', { id: this.id,
+             name: this.name, 
+             desc: this.desc,
+             can_talk: (this.can_talk || []),
+             can_join: (this.can_join || []),
+             color: this.color}, null)
           .then( (response) => {
               if (response.error) {
                   return;
               }
-              this.transitionToRoute('channels-manage');
+              this.router.transitionTo('channels-manage');
               this.flashMessages.success('Channel created!');
           });
         },

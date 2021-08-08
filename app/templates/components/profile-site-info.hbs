@@ -1,13 +1,13 @@
-<p><b>Last On:</b> {{char.siteinfo.last_online}}</p>
-<p><b>Last IP:</b> {{char.siteinfo.last_ip}}</p>
-<p><b>Last Hostname:</b> {{char.siteinfo.last_hostname}}</p>
-{{#if char.siteinfo.findsite}}
+<p><b>Last On:</b> {{this.char.siteinfo.last_online}}</p>
+<p><b>Last IP:</b> {{this.char.siteinfo.last_ip}}</p>
+<p><b>Last Hostname:</b> {{this.char.siteinfo.last_hostname}}</p>
+{{#if this.char.siteinfo.findsite}}
 <p><b>Findsite Matches:</b></p>
 <ul>
-  {{#each char.siteinfo.findsite as |findsite|}}
+  {{#each this.char.siteinfo.findsite as |findsite|}}
   <li>{{findsite.name}} - {{findsite.ip}} {{findsite.hostname}}</li>
   {{/each}}
 </ul>
 {{/if}}
 
-<p><b>Roles:</b> {{char.roles}}</p>
+<p><b>Roles:</b> {{this.char.roles}}</p>

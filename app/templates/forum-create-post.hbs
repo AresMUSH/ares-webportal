@@ -1,23 +1,23 @@
 {{page-title 'Create Post'}}
-<h1>Post to {{model.name}}</h1>
+<h1>Post to {{this.model.name}}</h1>
 
-{{#if model.can_post}}
+{{#if this.model.can_post}}
 
      <p><b>Post As:</b>        <div class="forum-char-select" >
-                 <PowerSelect @selected={{author}} @options={{model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |author|>
-                     <CharIconTiny @char={{author}} />
+                 <PowerSelect @selected={{this.author}} @options={{this.model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |author|>
+                     <CharIconTiny @char={{this.author}} />
                  </PowerSelect>
              </div>
     </p>
                  
     <p><b>Subject:</b></p> 
-    <Input @type="text" @id="subject" @value={{subject}} @size={{100}} />
+    <Input @type="text" id="subject" @value={{this.subject}} size={{100}} />
     
     <p><b>Message:</b></p>
-    <MarkdownEditor @text={{message}} />
+    <MarkdownEditor @text={{this.message}} />
 
 <div class="pull-right">
-    <LinkTo @route="forum-category" @model={{model.id}} class="btn btn-default">Cancel</LinkTo>
+    <LinkTo @route="forum-category" @model={{this.model.id}} class="btn btn-default">Cancel</LinkTo>
     <button {{action "addPost"}} class="btn btn-primary">Post</button>
 </div>
     

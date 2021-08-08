@@ -1,6 +1,6 @@
-<h1>{{model.title}}</h1>
+<h1>{{this.model.title}}</h1>
 
-{{#if model.shared}}
+{{#if this.model.shared}}
 <p>Scene is already shared, so you can only download the finished, clean log.</p> 
 {{else}}
 <p>
@@ -16,7 +16,7 @@
 <hr>
 
 <pre>
-{{model.log}}
+{{this.model.log}}
 </pre>
 
 {{outlet}}

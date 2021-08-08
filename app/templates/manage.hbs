@@ -3,12 +3,12 @@
 
 
 
-{{#if status}}
+{{#if this.status}}
 <p>The upgrade/deploy task may take a couple minutes.  The status will update below.  Be sure to pay attention to any errors displayed.</p>
 
 <hr>
 
-<pre id="manageLog" class="console">  <AnsiFormat @text={{status}} /></pre>
+<pre id="manageLog" class="console">  <AnsiFormat @text={{this.status}} /></pre>
 
 <hr>
 
@@ -37,7 +37,7 @@
 
 <h2>Idle Sweep</h2>
 
-<p>The idle sweep lets you prune characters whose players have left the game. See <LinkTo @route="help-topic" @model="idle" @target="_blank">Idle Sweep</LinkTo> for help.</p>
+<p>The idle sweep lets you prune characters whose players have left the game. See <LinkTo @route="help-topic" @model="idle" target="_blank">Idle Sweep</LinkTo> for help.</p>
   
 <LinkTo @route="idle" class="btn btn-primary">Idle Sweep</LinkTo>
 

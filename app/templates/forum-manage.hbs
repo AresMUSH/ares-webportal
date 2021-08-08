@@ -22,7 +22,7 @@
   <th class="col-xs-2"></th>
 </tr>
 
-{{#each @model.categories as |category|}}
+{{#each this.model.categories as |category|}}
 <tr>
   <td>{{category.name}}</td>
   <td><AnsiFormat @text={{category.desc}} /></td>
@@ -32,7 +32,7 @@
   <td>
     
     <LinkTo @route="forum-edit" @model={{category.id}}><i class="fas fa-edit" aria-label="Edit Category"></i></LinkTo>
-    <a href="#" {{action (mut forumToDelete) category}}><i class="fa fa-trash" aria-label="Delete Category"></i></a>
+    <a href="#" {{action (mut this.forumToDelete) category}}><i class="fa fa-trash" aria-label="Delete Category"></i></a>
     
   </td>
 </tr>
@@ -42,6 +42,6 @@
 </div>
 
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDeleteForum}} @onSubmit={{action "deleteForum" forumToDelete}} @onHide={{action (mut forumToDelete) null}}>
-    You're about to delete {{forumToDelete.name}}. This cannot be undone.  Are you sure?
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDeleteForum}} @onSubmit={{action "deleteForum" this.forumToDelete}} @onHide={{action (mut this.forumToDelete) null}}>
+    You're about to delete {{this.forumToDelete.name}}. This cannot be undone.  Are you sure?
   </BsModalSimple>

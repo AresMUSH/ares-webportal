@@ -13,26 +13,26 @@
                   
             <li><LinkTo @route="home">Home</LinkTo></li>
 
-            {{#if isAuthenticated}}
+            {{#if this.isAuthenticated}}
 
 
             <li class="dropdown hidden-xl  hidden-lg  hidden-md">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                       
-                      Welcome {{currentUser.name}}
-                      {{#if model.notification_count}}
-                          <span class="label label-pill label-primary" id="notificationBadge"><i class="fa fa-bell" aria-label="New Notifications"></i> {{model.notification_count}}</span>
+                      Welcome {{this.currentUser.name}}
+                      {{#if this.model.notification_count}}
+                          <span class="label label-pill label-primary" id="notificationBadge"><i class="fa fa-bell" aria-label="New Notifications"></i> {{this.model.notification_count}}</span>
                       {{/if}}
                       <span class="caret"></span></a>
                       <ul class="dropdown-menu">
                         <li><LinkTo @route="notifications">Notifications</LinkTo></li>
-                        <li><LinkTo @route="char" @model={{currentUser.name}}>Profile</LinkTo></li>
+                        <li><LinkTo @route="char" @model={{this.currentUser.name}}>Profile</LinkTo></li>
                         <li><LinkTo @route="mail">Mail</LinkTo></li>
-                        <li><LinkTo @route="jobs">{{#if model.jobs_admin}}Jobs{{else}}Requests{{/if}}</LinkTo></li>
+                        <li><LinkTo @route="jobs">{{#if this.model.jobs_admin}}Jobs{{else}}Requests{{/if}}</LinkTo></li>
                         <li><LinkTo @route="account">Account</LinkTo></li>
 
-                        {{#if model.alts}}
-                            <li><a href="#" {{action (mut showAltSelection) true}}>Switch Alt</a></li>
+                        {{#if this.model.alts}}
+                            <li><a href="#" {{action (mut this.showAltSelection) true}}>Switch Alt</a></li>
                         {{/if}} 
 
                         <li><LinkTo @route="logout">Logout</LinkTo></li>
@@ -40,11 +40,11 @@
                       </ul>
                     </li>
                   {{else}}
-                  <li class="hidden-xl  hidden-lg  hidden-md"><LinkTo @route="login" @query={{hash redirect=currentRoute}}>Login</LinkTo></li>
+                  <li class="hidden-xl  hidden-lg  hidden-md"><LinkTo @route="login" @query={{hash redirect=this.currentRoute}}>Login</LinkTo></li>
                   {{/if}}
 
             
-            {{#each topNavbar as |sec|}}
+            {{#each this.topNavbar as |sec|}}
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             
@@ -69,7 +69,7 @@
               </li>            
             {{/each}}
 
-            {{#if (or isAdmin isCoder)}}
+            {{#if (or this.isAdmin this.isCoder)}}
             
                    <li class="dropdown">
                              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -83,7 +83,7 @@
                                <li><LinkTo @route="files">Files</LinkTo></li>
                                <li><LinkTo @route="server-info">Server</LinkTo></li>
 
-                               {{#if isCoder}}
+                               {{#if this.isCoder}}
                                <li><LinkTo @route="tinker">Tinker</LinkTo></li>
                                {{/if}}
                              </ul>
@@ -91,7 +91,7 @@
                    
             {{/if}}
             
-            {{#if isWikiMgr}}
+            {{#if this.isWikiMgr}}
             <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                
@@ -115,10 +115,10 @@
 </nav>
 
 
-<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{showAltSelection}}  @onHide={{action (mut showAltSelection) false}} @onSubmit={{action (mut showAltSelection) false}}>
+<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{this.showAltSelection}}  @onHide={{action (mut this.showAltSelection) false}} @onSubmit={{action (mut this.showAltSelection) false}}>
 
   <table class="alts-switcher">
-    {{#each model.alts as |alt|}}
+    {{#each this.model.alts as |alt|}}
       {{#if (not (eq alt.name currentUser.name)) }}
         <tr><td>
         <CharIconInline @char={{alt}} @hideLink="true" />

@@ -2,8 +2,24 @@
 <h1>All Pages</h1>
 
 
-<ul>
-{{#each model as |page| }}
+<ul class="wiki-page-columns">
+{{#each this.model.all as |page| }}
 <li><LinkTo @route="wiki-page" @model={{page.id}}>{{page.heading}}</LinkTo></li>
 {{/each}}
 </ul>
+
+
+
+<h2>Categories</h2>
+
+{{#each this.model.categories as |category|}}
+
+<h3>{{category.name}}</h3>
+
+<ul class="wiki-page-columns">
+{{#each category.pages as |page| }}
+<li><LinkTo @route="wiki-page" @model={{page.id}}>{{page.heading}}</LinkTo></li>
+{{/each}}
+</ul>
+
+{{/each}}

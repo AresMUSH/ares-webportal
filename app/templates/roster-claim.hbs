@@ -5,12 +5,12 @@
 <div class="row profile-wrap">
     
     <div class="col-md-4 col-sm-12 col-xs-12">
-    {{#if model.profile_image.name}}
-            <LinkTo @route="file" @models={{array model.profile_image.folder model.profile_image.name}}>
-                <img src="/game/uploads/{{model.profile_image.path}}" alt="{{model.name}}'s icon"  class="profile-image">
+    {{#if this.model.profile_image.name}}
+            <LinkTo @route="file" @models={{array this.model.profile_image.folder this.model.profile_image.name}}>
+                <img src="/game/uploads/{{this.model.profile_image.path}}" alt="{{this.model.name}}'s icon"  class="profile-image">
             </LinkTo>
     {{else}}
-        <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{model.name}}'s icon" >
+        <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{this.model.name}}'s icon" >
     {{/if}}
     </div>
 
@@ -18,20 +18,20 @@
 
         <div class="profile-box">
         <h3>
-          {{model.military_name}}
+          {{this.model.profile_title}}
         </h3>
         
         <p>
-        <AnsiFormat @text={{model.roster.notes}} />
+        <AnsiFormat @text={{this.model.roster.notes}} />
         </p>
     
         <p>
-          {{#if model.roster.previously_played}}
+          {{#if this.model.roster.previously_played}}
           <span class="label label-info">Previously Played</span>
           {{/if}}
         </p>
     
-        <p>Any questions about this character, contact {{model.roster.contact}}.</p>
+        <p>Any questions about this character, contact {{this.model.roster.contact}}.</p>
         
       </div>
     </div>
@@ -40,7 +40,7 @@
 
 <div class="profile-tab">
     
-    {{#if model.roster.app_required}}
+    {{#if this.model.roster.app_required}}
     <h3>App Required</h3>
     
     <p>This character requires an application.  Include your app below. Consult your local game policies and/or the roster contact person for details about the app process and app requirements.
@@ -57,13 +57,13 @@
     <div class="col col-xs-12">
         <div class="pull-right">
         
-        {{#if model.password}}
+        {{#if this.model.password}}
         <div class="alert alert-success">
-          <p>Roster character claimed!  You can now log into that character with the password: {{model.password}}</p>
+          <p>Roster character claimed!  You can now log into that character with the password: {{this.model.password}}</p>
           <p>Please write this password down before you leave this page, or you will have to contact staff to reset it.</p>
         </div>
         {{else}}
-        <LinkTo @route="char" @model={{model.id}} class="btn btn-default" @target="_blank">View Profile</LinkTo>
+        <LinkTo @route="char" @model={{this.model.id}} class="btn btn-default" target="_blank">View Profile</LinkTo>
           <button {{action (mut confirmClaim) true}} class="btn btn-primary">Claim</button>
         {{/if}}
   </div>

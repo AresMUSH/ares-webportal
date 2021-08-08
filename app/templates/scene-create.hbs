@@ -1,19 +1,19 @@
 {{page-title 'Create a Scene'}}
 <h1>Create a Scene</h1>
     <div class="alert alert-info">
-        Scene Completed? <Input @type="checkbox" @checked={{model.scene.completed}} /> 
+        Scene Completed? <Input @type="checkbox" @checked={{this.model.scene.completed}} /> 
         <div class="hint">Completed scenes are automatically shared and will appear in the Scenes archive.  Incomplete scenes will show up on the 'Active Scenes' list as either open or private.  You can leave their title and summary blank and fill them in when the scene is complete.
         </div>
     </div>
 
-    {{#if (not model.scene.completed)}}
+    {{#if (not this.model.scene.completed)}}
     
      <div class="form-group row">
       <div class="col-sm-3">
          <label class="col-form-label">Scene Privacy:</label>
       </div>
       <div class="col-sm-9">
-        <PowerSelect @selected={{model.scene.privacy}} @options={{scenePrivacyValues}} @onChange={{action "privacyChanged"}} as |type|>
+        <PowerSelect @selected={{this.model.scene.privacy}} @options={{this.scenePrivacyValues}} @onChange={{action "privacyChanged"}} as |type|>
           {{type}}
         </PowerSelect>
       </div> 
@@ -25,7 +25,7 @@
            <label for="title" class="col-form-label">Notes:</label>
        </div>
        <div class="col-sm-9">
-           <Input @type="text" @size={{100}} @id="limit" @enter={{action "save"}} @value={{model.scene.limit}} />
+           <Input @type="text" size={{100}} id="limit" @enter={{action "save"}} @value={{this.model.scene.limit}} />
              <p class="hint">Use this for open scenes where participation is limited (by quantity, character type, etc.) or other special considerations apply.</p>
        </div>
      </div>
@@ -37,7 +37,7 @@
         <label for="title" class="col-form-label">Title:</label>
       </div>
       <div class="col-sm-9">
-        <Input @type="text" @size={{25}} @id="title" @enter={{action "save"}} @value={{model.scene.title}} />
+        <Input @type="text" size={{25}} id="title" @enter={{action "save"}} @value={{this.model.scene.title}} />
       </div> 
     </div>
     
@@ -47,12 +47,12 @@
      </div>
      <div class="col-sm-9">
        <p>
-           <PowerSelect  @searchEnabled=true @selected={{newLocation}} @options={{model.locations}} @searchEnabled=true  @onChange={{action "locationSelected"}} as |location|>
+           <PowerSelect  @searchEnabled=true @selected={{this.newLocation}} @options={{this.model.locations}} @searchEnabled=true  @onChange={{action "locationSelected"}} as |location|>
          {{location}}
        </PowerSelect>
        </p>
        
-       <p><Input @type="text" @size={{25}} @id="location" @enter={{action "save"}} @value={{model.scene.location}} /></p>
+       <p><Input @type="text" size={{25}} id="location" @enter={{action "save"}} @value={{this.model.scene.location}} /></p>
     
         
      </div> 
@@ -63,7 +63,7 @@
         <label for="icdate" class="col-form-label">IC Date:</label>
     </div>
     <div class="col-sm-9">
-       <Input @type="text" @size={{25}} @id="icdate" @enter={{action "save"}} @value={{model.scene.icdate}} />
+       <Input @type="text" size={{25}} id="icdate" @enter={{action "save"}} @value={{this.model.scene.icdate}} />
     </div> 
   </div>
     
@@ -73,7 +73,7 @@
         <label class="col-form-label">Scene Type:</label>
      </div>
      <div class="col-sm-9">
-        <PowerSelect @selected={{model.scene.scene_type}} @options={{sceneTypes}} @onChange={{action "typeChanged"}} as |type|>
+        <PowerSelect @selected={{this.model.scene.scene_type}} @options={{this.sceneTypes}} @onChange={{action "typeChanged"}} as |type|>
           {{type}}
         </PowerSelect>
      </div> 
@@ -84,7 +84,7 @@
         <label class="col-form-label">Scene Pacing:</label>
      </div>
      <div class="col-sm-9">
-        <PowerSelect @selected={{model.scene.scene_pacing}} @options={{scenePacingOptions}} @onChange={{action "pacingChanged"}} as |type|>
+        <PowerSelect @selected={{this.model.scene.scene_pacing}} @options={{this.scenePacingOptions}} @onChange={{action "pacingChanged"}} as |type|>
           {{type}}
         </PowerSelect>
      </div> 
@@ -97,7 +97,7 @@
     </div>
     <div class="col-sm-9">
  
-     <PowerSelectMultiple @selected={{model.scene.plots}} @options={{model.plots}} @allowClear={{true}} @searchEnabled=true @searchField="title" @onChange={{action "plotsChanged"}} as |plot|>
+     <PowerSelectMultiple @selected={{this.model.scene.plots}} @options={{this.model.plots}} @allowClear={{true}} @searchEnabled=true @searchField="title" @onChange={{action "plotsChanged"}} as |plot|>
        {{plot.title}}
      </PowerSelectMultiple>
     </div> 
@@ -108,7 +108,7 @@
         <label for="tags" class="col-form-label">Tags:</label>
     </div>
     <div class="col-sm-9">
-     <Input @type="text" @size={{25}} @id="tags" @enter={{action "save"}} @value={{model.scene.tags}} />
+     <Input @type="text" size={{25}} id="tags" @enter={{action "save"}} @value={{this.model.scene.tags}} />
     </div> 
   </div>
   
@@ -117,7 +117,7 @@
         <label for="participants" class="col-form-label">Participants:</label>
     </div>
     <div class="col-sm-9">
-        <PowerSelectMultiple @selected={{model.scene.participants}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
+        <PowerSelectMultiple @selected={{this.model.scene.participants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
           {{char.name}}
         </PowerSelectMultiple>
     </div> 
@@ -128,7 +128,7 @@
         <label for="related" class="col-form-label">Related Scenes:</label>
     </div>
     <div class="col-sm-9">
-        <PowerSelectMultiple @selected={{model.scene.related_scenes}} @options={{model.scenes.scenes}} @searchEnabled=true @searchField="title" @onChange={{action "relatedChanged"}} as |scene|>
+        <PowerSelectMultiple @selected={{this.model.scene.related_scenes}} @options={{this.model.scenes.scenes}} @searchEnabled=true @searchField="title" @onChange={{action "relatedChanged"}} as |scene|>
           {{scene.icdate}} {{scene.title}}
         </PowerSelectMultiple>
     </div> 
@@ -140,7 +140,7 @@
         <label for="summary" class="col-form-label">Summary:</label>
      </div>
      <div class="col-sm-9">
-        <MarkdownEditor @text={{model.scene.summary}} />
+        <MarkdownEditor @text={{this.model.scene.summary}} />
      </div> 
    </div>
  
@@ -149,17 +149,17 @@
           <label for="title" class="col-form-label">Content Warning:</label>
       </div>
       <div class="col-sm-9">
-        <PowerSelectMultiple @selected={{warning_tags}} @options={{model.sceneOptions.content_warnings}} @onChange={{action "warningsChanged"}} as |warning|>
+        <PowerSelectMultiple @selected={{this.warning_tags}} @options={{this.model.sceneOptions.content_warnings}} @onChange={{action "warningsChanged"}} as |warning|>
           {{warning}}
         </PowerSelectMultiple>       
-          <Input @type="text" @size={{25}} @id="content_warning" @enter={{action "save"}} @value={{model.scene.content_warning}} />
+          <Input @type="text" size={{25}} id="content_warning" @enter={{action "save"}} @value={{this.model.scene.content_warning}} />
           <p class="hint">Select from the suggested tags or write your own. Please avoid frivolous warnings.</p>
       </div>
     </div>
     
-    {{#if model.scene.completed }}
+    {{#if this.model.scene.completed }}
     <p>
-        <MarkdownEditor @text={{model.scene.log}} @rows={{20}} />
+        <MarkdownEditor @text={{this.model.scene.log}} @rows={{20}} />
     </p>
     {{/if}}
 

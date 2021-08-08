@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   gameApi: service(),
   flashMessages: service(),
+  router: service(),
   replySubject: '',
   fwdSubject: '',
   replyMessage: '',
@@ -66,7 +67,7 @@ export default Controller.extend({
         if (response.error) {
           return;
         }
-        this.transitionToRoute('mail');
+        this.router.transitionTo('mail');
         this.flashMessages.success('Message archived!');
       });
     },
@@ -77,7 +78,7 @@ export default Controller.extend({
         if (response.error) {
           return;
         }
-        this.transitionToRoute('mail');
+        this.router.transitionTo('mail');
         this.flashMessages.success('Message moved to trash.');
       });
     },
@@ -97,7 +98,7 @@ export default Controller.extend({
         if (response.error) {
           return;
         }
-        this.transitionToRoute('mail');
+        this.router.transitionTo('mail');
         this.flashMessages.success('Sent!');
       });
     },
@@ -110,7 +111,7 @@ export default Controller.extend({
         if (response.error) {
           return;
         }
-        this.transitionToRoute('mail');
+        this.router.transitionTo('mail');
         this.flashMessages.success('Sent!');
       });
     },
@@ -128,7 +129,7 @@ export default Controller.extend({
         if (response.error) {
           return;
         }
-        this.transitionToRoute('mail');
+        this.router.transitionTo('mail');
         this.flashMessages.success('Message undeleted.');
       });
     }

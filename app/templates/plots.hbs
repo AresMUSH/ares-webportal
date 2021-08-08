@@ -3,7 +3,7 @@
 
 <p>Plots are a way to group related scenes.</p>
 
-{{#if isApproved}}
+{{#if this.isApproved}}
 
 <div class="row">
     
@@ -29,7 +29,7 @@
 
 <tbody>
 
-{{#each model as |plot|}}
+{{#each this.model as |plot|}}
   {{#if (not plot.completed) }}
     <tr>
         <td>
@@ -37,7 +37,7 @@
         </td>
         <td>
           {{#each plot.storytellers as |storyteller|}}
-            {{char-icon-tiny char=storyteller}}
+            <CharIconTiny @char={{storyteller}} />
           {{/each}}
         </td>
         <td class="hidden-xs hidden-sm">
@@ -60,7 +60,7 @@
 <h2>Completed Plots</h2>
 
 <ul>
-{{#each model as |plot|}}
+{{#each this.model as |plot|}}
   {{#if plot.completed }}
     <li>
         <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>

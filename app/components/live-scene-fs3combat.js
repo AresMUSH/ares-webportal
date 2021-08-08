@@ -35,7 +35,7 @@ export default Component.extend({
     sendCommand: function() {
       let api = this.gameApi;
       
-      let command = this.get('combatCommand');
+      let command = this.combatCommand;
       this.set('commandResponse', '');
       this.set('combatCommand', '');
       

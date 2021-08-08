@@ -1,20 +1,20 @@
-{{page-title model.char.name}}
+{{page-title this.model.char.name}}
 
-<h1>{{model.char.name_and_nickname}}</h1>
+<h1>{{this.model.char.profile_title}}</h1>
 
 <div class="row profile-wrap">
-    <ProfileDemographics @char={{model.char}} />
+    <ProfileDemographics @char={{this.model.char}} />
 </div>
 
 
-{{#if model.char.status_message}}
+{{#if this.model.char.status_message}}
 <div class="row">
     <div class="col col-xs-12">
         <div class="panel panel-default">
             <div class="panel-body status-message">
-                {{{model.char.status_message}}}
-                {{#if model.char.idle_notes}}
-                <AnsiFormat @text={{model.char.idle_notes}} />
+                {{{this.model.char.status_message}}}
+                {{#if this.model.char.idle_notes}}
+                <AnsiFormat @text={{this.model.char.idle_notes}} />
                 {{/if}}
             </div>
         </div>
@@ -23,39 +23,39 @@
 {{/if}}
 
 <div class="profile-tab">
-    <ProfileSupplemental @char={{model.char}} @title="Supplemental Information" />
+    <ProfileSupplemental @char={{this.model.char}} @title="Supplemental Information" />
 </div>
 
 
 <div class="profile-tab">
 
-  <ProfileSystem @char={{model.char}} @game={{model.game}} @reloadChar={{action "reloadChar"}} />
+  <ProfileSystem @char={{this.model.char}} @game={{this.model.game}} @reloadChar={{action "reloadChar"}} />
   
 </div>
 
 
 <div class="profile-tab">
 
- <ProfileRelationships @char={{model.char}} />
+ <ProfileRelationships @char={{this.model.char}} />
  
  </div>
  
  <div class="profile-tab">
  
-<ProfileLogs @scenes={{model.scenes}} @sceneTypes={{model.sceneOptions.scene_types}} @char={{model.char}} />
+<ProfileLogs @scenes={{this.model.scenes}} @sceneTypes={{this.model.sceneOptions.scene_types}} @char={{this.model.char}} />
    
 </div>
    
 <div class="profile-tab">
 
- <ProfileGallery @char={{model.char}} />
+ <ProfileGallery @char={{this.model.char}} />
 
 </div>
 
 
 <hr>
 <b>Tags:</b>  
-{{#each model.char.tags as |tag|}}
+{{#each this.model.char.tags as |tag|}}
   <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
 {{/each}}
     
@@ -64,25 +64,25 @@
     <div class="col col-xs-12">
         <div class="pull-right">
         
-        {{#if model.char.last_profile_version}}
-            <LinkTo @route="char-source" @models={{array model.char.id model.char.last_profile_version}} class="btn btn-default">Source/History</LinkTo>
+        {{#if this.model.char.last_profile_version}}
+            <LinkTo @route="char-source" @models={{array this.model.char.id this.model.char.last_profile_version}} class="btn btn-default">Source/History</LinkTo>
         {{/if}}
-        {{#if model.char.can_approve}}
-          <LinkTo @route="chargen-char" @model={{model.char.id}} class="btn btn-default">Chargen</LinkTo>
+        {{#if this.model.char.can_approve}}
+          <LinkTo @route="chargen-char" @model={{this.model.char.id}} class="btn btn-default">Chargen</LinkTo>
         {{/if}}
-        {{#if model.char.show_notes}}
-          <LinkTo @route="notes" @model={{model.char.name}} class="btn btn-default">Notes</LinkTo>
+        {{#if this.model.char.show_notes}}
+          <LinkTo @route="notes" @model={{this.model.char.name}} class="btn btn-default">Notes</LinkTo>
         {{/if}}
-        {{#if model.char.can_manage}}
-          <button {{action (mut showFiles) true}} class="btn btn-default">Files</button>
-          <LinkTo @route="char-edit" @model={{model.char.id}} class="btn btn-primary">Edit</LinkTo>
+        {{#if this.model.char.can_manage}}
+          <button {{action (mut this.showFiles) true}} class="btn btn-default">Files</button>
+          <LinkTo @route="char-edit" @model={{this.model.char.id}} class="btn btn-primary">Edit</LinkTo>
         {{/if}}
   </div>
   </div>
 </div>
 
-{{#if model.char.can_manage}}
-{{#if showFiles}}
+{{#if this.model.char.can_manage}}
+{{#if this.showFiles}}
     <div class="panel panel-default">
         
         <div class="panel-body">
@@ -90,7 +90,7 @@
         <p><b>Existing Character Files:</b></p>
         
        <div class="thumbnail-gallery">
-       {{#each model.char.files as |charFile|}}
+       {{#each this.model.char.files as |charFile|}}
        
        <div class="thumbnail-gallery-item">
        <LinkTo @route="file" @models={{array charFile.folder charFile.name}}>
@@ -103,7 +103,7 @@
         
         <p><LinkTo @route="files">All Files</LinkTo></p>
     
-        <FileUploader @folder={{model.char.name}} @uploaded={{action "fileUploaded"}} />
+        <FileUploader @folder={{this.model.char.name}} @uploaded={{action "fileUploaded"}} />
         </div>
     </div>
 {{/if}}

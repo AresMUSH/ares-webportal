@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     queryParams: [ 'title', 'template', 'category', 'tags' ],
 
     setup: function() {
@@ -36,7 +37,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('wiki-page',                          
+                this.router.transitionTo('wiki-page',                          
                           response.name);
                 this.flashMessages.success('Page created!');
             });

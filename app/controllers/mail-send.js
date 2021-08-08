@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     subject: '',
     message: '',
     toList: null,
@@ -29,7 +30,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('mail');
+                this.router.transitionTo('mail');
                 this.flashMessages.success('Sent!');
             });
         },

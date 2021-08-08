@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     gameApi: service(),
+    router: service(),
     name: '',
     desc: '',
     order: '',
@@ -20,16 +21,16 @@ export default Controller.extend({
     actions: {        
         save: function() {
           let api = this.gameApi;
-          api.requestOne('jobCategoryCreate', { id: this.get('id'),
-             name: this.get('name'), 
-             color: this.get('color'),
-             template: this.get('template'),
-             roles: (this.get('roles') || [])}, null)
+          api.requestOne('jobCategoryCreate', { id: this.id,
+             name: this.name, 
+             color: this.color,
+             template: this.template,
+             roles: (this.roles || [])}, null)
           .then( (response) => {
               if (response.error) {
                   return;
               }
-              this.transitionToRoute('jobcat-manage');
+              this.router.transitionTo('jobcat-manage');
               this.flashMessages.success('Job category created!');
           });
         },

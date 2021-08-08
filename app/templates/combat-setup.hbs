@@ -1,14 +1,14 @@
 {{page-title 'Combat Setup'}}
-<h1>Setup Combat {{model.id}}</h1>
+<h1>Setup Combat {{this.model.id}}</h1>
 
 <p>Here you can quickly set up combat stats for all the NPCs at once.  PCs cannot be set here to avoid accidentally overwriting their settings.  You can still edit PCs individually on the main combat screen.</p>
 
-<p><LinkTo @route="combat" @model={{model.id}}><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Combat</LinkTo></p>
+<p><LinkTo @route="combat" @model={{this.model.id}}><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Combat</LinkTo></p>
 
 <hr>
 
 
-{{#each-in model.combatants as |id comb| }}
+{{#each-in this.model.combatants as |id comb| }}
 
 <p>
   {{comb.name}}
@@ -16,7 +16,7 @@
 
 <div class="form-group row">
     <div class="col-sm-6 col-xs-12">
-            <b>Action:</b>  <PowerSelect @selected={{comb.action}} @options={{model.options.actions}} @onChange={{action "actionChanged" id}} as |act|>
+            <b>Action:</b>  <PowerSelect @selected={{comb.action}} @options={{this.model.options.actions}} @onChange={{action "actionChanged" id}} as |act|>
               {{act}}
             </PowerSelect>
     </div>
@@ -26,13 +26,13 @@
             
             <TooltipIcon @position="top" @message="Enter targets or other options for your action, like Dummy/burst,called:head." @icon="fa fa-question-circle" />
             <br>
-            <Input @type="text" @size={{25}} @id={{id}} @value={{comb.action_args}} />
+            <Input @type="text" size={{25}} id={{id}} @value={{comb.action_args}} />
             
             <p>
             <b>Available Targets:</b>
             <TooltipIcon @position="right" @message="Click a target to add them to the action args list." @icon="fa fa-question-circle" />
             
-            {{#each model.options.targets as |target|}}
+            {{#each this.model.options.targets as |target|}}
               <a href="#" {{action 'addTarget' id target}}>{{target}}</a>
             {{/each}}
             </p>
@@ -48,7 +48,7 @@
     <p>
       <label>Team:</label>
   
-      <PowerSelect @selected={{comb.team}} @options={{teams}} @onChange={{action "teamChanged" id}} as |team|>
+      <PowerSelect @selected={{comb.team}} @options={{this.teams}} @onChange={{action "teamChanged" id}} as |team|>
         {{team}}
       </PowerSelect>
     </p>
@@ -59,7 +59,7 @@
       
     <p>
       <label>NPC Level:</label>
-      <PowerSelect @selected={{comb.npc_skill}} @options={{model.options.npc_skills}} @onChange={{action "npcChanged" id}} as |level|>
+      <PowerSelect @selected={{comb.npc_skill}} @options={{this.model.options.npc_skills}} @onChange={{action "npcChanged" id}} as |level|>
         {{level}}
       </PowerSelect>
     </p>
@@ -73,7 +73,7 @@
 
     <p>
       <label>Stance</label>
-    <PowerSelect @selected={{comb.stance}} @options={{model.options.stances}} @onChange={{action "stanceChanged" id}} as |stance|>
+    <PowerSelect @selected={{comb.stance}} @options={{this.model.options.stances}} @onChange={{action "stanceChanged" id}} as |stance|>
       {{stance}}
     </PowerSelect>
     </p>
@@ -82,7 +82,7 @@
   <div class="col col-sm-6 col-xs-12">
     <p>
       <label>Armor</label>
-    <PowerSelect @selected={{comb.armor}} @options={{model.options.armor}} @onChange={{action "armorChanged" id}} as |armor|>
+    <PowerSelect @selected={{comb.armor}} @options={{this.model.options.armor}} @onChange={{action "armorChanged" id}} as |armor|>
       {{armor}}
     </PowerSelect>
 
@@ -102,7 +102,7 @@
 
     <p>
       <label>Weapon</label>
-    <PowerSelect @selected={{comb.weapon}} @options={{model.options.weapons}} @onChange={{action "weaponChanged" id}} as |weapon|>
+    <PowerSelect @selected={{comb.weapon}} @options={{this.model.options.weapons}} @onChange={{action "weaponChanged" id}} as |weapon|>
       {{weapon}}
     </PowerSelect>
 
@@ -121,10 +121,10 @@
          
          <TooltipIcon @position="top" @message="Enter a vehicle type to get in your own vehicle, or a character name to get into theirs." @icon="fa fa-question-circle" />
          <br>
-         <Input @type="text" @size={{25}} @value={{comb.vehicle}} />
+         <Input @type="text" size={{25}} @value={{comb.vehicle}} />
          <br>
          <label>Passenger Type:</label>
-         <PowerSelect @selected={{comb.passenger_type}} @options={{passengerTypes}} @onChange={{action "passengerTypeChanged" id}} as |passengerType|>
+         <PowerSelect @selected={{comb.passenger_type}} @options={{this.passengerTypes}} @onChange={{action "passengerTypeChanged" id}} as |passengerType|>
            {{passengerType}}
          </PowerSelect>
          
@@ -144,7 +144,7 @@
         <div class="col col-xs-12">
             <div class="pull-right">
     
-                <p> <LinkTo @route="combat" @model={{model.id}} class="btn btn-default">Cancel</LinkTo>  
+                <p> <LinkTo @route="combat" @model={{this.model.id}} class="btn btn-default">Cancel</LinkTo>  
                     <button class="btn btn-primary" {{action 'save'}} >Save</button>
                 </p>
     

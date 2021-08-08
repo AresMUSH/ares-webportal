@@ -8,9 +8,9 @@
 </div>
 
 <div class="col-sm-3">
-<Fs3Dots @rating={{rating}} @max={{8}} />
+<Fs3Dots @rating={{this.rating}} @max={{8}} />
 <br>
-{{ratingName}}
+{{this.ratingName}}
 </div>
 
 <div class="col-sm-1">
@@ -19,16 +19,16 @@
 
 </div>
 
-{{#if specialties}}
+{{#if this.specialties}}
   <div class="row">
   <div class="col-sm-12">
-    {{#if (gt rating 2)}}
+    {{#if (gt this.rating 2)}}
     <div class="cg-tip">Specialty is required for ratings 3+.</div>
     {{else}}
     <div class="cg-tip">Specialty is optional for ratings 1-2.</div>
     {{/if}}
        
-      {{#each specialties as |spec|}}
+      {{#each this.specialties as |spec|}}
       
           <span class="text">&nbsp; {{spec.name}}:</span>
           <Input @type="checkbox" @checked={{spec.selected}} /> 

@@ -4,14 +4,14 @@
 <p>This information will be used on your web portal and in the <a href="http://arescentral.aresmush.com">AresCentral Game Directory</a> to advertise your game.</p>
 
 <p><label for="name">Name:</label></p>
-<p><Input @type="text" @size={{25}} @id="name" @value={{model.config.name}} /></p>
+<p><Input @type="text" size={{25}} id="name" @value={{this.model.config.name}} /></p>
 
 <p><label for="name">Website:</label> <span class="hint">(Leave blank to use your web portal address.)</span></p>
-<p><Input @type="text" @size={{25}} @id="website" @value={{model.config.website}} /></p>
+<p><Input @type="text" size={{25}} id="website" @value={{this.model.config.website}} /></p>
 
 <p><label for="name">Category:</label>
 
-<PowerSelect @selected={{model.config.category}} @options={{model.category_options}} @onChange={{action "categoryChanged"}} as |category|>
+<PowerSelect @selected={{this.model.config.category}} @options={{this.model.category_options}} @onChange={{action "categoryChanged"}} as |category|>
   {{category}}
 </PowerSelect>
 
@@ -19,7 +19,7 @@
 
 <p><label for="name">Status:</label>
 
-<PowerSelect @selected={{model.config.status}} @options={{model.status_options}} @onChange={{action "statusChanged"}} as |status|>
+<PowerSelect @selected={{this.model.config.status}} @options={{this.model.status_options}} @onChange={{action "statusChanged"}} as |status|>
   {{status}}
 </PowerSelect>
                         
@@ -29,7 +29,7 @@
 <p>
     <b>Public Game?:</b>
 
-    <Input @type="checkbox" @checked={{model.config.public_game}} />
+    <Input @type="checkbox" @checked={{this.model.config.public_game}} />
 </p>
 
 <p class="hint">Only public games are advertised on AresCentral.  Private games will not appear on the AresCentral game list, but they can still be registered to activate other AresCentral features (like player handles).  Only players with a character on the game will see details for a private game on AresCentral. Admins can register a private game with AresCentral using the <code>game/register</code> command. </p>
@@ -38,7 +38,7 @@
 
 <p><b>Description:</b></p>
 
-<MarkdownEditor @text={{model.config.description}} />
+<MarkdownEditor @text={{this.model.config.description}} />
 
 
 <div class="row">

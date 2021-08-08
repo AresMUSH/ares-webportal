@@ -6,16 +6,16 @@
 
 <hr>
 
-{{#if searchResults}}
+{{#if this.searchResults}}
 <a data-toggle="collapse" href="#searchFields" class="btn btn-default btn-collapse">Show/Hide Search</a>
 {{/if}}
 
-<div id="searchFields" class="panel-collapse collapse {{if searchResults '' 'in'}}">
+<div id="searchFields" class="panel-collapse collapse {{if this.searchResults '' 'in'}}">
     
 <h3>Groups</h3>
 
 <div class="row">
-{{#each-in model.cgInfo.group_options as |key group| }}
+{{#each-in this.model.cgInfo.group_options as |key group| }}
   
   {{#if (not (eq key 'all_ranks'))}}
   <div class="col col-xs-3 col-md-2">
@@ -23,7 +23,7 @@
   </div>
   
   <div class="col col-xs-9 col-md-4">
-        <p><Input @type="text" @size={{25}} @value={{mut (get searchGroups key)}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} @value={{mut (get this.searchGroups key)}} @enter={{action "search"}} /></p>
   </div>
   {{/if}}
   
@@ -33,14 +33,14 @@
 <h3>Demographics</h3>
 
 <div class="row">
-{{#each model.cgInfo.demographics as |demo| }}
+{{#each this.model.cgInfo.demographics as |demo| }}
   
   <div class="col col-xs-3 col-md-2">
     <label>{{demo}}:</label>
   </div>
   
   <div class="col col-xs-9 col-md-4">
-        <p><Input @type="text" @size={{25}} @value={{mut (get searchDemographics demo)}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} @value={{mut (get this.searchDemographics demo)}} @enter={{action "search"}} /></p>
   </div>
   
 {{/each}}
@@ -55,7 +55,7 @@
   </div>
   
   <div class="col col-xs-9 col-md-4">
-        <p><Input @type="text" @size={{25}} @id="name" @value={{searchName}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="name" @value={{this.searchName}} @enter={{action "search"}} /></p>
   </div>
   
   
@@ -64,7 +64,7 @@
   </div>
   
   <div class="col col-xs-9 col-md-4">
-        <p><Input @type="text" @size={{25}} @id="tag" @value={{searchTag}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="tag" @value={{this.searchTag}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -76,7 +76,7 @@
   </div>
   
   <div class="col col-xs-9 col-md-4">
-        <p><Input @type="text" @size={{25}} @id="relation" @value={{searchRelation}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="relation" @value={{this.searchRelation}} @enter={{action "search"}} /></p>
   </div>
 
   
@@ -102,9 +102,9 @@
 
 <FlashMessages />
 
-{{#if searchResults}}
+{{#if this.searchResults}}
 
-<CharGroupList @name="Results" @chars={{searchResults}} />
+<CharGroupList @name="Results" @chars={{this.searchResults}} />
 
 
 {{else}}

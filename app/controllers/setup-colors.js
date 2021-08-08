@@ -6,6 +6,7 @@ export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
+    router: service(),
     
     actions: {
         
@@ -21,9 +22,9 @@ export default Controller.extend(AuthenticatedController, {
                 
                 this.flashMessages.success('Colors saved.  You will need to refresh the page for the new colors to take effect.');
                 if (this.isWikiMgr) {
-                  this.transitionToRoute('home');
+                  this.router.transitionTo('home');
                 } else {
-                  this.transitionToRoute('setup');  
+                  this.router.transitionTo('setup');  
                 }
                 
                 

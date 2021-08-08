@@ -3,10 +3,10 @@
 
 <p>This list includes wiki pages and profiles.  For scenes, check the <LinkTo @route="scenes">Scenes</LinkTo> archive.</p>
 
-<div class="table-responsive">
-  <table class="table table-striped">
+<div class="table-responsive recent-changes-container">
+  <table class="table table-striped recent-changes-list">
     
-   {{#each model as |change|}}
+   {{#each this.model as |change|}}
    <tr>
        <td>
          {{#if (eq change.type 'char')}}

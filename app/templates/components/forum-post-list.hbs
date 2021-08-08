@@ -7,7 +7,7 @@
       <th>Last Activity</th>
     </tr>
     
-{{#each posts as |post|}}
+{{#each this.posts as |post|}}
   <tr>
     <td>
       {{#if post.unread}}
@@ -20,7 +20,7 @@
         {{/if}}
          <LinkTo @route="forum-topic" @models={{array post.category_id post.id}}>{{post.title}}</LinkTo>
      </td>
-     <td>{{char-icon-tiny char=post.author}}
+     <td><CharIconTiny @char={{post.author}} />
      </td>
      <td>
        {{post.last_updated_by}} @ {{post.last_activity}}

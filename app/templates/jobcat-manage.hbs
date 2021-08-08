@@ -20,7 +20,7 @@
   <th class="col-xs-2"></th>
 </tr>
 
-{{#each @model.categories as |category|}}
+{{#each this.model.categories as |category|}}
 <tr>
   <td>
     <span class="label label-info job-category job-category-{{category.name}}">{{category.name}}</span>
@@ -30,7 +30,7 @@
   <td>
     
     <LinkTo @route="jobcat-edit" @model={{category.id}}><i class="fas fa-edit" aria-label="Edit Category"></i></LinkTo>
-    <a href="#" {{action (mut categoryToDelete) category}}><i class="fa fa-trash" aria-label="Delete Category"></i></a>
+    <a href="#" {{action (mut this.categoryToDelete) category}}><i class="fa fa-trash" aria-label="Delete Category"></i></a>
     
   </td>
 </tr>
@@ -40,6 +40,6 @@
 </div>
 
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDeleteCategory}} @onSubmit={{action "deleteCategory" categoryToDelete}} @onHide={{action (mut categoryToDelete) null}}>
-    You're about to delete {{categoryToDelete.name}}. This cannot be undone.  Are you sure?
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDeleteCategory}} @onSubmit={{action "deleteCategory" this.categoryToDelete}} @onHide={{action (mut this.categoryToDelete) null}}>
+    You're about to delete {{this.categoryToDelete.name}}. This cannot be undone.  Are you sure?
   </BsModalSimple>

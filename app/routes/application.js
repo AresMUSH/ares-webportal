@@ -9,6 +9,7 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, AresConfig, 
 
     gameApi: service(),
     session: service(),
+    router: service(),
     flashMessages: service(),
     gameSocket: service(),
     favicon: service(),
@@ -79,7 +80,7 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, AresConfig, 
     
     sessionInvalidated: function() { 
         this.flashMessages.info('You have been logged out.');
-        this.transitionTo('/');
+        this.router.transitionTo('/');
         this.refresh();
     },
     

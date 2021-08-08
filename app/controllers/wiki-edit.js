@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     preview: null,
     minorEdit: false,
     
@@ -22,7 +23,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('wiki-page',                          
+                this.router.transitionTo('wiki-page',                          
                           this.get('model.name'));
             });
         },
@@ -50,13 +51,13 @@ export default Controller.extend({
                title: this.get('model.title'), 
                name: this.get('model.name'),
                text: this.get('model.text'),
-               minor_edit: this.get('minorEdit'),
+               minor_edit: this.minorEdit,
                tags: tags}, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('wiki-page',                          
+                this.router.transitionTo('wiki-page',                          
                           this.get('model.name'));
                 this.flashMessages.success('Page updated!');
             });

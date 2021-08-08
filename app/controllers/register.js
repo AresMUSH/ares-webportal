@@ -9,6 +9,7 @@ export default Controller.extend({
     session: service(),
     flashMessages: service(),
     gameApi: service(),
+    router: service(),
     
     actions: {
         recaptchaResolved(reCaptchaResponse) {
@@ -25,7 +26,7 @@ export default Controller.extend({
                     return;
                 }                
                 this.flashMessages.success("Your character has been created.  Please log in.");
-                this.transitionToRoute('login');
+                this.router.transitionTo('login');
             });
         }
     }

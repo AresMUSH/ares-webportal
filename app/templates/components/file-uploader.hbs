@@ -5,36 +5,36 @@
 
     <div class="panel-body">
 
-        {{#if showSelector}}
+        {{#if this.showSelector}}
         <p>Select files for upload...</p>
         
         <p class="alert alert-info">Please consider copyright when uploading images, and add attributions to pages where they're used as needed.</p>
         
-        {{#if allowMulti}}
+        {{#if this.allowMulti}}
         <input type="file"
            multiple
            accept="image/*" 
-           onchange={{action "filesSelected"}}>
+           onchange={{action "filesSelected"}} />
         {{else}}
         <input type="file"
            accept="image/*" 
-           onchange={{action "filesSelected"}}>
+           onchange={{action "filesSelected"}} />
         {{/if}}
         
         {{else}}
 
            <div class="alert alert-info"> 
-             {{fileCount}} files selected for upload. Review the options, then click the upload button for <b>each file</b> to commence the upload.
+             {{this.fileCount}} files selected for upload. Review the options, then click the upload button for <b>each file</b> to commence the upload.
              </div>
 
             <table class="table">
         
-            {{#each files as |f|}}
+            {{#each this.files as |f|}}
             <tr>
                 <td><img class="upload-preview" alt="preview image" src="{{f.url}}" ></td>
                 <td>
                     {{#if (not f.upload_success)}}
-                      {{#if lockProperties}}
+                      {{#if this.lockProperties}}
                       <p><label class="col-xs-5">Folder:</label> {{f.folder}}</p>
                       {{else}}
                       <p><label class="col-xs-5">Name:</label> <Input @type="text" @value={{f.name}} /></p>

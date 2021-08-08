@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({    
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     appNotes: '',
     
     resetOnExit: function() {
@@ -19,7 +20,7 @@ export default Controller.extend({
                     return;
                 }
                 this.flashMessages.success('You have submitted your application.  Check for responses to your app under Help->Requests.');
-                this.transitionToRoute('chargen');
+                this.router.transitionTo('chargen');
             });   
         }
     }

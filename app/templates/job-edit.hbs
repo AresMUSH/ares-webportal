@@ -1,5 +1,5 @@
 {{page-title 'Edit Job'}}
-<h1>Edit Job {{model.job.id}}</h1>
+<h1>Edit Job {{this.model.job.id}}</h1>
 
 <table>
  
@@ -9,7 +9,7 @@
      <label>Title:</label>
    </td>
    <td>
-     <p><Input @type="text" @size={{25}} @id="title" @value={{model.job.title}} /></p>
+     <p><Input @type="text" size={{25}} id="title" @value={{this.model.job.title}} /></p>
    </td>
    <td>
      &nbsp;
@@ -23,7 +23,7 @@
     
      <td>
       
-       <PowerSelect @selected={{model.job.author}} @options={{model.characters}} @searchField="name" @searchEnabled=true @onChange={{action "submitterChanged"}} as |char|>
+       <PowerSelect @selected={{this.model.job.author}} @options={{this.model.characters}} @searchField="name" @searchEnabled=true @onChange={{action "submitterChanged"}} as |char|>
          {{char.name}}
        </PowerSelect>
       
@@ -37,7 +37,7 @@
     
      <td>
       
-        <PowerSelectMultiple @selected={{model.job.participants}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
+        <PowerSelectMultiple @selected={{this.model.job.participants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
          {{char.name}}
        </PowerSelectMultiple>
       
@@ -49,7 +49,7 @@
      <label>Tags:</label>
    </td>
    <td>
-     <p><Input @type="text" @size={{25}} @id="tags" @value={{model.job.tags}} /></p>
+     <p><Input @type="text" size={{25}} id="tags" @value={{this.model.job.tags}} /></p>
    </td>
  </tr>
  
@@ -61,7 +61,7 @@
     
      <td>
       
-       <PowerSelect @selected={{model.job.assigned_to}} @options={{model.job.job_admins}} @searchField="name" @searchEnabled=true @onChange={{action "assigneeChanged"}} as |char|>
+       <PowerSelect @selected={{this.model.job.assigned_to}} @options={{this.model.job.job_admins}} @searchField="name" @searchEnabled=true @onChange={{action "assigneeChanged"}} as |char|>
          {{char.name}}
        </PowerSelect>
       
@@ -73,8 +73,8 @@
       <label>Category:</label>
     </td>
     <td>
-        <span class="label label-info job-category job-category-{{model.job.category}}">
-        {{model.job.category}}
+        <span class="label label-info job-category job-category-{{this.model.job.category}}">
+        {{this.model.job.category}}
         </span>
     </td>
     <td>
@@ -84,7 +84,7 @@
 
               <span class="btn btn-default" href="#">Change Category <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
-              {{#each model.options.category_values as |category| }}
+              {{#each this.model.options.category_values as |category| }}
                 <li><a href="#" {{action 'changeCategory' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
               {{/each}}
               </ul>
@@ -99,7 +99,7 @@
        <label>Status: </label>
     </td>
     <td>
-      <span class="label label-info job-status job-status-{{model.job.status}}">{{model.job.status}}</span>
+      <span class="label label-info job-status job-status-{{this.model.job.status}}">{{this.model.job.status}}</span>
     </td>
     <td>
           <ul class="nav">
@@ -108,7 +108,7 @@
 
               <span class="btn btn-default" href="#">Change Status <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
-              {{#each model.options.status_values as |status| }}
+              {{#each this.model.options.status_values as |status| }}
                 <li><a href="#" {{action 'changeStatus' status}}><span class="label job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
               {{/each}}
               </ul>
@@ -120,10 +120,10 @@
 </table>
 
      
-<MarkdownEditor @text={{model.job.description}} />
+<MarkdownEditor @text={{this.model.job.description}} />
    
 <div class="pull-right">
- <LinkTo @route="job" @model={{model.job.id}} class="btn btn-default">Cancel</LinkTo>  
+ <LinkTo @route="job" @model={{this.model.job.id}} class="btn btn-default">Cancel</LinkTo>  
  <button class="btn btn-primary" {{action 'saveJob'}}>Save</button>
 </div>
 

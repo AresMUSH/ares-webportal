@@ -1,12 +1,12 @@
-{{page-title model.name}}
-<h1>{{model.name}}</h1>
+{{page-title this.model.name}}
+<h1>{{this.model.name}}</h1>
 
-<img src="/game/uploads/{{model.path}}" alt="{{model.name}}" class="image-container file-image" >
+<img src="/game/uploads/{{this.model.path}}" alt="{{this.model.name}}" class="image-container file-image" >
 
 <div class="alert alert-info">
   To link to this image from a wiki page, profile, etc., use one of the following:
-  <p><code>[[image /game/uploads/{{model.path}}]]</code></p>
-  <p><code>![Alt Text](/game/uploads/{{model.path}})</code>.</p>
+  <p><code>[[image /game/uploads/{{this.model.path}}]]</code></p>
+  <p><code>![Alt Text](/game/uploads/{{this.model.path}})</code>.</p>
   <p>See <a href="/help/markdown">Help -> Markdown Formatting -> Images</a> for more information.</p>
 </div>
 
@@ -15,21 +15,21 @@
         <div class="pull-right">
           <LinkTo @route="files" class="btn btn-default">Back to Files</LinkTo>
 
-          {{#if model.can_edit}}
-              <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
+          {{#if this.model.can_edit}}
+              <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete</button>
           
-              <LinkTo @route="file-edit" @models={{array model.folder model.name}} class="btn btn-primary">Edit</LinkTo>
+              <LinkTo @route="file-edit" @models={{array this.model.folder this.model.name}} class="btn btn-primary">Edit</LinkTo>
           {{/if}}
          </div>
   </div>
 </div>
 <FlashMessages />
 
-<FileUploader @folder={{model.folder}} @file={{model.name}} />
+<FileUploader @folder={{this.model.folder}} @file={{this.model.name}} />
 
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) false}}>
-    You're about to delete file {{model.name}}. This cannot be undone.  Are you sure?
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut this.confirmDelete) false}}>
+    You're about to delete file {{this.model.name}}. This cannot be undone.  Are you sure?
   </BsModalSimple>
   
 {{outlet}}

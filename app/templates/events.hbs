@@ -27,7 +27,7 @@
     </tr>
 </thead>
         
-{{#each model.events as |event|}}
+{{#each this.model.events as |event|}}
 <tr>
   <td>
     {{#if event.is_signed_up}}
@@ -42,7 +42,7 @@
     </td>
     
     <td>
-        {{char-icon-tiny char=event.organizer}}
+        <CharIconTiny @char={{event.organizer}} />
     </td>
     <td>
         {{event.start_datetime_local}}
