@@ -16,9 +16,11 @@ self.deprecationWorkflow.config = {
     { handler: "silence", matchId: "manager-capabilities.modifiers-3-13" },
 
     /* Ares internals */
-    { handler: "throw", matchId: "computed-property.override" },
-    { handler: "throw", matchId: "routing.transition-methods" },
-    { handler: "throw", matchId: "this-property-fallback" },
-    { handler: "throw", matchId: "ember.built-in-components.legacy-attribute-arguments" },
+    { handler: "log", matchId: "computed-property.override" },
+    { handler: "log", matchId: "routing.transition-methods" },
+    { handler: "log", matchId: "this-property-fallback" },
+    { handler: "log", matchId: "ember.built-in-components.legacy-attribute-arguments" },
+    
+    /* silence, log, throw */
   ]
 };
