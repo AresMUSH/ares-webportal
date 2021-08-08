@@ -59,7 +59,6 @@
     "ember-cli-app-version": "^5.0.0",
     "ember-cli-babel": "^7.26.6",
     "ember-cli-dependency-checker": "^3.2.0",
-    "ember-cli-deprecation-workflow": "^2.0.0",
     "ember-cli-flash": "^2.1.2",
     "ember-cli-head": "^1.0.0",
     "ember-cli-htmlbars": "^5.7.1",
@@ -104,5 +103,8 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "disabled" {
+    "ember-cli-deprecation-workflow": "^2.0.0" 
   }
 }
