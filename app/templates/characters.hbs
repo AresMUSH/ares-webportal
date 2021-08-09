@@ -1,23 +1,23 @@
 {{page-title 'Characters'}}
 <h1>Characters</h1>
 
-<div class="pull-right">
+<div class="float-right">
   <LinkTo @route="search-chars"><i class="fa fa-search" aria-hidden="true"></i> Search Characters</LinkTo>  
 </div>
 <p>Here you can browse the profiles for all approved characters.</p>
 <div class="clearfix"/>
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs" role="tablist">
   
   {{#each this.model.characters.group_names as |group|}}
-      <li class={{group.active_class}}><a data-toggle="tab" href="#{{group.key}}">{{group.name}}</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link {{group.active_class}}" href="#{{group.key}}">{{group.name}}</a></li>
   {{/each}}
   {{#if this.model.game.roster_enabled}}
-      <li><a data-toggle="tab" href="#roster">Roster</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#roster">Roster</a></li>
   {{/if}}
-      <li><a data-toggle="tab" href="#idle">Gone</a></li>
-      <li><a data-toggle="tab" href="#dead">Dead</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#idle">Gone</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#dead">Dead</a></li>
   {{#if this.model.characters.unapproved}}
-    <li><a data-toggle="tab" href="#unapproved">New</a></li>
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#unapproved">New</a></li>
   {{/if}}
 </ul>
 

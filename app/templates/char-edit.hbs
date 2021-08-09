@@ -1,23 +1,23 @@
 {{page-title this.model.char.name}}
 
-    <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#general">General</a></li>
-        <li><a data-toggle="tab" href="#profile">Profile</a></li>
-        <li><a data-toggle="tab" href="#relationships">Relationships</a></li>
-        <li><a data-toggle="tab" href="#hooks">RP Hooks</a></li>
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#general">General</a></li>
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#profile">Profile</a></li>
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#relationships">Relationships</a></li>
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#hooks">RP Hooks</a></li>
         {{#if this.model.char.rp_prefs}}
-        <li><a data-toggle="tab" href="#rpprefs">RP Prefs</a></li>
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#rpprefs">RP Prefs</a></li>
         {{/if}}
-        <li><a data-toggle="tab" href="#descs">Descriptions</a></li>
-        <li><a data-toggle="tab" href="#files">Files</a></li>
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#descs">Descriptions</a></li>
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#files">Files</a></li>
         {{#if this.model.char.show_background_tab}}
-        <li><a data-toggle="tab" href="#background">Background</a></li>
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#background">Background</a></li>
         {{/if}}
         {{#if (or this.model.char.show_idle_tab this.model.char.show_roster_tab)}}
-        <li><a data-toggle="tab" href="#idle">Idle/Roster</a></li>
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#idle">Idle/Roster</a></li>
         {{/if}}
         {{#if (or this.model.char.show_idle_tab this.model.char.show_roles_tab)}}
-        <li><a data-toggle="tab" href="#roles">Roles</a></li>
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#roles">Roles</a></li>
         {{/if}}
         <CharEditCustomTabs @char={{this.model}} />
     </ul>
@@ -69,9 +69,9 @@
     
     <div class="row">
         <div class="col col-xs-12">
-            <div class="pull-right">
+            <div class="float-right">
     
-                <p> <LinkTo @route="char" @model={{this.model.char.name}} class="btn btn-default">Cancel</LinkTo>  
+                <p> <LinkTo @route="char" @model={{this.model.char.name}} class="btn btn-secondary">Cancel</LinkTo>  
                     <button class="btn btn-primary" {{action 'save'}} >Save</button>
                 </p>
     

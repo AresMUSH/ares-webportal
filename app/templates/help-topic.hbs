@@ -20,11 +20,11 @@
 
 <div class="row">
     <div class="col col-xs-12">
-        <div class="pull-right">
+        <div class="float-right">
         {{#if this.model.is_override}}
         <button {{action (mut this.confirmRestore) true}} class="btn btn-warning">Restore Default</button>
         {{/if}}
-        <LinkTo @route="help-override" @model={{this.model.key}} class="btn btn-default">Customize</LinkTo>
+        <LinkTo @route="help-override" @model={{this.model.key}} class="btn btn-secondary">Customize</LinkTo>
     </div>
     </div>
 </div>

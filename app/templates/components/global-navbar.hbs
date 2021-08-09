@@ -1,118 +1,110 @@
-<nav class="navbar navbar-inverse" role="navigation" aria-labelledby="topnavbar">
-   <div class="navbar-header">
-     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-       <span class="sr-only">Toggle navigation</span>
-       <span class="icon-bar"></span>
-       <span class="icon-bar"></span>
-       <span class="icon-bar"></span>
-     </button>
-   </div>
-   <div id="navbar" class="navbar-collapse collapse">
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-     <ul class="nav navbar-nav navbar-right">
-                  
-            <li><LinkTo @route="home">Home</LinkTo></li>
+        <li class="nav-item"><LinkTo class="nav-link" @route="home">Home</LinkTo></li>
 
-            {{#if this.isAuthenticated}}
+        {{#if this.isAuthenticated}}
 
-
-            <li class="dropdown hidden-xl  hidden-lg  hidden-md">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      
-                      Welcome {{this.currentUser.name}}
-                      {{#if this.model.notification_count}}
-                          <span class="label label-pill label-primary" id="notificationBadge"><i class="fa fa-bell" aria-label="New Notifications"></i> {{this.model.notification_count}}</span>
-                      {{/if}}
-                      <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><LinkTo @route="notifications">Notifications</LinkTo></li>
-                        <li><LinkTo @route="char" @model={{this.currentUser.name}}>Profile</LinkTo></li>
-                        <li><LinkTo @route="mail">Mail</LinkTo></li>
-                        <li><LinkTo @route="jobs">{{#if this.model.jobs_admin}}Jobs{{else}}Requests{{/if}}</LinkTo></li>
-                        <li><LinkTo @route="account">Account</LinkTo></li>
-
-                        {{#if this.model.alts}}
-                            <li><a href="#" {{action (mut this.showAltSelection) true}}>Switch Alt</a></li>
-                        {{/if}} 
-
-                        <li><LinkTo @route="logout">Logout</LinkTo></li>
-                        
-                      </ul>
-                    </li>
-                  {{else}}
-                  <li class="hidden-xl  hidden-lg  hidden-md"><LinkTo @route="login" @query={{hash redirect=this.currentRoute}}>Login</LinkTo></li>
-                  {{/if}}
-
-            
-            {{#each this.topNavbar as |sec|}}
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            
-                {{sec.title}} <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  {{#each sec.menu as |navItem|}}
-                    {{#if navItem.url}}
-                        <li><a href="{{navItem.url}}" target="{{navItem.target}}">{{{navItem.title}}}</a></li>
-                    {{else if navItem.divider}}
-                        <li><hr></li>
-                    {{else}}
-                      <li>
-                      {{#if navItem.id}}
-                        <LinkTo @route={{navItem.route}} @model={{navItem.id}}>{{{navItem.title}}}</LinkTo>
-                      {{else}}
-                        <LinkTo @route={{navItem.route}}>{{{navItem.title}}}</LinkTo>
-                      {{/if}}
-                      </li>
+          <li class="nav-item dropdown d-lg-none">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          
+                    Welcome {{this.currentUser.name}}
+                    {{#if this.model.notification_count}}
+                        <span class="badge rounded-pill bg-primary" id="notificationBadge"><i class="fa fa-bell" aria-label="New Notifications"></i> {{this.model.notification_count}}</span>
                     {{/if}}
-                  {{/each}}
-                </ul>
-              </li>            
-            {{/each}}
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><LinkTo class="dropdown-item" @route="notifications">Notifications</LinkTo></li>
+                      <li><LinkTo class="dropdown-item" @route="char" @model={{this.currentUser.name}}>Profile</LinkTo></li>
+                      <li><LinkTo class="dropdown-item" @route="mail">Mail</LinkTo></li>
+                      <li><LinkTo class="dropdown-item" @route="jobs">{{#if this.model.jobs_admin}}Jobs{{else}}Requests{{/if}}</LinkTo></li>
+                      <li><LinkTo class="dropdown-item" @route="account">Account</LinkTo></li>
 
-            {{#if (or this.isAdmin this.isCoder)}}
-            
-                   <li class="dropdown">
-                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      
-                             Admin <span class="caret"></span></a>
-                             <ul class="dropdown-menu">
-                               <li><LinkTo @route="jobs">Jobs</LinkTo></li>
-                               <li><LinkTo @route="setup">Setup</LinkTo></li>
-                               <li><LinkTo @route="manage">Manage</LinkTo></li>
-                               <li><LinkTo @route="logs">Logs</LinkTo></li>
-                               <li><LinkTo @route="files">Files</LinkTo></li>
-                               <li><LinkTo @route="server-info">Server</LinkTo></li>
+                      {{#if this.model.alts}}
+                          <li><a class="dropdown-item" href="#" {{action (mut this.showAltSelection) true}}>Switch Alt</a></li>
+                      {{/if}} 
 
-                               {{#if this.isCoder}}
-                               <li><LinkTo @route="tinker">Tinker</LinkTo></li>
-                               {{/if}}
-                             </ul>
-                           </li>
-                   
-            {{/if}}
+                      <li><LinkTo class="dropdown-item" @route="logout">Logout</LinkTo></li>
             
-            {{#if this.isWikiMgr}}
-            <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-               
-                      Admin <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><LinkTo @route="setup-colors">Theme Colors</LinkTo></li>
-                        <li><LinkTo @route="textfile" @models={{array 'text' 'website.txt'}}>Home Page Text</LinkTo></li>
-                        <li><LinkTo @route="textfile" @models={{array 'style' 'custom_style.scss'}}>Custom CSS</LinkTo></li>
-                        <li><LinkTo @route="files">Files</LinkTo></li>
-                      </ul>
-                    </li>
-            {{/if}}
+                    </ul>
+                  </li>
+                {{else}}
+                <li class="hidden-xl  hidden-lg  hidden-md"><LinkTo @route="login" @query={{hash redirect=this.currentRoute}}>Login</LinkTo></li>
+                {{/if}}
+
+        
+        {{#each this.topNavbar as |sec|}}
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+            {{sec.title}}</a>
+            <ul class="dropdown-menu">
+              {{#each sec.menu as |navItem|}}
+                {{#if navItem.url}}
+                    <li><a class="dropdown-item" href="{{navItem.url}}" target="{{navItem.target}}">{{{navItem.title}}}</a></li>
+                {{else if navItem.divider}}
+                    <li><hr class="dropdown-divider"></li>
+                {{else}}
+                  <li>
+                  {{#if navItem.id}}
+                    <LinkTo class="dropdown-item" @route={{navItem.route}} @model={{navItem.id}}>{{{navItem.title}}}</LinkTo>
+                  {{else}}
+                    <LinkTo class="dropdown-item" @route={{navItem.route}}>{{{navItem.title}}}</LinkTo>
+                  {{/if}}
+                  </li>
+                {{/if}}
+              {{/each}}
+            </ul>
+          </li>            
+        {{/each}}
+
+        {{#if (or this.isAdmin this.isCoder)}}
             
+         <li class="nav-item dropdown">
+           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+           Admin</a>
+           <ul class="dropdown-menu">
+             <li><LinkTo class="dropdown-item" @route="jobs">Jobs</LinkTo></li>
+             <li><LinkTo class="dropdown-item" @route="setup">Setup</LinkTo></li>
+             <li><LinkTo class="dropdown-item" @route="manage">Manage</LinkTo></li>
+             <li><LinkTo class="dropdown-item" @route="logs">Logs</LinkTo></li>
+             <li><LinkTo class="dropdown-item" @route="files">Files</LinkTo></li>
+             <li><LinkTo class="dropdown-item" @route="server-info">Server</LinkTo></li>
+
+             {{#if this.isCoder}}
+             <li><LinkTo class="dropdown-item" @route="tinker">Tinker</LinkTo></li>
+             {{/if}}
            </ul>
-            
-   
-   </div><!--/.navbar-collapse -->
-   
-   
-   
+         </li>
+
+        {{/if}}
+
+        {{#if this.isWikiMgr}}
+        <li class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+     
+            Admin</a>
+            <ul class="dropdown-menu">
+              <li><LinkTo class="dropdown-item" @route="setup-colors">Theme Colors</LinkTo></li>
+              <li><LinkTo class="dropdown-item" @route="textfile" @models={{array 'text' 'website.txt'}}>Home Page Text</LinkTo></li>
+              <li><LinkTo class="dropdown-item" @route="textfile" @models={{array 'style' 'custom_style.scss'}}>Custom CSS</LinkTo></li>
+              <li><LinkTo class="dropdown-item" @route="files">Files</LinkTo></li>
+            </ul>
+          </li>
+        {{/if}}
+        
+      </ul>
+
+    </div>
+  </div>
 </nav>
+
 
 
 <BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{this.showAltSelection}}  @onHide={{action (mut this.showAltSelection) false}} @onSubmit={{action (mut this.showAltSelection) false}}>
@@ -123,7 +115,7 @@
         <tr><td>
         <CharIconInline @char={{alt}} @hideLink="true" />
         </td>
-        <td><a href="#" {{action 'switchAlt' alt.name}} class="btn btn-default">Switch</a></td>
+        <td><a href="#" {{action 'switchAlt' alt.name}} class="btn btn-secondary">Switch</a></td>
         </tr>
       {{/if}}
     {{/each}}

@@ -4,7 +4,7 @@
 <div class="alert alert-info">See the <a href="{{this.model.help}}" target="_blank" rel="nofollow noopener">Configuration Help</a> for an explanation for all of these options.</div>
     
     {{#each-in this.config as |key config|}}
-        <h2>{{config.key}} <button class="btn btn-default btn-sm" {{action 'removeKey' config.key}}><i class="fa fa-trash" aria-label="Delete Key"></i></button></h2>
+        <h2>{{config.key}} <button class="btn btn-secondary btn-sm" {{action 'removeKey' config.key}}><i class="fa fa-trash" aria-label="Delete Key"></i></button></h2>
            <YamlEditor @editorId={{config.key}} @text={{config.new_value}} rows={{config.rows}} />
            
     {{/each-in}}
@@ -13,15 +13,15 @@
     
     <p>
          <b>Key Name:</b> <Input @type="text" size={{25}} @value={{this.newConfigKey}} />
-        <button {{action 'addNew'}} class="btn btn-default">Add</button>
+        <button {{action 'addNew'}} class="btn btn-secondary">Add</button>
     </p>
     
 <div class="row">
     <div class="col col-xs-12">
-        <div class="pull-right">
-            <LinkTo @route="setup" class="btn btn-default">Cancel</LinkTo>
+        <div class="float-right">
+            <LinkTo @route="setup" class="btn btn-secondary">Cancel</LinkTo>
             <button {{action (mut this.confirmRestore) true}}  class="btn btn-warning">Restore Defaults</button>
-            <LinkTo @route="textfile" @models={{array 'config' this.model.file}} class="btn btn-default">Advanced Editor</LinkTo>
+            <LinkTo @route="textfile" @models={{array 'config' this.model.file}} class="btn btn-secondary">Advanced Editor</LinkTo>
             <button {{action 'save'}} class="btn btn-primary">Save</button>
         </div>
     </div>

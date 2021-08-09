@@ -6,9 +6,9 @@
         <div class="col col-xs-12">
           <ul class="nav navbar-nav">    
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-                <span class="btn btn-default" href="#">Combat Menu <span class="caret"></span></span> </a>
+                <span class="btn btn-secondary" href="#">Combat Menu <span class="caret"></span></span> </a>
                 <ul class="dropdown-menu">
                  <li> <a href="#" {{action (mut this.showAddCombatant) true}}>Add Combatant</a></li>
                 {{#if this.model.can_manage}}
@@ -24,7 +24,7 @@
           </ul>
           
 
-            <div class="pull-right">
+            <div class="float-right">
               
               {{#if this.model.in_combat}}
                       <button class="btn btn-warning" {{action 'leaveCombat'}} >Leave Combat</button>
@@ -70,8 +70,8 @@
 
       <Input @value={{this.combatCommand}} @enter="sendCommand" size={{25}} />
 
-      <button class="btn btn-default" {{action 'sendCommand'}} >Send Command</button>
-      <div class="label label-info">{{this.commandResponse}}</div>
+      <button class="btn btn-secondary" {{action 'sendCommand'}} >Send Command</button>
+      <div class="badge bg-info">{{this.commandResponse}}</div>
     </div>
   </div>
 {{/if}}

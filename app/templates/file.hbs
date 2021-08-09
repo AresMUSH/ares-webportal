@@ -12,8 +12,8 @@
 
 <div class="row">
     <div class="col col-xs-12">
-        <div class="pull-right">
-          <LinkTo @route="files" class="btn btn-default">Back to Files</LinkTo>
+        <div class="float-right">
+          <LinkTo @route="files" class="btn btn-secondary">Back to Files</LinkTo>
 
           {{#if this.model.can_edit}}
               <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete</button>

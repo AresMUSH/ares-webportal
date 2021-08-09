@@ -55,9 +55,9 @@
     <div class="idle-status">  <AnsiFormat @text={{idleReport}} /></div>
   {{else}}
 
-    <Input @type="text" id="idleAddCharName" placeholder="Name" @value={{idleAddCharName}} /> <button class="btn btn-default" {{action "addChar"}}>Add Char</button>
+    <Input @type="text" id="idleAddCharName" placeholder="Name" @value={{idleAddCharName}} /> <button class="btn btn-secondary" {{action "addChar"}}>Add Char</button>
 
-    <div class="pull-right">
+    <div class="float-right">
             <button class="btn btn-primary" {{action (mut confirmExecute) true}}>Execute</button>
     </div>
   {{/if}}

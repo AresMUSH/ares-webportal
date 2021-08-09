@@ -3,7 +3,7 @@
 {{#each this.notices as |notification|}}
 <tr>
   <td>{{#if notification.is_unread}}
-        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="Unread Notification"></i></span>
+        <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="Unread Notification"></i></span>
         {{/if}}
       </td>
   <td>{{notification.timestamp}}</td>

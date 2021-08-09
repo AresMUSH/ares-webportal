@@ -11,16 +11,16 @@
 {{#each this.jobs as |job|}}
     <tr><td>
         {{#if job.unread}}
-        <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
+        <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
         {{/if}}
         
         <LinkTo @route="job" @model={{job.id}}>#{{job.id}} - {{job.title}}</LinkTo>
     </td>
     <td>
-        <span class="label label-info job-category job-category-{{job.category}}">{{job.category}}</span>
+        <span class="badge job-category job-category-{{job.category}}">{{job.category}}</span>
     </td>
     <td>
-        <span class="label label-info job-status job-status-{{job.status}}">{{job.status}}</span>
+        <span class="badge job-status job-status-{{job.status}}">{{job.status}}</span>
         
     </td>
     <td>
@@ -41,6 +41,6 @@
 {{#if (eq pg this.page)}}
 <button class="btn btn-primary" {{action "goToPage" pg}}>{{pg}}</button>
 {{else}}
-<button class="btn btn-default" {{action "goToPage" pg}}>{{pg}}</button>
+<button class="btn btn-secondary" {{action "goToPage" pg}}>{{pg}}</button>
 {{/if}}
 {{/each}}

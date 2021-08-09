@@ -34,7 +34,7 @@
     
 
     {{#each this.scene.poses as |pose|}}    
-            <div class="hint pull-right">
+            <div class="hint float-right">
                 
                 
                 {{#if (not pose.is_system_pose)}}
@@ -81,8 +81,8 @@
                  {{#if pose.editActive}}
                     <MarkdownEditor @text={{pose.raw_pose}} />
                                         
-                    <div class="pull-right">
-                    <button class="btn btn-default" {{action 'cancelScenePoseEdit' pose}}>Cancel</button>
+                    <div class="float-right">
+                    <button class="btn btn-secondary" {{action 'cancelScenePoseEdit' pose}}>Cancel</button>
                     <button class="btn btn-warning" {{action 'saveScenePose' pose false}}>Typo</button>
                     <button class="btn btn-primary" {{action 'saveScenePose' pose true}}>Save</button>
                     </div>
@@ -96,7 +96,7 @@
                         </div>
                     {{else if pose.is_ooc}}
                         <div class="scene-ooc-pose">
-                        <span class="label label-pill label-primary"> OOC</span>	
+                        <span class="badge rounded-pill bg-primary"> OOC</span>	
                         <AnsiFormat @text={{pose.pose}} />
                         </div>
                     {{else}}        
@@ -150,7 +150,7 @@
 
              <div class="pose-buttons">
                  <button {{action 'addPose' this.poseType.id}} class="btn btn-primary">Add {{this.poseType.title}}</button>
-                 <button {{action 'addPose' 'ooc'}} class="btn btn-default">Add OOC</button>
+                 <button {{action 'addPose' 'ooc'}} class="btn btn-secondary">Add OOC</button>
                  
                  {{#if this.txtExtraInstalled}}
                    <LiveSceneTxt @scenePose={{this.scene.draftPose}} @scene={{this.scene}} />
@@ -177,8 +177,8 @@
              {{#if (not this.scene.completed)}}
                  <ul class="nav scene-menu">    
                      <li class="dropup">
-                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                             <span class="btn btn-default" href="#">Play <span class="caret"></span></span>
+                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             <span class="btn btn-secondary" href="#">Play <span class="caret"></span></span>
                          </a>
                          <ul class="dropdown-menu">
                              {{#if this.scene.can_edit}}
@@ -222,8 +222,8 @@
                {{#if this.scene.combat}}
                  <ul class="nav scene-menu">    
                      <li class="dropup">
-                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                             <span class="btn btn-default" href="#">Combat <span class="caret"></span></span>
+                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                             <span class="btn btn-secondary" href="#">Combat <span class="caret"></span></span>
                          </a>
                          <ul class="dropdown-menu">
                              <LiveSceneFs3combat @scene={{this.scene}} />
@@ -236,8 +236,8 @@
 
              <ul class="nav scene-menu">    
                  <li class="dropup">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                         <span class="btn btn-default" href="#">Manage <span class="caret"></span></span>
+                     <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                         <span class="btn btn-secondary" href="#">Manage <span class="caret"></span></span>
                      </a>
                      <ul class="dropdown-menu">
                          {{#if this.scene.can_edit}}
@@ -261,8 +261,8 @@
              
              <ul class="nav scene-menu">    
                  <li class="dropup">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                         <span class="btn btn-default" href="#">Other <span class="caret"></span></span>
+                     <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                         <span class="btn btn-secondary" href="#">Other <span class="caret"></span></span>
                      </a>
                      <ul class="dropdown-menu">
                          <li><LinkTo @route="scene-download" @model={{this.scene.id}}>Download Scene</LinkTo></li> 

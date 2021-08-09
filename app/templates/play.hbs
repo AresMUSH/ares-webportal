@@ -7,10 +7,10 @@
      
      <div class="play-sidebar">
      
-     <button class="btn btn-default visible-sm visible-xs hidden-md" type="button" data-toggle="collapse" data-target="#sceneMenuCollapse" aria-expanded="false" aria-controls="sceneMenuCollapse">
+     <button class="btn btn-secondary visible-sm visible-xs hidden-md" type="button" data-bs-toggle="collapse" data-target="#sceneMenuCollapse" aria-expanded="false" aria-controls="sceneMenuCollapse">
          <TooltipIcon @position="right" @message="Show/hide play controls." @icon="fab fa-elementor" />
          {{#if this.anyNewActivity}}
-         <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
+         <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
          {{/if}}
        </button>
 
@@ -44,7 +44,7 @@
            <div class="play-selector {{if (eq scene.id this.currentScene.id) 'play-selector-active' ''}}">
                #{{scene.id}} - {{scene.location.name}} 
                {{#if scene.is_unread}}
-                 <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
+                 <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
                {{/if}}
            </div>
          </a>
@@ -80,7 +80,7 @@
               {{#if channel.is_hidden}}
                   <i class="fa fa-microphone-slash"></i>
               {{/if}}
-              <span class="label label-pill label-primary">{{channel.new_messages}}</span>
+              <span class="badge rounded-pill bg-primary">{{channel.new_messages}}</span>
             </div>
           </a>
           {{/if}}
@@ -112,7 +112,7 @@
                    {{#if channel.muted}}
                        <i class="fa fa-microphone-slash"></i>
                    {{/if}}                 
-                   <span class="label label-pill label-primary">{{channel.new_messages}}</span>
+                   <span class="badge rounded-pill bg-primary">{{channel.new_messages}}</span>
                </div>
                </a>
              {{/if}}

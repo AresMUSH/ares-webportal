@@ -27,7 +27,7 @@
     
         <p>
           {{#if this.model.roster.previously_played}}
-          <span class="label label-info">Previously Played</span>
+          <span class="badge bg-info">Previously Played</span>
           {{/if}}
         </p>
     
@@ -55,7 +55,7 @@
 
 <div class="row">
     <div class="col col-xs-12">
-        <div class="pull-right">
+        <div class="float-right">
         
         {{#if this.model.password}}
         <div class="alert alert-success">
@@ -63,7 +63,7 @@
           <p>Please write this password down before you leave this page, or you will have to contact staff to reset it.</p>
         </div>
         {{else}}
-        <LinkTo @route="char" @model={{this.model.id}} class="btn btn-default" target="_blank">View Profile</LinkTo>
+        <LinkTo @route="char" @model={{this.model.id}} class="btn btn-secondary" target="_blank">View Profile</LinkTo>
           <button {{action (mut confirmClaim) true}} class="btn btn-primary">Claim</button>
         {{/if}}
   </div>

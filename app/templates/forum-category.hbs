@@ -13,10 +13,10 @@
 
 <p><LinkTo @route="forum"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Forums</LinkTo></p>
 
-        <div class="pull-right">
+        <div class="float-right">
  
-          <button {{action 'catchup'}} class="btn btn-default">Mark All Read</button>
-          <button {{action 'nextUnread'}} class="btn btn-default">Next Unread</button>
+          <button {{action 'catchup'}} class="btn btn-secondary">Mark All Read</button>
+          <button {{action 'nextUnread'}} class="btn btn-secondary">Next Unread</button>
  
           {{#if this.model.can_post}}
           <LinkTo @route="forum-create-post" @model={{this.model.id}} class="btn btn-primary">Add Post</LinkTo>

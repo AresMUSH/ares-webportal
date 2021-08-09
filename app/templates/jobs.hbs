@@ -11,10 +11,10 @@
      
       
     
-  <div class="pull-right">
+  <div class="float-right">
     
     <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Jobs</LinkTo>  &nbsp;&nbsp;
-    <a href="#" {{action 'markRead'}} class="btn btn-default">Mark All Read</a>
+    <a href="#" {{action 'markRead'}} class="btn btn-secondary">Mark All Read</a>
     <LinkTo @route="job-create" class="btn btn-primary">Create Job</LinkTo>
   </div>
   
@@ -24,7 +24,7 @@
   {{page-title 'Requests'}}
     <h1>Requests</h1>
   
-    <div class="pull-right">
+    <div class="float-right">
       <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Requests</LinkTo>  &nbsp;&nbsp;
       <LinkTo @route="job-create" class="btn btn-primary">Create Request</LinkTo>
     </div>
@@ -33,16 +33,16 @@
   
     <ul class="nav inline-block">
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-        <span href="#" class="btn btn-default">{{this.model.jobs.jobs_filter}} <span class="caret"></span></span> </a>
+        <span href="#" class="btn btn-secondary">{{this.model.jobs.jobs_filter}} <span class="caret"></span></span> </a>
         <ul class="dropdown-menu">
           {{#each this.model.options.status_filters as |filter| }}
-            <li><a href="#" {{action 'filterJobs' filter}}><span class="label job-category job-category-general">&nbsp;</span> {{filter}}</a></li>
+            <li><a href="#" {{action 'filterJobs' filter}}><span class="badge job-category job-category-general">&nbsp;</span> {{filter}}</a></li>
           {{/each}}
           
           {{#each this.model.options.category_values as |category| }}
-            <li><a href="#" {{action 'filterJobs' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+            <li><a href="#" {{action 'filterJobs' category}}><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
           {{/each}}
           
         </ul>

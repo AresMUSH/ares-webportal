@@ -4,7 +4,7 @@
 
 <div class="row">
     
-    <div class="col pull-right">
+    <div class="col float-right">
         <a href="#" {{action "markAllRead"}} class="btn btn-primary">Mark All Read</a>
     </div>
     
@@ -14,10 +14,10 @@
 <ul class="nav nav-tabs notification-nav">
   {{#each this.model.chars as |char index| }}
   <li class="{{if (eq index 0) 'active' }}">
-    <a data-toggle="tab" href="#{{char.name}}">
+    <a data-bs-toggle="tab" href="#{{char.name}}">
     {{char.name}}
     {{#if char.has_unread}}
-      <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="Unread Notification"></i></span>
+      <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="Unread Notification"></i></span>
     {{/if}}
     </a>
   </li>

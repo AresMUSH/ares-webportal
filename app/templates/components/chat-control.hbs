@@ -4,7 +4,7 @@
 
 <div class="chat-controls">
 
-  <a data-toggle="collapse" href="#channel-info"><i class="fas fa-info-circle"></i> Channel Info</a>
+  <a data-bs-toggle="collapse" href="#channel-info"><i class="fas fa-info-circle"></i> Channel Info</a>
 
   <a href="#" {{action "scrollDown"}}><i class="fas fa-angle-double-down"></i> Jump to End</a>
 
@@ -52,7 +52,7 @@
 
  <div id="chat-window">
  {{#each this.channel.messages as |message|}}
-   <div class="hint pull-right">
+   <div class="hint float-right">
          <div class="timestamp-tip">{{message.timestamp}}</div>
    </div>
  
@@ -95,9 +95,9 @@
       <div class="scene-dropdowns">
         <ul class="nav scene-menu">    
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle chat-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <a href="#" class="dropdown-toggle chat-menu" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-              <span class="btn btn-default" href="#">Chat Menu <span class="caret"></span></span> </a>
+              <span class="btn btn-secondary" href="#">Chat Menu <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
               {{#if this.channel.is_page}}
                 {{#if this.channel.is_hidden}}

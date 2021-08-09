@@ -28,7 +28,7 @@
 <p><b>Message:</b></p>
 <MarkdownEditor @text={{this.message}} />
 
-<LinkTo @route="mail" class="btn btn-default">Cancel</LinkTo>
+<LinkTo @route="mail" class="btn btn-secondary">Cancel</LinkTo>
 <button {{action "sendMail"}} class="btn btn-primary">Send</button>
 
 <FlashMessages />

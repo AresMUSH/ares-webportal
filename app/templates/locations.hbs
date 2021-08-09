@@ -5,8 +5,8 @@
 
 <a name="top"></a>
 
-<div class="pull-right">
-  <LinkTo @route="search-locations" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> Search Locations</LinkTo>  
+<div class="float-right">
+  <LinkTo @route="search-locations" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Locations</LinkTo>  
 </div>
 
 <h2>Area Directory</h2>
@@ -15,9 +15,9 @@
  <ul class="nav nav-tabs" role="tablist">
 
   {{#each this.topLevelAreas as |area index| }}
-   <li role="presentation" class="{{if (eq index 0) 'active' }}"><a href="#{{area.id}}" aria-controls="{{area.id}}" role="tab" data-toggle="tab">{{area.name}}</a></li>
+   <li role="presentation" class="{{if (eq index 0) 'active' }}"><a href="#{{area.id}}" aria-controls="{{area.id}}" role="tab" data-bs-toggle="tab">{{area.name}}</a></li>
   {{/each}}
-   <li role="presentation"><a href="#unassigned" aria-controls="unassigned" role="tab" data-toggle="tab">No Area</a></li>
+   <li role="presentation"><a href="#unassigned" aria-controls="unassigned" role="tab" data-bs-toggle="tab">No Area</a></li>
 
 </ul>
 

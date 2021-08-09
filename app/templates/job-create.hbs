@@ -63,11 +63,11 @@
     </td>
     <td>
           {{#if this.category}}
-            <span class="label label-info job-category job-category-{{this.category}}">
+            <span class="badge job-category job-category-{{this.category}}">
             {{this.category}}
             </span>
           {{else}}
-            <span class="label label-info job-category job-category-{{this.model.options.request_category}}">
+            <span class="badge job-category job-category-{{this.model.options.request_category}}">
             {{this.model.options.request_category}}
             </span>
           {{/if}}
@@ -75,12 +75,12 @@
     <td>
           <ul class="nav">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-              <span class="btn btn-default" href="#">Change Category <span class="caret"></span></span> </a>
+              <span class="btn btn-secondary" href="#">Change Category <span class="caret"></span></span> </a>
               <ul class="dropdown-menu">
               {{#each this.model.options.category_values as |category| }}
-                <li><a href="#" {{action 'changeCategory' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+                <li><a href="#" {{action 'changeCategory' category}}><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
               {{/each}}
               </ul>
             </li>
@@ -96,7 +96,7 @@
      
  <MarkdownEditor @text={{this.description}} />
    
-<div class="pull-right">
+<div class="float-right">
 <button class="btn btn-primary" {{action 'createJob'}}>Create</button>
 </div>
 

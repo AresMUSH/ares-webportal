@@ -12,7 +12,7 @@
                    <div class="site-subtitle">{{this.mushHost}} port {{this.mushPort}}</div>
                </div>
                
-               <div class="col-md-6 hidden-sm hidden-xs" role="navigation">
+               <div class="col-md-6 d-none d-lg-block" role="navigation">
                   <div class="text-right user-bar">
                    {{#if this.isAuthenticated}}
                        <p>Welcome, {{this.currentUser.name}}. 
@@ -23,7 +23,7 @@
                        
                        <p>
                            <LinkTo @route="notifications">
-                               <span class="label label-pill label-primary"><i class="fa fa-bell" aria-label='Unread Notifications'></i>
+                               <span class="badge rounded-pill bg-primary"><i class="fa fa-bell" aria-label='Unread Notifications'></i>
                                <span id="notificationBadge">{{this.model.notification_count}}</span>
                                </span>
                            </LinkTo> 
@@ -113,7 +113,7 @@
         <tr><td>
         <CharIconInline @char={{alt}} @hideLink="true" />
         </td>
-        <td><a href="#" {{action 'switchAlt' alt.name}} class="btn btn-default">Switch</a></td>
+        <td><a href="#" {{action 'switchAlt' alt.name}} class="btn btn-secondary">Switch</a></td>
         </tr>
       {{/if}}
     {{/each}}
