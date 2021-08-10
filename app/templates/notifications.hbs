@@ -29,7 +29,7 @@
 
 {{#each this.model.chars as |char index| }}
 
-    <div id="{{char.name}}" class="tab-pane fade in {{if (eq index 0) 'active' }}">
+    <div id="{{char.name}}" class="tab-pane fase show {{if (eq index 0) 'active' }}">
       <NotificationList @notices={{char.notices}} @char={{char}} />
     </div>
   

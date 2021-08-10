@@ -31,18 +31,18 @@
       <CharEditRelationships @model={{this.model}} />
       <CharEditDescs @model={{this.model}} />
       
-      <div id="hooks" class="tab-pane fade in">
+      <div id="hooks" class="tab-pane fase show">
           <MarkdownEditor @text={{this.model.char.rp_hooks}} />
       </div>
       
       {{#if this.model.char.rp_prefs}}
-      <div id="rpprefs" class="tab-pane fade in">
+      <div id="rpprefs" class="tab-pane fase show">
           <MarkdownEditor @text={{this.model.char.rp_prefs}} />
       </div>
       {{/if}}
 
       {{#if this.model.char.show_background_tab}}
-      <div id="background" class="tab-pane fade in">
+      <div id="background" class="tab-pane fase show">
         <MarkdownEditor @text={{this.model.char.background}} />
       </div>
       {{/if}}
@@ -52,7 +52,7 @@
       {{/if}}
 
       {{#if this.model.char.show_roles_tab}}
-      <div id="roles" class="tab-pane fade in">
+      <div id="roles" class="tab-pane fase show">
         <PowerSelectMultiple @selected={{this.model.char.roles}} @options={{this.model.char.all_roles}} @onChange={{action "rolesChanged"}} as |role|>
           {{role}}
         </PowerSelectMultiple>

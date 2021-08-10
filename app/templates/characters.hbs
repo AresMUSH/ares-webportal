@@ -25,7 +25,7 @@
   
   {{#each this.model.characters.groups as |group|}}
 
-  <div id="{{group.key}}" class="tab-pane fade in {{group.active_class}}">
+  <div id="{{group.key}}" class="tab-pane fase show {{group.active_class}}">
 
     {{#each group.subgroups as |subgroup|}}
   
@@ -41,23 +41,23 @@
   {{/each}}
   
   {{#if this.model.game.roster_enabled}}
-  <div id="roster" class="tab-pane fade in">
+  <div id="roster" class="tab-pane fase show">
       <h2>Roster</h2>
 
       See <LinkTo @route="roster">Roster</LinkTo> for ready-made characters on the roster.
   </div>
   {{/if}}
 
-   <div id="idle" class="tab-pane fade in">
+   <div id="idle" class="tab-pane fase show">
       <CharGroupList @name="" @chars={{this.model.characters.idle}} />
   </div>
   
-   <div id="dead" class="tab-pane fade in">
+   <div id="dead" class="tab-pane fase show">
       <CharGroupList @name="" @chars={{this.model.characters.dead}} />
   </div>
   
   {{#if this.model.characters.unapproved}}
-     <div id="unapproved" class="tab-pane fade in">
+     <div id="unapproved" class="tab-pane fase show">
         <CharGroupList @name="" @chars={{this.model.characters.unapproved}} />
     </div>
   {{/if}}

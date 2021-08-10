@@ -20,15 +20,13 @@
 <table class="table table-striped mail-list">
 
 <thead>
-    <tr>
-        <th>Subject</th>
-        {{#if this.sentMail}}
-            <th>To</th>
-        {{else}}
-            <th>From</th>
-        {{/if}}
-        <th>Sent</th>
-    </tr>
+    <th>Subject</th>
+    {{#if this.sentMail}}
+        <th>To</th>
+    {{else}}
+        <th>From</th>
+    {{/if}}
+    <th>Sent</th>
 </thead>
         
 {{#each this.messages as |m| }}

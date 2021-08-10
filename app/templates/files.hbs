@@ -3,17 +3,17 @@
 
 <p><a href="#upload"><i class="fas fa-angle-double-down"></i> Jump to Upload</a></p>
 
-
+<div class="folder-list">
 {{#each this.model as |folder|}}
 
-<span class="col col-xs-3">
+<div class="folder-item">
         <LinkTo @route="folder" @model={{folder.name}}>
             <i class="far fa-folder-open" aria-hidden="true"></i>
             {{folder.name}}
         </LinkTo>
-</span>
+</div>
 {{/each}}
-
+</div>
 
 <a name="upload"></a>
 

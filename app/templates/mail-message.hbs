@@ -88,7 +88,6 @@
     </div>
     <div id="reply" class="panel-collapse collapse">
       <div class="panel-body">
-      <h3>Reply</h3>
       <p><b>To:</b> <a href="#" {{action 'replyAll'}}>[Reply All]</a>
         <PowerSelectMultiple @selected={{this.replyToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "replyToListChanged"}} as |char|>
           {{char.name}}
@@ -111,7 +110,6 @@
     </div>
     <div id="forward" class="panel-collapse collapse">
       <div class="panel-body">
-      <h3>Forward</h3>
       <p><b>To:</b>
       <PowerSelectMultiple @selected={{this.fwdToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "fwdToListChanged"}} as |char|>
         {{char.name}}

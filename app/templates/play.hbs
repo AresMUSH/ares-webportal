@@ -7,14 +7,14 @@
      
      <div class="play-sidebar">
      
-     <button class="btn btn-secondary visible-sm visible-xs hidden-md" type="button" data-bs-toggle="collapse" data-target="#sceneMenuCollapse" aria-expanded="false" aria-controls="sceneMenuCollapse">
+     <button class="btn btn-secondary d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#sceneMenuCollapse" aria-expanded="false" aria-controls="sceneMenuCollapse">
          <TooltipIcon @position="right" @message="Show/hide play controls." @icon="fab fa-elementor" />
          {{#if this.anyNewActivity}}
          <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
          {{/if}}
        </button>
 
-       <div class="collapse in" id="sceneMenuCollapse">
+       <div class="collapse show" id="sceneMenuCollapse">
 
        <p class="play-section-title">Scenes
              

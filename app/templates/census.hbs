@@ -6,12 +6,12 @@
 <div class="table-responsive">
 
 <table class="table table-striped">
-    <tr>
+    <thead>
         <th></th>
         {{#each this.model.census.titles as |title|}}
         <th>{{title}}</th>
         {{/each}}
-    </tr>
+    </thead>
     
     
 {{#each this.model.census.chars as |char| }}

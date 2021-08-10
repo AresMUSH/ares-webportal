@@ -6,15 +6,15 @@
 <ul class="nav nav-tabs">
 {{#each this.model.roster as |group|}}
 
-      <li class={{group.active_class}}><a data-bs-toggle="tab" href="#{{group.key}}">{{group.name}}</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" href="#{{group.key}}" class="nav-link {{group.active_class}}">{{group.name}}</a></li>
 {{/each}}
 </ul>
 
-<div class="tab-content">    
+<div class="tab-content" role="tablist">    
 
 {{#each this.model.roster as |group|}}
 
-  <div id="{{group.key}}" class="tab-pane fade in {{group.active_class}}">
+  <div id="{{group.key}}" class="tab-pane fade show {{group.active_class}}">
 
     {{#each group.chars as |char|}}
     
