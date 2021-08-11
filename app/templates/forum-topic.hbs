@@ -146,7 +146,7 @@
       <div class="forum-reply-panel">
          <p><b>Reply As:</b>        <div class="forum-char-select" >
                      <PowerSelect @selected={{this.author}} @options={{this.model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |author|>
-                         <CharIconTiny @char={{this.author}} />
+                         <CharIconTiny @char={{author}} />
                      </PowerSelect>
                  </div>
          </p>
