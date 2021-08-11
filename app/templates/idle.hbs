@@ -58,9 +58,9 @@
 
     <Input @type="text" id="idleAddCharName" placeholder="Name" @value={{idleAddCharName}} /> <button class="btn btn-secondary" {{action "addChar"}}>Add Char</button>
 
-    <div class="float-right">
-            <button class="btn btn-primary" {{action (mut confirmExecute) true}}>Execute</button>
-    </div>
+<div class="action-buttons">
+    <button class="btn btn-primary" {{action (mut confirmExecute) true}}>Execute</button>
+</div>
   {{/if}}
  
  

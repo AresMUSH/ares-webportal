@@ -161,19 +161,16 @@
 
 {{/if}}
     
-    <div class="row">
-        <div class="col col-xs-12">
-            <div class="float-right">
-    
-                <p> <LinkTo @route="combat" @model={{this.model.combat}} class="btn btn-secondary">Cancel</LinkTo>  
-                    <button class="btn btn-warning" {{action (mut confirmRemoveCombatant) true}} >Remove</button>
-                    <button class="btn btn-primary" {{action 'save'}} >Save</button>
-                </p>
-    
-            </div>
-        <FlashMessages />
-        </div>
-    </div>
+<div class="action-buttons">
+
+  <LinkTo @route="combat" @model={{this.model.combat}} class="btn btn-secondary">Cancel</LinkTo>  
+  <button class="btn btn-warning" {{action (mut confirmRemoveCombatant) true}} >Remove</button>
+  <button class="btn btn-primary" {{action 'save'}} >Save</button>
+
+</div>
+
+<FlashMessages />
+
     
 
 <BsModalSimple @title="Confirm Remove" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmRemoveCombatant}} @onSubmit={{action "removeCombatant"}} @onHide={{action (mut confirmRemoveCombatant) false}}>

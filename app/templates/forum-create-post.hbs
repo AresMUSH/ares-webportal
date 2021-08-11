@@ -16,7 +16,7 @@
     <p><b>Message:</b></p>
     <MarkdownEditor @text={{this.message}} />
 
-<div class="float-right">
+<div class="action-buttons">
     <LinkTo @route="forum-category" @model={{this.model.id}} class="btn btn-secondary">Cancel</LinkTo>
     <button {{action "addPost"}} class="btn btn-primary">Post</button>
 </div>

@@ -18,15 +18,11 @@
 
 {{#if this.model.can_manage}}
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="float-right">
+<div class="action-buttons">
         {{#if this.model.is_override}}
         <button {{action (mut this.confirmRestore) true}} class="btn btn-warning">Restore Default</button>
         {{/if}}
         <LinkTo @route="help-override" @model={{this.model.key}} class="btn btn-secondary">Customize</LinkTo>
-    </div>
-    </div>
 </div>
 
 

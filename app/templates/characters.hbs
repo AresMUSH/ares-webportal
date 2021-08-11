@@ -1,11 +1,10 @@
 {{page-title 'Characters'}}
 <h1>Characters</h1>
 
-<div class="float-right">
+<div class="action-buttons">
   <LinkTo @route="search-chars"><i class="fa fa-search" aria-hidden="true"></i> Search Characters</LinkTo>  
 </div>
-<p>Here you can browse the profiles for all approved characters.</p>
-<div class="clearfix"/>
+
 <ul class="nav nav-tabs" role="tablist">
   
   {{#each this.model.characters.group_names as |group|}}

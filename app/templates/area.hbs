@@ -39,17 +39,12 @@
 <p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
 
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="float-right">
-    
-        {{#if this.model.can_manage}}
-          <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete</button>
-          <LinkTo @route="area-edit" @model={{this.model.area.id}} class="btn btn-primary">Edit</LinkTo>
-        {{/if}}
-      </div>
-  </div>
-</div>        
+<div class="action-buttons">
+  {{#if this.model.can_manage}}
+    <button {{action (mut this.confirmDelete) true}} class="btn btn-warning action-button">Delete</button>
+    <LinkTo @route="area-edit" @model={{this.model.area.id}} class="btn btn-primary action-button">Edit</LinkTo>
+  {{/if}}
+</div>
 
 <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut this.confirmDelete) false}}>
     You're about to delete area {{this.model.area.name}}. This cannot be undone.  Are you sure?

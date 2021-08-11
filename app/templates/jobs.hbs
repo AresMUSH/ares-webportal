@@ -11,25 +11,7 @@
      
       
     
-  <div class="float-right">
-    
-    <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Jobs</LinkTo>  &nbsp;&nbsp;
-    <a href="#" {{action 'markRead'}} class="btn btn-secondary">Mark All Read</a>
-    <LinkTo @route="job-create" class="btn btn-primary">Create Job</LinkTo>
-  </div>
-  
-   
-  {{else}}
-
-  {{page-title 'Requests'}}
-    <h1>Requests</h1>
-  
-    <div class="float-right">
-      <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Requests</LinkTo>  &nbsp;&nbsp;
-      <LinkTo @route="job-create" class="btn btn-primary">Create Request</LinkTo>
-    </div>
-
-  {{/if}}
+  <div class="action-buttons-spaced">
   
   <DropdownMenu @id="filterDropdown" @title={{this.model.jobs.jobs_filter}}>
     {{#each this.model.options.status_filters as |filter| }}
@@ -41,6 +23,26 @@
     {{/each}}
     
   </DropdownMenu>
+  
+    <div>
+      <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Jobs</LinkTo>  &nbsp;&nbsp;
+      <a href="#" {{action 'markRead'}} class="btn btn-secondary">Mark All Read</a>
+      <LinkTo @route="job-create" class="btn btn-primary">Create Job</LinkTo>
+    </div>
+  </div>
+  
+   
+  {{else}}
+
+  {{page-title 'Requests'}}
+    <h1>Requests</h1>
+  
+    <div class="action-buttons">
+      <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Requests</LinkTo>  &nbsp;&nbsp;
+      <LinkTo @route="job-create" class="btn btn-primary">Create Request</LinkTo>
+    </div>
+
+  {{/if}}
 
 <div class="clearfix"></div>
 

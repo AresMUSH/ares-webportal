@@ -3,16 +3,10 @@
 
 <p>The events calendar helps you schedule scenes with other players.  Events you've signed up for are indicated with a <i class="fas fa-calendar-check" aria-label="Signed Up"></i> icon.</p>
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="float-right">
- 
-          {{#if isApproved}}
-              <LinkTo @route="event-create" class="btn btn-primary">Create Event</LinkTo>
-          {{/if}}
-
-      </div>
-  </div>
+<div class="action-buttons">
+  {{#if isApproved}}
+      <LinkTo @route="event-create" class="btn btn-primary">Create Event</LinkTo>
+  {{/if}}
 </div>
 
 <table class="table">

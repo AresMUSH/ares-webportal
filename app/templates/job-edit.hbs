@@ -111,7 +111,7 @@
      
 <MarkdownEditor @text={{this.model.job.description}} />
    
-<div class="float-right">
+<div class="action-buttons">
  <LinkTo @route="job" @model={{this.model.job.id}} class="btn btn-secondary">Cancel</LinkTo>  
  <button class="btn btn-primary" {{action 'saveJob'}}>Save</button>
 </div>

@@ -67,16 +67,14 @@
 <AnsiFormat @text={{this.model.message.body}} />
 
 <hr>
-        <div class="float-right">
-          {{#if this.model.message.in_trash}}
-            <button class="btn btn-secondary" {{action 'uneleteMsg'}}>Undelete</button>
-          {{else}}
-            <button class="btn btn-warning" {{action 'deleteMsg'}}>Trash</button>
-            <button class="btn btn-secondary" {{action 'archiveMsg'}}>Archive</button>          
-          {{/if}}
-        </div>
-        
-<div class="clearfix"></div>
+  <div class="action-buttons">
+    {{#if this.model.message.in_trash}}
+      <button class="btn btn-secondary" {{action 'uneleteMsg'}}>Undelete</button>
+    {{else}}
+      <button class="btn btn-warning" {{action 'deleteMsg'}}>Trash</button>
+      <button class="btn btn-secondary" {{action 'archiveMsg'}}>Archive</button>          
+    {{/if}}
+  </div>
 
  
 {{#if this.model.message.can_reply}}
@@ -95,7 +93,10 @@
       </p>
       <p><b>Subject:</b> <Input @type="text" size={{25}} id="replySubject" @value={{this.replySubject}} /></p>
           <MarkdownEditor @text={{this.replyMessage}} />
-          <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>    
+
+          <div class="action-buttons">
+            <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>    
+          </div>
         </div>
     </div>
 </div>
@@ -119,7 +120,10 @@
       <b>Original Message:</b>
       <AnsiFormat @text={{this.model.message.body}} />
           <MarkdownEditor @text={{this.fwdMessage}} />
-          <button class="btn btn-primary" {{action 'sendForward'}}>Send</button>    
+
+          <div class="action-buttons">
+            <button class="btn btn-primary" {{action 'sendForward'}}>Send</button>    
+          </div>
         </div>
     </div>
 </div>

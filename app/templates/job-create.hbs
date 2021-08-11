@@ -90,8 +90,9 @@
      
  <MarkdownEditor @text={{this.description}} />
    
-<div class="float-right">
-<button class="btn btn-primary" {{action 'createJob'}}>Create</button>
+<div class="action-buttons">
+  <LinkTo @route="jobs" class="btn btn-secondary">Cancel</LinkTo>
+  <button class="btn btn-primary" {{action 'createJob'}}>Create</button>
 </div>
 
 <FlashMessages />

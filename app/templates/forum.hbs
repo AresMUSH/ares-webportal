@@ -9,22 +9,19 @@
   
 {{#if this.isAuthenticated}}
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="float-right">
-          <LinkTo @route="search-forum" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Forum</LinkTo>  
+<div class="action-buttons">
+    <LinkTo @route="search-forum" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Forum</LinkTo>  
 
-          <button {{action 'catchup'}} class="btn btn-secondary">Mark All Read</button>
 
-          {{#if this.model.is_muted}}
-            <button {{action 'muteForum' false}} class="btn btn-secondary"><i class="fa fa-play" aria-hidden="true"></i> Unmute</button>
-          {{else}}
-            <button {{action 'muteForum' true}} class="btn btn-secondary"><i class="fa fa-pause" aria-hidden="true"></i> Mute</button>
-            {{/if}}
-          
-          <button {{action 'nextUnread'}} class="btn btn-secondary">Next Unread</button>
-         </div>
-  </div>
+    {{#if this.model.is_muted}}
+      <button {{action 'muteForum' false}} class="btn btn-secondary"><i class="fa fa-play" aria-hidden="true"></i> Unmute</button>
+    {{else}}
+      <button {{action 'muteForum' true}} class="btn btn-secondary"><i class="fa fa-pause" aria-hidden="true"></i> Mute</button>
+    {{/if}}
+      
+    <button {{action 'catchup'}} class="btn btn-secondary">Mark All Read</button>
+
+    <button {{action 'nextUnread'}} class="btn btn-secondary">Next Unread</button>
 </div>
 {{/if}}
 

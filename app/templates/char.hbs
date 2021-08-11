@@ -56,25 +56,21 @@
 {{/each}}
     
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="float-right">
+<div class="action-buttons">
         
-        {{#if this.model.char.last_profile_version}}
-            <LinkTo @route="char-source" @models={{array this.model.char.id this.model.char.last_profile_version}} class="btn btn-secondary">Source/History</LinkTo>
-        {{/if}}
-        {{#if this.model.char.can_approve}}
-          <LinkTo @route="chargen-char" @model={{this.model.char.id}} class="btn btn-secondary">Chargen</LinkTo>
-        {{/if}}
-        {{#if this.model.char.show_notes}}
-          <LinkTo @route="notes" @model={{this.model.char.name}} class="btn btn-secondary">Notes</LinkTo>
-        {{/if}}
-        {{#if this.model.char.can_manage}}
-          <button {{action (mut this.showFiles) true}} class="btn btn-secondary">Files</button>
-          <LinkTo @route="char-edit" @model={{this.model.char.id}} class="btn btn-primary">Edit</LinkTo>
-        {{/if}}
-  </div>
-  </div>
+      {{#if this.model.char.last_profile_version}}
+          <LinkTo @route="char-source" @models={{array this.model.char.id this.model.char.last_profile_version}} class="btn btn-secondary">Source/History</LinkTo>
+      {{/if}}
+      {{#if this.model.char.can_approve}}
+        <LinkTo @route="chargen-char" @model={{this.model.char.id}} class="btn btn-secondary">Chargen</LinkTo>
+      {{/if}}
+      {{#if this.model.char.show_notes}}
+        <LinkTo @route="notes" @model={{this.model.char.name}} class="btn btn-secondary">Notes</LinkTo>
+      {{/if}}
+      {{#if this.model.char.can_manage}}
+        <button {{action (mut this.showFiles) true}} class="btn btn-secondary">Files</button>
+        <LinkTo @route="char-edit" @model={{this.model.char.id}} class="btn btn-primary">Edit</LinkTo>
+      {{/if}}
 </div>
 
 {{#if this.model.char.can_manage}}

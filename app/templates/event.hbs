@@ -78,17 +78,11 @@
 
 <hr>
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="float-right">
+<div class="action-buttons">
   {{#if this.model.can_manage}}
-
       <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
       <LinkTo @route="event-edit" @model={{this.model.id}} class="btn btn-primary">Edit</LinkTo>
   {{/if}}
-      
-  </div>
-  </div>
 </div>
 
 <FlashMessages />

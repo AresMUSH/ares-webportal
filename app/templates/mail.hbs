@@ -1,18 +1,16 @@
 {{page-title this.tag}}
 <h1>Mail - {{this.tag}}</h1>
 
-<div class="row">
-    <div class="col col-xs-12">
+<div class="action-buttons-spaced">
 
-[  <a href="#" {{action 'changeTag' 'Inbox'}}>Inbox</a> ]
-{{#each this.model.tags as |tag|}}
-[ <a href="#" {{action 'changeTag' tag}}>{{tag}}</a> ]
-{{/each}}
-
-        <div class="float-right">
- 
-        <LinkTo @route="mail-send" class="btn btn-primary">Send Mail</LinkTo>
+  <div>
+    [  <a href="#" {{action 'changeTag' 'Inbox'}}>Inbox</a> ]
+    {{#each this.model.tags as |tag|}}
+    [ <a href="#" {{action 'changeTag' tag}}>{{tag}}</a> ]
+    {{/each}}
   </div>
+  <div>
+        <LinkTo @route="mail-send" class="btn btn-primary">Send Mail</LinkTo>
   </div>
 </div>
 
