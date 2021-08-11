@@ -10,18 +10,19 @@
         <th>Characters</th>
     </thead>
     
-    
-{{#each this.model.census.groups as |group| }}
-<tr>
-    <td>{{group.name}}</td>
-    <td>{{group.count}}</td>
-    <td>
-        {{#each group.chars as |char|}}
-        {{char.name}}
-        {{/each}}
-    </td>
-</tr>
-{{/each}}
+<tbody>
+  {{#each this.model.census.groups as |group| }}
+  <tr>
+      <td>{{group.name}}</td>
+      <td>{{group.count}}</td>
+      <td>
+          {{#each group.chars as |char|}}
+          {{char.name}}
+          {{/each}}
+      </td>
+  </tr>
+  {{/each}}
+</tbody>
 
 </table>
 {{outlet}}

@@ -1,17 +1,17 @@
 {{#if this.scene.fs3combat_enabled}}
   {{#if this.scene.combat}}
 
-  <li><a href="#" {{action (mut this.showCombat) true}}>Combat HUD</a></li>  
-  <li> <a href="#" {{action "combatHero"}}>Hero Recovery</a></li>
-  <li> <a href="#" {{action (mut this.showCombatCommand) true}}>Send Command</a></li>
+  <li><a href="#" {{action (mut this.showCombat) true}} class="dropdown-item">Combat HUD</a></li>  
+  <li> <a href="#" {{action "combatHero"}} class="dropdown-item">Hero Recovery</a></li>
+  <li> <a href="#" {{action (mut this.showCombatCommand) true}} class="dropdown-item">Send Command</a></li>
 
-  <li><LinkTo @route="combat" @model={{this.scene.combat}} target="_blank">Manage Combat</LinkTo></li>
+  <li><LinkTo @route="combat" @model={{this.scene.combat}} target="_blank" class="dropdown-item">Manage Combat</LinkTo></li>
   {{#if this.scene.combat.can_manage}}
-    <li><a href="#"  {{action 'newTurn'}}>Start New Turn</a></li>
+    <li><a href="#"  {{action 'newTurn'}} class="dropdown-item">Start New Turn</a></li>
   {{/if}}
   
 {{else}}
-  <li><a href="#" {{action 'startCombat'}}>Start Combat</a></li>
+  <li><a href="#" {{action 'startCombat'}} class="dropdown-item">Start Combat</a></li>
   {{/if}}
 {{/if}}
 

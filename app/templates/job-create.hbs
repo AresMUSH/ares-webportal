@@ -73,18 +73,12 @@
           {{/if}}
     </td>
     <td>
-          <ul class="nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-              <span class="btn btn-secondary" href="#">Change Category <span class="caret"></span></span> </a>
-              <ul class="dropdown-menu">
+      
+        <DropdownMenu @id="categoryDropdown" @title="Change Category">
               {{#each this.model.options.category_values as |category| }}
-                <li><a href="#" {{action 'changeCategory' category}}><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+                <li><a href="#" {{action 'changeCategory' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
               {{/each}}
-              </ul>
-            </li>
-        </ul>
+        </DropdownMenu>
       
     </td>
   </tr>

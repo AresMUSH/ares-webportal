@@ -78,19 +78,13 @@
         </span>
     </td>
     <td>
-          <ul class="nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-              <span class="btn btn-secondary" href="#">Change Category <span class="caret"></span></span> </a>
-              <ul class="dropdown-menu">
-              {{#each this.model.options.category_values as |category| }}
-                <li><a href="#" {{action 'changeCategory' category}}><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
-              {{/each}}
-              </ul>
-            </li>
-        </ul>
-      
+            
+      <DropdownMenu @id="categoryDropdown" @title="Change Category">
+            {{#each this.model.options.category_values as |category| }}
+              <li><a href="#" {{action 'changeCategory' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+            {{/each}}
+      </DropdownMenu>
+            
     </td>
   </tr>
   
@@ -102,18 +96,13 @@
       <span class="badge job-status job-status-{{this.model.job.status}}">{{this.model.job.status}}</span>
     </td>
     <td>
-          <ul class="nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-              <span class="btn btn-secondary" href="#">Change Status <span class="caret"></span></span> </a>
-              <ul class="dropdown-menu">
-              {{#each this.model.options.status_values as |status| }}
-                <li><a href="#" {{action 'changeStatus' status}}><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
-              {{/each}}
-              </ul>
-            </li>
-        </ul>
+      
+      <DropdownMenu @id="statusDropdown" @title="Change Status">
+        {{#each this.model.options.status_values as |status| }}
+          <li><a href="#" {{action 'changeStatus' status}} class="dropdown-item"><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
+        {{/each}}
+      </DropdownMenu>
+    
     </td>
   </tr>
   

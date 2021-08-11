@@ -1,4 +1,4 @@
-<div id="descs" class="tab-pane fase show">
+<div id="descs" class="tab-pane fade show">
    
    <ul class="nav nav-tabs" role="tablist">
        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#desccurrent">Main Description</a></li>
@@ -8,15 +8,15 @@
    </ul>
    
   <div class="tab-content">     
-   <div id="desccurrent" class="tab-pane fase show active">
+   <div id="desccurrent" class="tab-pane fade show active">
      <MarkdownEditor @text={{this.model.char.descs.current}} />
    </div>
    
-   <div id="descshort" class="tab-pane fase show">
+   <div id="descshort" class="tab-pane fade show">
      <MarkdownEditor @text={{this.model.char.shortdesc}} />
    </div>
 
-   <div id="descoutfits" class="tab-pane fase show">
+   <div id="descoutfits" class="tab-pane fade show">
      
      {{#each this.model.char.descs.outfits as |outfit|}}
      <p>
@@ -31,7 +31,7 @@
    
    </div>
 
-   <div id="descdetails" class="tab-pane fase show">
+   <div id="descdetails" class="tab-pane fade show">
      {{#each this.model.char.descs.details as |detail|}}
      <p>
      <Input @type="text" size={{25}} @value={{detail.name}} placeholder="Enter detail name." />

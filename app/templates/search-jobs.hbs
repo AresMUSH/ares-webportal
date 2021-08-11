@@ -1,4 +1,4 @@
-{{#if this.model.jobs_admin}}
+{{#if this.model.is_job_admin}}
 {{page-title "Search Jobs"}}
 
 <h1>Search Jobs</h1>
@@ -17,7 +17,7 @@
 <a data-bs-toggle="collapse" href="#searchFields" class="btn btn-secondary btn-collapse">Show/Hide Search</a>
 {{/if}}
 
-<div id="searchFields" class="panel-collapse collapse {{if this.searchResults '' 'in'}}">
+<div id="searchFields" class="panel-collapse collapse {{if this.searchResults '' 'show'}}">
 
 <div class="row">
   
@@ -59,18 +59,12 @@
     {{else}}
       Any
     {{/if}}
-      <ul class="nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-          <span class="btn btn-secondary" href="#">Category <span class="caret"></span></span> </a>
-          <ul class="dropdown-menu">
-          {{#each this.model.category_values as |category| }}
-            <li><a href="#" {{action 'changeSearchCategory' category}}><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
-          {{/each}}
-          </ul>
-        </li>
-    </ul>
+    
+    <DropdownMenu @id="categoryDropdown" @title="Category">
+        {{#each this.model.category_values as |category| }}
+          <li><a href="#" {{action 'changeSearchCategory' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+        {{/each}}
+    </DropdownMenu>
     
   </div>
   
@@ -90,18 +84,13 @@
       Any
     {{/if}}
     
-      <ul class="nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-          <span class="btn btn-secondary" href="#">Status <span class="caret"></span></span> </a>
-          <ul class="dropdown-menu">
-          {{#each this.model.status_values as |status| }}
-            <li><a href="#" {{action 'changeSearchStatus' status}}><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
-          {{/each}}
-          </ul>
-        </li>
-    </ul>
+    
+    <DropdownMenu @id="statusDropdown" @title="Status">
+      {{#each this.model.status_values as |status| }}
+        <li><a href="#" {{action 'changeSearchStatus' status}} class="dropdown-item"><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
+      {{/each}}
+    </DropdownMenu>
+    
     
   </div>
   

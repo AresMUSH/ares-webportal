@@ -13,30 +13,32 @@
 <div class="table-responsive">
 <table class="table table-striped">
     
-<tr>
+<thead>
   <th class="col-xs-2">Name</th>
   <th class="col-xs-3">Description</th>
   <th class="col-xs-1">Color</th>
   <th class="col-xs-2">Join Roles</th>
   <th class="col-xs-2">Talk Roles</th>
   <th class="col-xs-2"></th>
-</tr>
+</thead>
 
-{{#each this.model.channels as |channel|}}
-<tr>
-  <td>{{channel.name}}</td>
-  <td><AnsiFormat @text={{channel.desc}} /></td>
-  <td>{{channel.color}}</td>
-  <td>{{channel.can_join}}</td>
-  <td>{{channel.can_talk}}</td>
-  <td>
+<tbody>
+  {{#each this.model.channels as |channel|}}
+  <tr>
+    <td>{{channel.name}}</td>
+    <td><AnsiFormat @text={{channel.desc}} /></td>
+    <td>{{channel.color}}</td>
+    <td>{{channel.can_join}}</td>
+    <td>{{channel.can_talk}}</td>
+    <td>
     
-    <LinkTo @route="channel-edit" @model={{channel.id}}><i class="fas fa-edit" aria-label="Edit Channel"></i></LinkTo>
-    <a href="#" {{action (mut this.channelToDelete) channel}}><i class="fa fa-trash" aria-label="Delete Channel"></i></a>
+      <LinkTo @route="channel-edit" @model={{channel.id}}><i class="fas fa-edit" aria-label="Edit Channel"></i></LinkTo>
+      <a href="#" {{action (mut this.channelToDelete) channel}}><i class="fa fa-trash" aria-label="Delete Channel"></i></a>
     
-  </td>
-</tr>
-{{/each}}
+    </td>
+  </tr>
+  {{/each}}
+</tbody>
 
 </table>
 </div>

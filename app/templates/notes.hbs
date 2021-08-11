@@ -4,7 +4,7 @@
 
 <ul class="nav nav-tabs">
     {{#each this.model.notes as |section index| }}
-        <li class="{{if (eq index 0) 'active' }}"><a data-bs-toggle="tab" href="#{{section.key}}">{{section.name}} Notes</a></li>
+        <li class="nav-item"><a data-bs-toggle="tab" href="#{{section.key}}" class="nav-link {{if (eq index 0) 'active' }}">{{section.name}} Notes</a></li>
     {{/each}}
 </ul>
 

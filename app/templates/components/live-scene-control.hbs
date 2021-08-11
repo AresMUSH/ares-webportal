@@ -175,104 +175,80 @@
                 
              <div class="scene-dropdowns">
              {{#if (not this.scene.completed)}}
-                 <ul class="nav scene-menu">    
-                     <li class="dropup">
-                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                             <span class="btn btn-secondary" href="#">Play <span class="caret"></span></span>
-                         </a>
-                         <ul class="dropdown-menu">
-                             {{#if this.scene.can_edit}}
-                                 <li><a href="#" {{action (mut this.selectLocation) true}}>Change Location</a></li>
-                                 <li><a href="#" {{action (mut this.managePoseOrder) true}}>Manage Pose Order</a></li>
-                             {{/if}}
+             
+             <DropdownMenu @id="playMenu" @title="Play" class="scene-menu">
+               {{#if this.scene.can_edit}}
+                   <li><a href="#" {{action (mut this.selectLocation) true}} class="dropdown-item">Change Location</a></li>
+                   <li><a href="#" {{action (mut this.managePoseOrder) true}} class="dropdown-item">Manage Pose Order</a></li>
+               {{/if}}
 
-                             <LiveScenePlaces @scene={{this.scene}} />
+               <LiveScenePlaces @scene={{this.scene}} />
 
-                             <li role="separator" class="divider"></li>
-                    
-                             {{#if this.scene.fs3_enabled}}
-                                 <LiveSceneFs3 @abilities={{this.abilities}} @scene={{this.scene}} />
-                             {{/if}}
-                             
-                             {{#if this.cookiesExtraInstalled}}
-                               <LiveSceneCookies @scene={{this.scene}} />
-                             {{/if}}      
-                             
-                             {{#if this.rpgExtraInstalled}}
-                               <RpgLiveScene @scene={{this.scene}} />
-                             {{/if}}
-                             
-                             {{#if this.fateExtraInstalled}}
-                               <LiveSceneFate @scene={{this.scene}} />
-                             {{/if}}
+              <li><hr role="separator" class="dropdown-divider"></li>
+      
+               {{#if this.scene.fs3_enabled}}
+                   <LiveSceneFs3 @abilities={{this.abilities}} @scene={{this.scene}} />
+               {{/if}}
+               
+               {{#if this.cookiesExtraInstalled}}
+                 <LiveSceneCookies @scene={{this.scene}} />
+               {{/if}}      
+               
+               {{#if this.rpgExtraInstalled}}
+                 <RpgLiveScene @scene={{this.scene}} />
+               {{/if}}
+               
+               {{#if this.fateExtraInstalled}}
+                 <LiveSceneFate @scene={{this.scene}} />
+               {{/if}}
 
 
-                             {{#if this.diceExtraInstalled}}
-                             <LiveSceneDice @scene={{this.scene}} />
-                             {{/if}}
-                          
-                             <LiveSceneCustomPlay @scene={{this.scene}} @abilities={{this.abilities}} />
-                          
-                         </ul>
-                     </li>
-                 </ul>         
+               {{#if this.diceExtraInstalled}}
+               <LiveSceneDice @scene={{this.scene}} />
+               {{/if}}
+            
+               <LiveSceneCustomPlay @scene={{this.scene}} @abilities={{this.abilities}} />
+                 
+             </DropdownMenu>
+             
              {{/if}}                          
 
              {{#if this.scene.fs3combat_enabled}}
                {{#if this.scene.combat}}
-                 <ul class="nav scene-menu">    
-                     <li class="dropup">
-                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                             <span class="btn btn-secondary" href="#">Combat <span class="caret"></span></span>
-                         </a>
-                         <ul class="dropdown-menu">
-                             <LiveSceneFs3combat @scene={{this.scene}} />
-                         </ul>
-                     </li>
-                 </ul>
+               
+                 <DropdownMenu @id="combatMenu" @title="Combat" class="scene-menu">
+                     <LiveSceneFs3combat @scene={{this.scene}} />
+                 </DropdownMenu>
+               
                {{/if}}
              {{/if}}
              
 
-             <ul class="nav scene-menu">    
-                 <li class="dropup">
-                     <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                         <span class="btn btn-secondary" href="#">Manage <span class="caret"></span></span>
-                     </a>
-                     <ul class="dropdown-menu">
-                         {{#if this.scene.can_edit}}
-                             <li><LinkTo @route="scene-edit" @model={{this.scene.id}}>Edit Scene</LinkTo></li>
-                             {{#if (not this.scene.completed)}}
-                                 <li><a href="#" {{action 'changeSceneStatus' 'stop'}}>Stop Scene</a></li> 
-                             {{else}}
-                                 <li><a href="#" {{action 'changeSceneStatus' 'restart'}}>Restart Scene</a></li> 
-                                 <li><a href="#" {{action 'changeSceneStatus' 'share'}}>Share Scene</a></li> 
-                                 <li><a href="#" {{action 'collapseScene'}}>Collapse Scene Poses</a></li> 
-                                 {{#if this.scene.can_delete}}
-                                     <li role="separator" class="divider"></li>
-                                     <li><a href="#" {{action (mut this.confirmDeleteScene) true}}>Delete Scene</a></li> 
-                                 {{/if}}
-                             {{/if}}
-                         {{/if}}
-                     </ul>
-                 </li>
-             </ul>
+             <DropdownMenu @id="manageMenu" @title="Manage" class="scene-menu">
+               {{#if this.scene.can_edit}}
+                   <li><LinkTo @route="scene-edit" @model={{this.scene.id}} class="dropdown-item">Edit Scene</LinkTo></li>
+                   {{#if (not this.scene.completed)}}
+                       <li><a href="#" {{action 'changeSceneStatus' 'stop'}} class="dropdown-item">Stop Scene</a></li> 
+                   {{else}}
+                       <li><a href="#" {{action 'changeSceneStatus' 'restart'}} class="dropdown-item">Restart Scene</a></li> 
+                       <li><a href="#" {{action 'changeSceneStatus' 'share'}} class="dropdown-item">Share Scene</a></li> 
+                       <li><a href="#" {{action 'collapseScene'}} class="dropdown-item">Collapse Scene Poses</a></li> 
+                       {{#if this.scene.can_delete}}
+                           <li><hr role="separator" class="dropdown-divider"></li>
+                           <li><a href="#" {{action (mut this.confirmDeleteScene) true}} class="dropdown-item">Delete Scene</a></li> 
+                       {{/if}}
+                   {{/if}}
+               {{/if}}
+             </DropdownMenu>
 
-             
-             <ul class="nav scene-menu">    
-                 <li class="dropup">
-                     <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                         <span class="btn btn-secondary" href="#">Other <span class="caret"></span></span>
-                     </a>
-                     <ul class="dropdown-menu">
-                         <li><LinkTo @route="scene-download" @model={{this.scene.id}}>Download Scene</LinkTo></li> 
-                         <li><a href="#" {{action (mut this.confirmReportScene) true}}>Report Abuse</a></li> 
-                     </ul>
-                 </li>
-             </ul>
-             
 
-             
+             <DropdownMenu @id="otherMenu" @title="Other" class="scene-menu">
+               {{#if this.scene.can_edit}}
+                   <li><LinkTo @route="scene-download" @model={{this.scene.id}} class="dropdown-item">Download Scene</LinkTo></li> 
+                   <li><a href="#" {{action (mut this.confirmReportScene) true}} class="dropdown-item">Report Abuse</a></li>
+               {{/if}}
+             </DropdownMenu>
+                     
              </div>
              
              <div class="scene-char-select" >

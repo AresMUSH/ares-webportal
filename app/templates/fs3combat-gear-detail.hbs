@@ -1,31 +1,26 @@
 {{page-title this.model.name}}
 <h1>{{this.model.name}}</h1>
 
-<table class="table table-striped">
-    
-
 {{#each this.model.values as |value|}}
-<tr>
-    <td><b>{{value.title}}</b></td>
-    <td><AnsiFormat @text={{value.detail}} /></td>
-</tr>
+<div class="row fs3-gear-row">
+    <div class="col"><b>{{value.title}}</b></div>
+    <div class="col"><AnsiFormat @text={{value.detail}} /></div>
+</div>
 {{/each}}
+
 
 {{#if this.model.specials}}
 <h3>Available Specials</h3>
 
-
 {{#each this.model.specials as |value|}}
-<tr>
-    <td><b>{{value.title}}</b></td>
-    <td>
+<div class="row fs3-gear-row">
+    <div class="col"><b>{{value.title}}</b></div>
+    <div class="col">
       
       {{#each value.effects as |effect|}}
       {{effect}}<br>
       {{/each}}
-    </td>
-</tr>
+    </div>
+</div>
 {{/each}}
 {{/if}}
-
-</table>

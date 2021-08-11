@@ -12,39 +12,40 @@
     <th></th>
   </thead>
   
-  {{#each this.model.chars as |char|}}
-  <tr>
-    <td>
-      {{char.name}}
-    </td>
-    <td>
-      {{#if char.approved}}
-      <TooltipIcon @position="right" @message="Approved." @icon="fas fa-user-shield" />
-      {{/if}}
-      {{#if char.warned}}
-      <TooltipIcon @position="right" @message="Warned previously." @icon="fas fa-exclamation-triangle" />
-      {{/if}}
-    </td>
-    <td>
-      {{char.last_on_formatted}} ({{char.last_on}})
-    </td>
+  <tbody>
+    {{#each this.model.chars as |char|}}
+    <tr>
+      <td>
+        {{char.name}}
+      </td>
+      <td>
+        {{#if char.approved}}
+        <TooltipIcon @position="right" @message="Approved." @icon="fas fa-user-shield" />
+        {{/if}}
+        {{#if char.warned}}
+        <TooltipIcon @position="right" @message="Warned previously." @icon="fas fa-exclamation-triangle" />
+        {{/if}}
+      </td>
+      <td>
+        {{char.last_on_formatted}} ({{char.last_on}})
+      </td>
     
-    <td>{{char.lastwill}}</td>
-    <td>
-      <Input @type="text" id="idleNotes{{char.id}}" placeholder="Notes" @value={{char.notes}} />
-    </td>
-    <td>
-      <PowerSelect @selected={{char.idle_action}}  @options={{this.model.idle_actions}} @onChange={{action "idleActionChanged" char}} as |idleAction|>
-       {{idleAction}}
-     </PowerSelect>
+      <td>{{char.lastwill}}</td>
+      <td>
+        <Input @type="text" id="idleNotes{{char.id}}" placeholder="Notes" @value={{char.notes}} />
+      </td>
+      <td>
+        <PowerSelect @selected={{char.idle_action}}  @options={{this.model.idle_actions}} @onChange={{action "idleActionChanged" char}} as |idleAction|>
+         {{idleAction}}
+       </PowerSelect>
      
-    </td>
-    <td>
-      <a href="#" {{action "removeFromIdle" char.name}}><i class="fa fa-trash" aria-label="Remove"></i></a>
-    </td>
-  </tr>
-  {{/each}}
-
+      </td>
+      <td>
+        <a href="#" {{action "removeFromIdle" char.name}}><i class="fa fa-trash" aria-label="Remove"></i></a>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
 </table>
   {{#if destroyingApprovedChars}}
   <div class="alert alert-warning">Consider marking approved characters 'gone' instead of destroying them to avoid removing them from scenes, mails, forum posts, etc.</div>

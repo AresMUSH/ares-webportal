@@ -15,16 +15,16 @@
  <ul class="nav nav-tabs" role="tablist">
 
   {{#each this.topLevelAreas as |area index| }}
-   <li role="presentation" class="{{if (eq index 0) 'active' }}"><a href="#{{area.id}}" aria-controls="{{area.id}}" role="tab" data-bs-toggle="tab">{{area.name}}</a></li>
+   <li role="presentation" class="nav-item"><a href="#area{{area.id}}" aria-controls="{{area.id}}" role="tab" data-bs-toggle="tab" class="nav-link {{if (eq index 0) 'active' }}">{{area.name}}</a></li>
   {{/each}}
-   <li role="presentation"><a href="#unassigned" aria-controls="unassigned" role="tab" data-bs-toggle="tab">No Area</a></li>
+   <li role="presentation" class="nav-item"><a href="#unassigned" aria-controls="unassigned" role="tab" data-bs-toggle="tab" class="nav-link">No Area</a></li>
 
 </ul>
 
 <div class="tab-content">
 
   {{#each this.topLevelAreas as |area index| }}
-  <div role="tabpanel" class="tab-pane {{if (eq index 0) 'active' }}" id="{{area.id}}">
+  <div class="tab-pane {{if (eq index 0) 'active' }}" id="area{{area.id}}">
 
     <a name="{{area.id}}"></a>
     <AreaDirectory @area={{area}} />
@@ -32,7 +32,7 @@
   </div>
   {{/each}}
 
-  <div role="tabpanel" class="tab-pane" id="unassigned">
+  <div class="tab-pane" id="unassigned">
 
   <h3>Locations With No Area</h3>
   {{#each this.model.orphan_rooms as |room|}}

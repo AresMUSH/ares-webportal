@@ -109,36 +109,20 @@
 <p><LinkTo @route="scenes"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Scenes</LinkTo></p>
 
 
+      <DropdownMenu @id="sceneMenu" @title="Scene Menu">
+          {{#if this.model.can_edit}}
+
+          <li><LinkTo @route="scene-edit" @model={{this.model.id}} class="dropdown-item">Edit Scene</LinkTo></li>
+          <li><a href="#" {{action 'unshareScene'}}  class="dropdown-item">Unshare Scene</a></li>
+          
+           <li><hr role="separator" class="dropdown-divider"></li>
+         {{/if}}
+         
+         <LinkTo @route="scene-download" @model={{this.model.id}}  class="dropdown-item">Download Scene</LinkTo>
+      </DropdownMenu>
+      
+          
     
-    <div class="row">
-        <div class="col col-xs-12">
-
-                <ul class="nav navbar-nav">    
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-                      <span class="btn btn-secondary" href="#">Scene Menu <span class="caret"></span></span> </a>
-                      <ul class="dropdown-menu">
-
-                        {{#if this.model.can_edit}}
-
-                        <li><LinkTo @route="scene-edit" @model={{this.model.id}}>Edit Scene</LinkTo></li>
-                        <li><a href="#" {{action 'unshareScene'}}>Unshare Scene</a></li>
-                        
-                         <li role="separator" class="divider"></li>
-                       {{/if}}
-                       
-                      <li><LinkTo @route="scene-download" @model={{this.model.id}}>Download Scene</LinkTo></li> 
- 	
-                      </ul>
-                    </li>
-                </ul>
-        
-        </div>
-    </div>
-
-
-
 
 
 
