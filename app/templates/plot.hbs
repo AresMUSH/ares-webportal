@@ -50,15 +50,11 @@
 
 {{#if this.isApproved}}
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
-        {{#if this.isAdmin}}
-        <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete</button>
-        {{/if}}
-        <LinkTo @route="plot-edit" @model={{this.model.plot.id}} class="btn btn-primary">Edit</LinkTo>
-    </div>
-    </div>
+<div class="action-buttons">
+  {{#if this.isAdmin}}
+  <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete</button>
+  {{/if}}
+  <LinkTo @route="plot-edit" @model={{this.model.plot.id}} class="btn btn-primary">Edit</LinkTo>
 </div>
 
 {{/if}}

@@ -1,14 +1,14 @@
      <ul class="nav nav-tabs" role="tablist">
 
             {{#if this.model.char.fs3.reset_needed}}
-           <li role="presentation" class="active"><a href="#fs3reset" aria-controls="fs3reset" role="tab" data-toggle="tab">Reset</a></li>
+           <li role="presentation" class="nav-item"><a href="#fs3reset" aria-controls="fs3reset" role="tab" data-bs-toggle="tab" class="nav-link active">Reset</a></li>
            {{else}}
-           <li role="presentation" class="active"><a href="#fs3attrs" aria-controls="fs3attrs" role="tab" data-toggle="tab">Attributes</a></li>
-           <li role="presentation"><a href="#fs3action" aria-controls="fs3action" role="tab" data-toggle="tab">Action Skills</a></li>
-           <li role="presentation"><a href="#fs3bg" aria-controls="fs3bg" role="tab" data-toggle="tab">Background Skills</a></li>
-           <li role="presentation"><a href="#fs3lang" aria-controls="fs3lang" role="tab" data-toggle="tab">Languages</a></li>
+           <li role="presentation" class="nav-item"><a href="#fs3attrs" aria-controls="fs3attrs" role="tab" data-bs-toggle="tab" class="nav-link active">Attributes</a></li>
+           <li role="presentation" class="nav-item"><a href="#fs3action" aria-controls="fs3action" role="tab" data-bs-toggle="tab" class="nav-link">Action Skills</a></li>
+           <li role="presentation" class="nav-item"><a href="#fs3bg" aria-controls="fs3bg" role="tab" data-bs-toggle="tab" class="nav-link">Background Skills</a></li>
+           <li role="presentation" class="nav-item"><a href="#fs3lang" aria-controls="fs3lang" role="tab" data-bs-toggle="tab" class="nav-link">Languages</a></li>
            {{#if this.model.char.fs3.use_advantages}}
-       <li role="presentation"><a href="#fs3adv" aria-controls="fs3adv" role="tab" data-toggle="tab">Advantages</a></li>
+       <li role="presentation" class="nav-item"><a href="#fs3adv" aria-controls="fs3adv" role="tab" data-bs-toggle="tab" class="nav-link">Advantages</a></li>
             {{/if}}
        
            {{/if}}
@@ -95,7 +95,7 @@
      </Fs3Bgbox>
      {{/each}}
 
-     <button class="btn btn-default" id="addbg" {{action (mut this.selectBackgroundSkill) true}}>Add Background Skill</button>
+     <button class="btn btn-secondary" id="addbg" {{action (mut this.selectBackgroundSkill) true}}>Add Background Skill</button>
 
    </div>
   </div>

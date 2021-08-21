@@ -12,11 +12,11 @@
   <h4>{{faction}}</h4>
   <div class="table-responsive">
   <table>
-    <tr>
+    <thead>
     {{#each-in rankGroups as |rankGroupName |}}
     <th><b>{{rankGroupName}}</b></th>
     {{/each-in}}
-    </tr>
+    </thead>
     <tr>
     {{#each-in rankGroups as |rankGroupName ranks |}}
     <td>

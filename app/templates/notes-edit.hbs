@@ -12,7 +12,7 @@
 {{/each}}
 
 
-<div class="pull-right">
-        <p> <LinkTo @route="notes" @model={{this.model.name}} class="btn btn-default">Cancel</LinkTo>  
-        <button {{action 'save'}} class="btn btn-primary">Save</button> </p>
+<div class="action-buttons">
+  <LinkTo @route="notes" @model={{this.model.name}} class="btn btn-secondary">Cancel</LinkTo>  
+  <button {{action 'save'}} class="btn btn-primary">Save</button>
 </div>

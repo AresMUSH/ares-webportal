@@ -1,47 +1,35 @@
 {{page-title this.pageTitle}}
 <h1>Combat {{this.model.id}}</h1>
 
-
-    <div class="row">
-        <div class="col col-xs-12">
-          <ul class="nav navbar-nav">    
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-                <span class="btn btn-default" href="#">Combat Menu <span class="caret"></span></span> </a>
-                <ul class="dropdown-menu">
-                 <li> <a href="#" {{action (mut this.showAddCombatant) true}}>Add Combatant</a></li>
-                {{#if this.model.can_manage}}
-                 <li> <LinkTo @route="combat-setup" @model={{this.model.id}}>Setup NPCs</LinkTo></li>
-                 <li> <LinkTo @route="combat-teams" @model={{this.model.id}}>Setup Teams</LinkTo></li>
-                 <li> <a href="#" {{action "aiActions"}}>NPC AI Actions</a></li>
-                 <li> <a href="#" {{action (mut this.confirmStopCombat) true}}>Stop Combat</a></li>
-                {{/if}}
-                <li><LinkTo @route="combat-log" @model={{this.model.id}}>View Log</LinkTo></li> 
-
-                </ul>
-              </li>
-          </ul>
-          
-
-            <div class="pull-right">
-              
-              {{#if this.model.in_combat}}
-                      <button class="btn btn-warning" {{action 'leaveCombat'}} >Leave Combat</button>
-              {{else if this.currentUser.name}}
-                      <button class="btn btn-primary" {{action (mut this.showJoinCombat) true }} >Join Combat</button>
-              {{/if}}
-
+<div class="row">
+    <div class="col col-xs-12">
+      
+      <div class="fs3-combat-controls">
+        
+        <DropdownMenu @id="combatMenu" @title="Combat Menu">
+              <li><a href="#" {{action (mut this.showAddCombatant) true}} class="dropdown-item">Add Combatant</a></li>
               {{#if this.model.can_manage}}
-                <a href="#" class="btn btn-primary" {{action 'newTurn'}}>New Turn</a>
+                <li><LinkTo @route="combat-setup" @model={{this.model.id}} class="dropdown-item">Setup NPCs</LinkTo></li>
+                <li><LinkTo @route="combat-teams" @model={{this.model.id}} class="dropdown-item">Setup Teams</LinkTo></li>
+                <li><a href="#" {{action "aiActions"}} class="dropdown-item">NPC AI Actions</a></li>
+                <li><a href="#" {{action (mut this.confirmStopCombat) true}} class="dropdown-item">Stop Combat</a></li>
               {{/if}}
+              <li><LinkTo @route="combat-log" @model={{this.model.id}} class="dropdown-item">View Log</LinkTo></li>
+        </DropdownMenu>
               
-              
-            </div>
-            
-            <div class="clearfix"></div>
-            <p><LinkTo @route="combats"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Combat List</LinkTo></p>
-            
+        <div class="fs3-combat-buttons">
+          
+          {{#if this.model.in_combat}}
+                  <button class="btn btn-warning" {{action 'leaveCombat'}} >Leave Combat</button>
+          {{else if this.currentUser.name}}
+                  <button class="btn btn-primary" {{action (mut this.showJoinCombat) true }} >Join Combat</button>
+          {{/if}}
+
+          {{#if this.model.can_manage}}
+            <a href="#" class="btn btn-primary" {{action 'newTurn'}}>New Turn</a>
+          {{/if}}
+          
+          
         </div>
     </div>
     
@@ -65,21 +53,21 @@
 </div>
 
 {{#if this.model.in_combat}}
-  <div class="row">
-    <div class="col">
+  <div class="fs3-combat-command">
+    <Input @value={{this.combatCommand}} @enter="sendCommand" size={{25}} />
 
-      <Input @value={{this.combatCommand}} @enter="sendCommand" size={{25}} />
-
-      <button class="btn btn-default" {{action 'sendCommand'}} >Send Command</button>
-      <div class="label label-info">{{this.commandResponse}}</div>
-    </div>
+    <button class="btn btn-secondary" {{action 'sendCommand'}} >Send Command</button>
+    <div class="badge bg-info">{{this.commandResponse}}</div>
   </div>
 {{/if}}
 
 <Fs3CombatHud @combat={{this.model}} />
-   
 
-        <FlashMessages />
+
+    <FlashMessages />
+   
+    </div>
+</div>
 
   
   <BsModalSimple @title="Confirm Stop" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmStopCombat}} @onSubmit={{action "stopCombat"}} @onHide={{action (mut this.confirmStopCombat) false}}>

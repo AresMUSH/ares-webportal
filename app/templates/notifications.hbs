@@ -2,22 +2,18 @@
 <h1>Notifications</h1>
 
 
-<div class="row">
-    
-    <div class="col pull-right">
+<div class="action-buttons">
         <a href="#" {{action "markAllRead"}} class="btn btn-primary">Mark All Read</a>
-    </div>
-    
 </div>
 
 
 <ul class="nav nav-tabs notification-nav">
   {{#each this.model.chars as |char index| }}
-  <li class="{{if (eq index 0) 'active' }}">
-    <a data-toggle="tab" href="#{{char.name}}">
+  <li class="nav-item">
+    <a data-bs-toggle="tab" href="#{{char.name}}" class="nav-link {{if (eq index 0) 'active' }}">
     {{char.name}}
     {{#if char.has_unread}}
-      <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="Unread Notification"></i></span>
+      <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="Unread Notification"></i></span>
     {{/if}}
     </a>
   </li>
@@ -29,7 +25,7 @@
 
 {{#each this.model.chars as |char index| }}
 
-    <div id="{{char.name}}" class="tab-pane fade in {{if (eq index 0) 'active' }}">
+    <div id="{{char.name}}" class="tab-pane fade show {{if (eq index 0) 'active' }}">
       <NotificationList @notices={{char.notices}} @char={{char}} />
     </div>
   

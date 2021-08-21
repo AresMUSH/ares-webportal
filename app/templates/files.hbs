@@ -3,29 +3,25 @@
 
 <p><a href="#upload"><i class="fas fa-angle-double-down"></i> Jump to Upload</a></p>
 
-
+<div class="folder-list">
 {{#each this.model as |folder|}}
 
-<span class="col col-xs-3">
+<div class="folder-item">
         <LinkTo @route="folder" @model={{folder.name}}>
             <i class="far fa-folder-open" aria-hidden="true"></i>
             {{folder.name}}
         </LinkTo>
-</span>
+</div>
 {{/each}}
-
+</div>
 
 <a name="upload"></a>
 
 {{#if this.isApproved}}
 
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
-          <button {{action (mut this.showUpload) true}} class="btn btn-primary">Upload</button>
-  </div>
-  </div>
+<div class="action-buttons">
+  <button {{action (mut this.showUpload) true}} class="btn btn-primary">Upload</button>
 </div>
 
 

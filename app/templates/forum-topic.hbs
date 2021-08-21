@@ -4,25 +4,20 @@
     {{/if}}
     {{this.model.title}}</h1>
 
-
-<div class="row">
-    <div class="col col-xs-12">
-
-<p><LinkTo @route="forum-category" @model={{this.model.category.id}}><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to {{this.model.category.name}}</LinkTo></p>
-
-        <div class="pull-right">
-          {{#if this.isAuthenticated}}
-          <button {{action 'nextUnread'}} class="btn btn-default">Next Unread</button>
-          {{/if}}
-         </div>
-         
-         <p><a href="#bottom"><i class="fas fa-angle-double-down"></i> Jump to End</a></p>
-         
+<div class="action-buttons-spaced">
+  <div>
+    <LinkTo @route="forum-category" @model={{this.model.category.id}}><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to {{this.model.category.name}}</LinkTo> | 
+    <a href="#bottom"><i class="fas fa-angle-double-down"></i> Jump to End</a>
   </div>
+  
+  {{#if this.isAuthenticated}}
+  <button {{action 'nextUnread'}} class="btn btn-secondary">Next Unread</button>
+  {{/if}}
 </div>
+         
+         
 
-
-       <div class="hint pull-right text-right">
+       <div class="hint float-right text-right">
 
            <p>{{this.model.date}}</p>
            
@@ -68,11 +63,10 @@
           <p><b>Text:</b></p>
           <MarkdownEditor @text={{this.model.raw_message}} />
                               
-          <div class="pull-right">
-          <button class="btn btn-default" {{action (mut this.model.editActive) false}}>Cancel</button>
-          <button class="btn btn-primary" {{action 'editPost'}}>Save</button>
-          </div>
-          <div class="clearfix"></div>
+            <div class="action-buttons">
+              <button class="btn btn-secondary" {{action (mut this.model.editActive) false}}>Cancel</button>
+              <button class="btn btn-primary" {{action 'editPost'}}>Save</button>
+            </div>
         {{else}}
          <AnsiFormat @text={{this.model.message}} />
        {{/if}}
@@ -93,7 +87,7 @@
      <div>
        
        
-       <div class="hint pull-right text-right">
+       <div class="hint float-right text-right">
            
            <p>{{reply.date}}</p>
            
@@ -117,11 +111,10 @@
        {{#if reply.editActive}}
           <MarkdownEditor @text={{reply.raw_message}} />
                               
-          <div class="pull-right">
-          <button class="btn btn-default" {{action (mut reply.editActive) false}}>Cancel</button>
-          <button class="btn btn-primary" {{action 'editReply' reply}}>Save</button>
+          <div class="action-buttons">
+            <button class="btn btn-secondary" {{action (mut reply.editActive) false}}>Cancel</button>
+            <button class="btn btn-primary" {{action 'editReply' reply}}>Save</button>
           </div>
-          <div class="clearfix"></div>
         {{else}}
          <AnsiFormat @text={{reply.message}} />
        {{/if}}
@@ -130,7 +123,6 @@
     {{/each}}
     
     
-     <hr>
   </div>
 
  <a name="bottom"></a> 
@@ -139,7 +131,7 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <a data-toggle="collapse" href="#reply">Click to Reply</a>
+        <a data-bs-toggle="collapse" href="#reply">Click to Reply</a>
         
     </div>
     <div id="reply" class="panel-collapse collapse">
@@ -147,14 +139,16 @@
       <div class="forum-reply-panel">
          <p><b>Reply As:</b>        <div class="forum-char-select" >
                      <PowerSelect @selected={{this.author}} @options={{this.model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |author|>
-                         <CharIconTiny @char={{this.author}} />
+                         <CharIconTiny @char={{author}} />
                      </PowerSelect>
                  </div>
          </p>
     
         <MarkdownEditor @text={{this.reply}} />
   
-        <button {{action "addReply"}} class="btn btn-primary">Add Reply</button>
+          <div class="action-buttons">
+            <button {{action "addReply"}} class="btn btn-primary">Add Reply</button>
+          </div>
       </div>
     </div>
 </div>

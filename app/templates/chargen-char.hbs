@@ -30,7 +30,7 @@
              <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen, but anything set with the in-game chargen commands will be overwritten by what you set here.</p>
             
              <p>
-                 <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
+                 <button name="save" {{action 'save'}} class="btn btn-secondary">Save</button>
              </p>
 
      </div>
@@ -48,26 +48,26 @@
      
      <!-- Nav tabs -->
      <ul class="nav nav-tabs" role="tablist">
-       <li role="presentation" class="active"><a href="#demographics" aria-controls="demographics" role="tab" data-toggle="tab">Demographics</a></li>
-       <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>   
+       <li role="presentation" class="nav-item"><a href="#demographics" aria-controls="demographics" role="tab" data-bs-toggle="tab" class="nav-link active">Demographics</a></li>
+       <li role="presentation" class="nav-item"><a href="#groups" aria-controls="groups" role="tab" data-bs-toggle="tab" class="nav-link">Groups</a></li>   
 
         {{#if (not this.model.app.game.disabled_plugins.fs3skills) }}
-        <li role="presentation"><a href="#fs3abilities" aria-controls="fs3abilities" role="tab" data-toggle="tab">Abilities</a></li>
+        <li role="presentation" class="nav-item"><a href="#fs3abilities" aria-controls="fs3abilities" role="tab" data-bs-toggle="tab" class="nav-link">Abilities</a></li>
         {{/if}}
         
         {{#if this.traitsExtraInstalled}}
-        <li role="presentation"><a href="#traits" aria-controls="misc" role="tab" data-toggle="tab">Traits</a></li>
+        <li role="presentation" class="nav-item"><a href="#traits" aria-controls="misc" role="tab" data-bs-toggle="tab" class="nav-link">Traits</a></li>
        {{/if}}
 
         {{#if this.rpgExtraInstalled}}
-        <li role="presentation"><a href="#rpgsheet" aria-controls="misc" role="tab" data-toggle="tab">Sheet</a></li>
+        <li role="presentation" class="nav-item"><a href="#rpgsheet" aria-controls="misc" role="tab" data-bs-toggle="tab" class="nav-link">Sheet</a></li>
        {{/if}}
        
-       <li role="presentation"><a href="#bg" aria-controls="misc" role="tab" data-toggle="tab">Background</a></li>
-       <li role="presentation"><a href="#hooks" aria-controls="misc" role="tab" data-toggle="tab">RP Hooks</a></li>
-       <li role="presentation"><a href="#icon" aria-controls="misc" role="tab" data-toggle="tab">Profile Icon</a></li>
-       <li role="presentation"><a href="#descs" aria-controls="misc" role="tab" data-toggle="tab">Descriptions</a></li>
-       <li role="presentation"><a href="#misc" aria-controls="misc" role="tab" data-toggle="tab">Misc</a></li>
+       <li role="presentation" class="nav-item"><a href="#bg" aria-controls="misc" role="tab" data-bs-toggle="tab" class="nav-link">Background</a></li>
+       <li role="presentation" class="nav-item"><a href="#hooks" aria-controls="misc" role="tab" data-bs-toggle="tab" class="nav-link">RP Hooks</a></li>
+       <li role="presentation" class="nav-item"><a href="#icon" aria-controls="misc" role="tab" data-bs-toggle="tab" class="nav-link">Profile Icon</a></li>
+       <li role="presentation" class="nav-item"><a href="#descs" aria-controls="misc" role="tab" data-bs-toggle="tab" class="nav-link">Descriptions</a></li>
+       <li role="presentation" class="nav-item"><a href="#misc" aria-controls="misc" role="tab" data-bs-toggle="tab" class="nav-link">Misc</a></li>
        <ChargenCustomTabs @char={{this.model}} />
      </ul>
      
@@ -210,7 +210,7 @@
                <p>Remember to save often.  When you're finished, you can review your character for errors or missing information and then submit your application.</p>
             
                <p>
-                   <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
+                   <button name="save" {{action 'save'}} class="btn btn-secondary">Save</button>
                    {{#if this.model.char.can_approve}}
                    <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
                    {{else}}
@@ -221,7 +221,7 @@
                <p>Remember to save often.  You can also review your character for errors or missing information.  When you're done here, you will need to log onto the game to finish character creation and submit your application.</p>
             
                <p>
-                   <button name="save" {{action 'save'}} class="btn btn-default">Save</button>
+                   <button name="save" {{action 'save'}} class="btn btn-secondary">Save</button>
                    <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
                </p>     
        {{/if}}

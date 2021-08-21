@@ -149,15 +149,10 @@
     
     {{/if}}
     
-    <div class="row">
-        <div class="col col-xs-12">
-            <div class="pull-right">
-    
-                <LinkTo @route="scene" @model={{this.model.scene.id}} class="btn btn-default">Cancel</LinkTo> 
-                <button class="btn btn-primary" {{action 'save'}}>Save</button>
-            </div>
-        </div>
-    </div>
+<div class="action-buttons">
+    <LinkTo @route="scene" @model={{this.model.scene.id}} class="btn btn-secondary">Cancel</LinkTo> 
+    <button class="btn btn-primary" {{action 'save'}}>Save</button>
+</div>
 
 <FlashMessages />
 {{outlet}}

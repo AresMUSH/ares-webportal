@@ -1,20 +1,20 @@
 {{page-title 'Roster'}}
 <h1>Roster</h1>
 
-<p>The roster contains ready-made characters.  Some have been played before, as indicated by a <span class="label label-info">Previously Played</span> tag.  For most characters, you can claim them and begin playing immediately.  Characters marked with <span class="label label-warning">App Required</span> require an application.</p>
+<p>The roster contains ready-made characters.  Some have been played before, as indicated by a <span class="badge bg-info">Previously Played</span> tag.  For most characters, you can claim them and begin playing immediately.  Characters marked with <span class="badge bg-warning">App Required</span> require an application.</p>
 
 <ul class="nav nav-tabs">
 {{#each this.model.roster as |group|}}
 
-      <li class={{group.active_class}}><a data-toggle="tab" href="#{{group.key}}">{{group.name}}</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" href="#{{group.key}}" class="nav-link {{group.active_class}}">{{group.name}}</a></li>
 {{/each}}
 </ul>
 
-<div class="tab-content">    
+<div class="tab-content" role="tablist">    
 
 {{#each this.model.roster as |group|}}
 
-  <div id="{{group.key}}" class="tab-pane fade in {{group.active_class}}">
+  <div id="{{group.key}}" class="tab-pane fade show {{group.active_class}}">
 
     {{#each group.chars as |char|}}
     
@@ -40,22 +40,22 @@
            <div class="roster-char-warnings">
              
              {{#if char.app_pending }}
-             <span class="label label-danger">App Pending</span>
+             <span class="badge bg-danger">App Pending</span>
              {{/if}}
              
              {{#if char.previously_played}}
-             <span class="label label-info">Previously Played</span>
+             <span class="badge bg-info">Previously Played</span>
              {{/if}}
       
              {{#if char.app_required}}
-             <span class="label label-warning">App Required</span>
+             <span class="badge bg-warning">App Required</span>
              {{/if}}
             
            </div>
            
              
           <div>  
-             <LinkTo @route="char" @model={{char.name}} class="btn btn-default">Profile</LinkTo>
+             <LinkTo @route="char" @model={{char.name}} class="btn btn-secondary">Profile</LinkTo>
              {{#if (not char.app_pending)}}
              <LinkTo @route="roster-claim" @model={{char.id}} class="btn btn-primary">Claim</LinkTo>
              {{/if}}

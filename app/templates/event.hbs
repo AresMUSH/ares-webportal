@@ -69,26 +69,20 @@
 
 <p><label>Signup Comment:</label> <Input @type="text" size={{25}} id="signup" @enter={{action "signup"}} @value={{this.model.signup_comment}} />  </p>
 <p>  <button {{action 'cancelSignup'}} class="btn btn-warning">Cancel Signup</button>
-  <button {{action 'signup'}} class="btn btn-default">Edit Signup</button> </p>
+  <button {{action 'signup'}} class="btn btn-secondary">Edit Signup</button> </p>
 {{else if isApproved}}
 <p><label>Signup Comment:</label>  <Input @type="text" size={{25}} id="signup" @enter={{action "signup"}} @value={{this.model.signup_comment}} />  
-  <button {{action 'signup'}} class="btn btn-default">Sign Up</button> </p>
+  <button {{action 'signup'}} class="btn btn-secondary">Sign Up</button> </p>
 
 {{/if}}
 
 <hr>
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
+<div class="action-buttons">
   {{#if this.model.can_manage}}
-
       <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
       <LinkTo @route="event-edit" @model={{this.model.id}} class="btn btn-primary">Edit</LinkTo>
   {{/if}}
-      
-  </div>
-  </div>
 </div>
 
 <FlashMessages />

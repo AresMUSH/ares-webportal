@@ -8,8 +8,6 @@
 
 
 {{#if this.model.char.status_message}}
-<div class="row">
-    <div class="col col-xs-12">
         <div class="panel panel-default">
             <div class="panel-body status-message">
                 {{{this.model.char.status_message}}}
@@ -18,8 +16,6 @@
                 {{/if}}
             </div>
         </div>
-    </div>
-</div>
 {{/if}}
 
 <div class="profile-tab">
@@ -60,25 +56,21 @@
 {{/each}}
     
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
+<div class="action-buttons">
         
-        {{#if this.model.char.last_profile_version}}
-            <LinkTo @route="char-source" @models={{array this.model.char.id this.model.char.last_profile_version}} class="btn btn-default">Source/History</LinkTo>
-        {{/if}}
-        {{#if this.model.char.can_approve}}
-          <LinkTo @route="chargen-char" @model={{this.model.char.id}} class="btn btn-default">Chargen</LinkTo>
-        {{/if}}
-        {{#if this.model.char.show_notes}}
-          <LinkTo @route="notes" @model={{this.model.char.name}} class="btn btn-default">Notes</LinkTo>
-        {{/if}}
-        {{#if this.model.char.can_manage}}
-          <button {{action (mut this.showFiles) true}} class="btn btn-default">Files</button>
-          <LinkTo @route="char-edit" @model={{this.model.char.id}} class="btn btn-primary">Edit</LinkTo>
-        {{/if}}
-  </div>
-  </div>
+      {{#if this.model.char.last_profile_version}}
+          <LinkTo @route="char-source" @models={{array this.model.char.id this.model.char.last_profile_version}} class="btn btn-secondary">Source/History</LinkTo>
+      {{/if}}
+      {{#if this.model.char.can_approve}}
+        <LinkTo @route="chargen-char" @model={{this.model.char.id}} class="btn btn-secondary">Chargen</LinkTo>
+      {{/if}}
+      {{#if this.model.char.show_notes}}
+        <LinkTo @route="notes" @model={{this.model.char.name}} class="btn btn-secondary">Notes</LinkTo>
+      {{/if}}
+      {{#if this.model.char.can_manage}}
+        <button {{action (mut this.showFiles) true}} class="btn btn-secondary">Files</button>
+        <LinkTo @route="char-edit" @model={{this.model.char.id}} class="btn btn-primary">Edit</LinkTo>
+      {{/if}}
 </div>
 
 {{#if this.model.char.can_manage}}

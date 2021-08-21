@@ -5,45 +5,45 @@
 
 <div class="table-responsive recent-changes-container">
   <table class="table table-striped recent-changes-list">
-    
-   {{#each this.model as |change|}}
-   <tr>
-       <td>
-         {{#if (eq change.type 'char')}}
-         Character
-         {{else if (eq change.type 'wiki')}}
-         Wiki Page
-         {{else if (eq change.type 'event')}}
-         Event
-         {{else if (eq change.type 'scene')}}
-         Scene
-         {{else if (eq change.type 'file')}}
-         File
-         {{else if (eq change.type 'plot')}}
-         Plot
-         {{else}}
-         {{change.type}}
-         {{/if}}
-       </td>
-       <td>
-           {{change.timestamp}}
-       </td>
-       <td>
-           <RecentChangeLink @change={{change}} />
-       </td>
-       <td>
-           {{change.author}}
-       </td>
-       <td>
-         {{#if (eq change.type 'char')}}
-           <LinkTo @route="char-source" @models={{array change.data.char_name change.data.version_id}}>(history)</LinkTo>
-         {{else if (eq change.type 'wiki')}}
-           <LinkTo @route="wiki-source" @models={{array change.data.page_name change.data.version_id}}>(history)</LinkTo>
-         {{/if}}
-       </td>
-   </tr>
-   {{/each}}
-
+    <tbody>
+     {{#each this.model as |change|}}
+     <tr>
+         <td>
+           {{#if (eq change.type 'char')}}
+           Character
+           {{else if (eq change.type 'wiki')}}
+           Wiki Page
+           {{else if (eq change.type 'event')}}
+           Event
+           {{else if (eq change.type 'scene')}}
+           Scene
+           {{else if (eq change.type 'file')}}
+           File
+           {{else if (eq change.type 'plot')}}
+           Plot
+           {{else}}
+           {{change.type}}
+           {{/if}}
+         </td>
+         <td>
+             {{change.timestamp}}
+         </td>
+         <td>
+             <RecentChangeLink @change={{change}} />
+         </td>
+         <td>
+             {{change.author}}
+         </td>
+         <td>
+           {{#if (eq change.type 'char')}}
+             <LinkTo @route="char-source" @models={{array change.data.char_name change.data.version_id}}>(history)</LinkTo>
+           {{else if (eq change.type 'wiki')}}
+             <LinkTo @route="wiki-source" @models={{array change.data.page_name change.data.version_id}}>(history)</LinkTo>
+           {{/if}}
+         </td>
+     </tr>
+     {{/each}}
+   </tbody>
   </table>
 </div>
 

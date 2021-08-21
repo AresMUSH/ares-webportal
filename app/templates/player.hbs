@@ -64,23 +64,23 @@
 
 
 <div class="profile-tab">
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs" role="tablist">
     
-      <li class="active"><a data-toggle="tab" href="#systeminfo">+</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#systeminfo">+</a></li>
     
       {{#if this.model.rp_prefs}}
-        <li><a data-toggle="tab" href="#systemprefs">RP Prefs</a></li>
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemprefs">RP Prefs</a></li>
       {{/if}}
       
 
       {{#if this.model.achievements}}
-          <li><a data-toggle="tab" href="#systemachievements">Achievements</a></li>
+          <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemachievements">Achievements</a></li>
       {{/if}}
     </ul>
     
 
     <div class="tab-content">
-      <div id="systeminfo" class="tab-pane fade in active">
+      <div id="systeminfo" class="tab-pane fade show active">
           <div class="tab-cover">System Information</div>
       </div>
       
@@ -100,15 +100,10 @@
 </div>
 
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
-            
-        {{#if this.model.can_manage}}
-          <LinkTo @route="char-edit" @model={{this.model.id}} class="btn btn-primary">Edit</LinkTo>
-        {{/if}}
-  </div>
-  </div>
+<div class="action-buttons">
+  {{#if this.model.can_manage}}
+    <LinkTo @route="char-edit" @model={{this.model.id}} class="btn btn-primary">Edit</LinkTo>
+  {{/if}}
 </div>
 
 
