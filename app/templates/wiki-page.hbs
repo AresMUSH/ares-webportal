@@ -28,13 +28,9 @@
 
 <hr>
 
-<div class="row">
-    <div class="col col-xs-12">
-      <div class="float-right">
-        <a name="bottom"></a>
-        <p><a href="#top"><i class="fas fa-chevron-circle-up"></i> Jump to Top</a></p>
-      </div>
-    </div>
+<div class="action-buttons">
+  <a name="bottom"></a>
+  <p><a href="#top"><i class="fas fa-chevron-circle-up"></i> Jump to Top</a></p>
 </div>
 
 {{#if this.model.tags}}
@@ -44,10 +40,7 @@
     {{/each}}
 {{/if}}
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="float-right">
- 
+<div class="action-buttons">
   {{#if this.model.can_delete}}
         <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete Page</button>
   {{else}}
@@ -61,14 +54,11 @@
       <button class="btn btn-primary" disabled="true">Edit</button>
    {{/if}} 
    
-       </div>
-       
-       {{#if this.model.lock_info}}
-       <div class="alert alert-warning">This page is locked by {{this.model.lock_info.locked_by}}.  Their lock will expire on {{this.model.lock_info.time}} or when they're done editing.</div>
-       {{/if}}
-       
-  </div>
 </div>
+       
+{{#if this.model.lock_info}}
+<div class="alert alert-warning">This page is locked by {{this.model.lock_info.locked_by}}.  Their lock will expire on {{this.model.lock_info.time}} or when they're done editing.</div>
+{{/if}}
 
 <FlashMessages />
 

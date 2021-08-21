@@ -6,13 +6,9 @@
 <p>The unread flags <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity Flag"></i></span> show new activity in public scenes or scenes you're watching/participating in.</p>
 
 {{#if this.isApproved}}
-<div class="row">
-    <div class="col">
-      <div class="float-right">
-        <LinkTo @route="scene-create" class="btn btn-secondary">Create Scene</LinkTo>
-        <LinkTo @route="play" class="btn btn-primary">Play</LinkTo>
-      </div>
-    </div>
+<div class="action-buttons">
+  <LinkTo @route="scene-create" class="btn btn-secondary">Create Scene</LinkTo>
+  <LinkTo @route="play" class="btn btn-primary">Play</LinkTo>
 </div>
 {{/if}}
 

@@ -81,12 +81,11 @@
                  {{#if pose.editActive}}
                     <MarkdownEditor @text={{pose.raw_pose}} />
                                         
-                    <div class="float-right">
-                    <button class="btn btn-secondary" {{action 'cancelScenePoseEdit' pose}}>Cancel</button>
-                    <button class="btn btn-warning" {{action 'saveScenePose' pose false}}>Typo</button>
-                    <button class="btn btn-primary" {{action 'saveScenePose' pose true}}>Save</button>
+                    <div class="action-buttons">
+                      <button class="btn btn-secondary" {{action 'cancelScenePoseEdit' pose}}>Cancel</button>
+                      <button class="btn btn-warning" {{action 'saveScenePose' pose false}}>Typo</button>
+                      <button class="btn btn-primary" {{action 'saveScenePose' pose true}}>Save</button>
                     </div>
-                    <div class="clearfix"></div>
                     
                  {{else}}
                    

@@ -5,13 +5,8 @@
 
 {{#if this.isApproved}}
 
-<div class="row">
-    <div class="col">
-      <div class="float-right">
-        <LinkTo @route="plot-create" class="btn btn-primary">Create Plot</LinkTo>
-      </div>
-    </div>
-    
+<div class="action-buttons">
+  <LinkTo @route="plot-create" class="btn btn-primary">Create Plot</LinkTo>
 </div>
 
 {{/if}}

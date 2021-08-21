@@ -8,19 +8,15 @@
 {{/if}}
 
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="float-right">
-          {{#if this.isWikiMgr}}
-            <LinkTo @route="home" class="btn btn-secondary">Cancel</LinkTo>
-          {{else}}
-            <LinkTo @route="setup" class="btn btn-secondary">Cancel</LinkTo>
-          {{/if}}
-            <button {{action 'save'}} class="btn btn-primary">Save</button>
-        </div>
-        
-        <FlashMessages />
-    </div>
+<div class="action-buttons">
+  {{#if this.isWikiMgr}}
+    <LinkTo @route="home" class="btn btn-secondary">Cancel</LinkTo>
+  {{else}}
+    <LinkTo @route="setup" class="btn btn-secondary">Cancel</LinkTo>
+  {{/if}}
+    <button {{action 'save'}} class="btn btn-primary">Save</button>
 </div>
+        
+<FlashMessages />
 
 {{outlet}}

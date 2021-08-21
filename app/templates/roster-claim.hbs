@@ -53,21 +53,16 @@
     {{/if}}
 </div>
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="float-right">
-        
-        {{#if this.model.password}}
-        <div class="alert alert-success">
-          <p>Roster character claimed!  You can now log into that character with the password: {{this.model.password}}</p>
-          <p>Please write this password down before you leave this page, or you will have to contact staff to reset it.</p>
-        </div>
-        {{else}}
-        <LinkTo @route="char" @model={{this.model.id}} class="btn btn-secondary" target="_blank">View Profile</LinkTo>
-          <button {{action (mut confirmClaim) true}} class="btn btn-primary">Claim</button>
-        {{/if}}
+<div class="action-buttons">
+  {{#if this.model.password}}
+  <div class="alert alert-success">
+    <p>Roster character claimed!  You can now log into that character with the password: {{this.model.password}}</p>
+    <p>Please write this password down before you leave this page, or you will have to contact staff to reset it.</p>
   </div>
-  </div>
+  {{else}}
+  <LinkTo @route="char" @model={{this.model.id}} class="btn btn-secondary" target="_blank">View Profile</LinkTo>
+    <button {{action (mut confirmClaim) true}} class="btn btn-primary">Claim</button>
+  {{/if}}
 </div>
 
 <FlashMessages />
