@@ -31,6 +31,7 @@
   "dependencies": {
     "bootstrap": "^4.6.0",
     "caniuse-lite": "^1.0.30001208",
+    "dayjs": "^1.10.6",
     "elliptic": "^6.5.4",
     "express": "^4.16.2",
     "fstream": "^1.0.12",
@@ -63,7 +64,6 @@
     "ember-cli-head": "^1.0.0",
     "ember-cli-htmlbars": "^5.7.1",
     "ember-cli-inject-live-reload": "^2.0.2",
-    "ember-cli-moment-shim": "^3.8.0",
     "ember-cli-sass": "^10.0.1",
     "ember-cli-shims": "^1.2.0",
     "ember-cli-sri": "^2.1.1",

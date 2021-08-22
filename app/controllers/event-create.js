@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
+import dayjs from 'dayjs';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
@@ -26,7 +27,7 @@ export default Controller.extend(AuthenticatedController, {
     
     actions: {
         changeDate: function(date) {
-            let formatted_date = moment(date).format(this.get('model.app.game.date_entry_format'));
+            let formatted_date = dayjs(date).format(this.get('model.app.game.date_entry_format')); //moment(date).format(this.get('model.app.game.date_entry_format'));
             this.set('date', formatted_date);  
         },
         create: function() {
