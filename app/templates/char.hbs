@@ -8,8 +8,8 @@
 
 
 {{#if this.model.char.status_message}}
-        <div class="panel panel-default">
-            <div class="panel-body status-message">
+        <div class="card card-default">
+            <div class="card-body status-message">
                 {{{this.model.char.status_message}}}
                 {{#if this.model.char.idle_notes}}
                 <AnsiFormat @text={{this.model.char.idle_notes}} />
@@ -75,9 +75,9 @@
 
 {{#if this.model.char.can_manage}}
 {{#if this.showFiles}}
-    <div class="panel panel-default">
+    <div class="card card-default">
         
-        <div class="panel-body">
+        <div class="card-body">
             
         <p><b>Existing Character Files:</b></p>
         

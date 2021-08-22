@@ -8,10 +8,10 @@
 
 
 <a data-bs-toggle="collapse" href="#handle" class="btn btn-secondary btn-collapse">Manage Handle</a>
-<div id="handle" class="panel-collapse collapse">
+<div id="handle" class="card-collapse collapse">
 
-   <div class="panel panel-default">
-      <div class="panel-body">
+   <div class="card card-default">
+      <div class="card-body">
 
         {{#if this.model.handle}}
         <p>Your character is linked to the handle <b>{{this.model.handle}}</b>.  Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your handle preferences.</p>
@@ -48,10 +48,10 @@
 <p>You can change the password for this character. This is used to log in to both the game and the web portal.</p>
 
 <a data-bs-toggle="collapse" href="#password" class="btn btn-secondary btn-collapse">Change Password</a>
-<div id="password" class="panel-collapse collapse">
+<div id="password" class="card-collapse collapse">
 
-  <div class="panel panel-default">
-      <div class="panel-body">
+  <div class="card card-default">
+      <div class="card-body">
 
           <FlashMessages />
         
@@ -71,19 +71,19 @@
 <p>You can change several other account settings here.</p>
 
 <a data-bs-toggle="collapse" href="#settings" class="btn btn-secondary btn-collapse">Manage Settings</a>
-<div id="settings" class="panel-collapse collapse">
+<div id="settings" class="card-collapse collapse">
 
-  <div class="panel panel-default">
-      <div class="panel-body">
+  <div class="card card-default">
+      <div class="card-body">
 
           <FlashMessages />
         
-          <div class="panel panel-default">
-            <div class="panel-heading">
+          <div class="card card-default">
+            <div class="card-heading">
               Name
             </div>
           
-            <div class="panel-body">
+            <div class="card-body">
               {{#if this.isApproved}}
               <p>You are already approved. Submit a <LinkTo @route="jobs">request</LinkTo> to ask for a name change.</p>
               {{else}}
@@ -93,24 +93,24 @@
             </div>
           </div>
         
-          <div class="panel panel-default">
-            <div class="panel-heading">
+          <div class="card card-default">
+            <div class="card-heading">
               Email <LinkTo @route="help-topic" @model="email" target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
             </div>
           
-            <div class="panel-body">
+            <div class="card-body">
                         
               <p><Input placeholder="Email" id="email" @value={{this.model.email}} /></p>
             </div>
           </div>
             
           
-          <div class="panel panel-default">
-              <div class="panel-heading">
+          <div class="card card-default">
+              <div class="card-heading">
                 Timezone <LinkTo @route="help-topic" @model="timezone" target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
               </div>
     
-              <div class="panel-body">
+              <div class="card-body">
           
                 {{#if this.model.handle}}
                 <p>Your timezone is {{this.model.timezone}}. Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your timezone, which will apply to all characters linked to your handle.</p>
@@ -125,12 +125,12 @@
             </div>
             
             
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="card card-default">
+                <div class="card-heading">
                   Unified Play Screen <LinkTo @route="help-topic" @model="play" target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
                 </div>
     
-                <div class="panel-body">
+                <div class="card-body">
           
                   Unified Play Enabled <Input @type="checkbox" @checked={{this.model.unified_play_screen}} /> 
 

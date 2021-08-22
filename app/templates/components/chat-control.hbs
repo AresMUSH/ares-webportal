@@ -16,10 +16,10 @@
   {{/if}}
 </div>  
   
-<div id="channel-info" class="panel-collapse collapse">
+<div id="channel-info" class="card-collapse collapse">
   
-  <div class="panel panel-default">
-    <div class="panel-body">
+  <div class="card card-default">
+    <div class="card-body">
 
       <div class="icon-row">
         {{#if this.channel.desc}}
@@ -140,7 +140,7 @@
     <FlashMessages />
 
 
-<BsModalSimple @title="Report Offensive Chat" @closeTitle="Cancel" @submitTitle="Report" @size={{null}} @fade={{true}} @open={{this.showReport}} @onSubmit={{action "reportChat"}} @onHide={{action (mut this.showReport) false}}>
+<BsModalSimple @title="Report Chat" @closeTitle="Cancel" @submitTitle="Report" @size={{null}} @fade={{true}} @open={{this.showReport}} @onSubmit={{action "reportChat"}} @onHide={{action (mut this.showReport) false}}>
     
     <p>Enter a reason in the text box and select a starting message.  All messages after that one will be included in the report.</p>
     <p><Input @type="text" size={{50}} @value={{this.reportReason}} /></p>

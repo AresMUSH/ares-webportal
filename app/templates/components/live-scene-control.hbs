@@ -244,7 +244,7 @@
              <DropdownMenu @id="otherMenu" @title="Other" class="scene-menu">
                {{#if this.scene.can_edit}}
                    <li><LinkTo @route="scene-download" @model={{this.scene.id}} class="dropdown-item">Download Scene</LinkTo></li> 
-                   <li><a href="#" {{action (mut this.confirmReportScene) true}} class="dropdown-item">Report Abuse</a></li>
+                   <li><a href="#" {{action (mut this.confirmReportScene) true}} class="dropdown-item">Report Scene</a></li>
                {{/if}}
              </DropdownMenu>
                      
@@ -273,7 +273,7 @@
     </BsModalSimple>
     
     <BsModalSimple @title="Confirm Report" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmReportScene}} @onSubmit={{action "reportScene"}} @onHide={{action (mut this.confirmReportScene) false}}>
-      <p>If someone is behaving badly in a scene, you can bring it to the game admin's attention - along with an automatic, verified log of the scene (including OOC chat and any previously-edited or deleted poses).  </p>
+      <p>You can bring this cene to the game admin's attention - along with an automatic, verified log of the scene (including OOC chat).  </p>
       
       <p><b>Reason for Report:</b></p>
       

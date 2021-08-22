@@ -13,7 +13,25 @@ export default Controller.extend(AuthenticatedController, {
         saveColors() {
             let api = this.gameApi;
             let colors = {};
-            this.model.forEach(c => { colors[c.name] = c.value } );
+            let self = this;
+            let colorsValid = true;
+            
+            this.model.forEach(function(c) {
+              let value = c.value;
+              let colorName = c.name;
+              let style = new Option().style;
+              style.color = value;
+              
+              if (style.color === '') {
+                self.flashMessages.danger(`Invalid color for ${colorName}: ${value}`);
+                colorsValid = false;
+                return;
+              }
+              colors[colorName] = value;
+              });
+            if (!colorsValid) {
+              return;
+            }
             api.requestOne('saveColors', { colors: colors })
             .then( (response) => {
                 if (response.error) {

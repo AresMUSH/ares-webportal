@@ -79,13 +79,13 @@
  
 {{#if this.model.message.can_reply}}
 
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="card card-default">
+    <div class="card-heading">
         <a data-bs-toggle="collapse" href="#reply">Click to Reply</a>
         
     </div>
-    <div id="reply" class="panel-collapse collapse">
-      <div class="panel-body">
+    <div id="reply" class="card-collapse collapse">
+      <div class="card-body">
       <p><b>To:</b> <a href="#" {{action 'replyAll'}}>[Reply All]</a>
         <PowerSelectMultiple @selected={{this.replyToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "replyToListChanged"}} as |char|>
           {{char.name}}
@@ -104,13 +104,13 @@
 {{/if}}
 
 
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="card card-default">
+    <div class="card-heading">
         <a data-bs-toggle="collapse" href="#forward">Click to Forward</a>
         
     </div>
-    <div id="forward" class="panel-collapse collapse">
-      <div class="panel-body">
+    <div id="forward" class="card-collapse collapse">
+      <div class="card-body">
       <p><b>To:</b>
       <PowerSelectMultiple @selected={{this.fwdToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "fwdToListChanged"}} as |char|>
         {{char.name}}

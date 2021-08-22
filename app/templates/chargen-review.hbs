@@ -1,16 +1,16 @@
 {{page-title 'Review Character'}}
 <h1>Review Character</h1>
 
-<div class="panel panel-default">
-    <div class="panel-body">
+<div class="card card-default">
+    <div class="card-body">
         <pre class="ansi app-status">{{#if this.model.abilities}}<AnsiFormat @text={{this.model.abilities}} /> 
 {{/if}}<AnsiFormat @text={{this.model.demographics}} /><AnsiFormat @text={{this.model.background}} /><AnsiFormat @text={{this.model.desc}} /><AnsiFormat @text={{this.model.hooks}} />{{#if this.model.ranks}}<AnsiFormat @text={{this.model.ranks}} />{{/if}}{{#if this.model.custom}}<AnsiFormat @text={{this.model.custom}} />{{/if}}        </pre>
     </div>
 </div>
 
-<div class="panel panel-default">
+<div class="card card-default">
     
-    <div class="panel-body">
+    <div class="card-body">
        <p><span class="ansi-bright-red-fg">Red</span> issues will probably hold up your app.</p>
        <p><span class="ansi-bright-yellow-fg">Yellow</span> may be OK if it suits your character.</p>
 
