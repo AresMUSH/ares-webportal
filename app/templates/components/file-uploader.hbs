@@ -1,9 +1,9 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="card card-default">
+    <div class="card-heading">
         Upload Files
     </div>
 
-    <div class="panel-body">
+    <div class="card-body">
 
         {{#if this.showSelector}}
         <p>Select files for upload...</p>
@@ -45,9 +45,9 @@
                     
                     {{#if f.upload_message}}
                         {{#if f.upload_success}}
-                            <span class="label label-success">{{f.upload_message}}</span>
+                            <span class="badge label-success">{{f.upload_message}}</span>
                         {{else}}
-                            <span class="label label-danger">{{f.upload_message}}</span>
+                            <span class="badge label-danger">{{f.upload_message}}</span>
                         {{/if}}
                     {{/if}}
                     
@@ -55,7 +55,7 @@
                 <td>{{f.sizeKb}}KB</td> 
                 <td>
                     {{#if (not f.upload_success)}}
-                        <button class="btn btn-default" {{action 'removeFile' f}}><i class="fa fa-ban" aria-label="Remove File"></i></button>
+                        <button class="btn btn-secondary" {{action 'removeFile' f}}><i class="fa fa-ban" aria-label="Remove File"></i></button>
                         <button class="btn btn-primary" {{action 'uploadFile' f}}><i class="fa fa-upload" aria-label="Upload File"></i></button>
                     {{/if}}
                 </td>
@@ -63,7 +63,7 @@
             {{/each}}
         </table>
 
-        <button class="btn btn-default" {{action 'reset'}}>Reset Uploader</button>
+        <button class="btn btn-secondary" {{action 'reset'}}>Reset Uploader</button>
         {{/if}}
     </div>
 </div>

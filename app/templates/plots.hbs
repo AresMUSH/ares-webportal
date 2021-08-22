@@ -5,12 +5,8 @@
 
 {{#if this.isApproved}}
 
-<div class="row">
-    
-    <div class="col pull-right">
-        <LinkTo @route="plot-create" class="btn btn-primary">Create Plot</LinkTo>
-    </div>
-    
+<div class="action-buttons">
+  <LinkTo @route="plot-create" class="btn btn-primary">Create Plot</LinkTo>
 </div>
 
 {{/if}}
@@ -19,12 +15,10 @@
 
 
 <thead>
-    <tr>
-        <th class="col-xs-3">Plot</th>
-        <th class="col-xs-2">Storytellers</th>
-        <th class="col-xs-3 hidden-xs hidden-sm">Dates</th>
-        <th class="col-xs-4">Summary</th>
-    </tr>
+  <th class="col-xs-3">Plot</th>
+  <th class="col-xs-2">Storytellers</th>
+  <th class="col-xs-3 hidden-xs hidden-sm">Dates</th>
+  <th class="col-xs-4">Summary</th>
 </thead>
 
 <tbody>

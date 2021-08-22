@@ -6,18 +6,15 @@
 {{#each this.model as |color|}}
 <tr>
     <td><b>{{color.name}}</b></td>
-    <td><Input @type="color" class="color-select" @value={{color.value}} /> ({{color.value}})</td>
+    <td><Input @type="color" class="color-select" @value={{color.value}} /> <Input @value={{color.value}} /> </td>
 </tr>
 {{/each}}
 
 </table>
 
-    <div class="row">
-        <div class="col col-xs-12">
-            <div class="pull-right">
-                
-            <button {{action 'saveColors'}} class="btn btn-primary">Save</button>
-            </div>
-        </div>
-    </div>
+<div class="action-buttons">
+    <button {{action 'saveColors'}} class="btn btn-primary">Save</button>
+</div>
+
+<FlashMessages/>
 {{outlet}}

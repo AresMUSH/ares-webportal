@@ -1,8 +1,8 @@
 {{page-title this.model.heading}}
 <h1>{{this.model.heading}} Source</h1>
 
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="card card-default">
+    <div class="card-heading">
         Other Versions
     </div>
 
@@ -24,11 +24,11 @@
 
 </div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="card card-default">
+    <div class="card-heading">
         Selected Version
     </div>
-    <div class="panel-body">
+    <div class="card-body">
         <pre>
         {{this.model.text}}
         </pre>
@@ -38,15 +38,15 @@
 
 {{#if this.model.diff}}
 
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="card card-default">
+    <div class="card-heading">
         Compared to Previous Version
         &nbsp;
-        <a data-toggle="collapse" href="#compare" class="btn btn-default btn-collapse">Show/Hide</a>
+        <a data-bs-toggle="collapse" href="#compare" class="btn btn-secondary btn-collapse">Show/Hide</a>
         
     </div>
-    <div id="compare" class="panel-collapse collapse">
-        <div class="panel-body">
+    <div id="compare" class="card-collapse collapse">
+        <div class="card-body">
             {{{this.model.diff}}}
         </div>
     </div>
@@ -54,18 +54,12 @@
 
 {{/if}}
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
-
+<div class="action-buttons">
   {{#if can_edit}}
 
-        <button class="btn btn-default">Revert to This Version</button>
+        <button class="btn btn-secondary">Revert to This Version</button>
         
   {{/if}}
-        
-  </div>
-  </div>
 </div>
 
 <LinkTo @route="wiki-page" @model={{this.model.name}}><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Page</LinkTo>

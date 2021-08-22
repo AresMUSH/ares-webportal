@@ -43,6 +43,7 @@ export default Controller.extend({
         
         restoreDefaults() {
           let api = this.gameApi;
+          this.set('confirmRestore', false);
           api.requestOne('restoreConfig', { file: this.get('model.file') }, null)
           .then( (response) => {
               if (response.error) {

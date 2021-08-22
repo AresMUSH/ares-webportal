@@ -1,48 +1,48 @@
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#systeminfo">+</a></li>
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item"><a data-bs-toggle="tab" href="#systeminfo" class="nav-link active">+</a></li>
 
   {{#if this.char.roster}}
-    <li><a data-toggle="tab" href="#rosternotes">Roster Info</a></li>
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#rosternotes">Roster Info</a></li>
   {{/if}}
   
-  <li><a data-toggle="tab" href="#systemhooks">RP Hooks</a></li>
+  <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemhooks">RP Hooks</a></li>
   
   {{#if this.prefsExtraInstalled}}
-    <li><a data-toggle="tab" href="#systemprefs">RP Prefs</a></li>
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemprefs">RP Prefs</a></li>
   {{/if}}
   
   {{#if this.char.background}}
-      <li><a data-toggle="tab" href="#systembg">Background</a></li> 
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systembg">Background</a></li> 
   {{/if}}
   
   {{#if this.char.description}}
-  <li><a data-toggle="tab" href="#systemdesc">Description</a></li>
+  <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemdesc">Description</a></li>
   {{/if}}
   
   <ProfileFs3Tabs @char={{this.char}} @game={{this.game}} />
 
   {{#if this.char.achievements}}
-      <li><a data-toggle="tab" href="#systemachievements">Achievements</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemachievements">Achievements</a></li>
   {{/if}}
 
   {{#if this.traitsExtraInstalled}}
-    <li><a data-toggle="tab" href="#systemtraits">Traits</a></li>
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemtraits">Traits</a></li>
   {{/if}}
   
   {{#if this.rpgExtraInstalled}}
-    <li><a data-toggle="tab" href="#systemrpg">Sheet</a></li>
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemrpg">Sheet</a></li>
   {{/if}}
   
   {{#if this.fateExtraInstalled}}
-    <li><a data-toggle="tab" href="#systemfate">Sheet</a></li>
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemfate">Sheet</a></li>
   {{/if}}
 
   {{#if this.cookiesExtraInstalled}}
-    <li><a data-toggle="tab" href="#systemcookies">Cookies</a></li>
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemcookies">Cookies</a></li>
   {{/if}}  
   
   {{#if this.char.siteinfo}}
-    <li><a data-toggle="tab" href="#systemsite">Admin</a></li>
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemsite">Admin</a></li>
   {{/if}}
   
   <ProfileCustomTabs @char={{this.char}} @game={{this.game}} />
@@ -53,7 +53,7 @@
 
 
 <div class="tab-content">
-  <div id="systeminfo" class="tab-pane fade in active">
+  <div id="systeminfo" class="tab-pane fade show active">
       <div class="tab-cover">System Information</div>
   </div>
   {{#if this.char.roster}}
@@ -63,11 +63,11 @@
     <p>Contact: {{this.char.roster.contact}}</p>
 
     {{#if this.char.roster.previously_played}}
-    <span class="label label-info">Previously Played</span>
+    <span class="badge bg-info">Previously Played</span>
     {{/if}}
 
     {{#if this.char.roster.app_required}}
-    <span class="label label-warning">App Required</span>
+    <span class="badge bg-warning">App Required</span>
     {{/if}}
     
   </div>

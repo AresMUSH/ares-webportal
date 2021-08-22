@@ -63,28 +63,22 @@
     </td>
     <td>
           {{#if this.category}}
-            <span class="label label-info job-category job-category-{{this.category}}">
+            <span class="badge job-category job-category-{{this.category}}">
             {{this.category}}
             </span>
           {{else}}
-            <span class="label label-info job-category job-category-{{this.model.options.request_category}}">
+            <span class="badge job-category job-category-{{this.model.options.request_category}}">
             {{this.model.options.request_category}}
             </span>
           {{/if}}
     </td>
     <td>
-          <ul class="nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-              <span class="btn btn-default" href="#">Change Category <span class="caret"></span></span> </a>
-              <ul class="dropdown-menu">
+      
+        <DropdownMenu @id="categoryDropdown" @title="Change Category">
               {{#each this.model.options.category_values as |category| }}
-                <li><a href="#" {{action 'changeCategory' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+                <li><a href="#" {{action 'changeCategory' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
               {{/each}}
-              </ul>
-            </li>
-        </ul>
+        </DropdownMenu>
       
     </td>
   </tr>
@@ -96,8 +90,9 @@
      
  <MarkdownEditor @text={{this.description}} />
    
-<div class="pull-right">
-<button class="btn btn-primary" {{action 'createJob'}}>Create</button>
+<div class="action-buttons">
+  <LinkTo @route="jobs" class="btn btn-secondary">Cancel</LinkTo>
+  <button class="btn btn-primary" {{action 'createJob'}}>Create</button>
 </div>
 
 <FlashMessages />

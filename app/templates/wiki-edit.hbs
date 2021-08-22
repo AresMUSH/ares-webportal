@@ -36,27 +36,22 @@
    
     <MarkdownEditor @text={{this.model.text}} @rows={{30}} />
   
-    <div class="row">
-        <div class="col col-xs-12">
-            <div class="pull-right">
-
-                {{#if this.model.can_do_minor_edits}}
-                <Input @type="checkbox" @checked={{this.minorEdit}} /> Minor Edit
-                {{/if}}
-                <button class="btn btn-default" {{action 'cancel'}}>Cancel</button>
-                <button class="btn btn-primary" {{action 'save'}}>Save</button>
-        </div>
-      </div>
+    <div class="action-buttons">
+      {{#if this.model.can_do_minor_edits}}
+      <Input @type="checkbox" @checked={{this.minorEdit}} /> Minor Edit
+      {{/if}}
+      <button class="btn btn-secondary" {{action 'cancel'}}>Cancel</button>
+      <button class="btn btn-primary" {{action 'save'}}>Save</button>
     </div>
     
     <FlashMessages />
     
     {{#if this.preview}}
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card card-default">
+        <div class="card-heading">
             Preview
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             {{{this.preview}}}
         </div>
     </div>

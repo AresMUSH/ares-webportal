@@ -18,12 +18,10 @@ export default Component.extend({
   updatePoseControls: function() {
     if (this.channel && !this.get('channel.poseChar')) {
       let self = this;
-      this.channel.poseable_chars.some(function(c) {
-        if (self.channel.who.any(w => w.name == c.name)) {
+      this.channel.poseable_chars.forEach(c => {
+        if (!this.get('channel.poseChar') && self.channel.who.any(w => w.name === c.name)) {
           self.set('channel.poseChar', c);
-          return true;
         }
-        return false;
       });
     }
   },

@@ -32,16 +32,11 @@
     
 <p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
 
-    <div class="row">
-        <div class="col col-xs-12">
-
-        <div class="pull-right">
-          {{#if this.model.can_edit}}
-          <LinkTo @route="location-edit" @model={{this.model.id}} class="btn btn-default">Edit</LinkTo>
-          {{/if}}
-          <LinkTo @route="scene-create" @query={{hash location=this.model.name_and_area}} class="btn btn-primary">Start Scene Here</LinkTo>
-        </div>
-        </div>
-    </div>
+<div class="action-buttons">
+  {{#if this.model.can_edit}}
+  <LinkTo @route="location-edit" @model={{this.model.id}} class="btn btn-secondary">Edit</LinkTo>
+  {{/if}}
+  <LinkTo @route="scene-create" @query={{hash location=this.model.name_and_area}} class="btn btn-primary">Start Scene Here</LinkTo>
+</div>
 
 

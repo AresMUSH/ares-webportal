@@ -3,21 +3,17 @@
     
     <AceEditor @editorId="editor" @resetEditorCallback={{this.resetEditor}} @text={{this.model.text}} @mode="html_ruby" @editorChanged={{action "editorChanged"}} />
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
-            <LinkTo @route="home" class="btn btn-default">Cancel</LinkTo>
+<div class="action-buttons">
+            <LinkTo @route="home" class="btn btn-secondary">Cancel</LinkTo>
             <button {{action 'save'}} class="btn btn-primary">Save</button>
-        </div>
-        
-        <FlashMessages />
-    </div>
 </div>
+        
+<FlashMessages />
 
 
-<div class="panel panel-default">
+<div class="card card-default">
 
-    <div class="panel-body">
+    <div class="card-body">
         <p>When you're finished - or if you get the code into a messed-up state - you can reset the tinker code back to its default.</p>
         <p>Be aware: This will erase any of your tinkering changes.  No other code will be affected.</p>
 

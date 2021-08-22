@@ -5,7 +5,7 @@
 
      <p><b>Post As:</b>        <div class="forum-char-select" >
                  <PowerSelect @selected={{this.author}} @options={{this.model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |author|>
-                     <CharIconTiny @char={{this.author}} />
+                     <CharIconTiny @char={{author}} />
                  </PowerSelect>
              </div>
     </p>
@@ -16,8 +16,8 @@
     <p><b>Message:</b></p>
     <MarkdownEditor @text={{this.message}} />
 
-<div class="pull-right">
-    <LinkTo @route="forum-category" @model={{this.model.id}} class="btn btn-default">Cancel</LinkTo>
+<div class="action-buttons">
+    <LinkTo @route="forum-category" @model={{this.model.id}} class="btn btn-secondary">Cancel</LinkTo>
     <button {{action "addPost"}} class="btn btn-primary">Post</button>
 </div>
     

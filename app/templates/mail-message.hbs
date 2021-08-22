@@ -67,28 +67,25 @@
 <AnsiFormat @text={{this.model.message.body}} />
 
 <hr>
-        <div class="pull-right">
-          {{#if this.model.message.in_trash}}
-            <button class="btn btn-default" {{action 'uneleteMsg'}}>Undelete</button>
-          {{else}}
-            <button class="btn btn-warning" {{action 'deleteMsg'}}>Trash</button>
-            <button class="btn btn-default" {{action 'archiveMsg'}}>Archive</button>          
-          {{/if}}
-        </div>
-        
-<div class="clearfix"></div>
+  <div class="action-buttons">
+    {{#if this.model.message.in_trash}}
+      <button class="btn btn-secondary" {{action 'uneleteMsg'}}>Undelete</button>
+    {{else}}
+      <button class="btn btn-warning" {{action 'deleteMsg'}}>Trash</button>
+      <button class="btn btn-secondary" {{action 'archiveMsg'}}>Archive</button>          
+    {{/if}}
+  </div>
 
  
 {{#if this.model.message.can_reply}}
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <a data-toggle="collapse" href="#reply">Click to Reply</a>
+<div class="card card-default">
+    <div class="card-heading">
+        <a data-bs-toggle="collapse" href="#reply">Click to Reply</a>
         
     </div>
-    <div id="reply" class="panel-collapse collapse">
-      <div class="panel-body">
-      <h3>Reply</h3>
+    <div id="reply" class="card-collapse collapse">
+      <div class="card-body">
       <p><b>To:</b> <a href="#" {{action 'replyAll'}}>[Reply All]</a>
         <PowerSelectMultiple @selected={{this.replyToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "replyToListChanged"}} as |char|>
           {{char.name}}
@@ -96,7 +93,10 @@
       </p>
       <p><b>Subject:</b> <Input @type="text" size={{25}} id="replySubject" @value={{this.replySubject}} /></p>
           <MarkdownEditor @text={{this.replyMessage}} />
-          <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>    
+
+          <div class="action-buttons">
+            <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>    
+          </div>
         </div>
     </div>
 </div>
@@ -104,14 +104,13 @@
 {{/if}}
 
 
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <a data-toggle="collapse" href="#forward">Click to Forward</a>
+<div class="card card-default">
+    <div class="card-heading">
+        <a data-bs-toggle="collapse" href="#forward">Click to Forward</a>
         
     </div>
-    <div id="forward" class="panel-collapse collapse">
-      <div class="panel-body">
-      <h3>Forward</h3>
+    <div id="forward" class="card-collapse collapse">
+      <div class="card-body">
       <p><b>To:</b>
       <PowerSelectMultiple @selected={{this.fwdToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "fwdToListChanged"}} as |char|>
         {{char.name}}
@@ -121,7 +120,10 @@
       <b>Original Message:</b>
       <AnsiFormat @text={{this.model.message.body}} />
           <MarkdownEditor @text={{this.fwdMessage}} />
-          <button class="btn btn-primary" {{action 'sendForward'}}>Send</button>    
+
+          <div class="action-buttons">
+            <button class="btn btn-primary" {{action 'sendForward'}}>Send</button>    
+          </div>
         </div>
     </div>
 </div>

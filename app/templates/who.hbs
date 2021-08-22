@@ -3,12 +3,14 @@
 
 <p>{{this.model.who_count}} character(s) online.</p>
 
-<table class="table table-striped">
+<table class="table">
+  <tbody>
     {{#each this.model.who as |char|}}
     <tr>
         <td> <CharIconInline @char={{char}} /> </td>        
     </tr>
     {{/each}}
+  </tbody>
 </table>
 
 <br>

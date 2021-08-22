@@ -1,14 +1,14 @@
      <ul class="nav nav-tabs" role="tablist">
 
             {{#if this.model.char.fs3.reset_needed}}
-           <li role="presentation" class="active"><a href="#fs3reset" aria-controls="fs3reset" role="tab" data-toggle="tab">Reset</a></li>
+           <li role="presentation" class="nav-item"><a href="#fs3reset" aria-controls="fs3reset" role="tab" data-bs-toggle="tab" class="nav-link active">Reset</a></li>
            {{else}}
-           <li role="presentation" class="active"><a href="#fs3attrs" aria-controls="fs3attrs" role="tab" data-toggle="tab">Attributes</a></li>
-           <li role="presentation"><a href="#fs3action" aria-controls="fs3action" role="tab" data-toggle="tab">Action Skills</a></li>
-           <li role="presentation"><a href="#fs3bg" aria-controls="fs3bg" role="tab" data-toggle="tab">Background Skills</a></li>
-           <li role="presentation"><a href="#fs3lang" aria-controls="fs3lang" role="tab" data-toggle="tab">Languages</a></li>
+           <li role="presentation" class="nav-item"><a href="#fs3attrs" aria-controls="fs3attrs" role="tab" data-bs-toggle="tab" class="nav-link active">Attributes</a></li>
+           <li role="presentation" class="nav-item"><a href="#fs3action" aria-controls="fs3action" role="tab" data-bs-toggle="tab" class="nav-link">Action Skills</a></li>
+           <li role="presentation" class="nav-item"><a href="#fs3bg" aria-controls="fs3bg" role="tab" data-bs-toggle="tab" class="nav-link">Background Skills</a></li>
+           <li role="presentation" class="nav-item"><a href="#fs3lang" aria-controls="fs3lang" role="tab" data-bs-toggle="tab" class="nav-link">Languages</a></li>
            {{#if this.model.char.fs3.use_advantages}}
-       <li role="presentation"><a href="#fs3adv" aria-controls="fs3adv" role="tab" data-toggle="tab">Advantages</a></li>
+       <li role="presentation" class="nav-item"><a href="#fs3adv" aria-controls="fs3adv" role="tab" data-bs-toggle="tab" class="nav-link">Advantages</a></li>
             {{/if}}
        
            {{/if}}
@@ -33,11 +33,11 @@
 
   <div role="tabpanel" class="tab-pane active" id="fs3attrs">
 
-  <div class="panel panel-default">
-       <div class="panel-heading">
+  <div class="card card-default">
+       <div class="card-heading">
            Attributes
        </div>
-   <div class="panel-body">
+   <div class="card-body">
 
      <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.attrs_blurb}} /></p>
 
@@ -54,11 +54,11 @@
 
   <div role="tabpanel" class="tab-pane" id="fs3action">
 
-  <div class="panel panel-default">
-       <div class="panel-heading">
+  <div class="card card-default">
+       <div class="card-heading">
            Action Skills
        </div>
-   <div class="panel-body">
+   <div class="card-body">
 
      <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.action_blurb}} /></p>
      
@@ -79,11 +79,11 @@
   <div role="tabpanel" class="tab-pane" id="fs3bg">
 
 
-  <div class="panel panel-default">
-       <div class="panel-heading">
+  <div class="card card-default">
+       <div class="card-heading">
            Background Skills
        </div>
-   <div class="panel-body">
+   <div class="card-body">
 
      <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.background_blurb}} /> To remove a background skill, set its rating to Everyman.</p>
 
@@ -95,18 +95,18 @@
      </Fs3Bgbox>
      {{/each}}
 
-     <button class="btn btn-default" id="addbg" {{action (mut this.selectBackgroundSkill) true}}>Add Background Skill</button>
+     <button class="btn btn-secondary" id="addbg" {{action (mut this.selectBackgroundSkill) true}}>Add Background Skill</button>
 
    </div>
   </div>
   </div>
   <div role="tabpanel" class="tab-pane" id="fs3lang">
 
-   <div class="panel panel-default">
-       <div class="panel-heading">
+   <div class="card card-default">
+       <div class="card-heading">
            Language Skills
        </div>
-     <div class="panel-body">
+     <div class="card-body">
 
 
          <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.language_blurb}} /> To remove a language, set its rating to Everyman.</p>
@@ -124,11 +124,11 @@
 
   <div role="tabpanel" class="tab-pane" id="fs3adv">
 
-     <div class="panel panel-default">
-         <div class="panel-heading">
+     <div class="card card-default">
+         <div class="card-heading">
              Advantages
          </div>
-       <div class="panel-body">
+       <div class="card-body">
 
 
            <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.advantages_blurb}} /> To remove an advantage, set its rating to Everyman.</p>
