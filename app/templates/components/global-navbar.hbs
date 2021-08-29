@@ -34,7 +34,7 @@
                     </ul>
                   </li>
                 {{else}}
-                <li class="hidden-xl  hidden-lg  hidden-md"><LinkTo @route="login" @query={{hash redirect=this.currentRoute}}>Login</LinkTo></li>
+                <li class="nav-item d-md-none"><LinkTo class="nav-link" @route="login" @query={{hash redirect=this.currentRoute}}>Login</LinkTo></li>
                 {{/if}}
 
         
