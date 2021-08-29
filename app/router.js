@@ -97,6 +97,7 @@ Router.map(function() {
   this.route('players');
   this.route('player', { path: '/player/:id'});
   this.route('plots');
+  this.route('plots-archive', {path: '/plots/archive'});
   this.route('plot', { path: '/plot/:id' });
   this.route('plot-edit', { path: '/plot/:id/edit' });
   this.route('plot-create', { path: '/plot/create' });
