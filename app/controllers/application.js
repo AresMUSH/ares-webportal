@@ -37,17 +37,12 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, AresC
       return aresweb_version;
     }),
     
-    currentUser: computed('session.data.authenticated', function() {
-        return this.get('session.data.authenticated');
-    }),
-    
-    socketConnected: computed('gameSocket.connected', function() {
-      return this.get('gameSocket.connected');
-    }),
-    
-    sidebar: computed('refreshSidebar', function() {
-        return this.model;
-    }),
+    currentUser: computed.reads('session.data.authenticated'),
+
+    socketConnected: computed.reads('gameSocket.connected'),
+
+    sidebar: computed.reads('model'),
+
 
     topNavbar: computed('model.top_navbar', function() {
       let config = this.get('model.top_navbar');

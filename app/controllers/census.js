@@ -2,7 +2,7 @@ import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 
 export default Controller.extend({
-    chars: computed('model', function() {
+  chars: computed('model.census.{chars,titles}', function () {
         let titles = this.get('model.census.titles');
         let census = this.get('model.census.chars');
         let chars = [];

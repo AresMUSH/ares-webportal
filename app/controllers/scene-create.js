@@ -9,12 +9,12 @@ export default Controller.extend({
     queryParams: [ 'location' ],
     warning_tags: [],
 
-    scenePacingOptions: computed(function() { 
-        return this.get('model.sceneOptions.scene_pacing');
-    }),    
-    sceneTypes: computed(function() { 
-        return this.get('model.sceneOptions.scene_types').map(p => p.name);
+    scenePacingOptions: computed.reads('model.sceneOptions.scene_pacing'),
+  
+    sceneTypes: computed('model.sceneOptions.scene_types', function () {
+     return this.get('model.sceneOptions.scene_types').map((p) => p.name);
     }),
+
     
     scenePrivacyValues: computed(function() { 
         return [ 'Open', 'Private' ];

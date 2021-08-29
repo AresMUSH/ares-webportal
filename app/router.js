@@ -57,14 +57,14 @@ Router.map(function() {
   this.route('forum');
   this.route('forum-category', { path: '/forum/:category_id'});
   this.route('forum-topic', { path: '/forum/:category_id/:topic_id'});
-  this.route('forum-create-post', { path: '/forum/:category_id/create-post' })
+  this.route('forum-create-post', { path: '/forum/:category_id/create-post' });
   this.route('forum-create');
   this.route('forum-edit', { path: '/forum-edit/:id' });
   this.route('forum-manage');
   this.route('fs3-limits');
   this.route('fs3-xp-costs');
   this.route('fs3combat-gear', { path: '/fs3combat/gear/' });
-  this.route('fs3combat-gear-detail', { path: '/fs3combat/gear/:type/:name' })
+  this.route('fs3combat-gear-detail', { path: '/fs3combat/gear/:type/:name' });
   this.route('fs3skills-abilities', { path: '/fs3skills/abilities' });
   this.route('game-edit');
   this.route('groups');

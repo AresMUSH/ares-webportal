@@ -39,6 +39,7 @@ export default Component.extend(AuthenticatedController, {
     },
     
     didInsertElement: function() {
+      this._super(...arguments);
       this.updatePoseControls();
     },
     

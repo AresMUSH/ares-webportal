@@ -6,15 +6,15 @@ export default Component.extend({
   maxValue: 0,
   currentValue: 0,
   tagName: '',
-  
-  progress: computed('currentValue', function() {
+
+  progress: computed('currentValue', 'maxValue', function () {
     if (this.maxValue === 0) {
       return 0;
     }
-    return 100.0 * this.currentValue / this.maxValue;
+    return (100.0 * this.currentValue) / this.maxValue;
   }),
-  
-  widthStyle: computed('progress', function() {
+
+  widthStyle: computed('progress', function () {
     return htmlSafe(`width: ${this.progress}%;`);
-  })
+  }),
 });
