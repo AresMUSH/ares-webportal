@@ -16,7 +16,7 @@
         <label for="date" class="col-form-label">Date:</label>
     </div>
     <div class="col-sm-9">
-         <PikadayInput @onSelection={{action "changeDate"}} @format={{this.model.app.game.date_entry_format}} /> 
+         <PikadayInput @firstDay={{0}} @onSelection={{action "changeDate"}} @format={{this.model.app.game.date_entry_format}} /> 
     </div> 
   </div>
   
