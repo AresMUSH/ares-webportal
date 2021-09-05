@@ -8,42 +8,42 @@
         <i class="fas fa-exclamation-triangle"></i> <strong>Reboot Required!</strong> {{this.model.options.reboot_required_notice}}
       </div>
   {{/if}}
+
+{{else}}
+
+  {{page-title 'Requests'}}
+  <h1>Requests</h1>
+{{/if}}
+
      
-      
-    
-  <div class="action-buttons-spaced">
+<div class="action-buttons-spaced">
+
+<DropdownMenu @id="filterDropdown" @title={{this.model.jobs.jobs_filter}}>
+  {{#each this.model.options.status_filters as |filter| }}
+    <li><a href="#" {{action 'filterJobs' filter}} class="dropdown-item"><span class="badge job-category job-category-general">&nbsp;</span> {{filter}}</a></li>
+  {{/each}}
   
-  <DropdownMenu @id="filterDropdown" @title={{this.model.jobs.jobs_filter}}>
-    {{#each this.model.options.status_filters as |filter| }}
-      <li><a href="#" {{action 'filterJobs' filter}} class="dropdown-item"><span class="badge job-category job-category-general">&nbsp;</span> {{filter}}</a></li>
-    {{/each}}
-    
-    {{#each this.model.options.category_values as |category| }}
-      <li><a href="#" {{action 'filterJobs' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
-    {{/each}}
-    
-  </DropdownMenu>
+  {{#each this.model.options.category_values as |category| }}
+    <li><a href="#" {{action 'filterJobs' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+  {{/each}}
   
+</DropdownMenu>
+  
+{{#if this.model.options.is_job_admin}}
     <div>
       <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Jobs</LinkTo>  &nbsp;&nbsp;
       <a href="#" {{action 'markRead'}} class="btn btn-secondary">Mark All Read</a>
       <LinkTo @route="job-create" class="btn btn-primary">Create Job</LinkTo>
     </div>
-  </div>
-  
-   
-  {{else}}
-
-  {{page-title 'Requests'}}
-    <h1>Requests</h1>
-  
-    <div class="action-buttons">
+{{else}}
+    <div>
       <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Requests</LinkTo>  &nbsp;&nbsp;
       <LinkTo @route="job-create" class="btn btn-primary">Create Request</LinkTo>
     </div>
+{{/if}}
 
-  {{/if}}
-
+</div>
+    
 <div class="clearfix"></div>
 
   {{#if this.newJobs}}
