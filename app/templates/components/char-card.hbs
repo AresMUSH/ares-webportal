@@ -48,33 +48,55 @@
 
 <div class="card-abilities">
   {{#each this.char.fs3.attributes as |ability|}}
-  <span class="card-ability">{{ability.name}}: {{ability.rating}}</span>
+  <div class="card-ability">
+    <span class="card-ability-name">{{ability.name}}</span>
+    <Fs3Dots @rating={{ability.rating}} @max={{4}} />
+  </div>
   {{/each}}
 </div>
 
 <div class="card-abilities">
   {{#each this.char.fs3.action_skills as |ability|}}
-  <span class="card-ability">{{ability.name}}: {{ability.rating}}</span>
+  <div class="card-ability">
+    <span class="card-ability-name">{{ability.name}}</span>
+    <Fs3Dots @rating={{ability.rating}} @max={{8}} />
+  </div>
   {{/each}}
 </div>
 
+<div class="card-specialties">
+{{#each this.char.fs3.action_skills as |ability|}}
+  {{#if ability.specialties}}
+    <div class="card-specialty">{{ability.name}}: {{ability.specialties}}</div>
+  {{/if}}
+{{/each}}
+</div>
 
 <div class="card-abilities">
   {{#each this.char.fs3.backgrounds as |ability|}}
-  <span class="card-ability">{{ability.name}}: {{ability.rating}}</span>
+  <div class="card-ability">
+    <span class="card-ability-name">{{ability.name}}</span>
+    <Fs3Dots @rating={{ability.rating}} @max={{3}} />
+  </div>
   {{/each}}
 </div>
 
 <div class="card-abilities">
   {{#each this.char.fs3.languages as |ability|}}
-  <span class="card-ability">{{ability.name}}: {{ability.rating}}</span>
+  <div class="card-ability">
+    <span class="card-ability-name">{{ability.name}}</span>
+    <Fs3Dots @rating={{ability.rating}} @max={{3}} />
+  </div>
   {{/each}}
 </div>
 
-{{#if this.char.fs3.advantages}}
+{{#if this.char.fs3.use_advantages}}
 <div class="card-abilities">
   {{#each this.char.fs3.advantages as |ability|}}
-  {{ability.name}}: {{ability.rating}}
+  <div class="card-ability">
+    <span class="card-ability-name">{{ability.name}}</span>
+    <Fs3Dots @rating={{ability.rating}} @max={{3}} />
+  </div>
   {{/each}}
 </div>
 {{/if}}
