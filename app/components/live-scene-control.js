@@ -12,6 +12,7 @@ export default Component.extend(AuthenticatedController, {
     selectLocation: false,
     managePoseOrder: false,
     characterCard: false,
+    characterCardInfo: null,
     newLocation: null,
     reportReason: null,
     poseType: null,
@@ -39,6 +40,7 @@ export default Component.extend(AuthenticatedController, {
     },
     
     didInsertElement: function() {
+      this._super(...arguments);
       this.updatePoseControls();
     },
     
@@ -57,12 +59,7 @@ export default Component.extend(AuthenticatedController, {
     poseOrderTypes: computed(function() {
       return [ '3-per', 'normal' ];
     }),
-    
-    characterCardInfo: computed('characterCard', function() {
-      let participant = this.get('scene.participants').find(p => p.name == this.characterCard);
-      return participant ? participant.char_card : {};
-    }),
-  
+      
     txtExtraInstalled: computed(function() {
       return this.isExtraInstalled('txt');
     }),
@@ -280,6 +277,18 @@ export default Component.extend(AuthenticatedController, {
       
       poseCharChanged(newChar) { 
         this.set('scene.poseChar', newChar);
+      },
+      
+      showCharCard(char) {
+        let api = this.gameApi;
+        api.requestOne('sceneCard', { char: char }, null)
+        .then( (response) => {
+            if (response.error) {
+                return;
+            }
+            this.set('characterCardInfo', response);
+            this.set('characterCard', true);
+        });
       },
       
       switchPoseOrderType(newType) {

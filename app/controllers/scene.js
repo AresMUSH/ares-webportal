@@ -8,9 +8,10 @@ export default Controller.extend(AuthenticatedController, {
     router: service(),
     confirmDelete: false,
     
-    pageTitle: computed('model.title', function() {
-        return `${this.get('model.icdate')} - ${this.get('model.title')}`
+    pageTitle: computed('model.{icdate,title}', function () {
+      return `${this.get('model.icdate')} - ${this.get('model.title')}`;
     }),
+
     
     resetOnExit: function() {
       this.set('confirmDelete', false);

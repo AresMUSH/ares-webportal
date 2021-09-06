@@ -6,21 +6,20 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     'ember-bootstrap': {
-      'bootstrapVersion': 5,
-      'importBootstrapFont': true,
-      'importBootstrapCSS': false
+      bootstrapVersion: 5,
+      importBootstrapFont: false,
+      importBootstrapCSS: false,
     },
     'ember-cli-babel': {
-      includePolyfill: true
+      includePolyfill: true,
     },
-  
+
     'ember-cli-terser': {
-      enabled: false
+      enabled: false,
     },
-    'minifyCSS': {
-      enabled: false
-    }
-    
+    minifyCSS: {
+      enabled: false,
+    },
   });
 
   /*  app.import(app.bowerDirectory + '/bootstrap/dist/css/bootstrap.css');

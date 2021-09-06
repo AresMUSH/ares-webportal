@@ -62,7 +62,7 @@
                       <img alt="System Profile Icon"  class="small-profile-icon <IconClass />"  src="/game/uploads/theme_images/noicon.png" >
                       Combined Poses
                   {{else}}
-                      <a href="#" {{action (mut this.characterCard) pose.char.name}}>
+                      <a href="#" {{action 'showCharCard' pose.char.name}}>
                           {{#if pose.char.icon}}
                           <img alt="{{pose.char.name}}'s icon" class="small-profile-icon <IconClass />" src="/game/uploads/{{pose.char.icon}}" >
                           {{else}}
@@ -175,7 +175,7 @@
              <div class="scene-dropdowns">
              {{#if (not this.scene.completed)}}
              
-             <DropdownMenu @id="playMenu" @title="Play" class="scene-menu">
+             <DropdownMenu @id="playMenu" @title="Play"  @dropup={{true}} class="scene-menu">
                {{#if this.scene.can_edit}}
                    <li><a href="#" {{action (mut this.selectLocation) true}} class="dropdown-item">Change Location</a></li>
                    <li><a href="#" {{action (mut this.managePoseOrder) true}} class="dropdown-item">Manage Pose Order</a></li>
@@ -215,7 +215,7 @@
              {{#if this.scene.fs3combat_enabled}}
                {{#if this.scene.combat}}
                
-                 <DropdownMenu @id="combatMenu" @title="Combat" class="scene-menu">
+                 <DropdownMenu @id="combatMenu" @title="Combat"  @dropup={{true}} class="scene-menu">
                      <LiveSceneFs3combat @scene={{this.scene}} />
                  </DropdownMenu>
                
@@ -223,7 +223,7 @@
              {{/if}}
              
 
-             <DropdownMenu @id="manageMenu" @title="Manage" class="scene-menu">
+             <DropdownMenu @id="manageMenu" @title="Manage" @dropup={{true}} class="scene-menu">
                {{#if this.scene.can_edit}}
                    <li><LinkTo @route="scene-edit" @model={{this.scene.id}} class="dropdown-item">Edit Scene</LinkTo></li>
                    {{#if (not this.scene.completed)}}
@@ -241,7 +241,7 @@
              </DropdownMenu>
 
 
-             <DropdownMenu @id="otherMenu" @title="Other" class="scene-menu">
+             <DropdownMenu @id="otherMenu" @title="Other" @dropup={{true}} class="scene-menu">
                {{#if this.scene.can_edit}}
                    <li><LinkTo @route="scene-download" @model={{this.scene.id}} class="dropdown-item">Download Scene</LinkTo></li> 
                    <li><a href="#" {{action (mut this.confirmReportScene) true}} class="dropdown-item">Report Scene</a></li>

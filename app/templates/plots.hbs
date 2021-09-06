@@ -1,7 +1,7 @@
 {{page-title 'Plots'}}
 <h1>Plots</h1>
 
-<p>Plots are a way to group related scenes.</p>
+<p>Plots are a way to group related scenes. For archived plots, see <LinkTo @route="plots-archive">Plot Archive</LinkTo>.</p>
 
 {{#if this.isApproved}}
 
@@ -11,56 +11,4 @@
 
 {{/if}}
 
-<table class="table table-striped">
-
-
-<thead>
-  <th class="col-xs-3">Plot</th>
-  <th class="col-xs-2">Storytellers</th>
-  <th class="col-xs-3 hidden-xs hidden-sm">Dates</th>
-  <th class="col-xs-4">Summary</th>
-</thead>
-
-<tbody>
-
-{{#each this.model as |plot|}}
-  {{#if (not plot.completed) }}
-    <tr>
-        <td>
-        <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
-        </td>
-        <td>
-          {{#each plot.storytellers as |storyteller|}}
-            <CharIconTiny @char={{storyteller}} />
-          {{/each}}
-        </td>
-        <td class="hidden-xs hidden-sm">
-        {{plot.start_date}} - {{plot.end_date}}
-        </td>        
-        <td>
-            <AnsiFormat @text={{plot.summary}} />
-            {{#if plot.content_warning}}
-            <ContentWarningTag @warning={{plot.content_warning}} />
-            {{/if}}
-            
-        </td>
-    </tr>
-  {{/if}}
-{{/each}}
-
-</tbody>
-</table>
-
-<h2>Completed Plots</h2>
-
-<ul>
-{{#each this.model as |plot|}}
-  {{#if plot.completed }}
-    <li>
-        <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
-        
-            <AnsiFormat @text={{plot.summary}} />
-    </li>
-  {{/if}}
-{{/each}}
-</ul>
+<PlotsList @plots={{this.model}} />

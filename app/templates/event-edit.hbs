@@ -27,7 +27,7 @@
         <label for="date" class="col-form-label">Date:</label>
     </div>
     <div class="col-sm-9">
-         <PikadayInput @onSelection={{action "changeDate"}} @value={{this.model.event.date}}  @format={{this.model.event.date_entry_format}} /> 
+         <PikadayInput @firstDay={{0}} @onSelection={{action "changeDate"}} @value={{this.model.event.date}}  @format={{this.model.event.date_entry_format}} /> 
     </div> 
   </div>
   

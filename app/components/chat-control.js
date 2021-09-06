@@ -4,7 +4,6 @@ import { observer } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Component.extend({
-
   gameApi: service(),
   flashMessages: service(),
   showReport: false,
@@ -14,19 +13,15 @@ export default Component.extend({
   showReport: false,
   showPageRename: false,
   newPageTitle: '',
-  
-  updatePoseControls: function() {
+
+  updatePoseControls: function () {
     if (this.channel && !this.get('channel.poseChar')) {
-      let self = this;
-      this.channel.poseable_chars.forEach(c => {
-        if (!this.get('channel.poseChar') && self.channel.who.any(w => w.name === c.name)) {
-          self.set('channel.poseChar', c);
-        }
-      });
+      this.set('channel.poseChar', this.get('channel.poseable_chars')[0]);
     }
   },
-  
-  didInsertElement: function() {
+
+  didInsertElement: function () {
+    this._super(...arguments);
     this.updatePoseControls();
   },
   
