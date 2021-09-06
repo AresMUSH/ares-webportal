@@ -1,0 +1,107 @@
+{{page-title 'FS3 Skills Scan'}}
+<h1>FS3 Skills Scan</h1>
+
+<ul class="nav nav-tabs" id="skillscan" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="action-tab" data-bs-toggle="tab" data-bs-target="#action" type="button" role="tab" aria-controls="action" aria-selected="true">Action Skills</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="bg-tab" data-bs-toggle="tab" data-bs-target="#bg" type="button" role="tab" aria-controls="bg" aria-selected="true">Background Skills</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="lang-tab" data-bs-toggle="tab" data-bs-target="#lang" type="button" role="tab" aria-controls="lang" aria-selected="true">Languages</a>
+  </li>
+  {{#if this.model.advantage}}
+  <li class="nav-item">
+    <a class="nav-link" id="adv-tab" data-bs-toggle="tab" data-bs-target="#adv" type="button" role="tab" aria-controls="adv" aria-selected="true">Advantages</a>
+  </li>
+  {{/if}}
+</ul>
+
+<div class="tab-content" id="skillscan">
+  <div class="tab-pane fade show active" id="action" role="tabpanel" aria-labelledby="action-tab">
+
+    {{#each-in this.model.action as |name skills|}}
+    <h3>{{name}}</h3>
+
+    <table class="table table-striped">
+      <tbody>
+      {{#each-in skills as |rating chars|}}
+        <tr><td class="fs3-skillscan-rating">{{rating}}</td>
+          <td>
+            {{#each chars as |char|}}
+              {{char}}
+            {{/each}}
+          </td>
+        </tr>
+      {{/each-in}}
+      </tbody>
+    </table>
+    {{/each-in}}
+  
+  </div>
+  <div class="tab-pane fade" id="bg" role="tabpanel" aria-labelledby="bg-tab">
+
+    {{#each-in this.model.background as |name skills|}}
+    <h3>{{name}}</h3>
+
+    <table class="table table-striped">
+      <tbody>
+      {{#each-in skills as |rating chars|}}
+        <tr><td class="fs3-skillscan-rating">{{rating}}</td>
+          <td>
+            {{#each chars as |char|}}
+              {{char}}
+            {{/each}}
+          </td>
+        </tr>
+      {{/each-in}}
+      </tbody>
+    </table>
+    {{/each-in}}
+  
+  </div>
+  <div class="tab-pane fade" id="lang" role="tabpanel" aria-labelledby="lang-tab">
+
+    {{#each-in this.model.language as |name skills|}}
+    <h3>{{name}}</h3>
+
+    <table class="table table-striped">
+      <tbody>
+      {{#each-in skills as |rating chars|}}
+        <tr><td class="fs3-skillscan-rating">{{rating}}</td>
+          <td>
+            {{#each chars as |char|}}
+              {{char}}
+            {{/each}}
+          </td>
+        </tr>
+      {{/each-in}}
+      </tbody>
+    </table>
+    {{/each-in}}
+  
+  </div>
+  <div class="tab-pane fade" id="adv" role="tabpanel" aria-labelledby="adv-tab">
+
+  {{#each-in this.model.advantage as |name skills|}}
+  <h3>{{name}}</h3>
+
+  <table class="table table-striped">
+    <tbody>
+    {{#each-in skills as |rating chars|}}
+      <tr><td class="fs3-skillscan-rating">{{rating}}</td>
+        <td>
+          {{#each chars as |char|}}
+            {{char}}
+          {{/each}}
+        </td>
+      </tr>
+    {{/each-in}}
+    </tbody>
+  </table>
+  {{/each-in}}
+  
+  </div>
+</div>
+

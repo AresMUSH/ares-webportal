@@ -62,7 +62,7 @@
                       <img alt="System Profile Icon"  class="small-profile-icon <IconClass />"  src="/game/uploads/theme_images/noicon.png" >
                       Combined Poses
                   {{else}}
-                      <a href="#" {{action (mut this.characterCard) pose.char.name}}>
+                      <a href="#" {{action 'showCharCard' pose.char.name}}>
                           {{#if pose.char.icon}}
                           <img alt="{{pose.char.name}}'s icon" class="small-profile-icon <IconClass />" src="/game/uploads/{{pose.char.icon}}" >
                           {{else}}
