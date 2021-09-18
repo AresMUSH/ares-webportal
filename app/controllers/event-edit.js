@@ -15,7 +15,7 @@ export default Controller.extend(AuthenticatedController, {
           this.set('model.event.organizer', org);
         },
         changeDate: function(date) {
-            let formatted_date = dayjs(date).format(this.get('model.app.game.date_entry_format')); //moment(date).format(this.get('model.event.date_entry_format'));
+            let formatted_date = dayjs(date).format(this.get('model.event.date_entry_format')); //moment(date).format(this.get('model.event.date_entry_format'));
             this.set('model.event.date', formatted_date);  
         },
         edit: function() {
