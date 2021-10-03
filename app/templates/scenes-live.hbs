@@ -68,9 +68,11 @@
   <div class="row">
     <div class="col col-xs-12 col-sm-9">
       <div class="live-scenes-contents">
-        {{#each scene.participants as |char|}}
-        <CharIconInline @char={{char}} />
-        {{/each}}
+        <div classs="live-scenes-participants">
+          {{#each scene.participants as |char|}}
+          <CharIconInline @char={{char}} />
+          {{/each}}
+          </div>
         
         {{#if scene.limit}}
         <div><span class="scene-info-label">Notes:</span> {{scene.limit}}</div>

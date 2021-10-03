@@ -10,7 +10,14 @@ export default Controller.extend({
     flashMessages: service(),
     gameApi: service(),
     router: service(),
-    
+
+    resetOnExit: function() {
+        this.set('name', '');
+        this.set('password', '');
+        this.set('confirmPassword', '');
+        this.set('reCaptchaResponse', '');
+    },
+  
     actions: {
         recaptchaResolved(reCaptchaResponse) {
             this.set('reCaptchaResponse', reCaptchaResponse);
