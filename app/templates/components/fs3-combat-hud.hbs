@@ -67,7 +67,7 @@
         </td>
         
         <td>
-            {{#if this.combat.can_manage}}
+            {{#if c.can_edit}}
                 <LinkTo @route="combatant-edit" @model={{c.id}} target="_blank">
                 <TooltipIcon @position="left" @message="Edit combatant." @icon="fa fa-edit" />
                 </LinkTo>

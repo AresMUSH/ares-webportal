@@ -148,7 +148,7 @@ export default Controller.extend(AuthenticatedController, {
         deleteReply: function(reply) {
           let api = this.gameApi;
           this.get('model.replies').removeObject(reply);
-          this.set('confirmDeleteReply', null);
+          this.set('confirmDeleteReply', false);
           api.requestOne('forumDeleteReply', { reply_id: reply.id })
           .then( (response) => {
               if (response.error) {

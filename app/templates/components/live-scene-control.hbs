@@ -34,7 +34,7 @@
     
 
     {{#each this.scene.poses as |pose|}}    
-            <div class="hint float-right">
+            <div class="hint float-end">
                 
                 
                 {{#if (not pose.is_system_pose)}}
@@ -223,22 +223,22 @@
              {{/if}}
              
 
-             <DropdownMenu @id="manageMenu" @title="Manage" @dropup={{true}} class="scene-menu">
-               {{#if this.scene.can_edit}}
-                   <li><LinkTo @route="scene-edit" @model={{this.scene.id}} class="dropdown-item">Edit Scene</LinkTo></li>
-                   {{#if (not this.scene.completed)}}
-                       <li><a href="#" {{action 'changeSceneStatus' 'stop'}} class="dropdown-item">Stop Scene</a></li> 
-                   {{else}}
-                       <li><a href="#" {{action 'changeSceneStatus' 'restart'}} class="dropdown-item">Restart Scene</a></li> 
-                       <li><a href="#" {{action 'changeSceneStatus' 'share'}} class="dropdown-item">Share Scene</a></li> 
-                       <li><a href="#" {{action 'collapseScene'}} class="dropdown-item">Collapse Scene Poses</a></li> 
-                       {{#if this.scene.can_delete}}
-                           <li><hr role="separator" class="dropdown-divider"></li>
-                           <li><a href="#" {{action (mut this.confirmDeleteScene) true}} class="dropdown-item">Delete Scene</a></li> 
-                       {{/if}}
-                   {{/if}}
-               {{/if}}
-             </DropdownMenu>
+             {{#if this.scene.can_edit}}
+               <DropdownMenu @id="manageMenu" @title="Manage" @dropup={{true}} class="scene-menu">
+                     <li><LinkTo @route="scene-edit" @model={{this.scene.id}} class="dropdown-item">Edit Scene</LinkTo></li>
+                     {{#if (not this.scene.completed)}}
+                         <li><a href="#" {{action 'changeSceneStatus' 'stop'}} class="dropdown-item">Stop Scene</a></li> 
+                     {{else}}
+                         <li><a href="#" {{action 'changeSceneStatus' 'restart'}} class="dropdown-item">Restart Scene</a></li> 
+                         <li><a href="#" {{action 'changeSceneStatus' 'share'}} class="dropdown-item">Share Scene</a></li> 
+                         <li><a href="#" {{action 'collapseScene'}} class="dropdown-item">Collapse Scene Poses</a></li> 
+                         {{#if this.scene.can_delete}}
+                             <li><hr role="separator" class="dropdown-divider"></li>
+                             <li><a href="#" {{action (mut this.confirmDeleteScene) true}} class="dropdown-item">Delete Scene</a></li> 
+                         {{/if}}
+                     {{/if}}
+               </DropdownMenu>
+             {{/if}}
 
 
              <DropdownMenu @id="otherMenu" @title="Other" @dropup={{true}} class="scene-menu">

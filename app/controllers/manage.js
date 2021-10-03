@@ -42,7 +42,7 @@ export default Controller.extend({
         deploy() {
           let api = this.gameApi;
           this.set('status', '');
-          this.addToStatus('Website redeploying.  Please wait.');
+          this.addToStatus('Website redeploying. Please wait.');
 
           api.requestOne('deployWebsite', null)
             .then( (response) => {
@@ -71,7 +71,7 @@ export default Controller.extend({
         upgrade() {
           let api = this.gameApi;
           this.set('status', '');
-          this.addToStatus('Starting upgrade.  Please wait.');
+          this.addToStatus('Starting upgrade. Please wait.');
           api.requestOne('upgrade', null)
             .then( (response) => {
               this.addToStatus(response.message);
