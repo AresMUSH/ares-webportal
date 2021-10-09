@@ -71,13 +71,15 @@
     
     <div class="log-participants-box">
         
-    {{#each this.model.participants as |participant|}}
-      {{#if (not participant.is_ooc)}}
-        <div class="profile-gallery">    
-            <CharIcon @char={{participant}} />
-        </div>
-      {{/if}}
-    {{/each}}
+    <div class="icon-gallery">    
+      {{#each this.model.participants as |participant|}}
+        {{#if (not participant.is_ooc)}}
+             <div class="icon-gallery-item">
+              <CharIcon @char={{participant}} />
+            </div>
+        {{/if}}
+      {{/each}}
+    </div>
     
     </div>
     

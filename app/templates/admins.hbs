@@ -9,16 +9,17 @@
     
       <div>
         
-         {{#each role.chars as |c|}}
-   
-         <div class="profile-gallery">
-             <CharIcon @char={{c}} />
+         <div class="icon-gallery">
+           {{#each role.chars as |c|}}
+             <div class="icon-gallery-item">
+               <CharIcon @char={{c}} />
              
-             {{#if c.title}}
-             <p class="text-center"><b>{{c.title}}</b></p>
-             {{/if}}
+               {{#if c.title}}
+               <p class="text-center"><b>{{c.title}}</b></p>
+               {{/if}}
+             </div>
+           {{/each}}
          </div>
-         {{/each}}
      
       </div>
 

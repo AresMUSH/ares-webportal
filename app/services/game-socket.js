@@ -90,10 +90,11 @@ export default Service.extend(AresConfig, {
                 self.handleMessage(self, evt);
             };
             socket.onclose = function() {
-              let message = 'Your connection to the game has been lost!  You will no longer see updates.  Try reloading the page.  If the problem persists, the game may be down.';
-              self.notify(message, 5, 'error');
-              self.set('connected', false);
-            };            
+              self.handleError(self, 'Socket closed.');
+            };
+            socket.onError = function(evt) {
+              self.handleError(self, evt);
+            };
             this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
         
             if (this.browserNotification) {
@@ -142,6 +143,13 @@ export default Service.extend(AresConfig, {
     
     setupCallback( notification, method ) {
       this.callbacks[notification] = method;
+    },
+    
+    handleError(self, evt) {
+      let message = 'Your connection to the game has been lost!  You will no longer see updates.  Try reloading the page.  If the problem persists, the game may be down.';
+      console.error("Websocket closed: ", evt);
+      self.notify(message, 10, 'error');
+      self.set('connected', false);
     },
     
     handleConnect() {

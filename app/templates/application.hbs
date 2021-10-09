@@ -79,6 +79,10 @@
                {{/if}}
                
                {{outlet}}
+               
+               {{#if (not this.socketConnected)}}
+                 <div class="alert alert-warning">The website is not receiving live updates from the game.  Try reloading the page.</div>
+               {{/if}}
              </div>
          {{else}}
              <div class="col-md-9 body-container {{if this.model.left_sidebar 'right-body' 'left-body'}}" role="main">
