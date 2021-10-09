@@ -28,7 +28,7 @@
              </div>
 
             <table class="table">
-        
+            <tbody>
             {{#each this.files as |f|}}
             <tr>
                 <td><img class="upload-preview" alt="preview image" src="{{f.url}}" ></td>
@@ -61,6 +61,7 @@
                 </td>
             </tr>
             {{/each}}
+          </tbody>
         </table>
 
         <button class="btn btn-secondary" {{action 'reset'}}>Reset Uploader</button>
