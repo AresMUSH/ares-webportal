@@ -3,6 +3,14 @@
 
 <img src="/game/uploads/{{this.model.path}}" alt="{{this.model.name}}" class="image-container file-image" >
 
+{{#if this.model.description}}
+  <p>{{this.model.description}}</p>
+{{/if}}
+
+{{#if this.model.uploaded_by}}
+  <p>Uploaded by <CharIconInline @char={{this.model.uploaded_by}} /></p>
+{{/if}}
+
 <div class="alert alert-info">
   To link to this image from a wiki page, profile, etc., use one of the following:
   <p><code>[[image /game/uploads/{{this.model.path}}]]</code></p>
