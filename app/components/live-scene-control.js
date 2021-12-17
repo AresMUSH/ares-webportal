@@ -189,6 +189,10 @@ export default Component.extend(AuthenticatedController, {
           });
       },
       
+      loadLastPose() {
+        this.set('scene.draftPose', this.get('scene.lastDraftPose'));
+      },
+      
       addPose(poseType) {
           let pose = this.get('scene.draftPose') || "";
           if (pose.length === 0) {
@@ -196,11 +200,13 @@ export default Component.extend(AuthenticatedController, {
               return;
           }
           let api = this.gameApi;
+          this.set('scene.lastDraftPose', pose);
           this.set('scene.draftPose', '');
-          api.requestOne('addScenePose', { id: this.get('scene.id'),
+
+          api.requestOne('addScenePose', { id: sceneId,
               pose: pose, 
               pose_type: poseType,
-              pose_char: this.get('scene.poseChar.id') })
+              pose_char: charId }, null, true)
           .then( (response) => {
               if (response.error) {
                   return;
