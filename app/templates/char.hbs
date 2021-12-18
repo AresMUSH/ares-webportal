@@ -86,7 +86,7 @@
        
        <div class="thumbnail-gallery-item">
        <LinkTo @route="file" @models={{array charFile.folder charFile.name}}>
-       {{file.path}} <img src="/game/uploads/{{charFile.path}}" alt="{{charFile.name}}" class="thumbnail">
+       {{file.path}} <img src="/game/uploads/{{charFile.path}}" alt="{{charFile.name}}" class="thumbnail" title={{charFile.description}}>
        </LinkTo>
        </div>
        {{/each}}
