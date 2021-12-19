@@ -12,6 +12,9 @@ export default Component.extend({
   }),
   
   updateTime: function() {
+    if (!this.poseOrder) {
+      return;
+    }
     this.poseOrder.forEach(po => {
       set(po, 'timeString', timeDiff({}, { time: po.time }));
     });

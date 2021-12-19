@@ -34,6 +34,15 @@
   </tr>
   
   <tr>
+    <td class="col-xs-3"><b>Plugins Installed:</b> </td>
+    <td>
+        {{#each this.model.plugins as |plugin|}}
+        <span class="server-plugin">{{plugin}}</span>
+        {{/each}}
+    </td>
+  </tr>
+  
+  <tr>
     <td class="col-xs-3"><b>Database Migrations:</b> </td>
     <td>{{#each this.model.migrations as |migration|}}
       <span class="server-migration">{{migration}}</span>

@@ -85,9 +85,7 @@
       </div>
       
       {{#if this.model.rp_prefs}}
-        <div id="systemprefs" class="tab-pane fade">
-          <AnsiFormat @text={{this.model.rp_prefs}} />
-        </div>
+        <ProfilePrefs @char={{this.model}} />
       {{/if}}
       
   

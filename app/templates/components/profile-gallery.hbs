@@ -3,7 +3,7 @@
 {{#if this.char.profile_gallery}}
     {{#each this.char.profile_gallery as |gallery|}}
         <LinkTo @route="file" @models={{array gallery.folder gallery.name}}>
-        <img src="/game/uploads/{{gallery.path}}" alt="{{gallery.name}}" >
+        <img src="/game/uploads/{{gallery.path}}" title="{{gallery.title}}">
         </LinkTo>
     {{/each}}
 {{/if}}

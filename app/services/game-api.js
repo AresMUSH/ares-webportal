@@ -65,7 +65,7 @@ export default Service.extend(AresConfig, {
       }
     },
     
-    request(cmd, args) {
+    request(cmd, args, allowEpicFail = false) {
      return $.post(this.serverUrl("request"), 
         {
             cmd: cmd,
@@ -74,19 +74,27 @@ export default Service.extend(AresConfig, {
             auth: this.get('session.data.authenticated')
         }).then((response) => {
             if (!response) {
-              this.reportError({ message: `No response from game for ${cmd}.` });
+              if (allowEpicFail) {
+                return { error: "The game didn't respond. Try again, or save your work and refresh the page." };
+              } else {
+                this.reportError({ message: `No response from game for ${cmd}.` });
+              }
             }
             else if (response.error) {
                 return response;
             }
            return response;
         }).catch(ex => {
-          this.reportError(ex);
+          if (allowEpicFail) {
+            return { error: "The game didn't respond. Try again, or save your work and refresh the page." };
+          } else {
+            this.reportError(ex);
+          }
         });
     },
     
-    requestOne(cmd, args = {}, transitionToOnError = 'home') {
-        return this.request(cmd, args).then((response) => {
+    requestOne(cmd, args = {}, transitionToOnError = 'home', allowEpicFail = false) {
+        return this.request(cmd, args, allowEpicFail).then((response) => {
           if (!response) {
             this.reportError({ message: `No response from game for ${cmd}.` });
           }
@@ -101,8 +109,8 @@ export default Service.extend(AresConfig, {
         });
     },
 
-    requestMany(cmd, args = {}, transitionToOnError = 'home') {    
-        return this.request(cmd, args).then((response) => {
+    requestMany(cmd, args = {}, transitionToOnError = 'home', allowEpicFail = false) {    
+        return this.request(cmd, args, allowEpicFail).then((response) => {
           if (!response) {
             this.reportError({ message: `No response from game for ${cmd}.` });
           }

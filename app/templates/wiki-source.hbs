@@ -1,40 +1,52 @@
 {{page-title this.model.heading}}
 <h1>{{this.model.heading}} Source</h1>
 
-<div class="card card-default">
-    <div class="card-heading">
-        Other Versions
-    </div>
 
-<ol>
-    {{#each this.model.versions as |v|}}
-    <li>
-     
-     <LinkTo @route="wiki-source" @models={{array this.model.page_id v.id}}>
-     {{#if (eq v.id this.model.version_id)}}
-     <i class="far fa-dot-circle fa-fw" aria-label="Current Version"></i>
-     {{else}}
-     <i class="far fa-circle fa-fw" aria-label="Other Version"></i>
-     {{/if}}
-     
-     {{v.created}} ({{v.author}})</LinkTo>
-     </li>
-    {{/each}}
-</ol>
 
-</div>
 
 <div class="card card-default">
     <div class="card-heading">
-        Selected Version
+        Other Versions &nbsp;
+        <a data-bs-toggle="collapse" href="#history" class="btn btn-secondary btn-collapse">Show/Hide</a>
+        
     </div>
-    <div class="card-body">
-        <pre>
-        {{this.model.text}}
-        </pre>
+    <div id="history" class="card-collapse collapse">
+      <div class="card-body">
+   
+          <ol>
+              {{#each this.model.versions as |v|}}
+              <li>
+     
+               <LinkTo @route="wiki-source" @models={{array this.model.page_id v.id}}>
+               {{#if (eq v.id this.model.version_id)}}
+               <i class="far fa-dot-circle fa-fw" aria-label="Current Version"></i>
+               {{else}}
+               <i class="far fa-circle fa-fw" aria-label="Other Version"></i>
+               {{/if}}
+     
+               {{v.created}} ({{v.author}})</LinkTo>
+               </li>
+              {{/each}}
+          </ol>
+        </div>
     </div>
 </div>
 
+            
+<div class="card card-default">
+    <div class="card-heading">
+        Selected Version &nbsp;
+        <a data-bs-toggle="collapse" href="#source" class="btn btn-secondary btn-collapse">Show/Hide</a>
+        
+    </div>
+    <div id="source" class="card-collapse collapse">
+      <div class="card-body">
+          <pre>
+          {{this.model.text}}
+          </pre>
+      </div>
+    </div>
+</div>
 
 {{#if this.model.diff}}
 

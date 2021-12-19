@@ -202,8 +202,7 @@
          {{/if}}
      
      </div>
-     
-     
+          
      {{#if r.admin_only}}
      <div class="badge admin-only-reply-label">To Admins Only</div>
      {{/if}}
@@ -224,6 +223,7 @@
   {{/if}}
   
 <div class="inline-response">
+  
 <h3>Add Reply</h3>
 
     {{#if this.model.job.is_category_admin}}
@@ -247,6 +247,11 @@
         </PowerSelect>
       </div>
     {{/if}}
+    
+        <div class="action-buttons">
+          <button class="btn btn-primary" {{action 'addReply'}}>Reply</button>
+        </div>
+
 </div>
 
     
@@ -255,36 +260,29 @@
 <p><a href="#top"><i class="fas fa-chevron-circle-up"></i> Jump to Top</a></p>
 
 
-<div class="row">
-    <div class="col col-xs-12">
-     {{#if this.model.job.is_open }}
-        <DropdownMenu @id="jobMenuBottom" @title="Job Menu">
+{{#if this.model.job.is_open }}
+  <DropdownMenu @id="jobMenuBottom" @title="Job Menu">
 
-               <li><a href="#" {{action 'closeJob'}}  class="dropdown-item">Close Job</a></li>
-               {{#if this.model.job.is_job_admin}}
-                 <li><LinkTo @route="job-edit" @model={{this.model.job.id}} class="dropdown-item">Edit Job</LinkTo></li>
-               {{/if}}
-               {{#if this.model.job.fs3_enabled}}
-                 <li><a href="#" {{action (mut this.selectSkillRoll) true}} class="dropdown-item">Add Ability Roll</a></li>
-               {{/if}}
-               {{#if this.model.job.is_approval_job}}
-                 <li><LinkTo @route="app-review" @model={{this.model.job.author.id}} class="dropdown-item">App Review for {{this.model.job.author.name}}</LinkTo></li>
-                 <li><LinkTo @route="char" @model={{this.model.job.author.name}} class="dropdown-item">Profile for {{this.model.job.author.name}}</LinkTo></li>
-               {{/if}}
-               {{#if this.model.job.is_roster_job}}
-                 <li><a href="#" {{action 'approveRoster'}} class="dropdown-item">Approve Roster for {{this.model.job.roster_name}}</a></li>
-                 <li><a href="#" {{action 'rejectRoster'}} class="dropdown-item">Reject Roster for {{this.model.job.roster_name}}</a></li>
-               {{/if}}
-               
-        </DropdownMenu>
-    {{/if}}
-        
-        <div class="action-buttons">
-          <button class="btn btn-primary" {{action 'addReply'}}>Reply</button>
-        </div>
-  </div>
-</div>
-
+         <li><a href="#" {{action 'closeJob'}}  class="dropdown-item">Close Job</a></li>
+         {{#if this.model.job.is_job_admin}}
+           <li><LinkTo @route="job-edit" @model={{this.model.job.id}} class="dropdown-item">Edit Job</LinkTo></li>
+         {{/if}}
+         {{#if this.model.job.fs3_enabled}}
+           <li><a href="#" {{action (mut this.selectSkillRoll) true}} class="dropdown-item">Add Ability Roll</a></li>
+         {{/if}}
+         {{#if this.model.job.is_approval_job}}
+           <li><LinkTo @route="app-review" @model={{this.model.job.author.id}} class="dropdown-item">App Review for {{this.model.job.author.name}}</LinkTo></li>
+           <li><LinkTo @route="char" @model={{this.model.job.author.name}} class="dropdown-item">Profile for {{this.model.job.author.name}}</LinkTo></li>
+         {{/if}}
+         {{#if this.model.job.is_roster_job}}
+           <li><a href="#" {{action 'approveRoster'}} class="dropdown-item">Approve Roster for {{this.model.job.roster_name}}</a></li>
+           <li><a href="#" {{action 'rejectRoster'}} class="dropdown-item">Reject Roster for {{this.model.job.roster_name}}</a></li>
+         {{/if}}
+         
+  </DropdownMenu>
+{{/if}}
+  
+       
 <Fs3Roll @job={{this.model.job}} @destinationType="job" @abilities={{this.model.abilities}} @selectSkillRoll={{this.selectSkillRoll}} />
 
 <FlashMessages />

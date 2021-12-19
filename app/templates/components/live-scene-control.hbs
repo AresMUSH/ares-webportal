@@ -150,6 +150,9 @@
              <div class="pose-buttons">
                  <button {{action 'addPose' this.poseType.id}} class="btn btn-primary">Add {{this.poseType.title}}</button>
                  <button {{action 'addPose' 'ooc'}} class="btn btn-secondary">Add OOC</button>
+                 <button {{action 'loadLastPose'}} class="btn btn-secondary">
+                   <TooltipIcon @position="right" @message="Reload Last" @icon="fa fa-history" />
+                 </button>
                  
                  {{#if this.txtExtraInstalled}}
                    <LiveSceneTxt @scenePose={{this.scene.draftPose}} @scene={{this.scene}} />

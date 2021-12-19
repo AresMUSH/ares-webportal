@@ -78,9 +78,7 @@
   </div>
   
   {{#if this.prefsExtraInstalled}}
-    <div id="systemprefs" class="tab-pane fade">
-      <AnsiFormat @text={{this.char.rp_prefs}} />
-    </div>
+    <ProfilePrefs @char={{this.char}} />
   {{/if}}
   
   {{#if this.char.background}}

@@ -23,6 +23,7 @@ Router.map(function() {
   this.route('app-review', { path: '/app/:id' });
   this.route('area', { path: '/area/:id'});
   this.route('area-edit', { path: '/area/:id/edit'});
+  this.route('banned');
   this.route('census');
   this.route('census-group', { path: '/census/:filter' });
   this.route('characters', { path: '/chars'});

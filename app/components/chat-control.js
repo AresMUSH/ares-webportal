@@ -125,14 +125,14 @@ export default Component.extend({
         this.set(`channel.draftMessage`, '');
                   
         if (this.get('channel.is_page'))  {
-          api.requestOne('sendPage', { thread_id: channelKey, message: message, sender: this.get('channel.poseChar.name') }, null)
+          api.requestOne('sendPage', { thread_id: channelKey, message: message, sender: this.get('channel.poseChar.name') }, null, true)
           .then( (response) => {
               if (response.error) {
                   return;
               }
           }); 
         } else {
-          api.requestOne('chatTalk', { channel: channelKey, message: message, sender: this.get('channel.poseChar.name') }, null)
+          api.requestOne('chatTalk', { channel: channelKey, message: message, sender: this.get('channel.poseChar.name') }, null, true)
           .then( (response) => {
               if (response.error) {
                   return;
