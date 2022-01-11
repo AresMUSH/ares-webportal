@@ -4,7 +4,7 @@
 <p>Some plugins are designed to be easily disabled and enabled.  Please read the <a href="https://aresmush.com/tutorials/config/plugins.html">Enabling and Disabling Plugins</a> tutorial to learn more.</p>
 
 <table>
-{{#each model as |plugin|}}
+{{#each this.model as |plugin|}}
 
 <tr>
   <td><span class="text">{{plugin.name}}</span></td>
@@ -14,9 +14,9 @@
 
   <td>
   {{#if plugin.optional}}
-  <span class="label label-success">optional</span>
+  <span class="badge bg-success">optional</span>
   {{else}}
-  <span class="label label-danger">required</span>
+  <span class="badge bg-danger">required</span>
   {{/if}}
   </td>
 </tr>
@@ -27,15 +27,10 @@
 </table>
 
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
-          <LinkTo @route="setup" class="btn btn-default">Cancel</LinkTo>
+<div class="action-buttons">
+    <LinkTo @route="setup" class="btn btn-secondary">Cancel</LinkTo>
 
-          <button {{action 'save'}} class="btn btn-primary">Save</button>
-          
-         </div>
-  </div>
+    <button {{action 'save'}} class="btn btn-primary">Save</button>
 </div>
 
 

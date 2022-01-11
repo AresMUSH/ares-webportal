@@ -1,16 +1,18 @@
        <div>
 
-          <h3>{{name}}</h3>
+          <h3>{{this.name}}</h3>
           
          
-          {{#each chars as |c| }}
+          <div class="icon-gallery">
+            {{#each this.chars as |c| }}
     
-          <div class="profile-gallery">
-              <CharIcon @char={{c}} />
-          </div>
+             <div class="icon-gallery-item">
+                <CharIcon @char={{c}} />
+              </div>
           
-          {{/each}}
+            {{/each}}
       
+          </div>
        </div>
 
      <div class="clearfix"> </div>

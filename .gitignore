@@ -39,3 +39,7 @@ errors.txt
 aresconfig.js
 calendar.ics
 .ftpconfig
+# Ember upgrade junk
+
+codemods.log
+MODULE_REPORT.md

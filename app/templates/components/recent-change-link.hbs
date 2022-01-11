@@ -1,19 +1,19 @@
-{{#if (eq change.type 'char')}}
- <LinkTo @route="char" @model={{change.data.char_name}}>{{change.message}}</LinkTo>
-{{else if (eq change.type 'wiki')}}
- <LinkTo @route="wiki-page" @model={{change.data.page_name}}>{{change.message}}</LinkTo>
-{{else if (eq change.type 'file')}}
- <LinkTo @route="file" @models={{array change.data.folder change.data.name}}>{{change.message}}</LinkTo>
-{{else if (eq change.type 'event')}}
- <LinkTo @route="event" @model={{change.data.id}}>{{change.message}}</LinkTo>
-{{else if (eq change.type 'scene')}}
-  <LinkTo @route="scene" @model={{change.data.id}}>{{change.message}}</LinkTo>
-{{else if (eq change.type 'plot')}}
- <LinkTo @route="plot" @model={{change.data.id}}>{{change.message}}</LinkTo>
- {{else if (eq change.type 'creature')}}
-   <LinkTo @route="creature" @model={{change.data.id}}>{{change.message}}</LinkTo>
+{{#if (eq this.change.type 'char')}}
+ <LinkTo @route="char" @model={{this.change.data.char_name}}>{{this.change.message}}</LinkTo>
+{{else if (eq this.change.type 'wiki')}}
+ <LinkTo @route="wiki-page" @model={{this.change.data.page_name}}>{{this.change.message}}</LinkTo>
+{{else if (eq this.change.type 'file')}}
+ <LinkTo @route="file" @models={{array this.change.data.folder this.change.data.name}}>{{this.change.message}}</LinkTo>
+{{else if (eq this.change.type 'event')}}
+ <LinkTo @route="event" @model={{this.change.data.id}}>{{this.change.message}}</LinkTo>
+{{else if (eq this.change.type 'scene')}}
+ <LinkTo @route="scene" @model={{this.change.data.id}}>{{this.change.message}}</LinkTo>
+{{else if (eq this.change.type 'plot')}}
+ <LinkTo @route="plot" @model={{this.change.data.id}}>{{this.change.message}}</LinkTo>
+{{else if (eq change.type 'creature')}}
+  <LinkTo @route="creature" @model={{this.change.data.id}}>{{this.change.message}}</LinkTo>
 {{else if (eq change.type 'portal')}}
-  <LinkTo @route="portal" @model={{change.data.id}}>{{change.message}}</LinkTo>
+  <LinkTo @route="portal" @model={{this.change.data.id}}>{{this.change.message}}</LinkTo>
 {{else}}
- {{change.message}}
+ {{this.change.message}}
 {{/if}}

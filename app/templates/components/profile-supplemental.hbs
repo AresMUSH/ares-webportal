@@ -1,45 +1,18 @@
-<ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#supplementalindex">+</a></li>
-
-    <li><a data-toggle="tab" href="#systemhooks">RP Hooks</a></li>
-
-    {{#if char.background}}
-        <li><a data-toggle="tab" href="#systembg">Background</a></li>
-    {{/if}}
-
-    {{#if char.description}}
-    <li><a data-toggle="tab" href="#systemdesc">Description</a></li>
-    {{/if}}
-
-    {{#each char.profile as |profile| }}
-        <li><a data-toggle="tab" href="#{{profile.key}}">{{profile.name}}</a></li>
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#supplementalindex">+</a></li>
+    {{#each this.char.profile as |profile| }}
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#{{profile.key}}">{{profile.name}}</a></li>
     {{/each}}
 </ul>
 
 
 <div class="tab-content">
 
-  <div id="systemhooks" class="tab-pane fade">
-      {{{ansi-format text=char.rp_hooks}}}
+  <div id="supplementalindex" class="tab-pane fade show active">
+      <div class="tab-cover">{{this.title}}</div>
   </div>
 
-  {{#if char.background}}
-  <div id="systembg" class="tab-pane fade">
-      {{{ansi-format text=char.background}}}
-   </div>
-  {{/if}}
-
-  {{#if char.description}}
-  <div id="systemdesc" class="tab-pane fade">
-       {{{ansi-format text=char.description}}}
-  </div>
-  {{/if}}
-
-  <div id="supplementalindex" class="tab-pane fade in active">
-      <div class="tab-cover">{{title}}</div>
-  </div>
-
-  {{#each char.profile as |profile|}}
+  {{#each this.char.profile as |profile|}}
 
   <div id="{{profile.key}}" class="tab-pane fade ansi">
 

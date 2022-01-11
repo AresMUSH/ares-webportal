@@ -1,0 +1,105 @@
+{{page-title 'Banned Sites'}}
+<h1>Banned Sites</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Site</th>
+      <th>Reason for Ban</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.model.banned as |ban|}}
+    <tr>
+      <td>{{ban.site}}</td>
+      <td>
+        <AnsiFormat @text={{ban.reason}} />
+      </td>
+      <td>
+        <button class="btn btn-secondary btn-sm" {{action 'removeBan' ban.site}}><i class="fa fa-trash" aria-label="Remove Ban"></i></button>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<hr/>
+
+<div class="card card-default">
+  <div class="card-heading">
+    <a data-bs-toggle="collapse" href="#banPlayerCollapse">Click to Ban a Player</a>
+  </div>
+  <div id="banPlayerCollapse" class="card-collapse collapse">
+    <div class="card-body">
+      
+      <div class="alert alert-info">
+        Banning a player will boot them (and all their alts) from the game, reset their password, and unlink their player handle. It also
+        adds their IP address to the ban list.
+      </div>
+      
+       <div class="form-group row">
+        <div class="col-sm-3">
+            <label for="player" class="col-form-label"><b>Player</b></label>
+        </div>
+        <div class="col-sm-9">
+             <PowerSelect @selected={{this.banPlayer}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "banPlayerChanged"}} as |char|>
+               {{char.name}}
+             </PowerSelect>
+        </div> 
+      </div>
+      
+       <div class="form-group row">
+        <div class="col-sm-3">
+            <label for="player" class="col-form-label"><b>Reason</b></label>
+        </div>
+        <div class="col-sm-9">
+             <Input @type="text" size={{50}} id="banPlayerReason" @value={{this.banPlayerReason}} /> 
+        </div> 
+      </div>
+      
+      <div class="action-buttons">
+        <button class="btn btn-primary" {{action 'banPlayer'}}>Ban Player</button>    
+      </div>    
+    </div>
+  </div>
+</div>
+
+<div class="card card-default">
+  <div class="card-heading">
+    <a data-bs-toggle="collapse" href="#banSiteCollapse">Click to Ban a Site</a>
+  </div>
+  <div id="banSiteCollapse" class="card-collapse collapse">
+    <div class="card-body">
+      <div class="alert alert-info">
+        Banning a site will add a hostname or IP address to the ban list. If you're trying to ban a specific player and their alts, 
+        use the 'Ban Player' option instead.  This is more for when you need to preemptively ban a site or replace an incorrect entry.
+      </div>
+      
+       <div class="form-group row">
+        <div class="col-sm-3">
+            <label for="site" class="col-form-label"><b>Site</b></label>
+        </div>
+        <div class="col-sm-9">
+             <Input @type="text" size={{50}} id="site" @value={{this.banSite}} />
+             <p class="hint">Specify a complete or partial hostname or IP address. No wildcards.</p>
+        </div> 
+      </div>
+      
+       <div class="form-group row">
+        <div class="col-sm-3">
+            <label for="reason" class="col-form-label"><b>Reason</b></label>
+        </div>
+        <div class="col-sm-9">
+             <Input @type="text" size={{50}} id="reason" @value={{this.banReason}} />
+        </div> 
+      </div>
+      
+      <div class="action-buttons">
+        <button class="btn btn-primary" {{action 'banSite'}}>Ban Site</button>    
+      </div>
+    </div>
+  </div>
+</div>
+
+<FlashMessages/>

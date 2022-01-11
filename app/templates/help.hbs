@@ -1,15 +1,11 @@
 {{page-title 'Help Topics'}}
 <h1>Help Topics</h1>
 
-<div class="row">
-    
-    <div class="col pull-right">
-       <LinkTo @route="search-help" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> Search Help</LinkTo>  
-    </div>
-    
+<div class="action-buttons">
+       <LinkTo @route="search-help" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Help</LinkTo>  
 </div>
 
-{{#each model as |toc|}}
+{{#each this.model as |toc|}}
     <h3 class="help-heading">{{toc.toc_category}}</h3>
     
     <ul class="tutorial-help-list">

@@ -17,9 +17,9 @@ export default Component.extend({
   }),
     
   labelStyle: computed('privacy', function() {
-    if (this.get('privacy') == "Open*") {
+    if (this.privacy == "Open*") {
       return "openstar";
     }
-    return this.get('privacy').toLowerCase();
+    return this.privacy.toLowerCase();
   })
 });

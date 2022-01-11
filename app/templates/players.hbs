@@ -12,7 +12,7 @@
     <p>Characters linked with the player tag are not verified through AresCentral and will not have the "@" in front of their player name.</p>
 </div>
 
-{{#each model as |player|}}
+{{#each this.model as |player|}}
   {{#if player.is_handle}}
   <h2>@{{player.name}}</h2>
   {{else}}

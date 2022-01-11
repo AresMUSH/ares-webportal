@@ -12,33 +12,33 @@
   </div>
   <p><center>{{#link-to 'wiki-create'}}New{{/link-to}} &middot; {{#link-to 'wiki-all'}}All{{/link-to}} &middot; {{#link-to 'wiki-tags'}}Tags{{/link-to}}  &middot; {{#link-to 'files'}}Files {{/link-to}} &middot; {{#link-to 'help-topic' 'markdown'}}Format Help{{/link-to}}</center></p>
 </div>
-<div class="sidebar-box {{boxStyle}} text-center">
-  <SidebarSearch @model={{model}} />
+<div class="sidebar-box {{this.boxStyle}} text-center">
+  <SidebarSearch @model={{this.model}} />
 </div>
 
-<div class="sidebar-box {{boxStyle}}">
+<div class="sidebar-box {{this.boxStyle}}">
   <div class="sidebar-heading">
       <h2>Game Status <i class="fa fa-video" aria-hidden="true"></i></h2>
   </div>
-  {{#if (not socketConnected)}}
+  {{#if (not this.socketConnected)}}
     <div class="alert alert-warning">The website is not receiving live updates from the game.  If the problem persists, try reloading the page.</div>
   {{/if}}
 
-  {{#if versionWarning}}
+  {{#if this.versionWarning}}
     <div class="alert alert-danger">The website and game have <LinkTo @route="server-info">different versions</LinkTo>.  Try reloading the page.</div>
   {{/if}}
 
-   {{#if model.game_down}}
+   {{#if this.model.game_down}}
     <div class="alert alert-danger">The website can't contact the game.  It may be down.</div>
    {{else}}
 
-    <p>Today is {{model.game.ictime}}.
-    <br>{{model.game.who_count}} character(s) online.
-    <br>{{model.game.scene_count}} scene(s) in progress.
+    <p>Today is {{this.model.game.ictime}}.
+    <br>{{this.model.game.who_count}} character(s) online.
+    <br>{{this.model.game.scene_count}} scene(s) in progress.
   </p>
 
-  {{#if model.motd}}
-  <p><AnsiFormat @text={{model.motd}} /></p>
+  {{#if this.model.motd}}
+  <p><AnsiFormat @text={{this.model.motd}} /></p>
   {{/if}}
 
   <p>
@@ -52,12 +52,12 @@
 
 
 
-{{#if (not model.game.disabled_plugins.events)}}
-<div class="sidebar-box {{boxStyle}}">
+{{#if (not this.model.game.disabled_plugins.events)}}
+<div class="sidebar-box {{this.boxStyle}}">
   <div class="sidebar-heading">
       <h2>Upcoming Events <i class="fa fa-calendar" aria-hidden="true"></i></h2>
   </div>
-  {{#each model.upcoming_events as |event|}}
+  {{#each this.model.upcoming_events as |event|}}
   <p><b><LinkTo @route="event" @model={{event.id}}>
 
     {{#if event.is_signed_up}}
@@ -79,12 +79,12 @@
 
 
 
-<div class="sidebar-box {{boxStyle}}">
+<div class="sidebar-box {{this.boxStyle}}">
    <div class="sidebar-heading">
        <h2>Recent Scenes <i class="fa fa-book" aria-hidden="true"></i></h2>
 
    </div>
-   {{#each model.recent_scenes as |scene|}}
+   {{#each this.model.recent_scenes as |scene|}}
    <p><LinkTo @route="scene" @model={{scene.id}}>{{scene.icdate}} - {{scene.title}}</LinkTo>
        {{#if scene.content_warning}}
        <ContentWarningTag @warning={{scene.content_warning}} @position="top-left" />
@@ -96,12 +96,12 @@
    <p><LinkTo @route="scenes">All Scenes</LinkTo></p>
 </div>
 
-<div class="sidebar-box {{boxStyle}}">
+<div class="sidebar-box {{this.boxStyle}}">
    <div class="sidebar-heading">
        <h2>Recent Forum Posts <i class="fa fa-comments" aria-hidden="true"></i></h2>
 
    </div>
-   {{#each model.recent_forum as |post|}}
+   {{#each this.model.recent_forum as |post|}}
    <p>{{post.author.name}}
           {{#if post.is_reply}}
             replied to
@@ -115,12 +115,12 @@
    <p><LinkTo @route="forum">View Forum</LinkTo></p>
 </div>
 
-<div class="sidebar-box {{boxStyle}}">
+<div class="sidebar-box {{this.boxStyle}}">
    <div class="sidebar-heading">
        <h2>Recent Changes <i class="fa fa-file-alt" aria-hidden="true"></i></h2>
 
    </div>
-   {{#each model.recent_changes as |change|}}
+   {{#each this.model.recent_changes as |change|}}
    <p class='sidebar-list'>
      <RecentChangeLink @change={{change}} />
    </p>

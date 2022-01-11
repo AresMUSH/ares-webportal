@@ -1,13 +1,13 @@
-<li role="separator" class="divider"></li>
+<li><hr role="separator" class="dropdown-divider"></li>
 
-{{#if (not scene.completed)}}
-  <li><a href="#" {{action 'viewPlaces'}}>View Places</a></li>
-  <li><a href="#" {{action (mut selectPlace) true}}>Join a Place</a></li>
-  <li><a href="#" {{action 'leavePlace'}}>Leave Place</a></li>
+{{#if (not this.scene.completed)}}
+  <li><a href="#" {{action 'viewPlaces'}} class="dropdown-item">View Places</a></li>
+  <li><a href="#" {{action (mut this.selectPlace) true}} class="dropdown-item">Join a Place</a></li>
+  <li><a href="#" {{action 'leavePlace'}} class="dropdown-item">Leave Place</a></li>
 {{/if}}
           
-<BsModalSimple @title="View Places" @closeTitle="Done" @size={{null}} @fade={{true}} @open={{showPlaces}} @onHide={{action (mut showPlaces) false}}>
-  {{#each scene.places as |place|}}
+<BsModalSimple @title="View Places" @closeTitle="Done" @size={{null}} @fade={{true}} @open={{this.showPlaces}} @onHide={{action (mut this.showPlaces) false}}>
+  {{#each this.scene.places as |place|}}
     <p><b>{{place.name}}</b></p>
     {{#each place.chars as |char|}}
     <CharIconInline @char={{char}} />
@@ -17,10 +17,10 @@
 </BsModalSimple>
 
 
-<BsModalSimple @title="Join a Place" @closeTitle="Cancel" @submitTitle="Select" @size={{null}} @fade={{true}} @open={{selectPlace}} @onSubmit={{action "changePlace"}} @onHide={{action (mut selectPlace) false}}>
+<BsModalSimple @title="Join a Place" @closeTitle="Cancel" @submitTitle="Select" @size={{null}} @fade={{true}} @open={{this.selectPlace}} @onSubmit={{action "changePlace"}} @onHide={{action (mut this.selectPlace) false}}>
   <p>Select an existing place or a name for a new one.</p>
-  <select onchange={{action (mut newPlace) value="target.value"}}>
-    {{#each scene.places as |place|}}
+  <select onchange={{action (mut this.newPlace) value="target.value"}}>
+    {{#each this.scene.places as |place|}}
       <option value={{place.name}}>{{place.name}} -- 
       {{#each place.chars as |char|}}
       {{char.name}}
@@ -28,6 +28,6 @@
       </option>
     {{/each}}
   </select>
-  <Input @type="text" @size={{25}} @id="newPlace" @enter={{action "changePlace"}} @value={{newPlace}} />
+  <Input @type="text" size={{25}} id="newPlace" @enter={{action "changePlace"}} @value={{this.newPlace}} />
 
 </BsModalSimple>

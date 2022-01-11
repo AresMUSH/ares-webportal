@@ -1,64 +1,57 @@
-{{#if model.options.is_job_admin}}
+{{#if this.model.options.is_job_admin}}
 
   {{page-title 'Jobs'}}
   <h1>Jobs</h1>
 
-  {{#if model.options.reboot_required_notice}}
+  {{#if this.model.options.reboot_required_notice}}
       <div class="alert alert-warning">
-        <i class="fas fa-exclamation-triangle"></i> <strong>Reboot Required!</strong> {{model.options.reboot_required_notice}}
+        <i class="fas fa-exclamation-triangle"></i> <strong>Reboot Required!</strong> {{this.model.options.reboot_required_notice}}
       </div>
   {{/if}}
 
-
-
-  <div class="pull-right">
-
-    <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Jobs</LinkTo>  &nbsp;&nbsp;
-    <a href="#" {{action 'markRead'}} class="btn btn-default">Mark All Read</a>
-    <LinkTo @route="job-create" class="btn btn-primary">Create Job</LinkTo>
-  </div>
-
-
-  {{else}}
+{{else}}
 
   {{page-title 'Requests'}}
-    <h1>Requests</h1>
+  <h1>Requests</h1>
+{{/if}}
 
-    <div class="pull-right">
+
+<div class="action-buttons-spaced">
+
+<DropdownMenu @id="filterDropdown" @title={{this.model.jobs.jobs_filter}}>
+  {{#each this.model.options.status_filters as |filter| }}
+    <li><a href="#" {{action 'filterJobs' filter}} class="dropdown-item"><span class="badge job-category job-category-general">&nbsp;</span> {{filter}}</a></li>
+  {{/each}}
+
+  {{#each this.model.options.category_values as |category| }}
+    <li><a href="#" {{action 'filterJobs' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+  {{/each}}
+
+</DropdownMenu>
+
+{{#if this.model.options.is_job_admin}}
+    <div>
+      <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Jobs</LinkTo>  &nbsp;&nbsp;
+      <a href="#" {{action 'markRead'}} class="btn btn-secondary">Mark All Read</a>
+      <LinkTo @route="job-create" class="btn btn-primary">Create Job</LinkTo>
+    </div>
+{{else}}
+    <div>
       <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Requests</LinkTo>  &nbsp;&nbsp;
       <LinkTo @route="job-create" class="btn btn-primary">Create Request</LinkTo>
     </div>
+{{/if}}
 
-  {{/if}}
-
-    <ul class="nav inline-block">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-        <span href="#" class="btn btn-default">{{model.jobs.jobs_filter}} <span class="caret"></span></span> </a>
-        <ul class="dropdown-menu">
-          {{#each model.options.status_filters as |filter| }}
-            <li><a href="#" {{action 'filterJobs' filter}}><span class="label job-category job-category-general">&nbsp;</span> {{filter}}</a></li>
-          {{/each}}
-          
-          {{#each model.options.category_values as |category| }}
-            <li><a href="#" {{action 'filterJobs' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
-          {{/each}}
-
-        </ul>
-      </li>
-  </ul>
-
-
+</div>
 
 <div class="clearfix"></div>
 
-  {{#if newJobs}}
+  {{#if this.newJobs}}
       <div class="alert alert-warning">
         New jobs are available.  Reload the page to see them.
       </div>
   {{/if}}
 
-<JobsList @jobs={{model.jobs.jobs}} @pages={{model.jobs.pages}} @page={{page}} @goToPage={{action "goToPage"}} />
+<JobsList @jobs={{this.model.jobs.jobs}} @pages={{this.model.jobs.pages}} @page={{this.page}} @goToPage={{action "goToPage"}} />
 
 {{outlet}}

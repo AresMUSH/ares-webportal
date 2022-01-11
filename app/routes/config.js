@@ -7,6 +7,7 @@ import JsYaml from "js-yaml";
 
 export default Route.extend(ReloadableRoute, RouteResetOnExit, RestrictedRoute, {
     gameApi: service(),
+    router: service(),
     
     model: function(params) {
         let api = this.gameApi;
@@ -21,7 +22,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, RestrictedRoute, 
           }
           else {
             this.flashMessages.danger('There is a problem with this config file.  Check your formatting.');
-            this.transitionTo('textfile', 'config', model.get('file'));
+            this.router.transitionTo('textfile', 'config', model.get('file'));
           }
         });
        

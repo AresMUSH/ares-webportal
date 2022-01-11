@@ -8,8 +8,8 @@
 
 <a name="top"></a>
 
-<div class="pull-right">
-  <LinkTo @route="search-locations" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> Search Locations</LinkTo>
+<div class="action-buttons">
+  <LinkTo @route="search-locations" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Locations</LinkTo>
 </div>
 
 <h2>Area Directory</h2>
@@ -17,17 +17,17 @@
 
  <ul class="nav nav-tabs" role="tablist">
 
-  {{#each topLevelAreas as |area index| }}
-   <li role="presentation" class="{{if (eq index 0) 'active' }}"><a href="#{{area.id}}" aria-controls="{{area.id}}" role="tab" data-toggle="tab">{{area.name}}</a></li>
+  {{#each this.topLevelAreas as |area index| }}
+   <li role="presentation" class="nav-item"><a href="#area{{area.id}}" aria-controls="{{area.id}}" role="tab" data-bs-toggle="tab" class="nav-link {{if (eq index 0) 'active' }}">{{area.name}}</a></li>
   {{/each}}
-   <li role="presentation"><a href="#unassigned" aria-controls="unassigned" role="tab" data-toggle="tab">No Area</a></li>
+   <li role="presentation" class="nav-item"><a href="#unassigned" aria-controls="unassigned" role="tab" data-bs-toggle="tab" class="nav-link">No Area</a></li>
 
 </ul>
 
 <div class="tab-content">
 
-  {{#each topLevelAreas as |area index| }}
-  <div role="tabpanel" class="tab-pane {{if (eq index 0) 'active' }}" id="{{area.id}}">
+  {{#each this.topLevelAreas as |area index| }}
+  <div class="tab-pane {{if (eq index 0) 'active' }}" id="area{{area.id}}">
 
     <a name="{{area.id}}"></a>
     <AreaDirectory @area={{area}} />
@@ -35,10 +35,10 @@
   </div>
   {{/each}}
 
-  <div role="tabpanel" class="tab-pane" id="unassigned">
+  <div class="tab-pane" id="unassigned">
 
   <h3>Locations With No Area</h3>
-  {{#each model.orphan_rooms as |room|}}
+  {{#each this.model.orphan_rooms as |room|}}
   <LinkTo @route="location" @model={{room.id}}>{{room.name}}</LinkTo>
   {{/each}}
 

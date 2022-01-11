@@ -3,61 +3,54 @@
 
 <p>The events calendar helps you schedule scenes with other players.  Events you've signed up for are indicated with a <i class="fas fa-calendar-check" aria-label="Signed Up"></i> icon.</p>
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
-
-          {{#if isApproved}}
-              <LinkTo @route="event-create" class="btn btn-primary">Create Event</LinkTo>
-          {{/if}}
-
-      </div>
-  </div>
+<div class="action-buttons">
+  {{#if isApproved}}
+      <LinkTo @route="event-create" class="btn btn-primary">Create Event</LinkTo>
+  {{/if}}
 </div>
 
-<table class="table table-striped">
+<table class="table">
 
 <thead>
-    <tr>
-        <th></th>
-        <th>Title</th>
-        <th>Organizer</th>
-        <th>Date/Time</th>
-        <th>Tags</th>
-    </tr>
+      <th></th>
+      <th>Title</th>
+      <th>Organizer</th>
+      <th>Date/Time</th>
+      <th>Tags</th>
 </thead>
 
-{{#each model.events as |event|}}
-<tr>
-  <td>
-    {{#if event.is_signed_up}}
-    <i class="fas fa-calendar-check fa-2x" aria-label="Signed Up"></i>
-    {{/if}}
-  </td>
+<tbody>
+  {{#each this.model.events as |event|}}
+  <tr>
     <td>
-        <LinkTo @route="event" @model={{event.id}}>{{event.title}}</LinkTo>
-        {{#if event.content_warning}}
-        <ContentWarningTag @warning={{event.content_warning}} @position="top-right" />
-        {{/if}}
+      {{#if event.is_signed_up}}
+      <i class="fas fa-calendar-check fa-2x" aria-label="Signed Up"></i>
+      {{/if}}
     </td>
+      <td>
+          <LinkTo @route="event" @model={{event.id}}>{{event.title}}</LinkTo>
+          {{#if event.content_warning}}
+          <ContentWarningTag @warning={{event.content_warning}} @position="top-right" />
+          {{/if}}
+      </td>
 
-    <td>
-        {{char-icon-tiny char=event.organizer}}
-    </td>
-    <td>
-        {{event.start_datetime_local}}
-        <br>({{event.start_time_standard}})
-    </td>      
-    <td>
-      {{#each event.tags as |tag|}}
-      <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
-      {{/each}}
-    </td>
-    
-</tr>
+      <td>
+          <CharIconTiny @char={{event.organizer}} />
+      </td>
+      <td>
+          {{event.start_datetime_local}}
+          <br>({{event.start_time_standard}})
+      </td>
+      <td>
+        {{#each event.tags as |tag|}}
+        <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
+        {{/each}}
+      </td>
 
-{{/each}}
+  </tr>
 
+  {{/each}}
+</tbody>
 </table>
 
 <div class="alert alert-info">If you're using an iCalendar-compatible calendar app like Outlook or Apple iCal, you can add the game's iCal feed to your app and it will automatically load events into your calendar: <a href="{{calendarUrl}}">{{calendarUrl}}</a>.</div>

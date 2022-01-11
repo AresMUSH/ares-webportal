@@ -1,51 +1,51 @@
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#systeminfo">+</a></li>
+<ul class="nav nav-tabs" role="tablist">
+  <li class="nav-item"><a data-bs-toggle="tab" href="#systeminfo" class="nav-link active">+</a></li>
 
-  {{#if char.roster}}
-    <li><a data-toggle="tab" href="#rosternotes">Roster Info</a></li>
+  {{#if this.char.roster}}
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#rosternotes">Roster Info</a></li>
   {{/if}}
 
-  <li><a data-toggle="tab" href="#systemhooks">RP Hooks</a></li>
+  <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemhooks">RP Hooks</a></li>
 
-  {{#if prefsExtraInstalled}}
-    <li><a data-toggle="tab" href="#systemprefs">RP Prefs</a></li>
+  {{#if this.prefsExtraInstalled}}
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemprefs">RP Prefs</a></li>
   {{/if}}
 
-  {{#if char.background}}
-      <li><a data-toggle="tab" href="#systembg">Background</a></li>
+  {{#if this.char.background}}
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systembg">Background</a></li>
   {{/if}}
 
-  {{#if char.description}}
-  <li><a data-toggle="tab" href="#systemdesc">Description</a></li>
+  {{#if this.char.description}}
+  <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemdesc">Description</a></li>
   {{/if}}
 
-  <ProfileFs3Tabs @char={{char}} @game={{game}} />
+  <ProfileFs3Tabs @char={{this.char}} @game={{this.game}} />
 
-  {{#if char.achievements}}
-      <li><a data-toggle="tab" href="#systemachievements">Achievements</a></li>
+  {{#if this.char.achievements}}
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemachievements">Achievements</a></li>
   {{/if}}
 
-  {{#if traitsExtraInstalled}}
-    <li><a data-toggle="tab" href="#systemtraits">Traits</a></li>
+  {{#if this.traitsExtraInstalled}}
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemtraits">Traits</a></li>
   {{/if}}
 
-  {{#if rpgExtraInstalled}}
-    <li><a data-toggle="tab" href="#systemrpg">Sheet</a></li>
+  {{#if this.rpgExtraInstalled}}
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemrpg">Sheet</a></li>
   {{/if}}
 
-  {{#if fateExtraInstalled}}
-    <li><a data-toggle="tab" href="#systemfate">Sheet</a></li>
+  {{#if this.fateExtraInstalled}}
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemfate">Sheet</a></li>
   {{/if}}
 
-  {{#if cookiesExtraInstalled}}
-    <li><a data-toggle="tab" href="#systemcookies">Cookies</a></li>
+  {{#if this.cookiesExtraInstalled}}
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemcookies">Cookies</a></li>
   {{/if}}
 
-  {{#if char.siteinfo}}
-    <li><a data-toggle="tab" href="#systemsite">Admin</a></li>
+  {{#if this.char.siteinfo}}
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemsite">Admin</a></li>
   {{/if}}
 
-  <ProfileCustomTabs @char={{char}} @game={{game}} />
+  <ProfileCustomTabs @char={{this.char}} @game={{this.game}} />
 
 </ul>
 
@@ -53,84 +53,82 @@
 
 
 <div class="tab-content">
-  <div id="systeminfo" class="tab-pane fade in active">
+  <div id="systeminfo" class="tab-pane fade show active">
       <div class="tab-cover">System Information</div>
   </div>
-  {{#if char.roster}}
+  {{#if this.char.roster}}
   <div id="rosternotes" class="tab-pane fade">
-    <AnsiFormat @text={{char.roster.notes}} />
+    <AnsiFormat @text={{this.char.roster.notes}} />
 
-    <p>Contact: {{char.roster.contact}}</p>
+    <p>Contact: {{this.char.roster.contact}}</p>
 
-    {{#if char.roster.previously_played}}
-    <span class="label label-info">Previously Played</span>
+    {{#if this.char.roster.previously_played}}
+    <span class="badge bg-info">Previously Played</span>
     {{/if}}
 
-    {{#if char.roster.app_required}}
-    <span class="label label-warning">App Required</span>
+    {{#if this.char.roster.app_required}}
+    <span class="badge bg-warning">App Required</span>
     {{/if}}
 
   </div>
   {{/if}}
 
   <div id="systemhooks" class="tab-pane fade">
-      <AnsiFormat @text={{char.rp_hooks}} />
+      <AnsiFormat @text={{this.char.rp_hooks}} />
   </div>
 
-  {{#if prefsExtraInstalled}}
-    <div id="systemprefs" class="tab-pane fade">
-      <AnsiFormat @text={{char.rp_prefs}} />
-    </div>
+  {{#if this.prefsExtraInstalled}}
+    <ProfilePrefs @char={{this.char}} />
   {{/if}}
 
-  {{#if char.background}}
+  {{#if this.char.background}}
   <div id="systembg" class="tab-pane fade">
-      <AnsiFormat @text={{char.background}} />
+      <AnsiFormat @text={{this.char.background}} />
    </div>
   {{/if}}
 
-  {{#if char.description}}
+  {{#if this.char.description}}
   <div id="systemdesc" class="tab-pane fade">
-       <AnsiFormat @text={{char.description}} />
+       <AnsiFormat @text={{this.char.description}} />
 
-       {{#if char.details}}
-       {{#each char.details as |detail|}}
+       {{#if this.char.details}}
+       {{#each this.char.details as |detail|}}
        <b>{{detail.name}}</b>: <AnsiFormat @text={{detail.desc}} />
        {{/each}}
        {{/if}}
   </div>
   {{/if}}
 
-  <ProfileFs3 @char={{char}} @game={{game}} @reloadChar={{action "reloadChar"}} />
+  <ProfileFs3 @char={{this.char}} @game={{this.game}} @reloadChar={{action "reloadChar"}} />
 
-  {{#if traitsExtraInstalled}}
-    <ProfileTraits @char={{char}} />
+  {{#if this.traitsExtraInstalled}}
+    <ProfileTraits @char={{this.char}} />
   {{/if}}
 
-  {{#if rpgExtraInstalled}}
-    <RpgProfile @char={{char}} />
+  {{#if this.rpgExtraInstalled}}
+    <RpgProfile @char={{this.char}} />
   {{/if}}
 
-  {{#if fateExtraInstalled}}
-    <ProfileFate @char={{char}} />
+  {{#if this.fateExtraInstalled}}
+    <ProfileFate @char={{this.char}} />
   {{/if}}
 
-  {{#if cookiesExtraInstalled}}
-    <ProfileCookies @char={{char}} />
+  {{#if this.cookiesExtraInstalled}}
+    <ProfileCookies @char={{this.char}} />
   {{/if}}
 
-  {{#if char.achievements}}
+  {{#if this.char.achievements}}
   <div id="systemachievements" class="tab-pane fade">
-      <CharAchievements @achievements={{char.achievements}} @sceneStats={{char.scene_stats}}/>
+      <CharAchievements @achievements={{this.char.achievements}} @sceneStats={{this.char.scene_stats}}/>
   </div>
   {{/if}}
 
-  {{#if char.siteinfo}}
+  {{#if this.char.siteinfo}}
   <div id="systemsite" class="tab-pane fade">
-      <ProfileSiteInfo @char={{char}} />
+      <ProfileSiteInfo @char={{this.char}} />
   </div>
   {{/if}}
 
-  <ProfileCustom @char={{char}} @game={{game}} @reloadChar={{action "reloadChar"}} />
+  <ProfileCustom @char={{this.char}} @game={{this.game}} @reloadChar={{action "reloadChar"}} />
 
 </div>

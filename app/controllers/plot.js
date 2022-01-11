@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
+    router: service(),
     confirmDelete: false,
     filter: 'All',
     page: 1,
@@ -37,7 +38,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('plots');
+                this.router.transitionTo('plots');
                 this.flashMessages.success('Plot deleted!');
             });
         },

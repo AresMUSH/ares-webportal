@@ -1,32 +1,33 @@
 {{page-title "Census"}}
 <h1>All Characters</h1>
 
-<CensusNav @types={{model.types}} />
+<CensusNav @types={{this.model.types}} />
 
 <div class="table-responsive">
 
 <table class="table table-striped">
+  <thead>
+      <th></th>
+      {{#each this.model.census.titles as |title|}}
+      <th>{{title}}</th>
+      {{/each}}
+  </thead>
+  
+  <tbody>
+    {{#each this.model.census.chars as |char| }}
     <tr>
-        <th></th>
-        {{#each model.census.titles as |title|}}
-        <th>{{title}}</th>
-        {{/each}}
+      {{#each-in char as |field value| }}
+        <td>
+          {{#if (eq field 'char')}}
+            <CharIconInline @char={{value}} />
+          {{else}}
+            {{value}}
+          {{/if}}
+        </td>
+        {{/each-in}}
     </tr>
-    
-    
-{{#each model.census.chars as |char| }}
-<tr>
-  {{#each-in char as |field value| }}
-    <td>
-      {{#if (eq field 'char')}}
-        <CharIconInline @char={{value}} />
-      {{else}}
-        {{value}}
-      {{/if}}
-    </td>
-    {{/each-in}}
-</tr>
-{{/each}}
+    {{/each}}
+  </tbody>
 
 </table>
 

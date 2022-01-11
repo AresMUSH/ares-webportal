@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     flashMessages: service(),
     gameApi: service(),
+    router: service(),
 
     actions: {
         storytellersChanged(new_storytellers) {
@@ -15,12 +16,12 @@ export default Controller.extend({
 
         save: function() {
             let api = this.gameApi;
-            
+
             let tags = this.get('model.plot.tags') || [];
             if (!Array.isArray(tags)) {
                 tags = tags.split(/[\s,]/);
             }
-            
+
             api.requestOne('editPlot', { id: this.get('model.plot.id'),
                title: this.get('model.plot.title'),
                summary: this.get('model.plot.summary'),
@@ -30,13 +31,13 @@ export default Controller.extend({
                content_warning: this.get('model.plot.content_warning'),
                description: this.get('model.plot.description'),
                tags: tags
-            
+
             }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('plot',
+                this.router.transitionTo('plot',
                           this.get('model.plot.id'));
                 this.flashMessages.success('Plot updated!');
             });

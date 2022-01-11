@@ -1,4 +1,4 @@
-{{#if model.options.is_job_admin}}
+{{#if this.model.options.is_job_admin}}
   {{page-title 'Create Job'}}
   <h1>Create a Job</h1>
 {{else}}
@@ -14,7 +14,7 @@
      <label>Title:</label>
    </td>
    <td>
-     <p><Input @type="text" @size={{25}} @id="title" @value={{title}} /></p>
+     <p><Input @type="text" size={{25}} id="title" @value={{this.title}} /></p>
    </td>
    <td>
      &nbsp;
@@ -28,7 +28,7 @@
     
      <td>
       
-       <PowerSelect @selected={{submitter}} @options={{model.characters}} @searchField="name" @searchEnabled=true @onChange={{action "submitterChanged"}} as |char|>
+       <PowerSelect @selected={{this.submitter}} @options={{this.model.characters}} @searchField="name" @searchEnabled=true @onChange={{action "submitterChanged"}} as |char|>
          {{char.name}}
        </PowerSelect>
       
@@ -42,7 +42,7 @@
     
      <td>
       
-        <PowerSelectMultiple @selected={{participants}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
+        <PowerSelectMultiple @selected={{this.participants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
          {{char.name}}
        </PowerSelectMultiple>
       
@@ -53,7 +53,7 @@
        <label>Tags:</label>
      </td>
      <td>
-       <p><Input @type="text" @size={{25}} @id="tags" @value={{tags}} /></p>
+       <p><Input @type="text" size={{25}} id="tags" @value={{this.tags}} /></p>
      </td>
    </tr>
  
@@ -62,29 +62,23 @@
       <label>Category:</label>
     </td>
     <td>
-          {{#if category}}
-            <span class="label label-info job-category job-category-{{category}}">
-            {{category}}
+          {{#if this.category}}
+            <span class="badge job-category job-category-{{this.category}}">
+            {{this.category}}
             </span>
           {{else}}
-            <span class="label label-info job-category job-category-{{model.options.request_category}}">
-            {{model.options.request_category}}
+            <span class="badge job-category job-category-{{this.model.options.request_category}}">
+            {{this.model.options.request_category}}
             </span>
           {{/if}}
     </td>
     <td>
-          <ul class="nav">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-              <span class="btn btn-default" href="#">Change Category <span class="caret"></span></span> </a>
-              <ul class="dropdown-menu">
-              {{#each model.options.category_values as |category| }}
-                <li><a href="#" {{action 'changeCategory' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+      
+        <DropdownMenu @id="categoryDropdown" @title="Change Category">
+              {{#each this.model.options.category_values as |category| }}
+                <li><a href="#" {{action 'changeCategory' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
               {{/each}}
-              </ul>
-            </li>
-        </ul>
+        </DropdownMenu>
       
     </td>
   </tr>
@@ -94,10 +88,11 @@
 </table>
 
      
- <MarkdownEditor @text={{description}} />
+ <MarkdownEditor @text={{this.description}} />
    
-<div class="pull-right">
-<button class="btn btn-primary" {{action 'createJob'}}>Create</button>
+<div class="action-buttons">
+  <LinkTo @route="jobs" class="btn btn-secondary">Cancel</LinkTo>
+  <button class="btn btn-primary" {{action 'createJob'}}>Create</button>
 </div>
 
 <FlashMessages />

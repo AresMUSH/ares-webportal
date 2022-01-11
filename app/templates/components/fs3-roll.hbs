@@ -1,34 +1,34 @@
-<BsModalSimple @title="Add Ability Roll" @closeTitle="Cancel" @submitTitle="Roll" @size={{null}} @fade={{true}} @open={{selectSkillRoll}} @onSubmit={{action "addRoll"}} @onHide={{action (mut selectSkillRoll) false}}>
+<BsModalSimple @title="Add Ability Roll" @closeTitle="Cancel" @submitTitle="Roll" @size={{null}} @fade={{true}} @open={{this.selectSkillRoll}} @onSubmit={{action "addRoll"}} @onHide={{action (mut this.selectSkillRoll) false}}>
 
     <p class="hint">You can use a rating number to roll for a NPC. An average attribute is automatically factored in, so rolling a skill of "3" will roll 5 dice total for the NPC.</p>
     
 
     <p><b>Regular Roll</b></p>
     <p>Select an ability, or type one (plus modifiers, if applicable) in the box.</p>
-    <select onchange={{action (mut rollString) value="target.value"}}>
-      {{#each abilities as |ability|}}
+    <select onchange={{action (mut this.rollString) value="target.value"}}>
+      {{#each this.abilities as |ability|}}
         <option value={{ability}}>{{ability}}</option>
       {{/each}}
     </select>
-    <Input @type="text" @size={{25}} @id="rollString" @enter={{action "addRoll"}} @value={{rollString}} />
+    <Input @type="text" size={{25}} id="rollString" @enter={{action "addRoll"}} @value={{this.rollString}} />
 
    <hr>
     <p><b>Roll for Another PC</b></p>
     
     <p>
-      Character: <Input @type="text" @size={{15}} @id="pcRollName" @enter={{action "addRoll"}} @value={{pcRollName}} /> 
-      Ability: <Input @type="text" @size={{15}} @id="pcRollSkill" @enter={{action "addRoll"}} @value={{pcRollSkill}} /><br>
+      Character: <Input @type="text" size={{15}} id="pcRollName" @enter={{action "addRoll"}} @value={{this.pcRollName}} /> 
+      Ability: <Input @type="text" size={{15}} id="pcRollSkill" @enter={{action "addRoll"}} @value={{this.pcRollSkill}} /><br>
     </p>
       
     <hr>
     <p><b>Opposed Roll</b></p>
     <p>Enter two character and ability names.</p>
     <p>
-      Character: <Input @type="text" @size={{15}} @id="vsName1" @enter={{action "addRoll"}} @value={{vsName1}} /> 
-      Ability: <Input @type="text" @size={{15}} @id="vsRoll1" @enter={{action "addRoll"}} @value={{vsRoll1}} /><br>
+      Character: <Input @type="text" size={{15}} id="vsName1" @enter={{action "addRoll"}} @value={{this.vsName1}} /> 
+      Ability: <Input @type="text" size={{15}} id="vsRoll1" @enter={{action "addRoll"}} @value={{this.vsRoll1}} /><br>
      vs<br>
-      Character: <Input @type="text" @size={{15}} @id="vsName2" @enter={{action "addRoll"}} @value={{vsName2}} /> 
-      Ability: <Input @type="text" @size={{15}} @id="vsRoll2" @enter={{action "addRoll"}} @value={{vsRoll2}} /><br>
+      Character: <Input @type="text" size={{15}} id="vsName2" @enter={{action "addRoll"}} @value={{this.vsName2}} /> 
+      Ability: <Input @type="text" size={{15}} id="vsRoll2" @enter={{action "addRoll"}} @value={{this.vsRoll2}} /><br>
     </p>
     
   </BsModalSimple>

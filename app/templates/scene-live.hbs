@@ -1,12 +1,12 @@
-{{page-title pageTitle}}
+{{page-title this.pageTitle}}
 
 
  <div class="row">
    <div class="col col-xs-12">
 
-    <h1>Scene {{model.scene.id}} 
-        {{#if model.scene.title}}
-         - {{model.scene.title}}
+    <h1>Scene {{this.model.scene.id}}
+        {{#if this.model.scene.title}}
+         - {{this.model.scene.title}}
          {{/if}}
      </h1>
 
@@ -16,7 +16,7 @@
 <div class="row">
     <div class="col col-xs-12">
 
-      <LiveSceneControl @scene={{model.scene}} @locations={{model.locations}} @abilities={{model.abilities}} @spells={{model.spells}}  @places={{model.scene.places}} @playerName={{currentUser.name}} @scrollPaused={{scrollPaused}} @refresh={{action "refresh"}} @scrollDown={{action "scrollScene"}} @setScroll={{action "setScroll"}} />
+      <LiveSceneControl @scene={{this.model.scene}} @locations={{this.model.locations}} @abilities={{this.model.abilities}} @spells={{this.model.spells}}  @places={{this.model.scene.places}} @playerName={{this.currentUser.name}} @scrollPaused={{this.scrollPaused}} @refresh={{action "refresh"}} @scrollDown={{action "scrollScene"}} @setScroll={{action "setScroll"}} />
    </div>
 </div>
 {{outlet}}

@@ -1,31 +1,32 @@
 <table class="table table-striped">
-<tbody>
-    <tr>
-      <th></th>
-      <th>Title</th>
-      <th>Posted By</th>
-      <th>Last Activity</th>
-    </tr>
+  <thead>
+    <th></th>
+    <th>Title</th>
+    <th>Posted By</th>
+    <th>Last Activity</th>
+  </thead>
+
+  <tbody>
     
-{{#each posts as |post|}}
-  <tr>
-    <td>
-      {{#if post.unread}}
-      <span class="label label-pill label-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
-      {{/if}}
-    </td>
-    <td>
-        {{#if post.is_pinned}}
-        <i class="fa fa-thumbtack" aria-label="Pinned"></i>
+    {{#each this.posts as |post|}}
+    <tr>
+      <td>
+        {{#if post.unread}}
+        <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
         {{/if}}
-         <LinkTo @route="forum-topic" @models={{array post.category_id post.id}}>{{post.title}}</LinkTo>
-     </td>
-     <td>{{char-icon-tiny char=post.author}}
-     </td>
-     <td>
-       {{post.last_updated_by}} @ {{post.last_activity}}
-     </td>
-   </tr>
-{{/each}}
-</tbody>
+      </td>
+      <td>
+          {{#if post.is_pinned}}
+          <i class="fa fa-thumbtack" aria-label="Pinned"></i>
+          {{/if}}
+           <LinkTo @route="forum-topic" @models={{array post.category_id post.id}}>{{post.title}}</LinkTo>
+       </td>
+       <td><CharIconTiny @char={{post.author}} />
+       </td>
+       <td>
+         {{post.last_updated_by}} @ {{post.last_activity}}
+       </td>
+     </tr>
+     {{/each}}
+   </tbody>
 </table>

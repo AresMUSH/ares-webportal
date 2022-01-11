@@ -5,14 +5,14 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({    
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     newConfigKey: '',
     configChanged: false,
     confirmRestore: false,
     configErrors: null,
     
-    config: computed('model.config', 'configChanged', function() {
-        return this.get('model.config');
-    }),
+    config: computed.reads('model.config'),
+
     
     resetOnExit: function() {
         this.set('newConfigKey', '');
@@ -42,6 +42,7 @@ export default Controller.extend({
         
         restoreDefaults() {
           let api = this.gameApi;
+          this.set('confirmRestore', false);
           api.requestOne('restoreConfig', { file: this.get('model.file') }, null)
           .then( (response) => {
               if (response.error) {
@@ -73,7 +74,7 @@ export default Controller.extend({
                 }
         
             this.flashMessages.success('Config saved!');
-            this.transitionToRoute('setup');  
+            this.router.transitionTo('setup');  
             });  
         }
         

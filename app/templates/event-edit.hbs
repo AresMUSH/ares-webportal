@@ -7,7 +7,7 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelect @selected={{model.event.organizer}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "organizerChanged"}} as |char|>
+      <PowerSelect @selected={{this.model.event.organizer}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "organizerChanged"}} as |char|>
         {{char.name}}
       </PowerSelect>
     </div>
@@ -18,7 +18,7 @@
         <label for="title" class="col-form-label">Title:</label>
     </div>
     <div class="col-sm-9">
-         <Input @type="text" @size={{25}} @id="title" @enter={{action "edit"}} @value={{model.event.title}} />
+         <Input @type="text" size={{25}} id="title" @enter={{action "edit"}} @value={{this.model.event.title}} />
     </div> 
   </div>
   
@@ -27,7 +27,7 @@
         <label for="date" class="col-form-label">Date:</label>
     </div>
     <div class="col-sm-9">
-         <PikadayInput @onSelection={{action "changeDate"}} @value={{model.event.date}}  @format={{model.event.date_entry_format}} /> 
+         <PikadayInput @firstDay={{0}} @onSelection={{action "changeDate"}} @value={{this.model.event.date}}  @format={{this.model.event.date_entry_format}} /> 
     </div> 
   </div>
   
@@ -36,9 +36,9 @@
         <label for="startTime" class="col-form-label">Start Time:</label>
     </div>
     <div class="col-sm-9">
-         <Input @type="text" @id="time" @enter={{action "edit"}} @value={{model.event.time}} />
+         <Input @type="text" id="time" @enter={{action "edit"}} @value={{this.model.event.time}} />
          
-         <div class="hint">Use <b>server time</b> in the same format as the server time.  The current server time is {{model.event.server_time}}.</div>
+         <div class="hint">Use <b>server time</b> in the same format as the server time.  The current server time is {{this.model.event.server_time}}.</div>
     </div> 
   </div>
   
@@ -48,10 +48,10 @@
          <label for="title" class="col-form-label">Content Warning:</label>
      </div>
      <div class="col-sm-9">
-       <PowerSelectMultiple @selected={{warning_tags}} @options={{model.sceneOptions.content_warnings}} @onChange={{action "warningsChanged"}} as |warning|>
+       <PowerSelectMultiple @selected={{warning_tags}} @options={{this.model.sceneOptions.content_warnings}} @onChange={{action "warningsChanged"}} as |warning|>
          {{warning}}
        </PowerSelectMultiple>
-         <Input @type="text" @size={{60}} @id="content_warning" @enter={{action "edit"}} @value={{model.event.content_warning}} />
+         <Input @type="text" size={{60}} id="content_warning" @enter={{action "edit"}} @value={{this.model.event.content_warning}} />
             <p class="hint">Select from the suggested tags or write your own. Please avoid frivolous warnings.</p>
      </div>
    </div>
@@ -62,7 +62,7 @@
         <label for="tags" class="col-form-label">Tags:</label>
     </div>
     <div class="col-sm-9">
-        <Input @type="text" @size={{25}} @id="tags" @enter={{action "edit"}}  @value={{model.event.tags}} />
+        <Input @type="text" size={{25}} id="tags" @enter={{action "edit"}}  @value={{this.model.event.tags}} />
     </div> 
   </div>
   
@@ -71,15 +71,15 @@
         <label for="warning" class="col-form-label">Description:</label>
     </div>
     <div class="col-sm-9">
-         <MarkdownEditor @text={{model.event.description}} />
+         <MarkdownEditor @text={{this.model.event.description}} />
          
     </div> 
   </div>
   
 
 
-<div class="pull-right">
-  <LinkTo @route="event" @model={{model.event.id}} class="btn btn-default">Cancel</LinkTo>
+<div class="action-buttons">
+  <LinkTo @route="event" @model={{this.model.event.id}} class="btn btn-secondary">Cancel</LinkTo>
   <button {{action "edit"}} class="btn btn-primary">Save</button>
 </div>
 <FlashMessages />

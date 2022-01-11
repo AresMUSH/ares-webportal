@@ -1,53 +1,54 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
+<div class="card card-default">
+    <div class="card-heading">
         Upload Files
     </div>
 
-    <div class="panel-body">
+    <div class="card-body">
 
-        {{#if showSelector}}
+        {{#if this.showSelector}}
         <p>Select files for upload...</p>
         
         <p class="alert alert-info">Please consider copyright when uploading images, and add attributions to pages where they're used as needed.</p>
         
-        {{#if allowMulti}}
+        {{#if this.allowMulti}}
         <input type="file"
            multiple
            accept="image/*" 
-           onchange={{action "filesSelected"}}>
+           onchange={{action "filesSelected"}} />
         {{else}}
         <input type="file"
            accept="image/*" 
-           onchange={{action "filesSelected"}}>
+           onchange={{action "filesSelected"}} />
         {{/if}}
         
         {{else}}
 
            <div class="alert alert-info"> 
-             {{fileCount}} files selected for upload. Review the options, then click the upload button for <b>each file</b> to commence the upload.
+             {{this.fileCount}} files selected for upload. Review the options, then click the upload button for <b>each file</b> to commence the upload.
              </div>
 
             <table class="table">
-        
-            {{#each files as |f|}}
+            <tbody>
+            {{#each this.files as |f|}}
             <tr>
                 <td><img class="upload-preview" alt="preview image" src="{{f.url}}" ></td>
                 <td>
                     {{#if (not f.upload_success)}}
-                      {{#if lockProperties}}
+                      {{#if this.lockProperties}}
                       <p><label class="col-xs-5">Folder:</label> {{f.folder}}</p>
                       {{else}}
                       <p><label class="col-xs-5">Name:</label> <Input @type="text" @value={{f.name}} /></p>
                       <p><label class="col-xs-5">Folder:</label> <Input @type="text" @value={{f.folder}} /></p>
+                      <p><label class="col-xs-5">Description:</label> <Input @type="text" @value={{f.description}} /></p>
                       <p><label class="col-xs-5">Overwrite?</label> <Input @type="checkbox" @checked={{f.allowOverwrite}} /></p>
                       {{/if}}
                     {{/if}}
                     
                     {{#if f.upload_message}}
                         {{#if f.upload_success}}
-                            <span class="label label-success">{{f.upload_message}}</span>
+                            <span class="badge label-success">{{f.upload_message}}</span>
                         {{else}}
-                            <span class="label label-danger">{{f.upload_message}}</span>
+                            <span class="badge label-danger">{{f.upload_message}}</span>
                         {{/if}}
                     {{/if}}
                     
@@ -55,15 +56,16 @@
                 <td>{{f.sizeKb}}KB</td> 
                 <td>
                     {{#if (not f.upload_success)}}
-                        <button class="btn btn-default" {{action 'removeFile' f}}><i class="fa fa-ban" aria-label="Remove File"></i></button>
+                        <button class="btn btn-secondary" {{action 'removeFile' f}}><i class="fa fa-ban" aria-label="Remove File"></i></button>
                         <button class="btn btn-primary" {{action 'uploadFile' f}}><i class="fa fa-upload" aria-label="Upload File"></i></button>
                     {{/if}}
                 </td>
             </tr>
             {{/each}}
+          </tbody>
         </table>
 
-        <button class="btn btn-default" {{action 'reset'}}>Reset Uploader</button>
+        <button class="btn btn-secondary" {{action 'reset'}}>Reset Uploader</button>
         {{/if}}
     </div>
 </div>

@@ -1,37 +1,37 @@
-{{page-title model.area.name}}
-<h1>{{model.area.name}}</h1>
+{{page-title this.model.area.name}}
+<h1>{{this.model.area.name}}</h1>
 
 <p>
-  <AnsiFormat @text={{model.area.summary}} />
+  <AnsiFormat @text={{this.model.area.summary}} />
 </p>
 
 <h3>Description</h3>
 
 <p>
-    <AnsiFormat @text={{model.area.description}} />
+    <AnsiFormat @text={{this.model.area.description}} />
 </p>
 
 
-{{#if model.area.parent}}
+{{#if this.model.area.parent}}
 <h3>Located In</h3> 
-  <p><LinkTo @route="area" @model={{model.area.parent.id}}>{{model.area.parent.name}}</LinkTo></p>
+  <p><LinkTo @route="area" @model={{this.model.area.parent.id}}>{{this.model.area.parent.name}}</LinkTo></p>
 {{/if}}
 
 
-{{#if model.area.children}}
-<h3>Areas in {{model.area.name}}</h3>
+{{#if this.model.area.children}}
+<h3>Areas in {{this.model.area.name}}</h3>
 
 <ul> 
-{{#each model.area.children as |child|}}
+{{#each this.model.area.children as |child|}}
   <li><LinkTo @route="area" @model={{child.id}}>{{child.name}}</LinkTo></li>
 {{/each}}
 </ul>
 {{/if}}
 
-{{#if model.area.rooms}}
-<h3>Locations in {{model.area.name}}</h3>
+{{#if this.model.area.rooms}}
+<h3>Locations in {{this.model.area.name}}</h3>
  
-{{#each model.area.rooms as |room|}}
+{{#each this.model.area.rooms as |room|}}
   <p><LinkTo @route="location" @model={{room.id}}>{{room.name}}</LinkTo>  </p>
 {{/each}}
 {{/if}}
@@ -39,20 +39,15 @@
 <p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
 
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
-    
-        {{#if model.can_manage}}
-          <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
-          <LinkTo @route="area-edit" @model={{model.area.id}} class="btn btn-primary">Edit</LinkTo>
-        {{/if}}
-      </div>
-  </div>
-</div>        
+<div class="action-buttons">
+  {{#if this.model.can_manage}}
+    <button {{action (mut this.confirmDelete) true}} class="btn btn-warning action-button">Delete</button>
+    <LinkTo @route="area-edit" @model={{this.model.area.id}} class="btn btn-primary action-button">Edit</LinkTo>
+  {{/if}}
+</div>
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) false}}>
-    You're about to delete area {{model.area.name}}. This cannot be undone.  Are you sure?
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut this.confirmDelete) false}}>
+    You're about to delete area {{this.model.area.name}}. This cannot be undone.  Are you sure?
   </BsModalSimple>
   
 

@@ -1,10 +1,12 @@
 import Controller from '@ember/controller';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
+import dayjs from 'dayjs';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     
     warning_tags: [],
   
@@ -13,7 +15,7 @@ export default Controller.extend(AuthenticatedController, {
           this.set('model.event.organizer', org);
         },
         changeDate: function(date) {
-            let formatted_date = moment(date).format(this.get('model.event.date_entry_format'));
+            let formatted_date = dayjs(date).format(this.get('model.event.date_entry_format')); //moment(date).format(this.get('model.event.date_entry_format'));
             this.set('model.event.date', formatted_date);  
         },
         edit: function() {
@@ -36,7 +38,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('event',                          
+                this.router.transitionTo('event',                          
                           this.get('model.event.id'));
                 this.flashMessages.success('Event updated!');
             });

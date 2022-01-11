@@ -1,34 +1,36 @@
-{{page-title model.name}}
-<h1>{{model.name}}</h1>
+{{page-title this.model.name}}
+<h1>{{this.model.name}}</h1>
 
-<AnsiFormat @text={{model.descs.current}} />
+<AnsiFormat @text={{this.model.descs.current}} />
 
-{{#if model.weather}}
+{{#if this.model.weather}}
   <div class="row weather">
     <div class="col col-xs-2">
-      <img src={{model.weather_icon}} style="padding:0px;">
+      <img src={{this.model.weather_icon}} style="padding:0px;">
     </div>
     <div class="col col-xs-9">
-      <AnsiFormat @text={{model.weather}} />
+      <AnsiFormat @text={{this.model.weather}} />
     </div>
   </div>
 {{/if}}
 
+{{#each this.model.descs.details as |detail|}}
 
-{{#each model.descs.details as |detail|}}
+
+
 <p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
 {{/each}}
 
 
-{{#if model.area}}
+{{#if this.model.area}}
 <h3>Located In</h3>
 
-<LinkTo @route="area" @model={{model.area.id}}>{{model.area.full_name}}</LinkTo>
+<LinkTo @route="area" @model={{this.model.area.id}}>{{this.model.area.full_name}}</LinkTo>
 {{/if}}
 
-{{#if model.owners}}
+{{#if this.model.owners}}
 <h3>Owners</h3>
-  {{#each model.owners as |owner|}}
+  {{#each this.model.owners as |owner|}}
     <CharIconInline @char={{owner}} />
   {{/each}}
 {{/if}}
@@ -36,7 +38,7 @@
 <h3>Leads To</h3>
 
 <ul>
-  {{#each model.destinations as |dest|}}
+  {{#each this.model.destinations as |dest|}}
   <li><LinkTo @route="location" @model={{dest.id}}>{{dest.name}}</LinkTo></li>
   {{/each}}
 </ul>
@@ -44,14 +46,9 @@
 
 <p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
 
-    <div class="row">
-        <div class="col col-xs-12">
-
-        <div class="pull-right">
-          {{#if model.can_edit}}
-          <LinkTo @route="location-edit" @model={{model.id}} class="btn btn-default">Edit</LinkTo>
-          {{/if}}
-          <LinkTo @route="scene-create" @query={{hash location=model.name_and_area}} class="btn btn-primary">Start Scene Here</LinkTo>
-        </div>
-        </div>
-    </div>
+<div class="action-buttons">
+  {{#if this.model.can_edit}}
+  <LinkTo @route="location-edit" @model={{this.model.id}} class="btn btn-secondary">Edit</LinkTo>
+  {{/if}}
+  <LinkTo @route="scene-create" @query={{hash location=this.model.name_and_area}} class="btn btn-primary">Start Scene Here</LinkTo>
+</div>

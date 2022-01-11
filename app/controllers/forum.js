@@ -7,6 +7,7 @@ export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     gameSocket: service(),
     flashMessages: service(),
+    router: service(),
     
     anyHidden: computed('model.hidden', function() {
       return this.get('model.hidden').length > 0;
@@ -76,7 +77,7 @@ export default Controller.extend(AuthenticatedController, {
               }
               
               if (response.post_id) {
-                  this.transitionToRoute('forum-topic', response.category_id, response.post_id);
+                  this.router.transitionTo('forum-topic', response.category_id, response.post_id);
               }
               else {
                   this.flashMessages.warning('No more unread messages.');                    

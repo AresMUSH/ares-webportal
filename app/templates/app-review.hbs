@@ -1,5 +1,5 @@
 {{page-title 'Review Character'}}
-<h1>Review {{model.name}}</h1>
+<h1>Review {{this.model.name}}</h1>
 
 
 <h2>View Details</h2>
@@ -7,7 +7,7 @@
 <p>You can view the character's background, sheet, and RP hooks on their character page.  This will open in a new tab so you can easily flip back to this one when finished. You may also want to refer to the <a href="/wiki/character_creation">CG Guide</a>.</p>
 
        <p>
-          <LinkTo @route="char" @model={{model.id}} @class="btn btn-primary" @target="_blank">View Character</LinkTo>
+          <LinkTo @route="char" @model={{this.model.id}} class="btn btn-primary" target="_blank">View Character</LinkTo>
       </p>
 
 
@@ -20,32 +20,32 @@
        <p><span class="ansi-bright-yellow-fg">Yellow</span> may be OK if it suits the character.</p>
        <hr>
 
-<div class="panel panel-default">
-    <div class="panel-body">
-        <pre class="ansi app-status">{{#if model.abilities}}<AnsiFormat @text={{model.abilities}} />
-{{/if}}<AnsiFormat @text={{model.demographics}} /><AnsiFormat @text={{model.background}} /><AnsiFormat @text={{model.desc}} /><AnsiFormat @text={{model.hooks}} />{{#if model.ranks}}<AnsiFormat @text={{model.ranks}} />{{/if}}{{#if model.custom}}<AnsiFormat @text={{model.custom}} />{{/if}}        </pre>
+<div class="card card-default">
+    <div class="card-body">
+        <pre class="ansi app-status">{{#if this.model.abilities}}<AnsiFormat @text={{this.model.abilities}} />
+{{/if}}<AnsiFormat @text={{this.model.demographics}} /><AnsiFormat @text={{this.model.background}} /><AnsiFormat @text={{this.model.desc}} /><AnsiFormat @text={{this.model.hooks}} />{{#if this.model.ranks}}<AnsiFormat @text={{this.model.ranks}} />{{/if}}{{#if this.model.custom}}<AnsiFormat @text={{this.model.custom}} />{{/if}}        </pre>
     </div>
 </div>
 
-<div class="panel panel-default">
+<div class="card card-default">
 
-    <div class="panel-body">
+    <div class="card-body">
 
-       <p>Approve the character or send the app back for revisions using the button below.  Any notes you add in the textbox will be sent to the applicant via the approval job.</p>
+       <p>Approve the character or send the app back for revisions using the button below.   Any notes you add in the textbox will be sent to the applicant via the approval job.</p>
 
-       <Textarea @value={{appNotes}} @cols="80" @rows={{5}} />
+       <Textarea @value={{appNotes}} cols={{80}} rows={{5}} />
 
-       {{#if model.preset_responses}}
+       {{#if this.model.preset_responses}}
           <div class="preset-responses">
             <b>Pre-Made Responses:</b>
-            <PowerSelect @selected='' @options={{model.preset_responses}} @searchEnabled=true @searchField="name" @onChange={{action "responseSelected"}} as |resp|>
+            <PowerSelect @selected='' @options={{this.model.preset_responses}} @searchEnabled=true @searchField="name" @onChange={{action "responseSelected"}} as |resp|>
              {{resp.name}}
             </PowerSelect>
           </div>
        {{/if}}
 
       <p>
-          <LinkTo @route="job" @model={{model.job}} @class="btn btn-default">Back to Job</LinkTo>
+          <LinkTo @route="job" @model={{this.model.job}} class="btn btn-secondary">Back to Job</LinkTo>
           <button name="reject" {{action 'rejectChar'}} class="btn btn-warning">Send Back</button>
           <button name="approve" {{action 'approveChar'}} class="btn btn-success">Approve</button>
       </p>

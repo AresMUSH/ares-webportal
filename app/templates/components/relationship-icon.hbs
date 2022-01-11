@@ -1,16 +1,16 @@
 <div class="relationship-icon-container">
-{{#if char.is_npc}}
-    {{#if char.icon}}
-    <img class="relationship-icon" src="/game/uploads/{{char.icon}}" alt="{{char.name}}'s icon" >
+{{#if this.char.is_npc}}
+    {{#if this.char.icon}}
+    <img class="relationship-icon" src="/game/uploads/{{this.char.icon}}" alt="{{this.char.name}}'s icon" >
     {{else}}
-    <img class="relationship-icon" src="/game/uploads/theme_images/noicon.png" alt="{{char.name}}'s icon"  >
+    <img class="relationship-icon" src="/game/uploads/theme_images/noicon.png" alt="{{this.char.name}}'s icon"  >
     {{/if}}
 {{else}}
-  <LinkTo @route="char" @model={{char.name}}>
-      {{#if char.icon}}
-      <img class="relationship-icon" src="/game/uploads/{{char.icon}}" alt="{{char.name}}'s icon" >
+  <LinkTo @route="char" @model={{this.char.name}}>
+      {{#if this.char.icon}}
+      <img class="relationship-icon" src="/game/uploads/{{this.char.icon}}" alt="{{this.char.name}}'s icon" >
       {{else}}
-      <img class="relationship-icon" src="/game/uploads/theme_images/noicon.png" alt="{{char.name}}'s icon"  >
+      <img class="relationship-icon" src="/game/uploads/theme_images/noicon.png" alt="{{this.char.name}}'s icon"  >
       {{/if}}
   </LinkTo>
 {{/if}}

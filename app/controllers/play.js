@@ -1,6 +1,6 @@
 import $ from "jquery"
 import Controller from '@ember/controller';
-import { set, computed } from '@ember/object';
+import EmberObject, { set, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { localTime } from 'ares-webportal/helpers/local-time';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
@@ -123,7 +123,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     },
 
     onJoinedScene: function(type, msg, timestamp ) {
-      let sceneData = Ember.Object.create(JSON.parse(msg));
+      let sceneData = EmberObject.create(JSON.parse(msg));
 
       if (!this.get('model.scenes').find(s => s.id === sceneData.id)) {
         this.model.scenes.pushObject(sceneData);

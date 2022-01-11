@@ -1,24 +1,20 @@
-<div class="row"> 
-<div class="col-sm-7">
-{{yield}}
-</div>
+<div class="row fs3-abilitybox"> 
+  <div class="col col-sm-7">
+    {{yield}}
+  </div>
 
-<div class="col-sm-1">
-<button class="fs3-skillbutton" id="dec-attr" {{action "decrement"}}>-</button>
-</div>
+  <div class="col col-sm-5">
+    <div class="fs3-rating-control">
+      <button class="fs3-skillbutton" {{action "decrement"}}>-</button>
 
-<div class="col-sm-2">
-<Fs3Dots @rating={{rating}} @max={{3}} />
-<br>
-{{ratingName}}
-</div>
+      <div class="fs3-rating-display">
+        <Fs3Dots @rating={{this.rating}} @max={{3}} />
+        <br>
+        {{this.ratingName}}
+      </div>
 
-<div class="col-sm-1">
-<button class="fs3-skillbutton" id="inc-attr" {{action "increment"}}>+</button>
-</div>
-
-</div>
-
-<div class="row">
-<div class="col-sm-12 fs3-divider">&nbsp;</div>
+      <button class="fs3-skillbutton" {{action "increment"}}>+</button>
+    </div>
+    
+  </div>
 </div>

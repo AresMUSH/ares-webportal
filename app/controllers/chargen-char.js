@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     flashMessages: service(),
     gameApi: service(),
+    router: service(),
     charErrors: null,
 
     /* These callbacks are wired up a little weird.
@@ -33,33 +34,34 @@ export default Controller.extend({
       this.set('charErrors', []);
     },
 
-    genders: computed(function() {
-      let list = [];
-      this.get('model.cgInfo.genders').forEach(function(g) {
-        list.push({ value: g });
-      });
-      return list;
-    }),
+  genders: computed('model.cgInfo.genders', function () {
+    let list = [];
+    this.get('model.cgInfo.genders').forEach(function (g) {
+      list.push({ value: g });
+    });
+    return list;
+  }),
 
-    traitsExtraInstalled: computed(function() {
-      return this.get('model.app.game.extra_plugins').any(e => e == 'traits');
-    }),
+  traitsExtraInstalled: computed('model.app.game.extra_plugins', function () {
+    return this.get('model.app.game.extra_plugins').any((e) => e == 'traits');
+  }),
 
-    rpgExtraInstalled: computed(function() {
-      return this.get('model.app.game.extra_plugins').any(e => e == 'rpg');
-    }),
+  rpgExtraInstalled: computed('model.app.game.extra_plugins', function () {
+    return this.get('model.app.game.extra_plugins').any((e) => e == 'rpg');
+  }),
 
-    anyGroupMissing: computed('model', function() {
-        let groups = this.get('model.char.groups');
-        let anyMissing = false;
+  anyGroupMissing: computed('model.char.groups', function () {
+    let groups = this.get('model.char.groups');
+    let anyMissing = false;
 
-        Object.keys(groups).forEach(g => {
-            if (!groups[g].value) {
-                anyMissing = true;
-            }
-        });
-        return anyMissing;
-    }),
+    Object.keys(groups).forEach((g) => {
+      if (!groups[g].value) {
+        anyMissing = true;
+      }
+    });
+    return anyMissing;
+  }),
+
 
     buildQueryDataForChar: function() {
 
@@ -125,7 +127,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('chargen-review', this.get('model.char.id'));
+                this.router.transitionTo('chargen-review', this.get('model.char.id'));
             });
         },
 

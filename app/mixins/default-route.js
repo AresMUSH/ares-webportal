@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Mixin.create({
     session: service(),
     flashMessages: service(),
+    router: service(),
     
     beforeModel: function() {
         let appModel = this.modelFor('application');
@@ -14,7 +15,7 @@ export default Mixin.create({
         
         if (regRequired && !this.get('session.isAuthenticated')) {
             this.flashMessages.danger('You must log in first.');
-            this.transitionTo('login');
+            this.router.transitionTo('login');
         }
     }
 });

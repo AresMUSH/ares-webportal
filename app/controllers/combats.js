@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     
     actions: {
         startCombat: function() {
@@ -14,7 +15,7 @@ export default Controller.extend({
                   return;
               }
               this.flashMessages.success('Combat started!');
-              this.transitionToRoute('combat', response.id);
+              this.router.transitionTo('combat', response.id);
           });
         }
     }

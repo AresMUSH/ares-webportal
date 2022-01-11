@@ -1,6 +1,6 @@
 <div class="play-scene-context-wrap">
-    <!-- <a data-toggle="collapse" href="#scene-context" class="play-scene-context-prompt">
-    {{scene.location.name}} - {{scene.icdate}}
+    <a data-bs-toggle="collapse" href="#scene-context" class="play-scene-context-prompt">
+    {{this.scene.location.name}} - {{this.scene.icdate}}
 
     <TooltipIcon @position="right" @message="Expand scene details." @icon="fa fa-caret-square-down" />
    </a> -->
@@ -17,61 +17,61 @@
 
    {{/if}}
 
-<div id="scene-context" class="panel-collapse collapse">
+<div id="scene-context" class="card-collapse collapse">
 
-  <div class="panel panel-default">
-      <div class="panel-body scene-details">
+  <div class="card card-default">
+      <div class="card-body">
 
-          <p><b>{{scene.location.name}}</b></p>
+          <p><b>{{this.scene.location.name}}</b></p>
 
-          {{#if scene.summary}}
-          <p> <AnsiFormat @text={{scene.summary}} /> </p>
+          {{#if this.scene.summary}}
+          <p> <AnsiFormat @text={{this.scene.summary}} /> </p>
           <hr>
           {{/if}}
 
-          {{#if scene.content_warning}}
-          <div class="alert alert-danger"><b>Content Warning:</b> {{scene.content_warning}}</div>
+          {{#if this.scene.content_warning}}
+          <div class="alert alert-danger"><b>Content Warning:</b> {{this.scene.content_warning}}</div>
           {{/if}}
 
-          {{#if scene.location.description}}
-          <AnsiFormat @text={{scene.location.description}} />
+          {{#if this.scene.location.description}}
+          <AnsiFormat @text={{this.scene.location.description}} />
           {{/if}}
 
-          {{#if scene.location.weather}}
+          {{#if this.scene.location.weather}}
             <div class="row weather">
               <div class="col col-xs-2">
-                <img src={{scene.location.weather_icon}} style="padding:0px;">
+                <img src={{this.scene.location.weather_icon}} style="padding:0px;">
               </div>
               <div class="col col-xs-9">
-                <AnsiFormat @text={{scene.location.weather}} />
+                <AnsiFormat @text={{this.scene.location.weather}} />
               </div>
             </div>
           {{/if}}
 
-          {{#each scene.location.details as |detail|}}
+          {{#each this.scene.location.details as |detail|}}
           <p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
           {{/each}}
 
-          {{#if scene.location.scene_set}}
+          {{#if this.scene.location.scene_set}}
           <div class="scene-set-pose">
-            <AnsiFormat @text={{scene.location.scene_set}} />
+            <AnsiFormat @text={{this.scene.location.scene_set}} />
           </div>
           {{/if}}
 
-          <div class="icon-row">
-          {{#each scene.participants as |who|}}
+          <div class="icon-row scene-participants">
+          {{#each this.scene.participants as |who|}}
             <CharIconInline @char={{who}} />
           {{/each}}
           </div>
 
           <hr>
 
-          <ScenePrivacyTag @scene={{scene}} />
-          <ScenePacingTag @scene={{scene}} />
-          <SceneTypeTag @scene={{scene}} />
+          <ScenePrivacyTag @scene={{this.scene}} />
+          <ScenePacingTag @scene={{this.scene}} />
+          <SceneTypeTag @scene={{this.scene}} />
 
-          {{#if scene.limit}}
-          <p><b>Notes:</b> {{scene.limit}}</p>
+          {{#if this.scene.limit}}
+          <p><b>Notes:</b> {{this.scene.limit}}</p>
           {{/if}}
       </div>
   </div>

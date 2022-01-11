@@ -9,6 +9,7 @@ export default Controller.extend(AuthenticatedController, {
     session: service(),
     gameSocket: service(),
     flashMessages: service(),
+    router: service(),
     confirmDeleteTopic: false,
     confirmDeleteReply: false,
     chooseNewCategory: false,
@@ -108,7 +109,7 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 
                 if (response.post_id) {
-                    this.transitionToRoute('forum-topic', response.category_id, response.post_id);
+                    this.router.transitionTo('forum-topic', response.category_id, response.post_id);
                 }
                 else {
                     this.flashMessages.warning('No more unread messages.');                    
@@ -147,7 +148,7 @@ export default Controller.extend(AuthenticatedController, {
         deleteReply: function(reply) {
           let api = this.gameApi;
           this.get('model.replies').removeObject(reply);
-          this.set('confirmDeleteReply', null);
+          this.set('confirmDeleteReply', false);
           api.requestOne('forumDeleteReply', { reply_id: reply.id })
           .then( (response) => {
               if (response.error) {
@@ -164,7 +165,7 @@ export default Controller.extend(AuthenticatedController, {
               if (response.error) {
                 return;
               }
-            this.transitionToRoute('forum-category', this.get('model.category.id'));
+            this.router.transitionTo('forum-category', this.get('model.category.id'));
             this.flashMessages.success('Post deleted!');
           });
         },
@@ -188,7 +189,7 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 
                 this.flashMessages.success('Topic moved!');
-                this.transitionToRoute('forum-topic', response.category_id, response.post_id);
+                this.router.transitionTo('forum-topic', response.category_id, response.post_id);
               
             });
         },

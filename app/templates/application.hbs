@@ -1,5 +1,5 @@
 <HeadLayout />
-{{page-title mushName}}
+{{page-title this.mushName}}
 <div class="container-fluid">
     <div class="header-wrap">
 
@@ -8,27 +8,27 @@
 
            <div class="row" role=”banner”>
                <div class="col-md-6 col-sm-12 col-xs-12">
-                   <div class="site-title"><LinkTo @route="home">{{mushName}}</LinkTo></div>
-                   <div class="site-subtitle">{{mushHost}} port {{mushPort}}</div>
+                   <div class="site-title"><LinkTo @route="home">{{this.mushName}}</LinkTo></div>
+                   <div class="site-subtitle">{{this.mushHost}} port {{this.mushPort}}</div>
                </div>
 
-               <div class="col-md-6 hidden-sm hidden-xs" role="navigation">
-                  <div class="text-right user-bar">
-                   {{#if isAuthenticated}}
-                       <p>Welcome, {{currentUser.name}}.
-                        {{#if model.alts}}
-                         <a href="#" {{action (mut showAltSelection) true}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a>
+               <div class="col-md-6 d-none d-lg-block" role="navigation">
+                  <div class="float-end user-bar">
+                   {{#if this.isAuthenticated}}
+                       <p>Welcome, {{this.currentUser.name}}.
+                        {{#if this.model.alts}}
+                         <a href="#" {{action (mut this.showAltSelection) true}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a>
                          {{/if}}
                        </p>
 
                        <p>
                            <LinkTo @route="notifications">
-                               <span class="label label-pill label-primary"><i class="fa fa-bell" aria-label='Unread Notifications'></i>
-                               <span id="notificationBadge">{{model.notification_count}}</span>
+                               <span class="badge rounded-pill bg-primary"><i class="fa fa-bell" aria-label='Unread Notifications'></i>
+                               <span id="notificationBadge">{{this.model.notification_count}}</span>
                                </span>
                            </LinkTo>
                             |
-                           <LinkTo @route="char" @model={{currentUser.name}}>
+                           <LinkTo @route="char" @model={{this.currentUser.name}}>
                              <i class="fa fa-user" aria-label="Profile"></i>
                            </LinkTo> |
                            <LinkTo @route="mail">
@@ -45,7 +45,7 @@
                            </LinkTo>
                        </p>
                     {{else}}
-                        <p><LinkTo @route="login" @query={{hash redirect=currentRoute}}>Login</LinkTo>
+                        <p><LinkTo @route="login" @query={{hash redirect=this.currentRoute}}>Login</LinkTo>
                         | <LinkTo @route="register">Register</LinkTo>
                         </p>
                     {{/if}}
@@ -53,7 +53,7 @@
                </div>
            </div>
        </div>
-        <GlobalNavbar @topNavbar={{topNavbar}} @model={{model}} @isAdmin={{isAdmin}} @isCoder={{isCoder}} @isAuthenticated={{isAuthenticated}} @isWikiMgr={{isWikiMgr}} @currentUser={{currentUser}} @currentRoute={{currentRoute}} />
+        <GlobalNavbar @topNavbar={{this.topNavbar}} @model={{this.model}} @isAdmin={{this.isAdmin}} @isCoder={{this.isCoder}} @isAuthenticated={{this.isAuthenticated}} @isWikiMgr={{this.isWikiMgr}} @currentUser={{this.currentUser}} @currentRoute={{this.currentRoute}} />
     </div>
 
 
@@ -62,35 +62,39 @@
 
        <div class="row body-row">
 
-         {{#if (not hideSidebar)}}
-             {{#if model.left_sidebar}}
+         {{#if (not this.hideSidebar)}}
+             {{#if this.model.left_sidebar}}
              <div class="col-md-3 left-sidebar" role="navigation" aria-labelledby="sidebar">
-               <GlobalSidebar @model={{sidebar}} @socketConnected={{socketConnected}} @versionWarning={{versionWarning}} @boxStyle="sidebar-box-left" />
+               <GlobalSidebar @model={{this.sidebar}} @socketConnected={{this.socketConnected}} @versionWarning={{this.versionWarning}} @boxStyle="sidebar-box-left" />
              </div>
              {{/if}}
         {{/if}}
 
-         {{#if hideSidebar}}
-             <div class="col-md-12 body-container {{if model.left_sidebar 'right-body' 'left-body'}}" role="main">
+         {{#if this.hideSidebar}}
+             <div class="col-md-12 body-container {{if this.model.left_sidebar 'right-body' 'left-body'}}" role="main">
                <FlashMessages />
 
-               {{#if (not socketConnected)}}
+               {{#if (not this.socketConnected)}}
                  <div class="alert alert-warning">The website is not receiving live updates from the game.  Try reloading the page.</div>
                {{/if}}
 
                {{outlet}}
+
+               {{#if (not this.socketConnected)}}
+                 <div class="alert alert-warning">The website is not receiving live updates from the game.  Try reloading the page.</div>
+               {{/if}}
              </div>
          {{else}}
-             <div class="col-md-9 body-container {{if model.left_sidebar 'right-body' 'left-body'}}" role="main">
+             <div class="col-md-9 body-container {{if this.model.left_sidebar 'right-body' 'left-body'}}" role="main">
                <FlashMessages />
                {{outlet}}
              </div>
          {{/if}}
 
-         {{#if (not hideSidebar)}}
-             {{#if (not model.left_sidebar)}}
+         {{#if (not this.hideSidebar)}}
+             {{#if (not this.model.left_sidebar)}}
              <div class="col-md-3 right-sidebar" role="navigation" aria-labelledby="sidebar">
-                 <GlobalSidebar @model={{sidebar}} @socketConnected={{socketConnected}} @versionWarning={{versionWarning}} @boxStyle="sidebar-box-right" />
+                 <GlobalSidebar @model={{this.sidebar}} @socketConnected={{this.socketConnected}} @versionWarning={{this.versionWarning}} @boxStyle="sidebar-box-right" />
              </div>
              {{/if}}
          {{/if}}
@@ -100,20 +104,20 @@
        <hr>
 
        <footer>
-         <p>AresMUSH game v{{mushVersion}}, portal v{{portalVersion}}</p>
+         <p>AresMUSH game v{{this.mushVersion}}, portal v{{this.portalVersion}}</p>
        </footer>
 </div>
 
 
-<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{showAltSelection}}  @onHide={{action (mut showAltSelection) false}} @onSubmit={{action (mut showAltSelection) false}}>
+<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{this.showAltSelection}}  @onHide={{action (mut this.showAltSelection) false}} @onSubmit={{action (mut this.showAltSelection) false}}>
 
   <table class="alts-switcher">
-    {{#each model.alts as |alt|}}
-      {{#if (not (eq alt.name currentUser.name)) }}
+    {{#each this.model.alts as |alt|}}
+      {{#if (not (eq alt.name this.currentUser.name)) }}
         <tr><td>
         <CharIconInline @char={{alt}} @hideLink="true" />
         </td>
-        <td><a href="#" {{action 'switchAlt' alt.name}} class="btn btn-default">Switch</a></td>
+        <td><a href="#" {{action 'switchAlt' alt.name}} class="btn btn-secondary">Switch</a></td>
         </tr>
       {{/if}}
     {{/each}}

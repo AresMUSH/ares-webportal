@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
+    router: service(),
     
     actions: {        
         save: function() {
@@ -12,13 +13,14 @@ export default Controller.extend(AuthenticatedController, {
                 name: this.get('model.name'),
                 folder: this.get('model.folder'),
                 new_name: this.get('model.new_name'),
-                new_folder: this.get('model.new_folder')
+                new_folder: this.get('model.new_folder'),
+                new_description: this.get('model.new_description')
              }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('file', response.folder, response.name );
+                this.router.transitionTo('file', response.folder, response.name );
             this.flashMessages.success('File saved!');
             });
         }

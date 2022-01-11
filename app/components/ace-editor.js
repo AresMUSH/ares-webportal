@@ -14,6 +14,7 @@ export default Component.extend({
     },
     
     didInsertElement: function() {
+        this._super(...arguments);
         var editor = ace.edit(this.editorId);
         editor.setTheme("ace/theme/cobalt");
         editor.setOption("maxLines", this.lines);

@@ -1,32 +1,27 @@
-{{page-title model.name}}
-<h1>{{model.name}}</h1>
+{{page-title this.model.name}}
+<h1>{{this.model.name}}</h1>
 
 <div class="row">
     <div class="col col-xs-12">
 
-      <AnsiFormat @text={{model.description}} />
+      <AnsiFormat @text={{this.model.description}} />
   </div>
 </div>
 
-<div class="row">
-    <div class="col col-xs-12">
+<div class="action-buttons-spaced">
 
-<p><LinkTo @route="forum"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Forums</LinkTo></p>
+  <LinkTo @route="forum"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Forums</LinkTo>
 
-        <div class="pull-right">
+  <div>
+    <button {{action 'catchup'}} class="btn btn-secondary">Mark All Read</button>
+    <button {{action 'nextUnread'}} class="btn btn-secondary">Next Unread</button>
 
-          <button {{action 'catchup'}} class="btn btn-default">Mark All Read</button>
-          <button {{action 'nextUnread'}} class="btn btn-default">Next Unread</button>
-
-          {{#if model.can_post}}
-          <LinkTo @route="forum-create-post" @model={{model.id}} class="btn btn-primary">Add Post</LinkTo>
-          {{/if}}
-
-
-  </div>
+    {{#if this.model.can_post}}
+    <LinkTo @route="forum-create-post" @model={{this.model.id}} class="btn btn-primary">Add Post</LinkTo>
+    {{/if}}
   </div>
 </div>
 
-<ForumPostList @posts={{model.posts}} />
+<ForumPostList @posts={{this.model.posts}} />
 
 {{outlet}}

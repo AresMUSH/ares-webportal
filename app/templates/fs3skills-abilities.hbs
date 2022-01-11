@@ -3,7 +3,7 @@
 
 <h2>Attributes</h2>
 
-<AnsiFormat @text={{model.attrs_blurb}} />
+<AnsiFormat @text={{this.model.attrs_blurb}} />
 
 <table class="table table-striped">
 
@@ -13,7 +13,7 @@
 </thead>
 
 <tbody>
-{{#each model.attrs as |attr| }}
+{{#each this.model.attrs as |attr| }}
 <tr>
     <td>{{attr.name}}</td> 
     <td>{{attr.description}}</td>
@@ -24,7 +24,7 @@
 
 <h2>Action Skills</h2>
 
-<AnsiFormat @text={{model.action_blurb}} />
+<AnsiFormat @text={{this.model.action_blurb}} />
 
 <table class="table table-striped">
 
@@ -35,7 +35,7 @@
 </thead>
 
 <tbody>
-{{#each model.action_skills as |ability| }}
+{{#each this.model.action_skills as |ability| }}
 <tr>
     <td>{{ability.name}}</td> 
     <td class="hidden-xs hidden-sm">{{ability.linked_attr}}</td> 
@@ -76,7 +76,7 @@
 
 <h2>Background Skills</h2>
 
-<AnsiFormat @text={{model.background_blurb}} />
+<AnsiFormat @text={{this.model.background_blurb}} />
 
 <table class="table table-striped">
 
@@ -86,7 +86,7 @@
 </thead>
 
 <tbody>
-{{#each model.backgrounds as |ability| }}
+{{#each this.model.backgrounds as |ability| }}
 <tr>
     <td>{{ability.name}}</td> 
     <td>{{ability.description}}</td>
@@ -98,7 +98,7 @@
 
 <h2>Languages</h2>
 
-<AnsiFormat @text={{model.language_blurb}} />
+<AnsiFormat @text={{this.model.language_blurb}} />
 
 <table class="table table-striped">
 
@@ -108,7 +108,7 @@
 </thead>
 
 <tbody>
-{{#each model.languages as |ability| }}
+{{#each this.model.languages as |ability| }}
 <tr>
     <td>{{ability.name}}</td> 
     <td>{{ability.description}}</td>
@@ -117,10 +117,10 @@
 </tbody>
 </table>
 
-{{#if model.use_advantages}}
+{{#if this.model.use_advantages}}
 <h2>Advantages</h2>
 
-<AnsiFormat @text={{model.advantages_blurb}} />
+<AnsiFormat @text={{this.model.advantages_blurb}} />
 
 <table class="table table-striped">
 
@@ -130,7 +130,7 @@
 </thead>
 
 <tbody>
-{{#each model.advantages as |ability| }}
+{{#each this.model.advantages as |ability| }}
 <tr>
     <td>{{ability.name}}</td> 
     <td>{{ability.description}}</td>

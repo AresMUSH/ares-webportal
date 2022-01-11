@@ -1,28 +1,28 @@
-{{page-title pageTitle}}
+{{page-title this.pageTitle}}
 <a name="top"></a>
 
-<h1>{{model.icdate}} - {{model.title}}</h1>
+<h1>{{this.model.icdate}} - {{this.model.title}}</h1>
 
 <div class="row log-wrap">
 
-    <div class="log-box">
+    <div class="col log-box">
 
-        <p><AnsiFormat @text={{model.summary}} /></p>
+        <p><AnsiFormat @text={{this.model.summary}} /></p>
 
-        {{#if model.content_warning}}
-        <div class="alert alert-danger"><b>Content Warning:</b> {{model.content_warning}}</div>
+        {{#if this.model.content_warning}}
+        <div class="alert alert-danger"><b>Content Warning:</b> {{this.model.content_warning}}</div>
         {{/if}}
 
-        <p><b>IC Date:</b> {{model.icdate}}</p>
+        <p><b>IC Date:</b> {{this.model.icdate}}</p>
 
-        <p><b>OOC Date:</b> {{model.date_created}}</p>
+        <p><b>OOC Date:</b> {{this.model.date_created}}</p>
 
-        <p><b>Location:</b> {{model.location}}</p>
+        <p><b>Location:</b> {{this.model.location}}</p>
 
 
         <p><b>Related Scenes:</b>
-           {{#if model.related_scenes}}
-             {{#each model.related_scenes as |related index|}}
+           {{#if this.model.related_scenes}}
+             {{#each this.model.related_scenes as |related index|}}
                   {{#if (not-eq index 0)}}
                   &nbsp;
                   {{/if}}
@@ -35,8 +35,8 @@
 
         <p>
             <b>Plots: </b>
-            {{#if model.plots}}
-              {{#each model.plots as |plot index|}}
+            {{#if this.model.plots}}
+              {{#each this.model.plots as |plot index|}}
                 {{#if (not-eq index 0)}}
                 &nbsp;
                 {{/if}}
@@ -46,41 +46,40 @@
                 None
             {{/if}}
         </p>
-
-          <p>
-            {{#if model.portals}}
-            <b>Portals: </b>
-              {{#each model.portals as |portal|}}
-                <a href="/portal/{{portal.id}}">{{portal.name}}</a>
-              {{/each}}
-            {{/if}}
+        <p>
+          {{#if this.model.portals}}
+          <b>Portals: </b>
+            {{#each this.model.portals as |portal|}}
+              <a href="/portal/{{portal.id}}">{{portal.name}}</a>
+            {{/each}}
+          {{/if}}
         </p>
 
-          <p>
-            {{#if model.creatures}}
-            <b>Creatures: </b>
-              {{#each model.creatures as |creature|}}
-                <a href="/creature/{{creature.id}}">{{creature.name}}</a>
-              {{/each}}
-            {{/if}}
+        <p>
+          {{#if this.model.creatures}}
+          <b>Creatures: </b>
+            {{#each this.model.creatures as |creature|}}
+              <a href="/creature/{{creature.id}}">{{creature.name}}</a>
+            {{/each}}
+          {{/if}}
         </p>
 
-        <p><b>Scene Number:</b> {{model.id}}</p>
+        <p><b>Scene Number:</b> {{this.model.id}}</p>
 
 
         <div>
 
 
-        <SceneTypeTag @scene={{model}} />
+        <SceneTypeTag @scene={{this.model}} />
 
-        {{#if isApproved}}
-            {{#if model.has_liked}}
-            <button {{action 'like' false}} class="badge badge-likes"><i class="fa fa-heart" aria-label="Liked"></i> {{model.likes}}</button>
+        {{#if this.isApproved}}
+            {{#if this.model.has_liked}}
+            <button {{action 'like' false}} class="badge badge-likes"><i class="fa fa-heart" aria-label="Liked"></i> {{this.model.likes}}</button>
             {{else}}
-            <button {{action 'like' true}} class="badge badge-likes"><i class="far fa-heart" area-hidden="Like"></i> {{model.likes}}</button>
+            <button {{action 'like' true}} class="badge badge-likes"><i class="far fa-heart" area-hidden="Like"></i> {{this.model.likes}}</button>
             {{/if}}
         {{else}}
-            <span class="badge badge-likes"><i class="far fa-heart" area-label="Likes"></i> {{model.likes}}</span>
+            <span class="badge badge-likes"><i class="far fa-heart" area-label="Likes"></i> {{this.model.likes}}</span>
         {{/if}}
 
          </div>
@@ -89,13 +88,15 @@
 
     <div class="log-participants-box">
 
-    {{#each model.participants as |participant|}}
-      {{#if (not participant.is_ooc)}}
-        <div class="profile-gallery">
-            <CharIcon @char={{participant}} />
-        </div>
-      {{/if}}
-    {{/each}}
+    <div class="icon-gallery">
+      {{#each this.model.participants as |participant|}}
+        {{#if (not participant.is_ooc)}}
+             <div class="icon-gallery-item">
+              <CharIcon @char={{participant}} />
+            </div>
+        {{/if}}
+      {{/each}}
+    </div>
 
     </div>
 
@@ -137,7 +138,7 @@
 
 
 <div class="scene-log">
-    <AnsiFormat @text={{model.log}} />
+    <AnsiFormat @text={{this.model.log}} />
 </div>
 
 <a name="bottom"></a>
@@ -148,7 +149,7 @@
 
 <p>
     <b>Tags:</b>
-    {{#each model.tags as |tag|}}
+    {{#each this.model.tags as |tag|}}
     <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
     {{/each}}
    </p>
@@ -156,33 +157,17 @@
 <p><LinkTo @route="scenes"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Scenes</LinkTo></p>
 
 
+      <DropdownMenu @id="sceneMenu" @title="Scene Menu">
+          {{#if this.model.can_edit}}
 
-    <div class="row">
-        <div class="col col-xs-12">
+          <li><LinkTo @route="scene-edit" @model={{this.model.id}} class="dropdown-item">Edit Scene</LinkTo></li>
+          <li><a href="#" {{action 'unshareScene'}}  class="dropdown-item">Unshare Scene</a></li>
 
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+           <li><hr role="separator" class="dropdown-divider"></li>
+         {{/if}}
 
-                      <span class="btn btn-default" href="#">Scene Menu <span class="caret"></span></span> </a>
-                      <ul class="dropdown-menu">
-
-                        {{#if model.can_edit}}
-
-                        <li><LinkTo @route="scene-edit" @model={{model.id}}>Edit Scene</LinkTo></li>
-                        <li><a href="#" {{action 'unshareScene'}}>Unshare Scene</a></li>
-
-                         <li role="separator" class="divider"></li>
-                       {{/if}}
-
-                      <li><LinkTo @route="scene-download" @model={{model.id}}>Download Scene</LinkTo></li>
-
-                      </ul>
-                    </li>
-                </ul>
-
-        </div>
-    </div>
+         <LinkTo @route="scene-download" @model={{this.model.id}}  class="dropdown-item">Download Scene</LinkTo>
+      </DropdownMenu>
 
 
 

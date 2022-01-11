@@ -3,22 +3,22 @@ Add content you wish automatically added to the documents head
 here. The 'model' available in this template can be populated by
 setting values on the 'head-data' service.
 --}}
-{{#if (not model.robotindex)}}
+{{#if (not this.model.robotindex)}}
 <meta name="robots" content="noindex">
 {{/if}}
 
 
-<meta property="og:title" content="{{model.mushName}}">
-<meta name="twitter:title" content="{{model.mushName}}">
-<meta itemprop="name" content="{{model.mushName}}">
-<meta property="og:site_name" content="{{model.mushName}}">
-<meta property="og:url" content="{{model.portalUrl}}" >
+<meta property="og:title" content="{{this.model.mushName}}">
+<meta name="twitter:title" content="{{this.model.mushName}}">
+<meta itemprop="name" content="{{this.model.mushName}}">
+<meta property="og:site_name" content="{{this.model.mushName}}">
+<meta property="og:url" content="{{this.model.portalUrl}}" >
 
-<meta name="description" content="{{model.mushDesc}}">
-<meta property="og:description" content="{{model.mushDesc}}" >
-<meta name="twitter:description" content="{{model.mushDesc}}">
-<meta itemprop="description" content="{{model.mushDesc}}">
+<meta name="description" content="{{this.model.mushDesc}}">
+<meta property="og:description" content="{{this.model.mushDesc}}" >
+<meta name="twitter:description" content="{{this.model.mushDesc}}">
+<meta itemprop="description" content="{{this.model.mushDesc}}">
 
-<meta property="og:image" content="{{model.portalUrl}}/game/uploads/theme_images/jumbotron.png">
-<meta name="twitter:image" content="{{model.portalUrl}}/game/uploads/theme_images/jumbotron.png">
-<meta itemprop="image" content="{{model.portalUrl}}/game/uploads/theme_images/jumbotron.png">
+<meta property="og:image" content="{{this.model.portalUrl}}/game/uploads/theme_images/jumbotron.png">
+<meta name="twitter:image" content="{{this.model.portalUrl}}/game/uploads/theme_images/jumbotron.png">
+<meta itemprop="image" content="{{this.model.portalUrl}}/game/uploads/theme_images/jumbotron.png">

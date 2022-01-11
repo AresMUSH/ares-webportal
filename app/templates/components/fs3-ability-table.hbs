@@ -1,16 +1,16 @@
-<div class="char-ability-title">{{title}}</div>
+<div class="char-ability-title">{{this.title}}</div>
 
   <table class="char-ability-list">
-  {{#each list as |ability| }}
+  {{#each this.list as |ability| }}
   <tr>
     <td>{{ability.name}}
       {{#if ability.linked_attr}}
       <span class="fs3-linked-attr">({{ability.linked_attr}})</span>
       {{/if}}
     </td>
-    <td><Fs3Dots @rating={{ability.rating}} @max={{max}} />
+    <td><Fs3Dots @rating={{ability.rating}} @max={{this.max}} />
 
-    {{#if showSpecs}}
+    {{#if this.showSpecs}}
     <br>
         {{#if ability.specialties}}
           ({{ability.specialties}})

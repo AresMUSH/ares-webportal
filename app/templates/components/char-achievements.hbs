@@ -1,21 +1,23 @@
-{{#each achievements as |achieve| }}
-<p>
-<i class="fa {{achieve.type_icon}} fa-2x" aria-hidden="true"></i>
+<div class="char-achievements">
+  {{#each this.achievements as |achieve| }}
+  <div class="char-achievement">
+  <i class="fa fa-2x fa-fw achievement-icon {{achieve.type_icon}}" aria-hidden="true"></i>
 
-&nbsp;
+  <span class="achievement-message">
+  {{achieve.message}}
+  </span>
 
-{{achieve.message}} 
+  {{#if achieve.count}}
+  ({{achieve.count}})
+  {{/if}}
+  </div>
+  {{/each}}
+</div>
 
-{{#if achieve.count}}
-({{achieve.count}})
-{{/if}}
-</p>
-{{/each}}
-
-{{#if sceneStats}}
+{{#if this.sceneStats}}
 <hr>
 
-<p><b>Words Written in Scenes:</b> {{sceneStats.pose_word_count}}</p>
-<p><b>Scenes Participated In:</b> {{sceneStats.scenes_participated_in}}</p>
-<p><b>Words Per Scene (average):</b> {{sceneStats.words_per_scene}}</p>
+<p><b>Words Written in Scenes:</b> {{this.sceneStats.pose_word_count}}</p>
+<p><b>Scenes Participated In:</b> {{this.sceneStats.scenes_participated_in}}</p>
+<p><b>Words Per Scene (average):</b> {{this.sceneStats.words_per_scene}}</p>
 {{/if}}

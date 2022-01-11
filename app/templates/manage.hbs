@@ -3,12 +3,12 @@
 
 
 
-{{#if status}}
+{{#if this.status}}
 <p>The upgrade/deploy task may take a couple minutes.  The status will update below.  Be sure to pay attention to any errors displayed.</p>
 
 <hr>
 
-<pre id="manageLog" class="console">  <AnsiFormat @text={{status}} /></pre>
+<pre id="manageLog" class="console">  <AnsiFormat @text={{this.status}} /></pre>
 
 <hr>
 
@@ -37,9 +37,19 @@
 
 <h2>Idle Sweep</h2>
 
-<p>The idle sweep lets you prune characters whose players have left the game. See <LinkTo @route="help-topic" @model="idle" @target="_blank">Idle Sweep</LinkTo> for help.</p>
+<p>The idle sweep lets you prune characters whose players have left the game. See <LinkTo @route="help-topic" @model="idle" target="_blank">Idle Sweep</LinkTo> for help.</p>
   
 <LinkTo @route="idle" class="btn btn-primary">Idle Sweep</LinkTo>
+
+<p><hr></p>
+
+
+
+<h2>Banned Sites</h2>
+
+<p>The ban system can help you block troublesome players from the game. See <LinkTo @route="help-topic" @model="ban" target="_blank">Bans</LinkTo> for help.</p>
+  
+<LinkTo @route="banned" class="btn btn-primary">Manage Bans</LinkTo>
 
 <p><hr></p>
 
@@ -50,6 +60,12 @@
         
     <p><button class="btn btn-primary" {{action 'deploy'}}>Redeploy Website</button></p>
 
+
+<p><hr></p>
+
+<h2>Backups</h2>
+
+<p>To learn more about game backups, see <a href="https://aresmush.com/tutorials/manage/backups.html" target="_blank">Backing Up the Game</a>.</p>
 
 <p><hr></p>
         

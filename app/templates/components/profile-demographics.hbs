@@ -1,21 +1,19 @@
-    <div class="col-md-4 col-sm-12 col-xs-12 profile-image-wrap">
-    {{#if char.profile_image.name}}
-            <LinkTo @route="file" @models={{array char.profile_image.folder char.profile_image.name}}>
-                <img src="/game/uploads/{{char.profile_image.path}}" alt="{{char.name}}'s icon"  class="profile-image">
+<div class="row">
+  <div class="col col-12 col-lg-4 profile-image-wrap">
+    {{#if this.char.profile_image.name}}
+            <LinkTo @route="file" @models={{array this.char.profile_image.folder this.char.profile_image.name}}>
+                <img src="/game/uploads/{{this.char.profile_image.path}}" alt="{{this.char.name}}'s icon"  class="profile-image" title="{{this.char.profile_image.description}}">
             </LinkTo>
     {{else}}
-        <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{char.name}}'s icon" >
+        <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{this.char.name}}'s icon" >
     {{/if}}
     </div>
 
-    <div class="col-md-8 col-sm-12 col-xs-12 profile-demo-wrap">        
+    <div class="col col-12 col-lg-8 profile-demo-wrap">        
 
         <div class="profile-box">
-        <div class="profile-title">
-                    {{char.military_name}}
-        </div>
-        
-        {{#each char.demographics as |demo|}}
+
+        {{#each this.char.demographics as |demo|}}
         <div class="row">
             <div class="col-sm-4">
                     <b>{{demo.name}}</b> 
@@ -31,7 +29,7 @@
         </div>
         
         
-        {{#each char.groups as |group|}}
+        {{#each this.char.groups as |group|}}
         <div class="row">
             <div class="col-sm-4">
                     <b>{{group.name}}</b> 
@@ -43,14 +41,14 @@
         {{/each}}
 
 
-        {{#if char.handle}}
+        {{#if this.char.handle}}
         
         <div class="row">
             <div class="col-sm-4">
                     <b>Player</b> 
             </div>
             <div class="col-sm-8">
-                    <a href="http://arescentral.aresmush.com/handle/{{char.handle}}">{{char.handle}}</a>
+                    <a href="http://arescentral.aresmush.com/handle/{{this.char.handle}}">{{this.char.handle}}</a>
             </div>
         </div>
         
@@ -61,9 +59,10 @@
                     <b>Last Online</b> 
             </div>
             <div class="col-sm-8">
-                    {{char.last_online}}
+                    {{this.char.last_online}}
             </div>
         </div>
         </div>
         
     </div>
+</div>

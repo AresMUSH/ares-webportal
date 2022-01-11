@@ -1,28 +1,25 @@
-{{#if (not hideSearch)}}
+{{#if (not this.hideSearch)}}
 <p><b>Select Scenes:</b> 
 
-<PowerSelect @selected={{filter}} @options={{sceneFilters}} @onChange={{action "filterChanged"}} as |name|>
+<PowerSelect @selected={{this.filter}} @options={{this.sceneFilters}} @onChange={{action "filterChanged"}} as |name|>
   {{name}}
 </PowerSelect>
 
-<LinkTo @route="search-scenes" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i> Search Scenes</LinkTo>  
+<LinkTo @route="search-scenes" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Scenes</LinkTo>  
 
 </p>
 {{/if}}
 
 <table class="table table-striped">
 
-
 <thead>
-    <tr>
-        <th>Scene</th>
-        <th>Participants</th>
-    </tr>
+  <th>Scene</th>
+  <th>Participants</th>
 </thead>
 
 <tbody>
 
-{{#each scenes as |scene|}}
+{{#each this.scenes as |scene|}}
     <tr>
         <td>
         <LinkTo @route="scene" @model={{scene.id}}>{{scene.icdate}} - {{scene.title}}
@@ -49,11 +46,11 @@
 </tbody>
 </table>
 
-{{#each pages as |pg|}}
-{{#if (eq pg page)}}
+{{#each this.pages as |pg|}}
+{{#if (eq pg this.page)}}
 <button class="btn btn-primary" {{action "goToPage" pg}}>{{pg}}</button>
 {{else}}
-<button class="btn btn-default" {{action "goToPage" pg}}>{{pg}}</button>
+<button class="btn btn-secondary" {{action "goToPage" pg}}>{{pg}}</button>
 {{/if}}
 {{/each}}
 

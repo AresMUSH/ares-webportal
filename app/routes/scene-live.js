@@ -10,6 +10,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
     gameApi: service(),
     gameSocket: service(),
     session: service(),
+    router: service(),
 
     activate: function() {
         this.controllerFor('scene-live').setupCallback();
@@ -28,14 +29,14 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
         let api = this.gameApi;
         return RSVP.hash({
              scene: api.requestOne('liveScene', { id: params['id'] }),
-             abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }), 
+             abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }),
              spells:  api.request('charSpellList', { id: this.get('session.data.authenticated.id') }),
              locations: api.request('sceneLocations', { id: params['id'] })
            })
            .then((model) =>  {
 
              if (model.scene.shared) {
-               this.transitionTo('scene', params['id']);
+               this.router.transitionTo('scene', params['id']);
              }
              else
              {

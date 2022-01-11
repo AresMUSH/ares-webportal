@@ -5,11 +5,13 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
+    router: service(),
     confirmDelete: false,
     
-    pageTitle: computed('model.title', function() {
-        return `${this.get('model.icdate')} - ${this.get('model.title')}`
+    pageTitle: computed('model.{icdate,title}', function () {
+      return `${this.get('model.icdate')} - ${this.get('model.title')}`;
     }),
+
     
     resetOnExit: function() {
       this.set('confirmDelete', false);
@@ -36,7 +38,7 @@ export default Controller.extend(AuthenticatedController, {
                     return;
                 }
                 this.flashMessages.success('The scene is no longer shared.');
-                this.transitionToRoute('scene-live', this.get('model.id'));
+                this.router.transitionTo('scene-live', this.get('model.id'));
             });
         },
     }

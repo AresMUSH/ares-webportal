@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     
     actions: {
 
@@ -18,7 +19,7 @@ export default Controller.extend(AuthenticatedController, {
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('area', this.get('model.area.id'));
+                this.router.transitionTo('area', this.get('model.area.id'));
                 this.flashMessages.success('Area updated!');
             });
         }

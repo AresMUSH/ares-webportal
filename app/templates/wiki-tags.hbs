@@ -2,7 +2,7 @@
 <h1>All Tags</h1>
 
 <ul>
-{{#each model as |tag| }}
+{{#each this.model as |tag| }}
   <li><LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo></li>
 {{/each}}
 

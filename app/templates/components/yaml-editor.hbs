@@ -1,6 +1,6 @@
-<AceEditor @text={{text}} @editorId={{editorId}} @rows={{lines}} @mode="yaml" @editorChanged={{action "textChanged"}} />
+<AceEditor @text={{this.text}} @editorId={{this.editorId}} rows={{this.lines}} @mode="yaml" @editorChanged={{action "textChanged"}} />
 
 
-{{#if warning}}
-<div class="alert alert-warning">{{warning}}</div>
+{{#if this.warning}}
+<div class="alert alert-warning">{{this.warning}}</div>
 {{/if}}

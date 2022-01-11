@@ -1,32 +1,30 @@
 {{page-title 'Characters'}}
 <h1>Characters</h1>
 
-<div class="pull-right">
-
-    <LinkTo @route="census"><i class="fa fa-search" aria-hidden="true"></i> Census</LinkTo> &middot;  <LinkTo @route="search-chars"><i class="fa fa-search" aria-hidden="true"></i> Search Characters</LinkTo>
+<div class="action-buttons">
+  <LinkTo @route="search-chars"><i class="fa fa-search" aria-hidden="true"></i> Search Characters</LinkTo>
 </div>
-<p>Here you can browse the profiles for all approved characters.</p>
-<div class="clearfix"/>
-<ul class="nav nav-tabs">
 
-  {{#each model.characters.group_names as |group|}}
-      <li class={{group.active_class}}><a data-toggle="tab" href="#{{group.key}}">{{group.name}}</a></li>
+<ul class="nav nav-tabs" role="tablist">
+
+  {{#each this.model.characters.group_names as |group|}}
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link {{group.active_class}}" href="#{{group.key}}">{{group.name}}</a></li>
   {{/each}}
-  {{#if model.game.roster_enabled}}
-      <li><a data-toggle="tab" href="#roster">Roster</a></li>
+  {{#if this.model.game.roster_enabled}}
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#roster">Roster</a></li>
   {{/if}}
-      <li><a data-toggle="tab" href="#gone">Gone</a></li>
-      <li><a data-toggle="tab" href="#dead">Dead</a></li>
-  {{#if model.characters.unapproved}}
-    <li><a data-toggle="tab" href="#unapproved">New</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#idle">Gone</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#dead">Dead</a></li>
+  {{#if this.model.characters.unapproved}}
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#unapproved">New</a></li>
   {{/if}}
 </ul>
 
 <div class="tab-content">
 
-  {{#each model.characters.groups as |group|}}
+  {{#each this.model.characters.groups as |group|}}
 
-  <div id="{{group.key}}" class="tab-pane fade in {{group.active_class}}">
+  <div id="{{group.key}}" class="tab-pane fade show {{group.active_class}}">
 
     {{#each group.subgroups as |subgroup|}}
 
@@ -41,32 +39,32 @@
   </div>
   {{/each}}
 
-  {{#if model.game.roster_enabled}}
-  <div id="roster" class="tab-pane fade in">
+  {{#if this.model.game.roster_enabled}}
+  <div id="roster" class="tab-pane fade show">
       <h2>Roster</h2>
 
       See <LinkTo @route="roster">Roster</LinkTo> for ready-made characters on the roster.
   </div>
   {{/if}}
 
-   <div id="gone" class="tab-pane fade in">
-      <CharGroupList @name="" @chars={{model.characters.idle}} />
+   <div id="idle" class="tab-pane fade show">
+      <CharGroupList @name="" @chars={{this.model.characters.idle}} />
 
       <a data-toggle="collapse" href="#unplayed"><button class="btn btn-default btn-collapse">Unplayed Characters</button></a>
       <div id="unplayed" class="panel-collapse collapse">
         <p></p>
         <p>Characters with five scenes or less.</p>
-        <CharGroupList @name="" @chars={{model.characters.unplayed}} />
+        <CharGroupList @name="" @chars={{this.model.characters.unplayed}} />
       </div>
   </div>
 
-   <div id="dead" class="tab-pane fade in">
-      <CharGroupList @name="" @chars={{model.characters.dead}} />
+   <div id="dead" class="tab-pane fade show">
+      <CharGroupList @name="" @chars={{this.model.characters.dead}} />
   </div>
-  
-  {{#if model.characters.unapproved}}
-     <div id="unapproved" class="tab-pane fade in">
-        <CharGroupList @name="" @chars={{model.characters.unapproved}} />
+
+  {{#if this.model.characters.unapproved}}
+     <div id="unapproved" class="tab-pane fade show">
+        <CharGroupList @name="" @chars={{this.model.characters.unapproved}} />
     </div>
   {{/if}}
 </div>

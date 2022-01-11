@@ -7,6 +7,13 @@ export default Controller.extend({
     session: service(),
     flashMessages: service(),
     queryParams: [ 'redirect' ],
+
+    resetOnExit: function() {
+        this.set('name', '');
+        this.set('password', '');
+        this.set('confirmPassword', '');
+        this.set('reCaptchaResponse', '');
+    },
     
     actions: {
         login() {

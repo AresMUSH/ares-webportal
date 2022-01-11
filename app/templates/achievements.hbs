@@ -2,7 +2,7 @@
 <h1>Achievements</h1>
 
 <table class="achievement-table">
-  {{#each model as |achievement|}}
+  {{#each this.model as |achievement|}}
   <tr>
     <td class="col-xs-1"><i class="fa {{achievement.type_icon}} fa-2x" aria-hidden="true"></i></td>
     <td class="col-xs-2">{{achievement.message}}</td>

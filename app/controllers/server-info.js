@@ -10,6 +10,6 @@ export default Controller.extend(AresConfig, {
     return aresweb_version;
   }),
   versionWarning: computed('mushVersion', 'portalVersion', function() {
-    return this.get('mushVersion') != this.get('portalVersion');
+    return this.mushVersion != this.portalVersion;
   })
 });

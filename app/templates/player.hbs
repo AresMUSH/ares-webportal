@@ -1,14 +1,14 @@
-{{page-title model.name}}
-<h1>{{model.name}}</h1>
+{{page-title this.model.name}}
+<h1>{{this.model.name}}</h1>
 
 
 <div class="row profile-wrap">
 
     <div class="col-md-4 col-sm-12 col-xs-12">
-      {{#if model.icon}}
-          <img src="/game/uploads/{{model.icon}}" alt="{{model.name}}'s icon"  class="profile-image">
+      {{#if this.model.icon}}
+          <img src="/game/uploads/{{this.model.icon}}" alt="{{this.model.name}}'s icon"  class="profile-image">
       {{else}}
-          <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{model.name}}'s icon" >
+          <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{this.model.name}}'s icon" >
       {{/if}}
     </div>
 
@@ -21,22 +21,22 @@
                       <b>Handle:</b> 
               </div>
               <div class="col-sm-9">
-                    {{#if model.handle}}
+                    {{#if this.model.handle}}
                     
-                       <a href="http://arescentral.aresmush.com/handle/{{model.handle}}">{{model.handle}}</a>
+                       <a href="http://arescentral.aresmush.com/handle/{{this.model.handle}}">{{this.model.handle}}</a>
                      {{else}}
                      <a href="https://arescentral.aresmush.com/" target="_blank">Not Linked</a>
                      {{/if}}                        
               </div>
           </div>
                 
-          {{#if model.admin_role_title}}
+          {{#if this.model.admin_role_title}}
           <div class="row">
               <div class="col-sm-3">
                       <b>Title:</b> 
               </div>
               <div class="col-sm-9">
-                      {{model.admin_role_title}}
+                      {{this.model.admin_role_title}}
               </div>
           </div>
           {{/if}}
@@ -50,65 +50,58 @@
 
 
 
-{{#if model.alts}}
+{{#if this.model.alts}}
 <div class="profile-tab">
-    <CharGallery @chars={{model.alts}} @title="Characters" />
+    <CharGallery @chars={{this.model.alts}} @title="Characters" />
 </div>
 {{/if}}
 
-{{#if model.profile}}
+{{#if this.model.profile}}
 <div class="profile-tab">
-    <ProfileSupplemental @char={{model}} @title="Profile Information"/>
+    <ProfileSupplemental @char={{this.model}} @title="Profile Information"/>
 </div>
 {{/if}}
 
 
 <div class="profile-tab">
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs" role="tablist">
     
-      <li class="active"><a data-toggle="tab" href="#systeminfo">+</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#systeminfo">+</a></li>
     
-      {{#if model.rp_prefs}}
-        <li><a data-toggle="tab" href="#systemprefs">RP Prefs</a></li>
+      {{#if this.model.rp_prefs}}
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemprefs">RP Prefs</a></li>
       {{/if}}
       
 
-      {{#if model.achievements}}
-          <li><a data-toggle="tab" href="#systemachievements">Achievements</a></li>
+      {{#if this.model.achievements}}
+          <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemachievements">Achievements</a></li>
       {{/if}}
     </ul>
     
 
     <div class="tab-content">
-      <div id="systeminfo" class="tab-pane fade in active">
+      <div id="systeminfo" class="tab-pane fade show active">
           <div class="tab-cover">System Information</div>
       </div>
       
-      {{#if model.rp_prefs}}
-        <div id="systemprefs" class="tab-pane fade">
-          <AnsiFormat @text={{model.rp_prefs}} />
-        </div>
+      {{#if this.model.rp_prefs}}
+        <ProfilePrefs @char={{this.model}} />
       {{/if}}
       
   
-      {{#if model.achievements}}
+      {{#if this.model.achievements}}
       <div id="systemachievements" class="tab-pane fade">
-          <CharAchievements @achievements={{model.achievements}} @sceneStats={{model.scene_stats}}/>
+          <CharAchievements @achievements={{this.model.achievements}} @sceneStats={{this.model.scene_stats}}/>
       </div>
       {{/if}}
     </div>
 </div>
 
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
-            
-        {{#if model.can_manage}}
-          <LinkTo @route="char-edit" @model={{model.id}} class="btn btn-primary">Edit</LinkTo>
-        {{/if}}
-  </div>
-  </div>
+<div class="action-buttons">
+  {{#if this.model.can_manage}}
+    <LinkTo @route="char-edit" @model={{this.model.id}} class="btn btn-primary">Edit</LinkTo>
+  {{/if}}
 </div>
 
 

@@ -23,6 +23,7 @@ Router.map(function() {
   this.route('app-review', { path: '/app/:id' });
   this.route('area', { path: '/area/:id'});
   this.route('area-edit', { path: '/area/:id/edit'});
+  this.route('banned');
   this.route('census');
   this.route('census-group', { path: '/census/:filter' });
   this.route('characters', { path: '/chars'});
@@ -58,15 +59,16 @@ Router.map(function() {
   this.route('forum');
   this.route('forum-category', { path: '/forum/:category_id'});
   this.route('forum-topic', { path: '/forum/:category_id/:topic_id'});
-  this.route('forum-create-post', { path: '/forum/:category_id/create-post' })
+  this.route('forum-create-post', { path: '/forum/:category_id/create-post' });
   this.route('forum-create');
   this.route('forum-edit', { path: '/forum-edit/:id' });
   this.route('forum-manage');
   this.route('fs3-limits');
   this.route('fs3-xp-costs');
   this.route('fs3combat-gear', { path: '/fs3combat/gear/' });
-  this.route('fs3combat-gear-detail', { path: '/fs3combat/gear/:type/:name' })
+  this.route('fs3combat-gear-detail', { path: '/fs3combat/gear/:type/:name' });
   this.route('fs3skills-abilities', { path: '/fs3skills/abilities' });
+  this.route('fs3skills-scan', { path: '/fs3skills/scan' });
   this.route('game-edit');
   this.route('groups');
   this.route('help');
@@ -99,6 +101,7 @@ Router.map(function() {
   this.route('players');
   this.route('player', { path: '/player/:id'});
   this.route('plots');
+  this.route('plots-archive', {path: '/plots/archive'});
   this.route('plot', { path: '/plot/:id' });
   this.route('plot-edit', { path: '/plot/:id/edit' });
   this.route('plot-create', { path: '/plot/create' });

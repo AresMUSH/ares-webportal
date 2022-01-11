@@ -1,12 +1,12 @@
-{{page-title model.plot.title}}
-<h1>Edit Plot - {{model.plot.title}}</h1>
+{{page-title this.model.plot.title}}
+<h1>Edit Plot - {{this.model.plot.title}}</h1>
 
    <div class="form-group row">
     <div class="col-sm-3">
         <label for="title" class="col-form-label">Title:</label>
     </div>
     <div class="col-sm-9">
-        <Input @type="text" @size={{25}} @id="title" @enter={{action "save"}} @value={{model.plot.title}} />
+        <Input @type="text" size={{25}} id="title" @enter={{action "save"}} @value={{this.model.plot.title}} />
     </div>
   </div>
 
@@ -16,7 +16,7 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelectMultiple @selected={{model.plot.storytellers}} @options={{model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "storytellersChanged"}} as |char|>
+      <PowerSelectMultiple @selected={{this.model.plot.storytellers}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "storytellersChanged"}} as |char|>
         {{char.name}}
       </PowerSelectMultiple>
     </div>
@@ -28,12 +28,12 @@
     </div>
     <div class="col-sm-3">
         <label for="completed" class="col-form-label">Plot Completed:</label>
-        <Input @type="checkbox" @checked={{model.plot.completed}} />
+        <Input @type="checkbox" @checked={{this.model.plot.completed}} />
     </div>
 
     <div class="col-sm-3">
         <label for="background" class="col-form-label">Background Plot:</label>
-        <Input @type="checkbox" @checked={{model.plot.background}} />
+        <Input @type="checkbox" @checked={{this.model.plot.background}} />
     </div>
     <div class="col-sm-3">
 
@@ -46,7 +46,7 @@
         <label for="summary" class="col-form-label">Summary:</label>
     </div>
     <div class="col-sm-9">
-        <MarkdownEditor @text={{model.plot.summary}} />
+        <MarkdownEditor @text={{this.model.plot.summary}} />
     </div>
   </div>
 
@@ -55,7 +55,7 @@
          <label for="warning" class="col-form-label">Content Warning:</label>
      </div>
      <div class="col-sm-9">
-         <Input @type="text" @size={{25}} @id="content_warning" @value={{model.plot.content_warning}} />
+         <Input @type="text" size={{25}} id="content_warning" @value={{this.model.plot.content_warning}} />
      </div>
    </div>
 
@@ -65,7 +65,7 @@
     </div>
     <div class="col-sm-9">
       <p><i>Do `##Title` for a new section.</i></p>
-        <MarkdownEditor @text={{model.plot.description}} />
+        <MarkdownEditor @text={{this.model.plot.description}} />
     </div>
   </div>
 
@@ -74,14 +74,14 @@
          <label for="tags" class="col-form-label">Tags:</label>
      </div>
      <div class="col-sm-9">
-         <Input @type="text" @size={{25}} @id="tags" @value={{model.plot.tags}} />
+         <Input @type="text" size={{25}} id="tags" @value={{this.model.plot.tags}} />
      </div>
    </div>
 
 
-<div class="pull-right">
-        <p> <LinkTo @route="plot" @model={{model.plot.id}} class="btn btn-default">Cancel</LinkTo>
-        <button {{action 'save'}} class="btn btn-primary">Save</button> </p>
+<div class="action-buttons">
+  <LinkTo @route="plot" @model={{this.model.plot.id}} class="btn btn-secondary">Cancel</LinkTo>
+  <button {{action 'save'}} class="btn btn-primary">Save</button>
 </div>
 
 <FlashMessages />

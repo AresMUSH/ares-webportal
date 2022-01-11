@@ -2,7 +2,7 @@
 
 <h1>Emoji</h1>
 
-{{#if model.allowed}}
+{{#if this.model.allowed}}
 
 <p>AresMUSH supports standard <a href="https://unicode.org/emoji/charts/full-emoji-list.html" target="_blank" rel="nofollow noopener">Unicode emoji</a>.  You can copy/paste them from this list, or use the names like <code>:grin:</code>.</p>  
 
@@ -22,52 +22,60 @@
 
 <h2>Quickref</h2>
 
-{{#each model.aliases as |emoji|}}
-<div class="col col-xs-4">
-  <div class="col col-xs-2 emoji-example">
+<div class="row">
+
+{{#each this.model.aliases as |emoji|}}
+<div class="col col-4">
+  <div class="col col-2 emoji-example">
   {{emoji.display}}
   </div>
-  <div class="col col-xs-10">
+  <div class="col col-10">
   :{{emoji.name}}:
   </div>
 </div>
 {{/each}}
 
-<div class="clearfix"/>
+</div>
 
 
 <a name="emoji"></a>
 
 <h2>Emoji</h2>
 
-{{#each model.emoji as |emoji|}}
-<div class="col col-xs-4">
-  <div class="col col-xs-2 emoji-example">
+<div class="row">
+
+{{#each this.model.emoji as |emoji|}}
+<div class="col col-4">
+  <div class="col col-2 emoji-example">
   {{emoji.display}}
   </div>
-  <div class="col col-xs-10">
+  <div class="col col-10">
   :{{emoji.name}}:
   </div>
 </div>
 {{/each}}
 
-<div class="clearfix"/>
+</div>
+
 
 <a name="smileys"></a>
 
 <h2>Smileys</h2>
 
-{{#each model.smileys as |emoji|}}
-<div class="col col-xs-4">
-  <div class="col col-xs-3 emoji-example">
+<div class="row">
+
+{{#each this.model.smileys as |emoji|}}
+<div class="col col-4">
+  <div class="col col-3 emoji-example">
     <code>{{{emoji.name}}}</code>
   </div>
-  <div class="col col-xs-9 emoji-example">
+  <div class="col col-9 emoji-example">
   {{emoji.display}} 
   </div>
 </div>
 {{/each}}
 
+</div>
 
 {{else}}
 <p>This game does not have emoji enabled.  :sadface:</p>

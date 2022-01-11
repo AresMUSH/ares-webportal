@@ -5,15 +5,16 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
+    router: service(),
     queryParams: [ 'location' ],
     warning_tags: [],
 
-    scenePacingOptions: computed(function() {
-        return this.get('model.sceneOptions.scene_pacing');
+    scenePacingOptions: computed.reads('model.sceneOptions.scene_pacing'),
+
+    sceneTypes: computed('model.sceneOptions.scene_types', function () {
+     return this.get('model.sceneOptions.scene_types').map((p) => p.name);
     }),
-    sceneTypes: computed(function() {
-        return this.get('model.sceneOptions.scene_types').map(p => p.name);
-    }),
+
 
     scenePrivacyValues: computed(function() {
         return [ 'Open', 'Private' ];
@@ -80,7 +81,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.transitionToRoute('scene',
+                this.router.transitionTo('scene',
                           response.id);
                 this.flashMessages.success('Scene updated!');
             });

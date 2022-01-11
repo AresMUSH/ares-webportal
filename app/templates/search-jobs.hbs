@@ -1,4 +1,4 @@
-{{#if model.jobs_admin}}
+{{#if this.model.is_job_admin}}
 {{page-title "Search Jobs"}}
 
 <h1>Search Jobs</h1>
@@ -13,11 +13,11 @@
   
 <hr>
 
-{{#if searchResults}}
-<a data-toggle="collapse" href="#searchFields" class="btn btn-default btn-collapse">Show/Hide Search</a>
+{{#if this.searchResults}}
+<a data-bs-toggle="collapse" href="#searchFields" class="btn btn-secondary btn-collapse">Show/Hide Search</a>
 {{/if}}
 
-<div id="searchFields" class="panel-collapse collapse {{if searchResults '' 'in'}}">
+<div id="searchFields" class="card-collapse collapse {{if this.searchResults '' 'show'}}">
 
 <div class="row">
   
@@ -26,12 +26,12 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><Input @type="text" @size={{25}} @id="title" @value={{searchTitle}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="title" @value={{this.searchTitle}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
 
-{{#if model.is_job_admin}}
+{{#if this.model.is_job_admin}}
 
 <div class="row">
   
@@ -40,7 +40,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><Input @type="text" @size={{25}} @id="submitter" @value={{searchSubmitter}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="submitter" @value={{this.searchSubmitter}} @enter={{action "search"}} /></p>
         <p class="hint">Enter a player's name.  Remember that automated jobs come from "System".</p>
   </div>
   
@@ -54,23 +54,17 @@
   
   <div class="col col-xs-9">
     
-    {{#if searchCategory}}
-      <span class="label job-category job-category-{{searchCategory}}">&nbsp;</span> {{searchCategory}}    
+    {{#if this.searchCategory}}
+      <span class="badge job-category job-category-{{this.searchCategory}}">&nbsp;</span> {{this.searchCategory}}    
     {{else}}
       Any
     {{/if}}
-      <ul class="nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-          <span class="btn btn-default" href="#">Category <span class="caret"></span></span> </a>
-          <ul class="dropdown-menu">
-          {{#each model.category_values as |category| }}
-            <li><a href="#" {{action 'changeSearchCategory' category}}><span class="label job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
-          {{/each}}
-          </ul>
-        </li>
-    </ul>
+    
+    <DropdownMenu @id="categoryDropdown" @title="Category">
+        {{#each this.model.category_values as |category| }}
+          <li><a href="#" {{action 'changeSearchCategory' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+        {{/each}}
+    </DropdownMenu>
     
   </div>
   
@@ -84,24 +78,19 @@
   
   <div class="col col-xs-9">
     
-    {{#if searchStatus}}
-      <span class="label job-status job-status-{{searchStatus}}">&nbsp;</span> {{searchStatus}}    
+    {{#if this.searchStatus}}
+      <span class="badge job-status job-status-{{this.searchStatus}}">&nbsp;</span> {{this.searchStatus}}    
     {{else}}
       Any
     {{/if}}
     
-      <ul class="nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-          <span class="btn btn-default" href="#">Status <span class="caret"></span></span> </a>
-          <ul class="dropdown-menu">
-          {{#each model.status_values as |status| }}
-            <li><a href="#" {{action 'changeSearchStatus' status}}><span class="label job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
-          {{/each}}
-          </ul>
-        </li>
-    </ul>
+    
+    <DropdownMenu @id="statusDropdown" @title="Status">
+      {{#each this.model.status_values as |status| }}
+        <li><a href="#" {{action 'changeSearchStatus' status}} class="dropdown-item"><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
+      {{/each}}
+    </DropdownMenu>
+    
     
   </div>
   
@@ -117,7 +106,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><Input @type="text" @size={{25}} @id="tag" @value={{searchTag}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="tag" @value={{this.searchTag}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -129,7 +118,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><Input @type="text" @size={{25}} @id="text" @value={{searchText}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="text" @value={{this.searchText}} @enter={{action "search"}} /></p>
   </div>
   
 </div>
@@ -138,16 +127,11 @@
 
 
     
-{{#if (not searchInProgress)}}
-    <div class="row">
-        <div class="col col-xs-12">
-            <div class="pull-right">
-    
-                <button class="btn btn-default" {{action 'reset'}}>Reset</button>
-                <button class="btn btn-primary" {{action 'search'}}>Search</button>
-            </div>
-        </div>
-    </div>
+{{#if (not this.searchInProgress)}}
+<div class="action-buttons">
+    <button class="btn btn-secondary" {{action 'reset'}}>Reset</button>
+    <button class="btn btn-primary" {{action 'search'}}>Search</button>
+</div>
 {{/if}}
 
 <p class="search-hint">Search is case-insensitive and matches ALL specified criteria.</p>
@@ -159,12 +143,12 @@
 <FlashMessages />
 
 
-{{#if searchInProgress}}
+{{#if this.searchInProgress}}
 <i class="fas fa-spinner fa-spin"></i> Search In Progress...
 
-{{else if searchResults}}
+{{else if this.searchResults}}
 
-<JobsList @jobs={{searchResults}} />
+<JobsList @jobs={{this.searchResults}} />
 
 {{else}}
 <p>No search results.</p>

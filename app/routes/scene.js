@@ -7,13 +7,14 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
     gameApi: service(),
     headData: service(),
+    router: service(),
         
     model: function(params) {
         let api = this.gameApi;
         return api.requestOne('scene', { id: params['id'] })
             .then(response => { 
                 if (response.unshared) {
-                    this.transitionTo('scene-live', params['id']);
+                    this.router.transitionTo('scene-live', params['id']);
                 } 
                 return response;
             });

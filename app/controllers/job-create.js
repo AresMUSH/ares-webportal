@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
   flashMessages: service(),
   gameApi: service(),
+  router: service(),
     
   title: '',
   category: '',
@@ -43,7 +44,7 @@ export default Controller.extend({
     createJob: function() {
       let api = this.gameApi;
       
-      let tags = this.get('tags') || [];
+      let tags = this.tags || [];
       if (!Array.isArray(tags)) {
           tags = tags.split(/[\s,]/);
       }
@@ -59,7 +60,7 @@ export default Controller.extend({
           if (response.error) {
             return;
           }
-          this.transitionToRoute('job', response.id);
+          this.router.transitionTo('job', response.id);
           this.flashMessages.success('Job created!');
         });
       },

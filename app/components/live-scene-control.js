@@ -12,6 +12,7 @@ export default Component.extend(AuthenticatedController, {
     selectLocation: false,
     managePoseOrder: false,
     characterCard: false,
+    characterCardInfo: null,
     newLocation: null,
     reportReason: null,
     poseType: null,
@@ -24,21 +25,22 @@ export default Component.extend(AuthenticatedController, {
     updatePoseControls: function() {
       this.set('poseType', { title: 'Pose', id: 'pose' });
       if (this.scene && !this.get('scene.poseChar')) {
-       this.set('scene.poseChar', this.get('scene.poseable_chars')[0]);
 
         let self = this;
-        this.scene.poseable_chars.some(function(c) {
-          if (self.scene.participants.any(w => w.name == c.name)) {
+        this.scene.poseable_chars.forEach(c => {
+          if (!this.get('scene.poseChar') && self.scene.participants.any(w => w.name == c.name)) {
             self.set('scene.poseChar', c);
-            return true;
           }
-          return false;
         });
 
+        if (!this.get('scene.poseChar')) {
+          this.set('scene.poseChar', this.get('scene.poseable_chars')[0]);
+        }
       }
     },
 
     didInsertElement: function() {
+      this._super(...arguments);
       this.updatePoseControls();
     },
 
@@ -56,11 +58,6 @@ export default Component.extend(AuthenticatedController, {
 
     poseOrderTypes: computed(function() {
       return [ '3-per', 'normal' ];
-    }),
-
-    characterCardInfo: computed('characterCard', function() {
-      let participant = this.get('scene.participants').find(p => p.name == this.characterCard);
-      return participant ? participant.char_card : {};
     }),
 
     txtExtraInstalled: computed(function() {
@@ -192,6 +189,10 @@ export default Component.extend(AuthenticatedController, {
           });
       },
 
+      loadLastPose() {
+        this.set('scene.draftPose', this.get('scene.lastDraftPose'));
+      },
+
       addPose(poseType) {
           let pose = this.get('scene.draftPose') || "";
           if (pose.length === 0) {
@@ -199,11 +200,13 @@ export default Component.extend(AuthenticatedController, {
               return;
           }
           let api = this.gameApi;
+          this.set('scene.lastDraftPose', pose);
           this.set('scene.draftPose', '');
+
           api.requestOne('addScenePose', { id: this.get('scene.id'),
               pose: pose,
               pose_type: poseType,
-              pose_char: this.get('scene.poseChar.id') })
+              pose_char: this.get('scene.poseChar.id') }, null, true)
           .then( (response) => {
               if (response.error) {
                   return;
@@ -283,6 +286,18 @@ export default Component.extend(AuthenticatedController, {
         this.set('scene.poseChar', newChar);
       },
 
+      showCharCard(char) {
+        let api = this.gameApi;
+        api.requestOne('sceneCard', { char: char }, null)
+        .then( (response) => {
+            if (response.error) {
+                return;
+            }
+            this.set('characterCardInfo', response);
+            this.set('characterCard', true);
+        });
+      },
+
       switchPoseOrderType(newType) {
         let api = this.gameApi;
         api.requestOne('switchPoseOrder', { id: this.get('scene.id'), type: newType }, null)
@@ -310,7 +325,7 @@ export default Component.extend(AuthenticatedController, {
         let api = this.gameApi;
         this.set('confirmReportScene', false);
 
-        api.requestOne('reportScene', { id: this.get('scene.id'), reason: this.get('reportReason') })
+        api.requestOne('reportScene', { id: this.get('scene.id'), reason: this.reportReason })
         .then( (response) => {
             if (response.error) {
                 return;

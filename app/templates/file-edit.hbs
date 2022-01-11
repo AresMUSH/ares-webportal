@@ -1,27 +1,26 @@
-{{page-title model.name}}
-<h1>{{model.name}}</h1>
+{{page-title this.model.name}}
+<h1>{{this.model.name}}</h1>
 
-<img src="/game/uploads/{{model.path}}" alt="{{model.name}}" class="image-container file-image" >
+<img src="/game/uploads/{{this.model.path}}" alt="{{this.model.name}}" class="image-container file-image" >
 
 
 <p><label for="name">Name:</label></p>
-<p><Input @type="text" @id="name" @value={{model.new_name}} /></p>
+<p><Input @type="text" id="name" @value={{this.model.new_name}} /></p>
 
 <p><label for="folder">Folder (optional):</label></p>
-<p><Input @type="text" @id="folder" @value={{model.new_folder}} /></p>
+<p><Input @type="text" id="folder" @value={{this.model.new_folder}} /></p>
 
 
-<div class="row">
-    <div class="col col-xs-12">
-        <div class="pull-right">
-          <LinkTo @route="file" @models={{array model.folder model.name}} class="btn btn-default">Cancel</LinkTo>
+<p><label for="folder">Description (optional):</label></p>
+<p><Input @type="text" id="desc" @value={{this.model.new_description}} /></p>
 
-          {{#if isApproved}}
-          <button {{action 'save'}} class="btn btn-primary">Save</button>
-          {{/if}}
-          
-         </div>
-  </div>
+
+<div class="action-buttons">
+  <LinkTo @route="file" @models={{array this.model.folder this.model.name}} class="btn btn-secondary">Cancel</LinkTo>
+
+  {{#if isApproved}}
+  <button {{action 'save'}} class="btn btn-primary">Save</button>
+  {{/if}}
 </div>
 
 <FlashMessages />

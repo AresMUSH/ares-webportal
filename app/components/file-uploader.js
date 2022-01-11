@@ -37,6 +37,7 @@ export default Component.extend({
                 let fileInfo = EmberObject.create( {
                     file: file,
                     name: file.name,
+                    description: file.description,
                     data: null,
                     folder: this.folder.toLowerCase(),
                     sizeKb: Math.round(file.size / 1000),
@@ -75,6 +76,7 @@ export default Component.extend({
             
             api.requestOne('uploadFile', {
                  name: name,
+                description: file.description,
                  size_kb: file.sizeKb,
                  url: file.url,
                  data: file.data,

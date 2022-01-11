@@ -12,18 +12,23 @@ export default Component.extend({
   }),
   
   updateTime: function() {
+    if (!this.poseOrder) {
+      return;
+    }
     this.poseOrder.forEach(po => {
       set(po, 'timeString', timeDiff({}, { time: po.time }));
     });
   },
   
   didInsertElement: function() {
+    this._super(...arguments);
     this.updateTime();
     let timer = window.setInterval(this.updateTime.bind(this), 1000*60*5); // Update each five mins
     this.set('timerId', timer);
   },
   
   willDestroyElement: function() {
+    this._super(...arguments);
     window.clearInterval(this.timerId);
     this.set('timerId', null);
   }

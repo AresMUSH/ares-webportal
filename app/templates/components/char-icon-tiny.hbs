@@ -1,8 +1,8 @@
 <span class="inline-block">
-  <CharIconStatusBase @char={{char}} @iconClass="tiny-profile-icon" />
-  {{#if char.nick}}
-    {{char.nick}}
+  <CharIconStatusBase @char={{this.char}} @iconClass="tiny-profile-icon" />
+  {{#if this.char.nick}}
+    {{this.char.nick}}
   {{else}}
-    {{char.name}} 
+    {{this.char.name}} 
   {{/if}}
 </span>
