@@ -1,13 +1,13 @@
 {{page-title 'Portals'}}
 <h1>Portals</h1>
 
-<div class="pull-right">
+<div class="action-buttons">
   {{#link-to 'portal-create' class="btn btn-primary"}}Create Portal{{/link-to}}
 </div>
 
 <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1Iw2hd57g__fAY9PugKUXtnTLRSiVzZ3B" width="100%" height="480"></iframe><br><br>
 
-<div class="pull-right">
+<div class="action-buttons">
   {{#link-to 'portal-create' class="btn btn-primary"}}Create Portal{{/link-to}}
 </div>
 
@@ -15,16 +15,16 @@
 
 <div class="clearfix"/>
   <ul class="nav nav-tabs">
-      <li><a data-toggle="tab" href="#known">Location Known</a></li>
-      <li><a data-toggle="tab" href="#unknown">Location Unknown</a></li>
-        <li><a data-toggle="tab" href="#a-z">A-Z List</a></li>
+      <li><a data-bs-toggle="tab" href="#known">Location Known</a></li>
+      <li><a data-bs-toggle="tab" href="#unknown">Location Unknown</a></li>
+        <li><a data-bs-toggle="tab" href="#a-z">A-Z List</a></li>
     </ul>
 
     <div class="tab-content">
 
 
   <div id="known" class="tab-pane active in 'Location Known'">
-      {{#each model as |portal|}}
+      {{#each this.model as |portal|}}
       {{#if portal.location_known}}
         <div class="directory-card" style="background-image: url('/game/uploads/{{portal.banner_image.path}}');">
           <div class="directory-title">{{#link-to 'portal' portal.id}}{{portal.name}}{{/link-to}}</div>
@@ -36,8 +36,8 @@
     {{/each}}
   </div>
 
-  <div id="unknown" class="tab-pane fade in 'Location Unknown'">
-    {{#each model as |portal|}}
+  <div id="unknown" class="tab-pane fade show 'Location Unknown'">
+    {{#each this.model as |portal|}}
     {{#unless portal.location_known}}
       <div class="directory-card" style="background-image: url('/game/uploads/{{portal.banner_image.path}}');">
         <div class="directory-title">{{#link-to 'portal' portal.id}}{{portal.name}}{{/link-to}}</div>
@@ -55,7 +55,7 @@
       <div class="col col-xs-6">
         LOCATION KNOWN
         <ul>
-          {{#each model as |portal|}}
+          {{#each this.model as |portal|}}
             {{#if portal.location_known}}
               <li>{{#link-to 'portal' portal.id}}{{portal.name}}{{/link-to}}</li>
             {{/if}}
@@ -66,7 +66,7 @@
       <div class="col col-xs-6">
         LOCATION UNKNOWN
         <ul>
-          {{#each model as |portal|}}
+          {{#each this.model as |portal|}}
             {{#unless portal.location_known}}
               <li>{{#link-to 'portal' portal.id}}{{portal.name}}{{/link-to}}</li>
             {{/unless}}

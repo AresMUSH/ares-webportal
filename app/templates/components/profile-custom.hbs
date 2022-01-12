@@ -1,19 +1,19 @@
 
-{{#if char.custom.spells}}
+{{#if this.char.custom.spells}}
   <div id="systemspells" class="tab-pane fade">
-    <CharSpells @char={{char}} />
+    <CharSpells @char={{this.char}} />
   </div>
 {{/if}}
 
 
-{{#if char.custom.spells}}
+{{#if this.char.custom.spells}}
 <div id="systemspellcards" class="tab-pane fade">
-  <CharSpellCards @char={{char}} />
+  <CharSpellCards @char={{this.char}} />
 </div>
 {{/if}}
 
-{{#if char.custom.magic_items}}
+{{#if this.char.custom.magic_items}}
 <div id="systemitems" class="tab-pane fade">
-  <CharMagicItems @char={{char}} />
+  <CharMagicItems @char={{this.char}} />
 </div>
 {{/if}}

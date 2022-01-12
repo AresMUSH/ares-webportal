@@ -1,22 +1,22 @@
 {{page-title 'Creatures'}}
 <h1>Creatures</h1>
 
-<div class="pull-right row">
+<div class="action-buttons row">
   {{#link-to 'creature-create' class="btn btn-primary"}}Create Creature{{/link-to}}
 </div>
 
 <div class="clearfix"/>
   <ul class="nav nav-tabs">
-      <li><a data-toggle="tab" href="#sapient">Sapient</a></li>
-      <li><a data-toggle="tab" href="#nonsapient">Non Sapient</a></li>
-      <li><a data-toggle="tab" href="#a-z">A-Z List</a></li>
+      <li><a data-bs-toggle="tab" href="#sapient">Sapient</a></li>
+      <li><a data-bs-toggle="tab" href="#nonsapient">Non Sapient</a></li>
+      <li><a data-bs-toggle="tab" href="#a-z">A-Z List</a></li>
     </ul>
 
     <div class="tab-content">
 
 
   <div id="sapient" class="tab-pane row active">
-    {{#each model as |creature|}}
+    {{#each this.model as |creature|}}
       {{#if creature.sapient}}
         <div class="directory-card" style="background-image: url('/game/uploads/{{creature.banner_image.path}}');">
           <div class="directory-title">{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}}</div>
@@ -29,7 +29,7 @@
   </div>
 
   <div id="nonsapient" class="tab-pane fade row">
-    {{#each model as |creature|}}
+    {{#each this.model as |creature|}}
       {{#unless creature.sapient}}
       <div class="directory-card" style="background-image: url('/game/uploads/{{creature.banner_image.path}}');">
         <div class="directory-title">{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}}</div>
@@ -47,7 +47,7 @@
       <div class="col col-xs-6">
         SAPIENT
         <ul>
-          {{#each model as |creature|}}
+          {{#each this.model as |creature|}}
             {{#if creature.sapient}}
               <li>{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}}</li>
             {{/if}}
@@ -58,7 +58,7 @@
       <div class="col col-xs-6">
         NON SAPIENT
         <ul>
-          {{#each model as |creature|}}
+          {{#each this.model as |creature|}}
             {{#unless creature.sapient}}
               <li>{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}}</li>
             {{/unless}}

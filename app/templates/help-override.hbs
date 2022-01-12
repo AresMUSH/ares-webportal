@@ -4,7 +4,7 @@
 <div class="alert alert-warning"><b>Note:</b> Customizing a help file will override the default help with your own.  This means you will not receive automatic updates to the help file (like if a command is added/changed/corrected). Consider carefully whether you want to override the default help or just supplement it through a game-specific wiki page.
 </div>
 
-<MarkdownEditor @text={{this.model.raw_contents}} @rows={{30}} />
+<MarkdownEditor @text={{this.model.raw_contents}} rows={{30}} />
 
 <div class="action-buttons">
   <LinkTo @route="help-topic" @model={{this.model.key}} class="btn btn-secondary">Cancel</LinkTo>  

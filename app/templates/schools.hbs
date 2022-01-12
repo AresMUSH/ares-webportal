@@ -1,11 +1,11 @@
 {{page-title model.title}}
-<h1>{{model.title}}</h1>
+<h1>{{this.model.title}}</h1>
 
 <div class="ansi">
 
 <p><center>[ {{#link-to 'schools' 'air'}}Air{{/link-to}} | {{#link-to 'schools' 'corpus'}}Corpus{{/link-to}} | {{#link-to 'schools' 'earth'}}Earth{{/link-to}} | {{#link-to 'schools' 'fire'}}Fire{{/link-to}} | {{#link-to 'schools' 'nature'}}Nature{{/link-to}} | {{#link-to 'schools' 'spirit'}}Spirit{{/link-to}} | {{#link-to 'schools' 'water'}}Water{{/link-to}} | {{#link-to 'schools' 'will'}}Will{{/link-to}} ]</center></p>
 
-<div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="https://www.pinterest.com/spiritlakeworld/{{model.pinterest}}/"></a></div>
+<div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="https://www.pinterest.com/spiritlakeworld/{{this.model.pinterest}}/"></a></div>
 
 <p></p>
 <div class="blurb">
@@ -18,14 +18,14 @@
 
 <ul class="nav nav-tabs">
   {{#each-in model.spells as |group spells|}}
-    <li ><a data-toggle="tab" href="#{{group}}">Level {{group}}</a></li>
+    <li ><a data-bs-toggle="tab" href="#{{group}}">Level {{group}}</a></li>
   {{/each-in}}
 </ul>
 
 <div class="tab-content">
-  {{#link-to 'search-spells' class="btn btn-default"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}
+  {{#link-to 'search-spells' class="btn btn-secondary"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}
   {{#each-in model.spells as |group spells|}}
-  <div id="{{group}}" class="tab-pane fade in {{group}}">
+  <div id="{{group}}" class="tab-pane fade show {{group}}">
 
     {{#each spells as |spell|}}
       {{#if spell.available}}

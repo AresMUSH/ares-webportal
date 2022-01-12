@@ -1,33 +1,33 @@
-{{page-title model.creature.name}}
-<h1>Edit {{model.creature.name}} </h1>
+{{page-title this.model.creature.name}}
+<h1>Edit {{this.model.creature.name}} </h1>
 
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#general">General</a></li>
-        <li><a data-toggle="tab" href="#traits">Traits</a></li>
-        <li><a data-toggle="tab" href="#society">Society</a></li>
-        <li><a data-toggle="tab" href="#events">Plots & Events</a></li>
-        <li><a data-toggle="tab" href="#images">Images</a></li>
+        <li class="active"><a data-bs-toggle="tab" href="#general">General</a></li>
+        <li><a data-bs-toggle="tab" href="#traits">Traits</a></li>
+        <li><a data-bs-toggle="tab" href="#society">Society</a></li>
+        <li><a data-bs-toggle="tab" href="#events">Plots & Events</a></li>
+        <li><a data-bs-toggle="tab" href="#images">Images</a></li>
     </ul>
 
 
 
     <div class="tab-content">
 
-      <div id="general" class="tab-pane fade in active">
+      <div id="general" class="tab-pane fade show active">
         <div class="form-group row">
           <div class="col-sm-3">
             <b>Name</b>
           </div>
 
           <div class="col-sm-9">
-            <p><Input @type="text" @size={{25}} @value={{model.creature.name}}  /></p>
+            <p><Input @type="text" @size={{25}} @value={{this.model.creature.name}}  /></p>
           </div>
           <div class="col-sm-3">
             <b>GMs</b>
           </div>
 
           <div class="col-sm-9">
-            <p><PowerSelectMultiple @selected={{model.creature.gms}} @options={{model.characters}} @searchEnabled=true @searchField="name"  @onChange={{action "gmsChanged"}} as |char|>
+            <p><PowerSelectMultiple @selected={{this.model.creature.gms}} @options={{this.model.characters}} @searchEnabled=true @searchField="name"  @onChange={{action "gmsChanged"}} as |char|>
               {{char.name}}
             </PowerSelectMultiple></p>
           </div>
@@ -37,7 +37,7 @@
           </div>
 
           <div class="col-sm-9">
-            <p><PowerSelect @selected={{model.creature.major_school}} @options={{model.schools}} @onChange={{action "majorschoolChanged"}} as |school|>
+            <p><PowerSelect @selected={{this.model.creature.major_school}} @options={{this.model.schools}} @onChange={{action "majorschoolChanged"}} as |school|>
               {{school}}
             </PowerSelect></p>
           </div>
@@ -47,7 +47,7 @@
           </div>
 
           <div class="col-sm-9">
-            <p><PowerSelect @selected={{model.creature.minor_school}} @options={{model.schools}} @onChange={{action "minorschoolChanged"}} as |school|>
+            <p><PowerSelect @selected={{this.model.creature.minor_school}} @options={{this.model.schools}} @onChange={{action "minorschoolChanged"}} as |school|>
               {{school}}
             </PowerSelect></p>
           </div>
@@ -57,7 +57,7 @@
           </div>
 
           <div class="col-sm-9">
-            <p><Input @type="text" @size={{25}} @value={{model.creature.language}}  /></p>
+            <p><Input @type="text" @size={{25}} @value={{this.model.creature.language}}  /></p>
           </div>
 
           <div class="col-sm-3">
@@ -65,7 +65,7 @@
           </div>
 
           <div class="col-sm-9">
-            <p><PowerSelectMultiple @selected={{model.creature.portals}} @options={{model.portals}} @searchEnabled=true @searchField="name"  @onChange={{action "portalsChanged"}} as |portal|>
+            <p><PowerSelectMultiple @selected={{this.model.creature.portals}} @options={{this.model.portals}} @searchEnabled=true @searchField="name"  @onChange={{action "portalsChanged"}} as |portal|>
               {{portal.name}}
             </PowerSelectMultiple></p>
           </div>
@@ -75,7 +75,7 @@
           </div>
 
           <div class="col-sm-9">
-            <p><Input @type="text" @size={{25}} @value={{model.creature.found}}  /></p>
+            <p><Input @type="text" @size={{25}} @value={{this.model.creature.found}}  /></p>
           </div>
 
           <div class="col-sm-3">
@@ -83,7 +83,7 @@
           </div>
 
           <div class="col-sm-9">
-            <p><Input @type="text" @size={{25}} @value={{model.creature.pinterest}}  /></p>
+            <p><Input @type="text" @size={{25}} @value={{this.model.creature.pinterest}}  /></p>
           </div>
 
           <div class="col col-xs-3">
@@ -91,7 +91,7 @@
           </div>
 
           <div class="col-sm-9">
-            <p><Input @type="checkbox" @checked={{model.creature.sapient}} /></p>
+            <p><Input @type="checkbox" @checked={{this.model.creature.sapient}} /></p>
           </div>
 
 
@@ -103,45 +103,45 @@
 
           <div class="col-sm-9">
             <b>Summary</b>
-            <p><MarkdownEditor @text={{model.creature.edit_short_desc}}  @rows={{5}} /></p>
+            <p><MarkdownEditor @text={{this.model.creature.edit_short_desc}}  rows={{5}} /></p>
           </div>
 
         </div>
       </div>
 
-      <div id="traits" class="tab-pane fade in">
+      <div id="traits" class="tab-pane fade show">
         <b>Traits & Description</b>
-        <MarkdownEditor @text={{model.creature.edit_traits}} />
+        <MarkdownEditor @text={{this.model.creature.edit_traits}} />
 
         <b>Magical Abilities & Spells<</b>
-        <MarkdownEditor @text={{model.creature.edit_magical_abilities}}/>
+        <MarkdownEditor @text={{this.model.creature.edit_magical_abilities}}/>
       </div>
 
 
-      <div id="society" class="tab-pane fade in">
+      <div id="society" class="tab-pane fade show">
         <b>Society</b>
-        <MarkdownEditor @text={{model.creature.edit_society}} />
+        <MarkdownEditor @text={{this.model.creature.edit_society}} />
       </div>
 
 
 
-      <div id="events" class="tab-pane fade in">
+      <div id="events" class="tab-pane fade show">
         <div class="col-sm-3">
           <b>Plots</b>
         </div>
 
         <div class="col-sm-9">
-          <PowerSelectMultiple @selected={{model.creature.plots}} @options={{model.plots}} @searchEnabled=true @searchField="name"  @onChange={{action "plotsChanged"}} as |plot|>
+          <PowerSelectMultiple @selected={{this.model.creature.plots}} @options={{this.model.plots}} @searchEnabled=true @searchField="name"  @onChange={{action "plotsChanged"}} as |plot|>
             {{plot.title}}
           </PowerSelectMultiple>
         </div>
 
         <b>Events</b>
-        <MarkdownEditor @text={{model.creature.edit_events}} />
+        <MarkdownEditor @text={{this.model.creature.edit_events}} />
       </div>
 
 
-      <div id="images" class="tab-pane fade in">
+      <div id="images" class="tab-pane fade show">
 
         <div class="form-group row">
             <div class="col-sm-3">
@@ -149,7 +149,7 @@
             </div>
 
             <div class="col-sm-9">
-                <PowerSelect @selected={{model.creature.banner_image}} @allowClear={{true}} @searchField="name" @options={{model.creature.files}} @onChange={{action "bannerImageChanged"}} as |file|>
+                <PowerSelect @selected={{this.model.creature.banner_image}} @allowClear={{true}} @searchField="name" @options={{this.model.creature.files}} @onChange={{action "bannerImageChanged"}} as |file|>
                 {{file.name}}
                 </PowerSelect>
             </div>
@@ -161,7 +161,7 @@
             </div>
 
             <div class="col-sm-9">
-                <PowerSelect @selected={{model.creature.profile_image}} @allowClear={{true}} @searchField="name" @options={{model.creature.files}} @onChange={{action "profileImageChanged"}} as |file|>
+                <PowerSelect @selected={{this.model.creature.profile_image}} @allowClear={{true}} @searchField="name" @options={{this.model.creature.files}} @onChange={{action "profileImageChanged"}} as |file|>
                 {{file.name}}
                 </PowerSelect>
             </div>
@@ -176,7 +176,7 @@
             <div class="col-sm-9">
 
               <div class="profile-gallery-input">
-              <Textarea @value={{model.creature.image_gallery}} @cols="80" @rows={{3}} />
+              <Textarea @value={{this.model.creature.image_gallery}} cols="80" rows={{3}} />
 
                 <p class="hint">List image files in the order you want them shown (<code>folder/file1.jpg /folder/file2.jpg</code> etc.), or leave this blank to just show all images from the creature's folder.</p>
                 </div>
@@ -184,25 +184,23 @@
             </div>
         </div>
 
-        <CreatureEditFiles @model={{model}} />
+        <CreatureEditFiles @model={{this.model}} />
       </div>
 
     </div>
 
 
 
-    <div class="row">
-        <div class="col col-xs-12">
-            <div class="pull-right">
 
-                <p> {{#link-to 'creature' model.creature.id class="btn btn-default"}}Cancel{{/link-to}}
-                    <button class="btn btn-primary" {{action 'save'}} >Save</button>
-                </p>
+    <div class="action-buttons">
 
-            </div>
-        {{flash-messages}}
-        </div>
+        <p> {{#link-to 'creature' this.model.creature.id class="btn btn-secondary"}}Cancel{{/link-to}}
+            <button class="btn btn-primary" {{action 'save'}} >Save</button>
+        </p>
+
     </div>
+{{flash-messages}}
+
 
 
 {{outlet}}

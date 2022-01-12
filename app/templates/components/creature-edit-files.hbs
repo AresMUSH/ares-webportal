@@ -1,10 +1,10 @@
-<div id="files" class="tab-pane fade in">
+<div id="files" class="tab-pane fade show">
     <div class="cg-tip">Files need to be in a folder matching the creature's name.  They will show up in the gallery and banner image selection lists.  </div>
 
     <hr>
 
     <div>
-      {{#each model.creature.files as |file|}}
+      {{#each this.model.creature.files as |file|}}
 
       <div class="thumbnail-gallery">
         <LinkTo @route="file" @models={{array file.folder file.name}}>
@@ -17,5 +17,5 @@
 
     <p><LinkTo @route="files" target="_blank">All Files</LinkTo></p>
 
-    <FileUploader @folder={{model.creature.name}} @uploaded={{action "fileUploaded"}} />
+    <FileUploader @folder={{this.model.creature.name}} @uploaded={{action "fileUploaded"}} />
 </div>

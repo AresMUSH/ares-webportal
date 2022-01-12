@@ -1,35 +1,35 @@
-{{page-title model.portal.name}}
+{{page-title this.model.portal.name}}
 
 <!-- {{page-model.portal.name}} -->
-<h1>Edit {{model.portal.name}} Portal</h1>
+<h1>Edit {{this.model.portal.name}} Portal</h1>
 
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#general">General</a></li>
-        <li><a data-toggle="tab" href="#desc">Description & Society</a></li>
-        <li><a data-toggle="tab" href="#creatures">Creatures & NPCs</a></li>
-        <li><a data-toggle="tab" href="#events">Plots & Events</a></li>
-        <li><a data-toggle="tab" href="#images">Images</a></li>
+        <li class="active"><a data-bs-toggle="tab" href="#general">General</a></li>
+        <li><a data-bs-toggle="tab" href="#desc">Description & Society</a></li>
+        <li><a data-bs-toggle="tab" href="#creatures">Creatures & NPCs</a></li>
+        <li><a data-bs-toggle="tab" href="#events">Plots & Events</a></li>
+        <li><a data-bs-toggle="tab" href="#images">Images</a></li>
     </ul>
 
 
 
     <div class="tab-content">
 
-      <div id="general" class="tab-pane fade in active">
+      <div id="general" class="tab-pane fade show active">
         <div class="form-group row">
           <div class="col-sm-3">
             <p><b>Name</b></p>
           </div>
 
           <div class="col-sm-9">
-            <p>{{input type="text" size=25 value=model.portal.name}}</p>
+            <p>{{input type="text" size=25 value=this.model.portal.name}}</p>
           </div>
           <div class="col-sm-3">
             <p><b>GMs</b></p>
           </div>
 
           <div class="col-sm-9">
-            <p><PowerSelectMultiple @selected={{model.portal.gms}} @options={{model.characters}} @searchEnabled=true @searchField="name"   @onChange={{action "gmsChanged"}} as |char|>
+            <p><PowerSelectMultiple @selected={{this.model.portal.gms}} @options={{this.model.characters}} @searchEnabled=true @searchField="name"   @onChange={{action "gmsChanged"}} as |char|>
               {{char.name}}
             </PowerSelectMultiple></p>
           </div>
@@ -39,7 +39,7 @@
           </div>
 
           <div class="col-sm-9">
-          <p> {{input type="text" size=25 value=model.portal.location}}</p>
+          <p> {{input type="text" size=25 value=this.model.portal.location}}</p>
           </div>
 
           <div class="col-sm-3">
@@ -47,7 +47,7 @@
           </div>
 
           <div class="col-sm-9">
-            <p>{{input type="text" size=25 value=model.portal.latitude}}</p>
+            <p>{{input type="text" size=25 value=this.model.portal.latitude}}</p>
           </div>
 
           <div class="col-sm-3">
@@ -55,12 +55,12 @@
           </div>
 
           <div class="col-sm-9">
-            <p>{{input type="text" size=25 value=model.portal.longitude}}</p>
+            <p>{{input type="text" size=25 value=this.model.portal.longitude}}</p>
           </div>
 
           <div class="col col-xs-12">
             <p><label>Location known on WeirdNet?</label>
-              <Input @type="checkbox" @checked={{model.portal.location_known}} />
+              <Input @type="checkbox" @checked={{this.model.portal.location_known}} />
             <!-- {{input type="checkbox"  id="location_known"  checked=isKnown}} --></p>
           </div>
 
@@ -69,7 +69,7 @@
           </div>
 
           <div class="col-sm-9">
-            <p><PowerSelect @selected={{model.portal.primary_school}} @options={{model.schools}} @onChange={{action "primaryschoolChanged"}} as |school|>
+            <p><PowerSelect @selected={{this.model.portal.primary_school}} @options={{this.model.schools}} @onChange={{action "primaryschoolChanged"}} as |school|>
               {{school}}
             </PowerSelect></p>
           </div>
@@ -82,7 +82,7 @@
             <p>
 
 
-              <PowerSelectMultiple @selected={{model.portal.all_schools}} @options={{model.schools}} @searchEnabled=true @searchField="name"  @placeholder="A portal can have to 5 schools of magic total" @onChange={{action "allschoolsChanged"}} as |school|>
+              <PowerSelectMultiple @selected={{this.model.portal.all_schools}} @options={{this.model.schools}} @searchEnabled=true @searchField="name"  @placeholder="A portal can have to 5 schools of magic total" @onChange={{action "allschoolsChanged"}} as |school|>
                 {{school}}
               </PowerSelectMultiple></p>
           </div>
@@ -92,7 +92,7 @@
           </div>
 
           <div class="col-sm-9">
-            <p>{{input type="text" size=25 value=model.portal.pinterest}}</p>
+            <p>{{input type="text" size=25 value=this.model.portal.pinterest}}</p>
           </div>
 
           <div class="col-sm-3">
@@ -100,65 +100,65 @@
           </div>
 
           <div class="col-sm-9">
-            <MarkdownEditor @text={{model.portal.edit_short_desc}}  @rows={{5}} />
+            <MarkdownEditor @text={{this.model.portal.edit_short_desc}}  rows={{5}} />
           </div>
 
 
         </div>
       </div>
 
-      <div id="desc" class="tab-pane fade in">
+      <div id="desc" class="tab-pane fade show">
         <b>Description</b>
-        <MarkdownEditor @text={{model.portal.edit_desc}} />
+        <MarkdownEditor @text={{this.model.portal.edit_desc}} />
 
         <b>Society</b>
-        <MarkdownEditor @text={{model.portal.edit_society}} />
+        <MarkdownEditor @text={{this.model.portal.edit_society}} />
       </div>
 
-      <div id="creatures" class="tab-pane fade in">
+      <div id="creatures" class="tab-pane fade show">
         <div class="col-sm-3">
           <b>Creatures</b>
         </div>
 
         <div class="col-sm-9">
-          <PowerSelectMultiple @selected={{model.portal.creatures}} @options={{model.creatures}} @searchEnabled=true @searchField="name"  @onChange={{action "creaturesChanged"}} as |creature|>
+          <PowerSelectMultiple @selected={{this.model.portal.creatures}} @options={{this.model.creatures}} @searchEnabled=true @searchField="name"  @onChange={{action "creaturesChanged"}} as |creature|>
             {{creature.name}}
           </PowerSelectMultiple>
         </div>
 
 
         <b>Other Creatures</b>
-        <MarkdownEditor @text={{model.portal.edit_other_creatures}} />
+        <MarkdownEditor @text={{this.model.portal.edit_other_creatures}} />
 
         <b>Important Figures</b>
-        <MarkdownEditor @text={{model.portal.edit_npcs}} />
+        <MarkdownEditor @text={{this.model.portal.edit_npcs}} />
       </div>
 
 
 
 
-      <div id="events" class="tab-pane fade in">
+      <div id="events" class="tab-pane fade show">
         <b>Trivia</b>
-        <MarkdownEditor @text={{model.portal.edit_trivia}} />
+        <MarkdownEditor @text={{this.model.portal.edit_trivia}} />
 
         <b>RP Suggestions</b>
-        <MarkdownEditor @text={{model.portal.edit_rp_suggestions}} />
+        <MarkdownEditor @text={{this.model.portal.edit_rp_suggestions}} />
 
         <div class="col-sm-3">
           <b>Plots</b>
         </div>
 
         <div class="col-sm-9">
-          <PowerSelectMultiple @selected={{model.portal.plots}} @options={{model.plots}} @searchEnabled=true @searchField="name"  @onChange={{action "plotsChanged"}} as |plot|>
+          <PowerSelectMultiple @selected={{this.model.portal.plots}} @options={{this.model.plots}} @searchEnabled=true @searchField="name"  @onChange={{action "plotsChanged"}} as |plot|>
             {{plot.title}}
           </PowerSelectMultiple>
         </div>
 
         <b>Events</b>
-        <MarkdownEditor @text={{model.portal.edit_events}} />
+        <MarkdownEditor @text={{this.model.portal.edit_events}} />
       </div>
 
-      <div id="images" class="tab-pane fade in">
+      <div id="images" class="tab-pane fade show">
 
         <div class="form-group row">
             <div class="col-sm-3">
@@ -166,7 +166,7 @@
             </div>
 
             <div class="col-sm-9">
-                <PowerSelect @selected={{model.portal.banner_image}} @allowClear={{true}} @searchField="name" @options={{model.portal.files}} @onChange={{action "bannerImageChanged"}} as |file|>
+                <PowerSelect @selected={{this.model.portal.banner_image}} @allowClear={{true}} @searchField="name" @options={{this.model.portal.files}} @onChange={{action "bannerImageChanged"}} as |file|>
                 {{file.name}}
                 </PowerSelect>
             </div>
@@ -178,7 +178,7 @@
             </div>
 
             <div class="col-sm-9">
-                <PowerSelect @selected={{model.portal.profile_image}} @allowClear={{true}} @searchField="name" @options={{model.portal.files}} @onChange={{action "profileImageChanged"}} as |file|>
+                <PowerSelect @selected={{this.model.portal.profile_image}} @allowClear={{true}} @searchField="name" @options={{this.model.portal.files}} @onChange={{action "profileImageChanged"}} as |file|>
                 {{file.name}}
                 </PowerSelect>
             </div>
@@ -193,7 +193,7 @@
             <div class="col-sm-9">
 
               <div class="profile-gallery-input">
-              <Textarea @value={{model.portal.image_gallery}} @cols="80" @rows={{3}} />
+              <Textarea @value={{this.model.portal.image_gallery}} cols="80" rows={{3}} />
 
                 <p class="hint">List image files in the order you want them shown (<code>folder/file1.jpg /folder/file2.jpg</code> etc.), or leave this blank to just show all images from the creature's folder.</p>
                 </div>
@@ -201,23 +201,19 @@
             </div>
         </div>
 
-        <PortalEditFiles @model={{model}} />
+        <PortalEditFiles @model={{this.model}} />
       </div>
 
     </div>
 
-    <div class="row">
-        <div class="col col-xs-12">
-            <div class="pull-right">
+    <div class="action-buttons">
 
-                <p> {{#link-to 'portal' model.portal.id class="btn btn-default"}}Cancel{{/link-to}}
-                    <button class="btn btn-primary" {{action 'save'}} >Save</button>
-                </p>
+        <p> {{#link-to 'portal' this.model.portal.id class="btn btn-secondary"}}Cancel{{/link-to}}
+            <button class="btn btn-primary" {{action 'save'}} >Save</button>
+        </p>
 
-            </div>
-        {{flash-messages}}
-        </div>
     </div>
+{{flash-messages}}
 
 
 {{outlet}}

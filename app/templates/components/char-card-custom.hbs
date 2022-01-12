@@ -2,25 +2,25 @@
   <div class="row">
     <div class="col col-xs-4">
 
-      <CharIcon @char={{char}} />
+      <CharIcon @char={{this.char}} />
 
-      {{#if char.id}}
-        <LinkTo @route="char" @model={{char.name}} @target="_blank" style="font-size:80%; font-style: italic; position:relative; top:-20px;">Full Profile</LinkTo>
+      {{#if this.char.id}}
+        <LinkTo @route="char" @model={{this.char.name}} @target="_blank" style="font-size:80%; font-style: italic; position:relative; top:-20px;">Full Profile</LinkTo>
       {{/if}}
     </div>
 
     <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#basic">+</a></li>
-      <li><a data-toggle="tab" href="#sheet">Sheet</a></li>
-      <li><a data-toggle="tab" href="#spells">Spells</a></li>
+      <li class="active"><a data-bs-toggle="tab" href="#basic">+</a></li>
+      <li><a data-bs-toggle="tab" href="#sheet">Sheet</a></li>
+      <li><a data-bs-toggle="tab" href="#spells">Spells</a></li>
     </ul>
 
 
     <div class="tab-content plain-tab-content">
-      <div id="basic" class="tab-pane fade in active">
+      <div id="basic" class="tab-pane fade show active">
         <div class="col col-xs-9">
-          {{#if (not char.is_ooc)}}
-            {{#each char.demographics as |demo|}}
+          {{#if (not this.char.is_ooc)}}
+            {{#each this.char.demographics as |demo|}}
             <div class="row">
               <div class="col-sm-6">
                 <b>{{demo.name}}: </b>
@@ -31,11 +31,11 @@
             </div>
             {{/each}}
 
-            {{#if (not char.demographics)}}
+            {{#if (not this.char.demographics)}}
             No demographics available.  Try reloading the scene page.
             {{/if}}
 
-            {{#each char.custom.schools as |school|}}
+            {{#each this.char.custom.schools as |school|}}
               <div class="row">
                   <div class="col-sm-6">
                     <b>{{school.school_type}}:</b>
@@ -48,10 +48,10 @@
 
           {{/if}}
 
-          {{#if char.status_message}}
+          {{#if this.char.status_message}}
           <br>
           <div class="alert alert-info">
-            {{char.status_message}}
+            {{this.char.status_message}}
           </div>
           {{/if}}
         </div>
@@ -60,8 +60,8 @@
         <div class="row">
           <div class="col col-xs-12">
             <br>
-            {{#if char.description}}
-              <AnsiFormat @text={{char.description}} />
+            {{#if this.char.description}}
+              <AnsiFormat @text={{this.char.description}} />
             {{/if}}
           </div>
         </div>
@@ -74,17 +74,17 @@
         <div class="row">
           <div class="col col-md-6 col-sm-12">
 
-            <Fs3AbilityTable @title="Attributes" @list={{char.custom.abilities.attributes}} @max={{4}} @showSpecs={{false}} />
+            <Fs3AbilityTable @title="Attributes" @list={{this.char.custom.abilities.attributes}} @max={{4}} @showSpecs={{false}} />
 
-              <Fs3AbilityTable @title="Background Skills" @list={{char.custom.abilities.backgrounds}} @max={{3}} />
+              <Fs3AbilityTable @title="Background Skills" @list={{this.char.custom.abilities.backgrounds}} @max={{3}} />
 
           </div>
 
           <div class="col col-md-6 col-sm-12">
 
-            <Fs3AbilityTable @title="Action Skills" @list={{char.custom.abilities.action_skills}} @max={{8}} @showSpecs={{true}} />
+            <Fs3AbilityTable @title="Action Skills" @list={{this.char.custom.abilities.action_skills}} @max={{8}} @showSpecs={{true}} />
 
-              <Fs3AbilityTable @title="Languages" @list={{char.custom.abilities.languages}} @max={{3}} />
+              <Fs3AbilityTable @title="Languages" @list={{this.char.custom.abilities.languages}} @max={{3}} />
           </div>
         </div>
 
@@ -104,15 +104,15 @@
         <div class="row">
           <div class="col col-md-6 col-sm-12">
             <br>
-            <b>Luck Points:</b> {{char.custom.abilities.luck_points}}
+            <b>Luck Points:</b> {{this.char.custom.abilities.luck_points}}
           </div>
         </div>
       </div>
 
       <div id="spells" class="tab-pane fade">
-        <h2><a href="/wiki/{{char.custom.major_school}}">{{char.custom.major_school}}</a></h2>
+        <h2><a href="/wiki/{{this.char.custom.major_school}}">{{this.char.custom.major_school}}</a></h2>
         <div class="row">
-          {{#each char.custom.major_spells as |spell|}}
+          {{#each this.char.custom.major_spells as |spell|}}
           <div class="spell-block">
             <div  class="col-sm-7 col-md-6">
               <b>{{spell.name}}</b>
@@ -125,10 +125,10 @@
           {{/each}}
         </div>
 
-        {{#if char.custom.minor_spells}}
-          <h2><a href="/wiki/{{char.custom.minor_school}}">{{char.custom.minor_school}}</a></h2>
+        {{#if this.char.custom.minor_spells}}
+          <h2><a href="/wiki/{{this.char.custom.minor_school}}">{{this.char.custom.minor_school}}</a></h2>
           <div class="row">
-            {{#each char.custom.minor_spells as |spell|}}
+            {{#each this.char.custom.minor_spells as |spell|}}
             <div class="spell-block">
               <div  class="col-sm-7 col-md-6">
                 <b>{{spell.name}}</b>
@@ -142,10 +142,10 @@
           </div>
         {{/if}}
 
-        {{#if char.custom.other_spells}}
+        {{#if this.char.custom.other_spells}}
           <h2>Other Spells</h2>
           <div class="row">
-            {{#each char.custom.other_spells as |spell|}}
+            {{#each this.char.custom.other_spells as |spell|}}
             <div class="spell-block">
               <div  class="col-sm-7 col-md-6">
                 <b>{{spell.name}}</b>

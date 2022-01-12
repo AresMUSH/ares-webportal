@@ -13,7 +13,7 @@
 <p>Want to know your level of fatigue? Use the calculator below!  Spell fatigue is calculated as a formula: (4 * Dice) - Total level of spells cast.</p>
 <div>
   <h1>Spells</h1>
-  <h2><a href="/wiki/{{model.spells.major_school}}">{{model.spells.major_school}}</a></h2>
+  <h2><a href="/wiki/{{this.model.spells.major_school}}">{{this.model.spells.major_school}}</a></h2>
   <div class="row">
     {{#each model.spells.major_spells as |spell|}}
     <div class="spell-block">
@@ -31,7 +31,7 @@
 
 
   {{#if model.spells.minor_spells}}
-    <h2><a href="/wiki/{{model.spells.minor_school}}">{{model.spells.minor_school}}</a></h2>
+    <h2><a href="/wiki/{{this.model.spells.minor_school}}">{{this.model.spells.minor_school}}</a></h2>
     <div class="row">
       {{#each model.spells.minor_spells as |spell|}}
       <div class="spell-block">
@@ -155,9 +155,9 @@
 
 <div class="row">
     <div class="col col-xs-12">
-        <div class="pull-right">
+        <div class="action-buttons">
 
-            <button class="btn btn-default" {{action 'do_math'}}>Calculate Spell Fatigue</button>
+            <button class="btn btn-secondary" {{action 'do_math'}}>Calculate Spell Fatigue</button>
         </div>
     </div>
 </div>

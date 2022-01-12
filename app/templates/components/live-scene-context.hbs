@@ -6,12 +6,12 @@
    </a> -->
 
    {{#if showSceneDetails}}
-     <a data-toggle="collapse" href="#scene-context" aria-expanded="true" {{action (mut showSceneDetails) false}} class="play-scene-context-prompt">
+     <a data-bs-toggle="collapse" href="#scene-context" aria-expanded="true" {{action (mut showSceneDetails) false}} class="play-scene-context-prompt">
        {{scene.location.name}} - {{scene.icdate}}
 
      <TooltipIcon @position="right" @message="Hide scene details." @icon="fas fa-minus-square" /></a>
    {{else}}
-     <a data-toggle="collapse" href="#scene-context" aria-expanded="false" {{action (mut showSceneDetails) true}}>
+     <a data-bs-toggle="collapse" href="#scene-context" aria-expanded="false" {{action (mut showSceneDetails) true}}>
        {{scene.location.name}} - {{scene.icdate}}
        <TooltipIcon @position="right" @message="Show Scene Details" @icon="fas  fa-plus-square" /> </a>
 
