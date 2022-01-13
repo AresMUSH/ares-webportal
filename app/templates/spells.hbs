@@ -1,4 +1,4 @@
-{{page-title model.title}}
+{{page-title this.model.title}}
 <h1>{{this.model.title}}</h1>
 
 <div class="ansi">
@@ -14,14 +14,14 @@
 
 <h2 style="padding-top:0px; margin-top:0px;">All Spells</h2>
 {{#link-to 'search-spells' class="btn btn-secondary"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}<br><br>
-<ul class="nav nav-tabs">
-  {{#each-in model.spells as |group spells|}}
+<ul class="nav nav-tabs" role="tablist">
+  {{#each-in this.model.spells as |group spells|}}
     <li ><a data-bs-toggle="tab" href="#{{group}}">Level {{group}}</a></li>
   {{/each-in}}
 </ul>
 
 <div class="tab-content">
-  {{#each-in model.spells as |group spells|}}
+  {{#each-in this.model.spells as |group spells|}}
   <div id="{{group}}" class="tab-pane fade show {{group}}">
 
     {{#each spells as |spell|}}
