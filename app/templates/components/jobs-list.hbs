@@ -18,6 +18,9 @@
         <LinkTo @route="job" @model={{job.id}}>#{{job.id}} - {{job.title}}</LinkTo>
     </td>
     <td>
+      {{job.short_created}}
+    </td>
+    <td>
         <span class="badge job-category job-category-{{job.category}}">{{job.category}}</span>
     </td>
     <td>
