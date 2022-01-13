@@ -16,7 +16,7 @@
 {{#link-to 'search-spells' class="btn btn-secondary"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}<br><br>
 <ul class="nav nav-tabs" role="tablist">
   {{#each-in this.model.spells as |group spells|}}
-    <li ><a data-bs-toggle="tab" href="#{{group}}">Level {{group}}</a></li>
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#{{group}}">Level {{group}}</a></li>
   {{/each-in}}
 </ul>
 
