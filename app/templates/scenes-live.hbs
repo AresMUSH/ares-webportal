@@ -16,35 +16,35 @@
 
 <div class="live-scenes-block">
   <div class="row live-scenes-heading">
-
+    
     <div class="col col-xs-12 col-sm-6">
       {{#if scene.is_unread}}
       <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
       {{/if}}
 
       <LinkTo @route="scene-live" @model={{scene.id}} class="scene-title">
-      {{scene.id}} -
-      {{#if scene.title}}
+      {{scene.id}} - 
+      {{#if scene.title}}  
         {{scene.location}} - {{scene.title}}
       {{else}}
         {{scene.location}}
       {{/if}}
-
+            
       {{#if scene.content_warning}}
       <ContentWarningTag @warning={{scene.content_warning}} @position="top" />
       {{/if}}
       </LinkTo>
-
+   
     </div>
 
     <div class="col col-xs-12 col-sm-4">
       <ScenePrivacyTag @scene={{scene}} />
       <ScenePacingTag @scene={{scene}} />
       <SceneTypeTag @scene={{scene}} />
-    </div>
-
-
-
+    </div>        
+   
+    
+    
     <div class="col col-xs-12 col-sm-2">
       <div class="live-scenes-controls">
        {{#if scene.watching}}
@@ -53,17 +53,17 @@
        {{else}}
          {{#if scene.can_view}}
            <a href="#" {{action 'watchScene' scene.id}}><i class="fa fa-eye" aria-label="Watch"></i></a>
-
+      
            {{#if (not scene.participating) }}
            <a href="#" {{action 'joinScene' scene.id}}><i class="fa fa-sign-in-alt" aria-label="Join"></i></a>
            {{/if}}
          {{/if}}
-
+  
        {{/if}}
        </div>
       </div>
   </div>
-
+    
 
   <div class="row">
     <div class="col col-xs-12 col-sm-9">
@@ -73,11 +73,11 @@
           <CharIconInline @char={{char}} />
           {{/each}}
           </div>
-
+        
         {{#if scene.limit}}
         <div><span class="scene-info-label">Notes:</span> {{scene.limit}}</div>
         {{/if}}
-
+        
         {{#if scene.summary}}
         <div class="scene-summary">
           <a data-bs-toggle="collapse" href="#details-{{scene.id}}" class="">
@@ -92,11 +92,11 @@
 
       </div>
     </div>
-
+    
     <div class="col col-xs-12 col-sm-3">
-
+      
       <div>
-        <span class="scene-info-label">Last:</span>
+        <span class="scene-info-label">Last:</span> 
         {{#if scene.last_posed}}
         {{scene.last_posed}},
         {{/if}}
@@ -106,11 +106,11 @@
       <span class="scene-info-label">Date:</span> {{scene.icdate}}
       </div>
     </div>
-
-
+    
+    
   </div>
-
-
+    
+  
 </div>
 {{/each}}
 
@@ -125,5 +125,5 @@
 </div>
 
 {{/if}}
-
+  
 {{outlet}}

@@ -8,31 +8,31 @@
     </div>
     <div class="col-sm-9">
          <Input @type="text" size={{25}} id="title" @enter={{action "create"}} @value={{title}} />
-    </div>
+    </div> 
   </div>
-
+  
    <div class="form-group row">
     <div class="col-sm-3">
         <label for="date" class="col-form-label">Date:</label>
     </div>
     <div class="col-sm-9">
-         <PikadayInput @firstDay={{0}} @onSelection={{action "changeDate"}} @format={{this.model.app.game.date_entry_format}} />
-    </div>
+         <PikadayInput @firstDay={{0}} @onSelection={{action "changeDate"}} @format={{this.model.app.game.date_entry_format}} /> 
+    </div> 
   </div>
-
+  
    <div class="form-group row">
     <div class="col-sm-3">
         <label for="startTime" class="col-form-label">Start Time:</label>
     </div>
     <div class="col-sm-9">
          <Input @type="text" id="time" size="25" @enter={{action "create"}} @value={{time}} />
-
+         
          <div class="hint">Use <b>server time</b> in the same format as the server time.  The current server time is {{this.model.app.server_time}}.</div>
-    </div>
+    </div> 
   </div>
-
-
-
+  
+  
+  
   <div class="form-group row">
      <div class="col-sm-3">
          <label for="title" class="col-form-label">Content Warning:</label>
@@ -45,27 +45,27 @@
             <p class="hint">Select from the suggested tags or write your own. Please avoid frivolous warnings.</p>
      </div>
    </div>
-
+  
    <div class="form-group row">
     <div class="col-sm-3">
         <label for="tags" class="col-form-label">Tags:</label>
     </div>
     <div class="col-sm-9">
         <Input @type="text" size={{25}} id="tags" @enter={{action "create"}} @value={{tags}} />
-    </div>
+    </div> 
   </div>
-
+  
    <div class="form-group row">
     <div class="col-sm-3">
         <label for="warning" class="col-form-label">Description:</label>
     </div>
     <div class="col-sm-9">
          <MarkdownEditor @text={{description}} />
-
-    </div>
+         
+    </div> 
   </div>
-
-
+  
+     
 <div class="action-buttons">
   <LinkTo @route="events" class="btn btn-secondary">Cancel</LinkTo>
   <button {{action "create"}} class="btn btn-primary">Create</button>

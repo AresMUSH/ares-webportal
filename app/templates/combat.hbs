@@ -2,7 +2,7 @@
 <h1>Combat {{this.model.id}}</h1>
 
 <div class="action-buttons-spaced fs3-combat-controls">
-
+        
     <DropdownMenu @id="combatMenu" @title="Combat Menu">
           <li><a href="#" {{action (mut this.showAddCombatant) true}} class="dropdown-item">Add Combatant</a></li>
           {{#if this.model.can_manage}}
@@ -13,9 +13,9 @@
           {{/if}}
           <li><LinkTo @route="combat-log" @model={{this.model.id}} class="dropdown-item">View Log</LinkTo></li>
     </DropdownMenu>
-
+      
     <div class="fs3-combat-buttons">
-
+    
       {{#if this.model.in_combat}}
               <button class="btn btn-warning" {{action 'leaveCombat'}} >Leave Combat</button>
       {{else if this.currentUser.name}}
@@ -28,16 +28,16 @@
     </div>
 
 </div>
-
-<div class="card card-default">
+          
+<div class="card card-default">    
   <div class="card-heading">
     Combat Activity
-
-    (
+    
+    ( 
     {{#if this.model.scene}}
-      <i>Scene <LinkTo @route="scene-live" @model={{this.model.scene}}>{{this.model.scene}}</LinkTo></i>.
+      <i>Scene <LinkTo @route="scene-live" @model={{this.model.scene}}>{{this.model.scene}}</LinkTo></i>. 
     {{/if}}
-    <i>Organized by {{this.model.organizer}}</i>
+    <i>Organized by {{this.model.organizer}}</i> 
     )
   </div>
   <div class="card-body">
@@ -61,9 +61,9 @@
 
 
     <FlashMessages />
+   
 
-
-
+  
   <BsModalSimple @title="Confirm Stop" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmStopCombat}} @onSubmit={{action "stopCombat"}} @onHide={{action (mut this.confirmStopCombat) false}}>
       This will stop the combat.  Are you sure?
     </BsModalSimple>
@@ -83,6 +83,6 @@
           {{type}}
         </PowerSelect></p>
   </BsModalSimple>
-
+  
 
 {{outlet}}
