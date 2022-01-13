@@ -12,7 +12,7 @@
     onHide=(action (mut selectCastSpell) null)}}
     <p><b>Select or Type Spell</b></p>
     <select onchange={{action (mut spellString) value="target.value"}}>
-      {{#each this.spells as |spell|}}
+      {{#each spells as |spell|}}
         <option value={{spell}}>{{spell}}</option>
       {{/each}}
     </select>
