@@ -108,34 +108,18 @@
 <p><a href="#bottom"><i class="fas fa-angle-double-down"></i> Jump to End</a></p>
 
 
-<div class="row">
-    <div class="col col-xs-12">
 
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      <DropdownMenu @id="sceneMenu" @title="Scene Menu">
+          {{#if this.model.can_edit}}
 
-                  <span class="btn btn-secondary" href="#" role="button">Scene Menu <span class="caret"></span></span> </a>
-                  <ul class="dropdown-menu">
+          <li><LinkTo @route="scene-edit" @model={{this.model.id}} class="dropdown-item">Edit Scene</LinkTo></li>
+          <li><a href="#" {{action 'unshareScene'}}  class="dropdown-item">Unshare Scene</a></li>
 
-                  {{#if model.can_edit}}
+           <li><hr role="separator" class="dropdown-divider"></li>
+         {{/if}}
 
-                    <li>{{#link-to 'scene-edit' model.id}}Edit Scene{{/link-to}}</li>
-                    <li><a href="#" {{action 'unshareScene'}}>Unshare Scene</a></li>
-                    <li><a href="#" {{action (mut confirmDelete) true}}>Delete Scene</a></li>
-
-                     <li role="separator" class="divider"></li>
-                   {{/if}}
-
-                  <li>{{#link-to 'scene-download' model.id}}Download Scene{{/link-to}}</li>
-
-                  </ul>
-                </li>
-            </ul>
-
-    </div>
-</div>
-
+         <LinkTo @route="scene-download" @model={{this.model.id}}  class="dropdown-item">Download Scene</LinkTo>
+      </DropdownMenu>
 
 <div class="scene-log">
     <AnsiFormat @text={{this.model.log}} />
