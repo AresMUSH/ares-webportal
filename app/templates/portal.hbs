@@ -121,12 +121,12 @@
     {{{ansi-format text=this.model.portal.events}}}</p>
   {{/if}}
 
-  <div class="card panel-default">
+  <div class="card card-default profile-gallery">
 
   {{#if this.model.portal.display_image_gallery}}
     {{#each this.model.portal.display_image_gallery as |gallery|}}
       <LinkTo @route="file" @models={{array gallery.folder gallery.name}}>
-      <img src="/game/uploads/{{gallery.path}}" class="profile-gallery" alt="{{gallery.name}}" >
+      <img src="/game/uploads/{{gallery.path}}" alt="{{gallery.name}}" >
       </LinkTo>
     {{/each}}
   {{/if}}
