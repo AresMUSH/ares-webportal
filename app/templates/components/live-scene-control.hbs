@@ -7,17 +7,15 @@
           <a href="#" {{action "unpauseScroll"}}><i class="fas fa-play">
           </i> Resume Scrolling</a>
   {{else}}
-  <a href="#" {{action 'watchScene' true}}><TooltipIcon @position="right" @message="Watch Scene" @icon="fas fa-eye" /></a>
+          <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause"></i> Pause Scrolling</a>
   {{/if}}
+
 
   {{#if this.scene.is_watching}}
   <a href="#" {{action 'watchScene' false}}><i class="fas fa-eye-slash"></i> Unwatch Scene</a>
   {{else}}
-          <a href="#" {{action "pauseScroll"}}><TooltipIcon @position="right" @message="Pause Scrolling" @icon="fas fa-pause" /></a>
+  <a href="#" {{action 'watchScene' true}}><i class="fas fa-eye"></i> Watch Scene</a>
   {{/if}}
-
-  <a href="#" {{action "scrollDown"}}><TooltipIcon @position="right" @message="Jump to End" @icon="fas fa-angle-double-down" /></a>
-
 
 </div>
 
