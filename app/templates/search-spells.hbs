@@ -8,11 +8,11 @@
 
 <hr/>
 
-{{#if searchResults}}
+{{#if this.searchResults}}
 <a data-bs-toggle="collapse" href="#searchFields"><button class="btn btn-secondary btn-collapse">Show/Hide Search</button></a>
 {{/if}}
 
-<div id="searchFields" class="panel-collapse collapse {{if searchResults '' 'in'}}">
+<div id="searchFields" class="panel-collapse collapse {{if this.searchResults '' 'in'}}">
 
 <div class="row">
 
