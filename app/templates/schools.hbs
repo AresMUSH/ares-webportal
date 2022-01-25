@@ -27,7 +27,7 @@
   {{#each-in this.model.spells as |group spells|}}
   <div id="{{group}}" class="tab-pane fade show {{group}}">
 
-    {{#each this.spells as |spell|}}
+    {{#each spells as |spell|}}
       {{#if spell.available}}
         {{spell-card spell=spell}}
       {{/if}}
