@@ -141,8 +141,8 @@
 
 {{flash-messages}}
 
-{{#if searchResults}}
-{{#each searchResults as |spell|}}
+{{#if this.searchResults}}
+{{#each this.searchResults as |spell|}}
   {{spell-card spell=spell}}
 {{/each}}
 
