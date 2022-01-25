@@ -18,22 +18,26 @@
 
 <ul class="nav nav-tabs" role="tablist">
   {{#each-in this.model.spells as |group spells|}}
-    <li class="nav-item" role="presentation"><a data-bs-toggle="tab" role="tab" class="nav-link" href="#{{group}}">Level {{group}}</a></li>
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#{{group}}">Level {{group}}</a></li>
   {{/each-in}}
 </ul>
 
 <div class="tab-content">
-  <div role="tabpanel" class="tab-pane active" id="spells">
-  {{#link-to 'search-spells' class="btn btn-secondary"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}
-  {{#each-in this.model.spells as |group spells|}}
-  <div id="{{group}}" class="tab-pane fade show {{group}}">
-
-    {{#each spells as |spell|}}
-      {{#if spell.available}}
-        {{spell-card spell=spell}}
-      {{/if}}
-    {{/each}}
+  <div id="spellindex" class="tab-pane fade show active">
+      <div class="tab-cover">Spells
+        {{#link-to 'search-spells' class="btn btn-secondary"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}
+      </div>
   </div>
+
+
+  {{#each-in this.model.spells as |group spells|}}
+    <div id="{{group}}" class="tab-pane fade {{group}}">
+      {{#each spells as |spell|}}
+        {{#if spell.available}}
+          {{spell-card spell=spell}}
+        {{/if}}
+      {{/each}}
+    </div>
   {{/each-in}}
 </div>
 </div>
