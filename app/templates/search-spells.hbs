@@ -2,17 +2,18 @@
 
 <h1>Search Spells</h1>
 
-{{search-bar}}
+<SearchBar />
+<hr>
 
 <p>The search will only match spells that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
 
 <hr/>
 
 {{#if this.searchResults}}
-<a data-bs-toggle="collapse" href="#searchFields"><button class="btn btn-secondary btn-collapse">Show/Hide Search</button></a>
+<a data-bs-toggle="collapse" href="#searchFields" class="btn btn-secondary btn-collapse">Show/Hide Search</a>
 {{/if}}
 
-<div id="searchFields" class="panel-collapse collapse {{if this.searchResults '' 'in'}}">
+<div id="searchFields" class="card-collapse collapse {{if this.searchResults '' 'show'}}">
 
 <div class="row">
 
@@ -21,7 +22,7 @@
   </div>
 
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="title"  value=searchName enter=(action "search")}}</p>
+    <p><Input @type="text" size={{25}} id="title" @value={{this.searchName}} @enter={{action "search"}} /></p>
   </div>
 
 </div>
@@ -33,7 +34,7 @@
   </div>
 
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="participant"  value=searchLevel enter=(action "search")}}</p>
+    <p><Input @type="text" size={{25}} id="title" @value={{this.searchLevel}} @enter={{action "search"}} /></p>
   </div>
 
 </div>
@@ -47,7 +48,7 @@
 
     <div class="col-sm-9">
       <p>
-        <PowerSelect @selected={{searchSchool}} @options={{this.model.schools}} @searchEnabled=true @searchField="name"  @onChange={{action "schoolChanged"}} as |school|>
+        <PowerSelect @selected={{this.searchSchool}} @options={{this.model.schools}} @searchEnabled=true @searchField="name"  @onChange={{action "schoolChanged"}} as |school|>
           {{school}}
         </PowerSelect></p>
     </div>
@@ -64,7 +65,7 @@
 
 
   <div class="col-sm-9">
-    <p><PowerSelect  @selected={{searchEffect}} @options={{this.model.effects}} @searchEnabled=true @searchField="name" @onChange={{action "effectChanged"}} as |effect|>
+    <p><PowerSelect  @selected={{this.searchEffect}} @options={{this.model.effects}} @searchEnabled=true @searchField="name" @onChange={{action "effectChanged"}} as |effect|>
       {{effect}}
     </PowerSelect></p>
   </div>
@@ -79,7 +80,7 @@
 
 
   <div class="col-sm-9">
-    <p><PowerSelect  @selected={{searchDamage}} @options={{this.model.damage}} @searchEnabled=true @searchField="name" @onChange={{action "damageChanged"}} as |damage|>
+    <p><PowerSelect  @selected={{this.searchDamage}} @options={{this.model.damage}} @searchEnabled=true @searchField="name" @onChange={{action "damageChanged"}} as |damage|>
       {{damage}}
     </PowerSelect></p>
   </div>
@@ -94,7 +95,7 @@
   </div>
 
   <div class="col col-xs-9">
-        <p>{{input type="text" size=25 id="desc"  value=searchDesc enter=(action "search")}}</p>
+    <p><Input @type="text" size={{25}} id="title" @value={{this.searchDesc}} @enter={{action "search"}} /></p>
   </div>
 
 </div>
@@ -123,23 +124,16 @@
 
 </div>
 
-
-
-    <div class="row">
-        <div class="col col-xs-12">
-            <div class="action-buttons">
-
-                <button class="btn btn-secondary" {{action 'reset'}}>Reset</button>
-                <button class="btn btn-primary" {{action 'search'}}>Search</button>
-            </div>
-        </div>
-    </div>
+<div class="action-buttons">
+    <button class="btn btn-secondary" {{action 'reset'}}>Reset</button>
+    <button class="btn btn-primary" {{action 'search'}}>Search</button>
+</div>
 
 </div>
 
 <hr/>
 
-{{flash-messages}}
+<FlashMessages />
 
 {{#if this.searchResults}}
 {{#each this.searchResults as |spell|}}
