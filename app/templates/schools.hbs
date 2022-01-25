@@ -3,43 +3,42 @@
 
 <div class="ansi">
 
-<p><center>[ {{#link-to 'schools' 'air'}}Air{{/link-to}} | {{#link-to 'schools' 'corpus'}}Corpus{{/link-to}} | {{#link-to 'schools' 'earth'}}Earth{{/link-to}} | {{#link-to 'schools' 'fire'}}Fire{{/link-to}} | {{#link-to 'schools' 'nature'}}Nature{{/link-to}} | {{#link-to 'schools' 'spirit'}}Spirit{{/link-to}} | {{#link-to 'schools' 'water'}}Water{{/link-to}} | {{#link-to 'schools' 'will'}}Will{{/link-to}} ]</center></p>
+  <p><center>[ {{#link-to 'schools' 'air'}}Air{{/link-to}} | {{#link-to 'schools' 'corpus'}}Corpus{{/link-to}} | {{#link-to 'schools' 'earth'}}Earth{{/link-to}} | {{#link-to 'schools' 'fire'}}Fire{{/link-to}} | {{#link-to 'schools' 'nature'}}Nature{{/link-to}} | {{#link-to 'schools' 'spirit'}}Spirit{{/link-to}} | {{#link-to 'schools' 'water'}}Water{{/link-to}} | {{#link-to 'schools' 'will'}}Will{{/link-to}} ]</center></p>
 
-<div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="https://www.pinterest.com/spiritlakeworld/{{this.model.pinterest}}/"></a></div>
+  <div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="https://www.pinterest.com/spiritlakeworld/{{this.model.pinterest}}/"></a></div>
 
-<p></p>
-<div class="blurb">
-  {{{ansi-format text=this.model.blurb}}}
-</div>
-
-<div class="clear"></div>
-
-<h2 style="padding-top:0px; margin-top:0px;">Spells</h2>
-
-<ul class="nav nav-tabs" role="tablist">
-  {{#each-in this.model.spells as |group spells|}}
-    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#{{group}}">Level {{group}}</a></li>
-  {{/each-in}}
-</ul>
-
-<div class="tab-content">
-  <div id="spellindex" class="tab-pane fade show active">
-      <div class="tab-cover">Spells
-        {{#link-to 'search-spells' class="btn btn-secondary"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}
-      </div>
+  <p></p>
+  <div class="blurb">
+    {{{ansi-format text=this.model.blurb}}}
   </div>
 
+  <div class="clear"></div>
 
-  {{#each-in this.model.spells as |group spells|}}
-    <div id="{{group}}" class="tab-pane fade {{group}}">
-      {{#each spells as |spell|}}
-        {{#if spell.available}}
-          {{spell-card spell=spell}}
-        {{/if}}
-      {{/each}}
+  <h2 style="padding-top:0px; margin-top:0px;">Spells</h2>
+
+  <ul class="nav nav-tabs" role="tablist">
+    {{#each-in this.model.spells as |group spells|}}
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#{{group}}">Level {{group}}</a></li>
+    {{/each-in}}
+  </ul>
+
+  <div class="tab-content">
+    <div id="spellindex" class="tab-pane fade show active">
+        <div class="tab-cover">Spells</div>
     </div>
-  {{/each-in}}
-</div>
+
+
+    {{#each-in this.model.spells as |group spells|}}
+      <div id="{{group}}" class="tab-pane fade">
+        {{#link-to 'search-spells' class="btn btn-secondary"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}
+        {{#each spells as |spell|}}
+          {{#if spell.available}}
+            {{spell-card spell=spell}}
+          {{/if}}
+        {{/each}}
+      </div>
+    {{/each-in}}
+  </div>
 
 
 
