@@ -19,7 +19,7 @@
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#spellindex">+</a></li>
     {{#each-in this.model.spells as |group spells|}}
-      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#{{group}}">Level {{group}}</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#level{{group}}">Level {{group}}</a></li>
     {{/each-in}}
   </ul>
 
@@ -30,7 +30,7 @@
 
 
     {{#each-in this.model.spells as |group spells|}}
-      <div id="{{group}}" class="tab-pane fade">
+      <div id="level{{group}}" class="tab-pane fade">
         {{#link-to 'search-spells' class="btn btn-secondary"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}
         {{#each spells as |spell|}}
           {{#if spell.available}}
