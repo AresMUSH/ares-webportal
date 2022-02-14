@@ -10,14 +10,14 @@
            {{#if this.model.char.fs3.use_advantages}}
        <li role="presentation" class="nav-item"><a href="#fs3adv" aria-controls="fs3adv" role="tab" data-bs-toggle="tab" class="nav-link">Advantages</a></li>
             {{/if}}
-
+       
            {{/if}}
-
+           
          </ul>
 
      <div class="tab-content">
 
-
+           
 {{#if this.model.char.fs3.reset_needed}}
   <div role="tabpanel" class="tab-pane active" id="fs3reset">
   <p>Starting your abilities will set you up with default attribute and skill values.  Your other character information will be saved.</p>
@@ -41,48 +41,7 @@
 
      <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.attrs_blurb}} /></p>
 
-     <ul class="cg-tip-table">
-       <li>You get a rating of up to 'Average' for free. Each additional rating costs 2 points.</li>
-      <li>You can spend up to 10 additional points on attributes.</li>
-      <li>You can have up to four attributes at level 3 or higher, of which only two can be level 4.</li>
-      <li>No one may have a Magic attribute above 2.</li>
-    </ul>
 
-     <div class="cg-tip-table">
-       <p><b>What level should I choose?</b></p>
-       <table>
-       <thead>
-         <tr>
-           <th>Rating</th>
-           <th>Summary</th>
-           <th>Description</th>
-         </tr>
-       </thead>
-       <tbody>
-         <tr>
-           <td>1</td>
-           <td>Poor</td>
-           <td>You are below average.  (less than 40th percentile)</td>
-         </tr>
-         <tr>
-           <td>2</td>
-           <td>Average</td>
-           <td>You are about average.  (40-60th percentile)</td>
-         </tr>
-         <tr>
-           <td>3</td>
-           <td>Good</td>
-           <td>You’re better than average.   (60-80th percentile)</td>
-         </tr>
-         <tr>
-           <td>4</td>
-           <td>Exceptional</td>
-           <td>You’re considerably above average. (more than 80th percentile)</td>
-         </tr>
-       </tbody>
-     </table>
-     </div>
-     <br>
      {{#each this.model.char.fs3.fs3_attributes as |att|}}
      <Fs3Attrbox @rating={{att.rating}} @ratingName={{att.rating_name}} @maxRating={{this.model.cgInfo.fs3.max_attr_rating}} @updated={{action "abilityChanged"}}>
          <b>{{att.name}}</b> - {{att.desc}}
@@ -101,92 +60,16 @@
        </div>
    <div class="card-body">
 
-      <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.action_blurb}} /></p>
-
-
-      <ul class="cg-tip-table">
-        <li>You automatically get the Everyman (1) rating in each Action Skill for free. Each additional rating costs 1 point.</li>
-        <li>You can spend up to 28 points on action skills.</li>
-        <li>You can have up to six action skills at level 5 or above, of which only three can be level six or above, and only one can be level 7.</li>
-        <li>No one may start with a level 8 action skill.</li>
-        <li>Your Major School should be level 2 and your Minor School should be level 1. If you have only a Major School, it may be level 3.</li>
-        <li>For Alertness and Composure, natural ability can get you up to 3. Anything higher should reflect training or experience in those skills.</li>
-        <li>For Research, the 'what level should I take' chart refers to training, education, or experience specifically in research. For example, someone with education in a field like Library Science has a degree in Research in the same way someone with a MD has a degree in Medicine. We consider a BA or BS in any subject to provide Research at a 2, while further education or jobs where records and document-based research is common will count as experience toward higher levels. Feel free to ask if you're not sure where to put this skill.</li>
-      </ul>
+     <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.action_blurb}} /></p>
+     
      <br>
-
-     <div class="cg-tip-table">
-       <p><b>What level should I choose?</b></p>
-         <table>
-         <tr>
-         <th class="tg-0pky">Level</th>
-         <th class="tg-0pky">Label</th>
-         <th class="tg-0pky">Description</th>
-         <th class="tg-0pky">Examples</th>
-         </tr>
-
-         <tr>
-         <td class="tg-0lax">0</td>
-         <td class="tg-0lax">Unskilled</td>
-         <td class="tg-0lax">Worse than most people, specifically bad or lacking even the most basic knowledge.</td>
-         <td class="tg-0lax">You grew up in a cave or something and know absolutely nothing about this.</td>
-         </tr>
-         <tr>
-         <td class="tg-0pky">1</td>
-         <td class="tg-0pky">Everyman</td>
-         <td class="tg-0pky">You know what the average inhabitant of the game world would know.</td>
-         <td class="tg-0pky">Everyone is capable at this level except through special circumstances.</td>
-         </tr>
-         <tr>
-         <td class="tg-0pky">2</td>
-         <td class="tg-0pky">Fair</td>
-         <td class="tg-0pky">You’ve still got a lot to learn, but you can handle easy stuff.</td>
-         <td class="tg-0pky"> A high school graduate, a year or less in a job, a year or two of casual training from someone experienced.</td>
-         </tr>
-         <tr>
-         <td class="tg-0pky">3</td>
-         <td class="tg-0pky">Competent</td>
-         <td class="tg-0pky">You have competence at a junior-professional level, but lack finesse or experience.</td>
-         <td class="tg-0pky">An undergraduate student, two to five years in a job, several years of casual training from someone experienced.</td>
-         </tr>
-         <tr>
-         <td class="tg-0pky">4</td>
-         <td class="tg-0pky">Good</td>
-         <td class="tg-0pky">You are thoroughly competent at a general professional level.</td>
-         <td class="tg-0pky">A bachelor's degree in the subject, five to seven years in a job, more than 5 years of casual training from someone experienced.</td>
-         </tr>
-         <tr>
-         <td class="tg-0pky">5</td>
-         <td class="tg-0pky">Great</td>
-         <td class="tg-0pky">You understand nuances and shortcuts, and can handle even challenging situations with ease.</td>
-         <td class="tg-0pky">Seven to fifteen years in a job, more than 10 years of casual training from someone experienced.</td>
-         </tr>
-         <tr>
-         <td class="tg-0pky">6</td>
-         <td class="tg-0pky">Exceptional</td>
-         <td class="tg-0pky">You are an expert, and can pull through even in dire circumstances.</td>
-         <td class="tg-0pky">A PhD or MD in the subject, more than fifteen years in a job.</td>
-         </tr>
-         <tr>
-         <td class="tg-0pky">7</td>
-         <td class="tg-0pky">Amazing</td>
-         <td class="tg-0pky">You have mastered your field and few can compare.</td>
-         <td class="tg-0pky">A leading expert in a field. A star athlete, known physician, well-published author, etc.</td>
-         </tr>
-         <tr>
-         <td class="tg-0pky">8</td>
-         <td class="tg-0pky">Legendary</td>
-         <td class="tg-0pky">You are one of the best that’s ever lived. </td>
-         <td class="tg-0pky">Einstein, Stephen Hawking, Shakespeare, or Beethoven.</td>
-         </tr>
-         </table>
-       </div>
-       <br>
-       {{#each this.model.char.fs3.fs3_action_skills as |skill|}}
-       <Fs3Actionbox @name={{skill.name}} @rating={{skill.rating}} @ratingName={{skill.rating_name}} @maxRating={{this.model.cgInfo.fs3.max_skill_rating}} @minRating={{this.model.cgInfo.fs3.min_action_skill_rating}} @updated={{action "abilityChanged"}} @specialties={{skill.specialties}}>
-           <b>{{skill.name}}</b> - {{skill.desc}}
-       </Fs3Actionbox>
-       {{/each}}
+   
+     {{#each this.model.char.fs3.fs3_action_skills as |skill|}}
+     <Fs3Actionbox @name={{skill.name}} @rating={{skill.rating}} @ratingName={{skill.rating_name}} @maxRating={{this.model.cgInfo.fs3.max_skill_rating}} @minRating={{this.model.cgInfo.fs3.min_action_skill_rating}} @updated={{action "abilityChanged"}} @specialties={{skill.specialties}}>
+         <b>{{skill.name}}</b> - {{skill.desc}}
+     </Fs3Actionbox>
+     {{/each}}
+     
 
    </div>
   </div>
@@ -202,50 +85,9 @@
        </div>
    <div class="card-body">
 
-     <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.background_blurb}} /> </p>
-
-     <ul class="cg-tip-table">
-       <li>You can have up to 6 rating points of Background Skills for free. Additional Background Skills cost 1 AP each.</li>
-        <li>You must have at least 3 background skills.</li>
-        <li>To remove a background skill, set its rating to Everyman.</li>
-      </ul>
+     <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.background_blurb}} /> To remove a background skill, set its rating to Everyman.</p>
 
 
-
-     <div class="cg-tip-table">
-
-       <p><b>What level should I choose?</b></p>
-       <table>
-       <tr>
-         <th>Label</th>
-         <th>Description</th>
-         <th>Examples</th>
-       </tr>
-       <tr>
-         <td>Everyman</td>
-         <td>You know what the average inhabitant of the game world would know. <br><br>There is no need to add a background skill for this level. It is assumed everyone generally has everyman capabilities.</td>
-         <td>Everyone is capable at this level except through special circumstances.</td>
-       </tr>
-       <tr>
-         <td>Fair</td>
-         <td>Interests and casual studies.</td>
-         <td>Playing in a bar league, a hobby, some college or equivalent study short of a degree</td>
-       </tr>
-       <tr>
-         <td>Good</td>
-         <td>Professional or semi-professional competence.</td>
-         <td>A minor league or college athlete, a serious, long-term hobbyist, a college degree, professional experience.    </td>
-       </tr>
-       <tr>
-         <td>Exceptional</td>
-         <td>Notable expertise in your field</td>
-         <td>A major league athlete, an advanced degree such as a PhD, a renowned expert. </td>
-       </tr>
-     </table>
-     </div>
-     <br>
-     <button class="btn btn-secondary" id="addbg" {{action (mut selectBackgroundSkill) true}}>Add Background Skill</button>
-     <br>
      {{#each this.model.char.fs3.fs3_backgrounds as |skill|}}
 
      <Fs3Bgbox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{action "abilityChanged"}}>
@@ -271,11 +113,11 @@
 
        {{#each this.model.char.fs3.fs3_languages as |skill|}}
        <Fs3Langbox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{action "abilityChanged"}}>
-           <b>{{skill.name}}</b>
+           <b>{{skill.name}}</b> 
            {{#if skill.desc}}- {{skill.desc}}{{/if}}
        </Fs3Langbox>
        {{/each}}
-
+                
      </div>
    </div>
   </div>
@@ -296,11 +138,11 @@
              <b>{{skill.name}}</b> - {{skill.desc}}
          </Fs3Advantagebox>
          {{/each}}
-
+                
        </div>
      </div>
    </div>
-
+ 
 {{/if}}
 
 </div>

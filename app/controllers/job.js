@@ -8,7 +8,7 @@ export default Controller.extend({
   newParticipants: null,
   newActivity: false,
   selectSkillRoll: false,
-
+      
   gameApi: service(),
   gameSocket: service(),
   session: service(),
@@ -19,11 +19,11 @@ export default Controller.extend({
     this._super(...arguments);
     this.set('newParticipants', []);
   },
-
+      
   resetReplyAdmin: function() {
     this.set('replyAdminOnly', this.get('model.job.is_category_admin') ? true : false );
   },
-
+  
   setup: function() {
     this.set('reply', '');
     this.set('newActivity', false);
@@ -32,18 +32,18 @@ export default Controller.extend({
     this.set('selectSkillRoll', false);
     this.set('newParticipants', this.get('model.job.participants'));
   },
-
+    
   setupCallback: function() {
       let self = this;
       this.gameSocket.setupCallback('job_update', function(type, msg, timestamp) {
           self.onJobsMessage(type, msg, timestamp) } );
   },
-
+  
   onJobsMessage: function(type, msg, timestamp ) {
     let splitMsg = msg.split('|');
     let jobId = splitMsg[0]; // Message = splitMsg[1]
     let data = splitMsg[2];
-
+    
     if (data) {
       data = JSON.parse(data);
     }
@@ -57,11 +57,11 @@ export default Controller.extend({
           message: data.message
         });
       } else {
-        this.set('newActivity', true);
-      }
+        this.set('newActivity', true);  
+      }      
     }
   },
-
+  
   approveRoster: function(approved) {
     this.gameApi.requestOne('approveRoster', { name: this.get('model.job.roster_name'), approved: approved })
     .then((response) => {
@@ -72,16 +72,16 @@ export default Controller.extend({
       this.flashMessages.success('Roster app ' + (approved ? 'approved.' : 'rejected.'));
     });
   },
-
+  
   actions: {
     addReply() {
       let api = this.gameApi;
-
+      
       if (this.reply.length === 0) {
           this.flashMessages.danger("You haven't entered anything.");
           return;
       }
-      api.requestOne('jobReply', { id: this.get('model.job.id'),
+      api.requestOne('jobReply', { id: this.get('model.job.id'), 
       reply: this.reply,
       admin_only: this.replyAdminOnly}, null)
       .then( (response) => {
@@ -138,7 +138,7 @@ export default Controller.extend({
         this.flashMessages.success('Job changed to ' + data + '.');
       });
     },
-
+    
     participantsChanged: function(newParticipants) {
         this.set('newParticipants', newParticipants);
     },
@@ -155,18 +155,18 @@ export default Controller.extend({
         this.flashMessages.success('Participants saved.');
       });
     },
-
+    
     responseSelected: function(resp) {
       this.set('reply', resp.value);
     },
-
+    
     approveRoster: function() {
       this.approveRoster(true);
     },
-
+    
     rejectRoster: function() {
       this.approveRoster(false);
     }
-
+    
   }
 });

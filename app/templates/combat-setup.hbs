@@ -21,24 +21,24 @@
             </PowerSelect>
     </div>
     <div class="col-sm-6 col-xs-12">
-
-            <b>Action Args:</b>
-
-            <TooltipIcon @position="top" @message="Enter targets or other options for your action, like *stone slam* or *minor heal/name* or *name>called:head*." />
+        
+            <b>Action Args:</b> 
+            
+            <TooltipIcon @position="top" @message="Enter targets or other options for your action, like Dummy/burst,called:head." @icon="fa fa-question-circle" />
             <br>
             <Input @type="text" size={{25}} id={{id}} @value={{comb.action_args}} />
-
+            
             <p>
             <b>Available Targets:</b>
             <TooltipIcon @position="right" @message="Click a target to add them to the action args list." @icon="fa fa-question-circle" />
-
+            
             {{#each this.model.options.targets as |target|}}
               <a href="#" {{action 'addTarget' id target}}>{{target}}</a>
             {{/each}}
             </p>
-
+            
     </div>
-
+ 
 </div>
 
 
@@ -47,23 +47,23 @@
 
     <p>
       <label>Team:</label>
-
+  
       <PowerSelect @selected={{comb.team}} @options={{this.teams}} @onChange={{action "teamChanged" id}} as |team|>
         {{team}}
       </PowerSelect>
     </p>
 
   </div>
-
+    
   <div class="col col-sm-6 col-xs-12">
-
+      
     <p>
       <label>NPC Level:</label>
       <PowerSelect @selected={{comb.npc_skill}} @options={{this.model.options.npc_skills}} @onChange={{action "npcChanged" id}} as |level|>
         {{level}}
       </PowerSelect>
     </p>
-
+  
   </div>
 </div>
 
@@ -78,7 +78,7 @@
     </PowerSelect>
     </p>
   </div>
-
+  
   <div class="col col-sm-6 col-xs-12">
     <p>
       <label>Armor</label>
@@ -88,7 +88,7 @@
 
     {{#each comb.armor_specials as |spec|}}
         <span class="text">&nbsp; {{spec.name}}:</span>
-        <Input @type="checkbox" @checked={{spec.selected}} />
+        <Input @type="checkbox" @checked={{spec.selected}} /> 
     {{/each}}
     </p>
   </div>
@@ -108,17 +108,17 @@
 
     {{#each comb.weapon_specials as |spec|}}
         <span class="text">&nbsp; {{spec.name}}:</span>
-        <Input @type="checkbox" @checked={{spec.selected}} />
+        <Input @type="checkbox" @checked={{spec.selected}} /> 
     {{/each}}
 
     </p>
 
   </div>
-
+  
   <div class="col-sm-6 col-xs-12">
     <p>
          <label>Vehicle:</label>
-
+         
          <TooltipIcon @position="top" @message="Enter a vehicle type to get in your own vehicle, or a character name to get into theirs." @icon="fa fa-question-circle" />
          <br>
          <Input @type="text" size={{25}} @value={{comb.vehicle}} />
@@ -127,9 +127,9 @@
          <PowerSelect @selected={{comb.passenger_type}} @options={{this.passengerTypes}} @onChange={{action "passengerTypeChanged" id}} as |passengerType|>
            {{passengerType}}
          </PowerSelect>
-
+         
        </p>
-
+          
   </div>
 </div>
 
@@ -140,11 +140,11 @@
 
 
 <div class="action-buttons">
-  <LinkTo @route="combat" @model={{this.model.id}} class="btn btn-secondary">Cancel</LinkTo>
+  <LinkTo @route="combat" @model={{this.model.id}} class="btn btn-secondary">Cancel</LinkTo>  
   <button class="btn btn-primary" {{action 'save'}} >Save</button>
 </div>
 
 <FlashMessages />
 
-
+    
 {{outlet}}

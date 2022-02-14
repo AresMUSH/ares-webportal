@@ -5,7 +5,7 @@ import setupCustomRoutes from 'ares-webportal/custom-routes';
 export default class Router extends EmberRouter {
   location = config.locationType;
   rootURL = config.rootURL;
-
+    
  init() {
       super.init();
       this.on('routeDidChange', function() {
@@ -16,7 +16,7 @@ export default class Router extends EmberRouter {
 
 Router.map(function() {
   this.route('home', { path: ''});
-
+  
   this.route('account');
   this.route('achievements');
   this.route('admins');
@@ -45,7 +45,6 @@ Router.map(function() {
   this.route('combatant-edit', { path: '/combatant/:id' });
   this.route('combats');
   this.route('config', { path: '/config/:file' });
-
   this.route('emoji');
   this.route('error');
   this.route('events');
@@ -89,7 +88,6 @@ Router.map(function() {
   this.route('log', { path: '/log/:file' });
   this.route('login', { query_params: ['redirect'] });
   this.route('logout');
-
   this.route('mail');
   this.route('mail-message', { path: '/mail/:id'});
   this.route('mail-send');
@@ -105,7 +103,6 @@ Router.map(function() {
   this.route('plot', { path: '/plot/:id' });
   this.route('plot-edit', { path: '/plot/:id/edit' });
   this.route('plot-create', { path: '/plot/create' });
-
   this.route('plugins-edit');
   this.route('prefs');
   this.route('recent-changes');
@@ -130,12 +127,10 @@ Router.map(function() {
   this.route('search-chars');
   this.route('search-help');
   this.route('search-forum');
-
   this.route('server-info');
   this.route('setup');
   this.route('setup-colors');
   this.route('shutdown');
-
   this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
   this.route('tos');

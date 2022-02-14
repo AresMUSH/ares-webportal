@@ -4,15 +4,15 @@ import { inject as service } from '@ember/service';
 export default Component.extend({
     text: '',
     preview: null,
-    rows: 12,
+    rows: 6,
     gameApi: service(),
-
+    
     onEnter() {
-        this.send('onEnter');
+        this.send('onEnter');  
     },
-
-    actions: {
-
+    
+    actions: { 
+      
       keyDown: function(event) {
         if (event.keyCode == 13) {
           if (event.ctrlKey || event.metaKey) {
@@ -21,14 +21,14 @@ export default Component.extend({
           }
         }
       },
-
+      
         preview() {
             if (this.get('preview.length') > 0) {
                 this.set('preview', null);
                 return;
             }
             let api = this.gameApi;
-
+            
             api.requestOne('markdownPreview', { text: this.text })
             .then( (response) => {
                 if (response.error) {

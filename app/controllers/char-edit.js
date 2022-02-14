@@ -1,21 +1,21 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
-export default Controller.extend({
+export default Controller.extend({    
     gameApi: service(),
     flashMessages: service(),
     router: service(),
     customUpdateCallback: null,
-
+  
     buildQueryDataForChar: function() {
-
+      
         let custom = this.customUpdateCallback ? this.customUpdateCallback() : null;
-
+      
         let demographics = {};
         let profile = {};
         let relationships = {};
         let descs = {};
-
+        
         let demo_entry = this.get('model.char.demographics');
         Object.keys(demo_entry).forEach(function(k) {
             demographics[k] = demo_entry[k].value;
@@ -24,21 +24,21 @@ export default Controller.extend({
         this.get('model.char.profile').forEach(function(p) {
             profile[p.name] = p.text;
         });
-
+        
         this.get('model.char.relationships').forEach(function(r) {
-            relationships[r.name] = { text: r.text,
-              order: r.order,
+            relationships[r.name] = { text: r.text, 
+              order: r.order, 
               category: r.category,
               is_npc: r.is_npc,
               npc_image: r.is_npc ? r.npc_image : null };
         });
-
+        
         let tags = this.get('model.char.tags') || [];
         if (!Array.isArray(tags)) {
             tags = tags.split(/[\s,]/);
         }
 
-
+        
         descs['current'] = this.get('model.char.descs.current');
         descs['short'] = this.get('model.char.shortdesc');
         descs['outfits'] = {};
@@ -49,7 +49,7 @@ export default Controller.extend({
         this.get('model.char.descs.details').forEach(function(p) {
             descs['details'][p.name] = p.desc;
         });
-
+        
         let roster = {
           on_roster: this.get('model.char.roster.on_roster'),
           restricted: this.get('model.char.roster.restricted'),
@@ -57,12 +57,11 @@ export default Controller.extend({
           played: this.get('model.char.roster.played'),
           notes: this.get('model.char.roster.notes')
         };
-
-        return {
+                        
+        return { 
             id: this.get('model.char.id'),
             demographics: demographics,
             rp_hooks: this.get('model.char.rp_hooks'),
-            plot_prefs: this.get('model.char.plot_prefs'),
             relationships: relationships,
             relationships_category_order: this.get('model.char.relationships_category_order'),
             profile: profile,
@@ -81,29 +80,29 @@ export default Controller.extend({
             roster: roster,
             roles: this.get('model.char.roles') || []
         };
-    },
+    }, 
     actions: {
-
+      
         rolesChanged(roles) {
           this.set('model.char.roles', roles);
         },
-
+        
         save() {
             if (this.get('model.char.profile').filter(p => p.name.length == 0).length > 0) {
                 this.flashMessages.danger('Profile names cannot be blank.');
                 return;
             }
-
+            
             if (this.get('model.char.relationships').filter(r => r.name.length == 0).length > 0) {
                 this.flashMessages.danger('Relationship names cannot be blank.');
                 return;
             }
-
+            
             if (this.get('model.char.descs.outfits').filter(r => r.name.length == 0).length > 0) {
                 this.flashMessages.danger('Outfit names cannot be blank.');
                 return;
             }
-
+            
             if (this.get('model.char.descs.outfits').filter(r => r.name.includes(' ')).length > 0) {
                 this.flashMessages.danger('Outfit names cannot contain spaces.');
                 return;
@@ -113,17 +112,17 @@ export default Controller.extend({
                 this.flashMessages.danger('Detail names cannot be blank.');
                 return;
             }
-
+            
             let api = this.gameApi;
             api.requestOne('profileSave', this.buildQueryDataForChar(), null)
             .then( (response) => {
                 if (response.error) {
                     return;
                 }
-
+            
                 this.flashMessages.success('Saved!');
                 this.router.transitionTo('char', this.get('model.char.name'));
-
+                
             });
         }
     }

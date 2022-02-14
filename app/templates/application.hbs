@@ -5,28 +5,28 @@
 
 
        <div class="title-wrap">
-
+       
            <div class="row" role=”banner”>
                <div class="col-md-6 col-sm-12 col-xs-12">
                    <div class="site-title"><LinkTo @route="home">{{this.mushName}}</LinkTo></div>
                    <div class="site-subtitle">{{this.mushHost}} port {{this.mushPort}}</div>
                </div>
-
+               
                <div class="col-md-6 d-none d-lg-block" role="navigation">
                   <div class="float-end user-bar">
                    {{#if this.isAuthenticated}}
-                       <p>Welcome, {{this.currentUser.name}}.
+                       <p>Welcome, {{this.currentUser.name}}. 
                         {{#if this.model.alts}}
-                         <a href="#" {{action (mut this.showAltSelection) true}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a>
+                         <a href="#" {{action (mut this.showAltSelection) true}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a> 
                          {{/if}}
                        </p>
-
+                       
                        <p>
                            <LinkTo @route="notifications">
                                <span class="badge rounded-pill bg-primary"><i class="fa fa-bell" aria-label='Unread Notifications'></i>
                                <span id="notificationBadge">{{this.model.notification_count}}</span>
                                </span>
-                           </LinkTo>
+                           </LinkTo> 
                             |
                            <LinkTo @route="char" @model={{this.currentUser.name}}>
                              <i class="fa fa-user" aria-label="Profile"></i>
@@ -41,7 +41,7 @@
                              <i class="fa fa-cogs" aria-label="Account"></i>
                            </LinkTo>
                            | <LinkTo @route="logout">
-                             <i class="fa fa-sign-out-alt" aria-label="Logout"></i>
+                             <i class="fa fa-sign-out-alt" aria-label="Logout"></i> 
                            </LinkTo>
                        </p>
                     {{else}}
@@ -56,12 +56,12 @@
         <GlobalNavbar @topNavbar={{this.topNavbar}} @model={{this.model}} @isAdmin={{this.isAdmin}} @isCoder={{this.isCoder}} @isAuthenticated={{this.isAuthenticated}} @isWikiMgr={{this.isWikiMgr}} @currentUser={{this.currentUser}} @currentRoute={{this.currentRoute}} />
     </div>
 
-
-
+        
+        
      <div class="body-wrap">
-
+ 
        <div class="row body-row">
-
+         
          {{#if (not this.hideSidebar)}}
              {{#if this.model.left_sidebar}}
              <div class="col-md-3 left-sidebar" role="navigation" aria-labelledby="sidebar">
@@ -73,13 +73,13 @@
          {{#if this.hideSidebar}}
              <div class="col-md-12 body-container {{if this.model.left_sidebar 'right-body' 'left-body'}}" role="main">
                <FlashMessages />
-
+               
                {{#if (not this.socketConnected)}}
                  <div class="alert alert-warning">The website is not receiving live updates from the game.  Try reloading the page.</div>
                {{/if}}
-
+               
                {{outlet}}
-
+               
                {{#if (not this.socketConnected)}}
                  <div class="alert alert-warning">The website is not receiving live updates from the game.  Try reloading the page.</div>
                {{/if}}
@@ -90,7 +90,7 @@
                {{outlet}}
              </div>
          {{/if}}
-
+                
          {{#if (not this.hideSidebar)}}
              {{#if (not this.model.left_sidebar)}}
              <div class="col-md-3 right-sidebar" role="navigation" aria-labelledby="sidebar">
@@ -100,7 +100,7 @@
          {{/if}}
         </div>
      </div>
-
+ 
        <hr>
 
        <footer>
@@ -108,7 +108,7 @@
        </footer>
 </div>
 
-
+  
 <BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{this.showAltSelection}}  @onHide={{action (mut this.showAltSelection) false}} @onSubmit={{action (mut this.showAltSelection) false}}>
 
   <table class="alts-switcher">

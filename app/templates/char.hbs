@@ -26,22 +26,22 @@
 <div class="profile-tab">
 
   <ProfileSystem @char={{this.model.char}} @game={{this.model.game}} @reloadChar={{action "reloadChar"}} />
-
+  
 </div>
 
 
 <div class="profile-tab">
 
  <ProfileRelationships @char={{this.model.char}} />
-
+ 
  </div>
-
+ 
  <div class="profile-tab">
-
+ 
 <ProfileLogs @scenes={{this.model.scenes}} @sceneTypes={{this.model.sceneOptions.scene_types}} @char={{this.model.char}} />
-
+   
 </div>
-
+   
 <div class="profile-tab">
 
  <ProfileGallery @char={{this.model.char}} />
@@ -50,14 +50,14 @@
 
 
 <hr>
-<b>Tags:</b>
+<b>Tags:</b>  
 {{#each this.model.char.tags as |tag|}}
   <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
 {{/each}}
-
+    
 
 <div class="action-buttons">
-
+        
       {{#if this.model.char.last_profile_version}}
           <LinkTo @route="char-source" @models={{array this.model.char.id this.model.char.last_profile_version}} class="btn btn-secondary">Source/History</LinkTo>
       {{/if}}
@@ -76,14 +76,14 @@
 {{#if this.model.char.can_manage}}
 {{#if this.showFiles}}
     <div class="card card-default">
-
+        
         <div class="card-body">
-
+            
         <p><b>Existing Character Files:</b></p>
-
+        
        <div class="thumbnail-gallery">
        {{#each this.model.char.files as |charFile|}}
-
+       
        <div class="thumbnail-gallery-item">
        <LinkTo @route="file" @models={{array charFile.folder charFile.name}}>
        {{file.path}} <img src="/game/uploads/{{charFile.path}}" alt="{{charFile.name}}" class="thumbnail" title={{charFile.description}}>
@@ -92,9 +92,9 @@
        {{/each}}
        </div>
        <div class="clearfix"/>
-
+        
         <p><LinkTo @route="files">All Files</LinkTo></p>
-
+    
         <FileUploader @folder={{this.model.char.name}} @uploaded={{action "fileUploaded"}} />
         </div>
     </div>
@@ -103,6 +103,6 @@
 
 
 
-{{outlet}}
+{{outlet}}  
 
     <script async defer src="//assets.pinterest.com/js/pinit.js"></script>

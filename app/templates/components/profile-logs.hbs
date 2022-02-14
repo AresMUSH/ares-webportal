@@ -1,48 +1,19 @@
 <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#scenesindex">+</a></li>
     <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#scenelist">Scenes</a></li>
-    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#scenelist">Plot Preferences</a></li>
-    {{#if this.char.custom.lore_hook_name}}<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#scenelist">Lore Hook</a></li>{{/if}}
-    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#scenelist">Comps</a></li>
 </ul>
 
 
 <div class="tab-content">
 
     <div id="scenesindex" class="tab-pane fade show active">
-        <div class="tab-cover">Story</div>
+        <div class="tab-cover">Scenes</div>
     </div>
-
+    
     <div id="scenelist" class="tab-pane fade ">
-
+  
         <SceneList @scenes={{this.scenes.scenes}} @pages={{this.scenes.pages}} @sceneTypes={{this.sceneTypes}} @filter={{this.filter}} @page={{this.page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
-
-        <div id="plotprefs" class="tab-pane fade ">
-          {{#if this.char.custom.plot_prefs}}
-            {{{ansi-format text=this.char.custom.plot_prefs}}}
-          {{else}}
-              None.
-          {{/if}}
-      </div>
+      
     </div>
-
-
-    {{#if char.custom.lore_hook_name}}
-      <div id="lore-hook" class="tab-pane fade ">
-        {{#if char.custom.lore_hook_ancestry}}
-          <h4>{{#link-to 'creature' char.custom.lore_hook_ancestry}}{{char.custom.lore_hook_name}} {{/link-to}}</h4>
-        {{else if char.custom.lore_hook_pet}}
-          <h4>{{#link-to 'creature' char.custom.lore_hook_pet}}{{char.custom.lore_hook_name}} {{/link-to}}</h4>
-        {{else}}
-          <h4>{{char.custom.lore_hook_name}}</h4>
-        {{/if}}
-        {{char.custom.lore_hook_desc}}
-      </div>
-    {{/if}}
-
-    <div id="comps" class="tab-pane fade ">
-      <CharComps @char={{char}}  />
-
-    </div>
-
+    
 </div>

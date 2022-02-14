@@ -18,8 +18,8 @@
       <th>Date/Time</th>
       <th>Tags</th>
 </thead>
-
-<tbody>
+       
+<tbody> 
   {{#each this.model.events as |event|}}
   <tr>
     <td>
@@ -33,20 +33,20 @@
           <ContentWarningTag @warning={{event.content_warning}} @position="top-right" />
           {{/if}}
       </td>
-
+    
       <td>
           <CharIconTiny @char={{event.organizer}} />
       </td>
       <td>
           {{event.start_datetime_local}}
           <br>({{event.start_time_standard}})
-      </td>
+      </td>      
       <td>
         {{#each event.tags as |tag|}}
         <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
         {{/each}}
       </td>
-
+    
   </tr>
 
   {{/each}}
@@ -55,7 +55,6 @@
 
 <div class="alert alert-info">If you're using an iCalendar-compatible calendar app like Outlook or Apple iCal, you can add the game's iCal feed to your app and it will automatically load events into your calendar: <a href="{{calendarUrl}}">{{calendarUrl}}</a>.</div>
 
-<iframe src="https://calendar.google.com/calendar/b/3/embed?showTitle=0&amp;showPrint=0&amp;showCalendars=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=spiritlakemu%40gmail.com&amp;color=%2323164E&amp;src=so41d2tcl40g5qc77e1sghiaoh6g5ld0%40import.calendar.google.com&amp;color=%235229A3&amp;ctz=America%2FDenver" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
 
 {{outlet}}

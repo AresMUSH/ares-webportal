@@ -1,12 +1,12 @@
 {{page-title 'Play'}}
-
+ 
  <h1 class="play-title">Play</h1>
 
  <div class="row">
    <div class="col col-12 col-md-3">
-
-     <div class="play-sidebar">
-
+     
+     <div class="play-sidebar">     
+     
      <button class="btn btn-secondary d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#sceneMenuCollapse" aria-expanded="false" aria-controls="sceneMenuCollapse">
          <TooltipIcon @position="right" @message="Show/hide play controls." @icon="fab fa-elementor" />
          {{#if this.anyNewActivity}}
@@ -17,7 +17,7 @@
        <div class="collapse show" id="sceneMenuCollapse">
 
        <p class="play-section-title">Scenes
-
+             
        {{#if this.isApproved}}
          <LinkTo @route="scenes-live" target="_blank">
            <TooltipIcon @position="right" @message="Join Scene" @icon="fa fa-play-circle" />
@@ -36,13 +36,13 @@
          <TooltipIcon @position="right" @message="Who's Online" @icon="fa fa-users" />
        </LinkTo>
 
-       </p>
+       </p>  
 
-
+         
        {{#each this.model.scenes as |scene|}}
          <a href="#" {{action 'switchScene' scene.id}}>
            <div class="play-selector {{if (eq scene.id this.currentScene.id) 'play-selector-active' ''}}">
-               #{{scene.id}} - {{scene.location.name}}
+               #{{scene.id}} - {{scene.location.name}} 
                {{#if scene.is_unread}}
                  <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
                {{/if}}
@@ -53,11 +53,11 @@
              {{participant.name}}
            {{/each}}
          </div>
-
+         
        {{/each}}
-
-
-       <p class="play-section-title">Private Messages
+       
+       
+       <p class="play-section-title">Private Messages  
        <a href="#" {{action (mut this.showNewConversation) true}}>
          <TooltipIcon @position="right" @message="New Conversation" @icon="fa fa-plus-circle" />
        </a>
@@ -70,12 +70,12 @@
           <TooltipIcon @position="right" @message="Show All" @icon="fa fa-caret-square-down" />
         </a>
         {{/if}}
-       </p>
-
+       </p>  
+        
         {{#each this.sortedPageThreads as |channel|}}
           {{#if (or channel.is_recent this.showAllPms)}}
            <a href="#" {{action 'changeChannel' channel}}>
-            <div class="play-selector {{if (eq channel.key this.selectedChannel.key) 'play-selector-active' ''}}">
+            <div class="play-selector {{if (eq channel.key this.selectedChannel.key) 'play-selector-active' ''}}">                  
               # {{channel.title}}
               {{#if channel.is_hidden}}
                   <i class="fa fa-microphone-slash"></i>
@@ -84,10 +84,10 @@
             </div>
           </a>
           {{/if}}
-        {{/each}}
-
+        {{/each}}        
+        
        <p class="play-section-title">Channels
-
+         
          <a href="#" {{action (mut this.showAddChannel) true}}>
            <TooltipIcon @position="right" @message="Add Channel" @icon="fa fa-plus-circle" />
          </a>
@@ -100,8 +100,8 @@
             <TooltipIcon @position="right" @message="Show All" @icon="fa fa-caret-square-down" />
           </a>
           {{/if}}
-       </p>
-
+       </p>  
+              
        {{#each this.sortedChannels as |channel|}}
          {{#if channel.can_join}}
            {{#if channel.enabled}}
@@ -111,7 +111,7 @@
                     # {{channel.title}}
                    {{#if channel.muted}}
                        <i class="fa fa-microphone-slash"></i>
-                   {{/if}}
+                   {{/if}}                 
                    <span class="badge rounded-pill bg-primary">{{channel.new_messages}}</span>
                </div>
                </a>
@@ -119,25 +119,26 @@
            {{/if}}
          {{/if}}
        {{/each}}
-
+                         
      </div>
     </div>
-
+     
    </div>
-
+   
    <div class="col col-12 col-md-9">
-
+      
       {{#if this.currentScene}}
       <LinkTo @route="scene-live" @model={{this.currentScene.id}} class="play-scene-title">Scene {{this.currentScene.id}}
           {{#if this.currentScene.title}}
            - {{this.currentScene.title}}
            {{/if}}
        </LinkTo>
+       
        {{/if}}
-
-       <LiveSceneControl @scene={{this.currentScene}} @locations={{this.model.locations}} @abilities={{this.model.abilities}} @spells={{this.model.spells}} @places={{this.currentScene.places}} @scrollPaused={{this.scrollPaused}} @playerName={{this.currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
-
-
+    
+       <LiveSceneControl @scene={{this.currentScene}} @locations={{this.model.locations}} @abilities={{this.model.abilities}} @places={{this.currentScene.places}} @scrollPaused={{this.scrollPaused}} @playerName={{this.currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
+       
+       
        {{#if this.selectedChannel}}
 
        {{#if this.selectedChannel.is_page}}
@@ -146,11 +147,11 @@
        <h3>{{this.selectedChannel.title}}</h3>
        {{/if}}
        {{/if}}
-
-
+       
+       
          <ChatControl @channel={{this.selectedChannel}} @scrollPaused={{this.scrollPaused}} @playerName={{this.currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @poseableChars={{this.model.chat.pose_chars}} @setScroll={{action "setScroll"}} />
-
-
+       
+       
        {{#if this.emptyPrompt}}
        <div class="alert alert-info">Please select or join a channel or scene.</div>
        {{/if}}
@@ -158,20 +159,20 @@
     </div>
 </div>
 
-
+  
 <BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{this.showAddChannel}}  @onHide={{action (mut this.showAddChannel) false}}>
-
-
+  
+    
   <PowerSelect @selected={{this.poseChar}} @options={{this.model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
       <CharIconTiny @char={{poseChar}} />
   </PowerSelect>
-
+  
   <table>
     {{#each this.sortedChannels as |channel|}}
       {{#if channel.can_join}}
         <tr>
           <td>
-          <b>{{channel.title}}</b>
+          <b>{{channel.title}}</b> 
           </td>
           <td>
             {{#if channel.desc}}
@@ -186,17 +187,17 @@
         </tr>
       {{/if}}
   {{/each}}
-
+  
   </table>
 </BsModalSimple>
-
+  
 <BsModalSimple @title="Start Conversation" @closeTitle="Cancel" @submitTitle="Start" @size={{null}} @fade={{true}} @open={{this.showNewConversation}} @onSubmit={{action "startConversation"}}  @onHide={{action (mut this.showNewConversation) false}}>
 
 
          <div class="card card-default">
            <div class="card-body">
-
-
+             
+             
               <div class="form-group row">
                <div class="col-sm-3">
                    <label for="to" class="col-form-label">To:</label>
@@ -205,9 +206,9 @@
                    <PowerSelectMultiple @selected={{this.newConversationList}} @options={{this.model.characters}} @searchEnabled=true  @searchField="name" @onChange={{action "conversationListChanged"}} as |char|>
                  {{char.name}}
                </PowerSelectMultiple>
-               </div>
+               </div> 
              </div>
-
+             
               <div class="form-group row">
                <div class="col-sm-3">
                    <label for="from" class="col-form-label">From:</label>
@@ -218,17 +219,17 @@
                        <CharIconTiny @char={{this.poseChar}} />
                    </PowerSelect>
                  </div>
-               </div>
+               </div> 
              </div>
-
-
+             
+      
                <MarkdownEditor @text={{this.newPage}} class="chat-box" @rows="6" @onEnter={{action "startConversation"}} />
-
+      
            </div>
          </div>
-
+         
          <FlashMessages />
   </BsModalSimple>
-
+  
 
 {{outlet}}

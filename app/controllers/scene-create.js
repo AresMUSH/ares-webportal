@@ -10,25 +10,19 @@ export default Controller.extend({
     warning_tags: [],
 
     scenePacingOptions: computed.reads('model.sceneOptions.scene_pacing'),
-
+  
     sceneTypes: computed('model.sceneOptions.scene_types', function () {
      return this.get('model.sceneOptions.scene_types').map((p) => p.name);
     }),
 
-
-    scenePrivacyValues: computed(function() {
+    
+    scenePrivacyValues: computed(function() { 
         return [ 'Open', 'Private' ];
     }),
-
+    
     actions: {
         plotsChanged(newPlots) {
             this.set('model.scene.plots', newPlots);
-        },
-        creaturesChanged(new_creatures) {
-          this.set('model.scene.creatures', new_creatures);
-        },
-        portalsChanged(new_portals) {
-          this.set('model.scene.portals', new_portals);
         },
         typeChanged(newType) {
             this.set('model.scene.scene_type', newType);
@@ -58,16 +52,14 @@ export default Controller.extend({
             if (!Array.isArray(tags)) {
                 tags = tags.split(/[\s,]/);
             }
-
-            api.requestOne('createScene', {
-               title: this.get('model.scene.title'),
+            
+            api.requestOne('createScene', { 
+               title: this.get('model.scene.title'), 
                icdate: this.get('model.scene.icdate'),
                scene_type: this.get('model.scene.scene_type'),
                scene_pacing: this.get('model.scene.scene_pacing'),
                location: this.get('model.scene.location'),
                summary: this.get('model.scene.summary'),
-               portals: (this.get('model.scene.portals') || []).map(portal => portal.id),
-               creatures: (this.get('model.scene.creatures') || []).map(creature => creature.id),
                plots: (this.get('model.scene.plots') || []).map(p => p.id),
                completed: this.get('model.scene.completed'),
                privacy: this.get('model.scene.privacy'),
@@ -81,7 +73,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                this.router.transitionTo('scene',
+                this.router.transitionTo('scene',                          
                           response.id);
                 this.flashMessages.success('Scene updated!');
             });

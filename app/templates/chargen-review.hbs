@@ -3,13 +3,13 @@
 
 <div class="card card-default">
     <div class="card-body">
-        <pre class="ansi app-status">{{#if this.model.abilities}}<AnsiFormat @text={{this.model.abilities}} />
+        <pre class="ansi app-status">{{#if this.model.abilities}}<AnsiFormat @text={{this.model.abilities}} /> 
 {{/if}}<AnsiFormat @text={{this.model.demographics}} /><AnsiFormat @text={{this.model.background}} /><AnsiFormat @text={{this.model.desc}} /><AnsiFormat @text={{this.model.hooks}} />{{#if this.model.ranks}}<AnsiFormat @text={{this.model.ranks}} />{{/if}}{{#if this.model.custom}}<AnsiFormat @text={{this.model.custom}} />{{/if}}        </pre>
     </div>
 </div>
 
 <div class="card card-default">
-
+    
     <div class="card-body">
        <p><span class="ansi-bright-red-fg">Red</span> issues will probably hold up your app.</p>
        <p><span class="ansi-bright-yellow-fg">Yellow</span> may be OK if it suits your character.</p>
@@ -18,10 +18,10 @@
          <p>When you're happy with your character, submit them for review by the game admin.</p>
          <hr>
          <p>{{this.model.app_notes_prompt}}</p>
-
+       
          <Textarea @value={{this.appNotes}} cols={{80}} rows={{5}} />
-
-
+       
+       
         <p>
             <LinkTo @route="chargen-char" @model={{this.model.id}} class="btn btn-secondary">Back to Chargen</LinkTo>
             <button name="submit" {{action 'submit'}} class="btn btn-success">Submit</button>
@@ -33,7 +33,7 @@
             <LinkTo @route="chargen-char" @model={{this.model.id}} class="btn btn-secondary">Back to Chargen</LinkTo>
           </p>
       {{/if}}
-
+                   
     </div>
 </div>
 

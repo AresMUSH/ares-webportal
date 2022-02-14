@@ -25,29 +25,29 @@ export default Component.extend(AuthenticatedController, {
     updatePoseControls: function() {
       this.set('poseType', { title: 'Pose', id: 'pose' });
       if (this.scene && !this.get('scene.poseChar')) {
-
+        
         let self = this;
         this.scene.poseable_chars.forEach(c => {
           if (!this.get('scene.poseChar') && self.scene.participants.any(w => w.name == c.name)) {
             self.set('scene.poseChar', c);
           }
         });
-
+      
         if (!this.get('scene.poseChar')) {
           this.set('scene.poseChar', this.get('scene.poseable_chars')[0]);
-        }
+        }  
       }
     },
-
+    
     didInsertElement: function() {
       this._super(...arguments);
       this.updatePoseControls();
     },
-
+    
     sceneObserver: observer('scene', function() {
       this.updatePoseControls();
     }),
-
+    
     poseTypes: computed(function() {
       return [
         { title: 'Pose', id: 'pose' },
@@ -55,31 +55,31 @@ export default Component.extend(AuthenticatedController, {
         { title: 'Scene Set', id: 'setpose' }
       ];
     }),
-
+    
     poseOrderTypes: computed(function() {
       return [ '3-per', 'normal' ];
     }),
-
+      
     txtExtraInstalled: computed(function() {
       return this.isExtraInstalled('txt');
     }),
-
+    
     cookiesExtraInstalled: computed(function() {
       return this.isExtraInstalled('cookies');
     }),
-
+    
     rpgExtraInstalled: computed(function() {
       return this.isExtraInstalled('rpg');
     }),
-
+    
     fateExtraInstalled: computed(function() {
       return this.isExtraInstalled('fate');
     }),
-
+    
     diceExtraInstalled: computed(function() {
       return this.isExtraInstalled('dice');
     }),
-
+    
     sceneAlerts: computed('scene.{is_watching,reload_required}', 'scrollPaused', function() {
       let alertList = [];
       if (this.scrollPaused) {
@@ -93,18 +93,18 @@ export default Component.extend(AuthenticatedController, {
       }
       return alertList;
     }),
-
+    
     isExtraInstalled(name) {
-       return this.get('scene.extras_installed').any(e => e == name);
+       return this.get('scene.extras_installed').any(e => e == name); 
     },
-
-    actions: {
+    
+    actions: { 
       locationSelected(loc) {
-          this.set('newLocation', loc);
+          this.set('newLocation', loc);  
       },
       changeLocation() {
           let api = this.gameApi;
-
+          
           let newLoc = this.newLocation;
           if (!newLoc) {
               this.flashMessages.danger("You haven't selected a location.");
@@ -121,8 +121,8 @@ export default Component.extend(AuthenticatedController, {
               }
           });
       },
-
-      editScenePose(scenePose) {
+      
+      editScenePose(scenePose) { 
           set(scenePose, 'editActive', true);
       },
       cancelScenePoseEdit(scenePose) {
@@ -153,7 +153,7 @@ export default Component.extend(AuthenticatedController, {
                 return;
             }
             this.flashMessages.success('The scene poses have been collapsed for editing.');
-            this.refresh();
+            this.refresh(); 
         });
       },
       deleteScene() {
@@ -188,11 +188,11 @@ export default Component.extend(AuthenticatedController, {
               set(scenePose, 'pose', response.pose);
           });
       },
-
+      
       loadLastPose() {
         this.set('scene.draftPose', this.get('scene.lastDraftPose'));
       },
-
+      
       addPose(poseType) {
           let pose = this.get('scene.draftPose') || "";
           if (pose.length === 0) {
@@ -204,7 +204,7 @@ export default Component.extend(AuthenticatedController, {
           this.set('scene.draftPose', '');
 
           api.requestOne('addScenePose', { id: this.get('scene.id'),
-              pose: pose,
+              pose: pose, 
               pose_type: poseType,
               pose_char: this.get('scene.poseChar.id') }, null, true)
           .then( (response) => {
@@ -216,18 +216,18 @@ export default Component.extend(AuthenticatedController, {
               } else {
                 this.set('commandResponse', '');
               }
-
+              
               this.scrollDown();
           });
       },
-
+      
       changeSceneStatus(status) {
           let api = this.gameApi;
           if (status === 'share') {
             this.gameSocket.removeCallback('new_scene_activity');
           }
           this.set('scene.reload_required', true);
-
+          
           api.requestOne('changeSceneStatus', { id: this.get('scene.id'),
               status: status }, null)
           .then( (response) => {
@@ -239,16 +239,15 @@ export default Component.extend(AuthenticatedController, {
               }
               else if (status === 'stop') {
                   this.flashMessages.success('The scene has been stopped.');
-                  this.refresh();
+                  this.refresh(); 
               }
               else if (status === 'restart') {
                   this.flashMessages.success('The scene has been restarted.');
-                  this.refresh();
-
+                  this.refresh(); 
               }
           });
       },
-
+      
       watchScene(option) {
           let api = this.gameApi;
           let command = option ? 'watchScene' : 'unwatchScene';
@@ -260,32 +259,32 @@ export default Component.extend(AuthenticatedController, {
               let message = option ? 'now watching' : 'no longer watching';
               this.flashMessages.success(`You are ${message} the scene.`);
               this.scene.set('is_watching', option);
-
+              
               if (option) {
-                this.refresh();
+                this.refresh(); 
               }
           });
       },
-
+      
       scrollDown() {
         this.scrollDown();
       },
-
+      
       pauseScroll() {
         this.setScroll(false);
       },
       unpauseScroll() {
         this.setScroll(true);
       },
-
+      
       poseTypeChanged(newType) {
         this.set('poseType', newType);
       },
-
-      poseCharChanged(newChar) {
+      
+      poseCharChanged(newChar) { 
         this.set('scene.poseChar', newChar);
       },
-
+      
       showCharCard(char) {
         let api = this.gameApi;
         api.requestOne('sceneCard', { char: char }, null)
@@ -297,7 +296,7 @@ export default Component.extend(AuthenticatedController, {
             this.set('characterCard', true);
         });
       },
-
+      
       switchPoseOrderType(newType) {
         let api = this.gameApi;
         api.requestOne('switchPoseOrder', { id: this.get('scene.id'), type: newType }, null)
@@ -309,7 +308,7 @@ export default Component.extend(AuthenticatedController, {
             this.set('scene.pose_order_type', newType);
         });
       },
-
+      
       dropPoseOrder(name) {
         let api = this.gameApi;
         api.requestOne('dropPoseOrder', { id: this.get('scene.id'), name: name }, null)
@@ -320,7 +319,7 @@ export default Component.extend(AuthenticatedController, {
             }
         });
       },
-
+      
       reportScene() {
         let api = this.gameApi;
         this.set('confirmReportScene', false);

@@ -1,17 +1,3 @@
-
-<div class="sidebar-box {{boxStyle}}" style="margin-top:10px;">
-  <div class="sidebar-heading">
-    <h2>Search <i class="fa fa-search" aria-hidden="true"></i></h2>
-  </div>
-  <p><center>{{#link-to 'search-scenes'}}Scenes{{/link-to}} &middot; {{#link-to 'search-spells'}}Spells{{/link-to}} &middot; {{#link-to 'search-help'}}Help{{/link-to}}  &middot; {{#link-to 'search-wiki'}}Wiki {{/link-to}} &middot; {{#link-to 'search-forum'}}More{{/link-to}}</center></p>
-</div>
-
-<div class="sidebar-box {{boxStyle}}">
-  <div class="sidebar-heading">
-    <h2>Wiki <i class="fas fa-user-edit"></i></h2>
-  </div>
-  <p><center>{{#link-to 'wiki-create'}}New{{/link-to}} &middot; {{#link-to 'wiki-all'}}All{{/link-to}} &middot; {{#link-to 'wiki-tags'}}Tags{{/link-to}}  &middot; {{#link-to 'files'}}Files {{/link-to}} &middot; {{#link-to 'help-topic' 'markdown'}}Format Help{{/link-to}}</center></p>
-</div>
 <div class="sidebar-box {{this.boxStyle}} text-center">
   <SidebarSearch @model={{this.model}} />
 </div>
@@ -31,27 +17,27 @@
    {{#if this.model.game_down}}
     <div class="alert alert-danger">The website can't contact the game.  It may be down.</div>
    {{else}}
-
+   
     <p>Today is {{this.model.game.ictime}}.
     <br>{{this.model.game.who_count}} character(s) online.
     <br>{{this.model.game.scene_count}} scene(s) in progress.
   </p>
-
+  
   {{#if this.model.motd}}
   <p><AnsiFormat @text={{this.model.motd}} /></p>
   {{/if}}
-
-  <p>
-      <LinkTo @route="play">Play</LinkTo> |
-      <LinkTo @route="scenes-live">Active Scenes</LinkTo> |
-      <LinkTo @route="who">Who's Online</LinkTo>
+  
+  <p>       
+      <LinkTo @route="play">Play</LinkTo> | 
+      <LinkTo @route="scenes-live">Active Scenes</LinkTo> | 
+      <LinkTo @route="who">Who's Online</LinkTo> 
   </p>
 {{/if}}
 
 </div>
 
-
-
+    
+    
 {{#if (not this.model.game.disabled_plugins.events)}}
 <div class="sidebar-box {{this.boxStyle}}">
   <div class="sidebar-heading">
@@ -59,13 +45,13 @@
   </div>
   {{#each this.model.upcoming_events as |event|}}
   <p><b><LinkTo @route="event" @model={{event.id}}>
-
+    
     {{#if event.is_signed_up}}
     <i class="fas fa-calendar-check" aria-label="Signed Up"></i>
     {{/if}}
     {{event.title}}
-
-    </LinkTo></b>
+    
+    </LinkTo></b> 
     {{#if event.content_warning}}
     <ContentWarningTag @warning={{event.content_warning}} @position="top-left" />
     {{/if}}
@@ -73,7 +59,7 @@
   {{/each}}
    <br>
   <p><LinkTo @route="events">All Events</LinkTo></p>
-
+  
 </div>
 {{/if}}
 
@@ -82,7 +68,7 @@
 <div class="sidebar-box {{this.boxStyle}}">
    <div class="sidebar-heading">
        <h2>Recent Scenes <i class="fa fa-book" aria-hidden="true"></i></h2>
-
+       
    </div>
    {{#each this.model.recent_scenes as |scene|}}
    <p><LinkTo @route="scene" @model={{scene.id}}>{{scene.icdate}} - {{scene.title}}</LinkTo>
@@ -99,14 +85,14 @@
 <div class="sidebar-box {{this.boxStyle}}">
    <div class="sidebar-heading">
        <h2>Recent Forum Posts <i class="fa fa-comments" aria-hidden="true"></i></h2>
-
+       
    </div>
    {{#each this.model.recent_forum as |post|}}
-   <p>{{post.author.name}}
-          {{#if post.is_reply}}
-            replied to
+   <p>{{post.author.name}} 
+          {{#if post.is_reply}}    
+            replied to 
           {{else}}
-            posted
+            posted 
           {{/if}}
           <LinkTo @route="forum-topic" @models={{array post.category_id post.id}}>{{post.subject}}.</LinkTo>
    </p>
@@ -118,15 +104,15 @@
 <div class="sidebar-box {{this.boxStyle}}">
    <div class="sidebar-heading">
        <h2>Recent Changes <i class="fa fa-file-alt" aria-hidden="true"></i></h2>
-
+       
    </div>
    {{#each this.model.recent_changes as |change|}}
    <p class='sidebar-list'>
      <RecentChangeLink @change={{change}} />
    </p>
    {{/each}}
-
+   
    <br>
    <p><LinkTo @route="recent-changes">More Changes</LinkTo></p>
-
+   
 </div>

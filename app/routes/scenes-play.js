@@ -3,7 +3,7 @@ import Route from '@ember/routing/route';
 
 export default Route.extend({
     router: service(),
-
+    
     beforeModel: function() {
         this.router.transitionTo('play');
     }

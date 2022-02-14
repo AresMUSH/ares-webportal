@@ -11,15 +11,16 @@
   <div id="supplementalindex" class="tab-pane fade show active">
       <div class="tab-cover">{{this.title}}</div>
   </div>
-
+  
   {{#each this.char.profile as |profile|}}
-
+  
   <div id="{{profile.key}}" class="tab-pane fade ansi">
-
+  
       <AnsiFormat @text={{profile.text}} />
-
+      
   </div>
-
+  
   {{/each}}
-
+  
  </div>
+  

@@ -12,7 +12,7 @@
 
           <li class="nav-item dropdown d-lg-none">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
+          
                     Welcome {{this.currentUser.name}}
                     {{#if this.model.notification_count}}
                         <span class="badge rounded-pill bg-primary" id="notificationBadge"><i class="fa fa-bell" aria-label="New Notifications"></i> {{this.model.notification_count}}</span>
@@ -27,17 +27,17 @@
 
                       {{#if this.model.alts}}
                           <li><a class="dropdown-item" href="#" {{action (mut this.showAltSelection) true}}>Switch Alt</a></li>
-                      {{/if}}
+                      {{/if}} 
 
                       <li><LinkTo class="dropdown-item" @route="logout">Logout</LinkTo></li>
-
+            
                     </ul>
                   </li>
                 {{else}}
                 <li class="nav-item d-lg-none"><LinkTo class="nav-link" @route="login" @query={{hash redirect=this.currentRoute}}>Login</LinkTo></li>
                 {{/if}}
 
-
+        
         {{#each this.topNavbar as |sec|}}
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -60,11 +60,11 @@
                 {{/if}}
               {{/each}}
             </ul>
-          </li>
+          </li>            
         {{/each}}
 
         {{#if (or this.isAdmin this.isCoder)}}
-
+            
          <li class="nav-item dropdown">
            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
@@ -88,7 +88,7 @@
         {{#if this.isWikiMgr}}
         <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
+     
             Admin</a>
             <ul class="dropdown-menu  dropdown-menu-end">
               <li><LinkTo class="dropdown-item" @route="setup-colors">Theme Colors</LinkTo></li>
@@ -98,7 +98,7 @@
             </ul>
           </li>
         {{/if}}
-
+        
       </ul>
 
     </div>

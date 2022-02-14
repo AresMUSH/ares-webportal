@@ -9,8 +9,7 @@
   {{else}}
           <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause"></i> Pause Scrolling</a>
   {{/if}}
-
-
+  
   {{#if this.scene.is_watching}}
   <a href="#" {{action 'watchScene' false}}><i class="fas fa-eye-slash"></i> Unwatch Scene</a>
   {{else}}
@@ -27,16 +26,17 @@
     </div>
     {{/if}}
 
-
+    
     <LiveSceneContext @scene={{this.scene}} />
-
-
+    
+    
     <div class="ansi scene-log" id="live-scene-log">
+    
 
-    {{#each this.scene.poses as |pose|}}
+    {{#each this.scene.poses as |pose|}}    
             <div class="hint float-end">
-
-
+                
+                
                 {{#if (not pose.is_system_pose)}}
                   <div class="timestamp-tip">{{pose.timestamp}}</div>
                 {{/if}}
@@ -51,13 +51,13 @@
                   {{/if}}
                 {{/if}}
             </div>
-
+        
             {{#if pose.is_system_pose}}
                 <div class="scene-system-pose">
                 <AnsiFormat @text={{pose.pose}} />
                 </div>
             {{else}}
-                <div class="scene-pose-header">
+                <div class="scene-pose-header">		
                   {{#if pose.restarted_scene_pose}}
                       <img alt="System Profile Icon"  class="small-profile-icon <IconClass />"  src="/game/uploads/theme_images/noicon.png" >
                       Combined Poses
@@ -68,42 +68,42 @@
                           {{else}}
                           <img alt="{{pose.char.name}}'s icon" class="small-profile-icon <IconClass />" src="/game/uploads/theme_images/noicon.png" >
                           {{/if}}
-
+                          
                           {{#if pose.char.nick}}
                             {{pose.char.nick}}
                           {{else}}
-                            {{pose.char.name}}
+                            {{pose.char.name}} 
                           {{/if}}
-
+                          
                       </a>
                     {{/if}}
                 </div>
                  {{#if pose.editActive}}
                     <MarkdownEditor @text={{pose.raw_pose}} />
-
+                                        
                     <div class="action-buttons">
                       <button class="btn btn-secondary" {{action 'cancelScenePoseEdit' pose}}>Cancel</button>
                       <button class="btn btn-warning" {{action 'saveScenePose' pose false}}>Typo</button>
                       <button class="btn btn-primary" {{action 'saveScenePose' pose true}}>Save</button>
                     </div>
-
+                    
                  {{else}}
-
+                   
                      {{#if pose.is_setpose}}
                         <div class="scene-set-pose">
                         <AnsiFormat @text={{pose.pose}} />
                         </div>
                     {{else if pose.is_ooc}}
                         <div class="scene-ooc-pose">
-                        <span class="badge rounded-pill bg-primary"> OOC</span>
+                        <span class="badge rounded-pill bg-primary"> OOC</span>	
                         <AnsiFormat @text={{pose.pose}} />
                         </div>
-                    {{else}}
-                        <div class="scene-pose">
+                    {{else}}        
+                        <div class="scene-pose">	
                           {{#if pose.place_name}}
                             <b>At {{pose.place_name}}</b>
                           {{/if}}
-
+                          
                             <AnsiFormat @text={{pose.pose}} />
                         </div>
                     {{/if}}
@@ -115,8 +115,8 @@
      {{#if this.commandResponse}}
        <div class="scene-command">{{this.commandResponse}}</div>
      {{/if}}
-
-
+     
+     
     </div>
 
     {{#if this.sceneAlerts}}
@@ -126,26 +126,26 @@
       {{/each}}
     </div>
     {{/if}}
-
+    
 
     {{#if (not this.isApproved)}}
       <div class="alert alert-warning">You must be approved to join a scene.</div>
-
+      
     {{else}}
 
     <div class="scene-controls-box">
 
           {{#if (not this.scene.completed)}}
-
+ 
             <PoseOrder @poseOrder={{this.scene.pose_order}} @playerName={{this.playerName}} />
-
+             
              <MarkdownEditor @text={{this.scene.draftPose}} @rows={{6}} class="scene-pose-box" @onEnter={{action "addPose" this.poseType.id}} />
            {{/if}}
-
+   
 
        <div class="scene-controls">
          <div class="col col-sm-6 col-xs-12 scene-controls-right">
-             {{#if (and (not this.scene.completed) (not this.scene.reload_required))}}
+             {{#if (and (not this.scene.completed) (not this.scene.reload_required))}} 
 
              <div class="pose-buttons">
                  <button {{action 'addPose' this.poseType.id}} class="btn btn-primary">Add {{this.poseType.title}}</button>
@@ -153,31 +153,31 @@
                  <button {{action 'loadLastPose'}} class="btn btn-secondary">
                    <TooltipIcon @position="right" @message="Reload Last" @icon="fa fa-history" />
                  </button>
-
+                 
                  {{#if this.txtExtraInstalled}}
                    <LiveSceneTxt @scenePose={{this.scene.draftPose}} @scene={{this.scene}} />
                  {{/if}}
-
+                 
              <LiveSceneCustomScenepose @scenePose={{this.scene.draftPose}} @scene={{this.scene}} />
              </div>
-
+                
              <div class="scene-pose-select">
                  <PowerSelect @selected={{this.poseType}} @options={{this.poseTypes}} @searchField="title" @onChange={{action "poseTypeChanged"}} as |poseType|>
                      {{poseType.title}}
                  </PowerSelect>
              </div>
-
-
+                
+             
              {{/if}}
-
+            
          </div>
-
+                
         {{#if (not this.scene.reload_required)}}
          <div class="col col-sm-6 col-xs-12 scene-controls-left">
-
+                
              <div class="scene-dropdowns">
              {{#if (not this.scene.completed)}}
-
+             
              <DropdownMenu @id="playMenu" @title="Play"  @dropup={{true}} class="scene-menu">
                {{#if this.scene.can_edit}}
                    <li><a href="#" {{action (mut this.selectLocation) true}} class="dropdown-item">Change Location</a></li>
@@ -187,19 +187,19 @@
                <LiveScenePlaces @scene={{this.scene}} />
 
               <li><hr role="separator" class="dropdown-divider"></li>
-
+      
                {{#if this.scene.fs3_enabled}}
                    <LiveSceneFs3 @abilities={{this.abilities}} @scene={{this.scene}} />
                {{/if}}
-
+               
                {{#if this.cookiesExtraInstalled}}
                  <LiveSceneCookies @scene={{this.scene}} />
-               {{/if}}
-
+               {{/if}}      
+               
                {{#if this.rpgExtraInstalled}}
                  <RpgLiveScene @scene={{this.scene}} />
                {{/if}}
-
+               
                {{#if this.fateExtraInstalled}}
                  <LiveSceneFate @scene={{this.scene}} />
                {{/if}}
@@ -208,35 +208,36 @@
                {{#if this.diceExtraInstalled}}
                <LiveSceneDice @scene={{this.scene}} />
                {{/if}}
-
-               <LiveSceneCustomPlay @scene={{this.scene}} @abilities={{this.abilities}} @spells={{this.spells}}/>
-
+            
+               <LiveSceneCustomPlay @scene={{this.scene}} @abilities={{this.abilities}} />
+                 
              </DropdownMenu>
-
-             {{/if}}
+             
+             {{/if}}                          
 
              {{#if this.scene.fs3combat_enabled}}
                {{#if this.scene.combat}}
-
+               
                  <DropdownMenu @id="combatMenu" @title="Combat"  @dropup={{true}} class="scene-menu">
                      <LiveSceneFs3combat @scene={{this.scene}} />
                  </DropdownMenu>
-
+               
                {{/if}}
              {{/if}}
+             
 
              {{#if this.scene.can_edit}}
                <DropdownMenu @id="manageMenu" @title="Manage" @dropup={{true}} class="scene-menu">
                      <li><LinkTo @route="scene-edit" @model={{this.scene.id}} class="dropdown-item">Edit Scene</LinkTo></li>
                      {{#if (not this.scene.completed)}}
-                         <li><a href="#" {{action 'changeSceneStatus' 'stop'}} class="dropdown-item">Stop Scene</a></li>
+                         <li><a href="#" {{action 'changeSceneStatus' 'stop'}} class="dropdown-item">Stop Scene</a></li> 
                      {{else}}
-                         <li><a href="#" {{action 'changeSceneStatus' 'restart'}} class="dropdown-item">Restart Scene</a></li>
-                         <li><a href="#" {{action 'changeSceneStatus' 'share'}} class="dropdown-item">Share Scene</a></li>
-                         <li><a href="#" {{action 'collapseScene'}} class="dropdown-item">Collapse Scene Poses</a></li>
+                         <li><a href="#" {{action 'changeSceneStatus' 'restart'}} class="dropdown-item">Restart Scene</a></li> 
+                         <li><a href="#" {{action 'changeSceneStatus' 'share'}} class="dropdown-item">Share Scene</a></li> 
+                         <li><a href="#" {{action 'collapseScene'}} class="dropdown-item">Collapse Scene Poses</a></li> 
                          {{#if this.scene.can_delete}}
                              <li><hr role="separator" class="dropdown-divider"></li>
-                             <li><a href="#" {{action (mut this.confirmDeleteScene) true}} class="dropdown-item">Delete Scene</a></li>
+                             <li><a href="#" {{action (mut this.confirmDeleteScene) true}} class="dropdown-item">Delete Scene</a></li> 
                          {{/if}}
                      {{/if}}
                </DropdownMenu>
@@ -245,13 +246,13 @@
 
              <DropdownMenu @id="otherMenu" @title="Other" @dropup={{true}} class="scene-menu">
                {{#if this.scene.can_edit}}
-                   <li><LinkTo @route="scene-download" @model={{this.scene.id}} class="dropdown-item">Download Scene</LinkTo></li>
+                   <li><LinkTo @route="scene-download" @model={{this.scene.id}} class="dropdown-item">Download Scene</LinkTo></li> 
                    <li><a href="#" {{action (mut this.confirmReportScene) true}} class="dropdown-item">Report Scene</a></li>
                {{/if}}
              </DropdownMenu>
-
+                     
              </div>
-
+             
              <div class="scene-char-select" >
                  <PowerSelect @selected={{this.scene.poseChar}} @options={{this.scene.poseable_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
                      <CharIconTiny @char={{poseChar}} />
@@ -259,11 +260,11 @@
              </div>
          </div>
          {{/if}}
-
+         
        </div>
-     </div>
-
-    {{/if}}
+     </div>        
+     
+    {{/if}}          
 
     <FlashMessages />
 
@@ -273,16 +274,16 @@
     <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDeleteScenePose}} @onSubmit={{action "deleteScenePose"}} @onHide={{action (mut this.confirmDeleteScenePose) false}}>
       You're about to delete this scene pose. This cannot be undone.  Are you sure?
     </BsModalSimple>
-
+    
     <BsModalSimple @title="Confirm Report" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmReportScene}} @onSubmit={{action "reportScene"}} @onHide={{action (mut this.confirmReportScene) false}}>
       <p>You can bring this cene to the game admin's attention - along with an automatic, verified log of the scene (including OOC chat).  </p>
-
+      
       <p><b>Reason for Report:</b></p>
-
+      
       <Textarea @value={{this.reportReason}} cols="40" rows={{5}} />
-
+      
     </BsModalSimple>
-
+    
     <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDeleteScene}} @onSubmit={{action "deleteScene"}} @onHide={{action (mut this.confirmDeleteScene) false}}>
         You're about to delete this scene. This cannot be undone.  Are you sure?
     </BsModalSimple>
@@ -296,14 +297,14 @@
        <b>Custom Location:</b> <Input @type="text" size={{25}} id="newLocation" @enter={{action "changeLocation"}} @value={{this.newLocation}} />
          </p>
     </BsModalSimple>
-
+    
     <BsModalSimple @title="Manage Pose Order" @closeTitle="Cancel" @size={{null}} @fade={{true}} @open={{this.managePoseOrder}} @onHide={{action (mut this.managePoseOrder) false}}>
-
+        
         <table>
         {{#each this.scene.pose_order as |po|}}
         <tr>
         <td>
-        {{po.name}}
+        {{po.name}} 
         </td>
         <td>
            <a href="#" {{action 'dropPoseOrder' po.name}}> <TooltipIcon @position="left" @message="Skip Turn" @icon="fa fa-times-circle" /> </a>
@@ -311,9 +312,9 @@
         </tr>
         {{/each}}
       </table>
-
+      
       <br>
-
+      
       {{#if (eq this.scene.pose_order_type '3-per')}}
         Switch to regular pose order: <a href="#" {{action 'switchPoseOrderType' 'normal'}}>
           <TooltipIcon @position="left" @message="Regular Order" @icon="fa fa-user" /></a>
@@ -323,15 +324,15 @@
         </a>
       {{/if}}
     </BsModalSimple>
-
+    
     <BsModalSimple @title="Character Card" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{this.characterCard}} @onHide={{action (mut this.characterCard) false}}>
-
+      
       {{#if this.scene.use_custom_char_cards}}
         <CharCardCustom @char={{this.characterCardInfo}} />
       {{else}}
         <CharCard @char={{this.characterCardInfo}} />
       {{/if}}
-
+      
     </BsModalSimple>
-
+          
 {{/if}}

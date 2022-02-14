@@ -14,10 +14,10 @@
   {{else}}
           <a href="#" {{action "pauseScroll"}}><i class="fas fa-pause"></i> Pause Scrolling</a>
   {{/if}}
-</div>
-
+</div>  
+  
 <div id="channel-info" class="card-collapse collapse">
-
+  
   <div class="card card-default">
     <div class="card-body">
 
@@ -25,9 +25,9 @@
         {{#if this.channel.desc}}
         <p>{{this.channel.desc}}</p>
         {{/if}}
-
+        
         <p><b>Who's On</b></p>
-
+        
       {{#each this.channel.who as |who|}}
         <CharIconInline @char={{who}} />
         {{#if who.muted}}<i class="fa fa-microphone-slash"></i>{{/if}}
@@ -55,19 +55,19 @@
    <div class="hint float-end">
          <div class="timestamp-tip">{{message.timestamp}}</div>
    </div>
-
-    <div class="scene-pose-header">
+ 
+    <div class="scene-pose-header">		
       <LinkTo @route="char" @model="{{message.author.name}}" target="_blank">
           {{#if message.author.icon}}
           <img alt="{{message.author.name}}'s icon" class="small-profile-icon <IconClass />" src="/game/uploads/{{message.author.icon}}" >
           {{else}}
           <img alt="{{message.author.name}}'s icon" class="small-profile-icon <IconClass />" src="/game/uploads/theme_images/noicon.png" >
           {{/if}}
-
-          {{message.author.name}}
+          
+          {{message.author.name}} 
       </LinkTo>
       </div>
-
+      
      <AnsiFormat @text={{message.message}} />
  {{/each}}
  </div>
@@ -90,13 +90,13 @@
          <button class="btn-primary btn" {{action "send"}}>Send Message</button>
        {{/if}}
     </div>
-
+ 
     <div class="col col-sm-6 col-xs-12 scene-controls-left">
-
-
-
+      
+      
+      
       <div class="scene-dropdowns">
-
+        
         <DropdownMenu @id="chatMenu" @title="Chat Menu" @dropup={{true}} class="chat-menu">
           {{#if this.channel.is_page}}
             {{#if this.channel.is_hidden}}
@@ -105,7 +105,7 @@
               <li><a href="#" {{action "hidePage" true}} class="dropdown-item">Hide Conversation</a></li>
             {{/if}}
             <li><a href="#" {{action (mut this.showPageRename) true}} class="dropdown-item">Rename Conversation</a></li>
-
+    
           {{else}}
             <li><a href="#" {{action "leaveChannel"}} class="dropdown-item">Leave Channel</a></li>
             {{#if this.channel.muted}}
@@ -115,11 +115,11 @@
             {{/if}}
           {{/if}}
           <li><a href="#" {{action (mut this.showReport) true}} class="dropdown-item">Report Chat</a></li>
-          <li><a href="#" {{action "download"}} class="dropdown-item">Download Chat</a></li>
+          <li><a href="#" {{action "download"}} class="dropdown-item">Download Chat</a></li>  
         </DropdownMenu>
-
+        
       </div>
-
+ 
       <div class="scene-char-select">
         <PowerSelect @selected={{this.channel.poseChar}} @options={{this.channel.poseable_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
             <CharIconTiny @char={{poseChar}} />
@@ -127,24 +127,24 @@
       </div>
     </div>
   </div>
-
+          
 
 <div class="clearfix"></div>
 
 {{else}}
 
 <div class="alert alert-warning">You are not on this channel.</div>
-
+   
 {{/if}}
 
     <FlashMessages />
 
 
 <BsModalSimple @title="Report Chat" @closeTitle="Cancel" @submitTitle="Report" @size={{null}} @fade={{true}} @open={{this.showReport}} @onSubmit={{action "reportChat"}} @onHide={{action (mut this.showReport) false}}>
-
+    
     <p>Enter a reason in the text box and select a starting message.  All messages after that one will be included in the report.</p>
     <p><Input @type="text" size={{50}} @value={{this.reportReason}} /></p>
-
+    
     <div class="chat-report">
     <table>
     {{#each this.channel.messages as |message|}}
@@ -155,15 +155,15 @@
     {{/each}}
     </table>
     </div>
-
+    
 </BsModalSimple>
 
 
 
 <BsModalSimple @title="Rename Conversation" @closeTitle="Cancel" @submitTitle="Save" @size={{null}} @fade={{true}} @open={{this.showPageRename}} @onSubmit={{action "renamePage"}} @onHide={{action (mut this.showPageRename) false}}>
-
+    
     <p>Enter a new title for this conversation. Leave blank to restore the default title.</p>
     <p><Input @type="text" size={{50}} @value={{this.newPageTitle}} /></p>
-
+    
 </BsModalSimple>
 {{/if}}

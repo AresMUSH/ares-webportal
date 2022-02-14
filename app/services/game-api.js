@@ -7,7 +7,7 @@ export default Service.extend(AresConfig, {
     flashMessages: service(),
     session: service(),
     router: service(),
-
+    
     portalUrl() {
       var base;
       var protocol = aresconfig.use_https ? 'https' : 'http';
@@ -19,7 +19,7 @@ export default Service.extend(AresConfig, {
       }
       return base;
     },
-
+    
     serverUrl(route) {
         var base;
         var protocol = aresconfig.use_https ? 'https' : 'http';
@@ -30,7 +30,7 @@ export default Service.extend(AresConfig, {
           else {
             base = `${protocol}://${aresconfig.host}:${aresconfig.web_portal_port}/api`;
           }
-        }
+        } 
         else {
           base = `${protocol}://${aresconfig.host}:${aresconfig.api_port}`;
         }
@@ -40,7 +40,7 @@ export default Service.extend(AresConfig, {
             return base;
         }
     },
-
+    
     reportError(error) {
       try {
         if (error.message === 'TransitionAborted') {
@@ -48,14 +48,14 @@ export default Service.extend(AresConfig, {
         }
         console.log(error);
         let err = new Error();
-        $.post(this.serverUrl("request"),
+        $.post(this.serverUrl("request"), 
                 {
                     cmd: 'webError',
                     args: { error: `${error.message} : ${err.stack}` },
                     api_key: aresconfig.api_key
                 });
                 this.router.transitionTo('error');
-      } catch(ex) {
+      } catch(ex) { 
         try {
           this.router.transitionTo('error');
         }
@@ -64,9 +64,9 @@ export default Service.extend(AresConfig, {
         }
       }
     },
-
+    
     request(cmd, args, allowEpicFail = false) {
-     return $.post(this.serverUrl("request"),
+     return $.post(this.serverUrl("request"), 
         {
             cmd: cmd,
             args: args,
@@ -92,7 +92,7 @@ export default Service.extend(AresConfig, {
           }
         });
     },
-
+    
     requestOne(cmd, args = {}, transitionToOnError = 'home', allowEpicFail = false) {
         return this.request(cmd, args, allowEpicFail).then((response) => {
           if (!response) {
@@ -109,7 +109,7 @@ export default Service.extend(AresConfig, {
         });
     },
 
-    requestMany(cmd, args = {}, transitionToOnError = 'home', allowEpicFail = false) {
+    requestMany(cmd, args = {}, transitionToOnError = 'home', allowEpicFail = false) {    
         return this.request(cmd, args, allowEpicFail).then((response) => {
           if (!response) {
             this.reportError({ message: `No response from game for ${cmd}.` });
@@ -123,6 +123,6 @@ export default Service.extend(AresConfig, {
             }
             return response.map(r => EmberObject.create(r));
         });
-    }
-
+    }    
+    
 });

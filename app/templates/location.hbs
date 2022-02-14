@@ -3,21 +3,7 @@
 
 <AnsiFormat @text={{this.model.descs.current}} />
 
-{{#if this.model.weather}}
-  <div class="row weather">
-    <div class="col col-xs-2">
-      <img src={{this.model.weather_icon}} style="padding:0px;">
-    </div>
-    <div class="col col-xs-9">
-      <AnsiFormat @text={{this.model.weather}} />
-    </div>
-  </div>
-{{/if}}
-
 {{#each this.model.descs.details as |detail|}}
-
-
-
 <p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
 {{/each}}
 
@@ -43,7 +29,7 @@
   {{/each}}
 </ul>
 
-
+    
 <p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
 
 <div class="action-buttons">
@@ -52,3 +38,5 @@
   {{/if}}
   <LinkTo @route="scene-create" @query={{hash location=this.model.name_and_area}} class="btn btn-primary">Start Scene Here</LinkTo>
 </div>
+
+

@@ -18,7 +18,7 @@
     </a>
   </li>
   {{/each}}
-
+  
 </ul>
 
 <div class="tab-content">
@@ -28,7 +28,7 @@
     <div id="{{char.name}}" class="tab-pane fade show {{if (eq index 0) 'active' }}">
       <NotificationList @notices={{char.notices}} @char={{char}} />
     </div>
-
+  
 {{/each}}
 
 </div>

@@ -10,10 +10,6 @@
  <LinkTo @route="scene" @model={{this.change.data.id}}>{{this.change.message}}</LinkTo>
 {{else if (eq this.change.type 'plot')}}
  <LinkTo @route="plot" @model={{this.change.data.id}}>{{this.change.message}}</LinkTo>
-{{else if (eq change.type 'creature')}}
-  <LinkTo @route="creature" @model={{this.change.data.id}}>{{this.change.message}}</LinkTo>
-{{else if (eq change.type 'portal')}}
-  <LinkTo @route="portal" @model={{this.change.data.id}}>{{this.change.message}}</LinkTo>
 {{else}}
  {{this.change.message}}
 {{/if}}

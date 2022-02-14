@@ -6,14 +6,14 @@
     {{#if this.char.id}}
     <LinkTo @route="char" @model={{this.char.name}} target="_blank">View Full Profile</LinkTo>
     {{/if}}
-
-  </div>
+    
+  </div>  
   <div class="col col-8">
     {{#if (not this.char.is_ooc)}}
       {{#each this.char.demographics as |demo|}}
       <div class="row">
           <div class="col col-3">
-            <b>{{demo.name}}</b>
+            <b>{{demo.name}}</b> 
           </div>
           <div class="col col-9">
             {{demo.value}}
@@ -24,24 +24,24 @@
       No demographics available.  Try reloading the scene page.
       {{/if}}
     {{/if}}
-
+    
     {{#if this.char.status_message}}
     <br>
     <div class="alert alert-info">
       {{this.char.status_message}}
     </div>
     {{/if}}
-
-
+    
+    
   </div>
 </div>
 
-<hr>
+<hr>    
 
 {{#if this.char.description}}
 <AnsiFormat @text={{this.char.description}} />
 {{/if}}
-
+    
 <hr>
 
 {{#if this.char.fs3}}

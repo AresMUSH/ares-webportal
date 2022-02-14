@@ -3,167 +3,167 @@
 
 <div class="form-group row">
     <div class="col-sm-3">
-            <b>Action:</b>
+            <b>Action:</b> 
     </div>
     <div class="col-sm-9">
-
+        
             <PowerSelect @selected={{this.model.action}} @options={{this.model.options.actions}} @onChange={{action "actionChanged"}} as |act|>
               {{act}}
             </PowerSelect>
             <br>
-            <b>Action Args:</b>
-            <TooltipIcon @position="right" @message="Enter targets or other options for your action, like *stone slam* or *minor heal/name* or *name>called:head*." @icon="fa fa-question-circle" />
+            <b>Action Args:</b> 
+            <TooltipIcon @position="right" @message="Enter targets or other options for your action, like Dummy/burst,called:head." @icon="fa fa-question-circle" />
             <Input @type="text" size={{25}} id="actionArgs" @value={{this.model.action_args}} />
-
+            
             <p>
             <b>Available Targets:</b>
             <TooltipIcon @position="right" @message="Click a target to add them to your action args list." @icon="fa fa-question-circle" />
-
+            
             {{#each this.model.options.targets as |target|}}
               <a href="#" {{action 'addTarget' target}}>{{target}}</a>
             {{/each}}
             </p>
-
+            
     </div>
-
+ 
 </div>
 
 <div class="form-group row">
     <div class="col-sm-3">
-            <b>Team:</b>
+            <b>Team:</b> 
     </div>
     <div class="col-sm-9">
-
+        
             <PowerSelect @selected={{this.model.team}} @options={{teams}} @onChange={{action "teamChanged"}} as |team|>
               {{team}}
             </PowerSelect>
-
+            
     </div>
-
+ 
 </div>
 
 <div class="form-group row">
     <div class="col-sm-3">
-            <b>Stance:</b>
+            <b>Stance:</b> 
     </div>
     <div class="col-sm-9">
-
+        
             <PowerSelect @selected={{this.model.stance}} @options={{this.model.options.stances}} @onChange={{action "stanceChanged"}} as |stance|>
               {{stance}}
             </PowerSelect>
-
+            
     </div>
-
+ 
 </div>
 
 
 <div class="form-group row">
     <div class="col-sm-3">
-            <b>Weapon:</b>
+            <b>Weapon:</b> 
     </div>
     <div class="col-sm-9">
-
+        
             <PowerSelect @selected={{this.model.weapon}} @options={{this.model.options.weapons}} @onChange={{action "weaponChanged"}} as |weapon|>
               {{weapon}}
             </PowerSelect>
-
+            
     </div>
-
+ 
 </div>
 
 <div class="form-group row">
     <div class="col-sm-3">
-            <b>Weapon Specials:</b>
+            <b>Weapon Specials:</b> 
     </div>
     <div class="col-sm-9">
-
+        
             {{#each this.model.weapon_specials as |spec|}}
-
+      
                 <span class="text">&nbsp; {{spec.name}}:</span>
-                <Input @type="checkbox" @checked={{spec.selected}} />
-
+                <Input @type="checkbox" @checked={{spec.selected}} /> 
+          
 
             {{/each}}
-
+            
     </div>
-
+ 
 </div>
 
-
+     
 
 <div class="form-group row">
     <div class="col-sm-3">
-            <b>Armor:</b>
+            <b>Armor:</b> 
     </div>
     <div class="col-sm-9">
-
+        
             <PowerSelect @selected={{this.model.armor}} @options={{this.model.options.armor}} @onChange={{action "armorChanged"}} as |armor|>
               {{armor}}
             </PowerSelect>
-
+            
     </div>
-
+ 
 </div>
 
 <div class="form-group row">
     <div class="col-sm-3">
-            <b>Armor Specials:</b>
+            <b>Armor Specials:</b> 
     </div>
     <div class="col-sm-9">
-
+        
             {{#each this.model.armor_specials as |spec|}}
-
+      
                 <span class="text">&nbsp; {{spec.name}}:</span>
-                <Input @type="checkbox" @checked={{spec.selected}} />
-
+                <Input @type="checkbox" @checked={{spec.selected}} /> 
+          
 
             {{/each}}
-
+            
     </div>
-
+ 
 </div>
 
-<!-- <div class="form-group row">
+<div class="form-group row">
     <div class="col-sm-3">
-            <b>Vehicle:</b>
+            <b>Vehicle:</b>           
             <TooltipIcon @position="right" @message="Enter a vehicle type to get in your own vehicle, or a character name to get into theirs." @icon="fa fa-question-circle" />
 
     </div>
     <div class="col-sm-9">
-
+        
             <Input @type="text" size={{25}} id="vehicleName" @value={{this.model.vehicle}} />
             <br>
             <b>Passenger Type:</b> <PowerSelect @selected={{this.model.passenger_type}} @options={{passengerTypes}} @onChange={{action "passengerTypeChanged"}} as |passengerType|>
               {{passengerType}}
             </PowerSelect>
-
-
+            
+            
     </div>
-
-</div> -->
+ 
+</div>
 
 
 {{#if this.model.npc_skill}}
 
 <div class="form-group row">
     <div class="col-sm-3">
-            <b>NPC Skill:</b>
+            <b>NPC Skill:</b> 
     </div>
     <div class="col-sm-9">
-
+        
             <PowerSelect @selected={{this.model.npc_skill}} @options={{this.model.options.npc_skills}} @onChange={{action "npcChanged"}} as |npc|>
               {{npc}}
             </PowerSelect>
-
+            
     </div>
-
+ 
 </div>
 
 {{/if}}
-
+    
 <div class="action-buttons">
 
-  <LinkTo @route="combat" @model={{this.model.combat}} class="btn btn-secondary">Cancel</LinkTo>
+  <LinkTo @route="combat" @model={{this.model.combat}} class="btn btn-secondary">Cancel</LinkTo>  
   <button class="btn btn-warning" {{action (mut confirmRemoveCombatant) true}} >Remove</button>
   <button class="btn btn-primary" {{action 'save'}} >Save</button>
 
@@ -171,10 +171,10 @@
 
 <FlashMessages />
 
-
+    
 
 <BsModalSimple @title="Confirm Remove" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmRemoveCombatant}} @onSubmit={{action "removeCombatant"}} @onHide={{action (mut confirmRemoveCombatant) false}}>
     This will remove them from combat.  Are you sure?
-  </BsModalSimple>
+  </BsModalSimple>   
 
 {{outlet}}

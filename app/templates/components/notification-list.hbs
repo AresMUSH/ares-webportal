@@ -10,7 +10,7 @@
     <td>{{notification.timestamp}}</td>
     <td><AnsiFormat @text={{notification.message}}/></td>
     <td>
-
+    
       <div class="notification-controls">
         {{#if (eq notification.type 'mail')}}
           <LinkTo @route="mail-message" @model={{notification.reference_id}}>
@@ -44,27 +44,15 @@
           <LinkTo @route="char" @model={{this.char.name}}>
             <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
           </LinkTo>
-        {{else if (eq notification.type 'comp')}}
-          <LinkTo @route="char" @model={{this.char.name}}>
-            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-          </LinkTo>
-        {{else if (eq notification.type 'potion')}}
-          <LinkTo @route="char" @model={{this.char.name}}>
-            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-          </LinkTo>
-        {{else if (eq notification.type 'item')}}
-          <LinkTo @route="char" @model={{this.char.name}}>
-            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-          </LinkTo>
         {{/if}}
-
+      
         {{#if notification.is_unread}}
         <a href="#" {{action "markRead" notification false}}>
           <TooltipIcon @position="left" @message="Mark Read" @icon="fa fa-ban" />
         </a>
         {{else}}
         <a href="#" {{action "markRead" notification true}}>
-          <TooltipIcon @position="left" @message="Mark Unread" @icon="fa fa-flag" />
+          <TooltipIcon @position="left" @message="Mark Unread" @icon="fa fa-flag" />  
         </a>
         {{/if}}
       </div>

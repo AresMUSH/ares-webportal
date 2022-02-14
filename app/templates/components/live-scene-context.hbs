@@ -1,7 +1,7 @@
 <div class="play-scene-context-wrap">
     <a data-bs-toggle="collapse" href="#scene-context" class="play-scene-context-prompt">
     {{this.scene.location.name}} - {{this.scene.icdate}}
-
+    
     <TooltipIcon @position="right" @message="Expand scene details." @icon="fa fa-caret-square-down" />
    </a>
 
@@ -11,41 +11,30 @@
       <div class="card-body">
 
           <p><b>{{this.scene.location.name}}</b></p>
-
+        
           {{#if this.scene.summary}}
           <p> <AnsiFormat @text={{this.scene.summary}} /> </p>
           <hr>
-          {{/if}}
+          {{/if}}        
 
           {{#if this.scene.content_warning}}
           <div class="alert alert-danger"><b>Content Warning:</b> {{this.scene.content_warning}}</div>
           {{/if}}
-
+    
           {{#if this.scene.location.description}}
           <AnsiFormat @text={{this.scene.location.description}} />
           {{/if}}
-
-          {{#if this.scene.location.weather}}
-            <div class="row weather">
-              <div class="col col-xs-2">
-                <img src={{this.scene.location.weather_icon}} style="padding:0px;">
-              </div>
-              <div class="col col-xs-9">
-                <AnsiFormat @text={{this.scene.location.weather}} />
-              </div>
-            </div>
-          {{/if}}
-
+    
           {{#each this.scene.location.details as |detail|}}
           <p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
           {{/each}}
-
+        
           {{#if this.scene.location.scene_set}}
           <div class="scene-set-pose">
             <AnsiFormat @text={{this.scene.location.scene_set}} />
           </div>
           {{/if}}
-
+        
           <div class="icon-row scene-participants">
           {{#each this.scene.participants as |who|}}
             <CharIconInline @char={{who}} />
@@ -53,11 +42,11 @@
           </div>
 
           <hr>
-
+        
           <ScenePrivacyTag @scene={{this.scene}} />
           <ScenePacingTag @scene={{this.scene}} />
           <SceneTypeTag @scene={{this.scene}} />
-
+        
           {{#if this.scene.limit}}
           <p><b>Notes:</b> {{this.scene.limit}}</p>
           {{/if}}

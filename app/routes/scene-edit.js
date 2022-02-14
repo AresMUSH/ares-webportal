@@ -7,17 +7,15 @@ import RSVP from 'rsvp';
 
 export default Route.extend(AuthenticatedRoute, RouteResetOnExit, {
     gameApi: service(),
-
+        
     model: function(params) {
         let api = this.gameApi;
-
+        
         return RSVP.hash({
              scene:  api.requestOne('scene', { id: params['id'], edit_mode: true  }),
              sceneOptions: api.requestOne('sceneOptions'),
              plots: api.requestMany('plots'),
              characters: api.requestMany('characters', { select: 'include_staff' }),
-             creatures: api.requestMany('creatures'),
-             portals: api.requestMany('portals'),
              scenes: api.requestOne('scenes', { filter: 'Related' })
            })
            .then((model) => EmberObject.create(model));

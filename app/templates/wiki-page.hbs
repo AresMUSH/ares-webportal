@@ -10,14 +10,14 @@
           <i class="fas fa-angle-double-right" aria-hidden="true"></i>
           {{/if}}
           {{#if crumb.url}}
-          <a href="/wiki/{{crumb.url}}">{{crumb.title}}</a>
+          <a href="/wiki/{{crumb.url}}">{{crumb.title}}</a> 
           {{else}}
           {{crumb.title}}
           {{/if}}
         {{/each}}
       </span>
     </div>
-
+    
     <div class="col col-xs-2">
         <a href="#bottom"><i class="fas fa-angle-double-down" aria-hidden="true"></i> Jump to End</a>
     </div>
@@ -34,7 +34,7 @@
 </div>
 
 {{#if this.model.tags}}
-<b>Tags:</b>
+<b>Tags:</b>  
     {{#each this.model.tags as |tag|}}
     <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
     {{/each}}
@@ -47,15 +47,15 @@
         <button class="btn btn-warning" disabled="true">Delete Page</button>
   {{/if}}
       <LinkTo @route="wiki-source" @models={{array this.model.name this.model.current_version_id}} class="btn btn-secondary">Source/History</LinkTo>
-
+      
    {{#if this.model.can_edit}}
-        <LinkTo @route="wiki-edit" @model={{this.model.name}} class="btn btn-primary">Edit</LinkTo>
+        <LinkTo @route="wiki-edit" @model={{this.model.name}} class="btn btn-primary">Edit</LinkTo> 
    {{else}}
       <button class="btn btn-primary" disabled="true">Edit</button>
-   {{/if}}
-
+   {{/if}} 
+   
 </div>
-
+       
 {{#if this.model.lock_info}}
 <div class="alert alert-warning">This page is locked by {{this.model.lock_info.locked_by}}.  Their lock will expire on {{this.model.lock_info.time}} or when they're done editing.</div>
 {{/if}}
@@ -66,7 +66,8 @@
 <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut this.confirmDelete) false}}>
     You're about to delete page {{this.model.heading}}. This cannot be undone.  Are you sure?
   </BsModalSimple>
-
+  
 {{outlet}}
 
     <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+    

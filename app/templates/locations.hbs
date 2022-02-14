@@ -1,7 +1,4 @@
 {{page-title 'Locations'}}
-<h1>Map</h1>
-
-<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1Iw2hd57g__fAY9PugKUXtnTLRSiVzZ3B" width="100%" height="480"></iframe>
 <h1>Locations</h1>
 
 <p>The locations directory allows you to browse locations (aka 'rooms') on the game, organized by 'area'.</p>
@@ -9,12 +6,12 @@
 <a name="top"></a>
 
 <div class="action-buttons">
-  <LinkTo @route="search-locations" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Locations</LinkTo>
+  <LinkTo @route="search-locations" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Locations</LinkTo>  
 </div>
 
 <h2>Area Directory</h2>
 
-
+  
  <ul class="nav nav-tabs" role="tablist">
 
   {{#each this.topLevelAreas as |area index| }}
@@ -31,7 +28,7 @@
 
     <a name="{{area.id}}"></a>
     <AreaDirectory @area={{area}} />
-
+      
   </div>
   {{/each}}
 
@@ -41,7 +38,7 @@
   {{#each this.model.orphan_rooms as |room|}}
   <LinkTo @route="location" @model={{room.id}}>{{room.name}}</LinkTo>
   {{/each}}
-
+  
   </div>
 </div>
 

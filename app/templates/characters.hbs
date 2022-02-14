@@ -2,11 +2,11 @@
 <h1>Characters</h1>
 
 <div class="action-buttons">
-  <LinkTo @route="search-chars"><i class="fa fa-search" aria-hidden="true"></i> Search Characters</LinkTo>
+  <LinkTo @route="search-chars"><i class="fa fa-search" aria-hidden="true"></i> Search Characters</LinkTo>  
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
-
+  
   {{#each this.model.characters.group_names as |group|}}
       <li class="nav-item"><a data-bs-toggle="tab" class="nav-link {{group.active_class}}" href="#{{group.key}}">{{group.name}}</a></li>
   {{/each}}
@@ -21,24 +21,24 @@
 </ul>
 
 <div class="tab-content">
-
+  
   {{#each this.model.characters.groups as |group|}}
 
   <div id="{{group.key}}" class="tab-pane fade show {{group.active_class}}">
 
     {{#each group.subgroups as |subgroup|}}
-
+  
           <CharGroupList @name={{subgroup.name}} @chars={{subgroup.chars}} />
-
+        
     {{/each}}
 
     {{#if group.has_npcs}}
         <CharGroupList @name="NPCs" @chars={{group.npcs}} />
     {{/if}}
-
+                 
   </div>
   {{/each}}
-
+  
   {{#if this.model.game.roster_enabled}}
   <div id="roster" class="tab-pane fade show">
       <h2>Roster</h2>
@@ -49,19 +49,12 @@
 
    <div id="idle" class="tab-pane fade show">
       <CharGroupList @name="" @chars={{this.model.characters.idle}} />
-
-      <a data-bs-toggle="collapse" href="#unplayed"><button class="btn btn-secondary btn-collapse">Unplayed Characters</button></a>
-      <div id="unplayed" class="panel-collapse collapse">
-        <p></p>
-        <p>Characters with five scenes or less.</p>
-        <CharGroupList @name="" @chars={{this.model.characters.unplayed}} />
-      </div>
   </div>
-
+  
    <div id="dead" class="tab-pane fade show">
       <CharGroupList @name="" @chars={{this.model.characters.dead}} />
   </div>
-
+  
   {{#if this.model.characters.unapproved}}
      <div id="unapproved" class="tab-pane fade show">
         <CharGroupList @name="" @chars={{this.model.characters.unapproved}} />
