@@ -1,7 +1,18 @@
 {{page-title 'New Event'}}
 <h1>New Event</h1>
 
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label for="title" class="col-form-label">Organizer:</label>
+    </div>
 
+    <div class="col-sm-9">
+      <PowerSelect @selected={{this.organizer}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "organizerChanged"}} as |char|>
+        {{char.name}}
+      </PowerSelect>
+    </div>
+  </div>
+  
    <div class="form-group row">
     <div class="col-sm-3">
         <label for="title" class="col-form-label">Title:</label>
