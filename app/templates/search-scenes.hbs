@@ -10,6 +10,12 @@
 <a data-bs-toggle="collapse" href="#searchFields" class="btn btn-secondary btn-collapse">Show/Hide Search</a>
 {{/if}}
 
+{{#if this.searchResults.warning}}
+<div class="alert alert-danger">
+  {{this.searchResults.warning}}
+</div>
+{{/if}}
+
 <div id="searchFields" class="card-collapse collapse {{if this.searchResults '' 'show'}}">
 
 <div class="row">
