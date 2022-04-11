@@ -7,9 +7,11 @@ export default Controller.extend(AuthenticatedController, {
     flashMessages: service(),
     router: service(),
     confirmDelete: false,
+    signupAs: null,
   
     resetOnExit: function() {
       this.set('confirmDelete', false);
+      this.set('signupAs', null);
     },
     
     actions: {
@@ -27,7 +29,9 @@ export default Controller.extend(AuthenticatedController, {
         },
         signup: function() {
             let api = this.gameApi;
-            api.requestOne('eventSignup', { event_id: this.get('model.id'), comment: this.get('model.signup_comment') })
+            api.requestOne('eventSignup', { event_id: this.get('model.id'), 
+               comment: this.get('model.signup_comment'), 
+               signup_as: this.get('signupAs.name') })
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -46,6 +50,9 @@ export default Controller.extend(AuthenticatedController, {
                 this.router.transitionTo('events');
                 this.flashMessages.success('Signup canceled.');
             });
-        }
+        },
+        signupAsChanged(alt) {
+          this.set('signupAs', alt);
+        },
     }
 });
