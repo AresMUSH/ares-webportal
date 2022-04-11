@@ -13,6 +13,7 @@ export default Route.extend(RouteResetOnExit, AuthenticatedRoute, {
 
       return RSVP.hash({
            app: this.modelFor('application'),
+           characters: api.requestMany('characters', { select: 'include_staff' }),
            sceneOptions: api.requestOne('sceneOptions')
          })
          .then((model) => EmberObject.create(model));

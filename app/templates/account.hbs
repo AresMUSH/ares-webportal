@@ -132,7 +132,11 @@
     
                 <div class="card-body">
           
-                  Unified Play Enabled <Input @type="checkbox" @checked={{this.model.unified_play_screen}} /> 
+                  <div class="alert alert-info">
+                    Note: This setting applies to all alts on this game.
+                  </div>
+                  
+                  <p>Unified Play Enabled <Input @type="checkbox" @checked={{this.model.unified_play_screen}} /> </p>
 
                 </div>
               </div>
