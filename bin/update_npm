@@ -10,9 +10,9 @@ rm -rf node_modules
 
 . ~/.nvm/nvm.sh
 npm install -g npm
-nvm install 16
-nvm use 16
-npm install -g ember-cli
+nvm install 12
+nvm use 12
+npm install -g ember-cli@3.28.0
 npm install
 
 echo "NPM is updated. You can now start your game like normal."
