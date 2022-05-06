@@ -1,13 +1,16 @@
        <div>
 
           <h3>{{this.title}}</h3>
+
+          <div class="icon-gallery">
          
           {{#each this.chars as |c|}}
-    
-          <div class="profile-gallery">
+            <div class="icon-gallery-item">
               <CharIcon @char={{c}} />
-          </div>
+            </div>
           {{/each}}
+
+          </div>
       
        </div>
 

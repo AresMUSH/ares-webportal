@@ -27,7 +27,7 @@ export default Component.extend({
                 return;
               }
               
-              api.requestOne('learnAbility', { ability: name }, null)
+              api.requestOne('learnAbility', { ability: name, char: this.get('char.name') }, null)
               .then( (response) => {
                   if (response.error) {
                       return;
