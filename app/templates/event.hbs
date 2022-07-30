@@ -71,7 +71,7 @@
   <hr/>
 {{/each}}
 
-{{#if isApproved}}
+{{#if this.isApproved}}
 
   <div class="form-group row">
     <div class="col-sm-3">
@@ -91,7 +91,7 @@
           
           <div class="event-signup-item">
         
-            <Input @type="text" size={{25}} id="signup" @enter={{action "signup"}} @value={{this.model.signup_comment}} @placeholder="Signup Comment" />  
+            <Input @type="text" size={{25}} id="signup" @enter={{action "signup"}} @value={{this.model.signup_comment}} placeholder="Signup Comment" />  
             
           </div>
       
@@ -112,14 +112,14 @@
 
 <div class="action-buttons">
   {{#if this.model.can_manage}}
-      <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
+      <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete</button>
       <LinkTo @route="event-edit" @model={{this.model.id}} class="btn btn-primary">Edit</LinkTo>
   {{/if}}
 </div>
 
 <FlashMessages />
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) false}}>
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut this.confirmDelete) false}}>
     You're about to delete event {{this.model.title}}. This cannot be undone.  Are you sure?
   </BsModalSimple>
   
