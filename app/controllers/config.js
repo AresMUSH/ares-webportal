@@ -29,7 +29,7 @@ export default Controller.extend({
                 return;
             }
             modelConfig[key] = { key: key, lines: 3, value: '', new_value: '' };
-            this.set('model.config', modelConfig);
+            this.set('config', modelConfig);
             this.set('configChanged', !this.configChanged);
         },
         

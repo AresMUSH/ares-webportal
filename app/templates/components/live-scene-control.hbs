@@ -137,7 +137,7 @@
 
           {{#if (not this.scene.completed)}}
  
-            <PoseOrder @poseOrder={{this.scene.pose_order}} @playerName={{this.playerName}} />
+            <PoseOrder @poseOrder={{this.scene.pose_order}} @playerName={{this.playerName}} @poseOrderType={{this.scene.pose_order_type}} />
              
              <MarkdownEditor @text={{this.scene.draftPose}} @rows={{6}} class="scene-pose-box" @onEnter={{action "addPose" this.poseType.id}} />
            {{/if}}

@@ -216,7 +216,7 @@
                <div class="col-sm-9">
                  <div class="scene-char-select" >
                    <PowerSelect @selected={{this.poseChar}} @options={{this.model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
-                       <CharIconTiny @char={{this.poseChar}} />
+                       <CharIconTiny @char={{poseChar}} />
                    </PowerSelect>
                  </div>
                </div> 
