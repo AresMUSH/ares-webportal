@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane" id="magic">
 
-  <div class="chargen-section-title">Schools</div>
+  <div class="chargen-section-title">Magic</div>
   <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.schools_blurb}} /></div>
   <br>
 
@@ -15,15 +15,31 @@
     </div>
   </div>
 
-    <div class="form-group row">
-      <div class="col-sm-3">
-        <b>Mythic School</b>                               
-      </div>
-      <div class="col-sm-9">
-        <PowerSelect @selected={{char.custom.minor_school}} @searchEnabled=true @searchField="value" @options={{char.custom.minor_schools}} @onChange={{action "minorschoolChanged"}} as |school|>
-          {{school}}
-        </PowerSelect>
-      </div>
+
+  <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.schools_blurb}} /></div>
+  <br>
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Spells</b>
+    </div>
+
+    <div class="col-sm-9">
+      <PowerSelectMultiple @selected={{char.custom.starting_spells}} @allowClear=true @options={{char.custom.cg_spells.name}} @searchEnabled=true @searchField="name"  @onChange={{action "spellsChanged"}} as |spell|>
+        {{spell}}
+      </PowerSelectMultiple>
+    </div>
+  </div>
+  
+
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Mythic School</b>                               
+    </div>
+    <div class="col-sm-9">
+      <PowerSelect @selected={{char.custom.minor_school}} @searchEnabled=true @searchField="value" @options={{char.custom.minor_schools}} @onChange={{action "minorschoolChanged"}} as |school|>
+        {{school}}
+      </PowerSelect>
+    </div>
   </div>
 </div>
 
