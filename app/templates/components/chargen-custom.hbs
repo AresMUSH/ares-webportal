@@ -1,7 +1,7 @@
 <div role="tabpanel" class="tab-pane" id="magic">
 
   <div class="chargen-section-title">Magic</div>
-  <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.schools_blurb}} /></div>
+  <div class="cg-tip"><AnsiFormat @text={{char.custom.schools_blurb}} /></div>
   <br>
 
   <div class="form-group row">
@@ -16,7 +16,7 @@
   </div>
 
 
-  <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.schools_blurb}} /></div>
+  <div class="cg-tip"><AnsiFormat @text={{char.custom.schools_blurb}} /></div>
   <br>
   <div class="form-group row">
     <div class="col-sm-3">
@@ -29,7 +29,30 @@
       </PowerSelectMultiple>
     </div>
   </div>
-  
+
+  <div class="chargen-section-title">Mythic</div>
+  <div class="cg-tip"><AnsiFormat @text={{char.custom.mount_blurb}} /></div>
+
+
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Name</b>                               
+    </div>
+    <div class="col-sm-9">
+     <Input @type="text" size={{25}} @value={{char.custom.mount_name}} />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Mythic Type</b>                               
+    </div>
+    <div class="col-sm-9">
+      <PowerSelect @selected={{char.custom.mount_type}} @searchEnabled=true @searchField="value" @options={{char.custom.mount_types}} @onChange={{action "mounttypeChanged"}} as |type|>
+        {{type}}
+      </PowerSelect>
+    </div>
+  </div>
 
   <div class="form-group row">
     <div class="col-sm-3">
@@ -41,6 +64,27 @@
       </PowerSelect>
     </div>
   </div>
+
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Description</b>                               
+    </div>
+    <div class="col-sm-9">
+     <MarkdownEditor @text={{char.custom.mount_desc}} rows={{5}}/>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Short Description</b>                               
+    </div>
+    <div class="col-sm-9">
+     <Input @type="text" size={{100}} @value={{char.custom.mount_shortdesc}} />
+    </div>
+  </div>
+
+
+
 </div>
 
 
