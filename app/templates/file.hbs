@@ -4,7 +4,7 @@
 <img src="/game/uploads/{{this.model.path}}" alt="{{this.model.name}}" class="image-container file-image" >
 
 {{#if this.model.description}}
-  <p>{{this.model.description}}</p>
+  <p><AnsiFormat @text={{this.model.description}} /></p>
 {{/if}}
 
 {{#if this.model.uploaded_by}}
