@@ -28,7 +28,7 @@ export default Controller.extend(AuthenticatedController, {
             }
             else if (file_type == 'code') {
               this.flashMessages.success('File saved! You will need to reload or redploy the plugin/portal for the changes to take effect.');
-              this.router.transitionTo('setup');  
+              this.router.transitionTo('custom-code');  
             }
             else {
               this.flashMessages.success('Config saved! You may need to refresh the page to see the changes.');

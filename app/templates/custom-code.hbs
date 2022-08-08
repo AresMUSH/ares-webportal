@@ -1,0 +1,22 @@
+{{page-title "Game Setup"}}
+<h1>Custom Code Hooks</h1>
+
+<p><a href="https://aresmush.com/tutorials/code/custom-hooks.html" target="_blank">Custom code hooks</a> are special code files built into the core Ares code, which let you extend common pieces of the system while avoiding merge conflicts with core changes.</p>
+
+<div class="alert alert-info">
+Note: These links just let you edit the files. You will still need to reload the appropriate code and/or redeploy the web portal for the changes to take effect.
+</div>
+
+{{#each this.model.codefiles as |section|}}
+
+<h2>{{section.name}}</h2>
+
+<p><a href="{{section.help}}" target="_blank">Tutorial <i class="fa-solid fa-circle-question"></i></a></p>
+
+<ul>
+{{#each section.files as |file|}}
+<li><LinkTo @route="textfile" @models={{array 'code' file}}>{{file}}</LinkTo></li>
+{{/each}}
+</ul>
+
+{{/each}}
