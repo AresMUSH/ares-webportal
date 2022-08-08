@@ -48,7 +48,7 @@ export default Controller.extend(AuthenticatedController, {
                date: this.date,
                time: this.time,
                content_warning: this.content_warning,
-               organizer: this.organizer.name,
+               organizer: this.organizer ? this.organizer.name : "",
                tags: tags,
                description: this.description }, null)
             .then( (response) => {

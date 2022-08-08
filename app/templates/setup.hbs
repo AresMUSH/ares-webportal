@@ -46,4 +46,12 @@
 {{/each}}
 </ul>
 
+
+<h2>Code Files</h2>
+<ul>
+{{#each this.model.codefiles as |file|}}
+<li><LinkTo @route="textfile" @models={{array file.file_type file.name}}>{{file.name}}</LinkTo></li>
+{{/each}}
+</ul>
+
 {{outlet}}
