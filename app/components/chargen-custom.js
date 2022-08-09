@@ -27,7 +27,7 @@ export default Component.extend({
         
     },
     lorehookPrefChanged(val) {
-      this.set('model.char.custom.lore_hook_pref', val);
+      this.set('char.custom.lore_hook_pref', val);
     }
   },
   
