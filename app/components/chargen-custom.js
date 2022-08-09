@@ -25,6 +25,9 @@ export default Component.extend({
     mounttypeChanged(type) {
       this.set('char.custom.mount_type', type);
         
+    },
+    lorehookPrefChanged(val) {
+      this.set('model.char.custom.lore_hook_pref', val);
     }
   },
   
@@ -40,7 +43,7 @@ export default Component.extend({
       mount_name: this.get('char.custom.mount_name'),
       mount_shortdesc: this.get('char.custom.mount_shortdesc'),
       mount_desc: this.get('char.custom.mount_desc'),
-
+      lore_hook_pref: this.get('char.custom.lore_hook_pref')
     };
   }
 });

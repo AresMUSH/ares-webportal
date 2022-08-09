@@ -24,8 +24,8 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelectMultiple @selected={{char.custom.starting_spells}} @allowClear=true @options={{char.custom.cg_spells.name}} @searchEnabled=true @searchField="name"  @onChange={{action "spellsChanged"}} as |spell|>
-        {{spell}}
+      <PowerSelectMultiple @selected={{char.custom.starting_spells}} @allowClear=true @options={{char.custom.cg_spells}} @searchEnabled=true @searchField="name"  @onChange={{action "spellsChanged"}} as |spell|>
+        {{spell.name}} (Level {{spell.level}} {{spell.school}})
       </PowerSelectMultiple>
     </div>
   </div>
@@ -83,7 +83,18 @@
     </div>
   </div>
 
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Lore Hook Preference</b>
+    </div>
+    <div class="col-sm-9">
+      <PowerSelect @selected={{char.custom.lore_hook_pref }} @searchEnabled=true @searchField="value" @options={{char.custom.lore_hook_prefs}} @onChange={{action "lorehookPrefChanged"}} as |pref|>
+        {{pref.value}} - {{pref.desc}}
+      </PowerSelect>
 
+      <div class="cg-tip">{{{ansi-format text=char.custom.lorehook_blurb}}}</div><br>
+    </div>
+  </div>
 
 </div>
 
