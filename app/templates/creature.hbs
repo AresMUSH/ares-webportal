@@ -1,0 +1,140 @@
+{{page-title this.model.creature.name}}
+<h1>{{this.model.creature.name}}</h1>
+<div class="ansi">
+<div class="ooc"> <p><b>This is a GM resource and is for OOC reference only. While some of the information here is ICly known, some of it may not be.</b></p></div>
+
+<LinkTo @route="creatures"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Creatures</LinkTo>
+<div class="action-buttons">
+  {{#link-to 'creature-edit' this.model.creature.id class="btn btn-secondary"}}Edit Creature{{/link-to}}
+</div>
+
+
+
+
+  <div class="row profile-wrap">
+    <div class="row">
+      <div class="col-md-4 col-sm-12 col-xs-12 profile-image-wrap">
+      {{#if this.model.creature.profile_image.name}}
+        <LinkTo @route="file" @models={{array this.model.creature.profile_image.folder creature.profile_image.name}}>
+            <img src="/game/uploads/{{this.model.creature.profile_image.path}}" alt="{{this.model.creature.name}}'s image"  class="profile-image">
+        </LinkTo>
+      {{else}}
+          <!-- <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{creature.name}}'s image"> -->
+      {{/if}}
+      </div>
+
+      <div class="col-md-8 col-sm-12 col-xs-12 profile-demo-wrap info-box">
+        <div class="infobox-heading">
+          <div class="infobox-title-text">
+            {{this.model.creature.name}}
+            <div class="infobox-majorschool">
+              {{#if this.model.creature.major_school}}
+              {{#link-to 'schools' this.model.creature.major_school}}
+              {{this.model.creature.major_school}}
+              {{/link-to}}
+              {{/if}}
+            </div>
+
+            <div class="infobox-subtitle">
+              {{#if this.model.creature.sapient}}
+                Sapient
+              {{else}}
+                Non Sapient
+              {{/if}}
+              <div class="infobox-minorschool">
+                {{#if this.model.creature.minor_school}}
+                {{#link-to 'schools' model.creature.minor_school}}
+                {{this.model.creature.minor_school}}
+                {{/link-to}}
+                {{/if}}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="infobox-body">
+          {{#if this.model.creature.gms}}<i>For more information see {{#each this.model.creature.gms as |gm|}}
+            {{#link-to 'char' gm.name}}{{gm.name}} {{/link-to}}
+          {{/each}} </i><br>{{/if}}
+
+          {{#if this.model.creature.found}}<b>Also found:</b>
+          {{this.model.creature.found}}{{/if}}
+          {{#if model.creature.language}}<b>Language:</b>
+          {{this.model.creature.language}}{{/if}}
+
+        </div>
+      </div>
+
+    </div>
+    <div class="short-desc">
+      <p>{{{ansi-format text=this.model.creature.short_desc}}}</p>
+    </div>
+  </div>
+
+  {{#if this.model.creature.pinterest}}
+
+    <div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="{{this.model.creature.pinterest}}"></a></div>
+  {{/if}}
+
+
+
+
+  {{#if this.model.creature.traits}}
+    <h2>Traits & Description</h2>
+    {{{ansi-format text=this.model.creature.traits}}}
+  {{/if}}
+
+  {{#if this.model.creature.society}}
+    <h2>Society</h2>
+    {{{ansi-format text=this.model.creature.society}}}
+  {{/if}}
+
+  {{#if this.model.creature.magical_abilities}}
+    <h2>Magical Abilities & Spells</h2>
+    {{{ansi-format text=this.model.creature.magical_abilities}}}
+  {{/if}}
+
+  {{#if this.model.creature.plots}}
+    <h2>Plots</h2>
+    <ul>
+      {{#each this.model.creature.plots as |plot|}}
+        <li>{{#link-to 'plot' plot.id}}{{plot.title}} {{/link-to}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+  {{#if this.model.creature.events}}
+    <p><h2>Events</h2>
+    {{{ansi-format text=this.model.creature.events}}}</p>
+  {{/if}}
+
+
+  <div class="card card-default profile-gallery">
+
+  {{#if this.model.creature.display_image_gallery}}
+    {{#each this.model.creature.display_image_gallery as |gallery|}}
+      <LinkTo @route="file" @models={{array gallery.folder gallery.name}}>
+      <img src="/game/uploads/{{gallery.path}}" alt="{{gallery.name}}" >
+      </LinkTo>
+    {{/each}}
+  {{/if}}
+  <div class="clearfix"></div>
+  </div>
+
+
+<h2>Scenes</h2>
+<SceneList @scenes={{this.model.creature.scenes}} @pages={{this.model.creature.scenes.pages}} @sceneTypes={{this.model.sceneOptions.scene_types}} @filter={{filter}} @page={{page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}}  />
+
+
+
+  </div>
+  <div class="row">
+      <div class="col col-xs-12">
+        <LinkTo @route="creatures"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Creatures</LinkTo>
+        <div class="action-buttons">
+          {{#link-to 'creature-edit' this.model.creature.id class="btn btn-secondary"}}Edit Creature{{/link-to}}
+        </div>
+      </div>
+  </div>
+  <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
