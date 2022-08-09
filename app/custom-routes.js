@@ -3,4 +3,13 @@ export default function setupCustomRoutes(router) {
   // For example:
   // router.route('yourroute');
   
+  router.route('creature', { path: '/cryptid/:id' });
+  router.route('creatures', { path: '/cryptids' });
+  router.route('creature-create', { path: '/cryptid/create' });
+  router.route('creature-edit', { path: '/cryptid/:id/edit' });
+  router.route('lore-hooks');
+  router.route('search-spells');
+  router.route('schools', { path: '/schools/:school'});
+  router.route('spells', { path: '/spells'});
+  router.route('spell-fatigue'), { path: '/spell-fatigue'};
 }

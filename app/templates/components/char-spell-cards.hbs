@@ -1,0 +1,34 @@
+<h1>Spells</h1>
+<h2><a href="/wiki/{{char.custom.major_school}}">{{char.custom.major_school}}</a></h2>
+<div class="row">
+  {{#each char.custom.major_spells as |spell|}}
+  <div class="spell-block">
+    <div>{{spell-card spell=spell}}</div>
+    <br>
+  </div>
+  {{/each}}
+</div>
+
+{{#if char.custom.minor_spells}}
+  <h2><a href="/wiki/{{char.custom.minor_school}}">{{char.custom.minor_school}}</a></h2>
+  <div class="row">
+    {{#each char.custom.minor_spells as |spell|}}
+    <div class="spell-block">
+      <div>{{spell-card spell=spell}}</div>
+      <br>
+    </div>
+    {{/each}}
+  </div>
+{{/if}}
+
+{{#if char.custom.other_spells}}
+  <h2>Other Spells</h2>
+  <div class="row">
+    {{#each char.custom.other_spells as |spell|}}
+    <div class="spell-block">
+      <div>{{spell-card spell=spell}}</div>
+      <br>
+    </div>
+    {{/each}}
+  </div>
+{{/if}}

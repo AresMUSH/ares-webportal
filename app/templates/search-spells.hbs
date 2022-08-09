@@ -1,0 +1,148 @@
+{{page-title "Search Spells"}}
+
+<h1>Search Spells</h1>
+
+<SearchBar />
+<hr>
+
+<p>The search will only match spells that contain ALL the specified search criteria.  Searches match whole words unless otherwise specified.  Capitalization doesn't matter.</p>
+
+<hr/>
+
+{{#if this.searchResults}}
+<a data-bs-toggle="collapse" href="#searchFields" class="btn btn-secondary btn-collapse">Show/Hide Search</a>
+{{/if}}
+
+<div id="searchFields" class="card-collapse collapse {{if this.searchResults '' 'show'}}">
+
+<div class="row">
+
+  <div class="col col-xs-3">
+    <label>Name:</label>
+  </div>
+
+  <div class="col col-xs-9">
+    <p><Input @type="text" size={{25}} id="title" @value={{this.searchName}} @enter={{action "search"}} /></p>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <label>Level:</label>
+  </div>
+
+  <div class="col col-xs-9">
+    <p><Input @type="text" size={{25}} id="title" @value={{this.searchLevel}} @enter={{action "search"}} /></p>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <label>School:</label>
+  </div>
+
+
+    <div class="col-sm-9">
+      <p>
+        <PowerSelect @selected={{this.searchSchool}} @options={{this.model.schools}} @searchEnabled=true @searchField="name"  @onChange={{action "schoolChanged"}} as |school|>
+          {{school}}
+        </PowerSelect></p>
+    </div>
+
+
+
+</div>
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <label>Effect:</label>
+  </div>
+
+
+  <div class="col-sm-9">
+    <p><PowerSelect  @selected={{this.searchEffect}} @options={{this.model.effects}} @searchEnabled=true @searchField="name" @onChange={{action "effectChanged"}} as |effect|>
+      {{effect}}
+    </PowerSelect></p>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <label>Damage Type:</label>
+  </div>
+
+
+  <div class="col-sm-9">
+    <p><PowerSelect  @selected={{this.searchDamage}} @options={{this.model.damage}} @searchEnabled=true @searchField="name" @onChange={{action "damageChanged"}} as |damage|>
+      {{damage}}
+    </PowerSelect></p>
+  </div>
+
+</div>
+
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <label>Description:</label>
+  </div>
+
+  <div class="col col-xs-9">
+    <p><Input @type="text" size={{25}} id="title" @value={{this.searchDesc}} @enter={{action "search"}} /></p>
+  </div>
+
+</div>
+
+<div class="row">
+
+  <div class="col col-xs-3">
+        <p><label>Available?</label>
+
+        {{input type="checkbox"  id="available"  checked=this.searchAvailable}}</p>
+
+  </div>
+
+  <div class="col col-xs-3">
+      <p>  <label>Potion?</label>
+
+        {{input type="checkbox"  id="potion"  checked=this.searchPotion}}</p>
+  </div>
+
+  <div class="col col-xs-3">
+      <p>  <label>Line of Sight?</label>
+
+        {{input type="checkbox"  id="los"  checked=this.searchLOS}}</p>
+  </div>
+
+
+</div>
+
+<div class="action-buttons">
+    <button class="btn btn-secondary" {{action 'reset'}}>Reset</button>
+    <button class="btn btn-primary" {{action 'search'}}>Search</button>
+</div>
+
+</div>
+
+<hr/>
+
+<FlashMessages />
+
+{{#if this.searchResults}}
+{{#each this.searchResults as |spell|}}
+  {{spell-card spell=spell}}
+{{/each}}
+
+
+{{else}}
+<p>No search results.</p>
+{{/if}}
+
+{{outlet}}
