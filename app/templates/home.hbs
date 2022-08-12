@@ -1,7 +1,15 @@
 <div class="jumbotron">
+  <AnsiFormat @text={{this.model.game.website_welcome}} />
+
   <img src="/game/uploads/theme_images/jumbotron.png" alt="MUSH Logo" >
 
-  <AnsiFormat @text={{this.model.game.website_welcome}} />
+
+
+  <div class="plot-box">
+    <h3 style="text-align:center; font-variant:small-caps; margin-top:0px;">Current Story</h3>
+    <AnsiFormat @text={{this.model.game.story}} />
+    <p style="text-align:right; font-size: 90%"><a href="/plots">See more story...</a></p>
+  </div>
 
 <hr>
 
@@ -11,9 +19,9 @@
             
             <p>New to MUSHing?  Check out the <a href="http://aresmush.com/mush-101" target="_blank"  rel="nofollow noopener">MUSH 101 Tutorial</a>.</p>
               
-              <p>This is the <b>Web Portal</b>, which lets you interact with the game from a web browser.  You can <LinkTo @route="chargen">create your character</LinkTo>, <LinkTo @route="scenes-live">join scenes</LinkTo>, <LinkTo @route="chat">chat</LinkTo>, view and edit <LinkTo @route="characters">character profiles</LinkTo>, browse the game's <LinkTo @route="wiki">wiki</LinkTo>, read <LinkTo @route="scenes">scene logs</LinkTo> and more!</p>
+              <p>The <b>Web Portal</b> lets you interact with the game from a web browser.  You can <LinkTo @route="chargen">create your character</LinkTo>, <LinkTo @route="scenes-live">join scenes</LinkTo>, <LinkTo @route="chat">chat</LinkTo>, view and edit <LinkTo @route="characters">character profiles</LinkTo>, browse the game's <LinkTo @route="wiki">wiki</LinkTo>, read <LinkTo @route="scenes">scene logs</LinkTo> and more.</p>
             
-            <p>In addition to playing through the web portal, you can point your favorite <a href="https://aresmush.com/clients/" target="_blank" rel="nofollow noopener">MU client</a> at <b>{{this.model.game.host}} port {{this.model.game.port}}</b>, or connect to the game with the <LinkTo @route="client">web client</LinkTo>.</p>
+            <p>You can also point your favorite <a href="https://aresmush.com/clients/" target="_blank" rel="nofollow noopener">MU client</a> at <b>{{this.model.game.host}} port {{this.model.game.port}}</b>, or connect to the game with the <LinkTo @route="client">web client</LinkTo>.</p>
     </div>
             
 </div>        
