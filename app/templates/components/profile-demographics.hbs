@@ -1,5 +1,6 @@
 <div class="row">
-  <div class="col col-12 col-lg-4 profile-image-wrap">
+<div class="col col-12 col-lg-4 profile-image-overlay">
+  <div class="profile-image-wrap">
     {{#if this.char.profile_image.name}}
             <LinkTo @route="file" @models={{array this.char.profile_image.folder this.char.profile_image.name}}>
                 <img src="/game/uploads/{{this.char.profile_image.path}}" alt="{{this.char.name}}'s icon"  class="profile-image" title="{{this.char.profile_image.description}}">
@@ -8,6 +9,7 @@
         <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{this.char.name}}'s icon" >
     {{/if}}
     </div>
+</div>
 
     <div class="col col-12 col-lg-8 profile-demo-wrap">        
 
