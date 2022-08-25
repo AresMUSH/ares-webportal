@@ -136,6 +136,9 @@
 <FlashMessages />
 
 {{#if this.searchResults}}
+
+<p class="search_results">{{this.searchResults.length}} results.</p>
+
 {{#each this.searchResults as |spell|}}
   {{spell-card spell=spell}}
 {{/each}}
