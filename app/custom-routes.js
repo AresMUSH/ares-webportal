@@ -9,7 +9,7 @@ export default function setupCustomRoutes(router) {
   router.route('creature-edit', { path: '/cryptid/:id/edit' });
   router.route('lore-hooks');
   router.route('search-spells');
-  router.route('schools', { path: '/schools/:school'});
+  router.route('school', { path: '/school/:school'});
   router.route('spells', { path: '/spells'});
   router.route('spell-fatigue'), { path: '/spell-fatigue'};
 }
