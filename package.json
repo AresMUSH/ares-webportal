@@ -22,7 +22,7 @@
     "test:ember": "ember test"
   },
   "dependencies": {
-    "@babel/core": "^7.15.0",
+    "@babel/core": "^7.18.13",
     "@fortawesome/fontawesome-free": "^6.1.2",
     "@popperjs/core": "^2.9.3",
     "dayjs": "^1.10.6",
