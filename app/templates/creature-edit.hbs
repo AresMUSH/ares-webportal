@@ -9,8 +9,6 @@
         <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#images">Images</a></li>
     </ul>
 
-
-
     <div class="tab-content">
 
       <div id="general" class="tab-pane fade show active">
@@ -22,6 +20,7 @@
           <div class="col-sm-9">
             <p><Input @type="text" @size={{25}} @value={{this.model.creature.name}}  /></p>
           </div>
+
           <div class="col-sm-3">
             <b>GMs</b>
           </div>
@@ -32,36 +31,10 @@
             </PowerSelectMultiple></p>
           </div>
 
-          <div class="col-sm-3">
-            <b>Major School</b>
-          </div>
 
-          <div class="col-sm-9">
-            <p><PowerSelect @selected={{this.model.creature.major_school}} @options={{this.model.schools}} @onChange={{action "majorschoolChanged"}} as |school|>
-              {{school}}
-            </PowerSelect></p>
-          </div>
 
           <div class="col-sm-3">
-            <b>Minor School</b>
-          </div>
-
-          <div class="col-sm-9">
-            <p><PowerSelect @selected={{this.model.creature.minor_school}} @options={{this.model.schools}} @onChange={{action "minorschoolChanged"}} as |school|>
-              {{school}}
-            </PowerSelect></p>
-          </div>
-
-          <div class="col-sm-3">
-            <b>Language(s):</b>
-          </div>
-
-          <div class="col-sm-9">
-            <p><Input @type="text" @size={{25}} @value={{this.model.creature.language}}  /></p>
-          </div>
-
-          <div class="col-sm-3">
-            <b>Also Found:</b>
+            <b>Found:</b>
           </div>
 
           <div class="col-sm-9">
@@ -77,39 +50,41 @@
           </div>
 
           <div class="col col-xs-3">
-            <p><label>Sapient?</label>            </p>
+            <p><label><b>Sapient?</b></label>            </p>
           </div>
 
           <div class="col-sm-9">
             <p><Input @type="checkbox" @checked={{this.model.creature.sapient}} /></p>
           </div>
 
-
-
-
+        
           <div class="col-sm-3">
-
+            <b>Summary*</b>
           </div>
 
           <div class="col-sm-9">
-            <b>Summary</b>
-            <p><MarkdownEditor @text={{this.model.creature.edit_short_desc}}  rows={{5}} /></p>
+              <MarkdownEditor @text={{this.model.creature.edit_short_desc}}  rows={{5}} />
           </div>
-
         </div>
       </div>
 
+
+
+
       <div id="traits" class="tab-pane fade show">
-        <b>Traits & Description</b>
+        <b>Physical Traits & Description</b>
         <MarkdownEditor @text={{this.model.creature.edit_traits}} />
 
-        <b>Magical Abilities & Spells<</b>
+        <b>Magical Abilities & Preferences<</b>
         <MarkdownEditor @text={{this.model.creature.edit_magical_abilities}}/>
+
+        <b>Combat Abilities & Preferences</b>
+        <MarkdownEditor @text={{this.model.creature.edit_combat}}/>
       </div>
 
 
       <div id="society" class="tab-pane fade show">
-        <b>Society</b>
+        <b>Society & Relationships</b>
         <MarkdownEditor @text={{this.model.creature.edit_society}} />
       </div>
 

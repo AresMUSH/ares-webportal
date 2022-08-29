@@ -5,7 +5,8 @@
         <li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#general">General</a></li>
         <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#traits">Traits</a></li>
         <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#society">Society</a></li>
-        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#events">Events</a></li>
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#events">Plots & Events</a></li>
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#images">Images</a></li>
     </ul>
 
 
@@ -35,43 +36,10 @@
           </div>
         </div>
 
+        
         <div class="form-group row">
           <div class="col-sm-3">
-            <b>Major School</b>
-          </div>
-
-          <div class="col-sm-9">
-            <p><PowerSelect @selected={{this.model.creature.major_school}} @options={{this.model.schools}} @onChange={{action "majorschoolChanged"}} as |school|>
-              {{school}}
-            </PowerSelect></p>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-3">
-            <b>Minor School</b>
-          </div>
-
-          <div class="col-sm-9">
-            <p><PowerSelect @selected={{this.model.creature.minor_school}} @options={{this.model.schools}} @onChange={{action "minorschoolChanged"}} as |school|>
-              {{school}}
-            </PowerSelect></p>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-3">
-            <b>Languages:</b>
-          </div>
-
-          <div class="col-sm-9">
-            {{input type="text" size=25 value=this.model.creature.language}}
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col-sm-3">
-            <b>Also Found:</b>
+            <b>Found:</b>
           </div>
 
           <div class="col-sm-9">
@@ -91,23 +59,30 @@
 
         <div class="form-group row">
           <div class="col col-xs-3">
-            <p><label>Sapient?</label>
+            <p><label><b>Sapient?</b></label>
             {{input type="checkbox"  id="sapient"  checked=this.isSapient}}</p><br>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <b>Summary*</b>
           </div>
 
           <div class="col-sm-9">
-            <MarkdownEditor @text={{this.model.creature.edit_short_desc}}  rows={{5}} />
+              <MarkdownEditor @text={{this.model.creature.edit_short_desc}}  rows={{5}} />
           </div>
-
         </div>
       </div>
 
       <div id="traits" class="tab-pane fade show">
-        <b>Traits & Description</b>
+        <b>Physical Traits & Description</b>
         <MarkdownEditor @text={{this.model.creature.edit_traits}} />
 
-        <b>Magical Abilities & Spells<</b>
+        <b>Magical Abilities & Preferences</b>
         <MarkdownEditor @text={{this.model.creature.edit_magical_abilities}}/>
+
+        <b>Combat Abilities & Preferences</b>
+        <MarkdownEditor @text={{this.model.creature.edit_combat}}/>
       </div>
 
 
@@ -118,26 +93,69 @@
 
 
       <div id="events" class="tab-pane fade show">
+        <div class="form-group row">
+          <div class="col-sm-3">
+            <b>Plots</b>
+          </div>
 
-        <div class="col-sm-3">
-          <b>Plots</b>
-        </div>
-
-        <div class="col-sm-9">
-          <PowerSelectMultiple @selected={{this.model.creature.plots}} @options={{this.model.plots}} @searchEnabled=true @searchField="name"  @onChange={{action "plotsChanged"}} as |plot|>
-            {{plot.title}}
-          </PowerSelectMultiple>
+          <div class="col-sm-9">
+            <PowerSelectMultiple @selected={{this.model.creature.plots}} @options={{this.model.plots}} @searchEnabled=true @searchField="name"  @onChange={{action "plotsChanged"}} as |plot|>
+              {{plot.title}}
+            </PowerSelectMultiple>
+          </div>
         </div>
 
         <b>Events</b>
         <MarkdownEditor @text={{this.model.creature.edit_events}} />
       </div>
 
+      <div id="images" class="tab-pane fade show">
+
+        <div class="form-group row">
+            <div class="col-sm-3">
+                    <b>Banner Image</b>
+            </div>
+
+            <div class="col-sm-9">
+                <PowerSelect @selected={{this.model.creature.banner_image}} @allowClear={{true}} @searchField="name" @options={{this.model.creature.files}} @onChange={{action "bannerImageChanged"}} as |file|>
+                {{file.name}}
+                </PowerSelect>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-3">
+                    <b>Profile Image</b>
+            </div>
+
+            <div class="col-sm-9">
+                <PowerSelect @selected={{this.model.creature.profile_image}} @allowClear={{true}} @searchField="name" @options={{this.model.creature.files}} @onChange={{action "profileImageChanged"}} as |file|>
+                {{file.name}}
+                </PowerSelect>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-sm-3">
+                    <b>Image Gallery</b>
+            </div>
+
+            <div class="col-sm-9">
+
+              <div class="profile-gallery-input">
+              <Textarea @value={{this.model.creature.image_gallery}} cols="80" rows={{3}} />
+
+                <p class="hint">List image files in the order you want them shown (<code>folder/file1.jpg /folder/file2.jpg</code> etc.), or leave this blank to just show all images from the creature's folder.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <CreatureEditFiles @model={{this.model}} />
+      </div>      
+
     </div>
-
-
-
-
 
     <div class="action-buttons">
 
