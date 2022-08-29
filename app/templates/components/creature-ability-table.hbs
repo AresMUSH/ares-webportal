@@ -1,6 +1,6 @@
-<div class="char-ability-title">{{this.title}}</div>
+<div class="creature-ability-title">{{this.title}}</div>
 
-  <table class="char-ability-list">
+  <table class="creature-ability-list">
   {{#each this.list as |ability| }}
   <tr>
     <td>{{ability.name}}
@@ -9,16 +9,7 @@
       {{/if}}
     </td>
     <td><Fs3Dots @rating={{ability.rating}} @max={{this.max}} />
-
-    {{#if this.showSpecs}}
-    <br>
-        {{#if ability.specialties}}
-          ({{ability.specialties}})
-        {{/if}}
-    {{/if}}
-
     </td>
-    <td>{{ability.rating_name}}</td>
   </tr>
   {{/each}}
 </table>
