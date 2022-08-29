@@ -44,7 +44,17 @@
           {{/each}} </i><br>{{/if}}
 
           {{#if this.model.creature.found}}<b>Found:</b>
-          {{this.model.creature.found}}{{/if}}
+          {{this.model.creature.found}}<br>{{/if}}
+
+          {{#if this.model.creature.armor}}
+            <b>Armor:</b> {{#link-to 'fs3combat-gear-detail' 'armor' armor}}{{this.model.creature.armor}}{{/link-to}}<br>
+          {{/if}}
+
+          {{#if this.model.creature.weapons}}<b>Weapons:</b>
+            {{#each this.model.creature.weapons as |weapon|}}
+              {{#link-to 'fs3combat-gear-detail' 'weapon' weapon}}{{weapon}}{{/link-to}}<br>
+            {{/each}}
+          {{/if}}
         </div>
       </div>
 
@@ -58,6 +68,8 @@
 
     <div class="pinterest"> <a  data-pin-do="embedBoard" data-pin-board-width="400" data-pin-scale-height="500" data-pin-scale-width="115" href="{{this.model.creature.pinterest}}"></a></div>
   {{/if}}
+
+  <Fs3AbilityTable @title="Stats" @list={{this.model.creature.stats}} @max={{10}} />
 
 
 
