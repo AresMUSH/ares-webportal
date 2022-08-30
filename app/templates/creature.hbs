@@ -10,9 +10,9 @@
 
 
 
-  <div class="row profile-wrap">
+  <div class="row creature-wrap">
     <div class="row">
-      <div class="col-md-4 col-sm-12 col-xs-12 profile-image-wrap">
+      <div class="col-md-4 col-sm-12 col-xs-12 creature-image-wrap">
       {{#if this.model.creature.profile_image.name}}
         <LinkTo @route="file" @models={{array this.model.creature.profile_image.folder creature.profile_image.name}}>
             <img src="/game/uploads/{{this.model.creature.profile_image.path}}" alt="{{this.model.creature.name}}'s image"  class="profile-image">
