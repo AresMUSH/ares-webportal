@@ -8,6 +8,8 @@
   <p></p>
   <div class="blurb">
     {{{ansi-format text=this.model.blurb}}}
+
+    {{#link-to 'search-spells' class="btn btn-secondary"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}
   </div>
 
   <div class="clear"></div>
@@ -26,10 +28,8 @@
         <div class="tab-cover">Spells</div>
     </div>
 
-
     {{#each-in this.model.spells as |group spells|}}
-      <div id="level{{group}}" class="tab-pane fade">
-        {{#link-to 'search-spells' class="btn btn-secondary"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}
+      <div id="level{{group}}" class="tab-pane fade">        
         {{#each spells as |spell|}}
           {{#if spell.available}}
             {{spell-card spell=spell}}
