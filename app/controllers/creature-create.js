@@ -51,7 +51,7 @@ export default Controller.extend({
               sapient: this.get('isSapient'),
               pinterest: this.get('model.creature.pinterest'),
               found: this.get('model.creature.found'),
-              combat: this.get('model.creature.combat'),
+              combat: this.get('model.creature.edit_combat'),
               traits: this.get('model.creature.edit_traits'),
               short_desc: this.get('model.creature.edit_short_desc'),
               society: this.get('model.creature.edit_society'),
