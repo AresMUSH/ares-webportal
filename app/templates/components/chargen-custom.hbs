@@ -1,7 +1,7 @@
 <div role="tabpanel" class="tab-pane" id="magic">
 
   <div class="chargen-section-title">Magic</div>
-  <div class="cg-tip"><AnsiFormat @text={{char.custom.schools_blurb}} /></div>
+  <div class="cg-tip"><AnsiFormat @text={{char.custom.magic_blurb}} /></div>
   <br>
 
   <div class="form-group row">
@@ -15,8 +15,6 @@
     </div>
   </div>
 
-
-  <div class="cg-tip"><AnsiFormat @text={{char.custom.schools_blurb}} /></div>
   <br>
   <div class="form-group row">
     <div class="col-sm-3">
@@ -31,7 +29,7 @@
   </div>
 
   <div class="chargen-section-title">Mythic</div>
-  <div class="cg-tip"><AnsiFormat @text={{char.custom.mount_blurb}} /></div>
+  <div class="cg-tip"><AnsiFormat @text={{char.custom.mythic_blurb}} /><br><br></div>
 
 
   <div class="form-group row">
@@ -39,7 +37,7 @@
       <b>Name</b>
     </div>
     <div class="col-sm-9">
-     <Input @type="text" size={{25}} @value={{char.custom.mount_name}} />
+      <Input @type="text" size={{25}} @value={{char.custom.mount_name}} />
     </div>
   </div>
 
@@ -54,6 +52,25 @@
     </div>
   </div>
 
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Description</b>
+    </div>
+    <div class="col-sm-9">
+      <MarkdownEditor @text={{char.custom.mount_desc}} rows={{5}}/>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <b>Short Description</b>
+    </div>
+    <div class="col-sm-9">
+      <Input @type="text" size={{100}} @value={{char.custom.mount_shortdesc}} />
+    </div>
+  </div>
+
+  <div class="cg-tip">{{{ansi-format text=char.custom.mythic_magic_blurb}}}</div><br>
   <div class="form-group row">
     <div class="col-sm-3">
       <b>Mythic School</b>
@@ -77,24 +94,7 @@
     </div>
   </div>
 
-  <div class="form-group row">
-    <div class="col-sm-3">
-      <b>Description</b>
-    </div>
-    <div class="col-sm-9">
-     <MarkdownEditor @text={{char.custom.mount_desc}} rows={{5}}/>
-    </div>
-  </div>
-
-  <div class="form-group row">
-    <div class="col-sm-3">
-      <b>Short Description</b>
-    </div>
-    <div class="col-sm-9">
-     <Input @type="text" size={{100}} @value={{char.custom.mount_shortdesc}} />
-    </div>
-  </div>
-
+  <div class="cg-tip">{{{ansi-format text=char.custom.lorehook_blurb}}}</div><br>
   <div class="form-group row">
     <div class="col-sm-3">
       <b>Lore Hook Preference</b>
@@ -104,7 +104,7 @@
         {{pref.value}} - {{pref.desc}}
       </PowerSelect>
 
-      <div class="cg-tip">{{{ansi-format text=char.custom.lorehook_blurb}}}</div><br>
+
     </div>
   </div>
 
