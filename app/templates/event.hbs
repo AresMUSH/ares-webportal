@@ -48,31 +48,63 @@
 <h2>Signups</h2>
 
 {{#each this.model.signups as |s|}}
- <div>
+  <div class="event-signup-details">
  
-     <p><CharIconInline @char={{s.char}} /></p>
+     <div class="event-signup-item event-signup-char">
+       <CharIconInline @char={{s.char}} />
+     </div>
+     
+     
+     {{#if s.can_edit}}
+       <div class="event-signup-item">
+         <button {{action 'cancelSignup' s.char.name}}><i class="fa fa-trash" aria-label="Cancel Signup"></i></button>
+       </div>
+     {{/if}}
+     
      {{#if s.comment}}
-     <AnsiFormat @text={{s.comment}} />
+       <div class="event-signup-item">
+         <AnsiFormat @text={{s.comment}} />
+       </div>
      {{/if}}
      
-     {{#if this.model.can_manage}}
-     <p>  <button {{action 'cancelSignup' s.char.name}}><i class="fa fa-trash" aria-label="Cancel Signup"></i></button></p>
-     {{/if}}
-     
- 
-     <hr>
   </div>
+  <hr/>
 {{/each}}
 
-{{#if this.model.signed_up}}
-<p>You are signed up for the event.</p>
+{{#if this.isApproved}}
 
-<p><label>Signup Comment:</label> <Input @type="text" size={{25}} id="signup" @enter={{action "signup"}} @value={{this.model.signup_comment}} />  </p>
-<p>  <button {{action 'cancelSignup'}} class="btn btn-warning">Cancel Signup</button>
-  <button {{action 'signup'}} class="btn btn-secondary">Edit Signup</button> </p>
-{{else if isApproved}}
-<p><label>Signup Comment:</label>  <Input @type="text" size={{25}} id="signup" @enter={{action "signup"}} @value={{this.model.signup_comment}} />  
-  <button {{action 'signup'}} class="btn btn-secondary">Sign Up</button> </p>
+  <div class="form-group row">
+    <div class="col-sm-3">
+      <label for="title" class="col-form-label">Add or Modify Signup:</label>
+    </div>
+
+    <div class="col-sm-9">
+      
+      <div class="event-signup-details">
+        
+        <div class="event-signup-item event-signup-char">
+        
+          <PowerSelect @selected={{this.signupAs}} @options={{this.model.available_alts}} @searchField="name" @onChange={{action "signupAsChanged"}} as |alt|>
+              <CharIconTiny @char={{alt}} />
+            </PowerSelect>
+          </div>
+          
+          <div class="event-signup-item">
+        
+            <Input @type="text" size={{25}} id="signup" @enter={{action "signup"}} @value={{this.model.signup_comment}} placeholder="Signup Comment" />  
+            
+          </div>
+      
+          <div class="event-signup-item">
+            <button {{action 'signup'}} class="btn btn-secondary">Sign Up</button>
+          </div>
+        </div>
+      
+    </div>
+  </div>
+
+         
+         
 
 {{/if}}
 
@@ -80,14 +112,14 @@
 
 <div class="action-buttons">
   {{#if this.model.can_manage}}
-      <button {{action (mut confirmDelete) true}} class="btn btn-warning">Delete</button>
+      <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete</button>
       <LinkTo @route="event-edit" @model={{this.model.id}} class="btn btn-primary">Edit</LinkTo>
   {{/if}}
 </div>
 
 <FlashMessages />
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut confirmDelete) false}}>
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut this.confirmDelete) false}}>
     You're about to delete event {{this.model.title}}. This cannot be undone.  Are you sure?
   </BsModalSimple>
   

@@ -17,6 +17,9 @@ module.exports = function (defaults) {
     'ember-cli-terser': {
       enabled: false,
     },
+    'ember-simple-auth': {
+      useSessionSetupMethod: true,
+    },
     minifyCSS: {
       enabled: false,
     },

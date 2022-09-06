@@ -35,10 +35,12 @@
   <div class="tab-pane" id="unassigned">
 
   <h3>Locations With No Area</h3>
-  {{#each this.model.orphan_rooms as |room|}}
-  <LinkTo @route="location" @model={{room.id}}>{{room.name}}</LinkTo>
-  {{/each}}
   
+  <ul>
+    {{#each this.model.orphan_rooms as |room|}}
+      <li><LinkTo @route="location" @model={{room.id}}>{{room.name}}</LinkTo></li>
+    {{/each}}
+  </ul>
   </div>
 </div>
 

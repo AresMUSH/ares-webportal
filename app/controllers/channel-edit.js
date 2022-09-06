@@ -13,6 +13,8 @@ export default Controller.extend({
              desc: this.get('model.channel.desc'),
              can_talk: (this.get('model.channel.can_talk') || []),
              can_join: (this.get('model.channel.can_join') || []),
+             discord_channel: this.get('model.channel.discord_channel'),
+             discord_webhook: this.get('model.channel.discord_webhook'),
              color: this.get('model.channel.color')}, null)
           .then( (response) => {
               if (response.error) {

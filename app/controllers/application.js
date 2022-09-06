@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
+import { reads } from '@ember/object/computed';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import AvailableRoutes from 'ares-webportal/mixins/available-routes';
 import AresConfig from 'ares-webportal/mixins/ares-config';
@@ -37,11 +38,11 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, AresC
       return aresweb_version;
     }),
     
-    currentUser: computed.reads('session.data.authenticated'),
+    currentUser: reads('session.data.authenticated'),
 
-    socketConnected: computed.reads('gameSocket.connected'),
+    socketConnected: reads('gameSocket.connected'),
 
-    sidebar: computed.reads('model'),
+    sidebar: reads('model'),
 
 
     topNavbar: computed('model.top_navbar', function() {

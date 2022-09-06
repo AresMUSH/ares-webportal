@@ -7,7 +7,14 @@
   <tbody>
     {{#each this.model.who as |char|}}
     <tr>
-        <td> <CharIconInline @char={{char}} /> </td>        
+        <td> <CharIconInline @char={{char}} /> </td>   
+        <td> 
+          {{#if this.model.can_boot}}
+          <a href="#" {{action (mut this.bootTarget) char}}>
+            <TooltipIcon @position="right" @message="Boot player." @icon="fa-solid fa-user-slash" />
+          </a>
+          {{/if}}
+        </td>     
     </tr>
     {{/each}}
   </tbody>
@@ -38,4 +45,11 @@
   Idle on Portal
 </span>
 
+
+<BsModalSimple @title="Boot Player" @closeTitle="Cancel" @submitTitle="Boot" @size={{null}} @fade={{true}} @open={{this.bootTarget}} @onSubmit={{action "bootPlayer"}} @onHide={{action (mut this.bootTarget) null}}>
+    <p>Please enter the reason you are booting the player. Use the chat or scene reporting features if applicable to provide evidence. Abuse of the boot feature may result in disciplinary action.</p>
+    
+    <p><Textarea @type="text" id="bootReason" placeholder="Reason for booting" @value={{this.bootReason}} /></p>
+</BsModalSimple>   
+  
 {{outlet}}

@@ -9,7 +9,7 @@ export default Component.extend({
     actions: { 
       learnAbility(ability) {
             let api = this.gameApi;
-            api.requestOne('learnAbility', { ability: ability.name }, null)
+            api.requestOne('learnAbility', { ability: ability.name, char: this.get('char.name') }, null)
             .then( (response) => {
                 if (response.error) {
                     return;
@@ -27,7 +27,7 @@ export default Component.extend({
                 return;
               }
               
-              api.requestOne('learnAbility', { ability: name }, null)
+              api.requestOne('learnAbility', { ability: name, char: this.get('char.name') }, null)
               .then( (response) => {
                   if (response.error) {
                       return;

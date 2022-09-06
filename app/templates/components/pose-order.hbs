@@ -1,5 +1,13 @@
 {{this.updatePoseOrder}}<div class="scene-pose-order">
-<label>Pose Order:</label> {{#each this.poseOrder as |po|}}
+<label>Pose Order:</label> 
+
+{{#if (eq this.poseOrderType 'normal') }}
+<TooltipIcon @position="left" @message="Regular Order" @icon="fa fa-user" />
+{{else}}
+<TooltipIcon @position="left" @message="3-Per Order" @icon="fa fa-users" />
+{{/if}}
+
+{{#each this.poseOrder as |po|}}
 {{#if (eq po.name this.playerName)}}
   <span class="your-pose-order">{{po.name}}</span>
 {{else}}

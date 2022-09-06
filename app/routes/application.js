@@ -1,11 +1,10 @@
 import $ from "jquery"
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 import AresConfig from 'ares-webportal/mixins/ares-config';
 
-export default Route.extend(ApplicationRouteMixin, ReloadableRoute, AresConfig, {
+export default Route.extend(ReloadableRoute, AresConfig, {
 
     gameApi: service(),
     session: service(),
@@ -24,6 +23,9 @@ export default Route.extend(ApplicationRouteMixin, ReloadableRoute, AresConfig, 
         this.router.on('routeWillChange', function() {
           self.set('headData.robotindex', false); 
         });
+    },
+    async beforeModel() {
+      await this.session.setup();
     },
     afterModel(model) {
       try {

@@ -45,6 +45,7 @@ Router.map(function() {
   this.route('combatant-edit', { path: '/combatant/:id' });
   this.route('combats');
   this.route('config', { path: '/config/:file' });
+  this.route('custom-code');
   this.route('emoji');
   this.route('error');
   this.route('events');
