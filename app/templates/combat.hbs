@@ -50,7 +50,7 @@
 
 {{#if this.model.in_combat}}
   <div class="fs3-combat-command">
-    <Input @value={{this.combatCommand}} @enter="sendCommand" size={{25}} />
+    <Input @value={{this.combatCommand}} @enter={{action "sendCommand"}} size={{25}} />
 
     <button class="btn btn-secondary" {{action 'sendCommand'}} >Send Command</button>
     <div class="badge bg-info">{{this.commandResponse}}</div>

@@ -1,7 +1,7 @@
 {{page-title "Tinker"}}
 <h1>Tinker Command</h1>
     
-    <AceEditor @editorId="editor" @resetEditorCallback={{this.resetEditor}} @text={{this.model.text}} @mode="html_ruby" @editorChanged={{action "editorChanged"}} />
+    <AceEditor @editorId="editor" @resetEditorCallback={{this.resetEditor}} @text={{this.model.text}} @mode="html_ruby" @editorChanged={{action "editorChanged"}} lines={{20}} />
 
 <div class="action-buttons">
             <LinkTo @route="home" class="btn btn-secondary">Cancel</LinkTo>

@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
+import { reads } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
@@ -9,7 +10,7 @@ export default Controller.extend({
     queryParams: [ 'location' ],
     warning_tags: [],
 
-    scenePacingOptions: computed.reads('model.sceneOptions.scene_pacing'),
+    scenePacingOptions: reads('model.sceneOptions.scene_pacing'),
   
     sceneTypes: computed('model.sceneOptions.scene_types', function () {
      return this.get('model.sceneOptions.scene_types').map((p) => p.name);

@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
+import { equal } from '@ember/object/computed';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
 export default Controller.extend(AuthenticatedController, {
@@ -15,7 +16,7 @@ export default Controller.extend(AuthenticatedController, {
         }
     }),
     
-    sentMail: computed.equal('tag', 'Sent'),
+    sentMail: equal('tag', 'Sent'),
     
     actions: {
         changeTag(tag) {

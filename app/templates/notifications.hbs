@@ -10,7 +10,7 @@
 <ul class="nav nav-tabs notification-nav">
   {{#each this.model.chars as |char index| }}
   <li class="nav-item">
-    <a data-bs-toggle="tab" href="#{{char.name}}" class="nav-link {{if (eq index 0) 'active' }}">
+    <a data-bs-toggle="tab" href="#char{{index}}" class="nav-link {{if (eq index 0) 'active' }}">
     {{char.name}}
     {{#if char.has_unread}}
       <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="Unread Notification"></i></span>
@@ -25,7 +25,7 @@
 
 {{#each this.model.chars as |char index| }}
 
-    <div id="{{char.name}}" class="tab-pane fade show {{if (eq index 0) 'active' }}">
+    <div id="char{{index}}" class="tab-pane fade show {{if (eq index 0) 'active' }}">
       <NotificationList @notices={{char.notices}} @char={{char}} />
     </div>
   

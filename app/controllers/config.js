@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { computed } from '@ember/object';
+import { reads } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({    
@@ -11,7 +11,7 @@ export default Controller.extend({
     confirmRestore: false,
     configErrors: null,
     
-    config: computed.reads('model.config'),
+    config: reads('model.config'),
 
     
     resetOnExit: function() {

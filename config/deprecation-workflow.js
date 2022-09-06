@@ -1,5 +1,5 @@
-self.deprecationWorkflow = self.deprecationWorkflow || {};
-self.deprecationWorkflow.config = {
+window.deprecationWorkflow = window.deprecationWorkflow || {};
+window.deprecationWorkflow.config = {
   workflow: [
     
     /* Blocked by addons */

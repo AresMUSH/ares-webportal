@@ -9,7 +9,7 @@ export default Route.extend(AuthenticatedRoute, {
   model: function(params) {
       let api = this.gameApi;
       return api.requestOne('file', {folder: params['folder'],
-         name: params['name']});
+         name: params['name'], edit_mode: true});
   },
   afterModel: function(model) {
     model.set('new_name', model.name);

@@ -6,11 +6,13 @@ export default Controller.extend({
   flashMessages: service(),
   searchName: '',
   searchArea: '',
+  searchOwner: '',
   searchResults: null,
     
   resetOnExit: function() {
     this.set('searchName', '');
     this.set('searchArea', '');
+    this.set('searchOwner', '');
     this.set('searchResults', null);
   },
     
@@ -23,7 +25,8 @@ export default Controller.extend({
             
       api.requestMany('searchLocations', { 
         searchArea: this.searchArea,
-        searchName: this.searchName
+        searchName: this.searchName,
+        searchOwner: this.searchOwner
       }, null)
       .then( (response) => {
         if (response.error) {
