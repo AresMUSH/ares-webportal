@@ -11,30 +11,58 @@
     </div>
 </div>
 
-    <div class="col col-12 col-lg-8 profile-demo-wrap">        
+    <div class="col col-12 col-lg-8 profile-demo-wrap">
 
         <div class="profile-box">
 
         {{#each this.char.demographics as |demo|}}
         <div class="row">
             <div class="col-sm-4">
-                    <b>{{demo.name}}</b> 
+                    <b>{{demo.name}}</b>
             </div>
             <div class="col-sm-8">
                     {{demo.value}}
             </div>
         </div>
         {{/each}}
-                                
-        
+
+
         <div class="profile-divider">
         </div>
-        
-        
+
+        <div class="row">
+                <div class="col-sm-4">
+                        <b>Mage School</b>
+                </div>
+                <div class="col-sm-8">
+                        {{this.char.custom.major_school}}
+                </div>
+        </div>
+
+                <div class="row">
+                <div class="col-sm-4">
+                        <b>Mythic School</b>
+                </div>
+                <div class="col-sm-8">
+                        {{this.char.custom.minor_school}}
+                </div>
+        </div>
+
+                <div class="row">
+                <div class="col-sm-4">
+                      <b>Mythic Name</b>
+                </div>
+                <div class="col-sm-8">
+                        {{this.char.custom.mythic_name}}
+                </div>
+        </div>
+
+
+
         {{#each this.char.groups as |group|}}
         <div class="row">
             <div class="col-sm-4">
-                    <b>{{group.name}}</b> 
+                    <b>{{group.name}}</b>
             </div>
             <div class="col-sm-8">
                     {{group.value}}
@@ -43,28 +71,32 @@
         {{/each}}
 
 
+
+
+
+
         {{#if this.char.handle}}
-        
+
         <div class="row">
             <div class="col-sm-4">
-                    <b>Player</b> 
+                    <b>Player</b>
             </div>
             <div class="col-sm-8">
                     <a href="http://arescentral.aresmush.com/handle/{{this.char.handle}}">{{this.char.handle}}</a>
             </div>
         </div>
-        
+
         {{/if}}
-        
+
         <div class="row">
             <div class="col-sm-4">
-                    <b>Last Online</b> 
+                    <b>Last Online</b>
             </div>
             <div class="col-sm-8">
                     {{this.char.last_online}}
             </div>
         </div>
         </div>
-        
+
     </div>
 </div>
