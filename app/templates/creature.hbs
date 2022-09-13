@@ -76,7 +76,9 @@
     {{{ansi-format text=this.model.creature.traits}}}
   {{/if}}
 
+  {{#if this.model.creature.sapient}}
     <Fs3AbilityTable @title="Stats" @list={{this.model.creature.stats}} @max={{10}} />
+  {{/if}}
 
   {{#if this.model.creature.society}}
     <h2>Society & Relationships</h2>
