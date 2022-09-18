@@ -39,6 +39,7 @@ export default Component.extend({
         if (response.error) {
           return;
         }
+        this.set('scene.combat', response);
       });
           
     },
