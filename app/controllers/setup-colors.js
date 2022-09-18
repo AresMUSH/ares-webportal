@@ -39,7 +39,7 @@ export default Controller.extend(AuthenticatedController, {
                 }
                 
                 this.flashMessages.success('Colors saved.  You will need to refresh the page for the new colors to take effect.');
-                if (this.isWikiMgr) {
+                if (this.isThemeMgr) {
                   this.router.transitionTo('home');
                 } else {
                   this.router.transitionTo('setup');  
