@@ -32,6 +32,17 @@ export default Component.extend({
           
     },
     
+    joinCombat: function() {
+      let api = this.gameApi;
+      api.requestOne('joinCombat', { combat_id: this.get('scene.combat.id'), sender: this.get('scene.poseChar.name') }, null)
+      .then( (response) => {
+        if (response.error) {
+          return;
+        }
+      });
+          
+    },
+    
     sendCommand: function() {
       let api = this.gameApi;
       
