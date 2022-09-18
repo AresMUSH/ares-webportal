@@ -7,7 +7,9 @@
 <div class="alert alert-warning">This message is in the trash.</div>
 {{/if}}
 
-<table>
+<div class="mail-message-inbox">Inbox: {{this.model.message.recipient}}</div>
+
+<table>    
     <tr>
         <td>
             <b>From:</b> 
@@ -86,6 +88,7 @@
     </div>
     <div id="reply" class="card-collapse collapse">
       <div class="card-body">
+      <p><b>Replying As:</b> {{this.model.message.recipient}}</p>
       <p><b>To:</b> <a href="#" {{action 'replyAll'}}>[Reply All]</a>
         <PowerSelectMultiple @selected={{this.replyToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "replyToListChanged"}} as |char|>
           {{char.name}}
@@ -111,6 +114,7 @@
     </div>
     <div id="forward" class="card-collapse collapse">
       <div class="card-body">
+      <p><b>Forwarding As:</b> {{this.model.message.recipient}}</p>
       <p><b>To:</b>
       <PowerSelectMultiple @selected={{this.fwdToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "fwdToListChanged"}} as |char|>
         {{char.name}}

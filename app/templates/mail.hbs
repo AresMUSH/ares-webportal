@@ -1,59 +1,37 @@
-{{page-title this.tag}}
-<h1>Mail - {{this.tag}}</h1>
+{{page-title "Mail"}}
+<h1>Mail</h1>
+<ul class="nav nav-tabs notification-nav">
+  {{#each this.model as |char index| }}
+  
+  <li class="nav-item">
+    <a data-bs-toggle="tab" href="#char{{index}}" class="nav-link {{if (eq index 0) 'active' }}">
+    {{char.name}}
+    {{#if char.has_unread}}
+      <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="Unread Mail"></i></span>
+    {{/if}}
+    </a>
+  </li>
+  {{/each}}
+  
+</ul>
 
-<div class="action-buttons-spaced">
+<div class="tab-content">
 
-  <div>
-    [  <a href="#" {{action 'changeTag' 'Inbox'}}>Inbox</a> ]
-    {{#each this.model.tags as |tag|}}
-    [ <a href="#" {{action 'changeTag' tag}}>{{tag}}</a> ]
-    {{/each}}
-  </div>
-  <div>
-        <LinkTo @route="mail-send" class="btn btn-primary">Send Mail</LinkTo>
-  </div>
+{{#each this.model as |char index| }}
+
+    <div id="char{{index}}" class="tab-pane fade show {{if (eq index 0) 'active' }}">
+      
+      
+      <MailInbox @inbox={{char}} />
+      
+    </div>
+  
+{{/each}}
+
 </div>
 
 
-<table class="table table-striped mail-list">
 
-<thead>
-    <th>Subject</th>
-    {{#if this.sentMail}}
-        <th>To</th>
-    {{else}}
-        <th>From</th>
-    {{/if}}
-    <th>Sent</th>
-</thead>
-        
-<tbody>
-  {{#each this.messages as |m| }}
-  <tr>
-      <td>
-          {{#if m.unread}}
-          <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="Unread Message"></i></span>
-          {{/if}}
-        
-          <LinkTo @route="mail-message" @model={{m.id}}>{{m.subject}}</LinkTo>
-      </td>
-    
-      <td>
-          {{#if this.sentMail}}
-              {{m.to_list}}
-          {{else}}
-              {{m.from}}
-          {{/if}}
-      </td>
-      <td>
-          {{m.created}}
-      </td>
-  </tr>
-
-  {{/each}}
-</tbody>
-
-</table>
 
 
 {{outlet}}
