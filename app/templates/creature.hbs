@@ -4,7 +4,7 @@
 
 <LinkTo @route="creatures"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Cryptids</LinkTo>
 <div class="action-buttons">
-  <Linkto @route="creature-edit" @model={{this.model.creature.id}} class="btn btn-secondary">Edit Cryptid</Linkto>
+  <LinkTo @route="creature-edit" @model={{this.model.creature.id}} class="btn btn-secondary">Edit Cryptid</LinkTo>
 </div>
 
 
@@ -39,7 +39,7 @@
 
         <div class="infobox-body">
           {{#if this.model.creature.gms}}<i>For more information see {{#each this.model.creature.gms as |gm|}}
-            <Linkto @route="char" @model={{gm.name}}>{{gm.name}}</Linkto>
+            <LinkTo @route="char" @model={{gm.name}}>{{gm.name}}</LinkTo>
 
           {{/each}} </i><br>{{/if}}
 
@@ -100,7 +100,7 @@
     <h2>Plots</h2>
     <ul>
       {{#each this.model.creature.plots as |plot|}}
-        <li><Linkto @route="plot" @model={{plot.id}}>{{plot.title}}</Linkto></li>
+        <li><LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo></li>
       {{/each}}
     </ul>
   {{/if}}
@@ -134,7 +134,7 @@
       <div class="col col-xs-12">
         <LinkTo @route="creatures"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Cryptids</LinkTo>
         <div class="action-buttons">
-          <Linkto @route="creature-edit" @model={{this.model.creature.id}} class="btn btn-secondary">Edit Cryptid</Linkto>
+          <LinkTo @route="creature-edit" @model={{this.model.creature.id}} class="btn btn-secondary">Edit Cryptid</LinkTo>
         </div>
       </div>
   </div>
