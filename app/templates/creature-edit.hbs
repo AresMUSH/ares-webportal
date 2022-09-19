@@ -57,7 +57,7 @@
             <p><Input @type="checkbox" @checked={{this.model.creature.sapient}} /></p>
           </div>
 
-        
+
           <div class="col-sm-3">
             <b>Summary*</b>
           </div>
@@ -158,9 +158,8 @@
 
 
     <div class="action-buttons">
-
-        <p> {{#link-to 'creature' this.model.creature.id class="btn btn-secondary"}}Cancel{{/link-to}}
-            <button class="btn btn-primary" {{action 'save'}} >Save</button>
+        <p> <Linkto @route="creature" @model={{this.model.creature.id}} class="btn btn-secondary">Cancel</Linkto>
+        <button class="btn btn-primary" {{action 'save'}} >Save</button>
         </p>
 
     </div>
