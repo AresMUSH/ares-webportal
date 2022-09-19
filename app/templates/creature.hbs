@@ -47,13 +47,13 @@
           {{this.model.creature.found}}<br>{{/if}}
 
           {{#if this.model.creature.armor}}
-            <b>Armor:</b> {{#link-to 'fs3combat-gear-detail' 'armor' this.model.creature.armor}}{{this.model.creature.armor}}{{/link-to}}<br>
+            {{!-- <b>Armor:</b> {{#link-to 'fs3combat-gear-detail' 'armor' this.model.creature.armor}}{{this.model.creature.armor}}{{/link-to}}<br> --}}
           {{/if}}
 
           {{#if this.model.creature.weapons}}<b>Weapons:</b>
             <ul>
             {{#each this.model.creature.weapons as |weapon|}}
-              <li>{{#link-to 'fs3combat-gear-detail' 'weapon' weapon}}{{weapon}}{{/link-to}}</li>
+              {{!-- <li>{{#link-to 'fs3combat-gear-detail' 'weapon' weapon}}{{weapon}}{{/link-to}}</li> --}}
             {{/each}}
             </ul>
           {{/if}}
