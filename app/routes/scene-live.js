@@ -30,7 +30,8 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
         return RSVP.hash({
              scene: api.requestOne('liveScene', { id: params['id'] }),
              abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }),
-             locations: api.request('sceneLocations', { id: params['id'] })
+             locations: api.request('sceneLocations', { id: params['id'] }),
+             characters: api.requestMany('characters', { select: 'include_staff' })          
            })
            .then((model) =>  {
              

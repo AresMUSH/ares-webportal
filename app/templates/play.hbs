@@ -136,7 +136,7 @@
        
        {{/if}}
     
-       <LiveSceneControl @scene={{this.currentScene}} @locations={{this.model.locations}} @abilities={{this.model.abilities}} @places={{this.currentScene.places}} @scrollPaused={{this.scrollPaused}} @playerName={{this.currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
+       <LiveSceneControl @scene={{this.currentScene}} @locations={{this.model.locations}} @abilities={{this.model.abilities}} @places={{this.currentScene.places}} @characters={{this.model.characters}} @scrollPaused={{this.scrollPaused}} @playerName={{this.currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
        
        
        {{#if this.selectedChannel}}
