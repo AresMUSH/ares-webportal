@@ -39,7 +39,7 @@
 
         <div class="infobox-body">
           {{#if this.model.creature.gms}}<i>For more information see {{#each this.model.creature.gms as |gm|}}
-            <Linkto @route="char" @model={{gm.name}>{{gm.name}}</Linkto>
+            <Linkto @route="char" @model={{gm.name}}>{{gm.name}}</Linkto>
 
           {{/each}} </i><br>{{/if}}
 
