@@ -3,13 +3,13 @@
 
 <div class="ansi">
 
-  <p><center>[ {{#link-to 'school' 'arcane'}}Arcane{{/link-to}} | {{#link-to 'school' 'aether'}}Aether{{/link-to}} | {{#link-to 'school' 'creation'}}Creation{{/link-to}} | {{#link-to 'school' 'entropy'}}Entropy{{/link-to}} ]</center></p>
+  <p><center>[ <Linkto @route="school" @model="arcane">Arcane</Linkto> | <Linkto @route="school" @model="aether">Aether</Linkto>  | <Linkto @route="school" @model="creation">Creation</Linkto> | <Linkto @route="school" @model="entropy">Entropy</Linkto> ]</center></p>
 
   <p></p>
   <div class="blurb">
     {{{ansi-format text=this.model.blurb}}}
 
-    {{#link-to 'search-spells' class="btn btn-secondary"}}<i class="fa fa-search" aria-hidden="true"></i> Search Spells{{/link-to}}
+    <Linkto @route="search-spells"class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Spells</Linkto>
   </div>
 
   <div class="clear"></div>
@@ -29,7 +29,7 @@
     </div>
 
     {{#each-in this.model.spells as |group spells|}}
-      <div id="level{{group}}" class="tab-pane fade">        
+      <div id="level{{group}}" class="tab-pane fade">
         {{#each spells as |spell|}}
           {{#if spell.available}}
             {{spell-card spell=spell}}

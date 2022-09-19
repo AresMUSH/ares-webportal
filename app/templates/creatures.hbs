@@ -2,7 +2,7 @@
 <h1>Cryptids</h1>
 
 <div class="action-buttons">
-  {{#link-to 'creature-create' class="btn btn-primary"}}Create Cryptid Page{{/link-to}}
+  <Linkto @route="creature-create" @model={{this.model.creature.id}} class="btn btn-primary">Create Cryptid Page</Linkto>
 </div>
 
 <p>Cryptids are any creature, animal or person, that is not native to earth. The term includes [mythics](/wiki/mythics) - sapient creatures known to bond to human mages - are well as sapient creatures who are unable to bond with humans and non-sapient, animal-like creatures.</p>
@@ -21,7 +21,7 @@
     {{#each this.model as |creature|}}
       {{#if creature.sapient}}
         <div class="directory-card" style="background-image: url('/game/uploads/{{creature.banner_image.path}}');">
-          <div class="directory-title">{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}}</div>
+          <div class="directory-title"><Linkto @route="creature" @model={{creature.id}}>{{creature.name}}</Linkto></div>
           <div class="directory-info">
              <p>{{creature.short_desc}}</p>
           </div>
@@ -34,7 +34,7 @@
     {{#each this.model as |creature|}}
       {{#unless creature.sapient}}
       <div class="directory-card" style="background-image: url('/game/uploads/{{creature.banner_image.path}}');">
-        <div class="directory-title">{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}}</div>
+        <div class="directory-title"><Linkto @route="creature" @model={{creature.id}}>{{creature.name}}</Linkto></div>
         <div class="directory-info">
            <p>{{creature.short_desc}}</p>
         </div>
@@ -51,7 +51,7 @@
         <ul>
           {{#each this.model as |creature|}}
             {{#if creature.sapient}}
-              <li>{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}}</li>
+              <li><Linkto @route="creature" @model={{creature.id}}>{{creature.name}}</Linkto></li>
             {{/if}}
           {{/each}}
         </ul>
@@ -62,7 +62,7 @@
         <ul>
           {{#each this.model as |creature|}}
             {{#unless creature.sapient}}
-              <li>{{#link-to 'creature' creature.id}}{{creature.name}}{{/link-to}}</li>
+              <li><Linkto @route="creature" @model={{creature.id}}>{{creature.name}}</Linkto></li>
             {{/unless}}
           {{/each}}
         </ul>

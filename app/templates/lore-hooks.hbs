@@ -15,9 +15,9 @@
       <td>
         {{#if char.lore_hook_name}}
           {{#if char.ancestry}}
-            {{#link-to 'creature' char.ancestry}}{{char.lore_hook_name}} {{/link-to}}
+            {{!-- {{#link-to 'creature' char.ancestry}}{{char.lore_hook_name}} {{/link-to}} --}}
           {{else if char.pet}}
-            {{#link-to 'creature' char.pet}}{{char.lore_hook_name}} {{/link-to}}
+            <Linkto @route="creature" @model={{char.pet}}>{{char.lore_hook_name}}</Linkto>
           {{else}}
             <b>{{char.lore_hook_name}}</b>
           {{/if}}
@@ -47,9 +47,9 @@
         </td>
         <td>
           {{#if char.ancestry}}
-            {{#link-to 'creature' char.ancestry}}{{char.lore_hook_name}} {{/link-to}}
+            {{!-- {{#link-to 'creature' char.ancestry}}{{char.lore_hook_name}} {{/link-to}} --}}
           {{else if char.pet}}
-            {{#link-to 'creature' char.pet}}{{char.lore_hook_name}} {{/link-to}}
+           <Linkto @route="creature" @model={{char.pet}}>{{char.lore_hook_name}}</Linkto>
           {{else}}
             <b>{{char.lore_hook_name}}</b>
           {{/if}}
