@@ -7,6 +7,6 @@ export default Route.extend(AuthenticatedRoute, {
         
     model: function() {
         let api = this.gameApi;
-        return api.requestOne('mailIndex');
+        return api.requestMany('mailIndex');
     }
 });

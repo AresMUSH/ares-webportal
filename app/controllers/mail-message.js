@@ -93,6 +93,7 @@ export default Controller.extend({
       let api = this.gameApi;
       api.requestOne('sendMail', { subject: this.replySubject, 
       message: this.replyMessage,
+      sender: this.get('model.message.recipient'),
       to_list: (this.replyToList || []).map (p => p.name )}, null)
       .then( (response) => {
         if (response.error) {
@@ -106,6 +107,7 @@ export default Controller.extend({
       let api = this.gameApi;
       api.requestOne('sendMail', { subject: this.fwdSubject, 
       message: `${this.fwdMessage}\n\n----\n\nOriginal Message:\n${this.get('model.message.raw_body')}`,
+      sender: this.get('model.message.recipient'),
       to_list: (this.fwdToList || []).map (p => p.name )}, null)
       .then( (response) => {
         if (response.error) {

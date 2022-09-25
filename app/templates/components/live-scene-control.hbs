@@ -181,6 +181,7 @@
              <DropdownMenu @id="playMenu" @title="Play"  @dropup={{true}} class="scene-menu">
                {{#if this.scene.can_edit}}
                    <li><a href="#" {{action (mut this.selectLocation) true}} class="dropdown-item">Change Location</a></li>
+                   <li><a href="#" {{action (mut this.showInvitation) true}} class="dropdown-item">Invite Character</a></li>
                    <li><a href="#" {{action (mut this.managePoseOrder) true}} class="dropdown-item">Manage Pose Order</a></li>
                {{/if}}
 
@@ -297,6 +298,14 @@
        <b>Custom Location:</b> <Input @type="text" size={{25}} id="newLocation" @enter={{action "changeLocation"}} @value={{this.newLocation}} />
          </p>
     </BsModalSimple>
+    
+    
+    <BsModalSimple @title="Invite a Character" @closeTitle="Cancel" @submitTitle="Invite" @size={{null}} @fade={{true}} @open={{this.showInvitation}} @onSubmit={{action "inviteChar"}} @onHide={{action (mut this.showInvitation) null}}>
+          <PowerSelect @selected={{this.selectedInvitee}} @options={{this.characters}} @searchField="name"  @onChange={{action "changeInvitee"}} as |char|>
+        {{char.name}}
+      </PowerSelect>
+    </BsModalSimple>
+    
     
     <BsModalSimple @title="Manage Pose Order" @closeTitle="Cancel" @size={{null}} @fade={{true}} @open={{this.managePoseOrder}} @onHide={{action (mut this.managePoseOrder) false}}>
         
