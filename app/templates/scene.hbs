@@ -121,6 +121,7 @@
          {{/if}}
          
          <LinkTo @route="scene-download" @model={{this.model.id}}  class="dropdown-item">Download Scene</LinkTo>
+         <LinkTo @route="scene-source" @models={{array this.model.id this.model.current_version_id}}  class="dropdown-item">View History</LinkTo>
       </DropdownMenu>
       
           
