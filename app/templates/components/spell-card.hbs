@@ -25,51 +25,71 @@
           <div class="spell-desc">
             {{{ansi-format text=spell.desc}}}
           </div>
-          {{#if spell.weapon}}
+          {{#if spell.weapon_or_specials}}
             <div class="spell-attack-stats-block">
               <div class="spell-attack-stats-label">
                 <h5>Attack Stats:</h5>
               </div>
               <div class="spell-attack-stats">
-                   {{#if spell.weapon_specials}}
-                    <p><i>Applies {{spell.name}} stats atop the stats of the weapon you are already wielding.</i></p>
+                {{#if spell.weapon_specials}}
+                  <p><i>Applies {{spell.name}} stats atop the stats of the weapon you are already wielding.</i></p>
+                {{/if}}
+                {{#if spell.weapon}}
+                  {{spell.weapon_type}}{{#if spell.weapon_shrapnel}} (Shrapnel){{/if}}
+                {{/if}}
+                <ul>
+                  {{#if spell.weapon_lethality}}
+                    <li><b>Lethality:</b> {{spell.weapon_lethality}}</li>
                   {{/if}}
-                {{spell.weapon_type}}{{#if spell.weapon_shrapnel}} (Shrapnel){{/if}} —
-                {{#if spell.weapon_lethality}}
-                  <b>Lethality:</b> {{spell.weapon_lethality}} ·
-                {{/if}}
-                {{#if spell.weapon_penetration}}
-                  <b>Penetration:</b> {{spell.weapon_penetration}} ·
-                {{/if}}
-                {{#if spell.weapon_special_penetration}}
-                  <b>Penetration:</b> {{spell.weapon_special_penetration}} ·
-                {{/if}}
-                {{#if spell.weapon_accuracy}}
-                  <b>Accuracy:</b> {{spell.weapon_accuracy}} ·
-                {{/if}}
-                {{#if spell.weapon_special_accuracy}}
-                  <b>Accuracy:</b> {{spell.weapon_special_accuracy}} ·
-                {{/if}}
-                {{#if spell.weapon_init}}
-                  <b>Initiative Bonus:</b> {{spell.weapon_init}} ·
-                {{/if}}
-                {{#if spell.weapon_special_init}}
-                  <b>Initiative Bonus:</b> {{spell.weapon_special_init}}
-                {{/if}}
+                  {{#if spell.weapon_special_lethality}}
+                    <li><b>Lethality:</b> {{spell.weapon_special_lethality}}</li>
+                  {{/if}}
+                  {{#if spell.weapon_penetration}}
+                    <li><b>Penetration:</b> {{spell.weapon_penetration}}</li>
+                  {{/if}}
+                  {{#if spell.weapon_special_penetration}}
+                    <li><b>Penetration:</b> {{spell.weapon_special_penetration}}</li>
+                  {{/if}}
+                  {{#if spell.weapon_accuracy}}
+                    <li><b>Accuracy:</b> {{spell.weapon_accuracy}}</li>
+                  {{/if}}
+                  {{#if spell.weapon_special_accuracy}}
+                    <li><b>Accuracy:</b> {{spell.weapon_special_accuracy}}</li>
+                  {{/if}}
+                  {{#if spell.weapon_init}}
+                    <li><b>Initiative Bonus:</b> {{spell.weapon_init}}</li>
+                  {{/if}}
+                  {{#if spell.weapon_special_init}}
+                    <li><b>Initiative Bonus:</b> {{spell.weapon_special_init}}</li>
+                  {{/if}}
+                </ul>
               </div>
             </div>
           {{/if}}
+        {{#if spell.armor_or_specials}}
+          <div class="spell-attack-stats-label"><h4>Armor Stats</h4></div>
+          <div class="spell-attack-stats">
+            {{#if spell.armor_specials}}
+              <p><i>Applies {{spell.name}} stats atop the stats of the armor you are already wearing.</i></p>
+            {{/if}}
+            <ul>
+              {{#if spell.armor_protection}}
+                <li><b>Protection:</b> {{spell.armor_protection}}</li>
+              {{/if}}
+              {{#if spell.armor_special_protection}}
+                <li><b>Protection:</b> {{spell.armor_special_protection}}</li>
+              {{/if}}
+              {{#if spell.armor_defense}}
+                <li><b>Defense:</b> {{spell.armor_defense}}</li>
+              {{/if}}
+              {{#if spell.armor_special_defense}}
+                <li><b>Defense:</b> {{spell.armor_special_defense}}</li>
+              {{/if}}
+            </ul>
+          </div>
+        {{/if}}
 
-          {{#if spell.armor}}
-            <hr width="95%">
-            <h4>Armor Stats</h4>
-            {{#if spell.armor_protection}}
-              <b>Protection:</b> {{spell.armor_protection}}<br>
-            {{/if}}
-            {{#if spell.armor_defense}}
-              <b>Defense:</b> {{spell.armor_defense}}<br>
-            {{/if}}
-          {{/if}}
+
         </div>
 
         <div class="stats-right">
@@ -109,6 +129,9 @@
             {{/if}}
             {{#if spell.defense_mod}}
             {{spell.defense_mod}} defense
+            {{/if}}
+            {{#if spell.init_mod}}
+              {{spell.init_mod}} spell
             {{/if}}
             {{#if spell.spell_mod}}
               {{spell.spell_mod}} spell
