@@ -34,11 +34,12 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
              abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }),
              locations: api.request('sceneLocations', { id: params['id'] }),
              chat: api.requestOne('chat'),
-             characters: api.requestMany('characters', { select: 'all' })
+             characters: api.requestMany('characters', { select: 'all' }),
+             spells:  api.request('charSpellList', { id: this.get('session.data.authenticated.id') })
            })
            .then((model) => EmberObject.create(model));
     },
-    
+
     afterModel: function(model) {
       this.controllerFor('play').setupController(model);
     }
