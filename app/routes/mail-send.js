@@ -13,7 +13,7 @@ export default Route.extend(RouteResetOnExit, AuthenticatedRoute, {
       
       return RSVP.hash({
           characters: api.requestMany('characters', { select: 'all' }),
-          alts: this.modelFor('application').alts})
+          sendOptions: api.requestOne('mailSendOptions') })
           .then((model) => EmberObject.create(model));
   },
   

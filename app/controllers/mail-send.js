@@ -23,7 +23,7 @@ export default Controller.extend({
     },
     
     setup: function() {
-      this.set('sender', this.get('model.alts')[0]);
+      this.set('sender', this.get('model.sendOptions.authorableChars')[0]);
     },
     
     actions: {
