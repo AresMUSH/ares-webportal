@@ -26,7 +26,7 @@ export default Controller.extend(AuthenticatedController, {
     },
     
     setup: function() {
-      //this.set('author', this.get('model.authors')[0]);
+      this.set('author', this.get('model.authors')[0]);
     },
     
     onForumActivity: function(type, msg, timestamp ) {

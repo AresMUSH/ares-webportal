@@ -5,6 +5,7 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     gameSocket: service(),
+    flashMessages: service(),
     newActivity: false,
     
     onSceneActivity: function(type, msg, timestamp) {
