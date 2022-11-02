@@ -1,7 +1,13 @@
-<div id="mythic" class="tab-pane fade show">
+  1{{char.custom.mythic_name}}
+
+  2{{this.char.custom.mythic_name}}
+
+  3{{this.char.custom}}
+
   <div class="form-group row">
     <div class="col-sm-3">
       <b>Name</b>
+      {{this.char.custom.mythic_name}}
     </div>
     <div class="col-sm-9">
       <Input @type="text" size={{25}} @value={{char.custom.mythic_name}} />
@@ -31,7 +37,6 @@
       <b>Short desc</b>
     </div>
     <div class="col-sm-9">
-      <Input @type="text" size={{50}} @value={{char.custom.mythic_shortdesc}} />
+      <Input @type="text" size={{35}} @value={{char.custom.mythic_shortdesc}} />
     </div>
   </div>
-</div>
