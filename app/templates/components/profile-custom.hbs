@@ -1,3 +1,9 @@
+{{#if this.char.custom.mythic}}
+  <div id="systemmythic" class="tab-pane fade">
+    <CharMount @mythic={{this.char.custom.mythic}} />
+  </div>
+{{/if}}
+
 {{#if this.char.custom.spells}}
   <div id="systemspells" class="tab-pane fade">
     <CharSpells @char={{this.char}} />
