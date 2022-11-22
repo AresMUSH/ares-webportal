@@ -18,6 +18,7 @@ export default Component.extend({
       mythic_about: this.get('char.custom.mythic_about'),
       mythic_desc: this.get('char.custom.mythic_desc'),
       mythic_shortdesc: this.get('char.custom.mythic_shortdesc'),
+      mythic_gender: this.get('char.custom.mythic_gender'),
     };
   }
 });
