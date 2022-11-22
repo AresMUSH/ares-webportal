@@ -1,10 +1,10 @@
 {{page-title this.model.scene.title}}
 <h1>Edit Scene {{this.model.scene.title}}</h1>
-        
+
     {{#if (not this.model.scene.completed)}}
 
      <div class="form-group row">
-       <div class="col-sm-3">     
+       <div class="col-sm-3">
          <label class="col-form-label">Scene Privacy:</label>
        </div>
 
@@ -14,7 +14,7 @@
       </PowerSelect>
        </div>
      </div>
-     
+
      <div class="form-group row">
         <div class="col-sm-3">
             <label for="title" class="col-form-label">Notes:</label>
@@ -25,7 +25,7 @@
         </div>
       </div>
     {{/if}}
-    
+
    <div class="form-group row">
       <div class="col-sm-3">
           <label for="title" class="col-form-label">Title:</label>
@@ -34,7 +34,7 @@
           <Input @type="text" size={{25}} id="title" @enter={{action "save"}} @value={{this.model.scene.title}} />
       </div>
     </div>
-    
+
    <div class="form-group row">
      <div class="col-sm-3">
           <label for="location" class="col-form-label">Location:</label>
@@ -43,8 +43,8 @@
           <Input @type="text" size={{25}} id="location" @enter={{action "save"}} @value={{this.model.scene.location}} />
       </div>
     </div>
-    
-    
+
+
    <div class="form-group row">
      <div class="col-sm-3">
           <label for="icdate" class="col-form-label">IC Date:</label>
@@ -62,10 +62,10 @@
         <PowerSelect @selected={{this.model.scene.scene_type}} @options={{this.sceneTypes}} @onChange={{action "typeChanged"}} as |type|>
           {{type}}
         </PowerSelect>
-      
+
     </div>
   </div>
-  
+
    <div class="form-group row">
     <div class="col-sm-3">
        <label class="col-form-label">Scene Pacing:</label>
@@ -74,9 +74,9 @@
        <PowerSelect @selected={{this.model.scene.scene_pacing}} @options={{this.scenePacingOptions}} @onChange={{action "pacingChanged"}} as |type|>
          {{type}}
        </PowerSelect>
-    </div> 
+    </div>
   </div>
-    
+
    <div class="form-group row">
      <div class="col-sm-3">
         <label class="col-form-label">Plot:</label>
@@ -87,14 +87,25 @@
         </PowerSelectMultiple>
      </div>
   </div>
-    
+
+  <div class="form-group row">
+    <div class="col-sm-3">
+       <label class="col-form-label">Cryptids:</label>
+    </div>
+    <div class="col-sm-9">
+      <PowerSelectMultiple @selected={{this.model.scene.creatures}} @searchEnabled=true @searchField="name" @options={{this.model.creatures}} @onChange={{action "creaturesChanged"}} as |creature|>
+        {{creature.name}}
+      </PowerSelectMultiple>
+    </div>
+  </div>
+
    <div class="form-group row">
     <div class="col-sm-3">
         <label for="tags" class="col-form-label">Tags:</label>
     </div>
     <div class="col-sm-9">
         <Input @type="text" size={{25}} id="tags" @enter={{action "save"}} @value={{this.model.scene.tags}} />
-    </div> 
+    </div>
   </div>
 
    <div class="form-group row">
@@ -105,9 +116,9 @@
         <PowerSelectMultiple @selected={{this.model.scene.participants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
           {{char.name}}
         </PowerSelectMultiple>
-    </div> 
+    </div>
   </div>
-    
+
 
    <div class="form-group row">
     <div class="col-sm-3">
@@ -117,16 +128,16 @@
             <PowerSelectMultiple @selected={{this.model.scene.related_scenes}} @options={{this.model.scenes.scenes}} @searchEnabled=true @searchField="title" @onChange={{action "relatedChanged"}} as |scene|>
               {{scene.icdate}} {{scene.title}}
             </PowerSelectMultiple>
-    </div> 
+    </div>
   </div>
-    
+
    <div class="form-group row">
     <div class="col-sm-3">
         <label for="summary" class="col-form-label">Summary:</label>
     </div>
     <div class="col-sm-9">
             <MarkdownEditor @text={{this.model.scene.summary}} />
-            
+
     </div>
    </div>
 
@@ -144,13 +155,13 @@
     </div>
 
     {{#if this.model.scene.shared}}
-    
+
     <MarkdownEditor @text={{this.model.scene.log}} @rows={{20}} />
-    
+
     {{/if}}
-    
+
 <div class="action-buttons">
-    <LinkTo @route="scene" @model={{this.model.scene.id}} class="btn btn-secondary">Cancel</LinkTo> 
+    <LinkTo @route="scene" @model={{this.model.scene.id}} class="btn btn-secondary">Cancel</LinkTo>
     <button class="btn btn-primary" {{action 'save'}}>Save</button>
 </div>
 

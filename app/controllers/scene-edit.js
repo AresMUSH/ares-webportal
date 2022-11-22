@@ -8,22 +8,22 @@ export default Controller.extend({
     flashMessages: service(),
     router: service(),
     warning_tags: [],
-  
+
     scenePacingOptions: reads('model.sceneOptions.scene_pacing'),
 
     sceneTypes: computed('model.sceneOptions.scene_types', function () {
       return this.get('model.sceneOptions.scene_types').map((p) => p.name);
     }),
 
-    
-    scenePrivacyValues: computed(function() { 
+
+    scenePrivacyValues: computed(function() {
         return [ 'Open', 'Private' ];
     }),
-    
+
     resetOnExit: function() {
       this.set('warning_tags', []);
     },
-    
+
     setup: function() {
       let tags = (this.get('model.scene.content_warning') || "").split(',');
       tags.forEach(tag => {
@@ -32,7 +32,7 @@ export default Controller.extend({
         }
       });
     },
-    
+
     actions: {
         plotsChanged(new_plots) {
             this.set('model.scene.plots', new_plots);
@@ -46,6 +46,9 @@ export default Controller.extend({
         participantsChanged(new_participants) {
             this.set('model.scene.participants', new_participants);
         },
+        creaturesChanged(new_creatures) {
+            this.set('model.scene.creatures', new_creatures);
+          },
         privacyChanged(newPrivacy) {
             this.set('model.scene.privacy', newPrivacy)
         },
@@ -62,9 +65,9 @@ export default Controller.extend({
             if (!Array.isArray(tags)) {
                 tags = tags.split(/[\s,]/);
             }
-            
+
             api.requestOne('editScene', { id: this.get('model.scene.id'),
-               title: this.get('model.scene.title'), 
+               title: this.get('model.scene.title'),
                icdate: this.get('model.scene.icdate'),
                scene_type: this.get('model.scene.scene_type'),
                scene_pacing: this.get('model.scene.scene_pacing'),
@@ -72,6 +75,7 @@ export default Controller.extend({
                summary: this.get('model.scene.summary'),
                privacy: this.get('model.scene.privacy'),
                plots: (this.get('model.scene.plots') || []).map(p => p.id),
+               creatures: (this.get('model.scene.creatures') || []).map(creature => creature.id),
                participants: (this.get('model.scene.participants') || []).map(p => p.name),
                related_scenes: (this.get('model.scene.related_scenes') || []).map(s => s.id),
                tags: tags,
@@ -82,7 +86,7 @@ export default Controller.extend({
                 if (response.error) {
                     return;
                 }
-                
+
                 this.router.transitionTo('scene', this.get('model.scene.id'));
                 this.flashMessages.success('Scene updated!');
             });
