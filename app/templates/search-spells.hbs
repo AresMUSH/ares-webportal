@@ -17,11 +17,11 @@
 
 <div class="row">
 
-  <div class="col col-xs-3">
+  <div class="col col-sm">
     <label>Name:</label>
   </div>
 
-  <div class="col col-xs-9">
+  <div class="col col-9">
     <p><Input @type="text" size={{25}} id="title" @value={{this.searchName}} @enter={{action "search"}} /></p>
   </div>
 
@@ -29,11 +29,11 @@
 
 <div class="row">
 
-  <div class="col col-xs-3">
+  <div class="col col-sm">
         <label>Level:</label>
   </div>
 
-  <div class="col col-xs-9">
+  <div class="col col-9">
     <p><Input @type="text" size={{25}} id="title" @value={{this.searchLevel}} @enter={{action "search"}} /></p>
   </div>
 
@@ -41,7 +41,7 @@
 
 <div class="row">
 
-  <div class="col col-xs-3">
+  <div class="col col-sm">
         <label>School:</label>
   </div>
 
@@ -59,7 +59,7 @@
 
 <div class="row">
 
-  <div class="col col-xs-3">
+  <div class="col col-sm">
         <label>Effect:</label>
   </div>
 
@@ -74,7 +74,7 @@
 
 <div class="row">
 
-  <div class="col col-xs-3">
+  <div class="col col-sm">
         <label>Damage Type:</label>
   </div>
 
@@ -90,11 +90,11 @@
 
 <div class="row">
 
-  <div class="col col-xs-3">
+  <div class="col col-sm">
         <label>Description:</label>
   </div>
 
-  <div class="col col-xs-9">
+  <div class="col col-9">
     <p><Input @type="text" size={{25}} id="title" @value={{this.searchDesc}} @enter={{action "search"}} /></p>
   </div>
 
@@ -102,20 +102,20 @@
 
 <div class="row">
 
-  <div class="col col-xs-3">
+  <div class="col col-sm">
         <p><label>Available?</label>
 
         {{input type="checkbox"  id="available"  checked=this.searchAvailable}}</p>
 
   </div>
 
-  <div class="col col-xs-3">
+  <div class="col col-sm">
       <p>  <label>Potion?</label>
 
         {{input type="checkbox"  id="potion"  checked=this.searchPotion}}</p>
   </div>
 
-  <div class="col col-xs-3">
+  <div class="col col-sm">
       <p>  <label>Line of Sight?</label>
 
         {{input type="checkbox"  id="los"  checked=this.searchLOS}}</p>
