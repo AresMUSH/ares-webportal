@@ -46,6 +46,10 @@
           {{#if this.model.creature.found}}<b>Found:</b>
           {{this.model.creature.found}}<br>{{/if}}
 
+          <b>Speed:</b> {{this.model.creature.speed}}
+          <b>Length:</b> {{this.model.creature.length}}
+          <b>Height:</b> {{this.model.creature.height}}
+
           {{#if this.model.creature.armor}}
             {{!-- <b>Armor:</b> {{#link-to 'fs3combat-gear-detail' 'armor' this.model.creature.armor}}{{this.model.creature.armor}}{{/link-to}}<br> --}}
           {{/if}}
