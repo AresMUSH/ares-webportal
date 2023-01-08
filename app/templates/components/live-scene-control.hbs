@@ -43,9 +43,9 @@
                 {{#if (not this.scene.reload_required)}}
                   {{#if (and this.isApproved pose.can_edit)}}
                     {{#if (not pose.editActive)}}
-                    <a href="#" {{action 'editScenePose' pose}}><i class="fas fa-edit"></i></a>
+                    <a href="#" {{action 'editScenePose' pose}}><i class="fas fa-edit" aria-label="Edit Pose"></i></a>
                     {{#if pose.can_delete}}
-                    <a href="#" {{action (mut this.confirmDeleteScenePose) pose}}><i class="fas fa-trash"></i></a>
+                    <a href="#" {{action (mut this.confirmDeleteScenePose) pose}}><i class="fas fa-trash" aria-label="Delete Pose"></i></a>
                     {{/if}}
                     {{/if}}
                   {{/if}}
