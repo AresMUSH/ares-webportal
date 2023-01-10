@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend({
     gameApi: service(),
     router: service(),
+    flashMessages: service(),
   
     warning: '',
     

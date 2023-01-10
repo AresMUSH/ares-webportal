@@ -6,6 +6,7 @@ import { inject as service } from '@ember/service';
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     router: service(),
+    flashMessages: service(),
     confirmDelete: false,
     
     pageTitle: computed('model.{icdate,title}', function () {

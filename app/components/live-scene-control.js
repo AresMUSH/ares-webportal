@@ -17,6 +17,8 @@ export default Component.extend(AuthenticatedController, {
     reportReason: null,
     poseType: null,
     commandResponse: null,
+    showInvitation: false,
+    selectedInvitee: null,
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
@@ -101,6 +103,9 @@ export default Component.extend(AuthenticatedController, {
     actions: { 
       locationSelected(loc) {
           this.set('newLocation', loc);  
+      },
+      changeInvitee(char) {
+        this.set('selectedInvitee', char);
       },
       changeLocation() {
           let api = this.gameApi;
@@ -263,6 +268,21 @@ export default Component.extend(AuthenticatedController, {
               if (option) {
                 this.refresh(); 
               }
+          });
+      },
+      
+      inviteChar() {
+          let api = this.gameApi;
+          let invitee = this.selectedInvitee;
+          this.set('selectedInvitee', null);
+          this.set('showInvitation', false);
+          
+          api.requestOne('inviteToScene', { id: this.get('scene.id'), invitee: invitee.name }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              this.flashMessages.success(`Invitation sent.`);
           });
       },
       

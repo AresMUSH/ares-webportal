@@ -32,7 +32,7 @@ export default Controller.extend(AuthenticatedController, {
             }
             else {
               this.flashMessages.success('Config saved! You may need to refresh the page to see the changes.');
-              if (this.isWikiMgr) {
+              if (this.isThemeMgr) {
                 this.router.transitionTo('home');
               } else {
                 this.router.transitionTo('setup');  

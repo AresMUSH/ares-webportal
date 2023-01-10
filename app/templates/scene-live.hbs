@@ -16,7 +16,7 @@
 <div class="row">
     <div class="col col-xs-12">
 
-      <LiveSceneControl @scene={{this.model.scene}} @locations={{this.model.locations}} @abilities={{this.model.abilities}} @spells={{this.model.spells}} @places={{this.model.scene.places}} @playerName={{this.currentUser.name}} @scrollPaused={{this.scrollPaused}} @refresh={{action "refresh"}} @scrollDown={{action "scrollScene"}} @setScroll={{action "setScroll"}} />
+      <LiveSceneControl @scene={{this.model.scene}} @locations={{this.model.locations}} @abilities={{this.model.abilities}} @spells={{this.model.spells}} @places={{this.model.scene.places}} @playerName={{this.currentUser.name}} @characters={{this.model.characters}} @scrollPaused={{this.scrollPaused}} @refresh={{action "refresh"}} @scrollDown={{action "scrollScene"}} @setScroll={{action "setScroll"}} />
    </div>
 </div>
 {{outlet}}

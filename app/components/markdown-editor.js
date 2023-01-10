@@ -8,7 +8,9 @@ export default Component.extend({
     gameApi: service(),
     
     onEnter() {
-        this.send('onEnter');  
+      if (this.attrs.onEnter) {
+        this.attrs.onEnter();
+      }        
     },
     
     actions: { 
@@ -16,8 +18,8 @@ export default Component.extend({
       keyDown: function(event) {
         if (event.keyCode == 13) {
           if (event.ctrlKey || event.metaKey) {
-            this.onEnter();
-            event.preventDefault();
+              this.onEnter();
+              event.preventDefault();
           }
         }
       },
@@ -39,6 +41,9 @@ export default Component.extend({
         },
         showHelp() {
             window.open("/help/markdown");
+        },
+        swallowEnter() {
+          // Do nothing.
         }
     }
 });
