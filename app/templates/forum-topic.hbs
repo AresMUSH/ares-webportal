@@ -137,11 +137,12 @@
     <div id="reply" class="card-collapse collapse">
 
       <div class="forum-reply-panel">
-         <p><b>Reply As:</b>        <div class="forum-char-select" >
-                     <PowerSelect @selected={{this.author}} @options={{this.model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |author|>
-                         <CharIconTiny @char={{author}} />
-                     </PowerSelect>
-                 </div>
+         <p><b>Reply As:</b>        
+           <div class="forum-char-select" >
+           <PowerSelect @selected={{this.author}} @options={{this.model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |char|>
+               <CharIconTiny @char={{char}} />
+           </PowerSelect>
+           </div>
          </p>
     
         <MarkdownEditor @text={{this.reply}} />

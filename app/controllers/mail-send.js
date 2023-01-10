@@ -7,6 +7,7 @@ export default Controller.extend({
     router: service(),
     subject: '',
     message: '',
+    sender: null,
     toList: null,
 
     init: function() {
@@ -18,6 +19,11 @@ export default Controller.extend({
         this.set('subject', '');
         this.set('message', '');
         this.set('toList', []);
+        this.set('sender', null);
+    },
+    
+    setup: function() {
+      this.set('sender', this.get('model.sendOptions.authorableChars')[0]);
     },
     
     actions: {
@@ -25,6 +31,7 @@ export default Controller.extend({
             let api = this.gameApi;
             api.requestOne('sendMail', { subject: this.subject, 
                message: this.message,
+                sender: this.sender.name,
                to_list: (this.toList || []).map(p => p.name) }, null)
             .then( (response) => {
                 if (response.error) {
@@ -37,5 +44,8 @@ export default Controller.extend({
         toListChanged(newList) {
             this.set('toList', newList);
         },
+        senderChanged(char) {
+          this.set('sender', char);
+        }
     }
 });

@@ -13,6 +13,6 @@
 
 {{#if (not this.game.disabled_plugins.fs3combat)}}  
 <div id="systemfs3damage" class="tab-pane fade">
-  <Fs3Damage @char={{this.char}} />
+  <Fs3Damage @damage={{this.char.fs3.damage}} @damageMod={{this.char.fs3.damage_mod}} @showOriginal={{true}} />
 </div>
 {{/if}}
