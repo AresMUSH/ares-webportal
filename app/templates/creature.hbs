@@ -46,18 +46,18 @@
           {{#if this.model.creature.found}}<b>Found:</b>
           {{this.model.creature.found}}<br>{{/if}}
 
-          <b>Speed:</b> {{this.model.creature.speed}}
-          <b>Length:</b> {{this.model.creature.length}}
-          <b>Height:</b> {{this.model.creature.height}}
+          <b>Speed:</b> {{ansi-format text=this.model.creature.speed}}<br>
+          <b>Length:</b> {{ansi-format text=this.model.creature.length}}<br>
+          <b>Height:</b> {{ansi-format text=this.model.creature.height}}<br>
 
           {{#if this.model.creature.armor}}
-            {{!-- <b>Armor:</b> {{#link-to 'fs3combat-gear-detail' 'armor' this.model.creature.armor}}{{this.model.creature.armor}}{{/link-to}}<br> --}}
+            <b>Armor:</b> {{#link-to 'fs3combat-gear-detail' 'armor' this.model.creature.armor}}{{this.model.creature.armor}}{{/link-to}}<br>
           {{/if}}
 
           {{#if this.model.creature.weapons}}<b>Weapons:</b>
             <ul>
             {{#each this.model.creature.weapons as |weapon|}}
-              {{!-- <li>{{#link-to 'fs3combat-gear-detail' 'weapon' weapon}}{{weapon}}{{/link-to}}</li> --}}
+              <li>{{#link-to 'fs3combat-gear-detail' 'weapon' weapon}}{{weapon}}{{/link-to}}</li>
             {{/each}}
             </ul>
           {{/if}}
