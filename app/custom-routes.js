@@ -10,10 +10,6 @@ export default function setupCustomRoutes(router) {
   router.route('lore-hooks');
   router.route('search-spells');
   router.route('school', { path: '/school/:school'});
-  router.route('school-creation', { path: '/school/:school'});
-  router.route('school-arcane', { path: '/school/:school'});
-  router.route('school-aether', { path: '/school/:school'});
-  router.route('school-entropy', { path: '/school/:school'});
   router.route('spells', { path: '/spells'});
   router.route('spell-fatigue'), { path: '/spell-fatigue'};
 }
