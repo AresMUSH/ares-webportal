@@ -122,7 +122,6 @@ Router.map(function() {
   this.route('scene-download', { path: '/scene/:id/download' } );
   this.route('scene-create', { path: '/scene/create', query_params: ['location'] } );
   this.route('scene-source', { path: '/scene/:scene_id/source/:version_id'});
-  this.route('school', { path: '/school/:school'});
   this.route('search-locations');
   this.route('search-scenes');
   this.route('search-jobs');
