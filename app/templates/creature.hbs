@@ -46,9 +46,9 @@
           {{#if this.model.creature.found}}<b>Found:</b>
           {{this.model.creature.found}}<br>{{/if}}
 
-          <b>Speed:</b> {{ansi-format text=this.model.creature.speed}}<br>
-          <b>Length:</b> {{ansi-format text=this.model.creature.length}}<br>
-          <b>Height:</b> {{ansi-format text=this.model.creature.height}}<br>
+          <b>Speed:</b> {{ansi-format text=this.model.creature.edit_speed}}<br>
+          <b>Length:</b> {{ansi-format text=this.model.creature.edit_length}}<br>
+          <b>Height:</b> {{ansi-format text=this.model.creature.edit_height}}<br>
 
           {{#if this.model.creature.armor}}
             <b>Armor:</b> {{#link-to 'fs3combat-gear-detail' 'armor' this.model.creature.armor}}{{this.model.creature.armor}}{{/link-to}}<br>
