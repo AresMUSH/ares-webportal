@@ -11,7 +11,7 @@
 
 
   <div class="row profile-wrap creature-wrap">
-    <div class="row">
+    <div class="row" style="justify-content: space-between;">
       <div class="col-md-4 col-sm-12 col-xs-12 profile-image-wrap creature-image-wrap">
       {{#if this.model.creature.profile_image.name}}
         <LinkTo @route="file" @models={{array this.model.creature.profile_image.folder creature.profile_image.name}}>
@@ -22,7 +22,7 @@
       {{/if}}
       </div>
 
-      <div class="col-md-8 col-sm-12 col-xs-12 profile-demo-wrap info-box">
+      <div class="col-md-8 col-sm-12 col-xs-12 profile-demo-wrap infobox">
         <div class="infobox-heading">
           <div class="infobox-title-text">
             {{this.model.creature.name}}
@@ -46,20 +46,35 @@
           {{#if this.model.creature.found}}<b>Found:</b>
           {{this.model.creature.found}}<br>{{/if}}
 
-          <b>Speed:</b> {{ansi-format text=this.model.creature.edit_speed}}<br>
-          <b>Length:</b> {{ansi-format text=this.model.creature.edit_length}}<br>
-          <b>Height:</b> {{ansi-format text=this.model.creature.edit_height}}<br>
+          <div class="row creature-stats">
+            <div class="col-sm">
+              <b>Height:</b> {{ansi-format text=this.model.creature.edit_height}}<br>
+              <b>Length:</b> {{ansi-format text=this.model.creature.edit_length}}<br>
+            </div>
+            <div class="col-sm">
+              <b>Speed:</b> {{ansi-format text=this.model.creature.edit_speed}}<br>
+            </div>
+          </div>
 
           {{#if this.model.creature.armor}}
-            <b>Armor:</b> {{#link-to 'fs3combat-gear-detail' 'armor' this.model.creature.armor}}{{this.model.creature.armor}}{{/link-to}}<br>
-          {{/if}}
+            <div class="row creature-gear">
+              {{#if this.model.creature.weapons}}
+                <div class="col-sm">
+                  <b>Weapons:</b>
+                    <ul>
+                    {{#each this.model.creature.weapons as |weapon|}}
+                      <li>{{#link-to 'fs3combat-gear-detail' 'weapon' weapon}}{{weapon}}{{/link-to}}</li>
+                    {{/each}}
+                    </ul>
+                </div>
+              {{/if}}
 
-          {{#if this.model.creature.weapons}}<b>Weapons:</b>
-            <ul>
-            {{#each this.model.creature.weapons as |weapon|}}
-              <li>{{#link-to 'fs3combat-gear-detail' 'weapon' weapon}}{{weapon}}{{/link-to}}</li>
-            {{/each}}
-            </ul>
+              {{#if this.model.creature.armor}}
+                <div class="col-sm">
+                  <b>Armor:</b> {{#link-to 'fs3combat-gear-detail' 'armor' this.model.creature.armor}}{{this.model.creature.armor}}{{/link-to}}<br>
+                </div>
+              {{/if}}
+            </div>
           {{/if}}
         </div>
       </div>
