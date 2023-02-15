@@ -30,6 +30,9 @@ export default Component.extend({
       this.set('char.custom.mount_type', type);
 
     },
+    mountGenderChanged(type) {
+      this.set('char.custom.mount_gender', type);
+    },
     lorehookPrefChanged(val) {
       this.set('char.custom.lore_hook_pref', val);
     }
@@ -46,6 +49,7 @@ export default Component.extend({
       mythic_starting_spells: this.get('char.custom.mythic_starting_spells'),
       mount_type: this.get('char.custom.mount_type'),
       mount_name: this.get('char.custom.mount_name'),
+      mount_gender: this.get('char.custom.mount_gender'),
       mount_shortdesc: this.get('char.custom.mount_shortdesc'),
       mount_desc: this.get('char.custom.mount_desc'),
       lore_hook_pref: this.get('char.custom.lore_hook_pref')
