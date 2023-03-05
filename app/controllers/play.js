@@ -91,13 +91,14 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       let channelTitle = msgData.title;
       let newMessage = msgData.message;
       let author = msgData.author;
+      let messageId = msgData.message_id;
       let localTimestamp = localTime(timestamp);
       
       let channel = this.getChannel(channelKey);
       if (!channel) {
         channel = this.addPageChannel(msgData);
       }
-      channel.messages.pushObject({message: newMessage, timestamp: localTimestamp, author: author});
+      channel.messages.pushObject({message: newMessage, timestamp: localTimestamp, author: author, id: messageId});
       set(channel, 'last_activity', Date.now());
       if (!channel.is_hidden) {
         set(channel, 'is_recent', true);
