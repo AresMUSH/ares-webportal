@@ -44,4 +44,11 @@
   </div>
 </div>
 
+
+{{#if model.can_manage}}
+<div class="action-buttons">
+  <LinkTo @route="area-create" class="btn btn-secondary">Create Area</LinkTo>  
+</div>
+{{/if}}
+
 {{outlet}}

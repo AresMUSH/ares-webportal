@@ -13,6 +13,11 @@
 
 <MarkdownEditor @text={{this.model.area.description}} />
 
+<p><b>Parent Area:</b></p>
+
+<PowerSelect @selected={{this.model.area.parent}}  @options={{this.model.all_areas}} @searchEnabled=true @searchField="name" @allowClear={{true}} @onChange={{action "changeParent"}} as |area|>
+   {{area.name}}
+</PowerSelect>
 
 <div class="action-buttons">
   <LinkTo @route="locations" class="btn btn-secondary">Cancel</LinkTo>
