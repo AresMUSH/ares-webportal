@@ -9,41 +9,35 @@
   <LinkTo @route="search-locations" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Locations</LinkTo>  
 </div>
 
-<h2>Area Directory</h2>
-
-  
- <ul class="nav nav-tabs" role="tablist">
-
+<div class="area-quickjump">
   {{#each this.topLevelAreas as |area index| }}
-   <li role="presentation" class="nav-item"><a href="#area{{area.id}}" aria-controls="{{area.id}}" role="tab" data-bs-toggle="tab" class="nav-link {{if (eq index 0) 'active' }}">{{area.name}}</a></li>
+    {{#if (not (eq index 0 ))}}
+    &nbsp;|&nbsp;
+    {{/if}}
+    
+    <a href="#area{{index}}">{{area.name}}</a>
   {{/each}}
-   <li role="presentation" class="nav-item"><a href="#unassigned" aria-controls="unassigned" role="tab" data-bs-toggle="tab" class="nav-link">No Area</a></li>
-
-</ul>
-
-<div class="tab-content">
-
-  {{#each this.topLevelAreas as |area index| }}
-  <div class="tab-pane {{if (eq index 0) 'active' }}" id="area{{area.id}}">
-
-    <a name="{{area.id}}"></a>
-    <AreaDirectory @area={{area}} />
-      
-  </div>
-  {{/each}}
-
-  <div class="tab-pane" id="unassigned">
-
-  <h3>Locations With No Area</h3>
-  
-  <ul>
-    {{#each this.model.orphan_rooms as |room|}}
-      <li><LinkTo @route="location" @model={{room.id}}>{{room.name}}</LinkTo></li>
-    {{/each}}
-  </ul>
-  </div>
 </div>
 
+
+<div class="area-directory">
+
+  {{#each this.topLevelAreas as |area index| }}
+      <AreaDirectory @area={{area}} @index={{index}} />
+  {{/each}}
+
+</div>
+
+
+<h3>Locations With No Area</h3>
+
+<ul>
+  {{#each this.model.orphan_rooms as |room|}}
+    <li><LinkTo @route="location" @model={{room.id}}>{{room.name}}</LinkTo></li>
+  {{/each}}
+</ul>
+  
+  
 
 {{#if model.can_manage}}
 <div class="action-buttons">
