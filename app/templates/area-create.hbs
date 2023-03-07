@@ -1,23 +1,46 @@
 {{page-title 'Create Area'}}
 <h1>Create Area</h1>
 
-<p><b>Name:</b></p>
-<p><Input @type="text" size={{25}} id="name" @enter={{action "save"}} @value={{this.name}} /></p>
+<div class="form-group row">
+  <div class="col-sm-3">
+      <label for="name" class="col-form-label">Name:</label>
+  </div>
+  <div class="col-sm-9">
+      <Input @type="text" size={{25}} id="name" @enter={{action "save"}} @value={{this.name}} />
+  </div> 
+</div>
 
-<p><b>Summary:</b></p>
+<div class="form-group row">
+  <div class="col-sm-3">
+      <label for="summary" class="col-form-label">Summary:</label>
+  </div>
+  <div class="col-sm-9">
+      <MarkdownEditor @text={{this.summary}} />
+  </div> 
+</div>
 
-<MarkdownEditor @text={{this.summary}} />
+<div class="form-group row">
+  <div class="col-sm-3">
+      <label for="summary" class="col-form-label">Description:</label>
+  </div>
+  <div class="col-sm-9">
+      <MarkdownEditor @text={{this.description}} />
+  </div> 
+</div>
 
 
-<p><b>Description:</b></p>
+<div class="form-group row">
+  <div class="col-sm-3">
+      <label for="summary" class="col-form-label">Parent Area:</label>
+  </div>
+  <div class="col-sm-9">
+      <PowerSelect @selected={{this.parentArea}}  @options={{this.model.areas}} @searchEnabled=true @searchField="name" @allowClear=true @onChange={{action "changeParent"}} as |area|>
+         {{area.name}}
+      </PowerSelect>
+  </div> 
+</div>
 
-<MarkdownEditor @text={{this.description}} />
 
-<p><b>Parent Area:</b></p>
-
-<PowerSelect @selected={{this.parentArea}}  @options={{this.model.areas}} @searchEnabled=true @searchField="name" @allowClear=true @onChange={{action "changeParent"}} as |area|>
-   {{area.name}}
-</PowerSelect>
                              
 <div class="action-buttons">
   <LinkTo @route="locations" class="btn btn-secondary">Cancel</LinkTo>

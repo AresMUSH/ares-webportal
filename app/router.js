@@ -85,6 +85,7 @@ Router.map(function() {
   this.route('jobcat-manage');
   this.route('locations');
   this.route('location', { path: '/location/:id'});
+  this.route('location-create', { path: '/location/create'});
   this.route('location-edit', { path: '/location/:id/edit'});
   this.route('logs');
   this.route('log', { path: '/log/:file' });

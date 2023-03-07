@@ -1,0 +1,21 @@
+<div class="location-entry">
+  <div class="location-entry-top">
+            
+    <h2>{{this.location.name}}</h2>
+
+    <div class="location-entry-summary">
+      {{#if this.location.summary}}
+        <p><AnsiFormat @text={{this.location.summary}} /></p>
+      {{/if}}
+      
+    </div>
+  </div>
+
+  <div class="location-buttons">
+    {{#if this.can_manage}}
+    <LinkTo @route="location-edit" @model={{this.location.id}} class="btn btn-secondary">Edit</LinkTo>
+    {{/if}}
+    <LinkTo @route="scene-create" @query={{hash location=this.location.name_and_area}} class="btn btn-primary">Start Scene</LinkTo>
+    
+  </div>
+</div>

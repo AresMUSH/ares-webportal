@@ -1,10 +1,21 @@
 {{page-title this.model.name}}
 <h1>{{this.model.name}}</h1>
 
+<p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
+
+
+<AnsiFormat @text={{this.model.summary}} />
+
+<h2>Description</h2>
+
 <AnsiFormat @text={{this.model.descs.current}} />
 
+<h2>Details</h2>
+
 {{#each this.model.descs.details as |detail|}}
-<p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
+<p><b>{{detail.name}}:</b></p>
+
+<AnsiFormat @text={{detail.desc}} />
 {{/each}}
 
 
@@ -21,22 +32,19 @@
   {{/each}}
 {{/if}}
 
-<h3>Leads To</h3>
-
-<ul>
-  {{#each this.model.destinations as |dest|}}
-  <li><LinkTo @route="location" @model={{dest.id}}>{{dest.name}}</LinkTo></li>
-  {{/each}}
-</ul>
-
     
-<p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
 
 <div class="action-buttons">
   {{#if this.model.can_edit}}
+  <button {{action (mut this.confirmDelete) true}} class="btn btn-warning action-button">Delete</button>
   <LinkTo @route="location-edit" @model={{this.model.id}} class="btn btn-secondary">Edit</LinkTo>
   {{/if}}
   <LinkTo @route="scene-create" @query={{hash location=this.model.name_and_area}} class="btn btn-primary">Start Scene Here</LinkTo>
 </div>
+
+
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut this.confirmDelete) false}}>
+    You're about to delete location {{this.model.location.name}}. This cannot be undone. Are you sure?
+  </BsModalSimple>
 
 

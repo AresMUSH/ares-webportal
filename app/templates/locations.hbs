@@ -17,30 +17,46 @@
     
     <a href="#area{{index}}">{{area.name}}</a>
   {{/each}}
+  &nbsp;|&nbsp; <a href="#orphans">No Area</a>
 </div>
 
+{{#each this.topLevelAreas as |area index| }}
+  
+  <a name="area{{index}}" />
+  <h2>{{area.name}}</h2>
 
-<div class="area-directory">
+  <div class="area-directory">
+    <AreaDirectory @area={{area}} />
+  
+    {{#each area.descendants as |child|}}
+      <AreaDirectory @area={{child}} />
+    {{/each}}
+  </div>
+  
+{{/each}}
 
-  {{#each this.topLevelAreas as |area index| }}
-      <AreaDirectory @area={{area}} @index={{index}} />
-  {{/each}}
+<a name="orphans"></a>
 
+<h2>Locations With No Area</h2>
+
+<div class="area-entry">
+  <div class="area-entry-top">
+    <h2>No Area</h2>
+    <div class="area-entry-summary">
+        <h3>Locations</h3>
+        <ul>
+          {{#each this.model.orphan_rooms as |room|}}
+          <li><LinkTo @route="location" @model={{room.id}}>{{room.name}}</LinkTo></li>
+          {{/each}}
+        </ul>
+    </div>
+  </div>
 </div>
-
-
-<h3>Locations With No Area</h3>
-
-<ul>
-  {{#each this.model.orphan_rooms as |room|}}
-    <li><LinkTo @route="location" @model={{room.id}}>{{room.name}}</LinkTo></li>
-  {{/each}}
-</ul>
-  
   
 
-{{#if model.can_manage}}
+{{#if this.model.can_manage}}
 <div class="action-buttons">
+  <LinkTo @route="location-create" class="btn btn-secondary">Create Location</LinkTo>  
   <LinkTo @route="area-create" class="btn btn-secondary">Create Area</LinkTo>  
 </div>
 {{/if}}

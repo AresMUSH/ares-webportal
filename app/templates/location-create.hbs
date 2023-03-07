@@ -1,12 +1,12 @@
-{{page-title this.model.location.name}}
-<h1>Edit Location - {{this.model.location.name}}</h1>
+{{page-title 'Create Location'}}
+<h1>Create Location</h1>
 
    <div class="form-group row">
     <div class="col-sm-3">
         <label for="name" class="col-form-label">Name:</label>
     </div>
     <div class="col-sm-9">
-        <Input @type="text" size={{25}} id="name" @enter={{action "save"}} @value={{this.model.location.name}} />
+        <Input @type="text" size={{25}} id="name" @enter={{action "save"}} @value={{this.name}} />
     </div> 
   </div>
   
@@ -16,7 +16,7 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelect @selected={{this.model.location.area}} @options={{this.model.location.areas}} @searchEnabled=true @searchField="full_name" @allowClear=true @onChange={{action "areaChanged"}} as |area|>
+      <PowerSelect @selected={{this.area}} @options={{this.model.manage.areas}} @searchEnabled=true @searchField="full_name" @allowClear=true @onChange={{action "areaChanged"}} as |area|>
         {{area.full_name}}
       </PowerSelect>
     </div>
@@ -27,7 +27,7 @@
        <label for="owners" class="col-form-label">Owners:</label>
    </div>
     <div class="col-sm-9">
-      <PowerSelectMultiple @selected={{this.model.location.owners}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "ownersChanged"}} as |char|>
+      <PowerSelectMultiple @selected={{this.owners}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "ownersChanged"}} as |char|>
         {{char.name}}
       </PowerSelectMultiple>
     </div>
@@ -38,7 +38,7 @@
        <label for="summary" class="col-form-label">Summary (ShortDesc):</label>
    </div>
     <div class="col-sm-9">
-      <MarkdownEditor @text={{this.model.location.summary}} />
+      <MarkdownEditor @text={{this.summary}} />
     </div>
   </div>
   
@@ -47,11 +47,11 @@
         <label for="description" class="col-form-label">Description:</label>
     </div>
     <div class="col-sm-9">
-        <MarkdownEditor @text={{this.model.location.descs.current}} />
+        <MarkdownEditor @text={{this.description}} />
     </div> 
   </div>
     
-     {{#each this.model.location.descs.details as |detail|}}
+     {{#each this.details as |detail|}}
      <p>
      <Input @type="text" size={{25}} @value={{detail.name}} placeholder="Enter detail name." />
      <button class="btn btn-secondary" {{action 'removeDetail' detail.key}}><i class="fa fa-trash" aria-label="Remove Detail"></i></button>
