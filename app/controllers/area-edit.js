@@ -8,20 +8,24 @@ export default Controller.extend(AuthenticatedController, {
     router: service(),
     
     actions: {
-
-        edit: function() {
-            let api = this.gameApi;
-            api.requestOne('editArea', { id: this.get('model.area.id'),
-               name: this.get('model.area.name'), 
-               description: this.get('model.area.description'),
-               summary: this.get('model.area.summary') }, null)
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                this.router.transitionTo('area', this.get('model.area.id'));
-                this.flashMessages.success('Area updated!');
-            });
-        }
+      changeParent: function(area) {
+        this.set('model.area.parent', area);
+      },
+      
+      edit: function() {
+          let api = this.gameApi;
+          api.requestOne('editArea', { id: this.get('model.area.id'),
+             name: this.get('model.area.name'), 
+             description: this.get('model.area.description'),
+             summary: this.get('model.area.summary'),
+             parent_id: this.get('model.area.parent.id') }, null)
+          .then( (response) => {
+              if (response.error) {
+                  return;
+              }
+              this.router.transitionTo('area', this.get('model.area.id'));
+              this.flashMessages.success('Area updated!');
+          });
+      }
     }
 });
