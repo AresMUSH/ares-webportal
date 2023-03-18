@@ -1,7 +1,10 @@
 <div class="area-entry">
   <div class="area-entry-top">
-            
-    <h2>{{this.area.full_name}}</h2>
+    {{#if this.areaIndex}}
+      <a name="area{{this.areaIndex}}" />
+    {{/if}}
+    
+    <h2><LinkTo @route="area" @model={{this.area.id}}>{{this.area.display_name}}</LinkTo></h2>
 
     <div class="area-entry-summary">
       {{#if this.area.summary}}
