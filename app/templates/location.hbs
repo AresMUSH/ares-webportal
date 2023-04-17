@@ -18,6 +18,16 @@
 <AnsiFormat @text={{detail.desc}} />
 {{/each}}
 
+<h3>Leads To</h3>
+
+<ul>
+  {{#each this.model.destinations as |dest|}}
+  <li><LinkTo @route="location" @model={{dest.id}}>{{dest.name}}</LinkTo></li>
+  {{/each}}
+</ul>
+
+
+
 
 {{#if this.model.area}}
 <h3>Located In</h3>
@@ -32,7 +42,7 @@
   {{/each}}
 {{/if}}
 
-    
+
 
 <div class="action-buttons">
   {{#if this.model.can_edit}}
