@@ -37,8 +37,9 @@ export default Controller.extend({
       
       api.requestOne('editLocation', { id: this.get('model.location.id'),
       name: this.get('model.location.name'), 
-      area: this.get('model.location.area.id'), 
+      area_id: this.get('model.location.area.id'), 
       owners: (this.get('model.location.owners') || []).map(owner => owner.name),
+      summary: this.get('model.location.summary'),
       descs: descs}, null)
       .then( (response) => {
         if (response.error) {

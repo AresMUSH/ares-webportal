@@ -1,30 +1,29 @@
-<h3>{{this.area.name}}</h3>
+<div class="area-entry">
+  <div class="area-entry-top">
+    {{#if this.areaIndex}}
+      <a name="area{{this.areaIndex}}" />
+    {{/if}}
+    
+    <h2><LinkTo @route="area" @model={{this.area.id}}>{{this.area.display_name}}</LinkTo></h2>
 
-<p><AnsiFormat @text={{this.area.summary}} /></p>
+    <div class="area-entry-summary">
+      {{#if this.area.summary}}
+        <p><AnsiFormat @text={{this.area.summary}} /></p>
+      {{/if}}
+      
+      {{#if this.area.rooms}}
+        <h3>Locations</h3>
+        <ul>
+          {{#each this.area.rooms as |r|}}
+          <li><LinkTo @route="location" @model={{r.id}}>{{r.name}}</LinkTo>  </li>
+          {{/each}}
+        </ul>
+      {{/if}}
 
-{{#if this.area.rooms}}
+    </div>
+  </div>
 
-<p><b>Locations</b></p>
-<ul>
-  {{#each this.area.rooms as |r|}}
-  <li><LinkTo @route="location" @model={{r.id}}>{{r.name}}</LinkTo>  </li>
-  {{/each}}
-</ul>
-{{/if}}
-
-{{#if this.area.children}}
-<p><b>Areas Within</b></p>
-
-<ul>
-  {{#each this.area.children as |c| }}
-  <li><LinkTo @route="area" @model={{c.id}}>{{c.name}}</LinkTo></li>
-  {{/each}}
-</ul>
-{{/if}}
-
-<br>
-<div class="row">
-  <div class="col col-xs-12">
-    <LinkTo @route="area" @model={{this.area.id}}>Learn More...</LinkTo>
+  <div class="area-buttons">
+    <LinkTo @route="area" @model={{this.area.id}} class="btn btn-secondary">View Details</LinkTo>
   </div>
 </div>

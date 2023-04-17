@@ -40,7 +40,7 @@
       
        <div class="form-group row">
         <div class="col-sm-3">
-            <label for="player" class="col-form-label"><b>Player</b></label>
+            <label for="player" class="col-form-label">Player</label>
         </div>
         <div class="col-sm-9">
              <PowerSelect @selected={{this.banPlayer}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "banPlayerChanged"}} as |char|>
@@ -51,7 +51,7 @@
       
        <div class="form-group row">
         <div class="col-sm-3">
-            <label for="player" class="col-form-label"><b>Reason</b></label>
+            <label for="player" class="col-form-label">Reason</label>
         </div>
         <div class="col-sm-9">
              <Input @type="text" size={{50}} id="banPlayerReason" @value={{this.banPlayerReason}} /> 
@@ -78,7 +78,7 @@
       
        <div class="form-group row">
         <div class="col-sm-3">
-            <label for="site" class="col-form-label"><b>Site</b></label>
+            <label for="site" class="col-form-label">Site</label>
         </div>
         <div class="col-sm-9">
              <Input @type="text" size={{50}} id="site" @value={{this.banSite}} />
@@ -88,7 +88,7 @@
       
        <div class="form-group row">
         <div class="col-sm-3">
-            <label for="reason" class="col-form-label"><b>Reason</b></label>
+            <label for="reason" class="col-form-label">Reason</label>
         </div>
         <div class="col-sm-9">
              <Input @type="text" size={{50}} id="reason" @value={{this.banReason}} />

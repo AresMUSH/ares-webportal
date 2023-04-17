@@ -1,15 +1,30 @@
 {{page-title this.model.area.name}}
-<h1>{{this.model.area.name}}</h1>
+<h1>{{this.model.area.full_name}}</h1>
+
+<p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
 
 <p>
   <AnsiFormat @text={{this.model.area.summary}} />
 </p>
 
+{{#if this.model.area.description}}
 <h3>Description</h3>
 
 <p>
     <AnsiFormat @text={{this.model.area.description}} />
 </p>
+{{/if}}
+
+
+{{#if this.model.area.rooms}}
+<h3>Locations</h3>
+
+<div class="location-directory"> 
+  {{#each this.model.area.rooms as |room|}}
+    <LocationDirectory @location={{room}} @can_manage={{this.model.can_manage}} />
+  {{/each}}
+</div>
+{{/if}}
 
 
 {{#if this.model.area.parent}}
@@ -28,15 +43,6 @@
 </ul>
 {{/if}}
 
-{{#if this.model.area.rooms}}
-<h3>Locations in {{this.model.area.name}}</h3>
- 
-{{#each this.model.area.rooms as |room|}}
-  <p><LinkTo @route="location" @model={{room.id}}>{{room.name}}</LinkTo>  </p>
-{{/each}}
-{{/if}}
-
-<p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
 
 
 <div class="action-buttons">

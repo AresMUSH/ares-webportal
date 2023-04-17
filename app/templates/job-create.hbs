@@ -6,71 +6,35 @@
   <h1>Create a Request</h1>
 {{/if}}
 
-<table class="create-job-fields">
+<div class="create-job-block">
 
-
- <tr>
-   <td>
+   <div class="create-job-row">
      <label>Title:</label>
-   </td>
-   <td>
-     <p><Input @type="text" size={{25}} id="title" @value={{this.title}} /></p>
-   </td>
-   <td>
-     &nbsp;
-   </td>
- </tr>
+     <Input @type="text" size={{25}} id="title" @value={{this.title}} />
+   </div>
 
- <tr>
-    <td>
-       <label>Submitter:</label>
-     </td>
-
-     <td>
-
-       <PowerSelect @selected={{this.submitter}} @options={{this.model.characters}} @searchField="name" @searchEnabled=true @onChange={{action "submitterChanged"}} as |char|>
+   <div class="create-job-row">
+      <label>Submitter:</label>
+      <PowerSelect @selected={{this.submitter}} @options={{this.model.characters}} @searchField="name" @searchEnabled=true @onChange={{action "submitterChanged"}} as |char|>
          {{char.name}}
        </PowerSelect>
+     </div>
 
-     </td>
-      <td>
-        &nbsp;
-      </td>
- </tr>
-
- <tr>
-    <td>
+   <div class="create-job-row">
        <label>Other Participants:</label>
-     </td>
-
-     <td>
-
         <PowerSelectMultiple @selected={{this.participants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
          {{char.name}}
        </PowerSelectMultiple>
+     </div>
 
-     </td>
-      <td>
-        &nbsp;
-      </td>
- </tr>
-   <tr>
-     <td>
+     <div class="create-job-row">
        <label>Tags:</label>
-     </td>
-     <td>
-       <p><Input @type="text" size={{25}} id="tags" @value={{this.tags}} /></p>
-     </td>
-      <td>
-        &nbsp;
-      </td>
-   </tr>
+       <Input @type="text" size={{25}} id="tags" @value={{this.tags}} />
+    </div>
 
-  <tr>
-    <td>
+    <div class="create-job-row">
       <label>Category:</label>
-    </td>
-    <td>
+
           {{#if this.category}}
             <span class="badge job-category job-category-{{this.category}}">
             {{this.category}}
@@ -80,21 +44,15 @@
             {{this.model.options.request_category}}
             </span>
           {{/if}}
-    </td>
-    <td>
 
-        <DropdownMenu @id="categoryDropdown" @title="Change Category">
+        <DropdownMenu @id="categoryDropdown" @title="Category">
               {{#each this.model.options.category_values as |category| }}
                 <li><a href="#" {{action 'changeCategory' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
               {{/each}}
         </DropdownMenu>
 
-    </td>
-  </tr>
-
-
-
-</table>
+    </div>
+</div>
 
 
  <MarkdownEditor @text={{this.description}} />
