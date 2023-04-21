@@ -7,81 +7,69 @@
   <LinkTo @route="creature-edit" @model={{this.model.creature.id}} class="btn btn-secondary">Edit Cryptid</LinkTo>
 </div>
 
-
-
-
   <div class="row profile-wrap creature-wrap">
-    <div class="row" style="justify-content: space-between;">
-      <div class="col-md-4 col-sm-12 col-xs-12 profile-image-wrap creature-image-wrap">
-      {{#if this.model.creature.profile_image.name}}
-        <LinkTo @route="file" @models={{array this.model.creature.profile_image.folder creature.profile_image.name}}>
-            <img src="/game/uploads/{{this.model.creature.profile_image.path}}" alt="{{this.model.creature.name}}'s image"  class="profile-image">
-        </LinkTo>
-      {{else}}
-          <!-- <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{creature.name}}'s image"> -->
-      {{/if}}
-      </div>
-
-      <div class="col-md-8 col-sm-12 col-xs-12 profile-demo-wrap infobox">
-        <div class="infobox-heading">
-          <div class="infobox-title-text">
-            {{this.model.creature.name}}
-            <div class="infobox-subtitle">
+    <div class="col col-4 profile-image-wrap creature-image-wrap">
+        {{#if this.model.creature.profile_image.name}}
+          <LinkTo @route="file" @models={{array this.model.creature.profile_image.folder creature.profile_image.name}}>
+              <img src="/game/uploads/{{this.model.creature.profile_image.path}}" alt="{{this.model.creature.name}}'s image"  class="profile-image">
+          </LinkTo>
+        {{/if}}
+    </div>
+    <div class="col col-8">
+      <div class="index-card spell-card" style="width:95%; margin: auto; margin-bottom:30px;">
+        <div class="card-header">
+          <h3 class="card-title" style="display: flex; flex-flow: row nowrap;">
+            <div class="card-title-left">{{this.model.creature.name}}</div>
+            <div class="card-title-right">
               {{#if this.model.creature.sapient}}
                 Sapient
               {{else}}
                 Non Sapient
               {{/if}}
             </div>
-          </div>
-
+          </h3>
         </div>
-
-        <div class="infobox-body">
-          {{#if this.model.creature.gms}}<i>For more information see {{#each this.model.creature.gms as |gm|}}
-            <LinkTo @route="char" @model={{gm.name}}>{{gm.name}}</LinkTo>
-
-          {{/each}} </i><br>{{/if}}
-
+        <div class="card-text">
           {{#if this.model.creature.found}}<b>Found:</b>
           {{this.model.creature.found}}<br>{{/if}}
-
-          <div class="row creature-stats">
-            <div class="col-sm">
-              <b>Height:</b> {{ansi-format text=this.model.creature.edit_height}}<br>
-              <b>Length:</b> {{ansi-format text=this.model.creature.edit_length}}<br>
+          <div class="row">
+            <div class="col col-md-4" style="padding: 0">
+              {{if this.model.creature.edit_height}} <b>Height:</b> {{ansi-format text=this.model.creature.edit_height}} {{/if}}
             </div>
-            <div class="col-sm">
-              <b>Speed:</b> {{ansi-format text=this.model.creature.edit_speed}}<br>
+            <div class="col col-md-4" style="padding: 0">
+              {{if this.model.creature.edit_length}} <b>Length:</b> {{ansi-format text=this.model.creature.edit_length}} {{/if}}
+            </div>
+            <div class="col col-md-4" style="padding: 0">
+              {{if this.model.creature.edit_speed}} <b>Speed:</b> {{ansi-format text=this.model.creature.edit_speed}} {{/if}}
             </div>
           </div>
 
-          {{#if this.model.creature.armor}}
-            <div class="row creature-gear">
-              {{#if this.model.creature.weapons}}
-                <div class="col-sm">
-                  <b>Weapons:</b>
-                    <ul>
-                    {{#each this.model.creature.weapons as |weapon|}}
-                      <li>{{#link-to 'fs3combat-gear-detail' 'weapon' weapon}}{{weapon}}{{/link-to}}</li>
-                    {{/each}}
-                    </ul>
-                </div>
-              {{/if}}
-
-              {{#if this.model.creature.armor}}
-                <div class="col-sm">
-                  <b>Armor:</b> {{#link-to 'fs3combat-gear-detail' 'armor' this.model.creature.armor}}{{this.model.creature.armor}}{{/link-to}}<br>
-                </div>
+          <div class="row">
+            <div class="col col-md-4" style="padding: 0">
+              {{if this.model.creature.weapons}}
+                <b>Weapons:</b>
+                <ul>
+                  {{#each this.model.creature.weapons as |weapon|}}
+                    <li>{{#link-to 'fs3combat-gear-detail' 'weapon' weapon}}{{weapon}}{{/link-to}}</li>
+                  {{/each}}
+                </ul>
               {{/if}}
             </div>
+            <div class="col col-md-4" style="padding: 0">
+              {{if this.model.creature.armor}}
+                <b>Armor:</b> {{#link-to 'fs3combat-gear-detail' 'armor' this.model.creature.armor}}{{this.model.creature.armor}}{{/link-to}}
+              {{/if}}
+            </div>
+          </div>
+
+          </br>{{{ansi-format text=this.model.creature.short_desc}}}
+          </br>
+          {{#if this.model.creature.gms}}
+            <i>For more information see {{#each this.model.creature.gms as |gm|}}
+            <LinkTo @route="char" @model={{gm.name}}>{{gm.name}}</LinkTo>      {{/each}} </i><br>
           {{/if}}
         </div>
       </div>
-
-    </div>
-    <div class="short-desc">
-      <p>{{{ansi-format text=this.model.creature.short_desc}}}</p>
     </div>
   </div>
 
