@@ -17,9 +17,9 @@
     </div>
 
     <div class="col col-8">
-      <div class="index-card spell-card" style="width:95%; margin: auto; margin-bottom:30px;">
+      <div class="index-card spell-card">
         <div class="card-header">
-          <h3 class="card-title" style="display: flex; flex-flow: row nowrap;">
+          <h3 class="card-title">
             <div class="card-title-left">{{this.model.creature.name}}</div>
             <div class="card-title-right">
               {{#if this.model.creature.sapient}}
@@ -35,20 +35,20 @@
           {{#if this.model.creature.found}}<b>Found:</b>
           {{this.model.creature.found}}<br>{{/if}}
           <div class="row">
-            <div class="col col-md-4" style="padding: 0">
-              {{if this.model.creature.edit_height}} <b>Height:</b> {{ansi-format text=this.model.creature.edit_height}} {{/if}}
+            <div class="col col-md-4">
+              {{#if this.model.creature.edit_height}} <b>Height:</b> {{ansi-format text=this.model.creature.edit_height}} {{/if}}
             </div>
-            <div class="col col-md-4" style="padding: 0">
-              {{if this.model.creature.edit_length}} <b>Length:</b> {{ansi-format text=this.model.creature.edit_length}} {{/if}}
+            <div class="col col-md-4">
+              {{#if this.model.creature.edit_length}} <b>Length:</b> {{ansi-format text=this.model.creature.edit_length}} {{/if}}
             </div>
-            <div class="col col-md-4" style="padding: 0">
-              {{if this.model.creature.edit_speed}} <b>Speed:</b> {{ansi-format text=this.model.creature.edit_speed}} {{/if}}
+            <div class="col col-md-4">
+              {{#if this.model.creature.edit_speed}} <b>Speed:</b> {{ansi-format text=this.model.creature.edit_speed}} {{/if}}
             </div>
           </div>
 
           <div class="row">
-            <div class="col col-md-4" style="padding: 0">
-              {{if this.model.creature.weapons}}
+            <div class="col col-md-4">
+              {{#if this.model.creature.weapons}}
                 <b>Weapons:</b>
                 <ul>
                   {{#each this.model.creature.weapons as |weapon|}}
@@ -57,15 +57,15 @@
                 </ul>
               {{/if}}
             </div>
-            <div class="col col-md-4" style="padding: 0">
-              {{if this.model.creature.armor}}
+            <div class="col col-md-4">
+              {{#if this.model.creature.armor}}
                 <b>Armor:</b> {{#link-to 'fs3combat-gear-detail' 'armor' this.model.creature.armor}}{{this.model.creature.armor}}{{/link-to}}
               {{/if}}
             </div>
           </div>
 
-          </br>{{{ansi-format text=this.model.creature.short_desc}}}
-          </br>
+          <br>{{{ansi-format text=this.model.creature.short_desc}}}
+          <br>
           {{#if this.model.creature.gms}}
             <i>For more information see {{#each this.model.creature.gms as |gm|}}
             <LinkTo @route="char" @model={{gm.name}}>{{gm.name}}</LinkTo>      {{/each}} </i><br>
