@@ -9,33 +9,34 @@
 
 <div class="tab-content">
 
-  <div id="relationshipindex" class="tab-pane fade show active">
-      <div class="tab-cover">Relationships</div>
-  </div>
-  
-  {{#each this.char.relationships as |cat|}}
+    <div id="relationshipindex" class="tab-pane fade show active">
+        <div class="tab-cover">Relationships</div>
+    </div>
 
-  <div id="{{cat.key}}" class="tab-pane fade">
-    
+    {{#each this.char.relationships as |cat|}}
+
+    <div id="{{cat.key}}" class="tab-pane fade">
+
+    <div class="relationship-mat">
+
     {{#each cat.relationships as |ship|}}
-        
+
         <div class="row relationship-row">
-            <div class="col col-xs-12 col-sm-3">
+            <div style="width: 100px;">
                 <RelationshipIcon @char={{ship}} />
             </div>
-            
-            <div class="col col-xs-12 col-sm-8 ansi">
+
+            <div class="relationship-content ansi">
                 {{#if ship.is_npc}}
-                <b>{{ship.name}}</b> (NPC)
+				    <div class="relationship-name"><b>{{ship.name}}</b><span class="relationship-npc"> (NPC)</span></div>
                 {{else}}
-                <b><LinkTo @route="char" @model={{ship.name}}>{{ship.name_and_nickname}}</LinkTo></b>
+                    <div class="relationship-name"><b><LinkTo @route="char" @model={{ship.name}}>{{ship.name_and_nickname}}</LinkTo></b></div>
                 {{/if}}
                 <AnsiFormat @text={{ship.text}} />
             </div>
         </div>
-        
-     {{/each}}
-             
-  </div>
-  {{/each}}
+
+    {{/each}}
+
+    </div>
 </div>
