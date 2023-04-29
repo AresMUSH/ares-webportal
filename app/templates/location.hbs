@@ -16,14 +16,6 @@
 
 <AnsiFormat @text={{this.model.descs.current}} />
 
-<h2>Details</h2>
-
-{{#each this.model.descs.details as |detail|}}
-<p><b>{{detail.name}}:</b></p>
-
-<AnsiFormat @text={{detail.desc}} />
-{{/each}}
-
 
 {{#if this.model.area}}
 <h3>Located In</h3>
@@ -38,7 +30,15 @@
   {{/each}}
 {{/if}}
 
-    
+
+<h2>Details</h2>
+
+{{#each this.model.descs.details as |detail|}}
+<p><b>{{detail.name}}:</b></p>
+
+<AnsiFormat @text={{detail.desc}} />
+{{/each}}
+
 
 <div class="action-buttons">
   {{#if this.model.can_edit}}
