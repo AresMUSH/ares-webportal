@@ -12,6 +12,7 @@ export default Controller.extend({
   area: null,
   owners: null,
   details: [],
+  starred: false,
 
   resetOnExit: function() {
     this.set('name', '');
@@ -20,6 +21,7 @@ export default Controller.extend({
     this.set('area', null);
     this.set('owners', null);
     this.set('details', []);
+    this.set('starred', false);
   },  
     
   actions: {
@@ -56,6 +58,7 @@ export default Controller.extend({
         area_id: this.get('area.id'), 
         owners: (this.get('owners') || []).map(owner => owner.name),
         summary: this.get('summary'),
+        starred: this.get('starred'),
         descs: descs}, null)
       .then( (response) => {
         if (response.error) {

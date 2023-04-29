@@ -15,7 +15,12 @@
         <h3>Locations</h3>
         <ul>
           {{#each this.area.rooms as |r|}}
-          <li><LinkTo @route="location" @model={{r.id}}>{{r.name}}</LinkTo>  </li>
+          <li>
+            <LinkTo @route="location" @model={{r.id}}>{{r.name}}
+            {{#if r.starred}}
+              <i class="fas fa-star fa-xs"></i>
+            {{/if}}
+          </LinkTo>  </li>
           {{/each}}
         </ul>
       {{/if}}

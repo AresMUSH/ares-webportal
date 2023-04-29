@@ -1,5 +1,11 @@
 {{page-title this.model.name}}
-<h1>{{this.model.name}}</h1>
+<h1>
+  {{this.model.name}} 
+
+  {{#if this.model.starred}}
+    <i class="fas fa-star fa-xs"></i>
+  {{/if}}
+</h1>
 
 <p><LinkTo @route="locations"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Locations</LinkTo></p>
 

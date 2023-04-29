@@ -40,6 +40,7 @@ export default Controller.extend({
       area_id: this.get('model.location.area.id'), 
       owners: (this.get('model.location.owners') || []).map(owner => owner.name),
       summary: this.get('model.location.summary'),
+      starred: this.get('model.location.starred'),
       descs: descs}, null)
       .then( (response) => {
         if (response.error) {
