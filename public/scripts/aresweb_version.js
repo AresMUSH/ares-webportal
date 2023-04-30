@@ -1,1 +1,1 @@
-var aresweb_version = "1.0.5";
+var aresweb_version = "1.0.6";

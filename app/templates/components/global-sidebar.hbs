@@ -1,6 +1,8 @@
-<div class="sidebar-box {{this.boxStyle}} text-center">
-  <SidebarSearch @model={{this.model}} />
-</div>
+{{#unless this.model.hide_searchbox}}
+  <div class="sidebar-box {{this.boxStyle}} text-center">
+    <SidebarSearch @model={{this.model}} />
+  </div>
+{{/unless}}
 
 <div class="sidebar-box {{this.boxStyle}}">
   <div class="sidebar-heading">

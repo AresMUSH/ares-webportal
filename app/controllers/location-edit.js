@@ -24,6 +24,9 @@ export default Controller.extend({
     areaChanged(newArea) {
       this.set('model.location.area', newArea);
     },
+    iconChanged(newIcon) {
+      this.set('model.location.icon_type', newIcon);
+    },
         
     save: function() {
       let api = this.gameApi;
@@ -40,6 +43,7 @@ export default Controller.extend({
       area_id: this.get('model.location.area.id'), 
       owners: (this.get('model.location.owners') || []).map(owner => owner.name),
       summary: this.get('model.location.summary'),
+      icon_type: this.get('model.location.icon_type'),
       descs: descs}, null)
       .then( (response) => {
         if (response.error) {

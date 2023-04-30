@@ -67,7 +67,7 @@
 <ul>
 {{#each this.searchResults as |loc|}}
   {{#if loc.area_id}}
-    <li><LinkTo @route="area" @model={{loc.area_id}}>{{loc.name_and_area}}</LinkTo></li>
+    <li><LinkTo @route="location" @model={{loc.id}}>{{loc.name_and_area}}</LinkTo></li>
   {{else}}
     <li><LinkTo @route="locations">{{loc.name_and_area}}</LinkTo></li>
   {{/if}}
