@@ -17,8 +17,8 @@
           {{#each this.area.rooms as |r|}}
           <li>
             <LinkTo @route="location" @model={{r.id}}>{{r.name}}
-            {{#if r.starred}}
-              <i class="fas fa-star fa-xs"></i>
+            {{#if r.icon_type}}
+              <i class="{{r.icon_display}}"></i>
             {{/if}}
           </LinkTo>  </li>
           {{/each}}

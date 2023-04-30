@@ -53,10 +53,12 @@
   
    <div class="form-group row">
     <div class="col-sm-3">
-        <label for="starred" class="col-form-label">Starred:</label>
+        <label for="icon" class="col-form-label">Icon:</label>
     </div>
     <div class="col-sm-9">
-        <Input @type="checkbox" @checked={{this.model.location.starred}} /> 
+        <PowerSelect @selected={{this.model.location.icon_type}} @options={{this.model.location.icon_types}} @onChange={{action "iconChanged"}} @allowClear={{true}} as |type|>
+          {{type}}
+        </PowerSelect>
     </div> 
   </div>
   

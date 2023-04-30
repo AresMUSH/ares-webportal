@@ -2,8 +2,8 @@
 <h1>
   {{this.model.name}} 
 
-  {{#if this.model.starred}}
-    <i class="fas fa-star fa-xs"></i>
+  {{#if this.model.icon_type}}
+    <i class="{{this.model.icon_display}}"></i>
   {{/if}}
 </h1>
 

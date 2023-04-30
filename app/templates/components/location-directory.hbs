@@ -1,7 +1,14 @@
 <div class="location-entry">
   <div class="location-entry-top">
             
-    <h2>{{this.location.name}}</h2>
+    <h2>
+      {{this.location.name}}
+      
+      {{#if this.location.icon_type}}
+      <i class={{this.location.icon_display}} />
+      {{/if}}
+    
+    </h2>
 
     <div class="location-entry-summary">
       {{#if this.location.summary}}

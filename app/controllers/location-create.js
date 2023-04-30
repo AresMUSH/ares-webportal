@@ -12,7 +12,7 @@ export default Controller.extend({
   area: null,
   owners: null,
   details: [],
-  starred: false,
+  icon_type: '',
 
   resetOnExit: function() {
     this.set('name', '');
@@ -21,7 +21,7 @@ export default Controller.extend({
     this.set('area', null);
     this.set('owners', null);
     this.set('details', []);
-    this.set('starred', false);
+    this.set('icon_type', '');
   },  
     
   actions: {
@@ -42,6 +42,9 @@ export default Controller.extend({
     areaChanged(newArea) {
       this.set('area', newArea);
     },
+    iconChanged(newIcon) {
+      this.set('icon_type', newIcon);
+    },
         
     save: function() {
       let api = this.gameApi;
@@ -58,7 +61,7 @@ export default Controller.extend({
         area_id: this.get('area.id'), 
         owners: (this.get('owners') || []).map(owner => owner.name),
         summary: this.get('summary'),
-        starred: this.get('starred'),
+        icon_type: this.get('icon_type'),
         descs: descs}, null)
       .then( (response) => {
         if (response.error) {
