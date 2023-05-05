@@ -33,6 +33,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
             //  Magic changes
              spells:  api.request('charSpellList', { id: this.get('session.data.authenticated.id') }),
             //  /Magic changes
+             custom: api.requestOne('customSceneData'),
              locations: api.request('sceneLocations', { id: params['id'] }),
              characters: api.requestMany('characters', { select: 'include_staff' })
            })

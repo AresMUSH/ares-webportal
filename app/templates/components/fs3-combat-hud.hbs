@@ -18,7 +18,13 @@
 
 {{#each this.combat.teams as |t| }}    
 
-<tr><td colspan="8"><h3>Team {{t.team}}</h3></td></tr>
+<tr><td colspan="8"><h3>Team {{t.team}}
+  
+  {{#if t.name}}
+  ({{t.name}})
+  {{/if}}
+
+</h3></td></tr>
 
     {{#each t.combatants as |c| }}
     
