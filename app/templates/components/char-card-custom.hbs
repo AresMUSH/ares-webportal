@@ -129,7 +129,7 @@
       </div>
 
       <div id="spells" class="tab-pane fade">
-        <h2><a href="/wiki/{{this.char.custom.major_school}}">{{this.char.custom.major_school}}</a></h2>
+        <h2><a href="/school/{{this.char.custom.major_school}}">{{this.char.custom.major_school}}</a></h2>
         <div class="row">
           {{#each this.char.custom.major_spells as |spell|}}
             <div  class="col-sm-7 col-md-6">
@@ -142,7 +142,7 @@
         </div>
 
         {{#if this.char.custom.minor_spells}}
-          <h2><a href="/wiki/{{this.char.custom.minor_school}}">{{this.char.custom.minor_school}}</a></h2>
+          <h2><a href="/school/{{this.char.custom.minor_school}}">{{this.char.custom.minor_school}}</a></h2>
           <div class="row">
             {{#each this.char.custom.minor_spells as |spell|}}
               <div  class="col-sm-7 col-md-6">
