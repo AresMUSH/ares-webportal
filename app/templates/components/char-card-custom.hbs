@@ -1,0 +1,186 @@
+<div class="char-card">
+  <div class="row">
+    <div class="col col-xs-4">
+
+      <CharIcon @char={{this.char}} />
+
+      {{#if this.char.id}}
+        <LinkTo @route="char" @model={{this.char.name}} @target="_blank" style="font-size:80%; font-style: italic; position:relative; top:-20px;">Full Profile</LinkTo>
+      {{/if}}
+    </div>
+
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#basic">+</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#sheet">Sheet</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#spells">Spells</a></li>
+    </ul>
+
+
+    <div class="tab-content plain-tab-content">
+      <div id="basic" class="tab-pane fade show active">
+        <div class="col col-xs-9">
+          {{#if (not this.char.is_ooc)}}
+            {{#each this.char.demographics as |demo|}}
+            <div class="row">
+              <div class="col-sm-6">
+                <b>{{demo.name}}: </b>
+              </div>
+              <div class="col-sm-6">
+                {{demo.value}}
+              </div>
+            </div>
+            {{/each}}
+
+            {{#if (not this.char.demographics)}}
+            No demographics available.  Try reloading the scene page.
+            {{/if}}
+
+
+            <div class="row">
+              <div class="col-sm-6">
+                <b>Mage School:</b>
+              </div>
+              <div class="col-sm-6">
+                {{this.char.custom.major_school}}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <b>Mythic School:</b>
+              </div>
+              <div class="col-sm-6">
+                {{this.char.custom.minor_school}}
+              </div>
+            </div>
+
+            {{#if (this.char.custom.mythic_name)}}
+              <div class="row">
+                <div class="col-sm-6">
+                  <b>Mythic:</b>
+                </div>
+                <div class="col-sm-6">
+                  {{this.char.custom.mythic_name}} ({{this.char.custom.mythic_type}} )
+                </div>
+              </div>
+            {{/if}}
+
+          {{/if}}
+
+          {{#if this.char.status_message}}
+          <br>
+          <div class="alert alert-info">
+            {{this.char.status_message}}
+          </div>
+          {{/if}}
+        </div>
+
+
+        <div class="row">
+          <div class="col col-xs-12">
+            <br>
+            {{#if this.char.description}}
+              <AnsiFormat @text={{this.char.description}} />
+            {{/if}}
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div id="sheet" class="tab-pane fade">
+        <div class="row">
+          <div class="col col-md-6 col-sm-12">
+
+            <Fs3AbilityTable @title="Attributes" @list={{this.char.custom.abilities.attributes}} @max={{4}} @showSpecs={{false}} />
+
+              <Fs3AbilityTable @title="Background Skills" @list={{this.char.custom.abilities.backgrounds}} @max={{3}} />
+
+          </div>
+
+          <div class="col col-md-6 col-sm-12">
+
+            <Fs3AbilityTable @title="Action Skills" @list={{this.char.custom.abilities.action_skills}} @max={{8}} @showSpecs={{true}} />
+
+              <Fs3AbilityTable @title="Languages" @list={{this.char.custom.abilities.languages}} @max={{3}} />
+          </div>
+        </div>
+
+        <!-- <div class="row">
+          <div class="col col-md-6 col-sm-12">
+            <Fs3AbilityTable @title="Background Skills" @list={{char.custom.abilities.backgrounds}} @max={{3}} />
+          </div>
+
+          <div class="col col-md-6 col-sm-12">
+
+            <Fs3AbilityTable @title="Languages" @list={{char.custom.abilities.languages}} @max={{3}} />
+
+          </div>
+        </div> -->
+
+
+        <div class="row">
+          <div class="col col-md-6 col-sm-12">
+            <br>
+            <b>Luck Points:</b> {{this.char.custom.abilities.luck_points}}
+          </div>
+        </div>
+      </div>
+
+      <div id="spells" class="tab-pane fade">
+        <h2><a href="/wiki/{{this.char.custom.major_school}}">{{this.char.custom.major_school}}</a></h2>
+        <div class="row">
+          {{#each this.char.custom.major_spells as |spell|}}
+          <div class="spell-block">
+            <div  class="col-sm-7 col-md-6">
+              <b>{{spell.name}}</b>
+            </div>
+            <div  class="col-sm-2 col-md-2">
+              <i>Level {{spell.level}} </i>
+            </div>
+            <br>
+          </div>
+          {{/each}}
+        </div>
+
+        {{#if this.char.custom.minor_spells}}
+          <h2><a href="/wiki/{{this.char.custom.minor_school}}">{{this.char.custom.minor_school}}</a></h2>
+          <div class="row">
+            {{#each this.char.custom.minor_spells as |spell|}}
+            <div class="spell-block">
+              <div  class="col-sm-7 col-md-6">
+                <b>{{spell.name}}</b>
+              </div>
+              <div  class="col-sm-2 col-md-2">
+                <i>Level {{spell.level}} </i>
+              </div>
+              <br>
+            </div>
+            {{/each}}
+          </div>
+        {{/if}}
+
+        {{#if this.char.custom.other_spells}}
+          <h2>Other Spells</h2>
+          <div class="row">
+            {{#each this.char.custom.other_spells as |spell|}}
+            <div class="spell-block">
+              <div  class="col-sm-7 col-md-6">
+                <b>{{spell.name}}</b>
+              </div>
+              <div  class="col-sm-2 col-md-2">
+                <i>Level {{spell.level}} </i>
+              </div>
+              <br>
+            </div>
+            {{/each}}
+          </div>
+        {{/if}}
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
