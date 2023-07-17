@@ -23,7 +23,7 @@
                        
                        <p>
                            <LinkTo @route="notifications">
-                               <span class="badge rounded-pill bg-primary"><i class="fa fa-bell" aria-label='Unread Notifications'></i>
+                               <span class="badge rounded-pill bg-primary notification-bell {{if (gt this.model.notification_count 0) 'active' ''}}"><i class="fa fa-bell" aria-label='Unread Notifications'></i>
                                <span id="notificationBadge">{{this.model.notification_count}}</span>
                                </span>
                            </LinkTo> 
