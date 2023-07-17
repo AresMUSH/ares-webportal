@@ -17,11 +17,13 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         let sceneId = splitMsg[0];       
         let char = splitMsg[1];
         let currentUsername = this.get('currentUser.name');
+        let alts = this.model.app.alts ? this.model.app.alts.map(c => c.name) : [ currentUsername ];
         
         if (sceneId === this.get('model.scene.id')) {
           let notify = this.updateSceneData(this.get('model.scene'), msg, timestamp);
           
-          if (notify && (char != currentUsername)) {
+          // -1 is not found
+          if (notify && alts.indexOf(char) < 0) {
             this.gameSocket.notify(`New activity from ${char} in scene ${sceneId}.`);
           }
           
