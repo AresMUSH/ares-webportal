@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
     gameApi: service(),
+    flashMessages: service(),
     resetEditor: null,  // This will be set to a function by the component binding.  We can call that function to reset the editor text.
   
     handleSave: function() {
