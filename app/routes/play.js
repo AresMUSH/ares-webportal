@@ -36,7 +36,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
              locations: api.request('sceneLocations', { id: params['id'] }),
              chat: api.requestOne('chat'),
              characters: api.requestMany('characters', { select: 'all' }),
-             spells:  api.request('charSpellList', { id: this.get('session.data.authenticated.id') })
+             spells:  api.request('charSpellList', { id: this.get('session.data.authenticated.id') }),
              app: this.modelFor('application')
            })
            .then((model) => EmberObject.create(model));
