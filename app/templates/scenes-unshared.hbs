@@ -15,6 +15,7 @@
     <div class="row unshared-scenes-heading">
       <div class="col col-xs-8">
         <LinkTo @route="scene-live" @model={{scene.id}} class="scene-title">
+        
         {{scene.id}} - 
         {{#if scene.title}}  
           {{scene.title}}
@@ -52,7 +53,9 @@
         {{#if scene.summary}}
         <div><AnsiFormat @text={{scene.summary}} />
         </div>        
-        {{/if}}        
+        {{/if}}   
+        
+        
         
       </div>
       <div class="col col-xs-12 col-sm-2">
@@ -78,6 +81,14 @@
       </div>
       
   </div>
+  
+    {{#if scene.in_trash}}     
+    <div class="alert alert-warning scene-deletion-warning">
+      <i class="fa fa-trash"></i>
+      Marked for deletion. Download, share, or restart before it's deleted on {{scene.trash_date}}.
+    </div>
+    {{/if}}
+  
   {{/each}}
 </div>
 

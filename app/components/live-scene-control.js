@@ -23,6 +23,7 @@ export default Component.extend(AuthenticatedController, {
     flashMessages: service(),
     gameSocket: service(),
     session: service(),
+    router: service(),
 
     updatePoseControls: function() {
       this.set('poseType', { title: 'Pose', id: 'pose' });
@@ -170,8 +171,8 @@ export default Component.extend(AuthenticatedController, {
             if (response.error) {
                 return;
             }
-            this.flashMessages.success('The scene has been deleted.');
-            this.set('scene.reload_required', true);
+            this.flashMessages.success('The scene has been marked for deletion.');
+            this.router.transitionTo('scenes-live');
         });
       },
       saveScenePose(scenePose, notify) {
