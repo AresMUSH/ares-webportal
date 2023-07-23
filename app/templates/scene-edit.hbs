@@ -9,7 +9,7 @@
 
        <div class="col-sm-9">
          {{#if (not this.model.scene.completed)}}
-          <PowerSelect @selected={{this.model.scene.privacy}} @options={{scenePrivacyValues}} @onChange={{action "privacyChanged"}} as |type|>
+          <PowerSelect @selected={{this.model.scene.privacy}} @options={{this.scenePrivacyValues}} @onChange={{action "privacyChanged"}} as |type|>
             {{type}}
           </PowerSelect>
          {{else}}
