@@ -1,23 +1,34 @@
 import Controller from '@ember/controller';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     flashMessages: service(),
     router: service(),
-    
     warning_tags: [],
+    selectedDate: '',
   
+    @action
+    changeDate(date) {
+      this.set('selectedDate', date);  
+    },
+    
+    setup() {
+      dayjs.extend(customParseFormat);
+      let parsedDate = dayjs(this.model.event.date, this.get('model.event.date_entry_format'), true);
+      this.set('selectedDate', new Date(parsedDate));
+    },
+    
     actions: {
         organizerChanged(org) {
           this.set('model.event.organizer', org);
         },
-        changeDate: function(date) {
-            let formatted_date = dayjs(date).format(this.get('model.event.date_entry_format')); //moment(date).format(this.get('model.event.date_entry_format'));
-            this.set('model.event.date', formatted_date);  
-        },
+        
         edit: function() {
             let api = this.gameApi;
             
@@ -26,9 +37,11 @@ export default Controller.extend(AuthenticatedController, {
                 tags = tags.split(/[\s,]/);
             }
             
+            let formattedDate = dayjs(this.selectedDate).format(this.get('model.event.date_entry_format'));
+            
             api.requestOne('editEvent', { event_id: this.get('model.event.id'),
                title: this.get('model.event.title'), 
-               date: this.get('model.event.date'),
+               date: formattedDate,
                time: this.get('model.event.time'),
                organizer: this.get('model.event.organizer.name'),
                tags: tags,

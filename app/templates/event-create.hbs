@@ -26,8 +26,21 @@
     <div class="col-sm-3">
         <label for="date" class="col-form-label">Date:</label>
     </div>
-    <div class="col-sm-9">
-         <PikadayInput id="date" @firstDay={{0}} @onSelection={{action "changeDate"}} @format={{this.model.app.game.date_entry_format}} /> 
+    <div class="col-sm-9">  
+             
+             <EmberFlatpickr
+               id="date"
+               @date={{this.date}}
+               @altInput={{true}}
+               @altInputFormat="M/D/Y"
+               @defaultDate="today"
+               @dateFormat="M/D/Y"
+               @inline={{true}}
+               @mode="single"
+               @onChange={{this.changeDate}}
+             />
+             
+             
     </div> 
   </div>
   

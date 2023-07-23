@@ -27,7 +27,19 @@
         <label for="date" class="col-form-label">Date:</label>
     </div>
     <div class="col-sm-9">
-         <PikadayInput id="date" @firstDay={{0}} @onSelection={{action "changeDate"}} @value={{this.model.event.date}}  @format={{this.model.event.date_entry_format}} /> 
+         
+         
+           <EmberFlatpickr
+             id="date"
+             @date={{this.selectedDate}}
+             @altInput={{true}}
+             @altInputFormat="M/D/Y"
+             @inline={{true}}
+             @mode="single"
+             @onChange={{this.changeDate}}
+           />
+           
+           
     </div> 
   </div>
   
@@ -48,7 +60,7 @@
          <label for="warning" class="col-form-label">Content Warning:</label>
      </div>
      <div class="col-sm-9">
-       <PowerSelectMultiple @selected={{warning_tags}} @options={{this.model.sceneOptions.content_warnings}} @onChange={{action "warningsChanged"}} as |warning|>
+       <PowerSelectMultiple @selected={{this.warning_tags}} @options={{this.model.sceneOptions.content_warnings}} @onChange={{action "warningsChanged"}} as |warning|>
          {{warning}}
        </PowerSelectMultiple>
          <Input @type="text" size={{60}} id="warning" @enter={{action "edit"}} @value={{this.model.event.content_warning}} />
