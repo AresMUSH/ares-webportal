@@ -47,25 +47,25 @@
     {{/each}}
   </tbody>
 </table>
-  {{#if destroyingApprovedChars}}
+  {{#if this.destroyingApprovedChars}}
   <div class="alert alert-warning">Consider marking approved characters 'gone' instead of destroying them to avoid removing them from scenes, mails, forum posts, etc.</div>
   {{/if}}
       
 
-  {{#if idleReport}}
-    <div class="idle-status">  <AnsiFormat @text={{idleReport}} /></div>
+  {{#if this.idleReport}}
+    <div class="idle-status">  <AnsiFormat @text={{this.idleReport}} /></div>
   {{else}}
 
-    <Input @type="text" id="idleAddCharName" placeholder="Name" @value={{idleAddCharName}} /> <button class="btn btn-secondary" {{action "addChar"}}>Add Char</button>
+    <Input @type="text" id="idleAddCharName" placeholder="Name" @value={{this.idleAddCharName}} /> <button class="btn btn-secondary" {{action "addChar"}}>Add Char</button>
 
 <div class="action-buttons">
-    <button class="btn btn-primary" {{action (mut confirmExecute) true}}>Execute</button>
+    <button class="btn btn-primary" {{action (mut this.confirmExecute) true}}>Execute</button>
 </div>
   {{/if}}
  
  
 <FlashMessages />
 
- <BsModalSimple @title="Confirm Execute" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmExecute}} @onSubmit={{action "execute"}} @onHide={{action (mut confirmExecute) false}}>
+ <BsModalSimple @title="Confirm Execute" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmExecute}} @onSubmit={{action "execute"}} @onHide={{action (mut this.confirmExecute) false}}>
      You're about to proceed with the specified idle actions. This may take a minute.  Are you sure?
  </BsModalSimple>

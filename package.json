@@ -30,11 +30,13 @@
     "js-yaml": "^3.14.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "request": "^2.88.2",
     "websocket-extensions": "^0.1.4"
   },
   "devDependencies": {
     "@ember/jquery": "^1.1.0",
+    "@ember/legacy-built-in-components": "^0.4.2",
     "@ember/optional-features": "^2.0.0",
     "@ember/test-helpers": "^2.7.0",
     "@glimmer/component": "^1.0.4",
