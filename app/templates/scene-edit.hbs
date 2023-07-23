@@ -8,13 +8,9 @@
        </div>
 
        <div class="col-sm-9">
-         {{#if (not this.model.scene.completed)}}
           <PowerSelect @selected={{this.model.scene.privacy}} @options={{this.scenePrivacyValues}} @onChange={{action "privacyChanged"}} as |type|>
             {{type}}
           </PowerSelect>
-         {{else}}
-           {{this.model.scene.privacy}} (Completed)
-         {{/if}}
        </div>
      </div>
      
@@ -23,12 +19,8 @@
             <label for="title" class="col-form-label">Notes:</label>
         </div>
         <div class="col-sm-9">
-         {{#if (not this.model.scene.completed)}}
             <Input @type="text" size={{60}} id="limit" @enter={{action "save"}} @value={{this.model.scene.limit}} />
              <p class="hint">Use this for open scenes where participation is limited (by quantity, character type, etc.) or other special considerations apply.</p>
-         {{else}}
-           {{this.model.scene.limit}}
-         {{/if}}
         </div>
       </div>
     
