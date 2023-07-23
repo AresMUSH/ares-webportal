@@ -16,5 +16,10 @@ export default Route.extend(AuthenticatedRoute, {
              sceneOptions: api.requestOne('sceneOptions')
            })
            .then((model) => EmberObject.create(model));
+    },
+    
+    setupController: function(controller, model) {
+      this._super(controller, model);
+      controller.setup();
     }
 });

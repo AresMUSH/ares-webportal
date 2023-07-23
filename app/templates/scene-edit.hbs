@@ -1,7 +1,6 @@
 {{page-title this.model.scene.title}}
 <h1>Edit Scene {{this.model.scene.title}}</h1>
         
-    {{#if (not this.model.scene.completed)}}
 
      <div class="form-group row">
        <div class="col-sm-3">     
@@ -9,9 +8,9 @@
        </div>
 
        <div class="col-sm-9">
-      <PowerSelect @selected={{this.model.scene.privacy}} @options={{scenePrivacyValues}} @onChange={{action "privacyChanged"}} as |type|>
-        {{type}}
-      </PowerSelect>
+          <PowerSelect @selected={{this.model.scene.privacy}} @options={{this.scenePrivacyValues}} @onChange={{action "privacyChanged"}} as |type|>
+            {{type}}
+          </PowerSelect>
        </div>
      </div>
      
@@ -24,7 +23,7 @@
              <p class="hint">Use this for open scenes where participation is limited (by quantity, character type, etc.) or other special considerations apply.</p>
         </div>
       </div>
-    {{/if}}
+    
     
    <div class="form-group row">
       <div class="col-sm-3">
