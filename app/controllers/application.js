@@ -58,27 +58,15 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, AresC
         config.forEach(n => {
           let menuOK = true;
           try {
-            n.menu.forEach(m => {
-              let route = m.route;
-              if (route) {
-                
-               if (!availableRoutes.includes(route)) {
-                console.log(`Bad route in menu: ${route}`);
-                menuOK = false;
-               }
-               
-               let routeHasId = this.routeHasId(route);
-               if (m.id && !routeHasId) {
-                 console.log(`Menu ${route} has an ID when it shouldn't.`);
-                 menuOK = false;
-               }
-               
-               if (!m.id && routeHasId) {
-                 console.log(`Menu ${route} is missing ID.`);
-                 menuOK = false;
-               }
-             }
-            });
+            if (n.menu) {
+              n.menu.forEach(m => {
+                if (!this.checkRoute(m, availableRoutes)) {
+                  menuOK = false;
+                }
+              });
+            } else {
+              menuOK = this.checkRoute(n, availableRoutes);
+            }
             if (menuOK) {
               nav.push(n); 
             } else {
@@ -86,12 +74,14 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, AresC
             }
           }
           catch(error) {
+            console.log(error);
             console.log(`Bad menu config under ${n.title}.`);
             nav.push({ title: `MENU ERROR` });
           }
         });
       }
       catch(error) {
+        console.log(error);
         console.log("Bad menu config.");
         nav.push({ title: `MENU ERROR` });
       }
@@ -102,6 +92,30 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, AresC
     versionWarning: computed('mushVersion', 'portalVersion', function() {
       return this.mushVersion != this.portalVersion;
     }),
+    
+    checkRoute: function(menu, availableRoutes) {
+      let route = menu.route;
+      if (route) {
+      
+         if (!availableRoutes.includes(route)) {
+          console.log(`Bad route in menu: ${route}`);
+          return false;
+         }
+     
+         let routeHasId = this.routeHasId(route);
+         if (menu.id && !routeHasId) {
+           console.log(`Menu ${menu.title}:${route} has an ID when it shouldn't.`);
+           return false;
+         }
+     
+         if (!menu.id && routeHasId) {
+           console.log(`Menu ${menu.title}:${route} is missing ID.`);
+           return false;
+         }
+         return true;
+       } 
+       return true;
+    },
     
     actions: {
       switchAlt: function(alt) {

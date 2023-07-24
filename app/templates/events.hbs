@@ -4,7 +4,7 @@
 <p>The events calendar helps you schedule scenes with other players.  Events you've signed up for are indicated with a <i class="fas fa-calendar-check" aria-label="Signed Up"></i> icon.</p>
 
 <div class="action-buttons">
-  {{#if isApproved}}
+  {{#if this.isApproved}}
       <LinkTo @route="event-create" class="btn btn-primary">Create Event</LinkTo>
   {{/if}}
 </div>
@@ -53,7 +53,7 @@
 </tbody>
 </table>
 
-<div class="alert alert-info">If you're using an iCalendar-compatible calendar app like Outlook or Apple iCal, you can add the game's iCal feed to your app and it will automatically load events into your calendar: <a href="{{calendarUrl}}">{{calendarUrl}}</a>.</div>
+<div class="alert alert-info">If you're using an iCalendar-compatible calendar app like Outlook or Apple iCal, you can add the game's iCal feed to your app and it will automatically load events into your calendar: <a href="{{this.calendarUrl}}">{{this.calendarUrl}}</a>.</div>
 
 <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&src=NWE4OTFiNmE2ODJhOGYwNGY4ZTUwN2U2ZGQ5OGQ1OTI3ODc3MjRiMDliMGQwNDkwYjg0Y2JkYWJmNjFhOWI2OUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=bjJmMmFrbDMydmk5ZGNxbWMxamVra2R1YWdlaGRqbWdAaW1wb3J0LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23D81B60&color=%23E67C73" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 

@@ -21,11 +21,6 @@ export default Component.extend({
   actions: {
       changeTag(tag) {
           this.set('selectedTag', tag);
-      },
-      
-      showMessage(message) {
-        this.set('selectedMessage', message);
       }
-    
   }
 });

@@ -64,7 +64,7 @@
          
          {{#if (not this.hideSidebar)}}
              {{#if this.model.left_sidebar}}
-             <div class="col-md-3 left-sidebar" role="navigation" aria-labelledby="sidebar">
+             <div class="col-md-3 left-sidebar" role="navigation" aria-label="sidebar">
                <GlobalSidebar @model={{this.sidebar}} @socketConnected={{this.socketConnected}} @versionWarning={{this.versionWarning}} @boxStyle="sidebar-box-left" />
              </div>
              {{/if}}
@@ -93,7 +93,7 @@
                 
          {{#if (not this.hideSidebar)}}
              {{#if (not this.model.left_sidebar)}}
-             <div class="col-md-3 right-sidebar" role="navigation" aria-labelledby="sidebar">
+             <div class="col-md-3 right-sidebar" role="navigation" aria-label="sidebar">
                  <GlobalSidebar @model={{this.sidebar}} @socketConnected={{this.socketConnected}} @versionWarning={{this.versionWarning}} @boxStyle="sidebar-box-right" />
              </div>
              {{/if}}

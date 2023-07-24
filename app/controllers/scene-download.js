@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Controller.extend({
   showOoc: false,
@@ -23,16 +24,21 @@ export default Controller.extend({
     this.set('showOoc', false);
     this.set('showSystem', true);
   },
+
+  @action
+  toggleOoc() {
+    this.set('showOoc', !this.showOoc);
+    this.reloadScene();
+  },
+  
+  @action
+  toggleSystem() {
+    this.set('showSystem', !this.showSystem);
+    this.reloadScene();
+  },
+  
   actions: {
-    toggleOoc() {
-      this.set('showOoc', !this.showOoc);
-      this.reloadScene();
-    },
     
-    toggleSystem() {
-      this.set('showSystem', !this.showSystem);
-      this.reloadScene();
-    },
       
     download() {
           
