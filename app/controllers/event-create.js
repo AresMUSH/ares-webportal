@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import dayjs from 'dayjs';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
@@ -27,15 +28,17 @@ export default Controller.extend(AuthenticatedController, {
         this.set('warning_tags', []);
     },
     
+    @action
+    changeDate(date) {
+       this.set('date', date);
+    },
+    
     actions: {
       organizerChanged(org) {
         this.set('organizer', org);
       },
       
-        changeDate: function(date) {
-            let formatted_date = dayjs(date).format(this.get('model.app.game.date_entry_format')); //moment(date).format(this.get('model.app.game.date_entry_format'));
-            this.set('date', formatted_date);  
-        },
+        
         create: function() {
             let api = this.gameApi;
             
@@ -44,8 +47,9 @@ export default Controller.extend(AuthenticatedController, {
                 tags = tags.split(/[\s,]/);
             }
             
+            let formattedDate = dayjs(this.date).format(this.get('model.app.game.date_entry_format'));                        
             api.requestOne('createEvent', { title: this.title, 
-               date: this.date,
+               date: formattedDate,
                time: this.time,
                content_warning: this.content_warning,
                organizer: this.organizer ? this.organizer.name : "",

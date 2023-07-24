@@ -4,7 +4,7 @@
 <p>These scenes have been stopped but not shared.</p>
 
 {{#if this.model.delete_unshared}}
-<div class="alert alert-warning">Unshared scenes will be automatically deleted after {{this.model.unshared_deletion_days}} days.</div>
+<p>Unshared scenes are marked for deletion after {{this.model.unshared_warning_days}} days. You will receive a notification and opportunity to download, share, or restart the scene before it's deleted.'</p>
 {{/if}}
 
 <div class="unshared-scenes-list">
@@ -15,6 +15,7 @@
     <div class="row unshared-scenes-heading">
       <div class="col col-xs-8">
         <LinkTo @route="scene-live" @model={{scene.id}} class="scene-title">
+        
         {{scene.id}} - 
         {{#if scene.title}}  
           {{scene.title}}
@@ -24,11 +25,7 @@
         {{#if scene.content_warning}}
         <ContentWarningTag @warning={{scene.content_warning}} @position="top" />
         {{/if}}
-        </LinkTo>
-        
-        {{#if scene.content_warning}}
-        <ContentWarningTag @warning={{scene.content_warning}} @position="top-left" />
-        {{/if}}
+        </LinkTo>        
         
       </div>
       <div class="col col-xs-4">
@@ -52,7 +49,9 @@
         {{#if scene.summary}}
         <div><AnsiFormat @text={{scene.summary}} />
         </div>        
-        {{/if}}        
+        {{/if}}   
+        
+        
         
       </div>
       <div class="col col-xs-12 col-sm-2">
@@ -78,6 +77,14 @@
       </div>
       
   </div>
+  
+    {{#if scene.in_trash}}     
+    <div class="alert alert-warning scene-deletion-warning">
+      <i class="fa fa-trash"></i>
+      Marked for deletion. Download, share, or restart before it's deleted on {{scene.trash_date}}.
+    </div>
+    {{/if}}
+  
   {{/each}}
 </div>
 

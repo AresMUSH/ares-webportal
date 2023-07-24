@@ -9,7 +9,7 @@
     <div class="col col-xs-12 col-sm-4">{{damage.date}}</div>
     <div class="col col-xs-12 col-sm-4">
       
-      {{#if showOriginal}}
+      {{#if this.showOriginal}}
         <AnsiFormat @text={{damage.original_severity}} /> 
         ( now <AnsiFormat @text={{damage.severity}} />)
       {{else}}

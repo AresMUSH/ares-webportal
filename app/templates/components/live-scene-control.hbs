@@ -25,6 +25,13 @@
       {{/each}}
     </div>
     {{/if}}
+    
+    {{#if this.scene.in_trash}}     
+    <div class="alert alert-warning scene-deletion-warning">
+      <i class="fa fa-trash"></i>
+      Marked for deletion. Download, share, or restart before it's deleted on {{scene.trash_date}}.
+    </div>
+    {{/if}}
 
 
     <LiveSceneContext @scene={{this.scene}} />
@@ -286,7 +293,7 @@
     </BsModalSimple>
 
     <BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDeleteScene}} @onSubmit={{action "deleteScene"}} @onHide={{action (mut this.confirmDeleteScene) false}}>
-        You're about to delete this scene. This cannot be undone.  Are you sure?
+        You're about to mark this scene for deletion. If there are poses, other participants will have a chance to download, share, or restart the scene before it is permanently deleted.  Are you sure?
     </BsModalSimple>
 
     <BsModalSimple @title="Change the Scene Location" @closeTitle="Cancel" @submitTitle="Select" @size={{null}} @fade={{true}} @open={{this.selectLocation}} @onSubmit={{action "changeLocation"}} @onHide={{action (mut this.selectLocation) false}}>

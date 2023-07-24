@@ -45,7 +45,7 @@
 {{/if}}
 
 
-<BsModalSimple @title="Move Folder" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{showMove}} @onSubmit={{action "move"}} @onHide={{action (mut showMove) false}}>
+<BsModalSimple @title="Move Folder" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.showMove}} @onSubmit={{action "move"}} @onHide={{action (mut this.showMove) false}}>
     <p>Select files to move to a new folder.</p>
     
     <b>Folder Name:</b> <Input @type="text" size={{15}} id="newFolder" @value={{this.newFolder}} /> 
