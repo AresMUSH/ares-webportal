@@ -35,6 +35,9 @@ errors.txt
 /package-lock.json.ember-try
 /yarn.lock.ember-try
 
+# broccoli-debug
+/DEBUG/
+
 # Generated
 
 aresconfig.js
