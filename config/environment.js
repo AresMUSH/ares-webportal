@@ -9,7 +9,7 @@ module.exports = function (environment) {
     modulePrefix: 'ares-webportal',
     environment,
     rootURL: '/',
-    locationType: 'auto',
+    locationType: 'history',
     flashMessageDefaults: {
       timeout: 5000
     },
@@ -48,6 +48,7 @@ module.exports = function (environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.autoboot = false;
   }
 
   if (environment === 'production') {
