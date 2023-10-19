@@ -13,6 +13,8 @@ export default Component.extend({
     pcRollSkill: null,
     pcRollName: null,
     rollString: null,
+    controlled: false,
+    risky: false,
     destinationType: 'scene',
 
     didInsertElement: function() {
@@ -37,6 +39,8 @@ export default Component.extend({
         let vsName2 = this.vsName2;
         let pcRollSkill = this.pcRollSkill;
         let pcRollName = this.pcRollName;
+        let controlled = this.controlled;
+        let risky = this.risky;
         
         var sender;
         if (this.scene) {
@@ -69,6 +73,8 @@ export default Component.extend({
         this.set('vsName2', null);
         this.set('pcRollSkill', null);
         this.set('pcRollName', null);
+        this.set('controlled', false);
+        this.set('risky', false);
 
         var destinationId, command;
         if (this.destinationType == 'scene') {
@@ -88,6 +94,8 @@ export default Component.extend({
            vs_name2: vsName2,
            pc_name: pcRollName,
            pc_skill: pcRollSkill,
+           controlled_roll: controlled,
+           risky_roll: risky,
            sender: sender }, null)
         .then( (response) => {
           if (response.error) {

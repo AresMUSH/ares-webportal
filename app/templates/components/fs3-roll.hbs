@@ -11,7 +11,8 @@
       {{/each}}
     </select>
     <Input @type="text" size={{25}} id="rollString" @enter={{action "addRoll"}} @value={{this.rollString}} />
-
+    <label><Input @type="checkbox" @checked={{this.risky}}/><span class="RollType">Risky</span></label>
+    <label><Input @type="checkbox" @checked={{this.controlled}}/><span class="RollType">Controlled</span></label>
    <hr>
     <p><b>Roll for Another PC</b></p>
     
