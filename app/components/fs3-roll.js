@@ -15,11 +15,22 @@ export default Component.extend({
     rollString: null,
     controlled: false,
     risky: false,
+    desperate: false,
+    limited: false,
+    standard: false,
+    great: false,
+    fortune: false,
+    downtime: false,
+    information: false,
+    push: false,
+    resist: false,
+    devil: false,
+    groupaction: false,
     destinationType: 'scene',
 
     didInsertElement: function() {
       this._super(...arguments);
-      let defaultAbility = this.abilities ? this.abilities[0] : '';
+      let defaultAbility = 'Survey';
       this.set('rollString', defaultAbility);
     },
 
@@ -28,7 +39,7 @@ export default Component.extend({
       
       addRoll() {
         let api = this.gameApi;
-        let defaultAbility = this.abilities ? this.abilities[0] : '';
+        let defaultAbility = 'Survey';
       
         // Needed because the onChange event doesn't get triggered when the list is 
         // first loaded, so the roll string is empty.
@@ -41,6 +52,19 @@ export default Component.extend({
         let pcRollName = this.pcRollName;
         let controlled = this.controlled;
         let risky = this.risky;
+        let desperate = this.desperate;
+        let limited = this.limited;
+        let standard = this.standard;
+        let great = this.great;
+        let fortune = this.fortune;
+        let downtime = this.downtime;
+        let information = this.information;
+        let push = this.push;
+        let resist = this.resist;
+        let devil = this.devil;
+        let groupaction = this.groupaction;
+
+
         
         var sender;
         if (this.scene) {
@@ -75,6 +99,18 @@ export default Component.extend({
         this.set('pcRollName', null);
         this.set('controlled', false);
         this.set('risky', false);
+        this.set('desperate', false);
+        this.set('limited', false);
+        this.set('standard', false);
+        this.set('great', false);
+        this.set('downtime', false);
+        this.set('resist', false);
+        this.set('fortune', false);
+        this.set('information', false);
+        this.set('downtime', false);
+        this.set('devil', false);
+        this.set('groupaction', false);
+        this.set('push', false);
 
         var destinationId, command;
         if (this.destinationType == 'scene') {
@@ -96,6 +132,17 @@ export default Component.extend({
            pc_skill: pcRollSkill,
            controlled_roll: controlled,
            risky_roll: risky,
+           desperate_roll: desperate,
+           limited_effect: limited,
+           standard_effect: standard,
+           great_effect: great,
+           fortune_roll: fortune,
+           downtime_roll: downtime,
+           information_roll: information,
+           push_roll: push,
+           resist_roll: resist,
+           devil_roll: devil,
+           groupaction_roll: groupaction,           
            sender: sender }, null)
         .then( (response) => {
           if (response.error) {

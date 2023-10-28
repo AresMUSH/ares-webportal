@@ -5,31 +5,45 @@
 
     <p><b>Regular Roll</b></p>
     <p>Select an ability, or type one (plus modifiers, if applicable) in the box.</p>
-    <select onchange={{action (mut this.rollString) value="target.value"}}>
+        <select onchange={{action (mut this.rollString) value="target.value"}}>
       {{#each this.abilities as |ability|}}
         <option value={{ability}}>{{ability}}</option>
       {{/each}}
     </select>
     <Input @type="text" size={{25}} id="rollString" @enter={{action "addRoll"}} @value={{this.rollString}} />
-    <label><Input @type="checkbox" @checked={{this.risky}}/><span class="RollType">Risky</span></label>
-    <label><Input @type="checkbox" @checked={{this.controlled}}/><span class="RollType">Controlled</span></label>
    <hr>
     <p><b>Roll for Another PC</b></p>
-    
     <p>
       Character: <Input @type="text" size={{15}} id="pcRollName" @enter={{action "addRoll"}} @value={{this.pcRollName}} /> 
       Ability: <Input @type="text" size={{15}} id="pcRollSkill" @enter={{action "addRoll"}} @value={{this.pcRollSkill}} /><br>
     </p>
       
     <hr>
-    <p><b>Opposed Roll</b></p>
-    <p>Enter two character and ability names.</p>
-    <p>
-      Character: <Input @type="text" size={{15}} id="vsName1" @enter={{action "addRoll"}} @value={{this.vsName1}} /> 
-      Ability: <Input @type="text" size={{15}} id="vsRoll1" @enter={{action "addRoll"}} @value={{this.vsRoll1}} /><br>
-     vs<br>
-      Character: <Input @type="text" size={{15}} id="vsName2" @enter={{action "addRoll"}} @value={{this.vsName2}} /> 
-      Ability: <Input @type="text" size={{15}} id="vsRoll2" @enter={{action "addRoll"}} @value={{this.vsRoll2}} /><br>
-    </p>
+  <p><b>Roll Properties</b></p>
+  <p>Position</p>
+  <div class="roll-position-dropdown">
+    <label><Input @type="checkbox" @checked={{this.controlled}}/><span class="RollPosition">Controlled</span></label>
+    <label><Input @type="checkbox" @checked={{this.risky}}/><span class="RollPosition">Risky</span></label>
+    <label><Input @type="checkbox" @checked={{this.desperate}}/><span class="RollPosition">Desperate</span></label>
+</div>
+<p>Effect</p>
+<div class="roll-effect-dropdown">
+    <label><Input @type="checkbox" @checked={{this.limited}}/><span class="RollEffect">Limited</span></label>
+    <label><Input @type="checkbox" @checked={{this.standard}}/><span class="RollEffect">Standard</span></label>
+    <label><Input @type="checkbox" @checked={{this.great}}/><span class="RollEffect">Great</span></label>
+</div>
+  <p>Other Roll Types</p>
+  <div class="roll-type-checkboxes">
+    <label><Input @type="checkbox" @checked={{this.information}}/><span class="RollType">Gather Information</span></label>
+    <label><Input @type="checkbox" @checked={{this.resist}}/><span class="RollType">Resist</span></label>
+    <label><Input @type="checkbox" @checked={{this.downtime}}/><span class="RollType">Downtime</span></label>
+    <label><Input @type="checkbox" @checked={{this.fortune}}/><span class="RollType">Fortune</span></label>
+  </div>
+  <p>Modifiers</p>
+  <div class="roll-modifiers">
+    <label><Input @type="checkbox" @checked={{this.push}}/><span class="RollModifier">Push</span></label>
+    <label><Input @type="checkbox" @checked={{this.devil}}/><span class="RollModifier">Devil's Bargain</span></label>
+    <label><Input @type="checkbox" @checked={{this.groupaction}}/><span class="RollModifier">Group Action</span></label>
+  </div>
     
   </BsModalSimple>
