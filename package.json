@@ -31,6 +31,7 @@
     "jquery-ui": "^1.13.2",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
+    "npm": "^9.8.1",
     "request": "^2.88.2",
     "websocket-extensions": "^0.1.4"
   },
