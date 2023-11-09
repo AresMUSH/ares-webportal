@@ -2,14 +2,14 @@
 'use strict';
 
 module.exports = function (environment) {
-  let ENV = {
+  const ENV = {
       pageTitle: {
             replace: true
           },
     modulePrefix: 'ares-webportal',
     environment,
     rootURL: '/',
-    locationType: 'auto',
+    locationType: 'history',
     flashMessageDefaults: {
       timeout: 5000
     },
@@ -19,10 +19,7 @@ module.exports = function (environment) {
         // Here you can enable experimental features on an ember canary build
         // e.g. EMBER_NATIVE_DECORATOR_SUPPORT: true
       },
-      EXTEND_PROTOTYPES: {
-        // Prevent Ember Data from overriding Date.parse.
-        Date: false,
-      },
+      EXTEND_PROTOTYPES: true,
     },
 
     APP: {
@@ -48,6 +45,7 @@ module.exports = function (environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.APP.autoboot = false;
   }
 
   if (environment === 'production') {
