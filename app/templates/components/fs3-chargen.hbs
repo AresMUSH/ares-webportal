@@ -3,8 +3,7 @@
             {{#if this.model.char.fs3.reset_needed}}
            <li role="presentation" class="nav-item"><a href="#fs3reset" aria-controls="fs3reset" role="tab" data-bs-toggle="tab" class="nav-link active">Reset</a></li>
            {{else}}
-           <li role="presentation" class="nav-item"><a href="#fs3attrs" aria-controls="fs3attrs" role="tab" data-bs-toggle="tab" class="nav-link active">Attributes</a></li>
-           <li role="presentation" class="nav-item"><a href="#fs3action" aria-controls="fs3action" role="tab" data-bs-toggle="tab" class="nav-link">Action Skills</a></li>
+           <li role="presentation" class="nav-item"><a href="#fs3action" aria-controls="fs3action" role="tab" data-bs-toggle="tab" class="nav-link active">Rolled Skills</a></li>
            <li role="presentation" class="nav-item"><a href="#fs3bg" aria-controls="fs3bg" role="tab" data-bs-toggle="tab" class="nav-link">Background Skills</a></li>
            <li role="presentation" class="nav-item"><a href="#fs3lang" aria-controls="fs3lang" role="tab" data-bs-toggle="tab" class="nav-link">Languages</a></li>
            {{#if this.model.char.fs3.use_advantages}}
@@ -31,32 +30,12 @@
 
 {{else}}
 
-  <div role="tabpanel" class="tab-pane active" id="fs3attrs">
+  
+  <div role="tabpanel" class="tab-pane active" id="fs3action">
 
   <div class="card card-default">
        <div class="card-heading">
-           Attributes
-       </div>
-   <div class="card-body">
-
-     <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.attrs_blurb}} /></p>
-
-
-     {{#each this.model.char.fs3.fs3_attributes as |att|}}
-     <Fs3Attrbox @rating={{att.rating}} @ratingName={{att.rating_name}} @maxRating={{this.model.cgInfo.fs3.max_attr_rating}} @updated={{action "abilityChanged"}}>
-         <b>{{att.name}}</b> - {{att.desc}}
-     </Fs3Attrbox>
-     {{/each}}
-
-   </div>
-  </div>
-  </div>
-
-  <div role="tabpanel" class="tab-pane" id="fs3action">
-
-  <div class="card card-default">
-       <div class="card-heading">
-           Action Skills
+           Rolled Skills
        </div>
    <div class="card-body">
 
@@ -64,11 +43,19 @@
      
      <br>
    
-     {{#each this.model.char.fs3.fs3_action_skills as |skill|}}
-     <Fs3Actionbox @name={{skill.name}} @rating={{skill.rating}} @ratingName={{skill.rating_name}} @maxRating={{this.model.cgInfo.fs3.max_skill_rating}} @minRating={{this.model.cgInfo.fs3.min_action_skill_rating}} @updated={{action "abilityChanged"}} @specialties={{skill.specialties}}>
-         <b>{{skill.name}}</b> - {{skill.desc}}
-     </Fs3Actionbox>
-     {{/each}}
+      {{#each this.model.char.fs3.fs3_attributes as |att|}}
+    <Fs3Attrbox @rating={{att.rating}} @maxRating={{this.model.cgInfo.fs3.max_attr_rating}} @updated={{action "abilityChanged"}}>
+      <b>{{att.name}}</b> - {{att.desc}}
+    </Fs3Attrbox>
+
+    {{#each this.model.char.fs3.fs3_action_skills as |skill|}}
+      {{#if (eq skill.linked_attr att.name)}}
+        <Fs3Actionbox @name={{skill.name}} @linkedAttr={{skill.linked_attr}} @rating={{skill.rating}} @ratingName={{skill.rating_name}} @maxRating={{this.model.cgInfo.fs3.max_skill_rating}} @minRating={{this.model.cgInfo.fs3.min_action_skill_rating}} @updated={{action "abilityChanged"}} @specialties={{skill.specialties}}>
+          <b>{{skill.name}}</b> - {{skill.desc}} <span class="fs3-linked-attr">({{skill.linked_attr}})</span>
+        </Fs3Actionbox>
+      {{/if}}
+    {{/each}}
+  {{/each}}
      
 
    </div>

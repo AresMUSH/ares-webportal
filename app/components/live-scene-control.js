@@ -2,6 +2,7 @@ import Component from '@ember/component';
 import { set, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { observer } from '@ember/object';
+import { debounce } from '@ember/runloop';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 
 export default Component.extend(AuthenticatedController, {
@@ -19,11 +20,21 @@ export default Component.extend(AuthenticatedController, {
     commandResponse: null,
     showInvitation: false,
     selectedInvitee: null,
+    wordCount: 0,
     gameApi: service(),
     flashMessages: service(),
     gameSocket: service(),
     session: service(),
     router: service(),
+
+    sceneDraftPoseChanged: observer('scene.draftPose', function() {
+      debounce(this, this.updateWordCount, 1000);
+    }),
+    
+    updateWordCount() {
+      let pose = this.get('scene.draftPose') || "";
+      this.set('wordCount', pose.split(' ').filter(Boolean).length);
+    },
 
     updatePoseControls: function() {
       this.set('poseType', { title: 'Pose', id: 'pose' });

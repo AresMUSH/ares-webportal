@@ -147,6 +147,13 @@
             <PoseOrder @poseOrder={{this.scene.pose_order}} @playerName={{this.playerName}} @poseOrderType={{this.scene.pose_order_type}} />
              
              <MarkdownEditor @text={{this.scene.draftPose}} @rows={{6}} class="scene-pose-box" @onEnter={{action "addPose" this.poseType.id}} />
+             {{#if (lt this.wordCount 300)}}
+                <div class="word-count-green">Word Count: {{this.wordCount}}</div>
+             {{else if (and (gte this.wordCount 300) (lt this.wordCount 400))}}
+                <div class="word-count-yellow">Word Count: {{this.wordCount}}</div>
+             {{else}}
+                <div class="word-count-red">Word Count: {{this.wordCount}}</div>
+             {{/if}}
            {{/if}}
    
 
@@ -284,7 +291,7 @@
     </BsModalSimple>
     
     <BsModalSimple @title="Confirm Report" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmReportScene}} @onSubmit={{action "reportScene"}} @onHide={{action (mut this.confirmReportScene) false}}>
-      <p>You can bring this cene to the game admin's attention - along with an automatic, verified log of the scene (including OOC chat).  </p>
+      <p>You can bring this scene to the game admin's attention - along with an automatic, verified log of the scene (including OOC chat).  </p>
       
       <p><b>Reason for Report:</b></p>
       

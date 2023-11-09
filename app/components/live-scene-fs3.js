@@ -1,9 +1,11 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 
+
 export default Component.extend({
   selectSpendLuck: false,
   selectSkillRoll: false,
+  selectQuickGuide: false,
   luckReason: null,
   numPoints: null,
   tagName: '',
@@ -37,6 +39,10 @@ export default Component.extend({
           return;
         }
       });
+    },
+
+    updateRole(role) {
+      this.set('selectedRole', role);
     },
     
     startCombat() {

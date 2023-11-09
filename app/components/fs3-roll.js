@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 
 export default Component.extend({
     gameApi: service(),
@@ -13,12 +14,29 @@ export default Component.extend({
     pcRollSkill: null,
     pcRollName: null,
     rollString: null,
-    controlled: false,
-    risky: false,
-    desperate: false,
-    limited: false,
-    standard: false,
-    great: false,
+    rollSelection: null,
+    rollPosition: null,
+    controlled: computed('rollPosition', function() {
+        return this.rollPosition === 'controlled';
+      }),
+    risky: computed('rollPosition', function() {
+        return this.rollPosition === 'risky';
+      }),
+    desperate: computed('rollPosition', function() {
+        return this.rollPosition === 'desperate';
+      }),
+    rollEffect: null,
+    limited: computed('rollEffect', function() {
+        return this.rollEffect === 'limited';
+      }),
+    
+    standard: computed('rollEffect', function() {
+        return this.rollEffect === 'standard';
+      }),
+    
+    great: computed('rollEffect', function() {
+        return this.rollEffect === 'great';
+      }),
     fortune: false,
     downtime: false,
     information: false,
@@ -26,20 +44,51 @@ export default Component.extend({
     resist: false,
     devil: false,
     groupaction: false,
+    assist: false,
+    none: false,
     destinationType: 'scene',
 
     didInsertElement: function() {
       this._super(...arguments);
-      let defaultAbility = 'Survey';
+      let defaultAbility = this.abilities ? this.abilities[0] : '';
       this.set('rollString', defaultAbility);
     },
 
 
     actions: { 
-      
+
+      updateRollSelection(rollSelection) {
+        // Reset the options
+        this.set('resist', false);
+        this.set('information', false);
+        this.set('downtime', false);
+        this.set('fortune', false);
+        this.set('rollPosition', '');
+        this.set('rollEffect', '');
+        this.set('push', false);
+        this.set('devil', false);
+        this.set('groupaction', false);
+        this.set('assist', false);
+        this.set('none', false);
+    
+        // Update the roll selection
+        this.set('rollSelection', rollSelection);
+      },
+
+      updateCheckboxes(checkboxName) {
+        this.setProperties({
+          resist: false,
+          information: false,
+          downtime: false,
+          fortune: false,
+          [checkboxName]: true
+        });
+      },
+
+
       addRoll() {
         let api = this.gameApi;
-        let defaultAbility = 'Survey';
+        let defaultAbility = this.abilities ? this.abilities[0] : '';
       
         // Needed because the onChange event doesn't get triggered when the list is 
         // first loaded, so the roll string is empty.
@@ -63,6 +112,10 @@ export default Component.extend({
         let resist = this.resist;
         let devil = this.devil;
         let groupaction = this.groupaction;
+        let rollPosition = this.rollPosition;
+        let rollEffect = this.rollEffect;
+        let rollSelection = this.rollSelection;
+        let assist = this.assist;
 
 
         
@@ -82,13 +135,29 @@ export default Component.extend({
             return;
           }
         }
-      
+
+        if (!this.rollSelection) {
+          this.flashMessages.danger("You haven't selected a roll type.");
+          return;
+        }
+
+        if (this.rollSelection === 'action' && (this.rollPosition === null || this.rollEffect === null)) {
+            this.flashMessages.danger('Please select both Position and Effect for Action Roll.');
+            return;
+        }
+
+        if (this.rollSelection === 'other' && information !== true && resist !== true && downtime !== true && fortune !== true) {
+            this.flashMessages.danger("You haven't selected any of the other roll types.");
+            return;
+        }
+
         if (pcRollSkill || pcRollName) {
           if (!pcRollSkill || !pcRollName) {
             this.flashMessages.danger("You have to provide all skill information to roll for a PC.");
             return;
           }
         }
+       // I just want it known to whoever reads this that at this point I am powered by grilled cheese and spite.
         this.set('selectSkillRoll', false);
         this.set('rollString', null);
         this.set('vsRoll1', null);
@@ -97,12 +166,9 @@ export default Component.extend({
         this.set('vsName2', null);
         this.set('pcRollSkill', null);
         this.set('pcRollName', null);
-        this.set('controlled', false);
-        this.set('risky', false);
-        this.set('desperate', false);
-        this.set('limited', false);
-        this.set('standard', false);
-        this.set('great', false);
+        this.set('rollPosition', null);
+        this.set('rollEffect', null);
+        this.set('rollSelection', null);
         this.set('downtime', false);
         this.set('resist', false);
         this.set('fortune', false);
@@ -111,7 +177,9 @@ export default Component.extend({
         this.set('devil', false);
         this.set('groupaction', false);
         this.set('push', false);
-
+        this.set('assist', false);
+        this.set('none', false);
+      // so much spite.
         var destinationId, command;
         if (this.destinationType == 'scene') {
           destinationId = this.get('scene.id');
@@ -142,7 +210,8 @@ export default Component.extend({
            push_roll: push,
            resist_roll: resist,
            devil_roll: devil,
-           groupaction_roll: groupaction,           
+           groupaction_roll: groupaction, 
+           assist_roll: assist,          
            sender: sender }, null)
         .then( (response) => {
           if (response.error) {

@@ -1,6 +1,6 @@
 <li><a href="#" {{action (mut this.selectSkillRoll) true}} class="dropdown-item">Roll Ability</a></li>
 <li><a href="#" {{action (mut this.selectSpendLuck) true}} class="dropdown-item">Spend Luck</a></li>
-
+<li><a href="#" {{action (mut this.selectQuickGuide) true}} class="dropdown-item">Quick Guide</a></li>
 {{!--{{#if this.scene.fs3combat_enabled}}
   {{#if (not this.scene.combat)}}
     <li><a href="#" {{action 'startCombat'}} class="dropdown-item">Start Combat</a></li>
@@ -9,9 +9,16 @@
 
 <BsModalSimple @title="Spend Luck Points" @closeTitle="Cancel" @submitTitle="Spend" @size={{null}} @fade={{true}} @open={{this.selectSpendLuck}} @onSubmit={{action "spendLuck"}} @onHide={{action (mut this.selectSpendLuck) false}}>
 
-  <b>Reason:</b> <Input @type="text" size={{25}} id="luckReason" @enter={{action "spendLuck"}} @value={{this.luckReason}} />
+  <b>Reason:</b>
+  <select onchange={{action (mut this.luckReason) value="target.value"}}>
+  <option value="">Select a reason</option>
+  <option value="Push">Push</option>
+  <option value="Assist">Assist</option>
+  <option value="Resist">Resist</option>
+  <option value="Group Action">Lead The Group Action</option>
+</select>
 
-  <b>Number:</b>
+  <b>Amount:</b>
   <select onchange={{action (mut this.numPoints) value="target.value"}}>
     <option value="">Select a number</option>
     <option value="1">1</option>
@@ -22,6 +29,208 @@
     <option value="6">6</option>
   </select>
 
+  <hr>
+<table style="width:100%; font-size:small;">
+  <tr>
+    <th>Name</th>
+    <th>Effect</th> 
+    <th>Cost</th>
+  </tr>
+  <tr>
+    <td><i>Push</i></td>
+    <td><i>Push yourself to gain +1d, increase effect level, act when incapacitated.</i></td> 
+    <td><i>2 points</i></td>
+  </tr>
+  <tr>
+    <td><i>Assist</i></td>
+    <td><i>Give someone +1d. Allow them to act when incapacitated.</i></td> 
+    <td><i>1 point</i></td>
+  </tr>
+  <tr>
+    <td><i>Resist</i></td>
+    <td><i>Roll an attribute as resist roll first.</i></td> 
+    <td><i>6 - Roll Result</i></td>
+  </tr>
+  <tr>
+    <td><i>Group Action</i></td>
+    <td><i>Lead a group action roll. Highest result from all participants counts.</i></td> 
+    <td><i>1 point per failure roll.</i></td>
+  </tr>
+</table>
+
 </BsModalSimple>
+
+
+<BsModalSimple @title="Quick Guide" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{this.selectQuickGuide}} @onHide={{action (mut this.selectQuickGuide) false}}>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" id="teamwork-tab" data-bs-toggle="tab" href="#teamwork" role="tab" aria-controls="teamwork" aria-selected="true">Teamwork</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="info-gathering-tab" data-bs-toggle="tab" href="#info-gathering" role="tab" aria-controls="info-gathering" aria-selected="false">Information Gathering</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="action-skills-tab" data-bs-toggle="tab" href="#action-skills" role="tab" aria-controls="action-skills" aria-selected="false">Action Skills</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+
+    <div class="tab-pane fade show active" id="teamwork" role="tabpanel" aria-labelledby="teamwork-tab">
+  <table class="table text-center table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Assist</th>
+        <th scope="col">Protect</th>
+        <th scope="col">Group Action</th>
+        <th scope="col">Set Up Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            <p>Spend 1 Luck & help with an action.</p>
+            <p>Give +1 Die.</p>
+        </td>
+        <td>
+            <p>Take the Consequences for someone else.</p>
+        </td>
+        <td>
+            <p>All involved roll the same action.</p>
+            <p>Leader loses 1 luck per team member whose roll fails.</p>
+        </td>
+        <td>
+            <p>Take an action.</p>
+            <p>Give an advantage to other's follow-up action(s)</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>Might take the same Consequences</p>
+            <p>(Recipient: may not accept more than one assist)</p>
+        </td>
+        <td>
+            <p>Suffer Or Resist (Choose)</p>
+        </td>
+        <td>
+            <p>Use Best Roll</p>
+            <p>All involved suffer any Consequences</p>
+        </td>
+        <td>
+            <p>+1 Position Or Effect (Choose)</p>
+        </td>
+    </tr>
+   </tbody>
+  </table>
+</div>
+    <div class="tab-pane fade" id="info-gathering" role="tabpanel" aria-labelledby="info-gathering-tab">
+  <div class="text-center">
+    <h2>Gather Info</h2>
+    <p><em>Roll Action Or Fortune.</em></p>
+    <small>Ask question, get honest answer. Chance to learn may be fleeting.</small>
+    <p>May need to <em>Investigate</em> instead: Start Long-Term Project clock; when filled, may ask several questions & gain exceptional detail</p>
+    <h3>Level of Detail</h3>
+    <p>1-3: incomplete/partial; may be able to clarify</p>
+    <p>4/5: good, can clarify 6: exceptional, complete.</p>
+  </div>
+  <div class="text-center">
+    <label for="role-select">I'm {{a-or-an selectedRole}}</label>
+    <select id="role-select" onchange={{action 'updateRole' value="target.value"}}>
+      <option value="">Select a playbook</option>
+      <option value="Enforcer">Enforcer</option>
+      <option value="Scholar">Scholar</option>
+      <option value="Facade">Facade</option>
+      <option value="Fixer">Fixer</option>
+      <option value="Investigator">Investigator</option>
+      <option value="Courier">Courier</option>
+      <option value="Conduit">Conduit</option>
+    </select>
+  </div>
+  <div class="text-center">
+    {{#if (eq selectedRole "Enforcer")}}
+      <ul>
+    <li><em>How can I hurt them?</em></li>
+    <li><em>Who's most afraid of me?</em></li>
+    <li><em>Who's most dangerous here?</em></li>
+    <li><em>What do they intend to do?</em></li>
+    <li><em>How can I get them to [X]?</em></li>
+    <li><em>Are they telling the truth?</em></li>
+    <li><em>What's really going on here?</em></li>
+  </ul>
+    {{/if}}
+    {{#if (eq selectedRole "Scholar")}}
+  <ul>
+    <li><em>What do they intend to do?</em></li>
+    <li><em>How can I get them to [X]?</em></li>
+    <li><em>Are they telling the truth?</em></li>
+    <li><em>What can I tinker with here?</em></li>
+    <li><em>What might happen if I [X]?</em></li>
+    <li><em>How can I find [X]?</em></li>
+    <li><em>What's really going on here?</em></li>
+  </ul>
+{{/if}}
+    {{#if (eq selectedRole "Facade")}}
+  <ul>
+    <li><em>What do they intend to do?</em></li>
+    <li><em>How can I get them to [X]?</em></li>
+    <li><em>Are they telling the truth?</em></li>
+    <li><em>What are they really feeling?</em></li>
+    <li><em>What do they really care about?</em></li>
+    <li><em>How can I blend in here?</em></li>
+    <li><em>What's really going on here?</em></li>
+  </ul>
+{{/if}}
+    {{#if (eq selectedRole "Fixer")}}
+  <ul>
+    <li><em>What do they want most?</em></li>
+    <li><em>What should I look out for?</em></li>
+    <li><em>Where's the leverage here?</em></li>
+    <li><em>How can I discover [X]?</em></li>
+    <li><em>What do they intend to do?</em></li>
+    <li><em>How can I get them to [X]?</em></li>
+    <li><em>What's really going on here?</em></li>
+  </ul>
+{{/if}}
+    {{#if (eq selectedRole "Investigator")}}
+  <ul>
+    <li><em>What do they intend to do?</em></li>
+    <li><em>How can I get them to [X]?</em></li>
+    <li><em>What are they really feeling?</em></li>
+    <li><em>Where are they vulnerable?</em></li>
+    <li><em>Where did [X] go?</em></li>
+    <li><em>How can I find [X]?</em></li>
+    <li><em>What's really going on here?</em></li>
+  </ul>
+{{/if}}
+    {{#if (eq selectedRole "Courier")}}
+  <ul>
+    <li><em>What do they intend to do?</em></li>
+    <li><em>What's the best way out?</em></li>
+    <li><em>What should I look out for?</em></li>
+    <li><em>What's the best way in?</em></li>
+    <li><em>Where can I hide here?</em></li>
+    <li><em>How can I find [X]?</em></li>
+    <li><em>What's really going on here?</em></li>
+  </ul>
+{{/if}}
+    {{#if (eq selectedRole "Conduit")}}
+  <ul>
+    <li><em>What is weird here?</em></li>
+    <li><em>What echoes linger here?</em></li>
+    <li><em>What is hidden or lost here?</em></li>
+    <li><em>What do they intend to do?</em></li>
+    <li><em>What drives them to do this?</em></li>
+    <li><em>How can I reveal [X]?</em></li>
+    <li><em>What's really going on here?</em></li>
+  </ul>
+{{/if}}
+  </div>
+
+</div>
+    <div class="tab-pane fade" id="action-skills" role="tabpanel" aria-labelledby="action-skills-tab">
+      <p>Guidelines for action skills...</p>
+    </div>
+  </div>
+</BsModalSimple>
+
 
 <Fs3Roll @scene={{this.scene}} @destinationType="scene" @abilities={{this.abilities}} @selectSkillRoll={{this.selectSkillRoll}} />

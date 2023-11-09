@@ -1,49 +1,107 @@
 <BsModalSimple @title="Add Ability Roll" @closeTitle="Cancel" @submitTitle="Roll" @size={{null}} @fade={{true}} @open={{this.selectSkillRoll}} @onSubmit={{action "addRoll"}} @onHide={{action (mut this.selectSkillRoll) false}}>
 
-    <p class="hint">You can use a rating number to roll for a NPC. An average attribute is automatically factored in, so rolling a skill of "3" will roll 5 dice total for the NPC.</p>
     
-
-    <p><b>Regular Roll</b></p>
-    <p>Select an ability, or type one (plus modifiers, if applicable) in the box.</p>
+<p><b>First, pick a roll type.</b></p>
+<div class="roll-selection-radios">
+  <label>
+    <input 
+      type="radio" 
+      name="rollSelection" 
+      onchange={{action "updateRollSelection" "action"}} 
+      value="action"
+    > 
+    An Action Roll
+  </label>
+  <label>
+    <input 
+      type="radio" 
+      name="rollSelection" 
+      onchange={{action "updateRollSelection" "other"}} 
+      value="other"
+    > 
+    Another Roll
+  </label>
+</div>
+{{#if (eq this.rollSelection "action")}}
+<hr>
+<div class="roll-properties">
+  <div class="roll-position">
+<p>What's your position?</p>
+  <select onchange={{action (mut this.rollPosition) value="target.value"}}>
+    <option value="">Select Option</option>
+    <option value="controlled">Controlled</option>
+    <option value="risky">Risky</option>
+    <option value="desperate">Desperate</option>
+  </select>
+</div>
+  <div class="roll-effect">
+<p>What effect will this have?</p>
+  <select onchange={{action (mut this.rollEffect) value="target.value"}}>
+    <option value="">Select Option</option>
+    <option value="limited">Limited</option>
+    <option value="standard">Standard</option>
+    <option value="great">Great</option>
+  </select>
+</div>
+</div>
+{{/if}}
+{{#if (eq this.rollSelection "other")}}
+<hr>
+  <p>What are you trying to do?</p>
+<div class="roll-type-checkboxes">
+  <label><Input @type="checkbox" @checked={{this.resist}} @click={{action "updateCheckboxes" "resist"}}/><span class="RollType">Resistance Roll</span></label>
+  <label><Input @type="checkbox" @checked={{this.information}} @click={{action "updateCheckboxes" "information"}}/><span class="RollType">Gather Information</span></label>
+  <label><Input @type="checkbox" @checked={{this.downtime}} @click={{action "updateCheckboxes" "downtime"}}/><span class="RollType">Downtime Roll</span></label>
+  <label><Input @type="checkbox" @checked={{this.fortune}} @click={{action "updateCheckboxes" "fortune"}}/><span class="RollType">Fortune Roll</span></label>
+</div>
+{{/if}}
+{{#if (and this.rollPosition this.rollEffect)}}
+  <hr>
+  <p>What modifiers do you have?</p>
+  <div class="roll-modifiers">
+    <label><Input @type="checkbox" @checked={{this.push}}/><span class="RollModifier">Push</span></label>
+    <label><Input @type="checkbox" @checked={{this.devil}}/><span class="RollModifier">Devil's Bargain</span></label>
+    <label><Input @type="checkbox" @checked={{this.groupaction}}/><span class="RollModifier">Group Action</span></label>
+    <label><Input @type="checkbox" @checked={{this.assist}}/><span class="RollModifier">Assisted</span></label>
+    <label><Input @type="checkbox" @checked={{this.none}}/><span class="RollModifier">None</span></label>
+    {{#if this.none}} <p><i>Is it worth asking for one?</i></p> {{/if}}
+  </div>
+{{/if}}
+{{#if (or this.resist this.information this.downtime this.fortune this.push this.devil this.groupaction this.assist this.none)}}
+<hr>
+    <p>Now pick an ability, adding dice modifiers where applicable.</p>
+        <p><i>Example: 'Skirmish+1'</i></p>
+    <p><i>Note: The dropdown list auto-populates with the correct skills for the type of roll.</i></p>
         <select onchange={{action (mut this.rollString) value="target.value"}}>
-      {{#each this.abilities as |ability|}}
-        <option value={{ability}}>{{ability}}</option>
-      {{/each}}
-    </select>
+         {{#each this.abilities as |ability index|}}
+           {{#if (eq this.rollSelection "action")}}
+             {{#if (and (gte index 3) (lte index 14))}}
+               <option value={{ability}}>{{ability}}</option>
+             {{/if}}
+            {{else if (eq this.rollSelection "other")}}
+             {{#if this.resist}}
+               {{#if (and (gte index 0) (lte index 2))}}
+                 <option value={{ability}}>{{ability}}</option>
+               {{/if}}
+           {{else}}
+             {{#if (and (gte index 3) (lte index 14))}}
+               <option value={{ability}}>{{ability}}</option>
+             {{/if}}
+           {{/if}}
+         {{/if}}
+        {{/each}}
+</select>
     <Input @type="text" size={{25}} id="rollString" @enter={{action "addRoll"}} @value={{this.rollString}} />
+    {{#if this.push}}<p><i>Push: +1 Dice Or +1 Effect Level for every 2 luck points spent. Only one of each per roll.</i></p>{{/if}}
+    {{#if this.devil}}<p><i>Devil's Bargain: +1 Dice. Cannot stack with Push's dice bonus.</i></p>{{/if}}
+    {{#if this.assist}}<p><i>Assisted: +1 Dice. Can stack with Push's dice bonus.</i></p>{{/if}}
    <hr>
+   <p class="hint">You can use a number of dice rather than a skill to roll for a NPC. Remember NPCs don't get action rolls, though!</p>
     <p><b>Roll for Another PC</b></p>
     <p>
       Character: <Input @type="text" size={{15}} id="pcRollName" @enter={{action "addRoll"}} @value={{this.pcRollName}} /> 
       Ability: <Input @type="text" size={{15}} id="pcRollSkill" @enter={{action "addRoll"}} @value={{this.pcRollSkill}} /><br>
     </p>
-      
-    <hr>
-  <p><b>Roll Properties</b></p>
-  <p>Position</p>
-  <div class="roll-position-dropdown">
-    <label><Input @type="checkbox" @checked={{this.controlled}}/><span class="RollPosition">Controlled</span></label>
-    <label><Input @type="checkbox" @checked={{this.risky}}/><span class="RollPosition">Risky</span></label>
-    <label><Input @type="checkbox" @checked={{this.desperate}}/><span class="RollPosition">Desperate</span></label>
-</div>
-<p>Effect</p>
-<div class="roll-effect-dropdown">
-    <label><Input @type="checkbox" @checked={{this.limited}}/><span class="RollEffect">Limited</span></label>
-    <label><Input @type="checkbox" @checked={{this.standard}}/><span class="RollEffect">Standard</span></label>
-    <label><Input @type="checkbox" @checked={{this.great}}/><span class="RollEffect">Great</span></label>
-</div>
-  <p>Other Roll Types</p>
-  <div class="roll-type-checkboxes">
-    <label><Input @type="checkbox" @checked={{this.information}}/><span class="RollType">Gather Information</span></label>
-    <label><Input @type="checkbox" @checked={{this.resist}}/><span class="RollType">Resist</span></label>
-    <label><Input @type="checkbox" @checked={{this.downtime}}/><span class="RollType">Downtime</span></label>
-    <label><Input @type="checkbox" @checked={{this.fortune}}/><span class="RollType">Fortune</span></label>
-  </div>
-  <p>Modifiers</p>
-  <div class="roll-modifiers">
-    <label><Input @type="checkbox" @checked={{this.push}}/><span class="RollModifier">Push</span></label>
-    <label><Input @type="checkbox" @checked={{this.devil}}/><span class="RollModifier">Devil's Bargain</span></label>
-    <label><Input @type="checkbox" @checked={{this.groupaction}}/><span class="RollModifier">Group Action</span></label>
-  </div>
+    {{/if}}  
     
   </BsModalSimple>
