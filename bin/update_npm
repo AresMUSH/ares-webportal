@@ -17,4 +17,4 @@ nvm alias default 18
 npm install -g ember-cli@4.12
 npm ci
 
-echo "NPM is updated. You can now start your game like normal."
+echo "NPM is updated. Please reboot your server and your game should automatically restart."
