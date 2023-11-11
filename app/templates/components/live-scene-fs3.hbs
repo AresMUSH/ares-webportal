@@ -133,20 +133,20 @@
     <p>4/5: good, can clarify 6: exceptional, complete.</p>
   </div>
   <div class="text-center">
-    <label for="role-select">I'm {{a-or-an selectedRole}}</label>
-    <select id="role-select" onchange={{action 'updateRole' value="target.value"}}>
-      <option value="">Select a playbook</option>
-      <option value="Enforcer">Enforcer</option>
-      <option value="Scholar">Scholar</option>
-      <option value="Facade">Facade</option>
-      <option value="Fixer">Fixer</option>
-      <option value="Investigator">Investigator</option>
-      <option value="Courier">Courier</option>
-      <option value="Conduit">Conduit</option>
-    </select>
-  </div>
+      <label for="role-select">I'm {{#if this.selectedRole}}{{a-or-an this.selectedRole}}{{else}}a...{{/if}}</label>
+      <select id="role-select" onchange={{action 'updateRole' value="target.value"}}>
+        <option value="">Select a playbook</option>
+        <option value="Enforcer">Enforcer</option>
+        <option value="Scholar">Scholar</option>
+        <option value="Facade">Facade</option>
+        <option value="Fixer">Fixer</option>
+        <option value="Investigator">Investigator</option>
+        <option value="Courier">Courier</option>
+        <option value="Conduit">Conduit</option>
+      </select>
+    </div>
   <div class="text-center">
-    {{#if (eq selectedRole "Enforcer")}}
+    {{#if (eq this.selectedRole "Enforcer")}}
       <ul>
     <li><em>How can I hurt them?</em></li>
     <li><em>Who's most afraid of me?</em></li>
@@ -157,7 +157,7 @@
     <li><em>What's really going on here?</em></li>
   </ul>
     {{/if}}
-    {{#if (eq selectedRole "Scholar")}}
+    {{#if (eq this.selectedRole "Scholar")}}
   <ul>
     <li><em>What do they intend to do?</em></li>
     <li><em>How can I get them to [X]?</em></li>
@@ -168,7 +168,7 @@
     <li><em>What's really going on here?</em></li>
   </ul>
 {{/if}}
-    {{#if (eq selectedRole "Facade")}}
+    {{#if (eq this.selectedRole "Facade")}}
   <ul>
     <li><em>What do they intend to do?</em></li>
     <li><em>How can I get them to [X]?</em></li>
@@ -179,7 +179,7 @@
     <li><em>What's really going on here?</em></li>
   </ul>
 {{/if}}
-    {{#if (eq selectedRole "Fixer")}}
+    {{#if (eq this.selectedRole "Fixer")}}
   <ul>
     <li><em>What do they want most?</em></li>
     <li><em>What should I look out for?</em></li>
@@ -190,7 +190,7 @@
     <li><em>What's really going on here?</em></li>
   </ul>
 {{/if}}
-    {{#if (eq selectedRole "Investigator")}}
+    {{#if (eq this.selectedRole "Investigator")}}
   <ul>
     <li><em>What do they intend to do?</em></li>
     <li><em>How can I get them to [X]?</em></li>
@@ -201,7 +201,7 @@
     <li><em>What's really going on here?</em></li>
   </ul>
 {{/if}}
-    {{#if (eq selectedRole "Courier")}}
+    {{#if (eq this.selectedRole "Courier")}}
   <ul>
     <li><em>What do they intend to do?</em></li>
     <li><em>What's the best way out?</em></li>
@@ -212,7 +212,7 @@
     <li><em>What's really going on here?</em></li>
   </ul>
 {{/if}}
-    {{#if (eq selectedRole "Conduit")}}
+    {{#if (eq this.selectedRole "Conduit")}}
   <ul>
     <li><em>What is weird here?</em></li>
     <li><em>What echoes linger here?</em></li>

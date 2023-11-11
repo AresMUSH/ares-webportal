@@ -7,6 +7,7 @@ export default Component.extend({
   selectSkillRoll: false,
   selectQuickGuide: false,
   luckReason: null,
+  selectedRole: '',
   numPoints: null,
   tagName: '',
   gameApi: service(),
