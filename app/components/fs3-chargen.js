@@ -2,7 +2,6 @@ import EmberObject, { computed } from '@ember/object';
 import { A } from '@ember/array';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import _ from 'lodash';
 
 export default Component.extend({
   tagName: '',
@@ -10,46 +9,15 @@ export default Component.extend({
   selectBackgroundSkill: false,
   flashMessages: service(),
   gameApi: service(),
-  sortedActionSkills: computed('model.char.fs3.fs3_action_skills.@each.linked_attr', function() {
-    return _.groupBy(_.sortBy(this.get('model.char.fs3.fs3_action_skills'), 'linked_attr'), 'linked_attr');
-  }),
-  
-  init: function() {
-    this._super(...arguments);
-    // Create a promise that resolves when fetchAndMergeLinkedAttr finishes
-    this.set('fetchAndMergeLinkedAttrPromise', new Ember.RSVP.Promise((resolve) => {
-      this.fetchAndMergeLinkedAttr().then(() => {
-        resolve();
-      });
-    }));
-  },
   
   didInsertElement: function() {
     this._super(...arguments);
-    // Wait for the fetchAndMergeLinkedAttrPromise to resolve before rendering the component
-    this.get('fetchAndMergeLinkedAttrPromise').then(() => {
-      console.log("Component inserted into DOM"); // Log when the component is inserted into the DOM
-      let self = this;
-      this.set('updateCallback', function() { return self.onUpdate(); } );
-      this.set('validateCallback', function() { return self.validateChar(); } );
-      this.validateChar();
-    });
+    let self = this;
+    this.set('updateCallback', function() { return self.onUpdate(); } );
+    this.set('validateCallback', function() { return self.validateChar(); } );
+    this.validateChar();
   },
   
-  fetchAndMergeLinkedAttr: function() {
-    // Fetch the abilities data from the /abilities endpoint.
-    return this.gameApi.requestOne('abilities').then(fs3_action_skills_with_linked_attr => {
-      // For each skill in this.model.char.fs3.fs3_action_skills, find the corresponding skill in fs3.action_skills and copy the linked_attr property.
-      this.model.char.fs3.fs3_action_skills.forEach((skill, index) => {
-        let corresponding_skill = fs3_action_skills_with_linked_attr.action_skills.find(s => s.name === skill.name);
-        if (corresponding_skill) {
-          Ember.set(this.model.char.fs3.fs3_action_skills[index], 'linked_attr', corresponding_skill.linked_attr);
-          console.log(skill.name + ': ' + skill.linked_attr); // Log the name and linked_attr property of each skill
-        }
-      });
-      console.log("Finished fetching and merging linked_attr"); // Log when fetchAndMergeLinkedAttr finishes
-    });
-  },
   
   attrPoints: computed('model.char.fs3.fs3_attributes.@each.rating', function() {
     let total = this.countPointsInGroup(this.get('model.char.fs3.fs3_attributes'), 0, 2, 2);
@@ -160,30 +128,28 @@ export default Component.extend({
       }
     }
   },
+  
     
   validateChar: function() {
     this.set('charErrors', A());
-     
-      // Update attribute ratings
-      this.model.char.fs3.fs3_attributes.forEach(attribute => {
-        let uniqueSkills = new Set();
-      
-        this.model.char.fs3.fs3_action_skills.forEach(skill => {
-          if (skill.linked_attr === attribute.name && skill.rating >= 1) {
-            uniqueSkills.add(skill.name);
-          }
-        });
-      
-        Ember.set(attribute, 'rating', uniqueSkills.size);
-      });
-
     this.checkLimits(this.get('model.char.fs3.fs3_action_skills'), this.get('model.cgInfo.fs3.skill_limits'), 'action skills');
     this.checkLimits(this.get('model.char.fs3.fs3_attributes'), this.get('model.cgInfo.fs3.attr_limits'), 'attributes');
+
+
+    let actionSkills = this.get('model.char.fs3.fs3_action_skills');
+  let attributes = this.get('model.char.fs3.fs3_attributes');
+
+  attributes.forEach((attribute, index) => {
+    let linkedSkills = actionSkills.filter(skill => skill.linked_attr === attribute.name && skill.rating >= 1);
+    let calculatedRating = linkedSkills.length;
+    this.set(`model.char.fs3.fs3_attributes.${index}.rating`, calculatedRating);
+  });
         
     let emptyBgSkills = this.get('model.char.fs3.fs3_backgrounds').filter(s => !(s.name && s.name.length > 0));
     if (emptyBgSkills.length > 0) {
       this.charErrors.pushObject('Background skill names cannot be blank.  Set the skill to Everyman to remove it.');
     }
+    
         
     let totalAttrs = this.attrPoints;
     let totalSkills = this.skillPoints;
@@ -198,20 +164,18 @@ export default Component.extend({
     if (totalAction > maxAction) {
       this.charErrors.pushObject(`You can only spend ${maxAction} points in action skills.  You have spent ${totalAction}.`);
     }
- 
     
     let maxAdvantages = this.get('model.cgInfo.fs3.max_advantages');
     if (totalAdvantages > maxAdvantages) {
       this.charErrors.pushObject(`You can only spend ${maxAdvantages} points in advantages.  You have spent ${totalAdvantages}.`);
     }
-     
-    let actionSkills = this.get('model.char.fs3.fs3_action_skills');
-    let totalRating = actionSkills.reduce((total, skill) => total + skill.rating, 0);
-    let maxRating = 7;
-    if (totalRating > maxRating) {
-      this.charErrors.pushObject(`You can only have a total of ${maxRating} skill dots in chargen. Your total is ${totalRating}.`);
-    }
     
+    let maxActionSkillNumber = this.get('model.cgInfo.fs3.max_action_skill_number');
+    let totalActionSkillRatings = actionSkills.reduce((sum, skill) => sum + skill.rating, 0);
+if (totalActionSkillRatings > maxActionSkillNumber) {
+  this.charErrors.pushObject(`You can only have ${maxActionSkillNumber} total action skill ratings. You have ${totalActionSkillRatings}.`);
+  }
+        
     let maxAp = this.get('model.cgInfo.fs3.max_ap');
     let totalAp = totalAttrs + totalSkills;
     if (totalAp > maxAp) {
@@ -237,7 +201,6 @@ export default Component.extend({
       this.get('model.char.fs3.fs3_backgrounds').pushObject( EmberObject.create( { name: skill, rating: 1, rating_name: 'Fair' }) );  
       this.validateChar();
     },
-
         
     abilityChanged() {
       this.validateChar();
@@ -245,8 +208,6 @@ export default Component.extend({
     reset() {
       this.reset();
     }
-
-    
   }
     
 });

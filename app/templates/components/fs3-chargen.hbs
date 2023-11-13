@@ -21,7 +21,7 @@
   <div role="tabpanel" class="tab-pane active" id="fs3reset">
   <p>Starting your abilities will set you up with default attribute and skill values.  Your other character information will be saved.</p>
 
-  {{#if anyGroupMissing}}
+  {{#if this.anyGroupMissing}}
   <div class="alert alert-warning">If you set your groups first, you'll be given the appropriate starting skills based on your groups.</div>
   {{/if}}
 
@@ -40,9 +40,7 @@
    <div class="card-body">
 
      <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.action_blurb}} /></p>
-     
      <br>
-   
       {{#each this.model.char.fs3.fs3_attributes as |att|}}
     <Fs3Attrbox @rating={{att.rating}} @maxRating={{this.model.cgInfo.fs3.max_attr_rating}} @updated={{action "abilityChanged"}}>
       <b>{{att.name}}</b> - {{att.desc}}
@@ -56,8 +54,7 @@
       {{/if}}
     {{/each}}
   {{/each}}
-     
-
+{{/unless}}
    </div>
   </div>
 
