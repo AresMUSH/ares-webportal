@@ -22,7 +22,7 @@
   <p>Starting your abilities will set you up with default attribute and skill values.  Your other character information will be saved.</p>
 
   {{#if this.anyGroupMissing}}
-  <div class="alert alert-warning">If you set your groups first, you'll be given the appropriate starting skills based on your groups.</div>
+  <div class="alert alert-warning">If you haven't set a playbook yet, this will just loop infinitely until you do!</div>
   {{/if}}
 
   <button name="reset" {{action 'reset'}} class="btn btn-primary">Start Abilities</button>
@@ -38,7 +38,7 @@
            Rolled Skills
        </div>
    <div class="card-body">
-
+     <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.attrs_blurb}} /></p>
      <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.action_blurb}} /></p>
      <br>
       {{#each this.model.char.fs3.fs3_attributes as |att|}}
@@ -54,7 +54,6 @@
       {{/if}}
     {{/each}}
   {{/each}}
-{{/unless}}
    </div>
   </div>
 

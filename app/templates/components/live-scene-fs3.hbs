@@ -137,7 +137,7 @@
       <select id="role-select" onchange={{action 'updateRole' value="target.value"}}>
         <option value="">Select a playbook</option>
         <option value="Enforcer">Enforcer</option>
-        <option value="Scholar">Scholar</option>
+        <option value="Technician">Technician</option>
         <option value="Facade">Facade</option>
         <option value="Fixer">Fixer</option>
         <option value="Investigator">Investigator</option>
@@ -157,7 +157,7 @@
     <li><em>What's really going on here?</em></li>
   </ul>
     {{/if}}
-    {{#if (eq this.selectedRole "Scholar")}}
+    {{#if (eq this.selectedRole "Technician")}}
   <ul>
     <li><em>What do they intend to do?</em></li>
     <li><em>How can I get them to [X]?</em></li>
