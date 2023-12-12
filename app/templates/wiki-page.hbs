@@ -2,25 +2,23 @@
 <a name="top"></a>
 <h1>{{this.model.heading}}</h1>
 
-<div class="row wiki-breadcrumbs">
-    <div class="col col-xs-10">
-      <span class="wiki-breadcrumb">
-        {{#each this.model.breadcrumbs as |crumb index|}}
-          {{#if (not (eq index 0) ) }}
-          <i class="fas fa-angle-double-right" aria-hidden="true"></i>
-          {{/if}}
-          {{#if crumb.url}}
-          <a href="/wiki/{{crumb.url}}">{{crumb.title}}</a> 
-          {{else}}
-          {{crumb.title}}
-          {{/if}}
-        {{/each}}
-      </span>
-    </div>
-    
-    <div class="col col-xs-2">
-        <a href="#bottom"><i class="fas fa-angle-double-down" aria-hidden="true"></i> Jump to End</a>
-    </div>
+<div class="wiki-page-nav">
+  <div class="wiki-breadcrumbs">
+        <span class="wiki-breadcrumb">
+          {{#each this.model.breadcrumbs as |crumb index|}}
+            {{#if (not (eq index 0) ) }}
+            <i class="fas fa-angle-double-right" aria-hidden="true"></i>
+            {{/if}}
+            {{#if crumb.url}}
+            <a href="/wiki/{{crumb.url}}">{{crumb.title}}</a> 
+            {{else}}
+            {{crumb.title}}
+            {{/if}}
+          {{/each}}
+        </span>
+
+  </div>
+  <a href="#bottom"><i class="fas fa-angle-double-down" aria-hidden="true"></i> Jump to End</a>
 </div>
 
 

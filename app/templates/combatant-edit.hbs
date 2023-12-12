@@ -34,7 +34,7 @@
     </div>
     <div class="col-sm-9">
         
-            <PowerSelect @selected={{this.model.team}} @options={{teams}} @onChange={{action "teamChanged"}} as |team|>
+            <PowerSelect @selected={{this.model.team}} @options={{this.teams}} @onChange={{action "teamChanged"}} as |team|>
               {{team}}
             </PowerSelect>
             
