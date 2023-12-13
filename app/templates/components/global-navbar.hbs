@@ -125,7 +125,7 @@
 
   <table class="alts-switcher">
     {{#each this.model.alts as |alt|}}
-      {{#if (not (eq alt.name currentUser.name)) }}
+      {{#if (not (eq alt.name this.currentUser.name)) }}
         <tr><td>
         <CharIconInline @char={{alt}} @hideLink="true" />
         </td>
