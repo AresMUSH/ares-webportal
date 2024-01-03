@@ -116,11 +116,11 @@
 
            <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.advantages_blurb}} /> To remove an advantage, set its rating to Everyman.</p>
 
-         {{#each this.model.char.fs3.fs3_advantages as |skill|}}
-         <Fs3Advantagebox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{action "abilityChanged"}}>
-             <b>{{skill.name}}</b> - {{skill.desc}}
-         </Fs3Advantagebox>
-         {{/each}}
+        {{#each (sort-by "desc" this.model.char.fs3.fs3_advantages) as |skill|}}
+          <Fs3Advantagebox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{action "abilityChanged"}}>
+            <b>{{skill.name}}</b> - {{skill.desc}}
+          </Fs3Advantagebox>
+        {{/each}}
                 
        </div>
      </div>
