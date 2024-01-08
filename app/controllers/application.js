@@ -108,7 +108,7 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, AresC
            return false;
          }
      
-         if (!menu.id && routeHasId) {
+         if (routeHasId && (!menu.id && !menu.ids)) {
            console.log(`Menu ${menu.title}:${route} is missing ID.`);
            return false;
          }

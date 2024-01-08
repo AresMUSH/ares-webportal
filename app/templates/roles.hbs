@@ -2,35 +2,55 @@
 <h1>Roles and Permissions</h1>
 
 <h2>Roles</h2>
+
 <table>
-  {{#each this.model.roles as |role|}}
-  <tr>
-    <td>{{role.name}}</td>
-    <td>
-      {{#each role.permissions as |permission|}}
-        {{permission}}
-      {{/each}}
-    </td>
-    {{#if role.chars}}
-    <td>
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Permissions</th>
+      <th>Players</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.model.roles as |role|}}
+    <tr>
+      <td>{{role.name}}</td>
+      <td>
+        {{#each role.permissions as |permission|}}
+          {{permission}}
+        {{/each}}
+      </td>
+      {{#if role.chars}}
+      <td>
       
-      {{#each role.chars as |char|}}
-      {{char}}
-      {{/each}}
+        {{#each role.chars as |char|}}
+        {{char}}
+        {{/each}}
     
-    </td>
-    {{/if}}
-  </tr>
-  {{/each}}
+      </td>
+      {{/if}}
+    </tr>
+    {{/each}}
+  </tbody>
 </table>
 
 <h2>Permissions</h2>
+
 <table>
-  {{#each this.model.permissions as |permission|}}
-  <tr>
-    <td>{{permission.name}}</td>
-    <td>{{permission.section}}</td>
-    <td>{{permission.description}}</td>
-  </tr>
-  {{/each}}
+  <thead>
+    <tr>
+      <th>Permission</th>
+      <th>Plugin</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this.model.permissions as |permission|}}
+    <tr>
+      <td>{{permission.name}}</td>
+      <td>{{permission.section}}</td>
+      <td>{{permission.description}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
 </table>
