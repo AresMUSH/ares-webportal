@@ -206,7 +206,6 @@ export default Service.extend(AresConfig, {
         }
         
         if (!recipient || recipient === self.get('charId')) {
-            var formatted_msg = ansi_up.ansi_to_html(data.args.message, { use_classes: true });
             var notify = true;
             
             if (this.callbacks[notification_type]) {
@@ -224,7 +223,8 @@ export default Service.extend(AresConfig, {
             }
             
             if (notify) {
-                this.notify(formatted_msg);
+              var formatted_msg = ansi_up.ansi_to_html(data.args.message, { use_classes: true });
+              this.notify(formatted_msg);
             }
         }
         
