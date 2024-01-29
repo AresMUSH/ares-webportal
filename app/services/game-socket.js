@@ -224,7 +224,7 @@ export default Service.extend(AresConfig, {
             
             if (notify) {
                 var formatted_msg = ansi_up.ansi_to_html(data.args.message, { use_classes: true });
-                this.notify(formatted_msg);
+              this.notify(formatted_msg);
             }
         }
         
