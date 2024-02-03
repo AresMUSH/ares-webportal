@@ -1,10 +1,13 @@
 import Controller from '@ember/controller';
+import { action } from '@ember/object';
+import dayjs from 'dayjs';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   flashMessages: service(),
   gameApi: service(),
   router: service(),
+  session: service(),
     
   title: '',
   category: '',
@@ -12,13 +15,20 @@ export default Controller.extend({
   template: '',
   tags: '',
   submitter: null,
+  custom_fields: {},
   participants: null,
 
   init: function() {
     this._super(...arguments);
     this.set('participants', []);
   },
-    
+  setupController: function() {
+    this.setCategory(this.model.get('options.request_category'));
+    this.set('submitter', this.model.get('characters').find(c => c.id == this.get('session.data.authenticated.id')));
+    this.set('custom_fields', this.get('model.options.custom_fields'));
+    console.log(this.get('custom_fields'));
+  },
+     
   resetOnExit: function() {
     this.set('title', '');
     this.setCategory(this.get('model.options.request_category'));
@@ -36,6 +46,18 @@ export default Controller.extend({
     this.set('template', category_template);
   },
     
+  @action    
+  changeCustomDate(val, dateStr, instance) {
+    var fieldName = instance.element.id.split('-')[1];
+    this.set(`custom_fields.${fieldName}.value`, val);
+    this.set(`custom_fields.${fieldName}.date_input`, dayjs(val).format(this.get('model.options.date_entry_format')));
+  },
+    
+  @action  
+  changeCustomDropdown(id, val) {
+    this.set(`custom_fields.${id}.value`, val);
+  },
+      
   actions: {
     changeCategory: function(cat) {
       this.setCategory(cat);
@@ -55,6 +77,7 @@ export default Controller.extend({
         description: this.description,
         participants: (this.participants || []).map(p => p.id),
         submitter: this.get('submitter.name'),
+        custom_fields: this.get('custom_fields'),
         tags: tags }, null)
         .then( (response) => {
           if (response.error) {

@@ -1,83 +1,58 @@
 {{page-title 'Edit Job'}}
 <h1>Edit Job {{this.model.job.id}}</h1>
 
-<table class="edit-job-fields">
+<div class="edit-job-fields">
  
- 
- <tr>
-   <td>
+ <div class="edit-job-row">
+   
      <label>Title:</label>
-   </td>
-   <td>
-     <p><Input @type="text" size={{25}} id="title" @value={{this.model.job.title}} /></p>
-   </td>
-   <td>
-     &nbsp;
-   </td>
- </tr>
+   
+     <Input @type="text" size={{25}} id="title" @value={{this.model.job.title}} /><
+ </div>
  
- <tr>
-    <td>
+ <div class="edit-job-row">
        <label>Submitter:</label>
-     </td>
-    
-     <td>
-      
+     
        <PowerSelect @selected={{this.model.job.author}} @options={{this.model.characters}} @searchField="name" @searchEnabled=true @onChange={{action "submitterChanged"}} as |char|>
          {{char.name}}
        </PowerSelect>
       
-     </td>
- </tr>
+ </div>
  
- <tr>
-    <td>
+ <div class="edit-job-row">
+
        <label>Other Participants:</label>
-     </td>
-    
-     <td>
+     
       
         <PowerSelectMultiple @selected={{this.model.job.participants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
          {{char.name}}
        </PowerSelectMultiple>
       
-     </td>
- </tr>
- 
- <tr>
-   <td>
+  </div>
+  
+ <div class="edit-job-row">
      <label>Tags:</label>
-   </td>
-   <td>
-     <p><Input @type="text" size={{25}} id="tags" @value={{this.model.job.tags}} /></p>
-   </td>
- </tr>
+        
+     <Input @type="text" size={{25}} id="tags" @value={{this.model.job.tags}} />
+ </div>
  
  
- <tr>
-    <td>
-       <label>Assigned To:</label>
-     </td>
-    
-     <td>
+ <div class="edit-job-row">
+       <label>Assigned To:</label>     
       
        <PowerSelect @selected={{this.model.job.assigned_to}} @options={{this.model.job.job_admins}} @searchField="name" @searchEnabled=true @onChange={{action "assigneeChanged"}} as |char|>
          {{char.name}}
        </PowerSelect>
       
-     </td>
- </tr>
+  </div>
  
-  <tr>
-    <td>
+ <div class="edit-job-row">
       <label>Category:</label>
-    </td>
-    <td>
+
         <span class="badge job-category job-category-{{this.model.job.category}}">
         {{this.model.job.category}}
         </span>
-    </td>
-    <td>
+
             
       <DropdownMenu @id="categoryDropdown" @title="Change Category">
             {{#each this.model.options.category_values as |category| }}
@@ -85,17 +60,12 @@
             {{/each}}
       </DropdownMenu>
             
-    </td>
-  </tr>
+  </div>
   
-  <tr>
-    <td>
+ <div class="edit-job-row">
        <label>Status: </label>
-    </td>
-    <td>
       <span class="badge job-status job-status-{{this.model.job.status}}">{{this.model.job.status}}</span>
-    </td>
-    <td>
+
       
       <DropdownMenu @id="statusDropdown" @title="Change Status">
         {{#each this.model.options.status_values as |status| }}
@@ -103,10 +73,44 @@
         {{/each}}
       </DropdownMenu>
     
-    </td>
-  </tr>
+  </div>
   
-</table>
+  {{#each-in this.model.job.custom_fields as |id field|}}
+
+   <div class="edit-job-row">
+      <label>{{field.name}}</label>
+
+      {{#if (eq field.field_type 'dropdown')}}
+        <span class="badge job-custom job-custom-{{id}}-{{field.value}}">{{field.value}}</span>
+      {{else if (eq field.field_type 'date')}}
+        <div class="edit-custom-date">
+          <EmberFlatpickr
+            id="custom-{{id}}"
+            @date={{field.value}}
+            @altInput={{true}}
+            @altInputFormat="M/D/Y"
+            @inline={{true}}
+            @mode="single"
+            @onChange={{this.changeCustomDate}}
+          />
+        </div>
+      {{else}}
+        <Input @type="text" size={{25}} id="custom-{{id}}" @value={{field.value}} />
+      {{/if}}
+
+      {{#if (eq field.field_type 'dropdown')}}
+        <DropdownMenu @id="custom-{{id}}" @title="Change {{field.name}}">
+          {{#each field.dropdown_values as |val| }}
+            <li><a href="#" {{action 'changeCustomDropdown' id val}} class="dropdown-item"><span class="badge job-custom job-custom-{{id}}-{{val}}">&nbsp;</span> {{val}}</a></li>
+          {{/each}}
+        </DropdownMenu>
+      {{else}}
+        &nbsp;
+      {{/if}}
+  </div>
+  {{/each-in}}
+  
+</div>
 
      
 <MarkdownEditor @text={{this.model.job.description}} />
