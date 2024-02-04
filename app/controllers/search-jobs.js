@@ -1,4 +1,5 @@
 import Controller from '@ember/controller';
+import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
@@ -14,6 +15,7 @@ export default Controller.extend({
   searchTag: '',
   searchResults: null,
   searchInProgress: false,
+  searchCustom: '',
     
   resetOnExit: function() {
     this.set('searchText', '');
@@ -24,6 +26,11 @@ export default Controller.extend({
     this.set('searchTag', '');
     this.set('searchResults', null);
     this.set('searchInProgress', false);
+    this.set('searchCustom', this.get('model.custom_fields'));
+  },
+  
+  setupController: function(model) {
+    this.set('searchCustom', this.get('model.custom_fields'));
   },
   
   onSearchResults: function(type, msg, timestamp ) {
@@ -48,11 +55,17 @@ export default Controller.extend({
       this.gameSocket.setupCallback('search_results', function(type, msg, timestamp) {
           self.onSearchResults(type, msg, timestamp) } );
   },
+  
+  @action  
+  changeCustomDropdown(id, val) {
+    this.set(`searchCustom.${id}.search`, val);
+  },
     
   actions: {
     reset() {
       this.resetOnExit();
     },
+    
     search() {
       let api = this.gameApi;
       this.set('searchInProgress', Math.floor(Math.random() * 10000));      
@@ -65,7 +78,8 @@ export default Controller.extend({
         searchCategory: this.searchCategory,
         searchStatus: this.searchStatus,
         searchToken: this.searchInProgress,
-        searchTag: this.searchTag
+        searchTag: this.searchTag,
+        searchCustom: this.searchCustom
       })
       .then( (response) => {
         if (response.error) {

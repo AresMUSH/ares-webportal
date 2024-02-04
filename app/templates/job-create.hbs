@@ -52,6 +52,42 @@
         </DropdownMenu>
       
     </div>
+    
+    {{#each-in this.customFields as |id field|}}
+      <div class="create-job-row">          
+          <label>{{field.name}}</label>
+
+
+          {{#if (eq field.field_type 'dropdown')}}
+            {{field.value}}
+          {{else if (eq field.field_type 'date')}}
+          <div class="job-custom-datepicker">
+            <EmberFlatpickr
+              id="custom-{{id}}"
+              @date={{if field.value field.value ''}}
+              @altInput={{true}}
+              @altInputFormat="M/D/Y"
+              @inline={{true}}
+              @mode="single"
+              @onChange={{this.changeCustomDate}}
+            />
+          </div>
+          {{else}}
+            <Input @type="text" size={{25}} id="custom-{{id}}" @value={{field.value}} />
+          {{/if}}
+        
+          {{#if (eq field.field_type 'dropdown')}}
+            <DropdownMenu @id="custom-{{id}}" @title="Change {{field.name}}">
+              {{#each field.dropdown_values as |val| }}
+                <li><a href="#" {{action 'changeCustomDropdown' id val}} class="dropdown-item">{{val}}</a></li>
+              {{/each}}
+            </DropdownMenu>
+          {{else}}
+            &nbsp;
+          {{/if}}
+      </div>
+    {{/each-in}}
+      
 </div>
 
      

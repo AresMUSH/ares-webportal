@@ -19,41 +19,30 @@
 
 <div id="searchFields" class="card-collapse collapse {{if this.searchResults '' 'show'}}">
 
-<div class="row">
+<div class="search-row">
   
-  <div class="col col-xs-3">
-    <label>Title:</label>
-  </div>
-  
-  <div class="col col-xs-9">
-        <p><Input @type="text" size={{25}} id="title" @value={{this.searchTitle}} @enter={{action "search"}} /></p>
-  </div>
-  
+  <label>Title:</label>
+
+  <Input @type="text" size={{25}} id="title" @value={{this.searchTitle}} @enter={{action "search"}} />  
 </div>
 
 {{#if this.model.is_job_admin}}
 
-<div class="row">
+<div class="search-row">
   
-  <div class="col col-xs-3">
-        <label>Participant Name:</label>
-  </div>
-  
-  <div class="col col-xs-9">
+    <label>Participant Name:</label>
+
+    <div class="search-group">
         <p><Input @type="text" size={{25}} id="submitter" @value={{this.searchSubmitter}} @enter={{action "search"}} /></p>
         <p class="hint">Enter a player's name.  Remember that automated jobs come from "System".</p>
-  </div>
-  
+
+    </div>
 </div>
 
-<div class="row">
-  
-  <div class="col col-xs-3">
-        <label>Category:</label>
-  </div>
-  
-  <div class="col col-xs-9">
-    
+<div class="search-row">
+
+  <label>Category:</label>
+              
     {{#if this.searchCategory}}
       <span class="badge job-category job-category-{{this.searchCategory}}">&nbsp;</span> {{this.searchCategory}}    
     {{else}}
@@ -65,18 +54,12 @@
           <li><a href="#" {{action 'changeSearchCategory' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
         {{/each}}
     </DropdownMenu>
-    
-  </div>
   
 </div>
 
-<div class="row">
+<div class="search-row">
   
-  <div class="col col-xs-3">
-        <label>Status:</label>
-  </div>
-  
-  <div class="col col-xs-9">
+      <label>Status:</label>
     
     {{#if this.searchStatus}}
       <span class="badge job-status job-status-{{this.searchStatus}}">&nbsp;</span> {{this.searchStatus}}    
@@ -90,37 +73,48 @@
         <li><a href="#" {{action 'changeSearchStatus' status}} class="dropdown-item"><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
       {{/each}}
     </DropdownMenu>
-    
-    
-  </div>
-  
+          
 </div>
+
+{{#each-in this.searchCustom as |id field|}}
+<div class="search-row">
+  
+  <label>{{field.name}}:</label>
+                
+    {{#if (eq field.field_type 'dropdown')}}
+      {{#if field.search}}
+        <span class="badge job-custom-{{id}}-{{field.search}}">&nbsp;</span> {{field.search}}  
+      {{else}}
+        Any
+      {{/if}}
+      <DropdownMenu @id="custom-{{id}}" @title="{{field.name}}">
+        {{#each field.dropdown_values as |val| }}
+          <li><a href="#" {{action 'changeCustomDropdown' id val}} class="dropdown-item"><span class="badge job-custom job-custom-{{id}}-{{val}}">&nbsp;</span> {{val}}</a></li>
+        {{/each}}
+      </DropdownMenu>      
+    {{else}}
+       <Input @type="text" size={{25}} id="custom-{{id}}" @value={{field.search}} @enter={{action "search"}} />
+        {{#if (eq field.field_type 'date')}}
+        <div class="hint">({{this.model.date_entry_format}})</div>
+        {{/if}}
+    {{/if}}    
+      
+</div>
+{{/each-in}}
+
 
 {{/if}}
 
 
-<div class="row">
-  
-  <div class="col col-xs-3">
-        <label>Tag:</label>
-  </div>
-  
-  <div class="col col-xs-9">
-        <p><Input @type="text" size={{25}} id="tag" @value={{this.searchTag}} @enter={{action "search"}} /></p>
-  </div>
-  
+<div class="search-row">
+    <label>Tag:</label>
+    <Input @type="text" size={{25}} id="tag" @value={{this.searchTag}} @enter={{action "search"}} />
 </div>
 
-<div class="row">
-  
-  <div class="col col-xs-3">
-        <label>Description and Comments:</label>
-  </div>
-  
-  <div class="col col-xs-9">
-        <p><Input @type="text" size={{25}} id="text" @value={{this.searchText}} @enter={{action "search"}} /></p>
-  </div>
-  
+<div class="search-row">
+    <label>Description and Comments:</label>
+
+    <Input @type="text" size={{25}} id="text" @value={{this.searchText}} @enter={{action "search"}} />
 </div>
 
 
