@@ -81,7 +81,7 @@
       <label>{{field.name}}</label>
 
       {{#if (eq field.field_type 'dropdown')}}
-        <span class="badge job-custom job-custom-{{id}}-{{field.value}}">{{field.value}}</span>
+        {{field.value}}
       {{else if (eq field.field_type 'date')}}
         <div class="edit-custom-date">
           <EmberFlatpickr
@@ -101,7 +101,7 @@
       {{#if (eq field.field_type 'dropdown')}}
         <DropdownMenu @id="custom-{{id}}" @title="Change {{field.name}}">
           {{#each field.dropdown_values as |val| }}
-            <li><a href="#" {{action 'changeCustomDropdown' id val}} class="dropdown-item"><span class="badge job-custom job-custom-{{id}}-{{val}}">&nbsp;</span> {{val}}</a></li>
+            <li><a href="#" {{action 'changeCustomDropdown' id val}} class="dropdown-item">{{val}}</a></li>
           {{/each}}
         </DropdownMenu>
       {{else}}

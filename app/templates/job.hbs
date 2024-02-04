@@ -157,9 +157,7 @@
       <label>{{field.name}}:</label>
       
       <div class="display-job-selection">
-        {{#if (eq field.field_type 'dropdown')}}
-          <span class="badge job-custom job-custom-{{id}}-{{field.value}}">{{field.value}}</span>
-        {{else if (eq field.field_type 'date')}}
+        {{#if (eq field.field_type 'date')}}
           {{field.date_display}}
         {{else}}
           {{field.value}}
