@@ -15,7 +15,7 @@ export default Controller.extend({
   template: '',
   tags: '',
   submitter: null,
-  custom_fields: {},
+  customFields: {},
   participants: null,
 
   init: function() {
@@ -25,8 +25,7 @@ export default Controller.extend({
   setupController: function() {
     this.setCategory(this.model.get('options.request_category'));
     this.set('submitter', this.model.get('characters').find(c => c.id == this.get('session.data.authenticated.id')));
-    this.set('custom_fields', this.get('model.options.custom_fields'));
-    console.log(this.get('custom_fields'));
+    this.set('customFields', this.get('model.options.custom_fields'));
   },
      
   resetOnExit: function() {
@@ -49,13 +48,13 @@ export default Controller.extend({
   @action    
   changeCustomDate(val, dateStr, instance) {
     var fieldName = instance.element.id.split('-')[1];
-    this.set(`custom_fields.${fieldName}.value`, val);
-    this.set(`custom_fields.${fieldName}.date_input`, dayjs(val).format(this.get('model.options.date_entry_format')));
+    this.set(`customFields.${fieldName}.value`, val);
+    this.set(`customFields.${fieldName}.date_input`, dayjs(val).format(this.get('model.options.date_entry_format')));
   },
     
   @action  
   changeCustomDropdown(id, val) {
-    this.set(`custom_fields.${id}.value`, val);
+    this.set(`customFields.${id}.value`, val);
   },
       
   actions: {
@@ -77,7 +76,7 @@ export default Controller.extend({
         description: this.description,
         participants: (this.participants || []).map(p => p.id),
         submitter: this.get('submitter.name'),
-        custom_fields: this.get('custom_fields'),
+        custom_fields: this.get('customFields'),
         tags: tags }, null)
         .then( (response) => {
           if (response.error) {

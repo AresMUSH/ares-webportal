@@ -12,6 +12,8 @@ export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
     return this.gameApi.requestOne('jobOptions');
   },
   
+  
+  
   activate: function() {
       this.controllerFor('search-jobs').setupCallback();
       $(window).on('beforeunload', () => {
@@ -22,5 +24,10 @@ export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
   deactivate: function() {
       this.gameSocket.removeCallback('search_results');
   },
+  
+  setupController: function(controller, model) {
+    this._super(controller, model);
+    controller.setupController(model);
+  }
   
 });
