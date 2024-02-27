@@ -21,10 +21,8 @@ export default Service.extend(AresConfig, {
     },
       
     socketUrl() {
-      let protocol = this.get('aresconfig.use_https') ? 'wss' : 'ws';
-      let host = this.get('aresconfig.host');
-      let port = this.get('aresconfig.websocket_port');
-      return `${protocol}://${host}:${port}/websocket`;
+      let protocol = this.httpsEnabled ? 'wss' : 'ws';
+      return `${protocol}://${this.mushHost}:${this.websocketPort}/websocket`;
     },
     
     checkSession(charId) {
@@ -53,14 +51,13 @@ export default Service.extend(AresConfig, {
                 try {
                   var doc = new DOMParser().parseFromString(msg, 'text/html');
                   var cleanMsg =  doc.body.textContent || "";
-                  let gameName = this.get('aresconfig.game_name');
                   
-                  new Notification(`Activity in ${gameName}`, 
+                  new Notification(`Activity in ${this.mushName}`, 
                     {
                       icon: '/game/uploads/theme_images/notification.png',
                       badge: '/game/uploads/theme_images/notification.png',
                       body: cleanMsg,
-                      tag: gameName,
+                      tag: this.mushName,
                       renotify: true
                     }
                    ); 

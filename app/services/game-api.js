@@ -10,35 +10,30 @@ export default Service.extend(AresConfig, {
     
     portalUrl() {
       var base;
-      let protocol = this.get('aresconfig.use_https') ? 'https' : 'http';
-      let host = this.get('aresconfig.host');
-      let port = this.get('aresconfig.web_portal_port');
+      let protocol = this.httpsEnabled ? 'https' : 'http';
       if (`${port}` === '80') {
-        base = `${protocol}://${host}`;
+        base = `${protocol}://${this.mushHost}`;
       }
       else {
-        base = `${protocol}://${host}:${port}`;
+        base = `${protocol}://${this.mushHost}:${this.webPortalPort}`;
       }
       return base;
     },
     
     serverUrl(route) {
         var base;
-        let protocol = this.get('aresconfig.use_https') ? 'https' : 'http';
-        let host = this.get('aresconfig.host');
-        let webPort = this.get('aresconfig.web_portal_port');
-        let apiPort = this.get('aresconfig.api_port');
+        let protocol = this.httpsEnabled ? 'https' : 'http';
 
-        if (this.get('aresconfig.use_api_proxy')) {
+        if (this.apiProxyEnabled) {
           if (`${port}` === '80') {
-            base = `${protocol}://${host}/api`;
+            base = `${protocol}://${this.mushHost}/api`;
           }
           else {
-            base = `${protocol}://${host}:${webPort}/api`;
+            base = `${protocol}://${this.mushHost}:${this.webPortalPort}/api`;
           }
         } 
         else {
-          base = `${protocol}://${host}:${apiPort}`;
+          base = `${protocol}://${this.mushHost}:${this.apiPort}`;
         }
         if (route) {
             return base + "/" + route;
@@ -59,7 +54,7 @@ export default Service.extend(AresConfig, {
                 {
                     cmd: 'webError',
                     args: { error: `${error.message} : ${err.stack}` },
-                    api_key: this.get('aresconfig.api_key')
+                    api_key: this.apiKey
                 });
                 this.router.transitionTo('error');
       } catch(ex) { 
@@ -87,7 +82,7 @@ export default Service.extend(AresConfig, {
         {
             cmd: cmd,
             args: args,
-            api_key: this.get('aresconfig.api_key'),
+            api_key: this.apiKey,
             auth: this.get('session.data.authenticated')
         }).then((response) => {
             if (!response) {

@@ -4,7 +4,7 @@ import AresConfig from 'ares-webportal/mixins/ares-config';
 
 export default Controller.extend(AresConfig, {
   mushVersion: computed(function() {
-      return this.get('aresconfig.version');
+      return this.mushVersion;
   }),
   portalVersion: computed(function() {
     return aresweb_version;
