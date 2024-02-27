@@ -19,19 +19,19 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, AresC
     }),
     
     mushName: computed(function() { 
-        return aresconfig.game_name;
+        return this.get('aresconfig.game_name');
     }),
     
     mushPort: computed(function() {
-        return aresconfig.mush_port;        
+        return this.get('aresconfig.mush_port'); 
     }),
     
     mushHost: computed(function() {
-        return aresconfig.host;        
+        return this.get('aresconfig.host');
     }),
     
     mushVersion: computed(function() {
-        return aresconfig.version;
+        return this.get('aresconfig.version');
     }),
     
     portalVersion: computed(function() {

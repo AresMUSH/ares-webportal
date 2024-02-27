@@ -87,7 +87,7 @@ export default Route.extend(ReloadableRoute, AresConfig, {
     },
     
     title: function(tokens) {
-        var gameName = aresconfig.game_name;
+        var gameName = this.get('aresconfig.game_name');
         if (tokens.length > 0) {
             let tokenString = tokens.reverse().join(' - ');
             return `${tokenString} - ${gameName}`
