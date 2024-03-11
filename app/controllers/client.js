@@ -119,9 +119,10 @@ export default Controller.extend(AresConfig, {
     
   actions: {
     connect() {
-      var idle_keepalive_ms = 60000;
-      var protocol = aresconfig.use_https ? 'wss' : 'ws';
-      this.set('websocket', new WebSocket(`${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`));
+      let idle_keepalive_ms = 60000;
+      let protocol = this.httpsEnabled ? 'wss' : 'ws';
+      
+      this.set('websocket', new WebSocket(`${protocol}://${this.mushHost}:${this.websocketPort}/websocket`));
         var self = this;
         this.websocket.onmessage = function(evt) { 
           self.onMessage(evt);

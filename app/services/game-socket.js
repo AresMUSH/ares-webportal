@@ -21,8 +21,8 @@ export default Service.extend(AresConfig, {
     },
       
     socketUrl() {
-      var protocol = aresconfig.use_https ? 'wss' : 'ws';
-      return `${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
+      let protocol = this.httpsEnabled ? 'wss' : 'ws';
+      return `${protocol}://${this.mushHost}:${this.websocketPort}/websocket`;
     },
     
     checkSession(charId) {
@@ -51,13 +51,13 @@ export default Service.extend(AresConfig, {
                 try {
                   var doc = new DOMParser().parseFromString(msg, 'text/html');
                   var cleanMsg =  doc.body.textContent || "";
-                     
-                  new Notification(`Activity in ${aresconfig.game_name}`, 
+                  
+                  new Notification(`Activity in ${this.mushName}`, 
                     {
                       icon: '/game/uploads/theme_images/notification.png',
                       badge: '/game/uploads/theme_images/notification.png',
                       body: cleanMsg,
-                      tag: window.aresconfig.game_name,
+                      tag: this.mushName,
                       renotify: true
                     }
                    ); 
@@ -70,6 +70,12 @@ export default Service.extend(AresConfig, {
     },
     
     sessionStarted(charId) {
+      
+      if (this.aresconfig === null) {
+        console.log("Unable to open websocket - aresconfig is missing.");
+        return;
+      }
+      
         let socket = this.socket;
         this.set('charId', charId);
         
