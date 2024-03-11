@@ -35,7 +35,7 @@ export default Mixin.create({
     }),
     
     apiProxyEnabled: computed(function() {
-      return this.get('aresconfig.api_proxy_enabled');
+      return this.get('aresconfig.use_api_proxy');
     }),
     
     apiPort: computed(function() {

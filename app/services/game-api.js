@@ -23,9 +23,9 @@ export default Service.extend(AresConfig, {
     serverUrl(route) {
         var base;
         let protocol = this.httpsEnabled ? 'https' : 'http';
-
+        
         if (this.apiProxyEnabled) {
-          if (`${port}` === '80') {
+          if (`${this.webPortalPort}` === '80') {
             base = `${protocol}://${this.mushHost}/api`;
           }
           else {
