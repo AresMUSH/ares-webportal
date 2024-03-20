@@ -48,7 +48,7 @@
     
     <p><b>App Details</b>:</p>
      
-     <MarkdownEditor @text={{this.rosterApp}} />
+     <MarkdownEditor @text={{rosterApp}} />
          
     {{/if}}
 </div>
@@ -61,15 +61,15 @@
   </div>
   {{else}}
   <LinkTo @route="char" @model={{this.model.id}} class="btn btn-secondary" target="_blank">View Profile</LinkTo>
-    <button {{action (mut this.confirmClaim) true}} class="btn btn-primary">Claim</button>
+    <button {{action (mut confirmClaim) true}} class="btn btn-primary">Claim</button>
   {{/if}}
 </div>
 
 <FlashMessages />
 
 
-<BsModalSimple @title="Confirm Claim" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmClaim}} @onSubmit={{action "claimRoster"}} @onHide={{action (mut this.confirmClaim) false}}>
-    You're about to claim the character {{this.confirmClaim.name}} from the roster. Are you sure?
+<BsModalSimple @title="Confirm Claim" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{confirmClaim}} @onSubmit={{action "claimRoster"}} @onHide={{action (mut confirmClaim) false}}>
+    You're about to claim the character {{confirmClaim.name}} from the roster. Are you sure?
   </BsModalSimple>
   
 <p><LinkTo @route="roster"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Roster</LinkTo></p>

@@ -29,8 +29,27 @@
       </div>
       
       <div class="display-job-controls">
-       {{#if this.model.job.is_open }}       
-         <JobMenu @job={{this.model.job}} @abilities={{this.model.abilities}} @options={{this.model.options}} @id="jobMenuTop"  />
+       {{#if this.model.job.is_open }}
+       
+         <DropdownMenu @id="jobMenu" @title="Job Menu">
+
+                <li><a href="#" {{action 'closeJob'}}  class="dropdown-item">Close Job</a></li>
+                {{#if this.model.job.is_job_admin}}
+                  <li><LinkTo @route="job-edit" @model={{this.model.job.id}} class="dropdown-item">Edit Job</LinkTo></li>
+                {{/if}}
+                {{#if this.model.job.fs3_enabled}}
+                  <li><a href="#" {{action (mut this.selectSkillRoll) true}} class="dropdown-item">Add Ability Roll</a></li>
+                {{/if}}
+                {{#if this.model.job.is_approval_job}}
+                  <li><LinkTo @route="app-review" @model={{this.model.job.author.id}} class="dropdown-item">App Review for {{this.model.job.author.name}}</LinkTo></li>
+                  <li><LinkTo @route="char" @model={{this.model.job.author.name}} class="dropdown-item">Profile for {{this.model.job.author.name}}</LinkTo></li>
+                {{/if}}
+                {{#if this.model.job.is_roster_job}}
+                  <li><a href="#" {{action 'approveRoster'}} class="dropdown-item">Approve Roster for {{this.model.job.roster_name}}</a></li>
+                  <li><a href="#" {{action 'rejectRoster'}} class="dropdown-item">Reject Roster for {{this.model.job.roster_name}}</a></li>
+                {{/if}}
+                
+         </DropdownMenu>          
       {{/if}}
       </div>
   </div>
@@ -151,22 +170,6 @@
   </div>
   {{/if}}
   
-  {{#each-in this.model.job.custom_fields as |id field|}}
-  
-    <div class="display-job-row">
-      <label>{{field.name}}:</label>
-      
-      <div class="display-job-selection">
-        {{#if (eq field.field_type 'date')}}
-          {{field.date_display}}
-        {{else}}
-          {{field.value}}
-        {{/if}}
-      </div>
-      
-    </div>
-  {{/each-in}}
-  
 </div>
 
 <p><a href="#bottom"><i class="fas fa-angle-double-down"></i> Jump to End</a></p>
@@ -216,35 +219,26 @@
         Respond to Admin Only? <Input @type="checkbox" @checked={{this.replyAdminOnly}} /> 
     {{/if}}
 
-  <div class="{{if this.replyAdminOnly 'admin-only-reply' 'player-reply'}}">
+  <div class="{{if this.replyAdminOnly 'admin-only-reply' ''}}">
     {{#if this.replyAdminOnly}}
     <div class="badge admin-only-reply-label">To Admins Only</div>
-    {{else}}
-    <div class="badge player-reply-label">To Players</div>
     {{/if}}
     <div>
     </div>
         <MarkdownEditor @text={{this.reply}} />
     </div>
     
-    {{#if this.model.job.is_category_admin}}    
-      {{#if this.model.job.responses}}
-        <div class="preset-responses">
-          <b>Pre-Made Responses:</b>
-           <PowerSelect @selected='' @options={{this.model.job.responses}} @searchEnabled=true @searchField="name" @onChange={{action "responseSelected"}} as |resp|>
-            {{resp.name}}
-          </PowerSelect>
-        </div>
-      {{/if}}
-    {{/if}}    
+    {{#if this.model.job.responses}}
+      <div class="preset-responses">
+        <b>Pre-Made Responses:</b>
+         <PowerSelect @selected='' @options={{this.model.job.responses}} @searchEnabled=true @searchField="name" @onChange={{action "responseSelected"}} as |resp|>
+          {{resp.name}}
+        </PowerSelect>
+      </div>
+    {{/if}}
+    
         <div class="action-buttons">
-          <button class="btn btn-primary" {{action 'addReply'}}>
-            {{#if this.replyAdminOnly}}
-            Reply to Admins
-            {{else}}
-            Reply to Players
-            {{/if}}
-          </button>
+          <button class="btn btn-primary" {{action 'addReply'}}>Reply</button>
         </div>
 
 </div>
@@ -256,9 +250,29 @@
 
 
 {{#if this.model.job.is_open }}
-  <JobMenu @job={{this.model.job}} @abilities={{this.model.abilities}} @options={{this.model.options}} @id="jobMenuBottom" />
+  <DropdownMenu @id="jobMenuBottom" @title="Job Menu">
+
+         <li><a href="#" {{action 'closeJob'}}  class="dropdown-item">Close Job</a></li>
+         {{#if this.model.job.is_job_admin}}
+           <li><LinkTo @route="job-edit" @model={{this.model.job.id}} class="dropdown-item">Edit Job</LinkTo></li>
+         {{/if}}
+         {{#if this.model.job.fs3_enabled}}
+           <li><a href="#" {{action (mut this.selectSkillRoll) true}} class="dropdown-item">Add Ability Roll</a></li>
+         {{/if}}
+         {{#if this.model.job.is_approval_job}}
+           <li><LinkTo @route="app-review" @model={{this.model.job.author.id}} class="dropdown-item">App Review for {{this.model.job.author.name}}</LinkTo></li>
+           <li><LinkTo @route="char" @model={{this.model.job.author.name}} class="dropdown-item">Profile for {{this.model.job.author.name}}</LinkTo></li>
+         {{/if}}
+         {{#if this.model.job.is_roster_job}}
+           <li><a href="#" {{action 'approveRoster'}} class="dropdown-item">Approve Roster for {{this.model.job.roster_name}}</a></li>
+           <li><a href="#" {{action 'rejectRoster'}} class="dropdown-item">Reject Roster for {{this.model.job.roster_name}}</a></li>
+         {{/if}}
+         
+  </DropdownMenu>
 {{/if}}
   
        
+<Fs3Roll @job={{this.model.job}} @destinationType="job" @abilities={{this.model.abilities}} @selectSkillRoll={{this.selectSkillRoll}} />
+
 <FlashMessages />
 {{outlet}}

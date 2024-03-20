@@ -21,8 +21,8 @@ export default Service.extend(AresConfig, {
     },
       
     socketUrl() {
-      let protocol = this.httpsEnabled ? 'wss' : 'ws';
-      return `${protocol}://${this.mushHost}:${this.websocketPort}/websocket`;
+      var protocol = aresconfig.use_https ? 'wss' : 'ws';
+      return `${protocol}://${aresconfig.host}:${aresconfig.websocket_port}/websocket`;
     },
     
     checkSession(charId) {
@@ -51,13 +51,13 @@ export default Service.extend(AresConfig, {
                 try {
                   var doc = new DOMParser().parseFromString(msg, 'text/html');
                   var cleanMsg =  doc.body.textContent || "";
-                  
-                  new Notification(`Activity in ${this.mushName}`, 
+                     
+                  new Notification(`Activity in ${aresconfig.game_name}`, 
                     {
                       icon: '/game/uploads/theme_images/notification.png',
                       badge: '/game/uploads/theme_images/notification.png',
                       body: cleanMsg,
-                      tag: this.mushName,
+                      tag: window.aresconfig.game_name,
                       renotify: true
                     }
                    ); 
@@ -70,12 +70,6 @@ export default Service.extend(AresConfig, {
     },
     
     sessionStarted(charId) {
-      
-      if (this.aresconfig === null) {
-        console.log("Unable to open websocket - aresconfig is missing.");
-        return;
-      }
-      
         let socket = this.socket;
         this.set('charId', charId);
         
@@ -212,6 +206,7 @@ export default Service.extend(AresConfig, {
         }
         
         if (!recipient || recipient === self.get('charId')) {
+            var formatted_msg = ansi_up.ansi_to_html(data.args.message, { use_classes: true });
             var notify = true;
             
             if (this.callbacks[notification_type]) {
@@ -229,8 +224,7 @@ export default Service.extend(AresConfig, {
             }
             
             if (notify) {
-                var formatted_msg = ansi_up.ansi_to_html(data.args.message, { use_classes: true });
-              this.notify(formatted_msg);
+                this.notify(formatted_msg);
             }
         }
         

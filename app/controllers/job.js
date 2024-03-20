@@ -7,6 +7,7 @@ export default Controller.extend({
   editParticipants: false,
   newParticipants: null,
   newActivity: false,
+  selectSkillRoll: false,
       
   gameApi: service(),
   gameSocket: service(),
@@ -61,7 +62,17 @@ export default Controller.extend({
     }
   },
   
-
+  approveRoster: function(approved) {
+    this.gameApi.requestOne('approveRoster', { name: this.get('model.job.roster_name'), approved: approved })
+    .then((response) => {
+      if (response.error) {
+        return;
+      }
+      this.send('reloadModel');
+      this.flashMessages.success('Roster app ' + (approved ? 'approved.' : 'rejected.'));
+    });
+  },
+  
   actions: {
     addReply() {
       let api = this.gameApi;
@@ -82,7 +93,19 @@ export default Controller.extend({
         this.flashMessages.success('Reply added!');
       });
     },
-    
+    closeJob() {
+      let api = this.gameApi;
+      api.requestOne('jobClose', { id: this.get('model.job.id')})
+      .then( (response) => {
+        if (response.error) {
+          return;
+        }
+        this.set('reply', '');
+        this.resetReplyAdmin();
+        this.router.transitionTo('jobs');
+        this.flashMessages.success('Reply added!');
+      });
+    },
     assignJob(assignee) {
       let api = this.gameApi;
       api.requestOne('jobAssign', { id: this.get('model.job.id'), assignee_id: assignee.id })
@@ -137,7 +160,13 @@ export default Controller.extend({
       this.set('reply', resp.value);
     },
     
-   
+    approveRoster: function() {
+      this.approveRoster(true);
+    },
+    
+    rejectRoster: function() {
+      this.approveRoster(false);
+    }
     
   }
 });
