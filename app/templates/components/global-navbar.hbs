@@ -51,8 +51,6 @@
                     <li>
                     {{#if navItem.id}}
                       <LinkTo class="dropdown-item" @route={{navItem.route}} @model={{navItem.id}}>{{{navItem.title}}}</LinkTo>
-                    {{else if navItem.ids}}
-                      <LinkTo class="dropdown-item" @route={{navItem.route}} @models={{navItem.ids}}>{{{navItem.title}}}</LinkTo>
                     {{else}}
                       <LinkTo class="dropdown-item" @route={{navItem.route}}>{{{navItem.title}}}</LinkTo>
                     {{/if}}
@@ -69,8 +67,6 @@
                 <li>
                 {{#if sec.id}}
                   <LinkTo  @route={{sec.route}} @model={{sec.id}} class="nav-link">{{{sec.title}}}</LinkTo>
-                {{else if sec.ids}}
-                  <LinkTo  @route={{sec.route}} @models={{sec.ids}} class="nav-link">{{{sec.title}}}</LinkTo>
                 {{else}}
                   <LinkTo @route={{sec.route}} class="nav-link">{{{sec.title}}}</LinkTo>
                 {{/if}}
@@ -117,7 +113,6 @@
           </li>
         {{/if}}
 
-
       </ul>
 
     </div>
@@ -130,7 +125,7 @@
 
   <table class="alts-switcher">
     {{#each this.model.alts as |alt|}}
-      {{#if (not (eq alt.name this.currentUser.name)) }}
+      {{#if (not (eq alt.name currentUser.name)) }}
         <tr><td>
         <CharIconInline @char={{alt}} @hideLink="true" />
         </td>

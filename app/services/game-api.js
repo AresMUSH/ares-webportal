@@ -10,30 +10,29 @@ export default Service.extend(AresConfig, {
     
     portalUrl() {
       var base;
-      let protocol = this.httpsEnabled ? 'https' : 'http';
-      if (`${port}` === '80') {
-        base = `${protocol}://${this.mushHost}`;
+      var protocol = aresconfig.use_https ? 'https' : 'http';
+      if (`${aresconfig.web_portal_port}` === '80') {
+        base = `${protocol}://${aresconfig.host}`;
       }
       else {
-        base = `${protocol}://${this.mushHost}:${this.webPortalPort}`;
+        base = `${protocol}://${aresconfig.host}:${aresconfig.web_portal_port}`;
       }
       return base;
     },
     
     serverUrl(route) {
         var base;
-        let protocol = this.httpsEnabled ? 'https' : 'http';
-        
-        if (this.apiProxyEnabled) {
-          if (`${this.webPortalPort}` === '80') {
-            base = `${protocol}://${this.mushHost}/api`;
+        var protocol = aresconfig.use_https ? 'https' : 'http';
+        if (aresconfig.use_api_proxy) {
+          if (`${aresconfig.web_portal_port}` === '80') {
+            base = `${protocol}://${aresconfig.host}/api`;
           }
           else {
-            base = `${protocol}://${this.mushHost}:${this.webPortalPort}/api`;
+            base = `${protocol}://${aresconfig.host}:${aresconfig.web_portal_port}/api`;
           }
         } 
         else {
-          base = `${protocol}://${this.mushHost}:${this.apiPort}`;
+          base = `${protocol}://${aresconfig.host}:${aresconfig.api_port}`;
         }
         if (route) {
             return base + "/" + route;
@@ -48,13 +47,12 @@ export default Service.extend(AresConfig, {
           return;
         }
         console.log(error);
-        
         let err = new Error();
         $.post(this.serverUrl("request"), 
                 {
                     cmd: 'webError',
                     args: { error: `${error.message} : ${err.stack}` },
-                    api_key: this.apiKey
+                    api_key: aresconfig.api_key
                 });
                 this.router.transitionTo('error');
       } catch(ex) { 
@@ -68,21 +66,11 @@ export default Service.extend(AresConfig, {
     },
     
     request(cmd, args, allowEpicFail = false) {
-      
-      if (this.aresconfig === null) {
-        return new Promise((resolve, reject) => {
-          console.log("Unable to send request - aresconfig is missing.");
-          reject( {
-            error: "Unable to send request - aresconfig is missing."
-          });  
-        });
-      }
-      
      return $.post(this.serverUrl("request"), 
         {
             cmd: cmd,
             args: args,
-            api_key: this.apiKey,
+            api_key: aresconfig.api_key,
             auth: this.get('session.data.authenticated')
         }).then((response) => {
             if (!response) {
