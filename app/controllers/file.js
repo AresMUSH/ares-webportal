@@ -6,6 +6,7 @@ export default Controller.extend(AuthenticatedController, {
     gameApi: service(),
     router: service(),
     router: service(),
+    flashMessages: service(),
     confirmDelete: false,
     
     actions: {        

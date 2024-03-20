@@ -21,7 +21,6 @@ export default Route.extend(DefaultRoute, RouteResetOnExit, {
     
     setupController: function(controller, model) {
       this._super(controller, model);
-      controller.setCategory(model.get('options.request_category'));
-      controller.set('submitter', model.get('characters').find(c => c.id == this.get('session.data.authenticated.id')));
+      controller.setupController(model);
     }
 });

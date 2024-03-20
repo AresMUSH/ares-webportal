@@ -17,7 +17,7 @@
        {{#if this.model.allow_web_submit}}
          <p>When you're happy with your character, submit them for review by the game admin.</p>
          <hr>
-         <p>{{this.model.app_notes_prompt}}</p>
+         <p><AnsiFormat @text={{this.model.app_notes_prompt}} /></p>
        
          <Textarea @value={{this.appNotes}} cols={{80}} rows={{5}} />
        
