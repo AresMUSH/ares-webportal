@@ -169,7 +169,7 @@
 
 <BsModalSimple @title="Move Topic" @closeTitle="Cancel" @submitTitle="Move" @size={{null}} @fade={{true}} @open={{this.chooseNewCategory}} @onSubmit={{action "moveTopic"}} @onHide={{action (mut this.chooseNewCategory) false}}>
 
-      <PowerSelect @selected={{newCategory}} @options={{this.model.categories}} @onChange={{action "newCategorySelected"}} as |category|>
+      <PowerSelect @selected={{this.newCategory}} @options={{this.model.categories}} @onChange={{action "newCategorySelected"}} as |category|>
         {{category.name}}
       </PowerSelect>
 </BsModalSimple>

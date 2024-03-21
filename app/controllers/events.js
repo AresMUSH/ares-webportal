@@ -5,7 +5,7 @@ import AresConfig from 'ares-webportal/mixins/ares-config';
 
 export default Controller.extend(AuthenticatedController, AresConfig, {
   calendarUrl: computed(function() {
-    var protocol = aresconfig.use_https ? 'https' : 'http';
-    return `${protocol}://${aresconfig.host}/game/calendar.ics`;
+    let protocol = this.httpsEnabled ? 'https' : 'http';
+    return `${protocol}://${this.mushHost}/game/calendar.ics`;
   })
 });

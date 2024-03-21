@@ -7,13 +7,14 @@ fi
 
 cd /home/ares/ares-webportal/
 rm -rf node_modules
+rm -rf tmp
 
 . ~/.nvm/nvm.sh
-npm install -g npm@6.14.16
-nvm install 12
-nvm use 12
-nvm alias default 12
-npm install -g ember-cli@3.28.0
+npm install -g npm@8.6
+nvm install 18
+nvm use 18
+nvm alias default 18
+npm install -g ember-cli@4.12
 npm ci
 
-echo "NPM is updated. You can now start your game like normal."
+echo "NPM is updated. Please reboot your server and your game should automatically restart."
