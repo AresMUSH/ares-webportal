@@ -11,5 +11,4 @@ export default function setupCustomRoutes(router) {
   router.route('search-spells');
   router.route('school', { path: '/school/:school'});
   router.route('spells', { path: '/spells'});
-  router.route('spell-fatigue'), { path: '/spell-fatigue'};
 }

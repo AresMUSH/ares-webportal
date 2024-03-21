@@ -6,7 +6,7 @@
 
 <table class="table table-striped lore-hook-table">
 
-  {{#each model.active_chars as |char|}}
+  {{#each this.model.active_chars as |char|}}
 
     <tr>
       <td>
@@ -39,7 +39,7 @@
 
 <table class="table table-striped lore-hook-table">
 
-  {{#each model.idle_chars as |char|}}
+  {{#each this.model.idle_chars as |char|}}
     {{#if char.lore_hook_name}}
       <tr>
         <td>
