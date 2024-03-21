@@ -17,20 +17,6 @@
         <SceneList @scenes={{this.scenes.scenes}} @pages={{this.scenes.pages}} @sceneTypes={{this.sceneTypes}} @filter={{this.filter}} @page={{this.page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
 
     </div>
-
-    {{#if char.custom.lore_hook_name}}
-        <div id="lore-hook" class="tab-pane fade ">
-            {{#if char.custom.lore_hook_ancestry}}
-            <h4>{{#link-to 'creature' char.custom.lore_hook_ancestry}}{{char.custom.lore_hook_name}} {{/link-to}}</h4>
-            {{else if char.custom.lore_hook_pet}}
-            <h4>{{#link-to 'creature' char.custom.lore_hook_pet}}{{char.custom.lore_hook_name}} {{/link-to}}</h4>
-            {{else}}
-            <h4>{{char.custom.lore_hook_name}}</h4>
-            {{/if}}
-            {{char.custom.lore_hook_desc}}
-        </div>
-    {{/if}}
-
     <div id="comps" class="tab-pane fade ">
         <CharComps @char={{char}}  />
     </div>
