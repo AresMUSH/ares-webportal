@@ -1,10 +1,10 @@
 
-<h2>{{mythic.name}} ({{mythic.type}})</h2>
-<p><i>{{mythic.gender}}</i></p>
+<h2>{{this.mythic.name}} ({{this.mythic.type}})</h2>
+<p><i>{{this.mythic.gender}}</i></p>
 
-<p>{{mythic.shortdesc}}</p>
+<p>{{this.mythic.shortdesc}}</p>
 
-{{mythic.about}}
+{{this.mythic.about}}
 
 <h3>Description</h3>
 
@@ -12,7 +12,7 @@
 
 <h3>Damage</h3>
 
-{{#each mythic.damage as |damage|}}
+{{#each this.mythic.damage as |damage|}}
   <div class="fs3-damage-block">
 
     <div class="row">
