@@ -1,5 +1,5 @@
 <h1>Spells</h1>
-<h2><a href="/school/{{char.custom.major_school}}">{{char.custom.major_school}}</a></h2>
+<h2><a href="/school/{{this.char.custom.major_school}}">{{this.char.custom.major_school}}</a></h2>
   <ul>
     {{#each this.char.custom.major_spells as |spell|}}
       <li><b>{{spell.name}}</b> (<i>Level {{spell.level}} </i>)</li>
