@@ -3,6 +3,7 @@ import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
 import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
+import Ember from 'ember';
 
 export default Route.extend(DefaultRoute, ReloadableRoute, {
     gameApi: service(),

@@ -15,7 +15,7 @@
 <tbody>
 {{#each this.model.attrs as |attr| }}
 <tr>
-    <td>{{attr.name}}</td> 
+    <td>{{attr.name}}</td>
     <td>{{attr.description}}</td>
 </tr>
 {{/each}}
@@ -37,14 +37,14 @@
 <tbody>
 {{#each this.model.action_skills as |ability| }}
 <tr>
-    <td>{{ability.name}}</td> 
-    <td class="hidden-xs hidden-sm">{{ability.linked_attr}}</td> 
+    <td>{{ability.name}}</td>
+    <td class="hidden-xs hidden-sm">{{ability.linked_attr}}</td>
     <td>
         {{ability.description}}
         {{#if ability.specialties}}
         <br> <b>Specialty Required:</b> {{ability.specialties}}
         {{/if}}
-    
+
     </td>
 </tr>
 {{/each}}
@@ -59,7 +59,7 @@
 </thead>
 
 <tbody>
-{{#each model.magic_skills as |ability| }}
+{{#each this.model.magic_skills as |ability| }}
 <tr>
     <td>{{ability.name}}</td>
     <td>{{ability.description}}
@@ -87,7 +87,7 @@
 <tbody>
 {{#each this.model.backgrounds as |ability| }}
 <tr>
-    <td>{{ability.name}}</td> 
+    <td>{{ability.name}}</td>
     <td>{{ability.description}}</td>
 </tr>
 {{/each}}
@@ -109,7 +109,7 @@
 <tbody>
 {{#each this.model.languages as |ability| }}
 <tr>
-    <td>{{ability.name}}</td> 
+    <td>{{ability.name}}</td>
     <td>{{ability.description}}</td>
 </tr>
 {{/each}}
@@ -131,7 +131,7 @@
 <tbody>
 {{#each this.model.advantages as |ability| }}
 <tr>
-    <td>{{ability.name}}</td> 
+    <td>{{ability.name}}</td>
     <td>{{ability.description}}</td>
 </tr>
 {{/each}}
