@@ -1,10 +1,11 @@
 import Component from '@ember/component';
+import EmberObject, { computed } from '@ember/object';
 
 export default Component.extend({
     compFilters: function() {
         let base_filters = ['Recent', 'All'];
         return base_filters;
-    }.property('comps'),
+    }.computed('comps'),
 
     actions: {
         filterChanged(newFilter) {
