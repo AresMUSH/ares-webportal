@@ -7,9 +7,9 @@
   </ul>
 
 {{#if this.char.custom.minor_spells}}
-  <h2><a href="/school/{{char.custom.minor_school}}">{{char.custom.minor_school}}</a></h2>
+  <h2><a href="/school/{{this.char.custom.minor_school}}">{{this.char.custom.minor_school}}</a></h2>
   <ul>
-    {{#each char.custom.minor_spells as |spell|}}
+    {{#each this.char.custom.minor_spells as |spell|}}
       <li><b>{{spell.name}}</b> (<i>Level {{spell.level}} </i>)</li>
     {{/each}}
   </ul>

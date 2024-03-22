@@ -1,7 +1,7 @@
 <div role="tabpanel" class="tab-pane" id="magic">
 
   <div class="chargen-section-title">Magic</div>
-  <div class="cg-tip"><AnsiFormat @text={{char.custom.magic_blurb}} /></div>
+  <div class="cg-tip"><AnsiFormat @text={{this.char.custom.magic_blurb}} /></div>
   <br>
 
   <div class="form-group row">
@@ -77,11 +77,11 @@
       <b>Short Description</b>
     </div>
     <div class="col-sm-9">
-      <Input @type="text" size={{50}} @value={{char.custom.mount_shortdesc}} />
+      <Input @type="text" size={{50}} @value={{this.char.custom.mount_shortdesc}} />
     </div>
   </div>
 
-  <div class="cg-tip">{{{ansi-format text=char.custom.mythic_magic_blurb}}}</div><br>
+  <div class="cg-tip">{{{ansi-format text=this.char.custom.mythic_magic_blurb}}}</div><br>
   <div class="form-group row">
     <div class="col-sm-3">
       <b>Mythic School</b>
