@@ -4,7 +4,7 @@ export default Component.extend({
     compFilters: function() {
         let base_filters = ['Recent', 'All'];
         return base_filters;
-    }.computed('comps'),
+    }.property('comps'),
 
     actions: {
         filterChanged(newFilter) {
