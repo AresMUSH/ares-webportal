@@ -19,20 +19,20 @@
          {{char.name}}
        </PowerSelect>
      </div>
-     
+
    <div class="create-job-row">
        <label>Other Participants:</label>
         <PowerSelectMultiple @selected={{this.participants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
          {{char.name}}
        </PowerSelectMultiple>
      </div>
-     
+
      <div class="create-job-row">
        <label>Tags:</label>
        <Input @type="text" size={{25}} id="tags" @value={{this.tags}} />
     </div>
-    
-    <div class="create-job-row">    
+
+    <div class="create-job-row">
       <label>Category:</label>
 
           {{#if this.category}}
@@ -50,7 +50,7 @@
                 <li><a href="#" {{action 'changeCategory' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
               {{/each}}
         </DropdownMenu>
-      
+
     </div>
     
     {{#each-in this.customFields as |id field|}}
@@ -90,9 +90,9 @@
       
 </div>
 
-     
+
  <MarkdownEditor @text={{this.description}} />
-   
+
 <div class="action-buttons">
   <LinkTo @route="jobs" class="btn btn-secondary">Cancel</LinkTo>
   <button class="btn btn-primary" {{action 'createJob'}}>Create</button>

@@ -10,7 +10,7 @@
 
           <li class="nav-item dropdown d-lg-none">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          
+
                     Welcome {{this.currentUser.name}}
                     {{#if this.model.notification_count}}
                         <span class="badge rounded-pill bg-primary" id="notificationBadge"><i class="fa fa-bell" aria-label="New Notifications"></i> {{this.model.notification_count}}</span>
@@ -25,21 +25,21 @@
 
                       {{#if this.model.alts}}
                           <li><a class="dropdown-item" href="#" {{action (mut this.showAltSelection) true}}>Switch Alt</a></li>
-                      {{/if}} 
+                      {{/if}}
 
                       <li><LinkTo class="dropdown-item" @route="logout">Logout</LinkTo></li>
-            
+
                     </ul>
                   </li>
                 {{else}}
                 <li class="nav-item d-lg-none"><LinkTo class="nav-link" @route="login" @query={{hash redirect=this.currentRoute}}>Login</LinkTo></li>
                 {{/if}}
 
-        
+
         {{#each this.topNavbar as |sec|}}
           {{#if sec.menu }}
             <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">              
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               {{{sec.title}}}</a>
               <ul class="dropdown-menu  dropdown-menu-end">
                 {{#each sec.menu as |navItem|}}
@@ -64,7 +64,7 @@
           {{else}}
             <li class="nav-item">
               {{#if sec.url}}
-                  <a href="{{sec.url}}" target="{{sec.target}}" class="nav-link">{{{sec.title}}}</a>              
+                  <a href="{{sec.url}}" target="{{sec.target}}" class="nav-link">{{{sec.title}}}</a>
               {{else}}
                 <li>
                 {{#if sec.id}}
@@ -79,7 +79,7 @@
             </li>
           {{/if}}
         {{/each}}
-                
+
       </ul>
 
     </div>

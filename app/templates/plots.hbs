@@ -1,7 +1,171 @@
 {{page-title 'Plots'}}
 <h1>Plots</h1>
 
-<p>Plots are a way to group related scenes. For archived plots, see <LinkTo @route="plots-archive">Plot Archive</LinkTo>.</p>
+    <div class="pagebox-pic" style="margin: auto; width: 75%; max-width: 800px;">
+      <div class="box-header">
+        <div class="box-title">
+          Featured Plots
+        </div>
+      </div>
+      {{#each this.model as |plot|}}
+        {{#if plot.featured }}
+          <div class="pagebox-info">
+            <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
+            <AnsiFormat @text={{plot.summary}} />
+          </div>
+        {{/if}}
+      {{/each}}
+    </div>
+
+
+
+<h2 id="current" style="width:100%;">Current Plots</h2>
+<p>Currently active plots.</p>
+
+<table class="table table-striped plots-list">
+
+
+<thead>
+  <th class="col-xs-3">Plot</th>
+  <th class="col-xs-2">Storytellers</th>
+  <th class="col-xs-3 hidden-xs hidden-sm">Dates</th>
+  <th class="col-xs-4">Summary</th>
+</thead>
+
+<tbody>
+
+{{#each this.model as |plot|}}
+  {{#if (not plot.completed) }}
+    {{#if (not plot.background) }}
+      <tr>
+          <td>
+          <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
+          </td>
+          <td>
+            {{#each plot.storytellers as |storyteller|}}
+              <CharIconTiny @char={{storyteller}} />
+            {{/each}}
+          </td>
+          <td class="hidden-xs hidden-sm">
+          {{plot.start_date}} - {{plot.end_date}}
+          </td>
+          <td>
+              <AnsiFormat @text={{plot.summary}} />
+              {{#if plot.content_warning}}
+              <ContentWarningTag @warning={{plot.content_warning}} />
+              {{/if}}
+          </td>
+      </tr>
+    {{/if}}
+  {{/if}}
+{{/each}}
+
+</tbody>
+</table>
+
+<h2 id="background">Background Plots</h2>
+<p>Ongoing plots that currently exist in the background of the game's story, including plots to collect vignettes and flashbacks.</p>
+
+<table class="table table-striped">
+
+<thead>
+    <tr>
+        <th class="col-xs-3">Plot</th>
+        <th class="col-xs-2">Storytellers</th>
+        <th class="col-xs-3 hidden-xs hidden-sm">Dates</th>
+        <th class="col-xs-4">Summary</th>
+    </tr>
+</thead>
+
+<tbody>
+
+  {{#each this.model as |plot|}}
+    {{#if (not plot.completed) }}
+      {{#if plot.background }}
+        <tr>
+            <td>
+            <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
+            </td>
+            <td>
+              {{#each plot.storytellers as |storyteller|}}
+                <LinkTo @route="char" @model="{{storyteller.name}}">{{storyteller.name}}</LinkTo>
+              {{/each}}
+            </td>
+            <td class="hidden-xs hidden-sm">
+            {{plot.start_date}} - {{plot.end_date}}
+            </td>
+            <td>
+                <AnsiFormat @text={{plot.summary}} />
+                {{#if plot.content_warning}}
+                <ContentWarningTag @warning={{plot.content_warning}} />
+                {{/if}}
+
+            </td>
+        </tr>
+    {{/if}}
+    {{/if}}
+  {{/each}}
+
+</tbody>
+</table>
+
+<h2 id="background">Archived Plots</h2>
+<p>Plots which have been completed. </p>
+
+<a data-bs-toggle="collapse" href="#archived" class="btn btn-secondary btn-collapse">See Archived Plots</a>
+
+
+<div id="archived" class="card-collapse collapse">
+
+<table class="table table-striped">
+
+<thead>
+    <tr>
+        <th class="col-xs-3">Plot</th>
+        <th class="col-xs-2">Storytellers</th>
+        <th class="col-xs-3 hidden-xs hidden-sm">Dates</th>
+        <th class="col-xs-4">Summary</th>
+    </tr>
+</thead>
+
+<tbody>
+
+  {{#each this.model as |plot|}}
+    {{#if plot.completed }}
+      <tr>
+          <td>
+          <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
+          </td>
+          <td>
+            {{#each plot.storytellers as |storyteller|}}
+              <LinkTo @route="char" @model="{{storyteller.name}}">{{storyteller.name}}</LinkTo>
+            {{/each}}
+          </td>
+          <td class="hidden-xs hidden-sm">
+          {{plot.start_date}} - {{plot.end_date}}
+          </td>
+          <td>
+              <AnsiFormat @text={{plot.summary}} />
+              {{#if plot.content_warning}}
+              <ContentWarningTag @warning={{plot.content_warning}} />
+              {{/if}}
+
+          </td>
+      </tr>
+    {{/if}}
+  {{/each}}
+
+
+
+
+
+</tbody>
+</table>
+</div>
+
+
+{{!--
+<PlotsFeatured {{this.model.featured}} />
 
 {{#if this.isApproved}}
 
@@ -9,6 +173,12 @@
   <LinkTo @route="plot-create" class="btn btn-primary">Create Plot</LinkTo>
 </div>
 
-{{/if}}
+{{/if}} --}}
 
-<PlotsList @plots={{this.model}} />
+
+
+{{!-- <PlotsList @plots={{this.model.current}} />
+
+<PlotsBackground @plots={{this.model.background}} />
+
+<PlotsArchive @plots={{this.model.archived}} /> --}}

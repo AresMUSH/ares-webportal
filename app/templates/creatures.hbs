@@ -1,0 +1,77 @@
+{{page-title 'Cryptids'}}
+<h1>Cryptids</h1>
+
+<div class="action-buttons">
+  <LinkTo @route="creature-create" class="btn btn-primary">Create Cryptid Page</LinkTo>
+</div>
+
+<p>Cryptids are any creature, animal or person, that is not native to earth. The term includes <a href="/wiki/mythics">mythics</a> - sapient creatures known to bond to human mages - are well as sapient creatures who are unable to bond with humans and non-sapient, animal-like creatures.</p>
+
+<div class="clearfix"/>
+  <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#sapient">Sapient</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#nonsapient">Non Sapient</a></li>
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#a-z">A-Z List</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+
+  <div id="sapient" class="tab-pane row active">
+    {{#each this.model as |creature|}}
+      {{#if creature.sapient}}
+        <div class="directory-card" style="background-image: url('/game/uploads/{{creature.banner_image.path}}');">
+          <div class="directory-title"><LinkTo @route="creature" @model={{creature.id}}>{{creature.name}}</LinkTo></div>
+          <div class="directory-info">
+             <p>{{creature.short_desc}}</p>
+          </div>
+        </div>
+      {{/if}}
+    {{/each}}
+  </div>
+
+  <div id="nonsapient" class="tab-pane fade row">
+    {{#each this.model as |creature|}}
+      {{#unless creature.sapient}}
+      <div class="directory-card" style="background-image: url('/game/uploads/{{creature.banner_image.path}}');">
+        <div class="directory-title"><LinkTo @route="creature" @model={{creature.id}}>{{creature.name}}</LinkTo></div>
+        <div class="directory-info">
+           <p>{{creature.short_desc}}</p>
+        </div>
+      </div>
+      {{/unless}}
+    {{/each}}
+  </div>
+
+  <div id="a-z" class="tab-pane row">
+    <div class="row">
+
+      <div class="col col-xs-6">
+        SAPIENT
+        <ul>
+          {{#each this.model as |creature|}}
+            {{#if creature.sapient}}
+              <li><LinkTo @route="creature" @model={{creature.id}}>{{creature.name}}</LinkTo></li>
+            {{/if}}
+          {{/each}}
+        </ul>
+      </div>
+
+      <div class="col col-xs-6">
+        NON SAPIENT
+        <ul>
+          {{#each this.model as |creature|}}
+            {{#unless creature.sapient}}
+              <li><LinkTo @route="creature" @model={{creature.id}}>{{creature.name}}</LinkTo></li>
+            {{/unless}}
+          {{/each}}
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+{{outlet}}

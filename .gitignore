@@ -38,11 +38,13 @@ errors.txt
 # broccoli-debug
 /DEBUG/
 
+.ember-cli
+
 # Generated
 
 aresconfig.js
 calendar.ics
-
+.ftpconfig
 # Ember upgrade junk
 
 codemods.log
