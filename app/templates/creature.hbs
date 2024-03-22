@@ -52,7 +52,7 @@
                 <b>Weapons:</b>
                 <ul>
                   {{#each this.model.creature.weapons as |weapon|}}
-                    <li><LinkTo @route="fs3combat-gear-detail" @models={{'weapon' weapon}}>
+                    <li><LinkTo @route="fs3combat-gear-detail" @models={{array 'weapon' weapon}}>
                       {{weapon}}</LinkTo></li>
                   {{/each}}
                 </ul>
@@ -60,7 +60,7 @@
             </div>
             <div class="col col-md-4">
               {{#if this.model.creature.armor}}
-                <b>Armor:</b> <LinkTo @route="fs3combat-gear-detail" @models={{'armor' this.model.creature.armor}}>{{this.model.creature.armor}}</LinkTo>
+                <b>Armor:</b> <LinkTo @route="fs3combat-gear-detail" @models={{array 'armor' this.model.creature.armor}}>{{this.model.creature.armor}}</LinkTo>
               {{/if}}
             </div>
           </div>

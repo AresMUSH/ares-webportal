@@ -1,7 +1,7 @@
 <h2>Compliments</h2>
 <p>The most recent 10 compliments. For all compliments, use `comps` on game.</p>
 
-{{#each char.custom.comps as |comp|}}
+{{#each this.char.custom.comps as |comp|}}
 <div class="comp">
  <p>{{{ansi-format text=comp.msg}}}<i>From {{comp.from}} on {{comp.date}}</i></p></div>
 {{/each}}

@@ -1,16 +1,16 @@
 <div class="spell-card">
   <div class="index-card">
     <h3 class="card-header">
-      <div class="card-title">{{spell.name}}</div>
+      <div class="card-title">{{this.spell.name}}</div>
     </h3>
     <div class="spell-icons">
-      {{#if spell.potion}}
+      {{#if this.spell.potion}}
         <img src="http://spiritlakemu.com/game/uploads/theme_images/potionicon.png" width="35px"  alt="Can be made into a potion" title="Can be made into a potion">
       {{/if}}
-      {{#if spell.single_target}}
+      {{#if this.spell.single_target}}
         <img src="http://spiritlakemu.com/game/uploads/theme_images/singletargeticon.png" width="35px" alt="Single target" title="Single target">
       {{/if}}
-      {{#if spell.multi_target}}
+      {{#if this.spell.multi_target}}
         <img src="http://spiritlakemu.com/game/uploads/theme_images/multitargeticon.png" width="35px" alt="Multiple targets" title="Multiple targets">
       {{/if}}
     </div>
@@ -19,71 +19,71 @@
       <div class="spell-stats">
         <div class="stats-left">
           <div class="spell-info">
-            <b><i>{{spell.school}}</i></b><br><b>Level {{spell.level}}</b>
+            <b><i>{{this.spell.school}}</i></b><br><b>Level {{this.spell.level}}</b>
           </div>
 
           <div class="spell-desc">
-            {{{ansi-format text=spell.desc}}}
+            {{{ansi-format text=this.spell.desc}}}
           </div>
-          {{#if spell.weapon_or_specials}}
+          {{#if this.spell.weapon_or_specials}}
             <div class="spell-attack-stats-block">
               <div class="spell-attack-stats-label">
                 <h5>Attack Stats:</h5>
               </div>
               <div class="spell-attack-stats">
                 {{#if spell.weapon_specials}}
-                  <p><i>Applies {{spell.name}} stats atop the stats of the weapon you are already wielding.</i></p>
+                  <p><i>Applies {{this.spell.name}} stats atop the stats of the weapon you are already wielding.</i></p>
                 {{/if}}
-                {{#if spell.weapon}}
-                  {{spell.weapon_type}}{{#if spell.weapon_shrapnel}} (Shrapnel){{/if}}
+                {{#if this.spell.weapon}}
+                  {{this.spell.weapon_type}}{{#if this.spell.weapon_shrapnel}} (Shrapnel){{/if}}
                 {{/if}}
                 <ul>
-                  {{#if spell.weapon_lethality}}
-                    <li><b>Lethality:</b> {{spell.weapon_lethality}}</li>
+                  {{#if this.spell.weapon_lethality}}
+                    <li><b>Lethality:</b> {{this.spell.weapon_lethality}}</li>
                   {{/if}}
-                  {{#if spell.weapon_special_lethality}}
-                    <li><b>Lethality:</b> {{spell.weapon_special_lethality}}</li>
+                  {{#if this.spell.weapon_special_lethality}}
+                    <li><b>Lethality:</b> {{this.spell.weapon_special_lethality}}</li>
                   {{/if}}
-                  {{#if spell.weapon_penetration}}
-                    <li><b>Penetration:</b> {{spell.weapon_penetration}}</li>
+                  {{#if this.spell.weapon_penetration}}
+                    <li><b>Penetration:</b> {{this.spell.weapon_penetration}}</li>
                   {{/if}}
-                  {{#if spell.weapon_special_penetration}}
-                    <li><b>Penetration:</b> {{spell.weapon_special_penetration}}</li>
+                  {{#if this.spell.weapon_special_penetration}}
+                    <li><b>Penetration:</b> {{this.spell.weapon_special_penetration}}</li>
                   {{/if}}
-                  {{#if spell.weapon_accuracy}}
-                    <li><b>Accuracy:</b> {{spell.weapon_accuracy}}</li>
+                  {{#if this.spell.weapon_accuracy}}
+                    <li><b>Accuracy:</b> {{this.spell.weapon_accuracy}}</li>
                   {{/if}}
-                  {{#if spell.weapon_special_accuracy}}
-                    <li><b>Accuracy:</b> {{spell.weapon_special_accuracy}}</li>
+                  {{#if this.spell.weapon_special_accuracy}}
+                    <li><b>Accuracy:</b> {{this.spell.weapon_special_accuracy}}</li>
                   {{/if}}
-                  {{#if spell.weapon_init}}
-                    <li><b>Initiative Bonus:</b> {{spell.weapon_init}}</li>
+                  {{#if this.spell.weapon_init}}
+                    <li><b>Initiative Bonus:</b> {{this.spell.weapon_init}}</li>
                   {{/if}}
-                  {{#if spell.weapon_special_init}}
-                    <li><b>Initiative Bonus:</b> {{spell.weapon_special_init}}</li>
+                  {{#if this.spell.weapon_special_init}}
+                    <li><b>Initiative Bonus:</b> {{this.spell.weapon_special_init}}</li>
                   {{/if}}
                 </ul>
               </div>
             </div>
           {{/if}}
-        {{#if spell.armor_or_specials}}
+        {{#if this.spell.armor_or_specials}}
           <div class="spell-attack-stats-label"><h4>Armor Stats</h4></div>
           <div class="spell-attack-stats">
-            {{#if spell.armor_specials}}
-              <p><i>Applies {{spell.name}} stats atop the stats of the armor you are already wearing.</i></p>
+            {{#if this.spell.armor_specials}}
+              <p><i>Applies {{this.spell.name}} stats atop the stats of the armor you are already wearing.</i></p>
             {{/if}}
             <ul>
-              {{#if spell.armor_protection}}
-                <li><b>Protection:</b> {{spell.armor_protection}}</li>
+              {{#if this.spell.armor_protection}}
+                <li><b>Protection:</b> {{this.spell.armor_protection}}</li>
               {{/if}}
-              {{#if spell.armor_special_protection}}
-                <li><b>Protection:</b> {{spell.armor_special_protection}}</li>
+              {{#if this.spell.armor_special_protection}}
+                <li><b>Protection:</b> {{this.spell.armor_special_protection}}</li>
               {{/if}}
-              {{#if spell.armor_defense}}
-                <li><b>Defense:</b> {{spell.armor_defense}}</li>
+              {{#if this.spell.armor_defense}}
+                <li><b>Defense:</b> {{this.spell.armor_defense}}</li>
               {{/if}}
-              {{#if spell.armor_special_defense}}
-                <li><b>Defense:</b> {{spell.armor_special_defense}}</li>
+              {{#if this.spell.armor_special_defense}}
+                <li><b>Defense:</b> {{this.spell.armor_special_defense}}</li>
               {{/if}}
             </ul>
           </div>
@@ -93,48 +93,48 @@
         </div>
 
         <div class="stats-right">
-          <b>Cost:</b> {{spell.xp}} XP<br>
-           {{#if spell.effect}}
-            <i>{{spell.effect}}</i>
+          <b>Cost:</b> {{this.spell.xp}} XP<br>
+           {{#if this.spell.effect}}
+            <i>{{this.spell.effect}}</i>
           {{/if}}
-          {{#if spell.damage_type}}
-          &nbsp;&#183; {{spell.damage_type}} Damage{{/if}} <br><br>
-          {{#if spell.targets}}
-            <b>Targets:</b> {{spell.targets}}<br>
+          {{#if this.spell.damage_type}}
+          &nbsp;&#183; {{this.spell.damage_type}} Damage{{/if}} <br><br>
+          {{#if this.spell.targets}}
+            <b>Targets:</b> {{this.spell.targets}}<br>
           {{/if}}
-          {{#if spell.duration}}
-            <b>Duration:</b> {{spell.duration}}<br>
+          {{#if this.spell.duration}}
+            <b>Duration:</b> {{this.spell.duration}}<br>
           {{/if}}
-          <b>Casting Time:</b> {{spell.casting_time}}<br>
-          <b>Range:</b> {{spell.range}}<br>
-          {{#if spell.los}}
+          <b>Casting Time:</b> {{this.spell.casting_time}}<br>
+          <b>Range:</b> {{this.spell.range}}<br>
+          {{#if this.spell.los}}
             <i>Requires line of sight</i><br>
           {{/if}}
-          {{#if spell.area}}
-            <b>Area:</b> {{spell.area}}<br>
+          {{#if this.spell.area}}
+            <b>Area:</b> {{this.spell.area}}<br>
           {{/if}}
-          {{#if spell.heal}}
-            <b>Heal:</b> {{spell.heal}}<br>
+          {{#if this.spell.heal}}
+            <b>Heal:</b> {{this.spell.heal}}<br>
           {{/if}}
-          {{#if spell.shields_against}}
-            <b>Shields against:</b> {{spell.shields_against}}<br>
+          {{#if this.spell.shields_against}}
+            <b>Shields against:</b> {{this.spell.shields_against}}<br>
           {{/if}}
-          {{#if spell.mod}}
+          {{#if this.spell.mod}}
             <b>Modifiers:</b>
-            {{#if spell.attack_mod}}
-              {{spell.attack_mod}} attack
+            {{#if this.spell.attack_mod}}
+              {{this.spell.attack_mod}} attack
             {{/if}}
-            {{#if spell.lethal_mod}}
-              {{spell.lethal_mod}} lethality
+            {{#if this.spell.lethal_mod}}
+              {{this.spell.lethal_mod}} lethality
             {{/if}}
-            {{#if spell.defense_mod}}
-            {{spell.defense_mod}} defense
+            {{#if this.spell.defense_mod}}
+            {{this.spell.defense_mod}} defense
             {{/if}}
-            {{#if spell.init_mod}}
-              {{spell.init_mod}} spell
+            {{#if this.spell.init_mod}}
+              {{this.spell.init_mod}} this.spell
             {{/if}}
-            {{#if spell.spell_mod}}
-              {{spell.spell_mod}} spell
+            {{#if this.spell.spell_mod}}
+              {{this.spell.spell_mod}} spell
             {{/if}}
           {{/if}}
         </div>

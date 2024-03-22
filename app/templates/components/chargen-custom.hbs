@@ -9,7 +9,7 @@
       <b>Mage School</b>
     </div>
     <div class="col-sm-9">
-      <PowerSelect @selected={{char.custom.major_school}} @searchEnabled=true @searchField="value" @options={{char.custom.major_schools}} @onChange={{action "majorschoolChanged"}} as |school|>
+      <PowerSelect @selected={{this.char.custom.major_school}} @searchEnabled=true @searchField="value" @options={{this.char.custom.major_schools}} @onChange={{action "majorschoolChanged"}} as |school|>
         {{school}}
       </PowerSelect>
     </div>
@@ -22,14 +22,14 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelectMultiple @selected={{char.custom.mage_starting_spells}} @allowClear=true @options={{char.custom.mage_cg_spells}} @searchEnabled=true @searchField="name"  @onChange={{action "mageSpellsChanged"}} as |spell|>
+      <PowerSelectMultiple @selected={{this.char.custom.mage_starting_spells}} @allowClear=true @options={{this.char.custom.mage_cg_spells}} @searchEnabled=true @searchField="name"  @onChange={{action "mageSpellsChanged"}} as |spell|>
         {{spell.name}} (Level {{spell.level}} {{spell.school}})
       </PowerSelectMultiple>
     </div>
   </div>
 
   <div class="chargen-section-title">Mythic</div>
-  <div class="cg-tip"><AnsiFormat @text={{char.custom.mythic_blurb}} /><br><br></div>
+  <div class="cg-tip"><AnsiFormat @text={{this.char.custom.mythic_blurb}} /><br><br></div>
 
 
   <div class="form-group row">
@@ -37,7 +37,7 @@
       <b>Name</b>
     </div>
     <div class="col-sm-9">
-      <Input @type="text" size={{25}} @value={{char.custom.mount_name}} />
+      <Input @type="text" size={{25}} @value={{this.char.custom.mount_name}} />
     </div>
   </div>
 
@@ -46,7 +46,7 @@
       <b>Mythic Type</b>
     </div>
     <div class="col-sm-9">
-      <PowerSelect @selected={{char.custom.mount_type}} @searchEnabled=true @searchField="value" @options={{char.custom.mount_types}} @onChange={{action "mounttypeChanged"}} as |type|>
+      <PowerSelect @selected={{this.char.custom.mount_type}} @searchEnabled=true @searchField="value" @options={{this.char.custom.mount_types}} @onChange={{action "mounttypeChanged"}} as |type|>
         {{type}}
       </PowerSelect>
     </div>
@@ -57,7 +57,7 @@
       <b>Mythic Gender</b>
     </div>
     <div class="col-sm-9">
-      <PowerSelect @selected={{char.custom.mount_gender}} @searchEnabled=true @searchField="value" @options={{char.custom.mount_genders}} @onChange={{action "mountGenderChanged"}} as |type|>
+      <PowerSelect @selected={{this.char.custom.mount_gender}} @searchEnabled=true @searchField="value" @options={{this.char.custom.mount_genders}} @onChange={{action "mountGenderChanged"}} as |type|>
         {{type}}
       </PowerSelect>
     </div>
@@ -68,7 +68,7 @@
       <b>Description</b>
     </div>
     <div class="col-sm-9">
-      <MarkdownEditor @text={{char.custom.mount_desc}} rows={{5}}/>
+      <MarkdownEditor @text={{this.char.custom.mount_desc}} rows={{5}}/>
     </div>
   </div>
 
@@ -87,7 +87,7 @@
       <b>Mythic School</b>
     </div>
     <div class="col-sm-9">
-      <PowerSelect @selected={{char.custom.minor_school}} @searchEnabled=true @searchField="value" @options={{char.custom.minor_schools}} @onChange={{action "minorschoolChanged"}} as |school|>
+      <PowerSelect @selected={{this.char.custom.minor_school}} @searchEnabled=true @searchField="value" @options={{this.char.custom.minor_schools}} @onChange={{action "minorschoolChanged"}} as |school|>
         {{school}}
       </PowerSelect>
     </div>
@@ -99,25 +99,25 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelectMultiple @selected={{char.custom.mythic_starting_spells}} @allowClear=true @options={{char.custom.mythic_cg_spells}} @searchEnabled=true @searchField="name"  @onChange={{action "mythicSpellsChanged"}} as |spell|>
+      <PowerSelectMultiple @selected={{this.char.custom.mythic_starting_spells}} @allowClear=true @options={{this.char.custom.mythic_cg_spells}} @searchEnabled=true @searchField="name"  @onChange={{action "mythicSpellsChanged"}} as |spell|>
         {{spell.name}} (Level {{spell.level}} {{spell.school}})
       </PowerSelectMultiple>
     </div>
   </div>
 
-  <div class="cg-tip">{{{ansi-format text=char.custom.lorehook_blurb}}}</div><br>
+  {{!-- <div class="cg-tip">{{{ansi-format text=this.char.custom.lorehook_blurb}}}</div><br>
   <div class="form-group row">
     <div class="col-sm-3">
       <b>Lore Hook Preference</b>
     </div>
-    {{!-- <div class="col-sm-9">
+    <div class="col-sm-9">
       <PowerSelect @selected={{char.custom.lore_hook_pref }} @searchEnabled=true @searchField="value" @options={{char.custom.lore_hook_prefs}} @onChange={{action "lorehookPrefChanged"}} as |pref|>
         {{pref.value}} - {{pref.desc}}
       </PowerSelect>
 
 
-    </div> --}}
-  </div>
+    </div>
+  </div> --}}
 
 </div>
 

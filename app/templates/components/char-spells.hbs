@@ -1,12 +1,12 @@
 <h1>Spells</h1>
 <h2><a href="/school/{{char.custom.major_school}}">{{char.custom.major_school}}</a></h2>
   <ul>
-    {{#each char.custom.major_spells as |spell|}}
+    {{#each this.char.custom.major_spells as |spell|}}
       <li><b>{{spell.name}}</b> (<i>Level {{spell.level}} </i>)</li>
     {{/each}}
   </ul>
 
-{{#if char.custom.minor_spells}}
+{{#if this.char.custom.minor_spells}}
   <h2><a href="/school/{{char.custom.minor_school}}">{{char.custom.minor_school}}</a></h2>
   <ul>
     {{#each char.custom.minor_spells as |spell|}}
@@ -15,10 +15,10 @@
   </ul>
 {{/if}}
 
-{{#if char.custom.other_spells}}
+{{#if this.char.custom.other_spells}}
   <h2>Other Spells</h2>
   <ul>
-    {{#each char.custom.other_spells as |spell|}}
+    {{#each this.char.custom.other_spells as |spell|}}
       <li><b>{{spell.name}}</b> (<i>Level {{spell.level}} {{spell.school}}</i>)</li>
     {{/each}}
   </ul>
