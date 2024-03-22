@@ -7,7 +7,7 @@
 
   <p></p>
   <div class="blurb">
-    {{{ansi-format text=this.model.blurb}}}
+    <AnsiFormat @text={{this.model.blurb}} />
 
     <LinkTo @route="search-spells"class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Spells</LinkTo>
   </div>

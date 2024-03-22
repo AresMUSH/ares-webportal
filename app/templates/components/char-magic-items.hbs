@@ -2,7 +2,7 @@
 
 {{#each char.custom.magic_items as |item|}}
  <p><b>{{item.name}}</b><br>
-   {{{ansi-format text=item.desc}}}</p>
+   <AnsiFormat @text={{item.desc}} /></p>
 {{/each}}
 
 <h2>Potions</h2>

@@ -36,13 +36,15 @@
           {{this.model.creature.found}}<br>{{/if}}
           <div class="row">
             <div class="col col-md-4">
-              {{#if this.model.creature.edit_height}} <b>Height:</b> {{ansi-format text=this.model.creature.edit_height}} {{/if}}
+              {{#if this.model.creature.edit_height}}
+                <b>Height:</b> <AnsiFormat @text={{this.model.creature.edit_height}} />
+              {{/if}}
             </div>
             <div class="col col-md-4">
-              {{#if this.model.creature.edit_length}} <b>Length:</b> {{ansi-format text=this.model.creature.edit_length}} {{/if}}
+              {{#if this.model.creature.edit_length}} <b>Length:</b> <AnsiFormat @text={{this.model.creature.edit_length}} /> {{/if}}
             </div>
             <div class="col col-md-4">
-              {{#if this.model.creature.edit_speed}} <b>Speed:</b> {{ansi-format text=this.model.creature.edit_speed}} {{/if}}
+              {{#if this.model.creature.edit_speed}} <b>Speed:</b> <AnsiFormat @text={{this.model.creature.edit_speed}} /> {{/if}}
             </div>
           </div>
 
@@ -65,7 +67,7 @@
             </div>
           </div>
 
-          <br>{{{ansi-format text=this.model.creature.short_desc}}}
+          <br><AnsiFormat @text={{this.model.creature.short_desc}} />
           <br>
           {{#if this.model.creature.gms}}
             <i>For more information see {{#each this.model.creature.gms as |gm|}}
@@ -84,7 +86,7 @@
 
   {{#if this.model.creature.traits}}
     <h2>Physical Traits & Description</h2>
-    {{{ansi-format text=this.model.creature.traits}}}
+    <AnsiFormat @text={{this.model.creature.traits}} />
   {{/if}}
 
   {{#if this.model.creature.sapient}}
@@ -93,17 +95,17 @@
 
   {{#if this.model.creature.society}}
     <h2>Society & Relationships</h2>
-    {{{ansi-format text=this.model.creature.society}}}
+    <AnsiFormat @text={{this.model.creature.society}} />
   {{/if}}
 
   {{#if this.model.creature.magical_abilities}}
     <h2>Magical Abilities & Preferences</h2>
-    {{{ansi-format text=this.model.creature.magical_abilities}}}
+    <AnsiFormat @text={{this.model.creature.magical_abilities}} />
   {{/if}}
 
   {{#if this.model.creature.combat}}
     <h2>Combat Abilities & Preferences</h2>
-    {{{ansi-format text=this.model.creature.combat}}}
+    <AnsiFormat @text={{this.model.creature.combat}} />
   {{/if}}
 
   {{#if this.model.creature.plots}}
@@ -117,7 +119,7 @@
 
   {{#if this.model.creature.events}}
     <p><h2>Events</h2>
-    {{{ansi-format text=this.model.creature.events}}}</p>
+    <AnsiFormat @text={{this.model.creature.events}} /></p>
   {{/if}}
 
 
