@@ -6,13 +6,11 @@
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-        <li class="nav-item"><LinkTo class="nav-link" @route="home">Home</LinkTo></li>
-
         {{#if this.isAuthenticated}}
 
           <li class="nav-item dropdown d-lg-none">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          
+
                     Welcome {{this.currentUser.name}}
                     {{#if this.model.notification_count}}
                         <span class="badge rounded-pill bg-primary" id="notificationBadge"><i class="fa fa-bell" aria-label="New Notifications"></i> {{this.model.notification_count}}</span>
@@ -27,79 +25,61 @@
 
                       {{#if this.model.alts}}
                           <li><a class="dropdown-item" href="#" {{action (mut this.showAltSelection) true}}>Switch Alt</a></li>
-                      {{/if}} 
+                      {{/if}}
 
                       <li><LinkTo class="dropdown-item" @route="logout">Logout</LinkTo></li>
-            
+
                     </ul>
                   </li>
                 {{else}}
                 <li class="nav-item d-lg-none"><LinkTo class="nav-link" @route="login" @query={{hash redirect=this.currentRoute}}>Login</LinkTo></li>
                 {{/if}}
 
-        
-        {{#each this.topNavbar as |sec|}}
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-            {{sec.title}}</a>
-            <ul class="dropdown-menu  dropdown-menu-end">
-              {{#each sec.menu as |navItem|}}
-                {{#if navItem.url}}
-                    <li><a class="dropdown-item" href="{{navItem.url}}" target="{{navItem.target}}">{{{navItem.title}}}</a></li>
-                {{else if navItem.divider}}
-                    <li><hr class="dropdown-divider"></li>
-                {{else}}
-                  <li>
-                  {{#if navItem.id}}
-                    <LinkTo class="dropdown-item" @route={{navItem.route}} @model={{navItem.id}}>{{{navItem.title}}}</LinkTo>
+        {{#each this.topNavbar as |sec|}}
+          {{#if sec.menu }}
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              {{{sec.title}}}</a>
+              <ul class="dropdown-menu  dropdown-menu-end">
+                {{#each sec.menu as |navItem|}}
+                  {{#if navItem.url}}
+                      <li><a class="dropdown-item" href="{{navItem.url}}" target="{{navItem.target}}">{{{navItem.title}}}</a></li>
+                  {{else if navItem.divider}}
+                      <li><hr class="dropdown-divider"></li>
                   {{else}}
-                    <LinkTo class="dropdown-item" @route={{navItem.route}}>{{{navItem.title}}}</LinkTo>
+                    <li>
+                    {{#if navItem.id}}
+                      <LinkTo class="dropdown-item" @route={{navItem.route}} @model={{navItem.id}}>{{{navItem.title}}}</LinkTo>
+                    {{else if navItem.ids}}
+                      <LinkTo class="dropdown-item" @route={{navItem.route}} @models={{navItem.ids}}>{{{navItem.title}}}</LinkTo>
+                    {{else}}
+                      <LinkTo class="dropdown-item" @route={{navItem.route}}>{{{navItem.title}}}</LinkTo>
+                    {{/if}}
+                    </li>
                   {{/if}}
-                  </li>
+                {{/each}}
+              </ul>
+            </li>
+          {{else}}
+            <li class="nav-item">
+              {{#if sec.url}}
+                  <a href="{{sec.url}}" target="{{sec.target}}" class="nav-link">{{{sec.title}}}</a>
+              {{else}}
+                <li>
+                {{#if sec.id}}
+                  <LinkTo  @route={{sec.route}} @model={{sec.id}} class="nav-link">{{{sec.title}}}</LinkTo>
+                {{else if sec.ids}}
+                  <LinkTo  @route={{sec.route}} @models={{sec.ids}} class="nav-link">{{{sec.title}}}</LinkTo>
+                {{else}}
+                  <LinkTo @route={{sec.route}} class="nav-link">{{{sec.title}}}</LinkTo>
                 {{/if}}
-              {{/each}}
-            </ul>
-          </li>            
+                </li>
+              {{/if}}
+            </li>
+          {{/if}}
         {{/each}}
 
-        {{#if (or this.isAdmin this.isCoder)}}
-            
-         <li class="nav-item dropdown">
-           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-
-           Admin</a>
-           <ul class="dropdown-menu  dropdown-menu-end">
-             <li><LinkTo class="dropdown-item" @route="jobs">Jobs</LinkTo></li>
-             <li><LinkTo class="dropdown-item" @route="setup">Setup</LinkTo></li>
-             <li><LinkTo class="dropdown-item" @route="manage">Manage</LinkTo></li>
-             <li><LinkTo class="dropdown-item" @route="logs">Logs</LinkTo></li>
-             <li><LinkTo class="dropdown-item" @route="files">Files</LinkTo></li>
-             <li><LinkTo class="dropdown-item" @route="server-info">Server</LinkTo></li>
-
-             {{#if this.isCoder}}
-             <li><LinkTo class="dropdown-item" @route="tinker">Tinker</LinkTo></li>
-             <li><LinkTo class="dropdown-item" @route="custom-code">Custom Code</LinkTo></li>
-             {{/if}}
-           </ul>
-         </li>
-
-        {{/if}}
-
-        {{#if this.isThemeMgr}}
-        <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-     
-            Admin</a>
-            <ul class="dropdown-menu  dropdown-menu-end">
-              <li><LinkTo class="dropdown-item" @route="setup-colors">Theme Colors</LinkTo></li>
-              <li><LinkTo class="dropdown-item" @route="textfile" @models={{array 'text' 'website.txt'}}>Home Page Text</LinkTo></li>
-              <li><LinkTo class="dropdown-item" @route="textfile" @models={{array 'style' 'custom_style.scss'}}>Custom CSS</LinkTo></li>
-              <li><LinkTo class="dropdown-item" @route="files">Files</LinkTo></li>
-            </ul>
-          </li>
-        {{/if}}
-        
       </ul>
 
     </div>
@@ -112,7 +92,7 @@
 
   <table class="alts-switcher">
     {{#each this.model.alts as |alt|}}
-      {{#if (not (eq alt.name currentUser.name)) }}
+      {{#if (not (eq alt.name this.currentUser.name)) }}
         <tr><td>
         <CharIconInline @char={{alt}} @hideLink="true" />
         </td>
