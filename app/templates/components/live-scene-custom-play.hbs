@@ -4,7 +4,7 @@
 
 
     <p><b>Select or Type Spell</b></p>
-    <select onchange={{action (mut this.custom.spellString) value="target.value"}}>
+    <select onchange={{action (mut this.spellString) value="target.value"}}>
       {{#each this.spells as |spell|}}
         <option value={{spell}}>{{spell}}</option>
       {{/each}}
