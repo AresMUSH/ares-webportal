@@ -1,4 +1,4 @@
-<li><a href="#" {{action (mut this.custom.selectCastSpell) true}} class="dropdown-item">Cast a Spell</a></li>
+<li><a href="#" {{action (mut this.selectCastSpell) true}} class="dropdown-item">Cast a Spell</a></li>
 
 <BsModalSimple @title="Select a Spell to Cast" @closeTitle="Cancel" @submitTitle="Cast" @size={{null}} @fade={{true}} @open={{this.custom.selectCastSpell}} @onSubmit={{action "addSceneSpell"}} @onHide={{action (mut this.custom.selectCastSpell) false}}>
 
