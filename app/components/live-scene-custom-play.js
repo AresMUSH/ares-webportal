@@ -31,9 +31,9 @@ export default Component.extend({
           this.set('mod', null);
 
           api.requestOne('addSceneSpell', { scene_id: this.get('scene.id'),
-              target_name: targetName,
-              mod: mod,
-              spell_string: spellString }, null)
+              target_name: this.get('targetName'),
+              mod: this.get('mod'),
+              spell_string: this.get('spellString') }, null)
 
           .then( (response) => {
               if (response.error) {
