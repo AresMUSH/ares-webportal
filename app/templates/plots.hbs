@@ -3,13 +3,13 @@
 
     <div class="pagebox-pic" style="margin: auto; width: 75%; max-width: 800px;">
       <div class="box-header">
-        <div class="box-title">
+        <div class="box-title" style="color: #ebebeb !important;">
           Featured Plots
         </div>
       </div>
       {{#each this.model as |plot|}}
         {{#if plot.featured }}
-          <div class="pagebox-info">
+          <div class="pagebox-info" style="color: #090909 !important;">
             <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
             <AnsiFormat @text={{plot.summary}} />
           </div>
@@ -17,6 +17,10 @@
       {{/each}}
     </div>
 
+
+<div class="action-buttons">
+  <LinkTo @route="plot-create" class="btn btn-primary">Create Plot</LinkTo>
+</div>
 
 
 <h2 id="current" style="width:100%;">Current Plots</h2>
