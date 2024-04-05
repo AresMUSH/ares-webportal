@@ -17,9 +17,9 @@ export default Component.extend({
 
         // Needed because the onChange event doesn't get triggered when the list is
         // first loaded, so the roll string is empty.
-      let spellString = this.custom.spellString || this.spells[0];
-      let mod = this.custom.mod;
-      let targetName = this.custom.targetName;
+      let spellString = this.spellString || this.spells[0];
+      let mod = this.mod;
+      let targetName = this.targetName;
 
         if (!spellString) {
             this.flashMessages.danger("You haven't selected a spell to cast.");
