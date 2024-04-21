@@ -44,6 +44,14 @@ export default Mixin.create({
     
     apiKey: computed(function() {
       return this.get('aresconfig.api_key');
+    }),
+    
+    // Technically not part of aresconfig, but here for parity with the mushVersion.
+    webPortalVersion: computed(function() {
+      return aresweb_version;
+    }),
+    versionWarning: computed('mushVersion', 'webPortalVersion', function() {
+      return this.mushVersion != this.webPortalVersion;
     })
     
     

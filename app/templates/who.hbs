@@ -3,47 +3,21 @@
 
 <p>{{this.model.who_count}} character(s) online.</p>
 
-<table class="table who-list">
-  <tbody>
+<div class="who-list">
     {{#each this.model.who as |char|}}
-    <tr>
-        <td> <CharIconInline @char={{char}} /> </td>   
-        <td> 
+    <div class="who-row">
+        <CharIconInline @char={{char}} />
           {{#if this.model.can_boot}}
           <a href="#" {{action (mut this.bootTarget) char}}>
             <TooltipIcon @position="right" @message="Boot player." @icon="fa-solid fa-user-slash" />
           </a>
           {{/if}}
-        </td>     
-    </tr>
+    </div>
     {{/each}}
-  </tbody>
-</table>
+</div>
 
-<br>
 
-<h4>Legend</h4>
-  
-    
-<span class="inline-block">
-  <img class="small-profile-icon icon-status-game-active" alt="Active On Game" src="/game/uploads/theme_images/noicon.png" >
-  Active on Game
-</span>
-
-<span class="inline-block">
-  <img class="small-profile-icon icon-status-web-active" alt="Active On Portal" src="/game/uploads/theme_images/noicon.png" >
-  Active on Portal
-</span>
-
-<span class="inline-block">
-  <img class="small-profile-icon icon-status-game-inactive" alt="Idle" src="/game/uploads/theme_images/noicon.png" >
-  Idle on Game
-</span>
-
-<span class="inline-block">
-  <img class="small-profile-icon icon-status-web-inactive" alt="Idle" src="/game/uploads/theme_images/noicon.png" >
-  Idle on Portal
-</span>
+<IconLegend />
 
 
 <BsModalSimple @title="Boot Player" @closeTitle="Cancel" @submitTitle="Boot" @size={{null}} @fade={{true}} @open={{this.bootTarget}} @onSubmit={{action "bootPlayer"}} @onHide={{action (mut this.bootTarget) null}}>

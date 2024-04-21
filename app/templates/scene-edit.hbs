@@ -101,7 +101,7 @@
         <label for="participants" class="col-form-label">Participants:</label>
     </div>
     <div class="col-sm-9">
-        <PowerSelectMultiple @selected={{this.model.scene.participants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
+        <PowerSelectMultiple aria-label="participants" @selected={{this.model.scene.participants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
           {{char.name}}
         </PowerSelectMultiple>
     </div> 
@@ -113,7 +113,7 @@
         <label for="related" class="col-form-label">Related Scenes:</label>
     </div>
     <div class="col-sm-9">
-            <PowerSelectMultiple @selected={{this.model.scene.related_scenes}} @options={{this.model.scenes.scenes}} @searchEnabled=true @searchField="title" @onChange={{action "relatedChanged"}} as |scene|>
+            <PowerSelectMultiple aria-label="related" @selected={{this.model.scene.related_scenes}} @options={{this.model.scenes.scenes}} @searchEnabled=true @searchField="title" @onChange={{action "relatedChanged"}} as |scene|>
               {{scene.icdate}} {{scene.title}}
             </PowerSelectMultiple>
     </div> 
