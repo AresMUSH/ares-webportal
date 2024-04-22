@@ -2,7 +2,7 @@
     <li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#scenesindex">+</a></li>
     <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#scenelist">Scenes</a></li>
     {{#if this.char.custom.lore_hook_name}}<li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#lore-hook">Lore Hook</a></li>{{/if}}
-    {{!-- <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#comps">Comps</a></li> --}}
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#comps">Comps</a></li>
 </ul>
 
 
@@ -17,8 +17,8 @@
         <SceneList @scenes={{this.scenes.scenes}} @pages={{this.scenes.pages}} @sceneTypes={{this.sceneTypes}} @filter={{this.filter}} @page={{this.page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
 
     </div>
-    {{!-- <div id="comps" class="tab-pane fade ">
+    <div id="comps" class="tab-pane fade ">
         <CharComps @char={{this.char}}  />
-    </div> --}}
+    </div>
 
 </div>
