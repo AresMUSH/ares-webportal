@@ -3,5 +3,6 @@
 
 {{#each this.char.custom.comps as |comp|}}
 <div class="comp">
- <p><AnsiFormat @text={{comp.msg}} /><i>From {{comp.from}} on {{comp.date}}</i></p></div>
+ <p class="comp-msg"><AnsiFormat @text={{comp.msg}} /></p>
+ <p class="comp-from">From {{comp.from}} on {{comp.date}}</p></div>
 {{/each}}
