@@ -1,8 +1,28 @@
 <h2>Compliments</h2>
-<p>The most recent 10 compliments. For all compliments, use `comps` on game.</p>
 
-{{#each this.char.custom.comps as |comp|}}
+<a data-bs-toggle="collapse" href="#comp" class="btn btn-secondary btn-collapse">Give a Compliment</a>
+<div id="comp" class="card-collapse collapse">
+  <b>Give a Compliment</b>
+  <MarkdownEditor @text={{this.char.comp_msg}} />
+    <div class="action-buttons">
+        <p> <LinkTo @route="creature" @model={{this.model.creature.id}} class="btn btn-secondary">Cancel</LinkTo>
+        <button class="btn btn-primary" {{action 'save'}} >Save</button>
+        </p>
+    </div>
+</div>
+{{flash-messages}}
+
+{{#each this.char.custom.comps.comps as |comp|}}
 <div class="comp">
  <p class="comp-msg"><AnsiFormat @text={{comp.msg}} /></p>
  <p class="comp-from">From {{comp.from}} on {{comp.date}}</p></div>
+{{/each}}
+
+
+{{#each this.char.custom.comps.pages as |pg|}}
+{{#if (eq pg this.page)}}
+<button class="btn btn-primary" {{action "goToPage" pg}}>{{pg}}</button>
+{{else}}
+<button class="btn btn-secondary" {{action "goToPage" pg}}>{{pg}}</button>
+{{/if}}
 {{/each}}
