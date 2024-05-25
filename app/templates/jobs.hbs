@@ -5,7 +5,8 @@
 
   {{#if this.model.options.reboot_required_notice}}
       <div class="alert alert-warning">
-        <i class="fas fa-exclamation-triangle"></i> <strong>Reboot Required!</strong> {{this.model.options.reboot_required_notice}}
+        <i class="fas fa-exclamation-triangle"></i> <strong>Reboot Required!</strong> 
+        <AnsiFormat @text={{this.model.options.reboot_required_notice}} />
       </div>
   {{/if}}
 
