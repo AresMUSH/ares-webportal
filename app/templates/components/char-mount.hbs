@@ -1,0 +1,24 @@
+
+<h2>{{this.mythic.name}} ({{this.mythic.type}})</h2>
+<p><i>{{this.mythic.gender}}</i></p>
+
+<p>{{this.mythic.shortdesc}}</p>
+
+{{this.mythic.about}}
+
+<h3>Description</h3>
+
+<p>{{this.mythic.desc}}</p>
+
+<h3>Damage</h3>
+
+{{#each this.mythic.damage as |damage|}}
+  <div class="fs3-damage-block">
+
+    <div class="row">
+      <div class="col col-xs-12 col-sm-4">  <div class="fs3-damage-title">{{damage.description}}</div> </div>
+      <div class="col col-xs-12 col-sm-4">{{damage.date}}</div>
+      <div class="col col-xs-12 col-sm-4"><AnsiFormat @text={{damage.original_severity}} /> (now <AnsiFormat @text={{damage.severity}} />)</div>
+    </div>
+  </div>
+{{/each}}

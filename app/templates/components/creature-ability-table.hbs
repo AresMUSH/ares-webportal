@@ -1,0 +1,15 @@
+<div class="creature-ability-title">{{this.title}}</div>
+
+  <table class="creature-ability-list">
+  {{#each this.list as |ability| }}
+  <tr>
+    <td>{{ability.name}}
+      {{#if ability.linked_attr}}
+      <span class="fs3-linked-attr">({{ability.linked_attr}})</span>
+      {{/if}}
+    </td>
+    <td><Fs3Dots @rating={{ability.rating}} @max={{this.max}} />
+    </td>
+  </tr>
+  {{/each}}
+</table>

@@ -79,7 +79,7 @@ export default Controller.extend({
             rp_hooks: this.get('model.char.rp_hooks'),
             profile_image: this.get('model.char.profile_image'),
             background: this.get('model.char.background'),
-            lastwill: this.get('model.char.lastwill'),
+            lastwill: this.get('model.char.lastwill'),            
             fs3: fs3,
             custom: custom,
             traits: traits,

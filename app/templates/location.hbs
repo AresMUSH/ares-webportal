@@ -1,6 +1,6 @@
 {{page-title this.model.name}}
 <h1>
-  {{this.model.name}} 
+  {{this.model.name}}
 
   {{#if this.model.icon_type}}
     <i class="{{this.model.icon_display}}"></i>
@@ -15,6 +15,16 @@
 <h2>Description</h2>
 
 <AnsiFormat @text={{this.model.descs.current}} />
+
+<h3>Leads To</h3>
+
+<ul>
+  {{#each this.model.destinations as |dest|}}
+  <li><LinkTo @route="location" @model={{dest.id}}>{{dest.name}}</LinkTo></li>
+  {{/each}}
+</ul>
+
+
 
 
 {{#if this.model.area}}

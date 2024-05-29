@@ -28,9 +28,7 @@
     {{/each}}
 {{/if}}
 
-    <h2>Scenes</h2>
-        
-    <SceneList @scenes={{this.model.scenes.scenes}} @pages={{this.model.scenes.pages}} @sceneTypes={{this.model.sceneOptions.scene_types}} @filter={{this.filter}} @page={{this.page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
+   
     
     
 {{#if this.model.plot.description}}
@@ -43,6 +41,9 @@
 </div>
 {{/if}}
 
+ <h2>Scenes</h2>
+        
+    <SceneList @scenes={{this.model.scenes.scenes}} @pages={{this.model.scenes.pages}} @sceneTypes={{this.model.sceneOptions.scene_types}} @filter={{this.filter}} @page={{this.page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
 
 <p><LinkTo @route="plots"><i class="fa fa-long-arrow-alt-left" aria-hidden="true"></i> Back to Plots</LinkTo></p>
 

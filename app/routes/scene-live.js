@@ -30,15 +30,18 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
         return RSVP.hash({
              scene: api.requestOne('liveScene', { id: params['id'] }),
              abilities:  api.request('charAbilities', { id: this.get('session.data.authenticated.id') }),
+            //  Magic changes
+             spells:  api.request('charSpellList', { id: this.get('session.data.authenticated.id') }),
+            //  /Magic changes
              custom: api.requestOne('customSceneData'),
              locations: api.request('sceneLocations', { id: params['id'] }),
              characters: api.requestMany('characters', { select: 'include_staff' }),
-             app: this.modelFor('application')          
+             app: this.modelFor('application')
            })
            .then((model) =>  {
-             
+
              if (model.scene.shared) {
-               this.router.transitionTo('scene', params['id']);             
+               this.router.transitionTo('scene', params['id']);
              }
              else
              {
@@ -46,7 +49,7 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, {
              }
          });
     },
-    
+
     setupController: function(controller, model) {
       this._super(controller, model);
       this.set('model.is_unread', false);

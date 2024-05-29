@@ -5,7 +5,7 @@ import setupCustomRoutes from 'ares-webportal/custom-routes';
 export default class Router extends EmberRouter {
   location = config.locationType;
   rootURL = config.rootURL;
-    
+
  init() {
       super.init();
       this.on('routeDidChange', function() {
@@ -16,7 +16,7 @@ export default class Router extends EmberRouter {
 
 Router.map(function() {
   this.route('home', { path: ''});
-  
+
   this.route('account');
   this.route('achievements');
   this.route('admins');
