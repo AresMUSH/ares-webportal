@@ -43,7 +43,6 @@ export default Service.extend(AresConfig, {
       
       var doc = new DOMParser().parseFromString(msg, 'text/html');
       var cleanMsg =  doc.body.textContent || "";
-      this.flashMessages.info(cleanMsg);
 
         if (this.browserNotification && this.get('browserNotification.permission') === "granted") {
             try {
@@ -183,7 +182,7 @@ export default Service.extend(AresConfig, {
     
     updateNotificationBadge(count) {
       var notification_badge = $('#notificationBadge');
-      notification_badge.text(count);
+      notification_badge.text(`${count}` === '0' ? '' : count);
     },
     
     handleMessage(self, evt) {
