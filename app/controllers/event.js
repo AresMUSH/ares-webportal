@@ -27,6 +27,17 @@ export default Controller.extend(AuthenticatedController, {
                 this.flashMessages.success('Event deleted!');
             });
         },
+        createScene: function() {
+            let api = this.gameApi;
+            api.requestOne('createEventScene', { event_id: this.get('model.id') })
+            .then( (response) => {
+                if (response.error) {
+                    return;
+                }
+                this.router.transitionTo('play');
+                this.flashMessages.success('Event scene created!');
+            });
+        },
         signup: function() {
             let api = this.gameApi;
             api.requestOne('eventSignup', { event_id: this.get('model.id'), 
