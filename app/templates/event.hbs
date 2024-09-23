@@ -112,6 +112,7 @@
 
 <div class="action-buttons">
   {{#if this.model.can_manage}}
+      <button {{action "createScene"}} class="btn btn-secondary">Create Scene</button>
       <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete</button>
       <LinkTo @route="event-edit" @model={{this.model.id}} class="btn btn-primary">Edit</LinkTo>
   {{/if}}

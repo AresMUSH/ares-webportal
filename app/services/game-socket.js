@@ -14,7 +14,7 @@ export default Service.extend(AresConfig, {
     charId: null,
     callbacks: null,
     connected: false,
-
+  
     init: function() {
       this._super(...arguments);
       this.set('callbacks', {});
@@ -39,33 +39,31 @@ export default Service.extend(AresConfig, {
     },
     
     // Regular alert notification
-    notify(msg, timeOutSecs = 10, type = 'success') {
+    notify(msg) {
+      
+      var doc = new DOMParser().parseFromString(msg, 'text/html');
+      var cleanMsg =  doc.body.textContent || "";
+
+        if (this.browserNotification && this.get('browserNotification.permission') === "granted") {
+            try {
+              new Notification(`Activity in ${this.mushName}`, 
+                {
+                  icon: '/game/uploads/theme_images/notification.png',
+                  badge: '/game/uploads/theme_images/notification.png',
+                  body: cleanMsg,
+                  tag: this.mushName,
+                  renotify: true
+                }
+               ); 
+            }
+            catch(error) {
+                // Do nothing.  Just safeguard against missing browser notification.
+            }
+        }         
         
-        if (msg) {
-          alertify.notify(msg, type, timeOutSecs);
-        }
-             
        if (!this.windowVisible) {
             this.favicon.changeFavicon(true);
-            if (this.browserNotification && this.get('browserNotification.permission') === "granted") {
-                try {
-                  var doc = new DOMParser().parseFromString(msg, 'text/html');
-                  var cleanMsg =  doc.body.textContent || "";
-                  
-                  new Notification(`Activity in ${this.mushName}`, 
-                    {
-                      icon: '/game/uploads/theme_images/notification.png',
-                      badge: '/game/uploads/theme_images/notification.png',
-                      body: cleanMsg,
-                      tag: this.mushName,
-                      renotify: true
-                    }
-                   ); 
-                }
-                catch(error) {
-                    // Do nothing.  Just safeguard against missing browser notification.
-                }
-            }            
+               
         }
     },
     
@@ -184,7 +182,7 @@ export default Service.extend(AresConfig, {
     
     updateNotificationBadge(count) {
       var notification_badge = $('#notificationBadge');
-      notification_badge.text(count);
+      notification_badge.text(`${count}` === '0' ? '' : count);
     },
     
     handleMessage(self, evt) {
