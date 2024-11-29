@@ -1,0 +1,23 @@
+<div class="scene-card-demo">
+  {{#if (not this.char.is_ooc)}}
+    {{#each this.char.demographics as |demo|}}
+      <div class="row">
+        <div class="col col-4">
+          <b>{{demo.name}}</b> 
+        </div>
+        <div class="col col-8">
+          {{demo.value}}
+        </div>
+      </div>
+    {{/each}}
+    {{#if (not this.char.demographics)}}
+      No demographics available.  Try reloading the scene page.
+    {{/if}}
+  {{/if}}
+
+  {{#if this.char.status_message}}
+    <div class="alert alert-info">
+      {{this.char.status_message}}
+    </div>
+  {{/if}}
+</div>  

@@ -1,0 +1,8 @@
+<div class="scene-card-profile">
+  <CharIcon @char={{this.char}} />
+
+  {{#if this.char.id}}
+    <LinkTo @route="char" @model={{this.char.name}} target="_blank">View Full Profile</LinkTo>
+  {{/if}}
+
+</div>  
