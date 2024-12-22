@@ -21,7 +21,7 @@
                    {{#if this.isAuthenticated}}
                        <p>Welcome, {{this.currentUser.name}}. 
                         {{#if this.model.alts}}
-                         <a href="#" {{action (mut this.showAltSelection) true}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a> 
+                         <a href="#" {{on 'click' (fn this.setAltSelectionVisible true)}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a> 
                          {{/if}}
                        </p>
                        
@@ -113,7 +113,7 @@
 </div>
 
   
-<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{this.showAltSelection}}  @onHide={{action (mut this.showAltSelection) false}} @onSubmit={{action (mut this.showAltSelection) false}}>
+<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{this.showAltSelection}}  @onHide={{fn this.setAltSelectionVisible false}} @onSubmit={{fn this.setAltSelectionVisible false}}>
 
   <table class="alts-switcher">
     {{#each this.model.alts as |alt|}}
@@ -121,7 +121,7 @@
         <tr><td>
         <CharIconInline @char={{alt}} @hideLink="true" />
         </td>
-        <td><a href="#" {{action 'switchAlt' alt.name}} class="btn btn-secondary">Switch</a></td>
+        <td><a href="#" {{on 'click' (fn this.switchAlt alt.name)}} class="btn btn-secondary">Switch</a></td>
         </tr>
       {{/if}}
     {{/each}}
