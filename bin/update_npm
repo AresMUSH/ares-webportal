@@ -10,11 +10,11 @@ rm -rf node_modules
 rm -rf tmp
 
 . ~/.nvm/nvm.sh
-npm install -g npm@8.6
-nvm install 18
-nvm use 18
-nvm alias default 18
-npm install -g ember-cli@4.12
+npm install -g npm@11
+nvm install 20
+nvm use 20
+nvm alias default 20
+npm install -g ember-cli@5.12
 npm ci
 
 echo "NPM is updated. Please reboot your server and your game should automatically restart."

@@ -1,25 +1,19 @@
 # unconventional js
 /blueprints/*/files/
-/vendor/
 
 # compiled output
+/declarations/
 /dist/
-/tmp/
-
-# dependencies
-/bower_components/
-/node_modules/
 
 # misc
 /coverage/
 !.*
+<<<<<<< HEAD
 
 .eslintcache
+=======
+.*/
+>>>>>>> 598fd54 (v4.12.1...v5.12.0)
 
 # ember-try
 /.node_modules.ember-try/
-/bower.json.ember-try
-/npm-shrinkwrap.json.ember-try
-/package.json.ember-try
-/package-lock.json.ember-try
-/yarn.lock.ember-try
