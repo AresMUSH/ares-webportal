@@ -5,14 +5,9 @@ import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 
 export default Route.extend(DefaultRoute, ReloadableRoute, {
     gameApi: service(),
-    headData: service(),
     
     model: function() {
         let api = this.gameApi;
         return api.requestOne('locations');
-    },
-    
-    afterModel: function() {
-      this.set('headData.robotindex', true);
     }
 });

@@ -1,13 +1,3 @@
-{{!--
-Add content you wish automatically added to the documents head
-here. The 'model' available in this template can be populated by
-setting values on the 'head-data' service.
---}}
-{{#if (not this.model.robotindex)}}
-<meta name="robots" content="noindex">
-{{/if}}
-
-
 <meta property="og:title" content="{{this.model.mushName}}">
 <meta name="twitter:title" content="{{this.model.mushName}}">
 <meta itemprop="name" content="{{this.model.mushName}}">

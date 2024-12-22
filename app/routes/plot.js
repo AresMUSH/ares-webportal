@@ -8,7 +8,6 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
     gameApi: service(),
-    headData: service(),
         
     model: function(params) {
         let api = this.gameApi;
@@ -17,9 +16,5 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
             scenes: api.requestOne('scenes', { plot_id: params['id'], filter: 'All', page: 1 }),
             sceneOptions: api.requestOne('sceneOptions') })
             .then((model) => EmberObject.create(model));
-    },
-    
-    afterModel: function() {
-      this.set('headData.robotindex', true);
     }
 });

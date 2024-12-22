@@ -6,7 +6,6 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 export default Route.extend(DefaultRoute, {
     gameApi: service(),
     gameSocket: service(),
-    headData: service(),
   
     activate: function() {
         this.controllerFor('forum-category').setupCallback();
@@ -23,8 +22,4 @@ export default Route.extend(DefaultRoute, {
         let api = this.gameApi;
         return api.requestOne('forumCategory', {category_id: params['category_id']});
     },
-    
-    afterModel: function() {
-      this.set('headData.robotindex', true);
-    }
 });

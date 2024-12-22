@@ -12,7 +12,6 @@ export default Route.extend(ReloadableRoute, AresConfig, {
     flashMessages: service(),
     gameSocket: service(),
     favicon: service(),
-    headData: service(),
     router: service('router'),
     init() {
         this._super(...arguments);
@@ -20,24 +19,10 @@ export default Route.extend(ReloadableRoute, AresConfig, {
         this.router.on('routeDidChange', function() {
           self.doReload();
         });
-        this.router.on('routeWillChange', function() {
-          self.set('headData.robotindex', false); 
-        });
     },
     async beforeModel() {
       await this.session.setup();
     },
-    afterModel(model) {
-      try {
-        this.set('headData.mushName', model.get('game.name'));
-        this.set('headData.portalUrl', this.gameApi.portalUrl());
-        this.set('headData.mushDesc', model.get('game.description')); 
-        }
-        catch(error) {
-          // Don't do anything here.
-        }
-      },
-      
     doReload: function() {
         this.loadModel().then( newModel => {
             this.controllerFor('application').set('sidebar', newModel);

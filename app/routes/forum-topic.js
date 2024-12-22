@@ -9,7 +9,6 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
     gameApi: service(),
     gameSocket: service(),
     session: service(),
-    headData: service(),
     
     activate: function() {
         this.controllerFor('forum-topic').setupCallback();
@@ -25,10 +24,6 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
     model: function(params) {
         let api = this.gameApi;
         return api.requestOne('forumTopic', { topic_id: params['topic_id'] });
-    },
-    
-    afterModel: function() {
-      this.set('headData.robotindex', true);
     },
     
     setupController: function(controller, model) {

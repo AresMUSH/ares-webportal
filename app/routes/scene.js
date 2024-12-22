@@ -6,7 +6,6 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
     gameApi: service(),
-    headData: service(),
     router: service(),
         
     model: function(params) {
@@ -18,9 +17,5 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
                 } 
                 return response;
             });
-    },
-    
-    afterModel: function() {
-      this.set('headData.robotindex', true);
     }
 });

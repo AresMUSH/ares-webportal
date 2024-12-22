@@ -7,14 +7,12 @@ import DefaultRoute from 'ares-webportal/mixins/default-route';
 
 export default Route.extend(DefaultRoute, ReloadableRoute, {
     gameApi: service(),
-    headData: service(),
     router: service(),
     
     afterModel: function(model) { 
         if (model.get('char.playerbit')) {
             this.router.transitionTo('player', model.get('char.name'));
         }
-        this.set('headData.robotindex', true);
     },
     
     model: function(params) {
