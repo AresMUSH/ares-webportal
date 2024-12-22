@@ -3,20 +3,19 @@
 
     <hr>
 
-    <div>
+    <div class="thumbnail-gallery">
       {{#each this.model.char.files as |file|}}
-    
-      <div class="thumbnail-gallery">
-        <LinkTo @route="file" @models={{array file.folder file.name}}>
-          {{file.path}} <img src="/game/uploads/{{file.path}}" alt="{{file.name}}" class="thumbnail">
-        </LinkTo>
-      </div>
+        <div class="thumbnail-gallery-item">
+          <LinkTo @route="file" @models={{array file.folder file.name}}>
+            {{file.path}} <img src="/game/uploads/{{file.path}}" alt="{{file.name}}" class="thumbnail">
+          </LinkTo>
+        </div>
       {{/each}}
     </div>
     <div class="clearfix"/>
 
-    <p><LinkTo @route="files" target="_blank">All Files</LinkTo></p>
+    <p><LinkTo @route="files" target="_blank">View All Files</LinkTo></p>
 
-    <FileUploader @folder={{this.model.char.name}} @uploaded={{action "fileUploaded"}} />
+    <FileUploader @folder={{this.model.char.name}} @uploaded={{this.fileUploaded}} />
 </div>
         

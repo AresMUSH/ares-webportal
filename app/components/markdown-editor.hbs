@@ -3,15 +3,15 @@
       
       <div class="markdown-controls">
   
-          {{#if this.preview}}
-             <a class="markdown-control-toggle" href="#" {{action 'preview'}}>Write</a>
+          {{#if this.previewText}}
+             <a class="markdown-control-toggle" href="#" {{on 'click' this.preview}}>Write</a>
              <a class="markdown-control-toggle active">Preview</a>
           {{else}}
              <a class="markdown-control-toggle active">Write</a>
-             <a class="markdown-control-toggle" href="#" {{action 'preview'}}>Preview</a>
+             <a class="markdown-control-toggle" href="#" {{on 'click' this.preview}}>Preview</a>
           {{/if}}
           
-          <a href="#" {{action 'showHelp'}}>
+          <a href="#" {{on 'click' this.showHelp}}>
             <TooltipIcon @position="left" @message="Formatting help." @icon="fa fa-question-circle" />
           </a>
     
@@ -20,12 +20,12 @@
           </LinkTo>
     </div>
 
-{{#if this.preview}}
+{{#if this.previewText}}
   <div class="markdown-preview">
-    <AnsiFormat @text={{this.preview}} />
+    <AnsiFormat @text={{this.previewText}} />
   </div>
 {{else}}
-  <Textarea @value={{this.text}} cols={{80}} rows={{this.rows}} {{on "keydown" (action 'keyDown')}} aria-label="Markdown Editor" />
+  <Textarea @value={{this.text}} cols={{80}} rows={{this.rows}} {{on "keydown" this.keyDown}} aria-label="Markdown Editor" />
 {{/if}}
 
 </div>

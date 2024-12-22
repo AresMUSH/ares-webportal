@@ -10,7 +10,7 @@
     
     Category: <Input @type="text" size={{25}} @value={{relationship.category}} placeholder="Enter category." />
                 
-    <button class="btn btn-secondary" {{action 'removeRelationship' relationship.key}}><i class="fa fa-trash" aria-label="Remove Relationship"></i></button>
+    <button class="btn btn-secondary" {{on 'click' (fn this.removeRelationship relationship.key)}}><i class="fa fa-trash" aria-label="Remove Relationship"></i></button>
     </p>
     
     <p>
@@ -30,7 +30,7 @@
     <hr>
     {{/each}}
    
-    <button class="btn btn-secondary" {{action 'addRelationship'}}>Add Relationship <i class="fa fa-plus" aria-hidden="true"></i></button>
+    <button class="btn btn-secondary" {{on 'click' this.addRelationship}}>Add Relationship <i class="fa fa-plus" aria-hidden="true"></i></button>
     
   
 </div>

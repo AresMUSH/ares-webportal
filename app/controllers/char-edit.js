@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Controller.extend({    
     gameApi: service(),
@@ -81,49 +82,49 @@ export default Controller.extend({
             roles: this.get('model.char.roles') || []
         };
     }, 
-    actions: {
-      
-        rolesChanged(roles) {
-          this.set('model.char.roles', roles);
-        },
+    
+    @action
+    rolesChanged(roles) {
+      this.set('model.char.roles', roles);
+    },
         
-        save() {
-            if (this.get('model.char.profile').filter(p => p.name.length == 0).length > 0) {
-                this.flashMessages.danger('Profile names cannot be blank.');
-                return;
-            }
-            
-            if (this.get('model.char.relationships').filter(r => r.name.length == 0).length > 0) {
-                this.flashMessages.danger('Relationship names cannot be blank.');
-                return;
-            }
-            
-            if (this.get('model.char.descs.outfits').filter(r => r.name.length == 0).length > 0) {
-                this.flashMessages.danger('Outfit names cannot be blank.');
-                return;
-            }
-            
-            if (this.get('model.char.descs.outfits').filter(r => r.name.includes(' ')).length > 0) {
-                this.flashMessages.danger('Outfit names cannot contain spaces.');
-                return;
-            }
-
-            if (this.get('model.char.descs.details').filter(r => r.name.length == 0).length > 0) {
-                this.flashMessages.danger('Detail names cannot be blank.');
-                return;
-            }
-            
-            let api = this.gameApi;
-            api.requestOne('profileSave', this.buildQueryDataForChar(), null)
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-            
-                this.flashMessages.success('Saved!');
-                this.router.transitionTo('char', this.get('model.char.name'));
-                
-            });
+    @action
+    save() {
+        if (this.get('model.char.profile').filter(p => p.name.length == 0).length > 0) {
+            this.flashMessages.danger('Profile names cannot be blank.');
+            return;
         }
+        
+        if (this.get('model.char.relationships').filter(r => r.name.length == 0).length > 0) {
+            this.flashMessages.danger('Relationship names cannot be blank.');
+            return;
+        }
+        
+        if (this.get('model.char.descs.outfits').filter(r => r.name.length == 0).length > 0) {
+            this.flashMessages.danger('Outfit names cannot be blank.');
+            return;
+        }
+        
+        if (this.get('model.char.descs.outfits').filter(r => r.name.includes(' ')).length > 0) {
+            this.flashMessages.danger('Outfit names cannot contain spaces.');
+            return;
+        }
+
+        if (this.get('model.char.descs.details').filter(r => r.name.length == 0).length > 0) {
+            this.flashMessages.danger('Detail names cannot be blank.');
+            return;
+        }
+        
+        let api = this.gameApi;
+        api.requestOne('profileSave', this.buildQueryDataForChar(), null)
+        .then( (response) => {
+            if (response.error) {
+                return;
+            }
+        
+            this.flashMessages.success('Saved!');
+            this.router.transitionTo('char', this.get('model.char.name'));
+            
+        });
     }
 });

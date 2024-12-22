@@ -86,14 +86,14 @@
        
        <div class="thumbnail-gallery-item">
        <LinkTo @route="file" @models={{array charFile.folder charFile.name}}>
-       <img src="/game/uploads/{{charFile.path}}" alt="{{charFile.name}}" class="thumbnail" title={{charFile.description}}>
+       {{charFile.path}} <img src="/game/uploads/{{charFile.path}}" alt="{{charFile.name}}" class="thumbnail" title={{charFile.description}}>
        </LinkTo>
        </div>
        {{/each}}
        </div>
        <div class="clearfix"/>
         
-        <p><LinkTo @route="files">All Files</LinkTo></p>
+        <p><LinkTo @route="files">View All Files</LinkTo></p>
     
         <FileUploader @folder={{this.model.char.name}} @uploaded={{action "fileUploaded"}} />
         </div>

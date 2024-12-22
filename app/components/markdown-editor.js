@@ -1,49 +1,49 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Component.extend({
-    text: '',
-    preview: null,
-    rows: 6,
-    gameApi: service(),
+  text: '',
+  previewText: null,
+  rows: 6,
+  gameApi: service(),
     
-    onEnter() {
-      if (this.attrs.onEnter) {
-        this.attrs.onEnter();
-      }        
-    },
+  onEnter() {
+    if (this.attrs.onEnter) {
+      this.attrs.onEnter();
+    }        
+  },
     
-    actions: { 
-      
-      keyDown: function(event) {
-        if (event.keyCode == 13) {
-          if (event.ctrlKey || event.metaKey) {
-              this.onEnter();
-              event.preventDefault();
-          }
-        }
-      },
-      
-        preview() {
-            if (this.get('preview.length') > 0) {
-                this.set('preview', null);
-                return;
-            }
-            let api = this.gameApi;
-            
-            api.requestOne('markdownPreview', { text: this.text })
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-                this.set('preview', response.text);
-            });
-        },
-        showHelp() {
-            window.open("/help/markdown");
-        },
-        swallowEnter() {
-          // Do nothing.
-        }
+    
+  @action
+  showHelp() {
+    window.open("/help/markdown");
+  },
+    
+  @action
+  preview() {
+    if (this.get('previewText.length') > 0) {
+      this.set('previewText', null);
+      return;
     }
+    let api = this.gameApi;
+      
+    api.requestOne('markdownPreview', { text: this.text })
+    .then( (response) => {
+      if (response.error) {
+        return;
+      }
+      this.set('previewText', response.text);
+    });
+  },
+    
+  @action
+  keyDown(event) {
+    if (event.keyCode == 13) {
+      if (event.ctrlKey || event.metaKey) {
+        this.onEnter();
+        event.preventDefault();
+      }
+    }
+  }    
 });

@@ -8,7 +8,7 @@
         <div class="col-sm-9">
             {{#if (eq demo.name 'Gender') }}
                 
-                <PowerSelect @selected={{this.model.char.demographics.gender}} @searchField="value" @options={{this.genders}} @onChange={{action "genderChanged"}} as |gender|>
+                <PowerSelect @selected={{this.model.char.demographics.gender}} @searchField="value" @options={{this.genders}} @onChange={{this.genderChanged}} as |gender|>
                   {{gender.value}}
                 </PowerSelect>
                 
@@ -25,7 +25,7 @@
         </div>
         
         <div class="col-sm-9">
-            <PowerSelect @selected={{this.model.char.profile_image}} @allowClear={{true}} @searchField="name" @options={{this.model.char.files}} @onChange={{action "profileImageChanged"}} as |file|>
+            <PowerSelect @selected={{this.model.char.profile_image}} @allowClear={{true}} @searchField="name" @options={{this.model.char.files}} @onChange={{this.profileImageChanged}} as |file|>
             {{file.name}}
             </PowerSelect>
             
@@ -39,7 +39,7 @@
         </div>
         
         <div class="col-sm-9">
-            <PowerSelect @selected={{this.model.char.profile_icon}} @allowClear={{true}} @searchField="name" @options={{this.model.char.files}} @onChange={{action "profileIconChanged"}} as |file|>
+            <PowerSelect @selected={{this.model.char.profile_icon}} @allowClear={{true}} @searchField="name" @options={{this.model.char.files}} @onChange={{this.profileIconChanged}} as |file|>
             {{file.name}}
             </PowerSelect>
             

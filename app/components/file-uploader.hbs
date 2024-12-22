@@ -14,11 +14,11 @@
         <input type="file"
            multiple
            accept="image/*" 
-           onchange={{action "filesSelected"}} />
+           onchange={{this.filesSelected}} />
         {{else}}
         <input type="file"
            accept="image/*" 
-           onchange={{action "filesSelected"}} />
+           onchange={{this.filesSelected}} />
         {{/if}}
         
         {{else}}
@@ -27,12 +27,15 @@
              {{this.fileCount}} files selected for upload. Review the options, then click the upload button for <b>each file</b> to commence the upload.
              </div>
 
-            <table class="table">
-            <tbody>
+            <div class="file-uploader">
+              
             {{#each this.files as |f|}}
-            <tr>
-                <td><img class="upload-preview" alt="preview image" src="{{f.url}}" ></td>
-                <td>
+            <div class="file-uploader-item">
+              
+              <div class="file-uploader-item-preview">
+                <img class="upload-preview" alt="preview image" src="{{f.url}}" >
+              </div>
+              <div class="file-uploader-item-detail">
                     {{#if (not f.upload_success)}}
                       {{#if this.lockProperties}}
                       <p><label class="col-xs-5">Folder:</label> {{f.folder}}</p>
@@ -41,6 +44,8 @@
                       <p><label class="col-xs-5">Folder:</label> <Input @type="text" @value={{f.folder}} /></p>
                       <p><label class="col-xs-5">Description:</label> <Input @type="text" @value={{f.description}} /></p>
                       <p><label class="col-xs-5">Overwrite?</label> <Input @type="checkbox" @checked={{f.allowOverwrite}} /></p>
+                      <p>{{f.sizeKb}}KB</p> 
+
                       {{/if}}
                     {{/if}}
                     
@@ -52,20 +57,18 @@
                         {{/if}}
                     {{/if}}
                     
-                </td>
-                <td>{{f.sizeKb}}KB</td> 
-                <td>
+                </div>
+                <div class="file-uploader-item-action">
                     {{#if (not f.upload_success)}}
-                        <button class="btn btn-secondary" {{action 'removeFile' f}}><i class="fa fa-ban" aria-label="Remove File"></i></button>
-                        <button class="btn btn-primary" {{action 'uploadFile' f}}><i class="fa fa-upload" aria-label="Upload File"></i></button>
+                        <button class="btn btn-secondary" {{on 'click' (fn this.removeFile f)}}><i class="fa fa-ban" aria-label="Remove File"></i></button>
+                        <button class="btn btn-primary" {{on 'click' (fn this.uploadFile f)}}><i class="fa fa-upload" aria-label="Upload File"></i></button>
                     {{/if}}
-                </td>
-            </tr>
+                </div>
+            </div>
             {{/each}}
-          </tbody>
-        </table>
+        </div>
 
-        <button class="btn btn-secondary" {{action 'reset'}}>Reset Uploader</button>
+        <button class="btn btn-secondary" {{on 'click' this.reset}}>Reset Uploader</button>
         {{/if}}
     </div>
 </div>

@@ -7,11 +7,11 @@
    {{#each this.model.char.profile as |profile|}}
    <p>
    <Input @type="text" size={{25}} @value={{profile.name}} placeholder="Enter section name." />
-   <button class="btn btn-secondary" {{action 'removeProfile' profile.key}}><i class="fa fa-trash" aria-label="Remove Section"></i></button>
+   <button class="btn btn-secondary" {{on 'click' (fn this.removeProfile profile.key)}}><i class="fa fa-trash" aria-label="Remove Section"></i></button>
    </p>
    <MarkdownEditor @text={{profile.text}} />
     <hr>
    {{/each}}
    
-   <button class="btn btn-secondary" {{action 'addProfile'}}>Add Profile Section <i class="fa fa-plus" aria-label="Add Section"></i></button>
+   <button class="btn btn-secondary" {{on 'click' this.addProfile}}>Add Profile Section <i class="fa fa-plus" aria-label="Add Section"></i></button>
 </div>

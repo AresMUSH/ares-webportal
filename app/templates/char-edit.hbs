@@ -51,7 +51,7 @@
 
   {{#if this.model.char.show_roles_tab}}
   <div id="roles" class="tab-pane fade show">
-    <PowerSelectMultiple @selected={{this.model.char.roles}} @options={{this.model.char.all_roles}} @onChange={{action "rolesChanged"}} as |role|>
+    <PowerSelectMultiple @selected={{this.model.char.roles}} @options={{this.model.char.all_roles}} @onChange={{this.rolesChanged}} as |role|>
       {{role}}
     </PowerSelectMultiple>
   </div>
@@ -64,7 +64,7 @@
             
 <div class="action-buttons">
   <LinkTo @route="char" @model={{this.model.char.name}} class="btn btn-secondary">Cancel</LinkTo>  
-  <button class="btn btn-primary" {{action 'save'}} >Save</button>
+  <button class="btn btn-primary" {{on 'click' this.save}} >Save</button>
 </div>
 
 <FlashMessages />
