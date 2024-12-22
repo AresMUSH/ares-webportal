@@ -11,7 +11,7 @@ export default Service.extend(AresConfig, {
     portalUrl() {
       var base;
       let protocol = this.httpsEnabled ? 'https' : 'http';
-      if (`${port}` === '80') {
+      if (`${this.port}` === '80') {
         base = `${protocol}://${this.mushHost}`;
       }
       else {

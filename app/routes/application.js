@@ -13,6 +13,7 @@ export default Route.extend(ReloadableRoute, AresConfig, {
     gameSocket: service(),
     favicon: service(),
     router: service('router'),
+    headData: service(),
     init() {
         this._super(...arguments);
         let self = this;
@@ -23,6 +24,18 @@ export default Route.extend(ReloadableRoute, AresConfig, {
     async beforeModel() {
       await this.session.setup();
     },
+    afterModel(model) {
+      try {
+        this.set('headData.mushName', model.get('game.name'));
+        this.set('headData.portalUrl', this.gameApi.portalUrl());
+        this.set('headData.mushDesc', model.get('game.description')); 
+        }
+        catch(error) {
+          console.log(`Error loading head metadata.`);
+          console.log(error);
+          // Don't do anything here.
+        }
+      },
     doReload: function() {
         this.loadModel().then( newModel => {
             this.controllerFor('application').set('sidebar', newModel);
@@ -69,17 +82,6 @@ export default Route.extend(ReloadableRoute, AresConfig, {
         this.flashMessages.info('You have been logged out.');
         this.router.transitionTo('/');
         this.refresh();
-    },
-    
-    title: function(tokens) {
-        var gameName = this.mushName;
-        if (tokens.length > 0) {
-            let tokenString = tokens.reverse().join(' - ');
-            return `${tokenString} - ${gameName}`
-        }
-        else {
-            return gameName;
-        }
     },
 
     actions: {
