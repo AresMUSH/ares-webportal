@@ -252,33 +252,13 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     setTimeout(() => self.scrollWindow(), 150, self);
   },
     
-  switchScene: function(scene) {
+  updateScene(scene) {
     scene.set('is_unread', false);
     this.set('currentScene', scene);
     this.set('selectedChannel', null);
     let self = this;
     setTimeout(() => self.scrollWindow(), 150, self);
     this.markSceneRead(scene.id);
-  },
-
-  @action
-  setShowNewConversation(value) {
-    this.set('showNewConversation', value);
-  },
-  
-  @action
-  setShowAllPms(value) {
-    this.set('showAllPms', value);
-  },
-  
-  @action
-  setShowAddChannel(value) {
-    this.set('showAddChannel', value);
-  },
-  
-  @action
-  setShowAllChannels(value) {
-    this.set('showAllChannels', value);
   },
       
   @action   
@@ -336,10 +316,10 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         }
         scene.set('poses', response.poses);
         scene.set('lazy_loaded', false);
-        this.switchScene(scene);
+        this.updateScene(scene);
       });
     } else {
-      this.switchScene(scene);
+      this.updateScene(scene);
     }
   },
         
@@ -419,5 +399,26 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
   @action
   poseCharChanged(char) {
     this.set('poseChar', char);
-  }
+  },
+  
+
+  @action
+  setShowNewConversation(value) {
+    this.set('showNewConversation', value);
+  },
+  
+  @action
+  setShowAllPms(value) {
+    this.set('showAllPms', value);
+  },
+  
+  @action
+  setShowAddChannel(value) {
+    this.set('showAddChannel', value);
+  },
+  
+  @action
+  setShowAllChannels(value) {
+    this.set('showAllChannels', value);
+  },
 });

@@ -46,26 +46,6 @@ export default Component.extend({
   }),
   
   @action
-  setSelectedReportMessage(value) {
-    this.set('selectedReportMessage', value);
-  },
-  
-  @action
-  setShowReport(value) {
-    this.set('showReport', value);
-  },
-  
-  @action
-  setShowPageRename(value) {
-    this.set('showPageRename', value);
-  },
-  
-  @action
-  setNewPageTitle(value) {
-    this.set('newPageTitle', value);
-  },
-  
-  @action
   leaveChannel() {
     let api = this.gameApi;
     let channelKey = this.get('channel.key');
@@ -135,11 +115,11 @@ export default Component.extend({
   },
     
   @action
-  send() {
+  sendMessage() {
     let api = this.gameApi;
     let channelKey = this.get('channel.key');
     let message = this.get('channel.draftMessage') || "";
-        
+    
     if (message.length === 0) {
       this.flashMessages.danger("You haven't entered anything.");
       return;
@@ -246,6 +226,26 @@ export default Component.extend({
       document.body.removeChild(element);
     });
             
-  }
+  },
+  
+  @action
+  setSelectedReportMessage(value) {
+    this.set('selectedReportMessage', value);
+  },
+  
+  @action
+  setShowReport(value) {
+    this.set('showReport', value);
+  },
+  
+  @action
+  setShowPageRename(value) {
+    this.set('showPageRename', value);
+  },
+  
+  @action
+  setNewPageTitle(value) {
+    this.set('newPageTitle', value);
+  },  
   
 });

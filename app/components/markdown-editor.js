@@ -8,13 +8,6 @@ export default Component.extend({
   rows: 6,
   gameApi: service(),
     
-  onEnter() {
-    if (this.attrs.onEnter) {
-      this.attrs.onEnter();
-    }        
-  },
-    
-    
   @action
   showHelp() {
     window.open("/help/markdown");
@@ -41,7 +34,12 @@ export default Component.extend({
   keyDown(event) {
     if (event.keyCode == 13) {
       if (event.ctrlKey || event.metaKey) {
-        this.onEnter();
+        
+        // Needed because onEnter is optional - we don't want to trigger it if it's not set.
+        if (this.onEnter) {
+          this.onEnter();
+        }      
+        
         event.preventDefault();
       }
     }

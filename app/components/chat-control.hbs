@@ -81,13 +81,13 @@
  {{/if}}
 
  {{#if this.canTalk}}
-   <MarkdownEditor @text={{this.channel.draftMessage}} class="chat-box" cols={{80}} rows="6" @onEnter={{this.send}} />
+   <MarkdownEditor @text={{this.channel.draftMessage}} class="chat-box" cols={{80}} rows="6" @onEnter={{this.sendMessage}} />
  {{/if}}
   <div class="scene-controls">
 
     <div class="col col-sm-6 col-xs-12 scene-controls-right">
       {{#if this.canTalk}}
-         <button class="btn-primary btn" {{on 'click' this.send}}>Send Message</button>
+         <button class="btn-primary btn" {{on 'click' this.sendMessage}}>Send Message</button>
        {{/if}}
     </div>
  

@@ -101,41 +101,6 @@ export default Component.extend(AuthenticatedController, {
   isExtraInstalled(name) {
     return this.get('scene.extras_installed').any(e => e == name); 
   },
-  
-  @action
-  setCharacterCard(value) {
-    this.set('characterCard', value);
-  },
-    
-  @action
-  setManagePoseOrder(value) {
-    this.set('managePoseOrder', value);
-  },
-  
-  @action
-  setSelectLocation(value) {
-    this.set('selectLocation', value);
-  },
-  
-  @action
-  setShowInvitation(value) {
-    this.set('showInvitation', value);
-  },
-  
-  @action
-  setConfirmDeleteScene(value) {
-    this.set('confirmDeleteScene', value);
-  },
-  
-  @action
-  setConfirmDeleteScenePose(value) {
-    this.set('confirmDeleteScenePose', value);
-  },
-  
-  @action
-  setConfirmReportScene(value) {
-    this.set('confirmReportScene', value);
-  },
     
   @action
   locationSelected(loc) {
@@ -420,4 +385,40 @@ export default Component.extend(AuthenticatedController, {
       this.flashMessages.success('Thank you.  The scene has been reported.');
     });
   },
+  
+  @action
+  setCharacterCard(value) {
+    this.set('characterCard', value);
+  },
+    
+  @action
+  setManagePoseOrder(value) {
+    this.set('managePoseOrder', value);
+  },
+  
+  @action
+  setSelectLocation(value) {
+    this.set('selectLocation', value);
+  },
+  
+  @action
+  setShowInvitation(value) {
+    this.set('showInvitation', value);
+  },
+  
+  @action
+  setConfirmDeleteScene(value) {
+    this.set('confirmDeleteScene', value);
+  },
+  
+  @action
+  setConfirmDeleteScenePose(value) {
+    this.set('confirmDeleteScenePose', value);
+  },
+  
+  @action
+  setConfirmReportScene(value) {
+    this.set('confirmReportScene', value);
+  },
+  
 });
