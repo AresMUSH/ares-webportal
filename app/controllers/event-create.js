@@ -39,7 +39,7 @@ export default Controller.extend(AuthenticatedController, {
   },
       
   @action        
-  create: function() {
+  create() {
     let api = this.gameApi;
             
     let tags = this.tags || [];

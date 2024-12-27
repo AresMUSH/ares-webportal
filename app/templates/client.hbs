@@ -59,7 +59,7 @@
         </BsModalSimple>
         
         
-        <BsModalSimple @title="Load a Command" @closeTitle="Cancel" @size={{null}} @fade={{true}} @open={{this.showHistory2}} @onHide={{(fn this.showHistory2 false)}}>
+        <BsModalSimple @title="Load a Command" @closeTitle="Cancel" @size={{null}} @fade={{true}} @open={{this.showHistory2}} @onHide={{(fn this.setShowHistory2 false)}}>
           
            {{#each this.history2 as |h|}}
             <p><button class="btn btn-secondary" {{on 'click' (fn this.loadHistory2 h)}}><i class="fa fa-redo" aria-hidden="true"></i></button> {{h}}</p>

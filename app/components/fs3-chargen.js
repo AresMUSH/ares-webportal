@@ -193,5 +193,10 @@ export default Component.extend({
   @action
   reset() {
     this.onReset();
-  }    
+  },
+  
+  @action
+  setSelectBackgroundSkill(value) {
+    this.set('selectBackgroundSkill', value);
+  } 
 });
