@@ -6,7 +6,7 @@
    {{/if}}
    {{#if this.char.fs3.xp}}
     <div id="systemfs3xp" class="tab-pane fade">
-      <Fs3Xp @char={{this.char}} @abilityLearned={{action "reloadChar"}} />
+      <Fs3Xp @char={{this.char}} @abilityLearned={{this.reloadChar}} />
     </div>
    {{/if}}
 {{/if}}

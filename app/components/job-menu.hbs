@@ -1,6 +1,6 @@
 <DropdownMenu @id="{{this.id}}" @title="Job Menu">
 
-       <li><a href="#" {{action 'closeJob'}}  class="dropdown-item">Close Job</a></li>
+       <li><a href="#" {{on 'click' this.closeJob}}  class="dropdown-item">Close Job</a></li>
        {{#if this.job.is_job_admin}}
          <li><LinkTo @route="job-edit" @model={{this.job.id}} class="dropdown-item">Edit Job</LinkTo></li>
        {{/if}}
@@ -12,8 +12,8 @@
          <li><LinkTo @route="char" @model={{this.job.author.name}} class="dropdown-item">Profile for {{this.job.author.name}}</LinkTo></li>
        {{/if}}
        {{#if this.job.is_roster_job}}
-         <li><a href="#" {{action 'approveRoster'}} class="dropdown-item">Approve Roster for {{this.job.roster_name}}</a></li>
-         <li><a href="#" {{action 'rejectRoster'}} class="dropdown-item">Reject Roster for {{this.job.roster_name}}</a></li>
+         <li><a href="#" {{on 'click' this.approveRoster}} class="dropdown-item">Approve Roster for {{this.job.roster_name}}</a></li>
+         <li><a href="#" {{on 'click' this.rejectRoster}} class="dropdown-item">Reject Roster for {{this.job.roster_name}}</a></li>
        {{/if}}
        <JobMenuCustom @job={{this.job}}  @abilities={{this.abilities}} @options={{this.options}} />
        

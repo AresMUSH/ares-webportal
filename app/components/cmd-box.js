@@ -1,5 +1,6 @@
 import { TextArea } from '@ember/legacy-built-in-components'
 
+// No UI component - just some extra functionality on a standard TextArea
 export default TextArea.extend({
     
     allowMultiLine: false,

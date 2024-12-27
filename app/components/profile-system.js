@@ -1,5 +1,6 @@
 import { computed } from '@ember/object';
 import Component from '@ember/component';
+import { action } from '@ember/object';
 
 export default Component.extend({
   traitsExtraInstalled: computed('game.extra_plugins', function () {
@@ -22,9 +23,8 @@ export default Component.extend({
     return this.get('game.extra_plugins').any((e) => e == 'prefs');
   }),
 
-  actions: {
+  @action
     reloadChar() {
-      this.reloadChar();
+      this.onReloadChar();
     },
-  },
 });

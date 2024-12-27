@@ -1,11 +1,11 @@
 import Component from '@ember/component';
+import { action } from '@ember/object';
 
 export default Component.extend({
   tagName: '',
   
-  actions: { 
-      reloadChar() {
-          this.reloadChar();
-      }
+  @action
+  reloadChar() {
+    this.onReloadChar();
   }
 });

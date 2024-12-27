@@ -26,7 +26,7 @@
   <div class="alert alert-warning">If you set your groups first, you'll be given the appropriate starting skills based on your groups.</div>
   {{/if}}
 
-  <button name="reset" {{action 'reset'}} class="btn btn-primary">Start Abilities</button>
+  <button name="reset" {{on 'click' this.reset}} class="btn btn-primary">Start Abilities</button>
   </div>
 
 {{else}}
@@ -43,7 +43,7 @@
 
 
      {{#each this.model.char.fs3.fs3_attributes as |att|}}
-     <Fs3Attrbox @rating={{att.rating}} @ratingName={{att.rating_name}} @maxRating={{this.model.cgInfo.fs3.max_attr_rating}} @updated={{action "abilityChanged"}}>
+     <Fs3Attrbox @rating={{att.rating}} @ratingName={{att.rating_name}} @maxRating={{this.model.cgInfo.fs3.max_attr_rating}} @updated={{this.abilityChanged}}>
          <b>{{att.name}}</b> - {{att.desc}}
      </Fs3Attrbox>
      {{/each}}
@@ -65,7 +65,7 @@
      <br>
    
      {{#each this.model.char.fs3.fs3_action_skills as |skill|}}
-     <Fs3Actionbox @name={{skill.name}} @rating={{skill.rating}} @ratingName={{skill.rating_name}} @maxRating={{this.model.cgInfo.fs3.max_skill_rating}} @minRating={{this.model.cgInfo.fs3.min_action_skill_rating}} @updated={{action "abilityChanged"}} @specialties={{skill.specialties}}>
+     <Fs3Actionbox @name={{skill.name}} @rating={{skill.rating}} @ratingName={{skill.rating_name}} @maxRating={{this.model.cgInfo.fs3.max_skill_rating}} @minRating={{this.model.cgInfo.fs3.min_action_skill_rating}} @updated={{this.abilityChanged}} @specialties={{skill.specialties}}>
          <b>{{skill.name}}</b> - {{skill.desc}}
      </Fs3Actionbox>
      {{/each}}
@@ -90,7 +90,7 @@
 
      {{#each this.model.char.fs3.fs3_backgrounds as |skill|}}
 
-     <Fs3Bgbox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{action "abilityChanged"}}>
+     <Fs3Bgbox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{this.abilityChanged}}>
          <b><Input @type="text" @value={{skill.name}} size={{25}} /></b>
      </Fs3Bgbox>
      {{/each}}
@@ -112,7 +112,7 @@
          <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.language_blurb}} /> To remove a language, set its rating to Everyman.</p>
 
        {{#each this.model.char.fs3.fs3_languages as |skill|}}
-       <Fs3Langbox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{action "abilityChanged"}}>
+       <Fs3Langbox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{this.abilityChanged}}>
            <b>{{skill.name}}</b> 
            {{#if skill.desc}}- {{skill.desc}}{{/if}}
        </Fs3Langbox>
@@ -134,7 +134,7 @@
            <p class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.fs3.abilities.advantages_blurb}} /> To remove an advantage, set its rating to Everyman.</p>
 
          {{#each this.model.char.fs3.fs3_advantages as |skill|}}
-         <Fs3Advantagebox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{action "abilityChanged"}}>
+         <Fs3Advantagebox @rating={{skill.rating}} @ratingName={{skill.rating_name}} @updated={{this.abilityChanged}}>
              <b>{{skill.name}}</b> - {{skill.desc}}
          </Fs3Advantagebox>
          {{/each}}
@@ -148,8 +148,8 @@
 </div>
 
 
-<BsModalSimple @title="Add Background Skill" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{this.selectBackgroundSkill}} @onSubmit={{action "addBackgroundSkill"}} @onHide={{action (mut this.selectBackgroundSkill) false}}>
+<BsModalSimple @title="Add Background Skill" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{this.selectBackgroundSkill}} @onSubmit={{this.addBackgroundSkill}} @onHide={{action (mut this.selectBackgroundSkill) false}}>
     <p>Enter a skill name.</p>
-    <Input @type="text" size={{25}} id="bgSkill" @enter={{action "addBackgroundSkill"}} @value={{this.newBgSkill}} />
+    <Input @type="text" size={{25}} id="bgSkill" @enter={{this.addBackgroundSkill}} @value={{this.newBgSkill}} />
 
   </BsModalSimple>

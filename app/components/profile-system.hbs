@@ -99,7 +99,7 @@
   </div>
   {{/if}}
   
-  <ProfileFs3 @char={{this.char}} @game={{this.game}} @reloadChar={{action "reloadChar"}} />
+  <ProfileFs3 @char={{this.char}} @game={{this.game}} @onReloadChar={{this.reloadChar}} />
   
   {{#if this.traitsExtraInstalled}}
     <ProfileTraits @char={{this.char}} />
@@ -129,6 +129,6 @@
   </div>
   {{/if}}
   
-  <ProfileCustom @char={{this.char}} @game={{this.game}} @reloadChar={{action "reloadChar"}} />
+  <ProfileCustom @char={{this.char}} @game={{this.game}} @onReloadChar={{this.reloadChar}} />
   
 </div>

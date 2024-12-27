@@ -2,6 +2,7 @@ import EmberObject, { computed } from '@ember/object';
 import { A } from '@ember/array';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Component.extend({
   tagName: '',
@@ -164,32 +165,33 @@ export default Component.extend({
       this.charErrors.pushObject(`You can only spend ${maxAp} ability points.  You have spent ${totalAp}.`);
     }
   },
-    
-  actions: {
-    addBackgroundSkill() {
-      let skill = this.newBgSkill;
-      if (!skill) {
-        this.flashMessages.danger("You didn't specify a skill name.");
-        this.set('selectBackgroundSkill', false);
-        return;
-      }
-      if (!skill.match(/^[\w\s]+$/)) {
-        this.flashMessages.danger("Skills can't have special characters in their names.");
-        this.set('selectBackgroundSkill', false);
-        return;
-      }
-      this.set('newBgSkill', null);
+
+  @action
+  addBackgroundSkill() {
+    let skill = this.newBgSkill;
+    if (!skill) {
+      this.flashMessages.danger("You didn't specify a skill name.");
       this.set('selectBackgroundSkill', false);
-      this.get('model.char.fs3.fs3_backgrounds').pushObject( EmberObject.create( { name: skill, rating: 1, rating_name: 'Fair' }) );  
-      this.validateChar();
-    },
-        
-    abilityChanged() {
-      this.validateChar();
-    },
-    reset() {
-      this.reset();
+      return;
     }
-  }
+    if (!skill.match(/^[\w\s]+$/)) {
+      this.flashMessages.danger("Skills can't have special characters in their names.");
+      this.set('selectBackgroundSkill', false);
+      return;
+    }
+    this.set('newBgSkill', null);
+    this.set('selectBackgroundSkill', false);
+    this.get('model.char.fs3.fs3_backgrounds').pushObject( EmberObject.create( { name: skill, rating: 1, rating_name: 'Fair' }) );  
+    this.validateChar();
+  },
+        
+  @action
+  abilityChanged() {
+    this.validateChar();
+  },
     
+  @action
+  reset() {
+    this.onReset();
+  }    
 });

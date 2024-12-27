@@ -1,23 +1,23 @@
 <p><b>Experience Points Available:</b> {{this.char.fs3.xp.xp_points}}</p>
 
-<Fs3Xplist @category="Attributes" @abilities={{this.char.fs3.xp.attributes}} @xp={{this.char.fs3.xp.xp_points}} @canLearn={{this.char.fs3.xp.can_learn}} @learnAbility={{action "learnAbility"}} />
+<Fs3Xplist @category="Attributes" @abilities={{this.char.fs3.xp.attributes}} @xp={{this.char.fs3.xp.xp_points}} @canLearn={{this.char.fs3.xp.can_learn}} @onLearnAbility={{this.learnAbility}} />
 
 
 
-<Fs3Xplist @category="Action Skills" @abilities={{this.char.fs3.xp.action_skills}} @xp={{this.char.fs3.xp.xp_points}} @canLearn={{this.char.fs3.xp.can_learn}} @learnAbility={{action "learnAbility"}} />
+<Fs3Xplist @category="Action Skills" @abilities={{this.char.fs3.xp.action_skills}} @xp={{this.char.fs3.xp.xp_points}} @canLearn={{this.char.fs3.xp.can_learn}} @onLearnAbility={{this.learnAbility}} />
 
 
 
-<Fs3Xplist @category="Background Skills" @abilities={{this.char.fs3.xp.backgrounds}} @xp={{this.char.fs3.xp.xp_points}} @canLearn={{this.char.fs3.xp.can_learn}} @learnAbility={{action "learnAbility"}} />
+<Fs3Xplist @category="Background Skills" @abilities={{this.char.fs3.xp.backgrounds}} @xp={{this.char.fs3.xp.xp_points}} @canLearn={{this.char.fs3.xp.can_learn}} @onLearnAbility={{this.learnAbility}} />
 
 
-<Fs3Xplist @category="Language Skills" @abilities={{this.char.fs3.xp.languages}} @xp={{this.char.fs3.xp.xp_points}} @canLearn={{this.char.fs3.xp.can_learn}} @learnAbility={{action "learnAbility"}} />
+<Fs3Xplist @category="Language Skills" @abilities={{this.char.fs3.xp.languages}} @xp={{this.char.fs3.xp.xp_points}} @canLearn={{this.char.fs3.xp.can_learn}} @onLearnAbility={{this.learnAbility}} />
 
 {{#if this.char.fs3.use_advantages}}
 
   {{#if this.char.fs3.xp.allow_advantages_xp}}
 
-    <Fs3Xplist @category="Advantages" @abilities={{this.char.fs3.xp.advantages}} @xp={{this.char.fs3.xp.xp_points}} @canLearn={{this.char.fs3.xp.can_learn}} @learnAbility={{action "learnAbility"}} />
+    <Fs3Xplist @category="Advantages" @abilities={{this.char.fs3.xp.advantages}} @xp={{this.char.fs3.xp.xp_points}} @canLearn={{this.char.fs3.xp.can_learn}} @onLearnAbility={{this.learnAbility}} />
   {{else}}
   <p><b>Advantages</b></p>
     You can't raise advantages directly with XP.  Submit a request to staff.
@@ -31,7 +31,7 @@
     {{#if (and (gt this.char.fs3.xp.xp_points 0) this.char.fs3.xp.can_learn)}}
   
     <Input @type="text" size={{25}} @value={{this.newAbility}} />
-    <a href="#" class="btn btn-secondary" {{action 'learnNewAbility'}} >Learn</a>
+    <a href="#" class="btn btn-secondary" {{on 'click' this.learnNewAbility}} >Learn</a>
     
     {{else}}
     Out of XP
