@@ -42,5 +42,15 @@ export default Component.extend({
       }
       this.set('scene.combat', response);
     });
+  },
+  
+  @action
+  setSelectSkillRoll(value) {
+    this.set('selectSkillRoll', value);
+  },
+  
+  @action
+  setSelectSpendLuck(value) {
+    this.set('selectSpendLuck', value);
   }
 });

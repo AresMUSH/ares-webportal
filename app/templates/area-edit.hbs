@@ -6,7 +6,7 @@
       <label for="name" class="col-form-label">Name:</label>
   </div>
   <div class="col-sm-9">
-      <Input @type="text" size={{25}} id="name" @enter={{action "edit"}} @value={{this.model.area.name}} />
+      <Input @type="text" size={{25}} id="name" @enter={{this.edit}} @value={{this.model.area.name}} />
   </div> 
 </div>
 
@@ -34,7 +34,7 @@
       <label for="parentarea" class="col-form-label">Parent Area:</label>
   </div>
   <div class="col-sm-9">
-      <PowerSelect @selected={{this.model.area.parent}}  @options={{this.model.all_areas}} @searchEnabled=true @searchField="name" @allowClear={{true}} @onChange={{action "changeParent"}} as |area|>
+      <PowerSelect @selected={{this.model.area.parent}}  @options={{this.model.all_areas}} @searchEnabled=true @searchField="name" @allowClear={{true}} @onChange={{this.changeParent}} as |area|>
          {{area.name}}
       </PowerSelect>
   </div> 
@@ -44,7 +44,7 @@
 
 <div class="action-buttons">
   <LinkTo @route="locations" class="btn btn-secondary">Cancel</LinkTo>
-  <button {{action "edit"}} class="btn btn-primary">Save</button>
+  <button {{on 'click' this.edit}} class="btn btn-primary">Save</button>
 </div>
 
 <FlashMessages />

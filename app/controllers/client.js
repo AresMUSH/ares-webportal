@@ -3,6 +3,7 @@ import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import AresConfig from 'ares-webportal/mixins/ares-config';
+import { action } from '@ember/object';
 
 export default Controller.extend(AresConfig, {
   connected: false,
@@ -117,63 +118,86 @@ export default Controller.extend(AresConfig, {
   },
     
     
-  actions: {
-    connect() {
-      let idle_keepalive_ms = 60000;
-      let protocol = this.httpsEnabled ? 'wss' : 'ws';
+  @action
+  connect() {
+    let idle_keepalive_ms = 60000;
+    let protocol = this.httpsEnabled ? 'wss' : 'ws';
       
-      this.set('websocket', new WebSocket(`${protocol}://${this.mushHost}:${this.websocketPort}/websocket`));
-        var self = this;
-        this.websocket.onmessage = function(evt) { 
-          self.onMessage(evt);
-        };
-        this.websocket.onclose = function() {
-          self.onDisconnect(self);
-        };
-        this.websocket.onopen = function() {
-          self.onConnect(self);
-        };
-                
-        this.set('keepaliveInterval', window.setInterval(function(){ self.idleKeepalive() }, idle_keepalive_ms));
-                
-      },
-      disconnect() {
-        if (this.connected){
-          this.sendInput('quit');                    
-        }
-      },
-      sendMsg1() {
-        let cmd = this.text1;
-        this.sendInput(cmd);
-        this.set('text1', '');
-        this.history1.addObject(cmd); 
-        if (this.history1.length > 10) {
-          this.history1.removeAt(0);
-        }
-      },
-      sendMsg2() {
-        let cmd = this.text2;
-        this.sendInput(cmd);
-        this.set('text2', '');
-        this.history2.addObject(cmd); 
-        if (this.history2.length > 10) {
-          this.history2.removeAt(0);
-        }
-      },
-      loadHistory1(text) {
-        this.set('text1', text);
-        this.set('showHistory1', null);
-      },
-      loadHistory2(text) {
-        this.set('text2', text);
-        this.set('showHistory2', null);
-      },
-      pauseScroll() {
-        this.set('scrollPaused', true);
-      },
-      unpauseScroll() {
-        this.set('scrollPaused', false);
-        this.scrollToBottom();
-      }
+    this.set('websocket', new WebSocket(`${protocol}://${this.mushHost}:${this.websocketPort}/websocket`));
+    var self = this;
+    this.websocket.onmessage = function(evt) { 
+      self.onMessage(evt);
+    };
+    this.websocket.onclose = function() {
+      self.onDisconnect(self);
+    };
+    this.websocket.onopen = function() {
+      self.onConnect(self);
+    };
+            
+    this.set('keepaliveInterval', window.setInterval(function(){ self.idleKeepalive() }, idle_keepalive_ms));
+            
+  },
+      
+  @action
+  disconnect() {
+    if (this.connected){
+      this.sendInput('quit');                    
     }
-  });
+  },
+      
+  @action
+  sendMsg1() {
+    let cmd = this.text1;
+    this.sendInput(cmd);
+    this.set('text1', '');
+    this.history1.addObject(cmd); 
+    if (this.history1.length > 10) {
+      this.history1.removeAt(0);
+    }
+  },
+      
+  @action
+  sendMsg2() {
+    let cmd = this.text2;
+    this.sendInput(cmd);
+    this.set('text2', '');
+    this.history2.addObject(cmd); 
+    if (this.history2.length > 10) {
+      this.history2.removeAt(0);
+    }
+  },
+      
+  @action
+  loadHistory1(text) {
+    this.set('text1', text);
+    this.set('showHistory1', null);
+  },
+      
+  @action
+  loadHistory2(text) {
+    this.set('text2', text);
+    this.set('showHistory2', null);
+  },
+      
+  @action
+  pauseScroll() {
+    this.set('scrollPaused', true);
+  },
+      
+  @action
+  unpauseScroll() {
+    this.set('scrollPaused', false);
+    this.scrollToBottom();
+  },
+  
+  @action
+  setShowHistory1(value) {
+    this.set('showHistory1', value);
+  },
+  
+  @action
+  setShowHistory2(value) {
+    this.set('showHistory2', value);
+  }
+});

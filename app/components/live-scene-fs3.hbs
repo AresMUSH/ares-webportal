@@ -1,5 +1,5 @@
-<li><a href="#" {{action (mut this.selectSkillRoll) true}} class="dropdown-item">Roll Ability</a></li>
-<li><a href="#" {{action (mut this.selectSpendLuck) true}} class="dropdown-item">Spend Luck</a></li>
+<li><a href="#" {{on 'click' (fn this.setSelectSkillRoll true)}} class="dropdown-item">Roll Ability</a></li>
+<li><a href="#" {{on 'click' (fn this.setSelectSpendLuck true)}} class="dropdown-item">Spend Luck</a></li>
 
 {{#if this.scene.fs3combat_enabled}}
   {{#if (not this.scene.combat)}}
@@ -7,7 +7,7 @@
   {{/if}}
 {{/if}}
 
-<BsModalSimple @title="Spend a Luck Point" @closeTitle="Cancel" @submitTitle="Spend" @size={{null}} @fade={{true}} @open={{this.selectSpendLuck}} @onSubmit={{this.spendLuck}} @onHide={{action (mut this.selectSpendLuck) false}}>
+<BsModalSimple @title="Spend a Luck Point" @closeTitle="Cancel" @submitTitle="Spend" @size={{null}} @fade={{true}} @open={{this.selectSpendLuck}} @onSubmit={{this.spendLuck}} @onHide={{(fn this.setSelectSpendLuck false)}}>
   
   <b>Reason:</b> <Input @type="text" size={{25}} id="luckReason" @enter={{this.spendLuck}} @value={{this.luckReason}} />
 

@@ -25,7 +25,7 @@
 
 <div class="profile-tab">
 
-  <ProfileSystem @char={{this.model.char}} @game={{this.model.game}} @reloadChar={{action "reloadChar"}} />
+  <ProfileSystem @char={{this.model.char}} @game={{this.model.game}} @onReloadChar={{this.reloadChar}} />
   
 </div>
 
@@ -68,7 +68,7 @@
         <LinkTo @route="notes" @model={{this.model.char.name}} class="btn btn-secondary">Notes</LinkTo>
       {{/if}}
       {{#if this.model.char.can_manage}}
-        <button {{action (mut this.showFiles) true}} class="btn btn-secondary">Files</button>
+        <button {{on 'click' (fn this.setShowFiles true)}} class="btn btn-secondary">Files</button>
         <LinkTo @route="char-edit" @model={{this.model.char.id}} class="btn btn-primary">Edit</LinkTo>
       {{/if}}
 </div>
@@ -95,7 +95,7 @@
         
         <p><LinkTo @route="files">View All Files</LinkTo></p>
     
-        <FileUploader @folder={{this.model.char.name}} @uploaded={{action "fileUploaded"}} />
+        <FileUploader @folder={{this.model.char.name}} @uploaded={{this.fileUploaded}} />
         </div>
     </div>
 {{/if}}

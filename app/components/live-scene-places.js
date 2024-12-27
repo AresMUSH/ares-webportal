@@ -61,5 +61,20 @@ export default Component.extend({
       this.set('scene.places', response.places);
       this.set('showPlaces', true);
     });
-  }
+  },
+  
+  @action
+  setSelectPlace(value) {
+    this.set('selectPlace', value);
+  },
+  
+  @action
+  setShowPlaces(value) {
+    this.set('showPlaces', value);
+  },
+  
+  @action
+  onPlaceSelected(event) {
+    this.set('rollString', event.target.value);
+  },
 });

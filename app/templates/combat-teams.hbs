@@ -10,7 +10,7 @@
 <tr>
   <td>{{comb.name}}</td>
   <td>
-    <PowerSelect @selected={{comb.team}} @options={{this.teams}} @onChange={{action "teamChanged" id}} as |team|>
+    <PowerSelect @selected={{comb.team}} @options={{this.teams}} @onChange={{(fn this.teamChanged id)}} as |team|>
       {{team}}
     </PowerSelect>
   </td>
@@ -23,7 +23,7 @@
 <div class="action-buttons">
 
   <LinkTo @route="combat" @model={{this.model.id}} class="btn btn-secondary">Cancel</LinkTo>  
-  <button class="btn btn-primary" {{action 'save'}} >Save</button>
+  <button class="btn btn-primary" {{on 'click' this.save}} >Save</button>
 </div>
 
 <FlashMessages />

@@ -48,14 +48,14 @@
     <div class="col col-xs-12 col-sm-2">
       <div class="live-scenes-controls">
        {{#if scene.watching}}
-         <a href="#" {{action 'stopWatching' scene.id}}><i class="fa fa-eye-slash" aria-label="Stop Watching"></i></a>
+         <a href="#" {{on 'click' (fn this.stopWatching scene.id)}}><i class="fa fa-eye-slash" aria-label="Stop Watching"></i></a>
 
        {{else}}
          {{#if scene.can_view}}
-           <a href="#" {{action 'watchScene' scene.id}}><i class="fa fa-eye" aria-label="Watch"></i></a>
+           <a href="#" {{on 'click' (fn this.watchScene scene.id)}}><i class="fa fa-eye" aria-label="Watch"></i></a>
       
            {{#if (not scene.participating) }}
-           <a href="#" {{action 'joinScene' scene.id}}><i class="fa fa-sign-in-alt" aria-label="Join"></i></a>
+           <a href="#" {{on 'click' (fn this.joinScene scene.id)}}><i class="fa fa-sign-in-alt" aria-label="Join"></i></a>
            {{/if}}
          {{/if}}
   

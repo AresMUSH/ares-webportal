@@ -61,14 +61,14 @@
   </div>
   {{else}}
   <LinkTo @route="char" @model={{this.model.id}} class="btn btn-secondary" target="_blank">View Profile</LinkTo>
-    <button {{action (mut this.confirmClaim) true}} class="btn btn-primary">Claim</button>
+    <button {{on 'click' this.showActionConfirmation}} class="btn btn-primary">Claim</button>
   {{/if}}
 </div>
 
 <FlashMessages />
 
 
-<BsModalSimple @title="Confirm Claim" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmClaim}} @onSubmit={{action "claimRoster"}} @onHide={{action (mut this.confirmClaim) false}}>
+<BsModalSimple @title="Confirm Claim" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.actionConfirmationVisible}} @onSubmit={{this.claimRoster}} @onHide={{this.hideActionConfirmation}}>
     You're about to claim the character {{this.confirmClaim.name}} from the roster. Are you sure?
   </BsModalSimple>
   

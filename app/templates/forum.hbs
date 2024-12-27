@@ -14,14 +14,14 @@
 
 
     {{#if this.model.is_muted}}
-      <button {{action 'muteForum' false}} class="btn btn-secondary"><i class="fa fa-play" aria-hidden="true"></i> Unmute</button>
+      <button {{on 'click' (fn this.muteForum false)}} class="btn btn-secondary"><i class="fa fa-play" aria-hidden="true"></i> Unmute</button>
     {{else}}
-      <button {{action 'muteForum' true}} class="btn btn-secondary"><i class="fa fa-pause" aria-hidden="true"></i> Mute</button>
+      <button {{on 'click' (fn this.muteForum true)}} class="btn btn-secondary"><i class="fa fa-pause" aria-hidden="true"></i> Mute</button>
     {{/if}}
       
-    <button {{action 'catchup'}} class="btn btn-secondary">Mark All Read</button>
+    <button {{on 'click' this.catchup}} class="btn btn-secondary">Mark All Read</button>
 
-    <button {{action 'nextUnread'}} class="btn btn-secondary">Next Unread</button>
+    <button {{on 'click' this.nextUnread}} class="btn btn-secondary">Next Unread</button>
 </div>
 {{/if}}
 
@@ -64,7 +64,7 @@
             
         </td>
         <td>
-          <a href="#" {{action 'hideCategory' forum true}}>
+          <a href="#" {{on 'click' (fn this.hideCategory forum true)}}>
             <TooltipIcon @position="left" @message="Hide category." @icon="fa fa-eye-slash" />
           </a>
           
@@ -80,7 +80,7 @@
 <h4>Hidden</h4>
 {{#each this.model.hidden as |forum|}}
 <LinkTo @route="forum-category" @model={{forum.id}}>{{forum.name}}</LinkTo>          
-    <a href="#" {{action 'hideCategory' forum false}} >
+    <a href="#" {{on 'click' (fn this.hideCategory forum false)}} >
       [<TooltipIcon @position="top" @message="Show category." @icon="fa fa-eye" />]
     </a> &nbsp; &nbsp;
 {{/each}}

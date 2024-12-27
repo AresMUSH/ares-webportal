@@ -1,11 +1,11 @@
-<BsModalSimple @title="Add Ability Roll" @closeTitle="Cancel" @submitTitle="Roll" @size={{null}} @fade={{true}} @open={{this.selectSkillRoll}} @onSubmit={{this.addRoll}} @onHide={{action (mut this.selectSkillRoll) false}}>
+<BsModalSimple @title="Add Ability Roll" @closeTitle="Cancel" @submitTitle="Roll" @size={{null}} @fade={{true}} @open={{this.selectSkillRoll}} @onSubmit={{this.addRoll}} @onHide={{(fn this.setSelectSkillRoll false)}}>
 
     <p class="hint">You can use a rating number to roll for a NPC. An average attribute is automatically factored in, so rolling a skill of "3" will roll 5 dice total for the NPC.</p>
     
 
     <p><b>Regular Roll</b></p>
     <p>Select an ability, or type one (plus modifiers, if applicable) in the box.</p>
-    <select onchange={{action (mut this.rollString) value="target.value"}}>
+    <select onchange={{this.onRollStringSelected}}>
       {{#each this.abilities as |ability|}}
         <option value={{ability}}>{{ability}}</option>
       {{/each}}

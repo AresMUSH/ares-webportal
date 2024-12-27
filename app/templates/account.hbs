@@ -33,7 +33,7 @@
           <p><Input @type="text" placeholder="Link Code" id="linkCode" @value={{this.linkCode}} /></p>
           <p><Input @type="password" placeholder="Confirm Password" id="confirmPasswordHandle" @value={{this.confirmPasswordHandle}} /></p>
         
-          <button {{action "linkHandle"}} class="btn btn-primary">Link to Handle</button>
+          <button {{on 'click' this.linkHandle}} class="btn btn-primary">Link to Handle</button>
         
         {{/if}}
         
@@ -59,7 +59,7 @@
           <p><Input @type="password" placeholder="Password" id="newPassword" @value={{this.newPassword}} /></p>
           <p><Input @type="password" placeholder="Confirm New Password"  id="confirmPassword" @value={{this.confirmPassword}} /></p>
         
-          <button {{action "changePassword"}} class="btn btn-primary">Change Password</button>
+          <button {{on 'click' this.changePassword}} class="btn btn-primary">Change Password</button>
                 
       </div>
   </div>
@@ -116,7 +116,7 @@
                 <p>Your timezone is {{this.model.timezone}}. Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your timezone, which will apply to all characters linked to your handle.</p>
                 {{else}}
                 
-                <PowerSelect @selected={{this.model.timezone}}  @options={{this.model.timezones}} @searchEnabled=true @onChange={{action "timezoneChanged"}} as |tz|>
+                <PowerSelect @selected={{this.model.timezone}}  @options={{this.model.timezones}} @searchEnabled=true @onChange={{this.timezoneChanged}} as |tz|>
                    {{tz}}
                  </PowerSelect>
                                              
@@ -146,7 +146,7 @@
             
           
           <p><Input @type="password" id="passwordEmail" placeholder="Confirm Password" @value={{this.confirmPasswordSettings}} /></p>
-          <button {{action "changeSettings"}} class="btn btn-primary">Save Settings</button>
+          <button {{on 'click' this.changeSettings}} class="btn btn-primary">Save Settings</button>
              
           <FlashMessages />
                 

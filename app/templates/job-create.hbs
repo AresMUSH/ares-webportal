@@ -15,14 +15,14 @@
 
    <div class="create-job-row">
       <label>Submitter:</label>
-      <PowerSelect @selected={{this.submitter}} @options={{this.model.characters}} @searchField="name" @searchEnabled=true @onChange={{action "submitterChanged"}} as |char|>
+      <PowerSelect @selected={{this.submitter}} @options={{this.model.characters}} @searchField="name" @searchEnabled=true @onChange={{this.submitterChanged}} as |char|>
          {{char.name}}
        </PowerSelect>
      </div>
      
    <div class="create-job-row">
        <label>Other Participants:</label>
-        <PowerSelectMultiple @selected={{this.participants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
+        <PowerSelectMultiple @selected={{this.participants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{this.participantsChanged}} as |char|>
          {{char.name}}
        </PowerSelectMultiple>
      </div>
@@ -47,7 +47,7 @@
 
         <DropdownMenu @id="categoryDropdown" @title="Category">
               {{#each this.model.options.category_values as |category| }}
-                <li><a href="#" {{action 'changeCategory' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+                <li><a href="#" {{on 'click' (fn this.changeCategory category)}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
               {{/each}}
         </DropdownMenu>
       
@@ -79,7 +79,7 @@
           {{#if (eq field.field_type 'dropdown')}}
             <DropdownMenu @id="custom-{{id}}" @title="Change {{field.name}}">
               {{#each field.dropdown_values as |val| }}
-                <li><a href="#" {{action 'changeCustomDropdown' id val}} class="dropdown-item">{{val}}</a></li>
+                <li><a href="#" {{on 'click' (fn this.changeCustomDropdown id val)}} class="dropdown-item">{{val}}</a></li>
               {{/each}}
             </DropdownMenu>
           {{else}}
@@ -95,7 +95,7 @@
    
 <div class="action-buttons">
   <LinkTo @route="jobs" class="btn btn-secondary">Cancel</LinkTo>
-  <button class="btn btn-primary" {{action 'createJob'}}>Create</button>
+  <button class="btn btn-primary" {{on 'click' this.createJob}}>Create</button>
 </div>
 
 <FlashMessages />

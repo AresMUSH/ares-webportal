@@ -1,7 +1,7 @@
 <div class="action-buttons-spaced">
   <div>
     {{#each this.inbox.tags as |tag|}}
-    [ <a href="#" {{action 'changeTag' tag}}>
+    [ <a href="#" {{on 'click' (fn this.changeTag tag)}}>
       
       {{#if (eq tag this.selectedTag)}}
         <span class="mail-selected-tag">{{tag}}</span>

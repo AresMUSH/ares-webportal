@@ -1,11 +1,11 @@
 {{#if this.scene.fs3combat_enabled}}
   {{#if this.scene.combat}}
 
-  <li><a href="#" {{action (mut this.showCombat) true}} class="dropdown-item">Combat HUD</a></li>
+  <li><a href="#" {{on 'click' (fn this.setShowCombat true)}} class="dropdown-item">Combat HUD</a></li>
   
   {{#if this.scene.combat.in_combat}}
     <li> <a href="#" {{on 'click' this.combatHero}} class="dropdown-item">Hero Recovery</a></li>
-    <li> <a href="#" {{action (mut this.showCombatCommand) true}} class="dropdown-item">Send Command</a></li>
+    <li> <a href="#" {{on 'click' (fn this.setShowCombatCommand true)}} class="dropdown-item">Send Command</a></li>
 
     <li><LinkTo @route="combat" @model={{this.scene.combat}} target="_blank" class="dropdown-item">Manage Combat</LinkTo></li>
     {{#if this.scene.combat.can_manage}}
@@ -22,7 +22,7 @@
 
 
     
-<BsModalSimple @title="Combat HUD" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{this.showCombat}} @onHide={{action (mut this.showCombat) false}}>
+<BsModalSimple @title="Combat HUD" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{this.showCombat}} @onHide={{(fn this.setShowCombat false)}}>
   
     <Fs3CombatHud @combat={{this.scene.combat}} />
   
@@ -30,7 +30,7 @@
 
 
     
-<BsModalSimple @title="Send Combat Command" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{this.showCombatCommand}} @onHide={{action (mut this.showCombatCommand) false}}>
+<BsModalSimple @title="Send Combat Command" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{this.showCombatCommand}} @onHide={{(fn this.setShowCombatCommand false)}}>
   
     <Input @value={{this.combatCommand}} @enter={{this.sendCommand}} size={{25}} />
 

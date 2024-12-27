@@ -8,7 +8,7 @@
     
     <div class="col-sm-10">
       
-      <PowerSelectMultiple @selected={{this.toList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "toListChanged"}} as |char|>
+      <PowerSelectMultiple @selected={{this.toList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{this.toListChanged}} as |char|>
         {{char.name}}
       </PowerSelectMultiple>
       
@@ -31,7 +31,7 @@
     </div>
     
     <div class="col-sm-10">
-       <PowerSelect @selected={{this.sender}} @onChange={{action "senderChanged"}} @searchField="name" @options={{this.model.sendOptions.authorableChars}}  as |char|>
+       <PowerSelect @selected={{this.sender}} @onChange={{this.senderChanged}} @searchField="name" @options={{this.model.sendOptions.authorableChars}}  as |char|>
            <CharIconTiny @char={{char}} />
        </PowerSelect>
     </div>
@@ -43,7 +43,7 @@
 
 <div class="action-buttons">
   <LinkTo @route="mail" class="btn btn-secondary">Cancel</LinkTo>
-  <button {{action "sendMail"}} class="btn btn-primary">Send</button>
+  <button {{on 'click' this.sendMail}} class="btn btn-primary">Send</button>
 </div>
 
 <FlashMessages />

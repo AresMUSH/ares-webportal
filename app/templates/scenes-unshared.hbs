@@ -67,8 +67,8 @@
                 <LinkTo @route="scene-live" @model={{scene.id}}><i class="fa fa-eye" aria-label="View Scene"></i> View </LinkTo>
               {{#if scene.can_edit}}
                  <LinkTo @route="scene-edit" @model={{scene.id}}><i class="fa fa-edit" aria-label="Edit Scene"></i> Edit</LinkTo>
-                 <a href="#" {{action 'changeSceneStatus' scene 'restart'}}><i class="fa fa-play" aria-label="Restart Scene"></i> Restart</a>
-                  <a href="#" {{action 'changeSceneStatus' scene 'share'}}><i class="fa fa-share" aria-label="Share Scene"></i> Share</a>                 
+                 <a href="#" {{on 'click' (fn this.changeSceneStatus scene 'restart')}}><i class="fa fa-play" aria-label="Restart Scene"></i> Restart</a>
+                  <a href="#" {{on 'click' (fn this.changeSceneStatus scene 'share')}}><i class="fa fa-share" aria-label="Share Scene"></i> Share</a>                 
               {{/if}}
                 <LinkTo @route="scene-download" @model={{scene.id}}><i class="fa fa-download" aria-label="Download Scene"></i> Download </LinkTo>
           </div>

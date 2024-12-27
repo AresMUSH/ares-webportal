@@ -32,8 +32,8 @@
 {{#if this.model.can_edit}}
 
   <div class="action-buttons">
-    <button {{action "startMove"}} class="btn btn-secondary">Move Files</button>
-    <button {{action (mut this.showUpload) true}} class="btn btn-primary">Upload</button>
+    <button {{on 'click' this.startMove}} class="btn btn-secondary">Move Files</button>
+    <button {{on 'click' (fn this.setShowUpload true)}} class="btn btn-primary">Upload</button>
   </div>
 
 {{/if}}
@@ -41,17 +41,17 @@
 <FlashMessages/>
 
 {{#if this.showUpload}}
-  <FileUploader @uploaded={{action "uploaded"}} @folder="{{this.model.folder}}" />
+  <FileUploader @uploaded={{this.uploaded}} @folder="{{this.model.folder}}" />
 {{/if}}
 
 
-<BsModalSimple @title="Move Folder" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.showMove}} @onSubmit={{action "move"}} @onHide={{action (mut this.showMove) false}}>
+<BsModalSimple @title="Move Folder" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.showMove}} @onSubmit={{this.move}} @onHide={{(fn this.setShowMove false)}}>
     <p>Select files to move to a new folder.</p>
     
     <b>Folder Name:</b> <Input @type="text" size={{15}} id="newFolder" @value={{this.newFolder}} /> 
     
-    <p><button {{action "checkAll" true}}>Check All</button>
-      <button {{action "checkAll" false}}>Uncheck All</button>
+    <p><button {{on 'click' (fn this.checkAll true)}}>Check All</button>
+      <button {{on 'click' (fn this.checkAll false)}}>Uncheck All</button>
     </p>
     
    <table>

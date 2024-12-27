@@ -12,13 +12,13 @@ export default Controller.extend({
     let showSystem = this.showSystem;
     let api = this.gameApi;
     return api.requestOne('downloadScene', { id: this.get('model.id'), 
-            show_ooc: showOoc, show_system: showSystem })
-      .then( (response) => {
-        if (response.error) {
-          return;
-        }
-        this.set('model', response);
-      });
+    show_ooc: showOoc, show_system: showSystem })
+    .then( (response) => {
+      if (response.error) {
+        return;
+      }
+      this.set('model', response);
+    });
   },
   resetOnExit: function() {
     this.set('showOoc', false);
@@ -37,23 +37,18 @@ export default Controller.extend({
     this.reloadScene();
   },
   
-  actions: {
-    
-      
-    download() {
+  @action
+  download() {
           
-      var element = document.createElement('a');
-      element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.get('model.log')));
-      element.setAttribute('download', this.get('model.title'));
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(this.get('model.log')));
+    element.setAttribute('download', this.get('model.title'));
 
-      element.style.display = 'none';
-      document.body.appendChild(element);
+    element.style.display = 'none';
+    document.body.appendChild(element);
 
-      element.click();
+    element.click();
 
-      document.body.removeChild(element);
-           
-           
-    }
+    document.body.removeChild(element);
   }
 });

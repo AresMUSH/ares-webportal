@@ -21,11 +21,11 @@
 
 
 <div class="action-buttons">
-  <button {{action (mut this.showUpload) true}} class="btn btn-primary">Upload</button>
+  <button {{on 'click' (fn this.toggleShowUpload)}} class="btn btn-primary">Upload</button>
 </div>
 
 
   {{#if this.showUpload}}
-    <FileUploader @uploaded={{action "uploaded"}} @folder="misc" />
+    <FileUploader @uploaded={{this.uploaded}} @folder="misc" />
   {{/if}}
 {{/if}}

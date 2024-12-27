@@ -23,7 +23,7 @@
   
   <label>Title:</label>
 
-  <Input @type="text" size={{25}} id="title" @value={{this.searchTitle}} @enter={{action "search"}} />  
+  <Input @type="text" size={{25}} id="title" @value={{this.searchTitle}} @enter={{this.search}} />  
 </div>
 
 {{#if this.model.is_job_admin}}
@@ -33,7 +33,7 @@
     <label>Participant Name:</label>
 
     <div class="search-group">
-        <p><Input @type="text" size={{25}} id="submitter" @value={{this.searchSubmitter}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="submitter" @value={{this.searchSubmitter}} @enter={{this.search}} /></p>
         <p class="hint">Enter a player's name.  Remember that automated jobs come from "System".</p>
 
     </div>
@@ -51,7 +51,7 @@
     
     <DropdownMenu @id="categoryDropdown" @title="Category">
         {{#each this.model.category_values as |category| }}
-          <li><a href="#" {{action 'changeSearchCategory' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+          <li><a href="#" {{on 'click' (fn this.changeSearchCategory category)}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
         {{/each}}
     </DropdownMenu>
   
@@ -70,7 +70,7 @@
     
     <DropdownMenu @id="statusDropdown" @title="Status">
       {{#each this.model.status_values as |status| }}
-        <li><a href="#" {{action 'changeSearchStatus' status}} class="dropdown-item"><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
+        <li><a href="#" {{on 'click' (fn this.changeSearchStatus status)}} class="dropdown-item"><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
       {{/each}}
     </DropdownMenu>
           
@@ -89,11 +89,11 @@
       {{/if}}
       <DropdownMenu @id="custom-{{id}}" @title="{{field.name}}">
         {{#each field.dropdown_values as |val| }}
-          <li><a href="#" {{action 'changeCustomDropdown' id val}} class="dropdown-item"><span class="badge job-custom job-custom-{{id}}-{{val}}">&nbsp;</span> {{val}}</a></li>
+          <li><a href="#" {{on 'click' (fn this.changeCustomDropdown id val)}} class="dropdown-item"><span class="badge job-custom job-custom-{{id}}-{{val}}">&nbsp;</span> {{val}}</a></li>
         {{/each}}
       </DropdownMenu>      
     {{else}}
-       <Input @type="text" size={{25}} id="custom-{{id}}" @value={{field.search}} @enter={{action "search"}} />
+       <Input @type="text" size={{25}} id="custom-{{id}}" @value={{field.search}} @enter={{this.search}} />
         {{#if (eq field.field_type 'date')}}
         <div class="hint">({{this.model.date_entry_format}})</div>
         {{/if}}
@@ -108,13 +108,13 @@
 
 <div class="search-row">
     <label>Tag:</label>
-    <Input @type="text" size={{25}} id="tag" @value={{this.searchTag}} @enter={{action "search"}} />
+    <Input @type="text" size={{25}} id="tag" @value={{this.searchTag}} @enter={{this.search}} />
 </div>
 
 <div class="search-row">
     <label>Description and Comments:</label>
 
-    <Input @type="text" size={{25}} id="text" @value={{this.searchText}} @enter={{action "search"}} />
+    <Input @type="text" size={{25}} id="text" @value={{this.searchText}} @enter={{this.search}} />
 </div>
 
 
@@ -123,8 +123,8 @@
     
 {{#if (not this.searchInProgress)}}
 <div class="action-buttons">
-    <button class="btn btn-secondary" {{action 'reset'}}>Reset</button>
-    <button class="btn btn-primary" {{action 'search'}}>Search</button>
+    <button class="btn btn-secondary" {{on 'click' this.reset}}>Reset</button>
+    <button class="btn btn-primary" {{on 'click' this.search}}>Search</button>
 </div>
 {{/if}}
 

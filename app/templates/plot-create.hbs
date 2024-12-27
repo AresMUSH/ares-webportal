@@ -6,7 +6,7 @@
         <label for="title" class="col-form-label">Title:</label>
     </div>
     <div class="col-sm-9">
-         <Input @type="text" size={{25}} id="title" @enter={{action "save"}} @value={{this.title}} />
+         <Input @type="text" size={{25}} id="title" @enter={{this.save}} @value={{this.title}} />
     </div> 
   </div>
   
@@ -16,7 +16,7 @@
     </div>
 
     <div class="col-sm-9">
-      <PowerSelectMultiple @selected={{this.storytellers}} @options={{this.model}} @searchEnabled=true @searchField="name" @onChange={{action "storytellersChanged"}} as |char|>
+      <PowerSelectMultiple @selected={{this.storytellers}} @options={{this.model}} @searchEnabled=true @searchField="name" @onChange={{this.storytellersChanged}} as |char|>
         {{char.name}}
       </PowerSelectMultiple>
     </div>
@@ -62,7 +62,7 @@
 
 <div class="action-buttons">
   <LinkTo @route="plots" class="btn btn-secondary">Cancel</LinkTo>  
-  <button {{action 'save'}} class="btn btn-primary">Save</button>
+  <button {{on 'click' this.save}} class="btn btn-primary">Save</button>
 </div>
         
 <FlashMessages />

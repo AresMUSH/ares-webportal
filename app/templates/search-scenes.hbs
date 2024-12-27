@@ -25,7 +25,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><Input @type="text" size={{25}} id="title" @value={{this.searchTitle}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="title" @value={{this.searchTitle}} @enter={{this.search}} /></p>
   </div>
   
 </div>
@@ -37,7 +37,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><Input @type="text" size={{25}} id="participant" @value={{this.searchParticipant}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="participant" @value={{this.searchParticipant}} @enter={{this.search}} /></p>
         <p class="hint">Enter one or more participant names (space-separated).</p>
   </div>
   
@@ -50,7 +50,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><Input @type="text" size={{25}} id="icdate" @value={{this.searchDate}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="icdate" @value={{this.searchDate}} @enter={{this.search}} /></p>
         <p class="hint">Matches the beginning of a scene's IC date, e.g. 2018-04 will find all scenes from April.</p>
   </div>
   
@@ -64,7 +64,7 @@
   
   <div class="col col-xs-9">
 
-    <PowerSelect @selected={{this.searchType}} @options={{this.sceneTypes}} @onChange={{action "sceneTypeChanged"}} as |name|>
+    <PowerSelect @selected={{this.searchType}} @options={{this.sceneTypes}} @onChange={{this.sceneTypeChanged}} as |name|>
       {{name}}
     </PowerSelect>
     <br>
@@ -79,7 +79,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><Input @type="text" size={{25}} id="location" @value={{this.searchLocation}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="location" @value={{this.searchLocation}} @enter={{this.search}} /></p>
   </div>
   
 </div>
@@ -91,7 +91,7 @@
   </div>
   
   <div class="col col-xs-9">
-        <p><Input @type="text" size={{25}} id="tag" @value={{this.searchTag}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="tag" @value={{this.searchTag}} @enter={{this.search}} /></p>
   </div>
   
 </div>
@@ -103,7 +103,7 @@
   </div>
 
   <div class="col col-xs-9">
-        <p><Input @type="text" size={{25}} id="log" @value={{this.searchLog}} @enter={{action "search"}} /></p>
+        <p><Input @type="text" size={{25}} id="log" @value={{this.searchLog}} @enter={{this.search}} /></p>
 
         <p class="hint">Matches a whole word or phrase from a log's summary or full log text.</p>
   </div>
@@ -113,8 +113,8 @@
 {{#if (not this.searchInProgress)}}
     
 <div class="action-buttons">
-    <button class="btn btn-secondary" {{action 'reset'}}>Reset</button>
-    <button class="btn btn-primary" {{action 'search'}}>Search</button>
+    <button class="btn btn-secondary" {{on 'click' this.reset}}>Reset</button>
+    <button class="btn btn-primary" {{on 'click' this.search}}>Search</button>
 </div>
 
 {{/if}}
@@ -131,7 +131,7 @@
 <i class="fas fa-spinner fa-spin"></i> Search In Progress...
 {{else if this.searchResults.pages}}
 
-<SceneList @scenes={{this.searchResults.scenes}} @pages={{this.searchResults.pages}} @sceneTypes={{this.model.sceneOptions.scene_types}} @filter={{this.searchType}} @page={{this.page}} @hideSearch={{true}} @goToPage={{action "goToPage"}} />
+<SceneList @scenes={{this.searchResults.scenes}} @pages={{this.searchResults.pages}} @sceneTypes={{this.model.sceneOptions.scene_types}} @filter={{this.searchType}} @page={{this.page}} @hideSearch={{true}} @onGoToPage={{this.goToPage}} />
 
 {{else}}
 <p>No search results.</p>

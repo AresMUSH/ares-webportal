@@ -94,4 +94,14 @@ export default Component.extend({
       }
     });
   },
+  
+  @action
+  onRollStringSelected(event) {
+    this.set('rollString', event.target.value);
+  },
+  
+  @action
+  setSelectSkillRoll(value) {
+    this.set('selectSkillRoll', value);
+  }
 });

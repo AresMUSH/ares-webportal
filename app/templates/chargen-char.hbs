@@ -18,7 +18,7 @@
              <p>Your application has been submitted.  Unsubmit your app to make changes.</p>
             
              <p>
-                 <button name="unsubmit" {{action 'unsubmit'}} class="btn btn-warning">Unsubmit</button>
+                 <button name="unsubmit" {{on 'click' this.unsubmit}} class="btn btn-warning">Unsubmit</button>
              </p>
 
      </div>
@@ -30,7 +30,7 @@
              <p>Changes you make here are not made in-game until you click the <b>Save</b> button.  Save as often as you wish.  You can chat, look around, etc. in-game while you use the web chargen, but anything set with the in-game chargen commands will be overwritten by what you set here.</p>
             
              <p>
-                 <button name="save" {{action 'save'}} class="btn btn-secondary">Save</button>
+                 <button name="save" {{on 'click' this.save}} class="btn btn-secondary">Save</button>
              </p>
 
      </div>
@@ -86,7 +86,7 @@
                      <div class="col-sm-9">
                          {{#if (eq key 'gender') }}
                              
-                             <PowerSelect @selected={{this.model.char.demographics.gender}} @searchEnabled=true @searchField="value" @options={{this.genders}} @onChange={{action "genderChanged"}} as |gender|>
+                             <PowerSelect @selected={{this.model.char.demographics.gender}} @searchEnabled=true @searchField="value" @options={{this.genders}} @onChange={{this.genderChanged}} as |gender|>
                                {{gender.value}}
                              </PowerSelect>
                          
@@ -117,7 +117,7 @@
                       {{#if (get (get this.model.cgInfo.group_options key) 'freeform')}}
                         <Input @type="text" size={{25}} @value={{group.value}} />
                       {{else}}
-                        <PowerSelect @selected={{get this.model.char.groups key}} @options={{get (get this.model.cgInfo.group_options key) "values"}} @searchField="value" @allowClear={{true}} @onChange={{action "groupChanged" key}} as |g|>
+                        <PowerSelect @selected={{get this.model.char.groups key}} @options={{get (get this.model.cgInfo.group_options key) "values"}} @searchField="value" @allowClear={{true}} @onChange={{(fn this.groupChanged key)}} as |g|>
                         {{g.value}} {{if g.desc '-'}} {{g.desc}}
                       </PowerSelect>
                       {{/if}}
@@ -133,7 +133,7 @@
 
             {{#if (not this.model.app.game.disabled_plugins.fs3skills) }}
             <div role="tabpanel" class="tab-pane" id="fs3abilities">
-              <Fs3Chargen @model={{this.model}} @anyGroupMissing={{this.anyGroupMissing}} @charErrors={{this.charErrors}} @updateCallback={{this.fs3UpdateCallback}} @validateCallback={{this.fs3ValidateCallback}} @reset={{action "reset"}} />
+              <Fs3Chargen @model={{this.model}} @anyGroupMissing={{this.anyGroupMissing}} @charErrors={{this.charErrors}} @updateCallback={{this.fs3UpdateCallback}} @validateCallback={{this.fs3ValidateCallback}} @onReset={{this.reset}} />
             </div>
             {{/if}}
 
@@ -170,7 +170,7 @@
                  <p>See <LinkTo @route="help-topic" @model="icons" target="_blank">Icons</LinkTo> for tips on selecting and sizing your profile image.</p>
               </div>
 
-               <FileUploader @folder={{this.model.char.name}} @lockProperties={{true}} @allowMulti={{false}} @uploaded={{action "fileUploaded"}} />
+               <FileUploader @folder={{this.model.char.name}} @lockProperties={{true}} @allowMulti={{false}} @uploaded={{this.fileUploaded}} />
                    
           </div>
 
@@ -210,19 +210,19 @@
                <p>Remember to save often.  When you're finished, you can review your character for errors or missing information and then submit your application.</p>
             
                <p>
-                   <button name="save" {{action 'save'}} class="btn btn-secondary">Save</button>
+                   <button name="save" {{on 'click' this.save}} class="btn btn-secondary">Save</button>
                    {{#if this.model.char.can_approve}}
-                   <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
+                   <button name="review" {{on 'click' this.review}} class="btn btn-success">Review</button>
                    {{else}}
-                   <button name="review" {{action 'review'}} class="btn btn-success">Review or Submit</button>
+                   <button name="review" {{on 'click' this.review}} class="btn btn-success">Review or Submit</button>
                    {{/if}}
                </p>
        {{else}}
                <p>Remember to save often.  You can also review your character for errors or missing information.  When you're done here, you will need to log onto the game to finish character creation and submit your application.</p>
             
                <p>
-                   <button name="save" {{action 'save'}} class="btn btn-secondary">Save</button>
-                   <button name="review" {{action 'review'}} class="btn btn-success">Review</button>
+                   <button name="save" {{on 'click' this.save}} class="btn btn-secondary">Save</button>
+                   <button name="review" {{on 'click' this.review}} class="btn btn-success">Review</button>
                </p>     
        {{/if}}
      </div>

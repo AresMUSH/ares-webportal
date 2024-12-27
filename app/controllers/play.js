@@ -158,14 +158,18 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
   setupCallback: function() {
     let self = this;
     this.gameSocket.setupCallback('new_scene_activity', function(type, msg, timestamp) {
-      self.onSceneActivity(type, msg, timestamp) } );
+      self.onSceneActivity(type, msg, timestamp) 
+    } );
     this.gameSocket.setupCallback('new_chat', function(type, msg, timestamp) {
-      self.onChatMessage(type, msg, timestamp) } );
+      self.onChatMessage(type, msg, timestamp) 
+    } );
     this.gameSocket.setupCallback('new_page', function(type, msg, timestamp) {
-      self.onChatMessage(type, msg, timestamp) } );
-      this.gameSocket.setupCallback('joined_scene', function(type, msg, timestamp) {
-        self.onJoinedScene(type, msg, timestamp) } );
-    },
+      self.onChatMessage(type, msg, timestamp) 
+    } );
+    this.gameSocket.setupCallback('joined_scene', function(type, msg, timestamp) {
+      self.onJoinedScene(type, msg, timestamp) 
+    } );
+  },
     
   scrollWindow: function() {
     // Unless scrolling paused or edit active.

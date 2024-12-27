@@ -11,7 +11,7 @@
 
 <p><label for="name">Category:</label>
 
-<PowerSelect @selected={{this.model.config.category}} @options={{this.model.category_options}} @onChange={{action "categoryChanged"}} as |category|>
+<PowerSelect @selected={{this.model.config.category}} @options={{this.model.category_options}} @onChange={{this.categoryChanged}} as |category|>
   {{category}}
 </PowerSelect>
 
@@ -19,7 +19,7 @@
 
 <p><label for="name">Status:</label>
 
-<PowerSelect @selected={{this.model.config.status}} @options={{this.model.status_options}} @onChange={{action "statusChanged"}} as |status|>
+<PowerSelect @selected={{this.model.config.status}} @options={{this.model.status_options}} @onChange={{this.statusChanged}} as |status|>
   {{status}}
 </PowerSelect>
                         
@@ -43,7 +43,7 @@
 
 <div class="action-buttons">
   <LinkTo @route="setup" class="btn btn-secondary">Cancel</LinkTo>
-  <button {{action 'save'}} class="btn btn-primary">Save</button>
+  <button {{on 'click' this.save}} class="btn btn-primary">Save</button>
 </div>
 
 {{#if this.warning}}

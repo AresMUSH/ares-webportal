@@ -10,10 +10,10 @@
 <div class="card card-default">
     <div class="card-body">
 
-        <p><Input @type="text" id="name" placeholder="Name" @enter={{action "login"}} @value={{this.name}} autofocus={{true}} /></p>
-        <p><Input @type="password" placeholder="Password" @enter={{action "login"}} id="password" @value={{this.password}} /></p>
+        <p><Input @type="text" id="name" placeholder="Name" @enter={{this.login}} @value={{this.name}} autofocus={{true}} /></p>
+        <p><Input @type="password" placeholder="Password" @enter={{this.login}} id="password" @value={{this.password}} /></p>
         
-        <button {{action "login"}} class="btn btn-primary">Login</button>
+        <button {{on 'click' this.login}} class="btn btn-primary">Login</button>
             
         <p>Don't have a character yet? 
         {{#if this.model.enable_registration}}

@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
-import { action } from '@ember/object';
 import dayjs from 'dayjs';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Controller.extend({
   flashMessages: service(),
@@ -57,42 +57,46 @@ export default Controller.extend({
     this.set(`customFields.${id}.value`, val);
   },
       
-  actions: {
-    changeCategory: function(cat) {
-      this.setCategory(cat);
-    },
+  @action
+  changeCategory(cat) {
+    this.setCategory(cat);
+  },
       
-    createJob: function() {
-      let api = this.gameApi;
+  @action
+  createJob() {
+    let api = this.gameApi;
       
-      let tags = this.tags || [];
-      if (!Array.isArray(tags)) {
-          tags = tags.split(/[\s,]/);
-      }
-      
-      api.requestOne('jobCreate', { 
-        title: this.title, 
-        category: this.category || this.get('model.options.request_category'),
-        description: this.description,
-        participants: (this.participants || []).map(p => p.id),
-        submitter: this.get('submitter.name'),
-        custom_fields: this.get('customFields'),
-        tags: tags }, null)
-        .then( (response) => {
-          if (response.error) {
-            return;
-          }
-          this.router.transitionTo('job', response.id);
-          this.flashMessages.success('Job created!');
-        });
-      },
-      
-      participantsChanged: function(newParticipants) {
-          this.set('participants', newParticipants);
-      },
-
-      submitterChanged(submitter) {
-          this.set('submitter', submitter);
-      },
+    let tags = this.tags || [];
+    if (!Array.isArray(tags)) {
+      tags = tags.split(/[\s,]/);
     }
-  });
+      
+    api.requestOne('jobCreate', 
+    { 
+      title: this.title, 
+      category: this.category || this.get('model.options.request_category'),
+      description: this.description,
+      participants: (this.participants || []).map(p => p.id),
+      submitter: this.get('submitter.name'),
+      custom_fields: this.get('customFields'),
+      tags: tags 
+    }, null)
+    .then( (response) => {
+      if (response.error) {
+        return;
+      }
+      this.router.transitionTo('job', response.id);
+      this.flashMessages.success('Job created!');
+    });
+  },
+      
+  @action
+  participantsChanged(newParticipants) {
+    this.set('participants', newParticipants);
+  },
+
+  @action
+  submitterChanged(submitter) {
+    this.set('submitter', submitter);
+  },
+});

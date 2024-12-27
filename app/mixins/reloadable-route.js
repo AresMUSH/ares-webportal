@@ -1,9 +1,9 @@
 import Mixin from '@ember/object/mixin';
+import { action } from '@ember/object';
 
 export default Mixin.create({
-    actions: {
-        reloadModel() {
-            this.refresh();
-        }        
-    }
+  @action
+  reloadModel() {
+    this.refresh();
+  }        
 });

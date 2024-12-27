@@ -16,7 +16,7 @@
 
 <div class="form-group row">
     <div class="col-sm-6 col-xs-12">
-            <b>Action:</b>  <PowerSelect @selected={{comb.action}} @options={{this.model.options.actions}} @onChange={{action "actionChanged" id}} as |act|>
+            <b>Action:</b>  <PowerSelect @selected={{comb.action}} @options={{this.model.options.actions}} @onChange={{(fn this.actionChanged id)}} as |act|>
               {{act}}
             </PowerSelect>
     </div>
@@ -33,7 +33,7 @@
             <TooltipIcon @position="right" @message="Click a target to add them to the action args list." @icon="fa fa-question-circle" />
             
             {{#each this.model.options.targets as |target|}}
-              <a href="#" {{action 'addTarget' id target}}>{{target}}</a>
+              <a href="#" {{on 'click' (fn this.addTarget id target)}}>{{target}}</a>
             {{/each}}
             </p>
             
@@ -48,7 +48,7 @@
     <p>
       <label>Team:</label>
   
-      <PowerSelect @selected={{comb.team}} @options={{this.teams}} @onChange={{action "teamChanged" id}} as |team|>
+      <PowerSelect @selected={{comb.team}} @options={{this.teams}} @onChange={{(fn this.teamChanged id)}} as |team|>
         {{team}}
       </PowerSelect>
     </p>
@@ -59,7 +59,7 @@
       
     <p>
       <label>NPC Level:</label>
-      <PowerSelect @selected={{comb.npc_skill}} @options={{this.model.options.npc_skills}} @onChange={{action "npcChanged" id}} as |level|>
+      <PowerSelect @selected={{comb.npc_skill}} @options={{this.model.options.npc_skills}} @onChange={{(fn this.npcChanged id)}} as |level|>
         {{level}}
       </PowerSelect>
     </p>
@@ -73,7 +73,7 @@
 
     <p>
       <label>Stance</label>
-    <PowerSelect @selected={{comb.stance}} @options={{this.model.options.stances}} @onChange={{action "stanceChanged" id}} as |stance|>
+    <PowerSelect @selected={{comb.stance}} @options={{this.model.options.stances}} @onChange={{(fn this.stanceChanged id)}} as |stance|>
       {{stance}}
     </PowerSelect>
     </p>
@@ -82,7 +82,7 @@
   <div class="col col-sm-6 col-xs-12">
     <p>
       <label>Armor</label>
-    <PowerSelect @selected={{comb.armor}} @options={{this.model.options.armor}} @onChange={{action "armorChanged" id}} as |armor|>
+    <PowerSelect @selected={{comb.armor}} @options={{this.model.options.armor}} @onChange={{(fn this.armorChanged id)}} as |armor|>
       {{armor}}
     </PowerSelect>
 
@@ -102,7 +102,7 @@
 
     <p>
       <label>Weapon</label>
-    <PowerSelect @selected={{comb.weapon}} @options={{this.model.options.weapons}} @onChange={{action "weaponChanged" id}} as |weapon|>
+    <PowerSelect @selected={{comb.weapon}} @options={{this.model.options.weapons}} @onChange={{(fn this.weaponChanged id)}} as |weapon|>
       {{weapon}}
     </PowerSelect>
 
@@ -124,7 +124,7 @@
          <Input @type="text" size={{25}} @value={{comb.vehicle}} />
          <br>
          <label>Passenger Type:</label>
-         <PowerSelect @selected={{comb.passenger_type}} @options={{this.passengerTypes}} @onChange={{action "passengerTypeChanged" id}} as |passengerType|>
+         <PowerSelect @selected={{comb.passenger_type}} @options={{this.passengerTypes}} @onChange={{(fn this.passengerTypeChanged id)}} as |passengerType|>
            {{passengerType}}
          </PowerSelect>
          
@@ -141,7 +141,7 @@
 
 <div class="action-buttons">
   <LinkTo @route="combat" @model={{this.model.id}} class="btn btn-secondary">Cancel</LinkTo>  
-  <button class="btn btn-primary" {{action 'save'}} >Save</button>
+  <button class="btn btn-primary" {{on 'click' this.save}} >Save</button>
 </div>
 
 <FlashMessages />

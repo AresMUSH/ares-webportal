@@ -95,7 +95,7 @@
      </Fs3Bgbox>
      {{/each}}
 
-     <button class="btn btn-secondary" id="addbg" {{action (mut this.selectBackgroundSkill) true}}>Add Background Skill</button>
+     <button class="btn btn-secondary" id="addbg" {{on 'click' (fn this.selectBackgroundSkill true)}}>Add Background Skill</button>
 
    </div>
   </div>
@@ -148,7 +148,7 @@
 </div>
 
 
-<BsModalSimple @title="Add Background Skill" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{this.selectBackgroundSkill}} @onSubmit={{this.addBackgroundSkill}} @onHide={{action (mut this.selectBackgroundSkill) false}}>
+<BsModalSimple @title="Add Background Skill" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{this.selectBackgroundSkill}} @onSubmit={{this.addBackgroundSkill}} @onHide={{(fn this.selectBackgroundSkill false)}}>
     <p>Enter a skill name.</p>
     <Input @type="text" size={{25}} id="bgSkill" @enter={{this.addBackgroundSkill}} @value={{this.newBgSkill}} />
 

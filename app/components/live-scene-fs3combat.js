@@ -67,5 +67,15 @@ export default Component.extend({
       }
       this.set('model', response.data);
     });
+  },
+  
+  @action
+  setShowCombat(value) {
+    this.set('showCombat', value);
+  },
+  
+  @action
+  setShowCombatCommand(value) {
+    this.set('showCombatCommand', value);
   }
 });

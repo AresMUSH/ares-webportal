@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Controller.extend({
   gameApi: service(),
@@ -31,26 +32,27 @@ export default Controller.extend({
   },
   
   onSearchResults: function(type, msg, timestamp ) {
-      let splitMsg = msg.split('|');
-      let searchType = splitMsg[0];       
-      let searchToken = splitMsg[1];
-      let data = splitMsg[2];
-      let currentUsername = this.get('currentUser.name');
+    let splitMsg = msg.split('|');
+    let searchType = splitMsg[0];       
+    let searchToken = splitMsg[1];
+    let data = splitMsg[2];
+    let currentUsername = this.get('currentUser.name');
       
-      if (data) {
-        data = JSON.parse(data);
-      }
-      if (searchType != 'scenes' || searchToken != this.searchInProgress) {
-        return;
-      }
-      this.set('searchInProgress', false);
-      this.set('searchResults', data);
+    if (data) {
+      data = JSON.parse(data);
+    }
+    if (searchType != 'scenes' || searchToken != this.searchInProgress) {
+      return;
+    }
+    this.set('searchInProgress', false);
+    this.set('searchResults', data);
   },
   
   setupCallback: function() {
-      let self = this;
-      this.gameSocket.setupCallback('search_results', function(type, msg, timestamp) {
-          self.onSearchResults(type, msg, timestamp) } );
+    let self = this;
+    this.gameSocket.setupCallback('search_results', function(type, msg, timestamp) {
+      self.onSearchResults(type, msg, timestamp) 
+    } );
   },
   
   updateScenesList: function() {
@@ -81,24 +83,29 @@ export default Controller.extend({
     let scene_types = types.map(s => s.name);
     let base_filters = ['Recent', 'All', 'Popular'];
     return base_filters.concat(scene_types);
-    }),
+  }),
   
-  actions: {
-    goToPage(newPage) { 
-      this.set('page', newPage);
-      this.updateScenesList();
-    },
+  @action
+  goToPage(newPage) { 
+    this.set('page', newPage);
+    this.updateScenesList();
+  },
     
-    reset() {
-      this.resetOnExit();
-    },
-    search() {
-      this.set('page', 1);
-      this.updateScenesList();
-    },
-    sceneTypeChanged(sceneType) {
-      this.set('searchType', sceneType);
+    
+  @action
+  reset() {
+    this.resetOnExit();
+  },
+    
+  @action
+  search() {
+    this.set('page', 1);
+    this.updateScenesList();
+  },
+    
+  @action
+  sceneTypeChanged(sceneType) {
+    this.set('searchType', sceneType);
       
-    }
   }
 });

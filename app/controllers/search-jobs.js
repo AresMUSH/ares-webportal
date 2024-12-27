@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
-import { action } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Controller.extend({
   gameApi: service(),
@@ -34,26 +34,27 @@ export default Controller.extend({
   },
   
   onSearchResults: function(type, msg, timestamp ) {
-      let splitMsg = msg.split('|');
-      let searchType = splitMsg[0];       
-      let searchToken = splitMsg[1];
-      let data = splitMsg[2];
-      let currentUsername = this.get('currentUser.name');
+    let splitMsg = msg.split('|');
+    let searchType = splitMsg[0];       
+    let searchToken = splitMsg[1];
+    let data = splitMsg[2];
+    let currentUsername = this.get('currentUser.name');
       
-      if (data) {
-        data = JSON.parse(data);
-      }
-      if (searchType != 'jobs' || searchToken != this.searchInProgress) {
-        return;
-      }
-      this.set('searchInProgress', false);
-      this.set('searchResults', data);
+    if (data) {
+      data = JSON.parse(data);
+    }
+    if (searchType != 'jobs' || searchToken != this.searchInProgress) {
+      return;
+    }
+    this.set('searchInProgress', false);
+    this.set('searchResults', data);
   },
   
   setupCallback: function() {
-      let self = this;
-      this.gameSocket.setupCallback('search_results', function(type, msg, timestamp) {
-          self.onSearchResults(type, msg, timestamp) } );
+    let self = this;
+    this.gameSocket.setupCallback('search_results', function(type, msg, timestamp) {
+      self.onSearchResults(type, msg, timestamp) 
+    } );
   },
   
   @action  
@@ -61,39 +62,43 @@ export default Controller.extend({
     this.set(`searchCustom.${id}.search`, val);
   },
     
-  actions: {
-    reset() {
-      this.resetOnExit();
-    },
+  @action
+  reset() {
+    this.resetOnExit();
+  },
     
-    search() {
-      let api = this.gameApi;
-      this.set('searchInProgress', Math.floor(Math.random() * 10000));      
-      this.set('searchResults', null);
+  @action
+  search() {
+    let api = this.gameApi;
+    this.set('searchInProgress', Math.floor(Math.random() * 10000));      
+    this.set('searchResults', null);
             
-      api.requestOne('searchJobs', { 
-        searchSubmitter: this.searchSubmitter,
-        searchTitle: this.searchTitle,
-        searchText: this.searchText,
-        searchCategory: this.searchCategory,
-        searchStatus: this.searchStatus,
-        searchToken: this.searchInProgress,
-        searchTag: this.searchTag,
-        searchCustom: this.searchCustom
-      })
-      .then( (response) => {
-        if (response.error) {
-          this.set('searchInProgress', false);
-          return;
-        }
-      });
-    },
-    changeSearchStatus(status) {
-      this.set('searchStatus', status);
-    },
-    changeSearchCategory(cat) {
-      this.set('searchCategory', cat);
-    }
+    api.requestOne('searchJobs', 
+    { 
+      searchSubmitter: this.searchSubmitter,
+      searchTitle: this.searchTitle,
+      searchText: this.searchText,
+      searchCategory: this.searchCategory,
+      searchStatus: this.searchStatus,
+      searchToken: this.searchInProgress,
+      searchTag: this.searchTag,
+      searchCustom: this.searchCustom
+    })
+    .then( (response) => {
+      if (response.error) {
+        this.set('searchInProgress', false);
+        return;
+      }
+    });
+  },
     
+  @action
+  changeSearchStatus(status) {
+    this.set('searchStatus', status);
+  },
+    
+  @action
+  changeSearchCategory(cat) {
+    this.set('searchCategory', cat);
   }
 });

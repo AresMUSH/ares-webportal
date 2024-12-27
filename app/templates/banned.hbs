@@ -17,7 +17,7 @@
         <AnsiFormat @text={{ban.reason}} />
       </td>
       <td>
-        <button class="btn btn-secondary btn-sm" {{action 'removeBan' ban.site}}><i class="fa fa-trash" aria-label="Remove Ban"></i></button>
+        <button class="btn btn-secondary btn-sm" {{on 'click' (fn this.removeBan ban.site)}}><i class="fa fa-trash" aria-label="Remove Ban"></i></button>
       </td>
     </tr>
     {{/each}}
@@ -43,7 +43,7 @@
             <label for="player" class="col-form-label">Player</label>
         </div>
         <div class="col-sm-9">
-             <PowerSelect @selected={{this.banPlayer}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "banPlayerChanged"}} as |char|>
+             <PowerSelect @selected={{this.banPlayer}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{this.banPlayerChanged}} as |char|>
                {{char.name}}
              </PowerSelect>
         </div> 
@@ -59,7 +59,7 @@
       </div>
       
       <div class="action-buttons">
-        <button class="btn btn-primary" {{action 'banPlayer'}}>Ban Player</button>    
+        <button class="btn btn-primary" {{on 'click' this.banPlayer}}>Ban Player</button>    
       </div>    
     </div>
   </div>
@@ -96,7 +96,7 @@
       </div>
       
       <div class="action-buttons">
-        <button class="btn btn-primary" {{action 'banSite'}}>Ban Site</button>    
+        <button class="btn btn-primary" {{on 'click' this.banSite}}>Ban Site</button>    
       </div>
     </div>
   </div>

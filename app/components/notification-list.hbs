@@ -47,11 +47,11 @@
         {{/if}}
       
         {{#if notification.is_unread}}
-        <a href="#" {{action "markRead" notification false}}>
+        <a href="#" {{on 'click' (fn this.markRead notification false)}}>
           <TooltipIcon @position="left" @message="Mark Read" @icon="fa fa-ban" />
         </a>
         {{else}}
-        <a href="#" {{action "markRead" notification true}}>
+        <a href="#" {{on 'click' (fn this.markRead notification true)}}>
           <TooltipIcon @position="left" @message="Mark Unread" @icon="fa fa-flag" />  
         </a>
         {{/if}}

@@ -57,9 +57,9 @@
          
         {{#if this.isApproved}}
             {{#if this.model.has_liked}}
-            <button {{action 'like' false}} class="badge badge-likes"><i class="fa fa-heart" aria-label="Liked"></i> {{this.model.likes}}</button>
+            <button {{on 'click' (fn this.like false)}} class="badge badge-likes"><i class="fa fa-heart" aria-label="Liked"></i> {{this.model.likes}}</button>
             {{else}}
-            <button {{action 'like' true}} class="badge badge-likes"><i class="far fa-heart" area-hidden="Like"></i> {{this.model.likes}}</button>
+            <button {{on 'click' (fn this.like true)}} class="badge badge-likes"><i class="far fa-heart" area-hidden="Like"></i> {{this.model.likes}}</button>
             {{/if}}
         {{else}}
             <span class="badge badge-likes"><i class="far fa-heart" area-label="Likes"></i> {{this.model.likes}}</span>
@@ -115,7 +115,7 @@
           {{#if this.model.can_edit}}
 
           <li><LinkTo @route="scene-edit" @model={{this.model.id}} class="dropdown-item">Edit Scene</LinkTo></li>
-          <li><a href="#" {{action 'unshareScene'}}  class="dropdown-item">Unshare Scene</a></li>
+          <li><a href="#" {{on 'click' this.unshareScene}}  class="dropdown-item">Unshare Scene</a></li>
           
            <li><hr role="separator" class="dropdown-divider"></li>
          {{/if}}

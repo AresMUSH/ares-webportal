@@ -12,7 +12,7 @@
 
 <hr>
 
-<p>When the status says the task is done, you can <a href="#" {{action 'returnToManage'}}>return to the manage screen.</a></p>
+<p>When the status says the task is done, you can <a href="#" {{on 'click' this.returnToManage}}>return to the manage screen.</a></p>
 
 
 {{else}}
@@ -30,7 +30,7 @@
   </ul>
 </div>
 
-    <p><button class="btn btn-primary" {{action 'upgrade'}}>Upgrade</button></p>
+    <p><button class="btn btn-primary" {{on 'click' this.upgrade}}>Upgrade</button></p>
 
 
 <p><hr></p>
@@ -58,7 +58,7 @@
     
     <p>This button will redeploy the website.  You need to redeploy if you make custom web portal code changes.  Doing an upgrade will redeploy automatically.</p>
         
-    <p><button class="btn btn-primary" {{action 'deploy'}}>Redeploy Website</button></p>
+    <p><button class="btn btn-primary" {{on 'click' this.deploy}}>Redeploy Website</button></p>
 
 
 <p><hr></p>
@@ -75,7 +75,7 @@
         <p>This button will shut down your game. It does the same thing as the in-game 'shutdown' command.  You will have to log into the server shell to restart the game.</p>
     </div>
         
-        <p><button class="btn btn-danger" {{action 'shutdown'}}>Shutdown</button></p>
+        <p><button class="btn btn-danger" {{on 'click' this.shutdown}}>Shutdown</button></p>
 {{/if}}
 
 
