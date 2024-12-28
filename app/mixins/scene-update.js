@@ -29,8 +29,8 @@ export default Mixin.create({
         }
       }
       poseData.timestamp = localTimestamp;
-      poses.pushObject(poseData);
-      scene.get('pose_order').setObjects(poseData.pose_order);
+      poses.push(poseData);    
+      scene.set('pose_order', poseData.pose_order);
     } else if (activityType == 'pose_updated') {
       let poseData = JSON.parse(activityData);
       let poses = scene.get('poses');

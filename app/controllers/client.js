@@ -4,6 +4,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import AresConfig from 'ares-webportal/mixins/ares-config';
 import { action } from '@ember/object';
+import { notifyPropertyChange } from '@ember/object';
 
 export default Controller.extend(AresConfig, {
   connected: false,
@@ -58,7 +59,8 @@ export default Controller.extend(AresConfig, {
     }
         
     let html = ansi_up.ansi_to_html(data.args.message);
-    this.messages.pushObject(html);
+    this.messages.push(html);
+    notifyPropertyChange(this, 'messages');    
     this.scrollToBottom();  
     this.gameSocket.notify("");
   },

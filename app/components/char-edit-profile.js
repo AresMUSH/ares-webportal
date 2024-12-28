@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { action } from '@ember/object';
+import { notifyPropertyChange } from '@ember/object';
 
 export default Component.extend({
   tagName: '',
@@ -7,7 +8,8 @@ export default Component.extend({
   @action
   addProfile() {
     let count = this.get('model.char.profile.length');
-    this.get('model.char.profile').pushObject({ name: '', text: '', key: count + 1 });
+    this.get('model.char.profile').push({ name: '', text: '', key: count + 1 });
+    notifyPropertyChange(this, 'model');
   },
     
   @action

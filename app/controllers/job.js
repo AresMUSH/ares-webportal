@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { notifyPropertyChange } from '@ember/object';
 
 export default Controller.extend({
   reply: '',
@@ -50,13 +51,14 @@ export default Controller.extend({
     }
     if (jobId == this.get('model.job.id')) {
       if (data && data.type == 'job_reply') {
-        this.get('model.job.replies').pushObject( {
+        this.get('model.job.replies').push( {
           admin_only: data.admin_only,
           author: data.author,
           created: timestamp,
           id: data.reply_id,
           message: data.message
         });
+        notifyPropertyChange(this, 'model');
       } else {
         this.set('newActivity', true);  
       }      

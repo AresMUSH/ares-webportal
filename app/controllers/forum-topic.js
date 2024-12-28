@@ -3,6 +3,7 @@ import Controller from '@ember/controller';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { notifyPropertyChange } from '@ember/object';
 
 export default Controller.extend(AuthenticatedController, {
   reply: '',
@@ -38,7 +39,7 @@ export default Controller.extend(AuthenticatedController, {
     let currentUserId = this.get('currentUser.id');
      
     if (data.type == 'forum_reply') {
-      this.get('model.replies').pushObject( {
+      this.get('model.replies').push( {
         author: data.author,
         date: timestamp,
         id: data.reply,
@@ -46,6 +47,7 @@ export default Controller.extend(AuthenticatedController, {
         raw_message: data.raw_message,
         can_edit: currentUserId == data.author.id
       });
+      notifyPropertyChange(this, 'model');
     }
     else if (data.type == 'forum_edited') {
       this.set('model.message', data.message);

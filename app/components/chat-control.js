@@ -3,6 +3,7 @@ import { computed } from '@ember/object';
 import { observer } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { notifyPropertyChange } from '@ember/object';
 
 export default Component.extend({
   gameApi: service(),
@@ -78,9 +79,10 @@ export default Component.extend({
       else {
         let existingIds = this.channel.messages.map(m => m.id);
         let newMessages = response.channel.messages.filter(m => !existingIds.includes(m.id));
-        newMessages.forEach(m => this.channel.messages.pushObject(m));
+        newMessages.forEach(m => this.channel.messages.push(m));
         this.set('channel.who', response.channel.who);
         this.set('channel.muted', false);    
+        notifyPropertyChange(this, 'channel');
         this.onScrollDown();          
       }
     });

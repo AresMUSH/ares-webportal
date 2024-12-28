@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { notifyPropertyChange } from '@ember/object';
 
 export default Controller.extend({    
   flashMessages: service(),
@@ -44,11 +45,11 @@ export default Controller.extend({
   }),
 
   traitsExtraInstalled: computed('model.app.game.extra_plugins', function () {
-    return this.get('model.app.game.extra_plugins').any((e) => e == 'traits');
+    return this.get('model.app.game.extra_plugins').some((e) => e == 'traits');
   }),
 
   rpgExtraInstalled: computed('model.app.game.extra_plugins', function () {
-    return this.get('model.app.game.extra_plugins').any((e) => e == 'rpg');
+    return this.get('model.app.game.extra_plugins').some((e) => e == 'rpg');
   }),
 
   anyGroupMissing: computed('model.char.groups', function () {
@@ -149,7 +150,9 @@ export default Controller.extend({
         this.fs3ValidateCallback();
       }
       if (response.alerts) {
-        response.alerts.forEach( r => this.charErrors.pushObject(r) );
+        response.alerts.forEach( r => this.charErrors.push(r) );
+        notifyPropertyChange(this, 'charErrors');    
+        
       }
       this.flashMessages.success('Saved!');
     }); 

@@ -4,23 +4,23 @@ import { action } from '@ember/object';
 
 export default Component.extend({
   traitsExtraInstalled: computed('game.extra_plugins', function () {
-    return this.get('game.extra_plugins').any((e) => e == 'traits');
+    return this.get('game.extra_plugins').some((e) => e == 'traits');
   }),
 
   fateExtraInstalled: computed('game.extra_plugins', function () {
-    return this.get('game.extra_plugins').any((e) => e == 'fate');
+    return this.get('game.extra_plugins').some((e) => e == 'fate');
   }),
 
   rpgExtraInstalled: computed('game.extra_plugins', function () {
-    return this.get('game.extra_plugins').any((e) => e == 'rpg');
+    return this.get('game.extra_plugins').some((e) => e == 'rpg');
   }),
 
   cookiesExtraInstalled: computed('game.extra_plugins', function () {
-    return this.get('game.extra_plugins').any((e) => e == 'cookies');
+    return this.get('game.extra_plugins').some((e) => e == 'cookies');
   }),
 
   prefsExtraInstalled: computed('game.extra_plugins', function () {
-    return this.get('game.extra_plugins').any((e) => e == 'prefs');
+    return this.get('game.extra_plugins').some((e) => e == 'prefs');
   }),
 
   @action

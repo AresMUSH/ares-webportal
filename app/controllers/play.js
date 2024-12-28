@@ -6,6 +6,7 @@ import { localTime } from 'ares-webportal/helpers/local-time';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import SceneUpdate from 'ares-webportal/mixins/scene-update';
 import { action } from '@ember/object';
+import { notifyPropertyChange } from '@ember/object';
 
 export default Controller.extend(AuthenticatedController, SceneUpdate, {
   gameApi: service(),
@@ -61,7 +62,6 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
           
       notify = this.updateSceneData(scene, msg, timestamp);
           
-          
       // -1 is not found
       if (alts.indexOf(char) < 0) {
         scene.set('is_unread', false);
@@ -79,6 +79,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       this.get('model.scenes').forEach(s => {
         if (s.id === sceneId) {
           notify = this.updateSceneData(s, msg, timestamp);
+          notifyPropertyChange(this, 'model');
                   
           // -1 is not found
           if (alts.indexOf(char) < 0) {
@@ -89,6 +90,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       });            
     }
     this.markSceneRead(sceneId);
+    notifyPropertyChange(this, 'model');              
   },
     
   onChatMessage: function(type, msg, timestamp) {
@@ -106,7 +108,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     }
       
     if (!channel.messages.find(m => m.id === messageId)) {
-      channel.messages.pushObject({message: newMessage, timestamp: localTimestamp, author: author, id: messageId});
+      channel.messages.push({message: newMessage, timestamp: localTimestamp, author: author, id: messageId});
+      notifyPropertyChange(channel, 'messages');    
     }
     set(channel, 'last_activity', Date.now());
     if (!channel.is_hidden) {
@@ -136,7 +139,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     let sceneData = EmberObject.create(JSON.parse(msg));
 
     if (!this.get('model.scenes').find(s => s.id === sceneData.id)) {
-      this.model.scenes.pushObject(sceneData);
+      this.model.scenes.push(sceneData);
+      notifyPropertyChange(this, 'model');
     }
   },
     
@@ -205,7 +209,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
   }),
     
   anyNewActivity: computed('model.chat.channels.@each.{is_unread,new_messages}', 'model.scenes.@each.is_unread', function() {
-    return this.get('model.chat.channels').any(c => c.is_unread || c.new_messages > 0) || this.get('model.scenes').any(s => s.is_unread );
+    return this.get('model.chat.channels').some(c => c.is_unread || c.new_messages > 0) || this.get('model.scenes').some(s => s.is_unread );
   }),
         
     
@@ -221,7 +225,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       messages: [],
       who: []
     };
-    this.get('model.chat.channels').pushObject(channel);
+    this.get('model.chat.channels').push(channel);
+    notifyPropertyChange(this, 'model');
     return channel;
   },
     
@@ -278,7 +283,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       let data = response.channel;
       let channel = this.getChannel(data.key);
       this.get('model.chat.channels').removeObject(channel);
-      this.get('model.chat.channels').pushObject(data);
+      this.get('model.chat.channels').push(data);
+      notifyPropertyChange(this, 'model');
       this.updateChannel(data);
     });
   },
@@ -383,7 +389,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       let channel = this.getChannel(response.thread.key);
       if (!channel) {
         channel = response.thread;
-        this.get('model.chat.channels').pushObject(channel);  
+        this.get('model.chat.channels').push(channel);
+        notifyPropertyChange(this, 'model');
       } 
       this.updateChannel(channel);
     });

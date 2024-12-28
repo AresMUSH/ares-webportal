@@ -4,6 +4,7 @@ import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import ConfirmAction from 'ares-webportal/mixins/confirm-action';
+import { notifyPropertyChange } from '@ember/object';
 
 export default Controller.extend(ConfirmAction, {
   gameApi: service(),
@@ -18,12 +19,13 @@ export default Controller.extend(ConfirmAction, {
   },
   
   destroyingApprovedChars: computed('model.chars.@each.idle_action', function() {
-    return this.get('model.chars').any( c => c.approved && c.idle_action === 'Destroy');
+    return this.get('model.chars').some( c => c.approved && c.idle_action === 'Destroy');
   }),
   
   @action
   addChar() {
-    this.get('model.chars').pushObject( { name: this.idleAddCharName, last_on: '----', idle_action: 'Warn' } );
+    this.get('model.chars').push( { name: this.idleAddCharName, last_on: '----', idle_action: 'Warn' } );
+    notifyPropertyChange(this, 'model');
   },
       
   @action
