@@ -6,11 +6,11 @@ export default Controller.extend({
   gameApi: service(),
   flashMessages: service(),
   router: service(),
-  preview: null,
+  previewText: null,
   minorEdit: false,
     
   resetOnExit: function() {
-    this.set('preview', null);
+    this.set('previewText', null);
     this.set('minorEdit', null);
   },
     
@@ -37,7 +37,7 @@ export default Controller.extend({
       if (response.error) {
         return;
       }
-      this.set('preview', response.text);
+      this.set('previewText', response.text);
     });
   },
         
@@ -62,8 +62,7 @@ export default Controller.extend({
       if (response.error) {
         return;
       }
-      this.router.transitionTo('wiki-page',                          
-      this.get('model.name'));
+      this.router.transitionTo('wiki-page', this.get('model.name'));
       this.flashMessages.success('Page updated!');
     });
   }
