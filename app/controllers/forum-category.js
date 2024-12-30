@@ -12,6 +12,28 @@ export default Controller.extend(AuthenticatedController, {
   session: service(),
   flashMessages: service(),
   router: service(),
+  posts: new TrackedArray([]),
+  
+  setup: function() {
+    let list =  new TrackedArray(this.get('model.posts').slice());
+    this.set('posts', list);
+  },
+  
+  @action 
+  addPost() {
+    let post = {
+      author: { name: "Faraday" },
+      category_id: '2',
+      date: new Date(),
+      id: 111,
+      last_activity: new Date(),
+      title: "Test",
+      unread: true
+    };
+    
+    pushObject(this.get('model.posts'), post, this.model, 'posts');
+    pushObject(this.get('posts'), post, this, 'posts');      
+  },
   
   onForumActivity: function(type, msg, timestamp ) {
     let data = JSON.parse(msg);
