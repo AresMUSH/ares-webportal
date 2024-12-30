@@ -12,27 +12,14 @@ export default Controller.extend(AuthenticatedController, {
   session: service(),
   flashMessages: service(),
   router: service(),
-  posts: new TrackedArray([]),
+  posts: [],
   
+  // *******************************
+  // IMPORTANT
+  // Due to ember tracking weirdness, we need to use an intermediate trackedarray for the component
+  // *******************************
   setup: function() {
-    let list =  new TrackedArray(this.get('model.posts').slice());
-    this.set('posts', list);
-  },
-  
-  @action 
-  addPost() {
-    let post = {
-      author: { name: "Faraday" },
-      category_id: '2',
-      date: new Date(),
-      id: 111,
-      last_activity: new Date(),
-      title: "Test",
-      unread: true
-    };
-    
-    pushObject(this.get('model.posts'), post, this.model, 'posts');
-    pushObject(this.get('posts'), post, this, 'posts');      
+    this.set('posts', new TrackedArray(this.get('model.posts').slice()));
   },
   
   onForumActivity: function(type, msg, timestamp ) {
@@ -42,18 +29,22 @@ export default Controller.extend(AuthenticatedController, {
     }
      
     if (data.type == 'new_forum_post') {
-      pushObject(this.get('model.posts'), {
+      let post = {
         author: data.author,
         category_id: data.category,
         date: timestamp,
         id: data.post,
         last_activity: timestamp,
+        last_updated_by: data.author.name,
         title: data.subject,
         unread: true
-      }, this.model, 'posts');      
+      };
+      
+      pushObject(this.posts, post, this, 'posts');
+         
     }
     else if (data.type == 'forum_reply') {
-      let post = this.get('model.posts').find( p => p.id == data.post );
+      let post = this.get('posts').find( p => p.id == data.post );
       if (post) {
         set(post, 'last_activity', timestamp);
         set(post, 'unread', true);
