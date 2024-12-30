@@ -4,6 +4,7 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import { action } from '@ember/object';
+import { removeObject } from 'ares-webportal/helpers/object-ext';
 
 export default Controller.extend(AuthenticatedController, {
   gameApi: service(),
@@ -124,7 +125,7 @@ export default Controller.extend(AuthenticatedController, {
       this.get('model.teams').forEach(t => {
         let combatant = t.combatants.find(c => c.name === name);
         if (combatant) {
-          get(t, 'combatants').removeObject(combatant);
+          removeObject(get(t, 'combatants'), combatant, t, 'combatants');
         }
       });
       if (isCurrentUser) {

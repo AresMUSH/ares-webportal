@@ -3,7 +3,7 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 import { inject as service } from '@ember/service';
 import { set } from '@ember/object';
 import { action } from '@ember/object';
-import { notifyPropertyChange } from '@ember/object';
+import { pushObject } from 'ares-webportal/helpers/object-ext';
 
 export default Controller.extend(AuthenticatedController, {
   gameApi: service(),
@@ -65,19 +65,8 @@ export default Controller.extend(AuthenticatedController, {
         
   @action   
   uploaded(folder, file) {
-    let folderFound = false;
-    let fileData = { folder: folder, name: file, path: `/${folder}/file` };
-    this.model.forEach(function (f) {
-      if (f.name === folder) {
-        f.files.push( fileData );
-        folderFound = true;
-      }
-    });
-           
-    if (!folderFound) {
-      this.model.push( { name: folder, files: [ fileData ]});
-    }
-    notifyPropertyChange(this, 'model');    
+    let fileData = { folder: folder, name: file, path: `/${folder}/${file}` };
+    pushObject(this.get('model.files'), fileData, this.model, 'files');
   },
   
   @action

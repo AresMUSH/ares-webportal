@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
-import { notifyPropertyChange } from '@ember/object';
+import { pushObject } from 'ares-webportal/helpers/object-ext';
 
 export default Controller.extend({
 
@@ -15,8 +15,7 @@ export default Controller.extend({
   fileUploaded(folder, file) {
     let model_folder = this.get('model.char.name').toLowerCase();
     if (folder === model_folder) {
-      this.get('model.char.files').push( { folder: folder, name: file, path: `/${folder}/${file}` } );
-      notifyPropertyChange(this, 'model');          
+      pushObject(this.get('model.char.files'), { folder: folder, name: file, path: `/${folder}/${file}` }, this.model.char, 'files');
     }
   },
   

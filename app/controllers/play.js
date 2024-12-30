@@ -6,7 +6,7 @@ import { localTime } from 'ares-webportal/helpers/local-time';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import SceneUpdate from 'ares-webportal/mixins/scene-update';
 import { action } from '@ember/object';
-import { notifyPropertyChange } from '@ember/object';
+import { pushObject, removeObject } from 'ares-webportal/helpers/object-ext';
 
 export default Controller.extend(AuthenticatedController, SceneUpdate, {
   gameApi: service(),
@@ -79,7 +79,6 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       this.get('model.scenes').forEach(s => {
         if (s.id === sceneId) {
           notify = this.updateSceneData(s, msg, timestamp);
-          notifyPropertyChange(this, 'model');
                   
           // -1 is not found
           if (alts.indexOf(char) < 0) {
@@ -90,7 +89,6 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       });            
     }
     this.markSceneRead(sceneId);
-    notifyPropertyChange(this, 'model');              
   },
     
   onChatMessage: function(type, msg, timestamp) {
@@ -108,8 +106,10 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     }
       
     if (!channel.messages.find(m => m.id === messageId)) {
-      channel.messages.push({message: newMessage, timestamp: localTimestamp, author: author, id: messageId});
-      notifyPropertyChange(channel, 'messages');    
+      pushObject(channel.messages, 
+         {message: newMessage, timestamp: localTimestamp, author: author, id: messageId},
+           channel,
+           'messages');
     }
     set(channel, 'last_activity', Date.now());
     if (!channel.is_hidden) {
@@ -139,8 +139,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     let sceneData = EmberObject.create(JSON.parse(msg));
 
     if (!this.get('model.scenes').find(s => s.id === sceneData.id)) {
-      this.model.scenes.push(sceneData);
-      notifyPropertyChange(this, 'model');
+      pushObject(this.model.scenes.push, sceneData, this.model, 'scenes');
     }
   },
     
@@ -225,8 +224,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       messages: [],
       who: []
     };
-    this.get('model.chat.channels').push(channel);
-    notifyPropertyChange(this, 'model');
+    pushObject(this.get('model.chat.channels'), channel, this.model.chat, 'channels');
     return channel;
   },
     
@@ -282,9 +280,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       }
       let data = response.channel;
       let channel = this.getChannel(data.key);
-      this.get('model.chat.channels').removeObject(channel);
-      this.get('model.chat.channels').push(data);
-      notifyPropertyChange(this, 'model');
+      removeObject(this.get('model.chat.channels'), channel);
+      pushObject(this.get('model.chat.channels'), data, this.model.chat, 'channels');
       this.updateChannel(data);
     });
   },
@@ -389,8 +386,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       let channel = this.getChannel(response.thread.key);
       if (!channel) {
         channel = response.thread;
-        this.get('model.chat.channels').push(channel);
-        notifyPropertyChange(this, 'model');
+        pushObject(this.get('model.chat.channels'), channel, this.model.chat, 'channels');
       } 
       this.updateChannel(channel);
     });

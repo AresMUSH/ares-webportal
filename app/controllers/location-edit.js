@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { notifyPropertyChange } from '@ember/object';
+import { pushObject } from 'ares-webportal/helpers/object-ext';
 
 export default Controller.extend({
   flashMessages: service(),
@@ -11,8 +11,7 @@ export default Controller.extend({
   @action
   addDetail() {
     let count = this.get('model.location.descs.details.length');
-    this.get('model.location.descs.details').push({ name: '', desc: '', key: count + 1 });
-    notifyPropertyChange(this, 'model');
+    pushObject(this.get('model.location.descs.details'), { name: '', desc: '', key: count + 1 }, this.model.location.descs, 'details');
   },
     
   @action

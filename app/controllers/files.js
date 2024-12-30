@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import { action } from '@ember/object';
-import { notifyPropertyChange } from '@ember/object';
+import { pushObject } from 'ares-webportal/helpers/object-ext';
 
 export default Controller.extend(AuthenticatedController, {
   showUpload: false,
@@ -12,15 +12,14 @@ export default Controller.extend(AuthenticatedController, {
     let fileData = { folder: folder, name: file, path: `/${folder}/file` };
     this.model.forEach(function (f) {
       if (f.name === folder) {
-        f.files.push( fileData );
+        pushObject(f.files, fileData, f, 'files' );
         folderFound = true;
       }
     });
            
     if (!folderFound) {
-      this.model.push( { name: folder, files: [ fileData ]});
+      pushObject(this.model, { name: folder, files: [ fileData ]}, this, 'model');
     }
-    notifyPropertyChange(this, 'model');    
   },
   
   @action

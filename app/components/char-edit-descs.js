@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { action } from '@ember/object';
-import { notifyPropertyChange } from '@ember/object';
+import { pushObject } from 'ares-webportal/helpers/object-ext';
 
 export default Component.extend({
   tagName: '',
@@ -8,8 +8,7 @@ export default Component.extend({
   @action
   addOutfit() {
     let count = this.get('model.char.descs.outfits.length');
-    this.get('model.char.descs.outfits').push({ name: '', desc: '', key: count + 1 });
-    notifyPropertyChange(this, 'model');
+    pushObject(this.get('model.char.descs.outfits'), { name: '', desc: '', key: count + 1 }, this, 'model');
   },
     
   @action
@@ -22,9 +21,7 @@ export default Component.extend({
   @action
   addDetail() {
     let count = this.get('model.char.descs.details.length');
-    this.get('model.char.descs.details').push({ name: '', desc: '', key: count + 1 });
-    notifyPropertyChange(this, 'model');    
-  },
+    pushObject(this.get('model.char.descs.details'), { name: '', desc: '', key: count + 1 }, this, 'model');  },
     
   @action
   removeDetail(key) {

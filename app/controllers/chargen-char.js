@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { notifyPropertyChange } from '@ember/object';
+import { pushObject } from 'ares-webportal/helpers/object-ext';
 
 export default Controller.extend({    
   flashMessages: service(),
@@ -150,9 +150,7 @@ export default Controller.extend({
         this.fs3ValidateCallback();
       }
       if (response.alerts) {
-        response.alerts.forEach( r => this.charErrors.push(r) );
-        notifyPropertyChange(this, 'charErrors');    
-        
+        response.alerts.forEach( r => pushObject(this.charErrors, r, this, 'charErrors') );
       }
       this.flashMessages.success('Saved!');
     }); 

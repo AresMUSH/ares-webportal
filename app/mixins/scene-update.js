@@ -2,6 +2,7 @@ import { set } from '@ember/object';
 import Mixin from '@ember/object/mixin';
 import { localTime } from 'ares-webportal/helpers/local-time';
 import { inject as service } from '@ember/service';
+import { pushObject, removeObject } from 'ares-webportal/helpers/object-ext';
 
 export default Mixin.create({
   session: service(),
@@ -20,7 +21,6 @@ export default Mixin.create({
     
     if (activityType == 'new_pose') {
       let poseData = JSON.parse(activityData);
-      let poses = scene.get('poses');
       if (poseData.char.id == this.get('session.data.authenticated.id')) {
         scene.set('can_edit', true);
         if (!poseData.can_edit) {
@@ -29,7 +29,7 @@ export default Mixin.create({
         }
       }
       poseData.timestamp = localTimestamp;
-      poses.push(poseData);    
+      pushObject(scene.get('poses'), poseData, scene, 'poses');
       scene.set('pose_order', poseData.pose_order);
     } else if (activityType == 'pose_updated') {
       let poseData = JSON.parse(activityData);
@@ -48,10 +48,10 @@ export default Mixin.create({
       let poses = scene.get('poses');
       poses.forEach(p => {
         if (p.id === poseData.id) {
-          poses.removeObject(p);
+          removeObject(poses, p, scene, 'poses');
         }
       });
-      notify = false;
+      notify = false;      
     } else if (activityType == 'location_updated') {
       let locationData = JSON.parse(activityData);
       scene.set('location', locationData);

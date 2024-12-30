@@ -3,7 +3,7 @@ import Controller from '@ember/controller';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { notifyPropertyChange } from '@ember/object';
+import { pushObject, removeObject } from 'ares-webportal/helpers/object-ext';
 
 export default Controller.extend(AuthenticatedController, {
   reply: '',
@@ -39,15 +39,14 @@ export default Controller.extend(AuthenticatedController, {
     let currentUserId = this.get('currentUser.id');
      
     if (data.type == 'forum_reply') {
-      this.get('model.replies').push( {
+      pushObject(this.get('model.replies'), {
         author: data.author,
         date: timestamp,
         id: data.reply,
         message: data.message,
         raw_message: data.raw_message,
         can_edit: currentUserId == data.author.id
-      });
-      notifyPropertyChange(this, 'model');
+      }, this.model, 'replies');
     }
     else if (data.type == 'forum_edited') {
       this.set('model.message', data.message);
@@ -163,7 +162,7 @@ export default Controller.extend(AuthenticatedController, {
   @action
   deleteReply(reply) {
     let api = this.gameApi;
-    this.get('model.replies').removeObject(reply);
+    removeObject(this.get('model.replies'), reply, this.model, 'replies');
     this.set('confirmDeleteReply', false);
     api.requestOne('forumDeleteReply', { reply_id: reply.id })
     .then( (response) => {

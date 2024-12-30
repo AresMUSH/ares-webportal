@@ -5,7 +5,6 @@ import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import SceneUpdate from 'ares-webportal/mixins/scene-update';
 import { action } from '@ember/object';
-import { notifyPropertyChange } from '@ember/object';
 
 export default Controller.extend(AuthenticatedController, SceneUpdate, {
   gameApi: service(),
@@ -23,7 +22,6 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
         
     if (sceneId === this.get('model.scene.id')) {
       let notify = this.updateSceneData(this.get('model.scene'), msg, timestamp);
-      notifyPropertyChange(this, 'model');
           
       // -1 is not found
       if (notify && alts.indexOf(char) < 0) {

@@ -4,7 +4,7 @@ import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import ConfirmAction from 'ares-webportal/mixins/confirm-action';
-import { notifyPropertyChange } from '@ember/object';
+import { pushObject, removeObject } from 'ares-webportal/helpers/object-ext';
 
 export default Controller.extend(ConfirmAction, {
   gameApi: service(),
@@ -24,8 +24,7 @@ export default Controller.extend(ConfirmAction, {
   
   @action
   addChar() {
-    this.get('model.chars').push( { name: this.idleAddCharName, last_on: '----', idle_action: 'Warn' } );
-    notifyPropertyChange(this, 'model');
+    pushObject(this.get('model.chars'), { name: this.idleAddCharName, last_on: '----', idle_action: 'Warn' }, this.model, 'chars');
   },
       
   @action
@@ -60,7 +59,7 @@ export default Controller.extend(ConfirmAction, {
   removeFromIdle(name) {
     let entry = this.get('model.chars').find(c => c.name === name);
     if (entry) {
-      this.get('model.chars').removeObject(entry);
+      removeObject(this.get('model.chars'), entry, this.model, 'chars');
     }
   }
     

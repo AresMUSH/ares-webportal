@@ -3,7 +3,7 @@ import { A } from '@ember/array';
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { notifyPropertyChange } from '@ember/object';
+import { pushObject } from 'ares-webportal/helpers/object-ext';
 
 export default Component.extend({
   tagName: '',
@@ -20,6 +20,9 @@ export default Component.extend({
     this.validateChar();
   },
   
+  addCharError: function(text) {
+    pushObject(this.charErrors, text, this, charErrors);
+  },
   
   attrPoints: computed('model.char.fs3.fs3_attributes.@each.rating', function() {
     let total = this.countPointsInGroup(this.get('model.char.fs3.fs3_attributes'), 0, 2, 2);
@@ -126,7 +129,7 @@ export default Component.extend({
       let high = list.filter(l => l.rating >= high_rating);
       let count = high.length;
       if (count > limit) {
-        this.charErrors.push(`You can only have ${limit} ${title} at ${high_rating}+.`);
+        addCharError(`You can only have ${limit} ${title} at ${high_rating}+.`);
       }
     }
   },
@@ -138,7 +141,7 @@ export default Component.extend({
         
     let emptyBgSkills = this.get('model.char.fs3.fs3_backgrounds').filter(s => !(s.name && s.name.length > 0));
     if (emptyBgSkills.length > 0) {
-      this.charErrors.push('Background skill names cannot be blank.  Set the skill to Everyman to remove it.');
+      addCharError('Background skill names cannot be blank.  Set the skill to Everyman to remove it.');
     }
         
     let totalAttrs = this.attrPoints;
@@ -147,25 +150,24 @@ export default Component.extend({
     let totalAdvantages = this.advantagePoints;
     let maxAttrs = this.get('model.cgInfo.fs3.max_attrs');
     if (totalAttrs > maxAttrs) {
-      this.charErrors.push(`You can only spend ${maxAttrs} points in attributes.  You have spent ${totalAttrs}.`);
+      addCharError(`You can only spend ${maxAttrs} points in attributes.  You have spent ${totalAttrs}.`);
     }
 
     let maxAction = this.get('model.cgInfo.fs3.max_action');
     if (totalAction > maxAction) {
-      this.charErrors.push(`You can only spend ${maxAction} points in action skills.  You have spent ${totalAction}.`);
+      addCharError(`You can only spend ${maxAction} points in action skills.  You have spent ${totalAction}.`);
     }
     
     let maxAdvantages = this.get('model.cgInfo.fs3.max_advantages');
     if (totalAdvantages > maxAdvantages) {
-      this.charErrors.push(`You can only spend ${maxAdvantages} points in advantages.  You have spent ${totalAdvantages}.`);
+      addCharError(`You can only spend ${maxAdvantages} points in advantages.  You have spent ${totalAdvantages}.`);
     }
         
     let maxAp = this.get('model.cgInfo.fs3.max_ap');
     let totalAp = totalAttrs + totalSkills;
     if (totalAp > maxAp) {
-      this.charErrors.push(`You can only spend ${maxAp} ability points.  You have spent ${totalAp}.`);
+      addCharError(`You can only spend ${maxAp} ability points.  You have spent ${totalAp}.`);
     }
-    notifyPropertyChange(this, 'charErrors');    
   },
 
   @action
@@ -183,8 +185,10 @@ export default Component.extend({
     }
     this.set('newBgSkill', null);
     this.set('selectBackgroundSkill', false);
-    this.get('model.char.fs3.fs3_backgrounds').push( EmberObject.create( { name: skill, rating: 1, rating_name: 'Fair' }) );  
-    notifyPropertyChange(this, 'model');
+    pushObject(this.get('model.char.fs3.fs3_backgrounds'), 
+       EmberObject.create( { name: skill, rating: 1, rating_name: 'Fair' } ),
+       this.model.char.fs3,
+       'fs3_backgrounds');  
     
     this.validateChar();
   },

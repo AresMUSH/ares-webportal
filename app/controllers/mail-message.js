@@ -1,6 +1,7 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { pushObject } from 'ares-webportal/helpers/object-ext';
 
 export default Controller.extend({
   gameApi: service(),
@@ -44,15 +45,13 @@ export default Controller.extend({
     
   @action
   addNewTag() {
-    let tags = this.get('model.message.tags');
     let newTag = this.newTag;
       
     if (newTag === '') {
       return;
     }
       
-    tags.push(newTag);
-    this.set('model.message.tags', tags);
+    pushObject(this.get('model.message.tags'), newTag, this.model.message, 'tags');
     this.saveTags();
   },
     

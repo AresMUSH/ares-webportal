@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 import { observer } from '@ember/object';
 import { action } from '@ember/object';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
+import { removeObject } from 'ares-webportal/helpers/object-ext';
 
 export default Component.extend(AuthenticatedController, {
   rollString: null,
@@ -150,7 +151,7 @@ export default Component.extend(AuthenticatedController, {
     this.set('confirmDeleteScenePose', false);
 
     let scenePose = this.get('scene.poses').find(p => p.id === poseId);
-    this.get('scene.poses').removeObject(scenePose);
+    removeObject(this.get('scene.poses'), scenePose, this.scene, 'poses');
 
     api.requestOne('deleteScenePose', { scene_id: this.get('scene.id'),
     pose_id: poseId })

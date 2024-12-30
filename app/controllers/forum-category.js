@@ -3,7 +3,7 @@ import Controller from '@ember/controller';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { notifyPropertyChange } from '@ember/object';
+import { pushObject } from 'ares-webportal/helpers/object-ext';
 
 export default Controller.extend(AuthenticatedController, {
   gameApi: service(),
@@ -19,7 +19,7 @@ export default Controller.extend(AuthenticatedController, {
     }
      
     if (data.type == 'new_forum_post') {
-      this.get('model.posts').push( {
+      pushObject(this.get('model.posts'), {
         author: data.author.name,
         category_id: data.category,
         date: timestamp,
@@ -27,8 +27,7 @@ export default Controller.extend(AuthenticatedController, {
         last_activity: timestamp,
         title: data.subject,
         unread: true
-      });
-      notifyPropertyChange(this, 'model');
+      }, this.model, 'posts');
     }
     else if (data.type == 'forum_reply') {
       let post = this.get('model.posts').find( p => p.id == data.post );
