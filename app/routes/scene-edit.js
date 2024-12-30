@@ -2,10 +2,9 @@ import EmberObject from '@ember/object';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
-import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
 import RSVP from 'rsvp';
 
-export default Route.extend(AuthenticatedRoute, RouteResetOnExit, {
+export default Route.extend(AuthenticatedRoute, {
     gameApi: service(),
         
     model: function(params) {

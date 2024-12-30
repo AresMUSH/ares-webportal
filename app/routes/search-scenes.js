@@ -3,10 +3,8 @@ import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
 import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
-import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
-import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
 
-export default Route.extend(AuthenticatedRoute, ReloadableRoute, RouteResetOnExit, {
+export default Route.extend(AuthenticatedRoute, {
   gameApi: service(),
   gameSocket: service(),
   
