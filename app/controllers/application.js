@@ -116,7 +116,7 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, AresC
       this.set('showAltSelection', false);
       this.session.authenticate('authenticator:ares', { name: alt, password: 'ALT' })
        .then(() => {
-         let redirect = this.currentRoute;
+         let redirect = this.currentRoute.pathname;
          if (!redirect) {
              redirect = '/';
          }

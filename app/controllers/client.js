@@ -59,7 +59,7 @@ export default Controller.extend(AresConfig, {
     }
         
     let html = ansi_up.ansi_to_html(data.args.message);
-    pushObject(this.messages.push, html, this, 'messages');
+    pushObject(this.messages, html, this, 'messages');
     this.scrollToBottom();  
     this.gameSocket.notify("");
   },
@@ -152,7 +152,7 @@ export default Controller.extend(AresConfig, {
     let cmd = this.text1;
     this.sendInput(cmd);
     this.set('text1', '');
-    this.history1.addObject(cmd); 
+    pushObject(this.history1, cmd); 
     if (this.history1.length > 10) {
       this.history1.removeAt(0);
     }
@@ -163,7 +163,7 @@ export default Controller.extend(AresConfig, {
     let cmd = this.text2;
     this.sendInput(cmd);
     this.set('text2', '');
-    this.history2.addObject(cmd); 
+    pushObject(this.history2, cmd); 
     if (this.history2.length > 10) {
       this.history2.removeAt(0);
     }

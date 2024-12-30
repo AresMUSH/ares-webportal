@@ -21,5 +21,5 @@ export default Route.extend(DefaultRoute, {
     model: function(params) {
         let api = this.gameApi;
         return api.requestOne('forumCategory', {category_id: params['category_id']});
-    },
+    }
 });

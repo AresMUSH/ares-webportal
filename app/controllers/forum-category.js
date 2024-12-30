@@ -4,6 +4,7 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { pushObject } from 'ares-webportal/helpers/object-ext';
+import { TrackedArray } from 'tracked-built-ins';
 
 export default Controller.extend(AuthenticatedController, {
   gameApi: service(),
@@ -11,7 +12,7 @@ export default Controller.extend(AuthenticatedController, {
   session: service(),
   flashMessages: service(),
   router: service(),
-    
+  
   onForumActivity: function(type, msg, timestamp ) {
     let data = JSON.parse(msg);
     if (data.category != this.get('model.id')) {
@@ -20,20 +21,21 @@ export default Controller.extend(AuthenticatedController, {
      
     if (data.type == 'new_forum_post') {
       pushObject(this.get('model.posts'), {
-        author: data.author.name,
+        author: data.author,
         category_id: data.category,
         date: timestamp,
         id: data.post,
         last_activity: timestamp,
         title: data.subject,
         unread: true
-      }, this.model, 'posts');
+      }, this.model, 'posts');      
     }
     else if (data.type == 'forum_reply') {
       let post = this.get('model.posts').find( p => p.id == data.post );
       if (post) {
         set(post, 'last_activity', timestamp);
         set(post, 'unread', true);
+        set(post, 'last_updated_by', data.author.name)
       }
     }
   },

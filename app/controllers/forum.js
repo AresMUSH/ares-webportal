@@ -20,7 +20,7 @@ export default Controller.extend(AuthenticatedController, {
       let category = this.get('model.categories').find(c => c.id == data.category);
       if (category) {
         set(category, 'last_activity', {
-          author: data.author.name,
+          author: data.author,
           date: timestamp,
           id: data.post,
           subject: data.subject,
