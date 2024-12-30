@@ -5,6 +5,7 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 import { pushObject } from 'ares-webportal/helpers/object-ext';
 import { TrackedArray } from 'tracked-built-ins';
+import { notifyPropertyChange } from '@ember/object';
 
 export default Controller.extend(AuthenticatedController, {
   gameApi: service(),
@@ -12,15 +13,6 @@ export default Controller.extend(AuthenticatedController, {
   session: service(),
   flashMessages: service(),
   router: service(),
-  posts: [],
-  
-  // *******************************
-  // IMPORTANT
-  // Due to ember tracking weirdness, we need to use an intermediate trackedarray for the component
-  // *******************************
-  setup: function() {
-    this.set('posts', new TrackedArray(this.get('model.posts').slice()));
-  },
   
   onForumActivity: function(type, msg, timestamp ) {
     let data = JSON.parse(msg);
@@ -40,11 +32,13 @@ export default Controller.extend(AuthenticatedController, {
         unread: true
       };
       
-      pushObject(this.posts, post, this, 'posts');
-         
+      // Stupid workaround because the component isn't tracking changes properly.
+      let list = this.get('model.posts').slice();
+      list.push(post);
+      this.set('model.posts', list);         
     }
     else if (data.type == 'forum_reply') {
-      let post = this.get('posts').find( p => p.id == data.post );
+      let post = this.get('model.posts').find( p => p.id == data.post );
       if (post) {
         set(post, 'last_activity', timestamp);
         set(post, 'unread', true);
