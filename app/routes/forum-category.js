@@ -2,6 +2,7 @@ import $ from "jquery"
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
+import { TrackedArray } from 'tracked-built-ins';
 
 export default Route.extend(DefaultRoute, {
     gameApi: service(),
@@ -23,8 +24,7 @@ export default Route.extend(DefaultRoute, {
         return api.requestOne('forumCategory', {category_id: params['category_id']});
     },
     
-    setupController: function(controller, model) {
-      this._super(controller, model);
-      controller.setup();
+    afterModel: function(model) {
+      model.set('posts', new TrackedArray((model.posts || []).slice()));
     }
 });

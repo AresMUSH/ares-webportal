@@ -3,18 +3,13 @@ import Controller from '@ember/controller';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { TrackedArray } from 'tracked-built-ins';
 
 export default Controller.extend(AuthenticatedController, {
   gameApi: service(),
   gameSocket: service(),
   session: service(),
   flashMessages: service(),
-  router: service(),
-  
-  setup: function() {
-    this.set('model.posts', new TrackedArray(this.get('model.posts').slice()));
-  },
+  router: service(),  
   
   onForumActivity: function(type, msg, timestamp ) {
     let data = JSON.parse(msg);
