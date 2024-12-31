@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 import UnauthenticatedRouteMixin from 'ares-webportal/mixins/unauthenticated-route';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Route.extend(UnauthenticatedRouteMixin, {
     gameApi: service(),
@@ -10,7 +11,8 @@ export default Route.extend(UnauthenticatedRouteMixin, {
         this.controllerFor('application').set('hideSidebar', true);
     },
 
-    deactivate: function() {
+    @action 
+    willTransition(transition) {
         this.controllerFor('application').set('hideSidebar', false);
     },    
 

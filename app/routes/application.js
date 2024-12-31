@@ -1,4 +1,3 @@
-import $ from "jquery"
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import AresConfig from 'ares-webportal/mixins/ares-config';
@@ -65,12 +64,13 @@ export default Route.extend(AresConfig, {
     
   model: function() {       
     let gameSocket = this.gameSocket;
+    let self = this;
     gameSocket.checkSession(this.get('session.data.authenticated.id'));
-      
-    $(window).focus( () => {
-      this.favicon.changeFavicon(false);                    
+    
+    window.addEventListener("focus", function(event) {
+      self.favicon.changeFavicon(false);                    
     });
-        
+    
     return this.loadModel();
   },
 

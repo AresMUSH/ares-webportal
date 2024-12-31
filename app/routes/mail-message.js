@@ -6,7 +6,6 @@ import RSVP from 'rsvp';
 
 export default Route.extend(AuthenticatedRoute, {
     gameApi: service(),
-    gameSocket: service(),
         
     model: function(params) {
         let api = this.gameApi;
@@ -16,7 +15,6 @@ export default Route.extend(AuthenticatedRoute, {
              characters: api.requestMany('characters', { select: 'all' })
            })
            .then((model) => {
-          this.gameSocket.updateMailBadge(model.message.unread_mail_count);
           return EmberObject.create(model);
           }
         );

@@ -1,4 +1,3 @@
-import $ from "jquery"
 import EmberObject from '@ember/object';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';

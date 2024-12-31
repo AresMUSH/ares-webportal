@@ -1,6 +1,7 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
+import { action } from '@ember/object';
 
 export default Route.extend(DefaultRoute, {
   gameApi: service(),
@@ -12,12 +13,10 @@ export default Route.extend(DefaultRoute, {
   
   activate: function() {
       this.controllerFor('search-jobs').setupCallback();
-      $(window).on('beforeunload', () => {
-          this.deactivate();
-      });
   },
 
-  deactivate: function() {
+  @action 
+  willTransition(transition) {
       this.gameSocket.removeCallback('search_results');
   },
   
