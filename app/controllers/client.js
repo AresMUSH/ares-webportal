@@ -1,10 +1,10 @@
-import $ from "jquery"
 import { computed } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import AresConfig from 'ares-webportal/mixins/ares-config';
 import { action } from '@ember/object';
 import { pushObject } from 'ares-webportal/helpers/object-ext';
+import { scrollElementToBottom } from 'ares-webportal/helpers/scroll-element';
 
 export default Controller.extend(AresConfig, {
   connected: false,
@@ -86,15 +86,8 @@ export default Controller.extend(AresConfig, {
     if (this.scrollPaused) {
       return;
     }
-      
-    try {
-      $('#console').stop().animate({
-        scrollTop: $('#console')[0].scrollHeight + 1000
-      }, 800);           
-    }
-    catch(error) {
-      // This happens sometimes when transitioning away from play screen.
-    }      
+     
+    scrollElementToBottom('console'); 
   },
     
   showDisconnect: computed('connected', function() {

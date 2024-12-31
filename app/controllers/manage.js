@@ -1,7 +1,7 @@
-import $ from "jquery"
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { scrollElementToBottom } from 'ares-webportal/helpers/scroll-element';
 
 export default Controller.extend({    
   gameApi: service(),
@@ -29,15 +29,8 @@ export default Controller.extend({
   addToStatus: function(message) {
     let old_status = this.status;
     this.set('status', `${old_status}\n${message}`);
-      
-    try {
-      $('#manageLog').stop().animate({
-        scrollTop: $('#manageLog')[0].scrollHeight
-      }, 800); 
-    }
-    catch(error) {
-      // This happens sometimes when transitioning away from screen.
-    }   
+    
+    scrollElementToBottom('manageLog');    
   },
       
   @action

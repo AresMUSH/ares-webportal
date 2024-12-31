@@ -1,10 +1,10 @@
-import $ from "jquery"
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import SceneUpdate from 'ares-webportal/mixins/scene-update';
 import { action } from '@ember/object';
+import { scrollElementToBottom } from 'ares-webportal/helpers/scroll-element';
 
 export default Controller.extend(AuthenticatedController, SceneUpdate, {
   gameApi: service(),
@@ -49,15 +49,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       return;
     }
     
-    try {
-      $('#live-scene-log').stop().animate({
-        scrollTop: $('#live-scene-log')[0].scrollHeight
-      }, 800); 
-    }
-    catch(error) {
-      // This happens sometimes when transitioning away from screen.
-    }   
-
+    scrollElementToBottom('live-scene-log');
   },
     
   setupCallback: function() {

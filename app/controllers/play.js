@@ -1,4 +1,3 @@
-import $ from "jquery"
 import Controller from '@ember/controller';
 import EmberObject, { set, computed } from '@ember/object';
 import { inject as service } from '@ember/service';
@@ -7,6 +6,7 @@ import AuthenticatedController from 'ares-webportal/mixins/authenticated-control
 import SceneUpdate from 'ares-webportal/mixins/scene-update';
 import { action } from '@ember/object';
 import { pushObject, removeObject } from 'ares-webportal/helpers/object-ext';
+import { scrollElementToBottom } from 'ares-webportal/helpers/scroll-element';
 
 export default Controller.extend(AuthenticatedController, SceneUpdate, {
   gameApi: service(),
@@ -181,24 +181,8 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
       return;
     }
     
-    try {
-      let chatWindow = $('#chat-window')[0];
-      if (chatWindow) {
-        $('#chat-window').stop().animate({
-          scrollTop: chatWindow.scrollHeight
-        }, 400);    
-      }  
-      
-      let sceneWindow = $('#live-scene-log')[0];
-      if (sceneWindow) {
-        $('#live-scene-log').stop().animate({
-          scrollTop: $('#live-scene-log')[0].scrollHeight
-        }, 400);           
-      }
-    }
-    catch(error) {
-      // This happens sometimes when transitioning away from screen.
-    }   
+    scrollElementToBottom('chat-window');
+    scrollElementToBottom('live-scene-log');
   },
     
   channelsByActivity: computed('model.chat.channels.@each.last_activity', function() {

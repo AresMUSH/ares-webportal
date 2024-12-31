@@ -1,10 +1,10 @@
-import $ from "jquery"
 import { get, computed } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import { action } from '@ember/object';
 import { removeObject } from 'ares-webportal/helpers/object-ext';
+import { scrollElementToBottom } from 'ares-webportal/helpers/scroll-element';
 
 export default Controller.extend(AuthenticatedController, {
   gameApi: service(),
@@ -49,14 +49,7 @@ export default Controller.extend(AuthenticatedController, {
   },
   
   scrollLog: function() {
-    try {
-      $('#combat-log').stop().animate({
-        scrollTop: $('#combat-log')[0].scrollHeight
-      }, 800); 
-    }
-    catch(error) {
-      // This happens sometimes when transitioning away from screen.
-    }   
+    scrollElementToBottom('combat-log');
   },
     
   resetOnExit: function() {
