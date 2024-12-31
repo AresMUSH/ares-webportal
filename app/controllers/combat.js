@@ -72,8 +72,8 @@ export default Controller.extend(AuthenticatedController, {
     this.set('commandResponse', '');
   },
   
-  setupController: function(model) {
-    this.set('combatLog', model.messages);
+  setup: function() {
+    this.set('combatLog', this.get('model.messages'));
   },
   
   setupCallback: function() {

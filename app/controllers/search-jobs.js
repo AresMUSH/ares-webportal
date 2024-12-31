@@ -29,7 +29,7 @@ export default Controller.extend({
     this.set('searchCustom', this.get('model.custom_fields'));
   },
   
-  setupController: function(model) {
+  setup: function(model) {
     this.set('searchCustom', this.get('model.custom_fields'));
   },
   

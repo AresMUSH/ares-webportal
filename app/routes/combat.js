@@ -11,9 +11,10 @@ export default Route.extend(DefaultRoute, {
         let api = this.gameApi;
         return api.requestOne('combat', { id: params['id'] });
     },
-
-    afterModel: function(model) {
-      this.controllerFor('combat').setupController(model);
+    
+    setupController: function(controller, model) {
+      this._super(controller, model);
+      controller.setup();
     },
     
     activate: function() {

@@ -153,7 +153,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     this.set('scrollPaused', false);
   },
     
-  setupController: function(model) {
+  setup: function(model) {
     this.setupCallback();
     this.set('poseChar', model.chat.pose_chars[0]);
   },

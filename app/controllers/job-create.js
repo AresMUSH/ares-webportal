@@ -22,7 +22,7 @@ export default Controller.extend({
     this._super(...arguments);
     this.set('participants', []);
   },
-  setupController: function() {
+  setup: function() {
     this.setCategory(this.model.get('options.request_category'));
     this.set('submitter', this.model.get('characters').find(c => c.id == this.get('session.data.authenticated.id')));
     this.set('customFields', this.get('model.options.custom_fields'));

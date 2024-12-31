@@ -20,6 +20,6 @@ export default Route.extend(DefaultRoute, {
     
     setupController: function(controller, model) {
       this._super(controller, model);
-      controller.setupController(model);
+      controller.setup(model);
     }
 });

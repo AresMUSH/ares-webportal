@@ -38,8 +38,9 @@ export default Route.extend({
            })
            .then((model) => EmberObject.create(model));
     },
-    
-    afterModel: function(model) {
-      this.controllerFor('play').setupController(model);
+        
+    setupController: function(controller, model) {
+      this._super(controller, model);
+      controller.setup(model);
     }
 });
