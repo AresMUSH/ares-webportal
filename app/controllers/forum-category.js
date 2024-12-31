@@ -3,9 +3,7 @@ import Controller from '@ember/controller';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { pushObject } from 'ares-webportal/helpers/object-ext';
 import { TrackedArray } from 'tracked-built-ins';
-import { notifyPropertyChange } from '@ember/object';
 
 export default Controller.extend(AuthenticatedController, {
   gameApi: service(),
@@ -13,6 +11,10 @@ export default Controller.extend(AuthenticatedController, {
   session: service(),
   flashMessages: service(),
   router: service(),
+  
+  setup: function() {
+    this.set('model.posts', new TrackedArray(this.get('model.posts').slice()));
+  },
   
   onForumActivity: function(type, msg, timestamp ) {
     let data = JSON.parse(msg);
@@ -31,11 +33,7 @@ export default Controller.extend(AuthenticatedController, {
         title: data.subject,
         unread: true
       };
-      
-      // Stupid workaround because the component isn't tracking changes properly.
-      let list = this.get('model.posts').slice();
-      list.push(post);
-      this.set('model.posts', list);         
+      this.get('model.posts').push(post);    
     }
     else if (data.type == 'forum_reply') {
       let post = this.get('model.posts').find( p => p.id == data.post );
