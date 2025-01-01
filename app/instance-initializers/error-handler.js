@@ -1,19 +1,19 @@
 import RSVP from 'rsvp';
 import Ember from 'ember';
+import { inject as service } from '@ember/service';
 
 export function initialize(appInstance) {
-  let service = appInstance.lookup('service:gameApi');
-
+  gameApi: service(),
+  
   Ember.onerror = function(error) {
-    service.reportError(error);
+    this.gameApi.reportError(error);
   };
 
   RSVP.on('error', function(error) {
-    service.reportError(error);
-  });
+    this.gameApi.reportError(error);
+  });  
 }
 
 export default {
-  name: 'error-handler',
   initialize
 };

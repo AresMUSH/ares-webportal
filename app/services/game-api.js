@@ -47,62 +47,63 @@ export default Service.extend(AresConfig, {
         if (error.message === 'TransitionAborted') {
           return;
         }
-        console.log(error);
-        
         let err = new Error();
-        $.post(this.serverUrl("request"), 
-                {
-                    cmd: 'webError',
-                    args: { error: `${error.message} : ${err.stack}` },
-                    api_key: this.apiKey
-                });
-                this.router.transitionTo('error');
+        console.log(`${error.message} : ${err.stack}`);
+        this.router.transitionTo('error', { queryParams: { message: error.message } });
       } catch(ex) { 
-        try {
-          this.router.transitionTo('error');
-        }
-        catch(ex) {
           // Failsafe.  Do nothing.
-        }
       }
     },
     
+    buildFailurePromise(msg) {
+      return new Promise((resolve, reject) => {
+        console.log(msg);
+        reject( {
+          error: msg
+        });  
+      });
+    },
+    
     request(cmd, args, allowEpicFail = false) {
-      
       if (this.aresconfig === null) {
-        return new Promise((resolve, reject) => {
-          console.log("Unable to send request - aresconfig is missing.");
-          reject( {
-            error: "Unable to send request - aresconfig is missing."
-          });  
-        });
+        return buildFailurePromise("AresConfig is missing - can't load page");
       }
       
-     return $.post(this.serverUrl("request"), 
-        {
-            cmd: cmd,
-            args: args,
-            api_key: this.apiKey,
-            auth: this.get('session.data.authenticated')
+      const body = new FormData();
+      body.append("cmd", cmd);
+      body.append("api_key", this.apiKey);
+      
+      if (args) {
+        for (let key in args) {
+          body.append(`args[${key}]`, args[key]);
+        }
+      }
+      
+      if (this.get('session.isAuthenticated')) {
+        const auth = this.get('session.data.authenticated');
+        for (let key in auth) {
+          body.append(`auth[${key}]`, auth[key]);
+        }        
+      }
+      
+      try {  
+        return fetch(this.serverUrl("request"), {
+          method: "POST",
+          body: body
         }).then((response) => {
-            if (!response) {
-              if (allowEpicFail) {
-                return { error: "The game didn't respond. Try again, or save your work and refresh the page." };
-              } else {
-                this.reportError({ message: `No response from game for ${cmd}.` });
-              }
-            }
-            else if (response.error) {
-                return response;
-            }
-           return response;
-        }).catch(ex => {
-          if (allowEpicFail) {
-            return { error: "The game didn't respond. Try again, or save your work and refresh the page." };
-          } else {
-            this.reportError(ex);
+          if (!response) {
+            throw new Error(`No response from game for ${cmd}`);
           }
+          return response.json();
+        }).catch((ex) => {
+          this.reportError(ex);
+          return buildFailurePromise(`No response from game for $(cmd).`);          
         });
+      }
+      catch(ex) {
+        this.reportError(ex);
+        return buildFailurePromise(`No response from game for $(cmd).`);
+      }        
     },
     
     requestOne(cmd, args = {}, transitionToOnError = 'home', allowEpicFail = false) {

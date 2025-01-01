@@ -1,7 +1,6 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import AresConfig from 'ares-webportal/mixins/ares-config';
-import { action } from '@ember/object';
 
 export default Route.extend(AresConfig, {
 
@@ -13,17 +12,26 @@ export default Route.extend(AresConfig, {
   favicon: service(),
   router: service('router'),
   headData: service(),
+  gameDown: false,
+  
   init() {
     this._super(...arguments);
     let self = this;
     this.router.on('routeDidChange', function() {
       self.doReload();
+    });    
+    
+    window.addEventListener("error", function(error) {
+      self.gameApi.reportError(error);
     });
+    
   },
   async beforeModel() {
     await this.session.setup();
   },
   afterModel(model) {
+    if (this.get('gameDown')) return;
+    
     try {
       this.set('headData.mushName', model.get('game.name'));
       this.set('headData.portalUrl', this.gameApi.portalUrl());
@@ -42,13 +50,26 @@ export default Route.extend(AresConfig, {
       this.gameSocket.updateNotificationBadge(newModel.notification_count);
     });        
   },
-    
+  
+  buildGameDownPromise: function() {
+    return new Promise((resolve, reject) => {
+      resolve( {
+        game_down: true
+      });  
+    });
+  },
+  
   loadModel: function() {
     let api = this.gameApi;
+    
+    if (this.get('gameDown')) {
+      return this.buildGameDownPromise();
+    }
+    
     return api.requestOne('sidebarInfo')
     .then( (response) => {
       if (response.error) {
-        return { game_down: true };
+        this.set('gameDown', true);
       }
       response['socketConnected'] = this.get('gameSocket.connected');
             
@@ -58,7 +79,8 @@ export default Route.extend(AresConfig, {
       return response;
     })
     .catch(() => {
-      return { game_down: true };
+      this.set('gameDown', true);   
+      return this.buildGameDownPromise();         
     });  
   },
     
@@ -82,10 +104,5 @@ export default Route.extend(AresConfig, {
     this.flashMessages.info('You have been logged out.');
     this.router.transitionTo('/');
     this.refresh();
-  },
-
-  @action
-  error(error) {
-    this.gameApi.reportError({ message: error });
   }
 });
