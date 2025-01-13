@@ -24,6 +24,7 @@
 
 <BsModalSimple @title="Add Block" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{this.actionConfirmationVisible}} @onSubmit={{this.addBlock}} @onHide={{this.hideActionConfirmation}}>
 
+<p>Specific block behavior varies by block type. See the help for that command for details.</p>
   
   <PowerSelect @selected={{this.blockChar}} @options={{this.model.chars}} @searchEnabled=true @searchField="name" @onChange={{this.blockCharChanged}} @placeholder="Select a character" as |char|>
     {{char.name}}
