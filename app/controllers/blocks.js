@@ -37,7 +37,7 @@ export default Controller.extend(ConfirmAction, {
       }
       
       this.send('reloadModel');
-      this.flashMessages.success('Block removed!');
+      this.flashMessages.success('Block removed.');
     });
   },
   
@@ -61,7 +61,7 @@ export default Controller.extend(ConfirmAction, {
       }
       this.hideActionConfirmation();      
       this.send('reloadModel');
-      this.flashMessages.success('Block added.');
+      this.flashMessages.success('Blocked.');
     });
   }
 });
