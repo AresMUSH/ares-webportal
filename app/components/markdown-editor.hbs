@@ -25,7 +25,9 @@
     <AnsiFormat @text={{this.previewText}} />
   </div>
 {{else}}
-  <Textarea @value={{this.text}} cols={{80}} rows={{this.rows}} @keydown={{this.keyDown}} aria-label="Markdown Editor" />
+
+  <TuiEditor @value={{this.text}} @onChange={{this.onChange}} aria-label="Markdown Editor" />
+
 {{/if}}
 
 </div>

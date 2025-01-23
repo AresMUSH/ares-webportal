@@ -29,7 +29,12 @@ export default Component.extend({
       this.set('previewText', response.text);
     });
   },
-    
+  
+  @action
+  onChange(value) {  
+    this.set('text', value);
+  },
+  
   @action
   keyDown(event) {
     if (event.keyCode == 13) {
