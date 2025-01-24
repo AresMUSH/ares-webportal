@@ -32,12 +32,7 @@ export default Controller.extend({
   @action
   save() {
     let api = this.gameApi;
-            
-    let tags = this.tags || [];
-    if (!Array.isArray(tags)) {
-      tags = tags.split(/[\s,]/);
-    }
-            
+        
     api.requestOne('createPlot', 
     { 
       title: this.title, 
@@ -45,7 +40,7 @@ export default Controller.extend({
       content_warning: this.contentWarning,
       storytellers: (this.storytellers || []).map(storyteller => storyteller.name),
       description: this.description,
-      tags: tags
+      tags: this.tags
     }, null)
     .then( (response) => {
       if (response.error) {

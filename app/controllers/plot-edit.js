@@ -14,12 +14,7 @@ export default Controller.extend({
         
   @action
   save() {
-    let api = this.gameApi;
-            
-    let tags = this.get('model.plot.tags') || [];
-    if (!Array.isArray(tags)) {
-      tags = tags.split(/[\s,]/);
-    }
+    let api = this.gameApi;            
             
     api.requestOne('editPlot', 
     {
@@ -30,8 +25,7 @@ export default Controller.extend({
       completed: this.get('model.plot.completed'),
       content_warning: this.get('model.plot.content_warning'),
       description: this.get('model.plot.description'),
-      tags: tags
-            
+      tags: this.get('model.plot.tags')                  
     }, null)
     .then( (response) => {
       if (response.error) {

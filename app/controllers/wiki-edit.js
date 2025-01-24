@@ -11,7 +11,7 @@ export default Controller.extend({
     
   resetOnExit: function() {
     this.set('previewText', null);
-    this.set('minorEdit', null);
+    this.set('minorEdit', false);
   },
     
   @action   
@@ -44,11 +44,7 @@ export default Controller.extend({
   @action
   save() {
     let api = this.gameApi;
-    let tags = this.get('model.tags') || [];
-    if (!Array.isArray(tags)) {
-      tags = tags.split(/[\s,]/);
-    }
-            
+   
     api.requestOne('editWiki', 
     { 
       id: this.get('model.id'),
@@ -56,7 +52,7 @@ export default Controller.extend({
       name: this.get('model.name'),
       text: this.get('model.text'),
       minor_edit: this.minorEdit,
-      tags: tags
+      tags: this.get('model.tags')
     }, null)
     .then( (response) => {
       if (response.error) {

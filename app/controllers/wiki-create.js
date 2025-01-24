@@ -23,17 +23,13 @@ export default Controller.extend({
   @action
   save() {
     let api = this.gameApi;
-    let tags = this.get('model.tags') || [];
-    if (!Array.isArray(tags)) {
-      tags = tags.split(/[\s,]/);
-    }
             
     api.requestOne('createWiki', 
     {
       title: this.get('model.title'), 
       text: this.get('model.text'),
       name: this.get('model.name'),
-      tags: tags
+      tags: this.get('model.tags')
     }, null)
     .then( (response) => {
       if (response.error) {

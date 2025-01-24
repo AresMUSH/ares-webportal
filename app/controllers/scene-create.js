@@ -66,10 +66,6 @@ export default Controller.extend({
   @action
   save() {
     let api = this.gameApi;
-    let tags = this.get('model.scene.tags') || [];
-    if (!Array.isArray(tags)) {
-      tags = tags.split(/[\s,]/);
-    }
             
     api.requestOne('createScene', 
     { 
@@ -84,7 +80,7 @@ export default Controller.extend({
       privacy: this.get('model.scene.privacy'),
       participants: (this.get('model.scene.participants') || []).map(p => p.name),
       related_scenes: (this.get('model.scene.related_scenes') || []).map(s => s.id),
-      tags: tags,
+      tags: this.get('model.scene.tags'),
       content_warning: this.get('model.scene.content_warning'),
       limit: this.get('model.scene.limit'),
       log: this.get('model.scene.log')

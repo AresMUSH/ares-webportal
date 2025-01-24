@@ -34,6 +34,7 @@ export default Controller.extend({
     this.set('description', '');
     this.set('submitter', null);
     this.set('participants', []);
+    this.set('tags', '');
   },
   
   setCategory: function(cat) {
@@ -65,12 +66,7 @@ export default Controller.extend({
   @action
   createJob() {
     let api = this.gameApi;
-      
-    let tags = this.tags || [];
-    if (!Array.isArray(tags)) {
-      tags = tags.split(/[\s,]/);
-    }
-      
+         
     api.requestOne('jobCreate', 
     { 
       title: this.title, 
@@ -79,7 +75,7 @@ export default Controller.extend({
       participants: (this.participants || []).map(p => p.id),
       submitter: this.get('submitter.name'),
       custom_fields: this.get('customFields'),
-      tags: tags 
+      tags: this.tags
     }, null)
     .then( (response) => {
       if (response.error) {

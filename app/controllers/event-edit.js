@@ -30,13 +30,7 @@ export default Controller.extend(AuthenticatedController, {
         
   @action
   edit() {
-    let api = this.gameApi;
-            
-    let tags = this.model.event.tags || [];
-    if (!Array.isArray(tags)) {
-      tags = tags.split(/[\s,]/);
-    }
-            
+    let api = this.gameApi;            
     let formattedDate = dayjs(this.selectedDate).format(this.get('model.event.date_entry_format'));
             
     api.requestOne('editEvent', 
@@ -46,7 +40,7 @@ export default Controller.extend(AuthenticatedController, {
       date: formattedDate,
       time: this.get('model.event.time'),
       organizer: this.get('model.event.organizer.name'),
-      tags: tags,
+      tags: this.get('model.tags'),
       content_warning: this.get('model.event.content_warning'),
       description: this.get('model.event.description')
     }, null)

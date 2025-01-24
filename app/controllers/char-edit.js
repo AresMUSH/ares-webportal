@@ -34,11 +34,6 @@ export default Controller.extend({
               npc_image: r.is_npc ? r.npc_image : null };
         });
         
-        let tags = this.get('model.char.tags') || [];
-        if (!Array.isArray(tags)) {
-            tags = tags.split(/[\s,]/);
-        }
-
         
         descs['current'] = this.get('model.char.descs.current');
         descs['short'] = this.get('model.char.shortdesc');
@@ -75,7 +70,7 @@ export default Controller.extend({
             profile_order: this.get('model.char.profile_order'),
             background: this.get('model.char.background'),
             rp_prefs: this.get("model.char.rp_prefs"),
-            tags: tags,
+            tags: this.get('model.char.tags'),
             descs: descs,
             custom: custom,
             roster: roster,
