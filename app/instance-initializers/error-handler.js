@@ -6,11 +6,13 @@ export function initialize(appInstance) {
   const gameApi = service();  
   
   Ember.onerror = function(error) {
-    gameApi.reportError(error);
+    //gameApi.reportError(error);
+    console.log(error);
   };
 
   RSVP.on('error', function(error) {
-    gameApi.reportError(error);
+    //gameApi.reportError(error);
+    console.log(error);
   });  
 }
 

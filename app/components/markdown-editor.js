@@ -1,12 +1,18 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { tracked } from '@glimmer/tracking';
 
 export default Component.extend({
-  text: '',
   previewText: null,
   rows: 6,
   gameApi: service(),
+  
+  @tracked text: '',
+  
+  get markdownText() {
+    return this.text || "";
+  },
     
   @action
   showHelp() {
@@ -33,6 +39,12 @@ export default Component.extend({
   @action
   onChange(value) {  
     this.set('text', value);
+  },
+  
+  @action
+  onInit(editor) {  
+    setTimeout(() => editor.blur());
+    setTimeout(() => window.scrollTo(0, 0));
   },
   
   @action

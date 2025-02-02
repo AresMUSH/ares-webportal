@@ -14,10 +14,10 @@ export default Controller.extend({
     
   resetOnExit: function() {
     // Reset query params.
-    this.set('tags', null);
-    this.set('title', null);
-    this.set('category', null);
-    this.set('template', null);
+    this.set('tags', '');
+    this.set('title', '');
+    this.set('category', '');
+    this.set('template', '');
   },
     
   @action

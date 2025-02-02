@@ -11,6 +11,10 @@ export default Mixin.create(BaseRoute, {
     
     beforeModel: function() {
         let appModel = this.modelFor('application');
+        
+        if (appModel.error) {
+          return;
+        }
         if (appModel.game_down) {
             return;
         }

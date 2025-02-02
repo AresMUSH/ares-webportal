@@ -26,7 +26,12 @@
   </div>
 {{else}}
 
-  <TuiEditor @value={{this.text}} @onChange={{this.onChange}} aria-label="Markdown Editor" />
+  <TuiEditor 
+    @value={{this.markdownText}} 
+    @onChange={{this.onChange}} 
+    aria-label="Markdown Editor" 
+    @onInit={{this.onInit}}
+    />
 
 {{/if}}
 

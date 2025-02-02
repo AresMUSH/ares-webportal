@@ -40,7 +40,7 @@ export default Controller.extend(AuthenticatedController, {
       date: formattedDate,
       time: this.get('model.event.time'),
       organizer: this.get('model.event.organizer.name'),
-      tags: this.get('model.tags'),
+      tags: this.get('model.event.tags'),
       content_warning: this.get('model.event.content_warning'),
       description: this.get('model.event.description')
     }, null)

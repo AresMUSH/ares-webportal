@@ -69,27 +69,17 @@ export default Service.extend(AresConfig, {
         return buildFailurePromise("AresConfig is missing - can't load page");
       }
       
-      const body = new FormData();
-      body.append("cmd", cmd);
-      body.append("api_key", this.apiKey);
-      
-      if (args) {
-        for (let key in args) {
-          body.append(`args[${key}]`, args[key]);
-        }
-      }
-      
-      if (this.get('session.isAuthenticated')) {
-        const auth = this.get('session.data.authenticated');
-        for (let key in auth) {
-          body.append(`auth[${key}]`, auth[key]);
-        }        
-      }
+      let body = {
+          cmd: cmd,
+          api_key: this.apiKey,
+        args: args,
+        auth: this.get('session.data.authenticated')
+        };     
       
       try {  
         return fetch(this.serverUrl("request"), {
           method: "POST",
-          body: body
+          body: JSON.stringify(body)
         }).then((response) => {
           if (!response) {
             throw new Error(`No response from game for ${cmd}`);
