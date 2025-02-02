@@ -3,8 +3,9 @@ import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import RSVP from 'rsvp';
 import { action } from '@ember/object';
+import DefaultRoute from 'ares-webportal/mixins/default-route';
 
-export default Route.extend({
+export default Route.extend(DefaultRoute, {
   gameApi: service(),
   gameSocket: service(),
   session: service(),
