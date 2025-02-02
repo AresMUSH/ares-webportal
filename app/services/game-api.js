@@ -7,6 +7,8 @@ export default Service.extend(AresConfig, {
     flashMessages: service(),
     session: service(),
     router: service(),
+  
+    errorReported: false,
     
     portalUrl() {
       var base;
@@ -44,6 +46,8 @@ export default Service.extend(AresConfig, {
     
     reportError(error) {
       try {
+        this.set('errorReported', true);
+        
         if (error.message === 'TransitionAborted') {
           return;
         }
@@ -66,9 +70,14 @@ export default Service.extend(AresConfig, {
     
     request(cmd, args, allowEpicFail = false) {
       if (this.aresconfig === null) {
-        return buildFailurePromise("AresConfig is missing - can't load page");
+        this.set('errorReported', true);        
+        return this.buildFailurePromise("AresConfig is missing - can't load page");
       }
       
+      if (this.errorReported) {
+        return this.buildFailurePromise("Recursive error condition - ignoring.");        
+      }
+            
       let body = {
           cmd: cmd,
           api_key: this.apiKey,

@@ -14,6 +14,11 @@ export default Base.extend({
         }
         
         let api = this.gameApi;
+        
+        if (api.errorReported) {
+           return Promise.reject({});
+        }
+        
         return api.requestOne('checkToken', { id: data.id, token: data.token })
         .then((response) => {
             if (response.token) {
