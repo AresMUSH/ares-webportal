@@ -139,7 +139,7 @@ export default Controller.extend(AuthenticatedController, SceneUpdate, {
     let sceneData = EmberObject.create(JSON.parse(msg));
 
     if (!this.get('model.scenes').find(s => s.id === sceneData.id)) {
-      pushObject(this.model.scenes.push, sceneData, this.model, 'scenes');
+      pushObject(this.model.scenes, sceneData, this.model, 'scenes');
     }
   },
     
