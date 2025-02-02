@@ -43,7 +43,7 @@
             <label for="player" class="col-form-label">Player</label>
         </div>
         <div class="col-sm-9">
-             <PowerSelect @selected={{this.banPlayer}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{this.banPlayerChanged}} as |char|>
+             <PowerSelect @selected={{this.banPlayerObj}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{this.banPlayerChanged}} as |char|>
                {{char.name}}
              </PowerSelect>
         </div> 
@@ -81,7 +81,7 @@
             <label for="site" class="col-form-label">Site</label>
         </div>
         <div class="col-sm-9">
-             <Input @type="text" size={{50}} id="site" @value={{this.banSite}} />
+             <Input @type="text" size={{50}} id="site" @value={{this.banSiteName}} />
              <p class="hint">Specify a complete or partial hostname or IP address. No wildcards.</p>
         </div> 
       </div>

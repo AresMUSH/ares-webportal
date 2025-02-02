@@ -6,20 +6,21 @@ export default Controller.extend({
   gameApi: service(),
   flashMessages: service(),
 
-  banSite: '',
+  banSiteName: '',
+  banPlayerObj: null,
   banReason: '',
   banPlayerReason: '',
   
   resetOnExit: function() {
-    this.set('banSite', '');
+    this.set('banSiteName', '');
     this.set('banReason', '');
-    this.set('banPlayer', null);
+    this.set('banPlayerObj', null);
     this.set('banPlayerReason', '');
   },
     
   @action
   banPlayerChanged(player) {
-    this.set('banPlayer', player);
+    this.set('banPlayerObj', player);
   },
       
   @action
@@ -38,12 +39,12 @@ export default Controller.extend({
       
   @action
   banSite() {
-    if (this.banSite.length == 0 || this.banReason.length == 0) {
+    if (this.banSiteName.length == 0 || this.banReason.length == 0) {
       this.flashMessages.danger("You must specify a site and reason.");
       return;
     }
     this.gameApi.requestOne('banAdd', 
-    { site: this.banSite, reason: this.banReason }, null)
+    { site: this.banSiteName, reason: this.banReason }, null)
     .then((response) => {            
       if (response.error) {
         return;
@@ -61,7 +62,7 @@ export default Controller.extend({
       return;
     }
     this.gameApi.requestOne('banPlayer', 
-    { name: this.get('banPlayer.name'), reason: this.banPlayerReason }, null)
+    { name: this.get('banPlayerObj.name'), reason: this.banPlayerReason }, null)
     .then((response) => {            
       if (response.error) {
         return;
