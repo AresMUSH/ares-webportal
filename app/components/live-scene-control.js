@@ -231,7 +231,7 @@ export default Component.extend(AuthenticatedController, {
     api.requestOne('addScenePose', { id: this.get('scene.id'),
     pose: pose, 
     pose_type: poseType,
-    pose_char: this.get('scene.poseChar.id') }, null, true)
+    pose_char: this.get('scene.poseChar.id') }, null)
     .then( (response) => {
       if (response.error) {
         return;

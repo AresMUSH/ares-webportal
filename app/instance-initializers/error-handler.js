@@ -12,7 +12,7 @@ export function initialize(appInstance) {
 
   RSVP.on('error', function(error) {
     let gameApi = appInstance.lookup('service:game-api');
-    this.gameApi.reportError(error);
+    gameApi.reportError(error);
   });  
 }
 

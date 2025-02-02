@@ -15,7 +15,7 @@ export default Base.extend({
         
         let api = this.gameApi;
         
-        if (api.errorReported) {
+        if (api.errorHandlingInProgress) {
            return Promise.reject({});
         }
         
