@@ -7,8 +7,7 @@ export default Component.extend({
   previewText: null,
   rows: 6,
   gameApi: service(),
-  
-  @tracked text: '',
+  text: '',
   
   get markdownText() {
     return this.text || "";
