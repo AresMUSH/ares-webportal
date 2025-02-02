@@ -147,7 +147,7 @@ export default Controller.extend(AresConfig, {
     this.set('text1', '');
     pushObject(this.history1, cmd); 
     if (this.history1.length > 10) {
-      this.history1.removeAt(0);
+      this.history1.splice(0, 1);
     }
   },
       
@@ -158,7 +158,7 @@ export default Controller.extend(AresConfig, {
     this.set('text2', '');
     pushObject(this.history2, cmd); 
     if (this.history2.length > 10) {
-      this.history2.removeAt(0);
+      this.history2.splice(0, 1);
     }
   },
       
