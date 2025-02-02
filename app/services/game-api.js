@@ -46,11 +46,10 @@ export default Service.extend(AresConfig, {
     
     reportError(error) {
       try {
-        this.set('errorHandlingInProgress', true);
-        
         if (error.message === 'TransitionAborted') {
           return;
         }
+        this.set('errorHandlingInProgress', true);
         let err = new Error();
         console.log(`${error.message} : ${err.stack}`);
         this.router.transitionTo('error', { queryParams: { message: error.message } });
