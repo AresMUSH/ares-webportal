@@ -1,22 +1,22 @@
 {{page-title this.model.heading}}
 <h1>{{this.model.heading}}</h1>
 
-     <div class="form-group row">
-      <div class="col-sm-3">
+     <div class="form-item">
+      <div class="form-item-label">
         <label for="title" class="col-xs-2 col-form-label">Title:</label>
       </div>
-      <div class="col-sm-9">
+      <div class="form-item-entry">
         <Input @type="text" size={{25}} id="title" @enter={{this.save}} @value={{this.model.title}} />
       </div> 
     </div>
     
 {{#if this.model.can_change_name}}
     
-     <div class="form-group row">
-      <div class="col-sm-3">
+     <div class="form-item">
+      <div class="form-item-label">
         <label for="name" class="col-xs-2 col-form-label">Page Name:</label>
       </div>
-      <div class="col-sm-9">
+      <div class="form-item-entry">
         <Input @type="text" size={{25}} id="name" @enter={{this.save}} @value={{this.model.name}} />
       </div> 
     </div>
@@ -24,11 +24,11 @@
 {{/if}}
 
     
-     <div class="form-group row">
-      <div class="col-sm-3">
+     <div class="form-item">
+      <div class="form-item-label">
          <label for="tags" class="col-xs-2 col-form-label">Tags:</label>
       </div>
-      <div class="col-sm-9">
+      <div class="form-item-entry">
         <Input @type="text" size={{25}} id="tags" @enter={{this.save}} @value={{this.model.tags}} />
       </div> 
     </div>

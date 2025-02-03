@@ -1,11 +1,11 @@
 <div id="general" class="tab-pane fade show active">
     
     {{#each-in this.model.char.demographics as |key demo|}}
-    <div class="form-group row">
-        <div class="col-sm-3">
-                <b>{{demo.name}}</b> 
+    <div class="form-item">
+        <div class="form-item-label">
+            {{demo.name}}
         </div>
-        <div class="col-sm-9">
+        <div class="form-item-value">
             {{#if (eq demo.name 'Gender') }}
                 
                 <PowerSelect @selected={{this.model.char.demographics.gender}} @searchField="value" @options={{this.genders}} @onChange={{this.genderChanged}} as |gender|>
@@ -19,12 +19,12 @@
     </div>
     {{/each-in}}
     
-    <div class="form-group row">
-        <div class="col-sm-3">
+    <div class="form-item">
+        <div class="form-item-label">
                 <b>Profile Image</b>
         </div>
         
-        <div class="col-sm-9">
+        <div class="form-item-entry">
             <PowerSelect @selected={{this.model.char.profile_image}} @allowClear={{true}} @searchField="name" @options={{this.model.char.files}} @onChange={{this.profileImageChanged}} as |file|>
             {{file.name}}
             </PowerSelect>
@@ -33,12 +33,12 @@
         </div>
     </div>
     
-    <div class="form-group row">
-        <div class="col-sm-3">
+    <div class="form-item">
+        <div class="form-item-label">
                 <b>Profile Icon</b>
         </div>
         
-        <div class="col-sm-9">
+        <div class="form-item-entry">
             <PowerSelect @selected={{this.model.char.profile_icon}} @allowClear={{true}} @searchField="name" @options={{this.model.char.files}} @onChange={{this.profileIconChanged}} as |file|>
             {{file.name}}
             </PowerSelect>
@@ -47,12 +47,12 @@
         </div>
     </div>
     
-    <div class="form-group row">
-        <div class="col-sm-3">
+    <div class="form-item">
+        <div class="form-item-label">
                 <b>Profile Gallery</b>
         </div>
         
-        <div class="col-sm-9">
+        <div class="form-item-entry">
           
           <div class="profile-gallery-input">
           <Textarea @value={{this.model.char.profile_gallery}} cols={{80}} rows={{3}} />
@@ -64,34 +64,34 @@
         </div>
     </div>
     
-    <div class="form-group row">
-        <div class="col-sm-3">
+    <div class="form-item">
+        <div class="form-item-label">
                 <b>Page Tags</b>
         </div>
         
-        <div class="col-sm-9">
+        <div class="form-item-entry">
             <Input @type="text" size={{50}} @value={{this.model.char.tags}} />
             
         </div>
     </div>
     
-    <div class="form-group row">
-        <div class="col-sm-3">
+    <div class="form-item">
+        <div class="form-item-label">
                 <b>Share Background</b>
         </div>
         
-        <div class="col-sm-9">
+        <div class="form-item-entry">
               <Input @type="checkbox" @checked={{this.model.char.bg_shared}} />
         </div>
     </div>
     
     
-    <div class="form-group row">
-        <div class="col-sm-3">
+    <div class="form-item">
+        <div class="form-item-label">
                 <b>Last Will</b>
         </div>
         
-        <div class="col-sm-9">
+        <div class="form-item-entry">
               <MarkdownEditor @text={{this.model.char.lastwill}} />
         </div>
     </div>

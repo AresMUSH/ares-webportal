@@ -3,12 +3,12 @@
   <hr>
   <h3>Idle Settings</h3>
 
-  <div class="form-group row">
-    <div class="col-sm-3">
+  <div class="form-item">
+    <div class="form-item-label">
             <b>Idle Note</b>
     </div>
   
-    <div class="col-sm-9">
+    <div class="form-item-entry">
     
         <Input @type="text" id="idleNote" placeholder="Notes" @value={{this.model.char.idle_notes}} />
       
@@ -21,57 +21,57 @@
   {{#if this.model.char.show_roster_tab}}
   <hr>
   <h3>Roster Settings</h3>
-  <div class="form-group row">
-      <div class="col-sm-3">
+  <div class="form-item">
+      <div class="form-item-label">
               <b>On Roster</b>
       </div>
     
-      <div class="col-sm-9">
+      <div class="form-item-entry">
             <Input @type="checkbox" @checked={{this.model.char.roster.on_roster}} />
       </div>
   </div>
 
 
-  <div class="form-group row">
-      <div class="col-sm-3">
+  <div class="form-item">
+      <div class="form-item-label">
               <b>Restricted App</b>
       </div>
     
-      <div class="col-sm-9">
+      <div class="form-item-entry">
             <Input @type="checkbox" @checked={{this.model.char.roster.restricted}} />
       </div>
   </div>
 
-  <div class="form-group row">
-      <div class="col-sm-3">
+  <div class="form-item">
+      <div class="form-item-label">
               <b>Roster Contact</b>
       </div>
     
-      <div class="col-sm-9">
+      <div class="form-item-entry">
       
           <Input @type="text" id="handleName" placeholder="Roster Contact" @value={{this.model.char.roster.contact}} />
         
       </div>
   </div>
 
-  <div class="form-group row">
-      <div class="col-sm-3">
+  <div class="form-item">
+      <div class="form-item-label">
               <b>Previously Played</b>
       </div>
     
-      <div class="col-sm-9">
+      <div class="form-item-entry">
             <Input @type="checkbox" @checked={{this.model.char.roster.played}} />
       </div>
   </div>
 
 
 
-  <div class="form-group row">
-      <div class="col-sm-3">
+  <div class="form-item">
+      <div class="form-item-label">
               <b>Roster Notes</b>
       </div>
     
-      <div class="col-sm-9">
+      <div class="form-item-entry">
       
           <MarkdownEditor @text={{this.model.char.roster.notes}} />
         

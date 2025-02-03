@@ -1,39 +1,39 @@
 {{page-title 'Create Area'}}
 <h1>Create Area</h1>
 
-<div class="form-group row">
-  <div class="col-sm-3">
-      <label for="name" class="col-form-label">Name:</label>
+<div class="form-item">
+  <div class="form-item-label">
+      Name:
   </div>
-  <div class="col-sm-9">
+  <div class="form-item-entry">
       <Input @type="text" size={{25}} id="name" @enter={{this.save}} @value={{this.name}} />
   </div> 
 </div>
 
-<div class="form-group row">
-  <div class="col-sm-3">
-      <label for="summary" class="col-form-label">Summary:</label>
+<div class="form-item">
+  <div class="form-item-label">
+      Summary:
   </div>
-  <div class="col-sm-9">
+  <div class="form-item-entry">
       <MarkdownEditor @text={{this.summary}} />
   </div> 
 </div>
 
-<div class="form-group row">
-  <div class="col-sm-3">
-      <label for="summary" class="col-form-label">Description:</label>
+<div class="form-item">
+  <div class="form-item-label">
+      Description:
   </div>
-  <div class="col-sm-9">
+  <div class="form-item-entry">
       <MarkdownEditor @text={{this.description}} />
   </div> 
 </div>
 
 
-<div class="form-group row">
-  <div class="col-sm-3">
-      <label for="summary" class="col-form-label">Parent Area:</label>
+<div class="form-item">
+  <div class="form-item-label">
+      Parent Area:
   </div>
-  <div class="col-sm-9">
+  <div class="form-item-entry">
       <PowerSelect @selected={{this.parentArea}}  @options={{this.model.areas}} @searchEnabled=true @searchField="name" @allowClear=true @onChange={{this.changeParent}} as |area|>
          {{area.name}}
       </PowerSelect>

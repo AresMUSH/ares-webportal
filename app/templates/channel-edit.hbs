@@ -2,39 +2,39 @@
 <h1>Edit Channel</h1>
 
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="name" class="col-form-label">Name:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Name:
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         <Input @type="text" size={{25}} id="name" @enter={{this.save}} @value={{this.model.channel.name}} />
     </div> 
   </div>
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="desc" class="col-form-label">Description:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Description:
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         <Input @type="text" size={{25}} id="desc" @enter={{this.save}} @value={{this.model.channel.desc}} />
     </div> 
   </div>
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="color" class="col-form-label">Color:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Color:
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         <Input @type="text" size={{25}} id="color" @enter={{this.save}} @value={{this.model.channel.color}} />
     </div> 
   </div>
   
-  <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="canjoin" class="col-form-label">Can Join:</label>
+  <div class="form-item">
+    <div class="form-item-label">
+        Can Join:
     </div>
 
-    <div class="col-sm-9">
+    <div class="form-item-entry">
       <PowerSelectMultiple id="canjoin" @selected={{this.model.channel.can_join}} @options={{this.model.roles}} @onChange={{this.joinRolesChanged}} as |role|>
         {{role}}
       </PowerSelectMultiple>
@@ -42,12 +42,12 @@
     </div>
   </div>
   
-  <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="cantalk" class="col-form-label">Can Talk:</label>
+  <div class="form-item">
+    <div class="form-item-label">
+        Can Talk:
     </div>
 
-    <div class="col-sm-9">
+    <div class="form-item-entry">
       <PowerSelectMultiple id="cantalk" @selected={{this.model.channel.can_talk}} @options={{this.model.roles}} @onChange={{this.talkRolesChanged}} as |role|>
         {{role}}
       </PowerSelectMultiple>
@@ -56,21 +56,21 @@
     </div>
   </div>
   
-  <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="discordchan" class="col-form-label">Discord Channel Name:</label>
+  <div class="form-item">
+    <div class="form-item-label">
+        Discord Channel Name:
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         <Input @type="text" size={{25}} id="discordchan" @enter={{this.save}} @value={{this.model.channel.discord_channel}} />
         <p class="hint">Requires <a href="https://github.com/aresmush/ares-discord" target="_blank">Discord integration</a>, installed separately.</p>
     </div>
   </div>
   
-  <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="discordwebhook" class="col-form-label">Discord Webhook URL:</label>
+  <div class="form-item">
+    <div class="form-item-label">
+        Discord Webhook URL:
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         <Input @type="text" size={{90}} id="discordwebhook" @enter={{this.save}} @value={{this.model.channel.discord_webhook}} />
         <p class="hint">Requires <a href="https://github.com/aresmush/ares-discord" target="_blank">Discord integration</a>, installed separately.</p>
     </div>

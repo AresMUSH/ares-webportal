@@ -38,22 +38,22 @@
         adds their IP address to the ban list.
       </div>
       
-       <div class="form-group row">
-        <div class="col-sm-3">
+       <div class="form-item">
+        <div class="form-item-label">
             <label for="player" class="col-form-label">Player</label>
         </div>
-        <div class="col-sm-9">
+        <div class="form-item-entry">
              <PowerSelect @selected={{this.banPlayerObj}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{this.banPlayerChanged}} as |char|>
                {{char.name}}
              </PowerSelect>
         </div> 
       </div>
       
-       <div class="form-group row">
-        <div class="col-sm-3">
+       <div class="form-item">
+        <div class="form-item-label">
             <label for="player" class="col-form-label">Reason</label>
         </div>
-        <div class="col-sm-9">
+        <div class="form-item-entry">
              <Input @type="text" size={{50}} id="banPlayerReason" @value={{this.banPlayerReason}} /> 
         </div> 
       </div>
@@ -76,21 +76,21 @@
         use the 'Ban Player' option instead.  This is more for when you need to preemptively ban a site or replace an incorrect entry.
       </div>
       
-       <div class="form-group row">
-        <div class="col-sm-3">
+       <div class="form-item">
+        <div class="form-item-label">
             <label for="site" class="col-form-label">Site</label>
         </div>
-        <div class="col-sm-9">
+        <div class="form-item-entry">
              <Input @type="text" size={{50}} id="site" @value={{this.banSiteName}} />
              <p class="hint">Specify a complete or partial hostname or IP address. No wildcards.</p>
         </div> 
       </div>
       
-       <div class="form-group row">
-        <div class="col-sm-3">
+       <div class="form-item">
+        <div class="form-item-label">
             <label for="reason" class="col-form-label">Reason</label>
         </div>
-        <div class="col-sm-9">
+        <div class="form-item-entry">
              <Input @type="text" size={{50}} id="reason" @value={{this.banReason}} />
         </div> 
       </div>

@@ -1,11 +1,11 @@
 {{page-title 'Edit Combatant'}}
 <h1>Edit Combatant {{this.model.name}}</h1>
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Action:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
             <PowerSelect @selected={{this.model.action}} @options={{this.model.options.actions}} @onChange={{this.actionChanged}} as |act|>
               {{act}}
@@ -28,11 +28,11 @@
  
 </div>
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Team:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
             <PowerSelect @selected={{this.model.team}} @options={{this.teams}} @onChange={{this.teamChanged}} as |team|>
               {{team}}
@@ -42,11 +42,11 @@
  
 </div>
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Stance:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
             <PowerSelect @selected={{this.model.stance}} @options={{this.model.options.stances}} @onChange={{this.stanceChanged}} as |stance|>
               {{stance}}
@@ -57,11 +57,11 @@
 </div>
 
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Weapon:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
             <PowerSelect @selected={{this.model.weapon}} @options={{this.model.options.weapons}} @onChange={{this.weaponChanged}} as |weapon|>
               {{weapon}}
@@ -71,11 +71,11 @@
  
 </div>
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Weapon Specials:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
             {{#each this.model.weapon_specials as |spec|}}
       
@@ -91,11 +91,11 @@
 
      
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Armor:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
             <PowerSelect @selected={{this.model.armor}} @options={{this.model.options.armor}} @onChange={{this.armorChanged}} as |armor|>
               {{armor}}
@@ -105,11 +105,11 @@
  
 </div>
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Armor Specials:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
             {{#each this.model.armor_specials as |spec|}}
       
@@ -123,13 +123,13 @@
  
 </div>
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Vehicle:</b>           
             <TooltipIcon @position="right" @message="Enter a vehicle type to get in your own vehicle, or a character name to get into theirs." @icon="fa fa-question-circle" />
 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
             <Input @type="text" size={{25}} id="vehicleName" @value={{this.model.vehicle}} />
             <br>
@@ -145,11 +145,11 @@
 
 {{#if this.model.npc_skill}}
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>NPC Skill:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
             <PowerSelect @selected={{this.model.npc_skill}} @options={{this.model.options.npc_skills}} @onChange={{this.npcChanged}} as |npc|>
               {{npc}}

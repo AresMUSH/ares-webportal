@@ -2,9 +2,9 @@
 <h1>{{this.model.name}}</h1>
 
 
-<div class="row profile-wrap">
+<div class="profile-wrap">
 
-    <div class="col-md-4 col-sm-12 col-xs-12">
+    <div class="profile-image-wrap">
       {{#if this.model.icon}}
           <img src="/game/uploads/{{this.model.icon}}" alt="{{this.model.name}}'s icon"  class="profile-image">
       {{else}}
@@ -12,40 +12,35 @@
       {{/if}}
     </div>
 
-    <div class="col-md-8 col-sm-12 col-xs-12">        
+    <div class="profile-box">
 
-        <div class="profile-box">
-
-          <div class="row">
-              <div class="col-sm-3">
-                      <b>Handle:</b> 
-              </div>
-              <div class="col-sm-9">
-                    {{#if this.model.handle}}
-                    
-                       <a href="http://arescentral.aresmush.com/handle/{{this.model.handle}}">{{this.model.handle}}</a>
-                     {{else}}
-                     <a href="https://arescentral.aresmush.com/" target="_blank">Not Linked</a>
-                     {{/if}}                        
-              </div>
+      <div class="profile-item-list profile-demographics">
+        <div class="profile-item">
+          <div class="profile-item-name">
+            <b>Handle:</b> 
           </div>
-                
-          {{#if this.model.admin_role_title}}
-          <div class="row">
-              <div class="col-sm-3">
-                      <b>Title:</b> 
-              </div>
-              <div class="col-sm-9">
-                      {{this.model.admin_role_title}}
-              </div>
+          <div class="profile-item-value">
+              {{#if this.model.handle}}
+              
+                 <a href="http://arescentral.aresmush.com/handle/{{this.model.handle}}">{{this.model.handle}}</a>
+               {{else}}
+               <a href="https://arescentral.aresmush.com/" target="_blank">Not Linked</a>
+               {{/if}}                        
+           </div>
+         </div>
+         
+      {{#if this.model.admin_role_title}}
+         <div class="profile-item">
+           <div class="profile-item-name">
+             <b>Title:</b> 
+           </div>
+           <div class="profile-item-value">
+               {{this.model.admin_role_title}}                   
+            </div>
           </div>
-          {{/if}}
-               
-        </div>
-    </div>
-
-
-
+      {{/if}}
+     </div>
+  </div>
 </div>
 
 

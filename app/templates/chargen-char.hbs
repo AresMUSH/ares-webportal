@@ -79,11 +79,11 @@
 
                 
                  {{#each-in this.model.char.demographics as |key demo|}}
-                 <div class="form-group row">
-                     <div class="col-sm-3">
+                 <div class="form-item">
+                     <div class="form-item-label">
                              <b>{{demo.name}}</b> 
                      </div>
-                     <div class="col-sm-9">
+                     <div class="form-item-entry">
                          {{#if (eq key 'gender') }}
                              
                              <PowerSelect @selected={{this.model.char.demographics.gender}} @searchEnabled=true @searchField="value" @options={{this.genders}} @onChange={{this.genderChanged}} as |gender|>
@@ -108,11 +108,11 @@
                                     
                   
                   {{#each-in this.model.char.groups as |key group|}}
-                  <div class="form-group row">
-                      <div class="col-sm-3">
+                  <div class="form-item">
+                      <div class="form-item-label">
                               <b>{{group.name}}</b>                               
                       </div>
-                      <div class="col-sm-9">
+                      <div class="form-item-entry">
                           
                       {{#if (get (get this.model.cgInfo.group_options key) 'freeform')}}
                         <Input @type="text" size={{25}} @value={{group.value}} />

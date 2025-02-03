@@ -19,12 +19,10 @@
     
     {{#each cat.relationships as |ship|}}
         
-        <div class="row relationship-row">
-            <div class="col col-xs-12 col-sm-3">
-                <RelationshipIcon @char={{ship}} />
-            </div>
+        <div class="relationship-row">
+              <RelationshipIcon @char={{ship}} />
             
-            <div class="col col-xs-12 col-sm-8 ansi">
+            <div class="relationship-details ansi">
                 {{#if ship.is_npc}}
                 <b>{{ship.name}}</b> (NPC)
                 {{else}}

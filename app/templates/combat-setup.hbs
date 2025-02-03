@@ -10,130 +10,127 @@
 
 {{#each-in this.model.combatants as |id comb| }}
 
-<p>
-  {{comb.name}}
-</p>
-
-<div class="form-group row">
-    <div class="col-sm-6 col-xs-12">
-            <b>Action:</b>  <PowerSelect @selected={{comb.action}} @options={{this.model.options.actions}} @onChange={{(fn this.actionChanged id)}} as |act|>
-              {{act}}
-            </PowerSelect>
-    </div>
-    <div class="col-sm-6 col-xs-12">
-        
-            <b>Action Args:</b> 
-            
-            <TooltipIcon @position="top" @message="Enter targets or other options for your action, like Dummy/burst,called:head." @icon="fa fa-question-circle" />
-            <br>
-            <Input @type="text" size={{25}} id={{id}} @value={{comb.action_args}} />
-            
-            <p>
-            <b>Available Targets:</b>
-            <TooltipIcon @position="right" @message="Click a target to add them to the action args list." @icon="fa fa-question-circle" />
-            
-            {{#each this.model.options.targets as |target|}}
-              <a href="#" {{on 'click' (fn this.addTarget id target)}}>{{target}}</a>
-            {{/each}}
-            </p>
-            
-    </div>
- 
-</div>
-
-
-<div class="row">
-  <div class="col col-sm-6 col-xs-12">
-
-    <p>
-      <label>Team:</label>
-  
-      <PowerSelect @selected={{comb.team}} @options={{this.teams}} @onChange={{(fn this.teamChanged id)}} as |team|>
-        {{team}}
-      </PowerSelect>
-    </p>
-
+<div class="card card-default">
+  <div class="card-heading">
+    {{comb.name}}
   </div>
-    
-  <div class="col col-sm-6 col-xs-12">
-      
-    <p>
-      <label>NPC Level:</label>
+
+  <div class="card-body">
+    <div class="form-item">
+      <div class="form-item-label">
+              Action:
+      </div>
+      <div class="form-item-entry">
+        <PowerSelect @selected={{comb.action}} @options={{this.model.options.actions}} @onChange={{(fn this.actionChanged id)}} as |act|>
+            {{act}}
+          </PowerSelect>
+      </div>
+    </div>
+
+    <div class="form-item">
+      <div class="form-item-label">
+        Action Args:             <TooltipIcon @position="top" @message="Enter targets or other options for your action, like Dummy/burst,called:head." @icon="fa fa-question-circle" />
+
+      </div>
+      <div class="form-item-entry">
+            
+                <Input @type="text" size={{25}} id={{id}} @value={{comb.action_args}} />
+            
+                <p>
+                <b>Available Targets:</b>
+                <TooltipIcon @position="right" @message="Click a target to add them to the action args list." @icon="fa fa-question-circle" />
+            
+                {{#each this.model.options.targets as |target|}}
+                  <a href="#" {{on 'click' (fn this.addTarget id target)}}>{{target}}</a>
+                {{/each}}
+                </p>
+            
+      </div>
+    </div>
+
+    <div class="form-item">
+      <div class="form-item-label">
+          Team:
+      </div>
+      <div class="form-item-entry">
+  
+          <PowerSelect @selected={{comb.team}} @options={{this.teams}} @onChange={{(fn this.teamChanged id)}} as |team|>
+            {{team}}
+          </PowerSelect>
+      </div>
+    </div>
+
+    <div class="form-item">
+      <div class="form-item-label">
+          NPC Level:
+      </div>
+      <div class="form-item-entry">
       <PowerSelect @selected={{comb.npc_skill}} @options={{this.model.options.npc_skills}} @onChange={{(fn this.npcChanged id)}} as |level|>
         {{level}}
       </PowerSelect>
-    </p>
-  
+      </div>
+    </div>
+    
+    <div class="form-item">
+      <div class="form-item-label">
+          Stance:
+      </div>
+      <div class="form-item-entry">
+      <PowerSelect @selected={{comb.stance}} @options={{this.model.options.stances}} @onChange={{(fn this.stanceChanged id)}} as |stance|>
+        {{stance}}
+      </PowerSelect>
+      </div>
+    </div>
+
+    
+    <div class="form-item">
+      <div class="form-item-label">
+          Armor:
+      </div>
+      <div class="form-item-entry">
+      <PowerSelect @selected={{comb.armor}} @options={{this.model.options.armor}} @onChange={{(fn this.armorChanged id)}} as |armor|>
+        {{armor}}
+      </PowerSelect>
+
+      {{#each comb.armor_specials as |spec|}}
+          <span class="text">&nbsp; {{spec.name}}:</span>
+          <Input @type="checkbox" @checked={{spec.selected}} /> 
+      {{/each}}
+      </div>
+    </div>
+    
+    <div class="form-item">
+      <div class="form-item-label">
+          Weapon:
+      </div>
+      <div class="form-item-entry">
+      <PowerSelect @selected={{comb.weapon}} @options={{this.model.options.weapons}} @onChange={{(fn this.weaponChanged id)}} as |weapon|>
+        {{weapon}}
+      </PowerSelect>
+
+      {{#each comb.weapon_specials as |spec|}}
+          <span class="text">&nbsp; {{spec.name}}:</span>
+          <Input @type="checkbox" @checked={{spec.selected}} /> 
+      {{/each}}
+      </div>
+    </div>
+
+    <div class="form-item">
+      <div class="form-item-label">
+          Vehicle:   <TooltipIcon @position="top" @message="Enter a vehicle type to get in your own vehicle, or a character name to get into theirs." @icon="fa fa-question-circle" />
+
+      </div>
+      <div class="form-item-entry">
+      <Input @type="text" size={{25}} @value={{comb.vehicle}} />
+      <br>
+      <label>Passenger Type:</label>
+      <PowerSelect @selected={{comb.passenger_type}} @options={{this.passengerTypes}} @onChange={{(fn this.passengerTypeChanged id)}} as |passengerType|>
+        {{passengerType}}
+      </PowerSelect>
+      </div>
+    </div>
   </div>
 </div>
-
-
-<div class="row">
-  <div class="col col-sm-6 col-xs-12">
-
-    <p>
-      <label>Stance</label>
-    <PowerSelect @selected={{comb.stance}} @options={{this.model.options.stances}} @onChange={{(fn this.stanceChanged id)}} as |stance|>
-      {{stance}}
-    </PowerSelect>
-    </p>
-  </div>
-  
-  <div class="col col-sm-6 col-xs-12">
-    <p>
-      <label>Armor</label>
-    <PowerSelect @selected={{comb.armor}} @options={{this.model.options.armor}} @onChange={{(fn this.armorChanged id)}} as |armor|>
-      {{armor}}
-    </PowerSelect>
-
-    {{#each comb.armor_specials as |spec|}}
-        <span class="text">&nbsp; {{spec.name}}:</span>
-        <Input @type="checkbox" @checked={{spec.selected}} /> 
-    {{/each}}
-    </p>
-  </div>
-</div>
-
-
-
-
-<div class="row">
-  <div class="col col-sm-6 col-xs-12">
-
-    <p>
-      <label>Weapon</label>
-    <PowerSelect @selected={{comb.weapon}} @options={{this.model.options.weapons}} @onChange={{(fn this.weaponChanged id)}} as |weapon|>
-      {{weapon}}
-    </PowerSelect>
-
-    {{#each comb.weapon_specials as |spec|}}
-        <span class="text">&nbsp; {{spec.name}}:</span>
-        <Input @type="checkbox" @checked={{spec.selected}} /> 
-    {{/each}}
-
-    </p>
-
-  </div>
-  
-  <div class="col-sm-6 col-xs-12">
-    <p>
-         <label>Vehicle:</label>
-         
-         <TooltipIcon @position="top" @message="Enter a vehicle type to get in your own vehicle, or a character name to get into theirs." @icon="fa fa-question-circle" />
-         <br>
-         <Input @type="text" size={{25}} @value={{comb.vehicle}} />
-         <br>
-         <label>Passenger Type:</label>
-         <PowerSelect @selected={{comb.passenger_type}} @options={{this.passengerTypes}} @onChange={{(fn this.passengerTypeChanged id)}} as |passengerType|>
-           {{passengerType}}
-         </PowerSelect>
-         
-       </p>
-          
-  </div>
-</div>
-
-<hr>
 
 
 {{/each-in}}

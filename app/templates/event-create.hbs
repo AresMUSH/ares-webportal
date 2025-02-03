@@ -1,32 +1,32 @@
 {{page-title 'New Event'}}
 <h1>New Event</h1>
 
-  <div class="form-group row">
-    <div class="col-sm-3">
-      <label for="organizer" class="col-form-label">Organizer:</label>
+  <div class="form-item">
+    <div class="form-item-label">
+      Organizer:
     </div>
 
-    <div class="col-sm-9">
+    <div class="form-item-entry">
       <PowerSelect aria-label="organizer" @selected={{this.organizer}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{this.organizerChanged}} as |char|>
         {{char.name}}
       </PowerSelect>
     </div>
   </div>
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="title" class="col-form-label">Title:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Title:
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
          <Input @type="text" size={{25}} id="title" @enter={{this.create}} @value={{this.title}} />
     </div> 
   </div>
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="date" class="col-form-label">Date:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Date:
     </div>
-    <div class="col-sm-9">  
+    <div class="form-item-entry">  
              
              <EmberFlatpickr
                id="date"
@@ -44,11 +44,11 @@
     </div> 
   </div>
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="time" class="col-form-label">Start Time:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Start Time:
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
          <Input @type="text" id="time" size="25" @enter={{this.create}} @value={{this.time}} />
          
          <div class="hint">Use <b>server time</b> in the same format as the server time.  The server time format is {{this.model.app.server_time}}.</div>
@@ -57,11 +57,11 @@
   
   
   
-  <div class="form-group row">
-     <div class="col-sm-3">
-         <label for="content-warning" class="col-form-label">Content Warning:</label>
+  <div class="form-item">
+     <div class="form-item-label">
+         Content Warning:
      </div>
-     <div class="col-sm-9">
+     <div class="form-item-entry">
        <PowerSelectMultiple aria-label="content-warning" @selected={{this.warning_tags}} @options={{this.model.sceneOptions.content_warnings}} @onChange={{this.warningsChanged}} as |warning|>
          {{warning}}
        </PowerSelectMultiple>
@@ -70,20 +70,20 @@
      </div>
    </div>
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="tags" class="col-form-label">Tags:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Tags:
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         <Input @type="text" size={{25}} id="tags" @enter={{this.create}} @value={{this.tags}} />
     </div> 
   </div>
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="warning" class="col-form-label">Description:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Description:
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
          <MarkdownEditor @text={{this.description}} />
          
     </div> 
