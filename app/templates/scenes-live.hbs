@@ -14,10 +14,9 @@
 
 {{#each this.model.active as |scene| }}
 
-<div class="live-scenes-block">
-  <div class="row live-scenes-heading">
-    
-    <div class="col col-xs-12 col-sm-6">
+<div class="live-scenes-entry">
+  <div class="live-scenes-heading">
+    <div class="live-scenes-title">
       {{#if scene.is_unread}}
       <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
       {{/if}}
@@ -29,91 +28,52 @@
       {{else}}
         {{scene.location}}
       {{/if}}
-            
+        
       {{#if scene.content_warning}}
       <ContentWarningTag @warning={{scene.content_warning}} @position="top" />
       {{/if}}
       </LinkTo>
-   
+
     </div>
 
-    <div class="col col-xs-12 col-sm-4">
+    <div class="live-scenes-tags">
       <ScenePrivacyTag @scene={{scene}} />
       <ScenePacingTag @scene={{scene}} />
       <SceneTypeTag @scene={{scene}} />
-    </div>        
-   
+    </div> 
+  </div>           
     
-    
-    <div class="col col-xs-12 col-sm-2">
-      <div class="live-scenes-controls">
-       {{#if scene.watching}}
-         <a href="#" {{on 'click' (fn this.stopWatching scene.id)}}><i class="fa fa-eye-slash" aria-label="Stop Watching"></i></a>
-
-       {{else}}
-         {{#if scene.can_view}}
-           <a href="#" {{on 'click' (fn this.watchScene scene.id)}}><i class="fa fa-eye" aria-label="Watch"></i></a>
-      
-           {{#if (not scene.participating) }}
-           <a href="#" {{on 'click' (fn this.joinScene scene.id)}}><i class="fa fa-sign-in-alt" aria-label="Join"></i></a>
-           {{/if}}
-         {{/if}}
+  <div class="live-scenes-body">
+    <div class="live-scenes-participants">
+        {{#each scene.participants as |char|}}
+        <CharIconInline @char={{char}} />
+        {{/each}}
+    </div>
+    <div class="live-scenes-activity">      
+      <div class="live-scenes-last-pose"><span class="scene-info-label">Last:</span> {{scene.last_pose_time_str}}</div>
+      <div class="live-scenes-date"><span class="scene-info-label">Date:</span> {{scene.icdate}}</div>
+    </div>
+  </div>
   
+  <div class="live-scenes-controls">
+   {{#if scene.watching}}
+     <a href="#" {{on 'click' (fn this.stopWatching scene.id)}}><i class="fa fa-eye-slash" aria-label="Stop Watching"></i> Unwatch</a>
+
+   {{else}}
+     {{#if scene.can_view}}
+       <a href="#" {{on 'click' (fn this.watchScene scene.id)}}><i class="fa fa-eye" aria-label="Watch"></i> Watch</a>
+  
+       {{#if (not scene.participating) }}
+       <a href="#" {{on 'click' (fn this.joinScene scene.id)}}><i class="fa fa-sign-in-alt" aria-label="Join"></i> Join</a>
        {{/if}}
-       </div>
-      </div>
-  </div>
-    
+     {{/if}}
 
-  <div class="row">
-    <div class="col col-xs-12 col-sm-9">
-      <div class="live-scenes-contents">
-        <div class="live-scenes-participants">
-          {{#each scene.participants as |char|}}
-          <CharIconInline @char={{char}} />
-          {{/each}}
-          </div>
-        
-        {{#if scene.limit}}
-        <div><span class="scene-info-label">Notes:</span> {{scene.limit}}</div>
-        {{/if}}
-        
-        {{#if scene.summary}}
-        <div class="scene-summary">
-          <a data-bs-toggle="collapse" href="#details-{{scene.id}}" class="">
-             <i class="fa fa-caret-down" aria-label="Details"></i> Show Details
-          </a>
-          <div id="details-{{scene.id}}" class="card-collapse collapse">
-              <p><AnsiFormat @text={{scene.summary}} />
-              </p>
-          </div>
-        </div>
-        {{/if}}
-
-      </div>
-    </div>
-    
-    <div class="col col-xs-12 col-sm-3">
-      
-      <div>
-        <span class="scene-info-label">Last:</span> 
-        {{#if scene.last_posed}}
-        {{scene.last_posed}},
-        {{/if}}
-        {{scene.last_pose_time_str}}
-      </div>
-      <div>
-      <span class="scene-info-label">Date:</span> {{scene.icdate}}
-      </div>
-    </div>
-    
-    
-  </div>
-    
-  
+   {{/if}}
+   </div>
 </div>
 {{/each}}
 
+    
 <hr>
 
 <IconLegend />

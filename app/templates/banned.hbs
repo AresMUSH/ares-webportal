@@ -40,7 +40,7 @@
       
        <div class="form-item">
         <div class="form-item-label">
-            <label for="player" class="col-form-label">Player</label>
+            Player
         </div>
         <div class="form-item-entry">
              <PowerSelect @selected={{this.banPlayerObj}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{this.banPlayerChanged}} as |char|>
@@ -51,7 +51,7 @@
       
        <div class="form-item">
         <div class="form-item-label">
-            <label for="player" class="col-form-label">Reason</label>
+            Reason
         </div>
         <div class="form-item-entry">
              <Input @type="text" size={{50}} id="banPlayerReason" @value={{this.banPlayerReason}} /> 
@@ -78,7 +78,7 @@
       
        <div class="form-item">
         <div class="form-item-label">
-            <label for="site" class="col-form-label">Site</label>
+            Site
         </div>
         <div class="form-item-entry">
              <Input @type="text" size={{50}} id="site" @value={{this.banSiteName}} />
@@ -88,7 +88,7 @@
       
        <div class="form-item">
         <div class="form-item-label">
-            <label for="reason" class="col-form-label">Reason</label>
+            Reason
         </div>
         <div class="form-item-entry">
              <Input @type="text" size={{50}} id="reason" @value={{this.banReason}} />

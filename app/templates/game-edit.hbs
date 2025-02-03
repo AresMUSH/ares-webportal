@@ -3,42 +3,60 @@
 
 <p>This information will be used on your web portal and in the <a href="http://arescentral.aresmush.com">AresCentral Game Directory</a> to advertise your game.</p>
 
-<p><label for="name">Name:</label></p>
-<p><Input @type="text" size={{25}} id="name" @value={{this.model.config.name}} /></p>
+      <div class="alert alert-info">Only public games are advertised on AresCentral.  Private games will not appear on the AresCentral game list, but they can still be registered to activate other AresCentral features (like player handles).  Only players with a character on the game will see details for a private game on AresCentral. Admins can register a private game with AresCentral using the <code>game/register</code> command. </div>
 
-<p><label for="name">Website:</label> <span class="hint">(Leave blank to use your web portal address.)</span></p>
-<p><Input @type="text" size={{25}} id="website" @value={{this.model.config.website}} /></p>
 
-<p><label for="name">Category:</label>
-
-<PowerSelect @selected={{this.model.config.category}} @options={{this.model.category_options}} @onChange={{this.categoryChanged}} as |category|>
-  {{category}}
-</PowerSelect>
-
-</p>
-
-<p><label for="name">Status:</label>
-
-<PowerSelect @selected={{this.model.config.status}} @options={{this.model.status_options}} @onChange={{this.statusChanged}} as |status|>
-  {{status}}
-</PowerSelect>
-                        
-</p>
-
-<div class="card card-body">
-<p>
-    <b>Public Game?:</b>
-
-    <Input @type="checkbox" @checked={{this.model.config.public_game}} />
-</p>
-
-<p class="hint">Only public games are advertised on AresCentral.  Private games will not appear on the AresCentral game list, but they can still be registered to activate other AresCentral features (like player handles).  Only players with a character on the game will see details for a private game on AresCentral. Admins can register a private game with AresCentral using the <code>game/register</code> command. </p>
-
+<div class="form-item">
+  <div class="form-item-label">Name:</div>
+  <div class="form-item-entry"><Input @type="text" size={{25}} id="name" @value={{this.model.config.name}} /></div>
 </div>
 
-<p><b>Description:</b></p>
+<div class="form-item">
+  <div class="form-item-label">Website:</div>
+  <div class="form-item-entry">
+   <Input @type="text" size={{25}} id="website" @value={{this.model.config.website}} />
+    <div class="hint">(Leave blank to use your web portal address.)</div>
+   </div>
+</div>
 
-<MarkdownEditor @text={{this.model.config.description}} />
+<div class="form-item">
+  <div class="form-item-label">Category:</div>
+  <div class="form-item-entry">
+   <PowerSelect @selected={{this.model.config.category}} @options={{this.model.category_options}} @onChange={{this.categoryChanged}} as |category|>
+     {{category}}
+   </PowerSelect>
+  </div>
+</div>
+
+<div class="form-item">
+  <div class="form-item-label">Status:</div>
+  <div class="form-item-entry">
+    <PowerSelect @selected={{this.model.config.status}} @options={{this.model.status_options}} @onChange={{this.statusChanged}} as |status|>
+      {{status}}
+    </PowerSelect>                
+  </div>
+</div>
+
+<div class="form-item">
+  <div class="form-item-label">Public Game?</div>
+  <div class="form-item-entry">
+    <div>
+      <Input @type="checkbox" @checked={{this.model.config.public_game}} />   
+    </div>
+  </div>              
+</div>
+
+<div class="form-item">
+  <div class="form-item-label">Description:</div>
+  <div class="form-item-entry">
+    <MarkdownEditor @text={{this.model.config.description}} />     
+  </div>
+</div>
+
+
+<p><b>:</b></p>
+
+
 
 
 <div class="action-buttons">

@@ -4,7 +4,7 @@
         
     <div class="form-item">
      <div class="form-item-label">
-        <label for="title" class="col-xs-2 col-form-label">Title:</label>
+        Title:
      </div>
      <div class="form-item-entry">
        <Input @type="text" size={{25}} id="title" @enter={{this.save}} @value={{this.model.title}} />
@@ -15,7 +15,7 @@
 
      <div class="form-item">
       <div class="form-item-label">
-        <label for="name" class="col-xs-2 col-form-label">Page Name:</label>
+        Page Name:
       </div>
       <div class="form-item-entry">
         <Input @type="text" size={{25}} id="name" @enter={{this.save}} @value={{this.model.name}} />
@@ -26,7 +26,7 @@
        
     <div class="form-item">
      <div class="form-item-label">
-        <label for="tags" class="col-xs-2 col-form-label">Tags:</label>
+        Tags:
      </div>
      <div class="form-item-entry">
         <Input @type="text" size={{25}} id="tags" @enter={{this.save}} @value={{this.model.tags}} />
@@ -35,7 +35,7 @@
     
     <div class="form-item">
      <div class="form-item-label">
-        <label for="tags" class="col-xs-2 col-form-label">Template:</label>
+        Template:
      </div>
      <div class="form-item-entry">
       <PowerSelect @selected={{this.model.template}} @options={{this.model.templates}} @searchField="title" @onChange={{this.templateChanged}} as |tmp|>

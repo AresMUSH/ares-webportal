@@ -38,12 +38,27 @@
               <div class="file-uploader-item-detail">
                     {{#if (not f.upload_success)}}
                       {{#if this.lockProperties}}
-                      <p><label class="col-xs-5">Folder:</label> {{f.folder}}</p>
+                      <div class="form-item">
+                        <div class="form-item-label">>Folder:</div> 
+                        <div class="form-item-entry">{{f.folder}}</div>
+                      </div>
                       {{else}}
-                      <p><label class="col-xs-5">Name:</label> <Input @type="text" @value={{f.name}} /></p>
-                      <p><label class="col-xs-5">Folder:</label> <Input @type="text" @value={{f.folder}} /></p>
-                      <p><label class="col-xs-5">Description:</label> <Input @type="text" @value={{f.description}} /></p>
-                      <p><label class="col-xs-5">Overwrite?</label> <Input @type="checkbox" @checked={{f.allowOverwrite}} /></p>
+                      <div class="form-item">
+                        <div class="form-item-label">Name:</div> 
+                        <div class="form-item-entry"><Input @type="text" @value={{f.name}} /></div>
+                      </div>
+                      <div class="form-item">
+                        <div class="form-item-label">Folder:</div> 
+                        <div class="form-item-entry"><Input @type="text" @value={{f.folder}} /></div>
+                      </div>
+                      <div class="form-item">
+                        <div class="form-item-label">Description:</div> 
+                        <div class="form-item-entry"><Input @type="text" @value={{f.description}} /></div>
+                      </div>
+                      <div class="form-item">
+                        <div class="form-item-label">Overwrite?</div> 
+                        <div class="form-item-entry"><Input @type="checkbox" @checked={{f.allowOverwrite}} /></div>
+                      </div>
                       <p>{{f.sizeKb}}KB</p> 
 
                       {{/if}}

@@ -10,7 +10,7 @@
     
      <div class="form-item">
       <div class="form-item-label">
-         <label class="col-form-label">Scene Privacy:</label>
+         Scene Privacy:
       </div>
       <div class="form-item-entry">
         <PowerSelect @selected={{this.model.scene.privacy}} @options={{this.scenePrivacyValues}} @onChange={{this.privacyChanged}} as |type|>
@@ -70,7 +70,7 @@
     
     <div class="form-item">
      <div class="form-item-label">
-        <label class="col-form-label">Scene Type:</label>
+        Scene Type:
      </div>
      <div class="form-item-entry">
         <PowerSelect @selected={{this.model.scene.scene_type}} @options={{this.sceneTypes}} @onChange={{this.typeChanged}} as |type|>
@@ -81,7 +81,7 @@
    
     <div class="form-item">
      <div class="form-item-label">
-        <label class="col-form-label">Scene Pacing:</label>
+        Scene Pacing:
      </div>
      <div class="form-item-entry">
         <PowerSelect @selected={{this.model.scene.scene_pacing}} @options={{this.scenePacingOptions}} @onChange={{this.pacingChanged}} as |type|>

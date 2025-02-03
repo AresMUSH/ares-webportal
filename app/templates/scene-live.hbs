@@ -1,22 +1,14 @@
 {{page-title this.pageTitle}}
 
  
- <div class="row">
-   <div class="col col-xs-12">
-       
-    <h1>Scene {{this.model.scene.id}}
-        {{#if this.model.scene.title}}
-         - {{this.model.scene.title}}
-         {{/if}}
-     </h1>
+<h1>Scene {{this.model.scene.id}}
+    {{#if this.model.scene.title}}
+     - {{this.model.scene.title}}
+     {{/if}}
+ </h1>
     
-</div>
-</div>
-
-<div class="row">
-    <div class="col col-xs-12">
      
       <LiveSceneControl @scene={{this.model.scene}} @locations={{this.model.locations}} @abilities={{this.model.abilities}} @places={{this.model.scene.places}} @playerName={{this.currentUser.name}} @characters={{this.model.characters}} @scrollPaused={{this.scrollPaused}} @custom={{this.model.custom}} @refresh={{this.refresh}} @onScrollDown={{this.scrollScene}} @onSetScroll={{this.setScroll}} />
-   </div>
-</div>
+
+
 {{outlet}}

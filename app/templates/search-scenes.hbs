@@ -18,51 +18,51 @@
 
 <div id="searchFields" class="card-collapse collapse {{if this.searchResults '' 'show'}}">
 
-<div class="row">
+<div class="form-item">
   
-  <div class="col col-xs-3">
+  <div class="form-item-label">
     <label>Title:</label>
   </div>
   
-  <div class="col col-xs-9">
+  <div class="form-item-entry">
         <p><Input @type="text" size={{25}} id="title" @value={{this.searchTitle}} @enter={{this.search}} /></p>
   </div>
   
 </div>
 
-<div class="row">
+<div class="form-item">
   
-  <div class="col col-xs-3">
+  <div class="form-item-label">
         <label>Participant Names:</label>
   </div>
   
-  <div class="col col-xs-9">
+  <div class="form-item-entry">
         <p><Input @type="text" size={{25}} id="participant" @value={{this.searchParticipant}} @enter={{this.search}} /></p>
         <p class="hint">Enter one or more participant names (space-separated).</p>
   </div>
   
 </div>
 
-<div class="row">
+<div class="form-item">
   
-  <div class="col col-xs-3">
+  <div class="form-item-label">
         <label>IC Date:</label>
   </div>
   
-  <div class="col col-xs-9">
+  <div class="form-item-entry">
         <p><Input @type="text" size={{25}} id="icdate" @value={{this.searchDate}} @enter={{this.search}} /></p>
         <p class="hint">Matches the beginning of a scene's IC date, e.g. 2018-04 will find all scenes from April.</p>
   </div>
   
 </div>
 
-<div class="row">
+<div class="form-item">
   
-  <div class="col col-xs-3">
+  <div class="form-item-label">
         <label>Scene Type:</label>
   </div>
   
-  <div class="col col-xs-9">
+  <div class="form-item-entry">
 
     <PowerSelect @selected={{this.searchType}} @options={{this.sceneTypes}} @onChange={{this.sceneTypeChanged}} as |name|>
       {{name}}
@@ -72,37 +72,37 @@
   
 </div>
 
-<div class="row">
+<div class="form-item">
   
-  <div class="col col-xs-3">
+  <div class="form-item-label">
         <label>Location:</label>
   </div>
   
-  <div class="col col-xs-9">
+  <div class="form-item-entry">
         <p><Input @type="text" size={{25}} id="location" @value={{this.searchLocation}} @enter={{this.search}} /></p>
   </div>
   
 </div>
 
-<div class="row">
+<div class="form-item">
   
-  <div class="col col-xs-3">
+  <div class="form-item-label">
         <label>Tag:</label>
   </div>
   
-  <div class="col col-xs-9">
+  <div class="form-item-entry">
         <p><Input @type="text" size={{25}} id="tag" @value={{this.searchTag}} @enter={{this.search}} /></p>
   </div>
   
 </div>
 
-<div class="row">
+<div class="form-item">
 
-  <div class="col col-xs-3">
+  <div class="form-item-label">
         <label>Summary and Log:</label>
   </div>
 
-  <div class="col col-xs-9">
+  <div class="form-item-entry">
         <p><Input @type="text" size={{25}} id="log" @value={{this.searchLog}} @enter={{this.search}} /></p>
 
         <p class="hint">Matches a whole word or phrase from a log's summary or full log text.</p>

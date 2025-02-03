@@ -12,36 +12,36 @@
 
 <div id="searchFields" class="card-collapse collapse {{if this.searchResults '' 'show'}}">
 
-<div class="row">
+<div class="form-item">
   
-  <div class="col col-xs-3">
+  <div class="form-item-label">
     <label>Name:</label>
   </div>
   
-  <div class="col col-xs-9">
+  <div class="form-item-entry">
         <p><Input @type="text" size={{25}} id="name" @value={{this.searchName}} @enter={{this.search}} /></p>
   </div>
   
 </div>
-<div class="row">
+<div class="form-item">
   
-  <div class="col col-xs-3">
+  <div class="form-item-label">
     <label>Area:</label>
   </div>
   
-  <div class="col col-xs-9">
+  <div class="form-item-entry">
         <p><Input @type="text" size={{25}} id="area" @value={{this.searchArea}} @enter={{this.search}} /></p>
   </div>
   
 </div>
 
-<div class="row">
+<div class="form-item">
   
-  <div class="col col-xs-3">
+  <div class="form-item-label">
     <label>Owner:</label>
   </div>
   
-  <div class="col col-xs-9">
+  <div class="form-item-entry">
         <p><Input @type="text" size={{25}} id="area" @value={{this.searchOwner}} @enter={{this.search}} /></p>
   </div>
   

@@ -2,9 +2,9 @@
 
 <h1>Claim Roster Character</h1>
   
-<div class="row profile-wrap">
+<div class="profile-wrap">
     
-    <div class="col-md-4 col-sm-12 col-xs-12">
+    <div class="profile-image-wrap">
     {{#if this.model.profile_image.name}}
             <LinkTo @route="file" @models={{array this.model.profile_image.folder this.model.profile_image.name}}>
                 <img src="/game/uploads/{{this.model.profile_image.path}}" alt="{{this.model.name}}'s icon"  class="profile-image">
@@ -14,27 +14,25 @@
     {{/if}}
     </div>
 
-    <div class="col-md-8 col-sm-12 col-xs-12">        
-
         <div class="profile-box">
-        <h3>
-          {{this.model.profile_title}}
-        </h3>
+          <div class="roster-info">
+            <h3>
+              {{this.model.profile_title}}
+            </h3>
         
-        <p>
-        <AnsiFormat @text={{this.model.roster.notes}} />
-        </p>
+            <p>
+            <AnsiFormat @text={{this.model.roster.notes}} />
+            </p>
     
-        <p>
-          {{#if this.model.roster.previously_played}}
-          <span class="badge bg-info">Previously Played</span>
-          {{/if}}
-        </p>
+            <p>
+              {{#if this.model.roster.previously_played}}
+              <span class="badge bg-info">Previously Played</span>
+              {{/if}}
+            </p>
     
-        <p>Any questions about this character, contact {{this.model.roster.contact}}.</p>
-        
+            <p>Any questions about this character, contact {{this.model.roster.contact}}.</p>
+        </div>
       </div>
-    </div>
         
 </div>
 
@@ -43,13 +41,11 @@
     {{#if this.model.roster.app_required}}
     <h3>App Required</h3>
     
-    <p>This character requires an application.  Include your app below. Consult your local game policies and/or the roster contact person for details about the app process and app requirements.
+    <p>This character requires an application. Enter your application below. Consult your local game policies and/or the roster contact person for details about the app process and app requirements.
     </p>
-    
-    <p><b>App Details</b>:</p>
-     
-     <MarkdownEditor @text={{this.rosterApp}} />
          
+     <MarkdownEditor @text={{this.rosterApp}} />
+        
     {{/if}}
 </div>
 

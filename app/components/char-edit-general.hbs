@@ -5,7 +5,7 @@
         <div class="form-item-label">
             {{demo.name}}
         </div>
-        <div class="form-item-value">
+        <div class="form-item-entry">
             {{#if (eq demo.name 'Gender') }}
                 
                 <PowerSelect @selected={{this.model.char.demographics.gender}} @searchField="value" @options={{this.genders}} @onChange={{this.genderChanged}} as |gender|>
