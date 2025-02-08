@@ -80,18 +80,19 @@
  </div>
  {{/if}}
 
+ <div class="scene-controls-box">
  {{#if this.canTalk}}
    <MarkdownEditor @text={{this.channel.draftMessage}} class="chat-box" cols={{80}} rows="6" @onEnter={{this.sendMessage}} />
  {{/if}}
   <div class="scene-controls">
 
-    <div class="col col-sm-6 col-xs-12 scene-controls-right">
+    <div class="scene-controls-right">
       {{#if this.canTalk}}
          <button class="btn-primary btn" {{on 'click' this.sendMessage}}>Send Message</button>
        {{/if}}
     </div>
  
-    <div class="col col-sm-6 col-xs-12 scene-controls-left">
+    <div class="scene-controls-left">
       
       
       
@@ -127,6 +128,8 @@
       </div>
     </div>
   </div>
+  
+</div>
           
 
 <div class="clearfix"></div>

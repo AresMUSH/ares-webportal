@@ -151,7 +151,7 @@
    
 
        <div class="scene-controls">
-         <div class="col col-sm-6 col-xs-12 scene-controls-right">
+         <div class="scene-controls-right">
              {{#if (and (not this.scene.completed) (not this.scene.reload_required))}} 
 
              <div class="pose-buttons">
@@ -180,7 +180,7 @@
          </div>
                 
         {{#if (not this.scene.reload_required)}}
-         <div class="col col-sm-6 col-xs-12 scene-controls-left">
+         <div class="scene-controls-left">
                 
              <div class="scene-dropdowns">
              {{#if (not this.scene.completed)}}
