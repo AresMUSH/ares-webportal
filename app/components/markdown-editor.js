@@ -1,7 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
+import { action, computed } from '@ember/object';
 
 export default Component.extend({
   previewText: null,
@@ -9,10 +8,10 @@ export default Component.extend({
   gameApi: service(),
   text: '',
   
-  get markdownText() {
+  markdownText: computed('text', function() {
     return this.text || "";
-  },
-    
+  }),
+  
   @action
   showHelp() {
     window.open("/help/markdown");
