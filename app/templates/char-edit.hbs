@@ -13,6 +13,9 @@
     {{#if this.model.char.show_background_tab}}
     <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#background">Background</a></li>
     {{/if}}
+    {{#if this.model.char.fs3.show_fs3_tab}}
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#fs3">FS3</a></li>
+    {{/if}}
     {{#if (or this.model.char.show_idle_tab this.model.char.show_roster_tab)}}
     <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#idle">Idle/Roster</a></li>
     {{/if}}
@@ -45,10 +48,14 @@
   </div>
   {{/if}}
 
+  {{#if this.model.char.fs3.show_fs3_tab}}
+    <CharEditFs3 @char={{this.model.char}} />
+  {{/if}}
+
   {{#if (or this.model.char.show_idle_tab this.model.char.show_roster_tab)}}
     <CharEditIdle @model={{this.model}} />
   {{/if}}
-
+  
   {{#if (or this.model.char.show_roles_tab this.model.char.show_pw_tab)}}
   <div id="admin" class="tab-pane fade show">
     <CharEditAdmin @char={{this.model.char}} />

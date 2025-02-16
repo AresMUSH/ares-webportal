@@ -71,6 +71,7 @@ export default Controller.extend({
             background: this.get('model.char.background'),
             rp_prefs: this.get("model.char.rp_prefs"),
             tags: this.get('model.char.tags'),
+            fs3: this.get('model.char.fs3'),
             descs: descs,
             custom: custom,
             roster: roster,
