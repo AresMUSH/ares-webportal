@@ -8,7 +8,6 @@ export default Component.extend({
   didInsertElement: function () {
     this._super(...arguments);
     
-    console.log("LLAMA");
     this.onResetAvail(this.resetTurnstile);
     let args = {
         sitekey: this.sitekey,
