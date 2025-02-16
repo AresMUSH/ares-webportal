@@ -16,8 +16,8 @@
     {{#if (or this.model.char.show_idle_tab this.model.char.show_roster_tab)}}
     <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#idle">Idle/Roster</a></li>
     {{/if}}
-    {{#if (or this.model.char.show_idle_tab this.model.char.show_roles_tab)}}
-    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#roles">Roles</a></li>
+    {{#if (or this.model.char.show_roles_tab this.model.char.show_pw_tab)}}
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#admin">Admin</a></li>
     {{/if}}
     <CharEditCustomTabs @char={{this.model}} />
 </ul>
@@ -49,11 +49,9 @@
     <CharEditIdle @model={{this.model}} />
   {{/if}}
 
-  {{#if this.model.char.show_roles_tab}}
-  <div id="roles" class="tab-pane fade show">
-    <PowerSelectMultiple @selected={{this.model.char.roles}} @options={{this.model.char.all_roles}} @onChange={{this.rolesChanged}} as |role|>
-      {{role}}
-    </PowerSelectMultiple>
+  {{#if (or this.model.char.show_roles_tab this.model.char.show_pw_tab)}}
+  <div id="admin" class="tab-pane fade show">
+    <CharEditAdmin @char={{this.model.char}} />
   </div>
   {{/if}}
   

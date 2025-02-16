@@ -77,11 +77,6 @@ export default Controller.extend({
             roles: this.get('model.char.roles') || []
         };
     }, 
-    
-    @action
-    rolesChanged(roles) {
-      this.set('model.char.roles', roles);
-    },
         
     @action
     save() {

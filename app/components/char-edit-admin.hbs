@@ -1,0 +1,19 @@
+<div id="admin" class="tab-pane fade show">
+  {{#if this.char.show_roles_tab}}
+  <h3>Roles</h3>
+
+    <PowerSelectMultiple @selected={{this.char.roles}} @options={{this.char.all_roles}} @onChange={{this.rolesChanged}} as |role|>
+      {{role}}
+    </PowerSelectMultiple>
+
+  {{/if}}
+
+
+  {{#if this.char.show_pw_tab}}
+  <hr>
+  <h3>Password</h3>
+  
+    <button class="btn btn-warning" {{on 'click' this.resetPassword}}>Reset Password</button>
+    
+  {{/if}}
+</div>
