@@ -5,7 +5,7 @@ import { action } from '@ember/object';
 export default Component.extend({
   tagName: '',
   gameApi: service(),
-  flashMessages: service(),
+  newPassword: '',
   
   @action
   rolesChanged(roles) {
@@ -21,8 +21,8 @@ export default Component.extend({
             return;
         }
     
-        const newPassword = response['new_password'];
-        this.flashMessages.success(`Password reset to: ${newPassword}!`);
+        const newPass = response['new_password'];
+        this.set('newPassword', newPass);
     });
   },
       

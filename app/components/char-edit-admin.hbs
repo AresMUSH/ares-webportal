@@ -13,6 +13,10 @@
   <hr>
   <h3>Password</h3>
   
+    {{#if this.newPassword}}
+    <div class="alert alert-info">New Password: {{this.newPassword}}</div>
+    {{/if}}
+    
     <button class="btn btn-warning" {{on 'click' this.resetPassword}}>Reset Password</button>
     
   {{/if}}
