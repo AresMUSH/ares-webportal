@@ -6,24 +6,37 @@ export default Controller.extend({
   name: '',
   password: '',
   confirmPassword: '',
-  reCaptchaResponse: '',
+  recaptchaResponse: '',
+  turnstileResponse: '',
   session: service(),
   flashMessages: service(),
   gameApi: service(),
   router: service(),
-
+  
   resetOnExit: function() {
     this.set('name', '');
     this.set('password', '');
     this.set('confirmPassword', '');
     this.set('reCaptchaResponse', '');
+    this.set('turnstileResponse', '');
   },
   
   @action
-  recaptchaResolved(reCaptchaResponse) {
-    this.set('reCaptchaResponse', reCaptchaResponse);
+  setTurnstileReset(callback) {
+    this.set('turnstileReset', callback);
   },
-        
+  
+  @action
+  setRecaptchaRef(element) {
+    this.set('recaptchaControl', element);
+  },
+  
+  
+  @action
+  recaptchaResolved(response) {
+    this.set('recaptchaResponse', response);
+  },
+  
   @action
   register() {
             
@@ -32,11 +45,20 @@ export default Controller.extend({
       name: this.name, 
       password: this.password, 
       confirm_password: this.confirmPassword, 
-      recaptcha: this.reCaptchaResponse
+      recaptcha: this.recaptchaResponse,
+      turnstile: this.turnstileResponse
     }, null)
-    .then((response) => {            
-      if (response.error) {
-        this.recaptchaControl.resetReCaptcha();
+    .then((response) => {    
+      if (response.error) {   
+        if (this.recaptchaControl) {
+          this.set('recaptchaResponse', '');
+          this.recaptchaControl.reset();  
+        }
+        if (this.turnstileReset) { 
+          this.set('turnstileResponse', '');
+          this.turnstileReset();
+        }
+             
         return;
       }                
       this.flashMessages.success("Your character has been created.  Please log in.");
