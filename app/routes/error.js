@@ -9,6 +9,5 @@ export default Route.extend({
   @action 
   willTransition(transition) {
       this.controllerFor('application').set('hideSidebar', false);
-      this.controllerFor('client').send('disconnect');
   }
 });

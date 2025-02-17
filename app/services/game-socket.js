@@ -7,10 +7,11 @@ export default Service.extend(AresConfig, {
     router: service(),
     flashMessages: service(),
     favicon: service(),
+    gameApi: service(),
     
-    socket: null,
     charId: null,
     callbacks: null,
+    eventSource: null,
     connected: false,
   
     init: function() {
@@ -18,14 +19,13 @@ export default Service.extend(AresConfig, {
       this.set('callbacks', {});
     },
       
-    socketUrl() {
-      let protocol = this.httpsEnabled ? 'wss' : 'ws';
-      return `${protocol}://${this.mushHost}:${this.websocketPort}/websocket`;
+    streamUrl(charId) {
+      let url = `${this.gameApi.serverUrl()}/api/events/${charId || -1}`;
+      return url;
     },
     
     checkSession(charId) {
-        let socket = this.socket;
-        if (!socket || this.charId != charId) {
+        if (!this.connected || this.charId != charId) {
             this.sessionStarted(charId);
         }
     },
@@ -71,75 +71,48 @@ export default Service.extend(AresConfig, {
     sessionStarted(charId) {
       
       if (this.aresconfig === null) {
-        console.log("Unable to open websocket - aresconfig is missing.");
+        console.log("Unable to open event stream - aresconfig is missing.");
         return;
       }
       
-        let socket = this.socket;
-        this.set('charId', charId);
-        
-        if (socket) {
-          this.handleConnect();
-          return;
+      this.set('charId', charId);
+      
+      if (this.eventSource) {
+        this.eventSource.close();        
+      }
+      
+      try {
+        const sourceUrl  = this.streamUrl(charId);
+        const source = new EventSource(sourceUrl);
+      
+        this.set('eventSource', source);
+       
+        let self = this;
+        source.onopen = function() {
+          self.set('connected', true);
+          console.log("Event stream open at " + new Date().toLocaleString());
+        };
+        source.onerror = function(evt) {
+          self.handleError(self, evt);
+        };
+        source.addEventListener('message', function(evt) {
+            self.handleMessage(self, evt);
+        });
+        this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
+    
+        if (this.browserNotification) {
+            this.browserNotification.requestPermission();
         }
-        
-        try
-        {
-            socket = new WebSocket(this.socketUrl());
-            this.set('socket', socket);
-            let self = this;
-            socket.onopen = function() {
-                self.handleConnect();
-            };
-            socket.onmessage = function(evt) {
-                self.handleMessage(self, evt);
-            };
-            socket.onclose = function() {
-              self.handleError(self, 'Socket closed.');
-            };
-            socket.onError = function(evt) {
-              self.handleError(self, evt);
-            };
-            this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
-        
-            if (this.browserNotification) {
-                this.browserNotification.requestPermission();
-            }
-        }
-        catch(error)
-        {
-            console.log(`Error loading websocket: ${error}`);
-        }
+      }
+      catch(error)
+      {
+          console.log(`Error opening event stream: ${error}`);
+      }
     },
     
     sessionStopped() {
-        this.set('charId', null);
-        this.sendCharId();
-        /*
-        
-        let socket = this.get('socket');
-            if (socket) {
-            socket.close();
-            this.set('socket', null);
-        }*/
-    },
-    
-    sendCharId() {
-      let cmd = {
-        'type': 'identify',
-        'data': { 'id': this.charId }
-      };
-      let json = JSON.stringify(cmd);
-      try {
-        let socket = this.socket;
-        if (socket) {
-          socket.send(json); 
-        }
-      }
-      catch(err) {
-        // Socket closed already.
-      }
-       
+      // Stopping a session is just restarting it with no character ID.
+      this.sessionStarted(null);
     },
     
     removeCallback( notification ) {
@@ -152,14 +125,9 @@ export default Service.extend(AresConfig, {
     
     handleError(self, evt) {
       let message = 'Your connection to the game has been lost!  You will no longer see updates.  Try reloading the page.  If the problem persists, the game may be down.';
-      console.error("Websocket closed: ", evt);
+      console.error(`${new Date().toLocaleString()} Event stream closed.`, evt);
       self.notify(message, 10, 'error');
       self.set('connected', false);
-    },
-    
-    handleConnect() {
-      this.set('connected', true);
-      this.sendCharId();
     },
     
     updateNotificationBadge(count) {
@@ -170,7 +138,6 @@ export default Service.extend(AresConfig, {
     },
     
     handleMessage(self, evt) {
-        
         var data;
         
         try
@@ -182,7 +149,7 @@ export default Service.extend(AresConfig, {
             data = null;
         }
         
-        if (!data) {
+        if (!data || data.length <= 1) {
             return;
         }
         
