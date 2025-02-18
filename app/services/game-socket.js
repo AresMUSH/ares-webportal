@@ -1,5 +1,6 @@
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
+import { computed } from '@ember/object';
 import AresConfig from 'ares-webportal/mixins/ares-config';
 
 export default Service.extend(AresConfig, {
@@ -13,21 +14,17 @@ export default Service.extend(AresConfig, {
     callbacks: null,
     eventSource: null,
     connected: false,
+    notReceivingGameUpdates: false,
+    connecting: false,
   
     init: function() {
       this._super(...arguments);
       this.set('callbacks', {});
     },
-      
+    
     streamUrl(charId) {
       let url = `${this.gameApi.serverUrl()}/api/events/${charId || -1}`;
       return url;
-    },
-    
-    checkSession(charId) {
-        if (!this.connected || this.charId != charId) {
-            this.sessionStarted(charId);
-        }
     },
     
     isWindowFocused() {
@@ -68,36 +65,73 @@ export default Service.extend(AresConfig, {
         }
     },
     
-    sessionStarted(charId) {
+    checkForConnectionDown() {
+      
+      let self = this;
+      
+      setTimeout(function() {
+        if (!self.connected) {
+          self.set('notReceivingGameUpdates', true);
+          let message = 'Your connection to the game has been lost!  You will no longer see updates.  Try reloading the page.  If the problem persists, the game may be down.';
+          self.notify(message, 10, 'error');
+          console.log(message);
+        }
+      }, 15000);  
+    },
+    
+    startSession(charId) {
       
       if (this.aresconfig === null) {
         console.log("Unable to open event stream - aresconfig is missing.");
         return;
       }
       
+      if (this.connected || this.connecting) {
+        if (this.charId != charId) {
+          console.log("Switching event connection to new character.");
+          this.set('connected', false);
+          this.set('connecting', false);          
+          this.eventSource.close();
+        } else {
+          console.log("Double event connection attempt.");
+          return;
+        }
+      }      
+      
       this.set('charId', charId);
-      
-      if (this.eventSource) {
-        this.eventSource.close();        
-      }
-      
+
       try {
+        this.set('connecting', true);
+        this.checkForConnectionDown();
         const sourceUrl  = this.streamUrl(charId);
         const source = new EventSource(sourceUrl);
       
         this.set('eventSource', source);
-       
+        
+        
         let self = this;
+        
+        
         source.onopen = function() {
+          self.set('connecting', false);
           self.set('connected', true);
-          console.log("Event stream open at " + new Date().toLocaleString());
+          self.set('notReceivingGameUpdates', false);
+          console.log("Event stream open at " + new Date().toLocaleString());          
         };
         source.onerror = function(evt) {
+          self.set('connecting', false);
           self.handleError(self, evt);
-        };
+        };        
         source.addEventListener('message', function(evt) {
-            self.handleMessage(self, evt);
+          self.handleMessage(self, evt);
         });
+        window.addEventListener("beforeunload", function() {
+          console.log("Window unloading");
+          if (self.eventSource) {
+            self.eventSource.close();
+          }
+        });
+        
         this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
     
         if (this.browserNotification) {
@@ -106,13 +140,16 @@ export default Service.extend(AresConfig, {
       }
       catch(error)
       {
-          console.log(`Error opening event stream: ${error}`);
+        console.log(`Error opening event stream: ${error}`);
+        this.set('connecting', false);
+        this.set('connected', false);          
+        this.set('notReceivingGameUpdates', true);
       }
     },
     
     sessionStopped() {
       // Stopping a session is just restarting it with no character ID.
-      this.sessionStarted(null);
+      this.startSession(null);
     },
     
     removeCallback( notification ) {
@@ -124,9 +161,8 @@ export default Service.extend(AresConfig, {
     },
     
     handleError(self, evt) {
-      let message = 'Your connection to the game has been lost!  You will no longer see updates.  Try reloading the page.  If the problem persists, the game may be down.';
+      this.checkForConnectionDown();
       console.error(`${new Date().toLocaleString()} Event stream closed.`, evt);
-      self.notify(message, 10, 'error');
       self.set('connected', false);
     },
     

@@ -8,7 +8,7 @@
   <div class="sidebar-heading">
       <h2>Game Status <i class="fa fa-video" aria-hidden="true"></i></h2>
   </div>
-  {{#if (not this.socketConnected)}}
+  {{#if this.notReceivingGameUpdates}}
     <div class="alert alert-warning">The website is not receiving live updates from the game.  If the problem persists, try reloading the page.</div>
   {{/if}}
 

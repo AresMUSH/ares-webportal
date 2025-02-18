@@ -23,7 +23,7 @@ export default Base.extend({
         .then((response) => {
             if (response.token) {
                 this.set('data', response);
-                this.gameSocket.sessionStarted(data.id);
+                this.gameSocket.startSession(data.id);
                 return Promise.resolve(data);
             }
             this.session.invalidate();
@@ -37,7 +37,7 @@ export default Base.extend({
         .then((response) => {
             if (response.id) {
                 this.set('data', response);
-                this.gameSocket.sessionStarted(response.id);
+                this.gameSocket.startSession(response.id);
                 return Promise.resolve(response);
             }
             this.session.invalidate();
