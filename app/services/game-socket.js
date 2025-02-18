@@ -23,7 +23,7 @@ export default Service.extend(AresConfig, {
     },
     
     streamUrl(charId) {
-      let url = `${this.gameApi.serverUrl()}/api/events/${charId || -1}`;
+      let url = `${this.gameApi.serverUrl()}/events/${charId || -1}`;
       return url;
     },
     
