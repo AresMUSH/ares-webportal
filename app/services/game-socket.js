@@ -3,6 +3,8 @@ import { inject as service } from '@ember/service';
 import { computed } from '@ember/object';
 import AresConfig from 'ares-webportal/mixins/ares-config';
 
+const CONNECTION_CHECK_INTERVAL_MS = 10000;
+
 export default Service.extend(AresConfig, {
     session: service(),
     router: service(),
@@ -16,10 +18,26 @@ export default Service.extend(AresConfig, {
     connected: false,
     notReceivingGameUpdates: false,
     connecting: false,
+    connectionDownCount: 0,
+    connectionCheck: null,
+    
   
     init: function() {
       this._super(...arguments);
       this.set('callbacks', {});
+      
+      this.checkConnection();
+      
+      let self = this;      
+      window.addEventListener("beforeunload", function() {
+        console.log("Window unloading");
+        if (self.eventSource) {
+          self.eventSource.close();
+        }
+        if (self.connectionCheck) {
+          clearInterval(self.connectionCheck);            
+        }
+      });
     },
     
     streamUrl(charId) {
@@ -65,18 +83,32 @@ export default Service.extend(AresConfig, {
         }
     },
     
-    checkForConnectionDown() {
-      
+    checkConnection() {
       let self = this;
       
-      setTimeout(function() {
-        if (!self.connected) {
-          self.set('notReceivingGameUpdates', true);
-          let message = 'Your connection to the game has been lost!  You will no longer see updates.  Try reloading the page.  If the problem persists, the game may be down.';
-          self.notify(message, 10, 'error');
-          console.log(message);
+      let checkInterval = setInterval(function() {
+      
+        if (self.connected) {
+          self.set('connectionDownCount', 0);
+          console.log("Events connection OK: " + new Date().toLocaleString());
+          return;
+        } 
+
+        self.set('connectionDownCount', self.connectionDownCount + 1);
+        console.log(`Events connection lost for ${self.connectionDownCount * CONNECTION_CHECK_INTERVAL_MS}ms ${new Date().toLocaleString()}`);
+
+        if (!self.notReceivingGameUpdates) {
+        
+          if (self.connectionDownCount >= 2) {                      
+            self.set('notReceivingGameUpdates', true);
+            let message = 'Your connection to the game has been lost!  You will no longer see updates.  Try reloading the page.  If the problem persists, the game may be down.';
+            self.notify(message, 10, 'error');
+            console.log(message);
+          }
         }
-      }, 15000);  
+      }, CONNECTION_CHECK_INTERVAL_MS);
+      
+      this.set('connectionCheck', checkInterval);
     },
     
     startSession(charId) {
@@ -102,7 +134,6 @@ export default Service.extend(AresConfig, {
 
       try {
         this.set('connecting', true);
-        this.checkForConnectionDown();
         const sourceUrl  = this.streamUrl(charId);
         const source = new EventSource(sourceUrl);
       
@@ -116,7 +147,7 @@ export default Service.extend(AresConfig, {
           self.set('connecting', false);
           self.set('connected', true);
           self.set('notReceivingGameUpdates', false);
-          console.log("Event stream open at " + new Date().toLocaleString());          
+          console.log("Event stream open at " + new Date().toLocaleString());   
         };
         source.onerror = function(evt) {
           self.set('connecting', false);
@@ -124,13 +155,7 @@ export default Service.extend(AresConfig, {
         };        
         source.addEventListener('message', function(evt) {
           self.handleMessage(self, evt);
-        });
-        window.addEventListener("beforeunload", function() {
-          console.log("Window unloading");
-          if (self.eventSource) {
-            self.eventSource.close();
-          }
-        });
+        });        
         
         this.set('browserNotification', window.Notification || window.mozNotification || window.webkitNotification);
     
@@ -161,7 +186,6 @@ export default Service.extend(AresConfig, {
     },
     
     handleError(self, evt) {
-      this.checkForConnectionDown();
       console.error(`${new Date().toLocaleString()} Event stream closed.`, evt);
       self.set('connected', false);
     },
