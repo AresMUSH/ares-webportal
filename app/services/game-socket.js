@@ -12,6 +12,7 @@ export default Service.extend(AresConfig, {
     charId: null,
     callbacks: null,
     connected: false,
+    lastActivity: null,
   
     init: function() {
       this._super(...arguments);
@@ -68,6 +69,11 @@ export default Service.extend(AresConfig, {
         }
     },
     
+    reconnect() {
+      console.log("Reconnecting websocket.");
+      this.sessionStarted(this.charId);
+    },
+    
     sessionStarted(charId) {
       
       if (this.aresconfig === null) {
@@ -95,7 +101,7 @@ export default Service.extend(AresConfig, {
                 self.handleMessage(self, evt);
             };
             socket.onclose = function() {
-              self.handleError(self, 'Socket closed.');
+              self.handleError(self, 'Websocket closed.');
             };
             socket.onError = function(evt) {
               self.handleError(self, evt);
@@ -155,10 +161,13 @@ export default Service.extend(AresConfig, {
       console.error("Websocket closed: ", evt);
       self.notify(message, 10, 'error');
       self.set('connected', false);
+      self.set('socket', null);
+      setTimeout(() => self.reconnect(), 5000);      
     },
     
     handleConnect() {
       this.set('connected', true);
+      this.set('lastActivity', new Date());
       this.sendCharId();
     },
     
@@ -188,9 +197,12 @@ export default Service.extend(AresConfig, {
         
         var recipient = data.args.character;
         var notification_type = data.args.notification_type;
+
         
-        if (notification_type == "webclient_output") {
-            return;
+        if (notification_type == "ping") {
+          this.set('lastActivity', new Date());
+          console.log("PING " + new Date().toLocaleString());
+          return;
         }
         
         if (!recipient || recipient === self.get('charId')) {
