@@ -24,7 +24,7 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, AresC
     
     currentUser: reads('session.data.authenticated'),
 
-    notReceivingGameUpdates: reads('gameSocket.notReceivingGameUpdates'),
+    socketConnected: reads('gameSocket.connected'),
 
     sidebar: reads('model'),
 

@@ -71,7 +71,7 @@ export default Route.extend(AresConfig, {
       if (response.error) {
         this.set('gameDown', true);
       }
-      response['notReceivingGameUpdates'] = this.get('gameSocket.notReceivingGameUpdates');
+      response['socketConnected'] = this.get('gameSocket.connected');
             
       if (response.token_expiry_warning) {
         this.flashMessages.warning(`Your login expires today (in ${response.token_expiry_warning}). You should log out and back in before that happens so you don't lose any work.`);
@@ -87,7 +87,7 @@ export default Route.extend(AresConfig, {
   model: function() {       
     let gameSocket = this.gameSocket;
     let self = this;
-    gameSocket.startSession(this.get('session.data.authenticated.id'));
+    gameSocket.checkSession(this.get('session.data.authenticated.id'));
     
     window.addEventListener("focus", function(event) {
       self.favicon.changeFavicon(false);                    

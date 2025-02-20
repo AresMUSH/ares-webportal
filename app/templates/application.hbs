@@ -67,7 +67,7 @@
          {{#if (not this.hideSidebar)}}
              {{#if this.model.left_sidebar}}
              <div class="sidebar left-sidebar" role="navigation" aria-label="sidebar">
-               <GlobalSidebar @model={{this.sidebar}} @notReceivingGameUpdates={{this.notReceivingGameUpdates}} @versionWarning={{this.versionWarning}} @boxStyle="sidebar-box-left" />
+               <GlobalSidebar @model={{this.sidebar}} @socketConnected={{this.socketConnected}} @versionWarning={{this.versionWarning}} @boxStyle="sidebar-box-left" />
              </div>
              {{/if}}
         {{/if}}
@@ -76,13 +76,13 @@
              <div class="body-container {{if this.model.left_sidebar 'right-body' 'left-body'}}" role="main">
                <FlashMessages />
                
-               {{#if this.notReceivingGameUpdates}}
+               {{#if (not this.socketConnected)}}
                  <div class="alert alert-warning">The website is not receiving live updates from the game.  Try reloading the page.</div>
                {{/if}}
                
                {{outlet}}
                
-               {{#if this.notReceivingGameUpdates}}
+               {{#if (not this.socketConnected)}}
                  <div class="alert alert-warning">The website is not receiving live updates from the game.  Try reloading the page.</div>
                {{/if}}
              </div>
@@ -96,7 +96,7 @@
          {{#if (not this.hideSidebar)}}
              {{#if (not this.model.left_sidebar)}}
              <div class="sidebar right-sidebar" role="navigation" aria-label="sidebar">
-                 <GlobalSidebar @model={{this.sidebar}} @notReceivingGameUpdates={{this.notReceivingGameUpdates}} @versionWarning={{this.versionWarning}} @boxStyle="sidebar-box-right" />
+                 <GlobalSidebar @model={{this.sidebar}} @socketConnected={{this.socketConnected}} @versionWarning={{this.versionWarning}} @boxStyle="sidebar-box-right" />
              </div>
              {{/if}}
          {{/if}}

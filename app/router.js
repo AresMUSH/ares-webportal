@@ -39,6 +39,7 @@ Router.map(function() {
   this.route('channels-manage');
   this.route('channel-create');
   this.route('channel-edit', { path: '/channel-edit/:id' });
+  this.route('client');
   this.route('combat', { path: '/combat/:id' });
   this.route('combat-log', { path: '/combat/:id/log' });
   this.route('combat-teams', { path: '/combat/:id/teams' });
