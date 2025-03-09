@@ -14,14 +14,14 @@
       <div class="card-body">
 
         {{#if this.model.handle}}
-        <p>Your character is linked to the handle <b>{{this.model.handle}}</b>.  Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your handle preferences.</p>
+        <p>Your character is linked to the handle <b>{{this.model.handle}}</b>.  Visit <a href="https://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your handle preferences.</p>
         {{else}}
 
 
         <p>To set up a player handle:</p>
 
         <ol>
-          <li>Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a>  and register your handle account.</li>
+          <li>Visit <a href="https://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a>  and register your handle account.</li>
           <li>At AresCentral, go to 'My Account -> Manage Characters'.</li>
           <li>Click 'Get A New Link Code' and copy the code it gives you.</li>
           <li>Enter the handle name and the code below and click 'Link to Handle'.</li>
@@ -113,7 +113,7 @@
               <div class="card-body">
           
                 {{#if this.model.handle}}
-                <p>Your timezone is {{this.model.timezone}}. Visit <a href="http://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your timezone, which will apply to all characters linked to your handle.</p>
+                <p>Your timezone is {{this.model.timezone}}. Visit <a href="https://arescentral.aresmush.com" target="_blank" rel="nofollow noopener">AresCentral</a> to manage your timezone, which will apply to all characters linked to your handle.</p>
                 {{else}}
                 
                 <PowerSelect @selected={{this.model.timezone}}  @options={{this.model.timezones}} @searchEnabled=true @onChange={{this.timezoneChanged}} as |tz|>
