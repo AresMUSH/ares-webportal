@@ -1,0 +1,63 @@
+<table class="table table-striped notifications-list">
+
+<tbody>
+  {{#each this.notices as |notification|}}
+  <tr>
+    <td>{{#if notification.is_unread}}
+          <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="Unread Notification"></i></span>
+          {{/if}}
+        </td>
+    <td>{{notification.timestamp}}</td>
+    <td><AnsiFormat @text={{notification.message}}/></td>
+    <td>
+    
+      <div class="notification-controls">
+        {{#if (eq notification.type 'mail')}}
+          <LinkTo @route="mail-message" @model={{notification.reference_id}}>
+            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
+          </LinkTo>
+        {{else if (eq notification.type 'forum')}}
+          <LinkTo @route="forum-topic" @models={{array (get notification.data 0) (get notification.data 1)}}>
+            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
+          </LinkTo>
+        {{else if (eq notification.type 'job')}}
+          <LinkTo @route="job" @model={{notification.reference_id}}>
+            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
+          </LinkTo>
+        {{else if (eq notification.type 'pm')}}
+          <LinkTo @route="chat">
+            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
+          </LinkTo>
+        {{else if (eq notification.type 'scene')}}
+          <LinkTo @route="scene-live" @model={{notification.reference_id}}>
+            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
+          </LinkTo>
+        {{else if (eq notification.type 'scene_deletion')}}
+          <LinkTo @route="scene-live" @model={{notification.reference_id}}>
+            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
+          </LinkTo>
+        {{else if (eq notification.type 'event')}}
+          <LinkTo @route="event" @model={{notification.reference_id}}>
+            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
+          </LinkTo>
+        {{else if (eq notification.type 'achievement')}}
+          <LinkTo @route="char" @model={{this.char.name}}>
+            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
+          </LinkTo>
+        {{/if}}
+      
+        {{#if notification.is_unread}}
+        <a href="#" {{on 'click' (fn this.markRead notification false)}}>
+          <TooltipIcon @position="left" @message="Mark Read" @icon="fa fa-ban" />
+        </a>
+        {{else}}
+        <a href="#" {{on 'click' (fn this.markRead notification true)}}>
+          <TooltipIcon @position="left" @message="Mark Unread" @icon="fa fa-flag" />  
+        </a>
+        {{/if}}
+      </div>
+    </td>
+  </tr>
+  {{/each}}
+  </tbody>
+</table>

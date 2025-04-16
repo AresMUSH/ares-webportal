@@ -1,12 +1,11 @@
 import EmberObject from '@ember/object';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
-import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
 import RSVP from 'rsvp';
+import { action } from '@ember/object';
 
-export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
+export default Route.extend(DefaultRoute, {
     gameApi: service(),
     gameSocket: service(),
     session: service(),
@@ -15,7 +14,8 @@ export default Route.extend(DefaultRoute, ReloadableRoute, RouteResetOnExit, {
         this.controllerFor('jobs').setupCallback();
     },
   
-    deactivate: function() {
+    @action 
+    willTransition(transition) {
       this.gameSocket.removeCallback('job_update');
     },
     

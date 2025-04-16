@@ -1,0 +1,72 @@
+<div class="profile-wrap">
+  <div class="profile-image-wrap">
+    {{#if this.char.profile_image.name}}
+            <LinkTo @route="file" @models={{array this.char.profile_image.folder this.char.profile_image.name}}>
+                <img src="/game/uploads/{{this.char.profile_image.path}}" alt="{{this.char.name}}'s icon"  class="profile-image" title="{{this.char.profile_image.description}}">
+            </LinkTo>
+    {{else}}
+        <img src="/game/uploads/theme_images/noicon.png" class="profile-image" alt="{{this.char.name}}'s icon" >
+    {{/if}}
+  </div>
+
+  <div class="profile-box">
+
+    <div class="profile-item-list profile-demographics">
+      {{#each this.char.demographics as |demo|}}
+          <div class="profile-item">
+            <div class="profile-item-name">
+                    {{demo.name}} 
+            </div>
+            <div class="profile-item-value">
+                    {{demo.value}}
+            </div>
+          </div>
+      {{/each}}
+    </div>
+                          
+  
+    <div class="profile-divider">
+    </div>
+  
+  
+    <div class="profile-item-list profile-groups">
+      {{#each this.char.groups as |group|}}
+        <div class="profile-item">
+          <div class="profile-item-name">
+                  {{group.name}} 
+          </div>
+          <div class="profile-item-value">
+                  {{group.value}}
+          </div>
+        </div>
+      {{/each}}
+    </div>
+
+  
+    <div class="profile-divider">
+    </div>
+
+    <div class="profile-item-list profile-misc">
+      {{#if this.char.handle}}  
+        <div class="profile-item">
+            <div class="profile-item-name">
+                  Player 
+          </div>
+            <div class="profile-item-value">
+                  <a href="https://arescentral.aresmush.com/handle/{{this.char.handle}}">{{this.char.handle}}</a>
+          </div>
+        </div>
+      {{/if}}
+  
+      <div class="profile-item">
+        <div class="profile-item-name">
+              Last Online 
+        </div>
+        <div class="profile-item-value">
+              {{this.char.last_online}}
+        </div>
+      </div>
+    </div>
+  </div>
+        
+</div>

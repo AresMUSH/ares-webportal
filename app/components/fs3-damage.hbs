@@ -1,0 +1,22 @@
+<div class="fs3-damage-list">
+{{#each this.damage as |damage|}}
+
+
+<div class="fs3-damage-block">
+  
+    <div class="fs3-damage-desc">  <div class="fs3-damage-title">{{damage.description}}</div> </div>
+    <div class="fs3-damage-date">{{damage.date}}</div>
+    <div class="fs3-damage-sev">
+      
+      {{#if this.showOriginal}}
+        <AnsiFormat @text={{damage.original_severity}} /> 
+        ( now <AnsiFormat @text={{damage.severity}} />)
+      {{else}}
+        <AnsiFormat @text={{damage.severity}} /> 
+      {{/if}}
+    </div>
+</div>
+{{/each}}
+</div>
+
+<p><b>Total Damage Modifier:</b> {{this.damageMod}}</p>

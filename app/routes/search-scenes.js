@@ -3,10 +3,9 @@ import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
 import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
-import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
-import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
+import { action } from '@ember/object';
 
-export default Route.extend(AuthenticatedRoute, ReloadableRoute, RouteResetOnExit, {
+export default Route.extend(AuthenticatedRoute, {
   gameApi: service(),
   gameSocket: service(),
   
@@ -16,17 +15,14 @@ export default Route.extend(AuthenticatedRoute, ReloadableRoute, RouteResetOnExi
       sceneOptions: api.requestOne('sceneOptions'),
     })
     .then((model) => EmberObject.create(model));
-         
   },
   
   activate: function() {
       this.controllerFor('search-scenes').setupCallback();
-      $(window).on('beforeunload', () => {
-          this.deactivate();
-      });
   },
 
-  deactivate: function() {
+  @action 
+  willTransition(transition) {
       this.gameSocket.removeCallback('search_results');
   },
   

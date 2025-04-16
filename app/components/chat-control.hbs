@@ -1,0 +1,172 @@
+{{#if this.channel}}
+
+{{#if this.channel.enabled}}
+
+<div class="chat-controls">
+
+  <a data-bs-toggle="collapse" href="#channel-info"><i class="fas fa-info-circle"></i> Channel Info</a>
+
+  <a href="#" {{on 'click' this.scrollDown}}><i class="fas fa-angle-double-down"></i> Jump to End</a>
+
+  {{#if this.scrollPaused}}
+          <a href="#" {{on 'click' this.unpauseScroll}}><i class="fas fa-play">
+          </i> Resume Scrolling</a>
+  {{else}}
+          <a href="#" {{on 'click' this.pauseScroll}}><i class="fas fa-pause"></i> Pause Scrolling</a>
+  {{/if}}
+</div>  
+  
+<div id="channel-info" class="card-collapse collapse">
+  
+  <div class="card card-default">
+    <div class="card-body">
+
+      <div class="icon-row">
+        {{#if this.channel.desc}}
+        <p>{{this.channel.desc}}</p>
+        {{/if}}
+        
+        <p><b>Who's On</b></p>
+        
+      {{#each this.channel.who as |who|}}
+        <CharIconInline @char={{who}} />
+        {{#if who.muted}}<i class="fa fa-microphone-slash"></i>{{/if}}
+
+      {{/each}}
+      </div>
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</div>
+
+
+ {{#if this.chatAlerts}}
+ <div class="alert alert-warning chat-alerts">
+   {{#each this.chatAlerts as |alert|}}
+   <p>{{alert}}</p>
+   {{/each}}
+ </div>
+ {{/if}}
+
+
+ <div id="chat-window">
+ {{#each this.channel.messages as |message|}}
+   <div class="hint float-end">
+         <div class="timestamp-tip">{{message.timestamp}}</div>
+   </div>
+ 
+    <div class="scene-pose-header">		
+      <LinkTo @route="char" @model="{{message.author.name}}" target="_blank">
+          {{#if message.author.icon}}
+          <img alt="{{message.author.name}}'s icon" class="small-profile-icon <IconClass />" src="/game/uploads/{{message.author.icon}}" >
+          {{else}}
+          <img alt="{{message.author.name}}'s icon" class="small-profile-icon <IconClass />" src="/game/uploads/theme_images/noicon.png" >
+          {{/if}}
+          
+          {{message.author.name}} 
+      </LinkTo>
+      </div>
+      
+     <AnsiFormat @text={{message.message}} />
+ {{/each}}
+ </div>
+
+ {{#if this.chatAlerts}}
+ <div class="alert alert-warning chat-alerts">
+   {{#each this.chatAlerts as |alert|}}
+   <p>{{alert}}</p>
+   {{/each}}
+ </div>
+ {{/if}}
+
+ <div class="scene-controls-box">
+ {{#if this.canTalk}}
+   <MarkdownEditor @text={{this.channel.draftMessage}} class="chat-box" cols={{80}} rows="6" @onEnter={{this.sendMessage}} />
+ {{/if}}
+  <div class="scene-controls">
+
+    <div class="scene-controls-right">
+      {{#if this.canTalk}}
+         <button class="btn-primary btn" {{on 'click' this.sendMessage}}>Send Message</button>
+       {{/if}}
+    </div>
+ 
+    <div class="scene-controls-left">
+      
+      
+      
+      <div class="scene-dropdowns">
+        
+        <DropdownMenu @id="chatMenu" @title="Chat Menu" @dropup={{true}} class="chat-menu">
+          {{#if this.channel.is_page}}
+            {{#if this.channel.is_hidden}}
+              <li><a href="#" {{on 'click' (fn this.hidePage false)}} class="dropdown-item">Unhide Conversation</a></li>
+            {{else}}
+              <li><a href="#" {{on 'click' (fn this.hidePage true)}} class="dropdown-item">Hide Conversation</a></li>
+            {{/if}}
+            <li><a href="#" {{on 'click' (fn this.setShowPageRename true)}} class="dropdown-item">Rename Conversation</a></li>
+    
+          {{else}}
+            <li><a href="#" {{on 'click' this.leaveChannel}} class="dropdown-item">Leave Channel</a></li>
+            {{#if this.channel.muted}}
+            <li><a href="#" {{on 'click' (fn this.muteChannel false)}} class="dropdown-item">Unmute Channel</a></li>
+            {{else}}
+            <li><a href="#" {{on 'click'  (fn this.muteChannel true)}} class="dropdown-item">Mute Channel</a></li>
+            {{/if}}
+          {{/if}}
+          <li><a href="#" {{on 'click' (fn this.setShowReport true)}} class="dropdown-item">Report Chat</a></li>
+          <li><a href="#" {{on 'click' this.download}} class="dropdown-item">Download Chat</a></li>  
+        </DropdownMenu>
+        
+      </div>
+ 
+      <div class="scene-char-select">
+        <PowerSelect @selected={{this.channel.poseChar}} @options={{this.channel.poseable_chars}} @searchField="name" @onChange={{this.poseCharChanged}} as |poseChar|>
+            <CharIconTiny @char={{poseChar}} />
+        </PowerSelect>
+      </div>
+    </div>
+  </div>
+  
+</div>
+          
+
+<div class="clearfix"></div>
+
+{{else}}
+
+<div class="alert alert-warning">You are not on this channel.</div>
+   
+{{/if}}
+
+    <FlashMessages />
+
+
+<BsModalSimple @title="Report Chat" @closeTitle="Cancel" @submitTitle="Report" @size={{null}} @fade={{true}} @open={{this.showReport}} @onSubmit={{this.reportChat}} @onHide={{(fn this.setShowReport false)}}>
+    
+    <p>Enter a reason in the text box and select a starting message.  All messages after that one will be included in the report.</p>
+    <p><Input @type="text" size={{50}} @value={{this.reportReason}} /></p>
+    
+    <div class="chat-report">
+    <table>
+    {{#each this.channel.messages as |message|}}
+    <tr>
+      <td><Input @type="radio" id="{{message.id}}" name="reportMessage" onclick={{(fn this.setSelectedReportMessage message.id)}} /></td>
+      <td><AnsiFormat @text={{message.message}} /></td>
+    </tr>
+    {{/each}}
+    </table>
+    </div>
+    
+</BsModalSimple>
+
+
+
+<BsModalSimple @title="Rename Conversation" @closeTitle="Cancel" @submitTitle="Save" @size={{null}} @fade={{true}} @open={{this.showPageRename}} @onSubmit={{this.renamePage}} @onHide={{(fn this.setShowPageRename false)}}>
+    
+    <p>Enter a new title for this conversation. Leave blank to restore the default title.</p>
+    <p><Input @type="text" size={{50}} @value={{this.newPageTitle}} /></p>
+    
+</BsModalSimple>
+{{/if}}

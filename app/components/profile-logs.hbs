@@ -1,0 +1,19 @@
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#scenesindex">+</a></li>
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#scenelist">Scenes</a></li>
+</ul>
+
+
+<div class="tab-content">
+
+    <div id="scenesindex" class="tab-pane fade show active">
+        <div class="tab-cover">Scenes</div>
+    </div>
+    
+    <div id="scenelist" class="tab-pane fade ">
+  
+        <SceneList @scenes={{this.scenes.scenes}} @pages={{this.scenes.pages}} @sceneTypes={{this.sceneTypes}} @filter={{this.filter}} @page={{this.page}} @onFilterChanged={{this.filterChanged}} @onGoToPage={{this.goToPage}} />
+      
+    </div>
+    
+</div>

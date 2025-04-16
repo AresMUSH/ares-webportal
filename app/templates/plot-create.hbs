@@ -1,60 +1,60 @@
 {{page-title 'Create Plot'}}
 <h1>Create a Plot</h1>
 
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="title" class="col-form-label">Title:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Title:
     </div>
-    <div class="col-sm-9">
-         <Input @type="text" size={{25}} id="title" @enter={{action "save"}} @value={{this.title}} />
+    <div class="form-item-entry">
+         <Input @type="text" size={{25}} id="title" @enter={{this.save}} @value={{this.title}} />
     </div> 
   </div>
   
-  <div class="form-group row">
-    <div class="col-sm-3">
+  <div class="form-item">
+    <div class="form-item-label">
       <b>Storytellers:</b>
     </div>
 
-    <div class="col-sm-9">
-      <PowerSelectMultiple @selected={{this.storytellers}} @options={{this.model}} @searchEnabled=true @searchField="name" @onChange={{action "storytellersChanged"}} as |char|>
+    <div class="form-item-entry">
+      <PowerSelectMultiple @selected={{this.storytellers}} @options={{this.model}} @searchEnabled=true @searchField="name" @onChange={{this.storytellersChanged}} as |char|>
         {{char.name}}
       </PowerSelectMultiple>
     </div>
   </div>
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="summary" class="col-form-label">Summary:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Summary:
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
        <MarkdownEditor @text={{this.summary}} />
     </div> 
   </div>
      
   
-     <div class="form-group row">
-        <div class="col-sm-3">
-            <label for="title" class="col-form-label">Content Warning:</label>
+     <div class="form-item">
+        <div class="form-item-label">
+            Content Warning:
         </div>
-        <div class="col-sm-9">
+        <div class="form-item-entry">
             <Input @type="text" size={{25}} id="content_warning" @value={{this.contentWarning}} />
         </div>
       </div>
       
-      <div class="form-group row">
-         <div class="col-sm-3">
-             <label for="tags" class="col-form-label">Tags:</label>
+      <div class="form-item">
+         <div class="form-item-label">
+             Tags:
          </div>
-         <div class="col-sm-9">
+         <div class="form-item-entry">
              <Input @type="text" size={{25}} id="tags" @value={{this.tags}} />
          </div>
        </div>
        
-      <div class="form-group row">
-       <div class="col-sm-3">
-        <label for="description" class="col-form-label">Description:</label>
+      <div class="form-item">
+       <div class="form-item-label">
+        Description:
        </div>
-       <div class="col-sm-9">
+       <div class="form-item-entry">
         <MarkdownEditor @text={{this.description}} />
        </div> 
      </div>
@@ -62,7 +62,7 @@
 
 <div class="action-buttons">
   <LinkTo @route="plots" class="btn btn-secondary">Cancel</LinkTo>  
-  <button {{action 'save'}} class="btn btn-primary">Save</button>
+  <button {{on 'click' this.save}} class="btn btn-primary">Save</button>
 </div>
         
 <FlashMessages />

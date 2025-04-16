@@ -1,0 +1,57 @@
+{{#if (not this.hideSearch)}}
+<p><b>Select Scenes:</b> 
+
+<PowerSelect @selected={{this.filter}} @options={{this.sceneFilters}} @onChange={{this.filterChanged}} as |name|>
+  {{name}}
+</PowerSelect>
+
+<LinkTo @route="search-scenes" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Scenes</LinkTo>  
+
+</p>
+{{/if}}
+
+<table class="table table-striped">
+
+<thead>
+  <th>Scene</th>
+  <th>Participants</th>
+</thead>
+
+<tbody>
+
+{{#each this.scenes as |scene|}}
+    <tr>
+        <td>
+        <LinkTo @route="scene" @model={{scene.id}}>{{scene.icdate}} - {{scene.title}}
+        </LinkTo> 
+        
+        {{#if scene.content_warning}}
+          <ContentWarningTag @warning={{scene.content_warning}} @position="top-right" />
+          {{/if}}
+
+
+        <SceneTypeTag @scene={{scene}} /> 
+       
+        <p><AnsiFormat @text={{scene.summary}} />
+        </p>
+        </td>
+        <td>
+            {{#each scene.participants as |participant|}}
+            <a href="/char/{{participant.name}}">{{participant.name}}</a>
+            {{/each}}
+        </td>
+    </tr>
+{{/each}}
+
+</tbody>
+</table>
+
+{{#each this.pages as |pg|}}
+{{#if (eq pg this.page)}}
+<button class="btn btn-primary" {{on 'click' (fn this.goToPage pg)}}>{{pg}}</button>
+{{else}}
+<button class="btn btn-secondary" {{on 'click' (fn this.goToPage pg)}}>{{pg}}</button>
+{{/if}}
+{{/each}}
+
+

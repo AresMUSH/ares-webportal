@@ -1,4 +1,3 @@
-import $ from "jquery"
 import Service from '@ember/service';
 import { inject as service } from '@ember/service';
 import AresConfig from 'ares-webportal/mixins/ares-config';
@@ -9,11 +8,11 @@ export default Service.extend(AresConfig, {
     flashMessages: service(),
     favicon: service(),
     
-    windowVisible: true,
     socket: null,
     charId: null,
     callbacks: null,
     connected: false,
+    lastActivity: null,
   
     init: function() {
       this._super(...arguments);
@@ -32,8 +31,12 @@ export default Service.extend(AresConfig, {
         }
     },
     
+    isWindowFocused() {
+      return document.hasFocus();
+    },
+    
     highlightFavicon() {
-      if (!this.windowVisible) {
+      if (!this.isWindowFocused()) {
         this.favicon.changeFavicon(true);
       }
     },
@@ -61,10 +64,14 @@ export default Service.extend(AresConfig, {
             }
         }         
         
-       if (!this.windowVisible) {
+       if (!this.isWindowFocused()) {
             this.favicon.changeFavicon(true);
-               
         }
+    },
+    
+    reconnect() {
+      console.log("Reconnecting websocket.");
+      this.sessionStarted(this.charId);
     },
     
     sessionStarted(charId) {
@@ -94,7 +101,7 @@ export default Service.extend(AresConfig, {
                 self.handleMessage(self, evt);
             };
             socket.onclose = function() {
-              self.handleError(self, 'Socket closed.');
+              self.handleError(self, 'Websocket closed.');
             };
             socket.onError = function(evt) {
               self.handleError(self, evt);
@@ -154,35 +161,21 @@ export default Service.extend(AresConfig, {
       console.error("Websocket closed: ", evt);
       self.notify(message, 10, 'error');
       self.set('connected', false);
+      self.set('socket', null);
+      setTimeout(() => self.reconnect(), 5000);      
     },
     
     handleConnect() {
-      let self = this;
-        // Blur is the event that gets triggered when the window becomes active.
-        $(window).blur(function(){
-            self.set('windowVisible', false);
-        });
-        $(window).focus(function(){
-            self.set('windowVisible', true);
-            self.get('favicon').changeFavicon(false);                    
-        });
-        this.set('connected', true);
-        this.sendCharId();
-    },
-    
-    updateMailBadge(count) {
-      var mail_badge = $('#mailBadge');
-      mail_badge.text(count);
-    },
-    
-    updateJobsBadge(count) {
-      var job_badge = $('#jobBadge');
-      job_badge.text(count);
+      this.set('connected', true);
+      this.set('lastActivity', new Date());
+      this.sendCharId();
     },
     
     updateNotificationBadge(count) {
-      var notification_badge = $('#notificationBadge');
-      notification_badge.text(`${count}` === '0' ? '' : count);
+      var notificationBadge = document.getElementById('notificationBadge');
+      if (notificationBadge) {
+        notificationBadge.textContent = (`${count}` === '0' ? '' : count);
+      }
     },
     
     handleMessage(self, evt) {
@@ -204,9 +197,12 @@ export default Service.extend(AresConfig, {
         
         var recipient = data.args.character;
         var notification_type = data.args.notification_type;
+
         
-        if (notification_type == "webclient_output") {
-            return;
+        if (notification_type == "ping") {
+          this.set('lastActivity', new Date());
+          console.log("PING " + new Date().toLocaleString());
+          return;
         }
         
         if (!recipient || recipient === self.get('charId')) {

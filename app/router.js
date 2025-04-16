@@ -25,6 +25,7 @@ Router.map(function() {
   this.route('area-edit', { path: '/area/:id/edit'});
   this.route('area-create', { path: '/area/create'});
   this.route('banned');
+  this.route('blocks');
   this.route('census');
   this.route('census-group', { path: '/census/:filter' });
   this.route('characters', { path: '/chars'});
@@ -38,7 +39,6 @@ Router.map(function() {
   this.route('channels-manage');
   this.route('channel-create');
   this.route('channel-edit', { path: '/channel-edit/:id' });
-  this.route('client');
   this.route('combat', { path: '/combat/:id' });
   this.route('combat-log', { path: '/combat/:id/log' });
   this.route('combat-teams', { path: '/combat/:id/teams' });

@@ -1,5 +1,6 @@
 import { computed } from '@ember/object';
 import Component from '@ember/component';
+import { action } from '@ember/object';
 
 export default Component.extend({
   sceneFilters: computed('sceneTypes', 'scenes', function () {
@@ -9,12 +10,13 @@ export default Component.extend({
     return base_filters.concat(scene_types);
   }),
 
-  actions: {
-    filterChanged(newFilter) {
-      this.filterChanged(newFilter);
-    },
-    goToPage(newPage) {
-      this.goToPage(newPage);
-    },
+  @action
+  filterChanged(newFilter) {
+    this.onFilterChanged(newFilter);
+  },
+    
+  @action
+  goToPage(newPage) {
+    this.onGoToPage(newPage);
   },
 });

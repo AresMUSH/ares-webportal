@@ -36,7 +36,7 @@
        {{#if this.model.preset_responses}}
           <div class="preset-responses">
             <b>Pre-Made Responses:</b>
-            <PowerSelect @selected='' @options={{this.model.preset_responses}} @searchEnabled=true @searchField="name" @onChange={{action "responseSelected"}} as |resp|>
+            <PowerSelect @selected='' @options={{this.model.preset_responses}} @searchEnabled=true @searchField="name" @onChange={{this.responseSelected}} as |resp|>
              {{resp.name}}
             </PowerSelect>
           </div>
@@ -44,8 +44,8 @@
        
       <p>
           <LinkTo @route="job" @model={{this.model.job}} class="btn btn-secondary">Back to Job</LinkTo>
-          <button name="reject" {{action 'rejectChar'}} class="btn btn-warning">Reject</button>
-          <button name="approve" {{action 'approveChar'}} class="btn btn-success">Approve</button>
+          <button name="reject" {{on 'click' this.rejectChar}} class="btn btn-warning">Reject</button>
+          <button name="approve" {{on 'click' this.approveChar}} class="btn btn-success">Approve</button>
       </p>
                    
     </div>

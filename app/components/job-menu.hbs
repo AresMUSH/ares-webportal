@@ -1,0 +1,22 @@
+<DropdownMenu @id="{{this.id}}" @title="Job Menu">
+
+       <li><a href="#" {{on 'click' this.closeJob}}  class="dropdown-item">Close Job</a></li>
+       {{#if this.job.is_job_admin}}
+         <li><LinkTo @route="job-edit" @model={{this.job.id}} class="dropdown-item">Edit Job</LinkTo></li>
+       {{/if}}
+       {{#if this.job.fs3_enabled}}
+         <li><a href="#" {{on 'click' (fn this.selectSkillRoll true)}} class="dropdown-item">Add Ability Roll</a></li>
+       {{/if}}
+       {{#if this.job.is_approval_job}}
+         <li><LinkTo @route="app-review" @model={{this.job.author.id}} class="dropdown-item">App Review for {{this.job.author.name}}</LinkTo></li>
+         <li><LinkTo @route="char" @model={{this.job.author.name}} class="dropdown-item">Profile for {{this.job.author.name}}</LinkTo></li>
+       {{/if}}
+       {{#if this.job.is_roster_job}}
+         <li><a href="#" {{on 'click' this.approveRoster}} class="dropdown-item">Approve Roster for {{this.job.roster_name}}</a></li>
+         <li><a href="#" {{on 'click' this.rejectRoster}} class="dropdown-item">Reject Roster for {{this.job.roster_name}}</a></li>
+       {{/if}}
+       <JobMenuCustom @job={{this.job}}  @abilities={{this.abilities}} @options={{this.options}} />
+       
+</DropdownMenu>
+
+<Fs3Roll @job={{this.job}} @destinationType="job" @abilities={{this.abilities}} @selectSkillRoll={{this.selectSkillRoll}} />

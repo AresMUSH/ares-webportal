@@ -2,19 +2,16 @@ import EmberObject from '@ember/object';
 import Route from '@ember/routing/route';
 import RSVP from 'rsvp';
 import { inject as service } from '@ember/service';
-import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
 
-export default Route.extend(DefaultRoute, ReloadableRoute, {
+export default Route.extend(DefaultRoute, {
     gameApi: service(),
-    headData: service(),
     router: service(),
     
     afterModel: function(model) { 
         if (model.get('char.playerbit')) {
             this.router.transitionTo('player', model.get('char.name'));
         }
-        this.set('headData.robotindex', true);
     },
     
     model: function(params) {

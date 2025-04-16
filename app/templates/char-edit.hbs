@@ -13,11 +13,14 @@
     {{#if this.model.char.show_background_tab}}
     <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#background">Background</a></li>
     {{/if}}
+    {{#if this.model.char.fs3.show_fs3_tab}}
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#fs3">FS3</a></li>
+    {{/if}}
     {{#if (or this.model.char.show_idle_tab this.model.char.show_roster_tab)}}
     <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#idle">Idle/Roster</a></li>
     {{/if}}
-    {{#if (or this.model.char.show_idle_tab this.model.char.show_roles_tab)}}
-    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#roles">Roles</a></li>
+    {{#if (or this.model.char.show_roles_tab this.model.char.show_pw_tab)}}
+    <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#admin">Admin</a></li>
     {{/if}}
     <CharEditCustomTabs @char={{this.model}} />
 </ul>
@@ -45,15 +48,17 @@
   </div>
   {{/if}}
 
+  {{#if this.model.char.fs3.show_fs3_tab}}
+    <CharEditFs3 @char={{this.model.char}} />
+  {{/if}}
+
   {{#if (or this.model.char.show_idle_tab this.model.char.show_roster_tab)}}
     <CharEditIdle @model={{this.model}} />
   {{/if}}
-
-  {{#if this.model.char.show_roles_tab}}
-  <div id="roles" class="tab-pane fade show">
-    <PowerSelectMultiple @selected={{this.model.char.roles}} @options={{this.model.char.all_roles}} @onChange={{action "rolesChanged"}} as |role|>
-      {{role}}
-    </PowerSelectMultiple>
+  
+  {{#if (or this.model.char.show_roles_tab this.model.char.show_pw_tab)}}
+  <div id="admin" class="tab-pane fade show">
+    <CharEditAdmin @char={{this.model.char}} />
   </div>
   {{/if}}
   
@@ -64,7 +69,7 @@
             
 <div class="action-buttons">
   <LinkTo @route="char" @model={{this.model.char.name}} class="btn btn-secondary">Cancel</LinkTo>  
-  <button class="btn btn-primary" {{action 'save'}} >Save</button>
+  <button class="btn btn-primary" {{on 'click' this.save}} >Save</button>
 </div>
 
 <FlashMessages />

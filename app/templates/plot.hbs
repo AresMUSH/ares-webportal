@@ -30,7 +30,7 @@
 
     <h2>Scenes</h2>
         
-    <SceneList @scenes={{this.model.scenes.scenes}} @pages={{this.model.scenes.pages}} @sceneTypes={{this.model.sceneOptions.scene_types}} @filter={{this.filter}} @page={{this.page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
+    <SceneList @scenes={{this.model.scenes.scenes}} @pages={{this.model.scenes.pages}} @sceneTypes={{this.model.sceneOptions.scene_types}} @filter={{this.filter}} @page={{this.page}} @onFilterChanged={{this.filterChanged}} @onGoToPage={{this.goToPage}} />
     
     
 {{#if this.model.plot.description}}
@@ -52,7 +52,7 @@
 
 <div class="action-buttons">
   {{#if this.isAdmin}}
-  <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete</button>
+  <button {{on 'click' this.showActionConfirmation}} class="btn btn-warning">Delete</button>
   {{/if}}
   <LinkTo @route="plot-edit" @model={{this.model.plot.id}} class="btn btn-primary">Edit</LinkTo>
 </div>
@@ -61,7 +61,7 @@
 
 <FlashMessages />
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut this.confirmDelete) false}}>
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.actionConfirmationVisible}} @onSubmit={{this.delete}} @onHide={{this.hideActionConfirmation}}>
     You're about to delete plot {{this.model.plot.title}}. This cannot be undone.  Are you sure?
   </BsModalSimple>
   

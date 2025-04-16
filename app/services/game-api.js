@@ -7,11 +7,13 @@ export default Service.extend(AresConfig, {
     flashMessages: service(),
     session: service(),
     router: service(),
+  
+    errorHandlingInProgress: false,
     
     portalUrl() {
       var base;
       let protocol = this.httpsEnabled ? 'https' : 'http';
-      if (`${port}` === '80') {
+      if (`${this.port}` === '80') {
         base = `${protocol}://${this.mushHost}`;
       }
       else {
@@ -47,66 +49,60 @@ export default Service.extend(AresConfig, {
         if (error.message === 'TransitionAborted') {
           return;
         }
-        console.log(error);
-        
+        this.set('errorHandlingInProgress', true);
         let err = new Error();
-        $.post(this.serverUrl("request"), 
-                {
-                    cmd: 'webError',
-                    args: { error: `${error.message} : ${err.stack}` },
-                    api_key: this.apiKey
-                });
-                this.router.transitionTo('error');
+        console.log(`${error.message} : ${err.stack}`);
+        this.router.transitionTo('error', { queryParams: { message: error.message } });
       } catch(ex) { 
-        try {
-          this.router.transitionTo('error');
-        }
-        catch(ex) {
           // Failsafe.  Do nothing.
-        }
       }
     },
     
-    request(cmd, args, allowEpicFail = false) {
-      
+    buildFailurePromise(msg) {
+      return new Promise((resolve, reject) => {
+        console.log(msg);
+        reject( {
+          error: msg
+        });  
+      });
+    },
+    
+    async request(cmd, args) {
       if (this.aresconfig === null) {
-        return new Promise((resolve, reject) => {
-          console.log("Unable to send request - aresconfig is missing.");
-          reject( {
-            error: "Unable to send request - aresconfig is missing."
-          });  
-        });
+        this.set('errorHandlingInProgress', true);        
+        return this.buildFailurePromise("AresConfig is missing - can't talk to game.");
       }
       
-     return $.post(this.serverUrl("request"), 
-        {
-            cmd: cmd,
-            args: args,
-            api_key: this.apiKey,
-            auth: this.get('session.data.authenticated')
-        }).then((response) => {
-            if (!response) {
-              if (allowEpicFail) {
-                return { error: "The game didn't respond. Try again, or save your work and refresh the page." };
-              } else {
-                this.reportError({ message: `No response from game for ${cmd}.` });
-              }
-            }
-            else if (response.error) {
-                return response;
-            }
-           return response;
-        }).catch(ex => {
-          if (allowEpicFail) {
-            return { error: "The game didn't respond. Try again, or save your work and refresh the page." };
-          } else {
-            this.reportError(ex);
-          }
+      if (this.errorHandlingInProgress) {
+        return this.buildFailurePromise("Recursive error condition - ignoring.");        
+      }
+            
+      let body = {
+        cmd: cmd,
+        api_key: this.apiKey,
+        args: args,
+        auth: this.get('session.data.authenticated')
+      };     
+      
+      try {  
+        let response = await fetch(this.serverUrl("request"), {
+          method: "POST",
+          body: JSON.stringify(body)
         });
+        
+        if (!response) {
+          throw new Error(`No response from game for $(cmd).`);
+        }
+        return response.json();        
+      }
+      catch(ex) {
+        this.reportError(ex);
+        return this.buildFailurePromise(`No response from game $(cmd).`);
+      }        
     },
     
-    requestOne(cmd, args = {}, transitionToOnError = 'home', allowEpicFail = false) {
-        return this.request(cmd, args, allowEpicFail).then((response) => {
+    requestOne(cmd, args = {}, transitionToOnError = 'home') {
+        return this.request(cmd, args).then((response) => {
           if (!response) {
             this.reportError({ message: `No response from game for ${cmd}.` });
           }
@@ -121,8 +117,8 @@ export default Service.extend(AresConfig, {
         });
     },
 
-    requestMany(cmd, args = {}, transitionToOnError = 'home', allowEpicFail = false) {    
-        return this.request(cmd, args, allowEpicFail).then((response) => {
+    requestMany(cmd, args = {}, transitionToOnError = 'home') {    
+        return this.request(cmd, args).then((response) => {
           if (!response) {
             this.reportError({ message: `No response from game for ${cmd}.` });
           }

@@ -12,21 +12,21 @@
 
 <div id="searchFields" class="card-collapse collapse {{if this.searchResults '' 'show'}}">
 
-<div class="row">
+<div class="form-item">
   
-  <div class="col col-xs-3">
+  <div class="form-item-label">
     <label>Text:</label>
   </div>
   
-  <div class="col col-xs-9">
-        <p><Input @type="text" size={{25}} id="text" @value={{this.searchText}} @enter={{action "search"}} /></p>
+  <div class="form-item-entry">
+        <p><Input @type="text" size={{25}} id="text" @value={{this.searchText}} @enter={{this.search}} /></p>
   </div>
   
 </div>
     
 <div class="action-buttons">
-    <button class="btn btn-secondary" {{action 'reset'}}>Reset</button>
-    <button class="btn btn-primary" {{action 'search'}}>Search</button>
+    <button class="btn btn-secondary" {{on 'click' this.reset}}>Reset</button>
+    <button class="btn btn-primary" {{on 'click' this.search}}>Search</button>
 </div>
 
 <p class="search-hint">Search is case-insensitive and matches ALL specified criteria.</p>

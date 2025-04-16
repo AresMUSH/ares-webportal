@@ -1,0 +1,43 @@
+<div class="scene-card">
+  <div class="scene-card-top">
+    <div class="scene-card-profile">
+      <CharCardProfile @char={{this.char}} />
+    </div>
+    <div class="scene-card-demographics">
+      <CharCardDemo @char={{this.char}} />
+       
+    </div>
+  </div>
+
+{{#if (not this.char.is_ooc)}}
+  <hr>    
+
+  <ul class="nav nav-tabs" role="tablist">
+    {{#if this.char.description}}
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link active" href="#description">Description</a></li>
+    {{/if}}
+
+    {{#if this.char.fs3}}
+      <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#fs3abiliites">Abilities</a></li>
+    {{/if}}    
+    
+    <CharCardCustomTabs @char={{this.char}} />
+  </ul>
+
+  <div class="tab-content">
+    {{#if this.char.description}}
+      <div id="description" class="tab-pane fade show active">
+        <AnsiFormat @text={{this.char.description}} />
+      </div>
+    {{/if}}
+
+    {{#if this.char.fs3}}
+      <div id="fs3abiliites" class="tab-pane fade show">
+        <CharCardFs3 @char={{this.char}} />
+      </div>
+    {{/if}}
+    
+    <CharCardCustomTabsContent @char={{this.char}} />
+  </div>
+{{/if}}
+</div>

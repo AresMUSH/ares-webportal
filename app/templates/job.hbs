@@ -48,13 +48,13 @@
         <div class="job-participant-edit-box">
        
           {{#if this.editParticipants}}
-           <PowerSelectMultiple @selected={{this.newParticipants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "participantsChanged"}} as |char|>
+           <PowerSelectMultiple @selected={{this.newParticipants}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{this.participantsChanged}} as |char|>
             {{char.name}}
           </PowerSelectMultiple>
-          <button class="btn btn-secondary" {{action (mut this.editParticipants) false}}>Cancel</button>
-          <button class="btn btn-primary" {{action 'saveParticipants'}}>Save</button>
+          <button class="btn btn-secondary" {{on 'click' (fn this.setEditParticipants false)}}>Cancel</button>
+          <button class="btn btn-primary" {{on 'click' this.saveParticipants}}>Save</button>
         {{else}}
-          <button class="btn btn-secondary" {{action (mut this.editParticipants) true}}>Edit</button>
+          <button class="btn btn-secondary" {{on 'click' (fn this.setEditParticipants true)}}>Edit</button>
         {{/if}}
         
           </div>
@@ -75,7 +75,7 @@
       
           <DropdownMenu @id="assignDropdown" @title="Assign">
             {{#each this.model.job.job_admins as |staff| }}
-              <li><a href="#" {{action 'assignJob' staff}} class="dropdown-item">{{staff.name}}</a></li>
+              <li><a href="#" {{on 'click' (fn this.assignJob staff)}} class="dropdown-item">{{staff.name}}</a></li>
             {{/each}}
           </DropdownMenu>
         {{/if}}
@@ -94,7 +94,7 @@
       
           <DropdownMenu @id="statusDropdown" @title="Status">
             {{#each this.model.options.status_values as |status| }}
-              <li><a href="#" {{action 'changeData' 'status' status}} class="dropdown-item"><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
+              <li><a href="#" {{on 'click' (fn this.changeData 'status' status)}} class="dropdown-item"><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
             {{/each}}
           </DropdownMenu>
         {{/if}}
@@ -116,7 +116,7 @@
       
         <DropdownMenu @id="categoryDropdown" @title="Category">
               {{#each this.model.options.category_values as |category| }}
-                <li><a href="#" {{action 'changeData' 'category' category}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+                <li><a href="#" {{on 'click' (fn this.changeData 'category' category)}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
               {{/each}}
         </DropdownMenu>
         {{/if}}
@@ -184,7 +184,7 @@
          <p>{{r.created}}</p>
      
          {{#if this.model.job.is_job_admin}}
-           <a href="#" {{action 'deleteReply' r.id}}><i class="fa fa-trash" aria-label="Delete Reply"></i></a>     
+           <a href="#" {{on 'click' (fn this.deleteReply r.id)}}><i class="fa fa-trash" aria-label="Delete Reply"></i></a>     
          {{/if}}
      
      </div>
@@ -231,14 +231,14 @@
       {{#if this.model.job.responses}}
         <div class="preset-responses">
           <b>Pre-Made Responses:</b>
-           <PowerSelect @selected='' @options={{this.model.job.responses}} @searchEnabled=true @searchField="name" @onChange={{action "responseSelected"}} as |resp|>
+           <PowerSelect @selected='' @options={{this.model.job.responses}} @searchEnabled=true @searchField="name" @onChange={{this.responseSelected}} as |resp|>
             {{resp.name}}
           </PowerSelect>
         </div>
       {{/if}}
     {{/if}}    
         <div class="action-buttons">
-          <button class="btn btn-primary" {{action 'addReply'}}>
+          <button class="btn btn-primary" {{on 'click' this.addReply}}>
             {{#if this.replyAdminOnly}}
             Reply to Admins
             {{else}}

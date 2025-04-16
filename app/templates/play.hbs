@@ -1,46 +1,46 @@
 {{page-title 'Play'}}
  
- <h1 class="play-title">Play</h1>
+<h1 class="play-title">Play</h1>
 
- <div class="row">
-   <div class="col col-12 col-md-3">
+
+<div class="play-screen">
+       
+  <div class="play-sidebar">     
      
-     <div class="play-sidebar">     
-     
-     <button class="btn btn-secondary d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#sceneMenuCollapse" aria-expanded="false" aria-controls="sceneMenuCollapse">
-         <TooltipIcon @position="right" @message="Show/hide play controls." @icon="fab fa-elementor" />
-         {{#if this.anyNewActivity}}
-         <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
-         {{/if}}
-       </button>
+    <button class="btn btn-secondary" id="sceneMenuCollapseButton" type="button" data-bs-toggle="collapse" data-bs-target="#sceneMenuCollapse" aria-expanded="false" aria-controls="sceneMenuCollapse">
+      <TooltipIcon @position="right" @message="Show/hide play controls." @icon="fab fa-elementor" />
+      {{#if this.anyNewActivity}}
+       <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
+      {{/if}}
+    </button>
 
-       <div class="collapse show" id="sceneMenuCollapse">
+    <div class="collapse show" id="sceneMenuCollapse">
 
-       <p class="play-section-title">Scenes
+      <div class="play-section-title">Scenes
              
-       {{#if this.isApproved}}
-         <LinkTo @route="scenes-live" target="_blank">
-           <TooltipIcon @position="right" @message="Join Scene" @icon="fa fa-play-circle" />
+         {{#if this.isApproved}}
+           <LinkTo @route="scenes-live" target="_blank">
+             <TooltipIcon @position="right" @message="Join Scene" @icon="fa fa-play-circle" />
+           </LinkTo>
+
+           <LinkTo @route="scene-create" target="_blank">
+             <TooltipIcon @position="right" @message="Create Scene" @icon="fa fa-plus-circle" />
+           </LinkTo>
+
+           <LinkTo @route="scenes-unshared" target="_blank">
+             <TooltipIcon @position="right" @message="Unshared Scenes" @icon="fa fa-share-square" />
+           </LinkTo>
+         {{/if}}
+
+         <LinkTo @route="who" target="_blank">
+           <TooltipIcon @position="right" @message="Who's Online" @icon="fa fa-users" />
          </LinkTo>
 
-         <LinkTo @route="scene-create" target="_blank">
-           <TooltipIcon @position="right" @message="Create Scene" @icon="fa fa-plus-circle" />
-         </LinkTo>
-
-         <LinkTo @route="scenes-unshared" target="_blank">
-           <TooltipIcon @position="right" @message="Unshared Scenes" @icon="fa fa-share-square" />
-         </LinkTo>
-       {{/if}}
-
-       <LinkTo @route="who" target="_blank">
-         <TooltipIcon @position="right" @message="Who's Online" @icon="fa fa-users" />
-       </LinkTo>
-
-       </p>  
+       </div>  
 
          
        {{#each this.model.scenes as |scene|}}
-         <a href="#" {{action 'switchScene' scene.id}}>
+         <a href="#" {{on 'click' (fn this.switchScene scene.id)}}>
            <div class="play-selector {{if (eq scene.id this.currentScene.id) 'play-selector-active' ''}}">
                #{{scene.id}} - {{scene.location.name}} 
                {{#if scene.is_unread}}
@@ -53,28 +53,28 @@
              {{participant.name}}
            {{/each}}
          </div>
-         
+       
        {{/each}}
        
        
-       <p class="play-section-title">Private Messages  
-       <a href="#" {{action (mut this.showNewConversation) true}}>
+       <div class="play-section-title">Private Messages  
+       <a href="#" {{on 'click' (fn this.setShowNewConversation true)}}>
          <TooltipIcon @position="right" @message="New Conversation" @icon="fa fa-plus-circle" />
        </a>
         {{#if this.showAllPms}}
-        <a href="#" {{action (mut this.showAllPms) false}}>
+        <a href="#" {{on 'click' (fn this.setShowAllPms false)}}>
           <TooltipIcon @position="right" @message="Hide Inactive" @icon="fa fa-caret-square-up" />
         </a>
         {{else}}
-        <a href="#" {{action (mut this.showAllPms) true}}>
+        <a href="#" {{on 'click' (fn this.setShowAllPms true)}}>
           <TooltipIcon @position="right" @message="Show All" @icon="fa fa-caret-square-down" />
         </a>
         {{/if}}
-       </p>  
+       </div>  
         
         {{#each this.sortedPageThreads as |channel|}}
           {{#if (or channel.is_recent this.showAllPms)}}
-           <a href="#" {{action 'changeChannel' channel}}>
+           <a href="#" {{on 'click' (fn this.changeChannel channel)}}>
             <div class="play-selector {{if (eq channel.key this.selectedChannel.key) 'play-selector-active' ''}}">                  
               # {{channel.title}}
               {{#if channel.is_hidden}}
@@ -86,27 +86,26 @@
           {{/if}}
         {{/each}}        
         
-       <p class="play-section-title">Channels
-         
-         <a href="#" {{action (mut this.showAddChannel) true}}>
-           <TooltipIcon @position="right" @message="Add Channel" @icon="fa fa-plus-circle" />
-         </a>
-          {{#if this.showAllChannels}}
-          <a href="#" {{action (mut this.showAllChannels) false}}>
-            <TooltipIcon @position="right" @message="Hide Inactive" @icon="fa fa-caret-square-up" />
-          </a>
-          {{else}}
-          <a href="#" {{action (mut this.showAllChannels) true}}>
-            <TooltipIcon @position="right" @message="Show All" @icon="fa fa-caret-square-down" />
-          </a>
-          {{/if}}
-       </p>  
+        <div class="play-section-title">Channels
+           <a href="#" {{on 'click' (fn this.setShowAddChannel true)}}>
+             <TooltipIcon @position="right" @message="Add Channel" @icon="fa fa-plus-circle" />
+           </a>
+            {{#if this.showAllChannels}}
+            <a href="#" {{on 'click' (fn this.setShowAllChannels false)}}>
+              <TooltipIcon @position="right" @message="Hide Inactive" @icon="fa fa-caret-square-up" />
+            </a>
+            {{else}}
+            <a href="#" {{on 'click' (fn this.setShowAllChannels true)}}>
+              <TooltipIcon @position="right" @message="Show All" @icon="fa fa-caret-square-down" />
+            </a>
+            {{/if}}
+       </div>  
               
        {{#each this.sortedChannels as |channel|}}
          {{#if channel.can_join}}
            {{#if channel.enabled}}
             {{#if (or channel.is_recent this.showAllChannels)}}
-             <a href="#" {{action 'changeChannel' channel}}>
+             <a href="#" {{on 'click' (fn this.changeChannel channel)}}>
                <div class="play-selector {{if (eq channel.key this.selectedChannel.key) 'play-selector-active' ''}}">
                     # {{channel.title}}
                    {{#if channel.muted}}
@@ -119,37 +118,35 @@
            {{/if}}
          {{/if}}
        {{/each}}
-                         
      </div>
-    </div>
-     
+                         
    </div>
    
-   <div class="col col-12 col-md-9">
+   <div class="play-main">
       
       {{#if this.currentScene}}
-      <LinkTo @route="scene-live" @model={{this.currentScene.id}} class="play-scene-title">Scene {{this.currentScene.id}}
-          {{#if this.currentScene.title}}
-           - {{this.currentScene.title}}
-           {{/if}}
-       </LinkTo>
+        <LinkTo @route="scene-live" @model={{this.currentScene.id}} class="play-scene-title">Scene {{this.currentScene.id}}
+            {{#if this.currentScene.title}}
+             - {{this.currentScene.title}}
+             {{/if}}
+         </LinkTo>
        
        {{/if}}
     
-       <LiveSceneControl @scene={{this.currentScene}} @locations={{this.model.locations}} @abilities={{this.model.abilities}} @places={{this.currentScene.places}} @characters={{this.model.characters}} @scrollPaused={{this.scrollPaused}} @playerName={{this.currentUser.name}} @custom={{this.model.custom}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @setScroll={{action "setScroll"}} />
+       <LiveSceneControl @scene={{this.currentScene}} @locations={{this.model.locations}} @abilities={{this.model.abilities}} @places={{this.currentScene.places}} @characters={{this.model.characters}} @scrollPaused={{this.scrollPaused}} @playerName={{this.currentUser.name}} @custom={{this.model.custom}} @refresh={{this.refresh}} @onScrollDown={{this.scrollDown}} @onSetScroll={{this.setScroll}} />
        
        
        {{#if this.selectedChannel}}
 
-       {{#if this.selectedChannel.is_page}}
-       <h3>PMs with {{this.selectedChannel.title}}</h3>
-       {{else}}
-       <h3>{{this.selectedChannel.title}}</h3>
-       {{/if}}
+         {{#if this.selectedChannel.is_page}}
+         <h3>PMs with {{this.selectedChannel.title}}</h3>
+         {{else}}
+         <h3>{{this.selectedChannel.title}}</h3>
+         {{/if}}
        {{/if}}
        
        
-         <ChatControl @channel={{this.selectedChannel}} @scrollPaused={{this.scrollPaused}} @playerName={{this.currentUser.name}} @refresh={{action "refresh"}} @scrollDown={{action "scrollDown"}} @poseableChars={{this.model.chat.pose_chars}} @setScroll={{action "setScroll"}} />
+       <ChatControl @channel={{this.selectedChannel}} @scrollPaused={{this.scrollPaused}} @playerName={{this.currentUser.name}} @refresh={{this.refresh}} @onScrollDown={{this.scrollDown}} @poseableChars={{this.model.chat.pose_chars}} @onSetScroll={{this.setScroll}} />
        
        
        {{#if this.emptyPrompt}}
@@ -160,16 +157,16 @@
 </div>
 
   
-<BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{this.showAddChannel}}  @onHide={{action (mut this.showAddChannel) false}}>
+<BsModalSimple @title="Add Channel" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{this.showAddChannel}}  @onHide={{(fn this.setShowAddChannel false)}}>
   
     
-  <PowerSelect @selected={{this.poseChar}} @options={{this.model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+  <PowerSelect @selected={{this.poseChar}} @options={{this.model.chat.pose_chars}} @searchField="name" @onChange={{this.poseCharChanged}} as |poseChar|>
       <CharIconTiny @char={{poseChar}} />
   </PowerSelect>
   
   <table>
     {{#each this.sortedChannels as |channel|}}
-      {{#if channel.can_join}}
+      {{#if (and channel.can_join (not channel.enabled))}}
         <tr>
           <td>
           <b>{{channel.title}}</b> 
@@ -182,7 +179,7 @@
             {{/if}}
           </td>
           <td>
-            <a href="#" {{action 'joinChannel' channel.title}} class="btn btn-primary">Join</a>
+            <a href="#" {{on 'click' (fn this.joinChannel channel.title)}} class="btn btn-primary">Join</a>
           </td>
         </tr>
       {{/if}}
@@ -191,31 +188,31 @@
   </table>
 </BsModalSimple>
   
-<BsModalSimple @title="Start Conversation" @closeTitle="Cancel" @submitTitle="Start" @size={{null}} @fade={{true}} @open={{this.showNewConversation}} @onSubmit={{action "startConversation"}}  @onHide={{action (mut this.showNewConversation) false}}>
+<BsModalSimple @title="Start Conversation" @closeTitle="Cancel" @submitTitle="Start" @size={{null}} @fade={{true}} @open={{this.showNewConversation}} @onSubmit={{this.startConversation}}  @onHide={{(fn this.setShowNewConversation false)}}>
 
 
          <div class="card card-default">
            <div class="card-body">
              
              
-              <div class="form-group row">
-               <div class="col-sm-3">
-                   <label for="to" class="col-form-label">To:</label>
+              <div class="form-item">
+               <div class="form-item-label">
+                   To:
                </div>
-               <div class="col-sm-9">
-                   <PowerSelectMultiple @selected={{this.newConversationList}} @options={{this.model.characters}} @searchEnabled=true  @searchField="name" @onChange={{action "conversationListChanged"}} as |char|>
+               <div class="form-item-entry">
+                   <PowerSelectMultiple @selected={{this.newConversationList}} @options={{this.model.characters}} @searchEnabled=true  @searchField="name" @onChange={{this.conversationListChanged}} as |char|>
                  {{char.name}}
                </PowerSelectMultiple>
                </div> 
              </div>
              
-              <div class="form-group row">
-               <div class="col-sm-3">
-                   <label for="from" class="col-form-label">From:</label>
+              <div class="form-item">
+               <div class="form-item-label">
+                   From:
                </div>
-               <div class="col-sm-9">
+               <div class="form-item-entry">
                  <div class="scene-char-select" >
-                   <PowerSelect @selected={{this.poseChar}} @options={{this.model.chat.pose_chars}} @searchField="name" @onChange={{action "poseCharChanged"}} as |poseChar|>
+                   <PowerSelect @selected={{this.poseChar}} @options={{this.model.chat.pose_chars}} @searchField="name" @onChange={{this.poseCharChanged}} as |poseChar|>
                        <CharIconTiny @char={{poseChar}} />
                    </PowerSelect>
                  </div>
@@ -223,7 +220,7 @@
              </div>
              
       
-               <MarkdownEditor @text={{this.newPage}} class="chat-box" @rows="6" @onEnter={{action "startConversation"}} />
+               <MarkdownEditor @text={{this.newPage}} class="chat-box" @rows="6" @onEnter={{this.startConversation}} />
       
            </div>
          </div>

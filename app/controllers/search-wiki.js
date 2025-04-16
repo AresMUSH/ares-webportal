@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Controller.extend({
   gameApi: service(),
@@ -18,25 +19,27 @@ export default Controller.extend({
     this.set('searchResults', null);
   },
     
-  actions: {
-    reset() {
-      this.resetOnExit();
-    },
-    search() {
-      let api = this.gameApi;
+  @action
+  reset() {
+    this.resetOnExit();
+  },
+    
+  @action
+  search() {
+    let api = this.gameApi;
             
-      api.requestMany('searchWiki', { 
-        searchTitle: this.searchTitle,
-        searchText: this.searchText,
-        searchTag: this.searchTag,
-        searchCategory: this.searchCategory,
-      })
-      .then( (response) => {
-        if (response.error) {
-          return;
-        }
-        this.set('searchResults', response);
-      });
-    }
+    api.requestMany('searchWiki', 
+    { 
+      searchTitle: this.searchTitle,
+      searchText: this.searchText,
+      searchTag: this.searchTag,
+      searchCategory: this.searchCategory,
+    })
+    .then( (response) => {
+      if (response.error) {
+        return;
+      }
+      this.set('searchResults', response);
+    });
   }
 });

@@ -22,7 +22,7 @@
     <LinkTo @route="files" class="btn btn-secondary">Back to Files</LinkTo>
 
     {{#if this.model.can_edit}}
-        <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete</button>
+        <button {{on 'click' this.showActionConfirmation}} class="btn btn-warning">Delete</button>
     
         <LinkTo @route="file-edit" @models={{array this.model.folder this.model.name}} class="btn btn-primary">Edit</LinkTo>
     {{/if}}
@@ -33,7 +33,7 @@
 <FileUploader @folder={{this.model.folder}} @file={{this.model.name}} />
 
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut this.confirmDelete) false}}>
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.actionConfirmationVisible}} @onSubmit={{this.delete}} @onHide={{this.hideActionConfirmation}}>
     You're about to delete file {{this.model.name}}. This cannot be undone.  Are you sure?
   </BsModalSimple>
   

@@ -29,7 +29,7 @@
     <td>
     
       <LinkTo @route="channel-edit" @model={{channel.id}}><i class="fas fa-edit" aria-label="Edit Channel"></i></LinkTo>
-      <a href="#" {{action (mut this.channelToDelete) channel}}><i class="fa fa-trash" aria-label="Delete Channel"></i></a>
+      <a href="#" {{on 'click' (fn this.setChannelToDelete channel)}}><i class="fa fa-trash" aria-label="Delete Channel"></i></a>
     
     </td>
   </tr>
@@ -40,6 +40,6 @@
 </div>
 
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDeleteChannel}} @onSubmit={{action "deleteChannel" this.channelToDelete}} @onHide={{action (mut this.channelToDelete) null}}>
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDeleteChannel}} @onSubmit={{(fn this.deleteChannel this.channelToDelete)}} @onHide={{(fn this.setChannelToDelete null)}}>
     You're about to delete {{this.channelToDelete.name}}. This cannot be undone.  Are you sure?
   </BsModalSimple>

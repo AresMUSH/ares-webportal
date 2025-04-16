@@ -44,12 +44,12 @@
         </td>
         <td>
             
-             <PowerSelectMultiple @selected={{this.model.message.tags}} @options={{this.model.message.all_tags}} @onChange={{action "tagsChanged"}} as |tag|>
+             <PowerSelectMultiple @selected={{this.model.message.tags}} @options={{this.model.message.all_tags}} @onChange={{this.tagsChanged}} as |tag|>
                {{tag}}
              </PowerSelectMultiple>
              
              <Input @type="text" size={{10}} id="newTag" @value={{this.newTag}} /> 
-             <a href="#" {{action 'addNewTag'}}><i class="fa fa-plus" aria-label="Add Tag"></i></a>     
+             <a href="#" {{on 'click' this.addNewTag}}><i class="fa fa-plus" aria-label="Add Tag"></i></a>     
 
         </td>
     </tr>
@@ -71,10 +71,10 @@
 <hr>
   <div class="action-buttons">
     {{#if this.model.message.in_trash}}
-      <button class="btn btn-secondary" {{action 'uneleteMsg'}}>Undelete</button>
+      <button class="btn btn-secondary" {{on 'click' this.uneleteMsg}}>Undelete</button>
     {{else}}
-      <button class="btn btn-warning" {{action 'deleteMsg'}}>Trash</button>
-      <button class="btn btn-secondary" {{action 'archiveMsg'}}>Archive</button>          
+      <button class="btn btn-warning" {{on 'click' this.moveToTrash}}>Trash</button>
+      <button class="btn btn-secondary" {{on 'click' this.archiveMsg}}>Archive</button>          
     {{/if}}
   </div>
 
@@ -89,8 +89,8 @@
     <div id="reply" class="card-collapse collapse">
       <div class="card-body">
       <p><b>Replying As:</b> {{this.model.message.recipient}}</p>
-      <p><b>To:</b> <a href="#" {{action 'replyAll'}}>[Reply All]</a>
-        <PowerSelectMultiple @selected={{this.replyToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "replyToListChanged"}} as |char|>
+      <p><b>To:</b> <a href="#" {{on 'click' this.replyAll}}>[Reply All]</a>
+        <PowerSelectMultiple @selected={{this.replyToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{this.replyToListChanged}} as |char|>
           {{char.name}}
         </PowerSelectMultiple>
       </p>
@@ -98,7 +98,7 @@
           <MarkdownEditor @text={{this.replyMessage}} />
 
           <div class="action-buttons">
-            <button class="btn btn-primary" {{action 'sendReply'}}>Send</button>    
+            <button class="btn btn-primary" {{on 'click' this.sendReply}}>Send</button>    
           </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
       <div class="card-body">
       <p><b>Forwarding As:</b> {{this.model.message.recipient}}</p>
       <p><b>To:</b>
-      <PowerSelectMultiple @selected={{this.fwdToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "fwdToListChanged"}} as |char|>
+      <PowerSelectMultiple @selected={{this.fwdToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{this.fwdToListChanged}} as |char|>
         {{char.name}}
       </PowerSelectMultiple>
       </p> 
@@ -126,7 +126,7 @@
           <MarkdownEditor @text={{this.fwdMessage}} />
 
           <div class="action-buttons">
-            <button class="btn btn-primary" {{action 'sendForward'}}>Send</button>    
+            <button class="btn btn-primary" {{on 'click' this.sendForward}}>Send</button>    
           </div>
         </div>
     </div>

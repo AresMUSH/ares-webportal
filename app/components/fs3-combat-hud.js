@@ -1,11 +1,11 @@
 import Component from '@ember/component';
+import { action } from '@ember/object';
 
 export default Component.extend({  
   damagePopupChar: null,
   
-  actions: {
-    showDamage(char) {
-      this.set('damagePopupChar', char);
-    }
-  }  
+  @action
+  showDamage(char) {
+    this.set('damagePopupChar', char);
+  }
 });

@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Controller.extend({    
     gameApi: service(),
@@ -33,11 +34,6 @@ export default Controller.extend({
               npc_image: r.is_npc ? r.npc_image : null };
         });
         
-        let tags = this.get('model.char.tags') || [];
-        if (!Array.isArray(tags)) {
-            tags = tags.split(/[\s,]/);
-        }
-
         
         descs['current'] = this.get('model.char.descs.current');
         descs['short'] = this.get('model.char.shortdesc');
@@ -74,56 +70,52 @@ export default Controller.extend({
             profile_order: this.get('model.char.profile_order'),
             background: this.get('model.char.background'),
             rp_prefs: this.get("model.char.rp_prefs"),
-            tags: tags,
+            tags: this.get('model.char.tags'),
+            fs3: this.get('model.char.fs3'),
             descs: descs,
             custom: custom,
             roster: roster,
             roles: this.get('model.char.roles') || []
         };
     }, 
-    actions: {
-      
-        rolesChanged(roles) {
-          this.set('model.char.roles', roles);
-        },
         
-        save() {
-            if (this.get('model.char.profile').filter(p => p.name.length == 0).length > 0) {
-                this.flashMessages.danger('Profile names cannot be blank.');
-                return;
-            }
-            
-            if (this.get('model.char.relationships').filter(r => r.name.length == 0).length > 0) {
-                this.flashMessages.danger('Relationship names cannot be blank.');
-                return;
-            }
-            
-            if (this.get('model.char.descs.outfits').filter(r => r.name.length == 0).length > 0) {
-                this.flashMessages.danger('Outfit names cannot be blank.');
-                return;
-            }
-            
-            if (this.get('model.char.descs.outfits').filter(r => r.name.includes(' ')).length > 0) {
-                this.flashMessages.danger('Outfit names cannot contain spaces.');
-                return;
-            }
-
-            if (this.get('model.char.descs.details').filter(r => r.name.length == 0).length > 0) {
-                this.flashMessages.danger('Detail names cannot be blank.');
-                return;
-            }
-            
-            let api = this.gameApi;
-            api.requestOne('profileSave', this.buildQueryDataForChar(), null)
-            .then( (response) => {
-                if (response.error) {
-                    return;
-                }
-            
-                this.flashMessages.success('Saved!');
-                this.router.transitionTo('char', this.get('model.char.name'));
-                
-            });
+    @action
+    save() {
+        if (this.get('model.char.profile').filter(p => p.name.length == 0).length > 0) {
+            this.flashMessages.danger('Profile names cannot be blank.');
+            return;
         }
+        
+        if (this.get('model.char.relationships').filter(r => r.name.length == 0).length > 0) {
+            this.flashMessages.danger('Relationship names cannot be blank.');
+            return;
+        }
+        
+        if (this.get('model.char.descs.outfits').filter(r => r.name.length == 0).length > 0) {
+            this.flashMessages.danger('Outfit names cannot be blank.');
+            return;
+        }
+        
+        if (this.get('model.char.descs.outfits').filter(r => r.name.includes(' ')).length > 0) {
+            this.flashMessages.danger('Outfit names cannot contain spaces.');
+            return;
+        }
+
+        if (this.get('model.char.descs.details').filter(r => r.name.length == 0).length > 0) {
+            this.flashMessages.danger('Detail names cannot be blank.');
+            return;
+        }
+        
+        let api = this.gameApi;
+        api.requestOne('profileSave', this.buildQueryDataForChar(), null)
+        .then( (response) => {
+            if (response.error) {
+                return;
+            }
+        
+            this.flashMessages.success('Saved!');
+            this.router.transitionTo('char', this.get('model.char.name'));
+            
+        });
     }
 });

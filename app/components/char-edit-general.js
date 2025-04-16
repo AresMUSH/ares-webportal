@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import { computed } from '@ember/object';
+import { action } from '@ember/object';
 
 export default Component.extend({
   tagName: '',
@@ -13,16 +14,17 @@ export default Component.extend({
     return list;
   }),
   
-  actions: {
+  @action
+  genderChanged(val) {
+    this.set('model.char.demographics.gender.value', val.value);
+  },
 
-    genderChanged(val) {
-        this.set('model.char.demographics.gender.value', val.value);
-    },
-    profileImageChanged(image) {
-        this.set('model.char.profile_image', image);
-    },
-    profileIconChanged(icon) {
-        this.set('model.char.profile_icon', icon);
-    }
+  @action
+  profileImageChanged(image) {
+    this.set('model.char.profile_image', image);
+  },
+  @action
+  profileIconChanged(icon) {
+    this.set('model.char.profile_icon', icon);
   }
 });

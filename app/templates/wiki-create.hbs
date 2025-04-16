@@ -2,43 +2,43 @@
 <h1>Create New Page</h1>
 
         
-    <div class="form-group row">
-     <div class="col-sm-3">
-        <label for="title" class="col-xs-2 col-form-label">Title:</label>
+    <div class="form-item">
+     <div class="form-item-label">
+        Title:
      </div>
-     <div class="col-sm-9">
-       <Input @type="text" size={{25}} id="title" @enter={{action "save"}} @value={{this.model.title}} />
+     <div class="form-item-entry">
+       <Input @type="text" size={{25}} id="title" @enter={{this.save}} @value={{this.model.title}} />
 
         <div class="hint">This is the page title that the players see.</div>
      </div> 
    </div>
 
-     <div class="form-group row">
-      <div class="col-sm-3">
-        <label for="name" class="col-xs-2 col-form-label">Page Name:</label>
+     <div class="form-item">
+      <div class="form-item-label">
+        Page Name:
       </div>
-      <div class="col-sm-9">
-        <Input @type="text" size={{25}} id="name" @enter={{action "save"}} @value={{this.model.name}} />
+      <div class="form-item-entry">
+        <Input @type="text" size={{25}} id="name" @enter={{this.save}} @value={{this.model.name}} />
         
         <div class="hint">If blank, the page title will be converted into a name.</div>
       </div> 
     </div>
        
-    <div class="form-group row">
-     <div class="col-sm-3">
-        <label for="tags" class="col-xs-2 col-form-label">Tags:</label>
+    <div class="form-item">
+     <div class="form-item-label">
+        Tags:
      </div>
-     <div class="col-sm-9">
-        <Input @type="text" size={{25}} id="tags" @enter={{action "save"}} @value={{this.model.tags}} />
+     <div class="form-item-entry">
+        <Input @type="text" size={{25}} id="tags" @enter={{this.save}} @value={{this.model.tags}} />
      </div> 
    </div>  
     
-    <div class="form-group row">
-     <div class="col-sm-3">
-        <label for="tags" class="col-xs-2 col-form-label">Template:</label>
+    <div class="form-item">
+     <div class="form-item-label">
+        Template:
      </div>
-     <div class="col-sm-9">
-      <PowerSelect @selected={{this.model.template}} @options={{this.model.templates}} @searchField="title" @onChange={{action "templateChanged"}} as |tmp|>
+     <div class="form-item-entry">
+      <PowerSelect @selected={{this.model.template}} @options={{this.model.templates}} @searchField="title" @onChange={{this.templateChanged}} as |tmp|>
         {{tmp.title}}
       </PowerSelect>
      </div> 
@@ -49,7 +49,7 @@
     
 <div class="action-buttons">
   <LinkTo @route="wiki" class="btn btn-secondary">Cancel</LinkTo> 
-  <button class="btn btn-primary" {{action 'save'}}>Save</button>
+  <button class="btn btn-primary" {{on 'click' this.save}}>Save</button>
 </div>
     
     <FlashMessages />

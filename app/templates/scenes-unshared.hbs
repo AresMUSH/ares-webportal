@@ -12,8 +12,8 @@
   {{#each this.model.unshared as |scene| }}
 
   <div class="unshared-scene-block">
-    <div class="row unshared-scenes-heading">
-      <div class="col col-xs-8">
+    <div class="unshared-scene-heading">
+      <div class="unshared-scene-title">
         <LinkTo @route="scene-live" @model={{scene.id}} class="scene-title">
         
         {{scene.id}} - 
@@ -28,33 +28,28 @@
         </LinkTo>        
         
       </div>
-      <div class="col col-xs-4">
+      <div class="unshared-scene-tags">
         
         <ScenePrivacyTag @scene={{scene}} />
         <ScenePacingTag @scene={{scene}} />
         <SceneTypeTag @scene={{scene}} />
       </div>
     </div>
-
-  <div class="row">
-
-      <div class="col col-xs-12 col-sm-8">    
+    {{#if scene.in_trash}}     
+    <div class="alert alert-warning scene-deletion-warning">
+      <i class="fa fa-trash"></i>
+      Marked for deletion. Download, share, or restart before it's deleted on {{scene.trash_date}}.
+    </div>
+    {{/if}}
+    <div class="unshared-scene-body">    
         
-        <div class="unshared-scenes-contents">
-          {{#each scene.participants as |char|}}
-          <CharIconInline @char={{char}} />
-          {{/each}}
-        </div>
-        
-        {{#if scene.summary}}
-        <div><AnsiFormat @text={{scene.summary}} />
-        </div>        
-        {{/if}}   
-        
-        
-        
+      <div class="unshared-scene-participants">
+        {{#each scene.participants as |char|}}
+        <CharIconInline @char={{char}} />
+        {{/each}}
       </div>
-      <div class="col col-xs-12 col-sm-2">
+        
+      <div class="unshared-scene-activity">
         {{#if scene.last_posed}}
           <div>{{scene.last_posed}}</div>
         {{/if}}
@@ -62,28 +57,19 @@
         <div>{{scene.last_pose_time_str}}</div>
       </div>
         
-        <div class="col col-xs-12 col-sm-2">
-          <div class="unshared-scenes-controls">
-                <LinkTo @route="scene-live" @model={{scene.id}}><i class="fa fa-eye" aria-label="View Scene"></i> View </LinkTo>
-              {{#if scene.can_edit}}
-                 <LinkTo @route="scene-edit" @model={{scene.id}}><i class="fa fa-edit" aria-label="Edit Scene"></i> Edit</LinkTo>
-                 <a href="#" {{action 'changeSceneStatus' scene 'restart'}}><i class="fa fa-play" aria-label="Restart Scene"></i> Restart</a>
-                  <a href="#" {{action 'changeSceneStatus' scene 'share'}}><i class="fa fa-share" aria-label="Share Scene"></i> Share</a>                 
-              {{/if}}
-                <LinkTo @route="scene-download" @model={{scene.id}}><i class="fa fa-download" aria-label="Download Scene"></i> Download </LinkTo>
-          </div>
-        </div>
-        
+      <div class="unshared-scene-controls">
+            <LinkTo @route="scene-live" @model={{scene.id}}><i class="fa fa-eye" aria-label="View Scene"></i> View </LinkTo>
+          {{#if scene.can_edit}}
+             <LinkTo @route="scene-edit" @model={{scene.id}}><i class="fa fa-edit" aria-label="Edit Scene"></i> Edit</LinkTo>
+             <a href="#" {{on 'click' (fn this.changeSceneStatus scene 'restart')}}><i class="fa fa-play" aria-label="Restart Scene"></i> Restart</a>
+              <a href="#" {{on 'click' (fn this.changeSceneStatus scene 'share')}}><i class="fa fa-share" aria-label="Share Scene"></i> Share</a>                 
+          {{/if}}
+            <LinkTo @route="scene-download" @model={{scene.id}}><i class="fa fa-download" aria-label="Download Scene"></i> Download </LinkTo>
       </div>
-      
+    </div>
   </div>
   
-    {{#if scene.in_trash}}     
-    <div class="alert alert-warning scene-deletion-warning">
-      <i class="fa fa-trash"></i>
-      Marked for deletion. Download, share, or restart before it's deleted on {{scene.trash_date}}.
-    </div>
-    {{/if}}
+    
   
   {{/each}}
 </div>

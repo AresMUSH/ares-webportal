@@ -1,0 +1,42 @@
+{{page-title 'Block List'}}
+<h1>Block List</h1>
+
+<div class="block-list">
+    
+{{#each this.model.blockInfo.blocks as |block| }}
+  <div class="block-list-item">
+    <div class="block-list-name">{{block.blocked.name}}</div>
+    <div class="block-list-type">{{block.block_type}}</div>
+    <div class="block-list-action">
+      <button class="btn btn-secondary" {{on 'click' (fn this.removeBlock block.id)}}><i class="fa fa-trash" aria-label="Remove Block"></i></button>      
+    </div>
+  </div>
+{{/each}}
+
+</div>
+
+
+<div class="action-buttons">
+  <LinkTo @route="account" class="btn btn-secondary">Back</LinkTo>  
+  <button {{on 'click' this.showActionConfirmation}} class="btn btn-primary">Add Block</button>
+</div>
+
+
+<BsModalSimple @title="Add Block" @closeTitle="Cancel" @submitTitle="Add" @size={{null}} @fade={{true}} @open={{this.actionConfirmationVisible}} @onSubmit={{this.addBlock}} @onHide={{this.hideActionConfirmation}}>
+
+<p>Specific block behavior varies by block type. See the help for that command for details.</p>
+  
+  <PowerSelect @selected={{this.blockChar}} @options={{this.model.chars}} @searchEnabled=true @searchField="name" @onChange={{this.blockCharChanged}} @placeholder="Select a character" as |char|>
+    {{char.name}}
+  </PowerSelect>
+
+  
+  <PowerSelect @selected={{this.blockType}} @options={{this.model.blockInfo.block_types}} @searchEnabled=true @placeholder="Select a block type" @onChange={{this.blockTypeChanged}} as |type|>
+    {{type}}
+  </PowerSelect>
+        
+        
+  <FlashMessages />
+</BsModalSimple>
+
+{{outlet}}

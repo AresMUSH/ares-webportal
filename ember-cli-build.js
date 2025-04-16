@@ -9,6 +9,7 @@ module.exports = function (defaults) {
       bootstrapVersion: 5,
       importBootstrapFont: false,
       importBootstrapCSS: false,
+      insertEmberWormholeElementToDom: false
     },
     'ember-cli-babel': {
       includePolyfill: true,

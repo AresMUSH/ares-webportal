@@ -1,4 +1,3 @@
-import $ from "jquery"
 import Service from '@ember/service';
 
 export default Service.extend({
@@ -8,8 +7,8 @@ export default Service.extend({
         if (active) { 
             src = '/game/uploads/theme_images/favicon-active.ico';
         }
-        $('link[rel="shortcut icon"]').attr('href', src);
-        
+        let iconElement = document.getElementById('favicon');
+        iconElement.setAttribute('href',src);
     },
      
 });

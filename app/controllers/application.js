@@ -1,6 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
-import { computed } from '@ember/object';
+import { computed, action } from '@ember/object';
 import { reads } from '@ember/object/computed';
 import AuthenticatedController from 'ares-webportal/mixins/authenticated-controller';
 import AvailableRoutes from 'ares-webportal/mixins/available-routes';
@@ -106,21 +106,22 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, AresC
        return true;
     },
     
-    actions: {
-      switchAlt: function(alt) {
-        this.set('showAltSelection', false);
-        this.session.authenticate('authenticator:ares', { name: alt, password: 'ALT' })
-         .then(() => {
-           let redirect = this.currentRoute;
-           if (!redirect) {
-               redirect = '/';
-           }
-           window.location.replace(redirect);
-         });
-      },
-      toggleAltSelection: function() {
-        this.set('showAltSelection', !this.showAltSelection);
-      }
-    }
+    @action
+    setAltSelectionVisible(visible) {
+      this.set('showAltSelection', visible);
+    },
+    
+    @action
+    switchAlt(alt) {
+      this.set('showAltSelection', false);
+      this.session.authenticate('authenticator:ares', { name: alt, password: 'ALT' })
+       .then(() => {
+         let redirect = this.currentRoute.pathname;
+         if (!redirect) {
+             redirect = '/';
+         }
+         window.location.replace(redirect);
+       });
+    }    
     
 });

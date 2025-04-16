@@ -1,0 +1,27 @@
+<div id="fs3" class="tab-pane fade show">
+  <h3>FS3</h3>
+
+    {{#if this.char.fs3.can_manage_xp}}
+    <div class="form-item">
+        <div class="form-item-label">
+                <b>XP</b>
+        </div>
+    
+        <div class="form-item-entry">
+          <Input @type="text" id="xp" placeholder="XP" @value={{this.char.fs3.xp}} />
+        </div>
+    </div>
+    {{/if}}
+    
+    {{#if this.char.fs3.can_manage_luck}}
+    <div class="form-item">
+        <div class="form-item-label">
+                <b>Luck Points</b>
+        </div>
+    
+        <div class="form-item-entry">
+          <Input @type="text" id="luck" placeholder="Luck" @value={{this.char.fs3.luck}} />
+        </div>
+    </div>
+    {{/if}}
+</div>

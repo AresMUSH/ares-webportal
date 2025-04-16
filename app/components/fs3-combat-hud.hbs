@@ -1,0 +1,100 @@
+
+<div class="table-responsive fs3-combat-hud">
+
+<table class="table">
+<thead>
+    <th>Name</th>
+    <th>Damage</th>
+    <th>Weapon</th>
+    <th>Armor</th>
+    <th>Vehicle/Mount</th>
+    <th>Stance</th>
+    <th>Action</th>
+    <th></th>
+
+</thead>
+
+<tbody>
+
+{{#each this.combat.teams as |t| }}    
+
+<tr><td colspan="8"><h3>Team {{t.team}}
+  
+  {{#if t.name}}
+  ({{t.name}})
+  {{/if}}
+
+</h3></td></tr>
+
+    {{#each t.combatants as |c| }}
+    
+    <tr>
+        <td>
+          {{#if c.is_npc}}
+            {{c.name}}
+          {{else}}
+            <LinkTo @route="char" @model={{c.name}} target="_blank">{{c.name}}</LinkTo>
+          {{/if}}
+        </td>
+        
+        <td>
+          <a href="#" {{on 'click' (fn this.showDamage c)}}>
+            {{#if c.is_ko}}
+            
+                <i class="fa fa-crosshairs" aria-label="Knocked Out"></i>
+                K O 
+                <i class="fa fa-crosshairs" aria-hidden="true"></i>
+            
+            {{else}}
+              
+                {{#each c.damage_boxes}}
+                    <i class="fa fa-heartbeat combat-damage" aria-label="Damage Box"></i>
+                {{/each}}
+             
+            {{/if}}
+          </a>
+        </td>
+        
+        <td>
+            {{c.weapon}} {{c.ammo}}
+        </td>
+        <td>
+            {{c.armor}}
+        </td>
+        
+        <td>
+            {{c.vehicle}}{{c.mount}}
+        </td>
+        
+        <td>
+            {{c.stance}}
+        </td>
+        
+        <td>
+            {{c.action}}
+        </td>
+        
+        <td>
+            {{#if c.can_edit}}
+                <LinkTo @route="combatant-edit" @model={{c.id}} target="_blank">
+                <TooltipIcon @position="left" @message="Edit combatant." @icon="fa fa-edit" />
+                </LinkTo>
+            {{/if}}
+        </td>
+    </tr>
+    
+    {{/each}}
+  
+
+{{/each}}
+
+    
+</tbody>
+</table>
+
+</div>
+
+<BsModalSimple @title="Damage Report" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{this.damagePopupChar}}  @onHide={{(fn this.damagePopupChar null)}}>
+    <Fs3Damage @damage={{this.damagePopupChar.damage}} @damageMod={{this.damagePopupChar.damage_mod}} />
+    
+</BsModalSimple>

@@ -4,7 +4,7 @@
 {{#if this.model.can_post}}
 
      <p><b>Post As:</b>        <div class="forum-char-select" >
-                 <PowerSelect @selected={{this.author}} @options={{this.model.authors}} @searchField="name" @onChange={{action "authorChanged"}} as |author|>
+                 <PowerSelect @selected={{this.author}} @options={{this.model.authors}} @searchField="name" @onChange={{this.authorChanged}} as |author|>
                      <CharIconTiny @char={{author}} />
                  </PowerSelect>
              </div>
@@ -18,7 +18,7 @@
 
 <div class="action-buttons">
     <LinkTo @route="forum-category" @model={{this.model.id}} class="btn btn-secondary">Cancel</LinkTo>
-    <button {{action "addPost"}} class="btn btn-primary">Post</button>
+    <button {{on 'click' this.addPost}} class="btn btn-primary">Post</button>
 </div>
     
 {{else}}

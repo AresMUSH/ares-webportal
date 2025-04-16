@@ -12,56 +12,56 @@
 
 <div id="searchFields" class="card-collapse collapse {{if this.searchResults '' 'show'}}">
 
-<div class="row">
+<div class="form-item">
   
-  <div class="col col-xs-3">
+  <div class="form-item-label">
     <label>Title:</label>
   </div>
   
-  <div class="col col-xs-9">
-        <p><Input @type="text" size={{25}} id="title" @value={{this.searchTitle}} @enter={{action "search"}} /></p>
+  <div class="form-item-entry">
+        <p><Input @type="text" size={{25}} id="title" @value={{this.searchTitle}} @enter={{this.search}} /></p>
   </div>
   
 </div>
 
-<div class="row">
+<div class="form-item">
   
-  <div class="col col-xs-3">
+  <div class="form-item-label">
         <label>Tag:</label>
   </div>
   
-  <div class="col col-xs-8">
-        <p><Input @type="text" size={{25}} id="tag" @value={{this.searchTag}} @enter={{action "search"}} /></p>
+  <div class="form-item-entry">
+        <p><Input @type="text" size={{25}} id="tag" @value={{this.searchTag}} @enter={{this.search}} /></p>
   </div>
   
 </div>
 
-<div class="row">
+<div class="form-item">
   
-  <div class="col col-xs-3">
+  <div class="form-item-label">
     <label>Category:</label>
   </div>
   
-  <div class="col col-xs-9">
-        <p><Input @type="text" size={{25}} id="category" @value={{this.searchCategory}} @enter={{action "search"}} /></p>
+  <div class="form-item-entry">
+        <p><Input @type="text" size={{25}} id="category" @value={{this.searchCategory}} @enter={{this.search}} /></p>
   </div>
   
 </div>
 
-<div class="row">
-  <div class="col col-xs-3">
+<div class="form-item">
+  <div class="form-item-label">
     <label>Text:</label>
   </div>
 
-  <div class="col col-xs-9">
-        <p><Input @type="text" size={{25}} id="text" @value={{this.searchText}} @enter={{action "search"}} /></p>
+  <div class="form-item-entry">
+        <p><Input @type="text" size={{25}} id="text" @value={{this.searchText}} @enter={{this.search}} /></p>
   </div>
 </div>  
 
     
 <div class="action-buttons">
-    <button class="btn btn-secondary" {{action 'reset'}}>Reset</button>
-    <button class="btn btn-primary" {{action 'search'}}>Search</button>
+    <button class="btn btn-secondary" {{on 'click' this.reset}}>Reset</button>
+    <button class="btn btn-primary" {{on 'click' this.search}}>Search</button>
 </div>
 
 <p class="search-hint">Search is case-insensitive and matches ALL specified criteria.</p>

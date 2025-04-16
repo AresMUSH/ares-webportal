@@ -1,0 +1,46 @@
+<div class="table-responsive">
+<table class="table table-striped jobs-list">    
+  <thead>
+      <th>Title</th> 
+      <th>Category</th>  
+      <th>Status</th>
+      <th>Submitter</th>
+      <th>Handled By</th>
+  </thead>
+  <tbody>
+{{#each this.jobs as |job|}}
+    <tr><td>
+        {{#if job.unread}}
+        <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
+        {{/if}}
+        
+        <LinkTo @route="job" @model={{job.id}}>#{{job.id}} - {{job.title}}</LinkTo>
+    </td>
+    <td>
+        <span class="badge job-category job-category-{{job.category}}">{{job.category}}</span>
+    </td>
+    <td>
+        <span class="badge job-status job-status-{{job.status}}">{{job.status}}</span>
+        
+    </td>
+    <td>
+        {{job.author}}
+    </td>
+    <td>
+        {{job.assigned_to}}
+    </td>
+
+
+     </tr>
+{{/each}}
+</tbody>
+</table>
+</div>
+
+{{#each this.pages as |pg|}}
+{{#if (eq pg this.page)}}
+<button class="btn btn-primary" {{on 'click' (fn this.goToPage pg)}}>{{pg}}</button>
+{{else}}
+<button class="btn btn-secondary" {{on 'click' (fn this.goToPage pg)}}>{{pg}}</button>
+{{/if}}
+{{/each}}

@@ -1,7 +1,7 @@
 import Controller from '@ember/controller';
-import { action } from '@ember/object';
 import dayjs from 'dayjs';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Controller.extend({
   flashMessages: service(),
@@ -22,7 +22,7 @@ export default Controller.extend({
     this._super(...arguments);
     this.set('participants', []);
   },
-  setupController: function() {
+  setup: function() {
     this.setCategory(this.model.get('options.request_category'));
     this.set('submitter', this.model.get('characters').find(c => c.id == this.get('session.data.authenticated.id')));
     this.set('customFields', this.get('model.options.custom_fields'));
@@ -34,6 +34,7 @@ export default Controller.extend({
     this.set('description', '');
     this.set('submitter', null);
     this.set('participants', []);
+    this.set('tags', '');
   },
   
   setCategory: function(cat) {
@@ -57,42 +58,41 @@ export default Controller.extend({
     this.set(`customFields.${id}.value`, val);
   },
       
-  actions: {
-    changeCategory: function(cat) {
-      this.setCategory(cat);
-    },
+  @action
+  changeCategory(cat) {
+    this.setCategory(cat);
+  },
       
-    createJob: function() {
-      let api = this.gameApi;
-      
-      let tags = this.tags || [];
-      if (!Array.isArray(tags)) {
-          tags = tags.split(/[\s,]/);
+  @action
+  createJob() {
+    let api = this.gameApi;
+         
+    api.requestOne('jobCreate', 
+    { 
+      title: this.title, 
+      category: this.category || this.get('model.options.request_category'),
+      description: this.description,
+      participants: (this.participants || []).map(p => p.id),
+      submitter: this.get('submitter.name'),
+      custom_fields: this.get('customFields'),
+      tags: this.tags
+    }, null)
+    .then( (response) => {
+      if (response.error) {
+        return;
       }
+      this.router.transitionTo('job', response.id);
+      this.flashMessages.success('Job created!');
+    });
+  },
       
-      api.requestOne('jobCreate', { 
-        title: this.title, 
-        category: this.category || this.get('model.options.request_category'),
-        description: this.description,
-        participants: (this.participants || []).map(p => p.id),
-        submitter: this.get('submitter.name'),
-        custom_fields: this.get('customFields'),
-        tags: tags }, null)
-        .then( (response) => {
-          if (response.error) {
-            return;
-          }
-          this.router.transitionTo('job', response.id);
-          this.flashMessages.success('Job created!');
-        });
-      },
-      
-      participantsChanged: function(newParticipants) {
-          this.set('participants', newParticipants);
-      },
+  @action
+  participantsChanged(newParticipants) {
+    this.set('participants', newParticipants);
+  },
 
-      submitterChanged(submitter) {
-          this.set('submitter', submitter);
-      },
-    }
-  });
+  @action
+  submitterChanged(submitter) {
+    this.set('submitter', submitter);
+  },
+});

@@ -2,9 +2,9 @@
 <h1>{{this.model.name}}</h1>
 
 {{#each this.model.values as |value|}}
-<div class="row fs3-gear-row">
-    <div class="col"><b>{{value.title}}</b></div>
-    <div class="col"><AnsiFormat @text={{value.detail}} /></div>
+<div class="fs3-gear-row">
+    <div class="fs3-gear-title"><b>{{value.title}}</b></div>
+    <div class="fs3-gear-detail"><AnsiFormat @text={{value.detail}} /></div>
 </div>
 {{/each}}
 
@@ -14,8 +14,8 @@
 
 {{#each this.model.specials as |value|}}
 <div class="row fs3-gear-row">
-    <div class="col"><b>{{value.title}}</b></div>
-    <div class="col">
+    <div class="fs3-gear-title"><b>{{value.title}}</b></div>
+    <div class="fs3-gear-detail">
       
       {{#each value.effects as |effect|}}
       {{effect}}<br>

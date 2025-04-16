@@ -1,35 +1,35 @@
 {{page-title this.model.heading}}
 <h1>{{this.model.heading}}</h1>
 
-     <div class="form-group row">
-      <div class="col-sm-3">
-        <label for="title" class="col-xs-2 col-form-label">Title:</label>
+     <div class="form-item">
+      <div class="form-item-label">
+        Title:
       </div>
-      <div class="col-sm-9">
-        <Input @type="text" size={{25}} id="title" @enter={{action "save"}} @value={{this.model.title}} />
+      <div class="form-item-entry">
+        <Input @type="text" size={{25}} id="title" @enter={{this.save}} @value={{this.model.title}} />
       </div> 
     </div>
     
 {{#if this.model.can_change_name}}
     
-     <div class="form-group row">
-      <div class="col-sm-3">
-        <label for="name" class="col-xs-2 col-form-label">Page Name:</label>
+     <div class="form-item">
+      <div class="form-item-label">
+        Page Name:
       </div>
-      <div class="col-sm-9">
-        <Input @type="text" size={{25}} id="name" @enter={{action "save"}} @value={{this.model.name}} />
+      <div class="form-item-entry">
+        <Input @type="text" size={{25}} id="name" @enter={{this.save}} @value={{this.model.name}} />
       </div> 
     </div>
     
 {{/if}}
 
     
-     <div class="form-group row">
-      <div class="col-sm-3">
-         <label for="tags" class="col-xs-2 col-form-label">Tags:</label>
+     <div class="form-item">
+      <div class="form-item-label">
+         Tags:
       </div>
-      <div class="col-sm-9">
-        <Input @type="text" size={{25}} id="tags" @enter={{action "save"}} @value={{this.model.tags}} />
+      <div class="form-item-entry">
+        <Input @type="text" size={{25}} id="tags" @enter={{this.save}} @value={{this.model.tags}} />
       </div> 
     </div>
 
@@ -40,19 +40,19 @@
       {{#if this.model.can_do_minor_edits}}
       <Input @type="checkbox" @checked={{this.minorEdit}} /> Minor Edit
       {{/if}}
-      <button class="btn btn-secondary" {{action 'cancel'}}>Cancel</button>
-      <button class="btn btn-primary" {{action 'save'}}>Save</button>
+      <button class="btn btn-secondary" {{on 'click' this.cancel}}>Cancel</button>
+      <button class="btn btn-primary" {{on 'click' this.save}}>Save</button>
     </div>
     
     <FlashMessages />
     
-    {{#if this.preview}}
+    {{#if this.previewText}}
     <div class="card card-default">
         <div class="card-heading">
             Preview
         </div>
         <div class="card-body">
-            {{{this.preview}}}
+            {{{this.previewText}}}
         </div>
     </div>
     {{/if}}

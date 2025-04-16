@@ -1,32 +1,32 @@
 {{page-title 'Edit Event'}}
 <h1>Edit Event</h1>
   
-  <div class="form-group row">
-    <div class="col-sm-3">
-      <label for="organizer" class="col-form-label">Organizer:</label>
+  <div class="form-item">
+    <div class="form-item-label">
+      Organizer:
     </div>
 
-    <div class="col-sm-9">
-      <PowerSelect @selected={{this.model.event.organizer}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{action "organizerChanged"}} as |char|>
+    <div class="form-item-entry">
+      <PowerSelect @selected={{this.model.event.organizer}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{this.organizerChanged}} as |char|>
         {{char.name}}
       </PowerSelect>
     </div>
   </div>
 
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="title" class="col-form-label">Title:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Title:
     </div>
-    <div class="col-sm-9">
-         <Input @type="text" size={{25}} id="title" @enter={{action "edit"}} @value={{this.model.event.title}} />
+    <div class="form-item-entry">
+         <Input @type="text" size={{25}} id="title" @enter={{this.edit}} @value={{this.model.event.title}} />
     </div> 
   </div>
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="date" class="col-form-label">Date:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Date:
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
          
          
            <EmberFlatpickr
@@ -43,46 +43,46 @@
     </div> 
   </div>
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="time" class="col-form-label">Start Time:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Start Time:
     </div>
-    <div class="col-sm-9">
-         <Input @type="text" id="time" @enter={{action "edit"}} @value={{this.model.event.time}} />
+    <div class="form-item-entry">
+         <Input @type="text" id="time" @enter={{this.edit}} @value={{this.model.event.time}} />
          
          <div class="hint">Use <b>server time</b> in the same format as the server time.  The server time format is {{this.model.event.server_time}}.</div>
     </div> 
   </div>
   
   
-  <div class="form-group row">
-     <div class="col-sm-3">
-         <label for="warning" class="col-form-label">Content Warning:</label>
+  <div class="form-item">
+     <div class="form-item-label">
+         Content Warning:
      </div>
-     <div class="col-sm-9">
-       <PowerSelectMultiple @selected={{this.warning_tags}} @options={{this.model.sceneOptions.content_warnings}} @onChange={{action "warningsChanged"}} as |warning|>
+     <div class="form-item-entry">
+       <PowerSelectMultiple @selected={{this.warning_tags}} @options={{this.model.sceneOptions.content_warnings}} @onChange={{this.warningsChanged}} as |warning|>
          {{warning}}
        </PowerSelectMultiple>
-         <Input @type="text" size={{60}} id="warning" @enter={{action "edit"}} @value={{this.model.event.content_warning}} />
+         <Input @type="text" size={{60}} id="warning" @enter={{this.edit}} @value={{this.model.event.content_warning}} />
             <p class="hint">Select from the suggested tags or write your own. Please avoid frivolous warnings.</p>
      </div>
    </div>
    
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="tags" class="col-form-label">Tags:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Tags:
     </div>
-    <div class="col-sm-9">
-        <Input @type="text" size={{25}} id="tags" @enter={{action "edit"}}  @value={{this.model.event.tags}} />
+    <div class="form-item-entry">
+        <Input @type="text" size={{25}} id="tags" @enter={{this.edit}}  @value={{this.model.event.tags}} />
     </div> 
   </div>
   
-   <div class="form-group row">
-    <div class="col-sm-3">
-        <label for="description" class="col-form-label">Description:</label>
+   <div class="form-item">
+    <div class="form-item-label">
+        Description:
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
          <MarkdownEditor @text={{this.model.event.description}} />
          
     </div> 
@@ -92,6 +92,6 @@
 
 <div class="action-buttons">
   <LinkTo @route="event" @model={{this.model.event.id}} class="btn btn-secondary">Cancel</LinkTo>
-  <button {{action "edit"}} class="btn btn-primary">Save</button>
+  <button {{on 'click' this.edit}} class="btn btn-primary">Save</button>
 </div>
 <FlashMessages />

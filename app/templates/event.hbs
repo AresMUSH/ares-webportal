@@ -57,7 +57,7 @@
      
      {{#if s.can_edit}}
        <div class="event-signup-item">
-         <button {{action 'cancelSignup' s.char.name}}><i class="fa fa-trash" aria-label="Cancel Signup"></i></button>
+         <button {{on 'click' (fn this.cancelSignup s.char.name)}}><i class="fa fa-trash" aria-label="Cancel Signup"></i></button>
        </div>
      {{/if}}
      
@@ -73,30 +73,30 @@
 
 {{#if this.isApproved}}
 
-  <div class="form-group row">
-    <div class="col-sm-3">
-      <label for="title" class="col-form-label">Add or Modify Signup:</label>
+  <div class="form-item">
+    <div class="form-item-label">
+      Add or Modify Signup:
     </div>
 
-    <div class="col-sm-9">
+    <div class="form-item-entry">
       
       <div class="event-signup-details">
         
         <div class="event-signup-item event-signup-char">
         
-          <PowerSelect @selected={{this.signupAs}} @options={{this.model.available_alts}} @searchField="name" @onChange={{action "signupAsChanged"}} as |alt|>
+          <PowerSelect @selected={{this.signupAs}} @options={{this.model.available_alts}} @searchField="name" @onChange={{this.signupAsChanged}} as |alt|>
               <CharIconTiny @char={{alt}} />
             </PowerSelect>
           </div>
           
           <div class="event-signup-item">
         
-            <Input @type="text" size={{25}} id="signup" @enter={{action "signup"}} @value={{this.model.signup_comment}} placeholder="Signup Comment" />  
+            <Input @type="text" size={{25}} id="signup" @enter={{this.signup}} @value={{this.model.signup_comment}} placeholder="Signup Comment" />  
             
           </div>
       
           <div class="event-signup-item">
-            <button {{action 'signup'}} class="btn btn-secondary">Sign Up</button>
+            <button {{on 'click' this.signup}} class="btn btn-secondary">Sign Up</button>
           </div>
         </div>
       
@@ -112,15 +112,15 @@
 
 <div class="action-buttons">
   {{#if this.model.can_manage}}
-      <button {{action "createScene"}} class="btn btn-secondary">Create Scene</button>
-      <button {{action (mut this.confirmDelete) true}} class="btn btn-warning">Delete</button>
+      <button {{on 'click' this.createScene}} class="btn btn-secondary">Create Scene</button>
+      <button {{on 'click' this.showActionConfirmation}} class="btn btn-warning">Delete</button>
       <LinkTo @route="event-edit" @model={{this.model.id}} class="btn btn-primary">Edit</LinkTo>
   {{/if}}
 </div>
 
 <FlashMessages />
 
-<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmDelete}} @onSubmit={{action "delete"}} @onHide={{action (mut this.confirmDelete) false}}>
+<BsModalSimple @title="Confirm Delete" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.actionConfirmationVisible}} @onSubmit={{this.delete}} @onHide={{this.hideActionConfirmation}}>
     You're about to delete event {{this.model.title}}. This cannot be undone.  Are you sure?
   </BsModalSimple>
   

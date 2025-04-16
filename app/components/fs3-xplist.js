@@ -1,10 +1,10 @@
 import Component from '@ember/component';
+import { action } from '@ember/object';
 
 export default Component.extend({
    
-    actions: { 
-        learnAbility(ability) {
-            this.learnAbility(ability);
-        }
-    }
+  @action
+  learnAbility(ability) {
+    this.onLearnAbility(ability);
+  }
 });

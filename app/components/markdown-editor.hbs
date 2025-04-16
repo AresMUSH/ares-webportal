@@ -1,0 +1,39 @@
+<div class="card card-default markdown-editor">
+    <div class="card-body markdown-editor">
+      
+      <div class="markdown-controls">
+  
+          {{#if this.previewText}}
+             <a class="markdown-control-toggle" href="#" {{on 'click' this.preview}}>Write</a>
+             <a class="markdown-control-toggle active">Preview</a>
+          {{else}}
+             <a class="markdown-control-toggle active">Write</a>
+             <a class="markdown-control-toggle" href="#" {{on 'click' this.preview}}>Preview</a>
+          {{/if}}
+          
+          <a href="#" {{on 'click' this.showHelp}}>
+            <TooltipIcon @position="left" @message="Formatting help." @icon="fa fa-question-circle" />
+          </a>
+    
+          <LinkTo @route='emoji' target="_blank">
+            <TooltipIcon @position="left" @message="Emoji help." @icon="fa fa-smile" />
+          </LinkTo>
+    </div>
+
+{{#if this.previewText}}
+  <div class="markdown-preview">
+    <AnsiFormat @text={{this.previewText}} />
+  </div>
+{{else}}
+
+  <TuiEditor 
+    @value={{this.markdownText}} 
+    @onChange={{this.onChange}} 
+    aria-label="Markdown Editor" 
+    @onInit={{this.onInit}}
+    />
+
+{{/if}}
+
+</div>
+</div>

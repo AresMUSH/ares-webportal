@@ -1,6 +1,6 @@
-@import "advanced-colors";
-@import "ember-bootstrap/bootstrap";
-@import 'ember-power-select/themes/bootstrap';
-@import "ember-power-select";
-@import "ansi";
-@import "diff";
+@use "advanced-colors";
+@use "ember-bootstrap/bootstrap";
+@use "ember-power-select";
+@use "ansi";
+@use "diff";
+@use "flatpickr";

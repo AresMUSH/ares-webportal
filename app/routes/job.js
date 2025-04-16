@@ -2,10 +2,10 @@ import EmberObject from '@ember/object';
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
-import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 import RSVP from 'rsvp';
+import { action } from '@ember/object';
 
-export default Route.extend(DefaultRoute, ReloadableRoute, {
+export default Route.extend(DefaultRoute, {
     gameApi: service(),
     gameSocket: service(),
     
@@ -13,7 +13,8 @@ export default Route.extend(DefaultRoute, ReloadableRoute, {
         this.controllerFor('job').setupCallback();
     },
 
-    deactivate: function() {
+    @action 
+    willTransition(transition) {
       this.gameSocket.removeCallback('job_update');
     },
     
@@ -27,7 +28,6 @@ export default Route.extend(DefaultRoute, ReloadableRoute, {
              characters: api.requestMany('characters', { select: 'all' })
            })
            .then((model) => {
-             this.gameSocket.updateJobsBadge(model.job.unread_jobs_count);
              return EmberObject.create(model);
            });
            

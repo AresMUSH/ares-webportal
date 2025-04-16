@@ -10,6 +10,6 @@
     {{/if}}
 </div>
 
-<SceneList @scenes={{this.model.scenes.scenes}} @pages={{this.model.scenes.pages}} @sceneTypes={{this.model.sceneOptions.scene_types}} @filter={{this.filter}} @page={{this.page}} @filterChanged={{action "filterChanged"}} @goToPage={{action "goToPage"}} />
+<SceneList @scenes={{this.model.scenes.scenes}} @pages={{this.model.scenes.pages}} @sceneTypes={{this.model.sceneOptions.scene_types}} @filter={{this.filter}} @page={{this.page}} @onFilterChanged={{this.filterChanged}} @onGoToPage={{this.goToPage}} />
 
 {{outlet}}

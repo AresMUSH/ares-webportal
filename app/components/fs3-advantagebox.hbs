@@ -1,0 +1,20 @@
+<div class="fs3-abilitybox"> 
+  <div class="fs3-ability-row">
+    <div class="fs3-ability-name">
+      {{yield}}
+    </div>
+
+    <div class="fs3-rating-control">
+      <button class="fs3-skillbutton" {{on 'click' this.decrement}}>-</button>
+
+      <div class="fs3-rating-display">
+        <Fs3Dots @rating={{this.rating}} @max={{3}} />
+        <br>
+        {{this.ratingName}}
+      </div>
+
+      <button class="fs3-skillbutton" {{on 'click' this.increment}}>+</button>
+    </div>
+    
+  </div>
+</div>

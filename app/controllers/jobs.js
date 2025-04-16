@@ -1,6 +1,7 @@
 import { set } from '@ember/object';
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Controller.extend({
   gameApi: service(),
@@ -11,17 +12,18 @@ export default Controller.extend({
   page: 1,
   
   setupCallback: function() {
-      let self = this;
-      this.gameSocket.setupCallback('job_update', function(type, msg, timestamp) {
-          self.onJobsMessage(type, msg, timestamp) } );
+    let self = this;
+    this.gameSocket.setupCallback('job_update', function(type, msg, timestamp) {
+      self.onJobsMessage(type, msg, timestamp) 
+    } );
   },
   
   resetOnExit: function() {
-      this.set('page', 1);
-      this.set('newJobs', null);
+    this.set('page', 1);
+    this.set('newJobs', null);
   },
   
-  onJobsMessage: function(type, msg /* , timestamp */ ) {
+  onJobsMessage: function(type, msg, timestamp ) {
     let splitMsg = msg.split('|');
     let jobId = splitMsg[0];
     let found = false;
@@ -39,44 +41,43 @@ export default Controller.extend({
   },
   
   
-  actions: {
-
+  @action
+  goToPage(newPage) {
+    this.set('page', newPage);
+    let api = this.gameApi;
+    api.requestOne('jobs', { page: newPage }, null)
+    .then( (response) => {
+      if (response.error) {
+        return;
+      }
+      this.set('model.jobs', response);
+    });
+  },
     
-    goToPage(newPage) {
-      this.set('page', newPage);
-      let api = this.gameApi;
-      api.requestOne('jobs', { page: newPage }, null)
-      .then( (response) => {
-        if (response.error) {
-          return;
-        }
-        this.set('model.jobs', response);
-      });
-    },
+  @action
+  filterJobs(filter) {
+    this.set('page', 1);
+    let api = this.gameApi;
+    api.requestOne('jobsFilter', { filter: filter, page: 1 }, null)
+    .then( (response) => {
+      if (response.error) {
+        return;
+      }
+      this.send('reloadModel');
+      this.flashMessages.success('Jobs filtered!');
+    });
+  },
     
-    filterJobs(filter) {
-      this.set('page', 1);
-      let api = this.gameApi;
-      api.requestOne('jobsFilter', { filter: filter, page: 1 }, null)
-      .then( (response) => {
-        if (response.error) {
-          return;
-        }
-        this.send('reloadModel');
-        this.flashMessages.success('Jobs filtered!');
-      });
-    },
-    
-    markRead() {
-      let api = this.gameApi;
-      api.requestOne('jobsCatchup')
-      .then( (response) => {
-        if (response.error) {
-          return;
-        }
-        this.send('reloadModel');
-        this.flashMessages.success('Jobs marked read!');
-      });
-    }
+  @action
+  markRead() {
+    let api = this.gameApi;
+    api.requestOne('jobsCatchup')
+    .then( (response) => {
+      if (response.error) {
+        return;
+      }
+      this.send('reloadModel');
+      this.flashMessages.success('Jobs marked read!');
+    });
   }
 });

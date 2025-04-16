@@ -1,10 +1,8 @@
-import $ from "jquery"
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
 import AuthenticatedRoute from 'ares-webportal/mixins/authenticated-route';
 
-export default Route.extend(AuthenticatedRoute, ReloadableRoute, {
+export default Route.extend(AuthenticatedRoute, {
     gameApi: service(),
         
     model: function() {

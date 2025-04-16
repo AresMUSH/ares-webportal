@@ -1,11 +1,9 @@
-import $ from "jquery"
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
-import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
-import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
+import { action } from '@ember/object';
 
-export default Route.extend(DefaultRoute, RouteResetOnExit, ReloadableRoute, {
+export default Route.extend(DefaultRoute, {
     gameApi: service(),
     gameSocket: service(),
   
@@ -13,21 +11,19 @@ export default Route.extend(DefaultRoute, RouteResetOnExit, ReloadableRoute, {
         let api = this.gameApi;
         return api.requestOne('combat', { id: params['id'] });
     },
-
-    afterModel: function(model) {
-      this.controllerFor('combat').setupController(model);
+    
+    setupController: function(controller, model) {
+      this._super(controller, model);
+      controller.setup();
     },
     
     activate: function() {
-        this.controllerFor('combat').setupCallback();
-        $(window).on('beforeunload', () => {
-            this.deactivate();
-        });
-    },
-
-    deactivate: function() {
-      this.gameSocket.removeCallback('combat_activity');
-      this.gameSocket.removeCallback('new_combat_turn');
+      this.controllerFor('combat').setupCallback();
     },
     
+    @action 
+    willTransition(transition) {
+      this.gameSocket.removeCallback('combat_activity');
+      this.gameSocket.removeCallback('new_combat_turn');
+    }    
 });

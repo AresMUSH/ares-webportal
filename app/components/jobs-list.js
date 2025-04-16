@@ -1,10 +1,10 @@
 import Component from '@ember/component';
+import { action } from '@ember/object';
 
 export default Component.extend({
   
-    actions: {
-        goToPage(newPage) { 
-          this.goToPage(newPage);
-        }
-    }
+  @action
+  goToPage(newPage) { 
+    this.onGoToPage(newPage);
+  }
 });

@@ -1,13 +1,13 @@
 {{page-title 'Edit Combatant'}}
 <h1>Edit Combatant {{this.model.name}}</h1>
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Action:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
-            <PowerSelect @selected={{this.model.action}} @options={{this.model.options.actions}} @onChange={{action "actionChanged"}} as |act|>
+            <PowerSelect @selected={{this.model.action}} @options={{this.model.options.actions}} @onChange={{this.actionChanged}} as |act|>
               {{act}}
             </PowerSelect>
             <br>
@@ -20,7 +20,7 @@
             <TooltipIcon @position="right" @message="Click a target to add them to your action args list." @icon="fa fa-question-circle" />
             
             {{#each this.model.options.targets as |target|}}
-              <a href="#" {{action 'addTarget' target}}>{{target}}</a>
+              <a href="#" {{on 'click' (fn this.addTarget target)}}>{{target}}</a>
             {{/each}}
             </p>
             
@@ -28,13 +28,13 @@
  
 </div>
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Team:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
-            <PowerSelect @selected={{this.model.team}} @options={{this.teams}} @onChange={{action "teamChanged"}} as |team|>
+            <PowerSelect @selected={{this.model.team}} @options={{this.teams}} @onChange={{this.teamChanged}} as |team|>
               {{team}}
             </PowerSelect>
             
@@ -42,13 +42,13 @@
  
 </div>
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Stance:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
-            <PowerSelect @selected={{this.model.stance}} @options={{this.model.options.stances}} @onChange={{action "stanceChanged"}} as |stance|>
+            <PowerSelect @selected={{this.model.stance}} @options={{this.model.options.stances}} @onChange={{this.stanceChanged}} as |stance|>
               {{stance}}
             </PowerSelect>
             
@@ -57,13 +57,13 @@
 </div>
 
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Weapon:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
-            <PowerSelect @selected={{this.model.weapon}} @options={{this.model.options.weapons}} @onChange={{action "weaponChanged"}} as |weapon|>
+            <PowerSelect @selected={{this.model.weapon}} @options={{this.model.options.weapons}} @onChange={{this.weaponChanged}} as |weapon|>
               {{weapon}}
             </PowerSelect>
             
@@ -71,11 +71,11 @@
  
 </div>
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Weapon Specials:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
             {{#each this.model.weapon_specials as |spec|}}
       
@@ -91,13 +91,13 @@
 
      
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Armor:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
-            <PowerSelect @selected={{this.model.armor}} @options={{this.model.options.armor}} @onChange={{action "armorChanged"}} as |armor|>
+            <PowerSelect @selected={{this.model.armor}} @options={{this.model.options.armor}} @onChange={{this.armorChanged}} as |armor|>
               {{armor}}
             </PowerSelect>
             
@@ -105,11 +105,11 @@
  
 </div>
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Armor Specials:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
             {{#each this.model.armor_specials as |spec|}}
       
@@ -123,17 +123,17 @@
  
 </div>
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>Vehicle:</b>           
             <TooltipIcon @position="right" @message="Enter a vehicle type to get in your own vehicle, or a character name to get into theirs." @icon="fa fa-question-circle" />
 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
             <Input @type="text" size={{25}} id="vehicleName" @value={{this.model.vehicle}} />
             <br>
-            <b>Passenger Type:</b> <PowerSelect @selected={{this.model.passenger_type}} @options={{this.passengerTypes}} @onChange={{action "passengerTypeChanged"}} as |passengerType|>
+            <b>Passenger Type:</b> <PowerSelect @selected={{this.model.passenger_type}} @options={{this.passengerTypes}} @onChange={{this.passengerTypeChanged}} as |passengerType|>
               {{passengerType}}
             </PowerSelect>
             
@@ -145,13 +145,13 @@
 
 {{#if this.model.npc_skill}}
 
-<div class="form-group row">
-    <div class="col-sm-3">
+<div class="form-item">
+    <div class="form-item-label">
             <b>NPC Skill:</b> 
     </div>
-    <div class="col-sm-9">
+    <div class="form-item-entry">
         
-            <PowerSelect @selected={{this.model.npc_skill}} @options={{this.model.options.npc_skills}} @onChange={{action "npcChanged"}} as |npc|>
+            <PowerSelect @selected={{this.model.npc_skill}} @options={{this.model.options.npc_skills}} @onChange={{this.npcChanged}} as |npc|>
               {{npc}}
             </PowerSelect>
             
@@ -164,8 +164,8 @@
 <div class="action-buttons">
 
   <LinkTo @route="combat" @model={{this.model.combat}} class="btn btn-secondary">Cancel</LinkTo>  
-  <button class="btn btn-warning" {{action (mut this.confirmRemoveCombatant) true}} >Remove</button>
-  <button class="btn btn-primary" {{action 'save'}} >Save</button>
+  <button class="btn btn-warning" {{on 'click' this.showActionConfirmation}} >Remove</button>
+  <button class="btn btn-primary" {{on 'click' this.save}} >Save</button>
 
 </div>
 
@@ -173,7 +173,7 @@
 
     
 
-<BsModalSimple @title="Confirm Remove" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.confirmRemoveCombatant}} @onSubmit={{action "removeCombatant"}} @onHide={{action (mut this.confirmRemoveCombatant) false}}>
+<BsModalSimple @title="Confirm Remove" @closeTitle="Cancel" @submitTitle="Confirm" @size={{null}} @fade={{true}} @open={{this.actionConfirmationVisible}} @onSubmit={{this.removeCombatant}} @onHide={{this.hideActionConfirmation}}>
     This will remove them from combat.  Are you sure?
   </BsModalSimple>   
 

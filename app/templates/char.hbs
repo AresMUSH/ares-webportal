@@ -2,9 +2,7 @@
 
 <h1>{{this.model.char.profile_title}}</h1>
 
-<div class="row profile-wrap">
     <ProfileDemographics @char={{this.model.char}} />
-</div>
 
 
 {{#if this.model.char.status_message}}
@@ -25,7 +23,7 @@
 
 <div class="profile-tab">
 
-  <ProfileSystem @char={{this.model.char}} @game={{this.model.game}} @reloadChar={{action "reloadChar"}} />
+  <ProfileSystem @char={{this.model.char}} @game={{this.model.game}} @onReloadChar={{this.reloadChar}} />
   
 </div>
 
@@ -68,7 +66,7 @@
         <LinkTo @route="notes" @model={{this.model.char.name}} class="btn btn-secondary">Notes</LinkTo>
       {{/if}}
       {{#if this.model.char.can_manage}}
-        <button {{action (mut this.showFiles) true}} class="btn btn-secondary">Files</button>
+        <button {{on 'click' (fn this.setShowFiles true)}} class="btn btn-secondary">Files</button>
         <LinkTo @route="char-edit" @model={{this.model.char.id}} class="btn btn-primary">Edit</LinkTo>
       {{/if}}
 </div>
@@ -86,16 +84,16 @@
        
        <div class="thumbnail-gallery-item">
        <LinkTo @route="file" @models={{array charFile.folder charFile.name}}>
-       <img src="/game/uploads/{{charFile.path}}" alt="{{charFile.name}}" class="thumbnail" title={{charFile.description}}>
+       {{charFile.path}} <img src="/game/uploads/{{charFile.path}}" alt="{{charFile.name}}" class="thumbnail" title={{charFile.description}}>
        </LinkTo>
        </div>
        {{/each}}
        </div>
        <div class="clearfix"/>
         
-        <p><LinkTo @route="files">All Files</LinkTo></p>
+        <p><LinkTo @route="files">View All Files</LinkTo></p>
     
-        <FileUploader @folder={{this.model.char.name}} @uploaded={{action "fileUploaded"}} />
+        <FileUploader @folder={{this.model.char.name}} @uploaded={{this.fileUploaded}} />
         </div>
     </div>
 {{/if}}

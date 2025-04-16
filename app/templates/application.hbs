@@ -1,23 +1,27 @@
 <HeadLayout />
+
 {{page-title this.mushName}}
+
+<div id="ember-bootstrap-wormhole"></div>
+
 <div class="container-fluid">
     <div class="header-wrap">
 
 
        <div class="title-wrap">
        
-           <div class="row" role=”banner”>
-               <div class="col-md-6 col-sm-12 col-xs-12">
+           <div class="site-banner" role=”banner”>
+               <div class="site-info">
                    <div class="site-title"><LinkTo @route="home">{{this.mushName}}</LinkTo></div>
                    <div class="site-subtitle">{{this.mushHost}} port {{this.mushPort}}</div>
                </div>
                
-               <div class="col-md-6 d-none d-lg-block" role="navigation">
+               <div class="account-actions" role="navigation">
                   <div class="float-end user-bar">
                    {{#if this.isAuthenticated}}
                        <p>Welcome, {{this.currentUser.name}}. 
                         {{#if this.model.alts}}
-                         <a href="#" {{action (mut this.showAltSelection) true}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a> 
+                         <a href="#" {{on 'click' (fn this.setAltSelectionVisible true)}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a> 
                          {{/if}}
                        </p>
                        
@@ -59,19 +63,17 @@
         
         
      <div class="body-wrap">
- 
-       <div class="row body-row">
-         
+          
          {{#if (not this.hideSidebar)}}
              {{#if this.model.left_sidebar}}
-             <div class="col-md-3 left-sidebar" role="navigation" aria-label="sidebar">
+             <div class="sidebar left-sidebar" role="navigation" aria-label="sidebar">
                <GlobalSidebar @model={{this.sidebar}} @socketConnected={{this.socketConnected}} @versionWarning={{this.versionWarning}} @boxStyle="sidebar-box-left" />
              </div>
              {{/if}}
         {{/if}}
 
          {{#if this.hideSidebar}}
-             <div class="col-md-12 body-container {{if this.model.left_sidebar 'right-body' 'left-body'}}" role="main">
+             <div class="body-container {{if this.model.left_sidebar 'right-body' 'left-body'}}" role="main">
                <FlashMessages />
                
                {{#if (not this.socketConnected)}}
@@ -85,7 +87,7 @@
                {{/if}}
              </div>
          {{else}}
-             <div class="col-md-9 body-container {{if this.model.left_sidebar 'right-body' 'left-body'}}" role="main">
+             <div class="body-container {{if this.model.left_sidebar 'right-body' 'left-body'}}" role="main">
                <FlashMessages />
                {{outlet}}
              </div>
@@ -93,12 +95,11 @@
                 
          {{#if (not this.hideSidebar)}}
              {{#if (not this.model.left_sidebar)}}
-             <div class="col-md-3 right-sidebar" role="navigation" aria-label="sidebar">
+             <div class="sidebar right-sidebar" role="navigation" aria-label="sidebar">
                  <GlobalSidebar @model={{this.sidebar}} @socketConnected={{this.socketConnected}} @versionWarning={{this.versionWarning}} @boxStyle="sidebar-box-right" />
              </div>
              {{/if}}
          {{/if}}
-        </div>
      </div>
  
        <hr>
@@ -109,7 +110,7 @@
 </div>
 
   
-<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{this.showAltSelection}}  @onHide={{action (mut this.showAltSelection) false}} @onSubmit={{action (mut this.showAltSelection) false}}>
+<BsModalSimple @title="Select Alt" @submitTitle="Done" @size={{null}} @fade={{true}} @closeTitle="Cancel" @open={{this.showAltSelection}}  @onHide={{fn this.setAltSelectionVisible false}} @onSubmit={{this.switchAlt}}>
 
   <table class="alts-switcher">
     {{#each this.model.alts as |alt|}}
@@ -117,9 +118,11 @@
         <tr><td>
         <CharIconInline @char={{alt}} @hideLink="true" />
         </td>
-        <td><a href="#" {{action 'switchAlt' alt.name}} class="btn btn-secondary">Switch</a></td>
+        <td><a href="#" {{on 'click' (fn this.switchAlt alt.name)}} class="btn btn-secondary">Switch</a></td>
         </tr>
       {{/if}}
     {{/each}}
   </table>
 </BsModalSimple>
+
+<BasicDropdownWormhole />

@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { action } from '@ember/object';
 
 export default Controller.extend({
   gameApi: service(),
@@ -16,25 +17,27 @@ export default Controller.extend({
     this.set('searchResults', null);
   },
     
-  actions: {
-    reset() {
-      this.resetOnExit();
-    },
-    search() {
-      let api = this.gameApi;
+  @action
+  reset() {
+    this.resetOnExit();
+  },
+    
+  @action
+  search() {
+    let api = this.gameApi;
             
-      api.requestMany('searchLocations', { 
-        searchArea: this.searchArea,
-        searchName: this.searchName,
-        searchOwner: this.searchOwner
-      }, null)
-      .then( (response) => {
-        if (response.error) {
-          this.flashMessages.error("Oops!  Something went wrong when the website talked to the game.  Please try again and alert staff if the problem persists.");          
-          return;
-        }
-        this.set('searchResults', response);
-      });
-    }
+    api.requestMany('searchLocations', 
+    { 
+      searchArea: this.searchArea,
+      searchName: this.searchName,
+      searchOwner: this.searchOwner
+    }, null)
+    .then( (response) => {
+      if (response.error) {
+        this.flashMessages.error("Oops!  Something went wrong when the website talked to the game.  Please try again and alert staff if the problem persists.");          
+        return;
+      }
+      this.set('searchResults', response);
+    });
   }
 });

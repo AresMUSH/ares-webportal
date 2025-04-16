@@ -1,12 +1,9 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import ReloadableRoute from 'ares-webportal/mixins/reloadable-route';
-import RouteResetOnExit from 'ares-webportal/mixins/route-reset-on-exit';
 import DefaultRoute from 'ares-webportal/mixins/default-route';
 
-export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
+export default Route.extend(DefaultRoute, {
     gameApi: service(),
-    headData: service(),
     router: service(),
         
     model: function(params) {
@@ -18,9 +15,5 @@ export default Route.extend(ReloadableRoute, RouteResetOnExit, DefaultRoute, {
                 } 
                 return response;
             });
-    },
-    
-    afterModel: function() {
-      this.set('headData.robotindex', true);
     }
 });

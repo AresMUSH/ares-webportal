@@ -24,7 +24,7 @@
        
         <p>
             <LinkTo @route="chargen-char" @model={{this.model.id}} class="btn btn-secondary">Back to Chargen</LinkTo>
-            <button name="submit" {{action 'submit'}} class="btn btn-success">Submit</button>
+            <button name="submit" {{on 'click' this.submit}} class="btn btn-success">Submit</button>
         </p>
       {{else}}
           <p>You'll need to log onto the game to complete character creation and submit your application.</p>

@@ -1,0 +1,62 @@
+<div class="action-buttons-spaced">
+  <div>
+    {{#each this.inbox.tags as |tag|}}
+    [ <a href="#" {{on 'click' (fn this.changeTag tag)}}>
+      
+      {{#if (eq tag this.selectedTag)}}
+        <span class="mail-selected-tag">{{tag}}</span>
+      {{else}}
+        {{tag}}
+      {{/if}}
+    
+    </a> ]
+    {{/each}}
+  </div>
+  <div>
+        <LinkTo @route="mail-send" class="btn btn-primary">Send Mail</LinkTo>
+  </div>
+</div>
+
+<div class="mail-list-container">
+
+  <table class="table table-striped mail-list">
+
+  <thead>
+      <th>Subject</th>
+      {{#if this.sentMail}}
+          <th>To</th>
+      {{else}}
+          <th>From</th>
+      {{/if}}
+      <th>Sent</th>
+  </thead>
+  
+  <tbody>
+    {{#each this.messages as |m| }}
+    <tr>
+        <td>
+            {{#if m.unread}}
+            <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="Unread Message"></i></span>
+            {{/if}}
+  
+            <LinkTo @route="mail-message" @model={{m.id}}>{{m.subject}}</LinkTo>
+        </td>
+
+        <td>
+            {{#if this.sentMail}}
+                {{m.to_list}}
+            {{else}}
+                {{m.from}}
+            {{/if}}
+        </td>
+        <td>
+            {{m.created}}
+        </td>
+    </tr>
+
+    {{/each}}
+  </tbody>
+
+  </table>
+
+</div>

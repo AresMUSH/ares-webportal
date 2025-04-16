@@ -1,0 +1,89 @@
+<div class="card card-default">
+    <div class="card-heading">
+        Upload Files
+    </div>
+
+    <div class="card-body">
+
+        {{#if this.showSelector}}
+        <p>Select files for upload...</p>
+        
+        <p class="alert alert-info">Please consider copyright when uploading images, and add attributions to pages where they're used as needed.</p>
+        
+        {{#if this.allowMulti}}
+        <input type="file"
+           multiple
+           accept="image/*" 
+           onchange={{this.filesSelected}} />
+        {{else}}
+        <input type="file"
+           accept="image/*" 
+           onchange={{this.filesSelected}} />
+        {{/if}}
+        
+        {{else}}
+
+           <div class="alert alert-info"> 
+             {{this.fileCount}} files selected for upload. Review the options, then click the upload button for <b>each file</b> to commence the upload.
+             </div>
+
+            <div class="file-uploader">
+              
+            {{#each this.files as |f|}}
+            <div class="file-uploader-item">
+              
+              <div class="file-uploader-item-preview">
+                <img class="upload-preview" alt="preview image" src="{{f.url}}" >
+              </div>
+              <div class="file-uploader-item-detail">
+                    {{#if (not f.upload_success)}}
+                      {{#if this.lockProperties}}
+                      <div class="form-item">
+                        <div class="form-item-label">>Folder:</div> 
+                        <div class="form-item-entry">{{f.folder}}</div>
+                      </div>
+                      {{else}}
+                      <div class="form-item">
+                        <div class="form-item-label">Name:</div> 
+                        <div class="form-item-entry"><Input @type="text" @value={{f.name}} /></div>
+                      </div>
+                      <div class="form-item">
+                        <div class="form-item-label">Folder:</div> 
+                        <div class="form-item-entry"><Input @type="text" @value={{f.folder}} /></div>
+                      </div>
+                      <div class="form-item">
+                        <div class="form-item-label">Description:</div> 
+                        <div class="form-item-entry"><Input @type="text" @value={{f.description}} /></div>
+                      </div>
+                      <div class="form-item">
+                        <div class="form-item-label">Overwrite?</div> 
+                        <div class="form-item-entry"><Input @type="checkbox" @checked={{f.allowOverwrite}} /></div>
+                      </div>
+                      <p>{{f.sizeKb}}KB</p> 
+
+                      {{/if}}
+                    {{/if}}
+                    
+                    {{#if f.upload_message}}
+                        {{#if f.upload_success}}
+                            <span class="badge label-success">{{f.upload_message}}</span>
+                        {{else}}
+                            <span class="badge label-danger">{{f.upload_message}}</span>
+                        {{/if}}
+                    {{/if}}
+                    
+                </div>
+                <div class="file-uploader-item-action">
+                    {{#if (not f.upload_success)}}
+                        <button class="btn btn-secondary" {{on 'click' (fn this.removeFile f)}}><i class="fa fa-ban" aria-label="Remove File"></i></button>
+                        <button class="btn btn-primary" {{on 'click' (fn this.uploadFile f)}}><i class="fa fa-upload" aria-label="Upload File"></i></button>
+                    {{/if}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        <button class="btn btn-secondary" {{on 'click' this.reset}}>Reset Uploader</button>
+        {{/if}}
+    </div>
+</div>

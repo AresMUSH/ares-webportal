@@ -1,0 +1,35 @@
+<div class="xp-list">
+
+  <div class="char-ability-title">{{this.category}}</div>
+
+    {{#each this.abilities as |ability| }}
+        <div class="xp-ability">
+          <div class="xp-ability-name">{{ability.name}}</div>
+          
+          {{#if ability.can_raise}}
+            <div class="xp-progress">
+              <ProgressBar @currentValue={{ability.xp}} @maxValue={{ability.xp_needed}} @bgColor="bg-success" @showLabel=true>
+              </ProgressBar>
+              <div class="progress-value">{{ability.xp}} / {{ability.xp_needed}}</div>
+            </div>
+            <div class="xp-learning">
+              {{#if (eq ability.days_to_learn 0)}}
+                {{#if (gt this.xp 0)}}
+                  {{#if this.canLearn}}
+                  <a href="#" class="btn btn-secondary" {{on 'click' (fn this.learnAbility ability)}} >Learn</a>
+                  {{/if}}
+                {{else}}
+                Out of XP
+                {{/if}}
+              {{else}}
+              Learn again in {{ability.days_to_learn}} days
+              {{/if}}
+            </div>
+          {{else}}
+            <div class="xp-learning">
+            At Max
+            </div>
+          {{/if}}
+        </div>
+      {{/each}}
+</div>

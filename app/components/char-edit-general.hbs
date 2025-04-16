@@ -1,0 +1,102 @@
+<div id="general" class="tab-pane fade show active">
+    
+    {{#each-in this.model.char.demographics as |key demo|}}
+    <div class="form-item">
+        <div class="form-item-label">
+            {{demo.name}}
+        </div>
+        <div class="form-item-entry">
+            {{#if (eq demo.name 'Gender') }}
+                
+                <PowerSelect @selected={{this.model.char.demographics.gender}} @searchField="value" @options={{this.genders}} @onChange={{this.genderChanged}} as |gender|>
+                  {{gender.value}}
+                </PowerSelect>
+                
+            {{else}}
+                <Input @type="text" size={{25}} @value={{demo.value}} />
+            {{/if}}
+        </div>
+    </div>
+    {{/each-in}}
+    
+    <div class="form-item">
+        <div class="form-item-label">
+                <b>Profile Image</b>
+        </div>
+        
+        <div class="form-item-entry">
+            <PowerSelect @selected={{this.model.char.profile_image}} @allowClear={{true}} @searchField="name" @options={{this.model.char.files}} @onChange={{this.profileImageChanged}} as |file|>
+            {{file.name}}
+            </PowerSelect>
+            
+            <p class="hint">See <LinkTo @route="help-topic" @model="icons">Icons</LinkTo> for tips on selecting and sizing your profile image.</p>
+        </div>
+    </div>
+    
+    <div class="form-item">
+        <div class="form-item-label">
+                <b>Profile Icon</b>
+        </div>
+        
+        <div class="form-item-entry">
+            <PowerSelect @selected={{this.model.char.profile_icon}} @allowClear={{true}} @searchField="name" @options={{this.model.char.files}} @onChange={{this.profileIconChanged}} as |file|>
+            {{file.name}}
+            </PowerSelect>
+            
+            <p class="hint">See <LinkTo @route="help-topic" @model="icons">Icons</LinkTo> for tips on selecting and sizing your profile image.</p>
+        </div>
+    </div>
+    
+    <div class="form-item">
+        <div class="form-item-label">
+                <b>Profile Gallery</b>
+        </div>
+        
+        <div class="form-item-entry">
+          
+          <div class="profile-gallery-input">
+          <Textarea @value={{this.model.char.profile_gallery}} cols={{80}} rows={{3}} />
+          
+            <p class="hint">List image files in the order you want them shown (<code>folder/file1.jpg /folder/file2.jpg</code> etc.), or leave this blank to just show all images from your character's folder.</p>
+            
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="form-item">
+        <div class="form-item-label">
+                <b>Page Tags</b>
+        </div>
+        
+        <div class="form-item-entry">
+            <Input @type="text" size={{50}} @value={{this.model.char.tags}} />
+            
+        </div>
+    </div>
+    
+    <div class="form-item">
+        <div class="form-item-label">
+                <b>Share Background</b>
+        </div>
+        
+        <div class="form-item-entry">
+              <Input @type="checkbox" @checked={{this.model.char.bg_shared}} />
+        </div>
+    </div>
+    
+    
+    <div class="form-item">
+        <div class="form-item-label">
+                <b>Last Will</b>
+        </div>
+        
+        <div class="form-item-entry">
+              <MarkdownEditor @text={{this.model.char.lastwill}} />
+        </div>
+    </div>
+    
+    
+    
+</div>
+
