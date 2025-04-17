@@ -21,7 +21,7 @@ export default Component.extend({
   },
   
   addCharError: function(text) {
-    pushObject(this.charErrors, text, this, charErrors);
+    pushObject(this.charErrors, text, this, this.charErrors);
   },
   
   attrPoints: computed('model.char.fs3.fs3_attributes.@each.rating', function() {
@@ -129,7 +129,7 @@ export default Component.extend({
       let high = list.filter(l => l.rating >= high_rating);
       let count = high.length;
       if (count > limit) {
-        addCharError(`You can only have ${limit} ${title} at ${high_rating}+.`);
+        this.addCharError(`You can only have ${limit} ${title} at ${high_rating}+.`);
       }
     }
   },
@@ -141,7 +141,7 @@ export default Component.extend({
         
     let emptyBgSkills = this.get('model.char.fs3.fs3_backgrounds').filter(s => !(s.name && s.name.length > 0));
     if (emptyBgSkills.length > 0) {
-      addCharError('Background skill names cannot be blank.  Set the skill to Everyman to remove it.');
+      this.addCharError('Background skill names cannot be blank.  Set the skill to Everyman to remove it.');
     }
         
     let totalAttrs = this.attrPoints;
@@ -150,23 +150,23 @@ export default Component.extend({
     let totalAdvantages = this.advantagePoints;
     let maxAttrs = this.get('model.cgInfo.fs3.max_attrs');
     if (totalAttrs > maxAttrs) {
-      addCharError(`You can only spend ${maxAttrs} points in attributes.  You have spent ${totalAttrs}.`);
+      this.addCharError(`You can only spend ${maxAttrs} points in attributes.  You have spent ${totalAttrs}.`);
     }
 
     let maxAction = this.get('model.cgInfo.fs3.max_action');
     if (totalAction > maxAction) {
-      addCharError(`You can only spend ${maxAction} points in action skills.  You have spent ${totalAction}.`);
+      this.addCharError(`You can only spend ${maxAction} points in action skills.  You have spent ${totalAction}.`);
     }
     
     let maxAdvantages = this.get('model.cgInfo.fs3.max_advantages');
     if (totalAdvantages > maxAdvantages) {
-      addCharError(`You can only spend ${maxAdvantages} points in advantages.  You have spent ${totalAdvantages}.`);
+      this.addCharError(`You can only spend ${maxAdvantages} points in advantages.  You have spent ${totalAdvantages}.`);
     }
         
     let maxAp = this.get('model.cgInfo.fs3.max_ap');
     let totalAp = totalAttrs + totalSkills;
     if (totalAp > maxAp) {
-      addCharError(`You can only spend ${maxAp} ability points.  You have spent ${totalAp}.`);
+      this.addCharError(`You can only spend ${maxAp} ability points.  You have spent ${totalAp}.`);
     }
   },
 
