@@ -22,4 +22,13 @@ export function removeObject(list, item, objectToNotify = null, propertyToNotify
   }
 }
 
+export function clearList(list, objectToNotify = null, propertyToNotify = null) {
+  if (!list) return;
+  list.length = 0;
+  
+  if (objectToNotify && propertyToNotify) {
+    notifyPropertyChange(objectToNotify, propertyToNotify);
+  }
+}
+
 export default helper(pushObject);
