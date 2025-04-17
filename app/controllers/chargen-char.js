@@ -2,7 +2,7 @@ import Controller from '@ember/controller';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { pushObject } from 'ares-webportal/helpers/object-ext';
+import { pushObject, clearList } from 'ares-webportal/helpers/object-ext';
 
 export default Controller.extend({    
   flashMessages: service(),
@@ -145,7 +145,7 @@ export default Controller.extend({
       if (response.error) {
         return;
       }
-      this.charErrors.clear();
+      clearList(this.charErrors, this, 'charErrors');
       if (this.fs3ValidateCallback) {
         this.fs3ValidateCallback();
       }
