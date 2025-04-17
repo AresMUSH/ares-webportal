@@ -1,1 +1,1 @@
-var aresweb_version = "2.0.rc2";
+var aresweb_version = "2.0.rc3";
