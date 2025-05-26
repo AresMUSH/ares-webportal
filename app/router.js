@@ -138,6 +138,7 @@ Router.map(function() {
   this.route('textfile', { path: '/textfile/:file_type/:file' });
   this.route('tinker');
   this.route('tos');
+  this.route('tour');
   this.route('who');
   this.route('wiki');
   this.route('wiki-archive');

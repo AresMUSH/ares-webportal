@@ -1,4 +1,6 @@
 {{page-title 'Log In'}}
+<h1>Log In</h1>
+
 <p>Log in using your character information. Your web login is the same as your game login.</p>
 
 
@@ -16,7 +18,7 @@
         <button {{on 'click' this.login}} class="btn btn-primary">Login</button>
             
         <p>Don't have a character yet? 
-        {{#if this.model.enable_registration}}
+        {{#if this.model.allow_registration}}
         <LinkTo @route="register">Create one.</LinkTo>
         {{else}}
         Create one from inside the game first.
