@@ -93,6 +93,17 @@
             </div>
           </div>
         
+        <div class="card card-default">
+          <div class="card-heading">
+            Alias <LinkTo @route="help-topic" @model="alias" target="_blank"><i class="fas fa-info-circle"></i></LinkTo>
+          </div>
+        
+          <div class="card-body">
+                      
+            <p><Input placeholder="Alias" id="alias" @value={{this.model.alias}} /></p>
+          </div>
+        </div>
+        
           <div class="card card-default">
             <div class="card-heading">
               Email <LinkTo @route="help-topic" @model="email" target="_blank"><i class="fas fa-info-circle"></i></LinkTo>

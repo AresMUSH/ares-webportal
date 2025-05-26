@@ -46,6 +46,7 @@ export default Controller.extend(AuthenticatedController, {
     { 
       email: this.get('model.email'), 
       name: this.get('model.name'),
+      alias: this.get('model.alias'),
       confirm_password: this.confirmPasswordSettings,
       timezone: this.get('model.timezone'),
       unified_play_screen: this.get('model.unified_play_screen')
