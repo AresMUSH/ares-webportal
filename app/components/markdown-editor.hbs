@@ -12,12 +12,17 @@
           {{/if}}
           
           <a href="#" {{on 'click' this.showHelp}}>
-            <TooltipIcon @position="left" @message="Formatting help." @icon="fa fa-question-circle" />
+            <TooltipIcon @position="left" @message="Formatting help." @icon="fa fa-question-circle" {{on 'click' this.showHelp}} />
           </a>
     
           <LinkTo @route='emoji' target="_blank">
             <TooltipIcon @position="left" @message="Emoji help." @icon="fa fa-smile" />
           </LinkTo>
+          
+          <a href="#" {{on 'click' this.toggleToolbar}}>
+            <TooltipIcon @position="left" @message="Toggle toolbar." @icon="fa fa-toolbox" />
+          </a>
+          
     </div>
 
 {{#if this.previewText}}
@@ -26,12 +31,16 @@
   </div>
 {{else}}
 
+{{#if this.hideToolbar}}
+  <Textarea @value={{this.text}} cols={{80}} rows={{this.rows}} @keydown={{this.keyDown}} aria-label="Markdown Editor" />
+{{else}}
   <TuiEditor 
     @value={{this.markdownText}} 
     @onChange={{this.onChange}} 
     aria-label="Markdown Editor" 
     @onInit={{this.onInit}}
     />
+{{/if}}
 
 {{/if}}
 

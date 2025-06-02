@@ -7,6 +7,7 @@ export default Component.extend({
   rows: 6,
   gameApi: service(),
   text: '',
+  hideToolbar: false,
   
   markdownText: computed('text', function() {
     return this.text || "";
@@ -58,5 +59,9 @@ export default Component.extend({
         event.preventDefault();
       }
     }
-  }    
+  },  
+  @action
+  toggleToolbar() {
+    this.set('hideToolbar', !this.hideToolbar);
+  }  
 });
