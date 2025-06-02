@@ -50,7 +50,11 @@
         {{/each}}
     </div>
     <div class="live-scenes-activity">      
-      <div class="live-scenes-last-pose"><span class="scene-info-label">Last:</span> {{scene.last_pose_time_str}}</div>
+      <div class="live-scenes-last-pose"><span class="scene-info-label">Last:</span> 
+        {{#if scene.last_posed}}
+          {{scene.last_posed}},
+        {{/if}}
+        {{scene.last_pose_time_str}}</div>
       <div class="live-scenes-date"><span class="scene-info-label">Date:</span> {{scene.icdate}}</div>
     </div>
   </div>
