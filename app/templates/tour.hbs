@@ -15,7 +15,9 @@
 <div class="card card-default">
     <div class="card-body">
       
+      <button {{on 'click' this.tour}} class="btn btn-primary">Create Temp Character</button>
       
+      <div class="captcha-block">
         
         {{#if this.model.turnstile}}
         <TurnstileWidget @response={{this.turnstileResponse}} @onResetAvail={{this.setTurnstileReset}} @sitekey={{this.model.turnstile}} />
@@ -24,8 +26,7 @@
         <GRecaptcha @onSuccess={{this.recaptchaResolved}} @onRender={{this.setRecaptchaRef}} @sitekey={{this.model.recaptcha}} />
         
         {{/if}}
-
-        <button {{on 'click' this.tour}} class="btn btn-primary">Create Temp Character</button>
+      </div>
         
     </div>
 </div>
