@@ -16,16 +16,18 @@
         <p><Input @type="password" placeholder="Password" @enter={{this.register}} id="password" @value={{this.password}} /></p>
         <p><Input @type="password" placeholder="Confirm Password" @enter={{this.register}} id="confirmPassword" @value={{this.confirmPassword}} /></p>
         
-        
-        {{#if this.model.turnstile}}
-        <TurnstileWidget @response={{this.turnstileResponse}} @onResetAvail={{this.setTurnstileReset}} @sitekey={{this.model.turnstile}} />
-
-        {{else if this.model.recaptcha}}
-        <GRecaptcha @onSuccess={{this.recaptchaResolved}} @onRender={{this.setRecaptchaRef}} @sitekey={{this.model.recaptcha}} />
-        
-        {{/if}}
-
         <button {{on 'click' this.register}} class="btn btn-primary">Register</button>
+        
+        <div class="captcha-block">
+        
+          {{#if this.model.turnstile}}
+          <TurnstileWidget @response={{this.turnstileResponse}} @onResetAvail={{this.setTurnstileReset}} @sitekey={{this.model.turnstile}} />
+
+          {{else if this.model.recaptcha}}
+          <GRecaptcha @onSuccess={{this.recaptchaResolved}} @onRender={{this.setRecaptchaRef}} @sitekey={{this.model.recaptcha}} />
+        
+          {{/if}}
+        </div>
         
     </div>
 </div>

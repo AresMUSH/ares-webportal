@@ -16,7 +16,10 @@
         <p><Input @type="password" placeholder="Password" @enter={{this.login}} id="password" @value={{this.password}} /></p>
         
         <button {{on 'click' this.login}} class="btn btn-primary">Login</button>
-            
+        
+    </div>
+</div>
+
         <p>Don't have a character yet? 
         {{#if this.model.allow_registration}}
         <LinkTo @route="register">Create one.</LinkTo>
@@ -26,7 +29,10 @@
         
         </p>
         
-    </div>
-</div>
+        {{#if this.model.allow_tour}}
+        <p>Not ready to make a character? 
+          <LinkTo @route="tour">Tour the game</LinkTo> with a temporary one.
+        </p>
+        {{/if}}
 
 {{outlet}}
