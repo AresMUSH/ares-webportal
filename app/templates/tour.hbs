@@ -1,0 +1,38 @@
+{{page-title 'Tour Game'}}
+{{#if this.model.allow_tour}}
+
+<h1>Tour the Game</h1>
+
+        <p>The tour feature lets you check out a game with a temporary character. You will automatically be assigned a name and password, and can then chat with other players. You can also use the temporary name/password to log in via a MUSH client and explore the game that way.</p>
+        
+        <p>If you decide to keep the character, you can rename them later on the account screen.</p>
+        
+        
+        {{#if this.model.terms_of_service}}
+            <div class="ansi alert alert-info">By playing here, you agree to the policies listed on the <LinkTo @route="tos">Terms of Service</LinkTo> page.</div>
+        {{/if}}
+        
+<div class="card card-default">
+    <div class="card-body">
+      
+      
+        
+        {{#if this.model.turnstile}}
+        <TurnstileWidget @response={{this.turnstileResponse}} @onResetAvail={{this.setTurnstileReset}} @sitekey={{this.model.turnstile}} />
+
+        {{else if this.model.recaptcha}}
+        <GRecaptcha @onSuccess={{this.recaptchaResolved}} @onRender={{this.setRecaptchaRef}} @sitekey={{this.model.recaptcha}} />
+        
+        {{/if}}
+
+        <button {{on 'click' this.tour}} class="btn btn-primary">Create Temp Character</button>
+        
+    </div>
+</div>
+
+{{else}}
+
+<p>Web touring is disabled.  Please visit the game via a MUSH client.</p>
+
+{{/if}}
+{{outlet}}

@@ -3,9 +3,6 @@ import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
 
 export default Controller.extend({
-  name: '',
-  password: '',
-  confirmPassword: '',
   recaptchaResponse: '',
   turnstileResponse: '',
   session: service(),
@@ -14,9 +11,6 @@ export default Controller.extend({
   router: service(),
   
   resetOnExit: function() {
-    this.set('name', '');
-    this.set('password', '');
-    this.set('confirmPassword', '');
     this.set('reCaptchaResponse', '');
     this.set('turnstileResponse', '');
   },
@@ -38,13 +32,10 @@ export default Controller.extend({
   },
   
   @action
-  register() {
+  tour() {
             
-    this.gameApi.requestOne('register', 
+    this.gameApi.requestOne('tour', 
     { 
-      name: this.name, 
-      password: this.password, 
-      confirm_password: this.confirmPassword, 
       recaptcha: this.recaptchaResponse,
       turnstile: this.turnstileResponse
     }, null)
@@ -61,18 +52,13 @@ export default Controller.extend({
              
         return;
       }                
-      this.flashMessages.success("Your character has been created.");
-      this.session.authenticate('authenticator:ares', { name: this.name, password: this.password})
+      this.flashMessages.success(`Your character name is ${response['name']} and password ${response['password']}.`);
+      
+      this.session.authenticate('authenticator:ares', { name: response['name'], password: response['password'] })
       .then(() => {
                  
-        if (this.get('model.error')) {
-          return;  // Authenticate does the error printing
-        }
-                 
-        this.set('name', '');
-        this.set('password', '');
-
-        this.router.transitionTo('home');
+        this.router.transitionTo('play');
+        
       });
       
     });
