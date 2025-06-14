@@ -4,13 +4,17 @@ import { action, computed } from '@ember/object';
 
 export default Component.extend({
   previewText: null,
-  rows: 6,
+  rows: 0,
   gameApi: service(),
   text: '',
   hideToolbar: false,
   
   markdownText: computed('text', function() {
     return this.text || "";
+  }),
+  
+  height: computed('rows', function() {
+    return this.rows === 0 ? "auto" : `${this.rows * 15}px`;
   }),
   
   @action
