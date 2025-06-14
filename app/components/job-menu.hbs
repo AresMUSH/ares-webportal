@@ -5,7 +5,7 @@
          <li><LinkTo @route="job-edit" @model={{this.job.id}} class="dropdown-item">Edit Job</LinkTo></li>
        {{/if}}
        {{#if this.job.fs3_enabled}}
-         <li><a href="#" {{on 'click' (fn this.selectSkillRoll true)}} class="dropdown-item">Add Ability Roll</a></li>
+         <li><a href="#" {{on 'click' (fn this.showSelectSkillRoll true)}} class="dropdown-item">Add Ability Roll</a></li>
        {{/if}}
        {{#if this.job.is_approval_job}}
          <li><LinkTo @route="app-review" @model={{this.job.author.id}} class="dropdown-item">App Review for {{this.job.author.name}}</LinkTo></li>
