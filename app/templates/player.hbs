@@ -71,6 +71,10 @@
       {{#if this.model.achievements}}
           <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemachievements">Achievements</a></li>
       {{/if}}
+      
+      {{#if this.model.siteinfo}}
+        <li class="nav-item"><a data-bs-toggle="tab" class="nav-link" href="#systemsite">Admin</a></li>
+      {{/if}}
     </ul>
     
 
@@ -89,6 +93,13 @@
           <CharAchievements @achievements={{this.model.achievements}} @sceneStats={{this.model.scene_stats}}/>
       </div>
       {{/if}}
+      
+      {{#if this.model.siteinfo}}
+      <div id="systemsite" class="tab-pane fade">
+          <ProfileSiteInfo @char={{this.model}} />
+      </div>
+      {{/if}}
+      
     </div>
 </div>
 
