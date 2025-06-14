@@ -75,6 +75,7 @@ export default Controller.extend(AuthenticatedController, {
     });
   },
         
+  @action
   timezoneChanged(val) {
     this.set('model.timezone', val);
   }
