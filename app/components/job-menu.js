@@ -41,5 +41,12 @@ export default Component.extend({
   @action
   rejectRoster() {
     this.handleApproval(false);
-  }  
+  },
+  
+  @action
+  showSelectSkillRoll(value) {
+    this.set('selectSkillRoll', value);
+  },
+  
+  
 });

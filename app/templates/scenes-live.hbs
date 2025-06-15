@@ -59,7 +59,13 @@
     </div>
   </div>
   
+
+  {{#if scene.limit}}
+  <div class="live-scenes-notes">{{scene.limit}}</div>
+  {{/if}}
+  
   <div class="live-scenes-controls">
+  
    {{#if scene.watching}}
      <a href="#" {{on 'click' (fn this.stopWatching scene.id)}}><i class="fa fa-eye-slash" aria-label="Stop Watching"></i> Unwatch</a>
 

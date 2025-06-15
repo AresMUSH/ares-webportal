@@ -4,13 +4,29 @@ import { action, computed } from '@ember/object';
 
 export default Component.extend({
   previewText: null,
-  rows: 6,
+  rows: 0,
   gameApi: service(),
   text: '',
   hideToolbar: false,
   
+  didInsertElement: function() {
+    this._super(...arguments);
+    this.set('hideToolbar', window.localStorage.getItem("aresmush:hideToolbar") === "true");
+  },
+    
   markdownText: computed('text', function() {
     return this.text || "";
+  }),
+  
+  height: computed('rows', function() {
+    if (this.rows === 0) {
+      return "auto";
+    }
+    let minHeight = this.rows * 15;
+    if (minHeight < 250) {
+      minHeight = 250;
+    }
+    return `${minHeight}px`;
   }),
   
   @action
@@ -43,7 +59,7 @@ export default Component.extend({
   @action
   onInit(editor) {  
     setTimeout(() => editor.blur());
-    setTimeout(() => window.scrollTo(0, 0));
+    //setTimeout(() => window.scrollTo(0, 0));
   },
   
   @action
@@ -63,5 +79,6 @@ export default Component.extend({
   @action
   toggleToolbar() {
     this.set('hideToolbar', !this.hideToolbar);
+    window.localStorage.setItem("aresmush:hideToolbar", this.hideToolbar);
   }  
 });

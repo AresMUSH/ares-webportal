@@ -3,12 +3,13 @@
       
       <div class="markdown-controls">
   
+          
           {{#if this.previewText}}
-             <a class="markdown-control-toggle" href="#" {{on 'click' this.preview}}>Write</a>
-             <a class="markdown-control-toggle active">Preview</a>
+             <button class="markdown-control-toggle" {{on 'click' this.preview}}>Write</button>
+             <button class="markdown-control-toggle active">Preview</button>
           {{else}}
-             <a class="markdown-control-toggle active">Write</a>
-             <a class="markdown-control-toggle" href="#" {{on 'click' this.preview}}>Preview</a>
+             <button class="markdown-control-toggle active">Write</button>
+             <button class="markdown-control-toggle" {{on 'click' this.preview}}>Preview</button>
           {{/if}}
           
           <a href="#" {{on 'click' this.showHelp}}>
@@ -39,6 +40,8 @@
     @onChange={{this.onChange}} 
     aria-label="Markdown Editor" 
     @onInit={{this.onInit}}
+    @height="{{this.height}}"
+    @minHeight="{{this.height}}"
     />
 {{/if}}
 
