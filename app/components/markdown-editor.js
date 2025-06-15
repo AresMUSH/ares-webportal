@@ -14,7 +14,14 @@ export default Component.extend({
   }),
   
   height: computed('rows', function() {
-    return this.rows === 0 ? "auto" : `${this.rows * 15}px`;
+    if (this.rows === 0) {
+      return "auto";
+    }
+    let minHeight = this.rows * 15;
+    if (minHeight < 250) {
+      minHeight = 250;
+    }
+    return `${minHeight}px`;
   }),
   
   @action
