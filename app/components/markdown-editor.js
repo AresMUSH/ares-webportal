@@ -9,6 +9,11 @@ export default Component.extend({
   text: '',
   hideToolbar: false,
   
+  didInsertElement: function() {
+    this._super(...arguments);
+    this.set('hideToolbar', window.localStorage.getItem("aresmush:hideToolbar") === "true");
+  },
+    
   markdownText: computed('text', function() {
     return this.text || "";
   }),
@@ -74,5 +79,6 @@ export default Component.extend({
   @action
   toggleToolbar() {
     this.set('hideToolbar', !this.hideToolbar);
+    window.localStorage.setItem("aresmush:hideToolbar", this.hideToolbar);
   }  
 });
