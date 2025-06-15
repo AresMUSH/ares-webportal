@@ -230,7 +230,7 @@ export default Controller.extend(AuthenticatedController, {
   
   @action
   setConfirmDeleteReply(value) {
-    reply.set('confirmDeleteReply', value);
+    this.set('confirmDeleteReply', value);
   },
   
   @action
