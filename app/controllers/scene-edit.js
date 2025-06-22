@@ -3,13 +3,13 @@ import { computed } from '@ember/object';
 import { reads } from '@ember/object/computed';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
-import { tracked } from '@glimmer/tracking';
+import { TrackedArray } from 'tracked-built-ins';
 
 export default Controller.extend({
   gameApi: service(),
   flashMessages: service(),
   router: service(),
-  warning_tags: tracked([]),
+  warning_tags: [],
   
   scenePacingOptions: reads('model.sceneOptions.scene_pacing'),
 
@@ -28,11 +28,7 @@ export default Controller.extend({
     
   setup: function() {
     let tags = (this.get('model.scene.content_warning') || "").split(',');
-    tags.forEach(tag => {
-      if (this.get('model.sceneOptions.content_warnings').includes(tag.trim())) {
-        this.warning_tags.push(tag);
-      }
-    });
+    this.set('warning_tags', new TrackedArray((tags || []).slice()));
   },
     
   @action
