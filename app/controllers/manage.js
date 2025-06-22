@@ -66,13 +66,13 @@ export default Controller.extend({
   },
         
   @action
-  upgrade() {
+  upgrade(stage) {
     let api = this.gameApi;
     this.set('status', '');
     this.addToStatus('Starting upgrade. Please wait.');
-    api.requestOne('upgrade', null)
+    api.requestOne('upgrade', { 'stage': stage })
     .then( (response) => {
       this.addToStatus(response.message);
     });
-  }
+  }  
 });
