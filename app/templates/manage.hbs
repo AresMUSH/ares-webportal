@@ -30,7 +30,26 @@
   </ul>
 </div>
 
-    <p><button class="btn btn-primary" {{on 'click' this.upgrade}}>Upgrade</button></p>
+    <p><button class="btn btn-primary" {{on 'click' (fn this.upgrade 'all')}}>Upgrade</button></p>
+
+
+<a data-bs-toggle="collapse" href="#advancedUpgrade" class="btn btn-secondary btn-collapse">Advanced</a>
+<div id="advancedUpgrade" class="card-collapse collapse">
+
+   <div class="card card-default">
+      <div class="card-body">
+
+        <p>Coders - you can run the two pieces of the upgrade process separately.</p>
+        <ul>
+          <li><a href="#" {{on 'click' (fn this.upgrade 'start')}}>Start Upgrade</a> - grabs the latest code changes from GitHub.</li>
+          <li><a href="#" {{on 'click' (fn this.upgrade 'finish')}}>Finish Upgrade</a> - reloads and redeploys the code.</li>
+        </ul>
+        
+      </div>
+  </div>
+  
+
+</div>
 
 
 <p><hr></p>

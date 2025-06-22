@@ -1,0 +1,13 @@
+{{page-title "Edit MOTD"}}
+<h1>Edit MOTD</h1>
+
+<MarkdownEditor @text={{this.model.motd}} @rows={{30}} />
+
+<div class="action-buttons">
+  <LinkTo @route="setup" class="btn btn-secondary">Cancel</LinkTo> 
+  <button class="btn btn-primary" {{on 'click' this.save}}>Save</button>
+</div>
+        
+<FlashMessages />
+
+{{outlet}}
