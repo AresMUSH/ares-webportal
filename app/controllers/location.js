@@ -16,7 +16,7 @@ export default Controller.extend(ConfirmAction, {
   delete() {
     let api = this.gameApi;
     this.hideActionConfirmation();
-    api.requestOne('deleteLocation', { id: this.get('model.id')})
+    api.requestOne('deleteLocation', { id: this.get('model.id')}, null)
     .then( (response) => {
       if (response.error) {
         return;
