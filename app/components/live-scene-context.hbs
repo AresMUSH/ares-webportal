@@ -1,12 +1,15 @@
 <div class="play-scene-context-wrap">
-    <a data-bs-toggle="collapse" href="#scene-context" class="play-scene-context-prompt">
+    <div class="play-scene-context-prompt">
     {{this.scene.location.name}} - {{this.scene.icdate}}
     
-    <TooltipButton @position="right" @message="Expand scene details." @icon="fa fa-caret-square-down" />
-   </a>
+      {{#if this.showSceneDetails}}
+      <TooltipButton @position="right" @message="Hide scene details." @icon="fa fa-caret-square-up" @onClick={{this.toggleSceneDetails}} />
+      {{else}}
+      <TooltipButton @position="right" @message="Toggle scene details." @icon="fa fa-caret-square-down" @onClick={{this.toggleSceneDetails}} />
+      {{/if}}
+   </div>
 
-<div id="scene-context" class="card-collapse collapse">
-
+{{#if this.showSceneDetails}}
   <div class="card card-default">
       <div class="card-body">
 
@@ -52,6 +55,6 @@
           {{/if}}
       </div>
   </div>
-</div>
+{{/if}}
 
 </div>

@@ -13,15 +13,14 @@ export default Controller.extend({
   /* These callbacks are wired up a little weird.  
   
   In the template initialization, we connect these properties to a property in the component:
-  {{fs3-chargen model=model updateCallback=this.fs3UpdateCallback ... }}
+  <FS3Chargen @model={{this.model}} @updateCallback={{this.fs3UpdateCallback}} ... }}
 
-  That means the component's updateCallback ---binds to---> fs3UpdateCallback, which begins as null
+    That means the component's updateCallback ---binds to---> fs3UpdateCallback, which begins as null
    
   THEN in the component's didInsertElement method, we UPDATE updateCallback to point to a function.
-  
-  this.set('updateCallback', function() { return self.onUpdate(); } );
-  
-  Because of the binding, setting updateCallback in the component ALSO sets fs3UpdateCallback here in the controller
+
+    In component: this.set('updateCallback', function() { return self.onUpdate(); } );
+    Here: this.fs3UpdateCallback now ALSO points to the components onUpdate method.
   
   So now calling this.fs3UpdateCallback() actually calls onUpdate() in the component, letting us build the query data when we need it.
   */

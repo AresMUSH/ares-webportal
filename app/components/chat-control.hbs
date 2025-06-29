@@ -4,7 +4,7 @@
 
 <div class="chat-controls">
 
-  <a data-bs-toggle="collapse" href="#channel-info"><i class="fas fa-info-circle"></i> Channel Info</a>
+  <button class="btn-link" {{on 'click' this.toggleChannelInfo}}><i class="fas fa-info-circle"></i> Channel Info</button>
 
   <button class="btn-link" {{on 'click' this.scrollDown}}><i class="fas fa-angle-double-down"></i> Jump to End</button>
 
@@ -16,7 +16,7 @@
   {{/if}}
 </div>  
   
-<div id="channel-info" class="card-collapse collapse">
+{{#if this.showChannelInfo}}
   
   <div class="card card-default">
     <div class="card-body">
@@ -38,7 +38,7 @@
       <div class="clearfix"></div>
     </div>
   </div>
-</div>
+{{/if}}
 
 
  {{#if this.chatAlerts}}
