@@ -115,7 +115,7 @@
           {{#if this.model.can_edit}}
 
           <li><LinkTo @route="scene-edit" @model={{this.model.id}} class="dropdown-item">Edit Scene</LinkTo></li>
-          <li><a href="#" {{on 'click' this.unshareScene}}  class="dropdown-item">Unshare Scene</a></li>
+          <li><button {{on 'click' this.unshareScene}}  class="dropdown-item">Unshare Scene</button></li>
           
            <li><hr role="separator" class="dropdown-divider"></li>
          {{/if}}

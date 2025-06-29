@@ -12,7 +12,7 @@
 
 <hr>
 
-<p>When the status says the task is done, you can <a href="#" {{on 'click' this.returnToManage}}>return to the manage screen.</a></p>
+<p>When the status says the task is done, you can <button {{on 'click' this.returnToManage}} class="btn-link">return to the manage screen.</button></p>
 
 
 {{else}}
@@ -41,8 +41,8 @@
 
         <p>Coders - you can run the two pieces of the upgrade process separately.</p>
         <ul>
-          <li><a href="#" {{on 'click' (fn this.upgrade 'start')}}>Start Upgrade</a> - grabs the latest code changes from GitHub.</li>
-          <li><a href="#" {{on 'click' (fn this.upgrade 'finish')}}>Finish Upgrade</a> - reloads and redeploys the code.</li>
+          <li><button {{on 'click' (fn this.upgrade 'start')}} class="btn-link">Start Upgrade</button> - grabs the latest code changes from GitHub.</li>
+          <li><button {{on 'click' (fn this.upgrade 'finish')}} class="btn-link">Finish Upgrade</button> - reloads and redeploys the code.</li>
         </ul>
         
       </div>

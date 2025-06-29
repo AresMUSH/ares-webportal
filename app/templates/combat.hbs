@@ -41,7 +41,7 @@
     )
   </div>
   <div class="card-body">
-    <button {{on 'click' this.jumpToEnd}}><i class="fas fa-angle-double-down"></i> Jump to End</button>
+    <button {{on 'click' this.jumpToEnd}} class="btn-link"><i class="fas fa-angle-double-down"></i> Jump to End</button>
     <div id="combat-log">
       <AnsiFormat @text={{this.combatLog}} />
     </div>

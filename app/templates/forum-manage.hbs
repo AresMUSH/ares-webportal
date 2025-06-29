@@ -28,8 +28,8 @@
     <td>{{category.can_write}}</td>
     <td>
     
-      <LinkTo @route="forum-edit" @model={{category.id}}><i class="fas fa-edit" aria-label="Edit Category"></i></LinkTo>
-      <a href="#" {{on 'click' (fn this.setForumToDelete category)}}><i class="fa fa-trash" aria-label="Delete Category"></i></a>
+      <TooltipButton @route="forum-edit" @model={{category.id}} @icon="fas fa-edit" @message="Edit Category" />
+      <TooltipButton @onClick={{(fn this.setForumToDelete category)}} @icon="fa fa-trash" @message="Delete Category" />
     
     </td>
   </tr>

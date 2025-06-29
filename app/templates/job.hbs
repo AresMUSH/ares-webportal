@@ -75,7 +75,7 @@
       
           <DropdownMenu @id="assignDropdown" @title="Assign">
             {{#each this.model.job.job_admins as |staff| }}
-              <li><a href="#" {{on 'click' (fn this.assignJob staff)}} class="dropdown-item">{{staff.name}}</a></li>
+              <li><button {{on 'click' (fn this.assignJob staff)}} class="dropdown-item">{{staff.name}}</button></li>
             {{/each}}
           </DropdownMenu>
         {{/if}}
@@ -94,7 +94,7 @@
       
           <DropdownMenu @id="statusDropdown" @title="Status">
             {{#each this.model.options.status_values as |status| }}
-              <li><a href="#" {{on 'click' (fn this.changeData 'status' status)}} class="dropdown-item"><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
+              <li><button {{on 'click' (fn this.changeData 'status' status)}} class="dropdown-item"><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</button></li>
             {{/each}}
           </DropdownMenu>
         {{/if}}
@@ -116,7 +116,7 @@
       
         <DropdownMenu @id="categoryDropdown" @title="Category">
               {{#each this.model.options.category_values as |category| }}
-                <li><a href="#" {{on 'click' (fn this.changeData 'category' category)}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+                <li><button {{on 'click' (fn this.changeData 'category' category)}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</button></li>
               {{/each}}
         </DropdownMenu>
         {{/if}}
@@ -184,7 +184,7 @@
          <p>{{r.created}}</p>
      
          {{#if this.model.job.is_job_admin}}
-           <a href="#" {{on 'click' (fn this.deleteReply r.id)}}><i class="fa fa-trash" aria-label="Delete Reply"></i></a>     
+           <TooltipButton @onClick={{(fn this.deleteReply r.id)}} @icon="fa fa-trash" @message="Delete Reply" />
          {{/if}}
      
      </div>

@@ -20,7 +20,7 @@
             <TooltipIcon @position="right" @message="Click a target to add them to your action args list." @icon="fa fa-question-circle" />
             
             {{#each this.model.options.targets as |target|}}
-              <a href="#" {{on 'click' (fn this.addTarget target)}}>{{target}}</a>
+              <button {{on 'click' (fn this.addTarget target)}} class="btn-link">{{target}}</button>
             {{/each}}
             </p>
             

@@ -21,11 +21,11 @@
 
 <DropdownMenu @id="filterDropdown" @title={{this.model.jobs.jobs_filter}}>
   {{#each this.model.options.status_filters as |filter| }}
-    <li><a href="#" {{on 'click' (fn this.filterJobs filter)}} class="dropdown-item"><span class="badge job-category job-category-general">&nbsp;</span> {{filter}}</a></li>
+    <li><button {{on 'click' (fn this.filterJobs filter)}} class="dropdown-item"><span class="badge job-category job-category-general">&nbsp;</span> {{filter}}</button></li>
   {{/each}}
   
   {{#each this.model.options.category_values as |category| }}
-    <li><a href="#" {{on 'click' (fn this.filterJobs category)}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+    <li><button {{on 'click' (fn this.filterJobs category)}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</button></li>
   {{/each}}
   
 </DropdownMenu>
@@ -33,7 +33,7 @@
 {{#if this.model.options.is_job_admin}}
     <div>
       <LinkTo @route="search-jobs"><i class="fa fa-search" aria-hidden="true"></i> Search Jobs</LinkTo>  &nbsp;&nbsp;
-      <a href="#" {{on 'click' this.markRead}} class="btn btn-secondary">Mark All Read</a>
+      <button {{on 'click' this.markRead}} class="btn btn-secondary">Mark All Read</button>
       <LinkTo @route="job-create" class="btn btn-primary">Create Job</LinkTo>
     </div>
 {{else}}

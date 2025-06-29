@@ -25,8 +25,8 @@
     <td>{{category.roles}}</td>
     <td>
     
-      <LinkTo @route="jobcat-edit" @model={{category.id}}><i class="fas fa-edit" aria-label="Edit Category"></i></LinkTo>
-      <a href="#" {{on 'click' (fn this.setCategoryToDelete category)}}><i class="fa fa-trash" aria-label="Delete Category"></i></a>
+      <TooltipButton @route="jobcat-edit" @model={{category.id}} @icon="fas fa-edit" @message="Edit Category" />
+      <TooltipButton @onClick={{(fn this.setCategoryToDelete category)}} @icon="fa fa-trash" @message="Delete Category" />
     
     </td>
   </tr>
