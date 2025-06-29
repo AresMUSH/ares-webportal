@@ -9,13 +9,13 @@
         {{#if this.isAuthenticated}}
 
           <li class="nav-item dropdown d-lg-none">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
           
                     Welcome {{this.currentUser.name}}
                     {{#if this.model.notification_count}}
                         <span class="badge rounded-pill bg-primary" id="notificationBadge"><i class="fa fa-bell" aria-label="New Notifications"></i> {{this.model.notification_count}}</span>
                     {{/if}}
-                    </a>
+                    </button>
                     <ul class="dropdown-menu">
                       <li><LinkTo class="dropdown-item" @route="notifications">Notifications</LinkTo></li>
                       <li><LinkTo class="dropdown-item" @route="char" @model={{this.currentUser.name}}>Profile</LinkTo></li>
@@ -39,8 +39,9 @@
         {{#each this.topNavbar as |sec|}}
           {{#if sec.menu }}
             <li class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">              
-              {{{sec.title}}}</a>
+              <button class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">             
+                {{{sec.title}}}
+              </button>
               <ul class="dropdown-menu  dropdown-menu-end">
                 {{#each sec.menu as |navItem|}}
                   {{#if navItem.url}}
@@ -96,7 +97,7 @@
         <tr><td>
         <CharIconInline @char={{alt}} @hideLink="true" />
         </td>
-        <td><a href="#" {{on 'click' (fn this.switchAlt alt.name)}} class="btn btn-secondary">Switch</a></td>
+        <td><button {{on 'click' (fn this.switchAlt alt.name)}} class="btn btn-secondary">Switch</button></td>
         </tr>
       {{/if}}
     {{/each}}

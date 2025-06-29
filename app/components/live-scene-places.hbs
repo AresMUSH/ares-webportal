@@ -1,9 +1,9 @@
 <li><hr role="separator" class="dropdown-divider"></li>
 
 {{#if (not this.scene.completed)}}
-  <li><a href="#" {{on 'click' this.viewPlaces}} class="dropdown-item">View Places</a></li>
-  <li><a href="#" {{on 'click' (fn this.setSelectPlace true)}} class="dropdown-item">Join a Place</a></li>
-  <li><a href="#" {{on 'click' this.leavePlace}} class="dropdown-item">Leave Place</a></li>
+  <li><button {{on 'click' this.viewPlaces}} class="dropdown-item">View Places</button></li>
+  <li><button {{on 'click' (fn this.setSelectPlace true)}} class="dropdown-item">Join a Place</button></li>
+  <li><button {{on 'click' this.leavePlace}} class="dropdown-item">Leave Place</button></li>
 {{/if}}
           
 <BsModalSimple @title="View Places" @closeTitle="Done" @size={{null}} @fade={{true}} @open={{this.showPlaces}} @onHide={{(fn this.setShowPlaces false)}}>

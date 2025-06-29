@@ -101,22 +101,22 @@
         <DropdownMenu @id="chatMenu" @title="Chat Menu" @dropup={{true}} class="chat-menu">
           {{#if this.channel.is_page}}
             {{#if this.channel.is_hidden}}
-              <li><a href="#" {{on 'click' (fn this.hidePage false)}} class="dropdown-item">Unhide Conversation</a></li>
+              <li><button {{on 'click' (fn this.hidePage false)}} class="dropdown-item">Unhide Conversation</button></li>
             {{else}}
-              <li><a href="#" {{on 'click' (fn this.hidePage true)}} class="dropdown-item">Hide Conversation</a></li>
+              <li><button {{on 'click' (fn this.hidePage true)}} class="dropdown-item">Hide Conversation</button></li>
             {{/if}}
-            <li><a href="#" {{on 'click' (fn this.setShowPageRename true)}} class="dropdown-item">Rename Conversation</a></li>
+            <li><button {{on 'click' (fn this.setShowPageRename true)}} class="dropdown-item">Rename Conversation</button></li>
     
           {{else}}
-            <li><a href="#" {{on 'click' this.leaveChannel}} class="dropdown-item">Leave Channel</a></li>
+            <li><button {{on 'click' this.leaveChannel}} class="dropdown-item">Leave Channel</button></li>
             {{#if this.channel.muted}}
-            <li><a href="#" {{on 'click' (fn this.muteChannel false)}} class="dropdown-item">Unmute Channel</a></li>
+            <li><button {{on 'click' (fn this.muteChannel false)}} class="dropdown-item">Unmute Channel</button></li>
             {{else}}
-            <li><a href="#" {{on 'click'  (fn this.muteChannel true)}} class="dropdown-item">Mute Channel</a></li>
+            <li><button {{on 'click'  (fn this.muteChannel true)}} class="dropdown-item">Mute Channel</button></li>
             {{/if}}
           {{/if}}
-          <li><a href="#" {{on 'click' (fn this.setShowReport true)}} class="dropdown-item">Report Chat</a></li>
-          <li><a href="#" {{on 'click' this.download}} class="dropdown-item">Download Chat</a></li>  
+          <li><button {{on 'click' (fn this.setShowReport true)}} class="dropdown-item">Report Chat</button></li>
+          <li><button {{on 'click' this.download}} class="dropdown-item">Download Chat</button></li>  
         </DropdownMenu>
         
       </div>

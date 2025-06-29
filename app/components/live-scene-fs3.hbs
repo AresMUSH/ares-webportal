@@ -1,9 +1,9 @@
-<li><a href="#" {{on 'click' (fn this.setSelectSkillRoll true)}} class="dropdown-item">Roll Ability</a></li>
-<li><a href="#" {{on 'click' (fn this.setSelectSpendLuck true)}} class="dropdown-item">Spend Luck</a></li>
+<li><button {{on 'click' (fn this.setSelectSkillRoll true)}} class="dropdown-item">Roll Ability</button></li>
+<li><button {{on 'click' (fn this.setSelectSpendLuck true)}} class="dropdown-item">Spend Luck</button></li>
 
 {{#if this.scene.fs3combat_enabled}}
   {{#if (not this.scene.combat)}}
-    <li><a href="#" {{on 'click' this.startCombat}} class="dropdown-item">Start Combat</a></li>
+    <li><button {{on 'click' this.startCombat}} class="dropdown-item">Start Combat</button></li>
   {{/if}}
 {{/if}}
 

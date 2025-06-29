@@ -38,7 +38,7 @@
         </td>
         
         <td>
-          <a href="#" {{on 'click' (fn this.showDamage c)}}>
+          <button {{on 'click' (fn this.showDamage c)}} class="btn-link">
             {{#if c.is_ko}}
             
                 <i class="fa fa-crosshairs" aria-label="Knocked Out"></i>
@@ -52,7 +52,7 @@
                 {{/each}}
              
             {{/if}}
-          </a>
+          </button>
         </td>
         
         <td>
@@ -92,7 +92,7 @@
 
 </div>
 
-<BsModalSimple @title="Damage Report" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{this.damagePopupChar}}  @onHide={{(fn this.damagePopupChar null)}}>
+<BsModalSimple @title="Damage Report" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{this.damagePopupChar}}  @onHide={{(fn this.showDamage null)}}>
     <Fs3Damage @damage={{this.damagePopupChar.damage}} @damageMod={{this.damagePopupChar.damage_mod}} />
     
 </BsModalSimple>
