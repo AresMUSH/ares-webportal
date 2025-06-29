@@ -1,15 +1,15 @@
 <div class="action-buttons-spaced">
   <div>
     {{#each this.inbox.tags as |tag|}}
-    [ <a href="#" {{on 'click' (fn this.changeTag tag)}}>
+    <button {{on 'click' (fn this.changeTag tag)}} class="btn-link">
       
       {{#if (eq tag this.selectedTag)}}
-        <span class="mail-selected-tag">{{tag}}</span>
+        <span class="mail-selected-tag">[ {{tag}} ]</span>
       {{else}}
-        {{tag}}
+        [ {{tag}} ]
       {{/if}}
     
-    </a> ]
+    </button>
     {{/each}}
   </div>
   <div>

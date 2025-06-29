@@ -16,7 +16,7 @@
               {{#if (eq ability.days_to_learn 0)}}
                 {{#if (gt this.xp 0)}}
                   {{#if this.canLearn}}
-                  <a href="#" class="btn btn-secondary" {{on 'click' (fn this.learnAbility ability)}} >Learn</a>
+                  <button class="btn btn-secondary" {{on 'click' (fn this.learnAbility ability)}} >Learn</button>
                   {{/if}}
                 {{else}}
                 Out of XP

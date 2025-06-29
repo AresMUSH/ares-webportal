@@ -2,18 +2,18 @@
 
 <div class="live-scene-controls">
 
-<a href="#" {{on 'click' this.scrollDown}}><i class="fas fa-angle-double-down"></i> Jump to End</a>
+<button {{on 'click' this.scrollDown}} class="btn-link"><i class="fas fa-angle-double-down"></i> Jump to End</button>
   {{#if this.scrollPaused}}
-          <a href="#" {{on 'click' this.unpauseScroll}}><i class="fas fa-play">
-          </i> Resume Scrolling</a>
+          <button {{on 'click' this.unpauseScroll}} class="btn-link"><i class="fas fa-play">
+          </i> Resume Scrolling</button>
   {{else}}
-          <a href="#" {{on 'click' this.pauseScroll}}><i class="fas fa-pause"></i> Pause Scrolling</a>
+          <button {{on 'click' this.pauseScroll}} class="btn-link"><i class="fas fa-pause"></i> Pause Scrolling</button>
   {{/if}}
   
   {{#if this.scene.is_watching}}
-  <a href="#" {{on 'click' (fn this.watchScene false)}}><i class="fas fa-eye-slash"></i> Unwatch Scene</a>
+  <button {{on 'click' (fn this.watchScene false)}} class="btn-link"><i class="fas fa-eye-slash"></i> Unwatch Scene</button>
   {{else}}
-  <a href="#" {{on 'click' (fn this.watchScene true)}}><i class="fas fa-eye"></i> Watch Scene</a>
+  <button {{on 'click' (fn this.watchScene true)}} class="btn-link"><i class="fas fa-eye"></i> Watch Scene</button>
   {{/if}}
 
 </div>
@@ -50,9 +50,9 @@
                 {{#if (not this.scene.reload_required)}}
                   {{#if (and this.isApproved pose.can_edit)}}
                     {{#if (not pose.editActive)}}
-                    <a href="#" {{on 'click' (fn this.editScenePose pose)}}><i class="fas fa-edit" aria-label="Edit Pose"></i></a>
+                    <TooltipButton @onClick={{(fn this.editScenePose pose)}} @icon="fas fa-edit" @message="Edit Pose" />
                     {{#if pose.can_delete}}
-                    <a href="#" {{on 'click' (fn this.setConfirmDeleteScenePose pose)}}><i class="fas fa-trash" aria-label="Delete Pose"></i></a>
+                    <TooltipButton @onClick={{(fn this.setConfirmDeleteScenePose pose)}} @icon="fas fa-trash" @message="Delete Pose" />
                     {{/if}}
                     {{/if}}
                   {{/if}}
@@ -69,7 +69,7 @@
                       <img alt="System Profile Icon"  class="small-profile-icon <IconClass />"  src="/game/uploads/theme_images/noicon.png" >
                       Combined Poses
                   {{else}}
-                      <a href="#" {{on 'click' (fn this.showCharCard pose.char.name)}}>
+                      <button {{on 'click' (fn this.showCharCard pose.char.name)}} class="btn-link">
                           {{#if pose.char.icon}}
                           <img alt="{{pose.char.name}}'s icon" class="small-profile-icon <IconClass />" src="/game/uploads/{{pose.char.icon}}" >
                           {{else}}
@@ -82,7 +82,7 @@
                             {{pose.char.name}} 
                           {{/if}}
                           
-                      </a>
+                      </button>
                     {{/if}}
                 </div>
                  {{#if pose.editActive}}
@@ -187,9 +187,9 @@
              
              <DropdownMenu @id="playMenu" @title="Play"  @dropup={{true}} class="scene-menu">
                {{#if this.scene.can_edit}}
-                   <li><a href="#" {{on 'click' (fn this.setSelectLocation true)}} class="dropdown-item">Change Location</a></li>
-                   <li><a href="#" {{on 'click' (fn this.setShowInvitation true)}} class="dropdown-item">Invite Character</a></li>
-                   <li><a href="#" {{on 'click' (fn this.setManagePoseOrder true)}} class="dropdown-item">Manage Pose Order</a></li>
+                   <li><button {{on 'click' (fn this.setSelectLocation true)}} class="dropdown-item">Change Location</button></li>
+                   <li><button {{on 'click' (fn this.setShowInvitation true)}} class="dropdown-item">Invite Character</button></li>
+                   <li><button {{on 'click' (fn this.setManagePoseOrder true)}} class="dropdown-item">Manage Pose Order</button></li>
                {{/if}}
 
                <LiveScenePlaces @scene={{this.scene}} />
@@ -238,14 +238,14 @@
                <DropdownMenu @id="manageMenu" @title="Manage" @dropup={{true}} class="scene-menu">
                      <li><LinkTo @route="scene-edit" @model={{this.scene.id}} class="dropdown-item">Edit Scene</LinkTo></li>
                      {{#if (not this.scene.completed)}}
-                         <li><a href="#" {{on 'click' (fn this.changeSceneStatus 'stop')}} class="dropdown-item">Stop Scene</a></li> 
+                         <li><button {{on 'click' (fn this.changeSceneStatus 'stop')}} class="dropdown-item">Stop Scene</button></li> 
                      {{else}}
-                         <li><a href="#" {{on 'click' (fn this.changeSceneStatus 'restart')}} class="dropdown-item">Restart Scene</a></li> 
-                         <li><a href="#" {{on 'click' (fn this.changeSceneStatus 'share')}} class="dropdown-item">Share Scene</a></li> 
-                         <li><a href="#" {{on 'click' this.collapseScene}} class="dropdown-item">Collapse Scene Poses</a></li> 
+                         <li><button {{on 'click' (fn this.changeSceneStatus 'restart')}} class="dropdown-item">Restart Scene</button></li> 
+                         <li><button {{on 'click' (fn this.changeSceneStatus 'share')}} class="dropdown-item">Share Scene</button></li> 
+                         <li><button {{on 'click' this.collapseScene}} class="dropdown-item">Collapse Scene Poses</button></li> 
                          {{#if this.scene.can_delete}}
                              <li><hr role="separator" class="dropdown-divider"></li>
-                             <li><a href="#" {{on 'click' (fn this.setConfirmDeleteScene true)}} class="dropdown-item">Delete Scene</a></li> 
+                             <li><button {{on 'click' (fn this.setConfirmDeleteScene true)}} class="dropdown-item">Delete Scene</button></li> 
                          {{/if}}
                      {{/if}}
                </DropdownMenu>
@@ -255,7 +255,7 @@
              <DropdownMenu @id="otherMenu" @title="Other" @dropup={{true}} class="scene-menu">
                {{#if this.scene.can_edit}}
                    <li><LinkTo @route="scene-download" @model={{this.scene.id}} class="dropdown-item">Download Scene</LinkTo></li> 
-                   <li><a href="#" {{on 'click' (fn this.setConfirmReportScene true)}} class="dropdown-item">Report Scene</a></li>
+                   <li><button {{on 'click' (fn this.setConfirmReportScene true)}} class="dropdown-item">Report Scene</button></li>
                {{/if}}
              </DropdownMenu>
                      
@@ -323,7 +323,7 @@
         {{po.name}} 
         </td>
         <td>
-           <a href="#" {{on 'click' (fn this.dropPoseOrder po.name)}}> <TooltipIcon @position="left" @message="Skip Turn" @icon="fa fa-times-circle" /> </a>
+           <TooltipButton @onClick={{(fn this.dropPoseOrder po.name)}} @position="left" @message="Skip Turn" @icon="fa fa-times-circle" />
         </td>
         </tr>
         {{/each}}
@@ -332,12 +332,11 @@
       <br>
       
       {{#if (eq this.scene.pose_order_type '3-per')}}
-        Switch to regular pose order: <a href="#" {{on 'click' (fn this.switchPoseOrderType 'normal')}}>
-          <TooltipIcon @position="left" @message="Regular Order" @icon="fa fa-user" /></a>
+        Switch to regular pose order: 
+        <TooltipButton @onClick={{(fn this.switchPoseOrderType 'normal')}} @position="left" @message="Regular Order" @icon="fa fa-user" />
       {{else}}
-        Switch to 3-per pose order: <a href="#" {{on 'click' (fn this.switchPoseOrderType '3-per')}}>
-          <TooltipIcon @position="left" @message="3-Per Order" @icon="fa fa-users" />
-        </a>
+        Switch to 3-per pose order: 
+        <TooltipButton @onClick={{(fn this.switchPoseOrderType '3-per')}} @position="left" @message="3-Per Order" @icon="fa fa-users" />
       {{/if}}
     </BsModalSimple>
     

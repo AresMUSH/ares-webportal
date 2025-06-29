@@ -21,7 +21,7 @@
                    {{#if this.isAuthenticated}}
                        <p>Welcome, {{this.currentUser.name}}. 
                         {{#if this.model.alts}}
-                         <a href="#" {{on 'click' (fn this.setAltSelectionVisible true)}}><i class="fa fa-caret-down" aria-label="Switch Alt"></i></a> 
+                         <TooltipButton @onClick={{(fn this.setAltSelectionVisible true)}} @icon="fa fa-caret-down" @message="Switch Alt" />
                          {{/if}}
                        </p>
                        
@@ -119,7 +119,7 @@
         <tr><td>
         <CharIconInline @char={{alt}} @hideLink="true" />
         </td>
-        <td><a href="#" {{on 'click' (fn this.switchAlt alt.name)}} class="btn btn-secondary">Switch</a></td>
+        <td><button {{on 'click' (fn this.switchAlt alt.name)}} class="btn btn-secondary">Switch</button></td>
         </tr>
       {{/if}}
     {{/each}}

@@ -49,7 +49,7 @@
              </PowerSelectMultiple>
              
              <Input @type="text" size={{10}} id="newTag" @value={{this.newTag}} /> 
-             <a href="#" {{on 'click' this.addNewTag}}><i class="fa fa-plus" aria-label="Add Tag"></i></a>     
+             <TooltipButton @onClick={{this.addNewTag}} @icon="fa fa-plus" @message="Add Tag" />
 
         </td>
     </tr>
@@ -89,7 +89,7 @@
     <div id="reply" class="card-collapse collapse">
       <div class="card-body">
       <p><b>Replying As:</b> {{this.model.message.recipient}}</p>
-      <p><b>To:</b> <a href="#" {{on 'click' this.replyAll}}>[Reply All]</a>
+      <p><b>To:</b> <button {{on 'click' this.replyAll}} class="btn-link">[Reply All]</button>
         <PowerSelectMultiple @selected={{this.replyToList}} @options={{this.model.characters}} @searchEnabled=true @searchField="name" @onChange={{this.replyToListChanged}} as |char|>
           {{char.name}}
         </PowerSelectMultiple>

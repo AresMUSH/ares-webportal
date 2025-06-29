@@ -12,18 +12,11 @@
              <button class="markdown-control-toggle" {{on 'click' this.preview}}>Preview</button>
           {{/if}}
           
-          <a href="#" {{on 'click' this.showHelp}}>
-            <TooltipIcon @position="left" @message="Formatting help." @icon="fa fa-question-circle" {{on 'click' this.showHelp}} />
-          </a>
+          <TooltipButton @position="left" @message="Formatting help." @icon="fa fa-question-circle" @route="help" @target="_blank" />
     
-          <LinkTo @route='emoji' target="_blank">
-            <TooltipIcon @position="left" @message="Emoji help." @icon="fa fa-smile" />
-          </LinkTo>
-          
-          <a href="#" {{on 'click' this.toggleToolbar}}>
-            <TooltipIcon @position="left" @message="Toggle toolbar." @icon="fa fa-toolbox" />
-          </a>
-          
+          <TooltipButton @position="left" @message="Emoji help." @icon="fa fa-smile" @route="emoji" @target="_blank" />
+                              
+          <TooltipButton @onClick={{this.toggleToolbar}} @position="left" @message="Toggle toolbar." @icon="fa fa-toolbox" />          
     </div>
 
 {{#if this.previewText}}

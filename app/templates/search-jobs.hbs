@@ -51,7 +51,7 @@
     
     <DropdownMenu @id="categoryDropdown" @title="Category">
         {{#each this.model.category_values as |category| }}
-          <li><a href="#" {{on 'click' (fn this.changeSearchCategory category)}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</a></li>
+          <li><button {{on 'click' (fn this.changeSearchCategory category)}} class="dropdown-item"><span class="badge job-category job-category-{{category}}">&nbsp;</span> {{category}}</button></li>
         {{/each}}
     </DropdownMenu>
   
@@ -70,7 +70,7 @@
     
     <DropdownMenu @id="statusDropdown" @title="Status">
       {{#each this.model.status_values as |status| }}
-        <li><a href="#" {{on 'click' (fn this.changeSearchStatus status)}} class="dropdown-item"><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</a></li>
+        <li><button {{on 'click' (fn this.changeSearchStatus status)}} class="dropdown-item"><span class="badge job-status job-status-{{status}}">&nbsp;</span> {{status}}</button></li>
       {{/each}}
     </DropdownMenu>
           
@@ -89,7 +89,7 @@
       {{/if}}
       <DropdownMenu @id="custom-{{id}}" @title="{{field.name}}">
         {{#each field.dropdown_values as |val| }}
-          <li><a href="#" {{on 'click' (fn this.changeCustomDropdown id val)}} class="dropdown-item"><span class="badge job-custom job-custom-{{id}}-{{val}}">&nbsp;</span> {{val}}</a></li>
+          <li><button {{on 'click' (fn this.changeCustomDropdown id val)}} class="dropdown-item"><span class="badge job-custom job-custom-{{id}}-{{val}}">&nbsp;</span> {{val}}</button></li>
         {{/each}}
       </DropdownMenu>      
     {{else}}

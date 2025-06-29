@@ -15,6 +15,7 @@ export default Component.extend({
   showReport: false,
   showPageRename: false,
   newPageTitle: '',
+  showChannelInfo: false,
 
   updatePoseControls: function () {
     if (this.channel && !this.get('channel.poseChar')) {
@@ -45,6 +46,11 @@ export default Component.extend({
   canTalk: computed('channel.{muted,can_talk}', function() {
     return this.channel.can_talk && !this.channel.muted;
   }),
+  
+  @action
+  toggleChannelInfo() {
+    this.set('showChannelInfo', !this.showChannelInfo);
+  },
   
   @action
   leaveChannel() {

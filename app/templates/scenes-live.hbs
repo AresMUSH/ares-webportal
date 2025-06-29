@@ -67,14 +67,14 @@
   <div class="live-scenes-controls">
   
    {{#if scene.watching}}
-     <a href="#" {{on 'click' (fn this.stopWatching scene.id)}}><i class="fa fa-eye-slash" aria-label="Stop Watching"></i> Unwatch</a>
+     <button class="btn-link" {{on 'click' (fn this.stopWatching scene.id)}}><i class="fa fa-eye-slash" aria-label="Stop Watching"></i> Unwatch</button>
 
    {{else}}
      {{#if scene.can_view}}
-       <a href="#" {{on 'click' (fn this.watchScene scene.id)}}><i class="fa fa-eye" aria-label="Watch"></i> Watch</a>
+       <button class="btn-link" {{on 'click' (fn this.watchScene scene.id)}}><i class="fa fa-eye" aria-label="Watch"></i> Watch</button>
   
        {{#if (not scene.participating) }}
-       <a href="#" {{on 'click' (fn this.joinScene scene.id)}}><i class="fa fa-sign-in-alt" aria-label="Join"></i> Join</a>
+         <button class="btn-link" {{on 'click' (fn this.joinScene scene.id)}}><i class="fa fa-sign-in-alt" aria-label="Join"></i> Join</button>
        {{/if}}
      {{/if}}
 

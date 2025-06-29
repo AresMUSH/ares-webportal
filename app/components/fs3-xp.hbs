@@ -31,7 +31,7 @@
     {{#if (and (gt this.char.fs3.xp.xp_points 0) this.char.fs3.xp.can_learn)}}
   
     <Input @type="text" size={{25}} @value={{this.newAbility}} />
-    <a href="#" class="btn btn-secondary" {{on 'click' this.learnNewAbility}} >Learn</a>
+    <button class="btn btn-secondary" {{on 'click' this.learnNewAbility}} >Learn</button>
     
     {{else}}
     Out of XP

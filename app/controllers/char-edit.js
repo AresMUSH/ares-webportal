@@ -6,6 +6,8 @@ export default Controller.extend({
     gameApi: service(),
     flashMessages: service(),
     router: service(),
+  
+    /* See note in chargen-char about how this callack is wired up. */
     customUpdateCallback: null,
   
     buildQueryDataForChar: function() {

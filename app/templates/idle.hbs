@@ -41,7 +41,7 @@
      
       </td>
       <td>
-        <a href="#" {{on 'click' (fn this.removeFromIdle char.name)}}><i class="fa fa-trash" aria-label="Remove"></i></a>
+        <TooltipButton @onClick={{(fn this.removeFromIdle char.name)}} @icon="fa fa-trash" @message="Remove" />
       </td>
     </tr>
     {{/each}}

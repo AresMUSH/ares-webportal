@@ -24,31 +24,20 @@
            
            {{#if this.model.can_edit}}
              {{#if (not this.model.editActive)}}
-             <a href="#" {{on 'click' (fn this.setEditActive true)}}>
-               <TooltipIcon @position="left" @message="Edit topic." @icon="fa fa-edit" />
-             </a>
+               <TooltipButton @onClick={{(fn this.setEditActive true)}} @position="left" @message="Edit topic." @icon="fa fa-edit" />
              {{/if}}
            {{/if}}
            {{#if this.model.can_pin}}
              {{#if this.model.is_pinned}}
-               <a href="#" {{on 'click' (fn this.pinPost false)}}>
-                 <TooltipIcon @position="left" @message="Unpin topic." @icon="fa fa-thumbtack" />
-               </a>
+               <TooltipButton @onClick={{(fn this.pinPost false)}} @position="left" @message="Unpin topic." @icon="fa fa-thumbtack" />
              {{else}}
-               <a href="#" {{on 'click' (fn this.pinPost true)}}>
-                 <TooltipIcon @position="left" @message="Pin topic." @icon="fa fa-thumbtack" />
-               </a>
+               <TooltipButton @onClick={{(fn this.pinPost true)}} @position="left" @message="Pin topic." @icon="fa fa-thumbtack" />
              {{/if}}
            {{/if}}
            {{#if this.model.can_edit}}
              {{#if (not this.model.editActive)}}
-             <a href="#" {{on 'click' (fn this.setChooseNewCategory true)}}>
-               <TooltipIcon @position="left" @message="Move topic." @icon="fas fa-share-square" />
-             </a>
-             <a href="#" {{on 'click' (fn this.setConfirmDeleteTopic true)}}>
-               <TooltipIcon @position="left" @message="Delete topic." @icon="fa fa-trash" />
-             </a>
-             
+             <TooltipButton @onClick={{(fn this.setChooseNewCategory true)}} @position="left" @message="Move topic." @icon="fas fa-share-square" />
+             <TooltipButton @onClick={{(fn this.setConfirmDeleteTopic true)}} @position="left" @message="Delete topic." @icon="fa fa-trash" />
              {{/if}}
            {{/if}}
            
@@ -93,12 +82,8 @@
            
            {{#if reply.can_edit}}
              {{#if (not reply.editActive)}}
-             <a href="#" {{on 'click' (fn this.setReplyEditActive reply true)}}>
-               <TooltipIcon @position="left" @message="Edit reply." @icon="fa fa-edit" />
-             </a>
-             <a href="#" {{on 'click' (fn this.setConfirmDeleteReply reply)}}>
-               <TooltipIcon @position="left" @message="Delete reply." @icon="fa fa-trash" />
-             </a>
+             <TooltipButton @onClick={{(fn this.setReplyEditActive reply true)}} @position="left" @message="Edit reply." @icon="fa fa-edit" />
+             <TooltipButton  @onClick={{(fn this.setConfirmDeleteReply reply)}} @position="left" @message="Delete reply." @icon="fa fa-trash" />
              {{/if}}
            {{/if}}
            

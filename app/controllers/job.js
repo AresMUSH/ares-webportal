@@ -9,6 +9,7 @@ export default Controller.extend({
   editParticipants: false,
   newParticipants: null,
   newActivity: false,
+  replyToDelete: null,
       
   gameApi: service(),
   gameSocket: service(),
@@ -20,6 +21,11 @@ export default Controller.extend({
     this._super(...arguments);
     this.set('newParticipants', []);
   },
+  
+  resetOnExit: function() {
+    this.set("replyToDelete", null);
+  },
+  
       
   resetReplyAdmin: function() {
     this.set('replyAdminOnly', this.get('model.job.is_category_admin') ? true : false );
@@ -66,6 +72,11 @@ export default Controller.extend({
   
 
   @action
+  setReplyToDelete(reply) {
+    this.set("replyToDelete", reply);
+  },
+  
+  @action
   addReply() {
     let api = this.gameApi;
       
@@ -103,9 +114,13 @@ export default Controller.extend({
   },
     
   @action
-  deleteReply(id) {
+  deleteReply() {
     let api = this.gameApi;
-    api.requestOne('jobDeleteReply', { id: this.get('model.job.id'), reply_id: id })
+    let reply_id = this.replyToDelete.id;
+    
+    this.set("replyToDelete", null);
+    
+    api.requestOne('jobDeleteReply', { id: this.get('model.job.id'), reply_id: reply_id })
     .then((response) => {
       if (response.error) {
         return;

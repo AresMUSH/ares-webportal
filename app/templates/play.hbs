@@ -19,35 +19,25 @@
       <div class="play-section-title">Scenes
              
          {{#if this.isApproved}}
-           <LinkTo @route="scenes-live" target="_blank">
-             <TooltipIcon @position="right" @message="Join Scene" @icon="fa fa-play-circle" />
-           </LinkTo>
+           <TooltipButton @position="right" @message="Join Scene" @icon="fa fa-play-circle" @route="scenes-live" />
 
-           <LinkTo @route="scene-create" target="_blank">
-             <TooltipIcon @position="right" @message="Create Scene" @icon="fa fa-plus-circle" />
-           </LinkTo>
+           <TooltipButton @position="right" @message="Create Scene" @icon="fa fa-plus-circle" @route="scene-create" />
 
-           <LinkTo @route="scenes-unshared" target="_blank">
-             <TooltipIcon @position="right" @message="Unshared Scenes" @icon="fa fa-share-square" />
-           </LinkTo>
+           <TooltipButton @position="right" @message="Unshared Scenes" @icon="fa fa-share-square" @route="scenes-unshared" />
          {{/if}}
 
-         <LinkTo @route="who" target="_blank">
-           <TooltipIcon @position="right" @message="Who's Online" @icon="fa fa-users" />
-         </LinkTo>
+         <TooltipButton @position="right" @message="Who's Online" @icon="fa fa-users" @route="who" />
 
        </div>  
 
          
        {{#each this.model.scenes as |scene|}}
-         <a href="#" {{on 'click' (fn this.switchScene scene.id)}}>
-           <div class="play-selector {{if (eq scene.id this.currentScene.id) 'play-selector-active' ''}}">
+         <button {{on 'click' (fn this.switchScene scene.id)}} class="btn-link play-selector {{if (eq scene.id this.currentScene.id) 'play-selector-active' ''}}">
                #{{scene.id}} - {{scene.location.name}} 
                {{#if scene.is_unread}}
                  <span class="badge rounded-pill bg-primary"> <i class="fa fa-flag" aria-label="New Activity"></i></span>
                {{/if}}
-           </div>
-         </a>
+         </button>
          <div class="play-hint">
            {{#each scene.participants as |participant|}}
              {{participant.name}}
@@ -58,62 +48,46 @@
        
        
        <div class="play-section-title">Private Messages  
-       <a href="#" {{on 'click' (fn this.setShowNewConversation true)}}>
-         <TooltipIcon @position="right" @message="New Conversation" @icon="fa fa-plus-circle" />
-       </a>
+         <TooltipButton @onClick={{(fn this.setShowNewConversation true)}} @position="right" @message="New Conversation" @icon="fa fa-plus-circle" />
         {{#if this.showAllPms}}
-        <a href="#" {{on 'click' (fn this.setShowAllPms false)}}>
-          <TooltipIcon @position="right" @message="Hide Inactive" @icon="fa fa-caret-square-up" />
-        </a>
+          <TooltipButton @onClick={{(fn this.setShowAllPms false)}} @position="right" @message="Hide Inactive" @icon="fa fa-caret-square-up" />
         {{else}}
-        <a href="#" {{on 'click' (fn this.setShowAllPms true)}}>
-          <TooltipIcon @position="right" @message="Show All" @icon="fa fa-caret-square-down" />
-        </a>
+          <TooltipButton @onClick={{(fn this.setShowAllPms true)}} @position="right" @message="Show All" @icon="fa fa-caret-square-down" />
         {{/if}}
        </div>  
         
         {{#each this.sortedPageThreads as |channel|}}
           {{#if (or channel.is_recent this.showAllPms)}}
-           <a href="#" {{on 'click' (fn this.changeChannel channel)}}>
-            <div class="play-selector {{if (eq channel.key this.selectedChannel.key) 'play-selector-active' ''}}">                  
+            <button {{on 'click' (fn this.changeChannel channel)}} class="btn-link play-selector {{if (eq channel.key this.selectedChannel.key) 'play-selector-active' ''}}">                  
               # {{channel.title}}
               {{#if channel.is_hidden}}
                   <i class="fa fa-microphone-slash"></i>
               {{/if}}
               <span class="badge rounded-pill bg-primary">{{channel.new_messages}}</span>
-            </div>
-          </a>
+            </button>
           {{/if}}
         {{/each}}        
         
         <div class="play-section-title">Channels
-           <a href="#" {{on 'click' (fn this.setShowAddChannel true)}}>
-             <TooltipIcon @position="right" @message="Add Channel" @icon="fa fa-plus-circle" />
-           </a>
+             <TooltipButton @onClick={{(fn this.setShowAddChannel true)}} @position="right" @message="Add Channel" @icon="fa fa-plus-circle" />
             {{#if this.showAllChannels}}
-            <a href="#" {{on 'click' (fn this.setShowAllChannels false)}}>
-              <TooltipIcon @position="right" @message="Hide Inactive" @icon="fa fa-caret-square-up" />
-            </a>
+              <TooltipButton @onClick={{(fn this.setShowAllChannels false)}} @position="right" @message="Hide Inactive" @icon="fa fa-caret-square-up" />
             {{else}}
-            <a href="#" {{on 'click' (fn this.setShowAllChannels true)}}>
-              <TooltipIcon @position="right" @message="Show All" @icon="fa fa-caret-square-down" />
-            </a>
-            {{/if}}
+              <TooltipButton @onClick={{(fn this.setShowAllChannels true)}} @position="right" @message="Show All" @icon="fa fa-caret-square-down" />
+              {{/if}}
        </div>  
               
        {{#each this.sortedChannels as |channel|}}
          {{#if channel.can_join}}
            {{#if channel.enabled}}
             {{#if (or channel.is_recent this.showAllChannels)}}
-             <a href="#" {{on 'click' (fn this.changeChannel channel)}}>
-               <div class="play-selector {{if (eq channel.key this.selectedChannel.key) 'play-selector-active' ''}}">
+             <button {{on 'click' (fn this.changeChannel channel)}} class="btn-link play-selector {{if (eq channel.key this.selectedChannel.key) 'play-selector-active' ''}}">
                     # {{channel.title}}
                    {{#if channel.muted}}
                        <i class="fa fa-microphone-slash"></i>
                    {{/if}}                 
                    <span class="badge rounded-pill bg-primary">{{channel.new_messages}}</span>
-               </div>
-               </a>
+               </button>
              {{/if}}
            {{/if}}
          {{/if}}
@@ -179,7 +153,7 @@
             {{/if}}
           </td>
           <td>
-            <a href="#" {{on 'click' (fn this.joinChannel channel.title)}} class="btn btn-primary">Join</a>
+            <button {{on 'click' (fn this.joinChannel channel.title)}} class="btn btn-primary">Join</button>
           </td>
         </tr>
       {{/if}}

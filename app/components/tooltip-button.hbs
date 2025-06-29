@@ -1,0 +1,22 @@
+<button {{on 'click' this.handleClick}} class="tooltip-button">
+  {{#if this.route}}
+  
+    {{#if this.models}}
+      <LinkTo @route={{this.route}} target={{this.target}} @models={{this.models}}>  
+        <TooltipIcon @position={{this.position}} @message={{this.message}} @icon={{this.icon}} />
+      </LinkTo>
+    {{else if this.model}}
+      <LinkTo @route={{this.route}} target={{this.target}} @model={{this.model}}>  
+        <TooltipIcon @position={{this.position}} @message={{this.message}} @icon={{this.icon}} />
+      </LinkTo>
+    {{else}}
+      <LinkTo @route={{this.route}} target={{this.target}}>  
+        <TooltipIcon @position={{this.position}} @message={{this.message}} @icon={{this.icon}} />
+      </LinkTo>    
+    {{/if}}
+  {{else}}  
+  
+    <TooltipIcon @position={{this.position}} @message={{this.message}} @icon={{this.icon}} />
+  
+  {{/if}}
+</button>
