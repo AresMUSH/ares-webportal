@@ -27,12 +27,7 @@ export default Component.extend({
       minHeight = 250;
     }
     return `${minHeight}px`;
-  }),
-  
-  @action
-  showHelp() {
-    window.open("/help/markdown");
-  },
+  }),  
     
   @action
   preview() {

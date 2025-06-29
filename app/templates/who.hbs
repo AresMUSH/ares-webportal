@@ -8,9 +8,7 @@
     <div class="who-row">
         <CharIconInline @char={{char}} />
           {{#if this.model.can_boot}}
-          <a href="#" {{on 'click' (fn this.setBootTarget char)}}>
-            <TooltipIcon @position="right" @message="Boot player." @icon="fa-solid fa-user-slash" />
-          </a>
+            <TooltipButton @onClick={{(fn this.setBootTarget char)}} @position="right" @message="Boot player." @icon="fa-solid fa-user-slash" />
           {{/if}}
     </div>
     {{/each}}

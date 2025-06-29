@@ -323,7 +323,7 @@
         {{po.name}} 
         </td>
         <td>
-           <a href="#" {{on 'click' (fn this.dropPoseOrder po.name)}}> <TooltipIcon @position="left" @message="Skip Turn" @icon="fa fa-times-circle" /> </a>
+           <TooltipButton @onClick={{(fn this.dropPoseOrder po.name)}} @position="left" @message="Skip Turn" @icon="fa fa-times-circle" />
         </td>
         </tr>
         {{/each}}
@@ -332,12 +332,11 @@
       <br>
       
       {{#if (eq this.scene.pose_order_type '3-per')}}
-        Switch to regular pose order: <a href="#" {{on 'click' (fn this.switchPoseOrderType 'normal')}}>
-          <TooltipIcon @position="left" @message="Regular Order" @icon="fa fa-user" /></a>
+        Switch to regular pose order: 
+        <TooltipButton @onClick={{(fn this.switchPoseOrderType 'normal')}} @position="left" @message="Regular Order" @icon="fa fa-user" />
       {{else}}
-        Switch to 3-per pose order: <a href="#" {{on 'click' (fn this.switchPoseOrderType '3-per')}}>
-          <TooltipIcon @position="left" @message="3-Per Order" @icon="fa fa-users" />
-        </a>
+        Switch to 3-per pose order: 
+        <TooltipButton @onClick={{(fn this.switchPoseOrderType '3-per')}} @position="left" @message="3-Per Order" @icon="fa fa-users" />
       {{/if}}
     </BsModalSimple>
     

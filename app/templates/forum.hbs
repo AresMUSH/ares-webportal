@@ -64,10 +64,7 @@
             
         </td>
         <td>
-          <a href="#" {{on 'click' (fn this.hideCategory forum true)}}>
-            <TooltipIcon @position="left" @message="Hide category." @icon="fa fa-eye-slash" />
-          </a>
-          
+          <TooltipButton @onClick={{(fn this.hideCategory forum true)}} @position="left" @message="Hide category." @icon="fa fa-eye-slash" />
         </td>
     </tr>
 {{/each}}
@@ -80,9 +77,8 @@
 <h4>Hidden</h4>
 {{#each this.model.hidden as |forum|}}
 <LinkTo @route="forum-category" @model={{forum.id}}>{{forum.name}}</LinkTo>          
-    <a href="#" {{on 'click' (fn this.hideCategory forum false)}} >
-      [<TooltipIcon @position="top" @message="Show category." @icon="fa fa-eye" />]
-    </a> &nbsp; &nbsp;
+      <TooltipButton @onClick={{(fn this.hideCategory forum false)}} @position="top" @message="Show category." @icon="fa fa-eye" />
+     &nbsp; &nbsp;
 {{/each}}
 {{/if}}
 

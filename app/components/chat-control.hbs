@@ -6,13 +6,13 @@
 
   <a data-bs-toggle="collapse" href="#channel-info"><i class="fas fa-info-circle"></i> Channel Info</a>
 
-  <a href="#" {{on 'click' this.scrollDown}}><i class="fas fa-angle-double-down"></i> Jump to End</a>
+  <button class="btn-link" {{on 'click' this.scrollDown}}><i class="fas fa-angle-double-down"></i> Jump to End</button>
 
   {{#if this.scrollPaused}}
-          <a href="#" {{on 'click' this.unpauseScroll}}><i class="fas fa-play">
-          </i> Resume Scrolling</a>
+          <button class="btn-link" {{on 'click' this.unpauseScroll}}><i class="fas fa-play">
+          </i> Resume Scrolling</button>
   {{else}}
-          <a href="#" {{on 'click' this.pauseScroll}}><i class="fas fa-pause"></i> Pause Scrolling</a>
+          <button class="btn-link" {{on 'click' this.pauseScroll}}><i class="fas fa-pause"></i> Pause Scrolling</button>
   {{/if}}
 </div>  
   

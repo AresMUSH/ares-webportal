@@ -13,48 +13,28 @@
     
       <div class="notification-controls">
         {{#if (eq notification.type 'mail')}}
-          <LinkTo @route="mail-message" @model={{notification.reference_id}}>
-            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-          </LinkTo>
+          <TooltipButton @position="left" @message="View" @icon="fa fa-eye" @route="mail-message" @model={{notification.reference_id}} />
         {{else if (eq notification.type 'forum')}}
-          <LinkTo @route="forum-topic" @models={{array (get notification.data 0) (get notification.data 1)}}>
-            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-          </LinkTo>
+          <TooltipButton @position="left" @message="View" @icon="fa fa-eye" @route="forum-topic" @models={{array (get notification.data 0) (get notification.data 1)}} />
         {{else if (eq notification.type 'job')}}
-          <LinkTo @route="job" @model={{notification.reference_id}}>
-            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-          </LinkTo>
+          <TooltipButton @position="left" @message="View" @icon="fa fa-eye" @route="job" @model={{notification.reference_id}} />
         {{else if (eq notification.type 'pm')}}
-          <LinkTo @route="chat">
-            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-          </LinkTo>
+          <TooltipButton @position="left" @message="View" @icon="fa fa-eye" @route="chat" />
         {{else if (eq notification.type 'scene')}}
-          <LinkTo @route="scene-live" @model={{notification.reference_id}}>
-            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-          </LinkTo>
+          <TooltipButton @position="left" @message="View" @icon="fa fa-eye" @route="scene-live" @model={{notification.reference_id}} />
         {{else if (eq notification.type 'scene_deletion')}}
-          <LinkTo @route="scene-live" @model={{notification.reference_id}}>
-            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-          </LinkTo>
+          <TooltipButton @position="left" @message="View" @icon="fa fa-eye" @route="scene-live" @model={{notification.reference_id}} />
         {{else if (eq notification.type 'event')}}
-          <LinkTo @route="event" @model={{notification.reference_id}}>
-            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-          </LinkTo>
+          <TooltipButton @position="left" @message="View" @icon="fa fa-eye" @route="event" @model={{notification.reference_id}} />
         {{else if (eq notification.type 'achievement')}}
-          <LinkTo @route="char" @model={{this.char.name}}>
-            <TooltipIcon @position="left" @message="View" @icon="fa fa-eye" />
-          </LinkTo>
+          <TooltipButton @position="left" @message="View" @icon="fa fa-eye" @route="char" @model={{this.char.name}} />
         {{/if}}
       
         {{#if notification.is_unread}}
-        <a href="#" {{on 'click' (fn this.markRead notification false)}}>
-          <TooltipIcon @position="left" @message="Mark Read" @icon="fa fa-ban" />
-        </a>
+          <TooltipButton @onClick={{(fn this.markRead notification false)}} @position="left" @message="Mark Read" @icon="fa fa-ban" />
         {{else}}
-        <a href="#" {{on 'click' (fn this.markRead notification true)}}>
-          <TooltipIcon @position="left" @message="Mark Unread" @icon="fa fa-flag" />  
-        </a>
-        {{/if}}
+          <TooltipButton @onClick={{(fn this.markRead notification true)}} @position="left" @message="Mark Unread" @icon="fa fa-flag" />  
+          {{/if}}
       </div>
     </td>
   </tr>
