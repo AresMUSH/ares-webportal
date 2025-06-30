@@ -21,7 +21,7 @@
                    {{#if this.isAuthenticated}}
                        <p>Welcome, {{this.currentUser.name}}. 
                         {{#if this.model.alts}}
-                         <TooltipButton @onClick={{(fn this.setAltSelectionVisible true)}} @icon="fa fa-caret-down" @message="Switch Alt" />
+                         <TooltipButton @onClick={{(fn this.setAltSelectionVisible true)}} @icon="fa fa-caret-down" @message="Switch Alt" @position="left" />
                          {{/if}}
                        </p>
                        
