@@ -4,10 +4,10 @@ export default Service.extend({
     
   setEditorPreference(pref) {
       // Save editor cookie
-      window.localStorage.setItem("aresmush:editor", pref || "Classic");        
+      window.localStorage.setItem("aresmush:editor", pref || "WYSIWYG");        
     },
   editorPreference() {
-      return window.localStorage.getItem("aresmush:editor") || "Classic";
+      return window.localStorage.getItem("aresmush:editor") || "WYSIWYG";
     }
      
 });
