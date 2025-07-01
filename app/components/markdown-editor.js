@@ -1,19 +1,23 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
 import { action, computed } from '@ember/object';
+import { reads } from '@ember/object/computed';
+import { tracked } from '@glimmer/tracking';
 
 export default Component.extend({
+
   previewText: null,
   rows: 0,
   gameApi: service(),
+  cookies: service(),
   text: '',
-  hideToolbar: false,
+  editor: tracked({ value: "WYSIWYG" }),
   
   didInsertElement: function() {
     this._super(...arguments);
-    this.set('hideToolbar', window.localStorage.getItem("aresmush:hideToolbar") === "true");
-  },
-    
+    this.set('editor', this.cookies.editorPreference());
+  },    
+  
   markdownText: computed('text', function() {
     return this.text || "";
   }),
@@ -65,8 +69,8 @@ export default Component.extend({
     }
   },  
   @action
-  toggleToolbar() {
-    this.set('hideToolbar', !this.hideToolbar);
+  toggleEditor() {
+    this.set('editor', this.editor === "Classic" ? "WYSIWYG" : "Classic");
     window.localStorage.setItem("aresmush:hideToolbar", this.hideToolbar);
   }  
 });

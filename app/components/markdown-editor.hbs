@@ -16,7 +16,7 @@
     
           <TooltipButton @position="left" @message="Emoji help." @icon="fa fa-smile" @route="emoji" @target="_blank" />
                               
-          <TooltipButton @onClick={{this.toggleToolbar}} @position="left" @message="Toggle toolbar." @icon="fa fa-toolbox" />          
+          <TooltipButton @onClick={{this.toggleEditor}} @position="left" @message="Switch editor style." @icon="fa fa-toolbox" />          
     </div>
 
 {{#if this.previewText}}
@@ -25,7 +25,7 @@
   </div>
 {{else}}
 
-{{#if this.hideToolbar}}
+{{#if (eq this.editor "Classic")}}
   <Textarea @value={{this.text}} cols={{80}} rows={{this.rows}} @keydown={{this.keyDown}} aria-label="Markdown Editor" />
 {{else}}
   <TuiEditor 
