@@ -1,7 +1,9 @@
-{{#each this.dots as |r|}}
+<div class="fs3-dots-{{this.abilityType}}">
+{{#each this.dots as |r index|}}
  {{#if r.fill}}
- <i class="fas fa-circle fa-sm char-dot-fill"></i>
+ <i class="fas fa-circle fa-sm char-dot-fill fs3-dot-{{index}}"></i>
  {{else}}
- <i class="far fa-circle fa-sm char-dot-empty"></i>
+ <i class="far fa-circle fa-sm char-dot-empty fs3-dot-{{index}}"></i>
  {{/if}}
 {{/each}}
+</div>
