@@ -18,7 +18,7 @@ export default Component.extend({
     
   labelStyle: computed('privacy', function() {
     if (this.privacy == "Open*") {
-      return "openstar";
+      return "limited";
     }
     return this.privacy.toLowerCase();
   })
