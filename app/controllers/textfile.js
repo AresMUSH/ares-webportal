@@ -29,6 +29,11 @@ export default Controller.extend(AuthenticatedController, {
       if (response.error) {
         return;
       }
+      
+      if (response.warnings) {
+        this.flashMessages.warning(response.warnings);
+        return;
+      }
         
       if (file_type == 'style') {
         this.flashMessages.success('Config saved!  You will need to refresh the page for the new styles to take effect.');

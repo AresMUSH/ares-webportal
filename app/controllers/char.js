@@ -6,6 +6,10 @@ export default Controller.extend({
 
   showFiles: false,
   
+  resetOnExit() { 
+    this.set('showFiles', false);
+  },
+  
   @action
   reloadChar() {
     this.send('reloadModel');
