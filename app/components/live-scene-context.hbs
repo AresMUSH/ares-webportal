@@ -1,60 +1,44 @@
 <div class="play-scene-context-wrap">
-    <div class="play-scene-context-prompt">
-    {{this.scene.location.name}} - {{this.scene.icdate}}
     
-      {{#if this.showSceneDetails}}
-      <TooltipButton @position="right" @message="Hide scene details." @icon="fa fa-caret-square-up" @onClick={{this.toggleSceneDetails}} />
-      {{else}}
-      <TooltipButton @position="right" @message="Toggle scene details." @icon="fa fa-caret-square-down" @onClick={{this.toggleSceneDetails}} />
-      {{/if}}
-   </div>
+  <p><b>{{this.scene.location.name}}</b></p>
 
-{{#if this.showSceneDetails}}
-  <div class="card card-default">
-      <div class="card-body">
+  {{#if this.scene.summary}}
+  <p> <AnsiFormat @text={{this.scene.summary}} /> </p>
+  <hr>
+  {{/if}}        
 
-          <p><b>{{this.scene.location.name}}</b></p>
-        
-          {{#if this.scene.summary}}
-          <p> <AnsiFormat @text={{this.scene.summary}} /> </p>
-          <hr>
-          {{/if}}        
+  {{#if this.scene.content_warning}}
+  <div class="alert alert-danger"><b>Content Warning:</b> {{this.scene.content_warning}}</div>
+  {{/if}}
 
-          {{#if this.scene.content_warning}}
-          <div class="alert alert-danger"><b>Content Warning:</b> {{this.scene.content_warning}}</div>
-          {{/if}}
-    
-          {{#if this.scene.location.description}}
-          <AnsiFormat @text={{this.scene.location.description}} />
-          {{/if}}
-    
-          {{#each this.scene.location.details as |detail|}}
-          <p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
-          {{/each}}
-        
-          {{#if this.scene.location.scene_set}}
-          <div class="scene-set-pose">
-            <AnsiFormat @text={{this.scene.location.scene_set}} />
-          </div>
-          {{/if}}
-        
-          <div class="icon-row scene-participants">
-          {{#each this.scene.participants as |who|}}
-            <CharIconInline @char={{who}} />
-          {{/each}}
-          </div>
+  {{#if this.scene.location.description}}
+  <AnsiFormat @text={{this.scene.location.description}} />
+  {{/if}}
 
-          <hr>
-        
-          <ScenePrivacyTag @scene={{this.scene}} />
-          <ScenePacingTag @scene={{this.scene}} />
-          <SceneTypeTag @scene={{this.scene}} />
-        
-          {{#if this.scene.limit}}
-          <p><b>Notes:</b> {{this.scene.limit}}</p>
-          {{/if}}
-      </div>
+  {{#each this.scene.location.details as |detail|}}
+  <p><i>{{detail.name}}:</i> <AnsiFormat @text={{detail.desc}} /></p>
+  {{/each}}
+
+  {{#if this.scene.location.scene_set}}
+  <div class="scene-set-pose">
+    <AnsiFormat @text={{this.scene.location.scene_set}} />
   </div>
-{{/if}}
+  {{/if}}
+
+  <div class="icon-row scene-participants">
+  {{#each this.scene.participants as |who|}}
+    <CharIconInline @char={{who}} />
+  {{/each}}
+  </div>
+
+  <hr>
+
+  <ScenePrivacyTag @scene={{this.scene}} />
+  <ScenePacingTag @scene={{this.scene}} />
+  <SceneTypeTag @scene={{this.scene}} />
+
+  {{#if this.scene.limit}}
+  <p><b>Notes:</b> {{this.scene.limit}}</p>
+  {{/if}}
 
 </div>
