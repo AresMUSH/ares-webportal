@@ -14,6 +14,8 @@ export default Controller.extend({
   replyToList: null,
   fwdToList: null,
   newTag: '',
+  showReplyBox: false,
+  showForwardBox: false,
 
   init: function() {
     this._super(...arguments);
@@ -29,6 +31,8 @@ export default Controller.extend({
     this.set('replyMessage', '');
     this.set('fwdMessage', '');
     this.set('newTag', '');
+    this.set('showReplyBox', false);
+    this.set('showForwardBox', false);    
   },
   
   saveTags: function() {
@@ -151,5 +155,18 @@ export default Controller.extend({
       this.router.transitionTo('mail');
       this.flashMessages.success('Message undeleted.');
     });
+  },
+  
+  @action
+  setShowReplyBox() {
+    this.set('showReplyBox', true);
+    this.set('showForwardBox', false);
+  },
+  
+  @action
+  setShowForwardBox() {
+    this.set('showForwardBox', true);
+    this.set('showReplyBox', false);
   }
+  
 });

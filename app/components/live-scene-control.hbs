@@ -1,23 +1,5 @@
 {{#if this.scene}}
 
-<div class="live-scene-controls">
-
-<button {{on 'click' this.scrollDown}} class="btn-link"><i class="fas fa-angle-double-down"></i> Jump to End</button>
-  {{#if this.scrollPaused}}
-          <button {{on 'click' this.unpauseScroll}} class="btn-link"><i class="fas fa-play">
-          </i> Resume Scrolling</button>
-  {{else}}
-          <button {{on 'click' this.pauseScroll}} class="btn-link"><i class="fas fa-pause"></i> Pause Scrolling</button>
-  {{/if}}
-  
-  {{#if this.scene.is_watching}}
-  <button {{on 'click' (fn this.watchScene false)}} class="btn-link"><i class="fas fa-eye-slash"></i> Unwatch Scene</button>
-  {{else}}
-  <button {{on 'click' (fn this.watchScene true)}} class="btn-link"><i class="fas fa-eye"></i> Watch Scene</button>
-  {{/if}}
-
-</div>
-
     {{#if this.sceneAlerts}}
     <div class="alert alert-warning scene-alerts">
       {{#each this.sceneAlerts as |alert|}}
@@ -34,8 +16,31 @@
     {{/if}}
 
     
-    <LiveSceneContext @scene={{this.scene}} />
+     <div class="play-scene-controls-wrap">
+       <div class="play-scene-context-prompt">
+         {{this.scene.location.name}} - {{this.scene.icdate}}
+       </div>
     
+       <div class="live-scene-controls">
+         <TooltipButton @position="right" @message="Show scene details." @icon="fa fa-info-circle" @onClick={{(fn this.setShowSceneInfo true)}} />
+     
+         <TooltipButton @position="left" @message="Jump to end." @icon="fa fa-angle-double-down" @onClick={{this.scrollDown}} />
+     
+
+         {{#if this.scrollPaused}}
+           <TooltipButton @position="left" @message="Resume scrolling." @icon="fas fa-play" @onClick={{this.unpauseScroll}} />
+         {{else}}
+           <TooltipButton @position="left" @message="Pause scrolling." @icon="fas fa-pause" @onClick={{this.pauseScroll}} />
+         {{/if}}
+     
+         {{#if this.scene.is_watching}}
+           <TooltipButton @position="left" @message="Unwatch scene." @icon="fas fa-eye-slash" @onClick={{(fn this.watchScene false)}} />
+         {{else}}
+           <TooltipButton @position="left" @message="Watch scene." @icon="fas fa-eye" @onClick={{(fn this.watchScene true)}} />
+         {{/if}}
+       </div>
+          
+    </div>
     
     <div class="ansi scene-log" id="live-scene-log">
     
@@ -102,7 +107,7 @@
                         </div>
                     {{else if pose.is_ooc}}
                         <div class="scene-ooc-pose">
-                        <span class="badge rounded-pill bg-primary"> OOC</span>	
+                        <span class="badge rounded-pill bg-ooc"> OOC</span>	
                         <AnsiFormat @text={{pose.pose}} />
                         </div>
                     {{else}}        
@@ -347,6 +352,13 @@
       {{else}}
         <CharCard @char={{this.characterCardInfo}} />
       {{/if}}
+      
+    </BsModalSimple>
+    
+    <BsModalSimple @title="Scene Info" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{this.showSceneInfo}} @onHide={{(fn this.setShowSceneInfo false)}}>
+      
+      <LiveSceneContext @scene={{this.scene}} />
+      
       
     </BsModalSimple>
           

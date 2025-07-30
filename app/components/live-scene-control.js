@@ -21,6 +21,7 @@ export default Component.extend(AuthenticatedController, {
   commandResponse: null,
   showInvitation: false,
   selectedInvitee: null,
+  showSceneInfo: false,
   gameApi: service(),
   flashMessages: service(),
   gameSocket: service(),
@@ -421,5 +422,10 @@ export default Component.extend(AuthenticatedController, {
   setConfirmReportScene(value) {
     this.set('confirmReportScene', value);
   },
+  
+  @action
+  setShowSceneInfo(value) {
+    this.set('showSceneInfo', value);
+  }
   
 });

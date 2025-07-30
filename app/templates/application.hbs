@@ -65,7 +65,7 @@
         
      <div class="body-wrap">
           
-         {{#if (not this.hideSidebar)}}
+         {{#if this.showSidebar}}
              {{#if this.model.left_sidebar}}
              <div class="sidebar left-sidebar" role="navigation" aria-label="sidebar">
                <GlobalSidebar @model={{this.sidebar}} @socketConnected={{this.socketConnected}} @versionWarning={{this.versionWarning}} @boxStyle="sidebar-box-left" />
@@ -73,7 +73,7 @@
              {{/if}}
         {{/if}}
 
-         {{#if this.hideSidebar}}
+         {{#if (not this.showSidebar)}}
              <div class="body-container {{if this.model.left_sidebar 'right-body' 'left-body'}}" role="main">
                <FlashMessages />
                
@@ -94,7 +94,7 @@
              </div>
          {{/if}}
                 
-         {{#if (not this.hideSidebar)}}
+         {{#if this.showSidebar}}
              {{#if (not this.model.left_sidebar)}}
              <div class="sidebar right-sidebar" role="navigation" aria-label="sidebar">
                  <GlobalSidebar @model={{this.sidebar}} @socketConnected={{this.socketConnected}} @versionWarning={{this.versionWarning}} @boxStyle="sidebar-box-right" />

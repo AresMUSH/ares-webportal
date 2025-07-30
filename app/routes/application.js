@@ -45,7 +45,6 @@ export default Route.extend(AresConfig, {
   },
   doReload: function() {
     this.loadModel().then( newModel => {
-      this.controllerFor('application').set('sidebar', newModel);
       this.controllerFor('application').set('refreshSidebar', newModel.timestamp);
       this.gameSocket.updateNotificationBadge(newModel.notification_count);
     });        

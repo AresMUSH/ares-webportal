@@ -2,7 +2,7 @@ import Component from '@ember/component';
 import { computed } from '@ember/object';
 
 export default Component.extend({
-  tagName: 'span',
+  tagName: '',
   
     dots: computed('rating', function() {
       let rating = this.rating;

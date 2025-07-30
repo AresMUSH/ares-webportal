@@ -27,6 +27,23 @@ export default Controller.extend(AuthenticatedController, AvailableRoutes, AresC
     socketConnected: reads('gameSocket.connected'),
 
     sidebar: reads('model'),
+    
+    showSidebar: computed('model', 'hideSidebar', function() {
+      if (this.hideSidebar) {
+        console.log("COW");
+        return false;
+      }
+      if (this.model.registration_required && !this.currentUser) {
+        console.log("LLAMA");
+        return false;
+      }
+      console.log("DOG");
+      console.log(this.model);
+      console.log(this.model.registration_required);
+      console.log(this.currentUser);
+      
+      return true;
+    }),
 
 
     topNavbar: computed('model.top_navbar', function() {

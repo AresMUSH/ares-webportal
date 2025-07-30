@@ -76,17 +76,17 @@
       <button class="btn btn-warning" {{on 'click' this.moveToTrash}}>Trash</button>
       <button class="btn btn-secondary" {{on 'click' this.archiveMsg}}>Archive</button>          
     {{/if}}
+    
+    <button class="btn btn-secondary" {{on 'click' this.setShowForwardBox}}>Forward</button>    
+    {{#if this.model.message.can_reply}}
+    <button class="btn btn-primary" {{on 'click' this.setShowReplyBox}}>Reply</button>    
+    {{/if}}
   </div>
 
- 
-{{#if this.model.message.can_reply}}
 
+{{#if this.showReplyBox}}
 <div class="card card-default">
-    <div class="card-heading">
-        <a data-bs-toggle="collapse" href="#reply">Click to Reply</a>
-        
-    </div>
-    <div id="reply" class="card-collapse collapse">
+    <div id="reply" class="card-body">
       <div class="card-body">
       <p><b>Replying As:</b> {{this.model.message.recipient}}</p>
       <p><b>To:</b> <button {{on 'click' this.replyAll}} class="btn-link">[Reply All]</button>
@@ -106,13 +106,10 @@
 
 {{/if}}
 
+{{#if this.showForwardBox}}
 
 <div class="card card-default">
-    <div class="card-heading">
-        <a data-bs-toggle="collapse" href="#forward">Click to Forward</a>
-        
-    </div>
-    <div id="forward" class="card-collapse collapse">
+    <div id="forward" class="card-body">
       <div class="card-body">
       <p><b>Forwarding As:</b> {{this.model.message.recipient}}</p>
       <p><b>To:</b>
@@ -131,6 +128,8 @@
         </div>
     </div>
 </div>
+
+{{/if}}
 
 <FlashMessages />
 {{outlet}}

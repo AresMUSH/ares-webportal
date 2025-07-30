@@ -152,6 +152,23 @@
                 </div>
               </div>
               
+              <div class="card card-default">
+                  <div class="card-heading">
+                    Website Editor
+                  </div>
+    
+                  <div class="card-body">
+          
+                    <div class="alert alert-info">
+                      Note: This setting applies to all alts on this game.
+                    </div>
+                  
+                <PowerSelect @selected={{this.model.editor}}  @options={{this.model.editors}} @onChange={{this.editorChanged}} as |ed|>
+                   {{ed}}
+                 </PowerSelect>
+                  </div>
+                </div>
+              
             
             
             

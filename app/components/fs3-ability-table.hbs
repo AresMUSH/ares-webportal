@@ -1,7 +1,7 @@
 <div class="fs3-ability-table">
   <div class="char-ability-title">{{this.title}}</div>
 
-    <table class="char-ability-list">
+    <table class="char-ability-list fs3-ability-list-{{this.abilityType}}">
     {{#each this.list as |ability| }}
     <tr>
       <td>{{ability.name}} 
@@ -9,7 +9,7 @@
         <span class="fs3-linked-attr">({{ability.linked_attr}})</span>
         {{/if}}
       </td>
-      <td><Fs3Dots @rating={{ability.rating}} @max={{this.max}} />
+      <td><Fs3Dots @rating={{ability.rating}} @max={{this.max}} @abilityType={{this.abilityType}} />
     
       {{#if this.showSpecs}}
       <br>

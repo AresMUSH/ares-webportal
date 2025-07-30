@@ -171,11 +171,14 @@
 
 <p><a href="#bottom"><i class="fas fa-angle-double-down"></i> Jump to End</a></p>
 
-<hr>
+<h2>Description</h2>
 
     <AnsiFormat @text={{this.model.job.description}} />
 
-<hr>
+
+<h2>Comments</h2>
+
+
 
 {{#each this.model.job.replies as |r|}}
  <div class="job-reply {{if r.admin_only 'admin-only-reply' '' }}">
@@ -252,7 +255,7 @@
     
 <a name="bottom"></a>
 
-<p><a href="#top"><i class="fas fa-chevron-circle-up"></i> Jump to Top</a></p>
+<p><a href="#top"><i class="fas fa-angle-double-up"></i> Jump to Top</a></p>
 
 
 {{#if this.model.job.is_open }}

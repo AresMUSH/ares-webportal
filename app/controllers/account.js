@@ -11,9 +11,9 @@ export default Controller.extend(AuthenticatedController, {
   confirmPasswordSettings: '',
   handleName: '',
   linkCode: '',
-  session: service(),
   flashMessages: service(),
   gameApi: service(),
+  cookies: service(),
     
   resetOnExit: function() {
     this.set('currentPassword', '');
@@ -41,7 +41,9 @@ export default Controller.extend(AuthenticatedController, {
         
   @action
   changeSettings() {
-            
+    
+    this.cookies.setEditorPreference(this.get('model.editor'));
+    
     this.gameApi.requestOne('updateAccountInfo', 
     { 
       email: this.get('model.email'), 
@@ -49,7 +51,9 @@ export default Controller.extend(AuthenticatedController, {
       alias: this.get('model.alias'),
       confirm_password: this.confirmPasswordSettings,
       timezone: this.get('model.timezone'),
-      unified_play_screen: this.get('model.unified_play_screen')
+      unified_play_screen: this.get('model.unified_play_screen'),
+      editor: this.get('model.editor')
+      
     }, null)
     .then((response) => {            
       if (response.error) {
@@ -78,6 +82,11 @@ export default Controller.extend(AuthenticatedController, {
   @action
   timezoneChanged(val) {
     this.set('model.timezone', val);
+  },
+  
+  @action
+  editorChanged(val) {
+    this.set('model.editor', val);
   }
         
 });
