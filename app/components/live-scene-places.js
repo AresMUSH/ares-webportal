@@ -75,6 +75,6 @@ export default Component.extend({
   
   @action
   onPlaceSelected(event) {
-    this.set('rollString', event.target.value);
+    this.set('newPlace', event.target.value);
   },
 });
