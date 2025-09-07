@@ -8,8 +8,11 @@ export default Base.extend({
     gameSocket: service(),
 
     restore(data) {
-        let old = this.get('session.data.authenticated');
+        
+        let old = this.get('session.data.authenticated') || {};
+        
         if (old.id && old.id != data.id) {
+          console.log("Switching characters.");
           window.location.replace(window.location || '/');
         }
         
@@ -19,16 +22,23 @@ export default Base.extend({
            return Promise.reject({});
         }
         
-        return api.requestOne('checkToken', { id: data.id, token: data.token })
-        .then((response) => {
-            if (response.token) {
-                this.set('data', response);
-                this.gameSocket.sessionStarted(data.id);
-                return Promise.resolve(data);
-            }
-            this.session.invalidate();
-            return Promise.reject(response);            
-        });    
+        try {
+          return api.requestOne('checkToken', { id: data.id, token: data.token })
+          .then((response) => {
+              if (response.token) {
+                  this.set('data', response);
+                  this.gameSocket.sessionStarted(data.id);
+                  return Promise.resolve(data);
+              }
+              console.log(`Error checking token: ${response.error}`);
+              this.session.invalidate();
+              return Promise.reject(response);            
+          });    
+        } catch (error) {
+          console.log(`Error checking token: ${error}`);
+          this.session.invalidate();
+          return Promise.reject(response);    
+        }
     },
     
     authenticate(options) {
