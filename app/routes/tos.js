@@ -1,8 +1,8 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-import DefaultRoute from 'ares-webportal/mixins/default-route';
+import UnauthenticatedRoute from 'ares-webportal/mixins/unauthenticated-route';
 
-export default Route.extend(DefaultRoute, {
+export default Route.extend(UnauthenticatedRoute, {
     gameApi: service(),
 
     model: function() {

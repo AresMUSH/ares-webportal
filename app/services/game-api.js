@@ -89,15 +89,15 @@ export default Service.extend(AresConfig, {
           method: "POST",
           body: JSON.stringify(body)
         });
-        
+
         if (!response) {
-          throw new Error(`No response from game for $(cmd).`);
+          throw new Error(`No response from game for ${cmd}.`);
         }
         return response.json();        
       }
       catch(ex) {
         this.reportError(ex);
-        return this.buildFailurePromise(`No response from game $(cmd).`);
+        return this.buildFailurePromise(`No response from game ${cmd}.`);
       }        
     },
     
