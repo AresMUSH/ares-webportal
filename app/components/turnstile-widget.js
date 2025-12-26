@@ -19,13 +19,13 @@ export default Component.extend({
   
   @action
   turnstileCallback(response) {
-    console.log(response);
+    //console.log(response);
     this.set('response', response);
   },
   
   @action
   resetTurnstile() {
-    console.log(this.widgetId);
+    //console.log(this.widgetId);
     turnstile.reset(this.widgetId);
   }
   
