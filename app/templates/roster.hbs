@@ -20,50 +20,47 @@
     
     <div class="roster-char-title">{{char.profile_title}}</div>
     
-    <div class="profile-wrap">
+    <div class="roster-wrap">
     
-        <div class="profile-image-wrap">
-           <CharIcon @char={{char}} />
+        <div class="roster-image-wrap">
+           <CharIcon @char={{char}} />           
         </div>
 
-        <div class="profile-box">
-          <div class="roster-info">
+        <div class="roster-info">
+          
+          <p><AnsiFormat @text={{char.roster_notes}} /></p>
+     
+    
+          {{#each-in char.fields as |field value| }}
+          <div><b>{{field}}:</b> {{value}}</div>
+          {{/each-in}}
+    
+          <p><b>Contact:</b> {{char.contact}} </p>
+      
             
-            <p><AnsiFormat @text={{char.roster_notes}} /></p>
+           <div class="roster-char-warnings">
        
-      
-            {{#each-in char.fields as |field value| }}
-            <div><b>{{field}}:</b> {{value}}</div>
-            {{/each-in}}
-      
-            <p><b>Contact:</b> {{char.contact}} </p>
-        
-              
-             <div class="roster-char-warnings">
-         
-               {{#if char.app_pending }}
-               <span class="badge bg-danger">App Pending</span>
-               {{/if}}
-         
-               {{#if char.previously_played}}
-               <span class="badge bg-info">Previously Played</span>
-               {{/if}}
-  
-               {{#if char.app_required}}
-               <span class="badge bg-warning">App Required</span>
-               {{/if}}
-        
-             </div>
+             {{#if char.app_pending }}
+             <span class="badge bg-danger">App Pending</span>
+             {{/if}}
        
-         
-            <div>  
-               <LinkTo @route="char" @model={{char.name}} class="btn btn-secondary">Profile</LinkTo>
-               {{#if (not char.app_pending)}}
-               <LinkTo @route="roster-claim" @model={{char.id}} class="btn btn-primary">Claim</LinkTo>
-               {{/if}}
-             </div>
+             {{#if char.previously_played}}
+             <span class="badge bg-info">Previously Played</span>
+             {{/if}}
+
+             {{#if char.app_required}}
+             <span class="badge bg-warning">App Required</span>
+             {{/if}}
+      
            </div>
       </div>
+      
+      <div class="roster-buttons">  
+         <LinkTo @route="char" @model={{char.name}} class="btn btn-secondary">Profile</LinkTo>
+         {{#if (not char.app_pending)}}
+         <LinkTo @route="roster-claim" @model={{char.id}} class="btn btn-primary">Claim</LinkTo>
+         {{/if}}
+       </div>
         
     </div>
     
