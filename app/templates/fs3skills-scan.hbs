@@ -16,6 +16,9 @@
     <a class="nav-link" id="adv-tab" data-bs-toggle="tab" data-bs-target="#adv" type="button" role="tab" aria-controls="adv" aria-selected="true">Advantages</a>
   </li>
   {{/if}}
+  <li class="nav-item">
+    <a class="nav-link" id="spec-tab" data-bs-toggle="tab" data-bs-target="#spec" type="button" role="tab" aria-controls="spec" aria-selected="true">Specialties</a>
+  </li>
 </ul>
 
 <div class="tab-content" id="skillscan">
@@ -101,6 +104,28 @@
     </tbody>
   </table>
   {{/each-in}}
+  
+  </div>
+  
+  <div class="tab-pane fade" id="spec" role="tabpanel" aria-labelledby="spec-tab">
+
+    {{#each-in this.model.specialties as |name skills|}}
+    <h3>{{name}}</h3>
+
+    <table class="table table-striped">
+      <tbody>
+      {{#each-in skills as |spec chars|}}
+        <tr><td class="fs3-skillscan-rating">{{spec}}</td>
+          <td>
+            {{#each chars as |char|}}
+              {{char}}
+            {{/each}}
+          </td>
+        </tr>
+      {{/each-in}}
+      </tbody>
+    </table>
+    {{/each-in}}
   
   </div>
 </div>
