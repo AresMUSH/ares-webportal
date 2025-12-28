@@ -138,28 +138,38 @@
       <CharIconTiny @char={{poseChar}} />
   </PowerSelect>
   
+  <div class="chat-join-note"> <i class="fas fa-user-slash"></i> = One of your alts is already in this channel.</div>
+  
   <table>
     {{#each this.sortedChannels as |channel|}}
-      {{#if (and channel.can_join (not channel.enabled))}}
+      {{#if channel.can_join}}
         <tr>
           <td>
           <b>{{channel.title}}</b> 
           </td>
           <td>
             {{#if channel.desc}}
-            {{channel.desc}}
-            {{else}}
-            No description.
+            {{channel.desc}}            
             {{/if}}
           </td>
           <td>
-            <button {{on 'click' (fn this.joinChannel channel.title)}} class="btn btn-primary">Join</button>
+            {{#if channel.enabled}}
+            <button {{on 'click' (fn this.joinChannel channel.title)}} class="btn btn-secondary">Join
+             <i class="fas fa-user-slash"></i>
+            </button>
+            {{else}}
+            <button {{on 'click' (fn this.joinChannel channel.title)}} class="btn btn-primary">Join
+              <i class="fas fa-user-plus"></i>
+            </button>
+            {{/if}}
+            
           </td>
         </tr>
       {{/if}}
-  {{/each}}
+  {{/each}}  
   
   </table>
+  
 </BsModalSimple>
   
 <BsModalSimple @title="Start Conversation" @closeTitle="Cancel" @submitTitle="Start" @size={{null}} @fade={{true}} @open={{this.showNewConversation}} @onSubmit={{this.startConversation}}  @onHide={{(fn this.setShowNewConversation false)}}>

@@ -1,38 +1,28 @@
 
-<table class="table table-striped plots-list">
-
-
-<thead>
-  <th class="col-xs-3">Plot</th>
-  <th class="col-xs-2">Storytellers</th>
-  <th class="col-xs-3 hidden-xs hidden-sm">Dates</th>
-  <th class="col-xs-4">Summary</th>
-</thead>
-
-<tbody>
 
 {{#each this.plots as |plot|}}
-  <tr>
-      <td>
-      <LinkTo @route="plot" @model={{plot.id}}>{{plot.title}}</LinkTo>
-      </td>
-      <td>
+  
+<div class="plot-container">
+  <div class="plot-header">
+      <LinkTo @route="plot" @model={{plot.id}} class="plot-title">{{plot.title}}</LinkTo>
+      {{#if plot.content_warning}}
+      <ContentWarningTag @warning={{plot.content_warning}} />
+      {{/if}}          
+  </div>
+  <div class="plot-subheader">
+      <div class="plot-storytellers">
+        <i class="plot-storytellers-icon fa-solid fa-user-pen"></i>
         {{#each plot.storytellers as |storyteller|}}
           <CharIconTiny @char={{storyteller}} />
         {{/each}}
-      </td>
-      <td class="hidden-xs hidden-sm">
+      </div>
+      <div class="plot-dates">
+      <i class="plot-dates-icon fa-solid fa-calendar"></i>
       {{plot.start_date}} - {{plot.end_date}}
-      </td>        
-      <td>
-          <AnsiFormat @text={{plot.summary}} />
-          {{#if plot.content_warning}}
-          <ContentWarningTag @warning={{plot.content_warning}} />
-          {{/if}}
-          
-      </td>
-  </tr>
+      </div>
+  </div>
+  <div class="plot-summary">
+      <AnsiFormat @text={{plot.summary}} />
+  </div>
+</div>
 {{/each}}
-
-</tbody>
-</table>

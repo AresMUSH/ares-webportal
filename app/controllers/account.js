@@ -11,6 +11,7 @@ export default Controller.extend(AuthenticatedController, {
   confirmPasswordSettings: '',
   handleName: '',
   linkCode: '',
+  backupInProgress: false,
   flashMessages: service(),
   gameApi: service(),
   cookies: service(),
@@ -23,6 +24,7 @@ export default Controller.extend(AuthenticatedController, {
     this.set('confirmPasswordSettings', '');
     this.set('linkCode', '');
     this.set('handleName', '');
+    // Don't reset backup in progress
   },
     
   @action
@@ -87,6 +89,19 @@ export default Controller.extend(AuthenticatedController, {
   @action
   editorChanged(val) {
     this.set('model.editor', val);
+  },
+  
+  @action
+  createBackup() {
+    this.gameApi.requestOne('backupChar', { id: this.model.id }, null)
+    .then((response) => {            
+        if (response.error) {
+          this.flashMessages.danger(response.error);
+          return;
+        }            
+      this.set('backupInProgress', true);
+    });
+    
   }
         
 });

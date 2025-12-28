@@ -54,6 +54,13 @@
  {{#each this.channel.messages as |message|}}
    <div class="hint float-end">
          <div class="timestamp-tip">{{message.timestamp}}</div>
+         {{#if this.channel.can_manage}}
+           {{#if message.flagged}}
+             <TooltipButton @position="left" @onClick={{(fn this.flagMessage message false)}} @icon="fas fa-circle-check" @message="Unflag Message" />
+           {{else}}
+             <TooltipButton @position="left" @onClick={{(fn this.flagMessage message true)}} @icon="fas fa-flag" @message="Flag Message" />
+           {{/if}}
+         {{/if}}
    </div>
  
     <div class="scene-pose-header">		
@@ -68,7 +75,14 @@
       </LinkTo>
       </div>
       
-     <AnsiFormat @text={{message.message}} />
+     {{#if message.flagged}}
+       <div class="chat-msg-flagged">
+         <div class="label label-danger">This message was flagged, and is only visible to admin.</div> 
+         <AnsiFormat @text={{message.message}} />
+       </div>
+     {{else}}
+       <AnsiFormat @text={{message.message}} />
+     {{/if}}
  {{/each}}
  </div>
 

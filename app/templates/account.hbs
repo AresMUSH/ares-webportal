@@ -190,4 +190,21 @@
 
 <LinkTo @route="blocks" class="btn btn-secondary">Manage Blocks</LinkTo>  
 
+<h2>Backup</h2>
+
+
+{{#if this.model.backup}}
+  <p>Download the backup of your character's profile, scenes, etc.</p>
+  <a href="{{this.model.backup}}" class="btn btn-secondary">Download Backup</a>
+{{else if this.backupInProgress}}
+  <div class="alert alert-info">Your backup is being created. Check back in a few minutes.</div>
+{{else}}
+  <p>You can create a backup of your character's profile, scenes, etc.</p>
+  <button {{on 'click' this.createBackup}} class="btn btn-primary">Create Backup</button>
+{{/if}}
+
+<FlashMessages />
+                
+
 {{outlet}}
+

@@ -6,7 +6,7 @@
        {{/if}}
      </h1>
      
-     <p>The online character creation tool will guide you through creating your character.</p>
+     <AnsiFormat @text={{this.model.cgInfo.intro_blurb}} />
          
 
 {{#if this.model.char.chargen_locked}}

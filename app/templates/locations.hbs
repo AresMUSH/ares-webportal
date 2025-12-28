@@ -6,9 +6,21 @@
 <a name="top"></a>
 
 <div class="action-buttons">
+  <a data-bs-toggle="collapse" href="#legend" class="btn btn-secondary btn-collapse">Icon Legend <i class="fa fa-caret-down"></i></a>
   <LinkTo @route="search-locations" class="btn btn-secondary"><i class="fa fa-search" aria-hidden="true"></i> Search Locations</LinkTo>  
 </div>
 
+
+<div id="legend" class="card-collapse collapse">
+  <div class="location-legend">
+  {{#each this.model.legend as |icon|}}
+  <div class="location-legend-item">
+    <i aria-hidden="true" class="{{icon.icon}} location-legend-icon"></i>
+    <span class="location-legend-name">{{icon.name}}</span>
+  </div>
+  {{/each}}
+  </div>
+</div>
 
 <div class="area-quickjump">
   {{#each this.topLevelAreas as |area index| }}
@@ -22,14 +34,8 @@
 </div>
 
 
-<div class="location-legend">
-{{#each this.model.legend as |icon|}}
-<div class="location-legend-item">
-  <i aria-hidden="true" class="{{icon.icon}} location-legend-icon"></i>
-  <span class="location-legend-name">{{icon.name}}</span>
-</div>
-{{/each}}
-</div>
+
+
 
 {{#if this.model.display_sections}}
   {{#each this.topLevelAreas as |area index| }}

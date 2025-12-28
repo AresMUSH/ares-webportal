@@ -1,5 +1,5 @@
 import Component from '@ember/component';
-import { computed } from '@ember/object';
+import { set, computed } from '@ember/object';
 import { observer } from '@ember/object';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
@@ -120,7 +120,7 @@ export default Component.extend({
     });
       
   },
-    
+  
   @action
   sendMessage() {
     let api = this.gameApi;
@@ -186,6 +186,18 @@ export default Component.extend({
       }
       this.set('channel.title', response.title);
       this.flashMessages.success("Conversation renamed.");  
+    });
+  },
+  
+  @action
+  flagMessage(message, flagged) {
+    set(message, 'flagged', flagged);
+    let api = this.gameApi;
+    api.requestOne('flagChatMessage', { id: message.id, flagged: flagged }, null)
+    .then( (response) => {
+      if (response.error) {
+        return;
+      }
     });
   },
     
