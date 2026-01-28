@@ -6,14 +6,16 @@ export default Base.extend({
     gameApi: service(),
     session: service(),
     gameSocket: service(),
+    router: service(),
 
     restore(data) {
         
         let old = this.get('session.data.authenticated') || {};
-        
+        console.log("ALT DEBUG: Restoring session.");
+                    
         if (old.id && old.id != data.id) {
-          console.log("Switching characters.");
-          window.location.replace(window.location || '/');
+          console.log("ALT DEBUG: Switching characters.");
+          this.router.transitionTo("home");
         }
         
         let api = this.gameApi;
@@ -23,10 +25,13 @@ export default Base.extend({
         }
         
         try {
+          console.log("ALT DEBUG: Checking token");
           return api.requestOne('checkToken', { id: data.id, token: data.token })
           .then((response) => {
+            console.log("ALT DEBUG: Got token response back");
               if (response.token) {
                   this.set('data', response);
+                  console.log(`ALT DEBUG: Token checked: ${data.name}`);
                   this.gameSocket.sessionStarted(data.id);
                   return Promise.resolve(data);
               }
@@ -45,6 +50,7 @@ export default Base.extend({
         let api = this.gameApi;
         return api.requestOne('login', { name: options.name, password: options.password }, null)
         .then((response) => {
+          console.log("ALT DEBUG: Authenticated.");
             if (response.id) {
                 this.set('data', response);
                 this.gameSocket.sessionStarted(response.id);
@@ -56,6 +62,7 @@ export default Base.extend({
     },
     
     invalidate() {
+      console.log("ALT DEBUG: Invalidated.");
         this.gameSocket.sessionStopped();
         return Promise.resolve();
     }
