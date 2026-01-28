@@ -101,6 +101,7 @@ export default Service.extend(AresConfig, {
       }        
     },
     
+    // Pass null to transitionToOnError to stay on the page (so you can show a failure message)
     requestOne(cmd, args = {}, transitionToOnError = 'home') {
         return this.request(cmd, args).then((response) => {
           if (!response) {
@@ -117,6 +118,7 @@ export default Service.extend(AresConfig, {
         });
     },
 
+    // Pass null to transitionToOnError to stay on the page (so you can show a failure message)
     requestMany(cmd, args = {}, transitionToOnError = 'home') {    
         return this.request(cmd, args).then((response) => {
           if (!response) {
