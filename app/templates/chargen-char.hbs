@@ -1,6 +1,6 @@
-{{page-title 'Create a Character'}}
+{{page-title 'Character Creation'}}
       
-     <h1>Create a Character 
+     <h1>Character Creation
        {{#if this.model.char.can_approve}}
        - {{this.model.char.name}}
        {{/if}}
@@ -90,7 +90,7 @@
                          
                          {{else if (eq key 'age')}}
                              <Input @type="text" size={{25}} @value={{demo.value}} />
-                             <div class="cg-tip">Enter an age or a birthdate in {{this.model.cgInfo.date_format}} format.</div>
+                             <div class="cg-tip">Enter an age or a birthdate in {{this.model.cgInfo.date_format}} format. Age at last save: {{this.model.char.age}}</div>
                          {{else}}
                              <Input @type="text" size={{25}} @value={{demo.value}} />
                          {{/if}}

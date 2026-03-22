@@ -58,6 +58,21 @@
   
   <div class="form-item">
     <div class="form-item-label">
+        Default Alias:
+    </div>
+
+    <div class="form-item-entry">
+      <Input @type="text" size={{25}} id="color" @enter={{this.save}} @value={{this.model.channel.default_alias}} />
+      
+      <p class="hint">Separate aliases with commas.</p>
+      
+    </div>
+  </div>
+  
+  
+  
+  <div class="form-item">
+    <div class="form-item-label">
         Discord Channel Name:
     </div>
     <div class="form-item-entry">

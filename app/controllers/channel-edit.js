@@ -18,6 +18,7 @@ export default Controller.extend({
       can_join: (this.get('model.channel.can_join') || []),
       discord_channel: this.get('model.channel.discord_channel'),
       discord_webhook: this.get('model.channel.discord_webhook'),
+      default_alias: this.get('model.channel.default_alias'),
       color: this.get('model.channel.color')
     }, null)
     .then( (response) => {
