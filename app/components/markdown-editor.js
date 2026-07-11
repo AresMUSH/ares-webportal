@@ -24,7 +24,7 @@ class MarkdownEditorInfo {
 export default Component.extend({
 
   previewText: null,
-  rows: 0,
+  rows: 3,
   gameApi: service(),
   cookies: service(),
   text: '',
