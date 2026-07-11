@@ -1,5 +1,5 @@
-{{#if this.char.icon}}
-<img alt="{{this.char.name}}'s icon" class="{{this.iconClass}} icon-status-{{this.char.status}} {{if (eq this.char.status 'offline') 'faded'}}" src="/game/uploads/{{this.char.icon}}" >
+{{#if this.char.avatar.icon}}
+<img alt="{{this.char.name}}'s icon" class="{{this.iconClass}} icon-status-{{this.char.status}} {{if (eq this.char.status 'offline') 'faded'}}" src="/game/uploads/{{this.char.avatar.icon}}" >
 {{else}}
 <img alt="{{this.char.name}}'s icon" class="{{this.iconClass}} icon-status-{{this.char.status}}" src="/game/uploads/theme_images/noicon.png" >
 {{/if}}
