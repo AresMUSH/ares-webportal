@@ -1,6 +1,6 @@
-<div class="char-icon-container">
+<div class="char-icon-container {{this.char.avatar.classes}}">
     
-<div class="log-icon-container {{this.char.avatar.classes}}">
+<div class="log-icon-container">
     <LinkTo @route="char" @model={{this.char.name}}>
        {{#if this.char.avatar.icon}}
         <img alt="{{this.char.name}}'s icon" class="log-icon" src="/game/uploads/{{this.char.avatar.icon}}" >
