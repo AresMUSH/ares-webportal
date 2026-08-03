@@ -3,7 +3,6 @@
 
 <p>This information will be used on your web portal and in the <a href="https://arescentral.aresmush.com">AresCentral Game Directory</a> to advertise your game.</p>
 
-      <div class="alert alert-info">Only public games are advertised on AresCentral.  Private games will not appear on the AresCentral game list, but they can still be registered to activate other AresCentral features (like player handles).  Only players with a character on the game will see details for a private game on AresCentral. Admins can register a private game with AresCentral using the <code>game/register</code> command. </div>
 
 
 <div class="form-item">
@@ -38,12 +37,14 @@
 </div>
 
 <div class="form-item">
-  <div class="form-item-label">Public Game?</div>
+  <div class="form-item-label">Show in Directory?</div>
   <div class="form-item-entry">
-    <div>
-      <Input @type="checkbox" @checked={{this.model.config.public_game}} />   
-    </div>
-  </div>              
+      <div class="hint">Checking this box will make your game visible in the AresCentral game directory. </div>
+      <Input @type="checkbox" @checked={{this.model.config.public_game}} />    
+           
+      <div class="alert alert-info">If you don't want your game visible but still want to let players use AresCentral features (like player handles), you must manually register your game using the <code>game/register</code> command. Only players with a character on the game will see that game's details in AresCentral.</div>
+      
+  </div>
 </div>
 
 <div class="form-item">
