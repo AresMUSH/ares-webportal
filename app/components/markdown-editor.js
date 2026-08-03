@@ -33,11 +33,6 @@ export default Component.extend({
   linkUrl: '',
   toolbarVisible: true,
   
-  
-  markdownText: computed('text', function() {
-    return this.text || "";
-  }),
-  
   height: computed('rows', function() {
     return (this.rows < 10) ? "250px" : "500px";
   }),  
@@ -69,7 +64,7 @@ export default Component.extend({
   },
   
   addStandaloneBlock(edInfo, block, replaceSelection = false, cursorOffset = 0) {
-    let separator = this.text.length > 0 ? "\n\n" : "";
+    let separator = (this.text || "").length > 0 ? "\n\n" : "";
     let selection = replaceSelection ? "" : edInfo.selection;
     this.set('text', `${edInfo.beforeCursor}${selection}${separator}${block}${separator}${edInfo.afterCursor}`);
     this.moveCursor(edInfo.cursorStart + cursorOffset + separator.length);
@@ -83,7 +78,7 @@ export default Component.extend({
     }
     let api = this.gameApi;
       
-    api.requestOne('markdownPreview', { text: this.text })
+    api.requestOne('markdownPreview', { text: this.text || "" })
     .then( (response) => {
       if (response.error) {
         return;
