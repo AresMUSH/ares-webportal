@@ -75,7 +75,7 @@
                       Combined Poses
                   {{else}}
                       <button {{on 'click' (fn this.showCharCard pose.char.name)}} class="btn-link">
-                        <CharIconInline @char={{pose.char}} />
+                        <CharIconInline @char={{pose.char}} @hideLink={{true}} />
                       </button>
                     {{/if}}
                 </div>

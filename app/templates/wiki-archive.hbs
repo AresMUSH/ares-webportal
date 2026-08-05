@@ -2,7 +2,7 @@
 
 {{# if this.model.export_available}}
 
-<p>Ares can create a downloadable archive of the game's scenes, characters, and wiki pages. You can keep this for your reference even after a game closes and the web portal is no longer available.</p>
+<p>Ares can create a downloadable archive of ALL the game's scenes, characters, and wiki pages. You can keep this for your reference even after a game closes and the web portal is no longer available.</p>
 
 <p><a class="btn btn-primary" href="/game/wiki_export.zip">Download Archive</a></p>
 
@@ -10,15 +10,11 @@
 
 <div class="alert alert-info">
 Archive last updated on {{this.model.last_exported}}.
-{{#if this.model.auto_export}}
-This archive will be updated daily.
-{{else}}
 This archive is not updated automatically; ask the game admin if you would like a newer copy.
-{{/if}}
 </div>
 
 {{else}}
 
-The game admin have not enabled a wiki archive. Contact them for details.
+The game admin have not performed a wiki archive. Contact them to request one.
 
 {{/if}}

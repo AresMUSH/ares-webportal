@@ -152,14 +152,14 @@
          <div role="tabpanel" class="tab-pane" id="bg">
              <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.bg_blurb}} /></div>
            
-             <MarkdownEditor @text={{this.model.char.background}} />
+             <MarkdownEditor @text={{this.model.char.background}} @rows={{10}} />
           </div>
           
           <div role="tabpanel" class="tab-pane" id="hooks">
           
                <div class="cg-tip"><AnsiFormat @text={{this.model.cgInfo.hooks_blurb}} /></div>
 
-               <MarkdownEditor @text={{this.model.char.rp_hooks}} />
+               <MarkdownEditor @text={{this.model.char.rp_hooks}} @rows={{10}} />
           </div>
           
           <div role="tabpanel" class="tab-pane" id="icon">

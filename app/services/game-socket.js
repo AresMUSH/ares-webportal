@@ -19,11 +19,11 @@ export default Service.extend(AresConfig, {
       this._super(...arguments);
       this.set('callbacks', {});
       setInterval(() => {
-        if (!this.isSocketReady) {
+        if (!this.isSocketReady()) {
           console.log("Socket dead. Reconnecting.");
           this.sessionStarted(this.charId);
         }
-      }, 5000);
+      }, 30000);
     },
       
     socketUrl() {
@@ -39,11 +39,7 @@ export default Service.extend(AresConfig, {
         if (!this.isSocketReady() || (this.charId != charId)) {
             this.sessionStarted(charId);
         }        
-    },
-    
-    ping() {
-      
-    },
+    },    
     
     isWindowFocused() {
       return document.hasFocus();
@@ -122,7 +118,7 @@ export default Service.extend(AresConfig, {
               console.log("Websocket closed.");
               self.handleSocketClosed(self);
             };
-            socket.onError = function(evt) {
+            socket.onerror = function(evt) {
               console.log(evt);
               self.handleSocketClosed(self);
             };
@@ -151,9 +147,14 @@ export default Service.extend(AresConfig, {
     },
     
     sendCharId() {
+      const auth = this.get('session.data.authenticated');
+      const id = auth['id'] ? this.charId : null;
+      
       let cmd = {
         'type': 'identify',
-        'data': { 'id': this.charId }
+        'data': { 'id': id },
+        'auth': auth,
+        'api_key': this.apiKey,
       };
       let json = JSON.stringify(cmd);
       try {
