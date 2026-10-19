@@ -98,7 +98,7 @@ export default Service.extend(AresConfig, {
       try {
         oldSocket.close();
       } catch(err) {
-=        // Socket closed already or never fully opened.
+        // Socket closed already or never fully opened.
       }
       
     },

@@ -95,4 +95,11 @@
 <BsModalSimple @title="Damage Report" @closeTitle="Close" @size={{null}} @fade={{true}} @open={{this.damagePopupChar}}  @onHide={{(fn this.showDamage null)}}>
     <Fs3Damage @damage={{this.damagePopupChar.damage}} @damageMod={{this.damagePopupChar.damage_mod}} />
     
+    {{#if this.damagePopupChar.vehicle}}
+    <hr/>
+    <b>Vehicle Damage</b>
+    <Fs3Damage @damage={{this.damagePopupChar.vehicle_damage}} @damageMod="Included in pilot damage mod" />
+    {{/if}}
+    
+    
 </BsModalSimple>
