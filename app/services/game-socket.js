@@ -95,7 +95,12 @@ export default Service.extend(AresConfig, {
       oldSocket.onmessage = null;
       oldSocket.onclose = null;
       oldSocket.onerror = null;
-      oldSocket.close();     
+      try {
+        oldSocket.close();
+      } catch(err) {
+=        // Socket closed already or never fully opened.
+      }
+      
     },
     
     sessionStarted(charId) {
