@@ -56,6 +56,7 @@ export default Controller.extend({
       owners: (this.get('model.location.owners') || []).map(owner => owner.name),
       summary: this.get('model.location.summary'),
       icon_type: this.get('model.location.icon_type'),
+      tags: this.get('model.location.tags'),
       descs: descs
     }, null)
     .then( (response) => {
