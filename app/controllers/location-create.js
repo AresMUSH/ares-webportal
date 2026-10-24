@@ -24,6 +24,7 @@ export default Controller.extend({
     this.set('owners', null);
     this.set('details', []);
     this.set('icon_type', '');
+    this.set('tags', '');
   },  
     
   @action
@@ -72,6 +73,7 @@ export default Controller.extend({
       owners: (this.get('owners') || []).map(owner => owner.name),
       summary: this.get('summary'),
       icon_type: this.get('icon_type'),
+      tags: this.get('tags'),
       descs: descs
     }, null)
     .then( (response) => {

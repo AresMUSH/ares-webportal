@@ -8,16 +8,16 @@
 {{/if}}
 
 {{#if this.model.uploaded_by}}
-  <p>Uploaded by: <CharIconTiny @char={{this.model.uploaded_by}} /></p>
+  <p><b>Uploaded by:</b> <CharIconInline @char={{this.model.uploaded_by}} /></p>
 {{/if}}
 
+<p><b>Raw File URL:</b> <code> <a href="{{this.model.portal_url}}/game/uploads/{{this.model.path}}" target="_blank">{{this.model.portal_url}}/game/uploads/{{this.model.path}}</a></code><</p>
+
 <div class="alert alert-info">
-  <p>The URL for the raw file is: <code><a href="{{this.model.portal_url}}/game/uploads/{{this.model.path}}" target="_blank">{{this.model.portal_url}}/game/uploads/{{this.model.path}}</a></code></p>
     
-  <p>You can use this in markdown on wiki pages, profiles, etc. For example:</p>
+  <p>You can use this in markdown on wiki pages, profiles, etc. See <a href="/help/markdown">Help -> Markdown Formatting -> Images</a> for more info.</p>
   <p><code>[[image /game/uploads/{{this.model.path}}]]</code></p>
   <p><code>![Alt Text](/game/uploads/{{this.model.path}})</code>.</p>
-  <p>See <a href="/help/markdown">Help -> Markdown Formatting -> Images</a> for more information.</p>
 </div>
 
 <div class="action-buttons">

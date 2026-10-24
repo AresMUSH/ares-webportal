@@ -12,6 +12,7 @@ class MarkdownEditorInfo {
   afterCursor = '';
 
   constructor(editor, text = "") {
+    text = text || "";
     this.cursorStart = editor.selectionStart;
     this.cursorEnd = editor.selectionEnd;
     this.selection = text.substring(this.cursorStart, this.cursorEnd) || '';

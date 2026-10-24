@@ -39,6 +39,13 @@
 <AnsiFormat @text={{detail.desc}} />
 {{/each}}
 
+{{#if this.model.tags}}
+  <b>Tags:</b>  
+  
+  {{#each this.model.tags as |tag|}}
+  <LinkTo @route="wiki-tag" @model={{tag}}>{{tag}}</LinkTo>
+  {{/each}}
+{{/if}}
 
 <div class="action-buttons">
   {{#if this.model.can_edit}}
